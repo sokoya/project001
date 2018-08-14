@@ -15,3 +15,8 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 /vendor/
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/project001.iml
+.idea/modules.xml
+.idea/misc.xml
