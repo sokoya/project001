@@ -121,7 +121,7 @@
 						<div class="col-md-6" style="margin-bottom: 40px;">
 							<h3 class="widget-title" style="font-weight: bold; font-size: 20px;padding-bottom: 14px;">
 								Sign in</h3>
-							<form>
+							<form autocorrect="off" autocomplete="off">
 								<div class="form-group">
 									<label>Email Address*</label>
 									<input class="form-control" type="text"/>
@@ -146,7 +146,7 @@
 						<div class="col-md-6">
 							<h3 class="widget-title" style="font-weight: bold; font-size: 20px;padding-bottom: 14px;">
 								Create Account</h3>
-							<form>
+							<form autocorrect="off" autocomplete="off">
 								<div class="form-group">
 									<label>Email Address*</label>
 									<input class="form-control" type="text"/>
