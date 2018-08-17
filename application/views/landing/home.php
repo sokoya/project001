@@ -2,7 +2,6 @@
 </head>
 <body>
     <div class="global-wrapper clearfix" id="global-wrapper">
-        
         <div class="navbar-before mobile-hidden navbar-before-inverse">
             <div class="container">
                 <div class="row">
@@ -58,7 +57,7 @@
             </ul>
         </div>
         <div class="mfp-with-anim mfp-hide mfp-dialog clearfix" id="nav-account-dialog">
-            <h3 class="widget-title">Create TheBox Account</h3>
+            <h3 class="widget-title">Create Carritos Account</h3>
             <p>Ready to get best offers? Let's get started!</p>
             <hr />
             <form>
@@ -115,20 +114,20 @@
                                 <h4 class="slider-item-caption-title">Save up to $150 on Your Next Laptop</h4>
                                 <p class="slider-item-caption-desc">I'm Not Gonna Pay A Lot For This Laptop.</p><a class="btn btn-lg btn-ghost btn-white" href="#">Shop Now</a>
                             </div>
-                            <img class="slider-item-img-right" src="img/test_slider/1.png" alt="Image Alternative text" title="Image Title" style="top: 60%; width: 56%;" />
+                            <img class="slider-item-img-right" src="<?= base_url('assets/landing/img/test_slider/1.png');?>" alt="Image Alternative text" title="Image Title" style="top: 60%; width: 56%;" />
                         </div>
                     </div>
                 </div>
             </div>
             <div class="owl-item">
-                <div class="slider-item" style="background-image:url(img/concert_2_1200x500.jpg);">
+                <div class="slider-item" style="background-image:url(<?= base_url('assets/landing/img/concert_2_1200x500.jpg');?>);">
                     <div class="container">
                         <div class="slider-item-inner">
                             <div class="slider-item-caption-right slider-item-caption-white">
                                 <h4 class="slider-item-caption-title">World Top Guitars from $350</h4>
                                 <p class="slider-item-caption-desc">Fill It To The Rim With Guitar.</p><a class="btn btn-lg btn-ghost btn-white" href="#">Shop Now</a>
                             </div>
-                            <img class="slider-item-img-left" src="img/test_slider/2.png" alt="Image Alternative text" title="Image Title" style="transform:translateY(-50%) rotate(14deg); width: 55%;" />
+                            <img class="slider-item-img-left" src="<?= base_url('assets/landing/img/test_slider/2.png'); ?>" alt="Image Alternative text" title="Image Title" style="transform:translateY(-50%) rotate(14deg); width: 55%;" />
                         </div>
                     </div>
                 </div>
@@ -141,7 +140,7 @@
                                 <h4 class="slider-item-caption-title">Run! Run! Run!</h4>
                                 <p class="slider-item-caption-desc">Your Running Shoes, Right Away.</p><a class="btn btn-lg btn-ghost btn-white" href="#">Shop Now</a>
                             </div>
-                            <img class="slider-item-img-right" src="img/test_slider/3.png" alt="Image Alternative text" title="Image Title" />
+                            <img class="slider-item-img-right" src="<?= base_url('assets/landing/img/test_slider/3.png');?>" alt="Image Alternative text" title="Image Title" />
                         </div>
                     </div>
                 </div>

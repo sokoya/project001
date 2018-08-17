@@ -2,7 +2,7 @@
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="index-2.html">
-                <img src="img/logo.png" alt="Image Alternative text" title="Image Title" />
+                <img src="<?= base_url('assets/landing/img/logo.png');?>" alt="Image Alternative text" title="Image Title" />
             </a>
         </div>
         <form class="navbar-form navbar-left navbar-main-search navbar-main-search-category" role="search">
