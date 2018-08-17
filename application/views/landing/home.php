@@ -381,8 +381,7 @@
         </div>
         <div class="gap"></div>
         <div class="container">
-            <h3 class="widget-title">Why Choose Us</h3>
-
+            <hr class="hr-text" data-content="Why Choose Us">
             <div class="owl-carousel owl-loaded owl-nav-out" data-options='{"items":5,"loop":true,"nav":true}'>
                 <div class="owl-item">
                     <a class="banner-category owl-item-slide" href="#">
