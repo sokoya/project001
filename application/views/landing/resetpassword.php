@@ -64,64 +64,20 @@
 			<div class="col-md-8 col-md-offset-2 ">
 				<div class="box-lg" style="margin-top: 14px;">
 					<div class="row" data-gutter="60">
-						<div class="col-md-6" style="margin-bottom: 40px;">
+						<div class="col-md-12" style="margin-bottom: 40px;">
 							<h3 class="widget-title" style="font-weight: bold; font-size: 20px;padding-bottom: 14px;">
-								Sign in</h3>
-							<form autocorrect="off" autocomplete="off">
+								Reset Password</h3>
+							<form autocorrect="off" autocomplete="off" id="reset-form">
 								<div class="form-group">
 									<label>Email Address*</label>
-									<input class="form-control" type="text"/>
-								</div>
-								<div class="form-group">
-									<label>Password</label>
-									<input class="form-control" type="text"/>
-								</div>
-								<div class="checkbox">
-									<label>
-										<input class="i-check" type="checkbox"/>Remember me</label>
+									<input class="form-control" type="email" name="resetemail" id="resetemail"/>
 								</div>
 								<input class="carrito_btn_sign col-md-12 col-sm-12 col-xs-12" type="submit"
-									   value="Sign in"/>
+									   value="Reset Password"/>
 							</form>
 							<div class="form_end">
-								<a href="<?= base_url('resetpassword');?>">Forgot Your Password?</a>
+								<a href="#" onclick="window.history.back();">Never mind</a>
 							</div>
-						</div>
-						<hr class="hr-text hidden-lg hidden-md" data-content="OR">
-						<div class="col-md-6">
-							<h3 class="widget-title" style="font-weight: bold; font-size: 20px;padding-bottom: 14px;">
-								Create Account</h3>
-							<form autocorrect="off" autocomplete="off">
-								<div class="form-group">
-									<label>Email Address*</label>
-									<input class="form-control" type="text"/>
-								</div>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Password*</label>
-											<input class="form-control" type="text"/>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Repeat Password*</label>
-											<input class="form-control" type="text"/>
-										</div>
-									</div>
-								</div>
-								<div class="well text-center">
-									<div class="checkbox">
-										<label>
-											<input class="i-check" type="checkbox"/>
-											I agree to Carrito <a href="#">Terms & Conditions</a> | <a href="#"> Policy.</a></label>
-									</div>
-								</div>
-								<input class="carrito_btn_create col-md-12 col-sm-12 col-xs-12" type="submit"
-									   value="Create Account"/>
-
-								
-							</form>
 						</div>
 					</div>
 				</div>
@@ -134,5 +90,54 @@
 
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
+<script>
+	$('document').ready(function () {
+		/* validation */
+		$("#reset-form").validate({
+			rules:
+				{
+					resetemail: {
+						required: true,
+						email: true
+					},
+				},
+			messages:
+				{
+					resetemail: "Enter a Valid Email",
+				},
+			submitHandler: submitForm
+		});
+
+
+		function submitForm() {
+			let data = $("#reset-form").serialize();
+
+			$.ajax({
+
+				type: 'POST',
+				url: 'reset/process',
+				data: data,
+
+				success: function (data) {
+					if (data === "success") {
+
+						console.log("Success")
+
+					}
+					else if (data === "error") {
+						console.log("Error")
+					}
+					else {
+						console.log("An unknown error occurred")
+					}
+				}
+			});
+			return false;
+		}
+
+	});
+
+
+</script>
 </body>
 </html>

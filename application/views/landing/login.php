@@ -190,7 +190,6 @@
 
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
-<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
 
 
 <script>
@@ -249,13 +248,39 @@
 					},
 					loginemail: "Enter a Valid Email",
 				},
-			submitHandler: submitForm
+			submitHandler: submitLoginForm
 		});
 		// End Validation
 
 		// Carrito form submit
 		function submitForm() {
 			let data = $("#register-form").serialize();
+
+			$.ajax({
+
+				type: 'POST',
+				url: 'signup/process',
+				data: data,
+
+				success: function (data) {
+					if (data === "success") {
+
+						console.log("Success")
+
+					}
+					else if (data === "error") {
+						console.log("Error")
+					}
+					else {
+						console.log("An unknown error occurred")
+					}
+				}
+			});
+			return false;
+		}
+
+		function submitLoginForm() {
+			let data = $("#login-form").serialize();
 
 			$.ajax({
 
