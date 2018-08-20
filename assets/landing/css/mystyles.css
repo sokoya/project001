@@ -1,56 +1,84 @@
 /*YOUR CUSTOM STYLES*/
 .carrito_btn_sign {
-		font-weight: bold;
-		color: #fff;
-		text-align: center;
-		background: #0070A3;
-		border: 1px solid #005F8B;
-		padding: 10px;
-	}
+	font-weight: bold;
+	color: #fff;
+	text-align: center;
+	background: #0070A3;
+	border: 1px solid #005F8B;
+	padding: 10px;
+}
 
-	.carrito_btn_create {
-		font-weight: bold;
-		color: #fff;
-		text-align: center;
-		background: #27AE61;
-		border: 1px solid #219452;
-		padding: 10px;
-	}
+.carrito_btn_create {
+	font-weight: bold;
+	color: #fff;
+	text-align: center;
+	background: #27AE61;
+	border: 1px solid #219452;
+	padding: 10px;
+}
 
-	.form_end {
-		padding-top: 25px !important;
-		color: #444;
-		text-align: center;
-		font: 12px/20px "Helvetica Neue", Helvetica, Arial, sans-serif;
-	}
+.form_end {
+	padding-top: 25px !important;
+	color: #444;
+	text-align: center;
+	font: 12px/20px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 
-	.hr-text {
-		line-height: 1em;
-		position: relative;
-		outline: 0;
-		border: 0;
-		color: black;
-		text-align: center;
-		height: 1.5em;
-		opacity: .5;
-	}
+.hr-text {
+	line-height: 1em;
+	position: relative;
+	outline: 0;
+	border: 0;
+	color: black;
+	text-align: center;
+	height: 1.5em;
+	opacity: .5;
+}
 
-	.hr-text:before {
-		content: '';
-		background: linear-gradient(to right, transparent, #818078, transparent);
-		position: absolute;
-		left: 0;
-		top: 50%;
-		width: 100%;
-		height: 1px;
-	}
-	.hr-text:after {
-		content: attr(data-content);
-		position: relative;
-		display: inline-block;
-		color: black;
-		padding: 0 .5em;
-		line-height: 1.5em;
-		/*color: #818078;*/
-		background-color: #fcfcfa;
-	}
+.hr-text:before {
+	content: '';
+	background: linear-gradient(to right, transparent, #818078, transparent);
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 100%;
+	height: 1px;
+}
+
+.hr-text:after {
+	content: attr(data-content);
+	position: relative;
+	display: inline-block;
+	color: black;
+	padding: 0 .5em;
+	line-height: 1.5em;
+	/*color: #818078;*/
+	background-color: #fcfcfa;
+}
+
+/*form validation design*/
+.error {
+	color: #a94442;
+	font: 12px/20px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/*Removed bootstrap glow*/
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+	border-color: #dadada;
+	box-shadow: none;
+}
