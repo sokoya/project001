@@ -628,7 +628,7 @@
                 <li class="dropdown"><a href="<?= base_url('account'); ?>"><span>Sign in | Join</span><strong>My Carrito</strong></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="<?= base_url('account'); ?>">New Customer? Create an account</a>
+                            <a href="<?= base_url('account/create'); ?>">New Customer? Create an account</a>
                         </li>
                         <li>
                             <a href="<?= base_url('account'); ?>">My Accounts</a>

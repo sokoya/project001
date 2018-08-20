@@ -7,14 +7,15 @@ class Account extends CI_Controller{
         // @todo
         // Check if the user is already loggedin
         // Also check where the user is coming from
-        $this->session->set_userdata('referred_from', current_url());
+        // $this->session->set_userdata('referred_from', current_url());
         parent::__construct();
-        // $this->load->model('user_model', 'user');
         $this->load->model('customer_model', 'customer');
+        $this->load->helper('url'); 
     }
 
     public function index(){
-        $this->load->view('landing/login');
+        // $this->load->view('landing/login');
+        redirect('account/login');
     }
 
     /*
@@ -22,102 +23,94 @@ class Account extends CI_Controller{
      * result : string (success | error )
      * */
     public function login() {
-        if( !$this->input->post()){ 
-            $this->load->view('landing/create');
-        }else{
-            $output_array['status'] = 'error';
-            $this->form_validation->set_rules('loginemail', 'Email Address','trim|required|xss_clean|valid_email|is_unique[users.email]');
-            $this->form_validation->set_rules('loginpassword', 'Password','trim|required|xss_clean|min_length[8]|max_length[15]');
+        
+        if(!$_POST){
+            $this->load->view('landing/login');
+        }else {
+            // $this->output->enable_profiler(TRUE);
+            $this->form_validation->set_rules('loginemail', 'Email Address','trim|required|xss_clean|valid_email');
+            $this->form_validation->set_rules('loginpassword', 'Psassword','trim|required|xss_clean|min_length[6]|max_length[15]');
             if ($this->form_validation->run() == FALSE) {
-                $output_array['message'] = 'There was an error with the login information. Please fix the following <pre>' . $this->form_validation->error_array() . '</pre>';
+                $this->session->set_flashdata('error_msg','There was an error with the login information. Please fix the following <br />' . validation_errors() );
+                redirect($_SERVER['HTTP_REFERER'], 'refresh');
             }else{
-                $customer_id = $this->customer->login($email, $password);
-                if( !is_numeric($customer_id)) :
-                    $output_array['message'] = 'Sorry! Incorrect Username or password.';
-                else: 
+                $data = array(
+                    'email' => $this->input->post('loginemail'),
+                    'password' => $this->input->post('loginpassword')
+                );
+
+                $customer_id = $this->customer->login($data);
+                if( !is_numeric($customer_id)) {
+                    $this->session->set_flashdata('error_msg','Sorry! Incorrect username or password.');
+                    redirect('account/login');
+                }else{
                     // @TODO
                     // Set the login session
                     // Check if the user already have some products in the cart, and going to checkout
                     // Perform every other actions necessary
-                endif;
+                    $session_data = array('logged_in' => true, 'logged_id' => $customer_id);
+                    $this->session->set_userdata($session_data);
+                    $this->session->set_flashdata('success_msg','You are now logged in!');
+                    // redirect(base_url());
+                    redirect(base_url());
+                }
             }
         }
-    }    
+    } 
+
+    public function create(){
+        $this->load->view('landing/create');
+    }   
 
     /*
      * @Incoming : accepts the signup POST paramters
      * result : string (success | error )
      * */
-    function create(){
+    function signup_process(){        
+        $this->form_validation->set_rules('signupfirstname', 'First Name','trim|required|xss_clean');
+        $this->form_validation->set_rules('signuplastname', 'Last Name','trim|required|xss_clean');
+        $this->form_validation->set_rules('signupemail', 'Email Address','trim|required|xss_clean|valid_email|is_unique[customers.email]');
+        $this->form_validation->set_rules('signuppassword', 'Password','trim|required|xss_clean|min_length[8]|max_length[15]');
+        $this->form_validation->set_rules('signuprepeatpassword', 'Password','trim|required|xss_clean|min_length[8]|max_length[15]|matches[signuppassword]');
 
-        if( !$this->input->post() ){
-            // No input set
-            $this->load->view('landing/create');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error_msg','There was an error with the account creation. Please fix the following <br />' . validation_errors());
+            redirect($_SERVER['HTTP_REFERER'], 'refresh');
         }else{
-            $output_array['status'] = 'error';
-            $this->form_validation->set_rules('signupfirstname', 'First Name','trim|required|xss_clean');
-            $this->form_validation->set_rules('signuplastname', 'Last Name','trim|required|xss_clean');
-            $this->form_validation->set_rules('signupemail', 'Email Address','trim|required|xss_clean|valid_email|is_unique[users.email]');
-            $this->form_validation->set_rules('signuppassword', 'Password','trim|required|xss_clean|min_length[8]|max_length[15]');
-            $this->form_validation->set_rules('signuprepeatpassword', 'Password','trim|required|xss_clean|min_length[8]|max_length[15]|matches[signuppassword]');
+            $salt = salt(50);
+            $data = array(
+                'firstname' => $this->input->post('signupfirstname'),
+                'lastname' => $this->input->post('signuplastname'),
+                'email' => $this->input->post('signupemail'),
+                'salt' => $salt,
+                'password' => shaPassword($this->input->post('signuppassword'), $salt),
+                'last_ip' => $_SERVER['REMOTE_ADDR'],
+                'date_registered' => get_now(),
+                'last_login' => get_now()
+            );
 
-            if ($this->form_validation->run() == FALSE) {
-                $output_array['status'] = 'error';
-                $output_array['message'] = 'There was an error with the account creation. Please fix the following <pre>' . $this->form_validation->error_array() . '</pre>';
+            $customer_id = $this->customer->create_account($data, 'customers');
+            if( !is_numeric($customer_id) ) {
+                // check if site is live
+                // if( $lang['site_state'] == 'development' ) {
+                //     $output_array['message'] = $customer_id;
+                // }
+                $this->session->set_flashdata('error_msg','Sorry! There was an error creating your account.' . $customer_id);
+                redirect($_SERVER['HTTP_REFERER'], 'refresh');
+                
             }else{
-                $salt = salt(50);
-                $data = array(
-                    'firstname' => $this->input->post('signupfirstname'),
-                    'lastname' => $this->input->post('signuplastname'),
-                    'email' => $this->input->post('signupemail'),
-                    'salt' => $salt,
-                    'password' => shaPassword($this->input->post('signuppassword'), $salt),
-                    'last_ip' => $_SERVER['REMOTE_ADDR'],
-                    'last_login' => get_now()
-                );
-
-                $customer_id = $this->customer->create_account($data, 'customers');
-                if( !is_numeric($customer_id) ) :
-                    // check if site is live
-                    if( $lang['site_state'] == 'development' ) $output_array['message'] = $customer_id;
-                else :
-                    // @TODO
-                    // Congrats we have a new registered customer
-                    // Send a Welcoming Mail to the user
-                    // Check if he was trying to check out and ursher them there
-                    // Any other action to perform.
-                endif;
+                // @TODO
+                // Congrats we have a new registered customer
+                // Add customer session
+                // Send a Welcoming Mail to the user
+                // Check if he was trying to check out and ursher them there
+                // Any other action to perform. 
+                $this->session->set_flashdata('success_msg','You are now logged in!');
+                redirect(base_url());                 
             }
-        }       
+        } 
     }
 }
-
-// public function register_user($register_data = null){
-
-
-
-//         if($register_data) {
-
-
-
-//             $register_data['salt'] = salt(50);
-//             $register_data['pwd'] = shaPassword($register_data['pwd'], $register_data['salt']);
-
-
-//             $this->db->insert('users', $register_data);
-
-
-
-//             return true;
-
-
-
-//         }
-
-
-
-//     }
-
 
 
 // User was successfully created and the user needs to verify their account.

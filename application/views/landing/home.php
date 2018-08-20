@@ -312,7 +312,7 @@
                                 <ul class="product-labels"></ul>
                                 <a class="product-link" href="#"></a>
                                 <div class="product-caption">
-                                    <h5 class="text-center">Naviforce 9044 Military Style <br /> <span>Men Japan Quartz</span></h5>
+                                    <a href="#"><h5 class="text-center">Naviforce 9044 Military Style <br /> <span>Men Japan Quartz</span></h5></a>
                                     <div class="product-caption-price">N18,900</div>
                                     <ul class="product-caption-feature-list">
                                         <li>45 left</li>

@@ -17,8 +17,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/landing/css/font-awesome.css');?>">
     <link rel="stylesheet" href="<?= base_url('assets/landing/css/styles.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/landing/css/mystyles.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/landing/css/switcher.css');?>" />
-    <link rel="alternate stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/bright-turquoise.css'); ?>" title="bright-turquoise" media="all" />
+    <!-- <link rel="alternate stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/bright-turquoise.css'); ?>" title="bright-turquoise" media="all" />
     <link rel="alternate stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/turkish-rose.css'); ?>" title="turkish-rose" media="all" />
     <link rel="alternate stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/salem.css');?>" title="salem" media="all" />
     <link rel="alternate stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/hippie-blue.css');?>" title="hippie-blue" media="all" />
@@ -26,10 +25,10 @@
     <link rel="alternate stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/green-smoke.css'); ?>" title="green-smoke" media="all" />
     <link rel="alternate stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/horizon.css'); ?>" title="horizon" media="all" />
     <link rel="alternate stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/cerise.css'); ?>" title="cerise" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/brick-red.css');?>" title="brick-red" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/de-york.css'); ?>" title="de-york" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/shamrock.css'); ?>" title="shamrock" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/brick-red.css');?>" title="brick-red" media="all" /> -->
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/de-york.css'); ?>" title="de-york" media="all" />
+    <!-- <link rel="alternate stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/shamrock.css'); ?>" title="shamrock" media="all" />
     <link rel="alternate stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/studio.css'); ?>" title="studio" media="all" />
     <link rel="alternate stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/leather.css'); ?>" title="leather" media="all" />
     <link rel="alternate stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/denim.css'); ?>" title="denim" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/scarlet.css');?>" title="scarlet" media="all" />
+    <link rel="alternate stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/scarlet.css');?>" title="scarlet" media="all" /> -->

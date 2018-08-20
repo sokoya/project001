@@ -1,8 +1,9 @@
+
 <nav class="navbar navbar-default navbar-main-white navbar-pad-top navbar-first">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="index-2.html">
-                <img src="<?= base_url('assets/landing/img/logo.png');?>" alt="Image Alternative text" title="Image Title" />
+            <a class="navbar-brand" href="<?= base_url()?>">
+                <img src="<?= base_url('assets/landing/img/log.png');?>" alt="CarritoLogo" title="Image Title" />
             </a>
         </div>
         <form class="navbar-form navbar-left navbar-main-search navbar-main-search-category" role="search">
@@ -75,3 +76,10 @@
         </ul>
     </div>
 </nav>
+<!-- <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-2">
+            <?php $this->load->view('landing/msg_view'); ?>
+        </div>
+    </div>
+</div> -->

@@ -115,19 +115,22 @@
 	<div class="container">
 		<div class="row ">
 			<div class="col-md-10 col-md-offset-1">
+				<?php $this->load->view('landing/msg_view'); ?>
+			</div>
+			<div class="col-md-10 col-md-offset-1">
 				<div class="box-lg" style="margin-top: 14px;">
 					<div class="row" data-gutter="60">
 						<div class="col-md-7" style="margin-bottom: 40px;">
 							<h3 class="widget-title" style="font-weight: bold; font-size: 20px;padding-bottom: 14px;">
 								Sign in</h3>
-                            <?= form_open('', 'id="login-form"'); ?>
+                            <form id="login-form" action="<?= base_url('account/login'); ?>" method="post">
 								<div class="form-group">
 									<label>Email Address*</label>
 									<input class="form-control" type="email" name="loginemail" placeholder="Enter your email" required/>
 								</div>
 								<div class="form-group">
 									<label>Password</label>
-									<input class="form-control" type="password" name="loginpassword" required/>
+									<input class="form-control" type="password" name="loginpassword" placeholder="Enter your password" required/>
 								</div>
 								<div class="checkbox">
 									<label>
@@ -135,7 +138,7 @@
 								</div>
 								<input class="carrito_btn_sign col-md-12 col-sm-12 col-xs-12" type="submit"
 									   value="Sign in"/>
-							<?= form_close(); ?>
+							</form>
 							<br />
 							<div class="form_end">
 								<a href="<?= base_url('resetpassword'); ?>">Forgot Your Password?</a>
@@ -162,118 +165,39 @@
 
 
 <script>
-	// Carrito signUp validation
-	$('document').ready(function () {
-		/* validation */
-		$("#register-form").validate({
-			rules:
-				{
-					signupemail: {
-						required: true,
-						email: true
-					},
-					signuppassword: {
-						required: true,
-						minlength: 8,
-						maxlength: 15
-					},
-					signuprepeatpassword: {
-						required: true,
-						equalTo: '#signup-password'
-					},
-				},
-			messages:
-				{
+	// Carrito Login validation
+	// $('document').ready(function () {
+	// 	/* validation */
+	// 	$("#login-form").validate({
+	// 		rules:
+	// 			{
+	// 				loginemail: {
+	// 					required: true,
+	// 					email: true
+	// 				},
+	// 				loginpassword: {
+	// 					required: true,
+	// 				},
+	// 			},
+	// 		messages:
+	// 			{
+	// 				loginpassword: {
+	// 					required: "Provide a Password",
+	// 					minlength: "Password Needs To Be Minimum of 6 Characters"
+	// 				},
+	// 				loginemail: "Enter a Valid Email",
+	// 			},
+	// 		submitHandler: submitLoginForm
+	// 	});
+	// 	// End Validation
 
-					signuppassword: {
-						required: "Provide a Password",
-						minlength: "Password Needs To Be Minimum of 8 Characters"
-					},
-					signupemail: "Enter a Valid Email",
-					signuprepeatpassword: {
-						required: "Retype Your Password",
-						equalTo: "Password Mismatch! Retype"
-					}
-				},
-			submitHandler: submitForm
-		});
+	// 	// Carrito form submit
+		
 
-		$("#login-form").validate({
-			rules:
-				{
-					loginemail: {
-						required: true,
-						email: true
-					},
-					loginpassword: {
-						required: true,
-					},
-				},
-			messages:
-				{
-					loginpassword: {
-						required: "Provide a Password",
-						minlength: "Password Needs To Be Minimum of 8 Characters"
-					},
-					loginemail: "Enter a Valid Email",
-				},
-			submitHandler: submitLoginForm
-		});
-		// End Validation
-
-		// Carrito form submit
-		function submitForm() {
-			let data = $("#register-form").serialize();
-
-			$.ajax({
-
-				type: 'POST',
-				url: 'account/create',
-				data: data,
-
-				success: function (data) {
-					if (data.status === "success") {
-
-						console.log("Success")
-
-					}
-					else if (data.status === "error") {
-						console.log("Error")
-					}
-					else {
-						console.log("An unknown error occurred")
-					}
-				}
-			});
-			return false;
-		}
-
-		function submitLoginForm() {
-			let data = $("#login-form").serialize();
-
-			$.ajax({
-
-				type: 'POST',
-				url: 'account/login',
-				data: data,
-
-				success: function (data) {
-					if (data.status === "success") {
-
-						console.log("Success")
-
-					}
-					else if (data === "error") {
-						console.log("Error")
-					}
-					else {
-						console.log("An unknown error occurred")
-					}
-				}
-			});
-			return false;
-		}
-	});
+	// 	function submitLoginForm() {
+	// 		$.post( base_url + 'account/login', $("#login-form").serialize());
+	// 	}
+	// });
 
 </script>
 </body>

@@ -154,7 +154,7 @@
 			$.ajax({
 
 				type: 'POST',
-				url: 'account/create',
+				url: base_url + 'create',
 				data: data,
 
 				success: function (data) {
