@@ -263,12 +263,12 @@
 				data: data,
 
 				success: function (data) {
-					if (data === "success") {
+					if (data.status === "success") {
 
 						console.log("Success")
 
 					}
-					else if (data === "error") {
+					else if (data.status === "error") {
 						console.log("Error")
 					}
 					else {
@@ -289,7 +289,7 @@
 				data: data,
 
 				success: function (data) {
-					if (data === "success") {
+					if (data.status === "success") {
 
 						console.log("Success")
 

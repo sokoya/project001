@@ -22,6 +22,8 @@ public function index(){
  * */
 
 function process(){
+        $this->form_validation->set_rules('signupfirstname', 'First Name','trim|required|xss_clean');
+        $this->form_validation->set_rules('signuplastname', 'Last Name','trim|required|xss_clean');
         $this->form_validation->set_rules('signupemail', 'Email Address','trim|required|xss_clean|valid_email|is_unique[users.email]');
         $this->form_validation->set_rules('signuppassword', 'Password','trim|required|xss_clean|min_length[8]|max_length[15]');
         $this->form_validation->set_rules('signuprepeatpassword', 'Password','trim|required|xss_clean|min_length[8]|max_length[15]|matches[signuppassword]');
@@ -37,11 +39,47 @@ function process(){
                 'registration_date' => get_now(),
                 'registration_key' => $registration_key
             );
-
             $user_id = $this->user->create_user($data);
         }
     }
 }
+
+
+
+// public function register_user($register_data = null){
+
+
+
+//         if($register_data) {
+
+
+
+//             $register_data['salt'] = salt(50);
+
+
+
+//             $register_data['pwd'] = shaPassword($register_data['pwd'], $register_data['salt']);
+
+
+
+
+
+
+
+//             $this->db->insert('users', $register_data);
+
+
+
+//             return true;
+
+
+
+//         }
+
+
+
+//     }
+
 
 
 // User was successfully created and the user needs to verify their account.

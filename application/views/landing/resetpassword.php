@@ -119,7 +119,7 @@
 				data: data,
 
 				success: function (data) {
-					if (data === "success") {
+					if (data.status === "success") {
 
 						console.log("Success")
 
