@@ -47,17 +47,18 @@
                     <h3 class="widget-title" style="font-weight: bold; font-size: 20px;padding-bottom: 14px;">
                         Create An Account</h3>
                     <?= form_open('', 'autocorrect="off", id="register-form"'); ?>
+                    <div class="alert-notif"></div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="first_name">First Name*</label>
-                                    <input class="form-control" type="text" name="signup-firstname" name="firstname" placeholder="First name" required />
+                                    <input class="form-control" type="text" name="signupfirstname" placeholder="First name" required />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="lastname_name">Last Name*</label>
-                                    <input class="form-control" type="text" name="signup-lastname" name="lastname" placeholder="Last Name" required />
+                                    <input class="form-control" type="text" name="signuplastname" placeholder="Last Name" required />
                                 </div>
                             </div>  
                         </div>
@@ -154,17 +155,21 @@
 			$.ajax({
 
 				type: 'POST',
-				url: base_url + 'create',
+				url: base_url + 'account/signup_process',
 				data: data,
 
 				success: function (data) {
+                    // console.log(data);
 					if (data.status === "success") {
-
+                        // $('.alert-notif').slideDown().html('<p>' + data.message + '</p>').slideUp();
+                        alert(data.message);
 						console.log("Success")
 
 					}
 					else if (data.status === "error") {
-						console.log("Error")
+						// $('.alert-notif').slideDown().html('<p>' + data.message + '</p>').slideUp();
+                        alert(data.message);
+                        // console.log("Error")
 					}
 					else {
 						console.log("An unknown error occurred")

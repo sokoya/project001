@@ -23,16 +23,19 @@ class Account extends CI_Controller{
      * result : string (success | error )
      * */
     public function login() {
-        
+
         if(!$_POST){
             $this->load->view('landing/login');
         }else {
             // $this->output->enable_profiler(TRUE);
             $this->form_validation->set_rules('loginemail', 'Email Address','trim|required|xss_clean|valid_email');
             $this->form_validation->set_rules('loginpassword', 'Psassword','trim|required|xss_clean|min_length[6]|max_length[15]');
+            $output_array['status'] = 'error';
             if ($this->form_validation->run() == FALSE) {
                 $this->session->set_flashdata('error_msg','There was an error with the login information. Please fix the following <br />' . validation_errors() );
-                redirect($_SERVER['HTTP_REFERER'], 'refresh');
+                $output_array['message'] = validation_errors();
+                echo json_encode($output_array);
+                exit;
             }else{
                 $data = array(
                     'email' => $this->input->post('loginemail'),
@@ -42,7 +45,10 @@ class Account extends CI_Controller{
                 $customer_id = $this->customer->login($data);
                 if( !is_numeric($customer_id)) {
                     $this->session->set_flashdata('error_msg','Sorry! Incorrect username or password.');
-                    redirect('account/login');
+                    // redirect('account/login');
+                    $output_array['message'] = validation_errors();
+                    echo json_encode($output_array);
+                    exit;
                 }else{
                     // @TODO
                     // Set the login session
@@ -52,7 +58,9 @@ class Account extends CI_Controller{
                     $this->session->set_userdata($session_data);
                     $this->session->set_flashdata('success_msg','You are now logged in!');
                     // redirect(base_url());
-                    redirect(base_url());
+                    $output_array['status'] = 'success';
+                    echo json_encode($output_array);
+                    exit;
                 }
             }
         }
@@ -72,19 +80,22 @@ class Account extends CI_Controller{
         $this->form_validation->set_rules('signupemail', 'Email Address','trim|required|xss_clean|valid_email|is_unique[customers.email]');
         $this->form_validation->set_rules('signuppassword', 'Password','trim|required|xss_clean|min_length[8]|max_length[15]');
         $this->form_validation->set_rules('signuprepeatpassword', 'Password','trim|required|xss_clean|min_length[8]|max_length[15]|matches[signuppassword]');
-
-        if ($this->form_validation->run() == FALSE) {
+        $output_array['status'] = 'error';
+        if ($this->form_validation->run() === FALSE) {
             $this->session->set_flashdata('error_msg','There was an error with the account creation. Please fix the following <br />' . validation_errors());
-            redirect($_SERVER['HTTP_REFERER'], 'refresh');
+            // redirect($_SERVER['HTTP_REFERER'], 'refresh');
+            $output_array['message'] = validation_errors();
+            echo json_encode($output_array);
+            exit;
         }else{
             $salt = salt(50);
             $data = array(
-                'firstname' => $this->input->post('signupfirstname'),
-                'lastname' => $this->input->post('signuplastname'),
+                'first_name' => $this->input->post('signupfirstname'),
+                'last_name' => $this->input->post('signuplastname'),
                 'email' => $this->input->post('signupemail'),
                 'salt' => $salt,
                 'password' => shaPassword($this->input->post('signuppassword'), $salt),
-                'last_ip' => $_SERVER['REMOTE_ADDR'],
+                'ip' => $_SERVER['REMOTE_ADDR'],
                 'date_registered' => get_now(),
                 'last_login' => get_now()
             );
@@ -95,9 +106,11 @@ class Account extends CI_Controller{
                 // if( $lang['site_state'] == 'development' ) {
                 //     $output_array['message'] = $customer_id;
                 // }
-                $this->session->set_flashdata('error_msg','Sorry! There was an error creating your account.' . $customer_id);
-                redirect($_SERVER['HTTP_REFERER'], 'refresh');
-                
+                // $this->session->set_flashdata('error_msg','Sorry! There was an error creating your account.' . $customer_id);
+                // redirect($_SERVER['HTTP_REFERER'], 'refresh');
+                $output_array['message'] = 'Sorry! There was an error creating your account.';
+                echo json_encode($output_array);
+                exit;
             }else{
                 // @TODO
                 // Congrats we have a new registered customer
@@ -105,8 +118,12 @@ class Account extends CI_Controller{
                 // Send a Welcoming Mail to the user
                 // Check if he was trying to check out and ursher them there
                 // Any other action to perform. 
-                $this->session->set_flashdata('success_msg','You are now logged in!');
-                redirect(base_url());                 
+                // $this->session->set_flashdata('success_msg','You are now logged in!');
+                // redirect(base_url());  
+                $output_array['status'] = 'success';
+                $output_array['message'] = 'Account Created successfully';
+                echo json_encode($output_array);
+                exit;               
             }
         } 
     }

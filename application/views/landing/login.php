@@ -120,6 +120,7 @@
 			<div class="col-md-10 col-md-offset-1">
 				<div class="box-lg" style="margin-top: 14px;">
 					<div class="row" data-gutter="60">
+						<div class="alert-notif"></div>
 						<div class="col-md-7" style="margin-bottom: 40px;">
 							<h3 class="widget-title" style="font-weight: bold; font-size: 20px;padding-bottom: 14px;">
 								Sign in</h3>
@@ -165,39 +166,61 @@
 
 
 <script>
-	// Carrito Login validation
-	// $('document').ready(function () {
-	// 	/* validation */
-	// 	$("#login-form").validate({
-	// 		rules:
-	// 			{
-	// 				loginemail: {
-	// 					required: true,
-	// 					email: true
-	// 				},
-	// 				loginpassword: {
-	// 					required: true,
-	// 				},
-	// 			},
-	// 		messages:
-	// 			{
-	// 				loginpassword: {
-	// 					required: "Provide a Password",
-	// 					minlength: "Password Needs To Be Minimum of 6 Characters"
-	// 				},
-	// 				loginemail: "Enter a Valid Email",
-	// 			},
-	// 		submitHandler: submitLoginForm
-	// 	});
-	// 	// End Validation
+	Carrito Login validation
+	$('document').ready(function () {
+		/* validation */
+		$("#login-form").validate({
+			rules:
+				{
+					loginemail: {
+						required: true,
+						email: true
+					},
+					loginpassword: {
+						required: true,
+					},
+				},
+			messages:
+				{
+					loginpassword: {
+						required: "Provide a Password",
+						minlength: "Password Needs To Be Minimum of 6 Characters"
+					},
+					loginemail: "Enter a Valid Email",
+				},
+			submitHandler: submitLoginForm
+		});
+		// End Validation
 
-	// 	// Carrito form submit
+		// Carrito form submit
 		
 
-	// 	function submitLoginForm() {
-	// 		$.post( base_url + 'account/login', $("#login-form").serialize());
-	// 	}
-	// });
+		function submitLoginForm() {
+			$.ajax({
+
+				type: 'POST',
+				url: base_url + 'account/alogin',
+				data: data,
+
+				success: function (data) {
+                    console.log(data);
+					if (data.status === "success") {
+                        $('.alert-notif').html('<p>' + data.message + '</p>');
+						console.log("Success")
+
+					}
+					else if (data.status === "error") {
+						$('.alert-notif').html('<p>' + data.message + '</p>');
+                        console.log("Error")
+					}
+					else {
+						console.log("An unknown error occurred")
+					}
+				}
+			});
+			return false;
+		}
+	});
 
 </script>
 </body>
