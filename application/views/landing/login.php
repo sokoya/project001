@@ -120,7 +120,7 @@
 						<div class="col-md-6" style="margin-bottom: 40px;">
 							<h3 class="widget-title" style="font-weight: bold; font-size: 20px;padding-bottom: 14px;">
 								Sign in</h3>
-							<form autocorrect="off" id="login-form">
+                            <?= form_open('', 'id="login-form"'); ?>
 								<div class="form-group">
 									<label>Email Address*</label>
 									<input class="form-control" type="email" name="loginemail"/>
@@ -135,7 +135,7 @@
 								</div>
 								<input class="carrito_btn_sign col-md-12 col-sm-12 col-xs-12" type="submit"
 									   value="Sign in"/>
-							</form>
+							<?= form_close(); ?>
 							<div class="form_end">
 								<a href="<?= base_url('resetpassword'); ?>">Forgot Your Password?</a>
 							</div>
@@ -144,7 +144,8 @@
 						<div class="col-md-6">
 							<h3 class="widget-title" style="font-weight: bold; font-size: 20px;padding-bottom: 14px;">
 								Create Account</h3>
-							<form autocorrect="off" autocomplete="off" id="register-form">
+							
+                            <?= form_open('', 'autocorrect="off", id="register-form"'); ?>
 								<div class="form-group">
 									<label>Email Address*</label>
 									<input class="form-control" type="text" id="signup-email" name="signupemail"/>
@@ -175,9 +176,7 @@
 								</div>
 								<input class="carrito_btn_create col-md-12 col-sm-12 col-xs-12" type="submit"
 									   value="Create Account"/>
-
-
-							</form>
+                            <?= form_close(); ?>
 						</div>
 					</div>
 				</div>
@@ -259,7 +258,7 @@
 			$.ajax({
 
 				type: 'POST',
-				url: 'signup/process',
+				url: 'account/create',
 				data: data,
 
 				success: function (data) {
@@ -285,7 +284,7 @@
 			$.ajax({
 
 				type: 'POST',
-				url: 'login/process',
+				url: 'account/login',
 				data: data,
 
 				success: function (data) {

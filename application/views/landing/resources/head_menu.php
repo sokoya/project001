@@ -625,13 +625,13 @@
                 </li>
                 <li><a href="#" class="navbar-item-top">Cart</a>
                 </li>
-                <li class="dropdown"><a href="<?= base_url('login'); ?>"><span>Sign in | Join</span><strong>My Carrito</strong></a>
+                <li class="dropdown"><a href="<?= base_url('account'); ?>"><span>Sign in | Join</span><strong>My Carrito</strong></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#">New Customer? Create an account</a>
+                            <a href="<?= base_url('account'); ?>">New Customer? Create an account</a>
                         </li>
                         <li>
-                            <a href="<?= base_url('login'); ?>">My Accounts</a>
+                            <a href="<?= base_url('account'); ?>">My Accounts</a>
                         </li>
                         <li>
                             <a href="#">My Orders</a>
