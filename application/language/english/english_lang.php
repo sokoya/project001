@@ -1,6 +1,6 @@
 <?php
 // General Site Settings
-$lang['live_state'] = 'development';
+$lang['site_state'] = 'development';
 $lang['app_name'] = 'Carrito';
 $lang['app_email'] = '';
 $lang['notify_email'] = '';

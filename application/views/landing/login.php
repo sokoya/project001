@@ -114,20 +114,20 @@
 	<!-- Start your conytainer class here get reference from the theme -->
 	<div class="container">
 		<div class="row ">
-			<div class="col-md-8 col-md-offset-2 ">
+			<div class="col-md-10 col-md-offset-1">
 				<div class="box-lg" style="margin-top: 14px;">
 					<div class="row" data-gutter="60">
-						<div class="col-md-6" style="margin-bottom: 40px;">
+						<div class="col-md-7" style="margin-bottom: 40px;">
 							<h3 class="widget-title" style="font-weight: bold; font-size: 20px;padding-bottom: 14px;">
 								Sign in</h3>
                             <?= form_open('', 'id="login-form"'); ?>
 								<div class="form-group">
 									<label>Email Address*</label>
-									<input class="form-control" type="email" name="loginemail"/>
+									<input class="form-control" type="email" name="loginemail" placeholder="Enter your email" required/>
 								</div>
 								<div class="form-group">
 									<label>Password</label>
-									<input class="form-control" type="password" name="loginpassword"/>
+									<input class="form-control" type="password" name="loginpassword" required/>
 								</div>
 								<div class="checkbox">
 									<label>
@@ -136,47 +136,17 @@
 								<input class="carrito_btn_sign col-md-12 col-sm-12 col-xs-12" type="submit"
 									   value="Sign in"/>
 							<?= form_close(); ?>
+							<br />
 							<div class="form_end">
 								<a href="<?= base_url('resetpassword'); ?>">Forgot Your Password?</a>
 							</div>
-						</div>
-						<hr class="hr-text hidden-lg hidden-md" data-content="OR">
-						<div class="col-md-6">
+						</div>                        
+						<div class="col-md-5">
 							<h3 class="widget-title" style="font-weight: bold; font-size: 20px;padding-bottom: 14px;">
-								Create Account</h3>
-							
-                            <?= form_open('', 'autocorrect="off", id="register-form"'); ?>
-								<div class="form-group">
-									<label>Email Address*</label>
-									<input class="form-control" type="text" id="signup-email" name="signupemail"/>
-								</div>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Password*</label>
-											<input class="form-control" type="password" id="signup-password"
-												   name="signuppassword"/>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Repeat Password*</label>
-											<input class="form-control" type="password" id="signup-repeat-password"
-												   name="signuprepeatpassword"/>
-										</div>
-									</div>
-								</div>
-								<div class="well text-center">
-									<div class="checkbox">
-										<label>
-											<input class="i-check" type="checkbox"/>
-											I agree to Carrito <a href="#">Terms & Conditions</a> | <a href="#">
-												Policy.</a></label>
-									</div>
-								</div>
-								<input class="carrito_btn_create col-md-12 col-sm-12 col-xs-12" type="submit"
-									   value="Create Account"/>
-                            <?= form_close(); ?>
+								Don't Have An Account? </h3>
+							<div class="form-group">
+								<a href="<?= base_url('account/create'); ?>" class="carrito_btn_create col-md-12 col-sm-12 col-xs-12">Create An Account.</a>
+							</div>
 						</div>
 					</div>
 				</div>
