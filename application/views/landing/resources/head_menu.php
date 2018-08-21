@@ -625,26 +625,37 @@
                 </li>
                 <li><a href="#" class="navbar-item-top">Cart</a>
                 </li>
-                <li class="dropdown"><a href="<?= base_url('account'); ?>"><span>Sign in | Join</span><strong>My Carrito</strong></a>
+                <li class="dropdown">
+                    <?php if( $this->session->userdata('logged_in') ): ?>
+                        <a href="<?= base_url('login'); ?>"><span>Welcome</span><strong>{{The Email}}</strong></a>
+                    <?php else : ?>
+                        <a href="<?= base_url('login'); ?>"><span>Sign in | Join</span><strong>My Carrito</strong></a>
+                    <?php endif; ?>
                     <ul class="dropdown-menu">
-                        <li>
-                            <a href="<?= base_url('account/create'); ?>">New Customer? Create an account</a>
-                        </li>
-                        <li>
-                            <a href="<?= base_url('account'); ?>">My Accounts</a>
-                        </li>
-                        <li>
-                            <a href="#">My Orders</a>
-                        </li>
-                        <li>
-                            <a href="#">My Wallet</a>
-                        </li>
-                        <li>
-                            <a href="#">My Coupon</a>
-                        </li>
-                        <li>
-                            <a href="#">Help</a>
-                        </li>
+                        <?php if($this->session->userdata('logged_in') ): ?>
+                            <li>
+                                <a href="<?= base_url('myaccount'); ?>">My Accounts</a>
+                            </li>
+                            <li>
+                                <a href="#">My Orders</a>
+                            </li>
+                            <li>
+                                <a href="#">My Wallet</a>
+                            </li>
+                            <li>
+                                <a href="#">My Coupon</a>
+                            </li>
+                            <li>
+                                <a href="#">Help</a>
+                            </li>
+                            <li>
+                                <a href="<?= base_url('logout'); ?>">Logout</a>
+                            </li>
+                        <?php else : ?>
+                            <li>
+                                <a href="<?= base_url('create'); ?>">New Customer? Create an account</a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </li>
             </ul>

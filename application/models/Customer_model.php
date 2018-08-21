@@ -13,8 +13,8 @@ Class Customer_model extends CI_Model{
                 if ($salt) {
                     $password = shaPassword($data['password'], $salt);
                     $this->db->where('email', $data['email']);
-                    $this->db->where('password', $data['password']);
-                    $result = $this->db->get('users');
+                    $this->db->where('password', $password);
+                    $result = $this->db->get('customers');
                     if ($result->num_rows() == 1) {
                     	$c_update = array('last_login' => get_now(), 'ip' => $_SERVER['REMOTE_ADDR'] );
                     	$this->db->where('email', $data['email']);

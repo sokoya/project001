@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Account extends CI_Controller{
+class Create extends CI_Controller{
 
     public function __construct(){
         // @todo
@@ -11,70 +11,21 @@ class Account extends CI_Controller{
         parent::__construct();
         $this->load->model('customer_model', 'customer');
         $this->load->helper('url'); 
+        if( $this->session->userdata('logged_in')){
+            die();
+        }
     }
 
     public function index(){
-        // $this->load->view('landing/login');
-        redirect('account/login');
-    }
-
-    /*
-     * @Incoming : accepts the login POST paramters : email and password
-     * result : string (success | error )
-     * */
-    public function login() {
-
-        if(!$_POST){
-            $this->load->view('landing/login');
-        }else {
-            // $this->output->enable_profiler(TRUE);
-            $this->form_validation->set_rules('loginemail', 'Email Address','trim|required|xss_clean|valid_email');
-            $this->form_validation->set_rules('loginpassword', 'Psassword','trim|required|xss_clean|min_length[6]|max_length[15]');
-            $output_array['status'] = 'error';
-            if ($this->form_validation->run() == FALSE) {
-                $this->session->set_flashdata('error_msg','There was an error with the login information. Please fix the following <br />' . validation_errors() );
-                $output_array['message'] = validation_errors();
-                echo json_encode($output_array);
-                exit;
-            }else{
-                $data = array(
-                    'email' => $this->input->post('loginemail'),
-                    'password' => $this->input->post('loginpassword')
-                );
-
-                $customer_id = $this->customer->login($data);
-                if( !is_numeric($customer_id)) {
-                    $this->session->set_flashdata('error_msg','Sorry! Incorrect username or password.');
-                    // redirect('account/login');
-                    $output_array['message'] = validation_errors();
-                    echo json_encode($output_array);
-                    exit;
-                }else{
-                    // @TODO
-                    // Set the login session
-                    // Check if the user already have some products in the cart, and going to checkout
-                    // Perform every other actions necessary
-                    $session_data = array('logged_in' => true, 'logged_id' => $customer_id);
-                    $this->session->set_userdata($session_data);
-                    $this->session->set_flashdata('success_msg','You are now logged in!');
-                    // redirect(base_url());
-                    $output_array['status'] = 'success';
-                    echo json_encode($output_array);
-                    exit;
-                }
-            }
-        }
-    } 
-
-    public function create(){
         $this->load->view('landing/create');
-    }   
+    }
 
     /*
      * @Incoming : accepts the signup POST paramters
      * result : string (success | error )
      * */
-    function signup_process(){        
+    function process(){  
+        // $this->output->enable_profiler(TRUE);      
         $this->form_validation->set_rules('signupfirstname', 'First Name','trim|required|xss_clean');
         $this->form_validation->set_rules('signuplastname', 'Last Name','trim|required|xss_clean');
         $this->form_validation->set_rules('signupemail', 'Email Address','trim|required|xss_clean|valid_email|is_unique[customers.email]');
@@ -83,10 +34,7 @@ class Account extends CI_Controller{
         $output_array['status'] = 'error';
         if ($this->form_validation->run() === FALSE) {
             $this->session->set_flashdata('error_msg','There was an error with the account creation. Please fix the following <br />' . validation_errors());
-            // redirect($_SERVER['HTTP_REFERER'], 'refresh');
-            $output_array['message'] = validation_errors();
-            echo json_encode($output_array);
-            exit;
+            redirect('create');
         }else{
             $salt = salt(50);
             $data = array(
@@ -106,11 +54,8 @@ class Account extends CI_Controller{
                 // if( $lang['site_state'] == 'development' ) {
                 //     $output_array['message'] = $customer_id;
                 // }
-                // $this->session->set_flashdata('error_msg','Sorry! There was an error creating your account.' . $customer_id);
-                // redirect($_SERVER['HTTP_REFERER'], 'refresh');
-                $output_array['message'] = 'Sorry! There was an error creating your account.';
-                echo json_encode($output_array);
-                exit;
+                $this->session->set_flashdata('error_msg','Sorry! There was an error creating your account.' . $customer_id);
+                redirect($_SERVER['HTTP_REFERER']);
             }else{
                 // @TODO
                 // Congrats we have a new registered customer
@@ -118,12 +63,15 @@ class Account extends CI_Controller{
                 // Send a Welcoming Mail to the user
                 // Check if he was trying to check out and ursher them there
                 // Any other action to perform. 
-                // $this->session->set_flashdata('success_msg','You are now logged in!');
-                // redirect(base_url());  
-                $output_array['status'] = 'success';
-                $output_array['message'] = 'Account Created successfully';
-                echo json_encode($output_array);
-                exit;               
+                $data = array(
+                    'email' => $this->input->post('signupemail'),
+                    'password' => $this->input->post('signuppassword')
+                );
+                $id = $this->customer->login($data);
+                $session_data = array('logged_in' => true, 'logged_id' => $id);
+                $this->session->set_flashdata('success_msg','Account created and logged in successfully!');
+                // To ursher them to where they are coming from...
+                redirect(base_url());               
             }
         } 
     }

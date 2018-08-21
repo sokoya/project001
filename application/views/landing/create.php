@@ -42,11 +42,14 @@
 	<!-- Start your conytainer class here get reference from the theme -->
 	<div class="container">
 		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<?php $this->load->view('landing/msg_view'); ?>
+			</div>
             <div class="col-md-10 col-md-offset-1">
                 <div class="box-lg" style="margin-top: 14px;">
                     <h3 class="widget-title" style="font-weight: bold; font-size: 20px;padding-bottom: 14px;">
                         Create An Account</h3>
-                    <?= form_open('', 'autocorrect="off", id="register-form"'); ?>
+                    <?= form_open('create/process', 'autocorrect="off", id="register-form"'); ?>
                     <div class="alert-notif"></div>
                         <div class="row">
                             <div class="col-md-6">
@@ -109,77 +112,5 @@
 
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
-
-
-<script>
-	// Carrito signUp validation
-	$('document').ready(function () {
-		/* validation */
-		$("#register-form").validate({
-			rules:
-				{
-					signupemail: {
-						required: true,
-						email: true
-					},
-					signuppassword: {
-						required: true,
-						minlength: 8,
-						maxlength: 15
-					},
-					signuprepeatpassword: {
-						required: true,
-						equalTo: '#signup-password'
-					},
-				},
-			messages:
-				{
-
-					signuppassword: {
-						required: "Provide a Password",
-						minlength: "Password Needs To Be Minimum of 8 Characters"
-					},
-					signupemail: "Enter a Valid Email",
-					signuprepeatpassword: {
-						required: "Retype Your Password",
-						equalTo: "Password Mismatch! Retype"
-					}
-				},
-			submitHandler: submitForm
-		});
-
-		// Carrito form submit
-		function submitForm() {
-			let data = $("#register-form").serialize();
-
-			$.ajax({
-
-				type: 'POST',
-				url: base_url + 'account/signup_process',
-				data: data,
-
-				success: function (data) {
-                    // console.log(data);
-					if (data.status === "success") {
-                        // $('.alert-notif').slideDown().html('<p>' + data.message + '</p>').slideUp();
-                        alert(data.message);
-						console.log("Success")
-
-					}
-					else if (data.status === "error") {
-						// $('.alert-notif').slideDown().html('<p>' + data.message + '</p>').slideUp();
-                        alert(data.message);
-                        // console.log("Error")
-					}
-					else {
-						console.log("An unknown error occurred")
-					}
-				}
-			});
-			return false;
-		}
-	});
-
-</script>
 </body>
 </html>
