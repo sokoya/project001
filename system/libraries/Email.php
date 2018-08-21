@@ -6,7 +6,7 @@
  *
  * This content is released under the MIT License (MIT)
  *
- * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
+ * Copyright (c) 2014 - 2017, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
+ * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
@@ -913,13 +913,18 @@ class CI_Email {
 	/**
 	 * Get Mail Protocol
 	 *
+	 * @param	bool
 	 * @return	mixed
 	 */
-	protected function _get_protocol()
+	protected function _get_protocol($return = TRUE)
 	{
 		$this->protocol = strtolower($this->protocol);
 		in_array($this->protocol, $this->_protocols, TRUE) OR $this->protocol = 'mail';
-		return $this->protocol;
+
+		if ($return === TRUE)
+		{
+			return $this->protocol;
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -927,21 +932,25 @@ class CI_Email {
 	/**
 	 * Get Mail Encoding
 	 *
+	 * @param	bool
 	 * @return	string
 	 */
-	protected function _get_encoding()
+	protected function _get_encoding($return = TRUE)
 	{
 		in_array($this->_encoding, $this->_bit_depths) OR $this->_encoding = '8bit';
 
 		foreach ($this->_base_charsets as $charset)
 		{
-			if (strpos($this->charset, $charset) === 0)
+			if (strpos($charset, $this->charset) === 0)
 			{
 				$this->_encoding = '7bit';
 			}
 		}
 
-		return $this->_encoding;
+		if ($return === TRUE)
+		{
+			return $this->_encoding;
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -961,8 +970,10 @@ class CI_Email {
 		{
 			return 'plain-attach';
 		}
-
-		return 'plain';
+		else
+		{
+			return 'plain';
+		}
 	}
 
 	// --------------------------------------------------------------------
@@ -1032,13 +1043,9 @@ class CI_Email {
 	 */
 	public function valid_email($email)
 	{
-		if (function_exists('idn_to_ascii') && strpos($email, '@'))
+		if (function_exists('idn_to_ascii') && $atpos = strpos($email, '@'))
 		{
-			list($account, $domain) = explode('@', $email, 2);
-			$domain = is_php('5.4')
-				? idn_to_ascii($domain, 0, INTL_IDNA_VARIANT_UTS46)
-				: idn_to_ascii($domain);
-			$email = $account.'@'.$domain;
+			$email = self::substr($email, 0, ++$atpos).idn_to_ascii(self::substr($email, $atpos));
 		}
 
 		return (bool) filter_var($email, FILTER_VALIDATE_EMAIL);
@@ -1822,15 +1829,14 @@ class CI_Email {
 	{
 		$this->_unwrap_specials();
 
-		$protocol = $this->_get_protocol();
-		$method   = '_send_with_'.$protocol;
+		$method = '_send_with_'.$this->_get_protocol();
 		if ( ! $this->$method())
 		{
-			$this->_set_error_message('lang:email_send_failure_'.($protocol === 'mail' ? 'phpmail' : $protocol));
+			$this->_set_error_message('lang:email_send_failure_'.($this->_get_protocol() === 'mail' ? 'phpmail' : $this->_get_protocol()));
 			return FALSE;
 		}
 
-		$this->_set_error_message('lang:email_sent', $protocol);
+		$this->_set_error_message('lang:email_sent', $this->_get_protocol());
 		return TRUE;
 	}
 
@@ -1853,13 +1859,9 @@ class CI_Email {
 	 */
 	protected function _validate_email_for_shell(&$email)
 	{
-		if (function_exists('idn_to_ascii') && strpos($email, '@'))
+		if (function_exists('idn_to_ascii') && $atpos = strpos($email, '@'))
 		{
-			list($account, $domain) = explode('@', $email, 2);
-			$domain = is_php('5.4')
-				? idn_to_ascii($domain, 0, INTL_IDNA_VARIANT_UTS46)
-				: idn_to_ascii($domain);
-			$email = $account.'@'.$domain;
+			$email = self::substr($email, 0, ++$atpos).idn_to_ascii(self::substr($email, $atpos));
 		}
 
 		return (filter_var($email, FILTER_VALIDATE_EMAIL) === $email && preg_match('#\A[a-z0-9._+-]+@[a-z0-9.-]{1,253}\z#i', $email));
@@ -2265,8 +2267,10 @@ class CI_Email {
 				usleep(250000);
 				continue;
 			}
-
-			$timestamp = 0;
+			else
+			{
+				$timestamp = 0;
+			}
 		}
 
 		if ($result === FALSE)

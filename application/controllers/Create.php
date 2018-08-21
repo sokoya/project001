@@ -10,6 +10,7 @@ class Create extends CI_Controller{
         // $this->session->set_userdata('referred_from', current_url());
         parent::__construct();
         $this->load->model('customer_model', 'customer');
+        $this->load->library('session');
         $this->load->helper('url'); 
         if( $this->session->userdata('logged_in')){
             die();
