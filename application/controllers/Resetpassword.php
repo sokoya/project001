@@ -19,4 +19,16 @@ class Resetpassword extends CI_Controller {
 	public function index(){
 		$this->load->view('landing/resetpassword');
 	}
+
+	function process(){
+		$this->form_validation->set_rules('resetemail','Email Address', 'trim|required|min_length[3]|valid_email');
+		$email = cleanit($this->input->post('email'));
+		if ($this->form_validation->run() == FALSE) {
+			$this->session->set_flashdata('error_msg', validation_errors());
+		} else {
+			$activation_token = generate_token(25);
+			
+		}
+		redirect('resetpassword');
+	}
 }
