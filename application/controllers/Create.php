@@ -5,16 +5,16 @@ class Create extends CI_Controller{
 
     public function __construct(){
         // @todo
-        // Check if the user is already loggedin
+        // Check if the user is already logged in
         // Also check where the user is coming from
         // $this->session->set_userdata('referred_from', current_url());
         parent::__construct();
         $this->load->model('customer_model', 'customer');
-        $this->load->library('session');
-        $this->load->helper('url'); 
-        if( $this->session->userdata('logged_in')){
-            die();
-        }
+        if( $this->session->userdata('logged_in') ){
+            // Ursher the person to where he is coming from
+            if( !empty($this->session->userdata('referred_from')) ) redirect($this->session->userdata('referred_from'));
+            redirect(base_url());
+        }        
     }
 
     public function index(){
@@ -26,16 +26,17 @@ class Create extends CI_Controller{
      * result : string (success | error )
      * */
     function process(){  
-        // $this->output->enable_profiler(TRUE);      
+        // $this->output->enable_profiler(TRUE);    
         $this->form_validation->set_rules('signupfirstname', 'First Name','trim|required|xss_clean');
         $this->form_validation->set_rules('signuplastname', 'Last Name','trim|required|xss_clean');
-        $this->form_validation->set_rules('signupemail', 'Email Address','trim|required|xss_clean|valid_email|is_unique[customers.email]');
+        $this->form_validation->set_rules('signupemail', 'Email Address','trim|required|xss_clean|valid_email|is_unique[customers.email]',array('is_unique' => 'Sorry! This %s has already been registered!'));
+        // $this->form_validation->set_message('is_unique', 'The %s is already taken');
         $this->form_validation->set_rules('signuppassword', 'Password','trim|required|xss_clean|min_length[8]|max_length[15]');
         $this->form_validation->set_rules('signuprepeatpassword', 'Password','trim|required|xss_clean|min_length[8]|max_length[15]|matches[signuppassword]');
         $output_array['status'] = 'error';
         if ($this->form_validation->run() === FALSE) {
-            $this->session->set_flashdata('error_msg','There was an error with the account creation. Please fix the following <br />' . validation_errors());
-            redirect('create');
+            $this->session->set_flashdata('error_msg','<strong>There was an error with the account creation. Please fix the following</strong> <br />' . validation_errors());
+            $this->load->view('landing/create');
         }else{
             $salt = salt(50);
             $data = array(

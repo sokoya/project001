@@ -76,10 +76,3 @@
         </ul>
     </div>
 </nav>
-<!-- <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-8 col-md-2">
-            <?php $this->load->view('landing/msg_view'); ?>
-        </div>
-    </div>
-</div> -->

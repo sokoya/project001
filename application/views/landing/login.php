@@ -16,7 +16,7 @@
 	<!-- Start your conytainer class here get reference from the theme -->
 	<div class="container">
 		<div class="row ">
-			<div class="col-md-10 col-md-offset-1">
+			<div class="col-md-10 col-md-offset-1" style="margin-top: 3px;">
 				<?php $this->load->view('landing/msg_view'); ?>
 			</div>
 			<div class="col-md-10 col-md-offset-1">
@@ -44,14 +44,14 @@
 							<?= form_close(); ?>
 							<br />
 							<div class="form_end">
-								<a href="<?= base_url('resetpassword'); ?>">Forgot Your Password?</a>
+								<a href="<?= base_url(lang('forgot_password_link')); ?>"><?= lang('forgot_password'); ?></a>
 							</div>
 						</div>                        
 						<div class="col-md-5">
 							<h3 class="widget-title" style="font-weight: bold; font-size: 20px;padding-bottom: 14px;">
 								Don't Have An Account? </h3>
 							<div class="form-group">
-								<a href="<?= base_url('account/create'); ?>" class="carrito_btn_create col-md-12 col-sm-12 col-xs-12">Create An Account.</a>
+								<a href="<?= base_url(lang('create_account_link')); ?>" class="carrito_btn_create col-md-12 col-sm-12 col-xs-12">Create An Account.</a>
 							</div>
 						</div>
 					</div>

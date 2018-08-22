@@ -608,22 +608,22 @@
                         </li>
                     </ul>
                 </li>
-                <li><a class="navbar-item-top" href="#">Carrito Deals</a>
+                <li><a class="navbar-item-top" href="<?= base_url(lang('carrito_deal_link')); ?>"><?= lang('carrito_deal'); ?></a>
                 </li>
-                <li><a class="navbar-item-top" href="#">New Arrival</a>
+                <li><a class="navbar-item-top" href="<?= base_url(lang('new_arrival_link')); ?>"><?= lang('arrival_link'); ?></a>
                 </li>
-                <li><a class="navbar-item-top" href="#">Top Sellers</a>
+                <li><a class="navbar-item-top" href="<?= base_url(lang('top_seller_link')); ?>"><?= lang('top_seller'); ?></a>
                 </li>
-                <li><a class="navbar-item-top" href="#">Sell on Carrito</a>
+                <li><a class="navbar-item-top" href="<?= base_url(lang('sell_on_carrito_link')); ?>"><?= lang('sell_on_carrito'); ?></a>
                 </li>
-                <li><a class="navbar-item-top" href="#">Community</a>
+                <li><a class="navbar-item-top" href="<?= base_url(lang('community_link')); ?>"><?= lang('community'); ?></a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="#"><span>Learn more about</span> <strong>Carrito Shopper</strong></a>
                 </li>
-                <li><a href="#" class="navbar-item-top">Cart</a>
+                <li><a href="<?= base_url(lang('cart_link')); ?>" class="navbar-item-top"><?= lang('cart'); ?></a>
                 </li>
                 <li class="dropdown">
                     <?php if( $this->session->userdata('logged_in') ): ?>

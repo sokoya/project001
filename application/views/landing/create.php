@@ -42,7 +42,7 @@
 	<!-- Start your conytainer class here get reference from the theme -->
 	<div class="container">
 		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
+			<div class="col-md-10 col-md-offset-1" style="margin-top: 3px;">
 				<?php $this->load->view('landing/msg_view'); ?>
 			</div>
             <div class="col-md-10 col-md-offset-1">
@@ -55,23 +55,23 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="first_name">First Name*</label>
-                                    <input class="form-control" type="text" name="signupfirstname" placeholder="First name" required />
+                                    <input class="form-control" type="text" name="signupfirstname" value="<?php if(isset($_POST['signupfirstname'])) echo $_POST['signupfirstname']; ?>" placeholder="First name" required />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="lastname_name">Last Name*</label>
-                                    <input class="form-control" type="text" name="signuplastname" placeholder="Last Name" required />
+                                    <input class="form-control" type="text" name="signuplastname" value="<?php if(isset($_POST['signuplastname'])) echo $_POST['signuplastname']; ?>" placeholder="Last Name" required />
                                 </div>
                             </div>  
                         </div>
                         <div class="form-group">
                             <label for="phone_number">Phone Number*</label>
-                            <input class="form-control" type="number" name="signup-phone" name="phone" placeholder="08022334455" required />
+                            <input class="form-control" type="number" name="signup-phone" name="phone" value="<?php if(isset($_POST['phone'])) echo $_POST['phone']; ?>" placeholder="08022334455" required />
                         </div>
                         <div class="form-group">
                             <label>Email Address*</label>
-                            <input class="form-control" type="text" id="signup-email" name="signupemail" placeholder="Email Address" required/>
+                            <input class="form-control" type="text" id="signup-email" name="signupemail" value="<?php if(isset($_POST['signupemail'])) echo $_POST['signupemail']; ?>" placeholder="Email Address" required/>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
@@ -100,7 +100,7 @@
                     <?= form_close(); ?>
                     <br />
                     <div class="form_end">
-                        <a href="<?= base_url('account'); ?>">Already Have An Account</a>
+                        <a href="<?= base_url(lang('login_link')); ?>">Already Have An Account</a>
                     </div>
                 </div>
             </div>

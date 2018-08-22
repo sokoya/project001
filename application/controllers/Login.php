@@ -10,7 +10,11 @@ class Login extends CI_Controller{
         // $this->session->set_userdata('referred_from', current_url());
         parent::__construct();
         $this->load->model('customer_model', 'customer');
-        $this->load->helper('url'); 
+        if( $this->session->userdata('logged_in') ){
+            // Ursher the person to where he is coming from
+            if( !empty($this->session->userdata('referred_from')) ) redirect($this->session->userdata('referred_from'));
+            redirect(base_url());
+        } 
     }
 
     public function index(){
@@ -19,7 +23,6 @@ class Login extends CI_Controller{
 
     /*
      * @Incoming : accepts the login POST paramters : email and password
-     * result : string (success | error )
      * */
     public function process() {
         if(!$_POST){
@@ -41,7 +44,7 @@ class Login extends CI_Controller{
                 $customer_id = $this->customer->login($data);
                 if( !is_numeric($customer_id)) {
                     $this->session->set_flashdata('error_msg','Sorry! Incorrect username or password.');
-                    redirect('login');
+                    $this->load->view('landing/login');
                 }else{
                     // @TODO
                     // Check if the user already have some products in the cart, and going to checkout
