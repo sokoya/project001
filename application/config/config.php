@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-date_default_timezone_set('Africa/Lagos');
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -10,7 +10,8 @@ date_default_timezone_set('Africa/Lagos');
 | WITH a trailing slash:
 |
 |	http://example.com/
-|| WARNING: You MUST set this value!
+|
+| WARNING: You MUST set this value!
 |
 | If it is not set, then CodeIgniter will try guess the protocol and path
 | your installation, but due to security concerns the hostname will be set
@@ -22,7 +23,7 @@ date_default_timezone_set('Africa/Lagos');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = "http://localhost:8080/carrito/project001";
+$config['base_url'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -222,7 +223,7 @@ $config['allow_get_array'] = TRUE;
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 4;
+$config['log_threshold'] = 0;
 
 /*
 |--------------------------------------------------------------------------
@@ -447,8 +448,8 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_regenerate' = Regenerate token on every submission
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
-$config['csrf_protection'] = FALSE;
-$config['csrf_token_name'] = 'csrf_test_name';
+$config['csrf_protection'] = TRUE;
+$config['csrf_token_name'] = 'csrf_carrito_name';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
