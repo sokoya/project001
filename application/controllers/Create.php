@@ -50,7 +50,7 @@ class Create extends CI_Controller{
                 'last_login' => get_now()
             );
 
-            $customer_id = $this->user->create_account($data, 'users');
+            $user_id = $this->user->create_account($data, 'users');
             if( !is_numeric($user_id) ) {
                 // check if site is live
                 // if( $lang['site_state'] == 'development' ) {
@@ -71,6 +71,7 @@ class Create extends CI_Controller{
                 );
                 $id = $this->user->login($data);
                 $session_data = array('logged_in' => true, 'logged_id' => $id);
+                $this->session->set_userdata($session_data);
                 $this->session->set_flashdata('success_msg','Account created and logged in successfully!');
                 // To ursher them to where they are coming from...
                 redirect(base_url());               

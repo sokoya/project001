@@ -9,7 +9,7 @@ class Login extends CI_Controller{
         // Also check where the user is coming from
         // $this->session->set_userdata('referred_from', current_url());
         parent::__construct();
-        $this->load->model('customer_model', 'customer');
+        $this->load->model('user_model', 'user');
         if( $this->session->userdata('logged_in') ){
             // Ursher the person to where he is coming from
             if( !empty($this->session->userdata('referred_from')) ) redirect($this->session->userdata('referred_from'));
@@ -41,15 +41,15 @@ class Login extends CI_Controller{
                     'password' => $this->input->post('loginpassword')
                 );
 
-                $customer_id = $this->customer->login($data);
-                if( !is_numeric($customer_id)) {
+                $user_id = $this->user->login($data);
+                if( !is_numeric($user_id)) {
                     $this->session->set_flashdata('error_msg','Sorry! Incorrect username or password.');
                     $this->load->view('landing/login');
                 }else{
                     // @TODO
                     // Check if the user already have some products in the cart, and going to checkout
                     // Perform every other actions necessary
-                    $session_data = array('logged_in' => true, 'logged_id' => $customer_id);
+                    $session_data = array('logged_in' => true, 'logged_id' => $user_id);
                     $this->session->set_userdata($session_data);
                     $this->session->set_flashdata('success_msg','You are now logged in!');
                     redirect(base_url());
