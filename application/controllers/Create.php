@@ -9,7 +9,7 @@ class Create extends CI_Controller{
         // Also check where the user is coming from
         // $this->session->set_userdata('referred_from', current_url());
         parent::__construct();
-        $this->load->model('customer_model', 'customer');
+        $this->load->model('user_model', 'user');
         if( $this->session->userdata('logged_in') ){
             // Ursher the person to where he is coming from
             if( !empty($this->session->userdata('referred_from')) ) redirect($this->session->userdata('referred_from'));
@@ -29,7 +29,7 @@ class Create extends CI_Controller{
         // $this->output->enable_profiler(TRUE);    
         $this->form_validation->set_rules('signupfirstname', 'First Name','trim|required|xss_clean');
         $this->form_validation->set_rules('signuplastname', 'Last Name','trim|required|xss_clean');
-        $this->form_validation->set_rules('signupemail', 'Email Address','trim|required|xss_clean|valid_email|is_unique[customers.email]',array('is_unique' => 'Sorry! This %s has already been registered!'));
+        $this->form_validation->set_rules('signupemail', 'Email Address','trim|required|xss_clean|valid_email|is_unique[users.email]',array('is_unique' => 'Sorry! This %s has already been registered!'));
         // $this->form_validation->set_message('is_unique', 'The %s is already taken');
         $this->form_validation->set_rules('signuppassword', 'Password','trim|required|xss_clean|min_length[8]|max_length[15]');
         $this->form_validation->set_rules('signuprepeatpassword', 'Password','trim|required|xss_clean|min_length[8]|max_length[15]|matches[signuppassword]');
@@ -50,18 +50,18 @@ class Create extends CI_Controller{
                 'last_login' => get_now()
             );
 
-            $customer_id = $this->customer->create_account($data, 'customers');
-            if( !is_numeric($customer_id) ) {
+            $customer_id = $this->user->create_account($data, 'users');
+            if( !is_numeric($user_id) ) {
                 // check if site is live
                 // if( $lang['site_state'] == 'development' ) {
-                //     $output_array['message'] = $customer_id;
+                //     $output_array['message'] = $user_id;
                 // }
-                $this->session->set_flashdata('error_msg','Sorry! There was an error creating your account.' . $customer_id);
+                $this->session->set_flashdata('error_msg','Sorry! There was an error creating your account.' . $user_id);
                 redirect($_SERVER['HTTP_REFERER']);
             }else{
                 // @TODO
-                // Congrats we have a new registered customer
-                // Add customer session
+                // Congrats we have a new registered user
+                // Add user session
                 // Send a Welcoming Mail to the user
                 // Check if he was trying to check out and ursher them there
                 // Any other action to perform. 
@@ -69,7 +69,7 @@ class Create extends CI_Controller{
                     'email' => $this->input->post('signupemail'),
                     'password' => $this->input->post('signuppassword')
                 );
-                $id = $this->customer->login($data);
+                $id = $this->user->login($data);
                 $session_data = array('logged_in' => true, 'logged_id' => $id);
                 $this->session->set_flashdata('success_msg','Account created and logged in successfully!');
                 // To ursher them to where they are coming from...
