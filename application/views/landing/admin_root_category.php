@@ -16,18 +16,15 @@
 				<div class="box-lg" style="margin-top: 14px;">
 					<h3 class="widget-title" style="font-weight: bold; font-size: 20px;padding-bottom: 14px;">
 						Create Root Category</h3>
-					<form>
+					<?= form_open('admin/root_category'); ?>
 						<div class="alert-notif"></div>
 						<div class="form-group">
 							<label for="root-category-name">Root Category Name *</label>
-							<input class="form-control" type="text" name="root-category-name"
-
-								   placeholder="Electronics" required/>
+							<input class="form-control" type="text" name="root_category"  placeholder="Electronics" required/>
 						</div>
-
 						<input class="carrito_btn_create col-md-12 col-sm-12 col-xs-12" type="submit"
 							   value="Create Root Category"/>
-					</form>
+					<?= form_close(); ?>
 					<br/>
 					<div class="form_end">
 						<a href="<?= base_url('admin'); ?>">Discard Form</a>

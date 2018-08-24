@@ -25,11 +25,8 @@
 				<div class="box-lg" style="margin-top: 14px;">
 					<h3 class="widget-title" style="font-weight: bold; font-size: 20px;padding-bottom: 14px;">
 						Create New Specification</h3>
-
-
 					<form>
 						<div class="alert-notif"></div>
-
 						<div class="form-group">
 							<label for="-name">Specification Name *</label>
 							<input class="form-control" type="text" name="specification-name"
@@ -46,13 +43,10 @@
 									</button>
 								</div>
 							</div>
-
-
 						</div>
 
 						<div class="carrito_wrapper">
 						</div>
-
 						<input class="carrito_btn_create col-md-12 col-sm-12 col-xs-12" type="submit"
 							   value="Create Specification"/>
 					</form>
