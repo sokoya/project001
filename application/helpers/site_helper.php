@@ -109,5 +109,15 @@ function urlify($string){
     return strtolower(trim(preg_replace('~[^0-9a-z]+~i', '-', html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($string, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8')), '-'));
 }
 
+// Query helper functions
+
+if (!function_exists('get_root_category_name')){
+    function get_root_category_name( $id ){
+        $CI =& get_instance();
+        $CI->db->from(ROOT_CATEGORY_TABLE);
+        $CI->db->where('root_category_id', $id);
+        return $CI->db->get()->row()->name;
+    }
+}
 
 ?>

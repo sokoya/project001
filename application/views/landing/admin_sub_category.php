@@ -19,27 +19,25 @@
 					<form>
 						<div class="alert-notif"></div>
 						<div class="form-group">
-							<label for="sub-category-name">SubCategory Name *</label>
-							<input class="form-control" type="text" name="sub-category-name"
-
-								   placeholder="Apple" required/>
+							<label for="sub-category-name">Sub Category Name *</label>
+							<input class="form-control" type="text" name="sub-category-name" placeholder="Apple" required/>
 						</div>
 						<div class="form-group">
-							<label for="sel1">Select Root Category*</label>
-							<select class="form-control" id="sel1">
-								<option>Electronics</option>
-								<option>Clothes & Shoes</option>
-								<option>Travel</option>
-								<option>Pets</option>
+							<label for="sel1">Select Root Category *</label>
+							<select class="form-control" name="root_category_id" required>
+								<option>-- Select a root category-- </option>
+								<?php foreach( $root_categories as $root_category ) : ?>
+									<option value="<?= $root_category->root_category_id; ?>"><?= ucwords($root_category->name); ?></option>
+								<?php endforeach; ?>
 							</select>
 						</div>
 						<div class="form-group">
 							<label for="sel1">Select Category*</label>
-							<select class="form-control" id="sel1">
-								<option>Computers</option>
-								<option>Laptops</option>
-								<option>Phones</option>
-								<option>Cameras</option>
+							<select class="form-control" name="root_category_id" required>
+								<option>-- Select a category-- </option>
+								<?php foreach( $categories as $category ) : ?>
+									<option value="<?= $category->category_id; ?>"><?= ucwords($category->name); ?></option>
+								<?php endforeach; ?>
 							</select>
 						</div>
 
@@ -82,8 +80,6 @@
 															 type="checkbox"/>Bluetooth
 								</div>
 							</div>
-
-
 						</div>
 						<input class="carrito_btn_create col-md-12 col-sm-12 col-xs-12" type="submit"
 							   value="Create SubCategory"/>

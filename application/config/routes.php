@@ -52,3 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'frontpage';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+// Admin Category Route
+
+$route['admin/category/(:num)/'] = 'admin/category';

@@ -9,8 +9,9 @@ class Admin extends CI_Controller {
         // Check if the user is already loggedin
         // Also check where the user is coming from
         // $this->session->set_userdata('referred_from', current_url());
-        // parent::__construct();
+        parent::__construct();
         $this->load->model('admin_model', 'admin');
+        $this->output->enable_profiler(TRUE);
         // if( $this->session->userdata('logged_in') ){
         //     // Ursher the person to where he is coming from
         //     if( !empty($this->session->userdata('referred_from')) ) redirect($this->session->userdata('referred_from'));
@@ -24,42 +25,119 @@ class Admin extends CI_Controller {
 
 	// Root Category
 	public function root_category(){
+		
 		if( !$this->input->post() ){
 			// fetch all the root category data 
-			$page_data['root_categories'] = $this->admin->read_all_data('root_category');
+			$page_data['root_categories'] = $this->admin->read_all_data(ROOT_CATEGORY_TABLE);
 			$this->load->view('landing/admin_root_category', $page_data);
-		}
-		$this->form_validation->set_rules('root_category', 'Root Category','trim|required|xss_clean|is_unique[root_category.name]');
-		if ($this->form_validation->run() === FALSE) {
-			$this->session->set_flashdata('error_msg','<strong>There was an error creating the root category.</strong> <br />' . validation_errors());
-			$this->load->view('landing/admin_root_category');
 		}else{
-			// Insert 
-			$root_id = $this->admin->insert_data('root_category', array('name' => $this->input->post('root_category')));
-			if( !is_numeric($root_id) ){
-				$this->session->set_flashdata('error_msg','Oops, there was an error creating the root category' . validation_errors());
+			$this->form_validation->set_rules('root_category', 'Root Category','trim|required|xss_clean|is_unique[root_category.name]',array('is_unique' => 'Sorry! This %s has already been registered!'));
+			if ($this->form_validation->run() === FALSE) {
+				$this->session->set_flashdata('error_msg','<strong>There was an error creating the root category.</strong> <br />' . validation_errors());
+				redirect('admin/root_category');
+			}else{
+				// Insert 
+				$root_id = $this->admin->insert_data( ROOT_CATEGORY_TABLE,
+					array(
+						'name' => $this->input->post('root_category'),
+						'inserted_at' => get_now()
+				));
+				if( !is_numeric($root_id) ){
+					$this->session->set_flashdata('error_msg','Oops, there was an error creating the root category' . validation_errors());
+				}else{
+					$this->session->set_flashdata('success_msg','Success, the root category has been added.');
+					redirect('admin/category');
+				}
 				redirect('admin/root_category');
 			}
-
-
-
 		}
 	}
 
 	// Category
 	public function category(){
-		$this->load->view('landing/admin_category');
+		
+		if( !$this->input->post() ){
+			$page_data['categories'] = $this->admin->read_all_data(CATEGORY_TABLE);
+			$this->load->view('landing/admin_category', $page_data);
+		}else{
+			$this->form_validation->set_rules('category_name', 'Category Name','trim|required|xss_clean|is_unique[category.name]',array('is_unique' => 'Sorry! This %s has already been registered!'));
+			$this->form_validation->set_rules('category_name', 'Category Name','trim|required|xss_clean|is_unique[category.name]',array('is_unique' => 'Sorry! This %s has already been registered!'));
+			if ($this->form_validation->run() === FALSE) {
+				$this->session->set_flashdata('error_msg','<strong>There was an error creating the category.</strong> <br />' . validation_errors());
+				redirect('admin/category');
+			}else{
+				// Insert 
+				$root_id = $this->admin->insert_data( CATEGORY_TABLE, array(
+					'name' => $this->input->post('category_name'),
+					'root_category_id' => $this->input->post('root_category_id'),
+					'inserted_at' => get_now()
+				));
+				if( !is_numeric($root_id) ){
+					$this->session->set_flashdata('error_msg','Oops, there was an error creating the root category');
+				}else{
+					$this->session->set_flashdata('success_msg','Success, the category has been added.');
+					redirect('admin/category');
+				}
+			}
+		}
 	}
 
 	// Sub Category
 	public function sub_category(){
-		$this->load->view('landing/admin_sub_category');
+		if( !$this->input->post() ){
+			$page_data['root_categories'] = $this->admin->read_all_data(ROOT_CATEGORY_TABLE);
+			$page_data['categories'] = $this->admin->read_all_data(CATEGORY_TABLE);
+			$this->load->view('landing/admin_sub_category', $page_data);
+		}else{
+			$this->form_validation->set_rules('category_name', 'Category Name','trim|required|xss_clean|is_unique[category.name]',array('is_unique' => 'Sorry! This %s has already been registered!'));
+			$this->form_validation->set_rules('category_name', 'Category Name','trim|required|xss_clean|is_unique[category.name]',array('is_unique' => 'Sorry! This %s has already been registered!'));
+			if ($this->form_validation->run() === FALSE) {
+				$this->session->set_flashdata('error_msg','<strong>There was an error creating the category.</strong> <br />' . validation_errors());
+				redirect('admin/category');
+			}else{
+				// Insert 
+				$root_id = $this->admin->insert_data( CATEGORY_TABLE, array(
+					'name' => $this->input->post('category_name'),
+					'root_category_id' => $this->input->post('root_category_id'),
+					'inserted_at' => get_now()
+				));
+				if( !is_numeric($root_id) ){
+					$this->session->set_flashdata('error_msg','Oops, there was an error creating the root category.');
+				}else{
+					$this->session->set_flashdata('success_msg','Success, the category has been added.');
+					redirect('admin/category');
+				}
+			}
+		}
 	}
 
-
 	// Sub Category
-	public function sub_category(){
-		$this->load->view('landing/admin_specification');
+
+
+    public function category_specification(){
+		if( !$this->input->post() ){
+			$this->load->view('landing/admin_specification');
+		}else{
+			$this->form_validation->set_rules('specification_name', 'Specification Name','trim|required|xss_clean');
+			if ($this->form_validation->run() === FALSE) {
+				$this->session->set_flashdata('error_msg','<strong>There was an error creating the specification.</strong> <br />' . validation_errors());
+				redirect($_SERVER['HTTP_REFERER']);
+			}else{
+				if( empty($this->input->post('specification_field')) || count($this->input->post('specification_field')) < 1 ){
+					$this->session->set_flashdata('error_msg','Oops, the specification can not be empty or with empty fields.');
+					redirect($_SERVER['HTTP_REFERER']);
+				}
+				// model to check if table exists
+				// if not create table with its associated fields
+				$this->admin->create_specification($this->input->post('specification_name'), $this->input->post('specification_field'));
+					$this->session->set_flashdata('success_msg','Category specification has been created successfully.');
+					redirect($_SERVER['HTTP_REFERER']);
+				// }else{
+					$this->session->set_flashdata('error_msg','Error: The specification already exist.');
+					redirect($_SERVER['HTTP_REFERER']);
+				// }
+			}
+		}
 	}
 	
 }

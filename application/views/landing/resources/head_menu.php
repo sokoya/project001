@@ -610,7 +610,7 @@
                 </li>
                 <li><a class="navbar-item-top" href="<?= base_url(lang('carrito_deal_link')); ?>"><?= lang('carrito_deal'); ?></a>
                 </li>
-                <li><a class="navbar-item-top" href="<?= base_url(lang('new_arrival_link')); ?>"><?= lang('arrival_link'); ?></a>
+                <li><a class="navbar-item-top" href="<?= base_url(lang('new_arrival_link')); ?>"><?= lang('new_arrival'); ?></a>
                 </li>
                 <li><a class="navbar-item-top" href="<?= base_url(lang('top_seller_link')); ?>"><?= lang('top_seller'); ?></a>
                 </li>

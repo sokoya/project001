@@ -80,7 +80,7 @@
 				</div>
 			</a>
 
-			<a href="<?= base_url('adminrootcategory'); ?>">
+			<a href="<?= base_url('admin/root_category'); ?>">
 				<div class="col-md-5 carrito_box_yellow shadow">
 					<div class="col-md-12">
 						<i class="fa fa-folder"></i>
@@ -90,7 +90,7 @@
 			</a>
 		</div>
 		<div class="row col-md-offset-1">
-			<a href="<?= base_url('admincategory'); ?>">
+			<a href="<?= base_url('admin/category'); ?>">
 				<div class="col-md-5 carrito_box_purple shadow">
 					<div class="col-md-12">
 						<i class="fa fa-folder-open"></i>
@@ -100,7 +100,7 @@
 				</div>
 			</a>
 
-			<a href="<?= base_url('adminsubcategory'); ?>">
+			<a href="<?= base_url('admin/sub_category'); ?>">
 				<div class="col-md-5 carrito_box_dark_blue shadow">
 					<div class="col-md-12">
 						<i class="fa fa-files-o"></i>
@@ -110,7 +110,7 @@
 			</a>
 		</div>
 		<div class="row col-md-offset-1">
-			<a href="<?= base_url('adminspecification'); ?>">
+			<a href="<?= base_url('admin/category_specification'); ?>">
 				<div class="col-md-5 carrito_box_purple shadow" style="background: #7d695b">
 					<div class="col-md-12">
 						<i class="fa fa-file-code-o"></i>

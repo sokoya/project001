@@ -25,21 +25,17 @@
 				<div class="box-lg" style="margin-top: 14px;">
 					<h3 class="widget-title" style="font-weight: bold; font-size: 20px;padding-bottom: 14px;">
 						Create New Specification</h3>
-					<form>
+					<?= form_open('admin/category_specification')?>
 						<div class="alert-notif"></div>
 						<div class="form-group">
 							<label for="-name">Specification Name *</label>
-							<input class="form-control" type="text" name="specification-name"
-								   placeholder="Brand" required/>
+							<input class="form-control" type="text" name="specification_name" placeholder="Brand" required/>
 						</div>
 						<div class="well">
 							<div class="row">
-								<div class="col-md-8"><p
-										style="font-weight: bold; position: relative; top: 3px;color:#27AE61;">Enter the
-										specification fields</p></div>
+								<div class="col-md-8"><p style="font-weight: bold; position: relative; top: 3px;color:#27AE61;">Enter the specification fields</p></div>
 								<div class="col-md-4">
-									<button class="add_field_button btn btn-primary"
-											style="float: right; position: relative;bottom: 1px;">Add New Field
+									<button class="add_field_button btn btn-primary" style="float: right; position: relative;bottom: 1px;">Add New Field
 									</button>
 								</div>
 							</div>
@@ -49,7 +45,7 @@
 						</div>
 						<input class="carrito_btn_create col-md-12 col-sm-12 col-xs-12" type="submit"
 							   value="Create Specification"/>
-					</form>
+					<?= form_close(); ?>
 					<br/>
 					<div class="form_end">
 						<a href="<?= base_url('admin'); ?>">Discard Form</a>
@@ -78,7 +74,7 @@
 				x++;
 				$(wrapper).append('<div><div class="form-group">\n' +
 					'\t\t\t\t\t\t\t<label for="-name">Specification Field *</label>\n' +
-					'\t\t\t\t\t\t\t<input class="form-control" type="text" name="specification-field"\n' +
+					'\t\t\t\t\t\t\t<input class="form-control" type="text" name="specification_field[]"\n' +
 					'\t\t\t\t\t\t\t\t   placeholder="Samsung" required/>\n' +
 					'\t\t\t\t\t\t</div><a href="#" class="remove_field">Remove</a></div>');
 			}

@@ -85,4 +85,12 @@ defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 
-// My Define
+// My Constants
+// Database Table
+defined('TABLE_PREFIX')        OR define('TABLE_PREFIX', 'pr_'); // root category
+defined('ROOT_CATEGORY_TABLE')        OR define('ROOT_CATEGORY_TABLE', 'root_category'); // root category
+defined('CATEGORY_TABLE')        OR define('CATEGORY_TABLE', 'category'); // category
+defined('SUB_CATEGORY_TABLE')        OR define('SUB_CATEGORY_TABLE', 'sub_category'); // sub category
+defined('COUPONS_TABLE')        OR define('COUPONS_TABLE', 'coupons'); // Coupons and discount
+defined('PRODUCTS_TABLE')        OR define('PRODUCTS_TABLE', 'products'); // products
+defined('PRODUCT_GALLERY_TABLE')        OR define('PRODUCT_GALLERY_TABLE', 'product_gallery'); // image gallery

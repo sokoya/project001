@@ -31,6 +31,31 @@
 					</div>
 				</div>
 			</div>
+            <div class="col-md-10 col-md-offset-1">
+                <table class="table table-striped">
+                	<thead>
+                		<tr>
+                			<th>S/N</th>
+                			<th>Name</th>
+                			<th class="text-center">Action</th>
+                		</tr>
+                		<tbody>
+ 							<?php $x = 1; foreach( $root_categories as $root_category ) : ?>
+ 							<tr>
+ 								<td><?= $x; ?></td>
+ 								<td>
+ 									<?= $root_category->name; ?> 									
+ 								</td>
+ 							<td class="text-center">
+ 								<button class="btn btn-md btn-info">Add Category</button>
+ 								<button class="btn btn-md btn-warning">Edit</button>
+ 								<button class="btn btn-md btn-danger">Delete</button>
+ 							</td>
+ 							<?php $x++; endforeach;?>
+                		</tbody>
+                	</thead>
+                </table>
+            </div>
 		</div>
 	</div>
 	<div class="gap gap-small"></div>
