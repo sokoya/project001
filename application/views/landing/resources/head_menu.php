@@ -453,7 +453,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <img class="dropdown-menu-category-section-theme-img" src="<?= base_url('assets/lnading/img/test_cat/12.png'); ?>" alt="Image Alternative text" title="Image Title" />
+                                    <img class="dropdown-menu-category-section-theme-img" src="<?= base_url('assets/landing/img/test_cat/12.png'); ?>" alt="Image Alternative text" title="Image Title" />
                                 </div>
                             </div>
                         </li>
