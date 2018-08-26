@@ -90,23 +90,29 @@ class Admin extends CI_Controller {
 			$page_data['categories'] = $this->admin->read_all_data(CATEGORY_TABLE);
 			$this->load->view('landing/admin_sub_category', $page_data);
 		}else{
-			$this->form_validation->set_rules('category_name', 'Category Name','trim|required|xss_clean|is_unique[category.name]',array('is_unique' => 'Sorry! This %s has already been registered!'));
-			$this->form_validation->set_rules('category_name', 'Category Name','trim|required|xss_clean|is_unique[category.name]',array('is_unique' => 'Sorry! This %s has already been registered!'));
+			$this->form_validation->set_rules('sub_category_name', 'Sub Category Name','trim|required|xss_clean|is_unique[sub_category.name]',array('is_unique' => 'Sorry! This %s has already been registered!'));
+			$this->form_validation->set_rules('root_category_id', 'Root Category','trim|required|xss_clean');
+			$this->form_validation->set_rules('category_id', 'Category','trim|required|xss_clean');
 			if ($this->form_validation->run() === FALSE) {
 				$this->session->set_flashdata('error_msg','<strong>There was an error creating the category.</strong> <br />' . validation_errors());
-				redirect('admin/category');
+				redirect($_SERVER['HTTP_REFERER']);
 			}else{
 				// Insert 
-				$root_id = $this->admin->insert_data( CATEGORY_TABLE, array(
-					'name' => $this->input->post('category_name'),
+				if( empty($this->input->post('specifications')) || count($this->input->post('specifications')) < 1 ){
+					$this->session->set_flashdata('error_msg','Oops, you need to select atleast one specification.');
+					redirect($_SERVER['HTTP_REFERER']);
+				}
+				$sub_id = $this->admin->insert_data( SUB_CATEGORY_TABLE, array(
 					'root_category_id' => $this->input->post('root_category_id'),
-					'inserted_at' => get_now()
+					'category_id' => $this->input->post('category_id'),
+					'name' => $this->input->post('sub_category_name'),
+					'specifications' => json_encode($this->input->post('specifications'))
 				));
-				if( !is_numeric($root_id) ){
-					$this->session->set_flashdata('error_msg','Oops, there was an error creating the root category.');
+				if( !is_numeric($sub_id) ){
+					$this->session->set_flashdata('error_msg','Oops, there was an error creating the sub category.');
 				}else{
-					$this->session->set_flashdata('success_msg','Success, the category has been added.');
-					redirect('admin/category');
+					$this->session->set_flashdata('success_msg','Success, the sub category has been added.');
+					redirect($_SERVER['HTTP_REFERER']);
 				}
 			}
 		}
@@ -126,7 +132,7 @@ class Admin extends CI_Controller {
 				redirect($_SERVER['HTTP_REFERER']);
 			}else{
 				if( empty($this->input->post('specification_field')) || count($this->input->post('specification_field')) < 1 ){
-					$this->session->set_flashdata('error_msg','Oops, the specification can not be empty or with empty fields.');
+					$this->session->set_flashdata('error_msg','Oops, the specification can not be empty.');
 					redirect($_SERVER['HTTP_REFERER']);
 				}
 				// model to check if table exists

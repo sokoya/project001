@@ -16,11 +16,11 @@
 				<div class="box-lg" style="margin-top: 14px;">
 					<h3 class="widget-title" style="font-weight: bold; font-size: 20px;padding-bottom: 14px;">
 						Create New SubCategory</h3>
-					<form>
+					<?= form_open('admin/sub_category'); ?>
 						<div class="alert-notif"></div>
 						<div class="form-group">
 							<label for="sub-category-name">Sub Category Name *</label>
-							<input class="form-control" type="text" name="sub-category-name" placeholder="Apple" required/>
+							<input class="form-control" type="text" name="sub_category_name" placeholder="Apple" required/>
 						</div>
 						<div class="form-group">
 							<label for="sel1">Select Root Category *</label>
@@ -33,7 +33,7 @@
 						</div>
 						<div class="form-group">
 							<label for="sel1">Select Category*</label>
-							<select class="form-control" name="root_category_id" required>
+							<select class="form-control" name="category_id" required>
 								<option>-- Select a category-- </option>
 								<?php foreach( $categories as $category ) : ?>
 									<option value="<?= $category->category_id; ?>"><?= ucwords($category->name); ?></option>
@@ -47,14 +47,14 @@
                 							foreach( $value as $new_key => $new_value) :
                 				?>
 								<div class="col-md-2">
-									<input style="margin-right: 10px;" class="i-check"type="checkbox" value="<?= strtolower(clean_specification($new_value));?>" /><?= clean_specification($new_value);?>
+									<input style="margin-right: 10px;" class="i-check"type="checkbox" name="specifications[]" value="<?= strtolower(clean_specification($new_value));?>" /><?= clean_specification($new_value);?>
 								</div>
 							<?php endforeach; endforeach; ?>
 							</div>
 						</div>
 						<input class="carrito_btn_create col-md-12 col-sm-12 col-xs-12" type="submit"
 							   value="Create SubCategory"/>
-					</form>
+					<?= form_close(); ?>
 					<br/>
 					<div class="form_end">
 						<a href="<?= base_url('admin'); ?>">Discard Form</a>

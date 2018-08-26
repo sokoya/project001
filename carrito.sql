@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 24, 2018 at 08:41 AM
+-- Generation Time: Aug 26, 2018 at 12:36 AM
 -- Server version: 5.7.11
 -- PHP Version: 7.0.3
 
@@ -27,11 +27,18 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `category` (
-  `id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `root_category_id` int(11) NOT NULL,
   `inserted_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Foreign from root category';
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`category_id`, `name`, `root_category_id`, `inserted_at`) VALUES
+(1, 'Home Audio / Video', 2, '2018-08-24 20:44:01');
 
 -- --------------------------------------------------------
 
@@ -107,24 +114,21 @@ CREATE TABLE `product_tags` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pr_brand`
+-- Table structure for table `pr_colour`
 --
 
-CREATE TABLE `pr_brand` (
-  `brand_id` int(11) NOT NULL,
-  `brand_name` varchar(255) NOT NULL DEFAULT 'No Size Specified'
+CREATE TABLE `pr_colour` (
+  `colour_id` int(6) NOT NULL,
+  `colour_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `pr_color`
+-- Dumping data for table `pr_colour`
 --
 
-CREATE TABLE `pr_color` (
-  `color_id` int(11) NOT NULL,
-  `color_name` varchar(255) NOT NULL DEFAULT 'No color specified'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `pr_colour` (`colour_id`, `colour_name`) VALUES
+(2, 'green'),
+(1, 'red');
 
 -- --------------------------------------------------------
 
@@ -150,6 +154,15 @@ CREATE TABLE `root_category` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `root_category`
+--
+
+INSERT INTO `root_category` (`root_category_id`, `name`, `inserted_at`, `updated_at`) VALUES
+(1, 'Fashion', '0000-00-00 00:00:00', '2018-08-24 20:20:30'),
+(2, 'Tv & Electronics', '0000-00-00 00:00:00', '2018-08-24 20:23:40'),
+(3, 'Computing', '0000-00-00 00:00:00', '2018-08-24 20:23:59');
+
 -- --------------------------------------------------------
 
 --
@@ -158,10 +171,19 @@ CREATE TABLE `root_category` (
 
 CREATE TABLE `sub_category` (
   `sub_category_id` int(11) NOT NULL,
+  `root_category_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `specifications` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Sub Category from Category Table';
+
+--
+-- Dumping data for table `sub_category`
+--
+
+INSERT INTO `sub_category` (`sub_category_id`, `root_category_id`, `category_id`, `name`, `specifications`, `created_at`) VALUES
+(1, 3, 1, 'Apple', '["colour","size"]', '2018-08-26 00:35:14');
 
 -- --------------------------------------------------------
 
@@ -211,7 +233,7 @@ INSERT INTO `users` (`id`, `email`, `first_name`, `last_name`, `password`, `salt
 -- Indexes for table `category`
 --
 ALTER TABLE `category`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`category_id`);
 
 --
 -- Indexes for table `coupons`
@@ -239,16 +261,11 @@ ALTER TABLE `product_tags`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `pr_brand`
+-- Indexes for table `pr_colour`
 --
-ALTER TABLE `pr_brand`
-  ADD PRIMARY KEY (`brand_id`);
-
---
--- Indexes for table `pr_color`
---
-ALTER TABLE `pr_color`
-  ADD PRIMARY KEY (`color_id`);
+ALTER TABLE `pr_colour`
+  ADD PRIMARY KEY (`colour_id`),
+  ADD UNIQUE KEY `colour_name` (`colour_name`);
 
 --
 -- Indexes for table `pr_size`
@@ -288,7 +305,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `coupons`
 --
@@ -310,15 +327,10 @@ ALTER TABLE `product_gallery`
 ALTER TABLE `product_tags`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `pr_brand`
+-- AUTO_INCREMENT for table `pr_colour`
 --
-ALTER TABLE `pr_brand`
-  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `pr_color`
---
-ALTER TABLE `pr_color`
-  MODIFY `color_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `pr_colour`
+  MODIFY `colour_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `pr_size`
 --
@@ -328,12 +340,12 @@ ALTER TABLE `pr_size`
 -- AUTO_INCREMENT for table `root_category`
 --
 ALTER TABLE `root_category`
-  MODIFY `root_category_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `root_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `sub_category`
 --
 ALTER TABLE `sub_category`
-  MODIFY `sub_category_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `sub_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tags`
 --
