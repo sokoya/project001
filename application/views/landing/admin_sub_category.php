@@ -43,42 +43,13 @@
 
 						<div class="well" style="padding: 40px;">
 							<div class="row">
-								<div class="col-md-2"><input style="margin-right: 10px;" class="i-check"
-															 type="checkbox"/>Brand
+								<?php foreach($specifications as $key => $value ) :
+                							foreach( $value as $new_key => $new_value) :
+                				?>
+								<div class="col-md-2">
+									<input style="margin-right: 10px;" class="i-check"type="checkbox" value="<?= strtolower(clean_specification($new_value));?>" /><?= clean_specification($new_value);?>
 								</div>
-								<div class="col-md-2"><input style="margin-right: 10px;" class="i-check"
-															 type="checkbox"/>Color
-								</div>
-								<div class="col-md-2"><input style="margin-right: 10px;" class="i-check"
-															 type="checkbox"/>Dimension
-								</div>
-								<div class="col-md-2"><input style="margin-right: 10px;" class="i-check"
-															 type="checkbox"/>Ram
-								</div>
-								<div class="col-md-2"><input style="margin-right: 10px;" class="i-check"
-															 type="checkbox"/>Camera
-								</div>
-								<div class="col-md-2"><input style="margin-right: 10px;" class="i-check"
-															 type="checkbox"/>Network
-								</div>
-								<div class="col-md-2"><input style="margin-right: 10px;" class="i-check"
-															 type="checkbox"/>Storage
-								</div>
-								<div class="col-md-2"><input style="margin-right: 10px;" class="i-check"
-															 type="checkbox"/>Size
-								</div>
-								<div class="col-md-2"><input style="margin-right: 10px;" class="i-check"
-															 type="checkbox"/>Materials
-								</div>
-								<div class="col-md-2"><input style="margin-right: 10px;" class="i-check"
-															 type="checkbox"/>Weight
-								</div>
-								<div class="col-md-2"><input style="margin-right: 10px;" class="i-check"
-															 type="checkbox"/>Depth
-								</div>
-								<div class="col-md-2"><input style="margin-right: 10px;" class="i-check"
-															 type="checkbox"/>Bluetooth
-								</div>
+							<?php endforeach; endforeach; ?>
 							</div>
 						</div>
 						<input class="carrito_btn_create col-md-12 col-sm-12 col-xs-12" type="submit"

@@ -54,11 +54,6 @@ Class Admin_model extends CI_Model{
         ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
 
         if( $this->db->query( $query )){
-            $fields_array = $data =array();
-            // for ($i=0; $i == count($fields) ; $i++) { 
-            //     $fields[$table .'_name'] = $fields[$i];
-            //     unset($fields[$i]);
-            // }
             foreach ($fields as $key => $value) {
                 $this->insert_data(TABLE_PREFIX.$table, array( $table .'_name' => $value));
                 unset($fields[$key]);

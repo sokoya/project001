@@ -52,6 +52,32 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-md-10 col-md-offset-1">
+				<table class="table table-striped">
+                	<thead>
+                		<tr>
+                			<th>S/N</th>
+                			<th class="text-center">Specification Name</th>
+                			<th class="text-center">Action</th>
+                		</tr>
+                		<tbody>
+                			<?php $x=1; foreach($tables as $key => $value ) :
+                							foreach( $value as $new_key => $new_value) :
+                			?>
+                				<tr>
+                					<td><?= $x; ?></td>
+                					<td><?= clean_specification($new_value);?></td>
+                                    <td class="text-center">
+                                        <button class="btn btn-md btn-info">Add Category</button>
+                                        <button class="btn btn-md btn-warning">Edit</button>
+                                        <button class="btn btn-md btn-danger">Delete</button>
+                                    </td>
+                				</tr>
+                			<?php $x++; endforeach; endforeach; ?>
+                		</tbody>
+                	</thead>
+                </table>
+			</div>
 		</div>
 	</div>
 	<div class="gap gap-small"></div>

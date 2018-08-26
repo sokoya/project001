@@ -87,6 +87,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 // My Constants
 // Database Table
+defined('DB_NAME')		OR define('DB_NAME', 'carrito');
 defined('TABLE_PREFIX')        OR define('TABLE_PREFIX', 'pr_'); // root category
 defined('ROOT_CATEGORY_TABLE')        OR define('ROOT_CATEGORY_TABLE', 'root_category'); // root category
 defined('CATEGORY_TABLE')        OR define('CATEGORY_TABLE', 'category'); // category

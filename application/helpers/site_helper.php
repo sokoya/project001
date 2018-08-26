@@ -109,6 +109,11 @@ function urlify($string){
     return strtolower(trim(preg_replace('~[^0-9a-z]+~i', '-', html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($string, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8')), '-'));
 }
 
+function clean_specification($string){
+	$str = explode("_", $string);
+	return ucfirst($str[1]);
+}
+
 // Query helper functions
 
 if (!function_exists('get_root_category_name')){
@@ -118,6 +123,13 @@ if (!function_exists('get_root_category_name')){
         $CI->db->where('root_category_id', $id);
         return $CI->db->get()->row()->name;
     }
+}
+
+if( !function_exists('get_specifications_tables')){
+	function get_specifications_tables(){   
+		$CI =& get_instance();
+		return $CI->db->query("SHOW TABLES FROM " .DB_NAME. " LIKE '%" .str_replace("_", "", TABLE_PREFIX) . "\_%' ")->result_array();
+	}
 }
 
 ?>
