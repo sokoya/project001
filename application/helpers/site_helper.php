@@ -129,7 +129,10 @@ if (!function_exists('get_root_category_name')){
 
 
 if( !function_exists('get_specifications_tables')){
-	function get_specifications_tables(){   
+    /**
+     * @return mixed
+     */
+    function get_specifications_tables(){
 		$CI =& get_instance();
 		return $CI->db->query("SHOW TABLES FROM " .DB_NAME. " LIKE '%" .str_replace("_", "", TABLE_PREFIX) . "\_%' ")->result_array();
 	}
@@ -142,7 +145,7 @@ if (!function_exists('get_categories_by_root_id')){
      * @param $id
      * @return mixed
      */
-    function get_categories_by_root_id($id ){
+    function get_categories_by_root_id($id){
         $CI =& get_instance();
         $CI->db->select('category_id, name');
         $CI->db->from(CATEGORY_TABLE);
@@ -150,5 +153,37 @@ if (!function_exists('get_categories_by_root_id')){
         return $CI->db->get()->result();
     }
 }
+
+
+if (!function_exists('get_subcategories_by_root_id')){
+    /**
+     * @param $id
+     * @return mixed
+     */
+    function get_subcategories_by_root_id($id){
+        $CI =& get_instance();
+        $CI->db->select('sub_category_id, name');
+        $CI->db->from(SUB_CATEGORY_TABLE);
+        $CI->db->where('category_id', $id);
+        return $CI->db->get()->result();
+    }
+}
+
+// if (!function_exists('get_specifications_fields')){
+
+//     function get_specifications_fields(int $root_id, int $cat_id){
+//         $CI =& get_instance();
+//         $CI->db->select('*');
+//         $CI->db->from(SUB_CATEGORY_TABLE);
+//         $CI->db->where('root_category_id', $root_id);
+//         $CI->db->where('category_id', $cat_id);
+//         // 
+//         return $CI->db->get()->result();
+//     }
+// }
+
+
+
+
 
 ?>
