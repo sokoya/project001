@@ -115,6 +115,7 @@ function clean_specification($string){
 }
 
 // Query helper functions
+// This helper functions helps in fecthing the DB in instance
 
 if (!function_exists('get_root_category_name')){
     function get_root_category_name( $id ){
@@ -125,11 +126,24 @@ if (!function_exists('get_root_category_name')){
     }
 }
 
+
+
 if( !function_exists('get_specifications_tables')){
 	function get_specifications_tables(){   
 		$CI =& get_instance();
 		return $CI->db->query("SHOW TABLES FROM " .DB_NAME. " LIKE '%" .str_replace("_", "", TABLE_PREFIX) . "\_%' ")->result_array();
 	}
+}
+
+
+
+if (!function_exists('get_categories')){
+    function get_categories( $id ){
+        $CI =& get_instance();
+        $CI->db->from(CATEGORY_TABLE);
+        $CI->db->where('root_category_id', $id);
+        return $CI->db->get()->result();
+    }
 }
 
 ?>

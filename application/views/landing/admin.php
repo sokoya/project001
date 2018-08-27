@@ -119,7 +119,7 @@
 				</div>
 			</a>
 
-			<a href="<?= base_url('adminproduct'); ?>">
+			<a href="<?= base_url('admin/product'); ?>">
 				<div class="col-md-5 carrito_box_dark_blue shadow" style="background: #c54e53">
 					<div class="col-md-12">
 						<i class="fa fa-sitemap"></i>

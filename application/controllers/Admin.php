@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Admin extends CI_Controller {
 
 
-	 public function __construct(){
+	public function __construct(){
         // @todo
         // Check if the user is already loggedin
         // Also check where the user is coming from
@@ -58,6 +58,7 @@ class Admin extends CI_Controller {
 		
 		if( !$this->input->post() ){
 			$page_data['categories'] = $this->admin->read_all_data(CATEGORY_TABLE);
+			$page_data['root_categories'] = $this->admin->read_all_data(ROOT_CATEGORY_TABLE);
 			$this->load->view('landing/admin_category', $page_data);
 		}else{
 			$this->form_validation->set_rules('category_name', 'Category Name','trim|required|xss_clean|is_unique[category.name]',array('is_unique' => 'Sorry! This %s has already been registered!'));
@@ -121,6 +122,9 @@ class Admin extends CI_Controller {
 	// Sub Category
 
 
+    /**
+     *
+     */
     public function category_specification(){
 		if( !$this->input->post() ){
 			$page_data['tables'] = get_specifications_tables(); 
@@ -146,6 +150,11 @@ class Admin extends CI_Controller {
 				// }
 			}
 		}
+	}
+
+	public function product(){
+		$page_data['root_categories'] = $this->admin->read_all_data(ROOT_CATEGORY_TABLE);
+		$this->load->view('landing/admin_product', $page_data);
 	}
 	
 }
