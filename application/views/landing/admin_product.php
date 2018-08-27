@@ -105,21 +105,23 @@
 	$("#root_cat").change(function () {
 		let root = this.value;
 		$.ajax({
-
-			type: 'POST',
-			url: 'admin/get_category',
+			type: 'GET',
+			url: base_url + 'admin/get_category',
 			data: {
 				root_category: root
 			},
 			success: function(data) {
+				console.log(data);
 				$("#pr_cat").css("display", "block");
-
 				$.each(data.category, function (index, element) {
 					$('#product_cat').append($('<option>', {
 						value: element.id,
 						text: element.name
 					}));
 				});
+			},
+			error: function(response){
+				alert('ERROR' + response);
 			}
 		});
 	});

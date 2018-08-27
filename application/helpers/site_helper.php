@@ -137,9 +137,14 @@ if( !function_exists('get_specifications_tables')){
 
 
 
-if (!function_exists('get_categories')){
-    function get_categories( $id ){
+if (!function_exists('get_categories_by_root_id')){
+    /**
+     * @param $id
+     * @return mixed
+     */
+    function get_categories_by_root_id($id ){
         $CI =& get_instance();
+        $CI->db->select('category_id, name');
         $CI->db->from(CATEGORY_TABLE);
         $CI->db->where('root_category_id', $id);
         return $CI->db->get()->result();

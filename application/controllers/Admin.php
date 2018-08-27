@@ -11,7 +11,7 @@ class Admin extends CI_Controller {
         // $this->session->set_userdata('referred_from', current_url());
         parent::__construct();
         $this->load->model('admin_model', 'admin');
-        $this->output->enable_profiler(TRUE);
+        // $this->output->enable_profiler(TRUE);
         // if( $this->session->userdata('logged_in') ){
         //     // Ursher the person to where he is coming from
         //     if( !empty($this->session->userdata('referred_from')) ) redirect($this->session->userdata('referred_from'));
@@ -156,5 +156,20 @@ class Admin extends CI_Controller {
 		$page_data['root_categories'] = $this->admin->read_all_data(ROOT_CATEGORY_TABLE);
 		$this->load->view('landing/admin_product', $page_data);
 	}
-	
+
+
+	public function get_category(){
+		if( isset($_GET['root_category']) && !empty(get_categories_by_root_id($_GET['root_category'])) ){
+			// fetch the category for the root category id
+			echo json_encode(get_categories_by_root_id($_GET['root_category']), TRUE);
+			exit;
+		}
+		// echo get_categories_by_root_id($id);
+	}
+
+	function get_specifications_tables( $root_id, $cat_id ){
+		if( isset($_POST['root_id']) && isset($_POST['cat_id']) && !empty(get_specifications_tables($id))){
+
+		}
+	}	
 }

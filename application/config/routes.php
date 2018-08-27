@@ -56,3 +56,4 @@ $route['translate_uri_dashes'] = FALSE;
 // Admin Category Route
 
 $route['admin/category/(:num)/'] = 'admin/category';
+// $route['admin/get_category/(:num)/'] = 'admin/get_category/$i';

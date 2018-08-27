@@ -23,10 +23,5 @@ class AdminProduct extends CI_Controller {
 		$this->load->view('landing/admin_product');
 	}
 
-	function get_category( $id ){
-		if( isset($_POST['id']) ){
-			// fetch the category for the root category id
-			
-		}
-	}
+	
 }
