@@ -19,33 +19,6 @@
 					<form>
 						<div class="alert-notif"></div>
 						<div class="form-group">
-							<label for="sel1">Select Product Category*</label>
-							<select class="form-control" id="sel1">
-								<option>Computers</option>
-								<option>Laptops</option>
-								<option>Phones</option>
-								<option>Cameras</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="sel1">Product Seller</label>
-							<select class="form-control" id="sel1">
-								<option>Philip</option>
-								<option>Jeffrey</option>
-								<option>Paul</option>
-								<option>Jogn</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="sel1">Select SKU*</label>
-							<select class="form-control" id="sel1">
-								<option>Sku 1</option>
-								<option>Sku 2</option>
-								<option>Sku 3</option>
-								<option>Sku 4</option>
-							</select>
-						</div>
-						<div class="form-group">
 							<label for="product-name">Product Name *</label>
 							<input class="form-control" type="text" name="product-name"
 								   placeholder="Samsung S7" required/>
@@ -54,7 +27,6 @@
 							<label for="comment">Description *</label>
 							<textarea class="form-control" rows="5" id="comment"></textarea>
 						</div>
-
 						<div class="form-group">
 							<label for="product-name">Regular price *</label>
 							<input class="form-control" type="text" name="product-name"
@@ -66,6 +38,45 @@
 							<input class="form-control" type="text" name="product-name"
 								   placeholder="&#8358;1,200"/>
 						</div>
+						<div class="form-group">
+							<label for="sel1">Product Seller</label>
+							<select class="form-control" id="sel1">
+								<option>Philip</option>
+								<option>Jeffrey</option>
+								<option>Paul</option>
+								<option>Jogn</option>
+							</select>
+						</div>
+						<div class="form-group" id="pr_cat" style="display: none">
+							<label for="sel1">Select Product Root Category*</label>
+							<select class="form-control" id="root_cat">
+								<option selected="selected">-------------- Select------------------</option>
+								<?php $x = 1;
+								foreach ($root_categories as $root_category) : ?>
+									<option
+										value="<?= $root_category->root_category_id; ?>"><?= $root_category->name; ?></option>
+									<?php $x++; endforeach; ?>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="sel1">Select Product Category*</label>
+							<select class="form-control" id="product_cat">
+								<option selected="selected">-------------- Select------------------</option>
+								<option value="games">games</option>
+							</select>
+						</div>
+
+						<!--						<div class="form-group">-->
+						<!--							<label for="sel1">Select SKU*</label>-->
+						<!--							<select class="form-control" id="sel1">-->
+						<!--								<option>Sku 1</option>-->
+						<!--								<option>Sku 2</option>-->
+						<!--								<option>Sku 3</option>-->
+						<!--								<option>Sku 4</option>-->
+						<!--							</select>-->
+						<!--						</div>-->
+
 
 						<input class="carrito_btn_create col-md-12 col-sm-12 col-xs-12" type="submit"
 							   value="Create Product"/>
@@ -84,5 +95,37 @@
 
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
+<script>
+	//todo: Next step
+
+	// $("#product_cat").change(function () {
+	// 	let product_category = this.value;
+	//
+	// });
+
+	$("#root_cat").change(function () {
+		let root = this.value;
+
+		$.ajax({
+
+			type: 'POST',
+			url: 'admin/get_category',
+			data: {
+				root_category: root
+			}
+			success: function (data) {
+				$("#pr_cat").css("display", "block");
+
+				$.each(data.category, function (index, element) {
+					$('#product_cat').append($('<option>', {
+						value: element.id,
+						text: element.name
+					}));
+				});
+			}
+		});
+	});
+
+</script>
 </body>
 </html>
