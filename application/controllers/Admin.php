@@ -161,7 +161,7 @@ class Admin extends CI_Controller {
 	public function get_category(){
 		if( isset($_GET['root_category']) && !empty(get_categories_by_root_id($_GET['root_category'])) ){
 			// fetch the category for the root category id
-			echo json_encode(get_categories_by_root_id($_GET['root_category']), TRUE);
+			echo json_encode(get_categories_by_root_id($_GET['root_category']), JSON_UNESCAPED_SLASHES);
 			exit;
 		}
 		// echo get_categories_by_root_id($id);
