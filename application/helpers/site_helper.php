@@ -176,18 +176,27 @@ if (!function_exists('get_specifications_fields')){
         $CI->db->select('specifications');
         $CI->db->from(SUB_CATEGORY_TABLE);
         $CI->db->where('sub_category_id', $sub_cat_id);
-        $specifications = $CI->db->get()->row();
-        $specs = json_decode( $specifications, TRUE );
+        $specifications = $CI->db->get()->row()->specifications;
+        $specs = json_decode( $specifications, TRUE);
+
+        $option_array =  array();
         foreach ($specs as $spec) {
-        	$CI->db->select(TABLE_PREFIX.$spec);
-        	$CI->db->get();
+        	$spec_array[] = $spec;
+        	$CI->db->select('*');
+        	$CI->db->from(TABLE_PREFIX.$spec);
+        	$options = $CI->db->get()->result_array();
+
+        	foreach( $options as $option){
+        		// Push array
+        		$opt['id'] = $option[$spec .'_id'];
+        		$opt['name'] = $option[$spec .'_name'];
+        		array_push( $option_array, $opt);
+        	}
+        	array_push($spec_array, $option_array);
         }
-        // foreach( $CI->db->get()->result as $specifications ){
-
-        // }
-
-        // 
-        // return $CI->db->get()->result();
+        
+        echo json_encode( $spec_array );
+        exit;
     }
 }
 

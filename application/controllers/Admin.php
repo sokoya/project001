@@ -158,8 +158,11 @@ class Admin extends CI_Controller {
 	}
 
 
-	public function get_category(){
-		if( isset($_GET['root_category']) && !empty(get_categories_by_root_id($_GET['root_category'])) ){
+    /**
+     * @param: int root category
+     */
+    public function get_category(){
+		if( isset($_GET['root_category']) && !empty(get_categories_by_root_id($_GET['root_category']))){
 			// fetch the category for the root category id
 			echo json_encode(get_categories_by_root_id($_GET['root_category']), JSON_UNESCAPED_SLASHES);
 			exit;
@@ -167,16 +170,23 @@ class Admin extends CI_Controller {
 		// echo get_categories_by_root_id($id);
 	}
 
-	public function get_sub_category(){
+    /**
+     * @param int : root_category_id
+     * @return: sub categories id, name
+     */
+    public function get_sub_category(){
 		if( isset($_GET['category_id']) && !empty(get_subcategories_by_root_id($_GET['category_id'])) ){
 			// fetch the category for the root category id
-			echo json_encode(get_subcategories_by_root_id($_GET['category_id']), JSON_UNESCAPED_SLASHES);
+			echo json_encode(get_subcategories_by_root_id($_GET['category_id']) , JSON_UNESCAPED_SLASHES);
 			exit;
 		}
-		// echo get_categories_by_root_id($id);
 	}
 
-	function get_specifications_fields(){
+    /**
+     * @param int : row id of the sub category
+     * @return : JSON specification fields
+     */
+    function get_specifications_fields(){
 		if( isset($_GET['sub_category_id']) && !empty(get_specifications_fields($_GET['sub_category_id']))){
 			echo json_encode(get_specifications_fields($_GET['sub_category_id']));
 			exit;
