@@ -47,7 +47,7 @@
 								<option>Jogn</option>
 							</select>
 						</div>
-						<div class="form-group" id="pr_cat" style="display: none">
+						<div class="form-group">
 							<label for="sel1">Select Product Root Category*</label>
 							<select class="form-control" id="root_cat">
 								<option selected="selected">-------------- Select------------------</option>
@@ -59,11 +59,10 @@
 							</select>
 						</div>
 
-						<div class="form-group">
+						<div class="form-group" id="pr_cat" style="display: none">
 							<label for="sel1">Select Product Category*</label>
 							<select class="form-control" id="product_cat">
 								<option selected="selected">-------------- Select------------------</option>
-								<option value="games">games</option>
 							</select>
 						</div>
 
@@ -105,15 +104,14 @@
 
 	$("#root_cat").change(function () {
 		let root = this.value;
-
 		$.ajax({
 
 			type: 'POST',
 			url: 'admin/get_category',
 			data: {
 				root_category: root
-			}
-			success: function (data) {
+			},
+			success: function(data) {
 				$("#pr_cat").css("display", "block");
 
 				$.each(data.category, function (index, element) {
