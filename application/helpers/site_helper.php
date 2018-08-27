@@ -176,7 +176,9 @@ if (!function_exists('get_specifications_fields')){
         $CI->db->select('specifications');
         $CI->db->from(SUB_CATEGORY_TABLE);
         $CI->db->where('sub_category_id', $sub_cat_id);
-        foreach( $CI->db->get()->result)
+        foreach( $CI->db->get()->result as $specifications ){
+        	
+        }
         // 
         // return $CI->db->get()->result();
     }
