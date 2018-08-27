@@ -66,6 +66,14 @@
 							</select>
 						</div>
 
+						<div class="form-group" id="sr_cat" style="display: none">
+							<label for="sel1">Select Product Sub Category*</label>
+							<select class="form-control" id="sub_cat">
+								<option selected="selected">-------------- Select------------------</option>
+							</select>
+						</div>
+
+
 						<!--						<div class="form-group">-->
 						<!--							<label for="sel1">Select SKU*</label>-->
 						<!--							<select class="form-control" id="sel1">-->
@@ -95,36 +103,84 @@
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
 <script>
-	//todo: Next step
 
-	// $("#product_cat").change(function () {
-	// 	let product_category = this.value;
-	//
-	// });
+	$("#product_cat").change(function () {
+		let product_category = this.value;
+		// alert(product_category);
 
-	$("#root_cat").change(function () {
-		let root = this.value;
+		$('#sr_cat')
+			.find('option')
+			.remove()
+			.end(),
+			$.ajax({
+				type: 'GET',
+				url: base_url + 'admin/get_sub_category',
+				data: {
+					category_id: product_category
+				},
+				success: function (data) {
+					$("#sr_cat").css("display", "block");
+					$.each(JSON.parse(data), function (index, element) {
+						$('#sub_cat').append($('<option>', {
+							value: element.sub_category_id,
+							text: element.name
+						}));
+					});
+				},
+				error: function (response) {
+					alert('ERROR' + response);
+				}
+			});
+
+	});
+
+	$("#sub_cat").change(function () {
+		let product_category = this.value;
+		// alert(product_category);
+
 		$.ajax({
 			type: 'GET',
-			url: base_url + 'admin/get_category',
+			url: base_url + 'admin/get_specifications_fields',
 			data: {
-				root_category: root
+				sub_category_id: product_category
 			},
-			success: function(data) {
-				console.log(data);
-				$("#pr_cat").css("display", "block");
-				$.each(data.category, function (index, element) {
-					$('#product_cat').append($('<option>', {
-						value: element.id,
-						text: element.name
-					}));
-				});
+			success: function (data) {
+				console.log(data)
 			},
-			error: function(response){
+			error: function (response) {
 				alert('ERROR' + response);
 			}
 		});
+
 	});
+
+	$("#root_cat").change(function () {
+		let root = this.value;
+		$('#pr_cat')
+			.find('option')
+			.remove()
+			.end(),
+			$.ajax({
+				type: 'GET',
+				url: base_url + 'admin/get_category',
+				data: {
+					root_category: root
+				},
+				success: function (data) {
+					$("#pr_cat").css("display", "block");
+					$.each(JSON.parse(data), function (index, element) {
+						$('#product_cat').append($('<option>', {
+							value: element.category_id,
+							text: element.name
+						}));
+					});
+				},
+				error: function (response) {
+					alert('ERROR' + response);
+				}
+			});
+	})
+	;
 
 </script>
 </body>
