@@ -120,6 +120,7 @@
 				},
 				success: function (data) {
 					$("#sr_cat").css("display", "block");
+					$('#sub_cat').append('<option  selected="selected">-------------- Select------------------</option>');
 					$.each(JSON.parse(data), function (index, element) {
 						$('#sub_cat').append($('<option>', {
 							value: element.sub_category_id,
@@ -168,6 +169,7 @@
 				},
 				success: function (data) {
 					$("#pr_cat").css("display", "block");
+					$('#product_cat').append('<option  selected="selected">-------------- Select------------------</option>');
 					$.each(JSON.parse(data), function (index, element) {
 						$('#product_cat').append($('<option>', {
 							value: element.category_id,
