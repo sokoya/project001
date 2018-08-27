@@ -168,19 +168,17 @@ class Admin extends CI_Controller {
 	}
 
 	public function get_sub_category(){
-		if( isset($_GET['sub_category']) && !empty(get_subcategories_by_root_id($_GET['sub_category'])) ){
+		if( isset($_GET['category_id']) && !empty(get_subcategories_by_root_id($_GET['category_id'])) ){
 			// fetch the category for the root category id
-			echo json_encode(get_subcategories_by_root_id($_GET['sub_category']), JSON_UNESCAPED_SLASHES);
+			echo json_encode(get_subcategories_by_root_id($_GET['category_id']), JSON_UNESCAPED_SLASHES);
 			exit;
 		}
 		// echo get_categories_by_root_id($id);
 	}
 
 	function get_specifications_fields(){
-		if( isset($_GET['root_id']) && isset($_GET['cat_id']) 
-			&& !empty(get_specifications_fields($_GET['root_id'], $_GET['cat_id']))
-		){
-			echo json_encode(get_specifications_fields($_GET['root_id'], $_GET['cat_id']));
+		if( isset($_GET['sub_category_id']) && !empty(get_specifications_fields($_GET['sub_category_id']))){
+			echo json_encode(get_specifications_fields($_GET['sub_category_id']));
 			exit;
 		}
 	}	

@@ -169,18 +169,18 @@ if (!function_exists('get_subcategories_by_root_id')){
     }
 }
 
-// if (!function_exists('get_specifications_fields')){
+if (!function_exists('get_specifications_fields')){
 
-//     function get_specifications_fields(int $root_id, int $cat_id){
-//         $CI =& get_instance();
-//         $CI->db->select('*');
-//         $CI->db->from(SUB_CATEGORY_TABLE);
-//         $CI->db->where('root_category_id', $root_id);
-//         $CI->db->where('category_id', $cat_id);
-//         // 
-//         return $CI->db->get()->result();
-//     }
-// }
+    function get_specifications_fields($sub_cat_id){
+        $CI =& get_instance();
+        $CI->db->select('specifications');
+        $CI->db->from(SUB_CATEGORY_TABLE);
+        $CI->db->where('sub_category_id', $sub_cat_id);
+        foreach( $CI->db->get()->result)
+        // 
+        // return $CI->db->get()->result();
+    }
+}
 
 
 
