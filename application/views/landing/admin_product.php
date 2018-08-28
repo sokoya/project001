@@ -73,6 +73,10 @@
 							</select>
 						</div>
 
+						<div class="spec-fm">
+
+						</div>
+
 
 						<!--						<div class="form-group">-->
 						<!--							<label for="sel1">Select SKU*</label>-->
@@ -122,6 +126,7 @@
 					$("#sr_cat").css("display", "block");
 					$('#sub_cat').append('<option  selected="selected">-------------- Select------------------</option>');
 					$.each(JSON.parse(data), function (index, element) {
+						console.log(element);
 						$('#sub_cat').append($('<option>', {
 							value: element.sub_category_id,
 							text: element.name
@@ -146,7 +151,9 @@
 				sub_category_id: product_category
 			},
 			success: function (data) {
-				console.log(data)
+				$.each(JSON.parse(data), function (i, item) {
+					console.log(item)
+				});
 			},
 			error: function (response) {
 				alert('ERROR' + response);
