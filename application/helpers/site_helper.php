@@ -179,9 +179,9 @@ if (!function_exists('get_specifications_fields')){
         $specifications = $CI->db->get()->row()->specifications;
         $specs = json_decode( $specifications, TRUE);
 
+        $spec_array = array();
         foreach ($specs as $spec) {
         	$option_array =  array();
-        	$spec_array[] = $spec;
         	$CI->db->select('*');
         	$CI->db->from(TABLE_PREFIX.$spec);
         	$options = $CI->db->get()->result_array();
@@ -192,9 +192,11 @@ if (!function_exists('get_specifications_fields')){
 	        		$opt['name'] = $option[$spec .'_name'];
 	        		array_push( $option_array, $opt);
 	        	}
+	        	$spec_array[$spec] = $option_array;
         	}
-        	array_push($spec_array, $option_array);
-	        unset($option_array);
+        	// array_push($spec_array, $option_array);
+        	// $spec_array[[$spec]] = $option_array;
+	        // unset($option_array);
         }        
         echo json_encode( $spec_array );
         exit;
@@ -202,7 +204,18 @@ if (!function_exists('get_specifications_fields')){
 }
 
 
-
-
+// {
+//     $resArr = array();
+//     foreach ($indexedArr as $item)
+//     {
+//         $tmpArr = array();
+//         foreach ($item as $key=>$value)
+//         {
+//             $tmpArr[$keys[$key]] = $value;
+//         }
+//         $resArr[] = $tmpArr;
+//     }
+//     return $resArr;
+// }
 
 ?>
