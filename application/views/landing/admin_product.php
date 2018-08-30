@@ -78,16 +78,6 @@
 						</div>
 
 
-						<!--						<div class="form-group">-->
-						<!--							<label for="sel1">Select SKU*</label>-->
-						<!--							<select class="form-control" id="sel1">-->
-						<!--								<option>Sku 1</option>-->
-						<!--								<option>Sku 2</option>-->
-						<!--								<option>Sku 3</option>-->
-						<!--								<option>Sku 4</option>-->
-						<!--							</select>-->
-						<!--						</div>-->
-
 
 						<input class="carrito_btn_create col-md-12 col-sm-12 col-xs-12" type="submit"
 							   value="Create Product"/>
@@ -151,8 +141,18 @@
 				sub_category_id: product_category
 			},
 			success: function (data) {
+				// var s = $("<select id=\""+total+"\" name=\""+total+"\" />");
+				// s.appendTo("#product_cat");
+				// var sel = $('<select>').appendTo('#product_cat');
+				// sel.append($("<option>").attr('1',this.val).text('Jeffrey'));
+
 				$.each(JSON.parse(data), function (i, item) {
-					console.log(item)
+					console.log(i);
+					$.each(item, function (x, y) {
+						$.each(y, function (a, b) {
+								console.log(b);
+						});
+					});
 				});
 			},
 			error: function (response) {
