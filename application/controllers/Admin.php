@@ -162,6 +162,7 @@ class Admin extends CI_Controller {
      * @param: int root category
      */
     public function get_category(){
+    	$this->load->helper('query_helper');
 		if( isset($_GET['root_category']) && !empty(get_categories_by_root_id($_GET['root_category']))){
 			// fetch the category for the root category id
 			echo json_encode(get_categories_by_root_id($_GET['root_category']), JSON_UNESCAPED_SLASHES);
@@ -175,6 +176,7 @@ class Admin extends CI_Controller {
      * @return: sub categories id, name
      */
     public function get_sub_category(){
+    	$this->load->helper('query_helper');
 		if( isset($_GET['category_id']) && !empty(get_subcategories_by_root_id($_GET['category_id'])) ){
 			// fetch the category for the root category id
 			echo json_encode(get_subcategories_by_root_id($_GET['category_id']) , JSON_UNESCAPED_SLASHES);
@@ -187,6 +189,7 @@ class Admin extends CI_Controller {
      * @return : JSON specification fields
      */
     function get_specifications_fields(){
+    	$this->load->helper('query_helper');
 		if( isset($_GET['sub_category_id']) && !empty(get_specifications_fields($_GET['sub_category_id']))){
 			echo json_encode(get_specifications_fields($_GET['sub_category_id']));
 			exit;
