@@ -188,8 +188,7 @@
 					alert('ERROR' + response);
 				}
 			});
-	})
-	;
+	});
 
 </script>
 </body>
