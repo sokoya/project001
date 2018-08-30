@@ -150,7 +150,7 @@
 					console.log(i);
 					$.each(item, function (x, y) {
 						$.each(y, function (a, b) {
-								console.log(b);
+								console.log( "The id id " + b.id + 'and the name is ' + b.name);
 						});
 					});
 				});

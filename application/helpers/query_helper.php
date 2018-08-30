@@ -70,6 +70,7 @@ if (!function_exists('get_specifications_fields')){
         // $spec_array = $main_array = array();
         $option_array =  array();
         foreach ($specs as $spec) {
+        	$option_array =  array();
         	$CI->db->select('*');
         	$CI->db->from(TABLE_PREFIX.$spec);
         	$options = $CI->db->get()->result_array();
@@ -81,6 +82,7 @@ if (!function_exists('get_specifications_fields')){
 	        	}
         	}
 	        $spec_array[][$spec] = $option_array;
+        	unset( $option_array );
         }       
         echo json_encode( $spec_array );
         exit;
