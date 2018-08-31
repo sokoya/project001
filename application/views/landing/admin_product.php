@@ -115,7 +115,7 @@
 					$("#sr_cat").css("display", "block");
 					$('#sub_cat').append('<option  selected="selected">-------------- Select------------------</option>');
 					$.each(JSON.parse(data), function (index, element) {
-						console.log(element);
+						// console.log(element);
 						$('#sub_cat').append($('<option>', {
 							value: element.sub_category_id,
 							text: element.name
@@ -140,10 +140,10 @@
 			},
 			success: function (data) {
 				$.each(JSON.parse(data), function (i, item) {
-					console.log(item);
+					// console.log(item);
 					$.each(item, function (x, y) {
 						$(".spec-fm").append(`<div class="form-group">
-							<label for="sel1">${x.substr(0, 1).toUpperCase() + x.substr(1)}*</label>
+							<label for="sel1">${x.substr(0, 1).toUpperCase() + x.substr(1)} *</label>
 							<div id = "${x}"></div>
 						</div>`);
 						let sel = $(`<select class="form-control" name="${x}">`).appendTo(`#${x}`);
