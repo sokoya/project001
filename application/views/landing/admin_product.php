@@ -73,10 +73,9 @@
 							</select>
 						</div>
 
-						<div class="spec-fm">
+						<div class="form-group spec-fm">
 
 						</div>
-
 
 
 						<input class="carrito_btn_create col-md-12 col-sm-12 col-xs-12" type="submit"
@@ -150,10 +149,17 @@
 					$.each(item, function (x, y) {
 						// Declare the select attribute here
 						// <select name = x >
+						$(".spec-fm").append(`<div class="form-group">
+							<label for="sel1">${x.substr(0, 1).toUpperCase() + x.substr(1)}*</label>
+							<div id = "${x}"></div>
+						</div>`);
+
+						let sel = $('<select class="form-control">').appendTo(`#${x}`);
 						$.each(y, function (a, b) {
-								// console.log("The Specification name is :" + x + " The id " + b.id + ' and the name is ' + b.name);
-								// Loop out all the options here
-								console.log("The Specification name is :" + x + " and one of the <option> is " + b.name);
+							// console.log("The Specification name is :" + x + " The id " + b.id + ' and the name is ' + b.name);
+							// Loop out all the options here
+							sel.append($("<option>").attr('value', b.name).text(b.name));
+							// console.log("The Specification name is :" + x + " and one of the <option> is " + b.name);
 
 						});
 						// Close the select here here
