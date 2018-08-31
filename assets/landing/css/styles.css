@@ -6987,3 +6987,151 @@ undefinedundefined.owl-height {
 
 /*De-york*/
 
+.carrito-sidebar {
+	list-style-type: none;
+	font-size: 18px;
+	color: #000000 !important;
+}
+
+.carrito-sidebar > li > h4 > a {
+	color: #222;
+	font-size: 13px;
+	font-family: 'Open Sans', arial, helvetica, sans-serif;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-decoration: none;
+	padding-left: 10px;
+}
+
+.carrito-sidebar > li > h4 {
+	margin: 0;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.carrito-sidebar-active {
+	background: #e4ffde;
+	box-shadow: -4px 0 0 0 #44a94b;
+}
+
+.carrito-sidebar > li:hover {
+	background: #e4ffde;
+	box-shadow: -4px 0 0 0 #44a94b;
+}
+
+.carrito-dashboard-cover {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	background: #fff;
+	padding: 10px;
+	border-radius: 4px;
+
+}
+
+.carrito-sidebar-header {
+	margin-left: 49px;
+	font-size: 16px;
+	color: #444;
+	margin-bottom: 15px;
+	margin-top: 12px;
+}
+
+.carrito-sidebar-header-r {
+	font-size: 16px;
+	color: #444;
+	margin-bottom: 15px;
+	margin-top: 12px;
+}
+
+.carrito-sidebar-line-r {
+	border-top: 1px solid #000;
+	margin: 0 20px 15px 0;
+}
+
+.carrito-sidebar-line {
+	border-top: 1px solid #000;
+	margin: 0 0 15px 49px;
+}
+
+.carrito-dashboard-welcome-text {
+	color: #383838;
+	font-size: 15px;
+	padding-left: 3px;
+	font-weight: bold;
+}
+
+.carrito-dashboard-welcome-text-body {
+	padding-left: 3px;
+	color: #454545;
+	font-size: 13px;
+	margin-bottom: 30px;
+}
+
+.carrito-dashboard-card {
+	margin-left: 3px;
+	border: 1px solid #969696;
+	border-radius: 6px;
+	padding: 10px;
+	border-top: 2px solid #44a94b;
+	min-height: 140px;
+	margin-bottom: 10px;
+}
+
+.carrito-dashboard-card > hr{
+	border-top: 1px solid #202020;
+	margin: 0;
+}
+.carrito-dashboard-card > h4{
+	font-size: 14px;
+	color: #454545;
+}
+.carrito-dashboard-card >p{
+	text-transform: capitalize;
+	padding-top: 10px;
+	font-size: 12px;
+}
+
+
+.carrito-custom-dropdown{
+	text-decoration: none;
+	margin-left: -38px;
+	margin-bottom: -2px;
+	margin-top: 27px;
+	width: 300px;
+}
+
+
+.carrito-mobile-dropdown{
+	list-style-type: none;
+}
+
+.carrito-mobile-dropdown-text{
+	color: #0b0b0b !important;
+}
+
+.custom-drop{
+	background: none !important;
+	color: #000;
+	font-size: 23px;
+}
+
+.custom-mobile-navbar{
+	margin-top: 8px;
+	width: 270px;
+}
+.custom-mobile-navbar > li > h4 > a	{
+	color: #565656;
+	font-size: 14px;
+}
+
+.custom-mobile-navbar > li:hover{
+	background: #e4ffde;
+}
+.cx{
+	font-size: 18px;
+}
+
+.cx:focus{
+	color: #3a3a3a;
+	text-decoration: none;
+}
