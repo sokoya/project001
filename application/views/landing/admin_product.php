@@ -139,30 +139,17 @@
 				sub_category_id: product_category
 			},
 			success: function (data) {
-				// var s = $("<select id=\""+total+"\" name=\""+total+"\" />");
-				// s.appendTo("#product_cat");
-				// var sel = $('<select>').appendTo('#product_cat');
-				// sel.append($("<option>").attr('1',this.val).text('Jeffrey'));
-
 				$.each(JSON.parse(data), function (i, item) {
 					console.log(item);
 					$.each(item, function (x, y) {
-						// Declare the select attribute here
-						// <select name = x >
 						$(".spec-fm").append(`<div class="form-group">
 							<label for="sel1">${x.substr(0, 1).toUpperCase() + x.substr(1)}*</label>
 							<div id = "${x}"></div>
 						</div>`);
-
 						let sel = $('<select class="form-control">').appendTo(`#${x}`);
 						$.each(y, function (a, b) {
-							// console.log("The Specification name is :" + x + " The id " + b.id + ' and the name is ' + b.name);
-							// Loop out all the options here
 							sel.append($("<option>").attr('value', b.name).text(b.name));
-							// console.log("The Specification name is :" + x + " and one of the <option> is " + b.name);
-
 						});
-						// Close the select here here
 					});
 				});
 			},
