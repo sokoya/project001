@@ -132,7 +132,6 @@
 
 	$("#sub_cat").change(function () {
 		let product_category = this.value;
-		// alert(product_category);
 
 		$.ajax({
 			type: 'GET',
@@ -147,11 +146,17 @@
 				// sel.append($("<option>").attr('1',this.val).text('Jeffrey'));
 
 				$.each(JSON.parse(data), function (i, item) {
-					console.log(i);
+					console.log(item);
 					$.each(item, function (x, y) {
+						// Declare the select attribute here
+						// <select name = x >
 						$.each(y, function (a, b) {
-								console.log( "The id id " + b.id + 'and the name is ' + b.name);
+								// console.log("The Specification name is :" + x + " The id " + b.id + ' and the name is ' + b.name);
+								// Loop out all the options here
+								console.log("The Specification name is :" + x + " and one of the <option> is " + b.name);
+
 						});
+						// Close the select here here
 					});
 				});
 			},
