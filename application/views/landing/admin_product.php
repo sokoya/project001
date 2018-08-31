@@ -146,7 +146,7 @@
 							<label for="sel1">${x.substr(0, 1).toUpperCase() + x.substr(1)}*</label>
 							<div id = "${x}"></div>
 						</div>`);
-						let sel = $('<select class="form-control">').appendTo(`#${x}`);
+						let sel = $(`<select class="form-control" name="${x}">`).appendTo(`#${x}`);
 						$.each(y, function (a, b) {
 							sel.append($("<option>").attr('value', b.name).text(b.name));
 						});

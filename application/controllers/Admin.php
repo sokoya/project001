@@ -25,7 +25,7 @@ class Admin extends CI_Controller {
 
 	// Root Category
 	public function root_category(){
-		
+		$this->load->helper('query_helper');
 		if( !$this->input->post() ){
 			// fetch all the root category data 
 			$page_data['root_categories'] = $this->admin->read_all_data(ROOT_CATEGORY_TABLE);
@@ -55,7 +55,7 @@ class Admin extends CI_Controller {
 
 	// Category
 	public function category(){
-		
+		$this->load->helper('query_helper');
 		if( !$this->input->post() ){
 			$page_data['categories'] = $this->admin->read_all_data(CATEGORY_TABLE);
 			$page_data['root_categories'] = $this->admin->read_all_data(ROOT_CATEGORY_TABLE);
@@ -85,6 +85,7 @@ class Admin extends CI_Controller {
 
 	// Sub Category
 	public function sub_category(){
+		$this->load->helper('query_helper');
 		if( !$this->input->post() ){
 			$page_data['specifications'] = get_specifications_tables(); 
 			$page_data['root_categories'] = $this->admin->read_all_data(ROOT_CATEGORY_TABLE);
@@ -126,6 +127,7 @@ class Admin extends CI_Controller {
      *
      */
     public function category_specification(){
+    	$this->load->helper('query_helper');
 		if( !$this->input->post() ){
 			$page_data['tables'] = get_specifications_tables(); 
 			$this->load->view('landing/admin_specification', $page_data);
@@ -153,6 +155,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function product(){
+		$this->load->helper('query_helper');
 		$page_data['root_categories'] = $this->admin->read_all_data(ROOT_CATEGORY_TABLE);
 		$this->load->view('landing/admin_product', $page_data);
 	}

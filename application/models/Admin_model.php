@@ -46,6 +46,7 @@ Class Admin_model extends CI_Model{
             return false;
             exit;
         }
+        $table = strtolower($table);
         $table_id = $table . '_id';
         $query = "CREATE TABLE " . TABLE_PREFIX.$table ." ( 
             `$table_id` int(6) AUTO_INCREMENT PRIMARY KEY, 

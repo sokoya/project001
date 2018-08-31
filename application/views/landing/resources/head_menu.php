@@ -623,6 +623,7 @@
                 <li>
                     <a href="#"><span>Learn more about</span> <strong>Carrito Shopper</strong></a>
                 </li>
+                <!-- <span><i class="fa fa-shopping-cart"></i></span> -->
                 <li><a href="<?= base_url(lang('cart_link')); ?>" class="navbar-item-top"><?= lang('cart'); ?></a>
                 </li>
                 <li class="dropdown">
