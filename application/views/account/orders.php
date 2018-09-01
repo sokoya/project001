@@ -44,14 +44,14 @@
 										<td class="text-center">Delivered</td>
 									</tr>
 									<tr>
-										<td>1</td>
+										<td>2</td>
 										<td class="text-center">4 Burner Gas Cooker (50 x 50) -BGC:5040</td>
 										<td class="text-center">White</td>
 										<td class="text-center">Thurs, 07, 2018 (6:02am) </td>
 										<td class="text-center">Processing</td>
 									</tr>
 									<tr>
-										<td>1</td>
+										<td>3</td>
 										<td class="text-center">Galaxy Brand Prime Plus 5.0 Inch(1.5GB, 8GB ROM)...</td>
 										<td class="text-center">Gold</td>
 										<td class="text-center">Thurs, 07, 2018 (6:02am) </td>
