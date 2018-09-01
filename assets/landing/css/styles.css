@@ -7120,6 +7120,7 @@ undefinedundefined.owl-height {
 	width: 270px;
 }
 .custom-mobile-navbar > li > h4 > a	{
+	text-decoration: none;
 	color: #565656;
 	font-size: 14px;
 }
@@ -7127,6 +7128,11 @@ undefinedundefined.owl-height {
 .custom-mobile-navbar > li:hover{
 	background: #e4ffde;
 }
+
+.custom-mobile-navbar > .list-group-item:last-child {
+	border-bottom: none;
+}
+
 .cx{
 	font-size: 18px;
 }

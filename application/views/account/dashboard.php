@@ -8,7 +8,6 @@
 	<?php $this->load->view('landing/resources/head_menu') ?>
 
 	<div class="container carrito-dashboard-cover">
-
 		<div class="col-md-4">
 			<div class="hidden-xs hidden-md">
 				<h3 class="carrito-sidebar-header">My Account</h3>
@@ -34,8 +33,6 @@
 					</li>
 				</ul>
 			</div>
-
-
 		</div>
 		<div class="col-md-8">
 			<ul class="carrito-mobile-dropdown hidden-lg">

@@ -7,4 +7,9 @@ class Account extends CI_Controller {
 	public function index(){
 		$this->load->view('account/dashboard');
 	}
+
+	// Orders
+	public function orders(){
+		$this->load->view('account/orders');
+	}
 }
