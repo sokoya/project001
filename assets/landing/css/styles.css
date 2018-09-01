@@ -7141,3 +7141,13 @@ undefinedundefined.owl-height {
 	color: #3a3a3a;
 	text-decoration: none;
 }
+
+
+ul#table-pagination li{
+	border: 1px solid #202020;
+	padding: 5px;
+	margin-left: -5px;
+	margin-right: 0px;
+	border-style: groove;
+	display: inline;
+}
