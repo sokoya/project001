@@ -59,7 +59,7 @@
 				</div>
 				<div class="col-md-12 col-lg-12" style="background: #fff;">
 					<div class="row">
-						<div class="col-md-6 img-bg">
+						<div class="col-md-6 img-bg hidden-xs">
 							<img src="<?= base_url('assets/landing/cover-photo.png')?>">
 						</div>
 						<div class="col-md-6 carrito-box">
@@ -71,7 +71,7 @@
 							</h3>
 							<div class="row">
 								<div class="col-md-8 col-md-offset-2">
-									<div class="carrito-dashboard-card login-box">
+									<div class="carrito-board login-box">
 										<?= form_open('login/process', 'id="login-form"'); ?>
 											<div class="form-group">
 												<label><h5>Email Address*</h5></label>
@@ -81,6 +81,7 @@
 												<label><h5>Password</h5></label>
 												<input class="form-control" type="password" name="loginpassword" placeholder="Enter your password" required/>
 											</div>
+
 											<div class="form-group">
 												<button type="submit" class="col-md-12 col-sm-12 col-xs-12 btn btn-success"><strong>LOGIN</strong></button>
 											</div>
@@ -90,7 +91,7 @@
 										</div>
 										<hr class="hr-text" data-content="OR">
 										<p class="text-center form_end">
-											<a href="<?= base_url('create'); ?>"> Create an account</a>
+											<h4><a href="<?= base_url('create'); ?>"> Create an account</a></h4>
 										</p>
 									</div>
 								</div>
