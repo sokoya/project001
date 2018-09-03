@@ -6987,10 +6987,35 @@ undefinedundefined.owl-height {
 
 /*De-york*/
 
+.carrito-vl {
+	border-right: 1px solid #4c4c4c;
+	height: 73px;
+}
+
+.carrito-trash {
+	font-size: 30px;
+	margin-top: 10px;
+	color: #4c4c4c;
+}
+
+.carrito-left-l {
+	border-left: 1px solid #4c4c4c;
+	padding-left: 20px;
+}
+
+#carrito-table-head {
+	background: #4c4c4c;
+	color: #fff;
+}
+
+.carrito-table-center {
+	padding-top: 20px !important;
+}
+
 .carrito-sidebar {
 	list-style-type: none;
 	font-size: 18px;
-	color: #000000 !important;
+	color: #414141 !important;
 }
 
 .carrito-sidebar > li > h4 > a {
@@ -7077,22 +7102,23 @@ undefinedundefined.owl-height {
 	margin-bottom: 10px;
 }
 
-.carrito-dashboard-card > hr{
+.carrito-dashboard-card > hr {
 	border-top: 1px solid #202020;
 	margin: 0;
 }
-.carrito-dashboard-card > h4{
+
+.carrito-dashboard-card > h4 {
 	font-size: 14px;
 	color: #454545;
 }
-.carrito-dashboard-card >p{
+
+.carrito-dashboard-card > p {
 	text-transform: capitalize;
 	padding-top: 10px;
 	font-size: 12px;
 }
 
-
-.carrito-custom-dropdown{
+.carrito-custom-dropdown {
 	text-decoration: none;
 	margin-left: -38px;
 	margin-bottom: -2px;
@@ -7100,32 +7126,32 @@ undefinedundefined.owl-height {
 	width: 300px;
 }
 
-
-.carrito-mobile-dropdown{
+.carrito-mobile-dropdown {
 	list-style-type: none;
 }
 
-.carrito-mobile-dropdown-text{
+.carrito-mobile-dropdown-text {
 	color: #0b0b0b !important;
 }
 
-.custom-drop{
+.custom-drop {
 	background: none !important;
 	color: #000;
 	font-size: 23px;
 }
 
-.custom-mobile-navbar{
+.custom-mobile-navbar {
 	margin-top: 8px;
 	width: 270px;
 }
-.custom-mobile-navbar > li > h4 > a	{
+
+.custom-mobile-navbar > li > h4 > a {
 	text-decoration: none;
 	color: #565656;
 	font-size: 14px;
 }
 
-.custom-mobile-navbar > li:hover{
+.custom-mobile-navbar > li:hover {
 	background: #e4ffde;
 }
 
@@ -7133,17 +7159,16 @@ undefinedundefined.owl-height {
 	border-bottom: none;
 }
 
-.cx{
+.cx {
 	font-size: 18px;
 }
 
-.cx:focus{
+.cx:focus {
 	color: #3a3a3a;
 	text-decoration: none;
 }
 
-
-ul#table-pagination li{
+ul#table-pagination li {
 	border: 1px solid #202020;
 	padding: 5px;
 	margin-left: -5px;
@@ -7151,3 +7176,27 @@ ul#table-pagination li{
 	border-style: groove;
 	display: inline;
 }
+
+
+#carrito-newsletter-settings{
+	font-size: 16px;
+}
+#carrito-newsletter-settings-line{
+	margin: 0;
+	width: 50%;
+	border-top: 1px solid #919191;
+}
+
+.carrito-newsletter-text > p{
+	margin-top: 13px;
+	font-size: 14px;
+	color: #0b0b0b;
+}
+
+.carrito-select{
+	width: 114px;
+	border: 1px solid #b9b9b9;
+	padding: 3px;
+	border-radius: 5px;
+}
+
