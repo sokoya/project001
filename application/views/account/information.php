@@ -33,31 +33,31 @@
 						  	<div id="edit" class="tab-pane fade in active">
 						    	<?= form_open(); ?>
 							    	<div class="form-group row">
-							    		<label class="col-sm-3 col-form-label"><h4>Full name:</h4></label>
+							    		<label class="col-sm-3 col-form-label"><h5>Full name:</h5></label>
 							    		<div class="col-sm-9">
 							    			<input class="form-control" type="text" name="name" placeholder="Sokoya Philip"/>
 							    		</div>
 							    	</div>
 							    	<div class="form-group row">
-							    		<label class="col-sm-3 col-form-label"><h4>Email:</h4></label>
+							    		<label class="col-sm-3 col-form-label"><h5>Email:</h5></label>
 							    		<div class="col-sm-9">
 							    			<input class="form-control" readonly type="email" name="name" value="philip.sokoya@schoolville.com"/>
 							    		</div>
 							    	</div>
 							    	<div class="form-group row">
-							    		<label class="col-sm-3 col-form-label"><h4>Display Name:</h4></label>
+							    		<label class="col-sm-3 col-form-label"><h5>Display Name:</h5></label>
 							    		<div class="col-sm-9">
 							    			<input class="form-control" name="name" placeholder="Sokoya Philip"/>
 							    		</div>
 							    	</div>
 							    	<div class="form-group row">
-							    		<label class="col-sm-3 col-form-label"><h4>Phone:</h4></label>
+							    		<label class="col-sm-3 col-form-label"><h5>Phone:</h5></label>
 							    		<div class="col-sm-9">
 							    			<input class="form-control" type="tel" name="name" placeholder="Sokoya Philip"/>
 							    		</div>
 							    	</div>
 							    	<div class="form-group row">
-							    		<label class="col-sm-3 col-form-label"><h4>Gener:</h4></label>
+							    		<label class="col-sm-3 col-form-label"><h5>Gener:</h5></label>
 							    		<div class="col-sm-9">
 							    			<select class="form-control" name="gender">
 							    				<option value="male">Male</option>
@@ -76,19 +76,19 @@
 							<div id="change" class="tab-pane fade">
 							    <?= form_open(); ?>
 							    	<div class="form-group row">
-							    		<label class="col-sm-4 col-form-label"><h4>Old Password:</h4></label>
+							    		<label class="col-sm-4 col-form-label"><h5>Old Password:</h5></label>
 							    		<div class="col-sm-8">
 							    			<input class="form-control" type="password" name="old_password" />
 							    		</div>
 							    	</div>
 							    	<div class="form-group row">
-							    		<label class="col-sm-4 col-form-label"><h4>Email:</h4></label>
+							    		<label class="col-sm-4 col-form-label"><h5>Email:</h5></label>
 							    		<div class="col-sm-8">
 							    			<input class="form-control" type="password" name="new_password" />
 							    		</div>
 							    	</div>
 							    	<div class="form-group row">
-							    		<label class="col-sm-4 col-form-label"><h4>Confirm Password:</h4></label>
+							    		<label class="col-sm-4 col-form-label"><h5>Confirm Password:</h5></label>
 							    		<div class="col-sm-8">
 							    			<input class="form-control" type="password" name="confirm_password" />
 							    		</div>
