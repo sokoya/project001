@@ -628,7 +628,7 @@
                 </li>
                 <li class="dropdown">
                     <?php if( $this->session->userdata('logged_in') ): ?>
-                        <a href="<?= base_url('login'); ?>"><span>Welcome</span><strong>{{The Email}}</strong></a>
+                        <a href="<?= base_url('login'); ?>"><span>Welcome</span><strong><?= $this->session->userdata('email'); ?></strong></a>
                     <?php else : ?>
                         <a href="<?= base_url('login'); ?>"><span>Sign in | Join</span><strong>My Carrito</strong></a>
                     <?php endif; ?>

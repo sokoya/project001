@@ -49,7 +49,7 @@ class Login extends CI_Controller{
                     // @TODO
                     // Check if the user already have some products in the cart, and going to checkout
                     // Perform every other actions necessary
-                    $session_data = array('logged_in' => true, 'logged_id' => $user_id);
+                    $session_data = array('logged_in' => true, 'logged_id' => $user_id, 'email' => $this->input->post('loginemail'));
                     $this->session->set_userdata($session_data);
                     $this->session->set_flashdata('success_msg','You are now logged in!');
                     redirect(base_url());

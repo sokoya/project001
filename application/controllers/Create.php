@@ -69,7 +69,7 @@ class Create extends CI_Controller{
                     'password' => $this->input->post('signuppassword')
                 );
                 $id = $this->user->login($data);
-                $session_data = array('logged_in' => true, 'logged_id' => $id);
+                $session_data = array('logged_in' => true, 'logged_id' => $id, 'email' => $this->input->post('email'));
                 $this->session->set_userdata($session_data);
                 $this->session->set_flashdata('success_msg','Account created and logged in successfully!');
                 // To ursher them to where they are coming from...
