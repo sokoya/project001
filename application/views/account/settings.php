@@ -30,7 +30,7 @@
 					offers as a meeber of the Carrito family</p>
 				<div class="row">
 					<div class="col-md-6">
-						<p><input type="radio" title="label"> Yes I want to receive daily
+						<p><input type="radio" name="preference" title="label"> Yes I want to receive daily
 							<select style=" display : inline;" class="carrito-select">
 								<option>Electronics</option>
 								<option>Clothing</option>
@@ -42,9 +42,11 @@
 							</select> offers
 						</p>
 					</div>
-					<div class="col-md-6"><p><input type="radio" title="label"> I would like to unsubscribe from all the
+					<div class="col-md-6"><p><input name="preference" type="radio" title="label"> I would like to
+							unsubscribe from all the
 							offers</div>
 				</div>
+				<button type="button" class="btn btn-primary btn-lg btn-block" style="margin-top: 15px;">Save Preference</button>
 			</div>
 
 		</div>
