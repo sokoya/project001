@@ -2,6 +2,29 @@
 // Query helper functions
 // This helper functions helps in fecthing the DB in instance
 
+if( !function_exists('get_profile')){
+    function get_profile( $access = '' ){
+        $CI =& get_instance();
+        $CI->db->from(BUYERS_TABLE);
+        $CI->db->where('id', $access);
+        $CI->db->or_where('email', $access);
+        return $CI->db->get()->row();
+    }
+}
+
+
+if( !function_exists('get_categories')){
+    /**
+     * @return mixed
+     */
+    function get_categories($id){
+        $CI =& get_instance();
+        $CI->db->from(ROOT_CATEGORY_TABLE);
+        if( $id != '') {$CI->db->where('root_category_id', $id);}
+        return $CI->db->get();
+    }
+}
+
 if (!function_exists('get_root_category_name')){
     function get_root_category_name( $id ){
         $CI =& get_instance();
@@ -10,8 +33,6 @@ if (!function_exists('get_root_category_name')){
         return $CI->db->get()->row()->name;
     }
 }
-
-
 
 if( !function_exists('get_specifications_tables')){
     /**
@@ -22,7 +43,6 @@ if( !function_exists('get_specifications_tables')){
 		return $CI->db->query("SHOW TABLES FROM " .DB_NAME. " LIKE '%" .str_replace("_", "", TABLE_PREFIX) . "\_%' ")->result_array();
 	}
 }
-
 
 
 if (!function_exists('get_categories_by_root_id')){

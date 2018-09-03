@@ -95,3 +95,4 @@ defined('SUB_CATEGORY_TABLE')        OR define('SUB_CATEGORY_TABLE', 'sub_catego
 defined('COUPONS_TABLE')        OR define('COUPONS_TABLE', 'coupons'); // Coupons and discount
 defined('PRODUCTS_TABLE')        OR define('PRODUCTS_TABLE', 'products'); // products
 defined('PRODUCT_GALLERY_TABLE')        OR define('PRODUCT_GALLERY_TABLE', 'product_gallery'); // image gallery
+defined('BUYERS_TABLE')	OR define('BUYERS_TABLE', 'users' );

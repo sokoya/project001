@@ -43,6 +43,46 @@ Class User_model extends CI_Model{
 		}
 	}
 
+    // Update table
+    function update_data( $access = '' , $data = array(), $table_name = 'users'){
+        $this->db->where('id', $access);
+        $this->db->or_where('email', $access);
+        return $this->db->update( $table_name, $data );
+    }
+
+    // check if the password is correct
+
+    function cur_pass_match($password = null, $access = '', $table = 'users'){
+        if ($password) {
+            $this->db->where('id', $access);
+            $this->db->or_where('email', $access);
+            $salt = $this->db->get('users')->row()->salt;
+            $this->db->where('id', $access);
+            $this->db->or_where('email', $access);
+            $curpassword = $this->db->get($table)->row()->password;
+            $password = shaPassword($password, $salt);
+            if ($password === $curpassword) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    // Change Password 
+    function change_password($password, $access = '', $table = 'users'){
+        if($access == '') $access = $this->session->userdata('logged_id');
+        $salt = salt(50);
+        $password = shaPassword($password, $salt);
+        $data = array(
+            'password' => $password,
+            'salt' => $salt
+        );
+        $this->db->where(['id'=> $access]);
+        $this->db->or_where(['email'=> $access]);
+        return $this->db->update($table, $data);
+    }
+
 }
 
 ?>

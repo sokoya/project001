@@ -20,7 +20,7 @@
 				several area in the state may arrive latter than expected. To view the most up to date status for your
 				order, please go to the Orders page
 			</div>
-			<p class="carrito-dashboard-welcome-text">Hello Chidi Jeffrey,</p>
+			<p class="carrito-dashboard-welcome-text">Hello <?= ucwords($profile->first_name) . ' ' . ucwords($profile->last_name); ?></p>
 			<p class="carrito-dashboard-welcome-text-body">From your My Account Dashboard you have the ability to view a
 				snapshot of your recent account activity and update your account information. Select a link below to
 				view or edit information.</p>

@@ -21,7 +21,7 @@
 				several area in the state may arrive latter than expected. To view the most up to date status for your
 				order, please go to the Orders page
 			</div>
-
+			<?php $this->load->view('landing/msg_view'); ?> 
 			<p id="carrito-newsletter-settings">Newsletter Preference</p>
 			<hr id="carrito-newsletter-settings-line"/>
 			<div class="carrito-newsletter-text">
@@ -29,24 +29,23 @@
 					Everyone does not receive the same offer. You would automatically be eligible to receive these great
 					offers as a meeber of the Carrito family</p>
 				<div class="row">
-					<div class="col-md-6">
-						<p><input type="radio" name="preference" title="label"> Yes I want to receive daily
-							<select style=" display : inline;" class="carrito-select">
-								<option>Electronics</option>
-								<option>Clothing</option>
-								<option>Books</option>
-								<option>Apps & Games</option>
-								<option>Software</option>
-								<option>Movies & Tv</option>
-								<option>Digital Music</option>
-							</select> offers
-						</p>
-					</div>
-					<div class="col-md-6"><p><input name="preference" type="radio" title="label"> I would like to
-							unsubscribe from all the
-							offers</div>
+					<?= form_open(); ?>
+						<div class="col-md-6">
+							<p><input type="radio" name="preference" value="1" <?php if($profile->newsletter == true ) echo 'checked';?> title="Subscribe"> Yes I want to receive daily
+								<!-- <select style=" display : inline;" name="category" class="carrito-select">
+									<?php foreach( get_categories()->result() as $categories ) : ?>
+										<option value="<?= $categories->root_category_id; ?>"><?= ucwords($categories->name); ?></option>
+									<?php endforeach; ?>
+								</select> offers -->
+							</p>
+						</div>
+						<div class="col-md-6"><p><input name="preference" value="0" <?php if($profile->newsletter == false ) echo 'checked';?> type="radio" title="Subscribe"> I would like to
+								unsubscribe from all the
+								offers</div>
+						<input type="hidden" name="user" value="<?= base64_encode($profile->id); ?>">
+						<button type="submit" class="btn btn-primary btn-lg btn-block" style="margin: 15px;">Save Preference</button>
+					<?= form_close(); ?>
 				</div>
-				<button type="button" class="btn btn-primary btn-lg btn-block" style="margin-top: 15px;">Save Preference</button>
 			</div>
 
 		</div>
