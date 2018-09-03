@@ -635,19 +635,16 @@
                     <ul class="dropdown-menu">
                         <?php if($this->session->userdata('logged_in') ): ?>
                             <li>
-                                <a href="<?= base_url('myaccount'); ?>">My Accounts</a>
+                                <a href="<?= base_url('account'); ?>">My Accounts</a>
                             </li>
                             <li>
-                                <a href="#">My Orders</a>
+                                <a href="<?= base_url('account/orders'); ?>">My Orders</a>
                             </li>
                             <li>
-                                <a href="#">My Wallet</a>
+                                <a href="<?= base_url('account/saved'); ?>">My Saved Items</a>
                             </li>
                             <li>
-                                <a href="#">My Coupon</a>
-                            </li>
-                            <li>
-                                <a href="#">Help</a>
+                                <a href="<?= base_url('account/help'); ?>">Help</a>
                             </li>
                             <li>
                                 <a href="<?= base_url('logout'); ?>">Logout</a>

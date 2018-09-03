@@ -42,7 +42,6 @@
 <div class="global-wrapper clearfix" id="global-wrapper">
 	<?php $this->load->view('landing/resources/head_img') ?>
 	<?php $this->load->view('landing/resources/head_category') ?>
-
 	<?php $this->load->view('landing/resources/head_menu') ?>
 
 	<div class="container-fluid" style="width: 100%">
