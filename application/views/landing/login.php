@@ -47,6 +47,7 @@
 	<!-- <div class="full-width"> -->
 		<div class="container-fluid" style="width: 100%">
 			<div class="row">
+				<div class="col-md-10 col-md-offset-1" style="margin-top: 3px;"></div>
 				<div class="col-md-12 col-lg-12" style="background: #fff;">
 					<div class="row">
 						<div class="col-md-6 img-bg hidden-xs">
