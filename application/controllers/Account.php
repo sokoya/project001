@@ -5,11 +5,30 @@ class Account extends CI_Controller {
 
 	// Control panel
 	public function index(){
-		$this->load->view('account/dashboard');
+		$page_data['page'] = 'dashboard';
+		$this->load->view('account/dashboard', $page_data);
 	}
 
 	// Orders
 	public function orders(){
-		$this->load->view('account/orders');
+		$page_data['page'] = 'orders';
+		$this->load->view('account/orders', $page_data);
 	}
+
+	// Personal Information and Change password
+	public function information(){
+
+	}
+
+	// Saved and Wishlist
+	public function saved(){
+
+	}
+
+	// Settings
+	public function settings(){
+
+	}
+
+
 }

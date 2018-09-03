@@ -8,60 +8,11 @@
 	<?php $this->load->view('landing/resources/head_menu') ?>
 
 	<div class="container carrito-dashboard-cover">
-		<div class="col-md-4">
-			<div class="hidden-xs hidden-md">
-				<h3 class="carrito-sidebar-header">My Account</h3>
-				<hr class="carrito-sidebar-line"/>
-				<ul class="carrito-sidebar">
-					<li>
-						<h4 class="carrito-sidebar-active"><a href="<?= base_url('account'); ?>">Overview</a></h4>
-					</li>
-					<li>
-						<h4><a href="<?= base_url('account/information'); ?>">Information</a></h4>
-					</li>
-					<li>
-						<h4><a href="<?= base_url('account/my_orders'); ?>">My Orders</a></h4>
-					</li>
-					<li>
-						<h4><a href="<?= base_url('account/reviews'); ?>">My Reviews & Ratings</a></h4>
-					</li>
-					<li>
-						<h4><a href="<?= base_url('account/saved'); ?>">My Saved Items</a></h4>
-					</li>
-					<li>
-						<h4><a href="<?= base_url('account/settings'); ?>">Account Settings</a></h4>
-					</li>
-				</ul>
-			</div>
-		</div>
+		
+		<?php $this->load->view('account/includes/sidebar'); ?>
 		<div class="col-md-8">
-			<ul class="carrito-mobile-dropdown hidden-lg">
-				<li class="dropdown carrito-custom-dropdown"><a href="#" class="carrito-sidebar-header-r cx">Overview<i
-							class="drop-caret custom-drop"
-							data-toggle="dropdown"></i></a>
-					<ul class="dropdown-menu list-group custom-mobile-navbar">
-						<li class="list-group-item">
-							<h4><a href="<?= base_url('account'); ?>">Overview</a></h4>
-						</li>
-						<li class="list-group-item">
-							<h4><a href="<?= base_url('account/information'); ?>">Information</a></h4>
-						</li>
-						<li class="list-group-item">
-							<h4><a href="<?= base_url('account/my_orders'); ?>">My Orders</a></h4>
-						</li>
-						<li class="list-group-item">
-							<h4><a href="<?= base_url('account/reviews'); ?>">My Reviews & Ratings</a></h4>
-						</li>
-						<li class="list-group-item">
-							<h4><a href="<?= base_url('account/saved'); ?>">My Saved Items</a></h4>
-						</li>
-						<li class="list-group-item">
-							<h4><a href="<?= base_url('account/settings'); ?>">Account Settings</a></h4>
-						</li>
-					</ul>
+			<?php $this->load->view('account/includes/sidebar-mobile'); ?>
 
-				</li>
-			</ul>
 			<h3 class="carrito-sidebar-header-r hidden-sm hidden-md hidden-xs">Overview</h3>
 			<hr class="carrito-sidebar-line-r"/>
 			<div class="alert alert-warning">
