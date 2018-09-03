@@ -1,6 +1,5 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
 <style>
-
 	.well {
 		padding: 5px;
 		font: 12px/20px "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -8,10 +7,7 @@
 	.img-bg{
 		padding: 0px !important;
 		margin-right: 0px;
-		/*width: 100%;*/
-		/*margin-right: -30px;*/
 	}
-
 	.carrito-box{
 		margin-left: 0px !important;
 	}
@@ -40,9 +36,6 @@
 		-webkit-border-radius: 3px;
 		border-radius: 3px;
 	}
-
-
-
 </style>
 </head>
 <body>
@@ -84,14 +77,14 @@
 
 											<div class="form-group">
 												<button type="submit" class="col-md-12 col-sm-12 col-xs-12 btn btn-success"><strong>LOGIN</strong></button>
-											</div>
+											</div><br />
 										<?= form_close();?>
 										<div class="text-center">
 											<a href="<?= base_url(lang('forgot_password_link')); ?>"><?= lang('forgot_password'); ?></a>
 										</div>
 										<hr class="hr-text" data-content="OR">
 										<p class="text-center form_end">
-											<h4><a href="<?= base_url('create'); ?>"> Create an account</a></h4>
+											<a href="<?= base_url('create'); ?>"> Create an account</a>
 										</p>
 									</div>
 								</div>

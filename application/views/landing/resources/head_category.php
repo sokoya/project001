@@ -3,7 +3,7 @@
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="<?= base_url()?>">
-                <img src="<?= base_url('assets/landing/img/log.png');?>" alt="CarritoLogo" title="Image Title" />
+                <img src="<?= base_url('assets/landing/img/carrito-logo.png');?>" alt="CarritoLogo" title="Image Title" />
             </a>
         </div>
         <form class="navbar-form navbar-left navbar-main-search navbar-main-search-category" role="search">
