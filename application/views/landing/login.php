@@ -34,6 +34,14 @@
 	.login-box{
 		padding: 15px;
 	}
+	.carrito-box{
+		background: #fff;
+		-webkit-border-radius: 3px;
+		border-radius: 3px;
+		-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+		height: 100%;
+	}
 
 
 
@@ -56,7 +64,7 @@
 						<div class="col-md-6 img-bg">
 							<img src="<?= base_url('assets/landing/cover-photo.png')?>">
 						</div>
-						<div class="col-md-6 box-lg carrito-box">
+						<div class="col-md-6 carrito-box">
 							<p class="text-center">
 								<img src="<?= base_url('assets/landing/img/carrito-logo.png')?>" width="20%" alt="Carrito logo Image">
 							</p>
