@@ -14,5 +14,4 @@
     <link rel="stylesheet" href="<?= base_url('assets/landing/css/bootstrap.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/landing/css/font-awesome.css');?>">
     <link rel="stylesheet" href="<?= base_url('assets/landing/css/styles.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/landing/css/mystyles.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/de-york.css'); ?>" title="de-york" media="all" />

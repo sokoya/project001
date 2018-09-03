@@ -75,7 +75,6 @@ label {
 a {
 	color: #486d97;
 }
-
 .text-sm {
 	font-size: 12px;
 }
@@ -7302,7 +7301,6 @@ input[type="color"]:focus,
 	position: relative;
 	bottom: 13px;
 }
-
 
 @media only screen and (max-width: 768px) {
 	/* For mobile phones: */

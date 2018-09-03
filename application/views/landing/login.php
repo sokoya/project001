@@ -47,9 +47,6 @@
 	<!-- <div class="full-width"> -->
 		<div class="container-fluid" style="width: 100%">
 			<div class="row">
-				<div class="col-md-10 col-md-offset-1" style="margin-top: 3px;">
-					<?php $this->load->view('landing/msg_view'); ?>
-				</div>
 				<div class="col-md-12 col-lg-12" style="background: #fff;">
 					<div class="row">
 						<div class="col-md-6 img-bg hidden-xs">
@@ -63,7 +60,9 @@
 								Login to your account
 							</h3>
 							<div class="row">
+
 								<div class="col-md-8 col-md-offset-2">
+									<?php $this->load->view('landing/msg_view'); ?>
 									<div class="carrito-board login-box">
 										<?= form_open('login/process', 'id="login-form"'); ?>
 											<div class="form-group">
@@ -83,7 +82,7 @@
 											<a href="<?= base_url(lang('forgot_password_link')); ?>"><?= lang('forgot_password'); ?></a>
 										</div>
 										<hr class="hr-text" data-content="OR">
-										<p class="text-center form_end">
+										<p class="text-center form_end text-d">
 											<a href="<?= base_url('create'); ?>"> Create an account</a>
 										</p>
 									</div>
