@@ -17,7 +17,8 @@ class Account extends CI_Controller {
 
 	// Personal Information and Change password
 	public function information(){
-
+		$page_data['page'] = 'information';
+		$this->load->view('account/information', $page_data);
 	}
 
 	// Saved and Wishlist
