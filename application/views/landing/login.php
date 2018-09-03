@@ -35,12 +35,10 @@
 		padding: 15px;
 	}
 	.carrito-box{
+		margin-top: 50px;
 		background: #fff;
 		-webkit-border-radius: 3px;
 		border-radius: 3px;
-		-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-		height: 100%;
 	}
 
 
@@ -59,7 +57,7 @@
 				<div class="col-md-10 col-md-offset-1" style="margin-top: 3px;">
 					<?php $this->load->view('landing/msg_view'); ?>
 				</div>
-				<div class="col-md-12 col-lg-12">
+				<div class="col-md-12 col-lg-12" style="background: #fff;">
 					<div class="row">
 						<div class="col-md-6 img-bg">
 							<img src="<?= base_url('assets/landing/cover-photo.png')?>">
@@ -84,14 +82,14 @@
 												<input class="form-control" type="password" name="loginpassword" placeholder="Enter your password" required/>
 											</div>
 											<div class="form-group">
-												<button type="submit" class="col-md-12 col-sm-12 col-xs-12 btn btn-warning"><strong>LOGIN</strong></button>
+												<button type="submit" class="col-md-12 col-sm-12 col-xs-12 btn btn-success"><strong>LOGIN</strong></button>
 											</div>
 										<?= form_close();?>
-										<div class="form_end">
+										<div class="text-center">
 											<a href="<?= base_url(lang('forgot_password_link')); ?>"><?= lang('forgot_password'); ?></a>
 										</div>
 										<hr class="hr-text" data-content="OR">
-										<p class="text-center">
+										<p class="text-center form_end">
 											<a href="<?= base_url('create'); ?>"> Create an account</a>
 										</p>
 									</div>
