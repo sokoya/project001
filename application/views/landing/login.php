@@ -79,11 +79,11 @@
 												<button type="submit" class="col-md-12 col-sm-12 col-xs-12 btn btn-success"><strong>LOGIN</strong></button>
 											</div><br />
 										<?= form_close();?>
-										<div class="text-center">
+										<div class="text-center" style="margin-top: 25px">
 											<a href="<?= base_url(lang('forgot_password_link')); ?>"><?= lang('forgot_password'); ?></a>
 										</div>
-										<hr class="hr-text" data-content="OR">
-										<p class="text-center form_end text-d">
+										<hr class="hr-text" data-content="OR" style="margin-top: 10px">
+										<p class="text-center form_end text-d" style="font-size: 14px; margin-top: -40px;">
 											<a href="<?= base_url('create'); ?>"> Create an account</a>
 										</p>
 									</div>
