@@ -20,6 +20,7 @@ if( !function_exists('get_categories')){
     function get_categories($id){
         $CI =& get_instance();
         $CI->db->from(ROOT_CATEGORY_TABLE);
+        $CI->db->select('root_category_id,name');
         if( $id != '') {$CI->db->where('root_category_id', $id);}
         return $CI->db->get();
     }

@@ -80,6 +80,7 @@ class Account extends CI_Controller {
 							redirect($_SERVER['HTTP_REFERER']);
 						}else{							
 							if($this->user_model->cur_pass_match($this->input->post('current_password'),$this->session->userdata('logged_id'))){
+								
 								if($this->user_model->change_password($this->input->post('new_password'),$this->session->userdata('logged_id'))){$this->session->set_flashdata('success_msg','Success, your password has been reset.');
 								}else{
 									$this->session->set_flashdata('error_msg','Sorry! There was an error updating the password, please try after some time...');									
@@ -87,7 +88,6 @@ class Account extends CI_Controller {
 							}else{
 								$this->session->set_flashdata('error_msg','Sorry! The current password is incorrect');
 							}
-
 							redirect($_SERVER['HTTP_REFERER']);
 
 						}
