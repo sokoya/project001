@@ -99,8 +99,9 @@ class Admin extends CI_Controller {
 				$this->session->set_flashdata('error_msg','<strong>There was an error creating the category.</strong> <br />' . validation_errors());
 				redirect($_SERVER['HTTP_REFERER']);
 			}else{
-				// Insert 
-				if( empty($this->input->post('specifications')) || count($this->input->post('specifications')) < 1 ){
+				// Insert
+                $id = $this->input->post('specifications');
+				if( empty( $id ) || count($this->input->post('specifications')) < 1 ){
 					$this->session->set_flashdata('error_msg','Oops, you need to select atleast one specification.');
 					redirect($_SERVER['HTTP_REFERER']);
 				}
@@ -138,7 +139,8 @@ class Admin extends CI_Controller {
 				$this->session->set_flashdata('error_msg','<strong>There was an error creating the specification.</strong> <br />' . validation_errors());
 				redirect($_SERVER['HTTP_REFERER']);
 			}else{
-				if( empty($this->input->post('specification_field')) || count($this->input->post('specification_field')) < 1 ){
+			    $id = $this->input->post('specification_field');
+                if( count($this->input->post('specification_field')) < 1 || empty($id)){
 					$this->session->set_flashdata('error_msg','Oops, the specification can not be empty.');
 					redirect($_SERVER['HTTP_REFERER']);
 				}
@@ -167,7 +169,8 @@ class Admin extends CI_Controller {
      */
     public function get_category(){
     	$this->load->helper('query_helper');
-		if( isset($_GET['root_category']) && !empty(get_categories_by_root_id($_GET['root_category']))){
+    	$id = get_categories_by_root_id($_GET['root_category']);
+		if( isset($_GET['root_category']) && !empty($id)){
 			// fetch the category for the root category id
 			echo json_encode(get_categories_by_root_id($_GET['root_category']), JSON_UNESCAPED_SLASHES);
 			exit;
@@ -181,7 +184,8 @@ class Admin extends CI_Controller {
      */
     public function get_sub_category(){
     	$this->load->helper('query_helper');
-		if( isset($_GET['category_id']) && !empty(get_subcategories_by_root_id($_GET['category_id'])) ){
+    	$id = get_subcategories_by_root_id($_GET['category_id']);
+		if( isset($_GET['category_id']) && !empty($id) ){
 			// fetch the category for the root category id
 			echo json_encode(get_subcategories_by_root_id($_GET['category_id']) , JSON_UNESCAPED_SLASHES);
 			exit;
@@ -194,7 +198,8 @@ class Admin extends CI_Controller {
      */
     function get_specifications_fields(){
     	$this->load->helper('query_helper');
-		if( isset($_GET['sub_category_id']) && !empty(get_specifications_fields($_GET['sub_category_id']))){
+    	$cat_id = get_specifications_fields($_GET['sub_category_id']);
+		if( isset($_GET['sub_category_id']) && !empty($cat_id)){
 			echo json_encode(get_specifications_fields($_GET['sub_category_id']));
 			exit;
 		}
