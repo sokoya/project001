@@ -104,7 +104,8 @@ class Admin extends CI_Controller {
 					$this->session->set_flashdata('error_msg','Oops, you need to select atleast one specification.');
 					redirect($_SERVER['HTTP_REFERER']);
 				}
-				$sub_id = $this->admin->insert_data( SUB_CATEGORY_TABLE, array(
+
+                $sub_id = $this->admin->insert_data( SUB_CATEGORY_TABLE, array(
 					'root_category_id' => $this->input->post('root_category_id'),
 					'category_id' => $this->input->post('category_id'),
 					'name' => $this->input->post('sub_category_name'),
