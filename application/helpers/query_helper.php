@@ -35,13 +35,16 @@ if (!function_exists('get_root_category_name')){
     }
 }
 
-if( !function_exists('get_specifications_tables')){
+if( !function_exists('get_specifications')){
     /**
      * @return mixed
      */
-    function get_specifications_tables(){
+    function get_specifications(){
 		$CI =& get_instance();
-		return $CI->db->query("SHOW TABLES FROM " .DB_NAME. " LIKE '%" .str_replace("_", "", TABLE_PREFIX) . "\_%' ")->result_array();
+        $CI->db->select('id, spec_name');
+        $CI->db->from('specifications');
+        return $CI->db->get()->result_array();
+		// return $CI->db->query("SHOW TABLES FROM " .DB_NAME. " LIKE '%" .str_replace("_", "", TABLE_PREFIX) . "\_%' ")->result_array();
 	}
 }
 

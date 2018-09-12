@@ -87,7 +87,7 @@ class Admin extends CI_Controller {
 	public function sub_category(){
 		$this->load->helper('query_helper');
 		if( !$this->input->post() ){
-			$page_data['specifications'] = get_specifications_tables(); 
+			$page_data['specifications'] = get_specifications(); 
 			$page_data['root_categories'] = $this->admin->read_all_data(ROOT_CATEGORY_TABLE);
 			$page_data['categories'] = $this->admin->read_all_data(CATEGORY_TABLE);
 			$this->load->view('landing/admin_sub_category', $page_data);
@@ -100,17 +100,19 @@ class Admin extends CI_Controller {
 				redirect($_SERVER['HTTP_REFERER']);
 			}else{
 				// Insert
-                $id = $this->input->post('specifications');
-				if( empty( $id ) || count($this->input->post('specifications')) < 1 ){
-					$this->session->set_flashdata('error_msg','Oops, you need to select atleast one specification.');
-					redirect($_SERVER['HTTP_REFERER']);
-				}
+    //             $id = $this->input->post('specifications');
+				// if( empty( $id ) || count($this->input->post('specifications')) < 1 ){
+				// 	$this->session->set_flashdata('error_msg','Oops, you need to select atleast one specification.');
+				// 	redirect($_SERVER['HTTP_REFERER']);
+				// }
+
+				$specifications = (!empty($this->input->post('specifications')) ) ? json_encode($this->input->post('specifications')) : '';
 
                 $sub_id = $this->admin->insert_data( SUB_CATEGORY_TABLE, array(
 					'root_category_id' => $this->input->post('root_category_id'),
 					'category_id' => $this->input->post('category_id'),
 					'name' => $this->input->post('sub_category_name'),
-					'specifications' => json_encode($this->input->post('specifications'))
+					'specifications' => $specifications
 				));
 				if( !is_numeric($sub_id) ){
 					$this->session->set_flashdata('error_msg','Oops, there was an error creating the sub category.');
@@ -131,28 +133,39 @@ class Admin extends CI_Controller {
     public function category_specification(){
     	$this->load->helper('query_helper');
 		if( !$this->input->post() ){
-			$page_data['tables'] = get_specifications_tables(); 
+			$page_data['specifications'] = get_specifications(); 
 			$this->load->view('landing/admin_specification', $page_data);
 		}else{
-			$this->form_validation->set_rules('specification_name', 'Specification Name','trim|required|xss_clean');
+			$this->form_validation->set_rules('spec_name', 'Specification Name','trim|required|xss_clean');
+			if( $this->input->post('has_option') === 'on' ){
+				$this->form_validation->set_rules('options_field', 'Specification options','trim|required|xss_clean');
+			}
+			$this->form_validation->set_rules('description', 'Description','trim|required|xss_clean');
+
 			if ($this->form_validation->run() === FALSE) {
 				$this->session->set_flashdata('error_msg','<strong>There was an error creating the specification.</strong> <br />' . validation_errors());
 				redirect($_SERVER['HTTP_REFERER']);
 			}else{
-			    $id = $this->input->post('specification_field');
-                if( count($this->input->post('specification_field')) < 1 || empty($id)){
-					$this->session->set_flashdata('error_msg','Oops, the specification can not be empty.');
+				$multiple_options = ($this->input->post('multiple_options') === 'on') ? 1 : 0;
+				$required = ($this->input->post('required') === 'on') ? 1 : 0;
+				$options = explode(',', trim($this->input->post('options_field')));
+
+				$option = (!empty($options)) ? json_encode($options) : '';
+				$data = array(
+					'spec_name' => $this->input->post('spec_name'),
+					'required'			=> $required,
+					'options'			=> $option,
+					'description'		=> $this->input->post('description'),
+					'multiple_options'	=> $multiple_options
+				);			
+
+				if( $this->admin->create_specification($data) ){
+					$this->session->set_flashdata('success_msg','Specification has been created successfully.');
 					redirect($_SERVER['HTTP_REFERER']);
-				}
-				// model to check if table exists
-				// if not create table with its associated fields
-				$this->admin->create_specification($this->input->post('specification_name'), $this->input->post('specification_field'));
-					$this->session->set_flashdata('success_msg','Category specification has been created successfully.');
-					redirect($_SERVER['HTTP_REFERER']);
-				// }else{
+				}else{
 					$this->session->set_flashdata('error_msg','Error: The specification already exist.');
 					redirect($_SERVER['HTTP_REFERER']);
-				// }
+				}
 			}
 		}
 	}

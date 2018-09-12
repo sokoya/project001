@@ -43,13 +43,12 @@
 
 						<div class="well" style="padding: 40px;">
 							<div class="row">
-								<?php foreach($specifications as $key => $value ) :
-                							foreach( $value as $new_key => $new_value) :
+								<?php foreach($specifications as $specification ) :
                 				?>
 								<div class="col-md-2">
-									<input style="margin-right: 10px;" class="i-check"type="checkbox" name="specifications[]" value="<?= strtolower(clean_specification($new_value));?>" /><?= clean_specification($new_value);?>
+									<input style="margin-right: 10px;" class="i-check" type="checkbox" name="specifications[]" value="<?= $specification['id'];?>" /><?= $specification['spec_name'];?>
 								</div>
-							<?php endforeach; endforeach; ?>
+							<?php  endforeach; ?>
 							</div>
 						</div>
 						<input class="carrito_btn_create col-md-12 col-sm-12 col-xs-12" type="submit"

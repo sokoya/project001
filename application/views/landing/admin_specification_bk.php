@@ -27,51 +27,22 @@
 						Create New Specification</h3>
 					<?= form_open('admin/category_specification')?>
 						<div class="alert-notif"></div>
-
 						<div class="form-group">
 							<label for="-name">Specification Name *</label>
-							<input class="form-control" type="text" name="spec_name" placeholder="Eg : Features or Display Size or Refresh Rate or Display Features..." required/>
+							<input class="form-control" type="text" name="specification_name" placeholder="Brand" required/>
 						</div>
-
-						<div class="form-group">
-							<div class="checkbox">
-								<input type="checkbox" name="has_option" id="has_option"> Is this specification having an option?
-							</div>
-						</div>
-
-						<div id="options" style="display: none;">
-							<div class="form-group">
-								<label for="">Specification Options</label>
-								<input type="text" name="options_field" id="options_field" class="form-control" placeholder="Eg : 3G, 4G, Full HD, Retina,GSM, Bluetooth, 3G, Touchscreen ...">
-							</div>
-							<div class="form-group">
-								<div class="checkbox">
-									<input type="checkbox" name="multiple_options"> Should user select multiple options
+						<div class="well">
+							<div class="row">
+								<div class="col-md-8"><p style="font-weight: bold; position: relative; top: 3px;color:#27AE61;">Enter the specification fields</p></div>
+								<div class="col-md-4">
+									<button class="add_field_button btn btn-primary" style="float: right; position: relative;bottom: 1px;">Add New Field
+									</button>
 								</div>
 							</div>
 						</div>
 
-						<div class="form-group">
-							<div class="checkbox">
-								<input type="checkbox" name="required"> Is the specification required
-							</div>
+						<div class="carrito_wrapper">
 						</div>
-
-						<!-- <div class="form-group">
-							<p>Where should the specification be displayed on sellers page?</p>
-							<label class="radio-inline">
-      							<input type="radio" name="tab" value="main_specification" checked>Main Specification Tab
-    						</label>
-						    <label class="radio-inline">
-						      <input type="radio" name="tab" value="additional_attribute">Additional Attribute
-						    </label>
-						</div> -->
-
-						<div class="form-group">
-							<label for="description" class="control-label">Description for the specification</label>
-							<input type="text" name="description" class="form-control" placeholder="Specify the size of the display in inch. Example 14 Inch" required>
-						</div>
-
 						<input class="carrito_btn_create col-md-12 col-sm-12 col-xs-12" type="submit"
 							   value="Create Specification"/>
 					<?= form_close(); ?>
@@ -90,17 +61,19 @@
                 			<th class="text-center">Action</th>
                 		</tr>
                 		<tbody>
-                			<?php $x=1; foreach($specifications as $specification ) :
+                			<?php $x=1; foreach($tables as $key => $value ) :
+                							foreach( $value as $new_key => $new_value) :
                 			?>
                 				<tr>
                 					<td><?= $x; ?></td>
-                					<td><?= $specification['spec_name'];?></td>
+                					<td><?= clean_specification($new_value);?></td>
                                     <td class="text-center">
+                                        <button class="btn btn-md btn-info">Add Category</button>
                                         <button class="btn btn-md btn-warning">Edit</button>
                                         <button class="btn btn-md btn-danger">Delete</button>
                                     </td>
                 				</tr>
-                			<?php $x++; endforeach; ?>
+                			<?php $x++; endforeach; endforeach; ?>
                 		</tbody>
                 	</thead>
                 </table>
@@ -115,16 +88,29 @@
 <?php $this->load->view('landing/resources/script'); ?>
 
 <script>
-	$(document).ready(function(){
-	    $('#has_option').change(function(){
-	        if(this.checked){
-	            $('#options').fadeIn('slow');
-	        	$('#options_field').attr('required', true);	        	
-	        }else{
-	            $('#options').fadeOut('slow');
-	        }
+	$(document).ready(function () {
+		let max_fields = 10;
+		const wrapper = $(".carrito_wrapper");
+		const add_button = $(".add_field_button");
 
-	    });
+		let x = 1;
+		$(add_button).click(function (e) {
+			e.preventDefault();
+			if (x < max_fields) {
+				x++;
+				$(wrapper).append('<div><div class="form-group">\n' +
+					'\t\t\t\t\t\t\t<label for="-name">Specification Field *</label>\n' +
+					'\t\t\t\t\t\t\t<input class="form-control" type="text" name="specification_field[]"\n' +
+					'\t\t\t\t\t\t\t\t   placeholder="Samsung" required/>\n' +
+					'\t\t\t\t\t\t</div><a href="#" class="remove_field">Remove</a></div>');
+			}
+		});
+
+		$(wrapper).on("click", ".remove_field", function (e) {
+			e.preventDefault();
+			$(this).parent('div').remove();
+			x--;
+		})
 	});
 </script>
 </body>

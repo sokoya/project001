@@ -3,7 +3,6 @@
 
 Class Admin_model extends CI_Model{
 
-
     /**
      * @param $table
      * @param array $data
@@ -40,29 +39,42 @@ Class Admin_model extends CI_Model{
      * @param array $fields
      * @return bool
      */
-    function create_specification($table, $fields = array()){
+    function create_specification($fields = array(), $table = 'specifications') {
         // does table exists
         if( $this->db->table_exists(TABLE_PREFIX.$table) || empty($fields) || count($fields) < 1 ){
             return false;
             exit;
         }
-        $table = strtolower($table);
-        $table_id = $table . '_id';
-        $query = "CREATE TABLE " . TABLE_PREFIX.$table ." ( 
-            `$table_id` int(6) AUTO_INCREMENT PRIMARY KEY, 
-            `" .$table. "_name` varchar(255),
-            UNIQUE( " .$table . "_name)
-        ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
 
-        if( $this->db->query( $query )){
-            foreach ($fields as $key => $value) {
-                $this->insert_data(TABLE_PREFIX.$table, array( $table .'_name' => $value));
-                unset($fields[$key]);
-            }
-            return true;
-
+        $this->db->select();
+        $this->db->like('spec_name', $fields['spec_name']);
+        if( $this->db->get('specifications')->num_rows() > 0){
+            return false;
+            exit;
         }
-        return false;
+
+        if(is_numeric($this->insert_data($table, $fields)) ){
+            return true;
+        }else{
+            return false;
+        }
+        // $table = strtolower($table);
+        // $table_id = $table . '_id';
+        // $query = "CREATE TABLE " . TABLE_PREFIX.$table ." ( 
+        //     `$table_id` int(6) AUTO_INCREMENT PRIMARY KEY, 
+        //     `" .$table. "_name` varchar(255),
+        //     UNIQUE( " .$table . "_name)
+        // ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
+
+        // if( $this->db->query( $query )){
+        //     foreach ($fields as $key => $value) {
+        //         $this->insert_data(TABLE_PREFIX.$table, array( $table .'_name' => $value));
+        //         unset($fields[$key]);
+        //     }
+        //     return true;
+
+        // }
+        // return false;
     }
 
 }
