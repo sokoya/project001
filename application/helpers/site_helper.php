@@ -47,7 +47,7 @@ if (!function_exists('plushrs')) {
 if (!function_exists('ngn')) {
 	function ngn($amt = ''){
         if ($amt == '') $amt = '0';
-           return '₦'.number_format($amt, 2, '.', ',');
+           return '₦'.number_format($amt);
 	}
 }
 
@@ -63,6 +63,12 @@ function get_percentage($total, $number){
   	} else {
     	return 0;
   	}
+}
+
+function get_discount( $sale_price, $discount_price){
+	// return (100 * $discount_price/$sale_price );
+	$percent = (( $sale_price - $discount_price) * 100) / $sale_price;
+	return '-'.$percent.'%';
 }
 
 function ago($time){
@@ -105,13 +111,13 @@ function phoneclean($num) {
    	return '0'.$realNUM;
 }
 
-function urlify($string){
-    return strtolower(trim(preg_replace('~[^0-9a-z]+~i', '-', html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($string, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8')), '-'));
+function urlify($string, $id =''){
+    $new_string = strtolower(trim(preg_replace('~[^0-9a-z]+~i', '-', html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($string, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8')), '-'));
+    if( $id != '' ){
+    	return $new_string .'-'.$id.'/';    	
+    }else{
+    	return $new_string;  
+    }
 }
-
-// function clean_specification($string){
-// 	$str = explode("_", $string);
-// 	return ucfirst($str[1]);
-// }
 
 ?>

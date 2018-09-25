@@ -3752,13 +3752,13 @@ header.main {
 }
 
 .product-overview-title {
-	font-size: 25px;
+	font-size: 15px;
 	line-height: 1.4em;
 }
 
 .product-overview-desc {
-	font-size: 17px;
-	line-height: 1.6em;
+	font-size: 12px;
+	line-height: 1.3em;
 	color: #838383;
 }
 
@@ -3865,15 +3865,15 @@ header.main {
 }
 
 .product-page-price {
-	font-size: 40px;
-	font-weight: 700;
+	font-size: 22px;
+	font-weight: 200;
 	line-height: 1em;
-	margin-bottom: 1px;
+	margin-bottom: 5px;
 }
 
 .product-page-price-list {
-	font-size: 25px;
-	font-weight: 400;
+	font-size: 18px;
+	font-weight: 100;
 	line-height: 1em;
 	text-decoration: line-through;
 	color: #838383;
@@ -7308,6 +7308,5 @@ input[type="color"]:focus,
 		position: relative;
 		bottom: 17px;
 		left:127px;
-
 	}
 }

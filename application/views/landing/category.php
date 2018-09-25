@@ -10,19 +10,12 @@
 
 	<div class="container">
 		<header class="page-header">
-			<h1 class="page-title">Cell Phones</h1>
 			<ol class="breadcrumb page-breadcrumb">
-				<li><a href="#">Home</a>
+				<li><a href="<?= base_url(); ?>">Home</a>
 				</li>
-				<li class="active">Cell Phones</li>
+				<li class="active">Cell Phones <span class="text-dark"><strong><?= number_format(count($products)) .' results'; ?></strong></span> </li>
 			</ol>
 			<ul class="category-selections clearfix">
-				<li>
-					<a class="fa fa-th-large category-selections-icon active" href="#"></a>
-				</li>
-				<li>
-					<a class="fa fa-th-list category-selections-icon" href="#"></a>
-				</li>
 				<li><span class="category-selections-sign">Sort by :</span>
 					<select class="category-selections-select">
 						<option selected>Newest First</option>
@@ -33,14 +26,6 @@
 						<option>Price : Highest First</option>
 						<option>Title : A - Z</option>
 						<option>Title : Z - A</option>
-					</select>
-				</li>
-				<li><span class="category-selections-sign">Items :</span>
-					<select class="category-selections-select">
-						<option>9 / page</option>
-						<option selected>12 / page</option>
-						<option>18 / page</option>
-						<option>All</option>
 					</select>
 				</li>
 			</ul>
@@ -75,630 +60,109 @@
 						<h3 class="widget-title-sm">Price</h3>
 						<input type="text" id="price-slider"/>
 					</div>
-					<div class="category-filters-section">
-						<h3 class="widget-title-sm">Relese Date</h3>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>Last 30 days<span
-									class="category-filters-amount">(94)</span>
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>Last 90 days<span
-									class="category-filters-amount">(49)</span>
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>Comming Soon<span
-									class="category-filters-amount">(56)</span>
-							</label>
-						</div>
-					</div>
+					<?php if(!empty($brands)): ?>
 					<div class="category-filters-section">
 						<h3 class="widget-title-sm">Brand</h3>
+						<?php foreach( $brands as $brand ) :?>
 						<div class="checkbox">
 							<label>
-								<input class="i-check" type="checkbox"/>Apple<span
-									class="category-filters-amount">(28)</span>
+								<input class="i-check" type="checkbox"/><?= ucfirst($brand->brand_name); ?><span
+									class="category-filters-amount">(<?= $brand->brand_count; ?>)</span>
 							</label>
 						</div>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>Samsung<span class="category-filters-amount">(81)</span>
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>LG<span
-									class="category-filters-amount">(30)</span>
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>Sony<span
-									class="category-filters-amount">(57)</span>
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>Micosoft<span class="category-filters-amount">(35)</span>
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>Dell<span
-									class="category-filters-amount">(51)</span>
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>HP<span
-									class="category-filters-amount">(13)</span>
-							</label>
-						</div>
+						<?php endforeach ;?>
 					</div>
+					<?php endif; ?>
+					<?php if(!empty($colours)) :?>
 					<div class="category-filters-section">
-						<h3 class="widget-title-sm">Carrier</h3>
+						<h3 class="widget-title-sm">Main Colour</h3>
+						<?php foreach( $colours as $colour ) :?>
 						<div class="checkbox">
 							<label>
-								<input class="i-check" type="checkbox"/>AT&amp;T<span class="category-filters-amount">(86)</span>
+								<input class="i-check" type="checkbox"/><?= ucfirst($colour->colour_name); ?><span
+									class="category-filters-amount">(<?= $colour->colour_count; ?>)</span>
 							</label>
 						</div>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>Verizon<span class="category-filters-amount">(88)</span>
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>Sprint<span
-									class="category-filters-amount">(39)</span>
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>T-Mobile<span class="category-filters-amount">(83)</span>
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>Virgin Mobile<span
-									class="category-filters-amount">(60)</span>
-							</label>
-						</div>
+						<?php endforeach ;?>
 					</div>
+					<?php endif; ?>
+					<!-- Features -->
 					<div class="category-filters-section">
-						<h3 class="widget-title-sm">Operating System</h3>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>Android<span class="category-filters-amount">(65)</span>
-							</label>
+						<?php foreach($features as $feature => $feature_value) :?>
+						<div class="accordion" id="<?=trim($feature);?>">
+							<div class="panel">
+								<div class="panel-header">
+									<h3 class="widget-title-sm" >
+										<a href="#" data-toggle="collapse" onclick="javascript:void(0);" data-target="#<?= trim($feature).'-1'; ?>" araia-expanded="true" arial-controls="<?= trim($feature).'-1'; ?>">
+											<?= $feature; ?>											
+										</a>	
+									</h3>
+								</div>
+								<div id="<?= trim($feature).'-1'; ?>" class="collapse" aria-labeledby="<?= $feature; ?>" data-parent="#<?= trim($feature); ?>">
+									<div class="panel-body">
+										<?php foreach($feature_value as $key => $value ) :?>
+											<div class="checkbox">
+												<label>
+													<input class="i-check" type="checkbox"/><?= $value; ?>
+												</label>
+											</div>
+										<?php endforeach; ?>
+									</div>									
+								</div>
+							</div>
 						</div>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>iOS<span
-									class="category-filters-amount">(65)</span>
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>Windows 8<span class="category-filters-amount">(97)</span>
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>BlackberryOS<span
-									class="category-filters-amount">(43)</span>
-							</label>
-						</div>
-					</div>
-					<div class="category-filters-section">
-						<h3 class="widget-title-sm">Discount</h3>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>10% Off or More<span
-									class="category-filters-amount">(36)</span>
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>25% Off or More<span
-									class="category-filters-amount">(96)</span>
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>50% Off or More<span
-									class="category-filters-amount">(54)</span>
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>75% Off or More<span
-									class="category-filters-amount">(32)</span>
-							</label>
-						</div>
-					</div>
-					<div class="category-filters-section">
-						<h3 class="widget-title-sm">Features</h3>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>New<span
-									class="category-filters-amount">(13)</span>
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>Featured<span class="category-filters-amount">(35)</span>
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input class="i-check" type="checkbox"/>On Sale<span class="category-filters-amount">(96)</span>
-							</label>
-						</div>
+						<?php endforeach; ?>
 					</div>
 				</aside>
 			</div>
 			<div class="col-md-9">
 				<div class="row" data-gutter="15">
-					<div class="col-md-4">
-						<div class="product ">
-							<ul class="product-labels"></ul>
-							<div class="product-img-wrap">
-								<img class="product-img-primary"
-									 src="<?= base_url('assets/landing/img/test_product/31.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-								<img class="product-img-alt"
-									 src="<?= base_url('assets/landing/img/test_product/31-a.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-							</div>
-							<a class="product-link" href="<?= base_url('product'); ?>"></a>
-							<div class="product-caption">
-								<ul class="product-caption-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-								</ul>
-								<h5 class="product-caption-title">Apple iPhone 5c - 16GB - GSM Factory Unlocked White
-									Blue Green Pink Yellow</h5>
-								<div class="product-caption-price"><span class="product-caption-price-new">$53</span>
+					<?php foreach( $products as $product ) : ?>
+						<div class="col-md-4">
+							<div class="product">
+								<?php  if( !empty($product->discount_price )): ?>
+									<ul class="product-labels">
+										<li><?= get_discount( $product->sale_price, $product->discount_price);?></li>
+										<!-- Call the discount calculator her -->
+									</ul>
+								<?php endif; ?>
+								<div class="product-img-wrap">
+									<img class="product-img"
+										 src="<?= base_url('assets/landing/img/test_product/29.jpg'); ?>"
+										 alt="Image Alternative text" title="Image Title"/>
 								</div>
-								<ul class="product-caption-feature-list">
-									<li>2 left</li>
-									<li>Free Shipping</li>
-								</ul>
+								<a class="product-link" target="_blank;" href="<?= base_url(urlify($product->product_name, $product->id)); ?>" ></a>
+								<div class="product-caption">
+									<!-- <ul class="product-caption-rating">
+										<li class="rated"><i class="fa fa-star"></i>
+										</li>
+										<li class="rated"><i class="fa fa-star"></i>
+										</li>
+										<li class="rated"><i class="fa fa-star"></i>
+										</li>
+										<li class="rated"><i class="fa fa-star"></i>
+										</li>
+										<li class="rated"><i class="fa fa-star"></i>
+										</li>
+									</ul> -->
+									<h5 class="product-caption-title"><?= word_limiter(ucwords($product->product_name), 7,'...');  ?></h5>
+									<div class="product-caption-price">
+										<?php if(!empty( $product->discount_price)) :?>
+											<span class="product-caption-price-new"><?= ngn($product->discount_price); ?></span>
+											<span class="product-caption-price-old"><sup><?= ngn($product->sale_price);?> </sup></span>
+										<?php else : ?>
+											<span class="product-caption-price-new"><?= ngn($product->sale_price);?> </span>
+										<?php endif; ?>
+									</div>
+									<!-- <ul class="product-caption-feature-list">
+										<li>Available for pickup</li>
+									</ul> -->
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="product ">
-							<ul class="product-labels">
-								<li>stuff pick</li>
-								<li>hot</li>
-							</ul>
-							<div class="product-img-wrap">
-								<img class="product-img-primary"
-									 src="<?= base_url('assets/landing/img/test_product/27.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-								<img class="product-img-alt"
-									 src="<?= base_url('assets/landing/img/test_product/27-a.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-							</div>
-							<a class="product-link" href="<?= base_url('product'); ?>"></a>
-							<div class="product-caption">
-								<ul class="product-caption-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li><i class="fa fa-star"></i>
-									</li>
-									<li><i class="fa fa-star"></i>
-									</li>
-								</ul>
-								<h5 class="product-caption-title">Samsung Galaxy S6 Edge+ Factory Unlocked GSM 32GB</h5>
-								<div class="product-caption-price"><span class="product-caption-price-new">$50</span>
-								</div>
-								<ul class="product-caption-feature-list">
-									<li>Free Shipping</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="product ">
-							<ul class="product-labels"></ul>
-							<div class="product-img-wrap">
-								<img class="product-img-primary"
-									 src="<?= base_url('assets/landing/img/test_product/33.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-								<img class="product-img-alt"
-									 src="<?= base_url('assets/landing/img/test_product/33-a.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-							</div>
-							<a class="product-link" href="#"></a>
-							<div class="product-caption">
-								<ul class="product-caption-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li><i class="fa fa-star"></i>
-									</li>
-								</ul>
-								<h5 class="product-caption-title">Motorola XT1096 Moto X 2nd Generation 16GB Verizon
-									Wireless gsm unlocked</h5>
-								<div class="product-caption-price"><span class="product-caption-price-new">$132</span>
-								</div>
-								<ul class="product-caption-feature-list">
-									<li>3 left</li>
-									<li>Free Shipping</li>
-								</ul>
-							</div>
-						</div>
-					</div>
+					<?php endforeach; ?>
 				</div>
-				<div class="row" data-gutter="15">
-					<div class="col-md-4">
-						<div class="product ">
-							<ul class="product-labels">
-								<li>-70%</li>
-							</ul>
-							<div class="product-img-wrap">
-								<img class="product-img-primary"
-									 src="<?= base_url('assets/landing/img/test_product/30.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-								<img class="product-img-alt"
-									 src="<?= base_url('assets/landing/img/test_product/30-a.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-							</div>
-							<a class="product-link" href="<?= base_url('product'); ?>"></a>
-							<div class="product-caption">
-								<ul class="product-caption-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-								</ul>
-								<h5 class="product-caption-title">HTC One M8 32GB Factory Unlocked Smartphone Gold /
-									Silver Gray</h5>
-								<div class="product-caption-price"><span
-										class="product-caption-price-old">$116</span><span
-										class="product-caption-price-new">$35</span>
-								</div>
-								<ul class="product-caption-feature-list">
-									<li>Free Shipping</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="product ">
-							<ul class="product-labels">
-								<li>hot</li>
-							</ul>
-							<div class="product-img-wrap">
-								<img class="product-img-primary"
-									 src="<?= base_url('assets/landing/img/test_product/35.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-								<img class="product-img-alt"
-									 src="<?= base_url('assets/landing/img/test_product/35-a.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-							</div>
-							<a class="product-link" href="#"></a>
-							<div class="product-caption">
-								<ul class="product-caption-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li><i class="fa fa-star"></i>
-									</li>
-								</ul>
-								<h5 class="product-caption-title">LG G3 VS985 - 32GB - Verizon Smartphone - Metallic
-									Black or Silk White - Great</h5>
-								<div class="product-caption-price"><span class="product-caption-price-new">$97</span>
-								</div>
-								<ul class="product-caption-feature-list">
-									<li>Free Shipping</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="product ">
-							<ul class="product-labels">
-								<li>hot</li>
-							</ul>
-							<div class="product-img-wrap">
-								<img class="product-img-primary"
-									 src="<?= base_url('assets/landing/img/test_product/26.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-								<img class="product-img-alt"
-									 src="<?= base_url('assets/landing/img/test_product/26-a.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-							</div>
-							<a class="product-link" href="#"></a>
-							<div class="product-caption">
-								<ul class="product-caption-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li><i class="fa fa-star"></i>
-									</li>
-									<li><i class="fa fa-star"></i>
-									</li>
-								</ul>
-								<h5 class="product-caption-title">Google Nexus 6 XT1103 4G LTE - 32GB - Blue Factory
-									Unlocked GSM</h5>
-								<div class="product-caption-price"><span class="product-caption-price-new">$140</span>
-								</div>
-								<ul class="product-caption-feature-list">
-									<li>Free Shipping</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row" data-gutter="15">
-					<div class="col-md-4">
-						<div class="product ">
-							<ul class="product-labels">
-								<li>-20%</li>
-							</ul>
-							<div class="product-img-wrap">
-								<img class="product-img-primary"
-									 src="<?= base_url('assets/landing/img/test_product/29.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-								<img class="product-img-alt"
-									 src="<?= base_url('assets/landing/img/test_product/29-a.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-							</div>
-							<a class="product-link" href="#"></a>
-							<div class="product-caption">
-								<ul class="product-caption-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-								</ul>
-								<h5 class="product-caption-title">Apple iPhone 5s 16GB Factory Unlocked Smartphone Space
-									Gray / Silver / Gold</h5>
-								<div class="product-caption-price"><span
-										class="product-caption-price-old">$88</span><span
-										class="product-caption-price-new">$71</span>
-								</div>
-								<ul class="product-caption-feature-list">
-									<li>Free Shipping</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="product ">
-							<ul class="product-labels">
-								<li>-40%</li>
-							</ul>
-							<div class="product-img-wrap">
-								<img class="product-img-primary"
-									 src="<?= base_url('assets/landing/img/test_product/32.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-								<img class="product-img-alt"
-									 src="<?= base_url('assets/landing/img/test_product/32-a.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-							</div>
-							<a class="product-link" href="#"></a>
-							<div class="product-caption">
-								<ul class="product-caption-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li><i class="fa fa-star"></i>
-									</li>
-									<li><i class="fa fa-star"></i>
-									</li>
-								</ul>
-								<h5 class="product-caption-title">LG G Flex D959 - 32GB - Titan Silver GSM Unlocked
-									Android Smartphone (B)</h5>
-								<div class="product-caption-price"><span
-										class="product-caption-price-old">$109</span><span
-										class="product-caption-price-new">$66</span>
-								</div>
-								<ul class="product-caption-feature-list">
-									<li>Free Shipping</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="product ">
-							<ul class="product-labels">
-								<li>-40%</li>
-							</ul>
-							<div class="product-img-wrap">
-								<img class="product-img-primary"
-									 src="<?= base_url('assets/landing/img/test_product/28.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-								<img class="product-img-alt"
-									 src="<?= base_url('assets/landing/img/test_product/28-a.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-							</div>
-							<a class="product-link" href="#"></a>
-							<div class="product-caption">
-								<ul class="product-caption-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-								</ul>
-								<h5 class="product-caption-title">Apple iPhone 4S 16GB Factory Unlocked Black and White
-									Smartphone</h5>
-								<div class="product-caption-price"><span
-										class="product-caption-price-old">$66</span><span
-										class="product-caption-price-new">$40</span>
-								</div>
-								<ul class="product-caption-feature-list">
-									<li>5 left</li>
-									<li>Free Shipping</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row" data-gutter="15">
-					<div class="col-md-4">
-						<div class="product ">
-							<ul class="product-labels"></ul>
-							<div class="product-img-wrap">
-								<img class="product-img-primary"
-									 src="<?= base_url('assets/landing/img/test_product/34.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-								<img class="product-img-alt"
-									 src="<?= base_url('assets/landing/img/test_product/34-a.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-							</div>
-							<a class="product-link" href="#"></a>
-							<div class="product-caption">
-								<ul class="product-caption-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li><i class="fa fa-star"></i>
-									</li>
-									<li><i class="fa fa-star"></i>
-									</li>
-								</ul>
-								<h5 class="product-caption-title">Samsung Galaxy Note 4 IV 4G FACTORY UNLOCKED Black or
-									White</h5>
-								<div class="product-caption-price"><span class="product-caption-price-new">$77</span>
-								</div>
-								<ul class="product-caption-feature-list">
-									<li>Free Shipping</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="product ">
-							<ul class="product-labels">
-								<li>-40%</li>
-							</ul>
-							<div class="product-img-wrap">
-								<img class="product-img-primary"
-									 src="<?= base_url('assets/landing/img/test_product/26.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-								<img class="product-img-alt"
-									 src="<?= base_url('assets/landing/img/test_product/26-a.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-							</div>
-							<a class="product-link" href="#"></a>
-							<div class="product-caption">
-								<ul class="product-caption-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-								</ul>
-								<h5 class="product-caption-title">Google Nexus 6 XT1103 4G LTE - 32GB - Blue Factory
-									Unlocked GSM</h5>
-								<div class="product-caption-price"><span
-										class="product-caption-price-old">$85</span><span
-										class="product-caption-price-new">$51</span>
-								</div>
-								<ul class="product-caption-feature-list">
-									<li>Free Shipping</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="product ">
-							<ul class="product-labels"></ul>
-							<div class="product-img-wrap">
-								<img class="product-img-primary"
-									 src="<?= base_url('assets/landing/img/test_product/27.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-								<img class="product-img-alt"
-									 src="<?= base_url('assets/landing/img/test_product/27-a.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-							</div>
-							<a class="product-link" href="#"></a>
-							<div class="product-caption">
-								<ul class="product-caption-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li><i class="fa fa-star"></i>
-									</li>
-								</ul>
-								<h5 class="product-caption-title">Samsung Galaxy S6 Edge+ Factory Unlocked GSM 32GB</h5>
-								<div class="product-caption-price"><span class="product-caption-price-new">$98</span>
-								</div>
-								<ul class="product-caption-feature-list">
-									<li>Free Shipping</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
+
 				<div class="row">
 					<div class="col-md-6">
 						<p class="category-pagination-sign">58 items found in Cell Phones. Showing 1 - 12</p>
@@ -729,7 +193,6 @@
 </div>
 
 <?php $this->load->view('landing/resources/footer'); ?>
-
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
 </body>

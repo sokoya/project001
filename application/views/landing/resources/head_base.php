@@ -1,12 +1,11 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-
     <title>Carrito Marketplace</title>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
-    <meta name="keywords" content="Template, html, premium, themeforest" />
-    <meta name="description" content="TheBox - premium e-commerce template">
+    <meta name="keywords" content="" />
+    <meta name="description" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='http://fonts.googleapis.com/css?family=Roboto:500,300,700,400italic,400' rel='stylesheet' type='text/css'>

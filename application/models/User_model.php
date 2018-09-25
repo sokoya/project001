@@ -78,8 +78,8 @@ Class User_model extends CI_Model{
             'password' => $password,
             'salt' => $salt
         );
-        $this->db->where(['id'=> $access]);
-        $this->db->or_where(['email'=> $access]);
+        $this->db->where('id',  $access);
+        $this->db->or_where('email',$access);
         return $this->db->update($table, $data);
     }
 

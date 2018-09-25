@@ -7,5 +7,4 @@
 <script src="<?= base_url('assets/landing/js/owl-carousel.js');?>"></script>
 <script src="<?= base_url('assets/landing/js/magnific.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/custom.js'); ?>"></script>
-<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
 

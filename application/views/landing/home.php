@@ -107,14 +107,14 @@
 						<h5><strong>Carrito Essentials</strong></h5>
 					</div>
 					<div class="product-img-wrap">
-						<a href="<?= base_url('category'); ?>"> <img class="product-img" style="margin: 0 auto; height: 150px; width: 100% "
+						<a href="<?= base_url('catalog'); ?>"> <img class="product-img" style="margin: 0 auto; height: 150px; width: 100% "
 							 src="<?= base_url('assets/landing/img/carrito/carrito_essential_per_food.png'); ?>"
 							 alt="carrito_essential_per_food" title="Image Title"/></a>
 					</div>
 					<div class="product-caption text-center"><strong>Pet foods</strong></div>
 
 					<div class="product-img-wrap product-pt4">
-						<a href="<?= base_url('category'); ?>"> <img class="product-img" style="margin: 0 auto; height: 150px; width: 100%"
+						<a href="<?= base_url('catalog'); ?>"> <img class="product-img" style="margin: 0 auto; height: 150px; width: 100%"
 							 src="<?= base_url('assets/landing/img/carrito/carrito_essential_newest_gadget.png'); ?>"
 							 alt="carrito_essential_newest_gadget" title="Image Title"/></a>
 					</div>

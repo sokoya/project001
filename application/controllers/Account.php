@@ -11,7 +11,8 @@ class Account extends CI_Controller {
         parent::__construct();
         if( !$this->session->userdata('logged_in') ){
             // Ursher the person to where he is coming from
-            if( !empty($this->session->userdata('referred_from')) ) redirect($this->session->userdata('referred_from'));
+            $referred_from = $this->session->userdata('referred_from');
+            if( !empty($referred_from) ) redirect($referred_from);
             redirect(base_url());
         } 
         $this->load->helper('query_helper');
@@ -114,7 +115,7 @@ class Account extends CI_Controller {
 			$page_data['profile'] = get_profile( $this->session->userdata('logged_id') );
 			$this->load->view('account/settings', $page_data);
 		}else{
-			var_dump($this->input->post('preference'));
+//			var_dump($this->input->post('preference'));
 			if($this->user_model->update_data(
 				base64_decode($this->input->post('user')), 
 				array('newsletter' => $this->input->post('preference')))){
