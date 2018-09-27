@@ -9,6 +9,7 @@ class Account extends CI_Controller {
         // Also check where the user is coming from
         // $this->session->set_userdata('referred_from', current_url());
         parent::__construct();
+        $this->load->model('user_model', 'user');
         if( !$this->session->userdata('logged_in') ){
             // Ursher the person to where he is coming from
             $referred_from = $this->session->userdata('referred_from');
@@ -22,14 +23,14 @@ class Account extends CI_Controller {
 	// Control panel
 	public function index(){
 		$page_data['page'] = 'dashboard';
-		$page_data['profile'] = get_profile( $this->session->userdata('logged_id') );
+		$page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
 		$this->load->view('account/dashboard', $page_data);
 	}
 
 	// Orders
 	public function orders(){
 		$page_data['page'] = 'orders';
-		$page_data['profile'] = get_profile( $this->session->userdata('logged_id') );
+		$page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
 		$this->load->view('account/orders', $page_data);
 	}
 
@@ -37,7 +38,7 @@ class Account extends CI_Controller {
 	public function information(){
 		if( !$this->input->post() ){
 			$page_data['page'] = 'information';
-			$page_data['profile'] = get_profile($this->session->userdata('logged_id') );
+			$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id') );
 			$this->load->view('account/information', $page_data);
 		}else{
 			$this->load->model('user_model');
@@ -102,7 +103,8 @@ class Account extends CI_Controller {
 	// Saved and Wishlist
 	public function saved(){
 		$page_data['page'] = 'saved';
-		$page_data['profile'] = get_profile( $this->session->userdata('logged_id') );
+		$page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
+		$page_data['saved'] = $this->user->get_saved_items( $this->session->userdata('logged_id'));
 		$this->load->view('account/saved', $page_data);
 	}
 
@@ -112,7 +114,7 @@ class Account extends CI_Controller {
 		if( !$this->input->post()){
 			// var_dump($this->input->post('preference'));
 			$page_data['page'] = 'settings';
-			$page_data['profile'] = get_profile( $this->session->userdata('logged_id') );
+			$page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
 			$this->load->view('account/settings', $page_data);
 		}else{
 //			var_dump($this->input->post('preference'));

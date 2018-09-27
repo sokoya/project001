@@ -40,8 +40,6 @@
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
-	<?php $this->load->view('landing/resources/head_img') ?>
-	<?php $this->load->view('landing/resources/head_category') ?>
 	<?php $this->load->view('landing/resources/head_menu') ?>
 
 	<!-- <div class="full-width"> -->
@@ -68,7 +66,7 @@
 										<?= form_open('login/process', 'id="login-form"'); ?>
 											<div class="form-group">
 												<label><h5>Email Address*</h5></label>
-												<input class="form-control" type="email" name="loginemail" placeholder="Enter your email" required/>
+												<input class="form-control" type="email" name="loginemail" placeholder="Enter your email" autofocus="" required/>
 											</div>
 											<div class="form-group">
 												<label><h5>Password</h5></label>

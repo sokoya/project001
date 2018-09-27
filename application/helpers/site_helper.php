@@ -71,6 +71,25 @@ function get_discount( $sale_price, $discount_price){
 	return '-'.$percent.'%';
 }
 
+
+if (!function_exists('neatDate')) {
+    function neatDate($dt){
+        $bdate = $dt;
+        $bdate = str_replace('/', '-', $bdate);
+        $nice_date = date('d M., Y', strtotime($bdate));
+        return $nice_date;
+    }
+}
+
+if (!function_exists('neatTime')) {
+    function neatTime($dt){
+        $bdate = $dt;
+        $bdate = str_replace('/', '-', $bdate);
+        $nice_date = date('g:i a', strtotime($bdate));
+        return $nice_date;
+    }
+}
+
 function ago($time){
 	$time = strtotime($time);
 	$periods = array("second", "minute", "hour", "day", "week", "month", "year", "decade");

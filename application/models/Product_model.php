@@ -9,14 +9,18 @@ Class Product_model extends CI_Model{
     }
 
     function get_product( $id = ''){
-        return $this->db->query('SELECT seller_id, rootcategory, category, subcategory, sku, product_name, brand_name, model,
+        return $this->db->query('SELECT id, sku, seller_id, rootcategory, category, subcategory, sku, product_name, brand_name, model,
                                 main_colour, product_description, in_the_box, highlights, product_line, colour_family, main_material,
                                 dimensions, weight, attributes, product_warranty, warranty_type, warranty_address, certifications, 
                                 product_status FROM products WHERE id = ? ', $id )->row();
     }
 
     function get_variation( $id = ''){
-        return $this->db->query('SELECT * FROM product_variation WHERE product_id = ? LIMIT 1', $id)->row();
+        return $this->db->query('SELECT * FROM product_variation WHERE product_id = ?', $id)->row();
+    }
+
+    function get_variations( $id ){
+        return $this->db->query('SELECT * FROM product_variation WHERE product_id = ? ', $id)->result();
     }
 
     function get_gallery( $id ){
@@ -25,6 +29,19 @@ Class Product_model extends CI_Model{
         $this->db->from('product_gallery');
         $this->db->group_by('product_id');
         return $this->db->get();
+    }
+
+    // Get user has favourite this property
+
+    function is_favourited($uid ='', $product_id =''){
+        if( $uid ){
+            $this->db->where('uid', $uid);
+            $this->db->where('product_id', $product_id);
+            if( $this->db->get('favourite')->num_rows() == 1 ){
+                return true;
+            }
+        }
+        return false;
     }
 
     function get_products( $str ='' ){
@@ -39,8 +56,9 @@ Class Product_model extends CI_Model{
             MATCH(p.category) AGAINST('$str') OR
             MATCH(p.subcategory) AGAINST('$str') OR
             MATCH(p.brand_name) AGAINST('$str')
-            GROUP BY p.id";
+            ";
         }
+        $select_query .=' GROUP BY p.id';
         $products_query = $this->db->query( $select_query )->result();
         return $products_query;
     }

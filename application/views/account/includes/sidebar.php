@@ -4,6 +4,9 @@
 		<hr class="carrito-sidebar-line"/>
 		<ul class="carrito-sidebar">
 			<li>
+				<h4><a href="<?= base_url(); ?>">Carrito Home</a></h4>
+			</li>
+			<li>
 				<h4 <?php if($page == 'dashboard') echo 'class="carrito-sidebar-active"' ?> ><a href="<?= base_url('account'); ?>">Overview</a></h4>
 			</li>
 			<li>

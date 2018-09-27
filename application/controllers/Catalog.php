@@ -7,7 +7,7 @@ class Catalog extends CI_Controller {
         parent::__construct();
         $this->load->model('product_model', 'product');
         $this->load->helper('text');
-        $this->output->enable_profiler(TRUE);
+        // $this->output->enable_profiler(TRUE);
     }
 
     /* Expecting either of the following as the first arguement
@@ -16,6 +16,8 @@ class Catalog extends CI_Controller {
     - sub category
     */
 
+    // List Product Page
+
 	public function index(){
 	    $str = $this->uri->segment(2); // root category, category, sub category
         $str = preg_replace("/[^A-Za-z0-9-]/","",cleanit($str) );
@@ -23,6 +25,7 @@ class Catalog extends CI_Controller {
         $page_data['products'] = $this->product->get_products( $str );
         $page_data['brands'] = $this->product->get_brands($str);
         $page_data['colours'] = $this->product->get_colours($str);
+
         $features = $this->product->get_features($str);
         $output_array = array();
         foreach($features as $feature => $values ){
@@ -43,4 +46,8 @@ class Catalog extends CI_Controller {
         // exit;
         $this->load->view('landing/category', $page_data);
 	}
+
+
+
+    
 }

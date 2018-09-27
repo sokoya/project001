@@ -53,7 +53,7 @@ $route['default_controller'] = 'frontpage';
 
 //Product Page
 $route['(:any)-(:num)'] = 'product/index/$2/';
-$route['catalog/(:any)'] = 'catalog/index/$1/';
+$route['catalog/(:any)'] = 'product/catalog/$1/'; // List all product base on a rootcategory,,category,sub, or brand
 
 
 

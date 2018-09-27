@@ -2,16 +2,6 @@
 // Query helper functions
 // This helper functions helps in fecthing the DB in instance
 
-if( !function_exists('get_profile')){
-    function get_profile( $access = '' ){
-        $CI =& get_instance();
-        $CI->db->from(BUYERS_TABLE);
-        $CI->db->where('id', $access);
-        $CI->db->or_where('email', $access);
-        return $CI->db->get()->row();
-    }
-}
-
 
 if( !function_exists('get_categories')){
     /**

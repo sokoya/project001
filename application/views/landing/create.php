@@ -40,8 +40,7 @@
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
-	<?php $this->load->view('landing/resources/head_img') ?>
-	<?php $this->load->view('landing/resources/head_category') ?>
+	
 	<?php $this->load->view('landing/resources/head_menu') ?>
 
 	<div class="container-fluid" style="width: 100%">
@@ -67,7 +66,7 @@
 												<label for="first_name">First Name*</label>
 												<input class="form-control" type="text" name="signupfirstname"
 													   value="<?php if (isset($_POST['signupfirstname'])) echo $_POST['signupfirstname']; ?>"
-													   placeholder="First name" required/>
+													   placeholder="First name" autofocus required/>
 											</div>
 										</div>
 										<div class="col-md-6">

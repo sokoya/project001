@@ -2,8 +2,6 @@
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
-	<?php $this->load->view('landing/resources/head_img') ?>
-	<?php $this->load->view('landing/resources/head_category') ?>
 
 	<?php $this->load->view('landing/resources/head_menu') ?>
 
@@ -21,8 +19,8 @@
 				several area in the state may arrive latter than expected. To view the most up to date status for your
 				order, please go to the Orders page
 			</div>
-
-			<div class="table-responsive ">
+			<?php if(!empty($saved)) :?>
+			<div class="table-responsive">
 				<table class="table table-bordered table-hover carrito-saved-table">
 					<thead>
 					<tr id="carrito-table-head">
@@ -33,38 +31,41 @@
 					</tr>
 					</thead>
 					<tbody>
+						<?php foreach($saved as $item ): ?>
 					<tr>
 						<td style="padding: 20px;">
 							<div class="row">
-								<div class="col-md-1 col-xs-1">
-									<i class="fa fa-trash carrito-trash"></i>
-								</div>
-								<div class="col-md-2 col-xs-2">
-
-									<img src="<?= base_url('assets/landing/img/saved-img.jpg'); ?>"
-										 class="carrito-left-l"
-										 title="Sensational Cotton Club Perfume For Men - 100Ml"
-										 style="width: 60px; height: 100%">
+								<div class="col-md-1 col-xs-1">									
+									<a href="javascript:void(0)" class="delete" data-fid="<?= $item->fav_id; ?>"><i class="fa fa-trash carrito-trash"></i></a>
 								</div>
 								<div class="col-md-9 col-xs-9">
-									Sensational Cotton Club Perfume For Men - 100Ml
+									<img src="<?= base_url('assets/landing/img/saved-img.jpg'); ?>"
+										 class="carrito-left-l"
+										 title="<?= $item->product_name; ?>"
+										 style="width: 60px; height: 100%; padding-right: 4px;">
+										 <span><?= $item->product_name; ?></span>
 								</div>
 							</div>
 						</td>
-						<td class="carrito-table-center">In Stock</td>
-						<td class="carrito-table-center"><span style="white-space: nowrap">&#8358; 1,300</span>
+						<td class="carrito-table-center"><?= ($item->quantity > 0 && $item->product_status =='active') ? 'In Stock' : 'Out of stock/Inactive';  ?></td>
+						<td class="carrito-table-center"><span style="white-space: nowrap">&#8358; <?= (!empty($item->discount_price)) ? $item->discount_price : $item->sale_price; ?></span>
 							<br/>
-
-							<span style="text-decoration: line-through; white-space: nowrap">&#8358; 3,500</span>
+							<?php if(!empty($item->discount_price)): ?>
+								<span style="text-decoration: line-through; white-space: nowrap">&#8358; <?= $item->sale_price; ?></span>
+							<?php endif; ?>
 						</td>
-						<td class="carrito-table-center"><span
-								style="white-space: nowrap">Thurs 02, 2018</span><br/><span style="text-align: center">5:28pm</span>
+						<td class="carrito-table-center">
+							<span style="white-space: nowrap"><?= neatDate($item->date_saved); ?></span>
 						</td>
 					</tr>
+					<?php endforeach; ?>
 
 					</tbody>
 				</table>
 			</div>
+			<?php else : ?>
+
+			<?php endif; ?>
 		</div>
 	</div>
 

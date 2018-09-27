@@ -623,8 +623,7 @@
                 <li>
                     <a href="#"><span>Learn more about</span> <strong>Carrito Shopper</strong></a>
                 </li>
-                <!-- <span><i class="fa fa-shopping-cart"></i></span> -->
-                <li><a href="<?= base_url(lang('cart_link')); ?>" class="navbar-item-top"><?= lang('cart'); ?></a>
+                <li><a href="<?= base_url(lang('cart_link')); ?>" class="navbar-item-top"><strong><?= lang('cart'); ?></strong></a>
                 </li>
                 <li class="dropdown">
                     <?php if( $this->session->userdata('logged_in') ): ?>

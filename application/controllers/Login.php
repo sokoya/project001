@@ -14,7 +14,7 @@ class Login extends CI_Controller{
             // Ursher the person to where he is coming from
             if( !empty($this->session->userdata('referred_from')) ) redirect($this->session->userdata('referred_from'));
             redirect(base_url());
-        } 
+        }
     }
 
     public function index(){
@@ -52,7 +52,7 @@ class Login extends CI_Controller{
                     $session_data = array('logged_in' => true, 'logged_id' => $user_id, 'email' => $this->input->post('loginemail'));
                     $this->session->set_userdata($session_data);
                     $this->session->set_flashdata('success_msg','You are now logged in!');
-                    redirect(base_url());
+                    ( !empty($this->session->userdata('referred_from')) ) ? redirect($this->session->userdata('referred_from')) : redirect(base_url());
                 }
             }
         }

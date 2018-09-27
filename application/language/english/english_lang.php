@@ -18,7 +18,7 @@ $lang['sell_on_carrito'] = 'Sell On Carrito';
 $lang['sell_on_carrito_link'] = 'sell-on-carrito';
 $lang['community'] = 'Community';
 $lang['community_link'] = 'Community';
-$lang['cart'] = 'My Cart';
+$lang['cart'] = '<i class="fa fa-shopping-cart"></i> My Cart';
 $lang['cart_link'] = 'my-cart';
 $lang['new_customer'] = 'New Customer? Create an Account';
 $lang['new_customer_link'] = 'create';

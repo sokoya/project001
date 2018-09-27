@@ -1,5 +1,75 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+<style type="text/css">
+	.feature-attribute:hover {
+		cursor: pointer;
+	}
 
+	.carrito-checkbox{
+		display: block;
+  		position: relative;
+  		padding-left: 25px;
+	    margin-bottom: 10px;
+	    cursor: pointer;
+	    font-size: 14px;
+	    -webkit-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    user-select: none;
+	}
+
+	.carrito-checkbox input{
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+	}
+
+	.checkmark{
+		cursor: pointer;
+		position: absolute;
+		top: 0;
+		left: 0;
+		padding: 3px;
+		margin-top: 2px;
+		height: 15px;
+		width: 15px;
+		border:solid 1px #74c68366;;
+		background-color: #fff;
+	}
+
+	.carrito-checkbox:hover input ~ .checkmark{
+		border-color: #74c68366;
+	}
+
+	.carrito-checkbox input:checked ~ .checkmark{
+		background-color: #74c683;
+	};
+
+	.checkmark:after {
+	  content: "";
+	  position: absolute;
+	  display: none;
+	}
+
+	/* Show the checkmark when checked */
+	.carrito-checkbox input:checked ~ .checkmark:after {
+	  display: block;
+	  color: white;
+	}
+
+	/* Style the checkmark/indicator */
+	.carrito-checkbox .checkmark:after {
+	  left: 9px;
+	  top: 5px;
+	  width: 5px;
+	  height: 10px;
+	  border: solid white;
+	  border-width: 0 3px 3px 0;
+	  -webkit-transform: rotate(45deg);
+	  -ms-transform: rotate(45deg);
+	  transform: rotate(45deg);
+	}
+</style>
 </head>
 <body>
 
@@ -9,6 +79,13 @@
 	<?php $this->load->view('landing/resources/head_menu'); ?>
 
 	<div class="container">
+		<?php if(empty($products)) : ?>
+			<div class="row">
+	            <div class="gap-large"></div>
+	            <h2 class="text-center">Oops! Sorry, we couldn't find products on this section.</h2>
+	            <p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find product</a></p>
+	        </div>
+		<?php else :?>
 		<header class="page-header">
 			<ol class="breadcrumb page-breadcrumb">
 				<li><a href="<?= base_url(); ?>">Home</a>
@@ -59,15 +136,19 @@
 					<div class="category-filters-section">
 						<h3 class="widget-title-sm">Price</h3>
 						<input type="text" id="price-slider"/>
+						<input type="hidden" id="hidden_minimum_price" name="">
+						<input type="hidden" id="hidden_maximum_price" name="">
 					</div>
 					<?php if(!empty($brands)): ?>
 					<div class="category-filters-section">
 						<h3 class="widget-title-sm">Brand</h3>
 						<?php foreach( $brands as $brand ) :?>
-						<div class="checkbox">
+						<div class="carrito-checkbox">
 							<label>
-								<input class="i-check" type="checkbox"/><?= ucfirst($brand->brand_name); ?><span
-									class="category-filters-amount">(<?= $brand->brand_count; ?>)</span>
+
+								<input class="filter" type="checkbox" data-type="brand_name" data-value="<?= trim($brand->brand_name);?>" ><?= ucfirst($brand->brand_name); ?>
+								<span class="checkmark"></span>
+								<span class="category-filters-amount">(<?= $brand->brand_count; ?>)</span>
 							</label>
 						</div>
 						<?php endforeach ;?>
@@ -77,10 +158,11 @@
 					<div class="category-filters-section">
 						<h3 class="widget-title-sm">Main Colour</h3>
 						<?php foreach( $colours as $colour ) :?>
-						<div class="checkbox">
+						<div class="carrito-checkbox">
 							<label>
-								<input class="i-check" type="checkbox"/><?= ucfirst($colour->colour_name); ?><span
-									class="category-filters-amount">(<?= $colour->colour_count; ?>)</span>
+								<input class="filter" type="checkbox" data-type="main_colour" data-value="<?=trim($colour->colour_name); ?>" /><?= ucfirst($colour->colour_name); ?>
+								<span class="checkmark"></span>
+								<span class="category-filters-amount">(<?= $colour->colour_count; ?>)</span>
 							</label>
 						</div>
 						<?php endforeach ;?>
@@ -90,23 +172,25 @@
 					<div class="category-filters-section">
 						<?php foreach($features as $feature => $feature_value) :?>
 						<div class="accordion" id="<?=trim($feature);?>">
-							<div class="panel">
-								<div class="panel-header">
-									<h3 class="widget-title-sm" >
-										<a href="#" data-toggle="collapse" onclick="javascript:void(0);" data-target="#<?= trim($feature).'-1'; ?>" araia-expanded="true" arial-controls="<?= trim($feature).'-1'; ?>">
-											<?= $feature; ?>											
-										</a>	
-									</h3>
+							<div class="panel feature-attribute">
+								<div class="panel-header feature-attribute">
+									<div class="panel-title" data-toggle="collapse" data-target="#<?= trim($feature).'-1'; ?>" araia-expanded="true" arial-controls="<?= trim($feature).'-1'; ?>">
+										<h3 class="widget-title-sm">
+											<?= $feature; ?>
+										</h3>										
+									</div>
 								</div>
 								<div id="<?= trim($feature).'-1'; ?>" class="collapse" aria-labeledby="<?= $feature; ?>" data-parent="#<?= trim($feature); ?>">
 									<div class="panel-body">
-										<?php foreach($feature_value as $key => $value ) :?>
-											<div class="checkbox">
+										<?php foreach($feature_value as $key => $value ) : ?>
+											<div class="carrito-checkbox">
 												<label>
-													<input class="i-check" type="checkbox"/><?= $value; ?>
+
+													<input class="filter" type="checkbox" data-type="<?= trim($feature);?>" data-value="<?= trim($value)?>" /><?= $value; ?>
+													<span class="checkmark"></span>
 												</label>
 											</div>
-										<?php endforeach; ?>
+										<?php  endforeach; ?>
 									</div>									
 								</div>
 							</div>
@@ -116,7 +200,7 @@
 				</aside>
 			</div>
 			<div class="col-md-9">
-				<div class="row" data-gutter="15">
+				<div class="row filter_data" data-gutter="15">
 					<?php foreach( $products as $product ) : ?>
 						<div class="col-md-4">
 							<div class="product">
@@ -129,9 +213,9 @@
 								<div class="product-img-wrap">
 									<img class="product-img"
 										 src="<?= base_url('assets/landing/img/test_product/29.jpg'); ?>"
-										 alt="Image Alternative text" title="Image Title"/>
+										 alt="Image Alternative text" title="Image Title" >
 								</div>
-								<a class="product-link" target="_blank;" href="<?= base_url(urlify($product->product_name, $product->id)); ?>" ></a>
+								<a class="product-link" href="<?= base_url(urlify($product->product_name, $product->id)); ?>" ></a>
 								<div class="product-caption">
 									<!-- <ul class="product-caption-rating">
 										<li class="rated"><i class="fa fa-star"></i>
@@ -162,7 +246,12 @@
 						</div>
 					<?php endforeach; ?>
 				</div>
-
+				<div id="processing" style="display:none;position: center;top: 0;left: 0;width: auto;height: auto%;background: #f4f4f4;z-index: 99;">
+                    <div class="text" style="position: absolute;top: 35%;left: 0;height: 100%;width: 100%;font-size: 18px;text-align: center;">
+                        <img src="<?= base_url('assets/landing/img/load.gif'); ?>" alt="Processing...">
+                        Processing your request. <strong style="color: rgba(2.399780888618386%,61.74193548387097%,46.81068368248487%,0.843);">Please Wait! </strong>
+                    </div>
+                </div>
 				<div class="row">
 					<div class="col-md-6">
 						<p class="category-pagination-sign">58 items found in Cell Phones. Showing 1 - 12</p>
@@ -188,12 +277,78 @@
 				</div>
 			</div>
 		</div>
+		<?php endif; ?>
 	</div>
 	<div class="gap"></div>
 </div>
 
 <?php $this->load->view('landing/resources/footer'); ?>
 </div>
-<?php $this->load->view('landing/resources/script'); ?>
+<script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
+<script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
+<script src="<?= base_url('assets/landing/js/ionrangeslider.js');?>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>let base_url = "<?= base_url('catalog'); ?>"</script>
+<script>
+	// price slider
+	$("#price-slider").ionRangeSlider({
+	    min: 1000,
+	    max: 50000,
+	    type: 'double',
+	    prefix: "&#8358;",
+	    prettify: false,
+	    hasGrid: true
+	});
+	$(document).ready(function(){
+		
+		$('.filter').change(function(){
+			// setTimeout(function(){
+                filter_data();
+            // }, 10);   			
+		});	
+
+
+		function filter_data(){
+			$('.processing').show();
+			let action = 'fetch_data';
+			// price
+			// let minimum_price = $('#hidden_minimum_price').val();
+			// let maximum_price = $('#hidden_maximum_price').val();
+			let filters = get_filter('filter');
+
+			$.ajax({
+				url: base_url +'/product/fetch_data',
+				method: "POST",
+				data: {
+					action:action,filters:filters
+				},
+				success: function(data){
+
+					$('.filter_data').html(data)
+				}
+			});
+		}
+
+		function get_filter(class_name){
+			let filter = [];
+			$(`.${class_name}:checked`).each(function(){
+				let value = $(this).data('value'); // apple
+				let key = $(this).data('type'); // brand_name
+				// filter[key] = value + ',';
+				// console.log(filter);
+				if( !(key in filter) ){
+					filter[key] = value;	
+					// filter.push($(this).val('data-value'));
+				}else{
+					$.extend(filter, {key : "," + value});
+					// filter.key = value +',';
+				}
+				console.log( filter );
+				
+			});
+			return filter;
+		}
+	});
+</script>
 </body>
 </html>

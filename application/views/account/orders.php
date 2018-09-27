@@ -2,9 +2,6 @@
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
-	<?php $this->load->view('landing/resources/head_img') ?>
-	<?php $this->load->view('landing/resources/head_category') ?>
-
 	<?php $this->load->view('landing/resources/head_menu') ?>
 
 	<div class="container carrito-dashboard-cover">
