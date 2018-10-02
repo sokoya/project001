@@ -315,15 +315,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script>let base_url = "<?= base_url('catalog'); ?>"</script>
 <script>
-	// price slider
-	// $("#price-slider").ionRangeSlider({
-	//     min: 1000,
-	//     max: 50000,
-	//     type: 'double',
-	//     prefix: "&#8358;",
-	//     prettify: false,
-	//     hasGrid: true
-	// });
 	$(document).ready(function () {
 		let filter_list = [];
 		$('.filter').change(function () {
@@ -368,48 +359,6 @@
 			});
 		});
 
-
-		// function filter_data(){
-		// 	$('.processing').show();
-		// 	let action = 'fetch_data';
-		// 	// price
-		// 	// let minimum_price = $('#hidden_minimum_price').val();
-		// 	// let maximum_price = $('#hidden_maximum_price').val();
-		// 	let filters = get_filter('filter');
-		//
-		// 	$.ajax({
-		// 		url: base_url +'/product/fetch_data',
-		// 		method: "POST",
-		// 		data: {
-		// 			action:action,filters:filters
-		// 		},
-		// 		success: function(data){
-		//
-		// 			$('.filter_data').html(data)
-		// 		}
-		// 	});
-		// }
-
-		function get_filter(class_name) {
-			let filter = [];
-			$(`.${class_name}:checked`).each(function () {
-				let value = $(this).data('value'); // apple
-				let key = $(this).data('type'); // brand_name
-				// filter[key] = value + ',';
-				// console.log(filter);
-				if (!(key in filter)) {
-					filter[key] = value;
-					// filter.push($(this).val('data-value'));
-				} else {
-					$.extend(filter, {key: "," + value});
-					// filter.key = value +',';
-				}
-				console.log(filter);
-
-			});
-			return filter;
-		}
-	});
 </script>
 </body>
 </html>
