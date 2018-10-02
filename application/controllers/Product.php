@@ -10,6 +10,7 @@ class Product extends CI_Controller {
     }
 
 	public function index(){
+        $this->session->set_userdata('referred_from', current_url());
 	    $uri = $this->uri->segment(1);
         $index = substr($uri, strrpos($uri, '-') + 1);
         // sanitize
@@ -32,28 +33,45 @@ class Product extends CI_Controller {
         }else{
             echo false;
             exit;
-        }
-                   
+        }                   
     }
 
     
     // List Product Page
-    public function catalog( ){
-        // @TODO: Not fetching the right category feeds
+    public function catalog(){
         $str = $this->uri->segment(2); 
         $str = preg_replace("/[^A-Za-z0-9-]/","",cleanit($str) );
-        $str = preg_replace("/[^A-Za-z0-9]/"," ",cleanit($str) ); // Convert the - to space
-        
-        $page_data['products'] = $this->product->get_products( $str );
+        $str = preg_replace("/[^A-Za-z0-9]/"," ",cleanit($str) ); // Convert the - to space 
+        if( $str == '' ) redirect(base_url());
+        // pagination
+        $count = $this->product->num_of_products($str);
+
+        $this->load->library('pagination');
+        $this->config->load('pagination'); // Load d config
+        $config = $this->config->item('pagination');
+        $config['base_url'] = current_url() ;
+        $config['total_rows'] = $count;
+        $config['per_page'] = 10;    
+        $config["num_links"] = 5;
+
+        $this->pagination->initialize($config); 
+
+        $page = isset($_GET['page']) ? xss_clean($_GET['page']) : 0;
+        if( $page > 1 ) $page -= 1;
+
+        $array = array('str' => $str,'limit' => $config['per_page'],'offset' => $page);
+        $page_data['products'] = $this->product->get_products( $array );
         $page_data['brands'] = $this->product->get_brands($str);
         $page_data['colours'] = $this->product->get_colours($str);
         $features = $this->product->get_features($str);
+
         $output_array = array();
         foreach($features as $feature => $values ){
             foreach ($values as $key => $value) {
                 $variables = json_decode( $value );
                 foreach ($variables as $new_key => $new_value) {
                     if( is_array($new_value) ){
+                        $new_value = array_map("unserialize", array_unique(array_map("serialize", $new_value)));
                         foreach ($new_value as $inkey => $invalue) $output_array[$new_key][] = $invalue;
                     }else{
                         $output_array[$new_key][] = $new_value;
@@ -63,9 +81,10 @@ class Product extends CI_Controller {
         }
         $output_array = array_map("unserialize", array_unique(array_map("serialize", $output_array)));
         $page_data['features'] = $output_array;
-        // var_dump($page_data['features']);
-        // exit;
+        $page_data['sub_categories'] = $this->product->get_sub_categories($str);
+        $page_data['pagination'] = $this->pagination->create_links();
         $this->load->view('landing/category', $page_data);
+
     }
 
 
@@ -76,6 +95,19 @@ class Product extends CI_Controller {
         //     var_dump( $_POST);
         //     exit;
         // }
+    }
+
+
+    public function cart(){
+        $this->load->library('cart');
+        $data = array(
+            'id' => base64_decode($this->input->post('product_id')),
+            'qty' => $this->input->post('quantity'),
+            'price' => $this->input->post('product_price'),
+            'name' => $this->input->post('product_name'),
+            'options' => array('Size' => $this->input->post('variation'), 'Colour' => $this->input->post('colour'))
+        );
+        var_dump($data);
     }
 
 

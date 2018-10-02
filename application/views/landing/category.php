@@ -113,24 +113,13 @@
 					<div class="category-filters-section">
 						<h3 class="widget-title-sm">Category</h3>
 						<ul class="cateogry-filters-list">
-							<li><a href="#">Tv, Audio &amp; Home Theater</a>
-							</li>
-							<li><a href="#">Camera, Photo &amp; Video</a>
-							</li>
-							<li><a href="#">Computers &amp; Accessories</a>
-							</li>
-							<li><a href="#">Cell Phones &amp; Accessories</a>
-							</li>
-							<li><a href="#">Business &amp; Office</a>
-							</li>
-							<li><a href="#">Car &amp; GPS</a>
-							</li>
-							<li><a href="#">Audio & Accessories</a>
-							</li>
-							<li><a href="#">Software</a>
-							</li>
-							<li><a href="#">Video Games</a>
-							</li>
+							<?php foreach( $sub_categories as $category ) :?>
+								<li>
+									<a href="<?= base_url('catalog/' . urlify($category->name)); ?>">
+										<?= $category->name; ?>
+									</a>
+								</li>
+							<?php endforeach; ?>
 						</ul>
 					</div>
 					<div class="category-filters-section">
@@ -211,9 +200,10 @@
 									</ul>
 								<?php endif; ?>
 								<div class="product-img-wrap">
+									<!-- <?= base_url('assets/landing/img/test_product/29.jpg'); ?> -->
 									<img class="product-img"
-										 src="<?= base_url('assets/landing/img/test_product/29.jpg'); ?>"
-										 alt="Image Alternative text" title="Image Title" >
+										 src="https://res.cloudinary.com/philo001/image/upload/h_400,w_400,q_auto,f_auto,fl_lossy,dpr_auto/v1538144332/product/uv1zz6ob3e5t3efhxsaw.jpg"
+										 alt="<?= $product->product_name; ?>" title="<?= $product->product_name; ?>" >
 								</div>
 								<a class="product-link" href="<?= base_url(urlify($product->product_name, $product->id)); ?>" ></a>
 								<div class="product-caption">
@@ -253,26 +243,8 @@
                     </div>
                 </div>
 				<div class="row">
-					<div class="col-md-6">
-						<p class="category-pagination-sign">58 items found in Cell Phones. Showing 1 - 12</p>
-					</div>
-					<div class="col-md-6">
-						<nav>
-							<ul class="pagination category-pagination pull-right">
-								<li class="active"><a href="#">1</a>
-								</li>
-								<li><a href="#">2</a>
-								</li>
-								<li><a href="#">3</a>
-								</li>
-								<li><a href="#">4</a>
-								</li>
-								<li><a href="#">5</a>
-								</li>
-								<li class="last"><a href="#"><i class="fa fa-long-arrow-right"></i></a>
-								</li>
-							</ul>
-						</nav>
+					<div class="col-md-6 col-md-offset-3">
+						<?= $pagination ?> 
 					</div>
 				</div>
 			</div>
@@ -309,7 +281,7 @@
 
 
 		function filter_data(){
-			$('.processing').show();
+			$('#processing').show();
 			let action = 'fetch_data';
 			// price
 			// let minimum_price = $('#hidden_minimum_price').val();
@@ -323,7 +295,6 @@
 					action:action,filters:filters
 				},
 				success: function(data){
-
 					$('.filter_data').html(data)
 				}
 			});
@@ -334,8 +305,6 @@
 			$(`.${class_name}:checked`).each(function(){
 				let value = $(this).data('value'); // apple
 				let key = $(this).data('type'); // brand_name
-				// filter[key] = value + ',';
-				// console.log(filter);
 				if( !(key in filter) ){
 					filter[key] = value;	
 					// filter.push($(this).val('data-value'));
