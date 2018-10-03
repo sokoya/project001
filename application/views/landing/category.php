@@ -166,34 +166,27 @@
 					<?php endif; ?>
 					<!-- Features -->
 					<div class="category-filters-section">
-						<?php foreach ($features as $feature => $feature_value) : ?>
-							<div class="accordion" id="<?= trim($feature); ?>">
-								<div class="panel feature-attribute">
-									<div class="panel-header feature-attribute">
-										<div class="panel-title" data-toggle="collapse"
-											 data-target="#<?= trim($feature) . '-1'; ?>" araia-expanded="true"
-											 arial-controls="<?= trim($feature) . '-1'; ?>">
-											<h3 class="widget-title-sm">
-												<?= $feature; ?>
-											</h3>
-										</div>
+						<?php foreach($features as $feature => $feature_value) :?>
+						<div class="accordion" id="<?=trim($feature);?>">
+							<div class="panel feature-attribute">
+								<div class="panel-header feature-attribute">
+									<div class="panel-title" data-toggle="collapse" data-target="#<?= trim($feature).'-1'; ?>" araia-expanded="true" arial-controls="<?= trim($feature).'-1'; ?>">
+										<h3 class="widget-title-sm">
+											<?= preg_replace("/[^A-Za-z 0-9]/", ' ', $feature); ?>
+										</h3>										
 									</div>
-									<div id="<?= trim($feature) . '-1'; ?>" class="collapse"
-										 aria-labeledby="<?= $feature; ?>" data-parent="#<?= trim($feature); ?>">
-										<div class="panel-body">
-											<?php foreach ($feature_value as $key => $value) : ?>
-												<div class="carrito-checkbox">
-													<label>
-
-														<input class="filter" type="checkbox" name="filterset"
-															   data-type="<?= trim($feature); ?>"
-															   data-value="<?= trim($value) ?>"/><?= $value; ?>
-														<span class="checkmark"></span>
-													</label>
-												</div>
-											<?php endforeach; ?>
-										</div>
-									</div>
+								</div>
+								<div id="<?= trim($feature).'-1'; ?>" class="collapse" aria-labeledby="<?= $feature; ?>" data-parent="#<?= trim($feature); ?>">
+									<div class="panel-body">
+										<?php foreach($feature_value as $key => $value ) : ?>
+											<div class="carrito-checkbox">
+												<label>
+													<input class="filter" type="checkbox" name="filterset" data-type="<?= trim($feature);?>" data-value="<?= trim($value)?>" /><?= $value; ?>
+													<span class="checkmark"></span>
+												</label>
+											</div>
+										<?php  endforeach; ?>
+									</div>									
 								</div>
 							</div>
 						<?php endforeach; ?>
@@ -212,54 +205,48 @@
 					</div>
 				</div>
 				<div id="category_body">
-					<div class="row filter_data" data-gutter="15">
-						<?php foreach ($products as $product) : ?>
-							<div class="col-md-4">
-								<div class="product">
-									<?php if (!empty($product->discount_price)): ?>
-										<ul class="product-labels">
-											<li><?= get_discount($product->sale_price, $product->discount_price); ?></li>
-											<!-- Call the discount calculator her -->
-										</ul>
+				<div class="row filter_data" data-gutter="15">
+				<?php foreach( $products as $product ) : ?>
+					<div class="col-md-4">
+						<div class="product">
+							<?php  if( !empty($product->discount_price )): ?>
+								<ul class="product-labels">
+									<li><?= get_discount( $product->sale_price, $product->discount_price);?></li>
+									<!-- Call the discount calculator her -->
+								</ul>
+							<?php endif; ?>
+							<div class="product-img-wrap">
+								<!-- <?= base_url('assets/landing/img/test_product/29.jpg'); ?> -->
+								<?php $image_name = $product->image_name; 
+									$split = explode('|', $image_name)
+								?>
+								<img class="product-img"
+									 src="https://res.cloudinary.com/philo001/image/upload/h_400,w_400,q_auto,f_auto,fl_lossy,dpr_auto/v<?= $split[0] . '/' . $split[1]; ?>"
+									 alt="<?= $product->product_name; ?>" title="<?= $product->product_name; ?>" >
+							</div>
+							<a class="product-link" href="<?= base_url(urlify($product->product_name, $product->id)); ?>" ></a>
+							<div class="product-caption">
+								<ul class="product-caption-rating">
+									<li class="rated"><i class="fa fa-star"></i>
+									</li>
+									<li class="rated"><i class="fa fa-star"></i>
+									</li>
+									<li class="rated"><i class="fa fa-star"></i>
+									</li>
+									<li class="rated"><i class="fa fa-star"></i>
+									</li>
+									<li class="rated"><i class="fa fa-star"></i>
+									</li>
+								<span class="text-sm pull-right"><strong>Sold By: </strong><?=$product->first_name;?></span>
+								</ul>
+								<h5 class="product-caption-title"><?= word_limiter(ucwords($product->product_name), 7,'...');  ?></h5>
+								<div class="product-caption-price">
+									<?php if(!empty( $product->discount_price)) :?>
+										<span class="product-caption-price-new"><?= ngn($product->discount_price); ?></span>
+										<span class="product-caption-price-old"><sup><?= ngn($product->sale_price);?> </sup></span>
+									<?php else : ?>
+										<span class="product-caption-price-new"><?= ngn($product->sale_price);?> </span>
 									<?php endif; ?>
-									<div class="product-img-wrap">
-										<!-- <?= base_url('assets/landing/img/test_product/29.jpg'); ?> -->
-										<?php $image_name = $product->image_name;
-										$split = explode('|', $image_name);
-										?>
-										<img class="product-img"
-											 src="https://res.cloudinary.com/philo001/image/upload/h_400,w_400,q_auto,f_auto,fl_lossy,dpr_auto/v<?= $split[0] . '/' . $split[1]; ?>"
-											 alt="<?= $product->product_name; ?>"
-											 title="<?= $product->product_name; ?>">
-									</div>
-									<a class="product-link"
-									   href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
-									<div class="product-caption">
-										<ul class="product-caption-rating">
-											<li class="rated"><i class="fa fa-star"></i>
-											</li>
-											<li class="rated"><i class="fa fa-star"></i>
-											</li>
-											<li class="rated"><i class="fa fa-star"></i>
-											</li>
-											<li class="rated"><i class="fa fa-star"></i>
-											</li>
-											<li class="rated"><i class="fa fa-star"></i>
-											</li>
-											<span
-												class="text-sm pull-right"><strong>Sold By:</strong><?= $product->first_name; ?></span>
-										</ul>
-										<h5 class="product-caption-title"><?= word_limiter(ucwords($product->product_name), 7, '...'); ?></h5>
-										<div class="product-caption-price">
-											<?php if (!empty($product->discount_price)) : ?>
-												<span
-													class="product-caption-price-new"><?= ngn($product->discount_price); ?></span>
-												<span
-													class="product-caption-price-old"><sup><?= ngn($product->sale_price); ?> </sup></span>
-											<?php else : ?>
-												<span
-													class="product-caption-price-new"><?= ngn($product->sale_price); ?> </span>
-											<?php endif; ?>
 										</div>
 									</div>
 								</div>

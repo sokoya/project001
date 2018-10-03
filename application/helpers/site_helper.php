@@ -66,8 +66,8 @@ function get_percentage($total, $number){
 }
 
 function get_discount( $sale_price, $discount_price){
-	// return (100 * $discount_price/$sale_price );
-	$percent = (( $sale_price - $discount_price) * 100) / $sale_price;
+
+	$percent = round((( $sale_price - $discount_price) * 100) / $sale_price);
 	return '-'.$percent.'%';
 }
 
