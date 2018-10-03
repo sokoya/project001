@@ -201,8 +201,11 @@
 								<?php endif; ?>
 								<div class="product-img-wrap">
 									<!-- <?= base_url('assets/landing/img/test_product/29.jpg'); ?> -->
+									<?php $image_name = $product->image_name; 
+										$split = explode('|', $image_name)
+									?>
 									<img class="product-img"
-										 src="https://res.cloudinary.com/philo001/image/upload/h_400,w_400,q_auto,f_auto,fl_lossy,dpr_auto/v1538144332/product/uv1zz6ob3e5t3efhxsaw.jpg"
+										 src="https://res.cloudinary.com/philo001/image/upload/h_400,w_400,q_auto,f_auto,fl_lossy,dpr_auto/v<?= $split[0] . '/' . $split[1]; ?>"
 										 alt="<?= $product->product_name; ?>" title="<?= $product->product_name; ?>" >
 								</div>
 								<a class="product-link" href="<?= base_url(urlify($product->product_name, $product->id)); ?>" ></a>
@@ -218,6 +221,7 @@
 										</li>
 										<li class="rated"><i class="fa fa-star"></i>
 										</li>
+									<span class="text-sm pull-right"><strong>Sold By: </strong><?=$product->first_name;?></span>
 									</ul>
 									<h5 class="product-caption-title"><?= word_limiter(ucwords($product->product_name), 7,'...');  ?></h5>
 									<div class="product-caption-price">
