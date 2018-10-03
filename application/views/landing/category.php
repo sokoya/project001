@@ -292,6 +292,14 @@
 	let current_url = "<?= current_url()?>";
 </script>
 <script>
+	$("#price-slider").ionRangeSlider({
+	    min: 1000,
+	    max: 50000,
+	    type: 'double',
+	    prefix: "&#8358;",
+	    prettify: false,
+	    hasGrid: true
+	});
 	$(document).ready(function () {
 		let _category_body = $('#category_body');
 
