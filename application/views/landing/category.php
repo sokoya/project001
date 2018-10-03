@@ -207,7 +207,7 @@
 								</div>
 								<a class="product-link" href="<?= base_url(urlify($product->product_name, $product->id)); ?>" ></a>
 								<div class="product-caption">
-									<!-- <ul class="product-caption-rating">
+									<ul class="product-caption-rating">
 										<li class="rated"><i class="fa fa-star"></i>
 										</li>
 										<li class="rated"><i class="fa fa-star"></i>
@@ -218,7 +218,7 @@
 										</li>
 										<li class="rated"><i class="fa fa-star"></i>
 										</li>
-									</ul> -->
+									</ul>
 									<h5 class="product-caption-title"><?= word_limiter(ucwords($product->product_name), 7,'...');  ?></h5>
 									<div class="product-caption-price">
 										<?php if(!empty( $product->discount_price)) :?>
