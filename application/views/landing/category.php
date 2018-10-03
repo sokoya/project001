@@ -316,10 +316,15 @@
 <script>let base_url = "<?= base_url('catalog'); ?>"</script>
 <script>
 	$(document).ready(function () {
-		let filter_list = [];
+		let url = '';
+		let filter_string = '';
 		$('.filter').change(function () {
+			let filter_list = {};
+			url = '';
+			filter_string = '';
 			let action = 'fetch_data';
-			$('#category_body').hide();
+			let _category_body = $('#category_body');
+			$(_category_body).hide();
 			$('#processing').show();
 			let items = $('input[name=filterset]:checked');
 			items.each(function () {
@@ -336,29 +341,67 @@
 				}
 			});
 
-			console.log(filter_list);
-
-			$.ajax({
-				type: "POST",
-				url: base_url + '/product/fetch_data',
-				data: {
-					action: action,
-					filters: filter_list
-				},
-				success: function (response) {
-					console.log(`Successful ${response}`);
-					$('#category_body').show();
-					$('#processing').hide();
-				},
-				error: function (response) {
-					console.log(`Failed ${response}`);
-					$('#category_body').show();
-					$('#processing').hide();
-				},
-
+			jQuery.each(filter_list, function (obj) {
+				filter_string = '';
+				jQuery.each(filter_list[obj], function (id, values) {
+					if (filter_string === '') {
+						filter_string += values;
+					} else {
+						filter_string += ',' + values;
+					}
+				});
+				if (url === '') {
+					url += `?${obj}=${filter_string}`
+				} else {
+					url += `&${obj}=${filter_string}`
+				}
 			});
-		});
 
+
+			console.log(url);
+
+			function doReplaceState(url) {
+				let state = {current_url: url},
+					title = "Carrito MarketPlace";
+				history.replaceState(state, title, url);
+			}
+
+
+			$(_category_body).load(`${url} #category_body`, function (response, status, xhr) {
+				if (status === "error") {
+					let msg = "Sorry but there was an error: ";
+					alert(msg + xhr.status + " " + xhr.statusText);
+				}
+				// let stateObj = {foo: "bar"};
+				// history.replaceState(stateObj, 'Carrito MarketPlace', url);
+				doReplaceState(url);
+
+				$('#processing').hide();
+				$(_category_body).show();
+			});
+
+
+			// $.ajax({
+			// 	type: "POST",
+			// 	url: base_url + '/product/fetch_data',
+			// 	data: {
+			// 		action: action,
+			// 		filters: filter_list
+			// 	},
+			// 	success: function (response) {
+			// 		console.log(`Successful ${response}`);
+			// 		$('#category_body').show();
+			// 		$('#processing').hide();
+			// 	},
+			// 	error: function (response) {
+			// 		console.log(`Failed ${response}`);
+			// 		$('#category_body').show();
+			// 		$('#processing').hide();
+			// 	},
+			//
+			// });
+		});
+	});
 </script>
 </body>
 </html>
