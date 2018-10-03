@@ -188,7 +188,7 @@
 												<label>
 													<input class="filter" type="checkbox" name="filterset"
 														   data-type="<?= trim($feature); ?>"
-														   data-value="<?= trim($value) ?>"/><?= $value; ?>
+														   data-value="<?= trim(preg_replace("/[^A-Za-z0-9]/", '-', $value)) ?>"/><?= $value; ?>
 													<span class="checkmark"></span>
 												</label>
 											</div>
@@ -232,7 +232,7 @@
 											 alt="<?= $product->product_name; ?>"
 											 title="<?= $product->product_name; ?>">
 									</div>
-									<a class="product-link"
+									<a class="product-link" title="<?= $product->product_name?>"
 									   href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
 									<div class="product-caption">
 										<ul class="product-caption-rating">
