@@ -105,9 +105,6 @@ Class Product_model extends CI_Model{
                                         $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' OR";
                                     }
                                 }
-                                // remove the last OR
-                                // $select_query .= preg_replace('/\W\w+\s*(\W*)$/', '$1', $select_query);
-                                $select_query .= " )";
                             }else{
                                 // < 1
                                 $select_query .= " AND JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' )";
@@ -142,9 +139,6 @@ Class Product_model extends CI_Model{
                                         $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' OR";
                                     }
                                 }
-                                // remove the last OR
-                                // $select_query .= preg_replace('/\W\w+\s*(\W*)$/', '$1', $select_query);
-                                $select_query .= " )";
                             }else{
                                 // < 1
                                 $select_query .= " AND JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' )";
@@ -179,9 +173,6 @@ Class Product_model extends CI_Model{
                                         $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' OR";
                                     }
                                 }
-                                // remove the last OR
-                                // $select_query .= preg_replace('/\W\w+\s*(\W*)$/', '$1', $select_query);
-                                $select_query .= " )";
                             }else{
                                 // < 1
                                 $select_query .= " AND JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' )";
@@ -244,3 +235,21 @@ Class Product_model extends CI_Model{
         return $this->db->query( $select_query )->result_array();
     }
 }
+
+
+
+// SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price,g.image_name,s.first_name FROM products p JOIN product_variation AS v ON (p.id = v.product_id) JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 ) JOIN sellers AS s ON p.seller_id = s.id WHERE
+//     ( 
+//         MATCH(p.rootcategory) AGAINST('mobile phones') AND (JSON_EXTRACT(`attributes`, '$."Colour"') LIKE '%Black%' OR JSON_EXTRACT(`attributes`, '$."Colour"') LIKE '%Green%' )
+//     )
+
+// OR  
+//     (
+//         MATCH(p.category) AGAINST('mobile phones') AND (JSON_EXTRACT(`attributes`, '$."Colour"') LIKE '%Black%' OR JSON_EXTRACT(`attributes`, '$."Colour"') LIKE '%Green%' )
+//     ) 
+
+// OR  
+//     ( MATCH(p.subcategory) AGAINST('mobile phones') AND (JSON_EXTRACT(`attributes`, '$."Colour"') LIKE '%Black%' OR JSON_EXTRACT(`attributes`, '$."Colour"') LIKE '%Green%')
+//     )
+     
+// GROUP BY p.id LIMIT 0,10
