@@ -212,50 +212,44 @@
 						</div>
 					</div>
 					<div id="category_body">
-						<div class="row filter_data" data-gutter="15">
-							<?php foreach ($products as $product) : ?>
-								<div class="col-md-4">
-									<div class="product">
-										<?php if (!empty($product->discount_price)): ?>
-											<ul class="product-labels">
-												<li><?= get_discount($product->sale_price, $product->discount_price); ?></li>
-												<!-- Call the discount calculator her -->
-											</ul>
-										<?php endif; ?>
-										<div class="product-img-wrap">
-											<!-- <?= base_url('assets/landing/img/test_product/29.jpg'); ?> -->
-											<img class="product-img"
-												 src="https://res.cloudinary.com/philo001/image/upload/h_400,w_400,q_auto,f_auto,fl_lossy,dpr_auto/v1538144332/product/uv1zz6ob3e5t3efhxsaw.jpg"
-												 alt="<?= $product->product_name; ?>"
-												 title="<?= $product->product_name; ?>">
-										</div>
-										<a class="product-link"
-										   href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
-										<div class="product-caption">
-											<!-- <ul class="product-caption-rating">
-                                                <li class="rated"><i class="fa fa-star"></i>
-                                                </li>
-                                                <li class="rated"><i class="fa fa-star"></i>
-                                                </li>
-                                                <li class="rated"><i class="fa fa-star"></i>
-                                                </li>
-                                                <li class="rated"><i class="fa fa-star"></i>
-                                                </li>
-                                                <li class="rated"><i class="fa fa-star"></i>
-                                                </li>
-                                            </ul> -->
-											<h5 class="product-caption-title"><?= word_limiter(ucwords($product->product_name), 7, '...'); ?></h5>
-											<div class="product-caption-price">
-												<?php if (!empty($product->discount_price)) : ?>
-													<span
-														class="product-caption-price-new"><?= ngn($product->discount_price); ?></span>
-													<span
-														class="product-caption-price-old"><sup><?= ngn($product->sale_price); ?> </sup></span>
-												<?php else : ?>
-													<span
-														class="product-caption-price-new"><?= ngn($product->sale_price); ?> </span>
-												<?php endif; ?>
-											</div>
+					<div class="row filter_data" data-gutter="15">
+					<?php foreach( $products as $product ) : ?>
+						<div class="col-md-4">
+							<div class="product">
+								<?php  if( !empty($product->discount_price )): ?>
+									<ul class="product-labels">
+										<li><?= get_discount( $product->sale_price, $product->discount_price);?></li>
+										<!-- Call the discount calculator her -->
+									</ul>
+								<?php endif; ?>
+								<div class="product-img-wrap">
+									<!-- <?= base_url('assets/landing/img/test_product/29.jpg'); ?> -->
+									<img class="product-img"
+										 src="https://res.cloudinary.com/philo001/image/upload/h_400,w_400,q_auto,f_auto,fl_lossy,dpr_auto/v1538144332/product/uv1zz6ob3e5t3efhxsaw.jpg"
+										 alt="<?= $product->product_name; ?>" title="<?= $product->product_name; ?>" >
+								</div>
+								<a class="product-link" href="<?= base_url(urlify($product->product_name, $product->id)); ?>" ></a>
+								<div class="product-caption">
+									<ul class="product-caption-rating">
+										<li class="rated"><i class="fa fa-star"></i>
+										</li>
+										<li class="rated"><i class="fa fa-star"></i>
+										</li>
+										<li class="rated"><i class="fa fa-star"></i>
+										</li>
+										<li class="rated"><i class="fa fa-star"></i>
+										</li>
+										<li class="rated"><i class="fa fa-star"></i>
+										</li>
+									</ul>
+									<h5 class="product-caption-title"><?= word_limiter(ucwords($product->product_name), 7,'...');  ?></h5>
+									<div class="product-caption-price">
+										<?php if(!empty( $product->discount_price)) :?>
+											<span class="product-caption-price-new"><?= ngn($product->discount_price); ?></span>
+											<span class="product-caption-price-old"><sup><?= ngn($product->sale_price);?> </sup></span>
+										<?php else : ?>
+											<span class="product-caption-price-new"><?= ngn($product->sale_price);?> </span>
+											</div><?php endif; ?>
 											<!-- <ul class="product-caption-feature-list">
                                                 <li>Available for pickup</li>
                                             </ul> -->

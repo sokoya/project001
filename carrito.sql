@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 27, 2018 at 12:19 PM
+-- Generation Time: Oct 03, 2018 at 11:43 AM
 -- Server version: 5.7.11
 -- PHP Version: 7.0.3
 
@@ -53,12 +53,43 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`category_id`, `name`, `root_category_id`, `inserted_at`) VALUES
-(1, 'Home Audio / Video', 2, '2018-08-24 20:44:01'),
-(2, 'Men Wears', 1, '2018-08-27 18:50:55'),
-(3, 'Tablet Phones', 3, '2018-08-27 18:51:12'),
-(4, 'Graphics Designs', 4, '2018-09-18 11:09:23'),
-(5, 'Ladies Wears', 1, '2018-08-27 18:53:14'),
-(6, 'Category Creation', 2, '2018-09-18 09:54:08');
+(1, 'Mobile Phones', 1, '2018-10-01 11:54:19'),
+(2, 'Phones & Tablets Accessories', 1, '2018-10-01 11:54:58'),
+(3, 'Tablets', 1, '2018-10-01 11:55:08'),
+(4, 'Laptops', 2, '2018-10-01 11:56:30'),
+(5, 'Accessories', 2, '2018-10-01 11:56:45'),
+(6, 'Networking', 2, '2018-10-01 11:57:02'),
+(7, 'Desktop & Monitors', 2, '2018-10-01 11:57:18'),
+(8, 'Printers, Scanners & Accessories', 2, '2018-10-01 11:57:40'),
+(9, 'PC Gaming', 2, '2018-10-01 11:57:53'),
+(10, 'Office & School Supplies', 2, '2018-10-01 11:58:20'),
+(11, 'Softwares', 2, '2018-10-01 11:58:38'),
+(12, 'Hardwares', 2, '2018-10-01 11:58:45'),
+(13, 'Televisions', 3, '2018-10-01 11:59:33'),
+(15, 'Cameras', 3, '2018-10-01 11:59:45'),
+(16, 'DVD Players & Recorders', 3, '2018-10-01 12:00:09'),
+(17, 'Small Appliances', 3, '2018-10-01 12:00:24'),
+(18, 'Games & Consoles', 3, '2018-10-01 12:00:39'),
+(19, 'Musical Instruments & Equipments', 3, '2018-10-01 12:01:01'),
+(20, 'Women\'s Fashion', 4, '2018-10-01 12:01:30'),
+(21, 'Men\'s Fashion', 4, '2018-10-01 12:01:42'),
+(22, 'Wedding Shop', 4, '2018-10-01 12:02:15'),
+(23, 'Style Finder for Women', 4, '2018-10-01 12:02:38'),
+(24, 'Style Finder for Men', 4, '2018-10-01 12:02:48'),
+(25, 'Deluxe Fashion', 4, '2018-10-01 12:03:17'),
+(26, 'Large Appliances', 6, '2018-10-01 12:07:51'),
+(27, 'Small Appliances', 6, '2018-10-01 12:08:04'),
+(28, 'Home Furnitures', 6, '2018-10-01 12:09:08'),
+(29, 'Kitchen & Dinning', 6, '2018-10-01 12:09:25'),
+(30, 'Hand Tools', 6, '2018-10-01 12:10:01'),
+(31, 'Furniture', 6, '2018-10-01 12:10:21'),
+(32, 'Others', 6, '2018-10-01 12:10:26'),
+(33, 'Fashion for Girls', 5, '2018-10-01 12:11:28'),
+(34, 'Baby Essentials', 5, '2018-10-01 12:11:41'),
+(35, 'Maternity', 5, '2018-10-01 12:11:53'),
+(36, 'School Stores', 5, '2018-10-01 12:12:13'),
+(37, 'Diapering & Daily Cares', 5, '2018-10-01 12:12:35'),
+(38, 'Toys & Activities', 5, '2018-10-01 12:12:50');
 
 -- --------------------------------------------------------
 
@@ -146,14 +177,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `seller_id`, `rootcategory`, `category`, `subcategory`, `sku`, `product_name`, `brand_name`, `model`, `main_colour`, `product_description`, `youtube_id`, `in_the_box`, `highlights`, `product_line`, `colour_family`, `main_material`, `dimensions`, `weight`, `attributes`, `product_warranty`, `warranty_type`, `warranty_address`, `certifications`, `product_status`, `report`, `views`, `created_on`) VALUES
-(1, 1, 'Tv & Electronics', 'Home Audio / Video', 'My new Sub', 'VH3IP7', 'First Product 1', 'Apple', 'Iphone 4S', 'Green', 'Hello Everyone', '', 'Hello everyone', 'Hello everyone', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["Green","Red","Yellow"]', 'synthetic', '123', '1000', '{"Features":"dual core","Refresh":"123","Display":"56"}', 'Hello everyone', '["Repair by vendor","Replacement by vendor"]', 'Hello', '["Timber Certificate"]', 'pending', 0, 0, '2018-09-13 10:45:57'),
-(2, 1, '0', '0', '0', '8MW46V', 'A new product listing', 'Apple', 'Samsung S4', 'Blue', 'Hello everyone', '', 'Hello everyone', 'Hello everyone', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["Green","Red","Yellow"]', '', '123', '1000', '{"Features":" HD","Display":" Gorilla Glass","Refresh":"300"}', 'Hello everyone', '["Service Center","Repair by vendor","Replacement by vendor"]', 'Hello everyone', '["Timber Certificate"]', 'pending', 0, 0, '2018-09-19 10:33:37'),
-(3, 1, '', 'Fashion', 'My new Sub', '64PXFS', 'Third Product posting', 'Apple', 'Iphone 4S', 'Blue', 'Hello', '627272727', 'Hello', 'Hello', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["Green","Red","Yellow"]', '', '123', '1000', '{"Features":null,"Display":"Anti Glare","Refresh":"12344"}', 'Hello', '["Repair by vendor"]', 'Hello', '["AFRDI - Australian Furnishing Research & Development Institute"]', 'pending', 0, 0, '2018-09-19 11:03:29'),
-(4, 1, '', 'Home Audio / Video', 'My new Sub', 'OYDCZA', 'Third Property Posting', 'Samsung', 'Samsung S4+', 'Purple', 'Hello', '727272', 'Hello', 'Hello', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["Green"]', 'glass', '123', '1000', '{"Features":null,"Display":"Gorilla Glass"}', 'Hello', '["Repair by vendor"]', 'Hello', '["AFRDI - Australian Furnishing Research & Development Institute"]', 'pending', 0, 0, '2018-09-19 11:11:34'),
-(5, 1, '', 'Tv & Electronics', 'Samsung S9+', 'OGJLE0', 'Samsung Product', 'samsung', 'samsung s9', 'Blue', '', '', '', '', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["Green"]', 'resin', '123', '1000', '{"Features":[" Anti Glare"],"Display":"gps"}', '', '["Repair by vendor"]', 'Hello', '["Timber Certificate"]', 'pending', 0, 0, '2018-09-19 11:22:12'),
-(6, 1, 'Tv & Electronics', 'Home Audio / Video', 'My new Sub', 'DYJJPY', 'Hello This is Product Name', 'Apple', 'samsung s9', 'Blue', 'Hello', '', 'Hello', 'Hello', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["Green","Red"]', 'plume', '123', '1000', '{"Features":[" Gorilla Glass"],"Display-Features":" HD","Refresh-Rate":"455"}', 'Hello', '["Repair by vendor"]', 'Hello', '["Timber Certificate"]', 'pending', 0, 0, '2018-09-19 12:25:57'),
-(7, 1, 'Tv & Electronics', 'Home Audio / Video', 'My new Sub', 'OL1XO8', 'Another product testing', 'Apple', 'apple', 'purple', 'Hello', '', 'Hello', 'Hello', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["Green","Red","Yellow"]', 'silicon', '123', '1000', '{"Features":["3D"," Anti Glare"," Full HD"," Gorilla Glass"],"Display-Features":" UHD","Refresh-Rate":"13455"}', '', '["Repair by vendor"]', '', '["AFRDI - Australian Furnishing Research & Development Institute"]', 'pending', 0, 0, '2018-09-19 12:28:18'),
-(8, 1, 'Tv & Electronics', 'Home Audio / Video', 'My new Sub', 'GY56XJ', 'Another Product', 'Apple', 'samsung s9', 'Blue', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\n                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\n                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\n                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\n                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\n                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\n                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\n                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\n                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\n                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\n                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\n                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\n                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\n                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\n                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\n                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["Green","Red"]', 'wood', '123', '1000', '{"Features":[" Anti Glare"," Full HD"],"Display-Features":" Anti Glare","Refresh-Rate":"34500"}', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\n                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\n                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\n                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\n                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\n                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '["Repair by vendor","Replacement by vendor"]', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\n                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\n                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\n                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\n                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\n                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '["Timber Certificate"]', 'pending', 0, 0, '2018-09-23 14:51:41');
+(1, 1, 'Phones & Tablets', 'Mobile Phones', 'Smartphones', 'X5PJUH', 'Samsung Galaxy S9 - BLACK (Dual Sim) - Official Warranty', 'Samsung', 'S9', 'Black', 'Display: 5.8&rdquo;, Quad HD+ sAMOLED\r\nSingle Sim Option\r\nCamera Main: Super Speed Dual Pixel 12 MP OIS (F1.5/F2.4)\r\nCamera Front: 8MP AF (F1.7)\r\nProcessor: 10nm, Octa-core (2.7GHz Quad + 1.7GHz Quad)\r\nMemory: 4GB RAM and 64GB Internal storage, External Memory: MicroSD&trade; up to 400 GB\r\nBattery: 3000mAh\r\nSecurity: Intelligent Scan (Iris + Face), Fingerprint Scanner, Water and Dust Resistance: IP68 (1.5 m &amp; 30 min)\r\n\r\n', '', '', '', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["Green"]', 'silicon', '1260', '300', '{"Sim-Type":"Dual SIM","OS-Type":"Android OS","Battery-Capacity":"3000mAh ","Internal-Memory":"256 GB","RAM":"6 GB","Sceen-Size":"5.9 inches","Colour":"Black"}', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#039;Content here, content here&#039;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#039;lorem ipsum&#039; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n', '["Repair by vendor"]', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n', '["Eco Friendly","FSC - Forest Stewardship Council"]', 'pending', 0, 0, '2018-10-02 11:34:56'),
+(2, 1, 'Phones & Tablets', 'Mobile Phones', 'Smartphones', 'BYZZSP', 'Samsung Galaxy J6 - Purple', 'Samsung', 'samsung j6', 'Purple', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["Green"]', 'plume', '1260', '1000', '{"Sim-Type":"Dual SIM","OS-Type":"Android OS","Battery-Capacity":"3000mAh ","Internal-Memory":" 256 GB","RAM":"6 GB","Sceen-Size":"5.9 inches","Colour":"Black"}', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '["Repair by vendor"]', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '', 'pending', 0, 0, '2018-10-03 10:46:58'),
+(3, 1, 'Phones & Tablets', 'Mobile Phones', 'Smartphones', '31WUJE', 'Nokia - 2 - 5&quot; - 1GB RAM, 8GB ROM - Android 7.0 8MP + 5MP - White', 'Nokia', 'Nokia2', 'Grey', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["Green"]', 'plume', '1260', '1000', '{"Sim-Type":"Single SIM","OS-Type":"Android OS","Battery-Capacity":"5000mAh","Internal-Memory":"128 MB","Sceen-Size":"6.4 inches","Colour":"Yellow"}', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '["FSC - Forest Stewardship Council","Organic"]', 'pending', 0, 0, '2018-10-03 11:28:34');
 
 -- --------------------------------------------------------
 
@@ -175,27 +201,9 @@ CREATE TABLE `product_gallery` (
 --
 
 INSERT INTO `product_gallery` (`id`, `product_id`, `seller_id`, `image_name`, `featured_image`, `created_at`) VALUES
-(1, 1, 1, 'a3763d577f55154ef1f85f45b778df70.jpg', 1, '2018-09-23 15:17:30'),
-(2, 1, 1, '2c1f6989663d26facd3765d8a6b03fe8.jpg', 0, '2018-09-13 09:45:58'),
-(3, 2, 1, 'b521ee9732f5010fa35f0462520eccfa.jpg', 0, '2018-09-19 09:33:37'),
-(4, 2, 1, '2d78dc2aecfa9f8584c7a7646ae6a497.jpg', 1, '2018-09-19 09:33:37'),
-(5, 2, 1, '4d8710928b4e3c3f963241024088a061.jpg', 0, '2018-09-19 09:33:37'),
-(6, 3, 1, '2549f2c96309c0bd24af3439ac073ffe.jpg', 0, '2018-09-19 10:03:29'),
-(7, 3, 1, 'aaa6ef2f6fdae6d88227720ae7f80c93.jpg', 0, '2018-09-19 10:03:29'),
-(8, 3, 1, 'dee97be723d00a5c871ddc9905ecac36.jpg', 0, '2018-09-19 10:03:29'),
-(9, 3, 1, '52074e601307b6c4a51be17848ec8cd3.jpg', 0, '2018-09-19 10:03:29'),
-(10, 3, 1, '4f40468bf5c8af7cab00ae4f00ad87aa.jpg', 1, '2018-09-19 10:03:29'),
-(11, 4, 1, '184318e22b920667b39ef820c635082b.jpg', 0, '2018-09-19 10:11:34'),
-(12, 4, 1, 'e988474d296e0f1910407ce4cd041ac3.jpg', 1, '2018-09-19 10:11:34'),
-(13, 4, 1, '53930aee74db2b40dfb289d6a28bd115.jpg', 0, '2018-09-19 10:11:34'),
-(14, 4, 1, 'd63da0ba70d403f2c107074267c5b872.jpg', 0, '2018-09-19 10:11:34'),
-(15, 4, 1, '64c40e2a76ee217daba49b7cbc0b2c4c.jpg', 0, '2018-09-19 10:11:34'),
-(16, 5, 1, '2a49ddf9f15e4ebb0386addc5fd2c1da.jpg', 1, '2018-09-23 15:38:49'),
-(17, 6, 1, 'a94d8b95b80b7d23f51188fb8a3ff390.jpg', 1, '2018-09-23 10:48:18'),
-(18, 6, 1, 'cfdb659bb7266153e41f3182d91310c2.jpg', 0, '2018-09-19 11:25:57'),
-(19, 7, 1, '12cd514e8a0bde29654afeba05557cab.jpg', 1, '2018-09-19 11:28:18'),
-(20, 8, 1, 'c327166a5a0c2e9f68c2b8fda54aab9c.jpg', 0, '2018-09-23 13:51:41'),
-(21, 8, 1, '1e7d8a4791a78fb9bb86aace00c4effc.jpg', 1, '2018-09-23 13:51:41');
+(1, 1, 1, '1538480109|product/o3tudwucyep5kdi9jnof.jpg', 1, '2018-10-02 10:34:56'),
+(2, 2, 1, '1538563620|product/epkpjd5xdzgvk25taq9c.jpg', 1, '2018-10-03 09:46:58'),
+(3, 3, 1, '1538563620|product/epkpjd5xdzgvk25taq9c.jpg', 1, '2018-10-03 11:33:08');
 
 -- --------------------------------------------------------
 
@@ -221,15 +229,9 @@ CREATE TABLE `product_variation` (
 --
 
 INSERT INTO `product_variation` (`id`, `product_id`, `variation`, `sku`, `isbn`, `quantity`, `sale_price`, `discount_price`, `start_date`, `end_date`) VALUES
-(1, 1, 'Variation1', '234', '12345', '2', '3000', '', '', ''),
-(2, 1, 'variation2', '234', '123456', '1234', '4000', '3500', '2018-09-19', '2018-09-20'),
-(3, 2, 'Variation1', '2346', '123456', '123', '40000', '30000', '2018-09-20', '2018-09-21'),
-(4, 2, 'Variation2', '2346', '123456', '2', '5000', '3400', '2018-09-25', '2018-09-27'),
-(5, 5, 'Variation1', '2346', '123456', '3', '40000', '1000', '2018-09-20', '2018-09-21'),
-(6, 4, 'Variation1', '234', '12345', '3', '40000', '30000', '2018-09-20', '2018-09-21'),
-(7, 6, 'Variation1', '234', '12345', '3', '40000', '30000', '2018-09-20', '2018-09-22'),
-(8, 8, 'X', '234', '123456', '10', '40000', '30000', '2018-09-19', '2018-09-28'),
-(9, 5, 'Variation2', '2346', '123456', '3', '40000', '10000', '2018-09-20', '2018-09-21');
+(1, 1, '', '', '', '10', '300000', '223800', '', ''),
+(2, 2, 'Price1', 'HG23838', '123456', '20', '300000', '', '', ''),
+(3, 3, '', '', '', '35100', '27000', '26000', '', '');
 
 -- --------------------------------------------------------
 
@@ -240,6 +242,7 @@ INSERT INTO `product_variation` (`id`, `product_id`, `variation`, `sku`, `isbn`,
 CREATE TABLE `root_category` (
   `root_category_id` int(11) NOT NULL,
   `icon` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL
@@ -249,13 +252,13 @@ CREATE TABLE `root_category` (
 -- Dumping data for table `root_category`
 --
 
-INSERT INTO `root_category` (`root_category_id`, `icon`, `description`, `image`, `name`) VALUES
-(1, '', '', '', 'Fashion'),
-(2, 'electronics', 'TV and electronics', '29576db2db00fba7ff6d7fbc0143e8d5.png', 'Tv & Electronics'),
-(3, '', '', '', 'Computing'),
-(4, 'heart', 'Arts and design', '816f032b48ba188b22d65bdde6a47ccf.png', 'Arts & Designs'),
-(5, 'diamond', 'Jewelry and accessories... Good place to be... Cool', '9ef759f10d0da9f77ea73c4a240c95da.png', 'Jewelry'),
-(6, 'pet', 'Pets...', '6951ab8149e6c9dc49b0bb2d52933e1e.png', 'Pets');
+INSERT INTO `root_category` (`root_category_id`, `icon`, `title`, `description`, `image`, `name`) VALUES
+(1, 'phone', 'But Phones and Tablets', 'Shop for Phones &amp;amp; Tablets online at Jumia Nigeria. Discover a great selection of Phones &amp;amp; Tablets at the best price ? Enjoy cash on delivery ? Best prices in Nigeria ? FREE DELIVERY possible on eligible purchases.', '2dec9affbb20d7b59e4c2dbf3c18834b.png', 'Phones & Tablets'),
+(2, 'phone', 'Buy Computing Online in Nigeria', 'Shop for Computing online at Jumia Nigeria. Discover a great selection of Computing at the best price ? Enjoy cash on delivery ? Best prices in Nigeria ? FREE DELIVERY possible on eligible purchases.', '782967ec98fca68460a2db48dc381a95.png', 'Computers & Accessories'),
+(3, 'plug', 'Get Electronics devices', 'Shop for Electronics, electronics devices online at Carrito Nigeria. Discover a great selection of Computing at the best price ? Enjoy cash on delivery ? Best prices in Nigeria ? FREE DELIVERY possible on eligible purchases.', '70f344b2444d9f0ad4452aa57248ac74.png', 'Electronics'),
+(4, 'tags', 'Get fashionista, fashion ', 'Shop for affordable wears online at Carrito Nigeria. Discover a great selection of Computing at the best price ? Enjoy cash on delivery ? Best prices in Nigeria ? FREE DELIVERY possible on eligible purchases.', '7ab958a674bb653efabc3f3f8163bee2.png', 'Fashions'),
+(5, 'child', 'Baby, Kids & Toys with Accessories', 'Shop for affordable baby kids, cartoon, home video game, and accessories online at Carrito Nigeria. Discover a great selection of Computing at the best price ? Enjoy cash on delivery ? Best prices in Nigeria ? FREE DELIVERY possible on eligible purchases.', '184f9407a2d3fda059b8489b6f789d98.png', 'Baby, Kids & Toys'),
+(6, 'kitchen', 'Buy home and Kitchen utensils', 'Shop for affordable home and kitchen untensils online at Carrito Nigeria. Discover a great selection of Home and kitchen utensils at the best price ? Enjoy cash on delivery ? Best prices in Nigeria ? FREE DELIVERY possible on eligible purchases.', '6b0bdf4e969434a3eff64b844f18d053.png', 'Home & Kitchen');
 
 -- --------------------------------------------------------
 
@@ -299,9 +302,9 @@ CREATE TABLE `sellers` (
 --
 
 INSERT INTO `sellers` (`id`, `first_name`, `last_name`, `email`, `password`, `salt`, `legal_company_name`, `address`, `tin`, `reg_no`, `vat_file`, `license_to_sell`, `own_brand`, `main_category`, `no_of_products`, `bank_name`, `account_name`, `account_number`, `bvn`, `terms`, `start_date`, `end_date`, `profile_pic`, `account_status`, `date_registered`, `last_login`, `ip`, `is_approved`) VALUES
-(1, 'Sokoya', 'Philip', 'phil@gmail.com', '8f7d7a41ce942ec9b93ead40a8530fd02d5ee10982e0a23b52829a6364681e45', 'HQ8@D00m.j$F$b!5,x@y9.OWdfm;OAHm0PK?8c.p@:e%IE(#R3', 'My legal company name', 'my address', '71718181', 'Ng83833', 'd18cc26fbd8189e6124f1c1ee14e49c9.docx', 0, 0, 'Tv & Electronics', '', 'Guaranty Trust Bank Plc', 'Sokoya Adeniji Philip', '2820226778', '7262626228', 'Here is my information... Nothing serious', '2018-09-22', '2018-09-14', NULL, 0, '2018-09-06 15:41:35', '2018-09-23 14:49:15', '::1', 0),
+(1, 'Sokoya', 'Philip', 'phil@gmail.com', '8f7d7a41ce942ec9b93ead40a8530fd02d5ee10982e0a23b52829a6364681e45', 'HQ8@D00m.j$F$b!5,x@y9.OWdfm;OAHm0PK?8c.p@:e%IE(#R3', 'My legal company name', 'my address', '71718181', 'Ng83833', 'd18cc26fbd8189e6124f1c1ee14e49c9.docx', 0, 0, 'Tv & Electronics', '', 'Guaranty Trust Bank Plc', 'Sokoya Adeniji Philip', '2820226778', '7262626228', 'Here is my information... Nothing serious', '2018-09-22', '2018-09-14', NULL, 0, '2018-09-06 15:41:35', '2018-10-03 11:24:10', '::1', 0),
 (2, 'Jeff', 'Chidi', 'jeff@gmail.com', '11e403be4a0c4c4053a88321f57ba7e68d097fff0c90ef9fe0a54c721cfc72b7', '@nV$fMwzglx_X2)+w^S!6LrqE#nF360F6D*V$V?AK^wNK|z6yA', NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, 0, '2018-09-06 16:17:46', '2018-09-06 16:18:28', '::1', 0),
-(3, 'Sokoya', 'Adeniji', 'admin@gmail.com', '6ff6f751b0d7c6f9a797b0b120d7cc26ba8206026a177b3a0c5bfe09d445da9e', 'z5Lq8*.@)TXASYpj|e<GgH4l14^4)whvU=VrrYaKz.4L_DBlME', NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, '', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, 0, '2018-09-14 13:01:59', '2018-09-24 10:36:42', '::1', 0);
+(3, 'Sokoya', 'Adeniji', 'admin@gmail.com', '6ff6f751b0d7c6f9a797b0b120d7cc26ba8206026a177b3a0c5bfe09d445da9e', 'z5Lq8*.@)TXASYpj|e<GgH4l14^4)whvU=VrrYaKz.4L_DBlME', NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, '', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, 0, '2018-09-14 13:01:59', '2018-10-02 11:18:11', '::1', 0);
 
 -- --------------------------------------------------------
 
@@ -322,15 +325,13 @@ CREATE TABLE `specifications` (
 --
 
 INSERT INTO `specifications` (`id`, `spec_name`, `options`, `description`, `multiple_options`) VALUES
-(1, 'Features', '["3D"," Anti Glare"," Full HD"," Gorilla Glass"," HD"," UHD"]', 'Select the features of the products', 1),
-(2, 'Display Features', '["3D"," Anti Glare"," Full HD"," Gorilla Glass"," HD"," UHD"]', 'Specify the type of display. Example: Retina, Full HD, 3D', 0),
-(3, 'Refresh Rate', '', 'Specifying the screen refresh rate in MHz  Example: 40', 0),
-(4, 'Display Size', '["gps"]', 'Specify the size of the display in inch.  Example: 47', 0),
-(5, 'Heel type', '["Block"," block heel","cone heel","flat","high"," low","mid","platform","wedge","stacked","stiletto"]', 'Define the type of heel the shoe has  Example: e.g. Block, Cuban, Flared, Mid, Stiletto', 0),
-(6, 'A new feature', '["nothing, nothing 2"]', 'Hello just testing', 0),
-(7, 'Dummy Feature', '["option1","option2","option3","option4","option5","option6","option7","option8","option9","option10"]', 'Nothing to talk about', 0),
-(8, 'Another dummy spec', '["option1","option2","option3","option4","option5","option6","option7","option8","option9","option10"]', 'Another dummy specification description', 0),
-(9, 'Colour specification', '["green"," red"," blue"," yellow"," purple"]', 'Nothing serious', 1);
+(1, 'Sim Type', '["Dual SIM"," Nano SIM"," Tripple SIM"," Dual Nano SIM"," Single SIM"," Dual Micro SIM"," Dual Mini SIM","Single Mini SIM"," Others"]', 'Select the SIM type for the smartphone', 0),
+(2, 'OS Type', '["Android OS"," iOS"," Java OS"," Blackberry OS"," Symbian OS"," Others"]', 'Select the Operating system for the smartphone', 0),
+(3, 'Battery Capacity', '["3000mAh - 5000mAh","    1000mAh - 3000mAh ","    4000mAh","   3000mAh ","   2000mAh ","   2200mAh ","    5000mAh","   3450mAh ","   5000mAh - 8000mAh ","   Over 10000mAh ","   4000mAh "," 3000mAh","  2000mAh ","  2200mAh","  3450mAh","   5000mAh","  5000mAh - 8000mAh","   2450mAh ","  3300mAh ","  1450mAh","  4450mAh ","  Less than 1000mAh ","  4300mAh","  8000mAh - 10000mAh ","   2300mAh","   10000mAh ","  6000mAh ","   1000mAh ","   3200mAh ","  4200mAh ","  1200mAh ","  1300mAh ","  5300mAh ","  5450mAh ","   6200mAh"]', 'Battery Capacity', 0),
+(4, 'Internal Memory', '["6 GB "," 32 GB","64 GB"," 8 GB"," Below 128 MB"," 256 GB","128 GB","4 GB","1 GB","2 GB","128 MB"," Above 256 GB"," 3 GB","512 MB","256 MB"]', 'Phone Internal memory', 0),
+(5, 'RAM', '["2 GB"," 3 GB"," 1 GB"," 4 GB ","6 GB","512 MB"," 1.5 GB ","16 GB"," Below 128MB"," 8 GB"," 32 MB"," 128 MB"," 256 MB"," 768 MB","500 GB. Others"]', 'RAM size', 0),
+(6, 'Sceen Size', '["5.5 inches "," 5 inches"," 6 inches"," Others"," 4.7 inches "," 5.7 inches "," 5.2 inches"," 5.88 inches"," 4 inches"," 6.1 inches"," 4.5 inches"," 6.4 inches"," 5.6 inches "," 5.9 inches"," 2.4 inches"," 5.3 inches"," 5.1 inches"," 1.5 inches"," 2.8 inches "," 1.56 inches"," 1.4 inches","1.45 inches ","4.8 inches","1.77 inches"," 4.3 inches"," 55 inches"," 1.36 inches"," 4.6 inches"," 7 inches"," 1.52 inches"]', 'Screen Size', 0),
+(7, 'Colour', '["Black"," Gold "," Grey ","Blue "," Silver "," Yellow "," Red "," White ","Others"," Purple "," Pink "," Multicolour"," Brown "," Beige ","Green "," Orange"," Bronze"]', 'Colour', 0);
 
 -- --------------------------------------------------------
 
@@ -352,9 +353,10 @@ CREATE TABLE `sub_category` (
 --
 
 INSERT INTO `sub_category` (`sub_category_id`, `root_category_id`, `category_id`, `name`, `specifications`, `created_at`) VALUES
-(15, 2, 1, 'no spec category', '["1","2","3","4"]', '2018-09-18 17:45:19'),
-(16, 2, 1, 'My new Sub', '["1","2","3"]', '2018-09-17 16:20:51'),
-(17, 3, 3, 'Samsung S9+', '["1","2","4"]', '2018-09-17 16:24:27');
+(1, 1, 1, 'Smartphones', '["1","2","3","4","5","6","7"]', '2018-10-01 19:36:33'),
+(2, 1, 1, 'Feature Phones', '["1","2","3","4","5","6","7"]', '2018-10-01 19:37:22'),
+(3, 1, 1, 'Batteries', '', '2018-10-02 11:19:26'),
+(4, 1, 2, 'Phone Cables', '', '2018-10-02 11:21:06');
 
 -- --------------------------------------------------------
 
@@ -399,7 +401,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `email`, `first_name`, `last_name`, `phone`, `display_name`, `gender`, `password`, `salt`, `ip`, `date_registered`, `last_login`, `newsletter`, `recovery_code`, `account_status`) VALUES
 (1, 'bisi@gmail.com', 'Sokoya', 'Philip', '08169254598', 'mrphilo1234455', 'female', 'eaf859633c1bc66dc04a57f3d2579a0a0f5a626c17940a0010473222c9ee61f0', 'Dr=SLzk1viy$JP9q<=)bTn0V##gdQctp;!zmvb.g:8iur9T?!+', '127.0.0.1', '2018-08-23 16:21:31', '2018-09-04 20:44:25', 0, '', ''),
-(2, 'phil@gmail.com', 'Sokoya', 'Adeniji', '', '', '', 'f191311d9970adaf1117fbbb295cc959bb9d094329215bddfb590a9def27dee2', '*9-dTBSC-8m+QmuPv&|PKU>Ipz-Wcd^oxL<s.iAoepyAO1Wjxx', '::1', '2018-09-17 21:40:35', '2018-09-26 22:14:11', 0, '', '');
+(2, 'phil@gmail.com', 'Sokoya', 'Adeniji', '', '', '', 'f191311d9970adaf1117fbbb295cc959bb9d094329215bddfb590a9def27dee2', '*9-dTBSC-8m+QmuPv&|PKU>Ipz-Wcd^oxL<s.iAoepyAO1Wjxx', '::1', '2018-09-17 21:40:35', '2018-09-27 20:10:30', 0, '', '');
 
 --
 -- Indexes for dumped tables
@@ -416,6 +418,7 @@ ALTER TABLE `brands`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`category_id`);
+ALTER TABLE `category` ADD FULLTEXT KEY `name` (`name`);
 
 --
 -- Indexes for table `coupons`
@@ -457,6 +460,8 @@ ALTER TABLE `product_variation`
 --
 ALTER TABLE `root_category`
   ADD PRIMARY KEY (`root_category_id`);
+ALTER TABLE `root_category` ADD FULLTEXT KEY `name` (`name`);
+ALTER TABLE `root_category` ADD FULLTEXT KEY `name_2` (`name`);
 
 --
 -- Indexes for table `sellers`
@@ -476,6 +481,7 @@ ALTER TABLE `specifications`
 --
 ALTER TABLE `sub_category`
   ADD PRIMARY KEY (`sub_category_id`);
+ALTER TABLE `sub_category` ADD FULLTEXT KEY `name` (`name`);
 
 --
 -- Indexes for table `tags`
@@ -502,7 +508,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 --
 -- AUTO_INCREMENT for table `coupons`
 --
@@ -517,17 +523,17 @@ ALTER TABLE `favourite`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `product_gallery`
 --
 ALTER TABLE `product_gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `product_variation`
 --
 ALTER TABLE `product_variation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `root_category`
 --
@@ -542,12 +548,12 @@ ALTER TABLE `sellers`
 -- AUTO_INCREMENT for table `specifications`
 --
 ALTER TABLE `specifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `sub_category`
 --
 ALTER TABLE `sub_category`
-  MODIFY `sub_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `sub_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tags`
 --
