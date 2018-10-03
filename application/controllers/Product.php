@@ -53,8 +53,10 @@ class Product extends CI_Controller {
                     if( is_array($new_value) ){
                         $new_value = array_map("unserialize", array_unique(array_map("serialize", $new_value)));
                         foreach ($new_value as $inkey => $invalue) $output_array[$new_key][] = $invalue;
+                        $output_array[$new_key] = array_unique($output_array[$new_key], SORT_REGULAR);
                     }else{
                         $output_array[$new_key][] = $new_value;
+                        $output_array[$new_key] = array_unique($output_array[$new_key], SORT_REGULAR);
                     }
                 }
             }
@@ -66,7 +68,7 @@ class Product extends CI_Controller {
         $config = $this->config->item('pagination');
         $config['base_url'] = current_url() ;
         $config['total_rows'] = $count;
-        $config['per_page'] = 10;    
+        $config['per_page'] = 1;    
         $config["num_links"] = 5;
         $this->pagination->initialize($config); 
 

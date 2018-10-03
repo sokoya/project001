@@ -165,7 +165,7 @@
 								<div class="panel-header feature-attribute">
 									<div class="panel-title" data-toggle="collapse" data-target="#<?= trim($feature).'-1'; ?>" araia-expanded="true" arial-controls="<?= trim($feature).'-1'; ?>">
 										<h3 class="widget-title-sm">
-											<?= $feature; ?>
+											<?= preg_replace("/[^A-Za-z 0-9]/", ' ', $feature); ?>
 										</h3>										
 									</div>
 								</div>
@@ -174,7 +174,6 @@
 										<?php foreach($feature_value as $key => $value ) : ?>
 											<div class="carrito-checkbox">
 												<label>
-
 													<input class="filter" type="checkbox" data-type="<?= trim($feature);?>" data-value="<?= trim($value)?>" /><?= $value; ?>
 													<span class="checkmark"></span>
 												</label>
@@ -287,9 +286,6 @@
 		function filter_data(){
 			$('#processing').show();
 			let action = 'fetch_data';
-			// price
-			// let minimum_price = $('#hidden_minimum_price').val();
-			// let maximum_price = $('#hidden_maximum_price').val();
 			let filters = get_filter('filter');
 
 			$.ajax({

@@ -870,8 +870,17 @@
                 </div>
                 <div class="modal-body">
                     <p id="product-title">
-                        This is a confirmation the product <?= word_limiter(ucwords($product->product_name), 7,'...'); ?> has been added to the cart
+                        This is a confirmation the product <span class="text text-danger"><?= ucwords($product->product_name); ?></span> has been added to the cart
                     </p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-block btn-danger">Continue Shopping</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-block btn-success">Go to Cart</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -931,6 +940,8 @@
             _btn.prop('disabled', '');
             return false;
         }
+
+        $('#prod-confirmation').modal('show');
 
         $.ajax({
             url: base_url + "product/cart",
