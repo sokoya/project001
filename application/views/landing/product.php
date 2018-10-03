@@ -29,10 +29,8 @@
                     </li>
                     <li><a href="<?= base_url('catalog/' .urlify($product->category)); ?>"><?= ucwords($product->category); ?></a>
                     </li>
-                    <li><a href="<?= base_url('catalog/' . urlify($product->subcategory)); ?>"><?= ucwords($product->subcategory); ?></a>
-                    </li>
                     <?php if( !empty($product->brand_name)): ?>
-                        <li><a title="<?=$product->brand_name;?>" href="<?= base_url('brand/') . strtolower($product->brand_name); ?>"><?= ucwords($product->brand_name); ?></a>
+                        <li><a title="<?=$product->brand_name;?>" href="<?= base_url('catalog/') . strtolower($product->brand_name); ?>"><?= ucwords($product->brand_name); ?></a>
                         </li>
                     <?php endif;?>
                     <li class="active"><?= word_limiter(ucwords($product->product_name), 7,'...');  ?></li>
@@ -45,8 +43,8 @@
                             <a href="<?= base_url('assets/landing/img/test_product_page/xperia/1-b.jpg'); ?>" id="jqzoom"
                                data-rel="gal-1">
                                 <img src="<?= base_url('assets/landing/img/test_product_page/xperia/1.jpg'); ?>"
-                                     alt="Image Alternative text"
-                                     title="Image Title"/>
+                                     alt="<?= $product->product_name; ?>"
+                                     title="<?= ucwords($product->product_name)?>"/>
                             </a>
                         </div>
                     </div>
@@ -132,7 +130,7 @@
                                                 <td><?= ucwords($product->main_colour); ?></td>
                                             </tr>
                                             <?php endif; ?>
-                                            <?php if(!is_null($product->colour_family)): ?>
+                                            <?php if(!empty($product->colour_family)): ?>
                                                 <tr>
                                                     <td>Colour Family:</td>
                                                     <td><?php $colour_family = json_decode($product->colour_family);
@@ -146,7 +144,7 @@
                                                     <td><?= ucwords($product->main_material); ?></td>
                                                 </tr>
                                             <?php endif; ?>
-                                            <?php if( !is_null($product->attributes)) : ?>
+                                            <?php if( !empty($product->attributes)) : ?>
                                             <tr>
                                                 <td>Features:</td>
                                                 <td><a href="#tab-2">See more...</a></td>
@@ -189,13 +187,20 @@
                                                         <select class="form-control" name="variation">
                                                             <option value="">--Select Variation--</option>
                                                             <?php foreach( $variations as $variation ): ?>
-                                                                <option value="<?= trim($variation->id);?>" <?php if($variation->quantity == 0 ) echo'disabled'; ?> >
+                                                                <option value="<?= trim($variation->variation);?>" <?php if($variation->quantity == 0 ) echo'disabled'; ?> >
                                                                     <?= trim($variation->variation); ?>
                                                                 </option>
                                                             <?php endforeach; ?>
                                                         </select>
                                                     </div>
                                                 </div>
+                                            <?php endif; ?>
+                                            <input type="hidden" name="product_id" value="<?= base64_encode($product->sku); ?>">
+                                            <input type="hidden" name="product_name" value="<?= $product->product_name; ?>">
+                                            <?php if(!empty($variation->discount_price)): ?>
+                                                <input type="hidden" name="product_price" value="<?= $variation->discount_price; ?>">
+                                            <?php else :?>
+                                                <input type="hidden" name="product_price" value="<?= $variation->sale_price; ?>">
                                             <?php endif; ?>
                                             <div class="col-md-4">
                                                 <div class="form-group">
@@ -298,7 +303,7 @@
                                     </p>
                                 </div>
                             <?php endif; ?>
-                            <?php if( !is_null($product->certifications) ): ?>
+                            <?php if( !empty($product->certifications) ): ?>
                                 <h3 class="product-overview-title">Certifications</h3>
                                 <div class="product-overview-desc">
                                     <p style="text-wrap: normal">
@@ -309,7 +314,7 @@
                                     </p>
                                 </div>
                             <?php endif; ?>
-                            <?php if( !is_null($product->warranty_type) ): ?>
+                            <?php if( !empty($product->warranty_type) ): ?>
                                 <h3 class="product-overview-title">Warranty Type</h3>
                                 <div class="product-overview-desc">
                                     <p style="text-wrap: normal">
@@ -853,8 +858,29 @@
         <?php endif; ?>
 	</div>
 	<div class="gap gap-small"></div>
-	<?php $this->load->view('landing/resources/footer'); ?>
+    <!-- Modal -->
+    
+    <div id="prod-confirmation" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Product Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="product-title">
+                        This is a confirmation the product <?= word_limiter(ucwords($product->product_name), 7,'...'); ?> has been added to the cart
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
 
+        </div>
+    </div>
+	<?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <script type="text/javascript">let base_url = "<?= base_url(); ?>"</script>
 <?php $this->load->view('landing/resources/script'); ?>
@@ -905,6 +931,18 @@
             _btn.prop('disabled', '');
             return false;
         }
+
+        $.ajax({
+            url: base_url + "product/cart",
+            method: "POST",
+            data: $('#variation-form').serialize(),
+            success: function( respose ){
+
+            }
+        });
+
+        // $('#prod-confirmation').modal('show');
+
 
 
     });
