@@ -875,10 +875,10 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <button type="button" class="btn btn-block btn-danger">Continue Shopping</button>
+                            <button type="button" id="continue-shopping" class="btn btn-block btn-danger">Continue Shopping</button>
                         </div>
                         <div class="col-md-6">
-                            <button type="button" class="btn btn-block btn-success">Go to Cart</button>
+                            <button type="button" id="cart" class="btn btn-block btn-success">Go to Cart</button>
                         </div>
                     </div>
                 </div>
@@ -891,7 +891,7 @@
     </div>
 	<?php $this->load->view('landing/resources/footer'); ?>
 </div>
-<script type="text/javascript">let base_url = "<?= base_url(); ?>"</script>
+window.<script type="text/javascript">let base_url = "<?= base_url(); ?>"</script>
 <?php $this->load->view('landing/resources/script'); ?>
 <script>
     $('.fav').on('click', function(e) {
@@ -941,19 +941,29 @@
             return false;
         }
 
-        $('#prod-confirmation').modal('show');
+        _btn.prop('disabled', '');
 
+        $('#prod-confirmation').modal('show');
         $.ajax({
             url: base_url + "product/cart",
             method: "POST",
             data: $('#variation-form').serialize(),
             success: function( respose ){
-
+                if( response == 'good' ){
+                    let x = $('.cart-read').text();
+                    x++;
+                    $('.cart-read').text(x);
+                }
             }
         });
 
-        // $('#prod-confirmation').modal('show');
+        $('#continue-shopping').on('click', function(){
+            window.location.href = base_url;
+        });
 
+        $('#cart').on('click', function(){
+            window.location.href = base_url;
+        });
 
 
     });

@@ -101,7 +101,8 @@ class Product extends CI_Controller {
             'name' => $this->input->post('product_name'),
             'options' => array('Size' => $this->input->post('variation'), 'Colour' => $this->input->post('colour'))
         );
-        var_dump($data);
+        echo 'good';
+        exit;
     }
 
 
