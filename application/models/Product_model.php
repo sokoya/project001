@@ -41,7 +41,7 @@ Class Product_model extends CI_Model{
                 $this->db->limit(10);
                 $output = $this->db->get('sub_category')->result();
             }else{
-                // just return all the categoryies
+                // just return all the categories
                 $output = $this->db->query('SELECT name FROM root_category LIMIT 10')->result();
 
             }
@@ -78,22 +78,127 @@ Class Product_model extends CI_Model{
         return false;
     }
 
-    function get_products( $d = '' ){
+    function get_products( $d = '' , $gets = array()){
         $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price,g.image_name,s.first_name
             FROM products p                        
             JOIN product_variation AS v ON (p.id = v.product_id) 
             JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )                
             JOIN sellers AS s ON p.seller_id = s.id ";
         if( $d['str'] != '' ){
-            $select_query .= " 
-            WHERE MATCH(p.rootcategory) AGAINST('{$d['str']}') OR
-            MATCH(p.category) AGAINST('{$d['str']}') OR
-            MATCH(p.subcategory) AGAINST('{$d['str']}') OR
-            MATCH(p.brand_name) AGAINST('{$d['str']}')
-            ";
-        }
+            $select_query .= " WHERE ( MATCH(p.rootcategory) AGAINST('{$d['str']}') "; 
+
+            if( isset($gets) ){
+                if( isset($gets['page']) ) unset($gets['page']);
+                if( count($gets) ){
+                    foreach( $gets as $key => $value ){
+                        $explode = explode(',', $value);
+                        if( count($explode)){
+                            $count = $explode;
+                            if( $count > 1 ){
+                                $select_query .= " AND ( ";
+                                $array_value = array_values($explode);
+                                $last = end($array_value);
+                                foreach( $explode as $exp ){
+                                    if( $exp == $last ){ 
+                                        $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' )";
+                                    }else{
+                                        $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' OR";
+                                    }
+                                }
+                                // remove the last OR
+                                // $select_query .= preg_replace('/\W\w+\s*(\W*)$/', '$1', $select_query);
+                                $select_query .= " )";
+                            }else{
+                                // < 1
+                                $select_query .= " AND JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' )";
+                            }
+                            
+                        }else{
+                            $select_query .= " AND JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' )";
+                        }                    
+                    }
+                } 
+            } 
+
+            $select_query .= " )";
+
+            $select_query .= " OR (MATCH(p.category) AGAINST('{$d['str']}') ";
+
+            if( isset($gets) ){
+                if( isset($gets['page']) ) unset($gets['page']);
+                if( count($gets) ){
+                    foreach( $gets as $key => $value ){
+                        $explode = explode(',', $value);
+                        if( count($explode)){
+                            $count = $explode;
+                            if( $count > 1 ){
+                                $select_query .= " AND ( ";
+                                $array_value = array_values($explode);
+                                $last = end($array_value);
+                                foreach( $explode as $exp ){
+                                    if( $exp == $last ){ 
+                                        $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' )";
+                                    }else{
+                                        $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' OR";
+                                    }
+                                }
+                                // remove the last OR
+                                // $select_query .= preg_replace('/\W\w+\s*(\W*)$/', '$1', $select_query);
+                                $select_query .= " )";
+                            }else{
+                                // < 1
+                                $select_query .= " AND JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' )";
+                            }
+                            
+                        }else{
+                            $select_query .= " AND JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' )";
+                        }                    
+                    }
+                }
+            }
+
+            $select_query .= " )";
+
+            $select_query .= " OR (MATCH(p.subcategory) AGAINST('{$d['str']}') ";
+
+            if( isset($gets) ){
+                if( isset($gets['page']) ) unset($gets['page']);
+                if( count($gets) ){
+                    foreach( $gets as $key => $value ){
+                        $explode = explode(',', $value);
+                        if( count($explode)){
+                            $count = $explode;
+                            if( $count > 1 ){
+                                $select_query .= " AND ( ";
+                                $array_value = array_values($explode);
+                                $last = end($array_value);
+                                foreach( $explode as $exp ){
+                                    if( $exp == $last ){ 
+                                        $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' )";
+                                    }else{
+                                        $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' OR";
+                                    }
+                                }
+                                // remove the last OR
+                                // $select_query .= preg_replace('/\W\w+\s*(\W*)$/', '$1', $select_query);
+                                $select_query .= " )";
+                            }else{
+                                // < 1
+                                $select_query .= " AND JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' )";
+                            }
+                            
+                        }else{
+                            $select_query .= " AND JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' )";
+                        }                    
+                    }
+                }
+            }
+
+            $select_query .= " )";
+            
+        }        
         $select_query .=" GROUP BY p.id LIMIT {$d['offset']},{$d['limit']} ";
-        // die($select_query);
+        // die( $select_query );
         $products_query = $this->db->query( $select_query )->result();
 
         return $products_query;
@@ -129,7 +234,6 @@ Class Product_model extends CI_Model{
     }
 
     function get_features( $str = '' ){
-        // SELECT DISTINCT JSON_UNQUOTE(JSON_EXTRACT(`attributes` , '$.*')) AS feature_value FROM products
         $select_query = "SELECT DISTINCT JSON_UNQUOTE(JSON_EXTRACT(`attributes`, '$')) AS feature_value FROM products";
         if( $str != ''){
             $select_query .= " WHERE MATCH(rootcategory) AGAINST('$str') OR
