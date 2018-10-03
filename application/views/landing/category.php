@@ -166,31 +166,38 @@
 					<?php endif; ?>
 					<!-- Features -->
 					<div class="category-filters-section">
-						<?php foreach($features as $feature => $feature_value) :?>
-						<div class="accordion" id="<?=trim($feature);?>">
+						<?php foreach ($features
+
+						as $feature => $feature_value) : ?>
+						<div class="accordion" id="<?= trim($feature); ?>">
 							<div class="panel feature-attribute">
 								<div class="panel-header feature-attribute">
-									<div class="panel-title" data-toggle="collapse" data-target="#<?= trim($feature).'-1'; ?>" araia-expanded="true" arial-controls="<?= trim($feature).'-1'; ?>">
+									<div class="panel-title" data-toggle="collapse"
+										 data-target="#<?= trim($feature) . '-1'; ?>" araia-expanded="true"
+										 arial-controls="<?= trim($feature) . '-1'; ?>">
 										<h3 class="widget-title-sm">
 											<?= preg_replace("/[^A-Za-z 0-9]/", ' ', $feature); ?>
-										</h3>										
+										</h3>
 									</div>
 								</div>
-								<div id="<?= trim($feature).'-1'; ?>" class="collapse" aria-labeledby="<?= $feature; ?>" data-parent="#<?= trim($feature); ?>">
+								<div id="<?= trim($feature) . '-1'; ?>" class="collapse"
+									 aria-labeledby="<?= $feature; ?>" data-parent="#<?= trim($feature); ?>">
 									<div class="panel-body">
-										<?php foreach($feature_value as $key => $value ) : ?>
+										<?php foreach ($feature_value as $key => $value) : ?>
 											<div class="carrito-checkbox">
 												<label>
-													<input class="filter" type="checkbox" name="filterset" data-type="<?= trim($feature);?>" data-value="<?= trim($value)?>" /><?= $value; ?>
+													<input class="filter" type="checkbox" name="filterset"
+														   data-type="<?= trim($feature); ?>"
+														   data-value="<?= trim($value) ?>"/><?= $value; ?>
 													<span class="checkmark"></span>
 												</label>
 											</div>
-										<?php  endforeach; ?>
-									</div>									
+										<?php endforeach; ?>
+									</div>
 								</div>
 							</div>
-						<?php endforeach; ?>
-					</div>
+							<?php endforeach; ?>
+						</div>
 				</aside>
 			</div>
 			<div class="col-md-9">
@@ -205,48 +212,54 @@
 					</div>
 				</div>
 				<div id="category_body">
-				<div class="row filter_data" data-gutter="15">
-				<?php foreach( $products as $product ) : ?>
-					<div class="col-md-4">
-						<div class="product">
-							<?php  if( !empty($product->discount_price )): ?>
-								<ul class="product-labels">
-									<li><?= get_discount( $product->sale_price, $product->discount_price);?></li>
-									<!-- Call the discount calculator her -->
-								</ul>
-							<?php endif; ?>
-							<div class="product-img-wrap">
-								<!-- <?= base_url('assets/landing/img/test_product/29.jpg'); ?> -->
-								<?php $image_name = $product->image_name; 
-									$split = explode('|', $image_name)
-								?>
-								<img class="product-img"
-									 src="https://res.cloudinary.com/philo001/image/upload/h_400,w_400,q_auto,f_auto,fl_lossy,dpr_auto/v<?= $split[0] . '/' . $split[1]; ?>"
-									 alt="<?= $product->product_name; ?>" title="<?= $product->product_name; ?>" >
-							</div>
-							<a class="product-link" href="<?= base_url(urlify($product->product_name, $product->id)); ?>" ></a>
-							<div class="product-caption">
-								<ul class="product-caption-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-								<span class="text-sm pull-right"><strong>Sold By: </strong><?=$product->first_name;?></span>
-								</ul>
-								<h5 class="product-caption-title"><?= word_limiter(ucwords($product->product_name), 7,'...');  ?></h5>
-								<div class="product-caption-price">
-									<?php if(!empty( $product->discount_price)) :?>
-										<span class="product-caption-price-new"><?= ngn($product->discount_price); ?></span>
-										<span class="product-caption-price-old"><sup><?= ngn($product->sale_price);?> </sup></span>
-									<?php else : ?>
-										<span class="product-caption-price-new"><?= ngn($product->sale_price);?> </span>
+					<div class="row filter_data" data-gutter="15">
+						<?php foreach ($products as $product) : ?>
+							<div class="col-md-4">
+								<div class="product">
+									<?php if (!empty($product->discount_price)): ?>
+										<ul class="product-labels">
+											<li><?= get_discount($product->sale_price, $product->discount_price); ?></li>
+											<!-- Call the discount calculator her -->
+										</ul>
 									<?php endif; ?>
+									<div class="product-img-wrap">
+										<!-- <?= base_url('assets/landing/img/test_product/29.jpg'); ?> -->
+										<?php $image_name = $product->image_name;
+										$split = explode('|', $image_name)
+										?>
+										<img class="product-img"
+											 src="https://res.cloudinary.com/philo001/image/upload/h_400,w_400,q_auto,f_auto,fl_lossy,dpr_auto/v<?= $split[0] . '/' . $split[1]; ?>"
+											 alt="<?= $product->product_name; ?>"
+											 title="<?= $product->product_name; ?>">
+									</div>
+									<a class="product-link"
+									   href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
+									<div class="product-caption">
+										<ul class="product-caption-rating">
+											<li class="rated"><i class="fa fa-star"></i>
+											</li>
+											<li class="rated"><i class="fa fa-star"></i>
+											</li>
+											<li class="rated"><i class="fa fa-star"></i>
+											</li>
+											<li class="rated"><i class="fa fa-star"></i>
+											</li>
+											<li class="rated"><i class="fa fa-star"></i>
+											</li>
+											<span
+												class="text-sm pull-right"><strong>Sold By: </strong><?= $product->first_name; ?></span>
+										</ul>
+										<h5 class="product-caption-title"><?= word_limiter(ucwords($product->product_name), 7, '...'); ?></h5>
+										<div class="product-caption-price">
+											<?php if (!empty($product->discount_price)) : ?>
+												<span
+													class="product-caption-price-new"><?= ngn($product->discount_price); ?></span>
+												<span
+													class="product-caption-price-old"><sup><?= ngn($product->sale_price); ?> </sup></span>
+											<?php else : ?>
+												<span
+													class="product-caption-price-new"><?= ngn($product->sale_price); ?> </span>
+											<?php endif; ?>
 										</div>
 									</div>
 								</div>
@@ -280,89 +293,74 @@
 </script>
 <script>
 	$(document).ready(function () {
+		let _category_body = $('#category_body');
+
+		function doReplaceState(url) {
+			let state = {current_url: url},
+				title = "Carrito MarketPlace";
+			history.replaceState(state, title, url);
+		}
+
+		function load_page(url) {
+			$(_category_body).load(`${url} #category_body`, function (response, status, xhr) {
+				if (status === "error") {
+					let msg = "Sorry but there was an error: ";
+					alert(msg + xhr.status + " " + xhr.statusText);
+				}
+
+				doReplaceState(url);
+
+				$('#processing').hide();
+				$(_category_body).show();
+			});
+		}
+
 		let url = '';
 		let filter_string = '';
 		$('.filter').change(function () {
-			let filter_list = {};
-			url = '';
-			filter_string = '';
-			let _category_body = $('#category_body');
-			$(_category_body).hide();
-			$('#processing').show();
-			let items = $('input[name=filterset]:checked');
-			items.each(function () {
-				let value = $(this).data('value'); // apple
-				let key = $(this).data('type'); // brand_name
+			if ($('input[name=filterset]').is(':checked')) {
+				let filter_list = {};
+				url = '';
+				filter_string = '';
+				$(_category_body).hide();
+				$('#processing').show();
+				let items = $('input[name=filterset]:checked');
 
-				if (filter_list[key]) {
-					if (jQuery.inArray(value, filter_list[key]) !== -1) {
-					} else {
-						filter_list[key].push(value)
-					}
-				} else {
-					filter_list[key] = [value];
-				}
 
-				url='';
-				jQuery.each(filter_list, function (obj) {
-					filter_string = '';
-					jQuery.each(filter_list[obj], function (id, values) {
-						if (filter_string === '') {
-							filter_string += values;
+				items.each(function () {
+					let value = $(this).data('value'); // apple
+					let key = $(this).data('type'); // brand_name
+
+					if (filter_list[key]) {
+						if (jQuery.inArray(value, filter_list[key]) !== -1) {
 						} else {
-							filter_string += ',' + values;
+							filter_list[key].push(value)
+						}
+					} else {
+						filter_list[key] = [value];
+					}
+					url = '';
+					jQuery.each(filter_list, function (obj) {
+						filter_string = '';
+						jQuery.each(filter_list[obj], function (id, values) {
+							if (filter_string === '') {
+								filter_string += values;
+							} else {
+								filter_string += ',' + values;
+							}
+						});
+						if (url === '') {
+							url += `?${obj}=${filter_string}`
+						} else {
+							url += `&${obj}=${filter_string}`
 						}
 					});
+					load_page(url);
 
-
-					if (url === '') {
-						url += `?${obj}=${filter_string}`
-					} else {
-						url += `&${obj}=${filter_string}`
-					}
 				});
-
-
-				function doReplaceState(url) {
-					let state = {current_url: url},
-						title = "Carrito MarketPlace";
-					history.replaceState(state, title, url);
-				}
-
-
-				$(_category_body).load(`${url} #category_body`, function (response, status, xhr) {
-					if (status === "error") {
-						let msg = "Sorry but there was an error: ";
-						alert(msg + xhr.status + " " + xhr.statusText);
-					}
-
-					doReplaceState(url);
-
-					$('#processing').hide();
-					$(_category_body).show();
-				});
-
-
-				// $.ajax({
-				// 	type: "POST",
-				// 	url: base_url + '/product/fetch_data',
-				// 	data: {
-				// 		action: action,
-				// 		filters: filter_list
-				// 	},
-				// 	success: function (response) {
-				// 		console.log(`Successful ${response}`);
-				// 		$('#category_body').show();
-				// 		$('#processing').hide();
-				// 	},
-				// 	error: function (response) {
-				// 		console.log(`Failed ${response}`);
-				// 		$('#category_body').show();
-				// 		$('#processing').hide();
-				// 	},
-				//
-				// });
-			});
+			} else {
+				load_page(current_url);
+			}
 		});
 	});
 </script>
