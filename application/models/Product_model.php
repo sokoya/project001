@@ -180,11 +180,6 @@ Class Product_model extends CI_Model{
         return $products_query;
     }
 
-    function num_of_products($str){
-        $counts = $this->db->query("SELECT COUNT(*) AS cnt FROM products WHERE MATCH(rootcategory) AGAINST('$str') OR MATCH(category) AGAINST('$str') OR MATCH(subcategory) AGAINST('$str')")->row();
-        return $counts->cnt;
-    }
-
     function get_brands( $str ='' ){
         $select_query = "SELECT COUNT(*) AS `brand_count`, `brand_name` FROM `products` p ";
         if( $str != '' ){
@@ -218,5 +213,9 @@ Class Product_model extends CI_Model{
             MATCH(brand_name) AGAINST('$str')";
         }
         return $this->db->query( $select_query )->result_array();
+    }
+
+    function get_cart_details( $id ){
+        return $this->db->query('SELECT s.first_name name, i.image_name image FROM sellers s JOIN product_gallery i ON (s.id = i.product_id AND i.featured_image = 1) ')->row();
     }
 }

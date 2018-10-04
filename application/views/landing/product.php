@@ -30,10 +30,10 @@
                     <li><a href="<?= base_url('catalog/' .urlify($product->category)); ?>"><?= ucwords($product->category); ?></a>
                     </li>
                     <?php if( !empty($product->brand_name)): ?>
-                        <li><a title="<?=$product->brand_name;?>" href="<?= base_url('catalog/') . strtolower($product->brand_name); ?>"><?= ucwords($product->brand_name); ?></a>
+                        <li><a title="<?=$product->brand_name;?>" href="<?= base_url('catalog/brand/') . strtolower($product->brand_name); ?>"><?= ucwords($product->brand_name); ?></a>
                         </li>
                     <?php endif;?>
-                    <li class="active"><?= word_limiter(ucwords($product->product_name), 7,'...');  ?></li>
+                    <li class="active"><?= ucwords($product->product_name);  ?></li>
                 </ol>
             </header>
             <div class="row">
@@ -195,7 +195,7 @@
                                                     </div>
                                                 </div>
                                             <?php endif; ?>
-                                            <input type="hidden" name="product_id" value="<?= base64_encode($product->sku); ?>">
+                                            <input type="hidden" name="product_id" value="<?= base64_encode($product->id); ?>">
                                             <input type="hidden" name="product_name" value="<?= $product->product_name; ?>">
                                             <?php if(!empty($variation->discount_price)): ?>
                                                 <input type="hidden" name="product_price" value="<?= $variation->discount_price; ?>">
@@ -205,7 +205,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Quantity</label>
-                                                    <input type="number" name="quantity" required min="1" value="1" class="form-control">
+                                                    <input type="number" name="quantity" required min="1" max="10" value="1" class="form-control quantity">
                                                 </div>
                                             </div>
                                         </div>  
@@ -872,7 +872,6 @@
                     <p id="product-title">
                         This is a confirmation the product <span class="text text-danger"><?= ucwords($product->product_name); ?></span> has been added to the cart
                     </p>
-
                     <div class="row">
                         <div class="col-md-6">
                             <button type="button" id="continue-shopping" class="btn btn-block btn-danger">Continue Shopping</button>
@@ -945,14 +944,15 @@ window.<script type="text/javascript">let base_url = "<?= base_url(); ?>"</scrip
 
         $('#prod-confirmation').modal('show');
         $.ajax({
-            url: base_url + "product/cart",
+            url: base_url + "product/add_to_cart",
             method: "POST",
             data: $('#variation-form').serialize(),
-            success: function( respose ){
-                if( response == 'good' ){
-                    let x = $('.cart-read').text();
-                    x++;
-                    $('.cart-read').text(x);
+            success: function( response ){
+                if( response ){
+                    let x = $('.cart-read').text() * 1;
+                    let y = $('.quantity').val() * 1;
+                    $('.cart-read').text(x+y);
+                    console.log(response);
                 }
             }
         });
@@ -962,7 +962,7 @@ window.<script type="text/javascript">let base_url = "<?= base_url(); ?>"</scrip
         });
 
         $('#cart').on('click', function(){
-            window.location.href = base_url;
+            window.location.href = base_url + 'cart';
         });
 
 

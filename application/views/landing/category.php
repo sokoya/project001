@@ -336,9 +336,9 @@
 
 
 				items.each(function () {
-					let value = $(this).data('value'); // apple
-					let key = $(this).data('type'); // brand_name
-
+					let value = $(this).data('value');
+					let key = $(this).data('type'); 
+					
 					if (filter_list[key]) {
 						if (jQuery.inArray(value, filter_list[key]) !== -1) {
 						} else {

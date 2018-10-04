@@ -75,7 +75,7 @@ class Product extends CI_Controller {
         $config = $this->config->item('pagination');
         $config['base_url'] = current_url() ;
         $config['total_rows'] = $count; 
-        $config['per_page'] = 1; 
+        $config['per_page'] = 50; 
         $config["num_links"] = 5;
         $this->pagination->initialize($config);
 
@@ -88,27 +88,32 @@ class Product extends CI_Controller {
         $page_data['sub_categories'] = $this->product->get_sub_categories($str);
 
         $this->load->view('landing/category', $page_data);
-
-
-    }
-
-
-    // Fetch data base on search Ajax
-    public function fetch_data(){
-        // var_dump( $_POST['filters']);
     }
 
 
     public function cart(){
+        if( $this->input->post() ){
+            var_dump( $this->input->post());
+        }else{
+            $this->load->view('landing/cart');
+        }
+    }
+
+
+    public function add_to_cart(){
         $this->load->library('cart');
+        $name = preg_replace("/[^A-Za-z0-9- ]/","",cleanit($this->input->post('product_name')) );
         $data = array(
             'id' => base64_decode($this->input->post('product_id')),
             'qty' => $this->input->post('quantity'),
             'price' => $this->input->post('product_price'),
-            'name' => $this->input->post('product_name'),
-            'options' => array('Size' => $this->input->post('variation'), 'Colour' => $this->input->post('colour'))
+            'name' => $name,
+            'options' => array('size' => $this->input->post('variation'), 'colour' => $this->input->post('colour'))                
         );
-        echo 'good';
+
+        $this->cart->insert( $data );
+        echo 'Yes';        
+        exit;
     }
 
 

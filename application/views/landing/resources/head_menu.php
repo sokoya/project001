@@ -1,6 +1,5 @@
 <?php
 $categories = $this->product->get_menu_categories();
-
 ?>
 <nav class="navbar-default navbar-main-white yamm">
     <div class="container">
@@ -62,7 +61,9 @@ $categories = $this->product->get_menu_categories();
                 </li>
                 <li>
                     <a href="<?= base_url(lang('cart_link')); ?>" class="navbar-item-top">
-                        <strong><?= lang('cart'); ?></strong>
+                        <strong><i class="fa fa-shopping-cart"></i> Cart <span class="cart-read">
+                            <?= ($this->cart->total_items() == 0) ? '' : $this->cart->total_items(); ?>
+                        </span></strong>
                     </a>
                 </li>
                 <li class="dropdown">
