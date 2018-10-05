@@ -13,6 +13,7 @@
             </header>
             <div class="row">
                 <div class="col-md-10">
+                	<?php $this->load->view('landing/msg_view'); ?>
                     <?= form_open('', 'id="cart-form"'); ?>
                     <table class="table table table-shopping-cart">
                         <thead>
@@ -27,7 +28,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        	<?php $x = 1; 
+                        	<?php $x = 0; 
                         		$total = 0;
                         		foreach ($this->cart->contents() as $product): ?>
                         		<?php
@@ -50,12 +51,12 @@
 	                                </td>
 	                                <td><?= ngn($product['price']); ?></td>
 	                                <td>
-	                                    <input class="form-control quantity" name="<?=$x;?>[qty]" data-set="<?= $product['qty']; ?>" style="width:10; padding:4px; font-size:12px;" type="number" value="<?= $product['qty']; ?>" min="1" max="10"/>
-	                                    <a style="display: none;" href="javascript:void(0)" class="update-qty">Update Cart</a>
+	                                    <input class="form-control quantity" name="<?=$x;?>[qty]" data-set="<?= $product['qty']; ?>" data-id="<?= $x; ?>" style="width:10; padding:4px; font-size:12px;" type="number" value="<?= $product['qty']; ?>" min="1" max="10"/>
+	                                    <a style="display: none;" id="<?= $x; ?>" href="javascript:void(0)" class="update-qty">Update Cart</a>
 	                                </td>
 	                                <td><?php echo ngn($product['subtotal']); $total += $product['subtotal']; ?></td>
 	                                <td>
-	                                    <a class="fa fa-close table-shopping-remove" href="#"></a>
+	                                    <a class="fa fa-close table-shopping-remove" href="<?= base_url('cart/remove/' . $product['rowid']); ?>"></a>
 	                                </td>
 	                            </tr>
                         	<?php $x++; endforeach; ?>
@@ -77,8 +78,6 @@
             <ul class="list-inline">
                 <li><a class="btn btn-default" href="<?= base_url();?>">Continue Shopping</a>
                 </li>
-                <li><a class="btn btn-default" href="#">Update Cart</a>
-                </li>
             </ul>
             <?php else: ?>
             <div class="text-center"><i class="fa fa-cart-arrow-down empty-cart-icon"></i>
@@ -97,10 +96,11 @@
 		$('.quantity').change(function(){
 			_this = $(this);
 			let set = _this.data('set');
+			let id = _this.data('id');
 			if( set != _this.val() ){
-				$('.update-qty').show();
+				$("#"+id).show();
 			}else{
-				$('.update-qty').hide();
+				$("#"+id).hide();
 			}
 		});
 

@@ -93,10 +93,24 @@ class Product extends CI_Controller {
 
     public function cart(){
         if( $this->input->post() ){
-            var_dump( $this->input->post());
+            // update
+            $data = $this->input->post();
+            if( $this->cart->update($data) ){
+                $this->session->set_flashdata('success_msg','Your cart has been successfully updated.');
+                redirect('cart');
+            }else{
+                $this->session->set_flashdata('error_msg','There was an error updating the cart');
+                redirect('cart');
+            }
         }else{
             $this->load->view('landing/cart');
         }
+    }
+
+
+    public function remove_cart(){
+        $this->cart->remove($this->uri->segment(3));
+        redirect('cart');
     }
 
 
