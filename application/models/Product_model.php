@@ -1,6 +1,19 @@
 <?php
 
 Class Product_model extends CI_Model{
+
+    // Insert data
+    function insert_data($table = 'sellers', $data = array() ){
+        try {
+            $this->db->insert($table, $data);
+            $result = $this->db->insert_id();
+        } catch (Exception $e) {
+            $result = $e->getMessage();
+        }
+        return $result;
+    }
+
+
     // Update table
     function update_data( $access = '' , $data = array(), $table_name = 'users'){
         $this->db->where('id', $access);
@@ -180,6 +193,25 @@ Class Product_model extends CI_Model{
         return $products_query;
     }
 
+
+    // @param (id) - id of the present product
+    // return objects
+    function get_also_likes( $id = ''){
+        // Get the category of this product
+        $this->db->select('subcategory');
+        $this->db->where('id', $id);
+        $product_detail = $this->db->get('products')->row();
+
+        $select_query = "SELECT p.id, p.product_name, v.sale_price, v.discount_price,g.image_name
+            FROM products p                        
+            JOIN product_variation AS v ON (p.id = v.product_id) 
+            JOIN product_gallery AS g ON (p.id = g.product_id AND g.featured_image = 1) 
+            WHERE p.id != '$id' AND p.subcategory = '$product_detail->subcategory'
+            GROUP BY p.id ORDER BY RAND() LIMIT 4";
+        $result = $this->db->query( $select_query )->result();
+        return $result;
+    }
+
     function get_brands( $str ='' ){
         $select_query = "SELECT COUNT(*) AS `brand_count`, `brand_name` FROM `products` p ";
         if( $str != '' ){
@@ -218,4 +250,21 @@ Class Product_model extends CI_Model{
     function get_cart_details( $id ){
         return $this->db->query('SELECT s.first_name name, i.image_name image FROM sellers s JOIN product_gallery i ON (s.id = i.product_id AND i.featured_image = 1) ')->row();
     }
+
+
+    /**
+     * @param $table
+     * @return string
+     */
+    function generate_code($table = 'orders', $field = 'order_code'){
+        do {
+            $number = random_string('nozero', 6);
+            $this->db->where( $field, $number);
+            $this->db->from($table);
+            $count = $this->db->count_all_results();
+        } while ($count >= 1);
+            return $number;
+    }
 }
+
+

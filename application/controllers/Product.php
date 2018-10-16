@@ -5,7 +5,6 @@ class Product extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
-        $this->load->model('product_model', 'product');
         $this->load->helper('text');
     }
 
@@ -20,6 +19,7 @@ class Product extends CI_Controller {
         $page_data['variations'] = $this->product->get_variations($index);
         $page_data['gallery'] = $this->product->get_gallery($index);
         $page_data['favourited'] = $this->product->is_favourited($this->session->userdata('logged_id'), $index);
+        $page_data['likes'] = $this->product->get_also_likes( $index );
         $this->load->view('landing/product', $page_data);
 	}
 
@@ -38,8 +38,7 @@ class Product extends CI_Controller {
 
     
     // List Product Page
-    public function catalog(){
-        
+    public function catalog(){        
         $str = $this->uri->segment(2); 
         $str = preg_replace("/[^A-Za-z0-9-]/","",cleanit($str) );
         $str = preg_replace("/[^A-Za-z0-9]/"," ",cleanit($str) ); // Convert the - to space 
@@ -122,7 +121,11 @@ class Product extends CI_Controller {
             'qty' => $this->input->post('quantity'),
             'price' => $this->input->post('product_price'),
             'name' => $name,
-            'options' => array('size' => $this->input->post('variation'), 'colour' => $this->input->post('colour'))                
+            'options' => 
+                array('size' => $this->input->post('variation'), 
+                    'colour' => $this->input->post('colour'),
+                    'seller' => base64_decode($this->input->post('seller'))
+                )                
         );
 
         $this->cart->insert( $data );

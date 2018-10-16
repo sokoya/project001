@@ -72,7 +72,7 @@
                         </li>
                         <li><span>Total :</span><span><?= ngn($total); ?></span>
                         </li>
-                    </ul><a class="btn btn-primary" href="#">Checkout</a>
+                    </ul><a class="btn btn-primary" href="<?= base_url('checkout'); ?>">Checkout</a>
                 </div>
             </div>
             <ul class="list-inline">
