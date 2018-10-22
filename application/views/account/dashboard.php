@@ -11,6 +11,7 @@
 		<div class="col-md-8">
 			<?php $this->load->view('account/includes/sidebar-mobile'); ?>
 
+			<?php $this->load->view('landing/msg_view'); ?>
 			<h3 class="carrito-sidebar-header-r hidden-sm hidden-md hidden-xs">Overview</h3>
 			<hr class="carrito-sidebar-line-r"/>
 			<div class="alert alert-warning">

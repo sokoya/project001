@@ -3,10 +3,10 @@
 Class User_model extends CI_Model{
 
 
-    function get_profile( $id ){
+    function get_profile( $id , $table = 'users'){
         $this->db->where('id', $id );
         $this->db->or_where('email', $id);
-        return $this->db->get('users')->row();
+        return $this->db->get($table)->row();
     }
 
 	// Login Customer
@@ -115,6 +115,15 @@ Class User_model extends CI_Model{
             JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )
             JOIN favourite AS f ON (f.product_id = p.id )
             WHERE f.uid = $id GROUP BY p.id ORDER BY f.date_saved")->result();
+        return $query; 
+    }
+
+    function get_my_orders( $id ){
+        $query = $this->db->query("SELECT p.id as pid, p.name, g.image_name, o.order_date, o.order_code, o.status, o.product_desc
+        FROM orders o
+        JOIN (SELECT prod.id AS id, prod.product_name AS name FROM products AS prod) AS p ON (p.id = o.product_id)
+        JOIN product_gallery AS g ON (o.product_id = g.product_id AND g.featured_image = 1 )
+        WHERE buyer_id = $id LIMIT 10")->result();
         return $query; 
     }
 

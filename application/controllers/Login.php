@@ -10,6 +10,7 @@ class Login extends CI_Controller{
         // $this->session->set_userdata('referred_from', current_url());
         parent::__construct();
         $this->load->model('user_model', 'user');
+        
         if( $this->session->userdata('logged_in') ){
             // Ursher the person to where he is coming from
             if( !empty($this->session->userdata('referred_from')) ) redirect($this->session->userdata('referred_from'));

@@ -30,10 +30,10 @@
                     <li><a href="<?= base_url('catalog/' .urlify($product->category)); ?>"><?= ucwords($product->category); ?></a>
                     </li>
                     <?php if( !empty($product->brand_name)): ?>
-                        <li><a title="<?=$product->brand_name;?>" href="<?= base_url('catalog/') . strtolower($product->brand_name); ?>"><?= ucwords($product->brand_name); ?></a>
+                        <li><a title="<?=$product->brand_name;?>" href="<?= base_url('catalog/brand/') . strtolower($product->brand_name); ?>"><?= ucwords($product->brand_name); ?></a>
                         </li>
                     <?php endif;?>
-                    <li class="active"><?= word_limiter(ucwords($product->product_name), 7,'...');  ?></li>
+                    <li class="active"><?= ucwords($product->product_name);  ?></li>
                 </ol>
             </header>
             <div class="row">
@@ -195,17 +195,18 @@
                                                     </div>
                                                 </div>
                                             <?php endif; ?>
-                                            <input type="hidden" name="product_id" value="<?= base64_encode($product->sku); ?>">
+                                            <input type="hidden" name="product_id" value="<?= base64_encode($product->id); ?>">
                                             <input type="hidden" name="product_name" value="<?= $product->product_name; ?>">
                                             <?php if(!empty($variation->discount_price)): ?>
                                                 <input type="hidden" name="product_price" value="<?= $variation->discount_price; ?>">
                                             <?php else :?>
                                                 <input type="hidden" name="product_price" value="<?= $variation->sale_price; ?>">
                                             <?php endif; ?>
+                                            <input type="hidden" name="seller" value="<?= base64_encode( $product->seller_id)?>">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Quantity</label>
-                                                    <input type="number" name="quantity" required min="1" value="1" class="form-control">
+                                                    <input type="number" name="quantity" required min="1" max="10" value="1" class="form-control quantity">
                                                 </div>
                                             </div>
                                         </div>  
@@ -706,154 +707,58 @@
             <div class="gap"></div>
             <h3 class="widget-title">You Might Also Like</h3>
             <div class="row" data-gutter="15">
-                <div class="col-md-3">
-                    <div class="product ">
-                        <ul class="product-labels">
-                            <li>hot</li>
-                        </ul>
-                        <div class="product-img-wrap">
-                            <img class="product-img-primary"
-                                 src="<?= base_url('assets/landing/img/test_product/35.jpg'); ?>"
-                                 alt="Image Alternative text"
-                                 title="Image Title"/>
-                            <img class="product-img-alt" src="<?= base_url('assets/landing/img/test_product/35-a.jpg'); ?>"
-                                 alt="Image Alternative text"
-                                 title="Image Title"/>
-                        </div>
-                        <a class="product-link" href="#"></a>
-                        <div class="product-caption">
-                            <ul class="product-caption-rating">
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li><i class="fa fa-star"></i>
-                                </li>
-                            </ul>
-                            <h5 class="product-caption-title">LG G3 VS985 - 32GB - Verizon Smartphone - Metallic Black or
-                                Silk White - Great</h5>
-                            <div class="product-caption-price"><span class="product-caption-price-new">&#8358;74</span>
+                <?php foreach( $likes as $like ): ?>
+                    <div class="col-md-3">
+                        <div class="product ">
+                            <!-- <ul class="product-labels">
+                                <li>hot</li>
+                            </ul> -->
+                            <div class="product-img-wrap">
+                                <!-- <img class="product-img"
+                                     src="<?= base_url('assets/landing/img/test_product/35.jpg'); ?>"
+                                     alt="Image Alternative text"
+                                     title="Image Title"/> -->
+                                    <?php $image_name = $like->image_name;
+                                    $split = explode('|', $image_name)
+                                    ?>
+                                    <img class="product-img"
+                                         src="https://res.cloudinary.com/philo001/image/upload/h_400,w_400,q_auto,f_auto,fl_lossy,dpr_auto/v<?= $split[0] . '/' . $split[1]; ?>"
+                                         alt="<?= $like->product_name; ?>"
+                                         title="<?= $like->product_name; ?>">
                             </div>
-                            <ul class="product-caption-feature-list">
-                                <li>Free Shipping</li>
-                            </ul>
+                            <a class="product-link" href="<?= base_url(urlify($like->product_name, $like->id)); ?>"></a>
+                            <div class="product-caption">
+                                <ul class="product-caption-rating">
+                                    <li class="rated"><i class="fa fa-star"></i>
+                                    </li>
+                                    <li class="rated"><i class="fa fa-star"></i>
+                                    </li>
+                                    <li class="rated"><i class="fa fa-star"></i>
+                                    </li>
+                                    <li class="rated"><i class="fa fa-star"></i>
+                                    </li>
+                                    <li><i class="fa fa-star"></i>
+                                    </li>
+                                </ul>
+                                <h5 class="product-caption-title"><?= word_limiter(ucwords($like->product_name), 7, '...'); ?></h5>
+                                <div class="product-caption-price">
+                                    <?php if (!empty($like->discount_price)) : ?>
+                                        <span
+                                            class="product-caption-price-new"><?= ngn($like->discount_price); ?></span>
+                                        <span
+                                            class="product-caption-price-old"><sup><?= ngn($like->sale_price); ?> </sup></span>
+                                    <?php else : ?>
+                                        <span
+                                            class="product-caption-price-new"><?= ngn($like->sale_price); ?> </span>
+                                    <?php endif; ?>
+                                </div>
+                                <ul class="product-caption-feature-list">
+                                    <li>Free Shipping</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="product ">
-                        <ul class="product-labels"></ul>
-                        <div class="product-img-wrap">
-                            <img class="product-img-primary"
-                                 src="<?= base_url('assets/landing/img/test_product/29.jpg'); ?>"
-                                 alt="Image Alternative text"
-                                 title="Image Title"/>
-                            <img class="product-img-alt" src="<?= base_url('assets/landing/img/test_product/29-a.jpg'); ?>"
-                                 alt="Image Alternative text"
-                                 title="Image Title"/>
-                        </div>
-                        <a class="product-link" href="#"></a>
-                        <div class="product-caption">
-                            <ul class="product-caption-rating">
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li><i class="fa fa-star"></i>
-                                </li>
-                            </ul>
-                            <h5 class="product-caption-title">Apple iPhone 5s 16GB Factory Unlocked Smartphone Space Gray /
-                                Silver / Gold</h5>
-                            <div class="product-caption-price"><span class="product-caption-price-new">&#8358;82</span>
-                            </div>
-                            <ul class="product-caption-feature-list">
-                                <li>Free Shipping</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="product ">
-                        <ul class="product-labels"></ul>
-                        <div class="product-img-wrap">
-                            <img class="product-img-primary"
-                                 src="<?= base_url('assets/landing/img/test_product/31.jpg'); ?>"
-                                 alt="Image Alternative text"
-                                 title="Image Title"/>
-                            <img class="product-img-alt" src="<?= base_url('assets/landing/img/test_product/31-a.jpg'); ?>"
-                                 alt="Image Alternative text"
-                                 title="Image Title"/>
-                        </div>
-                        <a class="product-link" href="#"></a>
-                        <div class="product-caption">
-                            <ul class="product-caption-rating">
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li><i class="fa fa-star"></i>
-                                </li>
-                                <li><i class="fa fa-star"></i>
-                                </li>
-                            </ul>
-                            <h5 class="product-caption-title">Apple iPhone 5c - 16GB - GSM Factory Unlocked White Blue Green
-                                Pink Yellow</h5>
-                            <div class="product-caption-price"><span class="product-caption-price-new">&#8358;81</span>
-                            </div>
-                            <ul class="product-caption-feature-list">
-                                <li>Free Shipping</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="product ">
-                        <ul class="product-labels">
-                            <li>stuff pick</li>
-                        </ul>
-                        <div class="product-img-wrap">
-                            <img class="product-img-primary"
-                                 src="<?= base_url('assets/landing/img/test_product/32.jpg'); ?>"
-                                 alt="Image Alternative text"
-                                 title="Image Title"/>
-                            <img class="product-img-alt" src="<?= base_url('assets/landing/img/test_product/32-a.jpg'); ?>"
-                                 alt="Image Alternative text"
-                                 title="Image Title"/>
-                        </div>
-                        <a class="product-link" href="#"></a>
-                        <div class="product-caption">
-                            <ul class="product-caption-rating">
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li class="rated"><i class="fa fa-star"></i>
-                                </li>
-                                <li><i class="fa fa-star"></i>
-                                </li>
-                            </ul>
-                            <h5 class="product-caption-title">LG G Flex D959 - 32GB - Titan Silver GSM Unlocked Android
-                                Smartphone (B)</h5>
-                            <div class="product-caption-price"><span class="product-caption-price-new">&#8358;66</span>
-                            </div>
-                            <ul class="product-caption-feature-list">
-                                <li>Free Shipping</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         <?php endif; ?>
 	</div>
@@ -870,15 +775,14 @@
                 </div>
                 <div class="modal-body">
                     <p id="product-title">
-                        This is a confirmation the product <span class="text text-danger"><?= ucwords($product->product_name); ?></span> has been added to the cart
+                        This is a confirmation that the product <span class="text text-danger"><?= ucwords($product->product_name); ?></span> has been added to the cart
                     </p>
-
                     <div class="row">
                         <div class="col-md-6">
-                            <button type="button" class="btn btn-block btn-danger">Continue Shopping</button>
+                            <button type="button" class="btn btn-block btn-danger"  data-dismiss="modal">Continue Shopping</button>
                         </div>
                         <div class="col-md-6">
-                            <button type="button" class="btn btn-block btn-success">Go to Cart</button>
+                            <button type="button" id="cart" class="btn btn-block btn-success">Go to Cart</button>
                         </div>
                     </div>
                 </div>
@@ -891,7 +795,7 @@
     </div>
 	<?php $this->load->view('landing/resources/footer'); ?>
 </div>
-<script type="text/javascript">let base_url = "<?= base_url(); ?>"</script>
+window.<script type="text/javascript">let base_url = "<?= base_url(); ?>"</script>
 <?php $this->load->view('landing/resources/script'); ?>
 <script>
     $('.fav').on('click', function(e) {
@@ -941,19 +845,26 @@
             return false;
         }
 
-        $('#prod-confirmation').modal('show');
+        _btn.prop('disabled', '');
 
+        $('#prod-confirmation').modal('show');
         $.ajax({
-            url: base_url + "product/cart",
+            url: base_url + "product/add_to_cart",
             method: "POST",
             data: $('#variation-form').serialize(),
-            success: function( respose ){
-
+            success: function( response ){
+                if( response ){
+                    let x = $('.cart-read').text() * 1;
+                    let y = $('.quantity').val() * 1;
+                    $('.cart-read').text(x+y);
+                    console.log(response);
+                }
             }
         });
 
-        // $('#prod-confirmation').modal('show');
-
+        $('#cart').on('click', function(){
+            window.location.href = base_url + 'cart';
+        });
 
 
     });

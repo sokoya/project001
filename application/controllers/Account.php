@@ -30,6 +30,7 @@ class Account extends CI_Controller {
 	// Orders
 	public function orders(){
 		$page_data['page'] = 'orders';
+		$page_data['orders'] = $this->user->get_my_orders( $this->session->userdata('logged_id') );
 		$page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
 		$this->load->view('account/orders', $page_data);
 	}

@@ -188,7 +188,7 @@
 												<label>
 													<input class="filter" type="checkbox" name="filterset"
 														   data-type="<?= trim($feature); ?>"
-														   data-value="<?= trim($value) ?>"/><?= $value; ?>
+														   data-value="<?= trim(preg_replace("/[^A-Za-z0-9]/", '-', $value)) ?>"/><?= $value; ?>
 													<span class="checkmark"></span>
 												</label>
 											</div>
@@ -232,7 +232,7 @@
 											 alt="<?= $product->product_name; ?>"
 											 title="<?= $product->product_name; ?>">
 									</div>
-									<a class="product-link"
+									<a class="product-link" title="<?= $product->product_name?>"
 									   href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
 									<div class="product-caption">
 										<ul class="product-caption-rating">
@@ -292,6 +292,14 @@
 	let current_url = "<?= current_url()?>";
 </script>
 <script>
+	$("#price-slider").ionRangeSlider({
+	    min: 1000,
+	    max: 50000,
+	    type: 'double',
+	    prefix: "&#8358;",
+	    prettify: false,
+	    hasGrid: true
+	});
 	$(document).ready(function () {
 		let _category_body = $('#category_body');
 
@@ -300,7 +308,6 @@
 				title = "Carrito MarketPlace";
 			history.replaceState(state, title, url);
 		}
-
 		function load_page(url) {
 			$(_category_body).load(`${url} #category_body`, function (response, status, xhr) {
 				if (status === "error") {
@@ -328,9 +335,9 @@
 
 
 				items.each(function () {
-					let value = $(this).data('value'); // apple
-					let key = $(this).data('type'); // brand_name
-
+					let value = $(this).data('value');
+					let key = $(this).data('type'); 
+					
 					if (filter_list[key]) {
 						if (jQuery.inArray(value, filter_list[key]) !== -1) {
 						} else {

@@ -58,5 +58,7 @@ $route['catalog'] = 'product/catalog/';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-//$route['(:any)'] = 'category';
-// $route['admin/get_category/(:num)/'] = 'admin/get_category/$i';
+
+
+$route['cart'] = "product/cart";
+$route['cart/remove/(:any)'] = "product/remove_cart/$1";
