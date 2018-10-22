@@ -10,7 +10,6 @@ class Frontpage extends CI_Controller {
 
 	public function index(){
 		// get the categories 
-
 		$this->load->view('landing/home');
 	}
 }

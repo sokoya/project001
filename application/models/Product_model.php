@@ -3,7 +3,7 @@
 Class Product_model extends CI_Model{
 
     // Insert data
-    function insert_data($table = 'sellers', $data = array() ){
+    function insert_data($table = 'users', $data = array() ){
         try {
             $this->db->insert($table, $data);
             $result = $this->db->insert_id();
@@ -22,10 +22,7 @@ Class Product_model extends CI_Model{
     }
 
     function get_product( $id = ''){
-        return $this->db->query('SELECT id, sku, seller_id, rootcategory, category, subcategory, sku, product_name, brand_name, model,
-                                main_colour, product_description, in_the_box, highlights, product_line, colour_family, main_material,
-                                dimensions, weight, attributes, product_warranty, warranty_type, warranty_address, certifications, 
-                                product_status FROM products WHERE id = ? ', $id )->row();
+        return $this->db->query('SELECT p.*, u.first_name, u.last_name FROM products AS p LEFT JOIN users AS u ON (p.seller_id = u.id) WHERE p.id = ? ', $id )->row();
     }
 
 
@@ -96,7 +93,7 @@ Class Product_model extends CI_Model{
             FROM products p                        
             JOIN product_variation AS v ON (p.id = v.product_id) 
             JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )                
-            JOIN sellers AS s ON p.seller_id = s.id ";
+            JOIN users AS s ON p.seller_id = s.id ";
         if( $d['str'] != '' ){
             $select_query .= " WHERE ( MATCH(p.rootcategory) AGAINST('{$d['str']}') "; 
 
@@ -248,7 +245,7 @@ Class Product_model extends CI_Model{
     }
 
     function get_cart_details( $id ){
-        return $this->db->query('SELECT s.first_name name, i.image_name image FROM sellers s JOIN product_gallery i ON (s.id = i.product_id AND i.featured_image = 1) ')->row();
+        return $this->db->query('SELECT s.first_name name, i.image_name image FROM users s JOIN product_gallery i ON (s.id = i.product_id AND i.featured_image = 1) ')->row();
     }
 
 

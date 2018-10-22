@@ -66,9 +66,15 @@ $categories = $this->product->get_menu_categories();
                         </span></strong>
                     </a>
                 </li>
+
+                <?php
+                    $profile = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
+                ?>
                 <li class="dropdown">
                     <?php if( $this->session->userdata('logged_in') ): ?>
-                        <a href="<?= base_url('login'); ?>"><span>Welcome</span><strong><?= ucwords(explode('@',$this->session->userdata('email'))[0]); ?></strong></a>
+
+
+                        <a href="<?= base_url('login'); ?>"><span>Welcome</span><strong><?= ucfirst($profile->first_name); ?></strong></a>
                     <?php else : ?>
                         <a href="<?= base_url('login'); ?>"><span>Sign in | Join</span><strong>My Carrito</strong></a>
                     <?php endif; ?>
@@ -86,6 +92,15 @@ $categories = $this->product->get_menu_categories();
                             <li>
                                 <a href="<?= base_url('account/help'); ?>">Help</a>
                             </li>
+                            <?php if( $profile->is_seller !== 'false' ) : ?>
+                            <li>
+                                <a href="<?= base_url('seller/overview'); ?>">Seller Dashboard</a>
+                            </li>   
+                            <?php else : ?>
+                             <li>
+                                <a href="<?= base_url('seller/'); ?>">Become A Seller</a>
+                            </li>
+                            <?php endif; ?>                         
                             <li>
                                 <a href="<?= base_url('logout'); ?>">Logout</a>
                             </li>

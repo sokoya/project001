@@ -18,7 +18,7 @@ class Checkout extends CI_Controller {
 	public function index(){
         if( !$this->input->post() ){
             $this->load->model('user_model', 'user');
-            $page_data['user'] = $this->user->get_profile($this->session->userdata('logged_id'));
+            $page_data['user'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
             $this->load->view('landing/checkout', $page_data);
         }else{
             // Form validation
@@ -58,13 +58,14 @@ class Checkout extends CI_Controller {
                 $count++;
             }
             do {
-                // $_POST['order'] = 'userid|product_id|seller_id|qty|desc'
+                // $_POST['order'] = 'userid|product_id|seller_id|qty|desc}price'
                 $order = explode('|', $_POST['order'][$x]);
                 $data['buyer_id'] = base64_decode($order[0]);
                 $data['product_id'] = $order[1];
                 $data['seller_id'] = base64_decode($order[2]);
                 $data['qty'] = $order[3];
                 $data['product_desc'] = $order[4];
+                $data['amount'] = $order[5];
                 $this->product->insert_data('orders', $data);
                 $x++;
             } while ( $x < $count);

@@ -32,7 +32,7 @@
 	                                    <td>
 	                                    	<?= ngn($cart['price']); ?>
 	                                    	
-	                                    	<input type="hidden" name="order[]" value="<?= base64_encode($user->id) .'|'.$cart['id'].'|'.base64_encode($cart['options']['seller']).'|'.$cart['qty'].'|'.'Size: '. $cart['options']['size'] . '/ Colour:' . $cart['options']['colour'] ?>">
+	                                    	<input type="hidden" name="order[]" value="<?= base64_encode($user->id) .'|'.$cart['id'].'|'.base64_encode($cart['options']['seller']).'|'.$cart['qty'].'|'.'Size: '. $cart['options']['size'] . '/ Colour:' . $cart['options']['colour'].'|'.$cart['price']?>">
 	                                    </td>
 	                                    <?php $subtotal += ($cart['qty'] * $cart['price'])?>
 	                                </tr>
@@ -66,7 +66,7 @@
 	                    </div>
 	                    <div class="form-group">
 	                        <label>Phone Number</label>
-	                        <input class="form-control" type="number" name="customer_phone" required value="<?= $user->phone; ?>" />
+	                        <input class="form-control" type="text" name="customer_phone" required value="<?= $user->phone; ?>" />
 	                    </div>
 	                    
 	                    <div class="row">

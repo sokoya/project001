@@ -62,3 +62,6 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['cart'] = "product/cart";
 $route['cart/remove/(:any)'] = "product/remove_cart/$1";
+
+// Seller
+$route['seller'] = "seller/login";

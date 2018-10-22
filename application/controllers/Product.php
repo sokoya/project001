@@ -18,7 +18,7 @@ class Product extends CI_Controller {
         $page_data['variation'] = $this->product->get_variation($index);
         $page_data['variations'] = $this->product->get_variations($index);
         $page_data['gallery'] = $this->product->get_gallery($index);
-        $page_data['favourited'] = $this->product->is_favourited($this->session->userdata('logged_id'), $index);
+        $page_data['favourited'] = $this->product->is_favourited(base64_decode($this->session->userdata('logged_id')), $index);
         $page_data['likes'] = $this->product->get_also_likes( $index );
         $this->load->view('landing/product', $page_data);
 	}
@@ -26,7 +26,7 @@ class Product extends CI_Controller {
     public function fav(){
         if( !$this->session->userdata('logged_in')) redirect(base_url());        
         $this->load->model('user_model');
-        if($this->user_model->favourite( $this->session->userdata('logged_id'), base64_decode($this->input->post('pid')),
+        if($this->user_model->favourite( base64_decode($this->session->userdata('logged_id')), base64_decode($this->input->post('pid')),
             $this->input->post('action') )){
             echo true;
             exit;
@@ -70,14 +70,14 @@ class Product extends CI_Controller {
         $count = (count($x));
 
         $this->load->library('pagination');
-        $this->config->load('pagination'); // Load d config
+        $this->config->load('pagination');
         $config = $this->config->item('pagination');
         $config['base_url'] = current_url() ;
         $config['total_rows'] = $count; 
         $config['per_page'] = 50; 
         $config["num_links"] = 5;
         $this->pagination->initialize($config);
-
+        
         $page_data['features'] = $output_array;
         $array['limit'] = $config['per_page']; $array['offset'] = $page; $array['is_limit'] = true;
         $page_data['pagination'] = $this->pagination->create_links();        
@@ -129,7 +129,7 @@ class Product extends CI_Controller {
         );
 
         $this->cart->insert( $data );
-        echo 'Yes';        
+        echo true;        
         exit;
     }
 

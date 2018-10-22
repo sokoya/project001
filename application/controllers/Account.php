@@ -23,15 +23,15 @@ class Account extends CI_Controller {
 	// Control panel
 	public function index(){
 		$page_data['page'] = 'dashboard';
-		$page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
+		$page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')) );
 		$this->load->view('account/dashboard', $page_data);
 	}
 
 	// Orders
 	public function orders(){
 		$page_data['page'] = 'orders';
-		$page_data['orders'] = $this->user->get_my_orders( $this->session->userdata('logged_id') );
-		$page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
+		$page_data['orders'] = $this->user->get_my_orders( base64_decode($this->session->userdata('logged_id')) );
+		$page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')) );
 		$this->load->view('account/orders', $page_data);
 	}
 
@@ -39,7 +39,7 @@ class Account extends CI_Controller {
 	public function information(){
 		if( !$this->input->post() ){
 			$page_data['page'] = 'information';
-			$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id') );
+			$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')) );
 			$this->load->view('account/information', $page_data);
 		}else{
 			$this->load->model('user_model');
@@ -82,9 +82,9 @@ class Account extends CI_Controller {
 							$this->session->set_flashdata('error_msg','<strong>Please fix the following errors</strong> <br />' . validation_errors());
 							redirect($_SERVER['HTTP_REFERER']);
 						}else{							
-							if($this->user_model->cur_pass_match($this->input->post('current_password'),$this->session->userdata('logged_id'))){
+							if($this->user_model->cur_pass_match($this->input->post('current_password'),base64_decode($this->session->userdata('logged_id')))){
 								
-								if($this->user_model->change_password($this->input->post('new_password'),$this->session->userdata('logged_id'))){$this->session->set_flashdata('success_msg','Success, your password has been reset.');
+								if($this->user_model->change_password($this->input->post('new_password'),base64_decode($this->session->userdata('logged_id')))){$this->session->set_flashdata('success_msg','Success, your password has been reset.');
 								}else{
 									$this->session->set_flashdata('error_msg','Sorry! There was an error updating the password, please try after some time...');									
 								}
@@ -104,8 +104,8 @@ class Account extends CI_Controller {
 	// Saved and Wishlist
 	public function saved(){
 		$page_data['page'] = 'saved';
-		$page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
-		$page_data['saved'] = $this->user->get_saved_items( $this->session->userdata('logged_id'));
+		$page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id') ));
+		$page_data['saved'] = $this->user->get_saved_items( base64_decode($this->session->userdata('logged_id')));
 		$this->load->view('account/saved', $page_data);
 	}
 
@@ -115,7 +115,7 @@ class Account extends CI_Controller {
 		if( !$this->input->post()){
 			// var_dump($this->input->post('preference'));
 			$page_data['page'] = 'settings';
-			$page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
+			$page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')));
 			$this->load->view('account/settings', $page_data);
 		}else{
 //			var_dump($this->input->post('preference'));

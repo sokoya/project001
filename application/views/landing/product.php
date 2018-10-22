@@ -105,7 +105,7 @@
                                             <a href="#">238 customer reviews</a> |  <strong> 34 SOLDS</strong>
                                         </p>
                                         <p class="product-page-desc"><strong><?= word_limiter(ucwords($product->product_name), 7,'...'); ?></strong></p>
-                                        <p class="text-muted text-sm text-uppercase">Product ID : <?= $product->sku;?> | Seller : <a href="#">Sokoya Philip</a></p>
+                                        <p class="text-muted text-sm text-uppercase">Product ID : <?= $product->sku;?> | Seller : <a href="#"><?= ucwords($product->first_name . ' ' . $product->last_name);?></a></p>
                                         <span class="text-sm text-sm-center">
                                             <?php if(!empty($product->dimensions) ):  ?>
                                                 <strong>Measurement: </strong><?= $product->dimensions; ?>cm
@@ -206,7 +206,17 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Quantity</label>
-                                                    <input type="number" name="quantity" required min="1" max="10" value="1" class="form-control quantity">
+                                                    <select name="quantity" class="form-control quantity">
+                                                        <?php
+                                                            $x = 1;
+                                                            do {
+                                                                ?>
+                                                                <option value="<?= $x; ?>"><?= $x; ?></option>
+                                                        <?php
+                                                            $x++;
+                                                            } while ( $x <= 10);
+                                                        ?>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>  
@@ -846,7 +856,6 @@ window.<script type="text/javascript">let base_url = "<?= base_url(); ?>"</scrip
         }
 
         _btn.prop('disabled', '');
-
         $('#prod-confirmation').modal('show');
         $.ajax({
             url: base_url + "product/add_to_cart",
@@ -856,8 +865,8 @@ window.<script type="text/javascript">let base_url = "<?= base_url(); ?>"</scrip
                 if( response ){
                     let x = $('.cart-read').text() * 1;
                     let y = $('.quantity').val() * 1;
+                    alert( x + ' and ' + y);
                     $('.cart-read').text(x+y);
-                    console.log(response);
                 }
             }
         });

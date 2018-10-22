@@ -32,7 +32,7 @@
                         		$total = 0;
                         		foreach ($this->cart->contents() as $product): ?>
                         		<?php
-                        			$detail = $this->product->get_cart_details( $product['id'] );
+                        			$detail = $this->product->get_cart_details( base64_decode($product['id']) );
                         			$split = explode("|", $detail->image);
                         		?>
 	                            <tr>

@@ -30,11 +30,11 @@
 					<?= form_open(); ?>
 						<div class="col-md-6">
 							<p><input type="radio" name="preference" value="1" <?php if($profile->newsletter == true ) echo 'checked';?> title="Subscribe"> Yes I want to receive daily
-								<!-- <select style=" display : inline;" name="category" class="carrito-select">
-									<?php foreach( get_categories()->result() as $categories ) : ?>
+								<select style=" display : inline;" name="category" class="carrito-select">
+									<?php foreach( get_categories() as $categories ) : ?>
 										<option value="<?= $categories->root_category_id; ?>"><?= ucwords($categories->name); ?></option>
 									<?php endforeach; ?>
-								</select> offers -->
+								</select> offers
 							</p>
 						</div>
 						<div class="col-md-6"><p><input name="preference" value="0" <?php if($profile->newsletter == false ) echo 'checked';?> type="radio" title="Subscribe"> I would like to
@@ -49,7 +49,6 @@
 		</div>
 	</div>
 
-</div>
 </div>
 <div class="gap gap-small"></div>
 <?php $this->load->view('landing/resources/footer'); ?>

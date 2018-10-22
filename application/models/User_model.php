@@ -26,7 +26,7 @@ Class User_model extends CI_Model{
                     	$c_update = array('last_login' => get_now(), 'ip' => $_SERVER['REMOTE_ADDR'] );
                     	$this->db->where('email', $data['email']);
                     	$this->db->update($table_name, $c_update);
-                        return $result->row(0)->id;
+                        return $result->row(0);
                     } else {
                         return false;
                     }

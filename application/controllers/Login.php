@@ -42,15 +42,15 @@ class Login extends CI_Controller{
                     'password' => $this->input->post('loginpassword')
                 );
 
-                $user_id = $this->user->login($data);
-                if( !is_numeric($user_id)) {
+                $user = $this->user->login($data);
+                if( !$user ) {
                     $this->session->set_flashdata('error_msg','Sorry! Incorrect username or password.');
                     $this->load->view('landing/login');
                 }else{
                     // @TODO
                     // Check if the user already have some products in the cart, and going to checkout
                     // Perform every other actions necessary
-                    $session_data = array('logged_in' => true, 'logged_id' => $user_id, 'email' => $this->input->post('loginemail'));
+                    $session_data = array('logged_in' => true, 'logged_id' => base64_encode($user->id), 'is_seller' => $user->is_seller, 'email' => $this->input->post('loginemail'));
                     $this->session->set_userdata($session_data);
                     $this->session->set_flashdata('success_msg','You are now logged in!');
                     ( !empty($this->session->userdata('referred_from')) ) ? redirect($this->session->userdata('referred_from')) : redirect(base_url());
