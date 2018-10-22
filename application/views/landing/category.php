@@ -308,7 +308,6 @@
 				title = "Carrito MarketPlace";
 			history.replaceState(state, title, url);
 		}
-
 		function load_page(url) {
 			$(_category_body).load(`${url} #category_body`, function (response, status, xhr) {
 				if (status === "error") {
