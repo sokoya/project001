@@ -16,6 +16,7 @@ class Checkout extends CI_Controller {
     }
 
 	public function index(){
+        $page_data['title'] = 'Checkout';
         if( !$this->input->post() ){
             $this->load->model('user_model', 'user');
             $page_data['user'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
@@ -39,10 +40,6 @@ class Checkout extends CI_Controller {
             $code  = $this->product->generate_code('orders', 'order_code');
             $data = array(
                 'buyer_id' => base64_decode($this->input->post('userid')),
-                'card_number' => cleanit($this->input->post('card_number')),
-                'cvc' => cleanit($this->input->post('cvc')),
-                'cardholder_name' => cleanit($this->input->post('cardholder_name')),
-                'valid_through' => $this->input->post('valid_through'),
                 'customer_name' => $this->input->post('customer_name'),
                 'customer_phone'    => $this->input->post('customer_phone'),
                 'city'  => $this->input->post('city'),
@@ -65,7 +62,7 @@ class Checkout extends CI_Controller {
                 $data['seller_id'] = base64_decode($order[2]);
                 $data['qty'] = $order[3];
                 $data['product_desc'] = $order[4];
-                $data['amount'] = $order[5];
+                $data['amount'] = $order[3] * $order[5];
                 $this->product->insert_data('orders', $data);
                 $x++;
             } while ( $x < $count);

@@ -32,7 +32,9 @@ Class Product_model extends CI_Model{
         JOIN (SELECT GROUP_CONCAT(c.name SEPARATOR ', ') AS name, c.root_category_id AS id, c.category_id AS cid FROM category c GROUP BY cid) AS cat ON (cat.id = root.root_category_id)
         JOIN sub_category AS sub ON (cat.cid = sub.category_id)
         GROUP BY root.root_category_id";
+        // var_dump( $this->db->query( $select )->result() );
         return $this->db->query( $select )->result();
+
     }
 
     // To get the respective categories or sub

@@ -123,7 +123,7 @@ Class User_model extends CI_Model{
         FROM orders o
         JOIN (SELECT prod.id AS id, prod.product_name AS name FROM products AS prod) AS p ON (p.id = o.product_id)
         JOIN product_gallery AS g ON (o.product_id = g.product_id AND g.featured_image = 1 )
-        WHERE buyer_id = $id LIMIT 10")->result();
+        WHERE buyer_id = $id ORDER BY o.id DESC LIMIT 10")->result();
         return $query; 
     }
 

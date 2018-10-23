@@ -23,6 +23,7 @@ class Account extends CI_Controller {
 	// Control panel
 	public function index(){
 		$page_data['page'] = 'dashboard';
+		$page_data['title'] = "My dashboard";
 		$page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')) );
 		$this->load->view('account/dashboard', $page_data);
 	}
@@ -30,6 +31,7 @@ class Account extends CI_Controller {
 	// Orders
 	public function orders(){
 		$page_data['page'] = 'orders';
+		$page_data['title'] = "My Orders";
 		$page_data['orders'] = $this->user->get_my_orders( base64_decode($this->session->userdata('logged_id')) );
 		$page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')) );
 		$this->load->view('account/orders', $page_data);
@@ -37,6 +39,7 @@ class Account extends CI_Controller {
 
 	// Personal Information and Change password
 	public function information(){
+		$page_data['title'] = "My information";
 		if( !$this->input->post() ){
 			$page_data['page'] = 'information';
 			$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')) );
@@ -104,6 +107,7 @@ class Account extends CI_Controller {
 	// Saved and Wishlist
 	public function saved(){
 		$page_data['page'] = 'saved';
+		$page_data['title'] = "My saved items";
 		$page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id') ));
 		$page_data['saved'] = $this->user->get_saved_items( base64_decode($this->session->userdata('logged_id')));
 		$this->load->view('account/saved', $page_data);
@@ -111,6 +115,7 @@ class Account extends CI_Controller {
 
 	// Settings
 	public function settings(){
+		$page_data['title'] = "Account Settings";
 		$this->load->model('user_model');
 		if( !$this->input->post()){
 			// var_dump($this->input->post('preference'));
