@@ -1,6 +1,4 @@
-<?php
-$categories = $this->product->get_menu_categories();
-?>
+
 <nav class="navbar-default navbar-main-white yamm">
     <div class="container">
         <div class="collapse navbar-collapse navbar-collapse-no-pad" id="main-nav-collapse">
@@ -8,26 +6,24 @@ $categories = $this->product->get_menu_categories();
                 <li class="dropdown"><a href="#"><span >Welcome!</span>All Categories<i class="drop-caret" data-toggle="dropdown"></i></a>
                     <ul class="dropdown-menu dropdown-menu-category">
                         <?php
-                        $x = 1;
-                            do {?>
-
-                                <?php foreach($categories as $category ): ?>
-                        <li><a href="<?=  base_url('catalog/' . urlify($category->root_name)) ; ?>" title="<?= $category->root_name;?>"><i class="fa fa-<?=$category->icon;?> dropdown-menu-category-icon"></i><?= $category->root_name; ?></a>
+                            $categories = $this->db->query("SELECT * FROM root_category")->result();
+                            foreach($categories as $category ): ?>
+                        <li><a href="<?=  base_url('catalog/' . urlify($category->name)) ; ?>" title="<?= $category->name;?>"><i class="fa fa-<?=$category->icon;?> dropdown-menu-category-icon"></i><?= $category->name; ?></a>
                             <div class="dropdown-menu-category-section">
                                 <div class="dropdown-menu-category-section-inner">
                                     <div class="dropdown-menu-category-section-content">
                                         <div class="row">
                                             <?php 
-                                                $main_category = explode(',', $category->category_name);
-                                                foreach( $main_category as $cat => $cat_value) :
+                                                $main_category = $this->db->query("SELECT * FROM category WHERE root_category_id = ? ", $category->root_category_id)->result();
+                                                foreach( $main_category as $cat ) :
                                             ?>
                                             <div class="col-md-6">
-                                                <h5 class="dropdown-menu-category-title"><a href="<?= base_url('catalog/' . urlify($cat_value)); ?>"><?= $cat_value; ?></a></h5>
+                                                <h5 class="dropdown-menu-category-title"><a href="<?= base_url('catalog/' . urlify($cat->name)); ?>"><?= $cat->name; ?></a></h5>
                                                 <ul class="dropdown-menu-category-list">
                                                     <?php 
-                                                        $sub_category = explode(',', $category->sub_name );
-                                                        foreach($sub_category as $sub => $sub_value ) : ?>
-                                                        <li><a href="<?= base_url('catalog/' . urlify($sub_value)); ?>" title="<?= $sub_value; ?>"><?= $sub_value; ?></a></li>
+                                                        $sub_category = $this->db->query("SELECT name FROM sub_category WHERE root_category_id = ?  AND category_id = ? ", array($category->root_category_id, $cat->category_id))->result();
+                                                        foreach($sub_category as $sub ) : ?>
+                                                        <li><a href="<?= base_url('catalog/' . urlify($sub->name)); ?>" title="<?= $sub->name; ?>"><?= $sub->name; ?></a></li>
                                                     <?php endforeach; ?>
                                                 </ul>
                                             </div>
@@ -39,9 +35,6 @@ $categories = $this->product->get_menu_categories();
                             </div>
                         </li>
                         <?php endforeach; ?>
-                        <?php
-                            $x++;} while ( $x <= 10);
-                        ?>
                     </ul>
                 </li>
                 <li><a class="navbar-item-top" href="<?= base_url(lang('carrito_deal_link')); ?>"><?= lang('carrito_deal'); ?></a>

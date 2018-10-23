@@ -865,7 +865,6 @@ window.<script type="text/javascript">let base_url = "<?= base_url(); ?>"</scrip
                 if( response ){
                     let x = $('.cart-read').text() * 1;
                     let y = $('.quantity').val() * 1;
-                    alert( x + ' and ' + y);
                     $('.cart-read').text(x+y);
                 }
             }

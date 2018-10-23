@@ -20,6 +20,7 @@ class Product extends CI_Controller {
         $page_data['gallery'] = $this->product->get_gallery($index);
         $page_data['favourited'] = $this->product->is_favourited(base64_decode($this->session->userdata('logged_id')), $index);
         $page_data['likes'] = $this->product->get_also_likes( $index );
+        $page_data['title'] = preg_replace("/[^A-Za-z0-9]/"," ", $uri );
         $this->load->view('landing/product', $page_data);
 	}
 
@@ -43,7 +44,7 @@ class Product extends CI_Controller {
         $str = preg_replace("/[^A-Za-z0-9-]/","",cleanit($str) );
         $str = preg_replace("/[^A-Za-z0-9]/"," ",cleanit($str) ); // Convert the - to space 
         if( $str == '' ) redirect(base_url());      
-        
+        $page_data['title'] = $str;
         $features = $this->product->get_features($str);
         $output_array = array();
         foreach($features as $feature => $values ){
@@ -91,6 +92,7 @@ class Product extends CI_Controller {
 
 
     public function cart(){
+        $page_data['title'] = 'My cart';
         if( $this->input->post() ){
             // update
             $data = $this->input->post();
@@ -102,7 +104,7 @@ class Product extends CI_Controller {
                 redirect('cart');
             }
         }else{
-            $this->load->view('landing/cart');
+            $this->load->view('landing/cart', $page_data);
         }
     }
 
