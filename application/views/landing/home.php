@@ -101,7 +101,6 @@
 
 			<div class="col-md-3">
 				<div class="product product-fit">
-
 					<ul class="product-labels"></ul>
 					<div class="product-caption">
 						<h5><strong>Carrito Essentials</strong></h5>
