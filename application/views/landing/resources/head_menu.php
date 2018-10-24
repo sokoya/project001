@@ -13,14 +13,14 @@
                                 <div class="dropdown-menu-category-section-inner">
                                     <div class="dropdown-menu-category-section-content">
                                         <div class="row">
-                                            <?php 
+                                            <?php
                                                 $main_category = $this->db->query("SELECT * FROM category WHERE root_category_id = ? ", $category->root_category_id)->result();
                                                 foreach( $main_category as $cat ) :
                                             ?>
                                             <div class="col-md-6">
-                                                <h5 class="dropdown-menu-category-title"><a href="<?= base_url('catalog/' . urlify($cat->name)); ?>"><?= $cat->name; ?></a></h5>
+                                                <h5 class="custom-menu-category-drop"><a href="<?= base_url('catalog/' . urlify($cat->name)); ?>"><?= $cat->name; ?></a></h5>
                                                 <ul class="dropdown-menu-category-list">
-                                                    <?php 
+                                                    <?php
                                                         $sub_category = $this->db->query("SELECT name FROM sub_category WHERE root_category_id = ?  AND category_id = ? ", array($category->root_category_id, $cat->category_id))->result();
                                                         foreach($sub_category as $sub ) : ?>
                                                         <li><a href="<?= base_url('catalog/' . urlify($sub->name)); ?>" title="<?= $sub->name; ?>"><?= $sub->name; ?></a></li>
@@ -53,10 +53,12 @@
                     <a href="#"><span>Learn more about</span> <strong>Carrito Shopper</strong></a>
                 </li>
                 <li>
-                    <a href="<?= base_url(lang('cart_link')); ?>" class="navbar-item-top">
-                        <strong><i class="fa fa-shopping-cart"></i> Cart <span class="cart-read">
+                    <a href="<?= base_url(lang('cart_link')); ?>" class="navbar-item-top cart-cs">
+                        <strong><i class="fa fa-shopping-cart"></i> Cart
+							<span class="cart-read" style="display: <?= ($this->cart->total_items() == 0) ? 'none' : '' ?>;">
                             <?= ($this->cart->total_items() == 0) ? '' : $this->cart->total_items(); ?>
-                        </span></strong>
+                        </span>
+						</strong>
                     </a>
                 </li>
 
@@ -66,7 +68,7 @@
                 <li class="dropdown">
                     <?php if( $this->session->userdata('logged_in') ): ?>
 
-                        <a href="<?= base_url('login'); ?>"><span>Welcome</span><strong><?= ucfirst($profile->first_n*ame); ?></strong></a>
+                        <a href="<?= base_url('login'); ?>"><span>Welcome</span><strong><?= ucfirst($profile->first_name); ?></strong></a>
                     <?php else : ?>
                         <a href="<?= base_url('login'); ?>"><span>Sign in | Join</span><strong>My Carrito</strong></a>
                     <?php endif; ?>
@@ -87,12 +89,12 @@
                             <?php if( $profile->is_seller !== 'false' ) : ?>
                             <li>
                                 <a href="<?= base_url('seller/overview'); ?>">Seller Dashboard</a>
-                            </li>   
+                            </li>
                             <?php else : ?>
                              <li>
                                 <a href="<?= base_url('seller/'); ?>">Become A Seller</a>
                             </li>
-                            <?php endif; ?>                         
+                            <?php endif; ?>
                             <li>
                                 <a href="<?= base_url('logout'); ?>">Logout</a>
                             </li>

@@ -75,6 +75,7 @@ label {
 a {
 	color: #486d97;
 }
+
 .text-sm {
 	font-size: 12px;
 }
@@ -1520,6 +1521,16 @@ hr {
 	margin-left: 4px;
 }
 
+.cateogry-filters-list > li + li:before {
+	content: '\f105';
+	font-family: 'FontAwesome';
+}
+
+.tree-root:before {
+	content: '\f107';
+	font-family: 'FontAwesome';
+}
+
 .page-breadcrumb > li + li:before {
 	content: '\f105';
 	font-family: 'FontAwesome';
@@ -1584,7 +1595,7 @@ hr {
 }
 
 .category-selections-icon.active {
-	color: #486d97;
+	color: #fff;
 }
 
 .category-selections-icon.active:hover {
@@ -1604,7 +1615,8 @@ hr {
 	padding: 0 5px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
-	background: #fff;
+	background: #49a251;
+	color: #fff;
 	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
 	border: none;
@@ -4252,9 +4264,25 @@ header.main {
 
 .product-page-qty-item {
 	border: 1px solid #ccc;
-	-webkit-border-radius: 7px;
-	border-radius: 7px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
 	overflow: hidden;
+	width: 134px !important;
+}
+
+.custom-variation {
+	-webkit-box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.08);
+	box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.08)
+}
+
+.product-page-option-select:hover {
+	-webkit-box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.08);
+	box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.08)
+}
+
+.product-page-qty-item:hover {
+	-webkit-box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.08);
+	box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.08)
 }
 
 .product-page-qty {
@@ -7177,29 +7205,28 @@ ul#table-pagination li {
 	display: inline;
 }
 
-
-#carrito-newsletter-settings{
+#carrito-newsletter-settings {
 	font-size: 16px;
 }
-#carrito-newsletter-settings-line{
+
+#carrito-newsletter-settings-line {
 	margin: 0;
 	width: 50%;
 	border-top: 1px solid #919191;
 }
 
-.carrito-newsletter-text > p{
+.carrito-newsletter-text > p {
 	margin-top: 13px;
 	font-size: 14px;
 	color: #0b0b0b;
 }
 
-.carrito-select{
+.carrito-select {
 	width: 114px;
 	border: 1px solid #b9b9b9;
 	padding: 3px;
 	border-radius: 5px;
 }
-
 
 /*YOUR CUSTOM STYLES*/
 .carrito_btn_sign {
@@ -7286,7 +7313,6 @@ input[type="color"]:focus,
 	box-shadow: none;
 }
 
-
 .carrito-board {
 	margin-left: 3px;
 	border: 1px solid #969696;
@@ -7297,16 +7323,21 @@ input[type="color"]:focus,
 	margin-bottom: 10px;
 }
 
-#navbar-img{
+#navbar-img {
 	position: relative;
 	bottom: 13px;
 }
 
 @media only screen and (max-width: 768px) {
 	/* For mobile phones: */
-	#navbar-img{
+	#navbar-img {
 		position: relative;
 		bottom: 17px;
-		left:127px;
+		left: 127px;
 	}
 }
+
+.navbar-before .navbar-nav > li > a:hover {
+	color: #fff;
+}
+

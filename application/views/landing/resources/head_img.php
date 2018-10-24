@@ -7,7 +7,7 @@
 
 			</div>
 			<div class="col-md-6">
-				<ul class="nav navbar-nav navbar-right navbar-right-no-mar">
+				<ul class="nav navbar-nav  navbar-right navbar-right-no-mar custom-nav">
 					<li><a href="#">About Us</a>
 					</li>
 					<li><a href="#">Blog</a>
