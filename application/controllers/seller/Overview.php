@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller{
+class Overview extends CI_Controller{
 
     public function __construct(){
         parent::__construct();
@@ -23,14 +23,16 @@ class Dashboard extends CI_Controller{
     }
 
     public function index(){        
-        $page_data['page_title'] = 'Seller dashboard';
-        $page_data['pg_name'] = 'dashboard';
-        $page_data['sub_name'] = 'dashboard';
+        $status = cleanit($this->uri->segment(2));
+        
+        $page_data['page_title'] = 'Manage all products';
+        $page_data['pg_name'] = 'manage_product';
+        $page_data['sub_name'] = $status;
         $page_data['profile'] = $this->seller->get_profile_details(base64_decode($this->session->userdata('logged_id')),
             'first_name,last_name,email,profile_pic');
         // get product
         $page_data['products'] = $this->seller->get_product( base64_decode($this->session->userdata('logged_id')), $status
             );
-        $this->load->view('seller/overview', $page_data);
+        $this->load->view('seller/manage', $page_data);
     }
 }

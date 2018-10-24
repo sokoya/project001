@@ -14,15 +14,15 @@ class Settings extends CI_Controller{
             if( !empty($this->session->userdata('referred_from')) ) redirect($this->session->userdata('referred_from'));
             redirect('seller/login');
         }
-        $this->output->enable_profiler(TRUE);
+        // $this->output->enable_profiler(TRUE);
     }
     
     public function index(){
         $page_data['profile'] = $this->seller->get_profile(base64_decode($this->session->userdata('logged_id')));
-        $this->load->helper('query_helper');
-        $page_data['page_title'] = 'Profile Setting - Carrito';
+        $page_data['page_title'] = 'Profile Setting';
         $page_data['pg_name'] = 'settings';
         $page_data['sub_name'] = 'profile';
+        $page_data['categories'] = $this->seller->get_category_name('', 'root_category');
         $this->load->view('seller/settings', $page_data);
 
     }
@@ -41,10 +41,11 @@ class Settings extends CI_Controller{
                     $this->session->set_flashdata('error_msg','<strong>There was an error updating your information...</strong> <br />' . validation_errors() );
                     redirect('seller/settings');
                 }else{
-                    $data = array();
+
+                    $data = $user_data = array();
                     $uid = base64_decode($this->session->userdata('logged_id')) ;
                     $name = explode(' ', $this->input->post('name'));
-                    $data['first_name'] = $name[0]; $data['last_name'] = $name[1];
+                    $user_data['first_name'] = $name[0]; $user_data['last_name'] = $name[1];
                     $data['legal_company_name'] = $this->input->post('legal_company_name');
                     $data['address'] = $this->input->post('address');
                     $data['tin'] = $this->input->post('tin');
@@ -57,11 +58,9 @@ class Settings extends CI_Controller{
                     $data['bvn'] = $this->input->post('bvn');
                     $data['account_name'] = $this->input->post('account_name');
                     $data['account_number'] = $this->input->post('account_number');
-                    $data['start_date'] = date('Y-m-d', strtotime($this->input->post('start_date')));
-                    $data['end_date'] = date('Y-m-d', strtotime($this->input->post('end_date')));
-                    if( isset($_FILES['vat_file']) && !empty($_FILES) ){
+                    if( isset($_FILES['vat_file']) && !is_null($_FILES) ){
                         // is the file the same as present
-                        if( !is_dir( base_url('data/sellers/'. $uid .'/' ))) mkdir('./data/sellers/'.$uid);
+                        if( !is_dir( base_url('data/sellers/'. $uid .'/' )) || !file_exists(base_url('data/sellers/'. $uid .'/' ))) mkdir('./data/sellers/'.$uid);
                         $file1 = './data/sellers/'.$uid . '/' . $page_data['profile']->vat_file ;
                         $filename = $this->do_upload('vat_file', $page_data['profile']->id);
 
@@ -71,13 +70,17 @@ class Settings extends CI_Controller{
                         }
                         $data['vat_file'] = $filename;
                     }
-                    if( $this->seller->update_data ($uid , $data, 'sellers') ){
+                    // update user table
+
+                    $this->seller->update_data(array('id' => $uid ), $user_data, 'users');
+
+                    if( $this->seller->update_data(array('uid' => $uid), $data, 'sellers') ){
                         $this->session->set_flashdata('success_msg','Success: Your information has been saved successfully.');
                     }else{
                         $this->session->set_flashdata('error_msg','There was an error updating your information.');
                     }
-                    redirect($_SERVER['HTTP_REFERER']);
                 }
+                redirect($_SERVER['HTTP_REFERER']);
                 break;
             case 'terms':
                 // terms and condition
@@ -86,7 +89,7 @@ class Settings extends CI_Controller{
                     $this->session->set_flashdata('error_msg','Error: Please fix the error <br />'. validation_errors());
 
                 }else{
-                    if( $this->seller->update_data($uid , array('terms' => cleanit($this->input->post('terms'))), 'sellers') ){
+                    if( $this->seller->update_data(array('uid' => $uid) , array('terms' => cleanit($this->input->post('terms'))), 'sellers') ){
                         $this->session->set_flashdata('success_msg','Success: Your information has been saved successfully.');
                     }else{
                         $this->session->set_flashdata('error_msg','There was an error updating your information.');
@@ -111,7 +114,7 @@ class Settings extends CI_Controller{
             $page_data['page_title'] = 'Profile Setting - Carrito';
             $page_data['pg_name'] = 'settings';
             $page_data['sub_name'] = 'change_password';
-            $this->load->view('change_password', $page_data);
+            $this->load->view('seller/change_password', $page_data);
         }else{
             $this->form_validation->set_rules('current_password', 'Current password','trim|required|xss_clean');
             $this->form_validation->set_rules('new_password', 'New Password','trim|required|xss_clean');

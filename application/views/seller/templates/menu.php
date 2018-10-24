@@ -5,8 +5,8 @@
         <!--================================-->
         <div class="mainnav-brand">
             <a href="<?= base_url(); ?>" class="brand">
-                <img src="<?= base_url('assets/seller/img/carrito-logo.png');?>" alt="Carrito marketplace Logo" class="brand-icon">
-                <span class="brand-text">Carrito</span>
+                <img src="<?= base_url('seller/assets/seller/img/carrito-logo.png');?>" alt="<?= lang('app_name');?> logo" class="brand-icon">
+                <span class="brand-text"><?= lang('app_name'); ?></span>
             </a>
             <a href="#" class="mainnav-toggle"><i class="pci-cross pci-circle icon-lg"></i></a>
         </div>
@@ -35,16 +35,16 @@
                             </a>
                         </div>
                         <div id="profile-nav" class="collapse list-group bg-trans">
-                            <a href="<?= base_url('settings/profile'); ?>" class="list-group-item">
+                            <a href="<?= base_url('seller/settings/profile'); ?>" class="list-group-item">
                                 <i class="demo-pli-male icon-lg icon-fw"></i> View Profile
                             </a>
-                            <a href="<?= base_url('settings')?>" class="list-group-item">
+                            <a href="<?= base_url('seller/settings')?>" class="list-group-item">
                                 <i class="demo-pli-gear icon-lg icon-fw"></i> Settings
                             </a>
-                            <a href="<?= base_url('help')?>" class="list-group-item">
+                            <a href="<?= base_url('seller/help')?>" class="list-group-item">
                                 <i class="demo-pli-information icon-lg icon-fw"></i> Help
                             </a>
-                            <a href="<?= base_url('logout')?>" class="list-group-item">
+                            <a href="<?= base_url('seller/logout')?>" class="list-group-item">
                                 <i class="demo-pli-unlock icon-lg icon-fw"></i> Logout
                             </a>
                         </div>
@@ -58,9 +58,9 @@
 
                         <!--Menu list item-->
                         <li>
-                            <a href="<?= base_url('dashboard')?>">
+                            <a href="<?= base_url('seller/overview')?>">
                                 <i class="demo-pli-home"></i>
-                                <span class="menu-title">Dashboard</span>
+                                <span class="menu-title">Overview</span>
                             </a>
                         </li>
 
@@ -74,19 +74,19 @@
 
                             <!--Submenu-->
                             <ul class="collapse <?php if($pg_name == 'product' || $pg_name == 'manage_product') echo 'in';?>">
-                                <li <?php if($sub_name =='select_category') echo 'class="active-link"' ?>><a href="<?= base_url('product'); ?>">Select Category</a></li>
-                                <li <?php if($sub_name == 'add_product') echo 'class="active-link"' ?>><a href="<?= base_url('product/create'); ?>">Add new product</a></li>
+                                <li <?php if($sub_name =='select_category') echo 'class="active-link"' ?>><a href="<?= base_url('seller/product'); ?>">Select Category</a></li>
+                                <li <?php if($sub_name == 'add_product') echo 'class="active-link"' ?>><a href="<?= base_url('seller/product/create'); ?>">Add new product</a></li>
 
                                 <li>
                                     <a href="#">Manage Products<i class="arrow"></i></a>
                                     <!--Submenu-->
                                     <ul class="collapse">
-                                        <li><a href="<?= base_url('manage/'); ?>">All Products</a></li>
-                                        <li><a href="<?= base_url('manage/pending'); ?>">Pending</a></li>
-                                        <li><a href="<?= base_url('manage/delivered'); ?>">Delivered</a></li>
-                                        <li><a href="<?= base_url('manage/missing_images'); ?>">Missing Images</a></li>
-                                        <li><a href="<?= base_url('manage/sold_out'); ?>"">Returned</a></li>
-                                        <li><a href="<?= base_url('manage/inactive'); ?>"">Inactive</a></li>
+                                        <li><a href="<?= base_url('seller/manage/'); ?>">All Products</a></li>
+                                        <li><a href="<?= base_url('seller/manage/?type=pending'); ?>">Pending</a></li>
+                                        <li><a href="<?= base_url('seller/manage/?type=delivered'); ?>">Delivered</a></li>
+                                        <li><a href="<?= base_url('seller/manage/?type=missing_images'); ?>">Missing Images</a></li>
+                                        <li><a href="<?= base_url('seller/manage/?type=sold_out'); ?>"">Returned</a></li>
+                                        <li><a href="<?= base_url('seller/manage/?type=inactive'); ?>"">Inactive</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -104,17 +104,17 @@
 
                             <!--Submenu-->
                             <ul class="collapse <?php if($pg_name == 'orders') echo 'in';?>">
-                                <li <?php if($sub_name =='all') echo 'class="active-link"' ?>><a href="<?= base_url('orders/')?>">All Orders</a></li>
-                                <li <?php if($sub_name =='pending_order') echo 'class="active-link"' ?>><a href="<?= base_url('orders/pending')?>">Pending Orders</a></li>
-                                <li <?php if($sub_name =='shipped_pending') echo 'class="active-link"' ?>><a href="<?= base_url('orders/shipped')?>">Shipped Orders</a></li>
+                                <li <?php if($sub_name =='all') echo 'class="active-link"' ?>><a href="<?= base_url('seller/orders/')?>">All Orders</a></li>
+                                <li <?php if($sub_name =='pending_order') echo 'class="active-link"' ?>><a href="<?= base_url('seller/orders/?type=pending')?>">Pending Orders</a></li>
+                                <li <?php if($sub_name =='shipped_pending') echo 'class="active-link"' ?>><a href="<?= base_url('seller/orders/?type=shipped')?>">Shipped Orders</a></li>
                                 <li>
                                     <a href="#">Completed Orders<i class="arrow"></i></a>
                                     <!--Submenu-->
                                     <ul class="collapse">
-                                        <li><a href="<?= base_url('orders/delivered')?>">Delivered</a></li>
-                                        <li><a href="<?= base_url('orders/canceled'); ?>">Canceled</a></li>
-                                        <li><a href="<?= base_url('orders/failed_delivery'); ?>">Failed Delivery</a></li>
-                                        <li><a href="<?= base_url('orders/returned'); ?>">Returned</a></li>
+                                        <li><a href="<?= base_url('seller/orders/?type=delivered')?>">Delivered</a></li>
+                                        <li><a href="<?= base_url('seller/orders/?type=canceled'); ?>">Canceled</a></li>
+                                        <li><a href="<?= base_url('seller/orders/?type=failed_delivery'); ?>">Failed Delivery</a></li>
+                                        <li><a href="<?= base_url('seller/orders/?type=returned'); ?>">Returned</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -130,22 +130,22 @@
 
                             <!--Submenu-->
                             <ul class="collapse <?php if($pg_name == 'settings') echo 'in';?>">
-                                <li <?php if($sub_name =='profile') echo 'class="active-link"' ?>><a href="<?= base_url('settings')?>">Profile</a></li>
-                                <li <?php if($sub_name =='change_password') echo 'class="active-link"' ?>><a href="<?= base_url('settings/change_password'); ?>">Change Password</a></li>
-                                <li <?php if($sub_name =='notification') echo 'class="active-link"' ?>><a href="<?= base_url('settings/notification'); ?>">Notification Setting</a></li>
+                                <li <?php if($sub_name =='profile') echo 'class="active-link"' ?>><a href="<?= base_url('seller/settings')?>">Profile</a></li>
+                                <li <?php if($sub_name =='change_password') echo 'class="active-link"' ?>><a href="<?= base_url('seller/settings/change_password'); ?>">Change Password</a></li>
+                                <!-- <li <?php if($sub_name =='notification') echo 'class="active-link"' ?>><a href="<?= base_url('seller/settings/notification'); ?>">Notification Setting</a></li> -->
 
                             </ul>
                         </li>
                         <!--Menu list item-->
                         <li>
-                            <a href="<?= base_url('help'); ?>">
+                            <a href="<?= base_url('seller/help'); ?>">
                                 <i class="demo-pli-inbox-full"></i>
                                 <span class="menu-title">Help & Guidelines</span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="<?= base_url('logout'); ?>">
+                            <a href="<?= base_url('seller/logout'); ?>">
                                 <i class="fa fa-key"></i>
                                 <span class="menu-title">Logout</span>
                             </a>

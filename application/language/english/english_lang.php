@@ -44,4 +44,12 @@ $lang['countries'] = 'Afghanistan, Albania, Algeria, American Samoa, Andorra, An
 
 
 	$lang['banks'] = 'Access Bank Plc, Citibank Nigeria Limited, Diamond Bank Plc, Ecobank Nigeria Plc, Enterprise Bank , Fidelity Bank Plc, FIRST BANK NIGERIA LIMITED, First City Monument Bank Plc, Guaranty Trust Bank Plc, Heritage Banking Company Ltd, Key Stone Bank, MainStreet Bank, Skye Bank Plc, Stanbic IBTC Bank Ltd, Standard Chartered Bank Nigeria Ltd, Sterling Bank Plc, SunTrust Bank Nigeria Limited, Union Bank of Nigeria Plc, United Bank For Africa Plc, Unity Bank Plc, Wema Bank Plc, Zenith Bank Plc';
+
+	$lang['certifications'] = "AFRDI Leather, AFRDI - Australian Furnishing Research & Development Institute,ASTM Certified,Australian Made,Eco Friendly,FSC - Forest Stewardship Council,Fair Trade,GECA - Good Environmental Choice Australia,Organic,PEFC - Programme for the Endorcement of Forest Certification,PEFC - Programme for the Endorcement of Forest Certification,Timber Certificate,Suitable for Allergic";
+
+	$lang['main_material'] = 'ceramics, glass,leather,metal,natural fibre,plume,resin,silicon,stone,synthetic,textile,wood';
+
+	$lang['warranty_types'] = 'Service Center,Repair by vendor,replacement by vendor';
+
+	$lang['brands'] = 'sony,binatone,itel,samsung,infinix,hp,philips,lenovo,tecno,itel,samsung';
 ?>

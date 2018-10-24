@@ -17,8 +17,7 @@ class Application extends CI_Controller{
         $page_data['page_title'] = 'Seller Application Form';
         $page_data['pg_name'] = 'application';
         $page_data['sub_name'] = 'application_form';
-        $this->load->helper('query');
-        $page_data['categories'] = get_categories();
+        $page_data['categories'] = $this->seller->get_category_name('','root_category');
         $page_data['meta_tags'] = array( 'css/bootstrap.min.css','css/nifty.min.css','css/nifty-demo-icons.min.css','css/nifty-demo.min.css');
         $page_data['scripts'] = array('js/jquery.min.js','js/bootstrap.min.js', 'js/nifty.min.js');
         $status = $this->seller->get_seller_status(base64_decode($this->session->userdata('logged_id')));
@@ -39,7 +38,7 @@ class Application extends CI_Controller{
         if( is_numeric( $insert )){
             // update the seller status to pending
             $user_data['is_seller'] = 'pending';
-            $this->seller->update_data($data['uid'], $user_data, 'users');
+            $this->seller->update_data(array('id' => $data['uid']), $user_data, 'users');
             redirect('seller/application/status');
         }else{
             $this->session->set_flashdata('error_msg','There was an error submitting the form.');

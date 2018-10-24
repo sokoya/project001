@@ -37,7 +37,7 @@
                                     <label for="main_category">Select main category</label>
                                     <select class="form-control" name="main_category">
                                         <option value="">-- Select Main Category -- </option>
-                                    	<?php foreach( $categories  as $category ) : ?>
+                                    	<?php foreach( $categories->result()  as $category ) : ?>
                                             <option value="<?= $category->name ?>"> <?= ucwords($category->name); ?> </option>
                                     	<?php endforeach; ?>
                                     </select>

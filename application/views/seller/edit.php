@@ -19,7 +19,7 @@
                     <!--Page Title-->
                     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                     <div id="page-title">
-                        <h1 class="page-header text-overflow">Product</h1>
+                        <h1 class="page-header text-overflow">Edit Product</h1>
                     </div>
                     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                     <!--End page title-->
@@ -102,7 +102,7 @@
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Product Name *</label>
                                                                             <div class="col-lg-7">
-                                                                                <input type="text" class="form-control" autofocus required name="product_name" value="<?= isset($_POST['product_name']) ? $_POST['product_name']: ''; ?>" placeholder="Product name">
+                                                                                <input type="text" class="form-control" autofocus required name="product_name" value="<?= $product->product_name; ?>" placeholder="Product name">
                                                                                 <span class="text-sm text-dark">Name of the product. For a better listing quality, the name should consist the actual product name, if available colour, edition, speciality</span>
                                                                                 <span class="text-sm text-dark">Wide Angle Camera 10 MP - Black, Galaxy Tab A Leather Flip Case - Red</span>
                                                                             </div>
@@ -110,20 +110,27 @@
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Brand Name *</label>
                                                                             <div class="col-lg-7">
-                                                                                <input type="text" class="form-control" required name="brand_name" placeholder="Eg: Apple, Chanel, Random House. Add under ''Generic'' brand if your product is unbranded.">
+                                                                                <select name="brand_name" required class="selectpicker" data-width="100%" title="Select brand">
+                                                                                    <?php
+                                                                                        $brands = explode(',', lang('brands'));
+                                                                                        foreach( $brands as $brand ):
+                                                                                    ?>  
+                                                                                    <option value="<?= trim($brand); ?>" <?php if($brand == trim(strtolower($product->brand_name))) echo 'selected'; ?> ><?= $brand; ?></option>
+                                                                                <?php endforeach; ?>
+                                                                                </select>
                                                                                 <span class="text-sm text-dark">Brand of the product. If brand does not exist, please copy https://goo.gl/Hw8vma into your browser and fill accordingly.</span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Model</label>
                                                                             <div class="col-lg-7">
-                                                                                <input type="text" class="form-control" required name="model" placeholder="Eg:  iPhone 4S Samsung TV 4T">
+                                                                                <input type="text" class="form-control" required name="model" value="<?= $product->model; ?>" placeholder="Eg:  iPhone 4S Samsung TV 4T">
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Main Colour</label>
                                                                             <div class="col-lg-7">
-                                                                                <input type="text" class="form-control" name="main_colour" placeholder="Eg: royal blue, mint green, Peach red">
+                                                                                <input type="text" class="form-control" name="main_colour" value="<?= $product->main_colour; ?>" placeholder="Eg: royal blue, mint green, Peach red">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -150,37 +157,22 @@
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Product Line</label>
                                                                             <div class="col-lg-7">
-                                                                                <input type="text" placeholder="Enter In Here Your Store Name" name="product_line" class="form-control">
+                                                                                <input type="text" placeholder="Enter In Here Your Store Name" value="<?= $product->product_line; ?>" name="product_line" class="form-control">
                                                                                 <span class="text-sm text-dark">Eg: Fouani Nigeria, Trendy Woman Ltd, SEOLAK</span>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="form-group">
-                                                                            <label class="col-lg-3 control-label">Colour Family</label>
-                                                                            <div class="col-lg-7">
-                                                                                <select name="colour_family[]" class="selectpicker" multiple title="Choose colour family..." data-width="100%">
-                                                                                    <option name="green">Green</option>
-                                                                                    <option name="red">Red</option>
-                                                                                    <option name="yellow">Yellow</option>
-                                                                                </select>
-                                                                                <span class="text-sm text-dark">Add a generalisation of the main color, to help customers find the product using the provided color-filter in the shop</span>
-                                                                            </div>
-                                                                        </div>
+                                                                        
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Main Material</label>
                                                                             <div class="col-lg-7">
-                                                                                <select name="main_material" class="selectpicker" title="Choose type..." data-width="100%">
-                                                                                    <option value="ceramics">Ceramics</option>
-                                                                                    <option value="glass">Glass</option>
-                                                                                    <option value="leather">Leather</option>
-                                                                                    <option value="metal">Metal</option>
-                                                                                    <option value="natural fibre">Natural Fibre</option>
-                                                                                    <option value="plume">Plume</option>
-                                                                                    <option value="resin">Resin</option>
-                                                                                    <option value="silicon">Silicon</option>
-                                                                                    <option value="stone">Stone</option>
-                                                                                    <option value="synthetic">Synthetic</option>
-                                                                                    <option value="textile">Textile</option>
-                                                                                    <option value="wood">Wood</option>
+                                                                                <select name="main_material[]" class="selectpicker" title="Choose type..." multiple data-width="100%">
+                                                                                    <?php
+                                                                                         
+                                                                                        $materials = explode(',', lang('main_material'));
+                                                                                        foreach ($materials as $material) :
+                                                                                    ?>
+                                                                                    <option value="<?= trim($material); ?>" <?php if($material == strtolower(trim($product->main_material))) echo 'selected'; ?> > <?= trim($material); ?> </option>
+                                                                                    <?php endforeach; ?>
                                                                                 </select>
                                                                                 <span class="text-sm text-dark">Eg: Leather</span>
                                                                             </div>
@@ -205,26 +197,26 @@
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Product Description </label>
                                                                             <div class="col-lg-7">
-                                                                                <textarea placeholder="Product description" data-provide="markdown" rows="8" name="product_description" class="form-control"></textarea>
+                                                                                <textarea placeholder="Product description" data-provide="markdown" rows="8" name="product_description" class="form-control"><?= $product->product_description; ?></textarea>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">YouTube ID</label>
                                                                             <div class="col-lg-7">
-                                                                                <input type="email" class="form-control" name="youtube_id" placeholder="YouTube ID">
+                                                                                <input type="email" class="form-control" value="<?= $product->youtube_id; ?>" name="youtube_id" placeholder="YouTube ID">
                                                                                 <span class="text-sm text-dark">Example: e.g. http://www.youtube.com/watch?v=htlgaXRAe2k it is: htlgaXRAe2k</span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">What's in the box?</label>
                                                                             <div class="col-lg-7">
-                                                                                <textarea placeholder="Any information in the box" data-provide="markdown" name="in_the_box" rows="8" class="form-control"></textarea>
+                                                                                <textarea placeholder="Any information in the box" data-provide="markdown" name="in_the_box" rows="8" class="form-control"><?= $product->in_the_box;?></textarea>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Highlights</label>
                                                                             <div class="col-lg-7">
-                                                                                <textarea placeholder="Additional info" name="highlights" data-provide="markdown" rows="8" class="form-control"></textarea>
+                                                                                <textarea placeholder="Additional info" name="highlights" data-provide="markdown" rows="8" class="form-control"><?= $product->highlights; ?></textarea>
                                                                                 <span class="text-sm text-dark">Enter short major highlights of the product, to make the purchase decision for the customer easier.</span>
                                                                                 <span class="text-sm text-dark">Example: Best expierience ever - super fast and easy navigation - better control</span>
                                                                             </div>
@@ -246,14 +238,14 @@
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Dimension</label>
                                                                             <div class="col-lg-7">
-                                                                                <input type="text" placeholder="Example: 12 x 3 x 90" name="dimensions" class="form-control">
+                                                                                <input type="text" placeholder="Example: 12 x 3 x 90" value="<?= $product->dimensions; ?>" name="dimensions" class="form-control">
                                                                                 <span class="text-sm text-dark">Measurement of the product</span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Weight *</label>
                                                                             <div class="col-lg-7">
-                                                                                <input type="text" required placeholder="Weight of the product. eg 10" name="weight" class="form-control">
+                                                                                <input type="text" required placeholder="Weight of the product. eg 10" value="<?= $product->weight;?>" name="weight" class="form-control">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -272,33 +264,48 @@
                                                                 <!--Accordion content-->
                                                                 <div class="panel-collapse " id="attribute">
                                                                     <div class="panel-body">
-                                                                        <?php $x = 1;  foreach ($specifications as $specification ) :?>
+                                                                            <?php $x = 1; 
+                                                                                $created_specs = (array)json_decode( $product->attributes);
+                                                                                // var_dump( $created_specs );
+                                                                                // exit;
+                                                                                foreach( $specifications as $spec_key => $spec_value ) : 
+                                                                                    $spec_name = $spec_value['spec_name']; $selected = '';
+                                                                            ?>
+
                                                                                 <div class="form-group">
-                                                                                    <label class="col-lg-3 control-label"><?= ucwords($specification['spec_name']); ?></label>
+                                                                                    <label class="col-lg-3 control-label"><?= ucwords($spec_value['spec_name']); ?></label>
                                                                                     <div class="col-lg-7">
-                                                                                        <?php if( !empty($specification['options']) ) :
-                                                                                            $options = json_decode($specification['options']);
+
+                                                                                        <?php if( !empty($spec_value['options']) ) :
+                                                                                            $options = json_decode($spec_value['options']);
                                                                                         ?>
                                                                                             <select class="selectpicker"
-                                                                                                    <?php if($specification['multiple_options']) {
-                                                                                                        echo 'name="attribute_' . str_replace(' ','-',$specification["spec_name"]) .'[]"';
+                                                                                                    <?php if($spec_value['multiple_options']) {
+                                                                                                        echo 'name="attribute_' . str_replace(' ','-',$spec_value["spec_name"]) .'[]"';
                                                                                                         echo ' multiple';
                                                                                                     }else {
-                                                                                                        echo 'name="attribute_' . str_replace(' ','-',$specification["spec_name"]).'"' ;
+                                                                                                        echo 'name="attribute_' . str_replace(' ','-',$spec_value["spec_name"]).'"' ;
                                                                                                     } ?>
-                                                                                                    title="Choose <?= $specification['spec_name']; ?>"
+                                                                                                    title="Choose <?= $spec_value['spec_name']; ?>"
                                                                                                     data-width="100%">
                                                                                             <?php foreach ($options as $key => $value ) : ?>
-                                                                                                <option value="<?= trim($value); ?>"><?= ucwords(trim($value)); ?></option>
+                                                                                                <?php 
+                                                                                                    // if(in_array(str_replace('-','', $spec_value['spec_name']), $created_specs) && in_array($value, array_values($created_specs))) $selected = 'selected';
+                                                                                                ?>
+                                                                                                <option value="<?= trim($value); ?>" <?= $selected; ?> >
+                                                                                                    <?= ucwords(trim($value)); ?>
+                                                                                                </option>
+
                                                                                             <?php endforeach; ?>
                                                                                             </select>
+
                                                                                         <?php else: ?>
-                                                                                            <input type="text" placeholder="<?= $specification['spec_name']; ?>" name="attribute_<?= str_replace(' ','-',$specification['spec_name']); ?>" class="form-control">
+                                                                                            <input type="text" placeholder="<?= $spec_value['spec_name']; ?>" name="attribute_<?= str_replace(' ','-',$spec_value['spec_name']); ?>" class="form-control">
                                                                                         <?php endif; ?>
-                                                                                        <span class="text-sm text-dark"><?= $specification['description']; ?></span>
+                                                                                        <span class="text-sm text-dark"><?= $spec_value['description']; ?></span>
                                                                                     </div>
                                                                                 </div>
-                                                                        <?php $x++;  endforeach; ?>
+                                                                        <?php $x++; endforeach; ?>
                                                                     </div>
                                                                 </div>
                                                                 <!--/Accordion content-->
@@ -319,18 +326,15 @@
                                                                             <label class="col-lg-3 control-label">Cerification</label>
                                                                             <div class="col-lg-7">
                                                                                 <select name="certifications[]" class="selectpicker" multiple title="Example: Organic, Suitable for Allergics Fair Trade..." data-width="100%">
-                                                                                    <option name="AFRDI Leather">AFRDI Leather</option>
-                                                                                    <option name="AFRDI - Australian Furnishing Research & Development Institute">AFRDI - Australian Furnishing Research & Development Institute</option>
-                                                                                    <option name="ASTM Certified">ASTM Certified</option>
-                                                                                    <option name="Australian Made">Australian Made</option>
-                                                                                    <option name="Eco Friendly">Eco Friendly</option>
-                                                                                    <option name="FSC - Forest Stewardship Council">FSC - Forest Stewardship Council</option>
-                                                                                    <option name="Fair Trade">Fair Trade</option>
-                                                                                    <option name="GECA - Good Environmental Choice Australia">GECA Good Environmental Choice Australia</option>
-                                                                                    <option name="Organic">Organic</option>
-                                                                                    <option name="PEFC - Programme for the Endorcement of Forest Certification">PEFC -Programme for the Endorcement of Forest Certification</option>
-                                                                                    <option name="PEFC">Timber Certificate</option>
-                                                                                    <option name="Suitable for Allergic">Suitable For Allergic</option>
+                                                                                    <?php 
+
+                                                                                        $certs = json_decode( $product->certifications );
+                                                                                        $certifications = explode(',', lang('certifications') );
+                                                                                        foreach( $certifications as $certification ):
+                                                                                    ?>
+                                                                                        <option value="<?= trim($certification); ?>" <?php if(in_array($certification,$certs)) echo 'selected'; ?> > <?= $certification; ?></option>
+                                                                                    <?php endforeach;  ?>
+
                                                                                 </select>
                                                                                 <span class="text-sm text-dark">Select different certifications, that the product owns, or with which certifications the product was marked</span>
                                                                             </div>
@@ -346,16 +350,20 @@
                                                                             <label class="col-lg-3 control-label">Waranty Type</label>
                                                                             <div class="col-lg-7">
                                                                                 <select name="warranty_type[]" class="selectpicker" multiple title="Choose warranty type..." data-width="100%">
-                                                                                    <option name="service center">Service Center</option>
-                                                                                    <option name="Repair by vendor">Repair by vendor</option>
-                                                                                    <option name="replacement by vendor">Replacement by vendor</option>
+                                                                                    <?php
+                                                                                        $warranty = explode(',', $product->warranty_type);
+                                                                                        $types = explode(',', lang('warranty_types'));
+                                                                                        foreach( $types as $type ):
+                                                                                    ?>
+                                                                                    <option value="<?= trim($type); ?>" <?php if(in_array($type, $warranty)) echo 'selected'; ?> > <?= trim($type); ?></option>
+                                                                                <?php endforeach; ?>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Warranty address</label>
                                                                             <div class="col-lg-7">
-                                                                                <textarea placeholder="Warranty address" name="warranty_address" data-provide="markdown" rows="8" placeholder="Enter the Service Centre Address. If you have multi-options selected in the Warranty Type use the sample format for addresses." class="form-control"></textarea>
+                                                                                <textarea placeholder="Warranty address" name="warranty_address" data-provide="markdown" rows="8" placeholder="Enter the Service Centre Address. If you have multi-options selected in the Warranty Type use the sample format for addresses." class="form-control"><?= $product->warranty_address; ?></textarea>
                                                                                 <span class="text-sm text-dark">Example: Service Center Address: 20b Caro Road, Ikeja. Lagos | Repair by Vendor Address: 5 Paris Street, Yaba. Lagos.</span>
                                                                             </div>
                                                                         </div>
@@ -385,61 +393,64 @@
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody class="variation_body">
-                                                                <tr data-row-id="1">
-                                                                    <td>
-                                                                        <div class="form-group-sm">
-                                                                            <label class="">Variation</label>
-                                                                            <input title="variation" type="text" class="form-control" name="variation[]" />
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="form-group-sm">
-                                                                            <label class="">SKU</label>
-                                                                            <input title="Seller SKU" type="text" class="form-control" name="sku[]" />
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="form-group-sm">
-                                                                            <label class="">ISBN </label>
-                                                                            <input title="EAN / UPC / ISBN" type="text" class="form-control" name="isbn[]" />
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="form-group-sm">
-                                                                            <label class="">Quantity </label>
-                                                                            <input title="Quantity" type="number" min="1" max="100" class="form-control" name="quantity[]" />
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="form-group-sm">
-                                                                                <label class="">Sale Price* </label>
-                                                                                <input title="Price" type="text" class="form-control" name="sale_price[]" />
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="form-group">
-                                                                            <label class="">Discount Price </label>
-                                                                            <input title="Discounted price" type="text" class="form-control" required name="discount_price[]" />
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="form-group-sm">
-                                                                            <label class="">Discount Start Date</label>
-                                                                            <input title="Starting date for this variation" type="date" class="form-control" name="start_date[]" />
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="form-group-sm">
-                                                                            <label class="">Discount End Date</label>
-                                                                            <input title="End date for this variation" type="date" class="form-control" name="end_date[]" />
-                                                                        </div>
-                                                                    </td>
-                                                                    <td class="">
-                                                                        <div class="btn-group">
-                                                                            <a class="btn btn-sm btn-default btn-hover-success demo-psi-add add-tooltip add_more" href="javascript:void(0);" data-original-title="Add Another Variation" data-container="body"></a>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
+                                                                    <?php $x =1; foreach($variations as $variation ) :?>
+
+                                                                    <tr data-row-id="<?= $x; ?>">
+                                                                        <td>
+                                                                            <div class="form-group-sm">
+                                                                                <label class="">Variation</label>
+                                                                                <input title="variation" type="text" class="form-control" name="variation[]" value="<?= $variation->variation; ?>" />
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="form-group-sm">
+                                                                                <label class="">SKU</label>
+                                                                                <input title="Seller SKU" type="text" class="form-control" name="sku[]" value="<?= $variation->sku; ?>" />
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="form-group-sm">
+                                                                                <label class="">ISBN </label>
+                                                                                <input title="EAN / UPC / ISBN" type="text" class="form-control" name="isbn[]" value="<?= $variation->isbn; ?>" />
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="form-group-sm">
+                                                                                <label class="">Quantity </label>
+                                                                                <input title="Quantity" type="number" min="1" max="100" class="form-control" name="quantity[]" value="<?= $variation->quantity; ?>" />
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="form-group-sm">
+                                                                                    <label class="">Sale Price* </label>
+                                                                                    <input title="Price" type="text" class="form-control" name="sale_price[]" value="<?= $variation->sale_price; ?>" />
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="form-group">
+                                                                                <label class="">Discount Price </label>
+                                                                                <input title="Discounted price" type="text" class="form-control" required name="discount_price[]" />
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="form-group-sm">
+                                                                                <label class="">Discount Start Date</label>
+                                                                                <input title="Starting date for this variation" type="date" class="form-control" name="start_date[]" value="<?= date('Y/m/d', strtotime($variation->start_date)); ?>" />
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="form-group-sm">
+                                                                                <label class="">Discount End Date</label>
+                                                                                <input title="End date for this variation" type="date" class="form-control" name="end_date[]" value="<?= date('Y/m/d', strtotime($variation->end_date)); ?>" />
+                                                                            </div>
+                                                                        </td>
+                                                                        <td class="">
+                                                                            <div class="btn-group">
+                                                                                <a class="btn btn-sm btn-default btn-hover-success demo-psi-add add-tooltip add_more" href="javascript:void(0);" data-original-title="Add Another Variation" data-container="body"></a>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <?php $x++; endforeach; ?>
                                                                 </tbody>
                                                             </table>
                                                             <hr>

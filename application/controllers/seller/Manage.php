@@ -8,15 +8,13 @@ class Manage extends CI_Controller{
         $this->session->set_userdata('referred_from', current_url());
         $this->load->model('seller_model', 'seller');
         if( !$this->session->userdata('logged_in') ){
-            // Ursher the person to where he is coming from
-            
+            // Ursher the person to where he is coming from            
             redirect('seller/login');
         }        
     }
 
     public function index(){
-        $status = cleanit($this->uri->segment(2));
-        
+        $status = cleanit($this->input->get('type'));        
         $page_data['page_title'] = 'Manage all products';
         $page_data['pg_name'] = 'manage_product';
         $page_data['sub_name'] = $status;

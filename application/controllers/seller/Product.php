@@ -4,10 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Product extends CI_Controller{
 
     public function __construct(){
-        // @todo
-        // Check if the user is already logged in
-        // Also check where the user is coming from
-        // $this->session->set_userdata('referred_from', current_url());
         parent::__construct();
         $this->load->model('seller_model', 'seller');
         if( !$this->session->userdata('logged_in') ){
@@ -17,10 +13,6 @@ class Product extends CI_Controller{
             redirect('seller/login');
         }
          // $this->output->enable_profiler(TRUE);
-//        $this->output->set_header('Last-Modified:'.gmdate('D, d M Y H:i:s').'GMT');
-//        $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate');
-//        $this->output->set_header('Cache-Control: post-check=0, pre-check=0',false);
-//        $this->output->set_header('Pragma: no-cache');
     }
 
     public function index(){
@@ -38,12 +30,13 @@ class Product extends CI_Controller{
             $this->session->unset_userdata('rootcategory');
             $this->session->unset_userdata('category');
             $this->session->unset_userdata('subcategory');
-            $this->load->helper('query_helper');
+            $uid = base64_decode($this->session->userdata('logged_id'));
             $page_data['page_title'] = 'Choose Category';
             $page_data['pg_name'] = 'product';
             $page_data['sub_name'] = 'select_category';
-            $page_data['profile'] = $this->seller->get_profile_details(base64_decode($this->session->userdata('logged_id')),
+            $page_data['profile'] = $this->seller->get_profile_details($uid,
                 'first_name,last_name,email,profile_pic');
+            $page_data['root_categories'] = $this->seller->get_category_name('', 'root_category');
             $this->load->view('seller/choose_category', $page_data);
         }
     }
@@ -55,23 +48,23 @@ class Product extends CI_Controller{
 
         // check if we have the category session set
         if( $this->session->has_userdata('rootcategory')  && $this->session->has_userdata('category') && $this->session->has_userdata('subcategory') ){
-            $this->load->helper('query_helper');
             $new_session = array();
             $new_session['sub_id'] = $sub_id = $this->session->userdata('subcategory');
-            $new_session['new_rootcategory'] = $this->seller->get_category_name($this->session->userdata('rootcategory'), 'root_category')->name;
-            $new_session['new_category'] = $this->seller->get_category_name($this->session->userdata('category'), 'category')->name;
-            $new_session['new_subcategory'] = $this->seller->get_category_name($sub_id, 'sub_category')->name;
+            $new_session['new_rootcategory'] = $this->seller->get_single_category_name($this->session->userdata('rootcategory'), 'root_category')->name;
+            $new_session['new_category'] = $this->seller->get_single_category_name($this->session->userdata('category'), 'category')->name;
+            $new_session['new_subcategory'] = $this->seller->get_single_category_name($sub_id, 'sub_category')->name;
 
             $page_data['specifications'] = $this->seller->get_specification($sub_id);
             $this->session->set_userdata( $new_session );
             // Check if post method
+            $uid = base64_decode($this->session->userdata('logged_id'));
             $page_data['page_title'] = 'Add product';
             $page_data['pg_name'] = 'product';
             $page_data['sub_name'] = 'add_product';
-            $page_data['profile'] = $this->seller->get_profile_details(base64_decode($this->session->userdata('logged_id')),
+            $page_data['profile'] = $this->seller->get_profile_details( $uid ,
                 'first_name,last_name,email,profile_pic');
             // check the specification attached with the sub category
-            $this->load->view('create', $page_data);
+            $this->load->view('seller/create', $page_data);
         }else{
             // redirect to make a selection of category
             $this->session->set_flashdata('error_msg', 'Info. : You need to Select a Category first for the product.');
@@ -251,11 +244,9 @@ class Product extends CI_Controller{
      * @return:  JSON categories id, name
      */
     function append_category(){
-        $this->load->helper('query_helper');
         $id = $this->input->post('id');
-        if( !is_null($id) ){
-            echo json_encode(get_categories_by_root_id($id) , JSON_UNESCAPED_SLASHES);
-        }
+        $result = $this->seller->get_category_name($id,'category')->result_array();
+        echo json_encode($result, JSON_UNESCAPED_SLASHES);
         exit;
     }
 
@@ -264,11 +255,34 @@ class Product extends CI_Controller{
      * @return:  JSON sub categories id, name
      */
     function append_sub_category(){
-        $this->load->helper('query_helper');
         $id = $this->input->post('id');
-        if( !is_null($id) ){
-            echo json_encode(get_subcategories_by_cat_id($id) , JSON_UNESCAPED_SLASHES);
-        }
+        $result = $this->seller->get_category_name($id,'sub_category')->result_array();
+        echo json_encode( $result, JSON_UNESCAPED_SLASHES);
         exit;
+    }
+
+
+    /*
+
+    */
+
+    public function edit($id = ''){
+        $id = cleanit($id);
+        $uid = base64_decode($this->session->userdata('logged_id'));
+        $page_data['page_title'] = 'Edit product';
+        $page_data['pg_name'] = 'product';
+        $page_data['sub_name'] = 'edit_product';
+        $page_data['profile'] = $this->seller->get_profile_details($uid,
+            'first_name,last_name,email,profile_pic');
+        // check the owner
+        // if( $this->seller->is_product_owner( $uid, $id ) < 1 ){
+        //     $this->session->set_flashdata('error_msg', 'Info. : The product you are trying to access is not available to you.');
+        //     redirect('seller/overview');
+        // }
+        $page_data['product'] = $this->seller->get_single_product( $id );
+        $page_data['specifications'] = $this->seller->get_specifications( $page_data['product']->subcategory);
+        $page_data['variations'] = $this->seller->get_product_variation( $id );
+        // var_dump($page_data['variations']);
+        $this->load->view('seller/edit', $page_data);
     }
 }

@@ -1,13 +1,13 @@
-<?php $this->load->view('templates/meta_tags'); ?>
-<link href="<?= base_url('assets/plugins/bootstrap-validator/bootstrapValidator.min.css')?>" rel="stylesheet">
-<link href="<?= base_url('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css')?>" rel="stylesheet">
+<?php $this->load->view('seller/templates/meta_tags'); ?>
+<link href="<?= base_url('assets/seller/plugins/bootstrap-validator/bootstrapValidator.min.css')?>" rel="stylesheet">
+<link href="<?= base_url('assets/seller/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css')?>" rel="stylesheet">
 </head>
 <body>
     <div id="container" class="effect aside-float aside-bright mainnav-lg">
         
         <!--NAVBAR-->
         <!--===================================================-->
-        <?php $this->load->view('templates/head_navbar'); ?>
+        <?php $this->load->view('seller/templates/head_navbar'); ?>
         <!--===================================================-->
         <!--END NAVBAR-->
 
@@ -66,7 +66,7 @@
                                     <div class="tab-content">
                                         <div class="tab-pane fade in active" id="carrito-tabs-box-1">
                                             <p class="text-main text-semibold">Seller Account Information</p>
-                                            <?= form_open_multipart('settings/process', 'class="form-horizontal"')?>
+                                            <?= form_open_multipart('seller/settings/process', 'class="form-horizontal"')?>
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label" for="carrito-fl-name">First & Last
                                                         Name</label>
@@ -127,7 +127,7 @@
                                                             <span class="pull-left btn btn-primary btn-file ">
                                                                 Change <input type="file" name="vat_file">
                                                             </span>
-                                                            <?php if( !empty($profile->vat_file)) : ?>
+                                                            <?php if( !empty($profile->vat_file) || !is_null($profile->vat_file)) : ?>
                                                                 <span style="padding: 4px; margin: 10px 20px 5px 10px;">
                                                                     <a href="#">Google file viewer</a>
                                                                 </span>
@@ -143,8 +143,8 @@
                                                     <div class="col-sm-9">
                                                         <select class="demo_select2 form-control" name="license_to_sell">
                                                             <option>--Select an Option--</option>
-                                                            <option value="1" <?php if($profile->license_to_sell) echo 'selected'?> >Yes</option>
-                                                            <option value="0" <?php if(!$profile->license_to_sell) echo 'selected'?> >No</option>
+                                                            <option value="1" <?php if($profile->license_to_sell == 1) echo 'selected'?> >Yes</option>
+                                                            <option value="0" <?php if($profile->license_to_sell == 0) echo 'selected'?> >No</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -154,7 +154,7 @@
                                                         Do you own any brands for the products you are selling?</label>
                                                     <div class="col-sm-9">
                                                         <select class="demo_select2 form-control" name="own_brand">
-                                                            <option>--Select an Option--</option>
+                                                            <option value="">--Select an Option--</option>
                                                             <option value="1"  <?php if($profile->own_brand) echo 'selected'?> >Yes, I do</option>
                                                             <option value="0" <?php if($profile->own_brand) echo 'selected'?> >No.</option>
                                                         </select>
@@ -166,8 +166,8 @@
                                                         Product Category</label>
                                                     <div class="col-sm-9">
                                                         <select class="demo_select2 form-control" name="main_category">
-                                                            <option selected>--Select Main Product Category--</option>
-                                                            <?php foreach (get_root_categories()->result() as $root_categories ): ?>
+                                                            <option value="">--Select Main Product Category--</option>
+                                                            <?php foreach ($categories->result() as $root_categories ): ?>
                                                                 <option value="<?= $root_categories->name; ?>" <?php if(trim($profile->main_category == $root_categories->name)) echo 'selected';?> ><?= $root_categories->name; ?></option>
                                                             <?php endforeach; ?>
                                                         </select>
@@ -180,14 +180,14 @@
                                                     <div class="col-sm-9">
                                                         <select class="demo_select2 form-control" name="no_of_products">
                                                             <option value="">--Select an Option--</option>
-                                                            <option value="1-10">1-10</option>
-                                                            <option value="11-50">11-50</option>
-                                                            <option value="51-100">51-100</option>
-                                                            <option value="101-500">101-500</option>
-                                                            <option value="501-2000">501-2000</option>
-                                                            <option value="2000-5000">2001-5000</option>
-                                                            <option value="5000-10000">5001-10000</option>
-                                                            <option value="10001-50000">10001-50000</option>
+                                                            <option value="1-10" <?php if($profile->no_of_products =="1-10") echo 'selected'; ?> >1-10</option>
+                                                            <option value="11-50" <?php if($profile->no_of_products =="11-50") echo 'selected'; ?> >11-50</option>
+                                                            <option value="51-100" <?php if($profile->no_of_products =="51-100") echo 'selected'; ?> >51-100</option>
+                                                            <option value="101-500" <?php if($profile->no_of_products =="101-500") echo 'selected'; ?> >101-500</option>
+                                                            <option value="501-2000" <?php if($profile->no_of_products =="501-2000") echo 'selected'; ?> >501-2000</option>
+                                                            <option value="2000-5000" <?php if($profile->no_of_products =="2000-5000") echo 'selected'; ?> >2001-5000</option>
+                                                            <option value="5001-10000" <?php if($profile->no_of_products =="5001-10") echo 'selected'; ?> >5001-10000</option>
+                                                            <option value="10001-50000" <?php if($profile->no_of_products =="1-10") echo 'selected'; ?> >10001-50000</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -222,24 +222,6 @@
                                                     </div>
                                                 </div>
 
-                                                <p class="text-main text-semibold">Holidays</p>
-                                                <p>During the holiday period your products will be offline, but you can
-                                                    still process outstanding Orders or view your Account Statement.
-                                                    Holiday period includes the Start and End dates.</p>
-
-                                                <div class="form-group ">
-                                                    <label class="col-sm-3 control-label">Start Date</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="date" name="start_date" value="<?= date('Y-m-d', strtotime($profile->start_date)); ?>" class="form-control">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group ">
-                                                    <label class="col-sm-3 control-label">End Date</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="date" name="end_date" value="<?= date('Y-m-d', strtotime($profile->end_date)); ?>" class="form-control">
-                                                    </div>
-                                                </div>
                                                 <input type="hidden" name="process_type" value="profile">
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label"></label>
@@ -254,7 +236,7 @@
                                         <div class="tab-pane fade" id="carrito-tabs-box-2">
                                             <p class="text-main text-semibold">Your Terms & Conditions</p>
                                             <p>Fill in your Terms & Conditions</p>
-                                            <?= form_open('settings/process', 'class="form-horizontal"'); ?>
+                                            <?= form_open('seller/settings/process', 'class="form-horizontal"'); ?>
                                             <form class="form-horizontal">
                                                 <div class="form-group ">
                                                     <label class="col-sm-3 control-label">Terms & Conditions</label>
@@ -395,14 +377,14 @@
 
             <!--ASIDE-->
             <!--===================================================-->
-            <?php $this->load->view('templates/aside_menu'); ?>
+            <?php $this->load->view('seller/templates/aside_menu'); ?>
             <!--===================================================-->
             <!--END ASIDE-->
 
 
             <!--MAIN NAVIGATION-->
             <!--===================================================-->
-            <?php $this->load->view('templates/menu'); ?>
+            <?php $this->load->view('seller/templates/menu'); ?>
             <!--===================================================-->
             <!--END MAIN NAVIGATION-->
 
@@ -411,7 +393,7 @@
 
         <!-- FOOTER -->
         <!--===================================================-->
-        <?php $this->load->view('templates/footer'); ?>
+        <?php $this->load->view('seller/templates/footer'); ?>
         <!--===================================================-->
         <!-- END FOOTER -->
 
@@ -429,7 +411,7 @@
     <!--=================================================-->
 
 
-    <?php $this->load->view('templates/scripts'); ?>
-    <script src="<?= base_url('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js'); ?>"></script>
+    <?php $this->load->view('seller/templates/scripts'); ?>
+    <script src="<?= base_url('assets/Seller/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js'); ?>"></script>
 </body>
 </html>

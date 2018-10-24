@@ -53,9 +53,9 @@ Class Seller_model extends CI_Model{
     }
 
     // Update table
-    function update_data( $access = '' , $data = array(), $table_name = 'sellers'){
+    function update_data( $access , $data = array(), $table_name = 'sellers'){
         try{
-            $this->db->where('id', $access);
+            $this->db->where($access);
             $result = $this->db->update( $table_name, $data );
         }catch (Exception $e){
             $result = $e->getMessage();
@@ -65,11 +65,11 @@ Class Seller_model extends CI_Model{
 
     // check if the password is correct
 
-    function cur_pass_match($password = null, $access = '', $table = 'sellers'){
+    function cur_pass_match($password = null, $access = '', $table = 'users'){
         if ($password) {
             $this->db->where('id', $access);
             $this->db->or_where('email', $access);
-            $salt = $this->db->get('sellers')->row()->salt;
+            $salt = $this->db->get('users')->row()->salt;
             $this->db->where('id', $access);
             $this->db->or_where('email', $access);
             $curpassword = $this->db->get($table)->row()->password;
@@ -100,7 +100,7 @@ Class Seller_model extends CI_Model{
      * @param $details : string of data you only want to retrieve
      * @return mixed
      */
-    function get_profile_details($access, $details ){
+    function get_profile_details($access, $details = "*"){
         $this->db->select($details);
         $this->db->where('id', $access);
         return $this->db->get('users')->row();
@@ -111,9 +111,8 @@ Class Seller_model extends CI_Model{
      * @return mixed
      */
     function get_profile( $access ){
-        $this->db->select("*");
-        $this->db->where('id', $access);
-        return $this->db->get('users')->row();
+        $query = "SELECT * FROM users u LEFT JOIN sellers s ON (u.id = s.uid)";
+        return $this->db->query($query)->row();
     }
 
     /**
@@ -149,7 +148,7 @@ Class Seller_model extends CI_Model{
             return '';
         }
     }
-    
+
 
     function get_product($id, $status = ''){
         $query = "SELECT p.product_name, p.sku, p.created_on, p.product_status, AVG(v.sale_price) AS sale_price, AVG(v.discount_price) AS discount_price 
@@ -166,21 +165,49 @@ Class Seller_model extends CI_Model{
      * @param $label
      * @return array|string
      */
-    function get_category_name($id , $label ){
+    function get_category_name($id ='' , $label ='' ){
         switch ($label){
             case 'root_category' :
                 $this->db->select('name,root_category_id');
-                $this->db->where('root_category_id', $id);
+                if( $id != '') $this->db->where('root_category_id', $id);
+                return $this->db->get('root_category');
+                break;
+            case 'category':
+                $this->db->select('name,category_id');
+                if($id != '' ) $this->db->where('category_id', $id);
+                return $this->db->get('category');
+                break;
+            case 'sub_category' :
+                $this->db->select('name,sub_category_id');
+                if($id != '') $this->db->where('sub_category_id', $id);
+                return $this->db->get('sub_category');
+                break;
+            default:
+                return '';
+                break;
+        }
+    }
+
+    /**
+     * @param $id
+     * @param $label
+     * @return array|string
+     */
+    function get_single_category_name($id ='' , $label ='' ){
+        switch ($label){
+            case 'root_category' :
+                $this->db->select('name,root_category_id,description');
+                if( $id != '') $this->db->where('root_category_id', $id);
                 return $this->db->get('root_category')->row();
                 break;
             case 'category':
                 $this->db->select('name,category_id');
-                $this->db->where('category_id', $id);
+                if($id != '' ) $this->db->where('category_id', $id);
                 return $this->db->get('category')->row();
                 break;
             case 'sub_category' :
                 $this->db->select('name,sub_category_id');
-                $this->db->where('sub_category_id', $id);
+                if($id != '') $this->db->where('sub_category_id', $id);
                 return $this->db->get('sub_category')->row();
                 break;
             default:
@@ -203,5 +230,59 @@ Class Seller_model extends CI_Model{
         } while ($count >= 1);
             return $number;
     }
+
+
+    /**
+     * @param $user_id|product_id
+     * @return num_rows
+     */
+    function is_product_owner( $id ='', $pid = ""){
+        $this->db->where('seller_id', $id);
+        $this->db->where('id', $pid);
+        return $this->db->get('products')->num_rows();
+    }
+
+    /**
+     * @param $oroduct_id
+     * @return CI_DB_row
+     */
+    function get_single_product( $id ){
+        $query = "SELECT * FROM products WHERE $id";
+        return $this->db->query( $query)->row();
+    }
+
+
+    /**
+     * @param $name - productsubcategory
+     * @return CI_DB_result_array
+     */
+
+    function get_specifications( $name = '' ){
+        $this->db->select('specifications');
+        $this->db->where('name', $name);
+        $result = $this->db->get('sub_category')->row();
+
+        $specs = array();
+        $spec_array = json_decode( $result->specifications );
+        foreach( $spec_array as $key ){
+            $this->db->select('spec_name,options,multiple_options,description');
+            $this->db->where('id', $key);
+            $result = $this->db->get('specifications')->row_array();
+            array_push( $specs, $result );
+        }
+        return $specs;
+    }
+
+    /**
+     * @param $oroduct_id
+     * @return CI_DB_result_array
+     */
+
+    function get_product_variation( $id ){
+        $this->db->where('product_id', $id);
+        return $this->db->get('product_variation')->result();
+    }
+
+
 
 }
