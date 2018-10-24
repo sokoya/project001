@@ -284,5 +284,17 @@ Class Seller_model extends CI_Model{
     }
 
 
+    /**
+     * @param $oroduct_id
+     * @return CI_DB_result_array
+     */
+
+    function get_product_gallery( $id ){
+        $this->db->select('image_name,featured_image');
+        $this->db->where('product_id', $id);
+        return $this->db->get('product_gallery')->result();
+    }
+
+
 
 }

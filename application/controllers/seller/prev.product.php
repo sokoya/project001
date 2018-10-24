@@ -95,14 +95,14 @@ class Product extends CI_Controller{
                 'product_name' => cleanit($this->input->post('product_name')),
                 'brand_name' => cleanit($this->input->post('brand_name')),
                 'model' => cleanit($this->input->post('model')),
-                'main_colour' => $this->input->post('main_colour'),
+                'main_colour' => cleanit($this->input->post('main_colour')),
                 'product_description' => htmlentities($this->input->post('product_description'), ENT_QUOTES),
                 'youtube_id' => cleanit($this->input->post('youtube_id')),
                 'in_the_box' => htmlentities($this->input->post('in_the_box'), ENT_QUOTES),
                 'highlights' => htmlentities($this->input->post('highlights'), ENT_QUOTES),
                 'product_line' => cleanit( $this->input->post('product_line')),
                 'colour_family' => $colour_family,
-                'main_material' => $this->input->post('main_material'),
+                'main_material' => cleanit($this->input->post('main_material')),
                 'dimensions' => cleanit($this->input->post('dimensions')),
                 'weight'    => cleanit($this->input->post('weight')),
                 'product_warranty' => htmlentities($this->input->post('product_warranty') , ENT_QUOTES),
@@ -118,7 +118,6 @@ class Product extends CI_Controller{
             // Since we are getting the specification name; we loop through the specification json
             // SELECT id FROM specifications WHERE spec_name = 'POST_KEY'
             $attributes = array();
-            $y = 0;
             foreach($_POST as $post => $value ){
                 if( substr_compare('attribute_',$post,0,10 ) == 0 ){
                     // we found a match
@@ -128,16 +127,11 @@ class Product extends CI_Controller{
                     $feature_name = explode('_', $post);
                     if( is_array($post) && !empty($value)){
                         $x = json_encode($value);
-                        $obj['feature_name'] = $feature_name[1];
-                        $obj['feature_value'] = json_encode(json_decode($x));
-                        array_push( $attributes, $obj );
+                        $attributes[$feature_name[1]] = json_encode(json_decode($x));
                     }elseif(!empty($value)){
-                        $obj['feature_name'] = $feature_name[1];
-                        $obj['feature_value'] = trim($value);
-                        array_push( $attributes, $obj );
+                        $attributes[$feature_name[1]] = trim($value);
                     }
                 }
-                $y++;
             }
             $product_table['attributes'] = json_encode($attributes);
             $product_id  = $this->seller->insert_data('products', $product_table);
@@ -180,38 +174,40 @@ class Product extends CI_Controller{
 
             // Product Gallery Block
             if( isset($_FILES) ){
-                $counts = sizeof($_FILES['file']['tmp_name']);
-                $product_gallery = array(
-                    'product_id'    => $product_id,
-                    'seller_id' => base64_decode($this->session->userdata('logged_id')),
-                    'created_at' => get_now()
-                );
-                $files = $_FILES;
-                for ( $x = 0; $x < $counts; $x++ ){
-                    $old_name = $files['file']['name'][$x];
-                    $_FILES['file']['name']= $files['file']['name'][$x];
-                    $_FILES['file']['type']= $files['file']['type'][$x];
-                    $_FILES['file']['tmp_name']= $files['file']['tmp_name'][$x];
-                    $_FILES['file']['error']= $files['file']['error'][$x];
-                    $_FILES['file']['size']= $files['file']['size'][$x];
+            $counts = sizeof($_FILES['file']['tmp_name']);
+            $product_gallery = array(
+                'product_id'    => $product_id,
+                'seller_id' => base64_decode($this->session->userdata('logged_id')),
+                'created_at' => get_now()
+            );
+            $files = $_FILES;
+            for ( $x = 0; $x < $counts; $x++ ){
+                $old_name = $files['file']['name'][$x];
+                $_FILES['file']['name']= $files['file']['name'][$x];
+                $_FILES['file']['type']= $files['file']['type'][$x];
+                $_FILES['file']['tmp_name']= $files['file']['tmp_name'][$x];
+                $_FILES['file']['error']= $files['file']['error'][$x];
+                $_FILES['file']['size']= $files['file']['size'][$x];
 
-                    if( !is_dir("./data/products/$product_id/") ) mkdir("./data/products/$product_id/");
-
-                    $upload_result = $this->do_upload('file', $product_id);
-
-                    if( $upload_result ){
-                        $product_gallery['image_name'] = $upload_result;
-                        $product_gallery['featured_image'] = ( isset($_POST['featured_image']) && ($old_name == $_POST['featured_image'] )) ? 1 : 0;
-                        if( $counts == 1 ) $product_gallery['featured_image'] = 1;
-                        if( !is_int($this->seller->insert_data('product_gallery', $product_gallery)) ){
-                            $image_error++;
-                        }
-                    }else{
+                // Call cloudinary upload
+                @move_uploaded_file($_FILES['file']['tmp_name'], './assets/'.$_FILES['file']['name'] );
+                $upload_result = $this->upload_image( realpath('./assets/'.$_FILES['file']['name']), $this->input->post('product_name') );
+                // $filename = $this->do_upload('file');
+                if( $upload_result ){
+                    unlink(realpath('./assets/'.$_FILES['file']['name']));
+                    // version|filename.extension
+                    $product_gallery['image_name'] = $upload_result['version'] . '|' . $upload_result['public_id'] .'.'. $upload_result['format'];
+                    // check featured image
+                    $product_gallery['featured_image'] = ( isset($_POST['featured_image']) && ($old_name == $_POST['featured_image'] )) ? 1 : 0;
+                    // insert
+                    if( !is_int($this->seller->insert_data('product_gallery', $product_gallery)) ){
+//                                throw new Exception( 'Could not insert the image');
                         $image_error++;
-                    }                    
-                }// end of for loop
+                    }
+                }
+            }// end of for loop
 
-            }
+        }
 
             // Check for errors
             if( $pricing_error > 0 ){
@@ -265,26 +261,6 @@ class Product extends CI_Controller{
         exit;
     }
 
-
-
-    // upload function
-    function do_upload($file, $id =''){
-        $config['upload_path']          = "./data/products/$id/";
-        $config['allowed_types']        = 'gif|jpg|png|JPEG|jpeg|bmp';
-        $config['max_size']             = 10048;
-        $config['max_width']            = 2000;
-        $config['max_height']           = 2000;
-        $config['overwrite']            = false;
-        $config['encrypt_name']         = true;
-        $this->load->library('upload', $config);
-        if ( ! $this->upload->do_upload( $file )){
-            // could append the file name...
-            return $this->upload->display_errors();
-            return false;
-        }else{
-            return $this->upload->data('file_name');
-        }
-    }
 
     /*
 

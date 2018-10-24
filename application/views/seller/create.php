@@ -123,7 +123,17 @@
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Main Colour</label>
                                                                             <div class="col-lg-7">
-                                                                                <input type="text" class="form-control" name="main_colour" placeholder="Eg: royal blue, mint green, Peach red">
+                                                                                <select name="main_colour" required class="selectpicker" title="Choose main colour" data-width="100%">
+                                                                                    <option value="">-- Select main colour--</option>
+                                                                                    <?php 
+                                                                                        $colours = explode(',', lang('colours'));
+                                                                                        foreach( $colours as $colour ):
+                                                                                    ?>
+                                                                                    <option value="<?= trim($colour); ?>">
+                                                                                        <?= trim(ucfirst($colour)); ?> 
+                                                                                    </option>
+                                                                                    <?php endforeach; ?>
+                                                                                </select>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -157,10 +167,14 @@
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Colour Family</label>
                                                                             <div class="col-lg-7">
-                                                                                <select name="colour_family[]" class="selectpicker" multiple title="Choose colour family..." data-width="100%">
-                                                                                    <option name="green">Green</option>
-                                                                                    <option name="red">Red</option>
-                                                                                    <option name="yellow">Yellow</option>
+                                                                                <select name="colour_family[]" class="selectpicker" multiple title="Select colour family..." data-width="100%">
+                                                                                    <option value="">-- Select colour family--</option>
+                                                                                    <?php 
+                                                                                        $colours = explode(',', lang('colours'));
+                                                                                        foreach( $colours as $colour ):
+                                                                                    ?>
+                                                                                    <option value="<?= trim($colour); ?>"><?= trim(ucfirst($colour)); ?> </option>
+                                                                                <?php endforeach; ?>
                                                                                 </select>
                                                                                 <span class="text-sm text-dark">Add a generalisation of the main color, to help customers find the product using the provided color-filter in the shop</span>
                                                                             </div>
@@ -169,18 +183,12 @@
                                                                             <label class="col-lg-3 control-label">Main Material</label>
                                                                             <div class="col-lg-7">
                                                                                 <select name="main_material" class="selectpicker" title="Choose type..." data-width="100%">
-                                                                                    <option value="ceramics">Ceramics</option>
-                                                                                    <option value="glass">Glass</option>
-                                                                                    <option value="leather">Leather</option>
-                                                                                    <option value="metal">Metal</option>
-                                                                                    <option value="natural fibre">Natural Fibre</option>
-                                                                                    <option value="plume">Plume</option>
-                                                                                    <option value="resin">Resin</option>
-                                                                                    <option value="silicon">Silicon</option>
-                                                                                    <option value="stone">Stone</option>
-                                                                                    <option value="synthetic">Synthetic</option>
-                                                                                    <option value="textile">Textile</option>
-                                                                                    <option value="wood">Wood</option>
+                                                                                    <?php       
+                                                                                        $materials = explode(',', lang('main_material'));
+                                                                                        foreach ($materials as $material) :
+                                                                                    ?>
+                                                                                    <option value="<?= trim($material); ?>"> <?= trim($material); ?> </option>
+                                                                                    <?php endforeach; ?>
                                                                                 </select>
                                                                                 <span class="text-sm text-dark">Eg: Leather</span>
                                                                             </div>
@@ -355,7 +363,7 @@
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Warranty address</label>
                                                                             <div class="col-lg-7">
-                                                                                <textarea placeholder="Warranty address" name="warranty_address" data-provide="markdown" rows="8" placeholder="Enter the Service Centre Address. If you have multi-options selected in the Warranty Type use the sample format for addresses." class="form-control"></textarea>
+                                                                                <textarea name="warranty_address" data-provide="markdown" rows="8" placeholder="Enter the Service Centre Address. If you have multi-options selected in the Warranty Type use the sample format for addresses." class="form-control"></textarea>
                                                                                 <span class="text-sm text-dark">Example: Service Center Address: 20b Caro Road, Ikeja. Lagos | Repair by Vendor Address: 5 Paris Street, Yaba. Lagos.</span>
                                                                             </div>
                                                                         </div>

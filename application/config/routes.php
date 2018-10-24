@@ -65,4 +65,4 @@ $route['cart/remove/(:any)'] = "product/remove_cart/$1";
 
 // Seller
 $route['seller'] = "seller/login";
-// $route['seller/edit/(:any)'] = "seller/edit/$1/";
+// $route['seller/product/load_images/(:any)'] = "seller/edit/$1/";

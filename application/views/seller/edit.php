@@ -161,13 +161,31 @@
                                                                                 <span class="text-sm text-dark">Eg: Fouani Nigeria, Trendy Woman Ltd, SEOLAK</span>
                                                                             </div>
                                                                         </div>
+
+                                                                        <div class="form-group">
+                                                                            <label class="col-lg-3 control-label">Colour Family</label>
+                                                                            <div class="col-lg-7">
+                                                                                <select name="colour_family[]" class="selectpicker" multiple title="Choose colour family..." data-width="100%">
+                                                                                    <option value="">-- Select colour family--</option>
+                                                                                    <?php 
+                                                                                        $colour_family = json_decode( $product->colour_family);
+                                                                                        $colours = explode(',', lang('colours'));
+                                                                                        foreach( $colours as $colour ):
+                                                                                    ?>
+                                                                                    <option value="<?= trim($colour); ?>" <?php if(in_array($colour, $colour_family)) echo 'selected'; ?> >
+                                                                                        <?= trim(ucfirst($colour)); ?> 
+                                                                                    </option>
+                                                                                    <?php endforeach; ?>
+                                                                                </select>
+                                                                                <span class="text-sm text-dark">Add a generalisation of the main color, to help customers find the product using the provided color-filter in the shop</span>
+                                                                            </div>
+                                                                        </div>
                                                                         
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Main Material</label>
                                                                             <div class="col-lg-7">
-                                                                                <select name="main_material[]" class="selectpicker" title="Choose type..." multiple data-width="100%">
-                                                                                    <?php
-                                                                                         
+                                                                                <select name="main_material" class="selectpicker" title="Choose type..." multiple data-width="100%">
+                                                                                    <?php        
                                                                                         $materials = explode(',', lang('main_material'));
                                                                                         foreach ($materials as $material) :
                                                                                     ?>
@@ -363,7 +381,7 @@
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Warranty address</label>
                                                                             <div class="col-lg-7">
-                                                                                <textarea placeholder="Warranty address" name="warranty_address" data-provide="markdown" rows="8" placeholder="Enter the Service Centre Address. If you have multi-options selected in the Warranty Type use the sample format for addresses." class="form-control"><?= $product->warranty_address; ?></textarea>
+                                                                                <textarea name="warranty_address" data-provide="markdown" rows="8" placeholder="Enter the Service Centre Address. If you have multi-options selected in the Warranty Type use the sample format for addresses." class="form-control"><?= $product->warranty_address; ?></textarea>
                                                                                 <span class="text-sm text-dark">Example: Service Center Address: 20b Caro Road, Ikeja. Lagos | Repair by Vendor Address: 5 Paris Street, Yaba. Lagos.</span>
                                                                             </div>
                                                                         </div>
@@ -584,7 +602,8 @@
     <script src="<?= base_url('assets/seller/js/bootstrap.min.js'); ?>"></script>
     <script src="<?= base_url('assets/seller/js/nifty.min.js');?>"></script>
     <script src="<?= base_url('assets/seller/js/demo/nifty-demo.min.js'); ?>"></script>
-    <script type="text/javascript"> base_url = '<?= base_url(); ?>';</script>
+    <script type="text/javascript"> base_url = '<?= base_url('seller'); ?>';</script>
+    <script type="text/javascript"> product_id = <?= $product->id; ?></script>
     <script src="<?= base_url('assets/seller/plugins/dropzone/dropzone.min.js'); ?>"></script>
     <script src="<?= base_url('assets/seller/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js'); ?>"></script>
     <script src="<?= base_url('assets/seller/plugins/bootstrap-validator/bootstrapValidator.min.js'); ?>"></script>
@@ -608,8 +627,8 @@
                 maxImageHeight = 2000,
                 minImageWidth = 200,
                 minImageHeight = 200;
-            var myDropzone = new Dropzone(document.body,{ // Make the whole body a dropzone
-                url: base_url + "seller/product/process", // Set the url
+            let myDropzone = new Dropzone(document.body,{ // Make the whole body a dropzone
+                url: base_url + "seller/product/edit_process", // Set the url
                 autoProcessQueue: false,
                 addRemoveLinks: true,
                 autoDiscover: false,
@@ -624,18 +643,45 @@
                 acceptedFiles: "image/*",
                 uploadMultiple: true,
                 parallelUploads: 100,
-                accept: function(file, done) {
-                    file.acceptDimensions = done;
-                    file.rejectDimensions = function() { done(`Invalid file dimension, atleast 200 X 200 and maximum of 2000 X 2000. But image is having ${file.width} X ${file.height}. File won't be uploaded.`); };
+                // accept: function(file, done) {
+                //     file.acceptDimensions = done;
+                //     file.rejectDimensions = function() { 
+                //         done(`Invalid file dimension, atleast 200 X 200 and maximum of 2000 X 2000. But image is having ${file.width} X ${file.height}. File won't be uploaded.`); 
+                //     };
+                // },
+                init: function(){
+                    $.ajax({
+                        url: `${base_url}/product/load_images/${product_id}`,
+                        method: "GET",
+                        dataType: "json",
+                        success: function( data ){
+                            $.each(data, function( k, v ) {
+                            let mockFile = { name: v.filename, size: v.filesize };
+                            // Call the default addedfile event handler
+                            myDropzone.emit("addedfile", mockFile);
+                            myDropzone.emit("thumbnail", mockFile, v.fileURL);
+                            // myDropzone.createThumbnailFromUrl( v.filename, v.fileURL);
+                            if( v.featured == 1 ) {
+                                $(`#${v.filename}`).prop('checked', true);                               
+                            }
+                            // Make sure that there is no progress bar, etc...
+                            myDropzone.emit("complete", mockFile);
+
+                        });
+                        let existing_file_count = data.length;
+                        myDropzone.options.maxFiles = myDropzone.options.maxFiles - existing_file_count;
+                        }
+                    });
                 }
             });
+
 
 
             myDropzone.on("addedfile", function(file) {
                 // Hookup the button
                 uplodaBtn.prop('disabled', false);
                 removeBtn.prop('disabled', false);
-                file._captionLabel = Dropzone.createElement("<span class='text-sm text-dark'> &nbsp; Make this the featured Image &nbsp; </span>");
+                file._captionLabel = Dropzone.createElement("<span class='text-sm text-dark'> &nbsp;&nbsp; Make this the featured Image &nbsp; </span> &nbsp;&nbsp; ");
                 file._captionBox = Dropzone.createElement(`<input id="${file.name}" type='radio' name='featured_image' value="${file.name}">`);
                 file.previewElement.appendChild(file._captionBox);
                 file.previewElement.appendChild(file._captionLabel);
@@ -682,13 +728,13 @@
                 alert('There was an error sending the images' + response);
             });
 
-            myDropzone.on('thumbnail', function(file){
-                if( (file.width > maxImageWidth || file.height > maxImageHeight ) || (minImageWidth > file.width || minImageHeight > file.height) ){
-                    file.rejectDimensions();
-                }else{
-                    file.acceptDimensions();
-                }
-            });
+            // myDropzone.on('thumbnail', function(file){
+            //     if( (file.width > maxImageWidth || file.height > maxImageHeight ) || (minImageWidth > file.width || minImageHeight > file.height) ){
+            //         file.rejectDimensions();
+            //     }else{
+            //         file.acceptDimensions();
+            //     }
+            // });
             removeBtn.on('click', function() {
                 myDropzone.removeAllFiles(true);
                 uplodaBtn.prop('disabled', true);

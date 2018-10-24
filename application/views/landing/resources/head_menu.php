@@ -66,7 +66,7 @@
                 <li class="dropdown">
                     <?php if( $this->session->userdata('logged_in') ): ?>
 
-                        <a href="<?= base_url('login'); ?>"><span>Welcome</span><strong><?= ucfirst($profile->first_n*ame); ?></strong></a>
+                        <a href="<?= base_url('login'); ?>"><span>Welcome</span><strong><?= ucfirst($profile->first_name); ?></strong></a>
                     <?php else : ?>
                         <a href="<?= base_url('login'); ?>"><span>Sign in | Join</span><strong>My Carrito</strong></a>
                     <?php endif; ?>
