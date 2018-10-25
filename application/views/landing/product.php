@@ -316,13 +316,13 @@
 					<div class="tab-pane fade in active" id="tab-1">
 						<div class="product-overview-section gap-top">
 							<?php if (!empty($product->product_line)) : ?>
-								<h3 class="product-overview-title"> Product Frontline</h3>
+								<h3 class="product-overview-title pr-over"> Product Frontline</h3>
 								<div class="product-overview-desc">
 									<p><?= $product->product_line; ?></p>
 								</div>
 							<?php endif; ?>
 							<?php if (!empty($product->product_description)): ?>
-								<h3 class="product-overview-title">Product Description</h3>
+								<h3 class="product-overview-title pr-over">Product Description</h3>
 								<div class="product-overview-desc">
 									<p style="text-wrap: normal">
 										<?= $product->product_description; ?>
@@ -330,7 +330,7 @@
 								</div>
 							<?php endif; ?>
 							<?php if (!empty($product->in_the_box)): ?>
-								<h3 class="product-overview-title">What you will find in the box</h3>
+								<h3 class="product-overview-title pr-over">What you will find in the box</h3>
 								<div class="product-overview-desc">
 									<p style="text-wrap: normal">
 										<?= $product->in_the_box; ?>
@@ -338,7 +338,7 @@
 								</div>
 							<?php endif; ?>
 							<?php if (!empty($product->certifications)): ?>
-								<h3 class="product-overview-title">Certifications</h3>
+								<h3 class="product-overview-title pr-over">Certifications</h3>
 								<div class="product-overview-desc">
 									<p style="text-wrap: normal">
 										<?php
@@ -349,7 +349,7 @@
 								</div>
 							<?php endif; ?>
 							<?php if (!empty($product->warranty_type)): ?>
-								<h3 class="product-overview-title">Warranty Type</h3>
+								<h3 class="product-overview-title pr-over">Warranty Type</h3>
 								<div class="product-overview-desc">
 									<p style="text-wrap: normal">
 										This product has the following warranty :
@@ -361,7 +361,7 @@
 								</div>
 							<?php endif; ?>
 							<?php if (!empty($product->product_warranty)): ?>
-								<h3 class="product-overview-title">Product Warranty</h3>
+								<h3 class="product-overview-title pr-over">Product Warranty</h3>
 								<div class="product-overview-desc">
 									<p style="text-wrap: normal">
 										<?= $product->product_warranty; ?>
@@ -369,7 +369,7 @@
 								</div>
 							<?php endif; ?>
 							<?php if (!empty($product->warranty_address)): ?>
-								<h3 class="product-overview-title">Warranty Address</h3>
+								<h3 class="product-overview-title pr-over">Warranty Address</h3>
 								<div class="product-overview-desc">
 									<p style="text-wrap: normal">
 										<?= $product->warranty_address; ?>
@@ -382,9 +382,9 @@
 						<table class="table">
 							<thead>
 							<tr>
-								<th>Specs:</th>
-								<th>Details:</th>
-								<th>Description:</th>
+								<th class="pr-over">Specs:</th>
+								<th class="pr-over">Details:</th>
+								<th class="pr-over">Description:</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -839,7 +839,6 @@
 	</div>
 	<?php $this->load->view('landing/resources/footer'); ?>
 </div>
-window.
 <script type="text/javascript">let base_url = "<?= base_url(); ?>"</script>
 <?php $this->load->view('landing/resources/script'); ?>
 <script>
