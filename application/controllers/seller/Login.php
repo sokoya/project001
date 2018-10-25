@@ -7,12 +7,7 @@ class Login extends CI_Controller{
         parent::__construct();
         $this->load->model('seller_model', 'seller');
         if( $this->session->userdata('logged_in') ){
-            if( !empty($this->session->userdata('referred_from')) ){
-                redirect($this->session->userdata('referred_from'));
-            }else{
-                redirect('seller/overview');
-            }
-
+            redirect('seller/overview');
         } 
     }
 

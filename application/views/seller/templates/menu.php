@@ -35,9 +35,9 @@
                             </a>
                         </div>
                         <div id="profile-nav" class="collapse list-group bg-trans">
-                            <a href="<?= base_url('seller/settings/profile'); ?>" class="list-group-item">
+                            <!-- <a href="<?= base_url('seller/settings/profile'); ?>" class="list-group-item">
                                 <i class="demo-pli-male icon-lg icon-fw"></i> View Profile
-                            </a>
+                            </a> -->
                             <a href="<?= base_url('seller/settings')?>" class="list-group-item">
                                 <i class="demo-pli-gear icon-lg icon-fw"></i> Settings
                             </a>

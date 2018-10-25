@@ -36,30 +36,32 @@
             <div id="page-content">
                 <div class="panel">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Showing all products</h3>
+                        <h3 class="panel-title">Showing all <?= ucfirst($this->uri->segment(3)) ?> order</h3>
                     </div>
                     <div class="panel-body">
                         <table id="demo-dt-basic" class="table table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>Product Name</th>
-                                <th>SKU</th>
-                                <th class="min-tablet">Created On</th>
-                                <th class="min-tablet">Average Sale Price(N)</th>
-                                <th class="min-tablet">Avg Discount Price(N)</th>
-                                <th class="min-desktop">Available</th>
+                                <th colspan="2">Product Name</th>
+                                <th>Buyer's name</th>
+                                <th class="min-tablet">Ordered On</th>
+                                <th class="min-tablet">Qty (Amount)</th>
+                                <td class="min-tablet">Order Desc.</td>
                                 <th class="min-desktop">Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($products as $product) : ?>
+                            <?php foreach($orders as $order) : ?>
                                 <tr>
-                                    <td><?= $product['product_name']; ?></td>
-                                    <td><?= $product['sku'];?></td>
-                                    <td><?= neatDate($product['created_on']); ?></td>
-                                    <td><?= ngn($product['sale_price']); ?></td>
-                                    <td><?= ngn($product['discount_price']); ?></td>
-                                    <td><?= $product['product_status']; ?></td>
+                                    <td colspan="2">
+                                        <span><img width="65" src="<?= base_url('data/products/'. $order->pid .'/'. $order->image_name); ?>"></span>
+                                        <?= $order->product_name; ?>
+                                        <a href="<?= base_url('seller/order/detail/'. $order->orid); ?>"></a>
+                                    </td>
+                                    <th><?= $order->customer_name; ?></th>
+                                    <td><?= neatDate($order->order_date); ?></td>
+                                    <td><?= $order->qty .'<span class="text text-danger"> ( ' . ngn($order->amount) .' )</span>'; ?></td>
+                                    <td><?= $order->product_desc; ?></td>
                                     <td><i class="fa fa-plus"></i></td>
                                 </tr>
                             <?php endforeach;?>

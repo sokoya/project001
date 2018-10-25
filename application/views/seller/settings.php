@@ -168,7 +168,7 @@
                                                         <select class="demo_select2 form-control" name="main_category">
                                                             <option value="">--Select Main Product Category--</option>
                                                             <?php foreach ($categories->result() as $root_categories ): ?>
-                                                                <option value="<?= $root_categories->name; ?>" <?php if(trim($profile->main_category == $root_categories->name)) echo 'selected';?> ><?= $root_categories->name; ?></option>
+                                                                <option value="<?= $root_categories->name; ?>" <?php if($profile->main_category == trim($root_categories->name)) echo 'selected';?> ><?= $root_categories->name; ?></option>
                                                             <?php endforeach; ?>
                                                         </select>
                                                     </div>
@@ -197,7 +197,15 @@
                                                 <div class="form-group ">
                                                     <label class="col-sm-3 control-label">Bank*</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" required name="bank_name" value="<?= $profile->bank_name; ?>" class="form-control">
+                                                        <select name="bank_name" required class="form-control" data-width="100%">
+                                                            <option value=""> -- Select Bank Name --</option>
+                                                            <?php
+                                                                $banks = explode(',', lang('banks'));
+                                                                foreach( $banks as $bank ):
+                                                            ?>
+                                                            <option value="<?= trim($bank); ?>" <?php if(trim($bank) == $profile->bank_name) echo 'selected'; ?> > <?= ucfirst($bank); ?> </option>
+                                                            <?php endforeach; ?>
+                                                        </select>
                                                     </div>
                                                 </div>
 

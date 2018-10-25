@@ -745,9 +745,12 @@
 				</div>
 			</div>
 			<div class="gap"></div>
+			<?php if( count($likes) ){ ?>
 			<h3 class="widget-title">You Might Also Like</h3>
+			<?php }?>
 			<div class="row" data-gutter="15">
-				<?php foreach ($likes as $like): ?>
+				<?php
+				foreach ($likes as $like): ?>
 					<div class="col-md-3">
 						<div class="product ">
 							<!-- <ul class="product-labels">
@@ -841,6 +844,7 @@
 </div>
 <script type="text/javascript">let base_url = "<?= base_url(); ?>"</script>
 <?php $this->load->view('landing/resources/script'); ?>
+<script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
 <script>
 	$('.fav').on('click', function (e) {
 		e.preventDefault();
@@ -850,7 +854,7 @@
 		$.ajax({
 			url: base_url + "product/fav",
 			method: "POST",
-			data: {pid: pid, action: action},
+			data: {pid: pid, action: action, 'csrf_carrito' :csrf_token},
 			success: function (data) {
 				if (data == true) {
 					if (action == 'save') {

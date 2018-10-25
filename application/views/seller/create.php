@@ -82,6 +82,7 @@
                                         <!--Form demo-bv-wz-form -->
 
                                         <form id="product-post" class="form-horizontal add_product_form" novalidate  method="POST" action="" enctype="multipart/form-data">
+                                            <input type="hidden" name="csrf_carrito" value="<?= $this->security->get_csrf_token_name(); ?>" />
                                             <div class="panel-body">
                                                 <div class="tab-content">
                                                     <!--First tab-->

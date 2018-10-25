@@ -51,6 +51,7 @@ class Register extends CI_Controller{
                 'ip' => $_SERVER['REMOTE_ADDR'],
                 'date_registered' => get_now(),
                 'last_login' => get_now()
+                'is_seller' => 'false'
             );
 
             $user_id = $this->seller->create_account($data, 'users');

@@ -21,7 +21,6 @@
 		            <div class="mar-ver pad-btm">
 		                <h1 class="h3 text-2x">Complete the seller form</h1>
 		                <p class="text text-dark">We are glad you have decided to join the community.</p>
-
                         <?php $this->load->view('msg_view'); ?>
 		            </div>
 		            <?= form_open('seller/application/process')?>
@@ -32,9 +31,21 @@
 		                            <input type="text" class="form-control" placeholder="Legal Comapny name" required autofocus name="legal_company_name">
 		                        </div>
 		                    </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="address">Company address </label>
+                                        <textarea placeholder="Your company address" data-provide="markdown" rows="3" name="address" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>TIN (Taxpayer Identification Number)</label>
+                                    <input type="text" class="form-control" placeholder="TIN" required name="tin">
+                                </div>
+                            </div>
 		                    <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="main_category">Select main category</label>
+                                    <label for="main_category">Main Category</label>
                                     <select class="form-control" name="main_category">
                                         <option value="">-- Select Main Category -- </option>
                                     	<?php foreach( $categories->result()  as $category ) : ?>
@@ -45,27 +56,13 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="no_of_products">No of products you would be selling</label>
+                                    <label for="no_of_products">No of products you would likely be selling</label>
                                     <select class="form-control" name="no_of_products">
                                         <option value="1-10">1 - 10</option>
                                         <option value="21-50">21 - 50</option>
                                         <option value="51-100">51 - 100</option>
                                         <option value="101-more">100 +</option>
                                     </select>
-                                </div>
-                            </div>
-
-
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Company address</label>
-                                    <input type="text" class="form-control" placeholder="Company address" required name="address">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>TIN</label>
-                                    <input type="text" class="form-control" placeholder="TIN" required name="tin">
                                 </div>
                             </div>
 
@@ -88,7 +85,6 @@
                                     </select>
                                 </div>
                             </div>
-
 		                </div>
 		                <div class="checkbox pad-btm text-left">
 		                    <input id="demo-form-checkbox" class="magic-checkbox" type="checkbox">

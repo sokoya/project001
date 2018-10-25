@@ -111,7 +111,8 @@ Class Seller_model extends CI_Model{
      * @return mixed
      */
     function get_profile( $access ){
-        $query = "SELECT * FROM users u LEFT JOIN sellers s ON (u.id = s.uid)";
+        $query = "SELECT * FROM users u 
+                LEFT JOIN sellers s ON (u.id = s.uid)";
         return $this->db->query($query)->row();
     }
 
@@ -294,6 +295,22 @@ Class Seller_model extends CI_Model{
         $this->db->where('product_id', $id);
         return $this->db->get('product_gallery')->result();
     }
+
+    /**
+     * @param $oroduct_id
+     * @return CI_DB_result_array
+     */
+    function get_orders( $id = '', $status= '' ){
+
+        $query = "SELECT p.product_name,p.id pid, p.created_on created_on, o.order_date,o.id orid, g.image_name, o.customer_name, o.qty,o.amount, o.product_desc, o.status
+                FROM products p LEFT JOIN orders o ON (p.id = o.product_id)
+                LEFT JOIN product_gallery g ON (g.product_id = p.id AND g.featured_image = 1)
+                WHERE o.seller_id = $id";
+                // AND o.status = ????
+        return $this->db->query($query)->result();
+    }
+
+
 
 
 

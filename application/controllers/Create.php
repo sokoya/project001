@@ -47,7 +47,8 @@ class Create extends CI_Controller{
                 'password' => shaPassword($this->input->post('signuppassword'), $salt),
                 'ip' => $_SERVER['REMOTE_ADDR'],
                 'date_registered' => get_now(),
-                'last_login' => get_now()
+                'last_login' => get_now(),
+                'is_seller' => 'false'
             );
 
             $user_id = $this->user->create_account($data, 'users');

@@ -10,6 +10,17 @@ class Application extends CI_Controller{
             // Ursher the person to where he is coming from
             if( !empty($this->session->userdata('referred_from')) ) redirect($this->session->userdata('referred_from'));
             redirect('seller/login');
+        } 
+
+        $user = $this->seller->get_profile( base64_decode($this->session->userdata('logged_id')) );
+        if( $user->is_seller == 'pending'){
+            $this->session->set_flashdata('success_msg','Please fill in the form to become a seller');
+            redirect('seller/application/status');
+        }elseif($user->is_seller == 'approved'){
+            $this->session->set_flashdata('success_msg','Welcome to your seller dashboard.');
+            redirect('seller/overview');
+        }else{
+            redirect(base_url());
         }
     }
 
@@ -29,24 +40,48 @@ class Application extends CI_Controller{
     }
 
     public function process(){
-        $data = array();
-        foreach ($_POST as $key => $value) {
-            $data[$key] = cleanit($value);
-        }
-        $data['uid'] = base64_decode($this->session->userdata('logged_id'));
-        $insert = $this->seller->insert_data('sellers', $data);
-        if( is_numeric( $insert )){
-            // update the seller status to pending
-            $user_data['is_seller'] = 'pending';
-            $this->seller->update_data(array('id' => $data['uid']), $user_data, 'users');
-            redirect('seller/application/status');
+        if($this->input->post()){
+            $this->form_validation->set_rules('legal_company_name', 'Legal Company name','trim|required|xss_clean');
+            $this->form_validation->set_rules('address', 'Address','trim|required|xss_clean');
+            $this->form_validation->set_rules('main_category', 'Main Category','trim|required|xss_clean');
+            $this->form_validation->set_rules('own_brand', 'Do you own your brand','trim|required|xss_clean');
+            $this->form_validation->set_rules('license_to_sell', 'Do you have license to sell','trim|required|xss_clean');
+            $this->form_validation->set_rules('license_to_sell', 'Do you have license to sell','trim|required|xss_clean');
+
+            if ($this->form_validation->run() == FALSE) {
+                $this->session->set_flashdata('error_msg','There was an error with the information. Please fix the following <br />' . validation_errors() );
+                redirect('seller/application');
+            }else{
+                $data = array();
+                foreach ($_POST as $key => $value) {
+                    $data[$key] = cleanit($value);
+                }
+                $data['uid'] = base64_decode($this->session->userdata('logged_id'));
+                $data['date_applied'] = get_now();
+                $insert = $this->seller->insert_data('sellers', $data);
+                if( is_numeric( $insert )){
+                    // update the seller status to pending
+                    $user_data['is_seller'] = 'pending';
+                    $this->seller->update_data(array('id' => $data['uid']), $user_data, 'users');
+                    $this->session->set_flashdata('success_msg','Congrats! Your application has been received, we will get back to you shortly.');
+                    redirect('seller/application/status');
+                }else{
+                    $this->session->set_flashdata('error_msg','There was an error submitting the form. Please try again or contact support for assistance.');
+                    redirect($_SERVER['HTTP_RERFFER']);
+                }
+            }
         }else{
-            $this->session->set_flashdata('error_msg','There was an error submitting the form.');
-            redirect($_SERVER['HTTP_RERFFER']);
+            $this->session->set_flashdata('error_msg','You need to fill the form with appropriate data.');
+            redirect('seller/application');
         }
     }
 
     function status(){
+        $user = $this->seller->get_profile( base64_decode($this->session->userdata('logged_id')) );
+        if( $user->is_seller == 'false'){
+            $this->session->set_flashdata('success_msg','Please fill in the form to become a seller');
+            redirect('seller/application');
+        }
         $page_data['status'] = $this->seller->get_seller_status(base64_decode($this->session->userdata('logged_id')));
         $page_data['page_title'] = 'Seller Application Status';
         $page_data['pg_name'] = 'application';
