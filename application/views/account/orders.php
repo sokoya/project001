@@ -34,14 +34,11 @@
 								</thead>
 								<tbody>
 									<?php foreach( $orders as $order) : ?>
-										<?php
-		                        			$split = explode("|", $order->image_name);
-		                        		?>
 										<tr>
 											<td>
 
-												<img src="https://res.cloudinary.com/philo001/image/upload/h_400,w_400,q_auto,f_auto,fl_lossy,dpr_auto/v<?= $split[0] . '/' . $split[1]; ?>"
-										 		class="carrito-left-l"
+												<img src="<?= base_url('data/products/'.$order->pid.'/'.$order->image_name); ?>"
+										 		class=""
 										 		title="<?= $order->name; ?>"
 										 		style="width: 60px; height: 100%; padding-right: 4px;">
 										 		<span><a href="<?= base_url(urlify($order->name, $order->pid)); ?>"><?= word_limiter(ucwords($order->name), 7, '...'); ?></a></span>												

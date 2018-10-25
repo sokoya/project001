@@ -113,6 +113,18 @@ class Account extends CI_Controller {
 		$this->load->view('account/saved', $page_data);
 	}
 
+	function delete_fav(){
+		if( !$this->session->userdata('logged_in')) redirect(base_url());  
+        if($this->user_model->favourite( base64_decode($this->session->userdata('logged_id')), base64_decode($this->input->post('pid')),
+            $this->input->post('action') )){
+            echo true;
+            exit;
+        }else{
+            echo false;
+            exit;
+        }    
+	}
+
 	// Settings
 	public function settings(){
 		$page_data['title'] = "Account Settings";

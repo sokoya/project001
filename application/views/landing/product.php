@@ -169,10 +169,10 @@
 
 								<p class="product-page-price">
 									<?php if (!empty($variation->discount_price)) : ?>
-										<span class="price-cs"><?= ngn($variation->discount_price); ?></span>
-										<span class="product-page-price-list price-lower"><?= ngn($variation->sale_price); ?></span>
+                                        <span class="price-cs"><?= ngn($variation->discount_price); ?></span>
+                                        <span class="product-page-price-list price-lower"><?= ngn($variation->sale_price); ?></span>
 									<?php else: ?>
-										<span class="product-page-price-list"><?= ngn($variation->sale_price); ?></span>
+										<span class="price-cs"><?= ngn($variation->sale_price); ?></span>
 									<?php endif; ?>
 								</p>
 

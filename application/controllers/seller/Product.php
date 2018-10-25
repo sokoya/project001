@@ -127,18 +127,14 @@ class Product extends CI_Controller{
                     // @TODO: fix the multiple value
                     $feature_name = explode('_', $post);
                     if( is_array($post) && !empty($value)){
-                        $x = json_encode($value);
-                        $obj['feature_name'] = $feature_name[1];
-                        $obj['feature_value'] = json_encode(json_decode($x));
-                        array_push( $attributes, $obj );
+                        $x= json_encode($value);
+                        $attributes[$feature_name[1]] = json_encode(json_decode($x));
                     }elseif(!empty($value)){
-                        $obj['feature_name'] = $feature_name[1];
-                        $obj['feature_value'] = trim($value);
-                        array_push( $attributes, $obj );
+                        $attributes[$feature_name[1]] = trim($value);
                     }
                 }
-                $y++;
             }
+            
             $product_table['attributes'] = json_encode($attributes);
             $product_id  = $this->seller->insert_data('products', $product_table);
             // Product Variation Block

@@ -42,19 +42,47 @@ class Product extends CI_Controller {
     public function catalog(){        
         $str = $this->uri->segment(2); 
         $str = preg_replace("/[^A-Za-z0-9-]/","",cleanit($str) );
-        $page_data['searched'] = $str = preg_replace("/[^A-Za-z0-9]/"," ",cleanit($str) ); // Convert the - to space 
+        $str = preg_replace("/[^A-Za-z0-9]/"," ",cleanit($str) ); // Convert the - to space 
         if( $str == '' ) redirect(base_url());      
-        $page_data['title'] = ucwords($str);
-        $features = $this->product->get_features($str);
+        $page_data['title'] = $str;
+        $features = $this->product->get_features($str)->result_array();
+
+        $result = array();
+        foreach( $features as $key => $values ){
+            $json_decoded = json_decode($values['feature_value']);
+            foreach ($json_decoded as $jsons) {
+                $jsons = (array) $jsons;
+                $obj['feature_name'] = $jsons['feature_name'];
+
+                $obj['feature_name'][] = $jsons['feature_value'];
+                
+
+                // var_dump( $jsons );
+                array_push( $result, $obj);              
+                
+                // if( !in_array( $jsons['feature_name'], $result )){
+                //     $result['feature_name'] = $jsons['feature_name'];
+                //     echo $jsons['feature_name'] .' <br />';
+                // }
+            }
+        }
+        $result = array_unique($result, SORT_REGULAR);
+        var_dump( $result  );
+        exit;
         $output_array = array();
-        foreach($features as $feature => $values ){
+        foreach($features as $feature => $values ){            
             foreach ($values as $key => $value) {
                 $variables = json_decode( $value );
                 foreach ($variables as $new_key => $new_value) {
+                    $new_value = (array)$new_value;
+
                     if( is_array($new_value) ){
-                        $new_value = array_map("unserialize", array_unique(array_map("serialize", $new_value)));
-                        foreach ($new_value as $inkey => $invalue) $output_array[$new_key][] = $invalue;
+                        foreach ($new_value as $inkey => $invalue) {
+                            $output_array[$new_key][] = $invalue;
+                        }
                         $output_array[$new_key] = array_unique($output_array[$new_key], SORT_REGULAR);
+                        $new_value = array_map("unserialize", array_unique(array_map("serialize", $new_value)));
+                        // var_dump( $output_array);
                     }else{
                         $output_array[$new_key][] = $new_value;
                         $output_array[$new_key] = array_unique($output_array[$new_key], SORT_REGULAR);
@@ -79,7 +107,10 @@ class Product extends CI_Controller {
         $config["num_links"] = 5;
         $this->pagination->initialize($config);
         
+        // var_dump( $output_array );
+        // exit;
         $page_data['features'] = $output_array;
+
         $array['limit'] = $config['per_page']; $array['offset'] = $page; $array['is_limit'] = true;
         $page_data['pagination'] = $this->pagination->create_links();        
         $page_data['products'] = $this->product->get_products( $array, $this->input->get() );
@@ -117,8 +148,6 @@ class Product extends CI_Controller {
 
     public function add_to_cart(){
         $this->load->library('cart');
-        $size = empty($this->input->post('variation')) ? 'null' : $this->input->post('variation');
-        $colour = empty($this->input->post('colour')) ? 'null' : $this->input->post('colour');
         $name = preg_replace("/[^A-Za-z0-9- ]/","",cleanit($this->input->post('product_name')) );
         $data = array(
             'id' => base64_decode($this->input->post('product_id')),
@@ -126,9 +155,8 @@ class Product extends CI_Controller {
             'price' => $this->input->post('product_price'),
             'name' => $name,
             'options' => 
-                array(
-                    'size' => $size, 
-                    'colour' => $colour,
+                array('size' => $this->input->post('variation'), 
+                    'colour' => $this->input->post('colour'),
                     'seller' => base64_decode($this->input->post('seller'))
                 )                
         );

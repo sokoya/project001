@@ -36,10 +36,10 @@
 						<td style="padding: 20px;">
 							<div class="row">
 								<div class="col-md-1 col-xs-1">									
-									<a href="javascript:void(0)" class="delete" data-fid="<?= $item->fav_id; ?>"><i class="fa fa-trash carrito-trash"></i></a>
+									<a href="javascript:void(0)" class="delete" data-pid="<?= $item->fav_id; ?>"><i class="fa fa-trash carrito-trash"></i></a>
 								</div>
 								<div class="col-md-9 col-xs-9">
-									<img src="<?= base_url('assets/landing/img/saved-img.jpg'); ?>"
+									<img src="<?= base_url('data/products/'.$item->id.'/'.$item->image_name); ?>"
 										 class="carrito-left-l"
 										 title="<?= $item->product_name; ?>"
 										 style="width: 60px; height: 100%; padding-right: 4px;">

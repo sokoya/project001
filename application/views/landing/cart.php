@@ -32,15 +32,14 @@
 						$total = 0;
 						foreach ($this->cart->contents() as $product): ?>
 							<?php
-							$detail = $this->product->get_cart_details(base64_decode($product['id']));
-							$split = explode("|", $detail->image);
+								$detail = $this->product->get_cart_details($product['id']);
 							?>
 							<tr>
 								<td class="table-shopping-cart-img">
 									<?php echo form_hidden($x . '[rowid]', $product['rowid']); ?>
 									<a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
 										<img
-											src="https://res.cloudinary.com/philo001/image/upload/h_160,w_160,q_auto,f_auto,fl_lossy,dpr_auto/v<?= $split[0] . '/' . $split[1]; ?>"
+											src="<?= base_url('data/products/' .$product['id'].'/'.$detail->image); ?> ?>"
 											alt="Carrito -marketplace <?= $product['name']; ?>"
 											title="<?= $product['name']; ?>"/>
 									</a>

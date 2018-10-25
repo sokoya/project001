@@ -98,6 +98,18 @@ Class Product_model extends CI_Model{
             JOIN users AS s ON p.seller_id = s.id ";
         if( $d['str'] != '' ){
             $select_query .= " WHERE ( MATCH(p.rootcategory) AGAINST('{$d['str']}') "; 
+            // Brand name
+            if( isset($gets['brand_name']) ){
+                $brand_name = $gets['brand_name'];
+                unset($gets['brand_name']);
+                $select_query .= " AND p.brand_name = '{$brand_name}' ";
+            }
+
+            if( isset($gets['main_colour']) ){
+                $main_colour = $gets['main_colour'];
+                unset($gets['main_colour']);
+                $select_query .= " AND p.main_colour = '{$main_colour}' ";
+            }
 
             if( isset($gets) && count($gets) ){
                 if( isset($gets['page']) ) unset($gets['page']);
@@ -108,7 +120,7 @@ Class Product_model extends CI_Model{
                         $array_value = array_values($explode);
                         $last = end($array_value);
                         foreach( $explode as $exp ){
-                            $exp = preg_replace("/[^A-Za-z.0-9]/", ' ', $exp);
+                            $exp = preg_replace("/[^A-Za-z.0-9-]/", ' ', $exp);
                             if( $exp == $last ){ 
                                 $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%')";
                             }else{
@@ -117,7 +129,7 @@ Class Product_model extends CI_Model{
                         }                            
                     }else{
                         $value = trim($value);
-                        $value = preg_replace("/[^A-Za-z.0-9]/", ' ', $value);
+                        $value = preg_replace("/[^A-Za-z.0-9-]/", ' ', $value);
                         $select_query .= " AND JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$value}%' ";
                     }                    
                 }
@@ -126,6 +138,18 @@ Class Product_model extends CI_Model{
             $select_query .= " )";
 
             $select_query .= " OR (MATCH(p.category) AGAINST('{$d['str']}') ";
+            // Brand name
+            if( isset($gets['brand_name']) ){
+                $brand_name = $gets['brand_name'];
+                unset($gets['brand_name']);
+                $select_query .= " AND p.brand_name = '{$brand_name}' ";
+            }
+
+            if( isset($gets['main_colour']) ){
+                $main_colour = $gets['main_colour'];
+                unset($gets['main_colour']);
+                $select_query .= " AND p.main_colour = '{$main_colour}' ";
+            }
 
             if( isset($gets) && count($gets) ){
                 if( isset($gets['page']) ) unset($gets['page']);
@@ -136,7 +160,7 @@ Class Product_model extends CI_Model{
                         $array_value = array_values($explode);
                         $last = end($array_value);
                         foreach( $explode as $exp ){
-                            $exp = preg_replace("/[^A-Za-z.0-9]/", ' ', $exp);
+                            $exp = preg_replace("/[^A-Za-z.0-9-]/", ' ', $exp);
                             if( $exp == $last ){ 
                                 $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%')";
                             }else{
@@ -154,6 +178,17 @@ Class Product_model extends CI_Model{
             $select_query .= " )";
 
             $select_query .= " OR (MATCH(p.subcategory) AGAINST('{$d['str']}') ";
+            // Brand name
+            if( isset($gets['brand_name']) ){
+                $brand_name = $gets['brand_name'];
+                unset($gets['brand_name']);
+                $select_query .= " AND p.brand_name = '{$brand_name}' ";
+            }
+            if( isset($gets['main_colour']) ){
+                $main_colour = $gets['main_colour'];
+                unset($gets['main_colour']);
+                $select_query .= " AND p.main_colour = '{$main_colour}' ";
+            }
 
             if( isset($gets) && count($gets) ){
                 if( isset($gets['page']) ) unset($gets['page']);
@@ -247,7 +282,9 @@ Class Product_model extends CI_Model{
     }
 
     function get_cart_details( $id ){
-        return $this->db->query('SELECT s.first_name name, i.image_name image FROM users s JOIN product_gallery i ON (s.id = i.product_id AND i.featured_image = 1) ')->row();
+        return $this->db->query("SELECT s.first_name name, i.image_name image 
+            FROM users s 
+            LEFT JOIN product_gallery i ON (i.product_id = $id AND i.featured_image = 1) ")->row();
     }
 
 

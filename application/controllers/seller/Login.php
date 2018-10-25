@@ -10,7 +10,7 @@ class Login extends CI_Controller{
             if( !empty($this->session->userdata('referred_from')) ){
                 redirect($this->session->userdata('referred_from'));
             }else{
-                redirect('seller/dashboard');
+                redirect('seller/overview');
             }
 
         } 

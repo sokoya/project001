@@ -94,8 +94,7 @@
 				<ol class="breadcrumb page-breadcrumb">
 					<li><a href="<?= base_url(); ?>">Home</a>
 					</li>
-					<li class="active">Cell Phones <span
-							class="text-dark"><strong><?= number_format(count($products)) . ' results'; ?></strong></span>
+					<li class="active"><?= ucwords($searched); ?>
 					</li>
 				</ol>
 
@@ -197,7 +196,7 @@
 													<label class="tree-input">
 														<input class="filter" type="checkbox" name="filterset"
 															   data-type="<?= trim($feature); ?>"
-															   data-value="<?= trim(preg_replace("/[^A-Za-z0-9]/", '-', $value)) ?>"/><?= $value; ?>
+															   data-value="<?= trim(preg_replace("/[^A-Za-z0-9-]/", '_', $value)) ?>"/><?= $value; ?>
 														<span class="checkmark"></span>
 													</label>
 												</div>
@@ -225,7 +224,7 @@
 					</div>
 					<div id="category_body">
 						<div class="cat-notify">
-							<p class="n-head">Cell Phones</p>
+							<p class="n-head"><?= $searched; ?></p>
 							<p class="n-body"><?= number_format(count($products)) . ' results'; ?></strong></p>
 						</div>
 						<div class="row filter_data" data-gutter="15">
@@ -240,11 +239,8 @@
 										<?php endif; ?>
 										<div class="product-img-wrap">
 											<!-- <?= base_url('assets/landing/img/test_product/29.jpg'); ?> -->
-											<?php $image_name = $product->image_name;
-											$split = explode('|', $image_name)
-											?>
 											<img class="product-img"
-												 src="https://res.cloudinary.com/philo001/image/upload/h_400,w_400,q_auto,f_auto,fl_lossy,dpr_auto/v<?= $split[0] . '/' . $split[1]; ?>"
+												 src="<?= base_url('data/products/' . $product->id.'/'.$product->image_name); ?>"
 												 alt="<?= $product->product_name; ?>"
 												 title="<?= $product->product_name; ?>">
 										</div>
