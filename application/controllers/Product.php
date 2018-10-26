@@ -21,6 +21,7 @@ class Product extends CI_Controller {
         $page_data['favourited'] = $this->product->is_favourited(base64_decode($this->session->userdata('logged_id')), $index);
         $page_data['likes'] = $this->product->get_also_likes( $index );
         $page_data['title'] = preg_replace("/[^A-Za-z0-9]/"," ", $uri );
+        $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
         $this->load->view('landing/product', $page_data);
 	}
 
@@ -86,12 +87,13 @@ class Product extends CI_Controller {
         $page_data['brands'] = $this->product->get_brands($str);
         $page_data['colours'] = $this->product->get_colours($str);
         $page_data['sub_categories'] = $this->product->get_sub_categories($str);
-
+        $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
         $this->load->view('landing/category', $page_data);
     }
 
 
     public function cart(){
+        $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
         $page_data['title'] = 'My cart';
         if( $this->input->post() ){
             // update

@@ -3,7 +3,7 @@
 Class User_model extends CI_Model{
 
 
-    function get_profile( $id , $table = 'users'){
+    function get_profile( $id ='' , $table = 'users'){
         $this->db->where('id', $id );
         $this->db->or_where('email', $id);
         return $this->db->get($table)->row();

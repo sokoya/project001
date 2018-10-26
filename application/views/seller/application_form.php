@@ -20,8 +20,8 @@
 		        <div class="panel-body">
 		            <div class="mar-ver pad-btm">
 		                <h1 class="h3 text-2x">Complete the seller form</h1>
-		                <p class="text text-dark">We are glad you have decided to join the community.</p>
                         <?php $this->load->view('msg_view'); ?>
+                        <p class="text text-dark">We are glad you have decided to join the community.</p>
 		            </div>
 		            <?= form_open('seller/application/process')?>
 		                <div class="row">

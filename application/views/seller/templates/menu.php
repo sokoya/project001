@@ -65,7 +65,7 @@
                         </li>
 
                         <!--Menu list item-->
-                        <li class="<?php if($pg_name == 'product' || $pg_name == 'manage_product' ) echo 'class="active-sub"'?>">
+                        <li <?php if($pg_name == 'product' || $pg_name == 'manage_product' ) echo 'class="active-sub"'?>>
                             <a href="#">
                                 <i class="demo-pli-split-vertical-2"></i>
                                 <span class="menu-title">Products</span>
@@ -85,8 +85,8 @@
                                         <li><a href="<?= base_url('seller/manage/?type=pending'); ?>">Pending</a></li>
                                         <li><a href="<?= base_url('seller/manage/?type=delivered'); ?>">Delivered</a></li>
                                         <li><a href="<?= base_url('seller/manage/?type=missing_images'); ?>">Missing Images</a></li>
-                                        <li><a href="<?= base_url('seller/manage/?type=sold_out'); ?>"">Returned</a></li>
-                                        <li><a href="<?= base_url('seller/manage/?type=inactive'); ?>"">Inactive</a></li>
+                                        <li><a href="<?= base_url('seller/manage/?type=sold_out'); ?>">Returned</a></li>
+                                        <li><a href="<?= base_url('seller/manage/?type=inactive'); ?>">Inactive</a></li>
                                     </ul>
                                 </li>
                             </ul>

@@ -13,14 +13,9 @@ class Application extends CI_Controller{
         } 
 
         $user = $this->seller->get_profile( base64_decode($this->session->userdata('logged_id')) );
-        if( $user->is_seller == 'pending'){
-            $this->session->set_flashdata('success_msg','Please fill in the form to become a seller');
-            redirect('seller/application/status');
-        }elseif($user->is_seller == 'approved'){
+        if($user->is_seller == 'approved'){
             $this->session->set_flashdata('success_msg','Welcome to your seller dashboard.');
             redirect('seller/overview');
-        }else{
-            redirect(base_url());
         }
     }
 
