@@ -1,4 +1,9 @@
 <?php $this->load->view('seller/templates/meta_tags'); ?>
+<style type="text/css">
+    img.dz-img{
+        max-width: 80px;
+    }
+</style>
 </head>
 <body>
     <div id="container" class="effect aside-float aside-bright mainnav-lg">
@@ -19,7 +24,7 @@
                     <!--Page Title-->
                     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                     <div id="page-title">
-                        <h1 class="page-header text-overflow">Edit Product</h1>
+                        <h1 class="page-header text-overflow">Editing ( <?= $product->product_name; ?> )</h1>
                     </div>
                     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                     <!--End page title-->
@@ -27,9 +32,9 @@
                     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="demo-pli-home"></i></a></li>
-                        <li><?= $this->session->userdata('new_rootcategory'); ?></li>
-                        <li><?= $this->session->userdata('new_category'); ?></li>
-                        <li class="active"><?= $this->session->userdata('new_subcategory'); ?></li>
+                        <li><?= $product->rootcategory ?></li>
+                        <li><?= $product->subcategory; ?></li>
+                        <li class="active"><?= $product->category; ?></li>
                     </ol>
                     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                     <!--End breadcrumb-->
@@ -81,7 +86,8 @@
                                         </div>
                                         <!--Form demo-bv-wz-form -->
 
-                                        <form id="product-post" class="form-horizontal add_product_form" novalidate  method="POST" action="" enctype="multipart/form-data">
+                                        <form id="product-post" action="<?= base_url('seller/product/edit'); ?>" class="form-horizontal edit_product_form" novalidate  method="POST" action="" enctype="multipart/form-data">
+                                            <input type="hidden" name="product_id" value="<?= $product->id;?>">
                                             <div class="panel-body">
                                                 <div class="tab-content">
                                                     <!--First tab-->
@@ -532,7 +538,9 @@
                                                         </div>
 
                                                     </div>
-
+                                                    <!-- A dummy file type -->
+                                                    <input type="hidden" name="file" value="" type="file">
+                                                    <input type="hidden" name="csrf_carrito" value="<?= $this->security->get_csrf_hash(); ?>" />
                                                 </div>
                                             </div>
                                             <!--Footer button-->
@@ -628,7 +636,7 @@
                 minImageWidth = 200,
                 minImageHeight = 200;
             let myDropzone = new Dropzone(document.body,{ // Make the whole body a dropzone
-                url: base_url + "seller/product/edit_process", // Set the url
+                url: base_url + "/product/edit", // Set the url
                 autoProcessQueue: false,
                 addRemoveLinks: true,
                 autoDiscover: false,
@@ -668,14 +676,12 @@
                             myDropzone.emit("complete", mockFile);
 
                         });
-                        let existing_file_count = data.length;
-                        myDropzone.options.maxFiles = myDropzone.options.maxFiles - existing_file_count;
+                            let existing_file_count = data.length;
+                            myDropzone.options.maxFiles = myDropzone.options.maxFiles - existing_file_count;
                         }
                     });
                 }
             });
-
-
 
             myDropzone.on("addedfile", function(file) {
                 // Hookup the button
@@ -689,7 +695,7 @@
 
             myDropzone.on("sendingmultiple", function(file, xhr, formData) {
                 // Show the total progress bar when upload starts
-                let formDataArray = $('.add_product_form').serializeArray();
+                let formDataArray = $('.edit_product_form').serializeArray();
                 for(let i = 0; i < formDataArray.length; i++){
                     let formDataItem = formDataArray[i];
                     formData.append(formDataItem.name, formDataItem.value);
@@ -697,13 +703,15 @@
             });
 
             uplodaBtn.on('click', function(e) {
+
                 $('#processing').show();
                 e.preventDefault();
-                // e.stopPropagation();
-                setTimeout(function(){
+                if( myDropzone.getQueuedFiles().length > 0 ){
                     myDropzone.processQueue();
-                }, 10);
-                //Upload all files
+                }else{
+                    $('.edit_product_form').submit();
+                }
+                // Upload all files
                 // console.log(myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED)));
             });
             myDropzone.on("successmultiple", function(files, response) {
@@ -716,7 +724,7 @@
                     $('#status').html(`<p class="alert alert-error">There was an error posting the property. <br /> ${response.message} </p>`).slideDown('fast').delay(4000).slideUp('slow');
                 }else{
                     $('#processing').hide();
-                    $('.add_product_form').trigger('reset');
+                    $('.edit_product_form').trigger('reset');
                     $('#status').html(`<p class="alert alert-success">Congrats the property has been posted successfully.</p>`).slideDown('fast').delay(5000).slideUp('slow');
                 }
                 console.log(response);
@@ -727,7 +735,6 @@
                 $('#processing').hide();
                 alert('There was an error sending the images' + response);
             });
-
             // myDropzone.on('thumbnail', function(file){
             //     if( (file.width > maxImageWidth || file.height > maxImageHeight ) || (minImageWidth > file.width || minImageHeight > file.height) ){
             //         file.rejectDimensions();

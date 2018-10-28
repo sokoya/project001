@@ -30,6 +30,7 @@ class Manage extends CI_Controller{
         // get product
         $page_data['products'] = $this->seller->get_product( base64_decode($this->session->userdata('logged_id')), $status
             );
+        $page_data['type'] = $status;
         $this->load->view('seller/manage', $page_data);
     }
 

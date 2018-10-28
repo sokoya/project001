@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title><?= !isset($title) ? 'Welcome ' : $title ?> - <?= lang('app_name'); ?></title>
+    <title><?= !isset($title) ? 'Welcome ' : ucwords($title) ?> - <?= lang('app_name'); ?></title>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
-    <meta name="keywords" content="" />
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="keywords" content="<?= !empty($keywords) ? ucwords($keywords) : ''; ?>" />
+    <meta name="description" content="<?= !empty($description) ? $description : ''; ?>">
+    <meta name="robots" content="index,follow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='http://fonts.googleapis.com/css?family=Roboto:500,300,700,400italic,400' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>

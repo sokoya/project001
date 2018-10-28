@@ -112,7 +112,8 @@ Class Seller_model extends CI_Model{
      */
     function get_profile( $access ){
         $query = "SELECT * FROM users u 
-                LEFT JOIN sellers s ON (u.id = s.uid)";
+                LEFT JOIN sellers s ON (u.id = s.uid)
+                WHERE u.id = $access";
         return $this->db->query($query)->row();
     }
 
@@ -152,7 +153,7 @@ Class Seller_model extends CI_Model{
 
 
     function get_product($id, $status = ''){
-        $query = "SELECT p.product_name, p.sku, p.created_on, p.product_status, AVG(v.sale_price) AS sale_price, AVG(v.discount_price) AS discount_price 
+        $query = "SELECT p.product_name, p.id, p.sku, p.created_on, p.product_status, AVG(v.sale_price) AS sale_price, AVG(v.discount_price) AS discount_price 
         FROM products AS p JOIN product_variation AS v ON v.product_id = p.id ";
         if( $status !== '' AND $status !== 'missing_images' ) { $query .= " AND p.product_status = '$status'";}
         // elseif( $status == 'missing_images') { $query .=  JOIN product_gallery AS g }
@@ -237,9 +238,11 @@ Class Seller_model extends CI_Model{
      * @param $user_id|product_id
      * @return num_rows
      */
-    function is_product_owner( $id ='', $pid = ""){
-        $this->db->where('seller_id', $id);
+    function is_product_owner( $uid ='', $pid = ""){
+        $this->db->where('seller_id', $uid);
         $this->db->where('id', $pid);
+        $this->db->where('product_status =', 'pending');
+        $this->db->or_where('product_status =', 'missing_images');
         return $this->db->get('products')->num_rows();
     }
 

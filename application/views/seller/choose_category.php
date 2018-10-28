@@ -48,6 +48,7 @@
                                         </div>
                                         <div class="panel-body">
                                             <?= form_open(); ?>
+
                                             <div class="row">
                                                 <div class="col-md-4" style="margin-bottom: 20px;">
                                                     <h5 style="color: #232323;">Select Root Category</h5>
@@ -124,6 +125,7 @@
 
 
     <?php $this->load->view('seller/templates/scripts'); ?>
+    <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
 
     <script>
 
@@ -138,7 +140,7 @@
             $.ajax({
                 method: "POST",
                 url: base_url + 'seller/product/append_category',
-                data: { id: id },
+                data: { id: id,'csrf_carrito':csrf_token },
                 dataType: 'json'
             }).done(function( msg ) {
                 $(".subcat").append("<option>-- Please select a category --</option>");
@@ -153,7 +155,7 @@
             $.ajax({
                 method: "POST",
                 url: base_url + 'seller/product/append_sub_category',
-                data: { id: id },
+                data: { id: id,'csrf_carrito':csrf_token },
                 dataType: 'json'
             }).done(function( msg ) {
                 $(".cat").append("<option>-- Please select a sub category --</option>");
@@ -164,5 +166,6 @@
         });
 
     </script>
+    
 </body>
 </html>

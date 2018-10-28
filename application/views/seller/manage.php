@@ -48,7 +48,9 @@
                                 <th class="min-tablet">Average Sale Price(N)</th>
                                 <th class="min-tablet">Avg Discount Price(N)</th>
                                 <th class="min-desktop">Available</th>
-                                <th class="min-desktop">Action</th>
+                                <?php if(in_array($type,array('pending', 'missing_images')) ): ?>
+                                    <th class="min-desktop">Action</th>
+                                <?php endif; ?>
                             </tr>
                             </thead>
                             <tbody>
@@ -60,7 +62,13 @@
                                     <td><?= ngn($product['sale_price']); ?></td>
                                     <td><?= ngn($product['discount_price']); ?></td>
                                     <td><?= $product['product_status']; ?></td>
-                                    <td><i class="fa fa-plus"></i></td>
+                                    <?php if(in_array($type,array('pending', 'missing_images')) ): ?>
+                                        <td>
+                                            <a href="<?= base_url('seller/product/edit/' . $product['id']); ?>">
+                                                <i class="fa fa-plus" title="Edit"></i> Edit Product
+                                            </a>
+                                        </td>
+                                    <?php endif; ?>
                                 </tr>
                             <?php endforeach;?>
                             </tbody>

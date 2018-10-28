@@ -461,7 +461,7 @@ $config['csrf_token_name'] = 'csrf_carrito';
 $config['csrf_cookie_name'] = 'csrf_cookie';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
-$config['csrf_exclude_uris'] = array();
+$config['csrf_exclude_uris'] = array("seller/product/append_sub_category", "seller/product/append_category", "seller/product/create", "seller/product/edit/[0-9]+" );
 
 /*
 |--------------------------------------------------------------------------

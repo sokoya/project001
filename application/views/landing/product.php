@@ -158,7 +158,7 @@
 											<?php if (!empty($product->attributes)) : ?>
 												<tr>
 													<td>Features:</td>
-													<td><a href="#tab-2">See more...</a></td>
+													<td><a href="#description-tab">See more...</a></td>
 												</tr>
 											<?php endif; ?>
 											</tbody>

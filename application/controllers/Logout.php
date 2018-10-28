@@ -9,13 +9,7 @@ class Logout extends CI_Controller {
 		// $this->session->unset_userdata('email');
 		// $this->session->unset_userdata('logged_id');
 		// $this->session->unset_userdata('referred_from');
-
-		if( !$this->session->userdata('cart') ){
-			foreach ($this->session->userdata() as $key) {
-				$this->session->sess_destroy();
-			}
-			
-		}
+		$this->session->sess_destroy();
 		redirect(base_url());
 	}
 

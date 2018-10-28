@@ -1,5 +1,5 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"/>
+
 <style type="text/css">
 	.feature-attribute:hover {
 		cursor: pointer;
@@ -225,7 +225,7 @@
 					<div id="category_body">
 						<div class="cat-notify">
 							<p class="n-head"><?= $searched; ?></p>
-							<p class="n-body"><?= number_format(count($products)) . ' results'; ?></strong></p>
+							<p class="n-body"><?= number_format(count($products)) . ' results'; ?> <?php echo $this->benchmark->elapsed_time();?> Memory Usage <?php echo $this->benchmark->memory_usage();?></strong></p>
 						</div>
 						<div class="row filter_data" data-gutter="15">
 							<?php foreach ($products as $product) : ?>
@@ -239,10 +239,11 @@
 										<?php endif; ?>
 										<div class="product-img-wrap">
 											<!-- <?= base_url('assets/landing/img/test_product/29.jpg'); ?> -->
-											<img class="product-img"
-												 src="<?= base_url('data/products/' . $product->id.'/'.$product->image_name); ?>"
-												 alt="<?= $product->product_name; ?>"
-												 title="<?= $product->product_name; ?>">
+											<img class="product-img lazy"
+												data-src="<?= base_url('data/products/' . $product->id.'/'.$product->image_name); ?>"
+												src="<?= base_url('data/products/' . $product->id.'/'.$product->image_name); ?>"
+												alt="<?= $product->product_name; ?>"
+												title="<?= $product->product_name; ?>">
 										</div>
 										<a class="product-link" title="<?= $product->product_name ?>"
 										   href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
@@ -300,12 +301,16 @@
 <script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/ionrangeslider.js'); ?>"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@8.17.0/dist/lazyload.min.js"></script>
 <script>
 	let base_url = "<?= base_url('catalog'); ?>";
 	let current_url = "<?= current_url()?>";
 </script>
 <script>
+	var myLazyLoad = new LazyLoad({
+	    elements_selector: ".lazy"
+	});
+
 	$("#price-slider").ionRangeSlider({
 		min: 1000,
 		max: 50000,

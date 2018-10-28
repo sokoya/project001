@@ -82,7 +82,7 @@
                                         <!--Form demo-bv-wz-form -->
 
                                         <form id="product-post" class="form-horizontal add_product_form" novalidate  method="POST" action="" enctype="multipart/form-data">
-                                            <input type="hidden" name="csrf_carrito" value="<?= $this->security->get_csrf_token_name(); ?>" />
+                                            <input type="hidden" name="csrf_carrito" value="<?= $this->security->get_csrf_hash(); ?>" />
                                             <div class="panel-body">
                                                 <div class="tab-content">
                                                     <!--First tab-->
@@ -634,7 +634,7 @@
                 uplodaBtn.prop('disabled', false);
                 removeBtn.prop('disabled', false);
                 file._captionLabel = Dropzone.createElement("<span class='text-sm text-dark'> &nbsp; Make this the featured Image &nbsp; </span>");
-                file._captionBox = Dropzone.createElement(`<input id="${file.name}" type='radio' name='featured_image' value="${file.name}">`);
+                file._captionBox = Dropzone.createElement(`<input id="${file.name}" type='radio' name='featured_image' checked value="${file.name}">`);
                 file.previewElement.appendChild(file._captionBox);
                 file.previewElement.appendChild(file._captionLabel);
             });

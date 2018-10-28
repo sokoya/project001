@@ -26,16 +26,16 @@ Class Product_model extends CI_Model{
     }
 
 
-    function get_menu_categories(){
-        $select = "SELECT root.root_category_id, root.icon, root.title, root.name AS root_name, cat.name AS category_name, GROUP_CONCAT(sub.name SEPARATOR ', ') AS sub_name
-        FROM root_category root
-        JOIN (SELECT GROUP_CONCAT(c.name SEPARATOR ', ') AS name, c.root_category_id AS id, c.category_id AS cid FROM category c GROUP BY cid) AS cat ON (cat.id = root.root_category_id)
-        JOIN sub_category AS sub ON (cat.cid = sub.category_id)
-        GROUP BY root.root_category_id";
-        // var_dump( $this->db->query( $select )->result() );
-        return $this->db->query( $select )->result();
+    // function get_menu_categories(){
+    //     $select = "SELECT root.root_category_id, root.icon, root.title, root.name AS root_name, cat.name AS category_name, GROUP_CONCAT(sub.name SEPARATOR ', ') AS sub_name
+    //     FROM root_category root
+    //     JOIN (SELECT GROUP_CONCAT(c.name SEPARATOR ', ') AS name, c.root_category_id AS id, c.category_id AS cid FROM category c GROUP BY cid) AS cat ON (cat.id = root.root_category_id)
+    //     JOIN sub_category AS sub ON (cat.cid = sub.category_id)
+    //     GROUP BY root.root_category_id";
+    //     // var_dump( $this->db->query( $select )->result() );
+    //     return $this->db->query( $select )->result();
 
-    }
+    // }
 
     // To get the respective categories or sub
     function get_sub_categories( $str = ''){
@@ -59,6 +59,28 @@ Class Product_model extends CI_Model{
             }
         }
         return $output;
+    }
+
+    function category_description( $str = '' ){
+        $result = '';
+        $select = "SELECT description FROM root_category WHERE MATCH(name) AGAINST('$str') LIMIT 1";
+        $result = $this->db->query($select)->row()->description;
+        if( !empty( $result ) ){
+            return $result;
+        }else{
+            $select = "SELECT root_category_id FROM caterory WHERE MATCH(name) AGAINST('$str') LIMIT 1";
+            $id = $this->db->query($select)->row();
+            if( count( $id ) ){
+                $this->db->select('description');
+                $this->db->where('root_category_id', $id->root_category_id);
+                $result = $this->db->get('root_category')->row()->description;
+            }else{
+                $select = "SELECT r.description FROM root_category r LEFT JOIN sub_category s ON (r.root_category_id = s.root_category_id ) 
+                WHERE MATCH(s.name) AGAINST('$str') LIMIT 1";
+                $result = $this->db->query($select)->row()->description;
+            }
+        }
+        return $result;
     }
 
     function get_variation( $id = ''){
@@ -91,6 +113,7 @@ Class Product_model extends CI_Model{
     }
 
     function get_products( $d = '' , $gets = array() ){
+        $this->db->cache_on();
         $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price,g.image_name,s.first_name
             FROM products p                        
             JOIN product_variation AS v ON (p.id = v.product_id) 
@@ -224,6 +247,7 @@ Class Product_model extends CI_Model{
         }    
         // die( $select_query );
         $products_query = $this->db->query( $select_query )->result();
+        $this->db->cache_on();
         return $products_query;
     }
 
@@ -300,6 +324,44 @@ Class Product_model extends CI_Model{
             $count = $this->db->count_all_results();
         } while ($count >= 1);
             return $number;
+    }
+
+
+    /**
+     * @param $id
+     * @param $label
+     * @return array|string
+     */
+    function get_category_detail($field ='' , $label ='' ){
+        switch ($label){
+            case 'root_category' :
+                $this->db->select('name,root_category_id,description');
+                if( $field != '') {
+                    $this->db->where('root_category_id', $field);
+                    $this->db->or_where('name', $field);
+                }
+                return $this->db->get('root_category')->row();
+                break;
+            case 'category':
+                $this->db->select('name,category_id');
+                if($field != '' ) {
+                    $this->db->where('category_id', $field);
+                    $this->db->or_where('name', $field);
+                }
+                return $this->db->get('category')->row();
+                break;
+            case 'sub_category' :
+                $this->db->select('name,sub_category_id');
+                if($field != '') {
+                    $this->db->where('sub_category_id', $field);
+                    $this->db->or_where('name', $field);
+                }
+                return $this->db->get('sub_category')->row();
+                break;
+            default:
+                return '';
+                break;
+        }
     }
 }
 
