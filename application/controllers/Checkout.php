@@ -16,6 +16,7 @@ class Checkout extends CI_Controller {
     }
 
 	public function index(){
+        // @TODO : Check the product variation quantity and price
         $page_data['title'] = 'Checkout';
         if( !$this->input->post() ){
             $this->load->model('user_model', 'user');

@@ -855,7 +855,7 @@
 		$.ajax({
 			url: base_url + "product/check_variation",
 			method: "POST",
-			data: {vid: id},
+			data: {vid: id, 'csrf_carrito': csrf_token},
 			success: function (response) {
 				alert(response)
 			},
