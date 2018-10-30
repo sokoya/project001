@@ -409,7 +409,7 @@
                                                                     <th>EAN / UPC / ISBN</th>
                                                                     <th>Quantity</th>
                                                                     <th>Price*</th>
-                                                                    <th>Discounted Price*</th>
+                                                                    <th>Discounted Price</th>
                                                                     <th>Start date</th>
                                                                     <th>End date</th>
                                                                     <th class="text-center">Actions</th>
@@ -452,7 +452,7 @@
                                                                         <td>
                                                                             <div class="form-group">
                                                                                 <label class="">Discount Price </label>
-                                                                                <input title="Discounted price" type="text" class="form-control" required name="discount_price[]" />
+                                                                                <input title="Discounted price" type="text" class="form-control" name="discount_price[]" />
                                                                             </div>
                                                                         </td>
                                                                         <td>
