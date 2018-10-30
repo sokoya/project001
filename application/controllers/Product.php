@@ -146,10 +146,10 @@ class Product extends CI_Controller {
         exit;
     }
 
-    function check_variation( $id ){
-        $id = $this->uri->segment(3);
-        if( !$id ) exit;
-        $result = $this->product->check_variation( $id );
+    function check_variation( ){
+        $id = $this->input->post('vid');
+        if( !$vid ) exit;
+        $result = $this->product->check_variation( $vid );
         header('Content-type: text/json');
         header('Content-type: application/json');
         echo json_encode($result);
