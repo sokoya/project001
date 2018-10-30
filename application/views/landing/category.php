@@ -1,10 +1,11 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"/>
 <style type="text/css">
 	.feature-attribute:hover {
 		cursor: pointer;
 	}
 
-	.market-checkbox {
+	.carrito-checkbox {
 		display: block;
 		position: relative;
 		padding-left: 25px;
@@ -17,7 +18,7 @@
 		user-select: none;
 	}
 
-	.market-checkbox input {
+	.carrito-checkbox input {
 		position: absolute;
 		opacity: 0;
 		cursor: pointer;
@@ -36,11 +37,11 @@
 		background-color: #fff;
 	}
 
-	.market-checkbox:hover input ~ .checkmark {
+	.carrito-checkbox:hover input ~ .checkmark {
 		border-color: #74c68366;
 	}
 
-	.market-checkbox input:checked ~ .checkmark {
+	.carrito-checkbox input:checked ~ .checkmark {
 		background-color: #74c683;
 	}
 
@@ -53,13 +54,13 @@
 	}
 
 	/* Show the checkmark when checked */
-	.market-checkbox input:checked ~ .checkmark:after {
+	.carrito-checkbox input:checked ~ .checkmark:after {
 		display: block;
 		color: white;
 	}
 
 	/* Style the checkmark/indicator */
-	.market-checkbox .checkmark:after {
+	.carrito-checkbox .checkmark:after {
 		left: 9px;
 		top: 5px;
 		width: 5px;
@@ -80,17 +81,15 @@
 	<?php $this->load->view('landing/resources/head_menu'); ?>
 
 
-	<?php if (empty($products)) : ?>
-		<div class="container">
+	<div class="container">
+		<?php if (empty($products)) : ?>
 			<div class="row">
 				<div class="gap-large"></div>
 				<h2 class="text-center">Oops! Sorry, we couldn't find products on this section.</h2>
 				<p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find
 						product</a></p>
 			</div>
-		</div>
 		<?php else : ?>
-		<div class="container">
 			<header class="page-header">
 				<ol class="breadcrumb page-breadcrumb">
 					<li><a href="<?= base_url(); ?>">Home</a>
@@ -98,6 +97,8 @@
 					<li class="active"><?= ucwords($searched); ?>
 					</li>
 				</ol>
+
+
 				<ul class="category-selections clearfix">
 					<ul class="category-selections clearfix">
 						<li><span class="category-selections-sign">Sort by :</span>
@@ -109,6 +110,7 @@
 								<option>Price : Lowest First</option>
 								<option>Price : Highest First</option>
 								<option>Title : A - Z</option>
+								4
 								<option>Title : Z - A</option>
 							</select>
 						</li>
@@ -141,7 +143,7 @@
 							<div class="category-filters-section">
 								<h3 class="widget-title-sm custom-widget-text">Brand</h3>
 								<?php foreach ($brands as $brand) : ?>
-									<div class="market-checkbox">
+									<div class="carrito-checkbox">
 										<label class="tree-input">
 
 											<input class="filter" type="checkbox" data-type="brand_name"
@@ -158,7 +160,7 @@
 							<div class="category-filters-section">
 								<h3 class="widget-title-sm custom-widget-text">Main Colour</h3>
 								<?php foreach ($colours as $colour) : ?>
-									<div class="market-checkbox">
+									<div class="carrito-checkbox">
 										<label class="tree-input">
 											<input class="filter" type="checkbox" data-type="main_colour"
 												   name="filterset"
@@ -190,7 +192,7 @@
 										 aria-labeledby="<?= $feature; ?>" data-parent="#<?= trim($feature); ?>">
 										<div class="panel-body">
 											<?php foreach ($feature_value as $key => $value) : ?>
-												<div class="market-checkbox">
+												<div class="carrito-checkbox">
 													<label class="tree-input">
 														<input class="filter" type="checkbox" name="filterset"
 															   data-type="<?= trim($feature); ?>"
@@ -223,24 +225,24 @@
 					<div id="category_body">
 						<div class="cat-notify">
 							<p class="n-head"><?= $searched; ?></p>
-							<p class="n-body"><strong><?= number_format(count($products)) . ' results'; ?></strong></p>
+							<p class="n-body"><?= number_format(count($products)) . ' results'; ?></strong></p>
 						</div>
-						<div class="row filter_data clearfix" data-gutter="15">
+						<div class="row filter_data" data-gutter="15">
 							<?php foreach ($products as $product) : ?>
 								<div class="col-md-4">
 									<div class="product">
 										<?php if (!empty($product->discount_price)): ?>
 											<ul class="product-labels">
 												<li><?= get_discount($product->sale_price, $product->discount_price); ?></li>
+												<!-- Call the discount calculator her -->
 											</ul>
 										<?php endif; ?>
 										<div class="product-img-wrap">
 											<!-- <?= base_url('assets/landing/img/test_product/29.jpg'); ?> -->
-											<img class="product-img lazy"
-												data-src="<?= base_url('data/products/' . $product->id.'/'.$product->image_name); ?>"
-												src="<?= base_url('data/products/' . $product->id.'/'.$product->image_name); ?>"
-												alt="<?= $product->product_name; ?>"
-												title="<?= $product->product_name; ?>">
+											<img class="product-img"
+												 src="<?= base_url('data/products/' . $product->id.'/'.$product->image_name); ?>"
+												 alt="<?= $product->product_name; ?>"
+												 title="<?= $product->product_name; ?>">
 										</div>
 										<a class="product-link" title="<?= $product->product_name ?>"
 										   href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
@@ -278,35 +280,32 @@
 								</div>
 							<?php endforeach; ?>
 						</div>
-						<?php if( $pagination ) : ?>
-							<div class="row">
-								<div class="col-md-6 col-md-offset-3">
-									<?= $pagination ?>
-								</div>
+						<div class="row">
+							<div class="col-md-6 col-md-offset-3">
+								<?= $pagination ?>
 							</div>
-						<?php endif; ?>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+
+
 		<?php endif; ?>
+	</div>
 	<div class="gap"></div>
 </div>
 
 <?php $this->load->view('landing/resources/footer'); ?>
+</div>
 <script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/ionrangeslider.js'); ?>"></script>
-<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@8.17.0/dist/lazyload.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script>
 	let base_url = "<?= base_url('catalog'); ?>";
 	let current_url = "<?= current_url()?>";
 </script>
 <script>
-	var myLazyLoad = new LazyLoad({
-	    elements_selector: ".lazy"
-	});
-
 	$("#price-slider").ionRangeSlider({
 		min: 1000,
 		max: 50000,
@@ -320,7 +319,7 @@
 
 		function doReplaceState(url) {
 			let state = {current_url: url},
-				title = "Onitshamarket.com";
+				title = "Carrito MarketPlace";
 			history.replaceState(state, title, url);
 		}
 

@@ -116,13 +116,12 @@
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Brand Name *</label>
                                                                             <div class="col-lg-7">
-                                                                                <select name="brand_name" required class="selectpicker" data-width="100%" title="Select brand">
-                                                                                    <?php
-                                                                                        $brands = explode(',', lang('brands'));
-                                                                                        foreach( $brands as $brand ):
-                                                                                    ?>  
-                                                                                    <option value="<?= trim($brand); ?>" <?php if($brand == trim(strtolower($product->brand_name))) echo 'selected'; ?> ><?= $brand; ?></option>
-                                                                                <?php endforeach; ?>
+                                                                                <select class="form-control selectpicker" name="brand_name" required="" data-width="100%">
+                                                                                    <option>-- Select Brand Name --</option>
+                                                                                    <?php foreach( $brands as $brand ) :?>
+                                                                                        <option value="<?=ucwords($brand->brand_name);?>"><?= ucwords($brand->brand_name); ?></option>
+                                                                                    <?php endforeach; ?>
+                                                                                    <option value="others">Others</option>
                                                                                 </select>
                                                                                 <span class="text-sm text-dark">Brand of the product. If brand does not exist, please copy https://goo.gl/Hw8vma into your browser and fill accordingly.</span>
                                                                             </div>

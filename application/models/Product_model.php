@@ -92,6 +92,13 @@ Class Product_model extends CI_Model{
         return $this->db->query('SELECT * FROM product_variation WHERE product_id = ? ', $id)->result();
     }
 
+    function check_variation( $id ){
+        $this->db->select('quantity,sale_price,discount_price');
+        $this->db->where('id', $id);
+        $this->db->limit(1);
+        return $this->db->get('product_variation')->result_array();
+    }
+
     function get_gallery( $id ){
         $this->db->where('product_id', $id);
         $this->db->select('*');
