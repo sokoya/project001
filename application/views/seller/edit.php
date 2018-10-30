@@ -86,7 +86,7 @@
                                         </div>
                                         <!--Form demo-bv-wz-form -->
 
-                                        <form id="product-post" action="<?= base_url('seller/product/edit'); ?>" class="form-horizontal edit_product_form" novalidate  method="POST" action="" enctype="multipart/form-data">
+                                        <form id="demo-bv-wz-form" action="<?= base_url('seller/product/edit'); ?>" class="form-horizontal edit_product_form" novalidate  method="POST" action="" enctype="multipart/form-data">
                                             <input type="hidden" name="product_id" value="<?= $product->id;?>">
                                             <div class="panel-body">
                                                 <div class="tab-content">

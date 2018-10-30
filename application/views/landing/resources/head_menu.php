@@ -6,9 +6,9 @@
                 <li class="dropdown"><a href="<?= base_url(); ?>"><span >Welcome!</span>All Categories<i class="drop-caret" data-toggle="dropdown"></i></a>
                     <ul class="dropdown-menu dropdown-menu-category">
                         <?php
-                            $this->db->cache_on();
+                            
                                 $categories = $this->db->query("SELECT * FROM root_category")->result();
-                            $this->db->cache_off();
+                            
                             foreach($categories as $category ): ?>
                         <li><a href="<?=  base_url('catalog/' . urlify($category->name)) ; ?>" title="<?= $category->name;?>"><i class="fa fa-<?=$category->icon;?> dropdown-menu-category-icon"></i><?= $category->name; ?></a>
                             <div class="dropdown-menu-category-section">
@@ -16,18 +16,18 @@
                                     <div class="dropdown-menu-category-section-content">
                                         <div class="row">
                                             <?php
-                                                $this->db->cache_on();
+                                                
                                                 $main_category = $this->db->query("SELECT * FROM category WHERE root_category_id = ? ", $category->root_category_id)->result();
-                                                $this->db->cache_off();
+                                                
                                                 foreach( $main_category as $cat ) :
                                             ?>
                                             <div class="col-md-6">
                                                 <h5 class="custom-menu-category-drop"><a href="<?= base_url('catalog/' . urlify($cat->name)); ?>"><?= $cat->name; ?></a></h5>
                                                 <ul class="dropdown-menu-category-list">
                                                     <?php
-                                                        $this->db->cache_on();
+                                                        
                                                         $sub_category = $this->db->query("SELECT name FROM sub_category WHERE root_category_id = ?  AND category_id = ? ", array($category->root_category_id, $cat->category_id))->result();
-                                                        $this->db->cache_off();
+                                                        
                                                         foreach($sub_category as $sub ) : ?>
                                                         <li><a href="<?= base_url('catalog/' . urlify($sub->name)); ?>" title="<?= $sub->name; ?>"><?= $sub->name; ?></a></li>
                                                     <?php endforeach; ?>

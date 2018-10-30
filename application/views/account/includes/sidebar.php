@@ -15,9 +15,9 @@
 			<li>
 				<h4 <?php if($page == 'orders') echo 'class="market-sidebar-active"' ?> ><a href="<?= base_url('account/orders'); ?>">My Orders</a></h4>
 			</li>
-			<li>
+			<!-- <li>
 				<h4 <?php if($page == 'reviews') echo 'class="market-sidebar-active"' ?> ><a href="<?= base_url('account/reviews'); ?>">My Reviews & Ratings</a></h4>
-			</li>
+			</li> -->
 			<li>
 				<h4 <?php if($page == 'saved') echo 'class="market-sidebar-active"' ?> ><a href="<?= base_url('account/saved'); ?>">My Saved Items</a></h4>
 			</li>
