@@ -111,11 +111,13 @@
 											<a href="#">238 customer reviews</a> | <strong> 34 SOLDS</strong>
 										</p>
 										<p class="product-page-desc">
-											<strong class="custom-product-title"><?= word_limiter(ucwords($product->product_name), 7, '...'); ?></strong>
+											<strong
+												class="custom-product-title"><?= word_limiter(ucwords($product->product_name), 7, '...'); ?></strong>
 										</p>
 										<p class=" text-sm text-uppercase pr-id">Product ID : <?= $product->sku; ?>
 											| Seller : <a
-												href="#" id="pr-seller"><?= ucwords($product->first_name . ' ' . $product->last_name); ?></a>
+												href="#"
+												id="pr-seller"><?= ucwords($product->first_name . ' ' . $product->last_name); ?></a>
 										</p>
 										<span class="text-sm text-sm-center">
                                             <?php if (!empty($product->dimensions)): ?>
@@ -169,8 +171,9 @@
 
 								<p class="product-page-price">
 									<?php if (!empty($variation->discount_price)) : ?>
-                                        <span class="price-cs"><?= ngn($variation->discount_price); ?></span>
-                                        <span class="product-page-price-list price-lower"><?= ngn($variation->sale_price); ?></span>
+										<span class="price-cs"><?= ngn($variation->discount_price); ?></span>
+										<span
+											class="product-page-price-list price-lower"><?= ngn($variation->sale_price); ?></span>
 									<?php else: ?>
 										<span class="price-cs"><?= ngn($variation->sale_price); ?></span>
 									<?php endif; ?>
@@ -195,18 +198,16 @@
 										<?php endif; ?>
 										<?php if (count($variations) > 1) : ?>
 											<div class="col-md-4">
-												<div class="form-group">
-													<h5 class="custom-product-page-option-title">Variation:</h5>
-													<select class="form-control custom-variation" name="variation">
-														<option value="">--Select Variation--</option>
-														<?php foreach ($variations as $variation): ?>
-															<option
+												<h5 class="custom-product-page-option-title">Variation:</h5>
+												<select class="product-page-option-select variation-select"
+														name="colour">
+													<?php foreach ($variations as $variation): ?>
+														<option data-id="<?= $variation->id ?>"
 																value="<?= trim($variation->variation); ?>" <?php if ($variation->quantity == 0) echo 'disabled'; ?> >
-																<?= trim($variation->variation); ?>
-															</option>
-														<?php endforeach; ?>
-													</select>
-												</div>
+															<?= trim($variation->variation); ?>
+														</option>
+													<?php endforeach; ?>
+												</select>
 											</div>
 										<?php endif; ?>
 										<input type="hidden" name="product_id"
@@ -270,7 +271,8 @@
 										<?php endif; ?>
 									<?php else : ?>
 										<div class="col-md-6 col-lg-6">
-											<a class="btn btn-block btn-default  c-hover" href="<?= base_url('login'); ?>"><i
+											<a class="btn btn-block btn-default  c-hover"
+											   href="<?= base_url('login'); ?>"><i
 													class="fa fa-star-o"></i>Wishlist</a>
 										</div>
 									<?php endif; ?>
@@ -745,9 +747,9 @@
 				</div>
 			</div>
 			<div class="gap"></div>
-			<?php if( count($likes) ){ ?>
-			<h3 class="widget-title">You Might Also Like</h3>
-			<?php }?>
+			<?php if (count($likes)) { ?>
+				<h3 class="widget-title">You Might Also Like</h3>
+			<?php } ?>
 			<div class="row" data-gutter="15">
 				<?php
 				foreach ($likes as $like): ?>
@@ -846,6 +848,22 @@
 <?php $this->load->view('landing/resources/script'); ?>
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
 <script>
+
+	$('.variation-select').on('change', function () {
+		let id = $(this).children(":selected").data('id');
+		$.ajax({
+			url: base_url + "product/check_variation",
+			method: "POST",
+			data: {vid: id},
+			success: function (response) {
+				alert(response)
+			},
+			error: function (response) {
+				alert('An error occurred')
+			}
+		});
+	});
+
 	$('.fav').on('click', function (e) {
 		e.preventDefault();
 		_this = $(this);
@@ -854,7 +872,7 @@
 		$.ajax({
 			url: base_url + "product/fav",
 			method: "POST",
-			data: {pid: pid, action: action, 'csrf_carrito' :csrf_token},
+			data: {pid: pid, action: action, 'csrf_carrito': csrf_token},
 			success: function (data) {
 				if (data == true) {
 					if (action == 'save') {
