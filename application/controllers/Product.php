@@ -147,7 +147,7 @@ class Product extends CI_Controller {
     }
 
     function check_variation( ){
-        $id = $this->input->post('vid');
+        $vid = $this->input->post('vid');
         if( !$vid ) exit;
         $result = $this->product->check_variation( $vid );
         header('Content-type: text/json');
