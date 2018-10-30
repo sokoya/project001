@@ -71,6 +71,7 @@ class Product extends CI_Controller{
             $page_data['sub_name'] = 'add_product';
             $page_data['profile'] = $this->seller->get_profile_details( $uid ,
                 'first_name,last_name,email,profile_pic');
+            $page_data['brands'] = $this->seller->get_brands();
             // check the specification attached with the sub category
             $this->load->view('seller/create', $page_data);
         }else{
@@ -312,6 +313,7 @@ class Product extends CI_Controller{
             $page_data['specifications'] = $this->seller->get_specifications( $page_data['product']->subcategory);
             $page_data['variations'] = $this->seller->get_product_variation( $id );
             $page_data['product_id'] = $id;
+            $page_data['brands'] = $this->seller->get_brands();
             $this->load->view('seller/edit', $page_data);
         }else{
             // Process

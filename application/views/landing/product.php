@@ -8,10 +8,10 @@
 	<?php $this->load->view('landing/resources/head_menu') ?>
 
 	<div class="container">
-		<?php if ($product->product_status !== 'pending') : ?>
+		<?php if ($product->product_status !== 'approved') : ?>
 			<div class="row">
 				<div class="gap-large"></div>
-				<h2 class="text-center">Oops! The product you looking for is not active.</h2>
+				<h2 class="text-center">Oops! The product you looking for is not active, or has been removed.</h2>
 				<p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find
 						product</a></p>
 			</div>
@@ -202,7 +202,7 @@
 														<?php foreach ($variations as $variation): ?>
 															<option
 																value="<?= trim($variation->variation); ?>" <?php if ($variation->quantity == 0) echo 'disabled'; ?> >
-																<?= trim($variation->variation); ?>
+																<?= trim($variation->variation); ?> 
 															</option>
 														<?php endforeach; ?>
 													</select>
