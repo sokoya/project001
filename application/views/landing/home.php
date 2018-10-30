@@ -65,7 +65,7 @@
 
 		<!-- <h3 class="widget-title-lg">Weekly Featured</h3> -->
 
-<<<<<<< HEAD
+
 		<div class="row" data-gutter="15">
 			<div class="col-md-3 clearfix">
 				<div class="product product-half" style="margin-bottom: 10px;">
@@ -82,7 +82,7 @@
 					<div class="product-caption">
 						<a href="#"><h5 class="product-caption-title text-center"><span>Click to use </span><?= lang('app_name'); ?>
 								Shopper</h5></a>
-=======
+
 		<div class="row row-col-gap" data-gutter="15">
 			<div class="col-md-6">
 				<div class="banner banner-o-hid"
@@ -106,13 +106,12 @@
 						<p class="banner-desc">Exeedingly Good Jeans</p>
 						<p class="banner-shop-now">Shop Now <i class="fa fa-caret-right"></i>
 						</p>
->>>>>>> 17d1a75c3f32e32032bd6933badf9f4c509bcb90
+
 					</div>
 					<img class="banner-img" src="<?= base_url('assets/landing/img/test_banner/21.png'); ?>" alt="Image Alternative text"
 						 title="Image Title" style="bottom: -29px; right: -51px; width: 240px;"/>
 				</div>
 
-<<<<<<< HEAD
 				<div class="product product-half">
 					<div class="product-img-wrap text-center">
 						<img class="product-img-small" style="margin: 0 auto; width: 70%"
@@ -147,7 +146,7 @@
 							 alt="<?= lang('app_name'); ?>_essential_newest_gadget" title="<?= lang('app_name'); ?> "/></a>
 					</div>
 					<div class="product-caption text-center"><strong>Newest Gadget</strong></div>
-=======
+
 	</div>
 
 
@@ -197,7 +196,7 @@
 																src="<?= base_url('assets/landing/img/carrito/carrito_essential_per_food.png'); ?>"
 																alt="carrito_essential_per_food"
 																title="Image Title"/></a>
->>>>>>> 17d1a75c3f32e32032bd6933badf9f4c509bcb90
+
 				</div>
 				<div class="product-caption text-center"><strong>Pet foods</strong></div>
 
@@ -220,7 +219,6 @@
 				</div>
 				<div class="gap"></div>
 
-<<<<<<< HEAD
 					<div class="product-img-wrap">
 						<img class="product-img" style="margin: 0 auto; width: 100%;"
 							 src="<?= base_url('assets/landing/img/onitshamarket/female_wears.png'); ?>" alt="female_wears"
@@ -248,7 +246,7 @@
 					<div class="product-caption">
 						<h5 class="product-caption-title"><strong>Shop all male clothing</strong></h5>
 					</div>
-=======
+
 				<div class="product-img-wrap">
 					<img class="product-img" style="margin: 0 auto; width: 100%;"
 						 src="<?= base_url('assets/landing/img/carrito/female_wears.png'); ?>" alt="female_wears"
@@ -275,14 +273,13 @@
 				<a class="product-link" href="<?= base_url('category'); ?>"></a>
 				<div class="product-caption">
 					<h5 class="product-caption-title"><strong>Shop all male clothing</strong></h5>
->>>>>>> 17d1a75c3f32e32032bd6933badf9f4c509bcb90
+
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<div class="gap"></div>
-<<<<<<< HEAD
 	<div class="container">
 		<!-- <h3 class="widget-title-lg">Best of Tech</h3> -->
 		<div class="row" data-gutter="15">
@@ -299,7 +296,7 @@
 										<h4 class="slider-item-caption-title">Adventure Deals</h4>
 										<p class="slider-item-caption-desc">From Under N999.99</p>
 									</div>
-=======
+
 </div>
 <div class="gap"></div>
 <div class="container">
@@ -534,11 +531,12 @@
 							</a>
 							<div class="product-caption-price">N3,500</div>
 							<ul class="product-caption-feature-list">
-								<li>45 left</li>
+								<li>45 lefts</li>
 							</ul>
 						</div>
 					</div>
 				</div>
+
 				<div class="col-md-3">
 					<div class="product product-half product-fit3">
 						<div class="product-img-wrap text-center">
