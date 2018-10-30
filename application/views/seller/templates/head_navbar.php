@@ -3,10 +3,10 @@
         <!--Brand logo & name-->
         <!--================================-->
         <div class="navbar-header">
-            <a href="index-2.html" class="navbar-brand">
-                <img src="" alt="Nifty Logo" class="brand-icon">
+            <a href="<?= base_url(); ?>" class="navbar-brand">
+                <img src="<?= base_url('assets/landing/img/onitshamarket-logo.png'); ?>" alt="<?= lang('app_name');?>" class="brand-icon">
                 <div class="brand-title">
-                    <span class="brand-text">Carrito</span>
+                    <span class="brand-text"><?= lang('app_name'); ?></span>
                 </div>
             </a>
         </div>

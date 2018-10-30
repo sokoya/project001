@@ -80,8 +80,7 @@
                                             <div class="progress-bar progress-bar-primary"></div>
                                         </div>
                                         <!--Form demo-bv-wz-form -->
-
-                                        <form id="product-post" class="form-horizontal add_product_form" novalidate  method="POST" action="" enctype="multipart/form-data">
+                                        <form id="demo-bv-wz-form" class="form-horizontal add_product_form" novalidate  method="POST" action="" enctype="multipart/form-data">
                                             <input type="hidden" name="csrf_carrito" value="<?= $this->security->get_csrf_hash(); ?>" />
                                             <div class="panel-body">
                                                 <div class="tab-content">

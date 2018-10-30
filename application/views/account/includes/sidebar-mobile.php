@@ -15,9 +15,9 @@
 			<li class="list-group-item">
 				<h4><a href="<?= base_url('account/orders'); ?>">My Orders</a></h4>
 			</li>
-			<li class="list-group-item">
+			<!-- <li class="list-group-item">
 				<h4><a href="<?= base_url('account/reviews'); ?>">My Reviews & Ratings</a></h4>
-			</li>
+			</li> -->
 			<li class="list-group-item">
 				<h4><a href="<?= base_url('account/saved'); ?>">My Saved Items</a></h4>
 			</li>
