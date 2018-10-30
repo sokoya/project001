@@ -5,27 +5,27 @@
 
 	<?php $this->load->view('landing/resources/head_menu') ?>
 
-	<div class="container carrito-dashboard-cover">
+	<div class="container market-dashboard-cover">
 		
 		<?php $this->load->view('account/includes/sidebar'); ?>
 		<div class="col-md-8">
 			<?php $this->load->view('account/includes/sidebar-mobile'); ?>
 
 			<?php $this->load->view('landing/msg_view'); ?>
-			<h3 class="carrito-sidebar-header-r hidden-sm hidden-md hidden-xs">Overview</h3>
-			<hr class="carrito-sidebar-line-r"/>
+			<h3 class="market-sidebar-header-r hidden-sm hidden-md hidden-xs">Overview</h3>
+			<hr class="market-sidebar-line-r"/>
 			<div class="alert alert-warning">
 				<i class="fa fa-warning"></i> Due to severe wildfire conditions in Calabar, deliveries To and From
 				several area in the state may arrive latter than expected. To view the most up to date status for your
 				order, please go to the Orders page
 			</div>
-			<p class="carrito-dashboard-welcome-text">Hello <?= ucwords($profile->first_name) . ' ' . ucwords($profile->last_name); ?></p>
-			<p class="carrito-dashboard-welcome-text-body">From your My Account Dashboard you have the ability to view a
+			<p class="market-dashboard-welcome-text">Hello <?= ucwords($profile->first_name) . ' ' . ucwords($profile->last_name); ?></p>
+			<p class="market-dashboard-welcome-text-body">From your My Account Dashboard you have the ability to view a
 				snapshot of your recent account activity and update your account information. Select a link below to
 				view or edit information.</p>
 			<div class="row ">
 				<div class="col-md-4">
-					<div class="carrito-dashboard-card">
+					<div class="market-dashboard-card">
 						<h4>My Orders</h4>
 						<hr/>
 						<p>
@@ -34,7 +34,7 @@
 					</div>
 				</div>
 				<div class="col-md-4">
-					<div class="carrito-dashboard-card">
+					<div class="market-dashboard-card">
 						<h4>Account Settings</h4>
 						<hr/>
 						<p>
@@ -43,7 +43,7 @@
 					</div>
 				</div>
 				<div class="col-md-4">
-					<div class="carrito-dashboard-card">
+					<div class="market-dashboard-card">
 						<h4>My Saved Items</h4>
 						<hr/>
 						<p>

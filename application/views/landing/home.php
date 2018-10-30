@@ -68,18 +68,18 @@
 		<div class="row" data-gutter="15">
 			<div class="col-md-3 clearfix">
 				<div class="product product-half" style="margin-bottom: 10px;">
-					<div class="product-caption text-center">Let <strong>Carrito Shopper</strong> do all the shopping
+					<div class="product-caption text-center">Let <strong><?= lang('app_name')?> Shopper</strong> do all the shopping
 						for you free.
 					</div>
 					<div class="product-img-wrap text-center">
 						<img class="product-img-small" style="margin: 0 auto;"
-							 src="<?= base_url('assets/landing/img/carrito/carrito_shopper.png'); ?>"
-							 alt="Carrito Shoppers" title="Let Carrito Shopper do it for you"/>
+							 src="<?= base_url('assets/landing/img/onitshamarket/carrito_shopper.png'); ?>"
+							 alt="<?= lang('app_name'); ?> Shoppers" title="Let <?= lang('app_name'); ?> Shopper do it for you"/>
 					</div>
 					<ul class="product-labels"></ul>
 					<a class="product-link" href="#"></a>
 					<div class="product-caption">
-						<a href="#"><h5 class="product-caption-title text-center"><span>Click to use </span>Carrito
+						<a href="#"><h5 class="product-caption-title text-center"><span>Click to use </span><?= lang('app_name'); ?>
 								Shopper</h5></a>
 					</div>
 				</div>
@@ -87,13 +87,13 @@
 				<div class="product product-half">
 					<div class="product-img-wrap text-center">
 						<img class="product-img-small" style="margin: 0 auto; width: 70%"
-							 src="<?= base_url('assets/landing/img/carrito/gift_cards.png'); ?>"
-							 alt="Carrito Gift Cards" title="Gift Cards"/>
+							 src="<?= base_url('assets/landing/img/onitshamarket/gift_cards.png'); ?>"
+							 alt="<?= lang('app_name'); ?> Gift Cards" title="Gift Cards"/>
 					</div>
 					<ul class="product-labels"></ul>
 					<a class="product-link" href="#"></a>
 					<div class="product-caption">
-						<a href="#"><h5 class="product-caption-title text-center"><span>Want Exclusive Discounts? Get Carrito Gift Cards </span>Carrito
+						<a href="#"><h5 class="product-caption-title text-center"><span>Want Exclusive Discounts? Get <?= lang('app_name'); ?> Gift Cards </span><?= lang('app_name'); ?>
 								Shopper</h5></a>
 					</div>
 				</div>
@@ -103,19 +103,19 @@
 				<div class="product product-fit">
 					<ul class="product-labels"></ul>
 					<div class="product-caption">
-						<h5><strong>Carrito Essentials</strong></h5>
+						<h5><strong><?= lang('app_name'); ?> Essentials</strong></h5>
 					</div>
 					<div class="product-img-wrap">
 						<a href="<?= base_url('catalog'); ?>"> <img class="product-img" style="margin: 0 auto; height: 150px; width: 100% "
-							 src="<?= base_url('assets/landing/img/carrito/carrito_essential_per_food.png'); ?>"
-							 alt="carrito_essential_per_food" title="Image Title"/></a>
+							 src="<?= base_url('assets/landing/img/onitshamarket/carrito_essential_per_food.png'); ?>"
+							 alt="<?= lang('app_name'); ?> Essential Market" title="<?= lang('app_name'); ?> Essential"/></a>
 					</div>
 					<div class="product-caption text-center"><strong>Pet foods</strong></div>
 
 					<div class="product-img-wrap product-pt4">
 						<a href="<?= base_url('catalog'); ?>"> <img class="product-img" style="margin: 0 auto; height: 150px; width: 100%"
-							 src="<?= base_url('assets/landing/img/carrito/carrito_essential_newest_gadget.png'); ?>"
-							 alt="carrito_essential_newest_gadget" title="Image Title"/></a>
+							 src="<?= base_url('assets/landing/img/onitshamarket/carrito_essential_newest_gadget.png'); ?>"
+							 alt="<?= lang('app_name'); ?>_essential_newest_gadget" title="<?= lang('app_name'); ?> "/></a>
 					</div>
 					<div class="product-caption text-center"><strong>Newest Gadget</strong></div>
 				</div>
@@ -131,7 +131,7 @@
 
 					<div class="product-img-wrap">
 						<img class="product-img" style="margin: 0 auto; width: 100%;"
-							 src="<?= base_url('assets/landing/img/carrito/female_wears.png'); ?>" alt="female_wears"
+							 src="<?= base_url('assets/landing/img/onitshamarket/female_wears.png'); ?>" alt="female_wears"
 							 title="female_wears"/>
 					</div>
 					<a class="product-link" href="<?= base_url('category'); ?>"></a>
@@ -149,7 +149,7 @@
 					</div>
 					<div class="product-img-wrap">
 						<img class="product-img" style="margin: 0 auto; width: 100%; height: 370px;"
-							 src="<?= base_url('assets/landing/img/carrito/male_wears.png'); ?>" alt="female_wears"
+							 src="<?= base_url('assets/landing/img/onitshamarket/male_wears.png'); ?>" alt="female_wears"
 							 title="female_wears"/>
 					</div>
 					<a class="product-link" href="<?= base_url('category'); ?>"></a>
@@ -171,7 +171,7 @@
 					 data-options='{"items":1,"loop":true,"nav":true}'>
 					<div class="owl-item">
 						<div class="slider-item"
-							 style="background-image:url(<?= base_url('assets/landing/img/carrito/left-slider/adventure-deals.jpg'); ?>);">
+							 style="background-image:url(<?= base_url('assets/landing/img/onitshamarket/left-slider/adventure-deals.jpg'); ?>);">
 							<div class="slider-item-task"></div>
 							<div class="container">
 								<div class="slider-item-inner">
@@ -185,7 +185,7 @@
 					</div>
 					<div class="owl-item">
 						<div class="slider-item"
-							 style="background-image:url(<?= base_url('assets/landing/img/carrito/left-slider/top-bags-and-shoes.jpg'); ?>);">
+							 style="background-image:url(<?= base_url('assets/landing/img/onitshamarket/left-slider/top-bags-and-shoes.jpg'); ?>);">
 							<div class="slider-item-task"></div>
 							<div class="container">
 								<div class="slider-item-inner">
@@ -199,7 +199,7 @@
 					</div>
 					<div class="owl-item">
 						<div class="slider-item"
-							 style="background-image:url(<?= base_url('assets.landing/img/carrito/left-slider/home-essentials.jpg'); ?>);">
+							 style="background-image:url(<?= base_url('assets.landing/img/onitshamarket/left-slider/home-essentials.jpg'); ?>);">
 							<div class="slider-item-task"></div>
 							<div class="container">
 								<div class="slider-item-inner">
@@ -217,13 +217,13 @@
 				<div class="row">
 					<div class="col-md-8">
 						<div class="product">
-							<div class="product-caption text-center"><strong>Stir up your appetite with Carrito Fresh
+							<div class="product-caption text-center"><strong>Stir up your appetite with <?= lang('app_name'); ?> Fresh
 									Fruits!</strong> <span>Keep healthy with our fresh fruits for less than N200</span>
 							</div>
 							<div class="product-img-wrap text-center">
 								<img class="product-img-small" style="margin: 0 auto;"
-									 src="<?= base_url('assets/landing/img/carrito/fresh-fruit.png'); ?>"
-									 alt="fresh-fruit" title="Let Carrito Shopper do it for you"/>
+									 src="<?= base_url('assets/landing/img/onitshamarket/fresh-fruit.png'); ?>"
+									 alt="fresh-fruit" title="Let <?= lang('app_name'); ?> Shopper do it for you"/>
 							</div>
 							<a class="product-link" href="#"></a>
 						</div>
@@ -234,8 +234,8 @@
 									wears</strong><br/><span> Male</span></div>
 							<div class="product-img-wrap text-center">
 								<img class="product-img-small" style="margin: 0 auto; width: 70%"
-									 src="<?= base_url('assets/landing/img/carrito/assorted-wears.png'); ?>"
-									 alt="fresh-fruit" title="Let Carrito Shopper do it for you"/>
+									 src="<?= base_url('assets/landing/img/onitshamarket/assorted-wears.png'); ?>"
+									 alt="fresh-fruit" title="Let <?= lang('app_name'); ?> Shopper do it for you"/>
 							</div>
 							<a class="product-link" href="#"></a>
 						</div>
@@ -247,7 +247,7 @@
 						<div class="product product-half product-fit3">
 							<div class="product-img-wrap text-center">
 								<img class="product-img-small" style="margin: 0 auto; width: 80%"
-									 src="<?= base_url('assets/landing/img/carrito/wrist-watch.jpg'); ?>"
+									 src="<?= base_url('assets/landing/img/onitshamarket/wrist-watch.jpg'); ?>"
 									 alt="Wrstwatch" title="Wrist watch"/>
 							</div>
 							<ul class="product-labels"></ul>
@@ -266,7 +266,7 @@
 						<div class="product product-half product-fit3">
 							<div class="product-img-wrap text-center">
 								<img class="product-img-small" style="margin: 0 auto; width: 80%"
-									 src="<?= base_url('assets/landing/img/carrito/bag.jpg'); ?>" alt="Bag"
+									 src="<?= base_url('assets/landing/img/onitshamarket/bag.jpg'); ?>" alt="Bag"
 									 title="Gift Cards"/>
 							</div>
 							<ul class="product-labels"></ul>
@@ -285,7 +285,7 @@
 						<div class="product product-half product-fit3">
 							<div class="product-img-wrap text-center">
 								<img class="product-img-small" style="margin: 0 auto; width: 80%"
-									 src="<?= base_url('assets/landing/img/carrito/touchlight.jpg'); ?>"
+									 src="<?= base_url('assets/landing/img/onitshamarket/touchlight.jpg'); ?>"
 									 alt="Touchlight" title="Gift Cards"/>
 							</div>
 							<ul class="product-labels"></ul>
@@ -304,7 +304,7 @@
 						<div class="product product-half product-fit3">
 							<div class="product-img-wrap text-center">
 								<img class="product-img-small" style="margin: 0 auto; width: 70%"
-									 src="<?= base_url('assets/landing/img/carrito/vacuum-cleaner.jpg'); ?>"
+									 src="<?= base_url('assets/landing/img/onitshamarket/vacuum-cleaner.jpg'); ?>"
 									 alt="vacuum-cleaner" title="vacuum-cleaner"/>
 							</div>
 							<ul class="product-labels"></ul>
@@ -326,7 +326,7 @@
 	<div class="gap"></div>
 	<div class="container">
 		<h3 class="widget-title-sm text-center"><strong>
-				Online Shopping at Carrito.com: widest selection of quality products at the wholesale prices
+				Online Shopping at <?= lang('app_name'); ?>: widest selection of quality products at the wholesale prices
 				online.</strong>
 		</h3>
 		<h5 class="text-center"> Our extensive and affordable range of products features the very latest, with the
@@ -339,7 +339,7 @@
 			<div class="owl-item">
 				<a class="banner-category owl-item-slide" href="#">
 					<img class="banner-category-img"
-						 src="<?= base_url('assets/landing/img/why-carrito/largest.png'); ?>" alt="Largest"
+						 src="<?= base_url('assets/landing/img/why-onitshamarket/largest.png'); ?>" alt="Largest"
 						 title="Largest in the market"/>
 					<h5 class="banner-category-title">Largest</h5>
 					<p class="banner-category-desc">Range of products to choose from.</p>
@@ -348,8 +348,8 @@
 			<div class="owl-item">
 				<a class="banner-category owl-item-slide" href="#">
 					<img class="banner-category-img"
-						 src="<?= base_url('assets/landing/img/why-carrito/carrito-shopper.png'); ?>"
-						 alt="Carrito Shopper" title="Carrito Shopper"/>
+						 src="<?= base_url('assets/landing/img/why-onitshamarket/carrito-shopper.png'); ?>"
+						 alt="<?= lang('app_name'); ?> Shopper" title="<?= lang('app_name'); ?> Shopper"/>
 					<h5 class="banner-category-title">Jewelry</h5>
 					<p class="banner-category-desc">Automated shopping assistant</p>
 				</a>
@@ -357,7 +357,7 @@
 			<div class="owl-item">
 				<a class="banner-category owl-item-slide" href="#">
 					<img class="banner-category-img"
-						 src="<?= base_url('assets/landing/img/why-carrito/secured-payment.png'); ?>"
+						 src="<?= base_url('assets/landing/img/why-onitshamarket/secured-payment.png'); ?>"
 						 alt="secured-payment" title="secured-payment"/>
 					<h5 class="banner-category-title">Secured Payment</h5>
 					<p class="banner-category-desc">On all your debit/credit cards</p>
@@ -366,7 +366,7 @@
 			<div class="owl-item">
 				<a class="banner-category owl-item-slide" href="#">
 					<img class="banner-category-img"
-						 src="<?= base_url('assets/landing/img/why-carrito/incredible-discounts.png'); ?>"
+						 src="<?= base_url('assets/landing/img/why-onitshamarket/incredible-discounts.png'); ?>"
 						 alt="Incredible Discounts" title="Discounts"/>
 					<h5 class="banner-category-title">Incredible Discounts</h5>
 					<p class="banner-category-desc">On all products, all season.</p>
@@ -375,7 +375,7 @@
 			<div class="owl-item">
 				<a class="banner-category owl-item-slide" href="#">
 					<img class="banner-category-img"
-						 src="<?= base_url('assets/landing/img/why-carrito/pay-on-delivery.png') ?>"
+						 src="<?= base_url('assets/landing/img/why-onitshamarket/pay-on-delivery.png') ?>"
 						 alt="Pay on delivery" title="Pay on delivery"/>
 					<h5 class="banner-category-title">Pay On Delivery</h5>
 					<p class="banner-category-desc">On all products</p>
@@ -384,7 +384,7 @@
 			<div class="owl-item">
 				<a class="banner-category owl-item-slide" href="#">
 					<img class="banner-category-img"
-						 src="<?= base_url('assets/landing/img/why-carrito/fast-delivery.png') ?>" alt="Fast Delivery"
+						 src="<?= base_url('assets/landing/img/why-onitshamarket/fast-delivery.png') ?>" alt="Fast Delivery"
 						 title="Fast Delivery"/>
 					<h5 class="banner-category-title">Fast Delivery</h5>
 					<p class="banner-category-desc">Mationwide Same Day</p>
@@ -393,7 +393,7 @@
 			<div class="owl-item">
 				<a class="banner-category owl-item-slide" href="#">
 					<img class="banner-category-img"
-						 src="<?= base_url('assets/landing/img/why-carrito/genuine-brands.png') ?>" alt="Genuine Brands"
+						 src="<?= base_url('assets/landing/img/why-onitshamarket/genuine-brands.png') ?>" alt="Genuine Brands"
 						 title="Genuine Brands"/>
 					<h5 class="banner-category-title">Genuine Brands</h5>
 					<p class="banner-category-desc">From all over the world</p>
@@ -401,9 +401,9 @@
 			</div>
 			<div class="owl-item">
 				<a class="banner-category owl-item-slide" href="#">
-					<img class="banner-category-img" src="<?= base_url('assets/landing/img/why-carrito/237.png') ?>"
+					<img class="banner-category-img" src="<?= base_url('assets/landing/img/why-onitshamarket/247.png') ?>"
 						 alt="247 Active Support" title="247 Active Support"/>
-					<h5 class="banner-category-title">247</h5>
+					<h5 class="banner-category-title">24/7</h5>
 					<p class="banner-category-desc">Customer Agents Waiting To Help You.</p>
 				</a>
 			</div>

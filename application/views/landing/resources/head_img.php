@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-md-6">
 
-				<p class="navbar-before-sign">Everything You Need is Carrito</p>
+				<p class="navbar-before-sign">Everything You Need is <?= lang('app_name'); ?></p>
 
 			</div>
 			<div class="col-md-6">

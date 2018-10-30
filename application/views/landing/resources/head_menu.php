@@ -43,20 +43,20 @@
                         <?php endforeach; ?>
                     </ul>
                 </li>
-                <li><a class="navbar-item-top" href="<?= base_url(lang('carrito_deal_link')); ?>"><?= lang('carrito_deal'); ?></a>
+                <li><a class="navbar-item-top" href="<?= base_url(lang('deal_link')); ?>"><?= lang('deal'); ?></a>
                 </li>
                 <li><a class="navbar-item-top" href="<?= base_url(lang('new_arrival_link')); ?>"><?= lang('new_arrival'); ?></a>
                 </li>
                 <li><a class="navbar-item-top" href="<?= base_url(lang('top_seller_link')); ?>"><?= lang('top_seller'); ?></a>
                 </li>
-                <li><a class="navbar-item-top" href="<?= base_url(lang('sell_on_carrito_link')); ?>"><?= lang('sell_on_carrito'); ?></a>
+                <li><a class="navbar-item-top" href="<?= base_url(lang('sell_link')); ?>"><?= lang('sell'); ?></a>
                 </li>
                 <li><a class="navbar-item-top" href="<?= base_url(lang('community_link')); ?>"><?= lang('community'); ?></a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#"><span>Learn more about</span> <strong>Carrito Shopper</strong></a>
+                    <a href="#"><span>Learn more about</span> <strong>Market Shopper</strong></a>
                 </li>
                 <li>
                     <a href="<?= base_url(lang('cart_link')); ?>" class="navbar-item-top cart-cs">
@@ -75,7 +75,7 @@
                     <?php if( $this->session->userdata('logged_in') ): ?>
                         <a href="<?= base_url('account'); ?>"><span>Welcome</span><strong><?= ucfirst($profile->first_name); ?></strong></a>
                     <?php else : ?>
-                        <a href="<?= base_url('login'); ?>"><span>Sign in | Join</span><strong>My Carrito</strong></a>
+                        <a href="<?= base_url('login'); ?>"><span>Sign in | Join</span><strong>My Account</strong></a>
                     <?php endif; ?>
                     <ul class="dropdown-menu">
                         <?php if($this->session->userdata('logged_in') ): ?>

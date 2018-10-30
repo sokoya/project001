@@ -3,7 +3,7 @@
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="<?= base_url()?>">
-                <img src="<?= base_url('assets/landing/img/carrito-logo.png');?>" id="navbar-img" alt="CarritoLogo" title="Image Title" />
+                <img src="<?= base_url('assets/landing/img/onitshamarket-logo.png');?>" id="navbar-img" alt="<?= lang('app_name');?>" title="<?= lang('app_name'); ?>" />
             </a>
         </div>
         <form class="navbar-form navbar-left navbar-main-search navbar-main-search-category" role="search">
@@ -58,15 +58,15 @@
         </form>
         <ul class="nav navbar-nav navbar-right navbar-mob-item-left" style="padding:-2px;">
             <li>
-                <a href="#"><span>Save on our</span> big App <i class="fa fa-arrow-down"></i></a>
+                <a href="#"><span>Save big</span> on our App <i class="fa fa-arrow-down"></i></a>
             </li>
             <li>
-                <a href="#"><span>About</span> Carrito</a>
+                <a href="#"><span>About</span> <?= lang('app_name'); ?></a>
             </li>
-            <li>
+            <!-- <li>
                 <a href="#"><span>Help</span>Centers</a>
             </li>
-            <!-- <li><a href="#nav-login-dialog" data-effect="mfp-move-from-top" class="popup-text"><span >Hello, Sign in</span>Your Account</a>
+ -->            <!-- <li><a href="#nav-login-dialog" data-effect="mfp-move-from-top" class="popup-text"><span >Hello, Sign in</span>Your Account</a>
             </li> -->
             
             <div class="navbar-header">

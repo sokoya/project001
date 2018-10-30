@@ -139,4 +139,24 @@ function urlify($string, $id =''){
     }
 }
 
+if (!function_exists('productStatus')) {
+    function productStatus($status){
+        switch ($status) {
+        	case 'pending':
+        		return '<label class="label label-table label-warning">' . ucfirst( $status ). '</label>';
+        		break;
+        	case 'approved':
+        		return '<label class="label label-table label-success">' . ucfirst( $status ). '</label>';
+        		break;  
+        	case 'missing_images':
+				return '<label class="label label-table label-info">' . ucfirst( $status ). '</label>';
+				break;      	
+        	default:
+        		return '<label class="label label-table label-danger">' . ucfirst( $status ). '</label>';
+        		break;
+        }
+    }
+}
+
+
 ?>

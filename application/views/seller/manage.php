@@ -61,7 +61,7 @@
                                     <td><?= neatDate($product['created_on']); ?></td>
                                     <td><?= ngn($product['sale_price']); ?></td>
                                     <td><?= ngn($product['discount_price']); ?></td>
-                                    <td><?= $product['product_status']; ?></td>
+                                    <td><?= productStatus($product['product_status']); ?></td>
                                     <?php if(in_array($type,array('pending', 'missing_images')) ): ?>
                                         <td>
                                             <a href="<?= base_url('seller/product/edit/' . $product['id']); ?>">

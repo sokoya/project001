@@ -8,7 +8,7 @@
 		padding: 0px !important;
 		margin-right: 0px;
 	}
-	.carrito-box{
+	.market-box{
 		margin-left: 0px !important;
 	}
 
@@ -21,7 +21,7 @@
 		background-size: cover;
 	}
 
-	.carrito-login-box{
+	.market-login-box{
 		margin-left: -48px;
 		margin-right: 0px;
 		width: auto;
@@ -30,7 +30,7 @@
 	.login-box{
 		padding: 15px;
 	}
-	.carrito-box{
+	.market-box{
 		margin-top: 50px;
 		background: #fff;
 		-webkit-border-radius: 3px;
@@ -51,9 +51,9 @@
 						<div class="col-md-6 img-bg hidden-xs">
 							<img src="<?= base_url('assets/landing/cover-photo.png')?>">
 						</div>
-						<div class="col-md-6 carrito-box">
+						<div class="col-md-6 market-box">
 							<p class="text-center">
-								<img src="<?= base_url('assets/landing/img/carrito-logo.png')?>" width="20%" alt="Carrito logo Image">
+								<a href="<?= base_url(); ?>"><img src="<?= base_url('assets/landing/img/onitshamarket-logo.png')?>" width="20%" alt="market logo Image"></a>
 							</p>
 							<h3 class="widget-title text-center text-bold">
 								Login to your account
@@ -62,7 +62,7 @@
 
 								<div class="col-md-8 col-md-offset-2">
 									<?php $this->load->view('landing/msg_view'); ?>
-									<div class="carrito-board login-box">
+									<div class="market-board login-box">
 										<?= form_open('login/process', 'id="login-form"'); ?>
 											<div class="form-group">
 												<label><h5>Email Address*</h5></label>

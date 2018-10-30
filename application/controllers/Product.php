@@ -9,8 +9,7 @@ class Product extends CI_Controller {
     }
 
 	public function index(){
-        $this->output->cache(60);
-        $this->session->set_userdata('referred_from', current_url());
+        // $this->output->cache(60);
 	    $uri = $this->uri->segment(1);
         $index = substr($uri, strrpos($uri, '-') + 1);
         // sanitize
@@ -24,7 +23,7 @@ class Product extends CI_Controller {
         $page_data['title'] = preg_replace("/[^A-Za-z0-9]/"," ", $uri );
         $page_data['keywords'] = $page_data['title'] .' , ' . $page_data['product']->rootcategory . ', '.$page_data['product']->subcategory.', '.$page_data['product']->category .' ,' .$page_data['product']->brand_name;
         $page_data['description'] = $this->product->get_category_detail( $page_data['product']->rootcategory, 'root_category' )->description;
-        $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
+        $page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
         $this->load->view('landing/product', $page_data);
 	}
 
@@ -51,7 +50,6 @@ class Product extends CI_Controller {
         $page_data['searched'] = $str = preg_replace("/[^A-Za-z0-9]/"," ",cleanit($str) ); // Convert the - to space 
         if( $str == '' ) redirect(base_url());      
         $page_data['title'] = ucwords($str);
-        $page_data['description'] = $this->product->category_description($str);
         $features = $this->product->get_features($str);
         $output_array = array();
         foreach($features as $feature => $values ){
@@ -95,7 +93,6 @@ class Product extends CI_Controller {
         $page_data['sub_categories'] = $this->product->get_sub_categories($str);
         $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
         $page_data['description'] = $this->product->category_description($str);
-        $this->output->cache(60);
         $this->load->view('landing/category', $page_data);
     }
 

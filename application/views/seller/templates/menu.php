@@ -121,6 +121,14 @@
                         </li>
 
                         <li class="list-divider"></li>
+                        <?php $message_count = $this->seller->get_unread_message(base64_decode($this->session->userdata('logged_id'))); ?>
+                        <li>
+                            <a href="<?= base_url('seller/message'); ?>">
+                                <i class="demo-pli-inbox-full"></i>
+                                <span class="menu-title">Messages (<?= $message_count < 1 ? '' : $message_count; ?>)</span>
+                            </a>
+                        </li>
+                        <li class="list-divider"></li>
                         <li class="<?php if($pg_name == 'settings') echo 'class="active-sub"'?>">
                             <a href="#">
                                 <i class="demo-pli-gear"></i>
@@ -132,8 +140,7 @@
                             <ul class="collapse <?php if($pg_name == 'settings') echo 'in';?>">
                                 <li <?php if($sub_name =='profile') echo 'class="active-link"' ?>><a href="<?= base_url('seller/settings')?>">Profile</a></li>
                                 <li <?php if($sub_name =='change_password') echo 'class="active-link"' ?>><a href="<?= base_url('seller/settings/change_password'); ?>">Change Password</a></li>
-                                <!-- <li <?php if($sub_name =='notification') echo 'class="active-link"' ?>><a href="<?= base_url('seller/settings/notification'); ?>">Notification Setting</a></li> -->
-
+                                <li <?php if($sub_name =='notification') echo 'class="active-link"' ?>><a href="<?= base_url('seller/settings/notification'); ?>">Notification Setting</a></li>
                             </ul>
                         </li>
                         <!--Menu list item-->

@@ -1,21 +1,22 @@
 <?php
 // General Site Settings
 $lang['site_state'] = 'development';
-$lang['app_name'] = 'Carrito';
+$lang['app_name'] = 'Onitshamarket.com';
 $lang['app_email'] = '';
 $lang['notify_email'] = '';
+$lang['domain'] = 'https://onitshamarket.com';
 
 
 
 // Menu Label and Link
-$lang['carrito_deal'] = 'Carrito Deal';
-$lang['carrito_deal_link'] = 'carrito-deal';
+$lang['deal'] = 'Onitsha Market Deal';
+$lang['deal_link'] = 'market-deal';
 $lang['new_arrival'] = 'New Arrival';
 $lang['new_arrival_link'] = 'new-arrival';
 $lang['top_seller'] = 'Top Seller';
 $lang['top_seller_link'] = 'top-seller';
-$lang['sell_on_carrito'] = 'Sell On Carrito';
-$lang['sell_on_carrito_link'] = 'sell-on-carrito';
+$lang['sell'] = 'Sell On Onitsha Market';
+$lang['sell_link'] = 'become-a-seller';
 $lang['community'] = 'Community';
 $lang['community_link'] = 'Community';
 $lang['cart_link'] = 'cart';

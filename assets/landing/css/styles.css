@@ -7015,38 +7015,38 @@ undefinedundefined.owl-height {
 
 /*De-york*/
 
-.carrito-vl {
+.market-vl {
 	border-right: 1px solid #4c4c4c;
 	height: 73px;
 }
 
-.carrito-trash {
+.market-trash {
 	font-size: 30px;
 	margin-top: 10px;
 	color: #4c4c4c;
 }
 
-.carrito-left-l {
+.market-left-l {
 	border-left: 1px solid #4c4c4c;
 	padding-left: 20px;
 }
 
-#carrito-table-head {
+#market-table-head {
 	background: #4c4c4c;
 	color: #fff;
 }
 
-.carrito-table-center {
+.market-table-center {
 	padding-top: 20px !important;
 }
 
-.carrito-sidebar {
+.market-sidebar {
 	list-style-type: none;
 	font-size: 18px;
 	color: #414141 !important;
 }
 
-.carrito-sidebar > li > h4 > a {
+.market-sidebar > li > h4 > a {
 	color: #222;
 	font-size: 13px;
 	font-family: 'Open Sans', arial, helvetica, sans-serif;
@@ -7056,23 +7056,23 @@ undefinedundefined.owl-height {
 	padding-left: 10px;
 }
 
-.carrito-sidebar > li > h4 {
+.market-sidebar > li > h4 {
 	margin: 0;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
 
-.carrito-sidebar-active {
+.market-sidebar-active {
 	background: #e4ffde;
 	box-shadow: -4px 0 0 0 #44a94b;
 }
 
-.carrito-sidebar > li:hover {
+.market-sidebar > li:hover {
 	background: #e4ffde;
 	box-shadow: -4px 0 0 0 #44a94b;
 }
 
-.carrito-dashboard-cover {
+.market-dashboard-cover {
 	margin-top: 30px;
 	margin-bottom: 30px;
 	background: #fff;
@@ -7081,7 +7081,7 @@ undefinedundefined.owl-height {
 
 }
 
-.carrito-sidebar-header {
+.market-sidebar-header {
 	margin-left: 49px;
 	font-size: 16px;
 	color: #444;
@@ -7089,38 +7089,38 @@ undefinedundefined.owl-height {
 	margin-top: 12px;
 }
 
-.carrito-sidebar-header-r {
+.market-sidebar-header-r {
 	font-size: 16px;
 	color: #444;
 	margin-bottom: 15px;
 	margin-top: 12px;
 }
 
-.carrito-sidebar-line-r {
+.market-sidebar-line-r {
 	border-top: 1px solid #000;
 	margin: 0 20px 15px 0;
 }
 
-.carrito-sidebar-line {
+.market-sidebar-line {
 	border-top: 1px solid #000;
 	margin: 0 0 15px 49px;
 }
 
-.carrito-dashboard-welcome-text {
+.market-dashboard-welcome-text {
 	color: #383838;
 	font-size: 15px;
 	padding-left: 3px;
 	font-weight: bold;
 }
 
-.carrito-dashboard-welcome-text-body {
+.market-dashboard-welcome-text-body {
 	padding-left: 3px;
 	color: #454545;
 	font-size: 13px;
 	margin-bottom: 30px;
 }
 
-.carrito-dashboard-card {
+.market-dashboard-card {
 	margin-left: 3px;
 	border: 1px solid #969696;
 	border-radius: 6px;
@@ -7130,23 +7130,23 @@ undefinedundefined.owl-height {
 	margin-bottom: 10px;
 }
 
-.carrito-dashboard-card > hr {
+.market-dashboard-card > hr {
 	border-top: 1px solid #202020;
 	margin: 0;
 }
 
-.carrito-dashboard-card > h4 {
+.market-dashboard-card > h4 {
 	font-size: 14px;
 	color: #454545;
 }
 
-.carrito-dashboard-card > p {
+.market-dashboard-card > p {
 	text-transform: capitalize;
 	padding-top: 10px;
 	font-size: 12px;
 }
 
-.carrito-custom-dropdown {
+.market-custom-dropdown {
 	text-decoration: none;
 	margin-left: -38px;
 	margin-bottom: -2px;
@@ -7154,11 +7154,11 @@ undefinedundefined.owl-height {
 	width: 300px;
 }
 
-.carrito-mobile-dropdown {
+.market-mobile-dropdown {
 	list-style-type: none;
 }
 
-.carrito-mobile-dropdown-text {
+.market-mobile-dropdown-text {
 	color: #0b0b0b !important;
 }
 
@@ -7205,23 +7205,23 @@ ul#table-pagination li {
 	display: inline;
 }
 
-#carrito-newsletter-settings {
+#market-newsletter-settings {
 	font-size: 16px;
 }
 
-#carrito-newsletter-settings-line {
+#market-newsletter-settings-line {
 	margin: 0;
 	width: 50%;
 	border-top: 1px solid #919191;
 }
 
-.carrito-newsletter-text > p {
+.market-newsletter-text > p {
 	margin-top: 13px;
 	font-size: 14px;
 	color: #0b0b0b;
 }
 
-.carrito-select {
+.market-select {
 	width: 114px;
 	border: 1px solid #b9b9b9;
 	padding: 3px;
@@ -7229,7 +7229,7 @@ ul#table-pagination li {
 }
 
 /*YOUR CUSTOM STYLES*/
-.carrito_btn_sign {
+.market_btn_sign {
 	font-weight: bold;
 	color: #fff;
 	text-align: center;
@@ -7238,7 +7238,7 @@ ul#table-pagination li {
 	padding: 10px;
 }
 
-.carrito_btn_create {
+.market_btn_create {
 	font-weight: bold;
 	color: #fff;
 	text-align: center;
@@ -7313,7 +7313,7 @@ input[type="color"]:focus,
 	box-shadow: none;
 }
 
-.carrito-board {
+.market-board {
 	margin-left: 3px;
 	border: 1px solid #969696;
 	border-radius: 6px;

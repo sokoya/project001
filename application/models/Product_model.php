@@ -64,11 +64,12 @@ Class Product_model extends CI_Model{
     function category_description( $str = '' ){
         $result = '';
         $select = "SELECT description FROM root_category WHERE MATCH(name) AGAINST('$str') LIMIT 1";
-        $result = $this->db->query($select)->row()->description;
-        if( !empty( $result ) ){
-            return $result;
+
+        $result = $this->db->query($select)->row();
+        if( count($result) ){
+            return $result->description;
         }else{
-            $select = "SELECT root_category_id FROM caterory WHERE MATCH(name) AGAINST('$str') LIMIT 1";
+            $select = "SELECT root_category_id FROM category WHERE MATCH(name) AGAINST('$str') LIMIT 1";
             $id = $this->db->query($select)->row();
             if( count( $id ) ){
                 $this->db->select('description');

@@ -300,7 +300,7 @@ Class Seller_model extends CI_Model{
     }
 
     /**
-     * @param $oroduct_id
+     * @param $productid
      * @return CI_DB_result_array
      */
     function get_orders( $id = '', $status= '' ){
@@ -311,6 +311,19 @@ Class Seller_model extends CI_Model{
                 WHERE o.seller_id = $id";
                 // AND o.status = ????
         return $this->db->query($query)->result();
+    }
+
+
+    /**
+     * @param $sid
+     * @return CI_DB_result_array
+     */
+
+    function get_unread_message($sid){
+        $this->db->where('seller_id', $sid);
+        $this->db->where('is_read', 0);
+        return $this->db->count_all('sellers_notification_message');
+
     }
 
 

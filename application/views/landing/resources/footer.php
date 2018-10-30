@@ -5,13 +5,13 @@
                 <div class="row">
                     <div class="col-md-3">
                         <section class="widget widget-links widget-light-skin">
-                          <h3 class="widget-title-sm">About Carrito</h3>
+                          <h3 class="widget-title-sm">About <?= lang('app_name'); ?></h3>
                           <ul>
                             <li><a href="#">Our Company</a></li>
                             <li><a href="#">Investor Relation</a></li>
                             <li><a href="#">Social Responsibility</a></li>
                             <li><a href="#">Quality Complaince</a></li>
-                            <li><a href="#">Jobs at Carrito</a></li>
+                            <li><a href="#">Jobs at <?= lang('app_name'); ?></a></li>
                           </ul>
                         </section>
                         <!-- <ul class="main-footer-social-list">
@@ -76,7 +76,7 @@
             </div>
             <div class="col-md-3">
                 <h4 class="widget-title-sm">Newsletter</h4>
-                <p>Carrito respects your <a href="#">Privacy</a></p>
+                <p><?= lang('app_name'); ?> respects your <a href="#">Privacy</a></p>
                  <form>
                   <div class="input-group">
                     <input type="text" class="newsletter-input form-control" placeholder="Enter your email for more discounts">
@@ -132,7 +132,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <p class="copyright-text">&copy;  2015 - 2017 <a href="#">Carrito.com</a>  All rights reserved</p>
+                <p class="copyright-text">&copy;  2017 - <?= date('Y'); ?> <a href="<?= lang('domain'); ?>"><?= lang('app_name'); ?></a>  All rights reserved</p>
                 <p class="text-sm"><a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Site Map </a> | <a href="#">Switch View</a> </p>
             </div>
         </div>

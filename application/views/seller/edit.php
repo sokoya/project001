@@ -664,20 +664,25 @@
                         dataType: "json",
                         success: function( data ){
                             $.each(data, function( k, v ) {
-                            let mockFile = { name: v.filename, size: v.filesize };
-                            // Call the default addedfile event handler
-                            myDropzone.emit("addedfile", mockFile);
-                            myDropzone.emit("thumbnail", mockFile, v.fileURL);
-                            // myDropzone.createThumbnailFromUrl( v.filename, v.fileURL);
-                            if( v.featured == 1 ) {
-                                $(`#${v.filename}`).prop('checked', true);                               
-                            }
-                            // Make sure that there is no progress bar, etc...
-                            myDropzone.emit("complete", mockFile);
+                                let mockFile = { name: v.filename, size: v.filesize };
+                                // Call the default addedfile event handler
+                                myDropzone.emit("addedfile", mockFile);
+                                myDropzone.emit("thumbnail", mockFile, v.fileURL);
+                                // myDropzone.createThumbnailFromUrl( v.filename, v.fileURL);
+                                // if( v.featured == 1 ) {
+                                //     $(`#${v.filename}`).prop('checked', true);                               
+                                // }
+                                $('input[type="radio"]', this).first().prop('checked', true);
+                                // Make sure that there is no progress bar, etc...
+                                myDropzone.emit("complete", mockFile);
 
-                        });
+                            });
+
+                            $("input:radio[name=featured_image]:first").attr('checked', true);
+
                             let existing_file_count = data.length;
                             myDropzone.options.maxFiles = myDropzone.options.maxFiles - existing_file_count;
+
                         }
                     });
                 }

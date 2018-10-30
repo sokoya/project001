@@ -1,11 +1,10 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
-
 <style type="text/css">
 	.feature-attribute:hover {
 		cursor: pointer;
 	}
 
-	.carrito-checkbox {
+	.market-checkbox {
 		display: block;
 		position: relative;
 		padding-left: 25px;
@@ -18,7 +17,7 @@
 		user-select: none;
 	}
 
-	.carrito-checkbox input {
+	.market-checkbox input {
 		position: absolute;
 		opacity: 0;
 		cursor: pointer;
@@ -37,11 +36,11 @@
 		background-color: #fff;
 	}
 
-	.carrito-checkbox:hover input ~ .checkmark {
+	.market-checkbox:hover input ~ .checkmark {
 		border-color: #74c68366;
 	}
 
-	.carrito-checkbox input:checked ~ .checkmark {
+	.market-checkbox input:checked ~ .checkmark {
 		background-color: #74c683;
 	}
 
@@ -54,13 +53,13 @@
 	}
 
 	/* Show the checkmark when checked */
-	.carrito-checkbox input:checked ~ .checkmark:after {
+	.market-checkbox input:checked ~ .checkmark:after {
 		display: block;
 		color: white;
 	}
 
 	/* Style the checkmark/indicator */
-	.carrito-checkbox .checkmark:after {
+	.market-checkbox .checkmark:after {
 		left: 9px;
 		top: 5px;
 		width: 5px;
@@ -81,15 +80,17 @@
 	<?php $this->load->view('landing/resources/head_menu'); ?>
 
 
-	<div class="container">
-		<?php if (empty($products)) : ?>
+	<?php if (empty($products)) : ?>
+		<div class="container">
 			<div class="row">
 				<div class="gap-large"></div>
 				<h2 class="text-center">Oops! Sorry, we couldn't find products on this section.</h2>
 				<p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find
 						product</a></p>
 			</div>
+		</div>
 		<?php else : ?>
+		<div class="container">
 			<header class="page-header">
 				<ol class="breadcrumb page-breadcrumb">
 					<li><a href="<?= base_url(); ?>">Home</a>
@@ -97,8 +98,6 @@
 					<li class="active"><?= ucwords($searched); ?>
 					</li>
 				</ol>
-
-
 				<ul class="category-selections clearfix">
 					<ul class="category-selections clearfix">
 						<li><span class="category-selections-sign">Sort by :</span>
@@ -110,7 +109,6 @@
 								<option>Price : Lowest First</option>
 								<option>Price : Highest First</option>
 								<option>Title : A - Z</option>
-								4
 								<option>Title : Z - A</option>
 							</select>
 						</li>
@@ -143,7 +141,7 @@
 							<div class="category-filters-section">
 								<h3 class="widget-title-sm custom-widget-text">Brand</h3>
 								<?php foreach ($brands as $brand) : ?>
-									<div class="carrito-checkbox">
+									<div class="market-checkbox">
 										<label class="tree-input">
 
 											<input class="filter" type="checkbox" data-type="brand_name"
@@ -160,7 +158,7 @@
 							<div class="category-filters-section">
 								<h3 class="widget-title-sm custom-widget-text">Main Colour</h3>
 								<?php foreach ($colours as $colour) : ?>
-									<div class="carrito-checkbox">
+									<div class="market-checkbox">
 										<label class="tree-input">
 											<input class="filter" type="checkbox" data-type="main_colour"
 												   name="filterset"
@@ -192,7 +190,7 @@
 										 aria-labeledby="<?= $feature; ?>" data-parent="#<?= trim($feature); ?>">
 										<div class="panel-body">
 											<?php foreach ($feature_value as $key => $value) : ?>
-												<div class="carrito-checkbox">
+												<div class="market-checkbox">
 													<label class="tree-input">
 														<input class="filter" type="checkbox" name="filterset"
 															   data-type="<?= trim($feature); ?>"
@@ -225,16 +223,15 @@
 					<div id="category_body">
 						<div class="cat-notify">
 							<p class="n-head"><?= $searched; ?></p>
-							<p class="n-body"><?= number_format(count($products)) . ' results'; ?> <?php echo $this->benchmark->elapsed_time();?> Memory Usage <?php echo $this->benchmark->memory_usage();?></strong></p>
+							<p class="n-body"><strong><?= number_format(count($products)) . ' results'; ?></strong></p>
 						</div>
-						<div class="row filter_data" data-gutter="15">
+						<div class="row filter_data clearfix" data-gutter="15">
 							<?php foreach ($products as $product) : ?>
 								<div class="col-md-4">
 									<div class="product">
 										<?php if (!empty($product->discount_price)): ?>
 											<ul class="product-labels">
 												<li><?= get_discount($product->sale_price, $product->discount_price); ?></li>
-												<!-- Call the discount calculator her -->
 											</ul>
 										<?php endif; ?>
 										<div class="product-img-wrap">
@@ -281,23 +278,22 @@
 								</div>
 							<?php endforeach; ?>
 						</div>
-						<div class="row">
-							<div class="col-md-6 col-md-offset-3">
-								<?= $pagination ?>
+						<?php if( $pagination ) : ?>
+							<div class="row">
+								<div class="col-md-6 col-md-offset-3">
+									<?= $pagination ?>
+								</div>
 							</div>
-						</div>
+						<?php endif; ?>
 					</div>
 				</div>
 			</div>
-
-
+		</div>
 		<?php endif; ?>
-	</div>
 	<div class="gap"></div>
 </div>
 
 <?php $this->load->view('landing/resources/footer'); ?>
-</div>
 <script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/ionrangeslider.js'); ?>"></script>
@@ -324,7 +320,7 @@
 
 		function doReplaceState(url) {
 			let state = {current_url: url},
-				title = "Carrito MarketPlace";
+				title = "Onitshamarket.com";
 			history.replaceState(state, title, url);
 		}
 
