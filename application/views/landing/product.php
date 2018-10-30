@@ -171,11 +171,11 @@
 
 								<p class="product-page-price">
 									<?php if (!empty($variation->discount_price)) : ?>
-										<span class="price-cs"><?= ngn($variation->discount_price); ?></span>
+										<span class="price-cs ds-price"><?= ngn($variation->discount_price); ?></span>
 										<span
-											class="product-page-price-list price-lower"><?= ngn($variation->sale_price); ?></span>
+											class="product-page-price-list price-lower dn-price"><?= ngn($variation->sale_price); ?></span>
 									<?php else: ?>
-										<span class="price-cs"><?= ngn($variation->sale_price); ?></span>
+										<span class="price-cs dn-price"><?= ngn($variation->sale_price); ?></span>
 									<?php endif; ?>
 								</p>
 
@@ -232,7 +232,7 @@
 													<input data-range="10" name="quantity" id="quan"
 														   class="product-page-qty product-page-qty-input quantity"
 														   type="text"
-														   value="1"/>
+														   value="1" disabled/>
 													<button type="button"
 															class="product-page-qty product-page-qty-plus">+
 													</button>
@@ -848,15 +848,44 @@
 <?php $this->load->view('landing/resources/script'); ?>
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
 <script>
+	let quantity = $('#quan');
+	let count = quantity.data('range');
+	let plus = $('.product-page-qty-plus');
+	let minus = $('.product-page-qty-minus');
+
+	function format_currency(str) {
+		return '₦' + str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+	}
 
 	$('.variation-select').on('change', function () {
 		let id = $(this).children(":selected").data('id');
+		let quantity = $('#quan');
+		// let count = quantity.data('range');
 		$.ajax({
 			url: base_url + "product/check_variation",
 			method: "POST",
 			data: {vid: id, 'csrf_carrito': csrf_token},
 			success: function (response) {
-				alert(response)
+				$.each(response, function (i, v) {
+					// $('#quan').attr("data-range", v.quantity);
+
+					if (v.discount_price) {
+						$('.ds-price').html(format_currency(v.discount_price));
+						$('.dn-price').show();
+						$('.dn-price').html(format_currency(v.sale_price));
+					} else {
+						console.log('No discount price');
+						$('.ds-price').html(format_currency(v.sale_price));
+						$('.dn-price').hide();
+					}
+					count = v.quantity * 1;
+					quantity.val(1);
+					minus.prop("disabled", true);
+					plus.prop("disabled", false);
+					// console.log(v.sale_price)
+					// console.log(v.discount_price)
+
+				});
 			},
 			error: function (response) {
 				alert('An error occurred')
@@ -940,10 +969,6 @@
 
 	});
 
-	let plus = $('.product-page-qty-plus');
-	let minus = $('.product-page-qty-minus');
-	let quantity = $('#quan');
-	let count = quantity.data('range');
 
 	document.querySelector("#quan").addEventListener("keypress", function (evt) {
 		if (evt.which < 48 || evt.which > 57) {
