@@ -8,7 +8,7 @@
 	<?php $this->load->view('landing/resources/head_menu') ?>
 
 	<div class="container">
-		<?php if ($product->product_status !== 'pending') : ?>
+		<?php if ($product->product_status !== 'approved') : ?>
 			<div class="row">
 				<div class="gap-large"></div>
 				<h2 class="text-center">Oops! The product you looking for is not active.</h2>
