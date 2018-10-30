@@ -229,7 +229,7 @@
 													<button type="button"
 															class="product-page-qty product-page-qty-minus">-
 													</button>
-													<input data-range="10" name="quantity" id="quan"
+													<input data-range="<?= $variation->quantity; ?>" name="quantity" id="quan"
 														   class="product-page-qty product-page-qty-input quantity"
 														   type="text"
 														   value="1"/>
