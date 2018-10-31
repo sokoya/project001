@@ -150,7 +150,7 @@ class Product extends CI_Controller {
         $vid = $this->input->post('vid');
         if( !$vid ) exit;
         $result = $this->product->check_variation( $vid );
-        if( !empty($result['start_date'] && ( date('Y-m-d', strtotime($result['start_date']) < get_now() ) || date('Y-m-d', strtotime($result['start_date']) > get_now() )) ) $result['discount_price'] = '';
+        if( !empty($result['start_date']) && ( date('Y-m-d', strtotime($result['start_date']) < get_now() ) || date('Y-m-d', strtotime($result['start_date']) > get_now() )) ) $result['discount_price'] = '';
         header('Content-type: text/json');
         header('Content-type: application/json');
         echo json_encode($result);
