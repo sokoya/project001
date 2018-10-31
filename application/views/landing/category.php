@@ -81,42 +81,45 @@
 	<?php $this->load->view('landing/resources/head_menu'); ?>
 
 
-	<div class="container">
-		<?php if (empty($products)) : ?>
+	<?php if (empty($products)) : ?>
+		<div class="container">
 			<div class="row">
 				<div class="gap-large"></div>
 				<h2 class="text-center">Oops! Sorry, we couldn't find products on this section.</h2>
 				<p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find
 						product</a></p>
 			</div>
-		<?php else : ?>
-			<header class="page-header">
-				<ol class="breadcrumb page-breadcrumb">
-					<li><a href="<?= base_url(); ?>">Home</a>
-					</li>
-					<li class="active"><?= ucwords($searched); ?>
-					</li>
-				</ol>
-
-
-				<ul class="category-selections clearfix">
-					<ul class="category-selections clearfix">
-						<li><span class="category-selections-sign">Sort by :</span>
-							<select name="order" class="category-selections-select">
-								<option selected>Newest First</option>
-								<option>Best Sellers</option>
-								<option>Trending Now</option>
-								<option>Best Raited</option>
-								<option>Price : Lowest First</option>
-								<option>Price : Highest First</option>
-								<option>Title : A - Z</option>
-								4
-								<option>Title : Z - A</option>
-							</select>
+		</div>
+	<?php else : ?>
+		<div class="container">
+			<div class="row">
+				<header class="page-header">
+					<ol class="breadcrumb page-breadcrumb">
+						<li><a href="<?= base_url(); ?>">Home</a>
 						</li>
+						<li class="active"><?= ucwords($searched); ?>
+						</li>
+					</ol>
+					<ul class="category-selections clearfix">
+						<ul class="category-selections clearfix">
+							<li><span class="category-selections-sign">Sort by :</span>
+								<select name="order" class="category-selections-select">
+									<option selected>Newest First</option>
+									<option>Best Sellers</option>
+									<option>Trending Now</option>
+									<option>Best Raited</option>
+									<option>Price : Lowest First</option>
+									<option>Price : Highest First</option>
+									<option>Title : A - Z</option>
+									4
+									<option>Title : Z - A</option>
+								</select>
+							</li>
+						</ul>
 					</ul>
-				</ul>
-			</header>
+				</header>
+			</div>
+			<div class="gap"></div>
 			<div class="row">
 				<div class="col-md-3">
 					<aside class="category-filters">
@@ -174,9 +177,7 @@
 						<?php endif; ?>
 						<!-- Features -->
 						<div class="category-filters-section">
-							<?php foreach ($features
-
-							as $feature => $feature_value) : ?>
+							<?php foreach ($features as $feature => $feature_value) : ?>
 							<div class="accordion" id="<?= trim($feature); ?>">
 								<div class="panel no-outline feature-attribute">
 									<div class="panel-header feature-attribute">
@@ -210,90 +211,90 @@
 							</div>
 						</div>
 					</aside>
-				</div>
-				<div class="col-md-9">
-					<div id="processing"
-						 style="display:none;position: center;top: 0;left: 0;width: auto;height: auto%;background: #f4f4f4;z-index: 99;">
-						<div class="text"
-							 style="position: absolute;top: 35%;left: 0;height: 100%;width: 100%;font-size: 18px;text-align: center;">
-							<img src="<?= base_url('assets/landing/load.gif'); ?>" alt="Processing...">
-							Processing your request. <strong
-								style="color: rgba(2.399780888618386%,61.74193548387097%,46.81068368248487%,0.843);">Please
-								Wait! </strong>
+					<div class="col-md-9">
+						<div id="processing"
+							 style="display:none;position: center;top: 0;left: 0;width: auto;height: auto%;background: #f4f4f4;z-index: 99;">
+							<div class="text" style="position: absolute;top: 35%;left: 0;height: 100%;width: 100%;font-size: 18px;text-align: center;">
+								<img src="<?= base_url('assets/landing/load.gif'); ?>" alt="Processing...">
+								Processing your request. <strong
+									style="color: rgba(2.399780888618386%,61.74193548387097%,46.81068368248487%,0.843);">Please
+									Wait! </strong>
+							</div>
 						</div>
-					</div>
-					<div id="category_body">
-						<div class="cat-notify">
-							<p class="n-head"><?= $searched; ?></p>
-							<p class="n-body"><?= number_format(count($products)) . ' results'; ?></strong></p>
-						</div>
-						<div class="row filter_data" data-gutter="15">
-							<?php foreach ($products as $product) : ?>
-								<div class="col-md-4">
-									<div class="product">
-										<?php if (!empty($product->discount_price)): ?>
-											<ul class="product-labels">
-												<li><?= get_discount($product->sale_price, $product->discount_price); ?></li>
-												<!-- Call the discount calculator her -->
-											</ul>
-										<?php endif; ?>
-										<div class="product-img-wrap">
-											<img class="product-img"
-												data-src="<?= base_url('data/products/' . $product->id.'/'.$product->image_name); ?>"
-												src="<?= base_url('data/products/' . $product->id.'/'.$product->image_name); ?>"
-												alt="<?= $product->product_name; ?>"
-												title="<?= $product->product_name; ?>">
-										</div>
-										<a class="product-link" title="<?= $product->product_name ?>"
-										   href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
-										<div class="product-caption">
-											<ul class="product-caption-rating">
-												<li class="rated"><i class="fa fa-star"></i>
-												</li>
-												<li class="rated"><i class="fa fa-star"></i>
-												</li>
-												<li class="rated"><i class="fa fa-star"></i>
-												</li>
-												<li class="rated"><i class="fa fa-star"></i>
-												</li>
-												<li class="rated"><i class="fa fa-star"></i>
-												</li>
-												<span
-													class="text-sm pull-right"><strong>Sold By: </strong><?= $product->first_name; ?></span>
-											</ul>
-											<h5 class="cs-title"><?= word_limiter(ucwords($product->product_name), 7, '...'); ?></h5>
-											<div class="product-caption-price">
-												<?php if (!empty($product->discount_price)) : ?>
-													<span>
+
+						<div id="category_body">
+							<div class="cat-notify">
+								<p class="n-head"><?= $searched; ?></p>
+								<p class="n-body"><strong><?= number_format(count($products)) . ' results'; ?></strong></p>
+							</div>
+
+							<div class="row filter_data" data-gutter="15">
+								<?php foreach ($products as $product) : ?>
+									<div class="col-md-4 clearfix">
+										<div class="product">
+											<?php if (!empty($product->discount_price)): ?>
+												<ul class="product-labels">
+													<li><?= get_discount($product->sale_price, $product->discount_price); ?></li>
+													<!-- Call the discount calculator her -->
+												</ul>
+											<?php endif; ?>
+											<div class="product-img-wrap">
+												<img class="product-img"
+													data-src="<?= base_url('data/products/' . $product->id.'/'.$product->image_name); ?>"
+													src="<?= base_url('data/products/' . $product->id.'/'.$product->image_name); ?>"
+													alt="<?= $product->product_name; ?>"
+													title="<?= $product->product_name; ?>">
+											</div>
+											<a class="product-link" title="<?= $product->product_name ?>"
+											   href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
+											<div class="product-caption">
+												<ul class="product-caption-rating">
+													<li class="rated"><i class="fa fa-star"></i>
+													</li>
+													<li class="rated"><i class="fa fa-star"></i>
+													</li>
+													<li class="rated"><i class="fa fa-star"></i>
+													</li>
+													<li class="rated"><i class="fa fa-star"></i>
+													</li>
+													<li class="rated"><i class="fa fa-star"></i>
+													</li>
 													<span
-														class="cs-price-tl"><?= ngn($product->discount_price); ?></span>
+														class="text-sm pull-right"><strong>Sold By: </strong><?= $product->first_name; ?></span>
+												</ul>
+												<h5 class="cs-title"><?= word_limiter(ucwords($product->product_name), 7, '...'); ?></h5>
+												<div class="product-caption-price">
+													<?php if (!empty($product->discount_price)) : ?>
+														<span>
 														<span
-															class="cs-price-tl-discount"><sup><?= ngn($product->sale_price); ?> </sup></span>
-													</span>
-												<?php else : ?>
-													<span
-														class="cs-price-tl"><?= ngn($product->sale_price); ?> </span>
-												<?php endif; ?>
+															class="cs-price-tl"><?= ngn($product->discount_price); ?></span>
+															<span
+																class="cs-price-tl-discount"><sup><?= ngn($product->sale_price); ?> </sup></span>
+														</span>
+													<?php else : ?>
+														<span
+															class="cs-price-tl"><?= ngn($product->sale_price); ?> </span>
+													<?php endif; ?>
+												</div>
 											</div>
 										</div>
 									</div>
+								<?php endforeach; ?>
+							</div>
+
+							<div class="row">
+								<div class="col-md-6 col-md-offset-3">
+									<?= $pagination ?>
 								</div>
-							<?php endforeach; ?>
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-md-offset-3">
-								<?= $pagination ?>
 							</div>
 						</div>
 					</div>
 				</div>
+				<div class="gap"></div>
 			</div>
-
-
-		<?php endif; ?>
-	</div>
+		</div>
+	<?php endif; ?>
 	<div class="gap"></div>
-</div>
 <!--comment-->
 <?php $this->load->view('landing/resources/footer'); ?>
 </div>
