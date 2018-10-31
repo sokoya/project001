@@ -45,7 +45,7 @@
 							    	<div class="form-group row">
 							    		<label class="col-sm-3 col-form-label"><h5>Display Name:</h5></label>
 							    		<div class="col-sm-9">
-							    			<input class="form-control" name="display_name" autofocus=""  value="<?= $profile->display_name; ?>" />
+							    			<input type="text" class="form-control" name="display_name" autofocus=""  value="<?= $profile->display_name; ?>" />
 							    		</div>
 							    	</div>
 							    	<div class="form-group row">
@@ -66,7 +66,7 @@
 							    	<div class="form-group row">
 							    		<label class="col-sm-3 col-form-label"></label>
 							    		<div class="col-sm-9">
-							    			<button type="submit" class="btn btn-danger col-md-12"><strong>SAVE INFORMATION</strong></button>
+							    			<button type="submit" class="btn btn-success col-md-12"><strong>SAVE INFORMATION</strong></button>
 							    		</div>
 							    	</div>
 							    	<input type="hidden" name="user" value="<?= base64_encode($profile->id); ?>">

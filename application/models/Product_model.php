@@ -371,6 +371,13 @@ Class Product_model extends CI_Model{
                 break;
         }
     }
+
+
+    function set_field( $table, $field, $set, $where ){
+        $this->db->where($where);
+        $this->db->set($field, $set, false);
+        $this->db->update($table);
+    }
 }
 
 

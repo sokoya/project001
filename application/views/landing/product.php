@@ -15,7 +15,7 @@
 				<p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find
 						product</a></p>
 			</div>
-		<?php elseif (empty($product) || empty($variation) || empty($variations) || empty($gallery)): ?>
+		<?php elseif (empty($product) || empty($variation) || empty($gallery)): ?>
 			<div class="row">
 				<div class="gap-large"></div>
 				<h2 class="text-center">Oops! The product you looking does not exist.</h2>
@@ -33,11 +33,9 @@
 					<li>
 						<a href="<?= base_url('catalog/' . urlify($product->category)); ?>"><?= ucwords($product->category); ?></a>
 					</li>
-					<?php if (!empty($product->brand_name)): ?>
-						<li><a title="<?= $product->brand_name; ?>"
-							   href="<?= base_url('catalog/brand/') . strtolower($product->brand_name); ?>"><?= ucwords($product->brand_name); ?></a>
-						</li>
-					<?php endif; ?>
+					<li>
+						<a href="<?= base_url('catalog/' . urlify($product->subcategory)); ?>"><?= ucwords($product->subcategory); ?></a>
+					</li>
 					<li class="active c-a-brc"><?= ucwords($product->product_name); ?></li>
 				</ol>
 			</header>
@@ -202,9 +200,10 @@
 												<select class="product-page-option-select variation-select"
 														name="colour">
 													<?php foreach ($variations as $variation): ?>
-														<option data-id="<?= $variation->id ?>"
+														<option title="<?= $variation->variation;?>" data-id="<?= $variation->id ?>"
 																value="<?= trim($variation->variation); ?>" <?php if ($variation->quantity == 0) echo 'disabled'; ?> >
-															<?= trim($variation->variation); ?>
+																
+															<?= ellipsize(trim($variation->variation), 8); ?>
 														</option>
 													<?php endforeach; ?>
 												</select>
@@ -309,9 +308,9 @@
 				<ul class="nav nav-tabs" id="myTab">
 					<li class="active"><a href="#tab-1" data-toggle="tab"><i class="fa fa-list nav-tab-icon"></i>Overview</a>
 					</li>
-					<li><a href="#tab-2" data-toggle="tab"><i class="fa fa-cogs nav-tab-icon"></i>Full Specs</a>
+					<li><a href="#full-spec" data-toggle="tab"><i class="fa fa-cogs nav-tab-icon"></i>Full Specs</a>
 					</li>
-					<li><a href="#tab-3" data-toggle="tab"><i class="fa fa-star nav-tab-icon"></i>Rating and Reviews</a>
+					<li><a href="#review" data-toggle="tab"><i class="fa fa-star nav-tab-icon"></i>Rating and Reviews</a>
 					</li>
 				</ul>
 				<div class="tab-content">
@@ -380,7 +379,7 @@
 							<?php endif; ?>
 						</div>
 					</div>
-					<div class="tab-pane fade" id="tab-2">
+					<div class="tab-pane fade" id="full-spec">
 						<table class="table">
 							<thead>
 							<tr>
@@ -408,7 +407,7 @@
 							</tbody>
 						</table>
 					</div>
-					<div class="tab-pane fade" id="tab-3">
+					<div class="tab-pane fade" id="review">
 						<div class="row">
 							<div class="col-md-4">
 								<h3 class="product-tab-rating-title">Overall Customer Rating:</h3>
@@ -425,48 +424,45 @@
 									</li>
 									<li class="count">4.9</li>
 								</ul>
-								<small>238 customer reviews</small>
-								<p><strong>98%</strong> of reviewers would recommend this product</p><a
-									class="btn btn-primary" href="#">Write a Review</a>
+								<small>{{ Number of reviews - 238 customer reviews }} </small>
+								<p><strong>98%</strong> of reviewers would recommend this product</p>
+								<a class="btn btn-primary" href="#">Write a Review</a>
 							</div>
 							<div class="col-md-5">
-								<ul class="product-rate-list">
-									<li>
-										<p class="product-rate-list-item">Camera</p>
-										<div class="product-rate-list-bar">
-											<div style="width:95%;"></div>
+								<form id="review">
+									<ul class="product-page-product-rating product-rating-big">
+										<li class=""><i class="fa fa-star"></i>
+										</li>
+										<li class=""><i class="fa fa-star"></i>
+										</li>
+										<li class=""><i class="fa fa-star"></i>
+										</li>
+										<li class=""><i class="fa fa-star"></i>
+										</li>
+										<li class=""><i class="fa fa-star"></i>
+										</li>
+										<li class="rating-text"></li>
+									</ul>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Title of review*</label>
+												<input type="text" name="title" placeholder="Title of the review" class="form-control">
+											</div>
 										</div>
-										<p class="product-rate-list-count">95%</p>
-									</li>
-									<li>
-										<p class="product-rate-list-item">Sound Quality</p>
-										<div class="product-rate-list-bar">
-											<div style="width:90%;"></div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Display name*</label>
+												<input type="text" name="display_name" placeholder="Display name" class="form-control">
+											</div>
 										</div>
-										<p class="product-rate-list-count">90%</p>
-									</li>
-									<li>
-										<p class="product-rate-list-item">Screen</p>
-										<div class="product-rate-list-bar">
-											<div style="width:100%;"></div>
-										</div>
-										<p class="product-rate-list-count">100%</p>
-									</li>
-									<li>
-										<p class="product-rate-list-item">Battery Life</p>
-										<div class="product-rate-list-bar">
-											<div style="width:95%;"></div>
-										</div>
-										<p class="product-rate-list-count">95%</p>
-									</li>
-									<li>
-										<p class="product-rate-list-item">Look & Feel</p>
-										<div class="product-rate-list-bar">
-											<div style="width:100%;"></div>
-										</div>
-										<p class="product-rate-list-count">100%</p>
-									</li>
-								</ul>
+									</div>
+									<div class="form-group">
+										<label>Review</label>
+										<textarea name="review" rows="2" class="form-control"></textarea>
+									</div>
+									<button type="button" class="btn btn-success">Post Review</button>
+								</form>
 							</div>
 							<div class="col-md-3">
 								<ul class="product-rate-list">
@@ -516,7 +512,7 @@
 									 alt="Image Alternative text" title="Image Title"/>
 							</div>
 							<div class="product-review-content">
-								<h5 class="product-review-title">Terrific Buy!</h5>
+								<h5 class="product-review-title">{{ Review Title}}</h5>
 								<ul class="product-page-product-rating">
 									<li class="rated"><i class="fa fa-star"></i>
 									</li>
@@ -529,197 +525,13 @@
 									<li class="rated"><i class="fa fa-star"></i>
 									</li>
 								</ul>
-								<p class="product-review-meta">by Joseph Hudson on 08/14/2015</p>
-								<p class="product-review-body">Amet mauris ipsum nullam congue porttitor velit natoque
-									malesuada laoreet quam mus ut at eros per odio laoreet ligula massa fermentum
-									tincidunt
-									sed cursus dolor et</p>
-								<p class="text-success"><strong><i class="fa fa-check"></i> I would recommend this to a
-										friend!</strong>
+								<p class="product-review-meta">by {{Display name}} on 08/14/2015</p>
+								<p class="product-review-body">{{ Review Content }}</p>
+								<p class="text-success"><strong><i class="fa fa-check"></i> {{I would recommend it to a friend}}</strong>
 								</p>
-								<ul class="list-inline product-review-actions">
-									<li><a href="#"><i class="fa fa-flag"></i> Flag this review</a>
-									</li>
-									<li><a href="#"><i class="fa fa-comment"></i> Comment review</a>
-									</li>
-								</ul>
-							</div>
-							<div class="product-review-side">
-								<p><strong>8</strong> out of <strong>8</strong> found this review helpful</p>
-								<p class="product-review-side-sign">Was this review helpful?</p><a
-									class="product-review-rate" href="#"><i class="fa fa-thumbs-up"></i>8</a><a
-									class="product-review-rate" href="#"><i class="fa fa-thumbs-down"></i>0</a>
 							</div>
 						</article>
-						<article class="product-review">
-							<div class="product-review-author">
-								<img class="product-review-author-img"
-									 src="<?= base_url('assets/landing/img/chiara_70x70.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-							</div>
-							<div class="product-review-content">
-								<h5 class="product-review-title">Too Big. Unusable.</h5>
-								<ul class="product-page-product-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li><i class="fa fa-star"></i>
-									</li>
-									<li><i class="fa fa-star"></i>
-									</li>
-									<li><i class="fa fa-star"></i>
-									</li>
-								</ul>
-								<p class="product-review-meta">by Ava McDonald on 08/14/2015</p>
-								<p class="product-review-body">Morbi inceptos scelerisque interdum convallis rhoncus
-									vivamus
-									pulvinar tellus sed dictum ipsum taciti primis elit inceptos potenti eros mauris
-									curae
-									malesuada nullam sollicitudin per sit mi</p>
-								<p class="text-danger"><strong><i class="fa fa-close"></i> No, I would not recommend
-										this to
-										a friend.</strong>
-								</p>
-								<ul class="list-inline product-review-actions">
-									<li><a href="#"><i class="fa fa-flag"></i> Flag this review</a>
-									</li>
-									<li><a href="#"><i class="fa fa-comment"></i> Comment review</a>
-									</li>
-								</ul>
-							</div>
-							<div class="product-review-side">
-								<p><strong>1</strong> out of <strong>2</strong> found this review helpful</p>
-								<p class="product-review-side-sign">Was this review helpful?</p><a
-									class="product-review-rate" href="#"><i class="fa fa-thumbs-up"></i>1</a><a
-									class="product-review-rate" href="#"><i class="fa fa-thumbs-down"></i>1</a>
-							</div>
-						</article>
-						<article class="product-review">
-							<div class="product-review-author">
-								<img class="product-review-author-img"
-									 src="<?= base_url('assets/landing/img/bubbles_70x70.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-							</div>
-							<div class="product-review-content">
-								<h5 class="product-review-title">Worth it</h5>
-								<ul class="product-page-product-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-								</ul>
-								<p class="product-review-meta">by Carl Butler on 08/14/2015</p>
-								<p class="product-review-body">Natoque aenean malesuada nostra varius aenean odio
-									tincidunt
-									eu interdum euismod cum</p>
-								<p class="text-success"><strong><i class="fa fa-check"></i> I would recommend this to a
-										friend!</strong>
-								</p>
-								<ul class="list-inline product-review-actions">
-									<li><a href="#"><i class="fa fa-flag"></i> Flag this review</a>
-									</li>
-									<li><a href="#"><i class="fa fa-comment"></i> Comment review</a>
-									</li>
-								</ul>
-							</div>
-							<div class="product-review-side">
-								<p><strong>7</strong> out of <strong>7</strong> found this review helpful</p>
-								<p class="product-review-side-sign">Was this review helpful?</p><a
-									class="product-review-rate" href="#"><i class="fa fa-thumbs-up"></i>7</a><a
-									class="product-review-rate" href="#"><i class="fa fa-thumbs-down"></i>0</a>
-							</div>
-						</article>
-						<article class="product-review">
-							<div class="product-review-author">
-								<img class="product-review-author-img"
-									 src="<?= base_url('assets/landing/img/me_with_the_uke_70x70.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-							</div>
-							<div class="product-review-content">
-								<h5 class="product-review-title">Great Affordable Phone</h5>
-								<ul class="product-page-product-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-								</ul>
-								<p class="product-review-meta">by Bernadette Cornish on 08/14/2015</p>
-								<p class="product-review-body">Nisi nulla nec aliquet integer erat convallis per
-									ultricies
-									tempus risus ligula et porttitor gravida himenaeos aenean lectus dictumst tellus</p>
-								<p class="text-success"><strong><i class="fa fa-check"></i> I would recommend this to a
-										friend!</strong>
-								</p>
-								<ul class="list-inline product-review-actions">
-									<li><a href="#"><i class="fa fa-flag"></i> Flag this review</a>
-									</li>
-									<li><a href="#"><i class="fa fa-comment"></i> Comment review</a>
-									</li>
-								</ul>
-							</div>
-							<div class="product-review-side">
-								<p><strong>2</strong> out of <strong>2</strong> found this review helpful</p>
-								<p class="product-review-side-sign">Was this review helpful?</p><a
-									class="product-review-rate" href="#"><i class="fa fa-thumbs-up"></i>2</a><a
-									class="product-review-rate" href="#"><i class="fa fa-thumbs-down"></i>0</a>
-							</div>
-						</article>
-						<article class="product-review">
-							<div class="product-review-author">
-								<img class="product-review-author-img"
-									 src="<?= base_url('assets/landing/img/afro_70x70.jpg'); ?>"
-									 alt="Image Alternative text"
-									 title="Image Title"/>
-							</div>
-							<div class="product-review-content">
-								<h5 class="product-review-title">Excellent</h5>
-								<ul class="product-page-product-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-								</ul>
-								<p class="product-review-meta">by Frank Mills on 08/14/2015</p>
-								<p class="product-review-body">Quisque morbi feugiat cursus proin varius lectus
-									sollicitudin
-									nisi dignissim suspendisse id auctor parturient arcu suspendisse himenaeos dapibus
-									accumsan</p>
-								<p class="text-success"><strong><i class="fa fa-check"></i> I would recommend this to a
-										friend!</strong>
-								</p>
-								<ul class="list-inline product-review-actions">
-									<li><a href="#"><i class="fa fa-flag"></i> Flag this review</a>
-									</li>
-									<li><a href="#"><i class="fa fa-comment"></i> Comment review</a>
-									</li>
-								</ul>
-							</div>
-							<div class="product-review-side">
-								<p><strong>7</strong> out of <strong>7</strong> found this review helpful</p>
-								<p class="product-review-side-sign">Was this review helpful?</p><a
-									class="product-review-rate" href="#"><i class="fa fa-thumbs-up"></i>7</a><a
-									class="product-review-rate" href="#"><i class="fa fa-thumbs-down"></i>0</a>
-							</div>
-						</article>
+
 						<div class="row">
 							<div class="col-md-6">
 								<p class="category-pagination-sign">238 customer reviews found. Showing 1 - 5</p>
@@ -743,6 +555,7 @@
 								</nav>
 							</div>
 						</div>
+
 					</div>
 				</div>
 			</div>

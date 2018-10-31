@@ -15,8 +15,8 @@ class Login extends CI_Controller{
     }
 
     public function index(){
-        
-        $this->load->view('landing/login');
+        $page_data['title'] = "Login";
+        $this->load->view('landing/login', $page_data);
     }
 
     /*

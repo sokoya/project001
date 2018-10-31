@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title><?= !isset($title) ? 'Welcome ' : ucwords($title) ?> - <?= lang('app_name'); ?></title>
+    <title><?= !isset($title) ? 'Welcome ' : ucwords($title) ?> | <?= lang('app_name'); ?></title>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
     <meta name="keywords" content="<?= !empty($keywords) ? ucwords($keywords) : ''; ?>" />

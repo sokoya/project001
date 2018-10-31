@@ -19,7 +19,8 @@ class Create extends CI_Controller{
     }
 
     public function index(){
-        $this->load->view('landing/create');
+        $page_data['title'] = "Login";
+        $this->load->view('landing/create', $page_data);
     }
 
     /*

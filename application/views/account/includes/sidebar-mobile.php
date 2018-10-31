@@ -3,7 +3,7 @@
 				class="drop-caret custom-drop"
 				data-toggle="dropdown"></i></a>
 		<ul class="dropdown-menu list-group custom-mobile-navbar">
-			<li class="list-group-itemst">
+			<li class="list-group-item">
 				<h4><a href="<?= base_url(); ?>">Onitsha Market Home</a></h4>				
 			</li>
 			<li class="list-group-item">
