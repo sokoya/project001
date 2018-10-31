@@ -294,7 +294,7 @@
 	</div>
 	<div class="gap"></div>
 </div>
-
+<!--comment-->
 <?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
