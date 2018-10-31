@@ -426,12 +426,18 @@
 								</ul>
 								<small>{{ Number of reviews - 238 customer reviews }} </small>
 								<p><strong>98%</strong> of reviewers would recommend this product</p>
-								<a class="btn btn-primary" href="#">Write a Review</a>
+								<?php
+									if( !$this->session->userdata('logged_in') ):
+								?>
+									<a href="<?= base_url('login'); ?>" class="btn btn-primary">Write a Review</a>
+								<?php else :?>
+									<a class="btn btn-primary" href="#">Write a Review</a>
+								<?php endif; ?>
 							</div>
-							<div class="col-md-5">
+							<div class="col-md-5" style="">
 								<form id="review">
 									<ul class="product-page-product-rating product-rating-big">
-										<li class=""><i class="fa fa-star"></i>
+										<li class="rated"><i class="fa fa-star"></i>
 										</li>
 										<li class=""><i class="fa fa-star"></i>
 										</li>
@@ -659,6 +665,8 @@
 </div>
 <script type="text/javascript">let base_url = "<?= base_url(); ?>"</script>
 <?php $this->load->view('landing/resources/script'); ?>
+<script type="text/javascript">let product_id = <?= $product->id;?>; let user = <?= $profile->id; ?></script>
+
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
 <script>
 	let quantity = $('#quan');
