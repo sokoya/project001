@@ -109,8 +109,8 @@
                                                                             <label class="col-lg-3 control-label">Product Name *</label>
                                                                             <div class="col-lg-7">
                                                                                 <input type="text" class="form-control" autofocus required name="product_name" value="<?= $product->product_name; ?>" placeholder="Product name">
-                                                                                <span class="text-sm text-dark">Name of the product. For a better listing quality, the name should consist the actual product name, if available colour, edition, speciality</span>
-                                                                                <span class="text-sm text-dark">Wide Angle Camera 10 MP - Black, Galaxy Tab A Leather Flip Case - Red</span>
+                                                                                <span class="text-sm text-danger">Name of the product. For a better listing quality, the name should consist the actual product name, if available colour, edition, speciality</span>
+                                                                                <span class="text-sm text-danger">Wide Angle Camera 10 MP - Black, Galaxy Tab A Leather Flip Case - Red</span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
@@ -119,11 +119,13 @@
                                                                                 <select class="form-control selectpicker" name="brand_name" required="" data-width="100%">
                                                                                     <option>-- Select Brand Name --</option>
                                                                                     <?php foreach( $brands as $brand ) :?>
-                                                                                        <option value="<?=ucwords($brand->brand_name);?>"><?= ucwords($brand->brand_name); ?></option>
+                                                                                        <option value="<?=ucwords($brand->brand_name);?>" <?php if($product->product_name == $brand->brand_name) echo 'selected';?> >
+                                                                                            <?= ucwords($brand->brand_name); ?>
+                                                                                        </option>
                                                                                     <?php endforeach; ?>
                                                                                     <option value="others">Others</option>
                                                                                 </select>
-                                                                                <span class="text-sm text-dark">Brand of the product. If brand does not exist, please copy https://goo.gl/Hw8vma into your browser and fill accordingly.</span>
+                                                                                <span class="text-sm text-danger">Brand of the product. If brand does not exist, please copy https://goo.gl/Hw8vma into your browser and fill accordingly.</span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
@@ -163,7 +165,7 @@
                                                                             <label class="col-lg-3 control-label">Product Line</label>
                                                                             <div class="col-lg-7">
                                                                                 <input type="text" placeholder="Enter In Here Your Store Name" value="<?= $product->product_line; ?>" name="product_line" class="form-control">
-                                                                                <span class="text-sm text-dark">Eg: Fouani Nigeria, Trendy Woman Ltd, SEOLAK</span>
+                                                                                <span class="text-sm text-danger">Eg: Fouani Nigeria, Trendy Woman Ltd, SEOLAK</span>
                                                                             </div>
                                                                         </div>
 
@@ -182,7 +184,7 @@
                                                                                     </option>
                                                                                     <?php endforeach; ?>
                                                                                 </select>
-                                                                                <span class="text-sm text-dark">Add a generalisation of the main color, to help customers find the product using the provided color-filter in the shop</span>
+                                                                                <span class="text-sm text-danger">Add a generalisation of the main color, to help customers find the product using the provided color-filter in the shop</span>
                                                                             </div>
                                                                         </div>
                                                                         
@@ -197,7 +199,7 @@
                                                                                     <option value="<?= trim($material); ?>" <?php if($material == strtolower(trim($product->main_material))) echo 'selected'; ?> > <?= trim($material); ?> </option>
                                                                                     <?php endforeach; ?>
                                                                                 </select>
-                                                                                <span class="text-sm text-dark">Eg: Leather</span>
+                                                                                <span class="text-sm text-danger">Eg: Leather</span>
                                                                             </div>
                                                                         </div>
 
@@ -227,7 +229,7 @@
                                                                             <label class="col-lg-3 control-label">YouTube ID</label>
                                                                             <div class="col-lg-7">
                                                                                 <input type="email" class="form-control" value="<?= $product->youtube_id; ?>" name="youtube_id" placeholder="YouTube ID">
-                                                                                <span class="text-sm text-dark">Example: e.g. http://www.youtube.com/watch?v=htlgaXRAe2k it is: htlgaXRAe2k</span>
+                                                                                <span class="text-sm text-danger">Example: e.g. http://www.youtube.com/watch?v=htlgaXRAe2k it is: htlgaXRAe2k</span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
@@ -240,8 +242,8 @@
                                                                             <label class="col-lg-3 control-label">Highlights</label>
                                                                             <div class="col-lg-7">
                                                                                 <textarea placeholder="Additional info" name="highlights" data-provide="markdown" rows="8" class="form-control"><?= $product->highlights; ?></textarea>
-                                                                                <span class="text-sm text-dark">Enter short major highlights of the product, to make the purchase decision for the customer easier.</span>
-                                                                                <span class="text-sm text-dark">Example: Best expierience ever - super fast and easy navigation - better control</span>
+                                                                                <span class="text-sm text-danger">Enter short major highlights of the product, to make the purchase decision for the customer easier.</span>
+                                                                                <span class="text-sm text-danger">Example: Best expierience ever - super fast and easy navigation - better control</span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -262,7 +264,7 @@
                                                                             <label class="col-lg-3 control-label">Dimension</label>
                                                                             <div class="col-lg-7">
                                                                                 <input type="text" placeholder="Example: 12 x 3 x 90" value="<?= $product->dimensions; ?>" name="dimensions" class="form-control">
-                                                                                <span class="text-sm text-dark">Measurement of the product</span>
+                                                                                <span class="text-sm text-danger">Measurement of the product</span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
@@ -325,7 +327,7 @@
                                                                                         <?php else: ?>
                                                                                             <input type="text" placeholder="<?= $spec_value['spec_name']; ?>" name="attribute_<?= str_replace(' ','-',$spec_value['spec_name']); ?>" class="form-control">
                                                                                         <?php endif; ?>
-                                                                                        <span class="text-sm text-dark"><?= $spec_value['description']; ?></span>
+                                                                                        <span class="text-sm text-danger"><?= $spec_value['description']; ?></span>
                                                                                     </div>
                                                                                 </div>
                                                                         <?php $x++; endforeach; ?>
@@ -359,14 +361,14 @@
                                                                                     <?php endforeach;  ?>
 
                                                                                 </select>
-                                                                                <span class="text-sm text-dark">Select different certifications, that the product owns, or with which certifications the product was marked</span>
+                                                                                <span class="text-sm text-danger">Select different certifications, that the product owns, or with which certifications the product was marked</span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Product Warranty</label>
                                                                             <div class="col-lg-7">
                                                                                 <textarea placeholder="Detailed product waranty for this product" name="product_warranty" data-provide="markdown" rows="8" class="form-control"></textarea>
-                                                                                <span class="text-sm text-dark">Example: Provide the warranty validity period eg. 1 Year Warranty, N/A</span>
+                                                                                <span class="text-sm text-danger">Example: Provide the warranty validity period eg. 1 Year Warranty, N/A</span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
@@ -387,7 +389,7 @@
                                                                             <label class="col-lg-3 control-label">Warranty address</label>
                                                                             <div class="col-lg-7">
                                                                                 <textarea name="warranty_address" data-provide="markdown" rows="8" placeholder="Enter the Service Centre Address. If you have multi-options selected in the Warranty Type use the sample format for addresses." class="form-control"><?= $product->warranty_address; ?></textarea>
-                                                                                <span class="text-sm text-dark">Example: Service Center Address: 20b Caro Road, Ikeja. Lagos | Repair by Vendor Address: 5 Paris Street, Yaba. Lagos.</span>
+                                                                                <span class="text-sm text-danger">Example: Service Center Address: 20b Caro Road, Ikeja. Lagos | Repair by Vendor Address: 5 Paris Street, Yaba. Lagos.</span>
                                                                             </div>
                                                                         </div>
 
@@ -539,7 +541,7 @@
                                                     </div>
                                                     <!-- A dummy file type -->
                                                     <input type="hidden" name="file" value="" type="file">
-                                                    <input type="hidden" name="csrf_carrito" value="<?= $this->security->get_csrf_hash(); ?>" />
+                                                    <!-- <input type="hidden" name="csrf_carrito" value="<?= $this->security->get_csrf_hash(); ?>" /> -->
                                                 </div>
                                             </div>
                                             <!--Footer button-->
@@ -671,13 +673,13 @@
                                 // if( v.featured == 1 ) {
                                 //     $(`#${v.filename}`).prop('checked', true);                               
                                 // }
-                                $('input[type="radio"]', this).first().prop('checked', true);
+                                // $('input[type="radio"]', this).first().prop('checked', true);
                                 // Make sure that there is no progress bar, etc...
                                 myDropzone.emit("complete", mockFile);
 
                             });
 
-                            $("input:radio[name=featured_image]:first").attr('checked', true);
+                            // $("input:radio[name=featured_image]:first").attr('checked', true);
 
                             let existing_file_count = data.length;
                             myDropzone.options.maxFiles = myDropzone.options.maxFiles - existing_file_count;
@@ -691,7 +693,7 @@
                 // Hookup the button
                 uplodaBtn.prop('disabled', false);
                 removeBtn.prop('disabled', false);
-                file._captionLabel = Dropzone.createElement("<span class='text-sm text-dark'> &nbsp;&nbsp; Make this the featured Image &nbsp; </span> &nbsp;&nbsp; ");
+                file._captionLabel = Dropzone.createElement("<span class='text-sm text-danger'> &nbsp;&nbsp; Make this the featured Image &nbsp; </span> &nbsp;&nbsp; ");
                 file._captionBox = Dropzone.createElement(`<input id="${file.name}" type='radio' name='featured_image' value="${file.name}">`);
                 file.previewElement.appendChild(file._captionBox);
                 file.previewElement.appendChild(file._captionLabel);
@@ -715,8 +717,6 @@
                 }else{
                     $('.edit_product_form').submit();
                 }
-                // Upload all files
-                // console.log(myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED)));
             });
             myDropzone.on("successmultiple", function(files, response) {
                 // Gets triggered when the files have successfully been sent.

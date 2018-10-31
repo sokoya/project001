@@ -316,6 +316,7 @@ class Product extends CI_Controller{
             $page_data['brands'] = $this->seller->get_brands();
             $this->load->view('seller/edit', $page_data);
         }else{
+            die( 'Over here');
             // Process
             $id = $this->input->post('product_id');
             $pricing_error = $image_error = 0;

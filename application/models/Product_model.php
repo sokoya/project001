@@ -121,7 +121,7 @@ Class Product_model extends CI_Model{
     }
 
     function get_products( $d = '' , $gets = array() ){
-        $this->db->cache_on();
+        // $this->db->cache_on();
         $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price,g.image_name,s.first_name
             FROM products p                        
             JOIN product_variation AS v ON (p.id = v.product_id) 
@@ -255,7 +255,7 @@ Class Product_model extends CI_Model{
         }    
         // die( $select_query );
         $products_query = $this->db->query( $select_query )->result();
-        $this->db->cache_off();
+        // $this->db->cache_off();
         return $products_query;
     }
 
