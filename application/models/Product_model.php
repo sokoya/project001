@@ -255,7 +255,7 @@ Class Product_model extends CI_Model{
         }    
         // die( $select_query );
         $products_query = $this->db->query( $select_query )->result();
-        $this->db->cache_on();
+        $this->db->cache_off();
         return $products_query;
     }
 
