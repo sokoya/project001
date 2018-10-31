@@ -211,81 +211,81 @@
 							</div>
 						</div>
 					</aside>
-					<div class="col-md-9">
-						<div id="processing"
-							 style="display:none;position: center;top: 0;left: 0;width: auto;height: auto%;background: #f4f4f4;z-index: 99;">
-							<div class="text" style="position: absolute;top: 35%;left: 0;height: 100%;width: 100%;font-size: 18px;text-align: center;">
-								<img src="<?= base_url('assets/landing/load.gif'); ?>" alt="Processing...">
-								Processing your request. <strong
-									style="color: rgba(2.399780888618386%,61.74193548387097%,46.81068368248487%,0.843);">Please
-									Wait! </strong>
-							</div>
+				</div>
+				<div class="col-md-9">
+					<div id="processing"
+						 style="display:none;position: center;top: 0;left: 0;width: auto;height: auto%;background: #f4f4f4;z-index: 99;">
+						<div class="text" style="position: absolute;top: 35%;left: 0;height: 100%;width: 100%;font-size: 18px;text-align: center;">
+							<img src="<?= base_url('assets/landing/load.gif'); ?>" alt="Processing...">
+							Processing your request. <strong
+								style="color: rgba(2.399780888618386%,61.74193548387097%,46.81068368248487%,0.843);">Please
+								Wait! </strong>
+						</div>
+					</div>
+
+					<div id="category_body">
+						<div class="cat-notify">
+							<p class="n-head"><?= $searched; ?></p>
+							<p class="n-body"><strong><?= number_format(count($products)) . ' results'; ?></strong></p>
 						</div>
 
-						<div id="category_body">
-							<div class="cat-notify">
-								<p class="n-head"><?= $searched; ?></p>
-								<p class="n-body"><strong><?= number_format(count($products)) . ' results'; ?></strong></p>
-							</div>
-
-							<div class="row filter_data" data-gutter="15">
-								<?php foreach ($products as $product) : ?>
-									<div class="col-md-4 clearfix">
-										<div class="product">
-											<?php if (!empty($product->discount_price)): ?>
-												<ul class="product-labels">
-													<li><?= get_discount($product->sale_price, $product->discount_price); ?></li>
-													<!-- Call the discount calculator her -->
-												</ul>
-											<?php endif; ?>
-											<div class="product-img-wrap">
-												<img class="product-img"
-													data-src="<?= base_url('data/products/' . $product->id.'/'.$product->image_name); ?>"
-													src="<?= base_url('data/products/' . $product->id.'/'.$product->image_name); ?>"
-													alt="<?= $product->product_name; ?>"
-													title="<?= $product->product_name; ?>">
-											</div>
-											<a class="product-link" title="<?= $product->product_name ?>"
-											   href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
-											<div class="product-caption">
-												<ul class="product-caption-rating">
-													<li class="rated"><i class="fa fa-star"></i>
-													</li>
-													<li class="rated"><i class="fa fa-star"></i>
-													</li>
-													<li class="rated"><i class="fa fa-star"></i>
-													</li>
-													<li class="rated"><i class="fa fa-star"></i>
-													</li>
-													<li class="rated"><i class="fa fa-star"></i>
-													</li>
+						<div class="row filter_data" data-gutter="15">
+							<?php foreach ($products as $product) : ?>
+								<div class="col-md-4 clearfix">
+									<div class="product">
+										<?php if (!empty($product->discount_price)): ?>
+											<ul class="product-labels">
+												<li><?= get_discount($product->sale_price, $product->discount_price); ?></li>
+												<!-- Call the discount calculator her -->
+											</ul>
+										<?php endif; ?>
+										<div class="product-img-wrap">
+											<img class="product-img"
+												data-src="<?= base_url('data/products/' . $product->id.'/'.$product->image_name); ?>"
+												src="<?= base_url('data/products/' . $product->id.'/'.$product->image_name); ?>"
+												alt="<?= $product->product_name; ?>"
+												title="<?= $product->product_name; ?>">
+										</div>
+										<a class="product-link" title="<?= $product->product_name ?>"
+										   href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
+										<div class="product-caption">
+											<ul class="product-caption-rating">
+												<li class="rated"><i class="fa fa-star"></i>
+												</li>
+												<li class="rated"><i class="fa fa-star"></i>
+												</li>
+												<li class="rated"><i class="fa fa-star"></i>
+												</li>
+												<li class="rated"><i class="fa fa-star"></i>
+												</li>
+												<li class="rated"><i class="fa fa-star"></i>
+												</li>
+												<span
+													class="text-sm pull-right"><strong>Sold By: </strong><?= $product->first_name; ?></span>
+											</ul>
+											<h5 class="cs-title"><?= word_limiter(ucwords($product->product_name), 7, '...'); ?></h5>
+											<div class="product-caption-price">
+												<?php if (!empty($product->discount_price)) : ?>
+													<span>
 													<span
-														class="text-sm pull-right"><strong>Sold By: </strong><?= $product->first_name; ?></span>
-												</ul>
-												<h5 class="cs-title"><?= word_limiter(ucwords($product->product_name), 7, '...'); ?></h5>
-												<div class="product-caption-price">
-													<?php if (!empty($product->discount_price)) : ?>
-														<span>
+														class="cs-price-tl"><?= ngn($product->discount_price); ?></span>
 														<span
-															class="cs-price-tl"><?= ngn($product->discount_price); ?></span>
-															<span
-																class="cs-price-tl-discount"><sup><?= ngn($product->sale_price); ?> </sup></span>
-														</span>
-													<?php else : ?>
-														<span
-															class="cs-price-tl"><?= ngn($product->sale_price); ?> </span>
-													<?php endif; ?>
-												</div>
+															class="cs-price-tl-discount"><sup><?= ngn($product->sale_price); ?> </sup></span>
+													</span>
+												<?php else : ?>
+													<span
+														class="cs-price-tl"><?= ngn($product->sale_price); ?> </span>
+												<?php endif; ?>
 											</div>
 										</div>
 									</div>
-								<?php endforeach; ?>
-							</div>
-
-							<div class="row">
-								<div class="col-md-6 col-md-offset-3">
-									<?= $pagination ?>
 								</div>
+							<?php endforeach; ?>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-md-offset-3">
+								<?= $pagination ?>
 							</div>
 						</div>
 					</div>
