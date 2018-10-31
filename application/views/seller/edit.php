@@ -86,7 +86,7 @@
                                         </div>
                                         <!--Form demo-bv-wz-form -->
 
-                                        <form id="demo-bv-wz-form" action="<?= base_url('seller/product/edit'); ?>" class="form-horizontal edit_product_form" novalidate  method="POST" action="" enctype="multipart/form-data">
+                                        <form id="" action="<?= base_url('seller/product/edit'); ?>" class="form-horizontal edit_product_form" novalidate  method="POST" action="" enctype="multipart/form-data">
                                             <input type="hidden" name="product_id" value="<?= $product->id;?>">
                                             <div class="panel-body">
                                                 <div class="tab-content">
@@ -191,12 +191,12 @@
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Main Material</label>
                                                                             <div class="col-lg-7">
-                                                                                <select name="main_material" class="selectpicker" title="Choose type..." multiple data-width="100%">
+                                                                                <select name="main_material" class="selectpicker" title="Choose type..." data-width="100%">
                                                                                     <?php        
                                                                                         $materials = explode(',', lang('main_material'));
                                                                                         foreach ($materials as $material) :
                                                                                     ?>
-                                                                                    <option value="<?= trim($material); ?>" <?php if($material == strtolower(trim($product->main_material))) echo 'selected'; ?> > <?= trim($material); ?> </option>
+                                                                                    <option value="<?= trim($material); ?>" <?php if($material == strtolower(trim($product->main_material))) echo 'selected'; ?> > <?= trim(ucwords($material)); ?> </option>
                                                                                     <?php endforeach; ?>
                                                                                 </select>
                                                                                 <span class="text-sm text-danger">Eg: Leather</span>
@@ -424,6 +424,7 @@
                                                                         <td>
                                                                             <div class="form-group-sm">
                                                                                 <label class="">Variation</label>
+                                                                                <input type="hidden" name="variation_id[]" value="<?= $variation->id; ?>">
                                                                                 <input title="variation" type="text" class="form-control" name="variation[]" value="<?= $variation->variation; ?>" />
                                                                             </div>
                                                                         </td>
@@ -673,7 +674,7 @@
                                 // if( v.featured == 1 ) {
                                 //     $(`#${v.filename}`).prop('checked', true);                               
                                 // }
-                                // $('input[type="radio"]', this).first().prop('checked', true);
+                                $('input[type="radio"]', this).first().prop('checked', true);
                                 // Make sure that there is no progress bar, etc...
                                 myDropzone.emit("complete", mockFile);
 
@@ -768,7 +769,8 @@
                 let new_id = row_id + 1;
                 let new_row = `<tr data-row-id="${new_id}">
                                 <td>
-                                    <div class="form-group-sm">
+                                    <input type="hidden" name="variation_id[]"  value="new"/>
+                                    <div class="form-group-sm">                                        
                                         <label class="">Variation</label>
                                         <input title="variation" type="text" class="form-control" name="variation[]" />
                                     </div>

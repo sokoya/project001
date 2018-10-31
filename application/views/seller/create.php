@@ -80,7 +80,7 @@
                                             <div class="progress-bar progress-bar-primary"></div>
                                         </div>
                                         <!--Form demo-bv-wz-form -->
-                                        <form id="demo-bv-wz-form" class="form-horizontal add_product_form" novalidate  method="POST" action="" enctype="multipart/form-data">
+                                        <form id="" class="form-horizontal add_product_form" novalidate  method="POST" action="" enctype="multipart/form-data">
                                             <input type="hidden" name="csrf_carrito" value="<?= $this->security->get_csrf_hash(); ?>" />
                                             <div class="panel-body">
                                                 <div class="tab-content">
@@ -111,7 +111,7 @@
                                                                             <label class="col-lg-3 control-label">Brand Name *</label>
                                                                             <div class="col-lg-7">
                                                                                 <select class="form-control selectpicker" name="brand_name" required="" data-width="100%">
-                                                                                    <option>-- Select Brand Name --</option>
+                                                                                    <option value="">-- Select Brand Name --</option>
                                                                                     <?php foreach( $brands as $brand ) :?>
                                                                                         <option value="<?=ucwords($brand->brand_name);?>"><?= ucwords($brand->brand_name); ?></option>
                                                                                     <?php endforeach; ?>
@@ -166,14 +166,14 @@
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Product Line</label>
                                                                             <div class="col-lg-7">
-                                                                                <input type="text" placeholder="Enter In Here Your Store Name" name="product_line" class="form-control">
+                                                                                <input type="text" placeholder="Enter In Here Your Store Name" name="product_line" class="form-control" required>
                                                                                 <span class="text-sm text-dark">Eg: Fouani Nigeria, Trendy Woman Ltd, SEOLAK</span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label class="col-lg-3 control-label">Colour Family</label>
                                                                             <div class="col-lg-7">
-                                                                                <select name="colour_family[]" class="selectpicker" multiple title="Select colour family..." data-width="100%">
+                                                                                <select name="colour_family[]" required class="selectpicker" multiple title="Select colour family..." data-width="100%">
                                                                                     <option value="">-- Select colour family--</option>
                                                                                     <?php 
                                                                                         $colours = explode(',', lang('colours'));
@@ -193,7 +193,7 @@
                                                                                         $materials = explode(',', lang('main_material'));
                                                                                         foreach ($materials as $material) :
                                                                                     ?>
-                                                                                    <option value="<?= trim($material); ?>"> <?= trim($material); ?> </option>
+                                                                                    <option value="<?= trim($material); ?>"> <?= trim(ucwords($material)); ?> </option>
                                                                                     <?php endforeach; ?>
                                                                                 </select>
                                                                                 <span class="text-sm text-dark">Eg: Leather</span>
@@ -265,7 +265,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label class="col-lg-3 control-label">Weight *</label>
+                                                                            <label class="col-lg-3 control-label">Weight * (in Kg)</label>
                                                                             <div class="col-lg-7">
                                                                                 <input type="text" required placeholder="Weight of the product. eg 10" name="weight" class="form-control">
                                                                             </div>
@@ -391,8 +391,8 @@
                                                                     <th>Seller SKU</th>
                                                                     <th>EAN / UPC / ISBN</th>
                                                                     <th>Quantity</th>
-                                                                    <th>Price*</th>
-                                                                    <th>Discounted Price*</th>
+                                                                    <th>Sale Price*</th>
+                                                                    <th>Discounted Price</th>
                                                                     <th>Start date</th>
                                                                     <th>End date</th>
                                                                     <th class="text-center">Actions</th>
@@ -427,13 +427,13 @@
                                                                     <td>
                                                                         <div class="form-group-sm">
                                                                                 <label class="">Sale Price* </label>
-                                                                                <input title="Price" type="text" class="form-control" name="sale_price[]" />
+                                                                                <input title="Price" type="text" class="form-control" required name="sale_price[]" />
                                                                         </div>
                                                                     </td>
                                                                     <td>
                                                                         <div class="form-group">
                                                                             <label class="">Discount Price </label>
-                                                                            <input title="Discounted price" type="text" class="form-control" required name="discount_price[]" />
+                                                                            <input title="Discounted price" type="text" class="form-control" name="discount_price[]" />
                                                                         </div>
                                                                     </td>
                                                                     <td>
@@ -642,6 +642,7 @@
                 file._captionBox = Dropzone.createElement(`<input id="${file.name}" type='radio' name='featured_image' checked value="${file.name}">`);
                 file.previewElement.appendChild(file._captionBox);
                 file.previewElement.appendChild(file._captionLabel);
+                $('input[type="radio"]').first().prop('checked', true);
             });
 
             myDropzone.on("sendingmultiple", function(file, xhr, formData) {
@@ -656,10 +657,11 @@
             uplodaBtn.on('click', function(e) {
                 $('#processing').show();
                 e.preventDefault();
-                // e.stopPropagation();
-                setTimeout(function(){
+                if( myDropzone.getQueuedFiles().length > 0 ){
                     myDropzone.processQueue();
-                }, 10);
+                }else{
+                    $('.add_product_form').submit();
+                }
                 //Upload all files
                 // console.log(myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED)));
             });
@@ -740,13 +742,13 @@
                                 <td>
                                     <div class="form-group-sm">
                                             <label class="">Sale Price* </label>
-                                            <input title="Price" type="text" class="form-control" name="sale_price[]" />
+                                            <input title="Price" type="text" class="form-control" required name="sale_price[]" />
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-group">
                                         <label class="">Discount Price </label>
-                                        <input title="Discounted price" type="text" class="form-control" required name="discount_price[]" />
+                                        <input title="Discounted price" type="text" class="form-control" name="discount_price[]" />
                                     </div>
                                 </td>
                                 <td>

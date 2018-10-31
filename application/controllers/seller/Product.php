@@ -177,6 +177,10 @@ class Product extends CI_Controller{
                     //     $variation_data['end_date'] == ''  )
                     //     continue;
                     // create a new variation row
+                    if( empty($variation_data['discount_price']) ) { $variation_data['start_date'] = $variation_data['end_date'] ='';}
+
+                    if( $variation_data['quantity'] > 10 ) $variation_data['quantity'] = 10;
+                    
                     if( !is_int($this->seller->insert_data('product_variation', $variation_data) ) ){
                         throw new Exception( 'There was an error inserting the variation' . $this->seller->insert_data('product_variation', $variation_data));
                     }
@@ -296,6 +300,7 @@ class Product extends CI_Controller{
     */
 
     public function edit($id = ''){
+
         $id = cleanit($id);
         if( !$this->input->post() ){
             $uid = base64_decode($this->session->userdata('logged_id'));
@@ -316,7 +321,7 @@ class Product extends CI_Controller{
             $page_data['brands'] = $this->seller->get_brands();
             $this->load->view('seller/edit', $page_data);
         }else{
-            die( 'Over here');
+            
             // Process
             $id = $this->input->post('product_id');
             $pricing_error = $image_error = 0;
@@ -384,9 +389,10 @@ class Product extends CI_Controller{
             $discount_price = $this->input->post('discount_price');
             $start_date = $this->input->post('start_date');
             $end_date = $this->input->post('end_date');
+            $variation_id = $this->input->post('variation_id');
             if( $count_check > 0 ){
                 for( $i = 0; $i < $count_check; $i++ ){
-                    $variation_data['product_id'] = $product_id;
+                    $variation_id                 =   $variation_id[$i];                    
                     $variation_data['variation'] = $variation[$i];
                     $variation_data['sku']      = $sku[$i];
                     $variation_data['isbn']     = $isbn[$i];
@@ -395,9 +401,20 @@ class Product extends CI_Controller{
                     $variation_data['discount_price'] = $discount_price[$i];
                     $variation_data['start_date'] = $start_date[$i];
                     $variation_data['end_date'] = $end_date[$i];
-                    if( !$this->seller->update_data(array('product_id' => $id ), $variation_data, 'product_variation') ){
-                        throw new Exception( 'There was an error inserting the variation' . $this->seller->insert_data('product_variation', $variation_data));
+
+                    // little validation
+                    if( $variation_data['quantity'] > 10 ) $variation_data['quantity'] = 10;
+
+                    if( empty($variation_data['discount_price']) ) { $variation_data['start_date'] = $variation_data['end_date'] ='';}
+                    if( $variation_id == 'new' ){
+                        $variation_data['product_id'] = $product_id;
+                        $this->seller->insert_data('product_variation', $variation_data);
+                    }else{
+                        $this->seller->update_data(array('id' => $variation_id ), $variation_data, 'product_variation');
                     }
+                    // if( !$this->seller->update_data(array('product_id' => $id ), $variation_data, 'product_variation') ){
+                    //     throw new Exception( 'There was an error updating the variation' . $this->seller->insert_data('product_variation', $variation_data));
+                    // }
                 }
             }
 
