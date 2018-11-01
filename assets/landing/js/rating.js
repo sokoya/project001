@@ -145,3 +145,28 @@ $('#star2').starrr({
 		$s2input.val(value).trigger('input');
 	}
 });
+
+
+$('#review').on('submit', function (e) {
+	e.preventDefault();
+	let title = $('#review_title').val();
+	let name = $('#review_name').val();
+	let detail = $('#review_detail').val();
+
+	$.ajax({
+		url: base_url + "product/add_review",
+		method: "POST",
+		data: {title: title, name: name, detail: detail, product_id: product_id, user_id: user},
+		success: function (response) {
+			$('#review').hide();
+			$('#review_submit').append(`
+				<h4>${response.title}</h4>
+				<p>${response.detail}</p>
+			`)
+		},
+		error: function (response) {
+			alert("Sorry an error occurred somewhere")
+		}
+	});
+
+});
