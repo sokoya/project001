@@ -7363,3 +7363,17 @@ input[type="color"]:focus,
 	margin-top: 8px;
 	margin-left: -28px;
 }
+
+#review_submit > h4 {
+	font-family: "Open Sans", cursive;
+}
+
+#review_submit > p {
+	font-family: "Open Sans", cursive;
+	font-size: 15px;
+}
+
+#review_submit > span{
+	font-family: "Open Sans", cursive;
+	font-size: 13px;
+}

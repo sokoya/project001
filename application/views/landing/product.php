@@ -447,7 +447,7 @@
 									</div>
 								</div>
 								<div id="review_submit"></div>
-								<form id="review">
+								<form id="review_form" onsubmit="return false">
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
@@ -471,7 +471,7 @@
 										<textarea title="review" id="review_detail" name="review" rows="2"
 												  class="form-control" required></textarea>
 									</div>
-									<input type="submit" class="btn btn-success" value="Post Review">
+									<input type="submit" class="btn btn-success" id="review_submit_button" value="Post Review">
 								</form>
 							</div>
 							<div class="col-md-3">
