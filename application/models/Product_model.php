@@ -383,8 +383,12 @@ Class Product_model extends CI_Model{
         $this->db->where('product_id', $pid);
         $this->db->where('buyer_id', $uid);
         if( $this->db->get('orders')->num_rows() > 0 ) return true;
-
         return false;
+    }
+
+    function num_rows_count( $table_name, $where ){
+        $this->db->where($where);
+        return $this->db->get($table_name)->num_rows();
     }
 }
 
