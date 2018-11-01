@@ -439,8 +439,14 @@
 							</div>
 							<div class="col-md-5" style="">
 								<form id="review">
-									<div class='starrr' id='star1'></div>
-									<div class="rating-text"></div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class='starrr' id='star1'></div>
+										</div>
+										<div class="col-md-6">
+											<div class="rating-text"></div>
+										</div>
+									</div>
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
