@@ -7345,7 +7345,7 @@ input[type="color"]:focus,
 
 .starrr {
 	display: inline-block;
-	margin-bottom: 8px;
+	margin-bottom: 18px;
 }
 
 .starrr a {
@@ -7360,7 +7360,9 @@ input[type="color"]:focus,
 	font-family: "Open Sans", cursive;
 	font-size: 13px;
 	font-weight: bold;
-	position: relative;
-	left: 190px;
-	bottom: 35px;
+	margin-top: 8px;
+	margin-left: -28px;
+	/*position: relative;*/
+	/*left: 190px;*/
+	/*bottom: 35px;*/
 }
