@@ -105,7 +105,8 @@ class Product extends CI_Controller
 	}
 
 
-	public function cart(){
+	public function cart()
+	{
 		if ($this->input->post()) {
 			// update
 			$data = $this->input->post();
@@ -117,15 +118,16 @@ class Product extends CI_Controller
 				redirect('cart');
 			}
 		} else {
-            $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
-            $page_data['title'] = 'My cart';
+			$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
+			$page_data['title'] = 'My cart';
 			$this->load->view('landing/cart', $page_data);
 		}
 	}
 
 
 	// remove cart
-	public function remove_cart(){
+	public function remove_cart()
+	{
 		$this->cart->remove($this->uri->segment(3));
 		redirect('cart');
 	}
@@ -136,7 +138,8 @@ class Product extends CI_Controller
 		$this->load->library('cart');
 		$size = empty($this->input->post('variation')) ? 'null' : $this->input->post('variation');
 		$colour = empty($this->input->post('colour')) ? 'null' : $this->input->post('colour');
-		$name = preg_replace("/[^A-Za-z0-9-. ]/", "", cleanit($this->input->post('product_name')));
+		$name = preg_replace("/[^A-Za-z0-9-,. ]/", "", cleanit($this->input->post('product_name')));
+
 		$data = array(
 			'id' => base64_decode($this->input->post('product_id')),
 			'qty' => $this->input->post('quantity'),
@@ -149,6 +152,7 @@ class Product extends CI_Controller
 					'seller' => base64_decode($this->input->post('seller'))
 				)
 		);
+
 		if( $this->cart->insert($data)){
             echo true;
             exit;
