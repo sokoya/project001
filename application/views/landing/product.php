@@ -198,7 +198,7 @@
 											<div class="col-md-4">
 												<h5 class="custom-product-page-option-title">Variation:</h5>
 												<select class="product-page-option-select variation-select"
-														name="colour">
+														name="variation">
 													<?php foreach ($variations as $variation): ?>
 														<option title="<?= $variation->variation; ?>"
 																data-id="<?= $variation->id ?>"
@@ -213,13 +213,15 @@
 										<input type="hidden" name="product_id"
 											   value="<?= base64_encode($product->id); ?>">
 										<input type="hidden" name="product_name" value="<?= $product->product_name; ?>">
-										<?php if (!empty($variation->discount_price)): ?>
-											<input type="hidden" name="product_price"
-												   value="<?= $variation->discount_price; ?>">
-										<?php else : ?>
-											<input type="hidden" name="product_price"
-												   value="<?= $variation->sale_price; ?>">
+
+										<?php if (!empty($variation->discount_price)) : ?>
+											<input type="hidden" name="product_price" class="pr_price_hidden"
+												   value="<?= $variation->discount_price ?>">
+										<?php else: ?>
+											<input type="hidden" name="product_price" class="pr_price_hidden"
+												   value="<?= $variation->sale_price ?>">
 										<?php endif; ?>
+
 										<input type="hidden" name="seller"
 											   value="<?= base64_encode($product->seller_id) ?>">
 										<div class="col-md-5 quan-u">
@@ -430,9 +432,10 @@
 								<small>{{ Number of reviews - 238 customer reviews }}</small>
 								<p><strong>98%</strong> of reviewers would recommend this product</p>
 								<?php
-								if (!$this->session->userdata('logged_in')): 
-								?>
-									<a href="<?= base_url('login/?ref='.current_url()); ?>" class="btn btn-primary">Write a Review</a>
+								if (!$this->session->userdata('logged_in')):
+									?>
+									<a href="<?= base_url('login/?ref=' . current_url()); ?>" class="btn btn-primary">Write
+										a Review</a>
 								<?php else : ?>
 									<a class="btn btn-primary" href="#">Write a Review</a>
 								<?php endif; ?>
@@ -478,58 +481,60 @@
 							</div>
 							<div class="col-md-5" style="">
 								<div class="row">
-									<?php 
-										// var_dump( $user);
-										if($this->session->userdata('logged_in') ) :
-											$user = $this->product->get_rating_review('product_rating','rating_score',$profile->id, $product->id);
-											if( !$user ):
-									?>
-										<script type="text/javascript"> let score = $user->rating_score; </script>
-										<div class="col-md-6">
-											<div class='starrr' id='star1'></div>
-										</div>
-										<div class="col-md-6">
-											<div class="rating-text"></div>
-										</div>
-									<?php elseif($user): ?>
-										<div id="starr-rating">
-											<ul class="product-page-product-rating product-rating-big">
-												<?php 
-												for ($i=1; $i <= $user->rating_score ; $i++) { 
-												?>
-													<li class="rated"><i class="fa fa-star"></i>
-													</li>
-												<?php	
-													}
-													if( $user->rating_score < 5 ){
-														for ($i=0; $i < (5 - $user->rating_score) ; $i++) { ?>
-															<li><i class="fa fa-star"></i></li>
-												<?php
-														}
-													}
-												?>
-												<li class=""><span class="text-bold" style="font-size: 12px;"><a href="javascript:void(0)" class="update_rating">Update Rating</a></span></li>
-											</ul>
-										</div>
-
-										<div id="starr-rating-active" style="display: none;">
+									<?php
+									// var_dump( $user);
+									if ($this->session->userdata('logged_in')) :
+										$user = $this->product->get_rating_review('product_rating', 'rating_score', $profile->id, $product->id);
+										if (!$user):
+											?>
+											<script type="text/javascript"> let score = $user->rating_score; </script>
 											<div class="col-md-6">
 												<div class='starrr' id='star1'></div>
 											</div>
 											<div class="col-md-6">
 												<div class="rating-text"></div>
 											</div>
-										</div>
-									<?php else :?>										
-										<div class="col-md-6">
-											<div class='starrr' id='star1'></div>
-										</div>
-										<div class="col-md-6">
-											<div class="rating-text"></div>
-										</div>										
-									<?php endif; endif; ?>
+										<?php elseif ($user): ?>
+											<div id="starr-rating">
+												<ul class="product-page-product-rating product-rating-big">
+													<?php
+													for ($i = 1; $i <= $user->rating_score; $i++) {
+														?>
+														<li class="rated"><i class="fa fa-star"></i>
+														</li>
+														<?php
+													}
+													if ($user->rating_score < 5) {
+														for ($i = 0; $i < (5 - $user->rating_score); $i++) { ?>
+															<li><i class="fa fa-star"></i></li>
+															<?php
+														}
+													}
+													?>
+													<li class=""><span class="text-bold" style="font-size: 12px;"><a
+																href="javascript:void(0)" class="update_rating">Update Rating</a></span>
+													</li>
+												</ul>
+											</div>
+
+											<div id="starr-rating-active" style="display: none;">
+												<div class="col-md-6">
+													<div class='starrr' id='star1'></div>
+												</div>
+												<div class="col-md-6">
+													<div class="rating-text"></div>
+												</div>
+											</div>
+										<?php else : ?>
+											<div class="col-md-6">
+												<div class='starrr' id='star1'></div>
+											</div>
+											<div class="col-md-6">
+												<div class="rating-text"></div>
+											</div>
+										<?php endif; endif; ?>
 								</div>
-								<?php if($this->session->userdata('logged_in') ) : ?>
+								<?php if ($this->session->userdata('logged_in')) : ?>
 									<div id="review_submit"></div>
 									<form id="review_form" onsubmit="return false">
 										<div class="row">
@@ -555,9 +560,10 @@
 											<textarea title="review" id="review_detail" name="review" rows="2"
 													  class="form-control" required></textarea>
 										</div>
-										<input type="submit" class="btn btn-success" id="review_submit_button" value="Post Review">
+										<input type="submit" class="btn btn-success" id="review_submit_button"
+											   value="Post Review">
 									</form>
-								<?php endif;?>
+								<?php endif; ?>
 							</div>
 						</div>
 						<hr/>
@@ -746,7 +752,9 @@
 						$('.ds-price').html(format_currency(v.discount_price));
 						$('.dn-price').show();
 						$('.dn-price').html(format_currency(v.sale_price));
+						$('.pr_price_hidden').val(v.discount_price);
 					} else {
+						$('.pr_price_hidden').val(v.sale_price);
 						$('.ds-price').html(format_currency(v.sale_price));
 						$('.dn-price').hide();
 					}
