@@ -62,24 +62,26 @@
 	<div class="container">
 		<div class="row ">
 			<div class="col-md-10 col-md-offset-1" style="margin-top: 3px;">
-				<?php $this->load->view('landing/msg_view'); ?>
 			</div>
 			<div class="col-md-8 col-md-offset-2 ">
 				<div class="box-lg" style="margin-top: 14px;">
 					<div class="row" data-gutter="60">
 						<div class="col-md-12" style="margin-bottom: 40px;">
-							<h3 class="widget-title" style="font-weight: bold; font-size: 20px;padding-bottom: 14px;">
-								Reset Password</h3>
+							<p>
+								<h3 class="widget-title text-center text-bold" style="font-weight: bold; font-size: 20px;padding-bottom: 14px;">
+									Reset Password</h3>
+							</p>
+							<?php $this->load->view('landing/msg_view'); ?>
 							<?= form_open('resetpassword/process', 'id="autocorrect" autocomplete="off"'); ?>
 								<div class="form-group">
 									<label>Email Address*</label>
-									<input class="form-control" type="email" name="resetemail" value="<? if(isset($_POST['resetemail'])) echo $_POST['resetemail']; ?>" id="resetemail"/>
+									<input class="form-control" type="email" name="resetemail" value="<?php if(isset($_POST['resetemail'])) echo $_POST['resetemail']; ?>" id="resetemail" placeholder="Please enter your account email"/>
 								</div>
-								<input class="carrito_btn_sign col-md-12 col-sm-12 col-xs-12" type="submit"
+								<input class="market_btn_sign col-md-12 col-sm-12 col-xs-12" type="submit"
 									   value="Reset Password"/>
 							<?= form_close();?>
 							<div class="form_end">
-								<a href="#" onclick="window.history.back();">Never mind</a>
+								<a href="#" onclick="window.history.back();" style="color: #49a251;">Never mind</a>
 							</div>
 						</div>
 					</div>
