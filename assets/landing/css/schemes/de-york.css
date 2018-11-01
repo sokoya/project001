@@ -364,8 +364,8 @@ a,
 }
 
 .product-overview-desc > p {
-	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	font-size: 12px;
+	font-family: 'Open Sans', arial, helvetica, sans-serif !important;
+	font-size: 13px;
 	color: #636363;
 }
 
