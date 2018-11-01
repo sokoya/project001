@@ -225,6 +225,7 @@ class Product extends CI_Controller
     }
 
 
+
     public function cart(){
         $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
         $page_data['title'] = 'My cart';
@@ -245,6 +246,7 @@ class Product extends CI_Controller
     }
 
 
+    // remove cart
     public function remove_cart(){
         $this->cart->remove($this->uri->segment(3));
         redirect('cart');
