@@ -6,5 +6,6 @@
 <script src="<?= base_url('assets/landing/js/card-payment.js');?>"></script>
 <script src="<?= base_url('assets/landing/js/owl-carousel.js');?>"></script>
 <script src="<?= base_url('assets/landing/js/magnific.js'); ?>"></script>
+<script src="<?= base_url('assets/landing/js/rating.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/custom.js'); ?>"></script>
 

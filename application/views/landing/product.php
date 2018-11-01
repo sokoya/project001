@@ -200,9 +200,10 @@
 												<select class="product-page-option-select variation-select"
 														name="colour">
 													<?php foreach ($variations as $variation): ?>
-														<option title="<?= $variation->variation;?>" data-id="<?= $variation->id ?>"
+														<option title="<?= $variation->variation; ?>"
+																data-id="<?= $variation->id ?>"
 																value="<?= trim($variation->variation); ?>" <?php if ($variation->quantity == 0) echo 'disabled'; ?> >
-																
+
 															<?= ellipsize(trim($variation->variation), 8); ?>
 														</option>
 													<?php endforeach; ?>
@@ -228,7 +229,8 @@
 													<button type="button"
 															class="product-page-qty product-page-qty-minus">-
 													</button>
-													<input data-range="<?= $variation->quantity; ?>" name="quantity" id="quan"
+													<input data-range="<?= $variation->quantity; ?>" name="quantity"
+														   id="quan"
 														   class="product-page-qty product-page-qty-input quantity"
 														   type="text"
 														   value="1" disabled/>
@@ -310,7 +312,8 @@
 					</li>
 					<li><a href="#full-spec" data-toggle="tab"><i class="fa fa-cogs nav-tab-icon"></i>Full Specs</a>
 					</li>
-					<li><a href="#review" data-toggle="tab"><i class="fa fa-star nav-tab-icon"></i>Rating and Reviews</a>
+					<li><a href="#review" data-toggle="tab"><i class="fa fa-star nav-tab-icon"></i>Rating and
+							Reviews</a>
 					</li>
 				</ul>
 				<div class="tab-content">
@@ -424,42 +427,33 @@
 									</li>
 									<li class="count">4.9</li>
 								</ul>
-								<small>{{ Number of reviews - 238 customer reviews }} </small>
+								<small>{{ Number of reviews - 238 customer reviews }}</small>
 								<p><strong>98%</strong> of reviewers would recommend this product</p>
 								<?php
-									if( !$this->session->userdata('logged_in') ):
-								?>
+								if (!$this->session->userdata('logged_in')):
+									?>
 									<a href="<?= base_url('login'); ?>" class="btn btn-primary">Write a Review</a>
-								<?php else :?>
+								<?php else : ?>
 									<a class="btn btn-primary" href="#">Write a Review</a>
 								<?php endif; ?>
 							</div>
 							<div class="col-md-5" style="">
 								<form id="review">
-									<ul class="product-page-product-rating product-rating-big">
-										<li class="rated"><i class="fa fa-star"></i>
-										</li>
-										<li class=""><i class="fa fa-star"></i>
-										</li>
-										<li class=""><i class="fa fa-star"></i>
-										</li>
-										<li class=""><i class="fa fa-star"></i>
-										</li>
-										<li class=""><i class="fa fa-star"></i>
-										</li>
-										<li class="rating-text"></li>
-									</ul>
+									<div class='starrr' id='star1'></div>
+									<div class="rating-text"></div>
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
 												<label>Title of review*</label>
-												<input type="text" name="title" placeholder="Title of the review" class="form-control">
+												<input type="text" name="title" placeholder="Title of the review"
+													   class="form-control">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label>Display name*</label>
-												<input type="text" name="display_name" placeholder="Display name" class="form-control">
+												<input type="text" name="display_name" placeholder="Display name"
+													   class="form-control">
 											</div>
 										</div>
 									</div>
@@ -533,7 +527,8 @@
 								</ul>
 								<p class="product-review-meta">by {{Display name}} on 08/14/2015</p>
 								<p class="product-review-body">{{ Review Content }}</p>
-								<p class="text-success"><strong><i class="fa fa-check"></i> {{I would recommend it to a friend}}</strong>
+								<p class="text-success"><strong><i class="fa fa-check"></i> {{I would recommend it to a
+										friend}}</strong>
 								</p>
 							</div>
 						</article>
@@ -661,11 +656,14 @@
 
 		</div>
 	</div>
+	<script type="text/javascript">
+		let product_id = <?= $product->id;?>;
+		let user = <?= !empty($profile->id) ? $profile->id : ''; ?></script>
 	<?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <script type="text/javascript">let base_url = "<?= base_url(); ?>"</script>
 <?php $this->load->view('landing/resources/script'); ?>
-<script type="text/javascript">let product_id = <?= $product->id;?>; let user = <?= $profile->id; ?></script>
+
 
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
 <script>
