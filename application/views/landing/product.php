@@ -471,7 +471,8 @@
 										<textarea title="review" id="review_detail" name="review" rows="2"
 												  class="form-control" required></textarea>
 									</div>
-									<input type="submit" class="btn btn-success" id="review_submit_button" value="Post Review">
+									<input type="submit" class="btn btn-success" id="review_submit_button"
+										   value="Post Review">
 								</form>
 							</div>
 							<div class="col-md-3">
@@ -673,7 +674,7 @@
 </div>
 <script type="text/javascript">let base_url = "<?= base_url(); ?>"</script>
 <?php $this->load->view('landing/resources/script'); ?>
-
+<script src="<?= base_url('assets/landing/js/rating.js'); ?>"></script>
 
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
 <script>
