@@ -198,20 +198,27 @@ class Product extends CI_Controller {
             $data =  array(
                 'product_id' => $this->input->post('product_id'),
                 'user_id'   => $this->input->post('user_id'),
-                'rating_score' => $this->input->post('score')
+                'rating_score' => $this->input->post('count')
             );
             // check if the user bought the product
             if( $this->product->has_bought( $data['product_id'], $data['user_id'] ) ){
                 $status['message'] = 'You need to be a verified buyer before first.';
                 echo json_encode( $status );
+                exit;
+            }
+
+            if( $this->product->num_rows_count( 'product_rating', array('product_id' => $data['product_id'], 'user_id' => $data['user_id'])) > 0 ){
+                echo json_encode( $status );
+                exit;
             }
 
             if( is_int($this->product->insert_data('product_rating', $data) ) ){
                 $status['status'] = 'success';
                 echo json_encode( $status );
+                exit; 
             }
-            exit; 
         }
+        exit;
     }
 
 
