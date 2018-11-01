@@ -177,3 +177,9 @@ $('#review_form').on('submit', function (e) {
 	});
 
 });
+
+$('.update_rating').on('click', function(){
+$('#starr-rating-active').show();
+$('#starr-rating').hide();
+
+});

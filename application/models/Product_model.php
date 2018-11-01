@@ -379,12 +379,14 @@ Class Product_model extends CI_Model{
     }
 
 
+    // increase view
     function set_field( $table, $field, $set, $where ){
         $this->db->where($where);
         $this->db->set($field, $set, false);
         $this->db->update($table);
     }
 
+    // check if user has bought a product
     function has_bought( $pid ='', $uid =''){
         $this->db->where('product_id', $pid);
         $this->db->where('buyer_id', $uid);
@@ -392,6 +394,7 @@ Class Product_model extends CI_Model{
         return false;
     }
 
+    // check nom rows and return the id if found
     function num_rows_count( $table_name, $where ){
         $this->db->where($where);
         if($this->db->get($table_name)->num_rows()){
@@ -399,8 +402,15 @@ Class Product_model extends CI_Model{
             return $this->db->get($table_name)->row()->id;
         }else{
             return false;
-        }
-        
+        }        
+    }
+
+    // Select on rating || review
+    function get_rating_review($table, $select, $uid, $pid ){
+        $this->db->select($select);
+        $this->db->where('product_id', $pid);
+        $this->db->where('user_id', $uid);
+        return $this->db->get($table)->row();
     }
 }
 
