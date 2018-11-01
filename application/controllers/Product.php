@@ -192,7 +192,6 @@ class Product extends CI_Controller {
      * @param $count - rating count
      * @return null
      */
-
     function add_rating(){
         if( $this->input->post()){
             $status['status'] = 'error';
@@ -206,7 +205,7 @@ class Product extends CI_Controller {
                 $status['message'] = 'You need to be a verified buyer before first.';
                 echo json_encode( $status );
             }
-            
+
             if( is_int($this->product->insert_data('product_rating', $data) ) ){
                 $status['status'] = 'success';
                 echo json_encode( $status );
