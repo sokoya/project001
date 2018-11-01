@@ -136,7 +136,7 @@ class Product extends CI_Controller
 		$this->load->library('cart');
 		$size = empty($this->input->post('variation')) ? 'null' : $this->input->post('variation');
 		$colour = empty($this->input->post('colour')) ? 'null' : $this->input->post('colour');
-		$name = preg_replace("/[^A-Za-z0-9- ]/", "", cleanit($this->input->post('product_name')));
+		$name = preg_replace("/[^A-Za-z0-9-. ]/", "", cleanit($this->input->post('product_name')));
 		$data = array(
 			'id' => base64_decode($this->input->post('product_id')),
 			'qty' => $this->input->post('quantity'),
@@ -149,9 +149,13 @@ class Product extends CI_Controller
 					'seller' => base64_decode($this->input->post('seller'))
 				)
 		);
-		$this->cart->insert($data);
-		echo true;
-		exit;
+		if( $this->cart->insert($data)){
+            echo true;
+            exit;
+        }else{
+            echo false;
+            exit;
+        }
 	}
 
 

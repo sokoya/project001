@@ -186,10 +186,8 @@
 												<h5 class="custom-product-page-option-title">Color:</h5>
 												<select class="product-page-option-select" name="colour">
 													<?php $colour_family = json_decode($product->colour_family);
-													foreach ($colour_family as $colour):
-														?>
-														<option
-															value="<?= trim($colour); ?>"><?= $colour; ?></option>
+													foreach ($colour_family as $colour): ?>
+														<option value="<?= trim($colour); ?>"><?= ucfirst($colour); ?></option>
 													<?php endforeach; ?>
 												</select>
 											</div>
@@ -198,12 +196,11 @@
 											<div class="col-md-4">
 												<h5 class="custom-product-page-option-title">Variation:</h5>
 												<select class="product-page-option-select variation-select"
-														name="colour">
+														name="variation">
 													<?php foreach ($variations as $variation): ?>
 														<option title="<?= $variation->variation; ?>"
 																data-id="<?= $variation->id ?>"
 																value="<?= trim($variation->variation); ?>" <?php if ($variation->quantity == 0) echo 'disabled'; ?> >
-
 															<?= ellipsize(trim($variation->variation), 8); ?>
 														</option>
 													<?php endforeach; ?>
@@ -213,13 +210,7 @@
 										<input type="hidden" name="product_id"
 											   value="<?= base64_encode($product->id); ?>">
 										<input type="hidden" name="product_name" value="<?= $product->product_name; ?>">
-										<?php if (!empty($variation->discount_price)): ?>
-											<input type="hidden" name="product_price"
-												   value="<?= $variation->discount_price; ?>">
-										<?php else : ?>
-											<input type="hidden" name="product_price"
-												   value="<?= $variation->sale_price; ?>">
-										<?php endif; ?>
+										
 										<input type="hidden" name="seller"
 											   value="<?= base64_encode($product->seller_id) ?>">
 										<div class="col-md-5 quan-u">

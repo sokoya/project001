@@ -54,6 +54,6 @@ $lang['countries'] = 'Afghanistan, Albania, Algeria, American Samoa, Andorra, An
 
 	// $lang['brands'] = 'sony,binatone,itel,samsung,infinix,hp,philips,lenovo,tecno,itel,samsung';
 
-	$lang['colours'] = 'green,red,yellow,black,red,pink,purple';
+	$lang['colours'] = 'green,yellow,black,red,pink,purple';
 
 ?>
