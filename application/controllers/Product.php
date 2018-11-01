@@ -220,9 +220,10 @@ class Product extends CI_Controller
 				echo json_encode($status);
 				exit;
 			}
-
-			if ($this->product->num_rows_count('product_rating', array('product_id' => $data['product_id'], 'user_id' => $data['user_id'])) > 0) {
-				echo json_encode($status);
+            $id = $this->product->num_rows_count('product_rating', array('product_id' => $data['product_id'], 'user_id' => $data['user_id']));
+			if ( $id) {
+                $this->product->update_data($id, array('rating_score' => $this->input->post('count') ), 'product_rating');
+				echo json_encode($status['status']);
 				exit;
 			}
 
