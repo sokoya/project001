@@ -1,4 +1,5 @@
 var slice = [].slice;
+var _rating = $('.rating-text');
 
 (function ($, window) {
 	var Starrr;
@@ -23,11 +24,32 @@ var slice = [].slice;
 			}
 			this.$el.on('mouseover.starrr', 'a', (function (_this) {
 				return function (e) {
+					_rating.show();
+					switch (_this.getStars().index(e.currentTarget) + 1) {
+						case 1:
+							_rating.html("I hate it");
+							break;
+						case 2:
+							_rating.html("I don't like it");
+							break;
+						case 3:
+							_rating.html("I don't like or dislike it");
+							break;
+						case 4:
+							_rating.html("I like it");
+							break;
+						case 5:
+							_rating.html("I love it!");
+							break;
+						default:
+							break;
+					}
 					return _this.syncRating(_this.getStars().index(e.currentTarget) + 1);
 				};
 			})(this));
 			this.$el.on('mouseout.starrr', (function (_this) {
 				return function () {
+					_rating.hide();
 					return _this.syncRating();
 				};
 			})(this));
@@ -100,8 +122,21 @@ var slice = [].slice;
 $('#star1').starrr({
 	change: function (e, value) {
 		if (value) {
-			$('.your-choice-was').show();
-			$('.choice').text(value);
+
+			$.ajax({
+				url: base_url + "product/add_rating",
+				method: "POST",
+				data: {product_id: product_id, user_id: user, count: value},
+				success: function (response) {
+					console.log(response);
+				},
+				error: function (response) {
+					alert(JSON.stringify(response))
+				}
+			});
+			// $('.your-choice-was').show();
+			// $('.choice').text(value);
+			// alert(value);
 		} else {
 			$('.your-choice-was').hide();
 		}

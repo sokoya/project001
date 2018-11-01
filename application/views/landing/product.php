@@ -430,34 +430,17 @@
 								<small>{{ Number of reviews - 238 customer reviews }}</small>
 								<p><strong>98%</strong> of reviewers would recommend this product</p>
 								<?php
-									if( !$this->session->userdata('logged_in') ):
-								?>
+								if (!$this->session->userdata('logged_in')):
+									?>
 									<a href="<?= base_url('login'); ?>" class="btn btn-primary">Write a Review</a>
-								<?php else :?>
+								<?php else : ?>
 									<a class="btn btn-primary" href="#">Write a Review</a>
 								<?php endif; ?>
 							</div>
 							<div class="col-md-5" style="">
 								<form id="review">
 									<div class='starrr' id='star1'></div>
-<!--									<div>&nbsp;-->
-<!--										<span class='your-choice-was' style='display: none;'>-->
-<!--        									Your rating was <span class='choice'></span>.-->
-<!--      									</span>-->
-<!--									</div>-->
-<!--									<ul class="product-page-product-rating product-rating-big">-->
-<!--										<li class=""><i class="fa fa-star"></i>-->
-<!--										</li>-->
-<!--										<li class=""><i class="fa fa-star"></i>-->
-<!--										</li>-->
-<!--										<li class=""><i class="fa fa-star"></i>-->
-<!--										</li>-->
-<!--										<li class=""><i class="fa fa-star"></i>-->
-<!--										</li>-->
-<!--										<li class=""><i class="fa fa-star"></i>-->
-<!--										</li>-->
-<!--										<li class="rating-text"></li>-->
-<!--									</ul>-->
+									<div class="rating-text"></div>
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
@@ -673,11 +656,14 @@
 
 		</div>
 	</div>
+	<script type="text/javascript">
+		let product_id = <?= $product->id;?>;
+		let user = <?= !empty($profile->id) ? $profile->id : ''; ?></script>
 	<?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <script type="text/javascript">let base_url = "<?= base_url(); ?>"</script>
 <?php $this->load->view('landing/resources/script'); ?>
-<script type="text/javascript">let product_id = <?= $product->id;?>; let user = <?= $profile->id; ?></script>
+
 
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
 <script>

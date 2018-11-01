@@ -7355,3 +7355,12 @@ input[type="color"]:focus,
 	color: #FFD119;
 	text-decoration: none;
 }
+
+.rating-text {
+	font-family: "Open Sans", cursive;
+	font-size: 13px;
+	font-weight: bold;
+	position: relative;
+	left: 190px;
+	bottom: 35px;
+}
