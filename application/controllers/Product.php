@@ -27,7 +27,6 @@ class Product extends CI_Controller
 		$page_data['keywords'] = $page_data['title'] . ' , ' . $page_data['product']->rootcategory . ', ' . $page_data['product']->subcategory . ', ' . $page_data['product']->category . ' ,' . $page_data['product']->brand_name;
 		$page_data['description'] = $this->product->get_category_detail($page_data['product']->rootcategory, 'root_category')->description;
 		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
-		// $page_data['']
 		$this->add_count($index);
 		$this->load->view('landing/product', $page_data);
 	}

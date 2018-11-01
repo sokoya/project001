@@ -668,13 +668,11 @@
 	</div>
 	<script type="text/javascript">
 		let product_id = <?= $product->id;?>;
-		let user = <?= !empty($profile->id) ? $profile->id : ''; ?></script>
+		let user = <?= !is_null($profile) ? $profile->id : "''"; ?></script>
 	<?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <script type="text/javascript">let base_url = "<?= base_url(); ?>"</script>
 <?php $this->load->view('landing/resources/script'); ?>
-
-
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
 <script>
 	let quantity = $('#quan');
@@ -696,8 +694,6 @@
 			data: {vid: id, 'csrf_carrito': csrf_token},
 			success: function (response) {
 				$.each(response, function (i, v) {
-					// $('#quan').attr("data-range", v.quantity);
-
 					if (v.discount_price) {
 						$('.ds-price').html(format_currency(v.discount_price));
 						$('.dn-price').show();

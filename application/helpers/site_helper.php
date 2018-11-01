@@ -168,6 +168,10 @@ if (!function_exists('productStatus')) {
 // 				$text = '<p class="text-success"><strong><i class="fa fa-check"></i> I would recommend it to a friend.</strong></p>';
 // 				return 
 // 				break;
+// 			case 4:
+// 				$text = '<p class="text-info"><strong><i class="fa fa-check"></i> I would recommend it to a friend.</strong></p>';
+// 				return 
+// 				break;
 			
 // 			default:
 // 				# code...
