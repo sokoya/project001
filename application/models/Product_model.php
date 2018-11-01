@@ -21,6 +21,12 @@ Class Product_model extends CI_Model{
         return $this->db->update( $table_name, $data );
     }
 
+    // Update table
+    function product_update_data( $access = '' , $data = array(), $table_name = 'products'){
+        $this->db->where('id', $access);
+        return $this->db->update( $table_name, $data );
+    }
+
     function get_product( $id = ''){
         return $this->db->query('SELECT p.*, u.first_name, u.last_name FROM products AS p LEFT JOIN users AS u ON (p.seller_id = u.id) WHERE p.id = ? ', $id )->row();
     }
@@ -388,7 +394,13 @@ Class Product_model extends CI_Model{
 
     function num_rows_count( $table_name, $where ){
         $this->db->where($where);
-        return $this->db->get($table_name)->row()->id;
+        if($this->db->get($table_name)->num_rows()){
+            $this->db->where($where);
+            return $this->db->get($table_name)->row()->id;
+        }else{
+            return false;
+        }
+        
     }
 }
 

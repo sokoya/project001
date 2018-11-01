@@ -222,8 +222,9 @@ class Product extends CI_Controller
 			}
             $id = $this->product->num_rows_count('product_rating', array('product_id' => $data['product_id'], 'user_id' => $data['user_id']));
 			if ( $id) {
-                $this->product->update_data($id, array('rating_score' => $this->input->post('count') ), 'product_rating');
-				echo json_encode($status['status']);
+                $this->product->product_update_data($id, array('rating_score' => $this->input->post('count') ), 'product_rating');
+				$status['status'] = 'success';
+                echo json_encode($status);
 				exit;
 			}
 
