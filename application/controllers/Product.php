@@ -24,7 +24,6 @@ class Product extends CI_Controller {
         $page_data['keywords'] = $page_data['title'] .' , ' . $page_data['product']->rootcategory . ', '.$page_data['product']->subcategory.', '.$page_data['product']->category .' ,' .$page_data['product']->brand_name;
         $page_data['description'] = $this->product->get_category_detail( $page_data['product']->rootcategory, 'root_category' )->description;
         $page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
-
         $this->add_count($index);
         $this->load->view('landing/product', $page_data);
 	}
@@ -148,6 +147,12 @@ class Product extends CI_Controller {
         exit;
     }
 
+
+    /**
+     * @param $vid - variation id
+     * @return JSON
+     */
+
     function check_variation( ){
         $vid = $this->input->post('vid');
         if( !$vid ) exit;
@@ -159,19 +164,54 @@ class Product extends CI_Controller {
         exit;
     }
 
+    /**
+     * @param $id - product id
+     * @return null
+     */
     function add_count($id){
-        $this->load->helper('cookie');
-        $check_visitor = $this->input->cookie($id, FALSE);
-        // get the visitor Ip address
-        $ip = $this->input->ip_address();
-        if ($check_visitor == false) {
-            $cookie = array(
-                "name"   => $id,
-                "value"  => $ip,
-                "secure" => false
+        if( !empty($id)){
+            $this->load->helper('cookie');
+            $check_visitor = $this->input->cookie($id, FALSE);
+            // get the visitor Ip address
+            $ip = $this->input->ip_address();
+            if ($check_visitor == false) {
+                $cookie = array(
+                    "name"   => $id,
+                    "value"  => $ip,
+                    "secure" => false
+                );
+                $this->input->set_cookie($cookie);
+                $this->product->set_field('products', 'views','views+1',array('id' => $id));
+            }
+        }
+    }
+
+    /**
+     * @param $product_id - product id
+     * @param $user_id - user id
+     * @param $count - rating count
+     * @return null
+     */
+
+    function add_rating(){
+        if( $this->input->post()){
+            $status['status'] = 'error';
+            $data =  array(
+                'product_id' => $this->input->post('product_id'),
+                'user_id'   => $this->input->post('user_id'),
+                'rating_score' => $this->input->post('score')
             );
-            $this->input->set_cookie($cookie);
-            $this->product->set_field('products', 'views','views+1',array('id' => $id));
+            // check if the user bought the product
+            if( $this->product->has_bought( $data['product_id'], $data['user_id'] ) ){
+                $status['message'] = 'You need to be a verified buyer before first.';
+                echo json_encode( $status );
+            }
+            
+            if( is_int($this->product->insert_data('product_rating', $data) ) ){
+                $status['status'] = 'success';
+                echo json_encode( $status );
+            }
+            exit; 
         }
     }
 
