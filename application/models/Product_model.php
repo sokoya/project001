@@ -378,6 +378,14 @@ Class Product_model extends CI_Model{
         $this->db->set($field, $set, false);
         $this->db->update($table);
     }
+
+    function has_bought( $pid ='', $uid =''){
+        $this->db->where('product_id', $pid);
+        $this->db->where('buyer_id', $uid);
+        if( $this->db->get('orders')->num_rows() > 0 ) return true;
+
+        return false;
+    }
 }
 
 

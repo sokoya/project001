@@ -127,5 +127,11 @@ Class User_model extends CI_Model{
         return $query; 
     }
 
+    function get_rows($table_name ='users', $where ){
+        $this->db->where($where);
+        return $this->db->get( $table_name )->row();
+    }
+
+    function recover_email(){}
     
 }
