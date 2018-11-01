@@ -122,21 +122,16 @@ var _rating = $('.rating-text');
 $('#star1').starrr({
 	change: function (e, value) {
 		if (value) {
-
 			$.ajax({
 				url: base_url + "product/add_rating",
 				method: "POST",
 				data: {product_id: product_id, user_id: user, count: value},
 				success: function (response) {
-					console.log(response);
 				},
 				error: function (response) {
-					alert(JSON.stringify(response))
+					alert("Sorry an error occurred somewhere")
 				}
 			});
-			// $('.your-choice-was').show();
-			// $('.choice').text(value);
-			// alert(value);
 		} else {
 			$('.your-choice-was').hide();
 		}
