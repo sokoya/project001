@@ -253,13 +253,14 @@ class Product extends CI_Controller
                 'user_id' => $this->input->post('user_id'),
                 'title' => cleanit($this->input->post('title')),
                 'display_name' => cleanit($this->input->post('name')),
-                'content'   => cleanit( $this->input->post('detail'))
+                'content'   => cleanit( $this->input->post('detail')),
+                'published_date' => get_now()
             );
 
             if (is_int($this->product->insert_data('product_review', $data))) {
                 $status['status'] = 'success';
                 $status['title'] = ucwords($data['title']);
-                $status['detail'] = ucwords($data['detail']);
+                $status['detail'] = ucwords($data['content']);
                 echo json_encode($status);
                 exit;
             }else{
