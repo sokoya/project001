@@ -27,7 +27,7 @@ class Product extends CI_Controller
 		$page_data['keywords'] = $page_data['title'] . ' , ' . $page_data['product']->rootcategory . ', ' . $page_data['product']->subcategory . ', ' . $page_data['product']->category . ' ,' . $page_data['product']->brand_name;
 		$page_data['description'] = $this->product->get_category_detail($page_data['product']->rootcategory, 'root_category')->description;
 		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
-        // $page_data['']
+		// $page_data['']
 		$this->add_count($index);
 		$this->load->view('landing/product', $page_data);
 	}
@@ -206,7 +206,8 @@ class Product extends CI_Controller
 	 * @param $count - rating count
 	 * @return null
 	 */
-	function add_rating(){
+	function add_rating()
+	{
 		if ($this->input->post()) {
 			$status['status'] = 'error';
 			$data = array(
@@ -220,11 +221,11 @@ class Product extends CI_Controller
 				echo json_encode($status);
 				exit;
 			}
-            $id = $this->product->num_rows_count('product_rating', array('product_id' => $data['product_id'], 'user_id' => $data['user_id']));
-			if ( $id) {
-                $this->product->product_update_data($id, array('rating_score' => $this->input->post('count') ), 'product_rating');
+			$id = $this->product->num_rows_count('product_rating', array('product_id' => $data['product_id'], 'user_id' => $data['user_id']));
+			if ($id) {
+				$this->product->product_update_data($id, array('rating_score' => $this->input->post('count')), 'product_rating');
 				$status['status'] = 'success';
-                echo json_encode($status);
+				echo json_encode($status);
 				exit;
 			}
 
@@ -237,36 +238,38 @@ class Product extends CI_Controller
 		exit;
 	}
 
-    /**
-     * @param $product_id - product id
-     * @param $user_id - user id
-     * @param $title - title
-     * @param $display_name - display_name
-     * @param $content - content
-     * @return null
-     */
-    function add_review(){
-        if ($this->input->post()) {
-            $status['status'] = 'error';
-            $data = array(
-                'product_id' => $this->input->post('product_id'),
-                'user_id' => $this->input->post('user_id'),
-                'title' => cleanit($this->input->post('title')),
-                'display_name' => cleanit($this->input->post('name')),
-                'content'   => cleanit( $this->input->post('detail')),
-                'published_date' => get_now()
-            );
+	/**
+	 * @param $product_id - product id
+	 * @param $user_id - user id
+	 * @param $title - title
+	 * @param $display_name - display_name
+	 * @param $content - content
+	 * @return null
+	 */
+	function add_review()
+	{
+		if ($this->input->post()) {
+			$status['status'] = 'error';
+			$data = array(
+				'product_id' => $this->input->post('product_id'),
+				'user_id' => $this->input->post('user_id'),
+				'title' => cleanit($this->input->post('title')),
+				'display_name' => cleanit($this->input->post('name')),
+				'content' => cleanit($this->input->post('detail')),
+				'published_date' => get_now()
+			);
 
-            if (is_int($this->product->insert_data('product_review', $data))) {
-                $status['status'] = 'success';
-                $status['title'] = ucwords($data['title']);
-                $status['detail'] = ucwords($data['content']);
-                echo json_encode($status);
-                exit;
-            }else{
-                echo json_encode($status);
-            }
-        }
-        exit;
-    }
+			if (is_int($this->product->insert_data('product_review', $data))) {
+				$status['status'] = 'success';
+				$status['title'] = ucwords($data['title']);
+				$status['detail'] = ucwords($data['content']);
+				$status['name'] = ucwords($data['display_name']);
+				echo json_encode($status);
+				exit;
+			} else {
+				echo json_encode($status);
+			}
+		}
+		exit;
+	}
 }

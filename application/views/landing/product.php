@@ -438,36 +438,40 @@
 								<?php endif; ?>
 							</div>
 							<div class="col-md-5" style="">
-								<form id="review">
-									<div class="row">
-										<div class="col-md-6">
-											<div class='starrr' id='star1'></div>
-										</div>
-										<div class="col-md-6">
-											<div class="rating-text"></div>
-										</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class='starrr' id='star1'></div>
 									</div>
+									<div class="col-md-6">
+										<div class="rating-text"></div>
+									</div>
+								</div>
+								<div id="review_submit"></div>
+								<form id="review_form" onsubmit="return false">
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
 												<label>Title of review*</label>
 												<input type="text" name="title" placeholder="Title of the review"
-													   class="form-control">
+													   id="review_title"
+													   class="form-control" required>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label>Display name*</label>
 												<input type="text" name="display_name" placeholder="Display name"
-													   class="form-control">
+													   id="review_name"
+													   class="form-control" required>
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label>Review</label>
-										<textarea name="review" rows="2" class="form-control"></textarea>
+										<textarea title="review" id="review_detail" name="review" rows="2"
+												  class="form-control" required></textarea>
 									</div>
-									<button type="button" class="btn btn-success">Post Review</button>
+									<input type="submit" class="btn btn-success" id="review_submit_button" value="Post Review">
 								</form>
 							</div>
 							<div class="col-md-3">

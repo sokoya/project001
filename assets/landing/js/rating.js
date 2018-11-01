@@ -1,5 +1,7 @@
 var slice = [].slice;
 var _rating = $('.rating-text');
+var pid = product_id;
+
 
 (function ($, window) {
 	var Starrr;
@@ -144,4 +146,34 @@ $('#star2').starrr({
 	change: function (e, value) {
 		$s2input.val(value).trigger('input');
 	}
+});
+
+
+$('#review_form').on('submit', function (e) {
+	$('#review_submit_button').prop("disabled", true);
+	e.preventDefault();
+	let title = $('#review_title').val();
+	let name = $('#review_name').val();
+	let detail = $('#review_detail').val();
+
+	$.ajax({
+		url: base_url + "product/add_review",
+		method: "POST",
+		data: {title: title, name: name, detail: detail, 'product_id': pid, 'user_id': user},
+		success: function (response) {
+			$('#review_form').hide();
+			let m_review = JSON.parse(response);
+
+
+			$('#review_submit').append(`
+				<h4>${m_review.title}</h4>
+				<p>${m_review.detail}</p>
+				<span>By - ${m_review.name}</span>
+			`)
+		},
+		error: function (response) {
+			alert("Sorry an error occurred somewhere")
+		}
+	});
+
 });
