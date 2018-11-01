@@ -29,7 +29,7 @@ class Product extends CI_Controller {
 	}
 
 
-
+    // 
     public function fav(){
         if( !$this->session->userdata('logged_in')) redirect(base_url());        
         $this->load->model('user_model');
@@ -208,8 +208,10 @@ class Product extends CI_Controller {
                 echo json_encode( $status );
                 exit;
             }
-
-            if( $this->product->num_rows_count( 'product_rating', array('product_id' => $data['product_id'], 'user_id' => $data['user_id'])) > 0 ){
+            $id = $this->product->num_rows_count( 'product_rating', array('product_id' => $data['product_id'], 'user_id' => $data['user_id']));
+            if( $id ){
+                $rating_array = array('rating_score' => $this->input->post('count'));
+                $this->product->update_data($id, $rating_array, 'product_rating');
                 echo json_encode( $status );
                 exit;
             }

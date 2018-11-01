@@ -388,7 +388,7 @@ Class Product_model extends CI_Model{
 
     function num_rows_count( $table_name, $where ){
         $this->db->where($where);
-        return $this->db->get($table_name)->num_rows();
+        return $this->db->get($table_name)->row()->id;
     }
 }
 

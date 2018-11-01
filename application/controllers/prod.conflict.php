@@ -28,21 +28,6 @@ class Product extends CI_Controller {
         $this->load->view('landing/product', $page_data);
 	}
 
-
-    // 
-    public function fav(){
-        if( !$this->session->userdata('logged_in')) redirect(base_url());        
-        $this->load->model('user_model');
-        if($this->user_model->favourite( base64_decode($this->session->userdata('logged_id')), base64_decode($this->input->post('pid')),
-            $this->input->post('action') )){
-            echo true;
-            exit;
-        }else{
-            echo false;
-            exit;
-        }                   
-    }
-
     
     // List Product Page
     public function catalog(){        
@@ -97,6 +82,21 @@ class Product extends CI_Controller {
         $this->load->view('landing/category', $page_data);
     }
 
+
+
+    // 
+    public function fav(){
+        if( !$this->session->userdata('logged_in')) redirect(base_url());        
+        $this->load->model('user_model');
+        if($this->user_model->favourite( base64_decode($this->session->userdata('logged_id')), base64_decode($this->input->post('pid')),
+            $this->input->post('action') )){
+            echo true;
+            exit;
+        }else{
+            echo false;
+            exit;
+        }                   
+    }
 
 
     public function cart(){
