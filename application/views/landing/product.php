@@ -537,8 +537,8 @@
 								</ul>
 								<p class="product-review-meta">by {{Display name}} on 08/14/2015</p>
 								<p class="product-review-body">{{ Review Content }}</p>
-								<p class="text-success"><strong><i class="fa fa-check"></i> {{I would recommend it to a
-										friend}}</strong>
+								<p class="text-success">
+									<strong><i class="fa fa-check"></i> {{I would recommend it to a friend}}</strong>
 								</p>
 							</div>
 						</article>

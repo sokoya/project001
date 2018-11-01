@@ -159,4 +159,21 @@ if (!function_exists('productStatus')) {
 }
 
 
+// Rating score test
+
+// if(!function_exists('rating_text')){
+// 	function rating_text( $score ){
+// 		switch ($score) {
+// 			case 5:
+// 				$text = '<p class="text-success"><strong><i class="fa fa-check"></i> I would recommend it to a friend.</strong></p>';
+// 				return 
+// 				break;
+			
+// 			default:
+// 				# code...
+// 				break;
+// 		}
+// 	}
+// }
+
 ?>
