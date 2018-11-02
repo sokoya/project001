@@ -223,7 +223,7 @@
 														   id="quan"
 														   class="product-page-qty product-page-qty-input quantity"
 														   type="text"
-														   value="1" disabled/>
+														   value="1" />
 													<button type="button"
 															class="product-page-qty product-page-qty-plus">+
 													</button>

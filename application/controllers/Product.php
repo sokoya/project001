@@ -133,13 +133,25 @@ class Product extends CI_Controller
 	}
 
 
-	public function add_to_cart()
-	{
+	public function add_to_cart(){
 		$this->load->library('cart');
-		$size = empty($this->input->post('variation')) ? 'null' : $this->input->post('variation');
-		$colour = empty($this->input->post('colour')) ? 'null' : $this->input->post('colour');
-		$name = preg_replace("/[^A-Za-z0-9-,. ]/", "", cleanit($this->input->post('product_name')));
+        $variation = empty($this->input->post('variation')) ? '' : $this->input->post('variation');
+        $colour = empty($this->input->post('colour')) ? '' : $this->input->post('colour');
+        $name = preg_replace("/[^A-Za-z0-9-,. ]/", "", cleanit($this->input->post('product_name')));
 
+// <pre class='xdebug-var-dump' dir='ltr'>
+// <small>C:\UwAmp\www\project001\application\controllers\Product.php:154:</small>
+// <b>array</b> <i>(size=6)</i>
+//   'colour' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'black'</font> <i>(length=5)</i>
+//   'variation' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'with battery'</font> <i>(length=12)</i>
+//   'product_id' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'MQ=='</font> <i>(length=4)</i>
+//   'product_name' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'Samsung Galaxy S9 - BLACK (Dual Sim) - Official Warranty Product'</font> <i>(length=64)</i>
+//   'seller' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'Mw=='</font> <i>(length=4)</i>
+//   'quantity' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'1'</font> <i>(length=1)</i>
+// </pre>
+
+
+        // contain a product ID, quantity, price, and name.
 		$data = array(
 			'id' => base64_decode($this->input->post('product_id')),
 			'qty' => $this->input->post('quantity'),
@@ -147,11 +159,12 @@ class Product extends CI_Controller
 			'name' => $name,
 			'options' =>
 				array(
-					'size' => $size,
+					'variation' => $variation,
 					'colour' => $colour,
 					'seller' => base64_decode($this->input->post('seller'))
 				)
 		);
+
 
 		if( $this->cart->insert($data)){
             echo true;
