@@ -790,7 +790,7 @@
 			error: function (error) {
 				console.log(error);
 			}
-		}); // ajax
+		}); 
 	});
 	$('.add-to-cart').on('click', function () {
 		_btn = $(this);
