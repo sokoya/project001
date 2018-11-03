@@ -262,7 +262,7 @@
 										<?php endif; ?>
 									<?php else : ?>
 										<div class="col-md-6 col-lg-6">
-											<a class="btn btn-block btn-default  c-hover"
+											<a class="btn btn-block btn-default fav c-hover"
 											   href="<?= base_url('login'); ?>"><i
 													class="fa fa-star-o"></i>Wishlist</a>
 										</div>
