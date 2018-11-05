@@ -127,6 +127,10 @@ Class User_model extends CI_Model{
         return $query; 
     }
 
+    function get_states(){
+        return $this->db->get('states')->result_array();
+    }
+
     function get_rows($table_name ='users', $where ){
         $this->db->where($where);
         return $this->db->get( $table_name )->row();

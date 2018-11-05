@@ -155,4 +155,12 @@ class Account extends CI_Controller {
 		}
 	}
 
+	function fetch_states(){
+		$states = $this->user->get_states();
+		header('Content-type: text/json');
+		header('Content-type: application/json');
+		echo json_encode($states);
+        exit;
+	}
+
 }

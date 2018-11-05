@@ -444,41 +444,26 @@
 							</div>
 							<div class="col-md-3">
 								<ul class="product-rate-list">
-									<li>
-										<p class="product-rate-list-item">5 Stars</p>
-										<div class="product-rate-list-bar">
-											<div style="width:96%;"></div>
-										</div>
-										<p class="product-rate-list-count">210</p>
-									</li>
-									<li>
-										<p class="product-rate-list-item">4 Stars</p>
-										<div class="product-rate-list-bar">
-											<div style="width:3%;"></div>
-										</div>
-										<p class="product-rate-list-count">10</p>
-									</li>
-									<li>
-										<p class="product-rate-list-item">3 Stars</p>
-										<div class="product-rate-list-bar">
-											<div style="width:0%;"></div>
-										</div>
-										<p class="product-rate-list-count">0</p>
-									</li>
-									<li>
-										<p class="product-rate-list-item">2 Stars</p>
-										<div class="product-rate-list-bar">
-											<div style="width:2%;"></div>
-										</div>
-										<p class="product-rate-list-count">6</p>
-									</li>
-									<li>
-										<p class="product-rate-list-item">1 Star</p>
-										<div class="product-rate-list-bar">
-											<div style="width:1%;"></div>
-										</div>
-										<p class="product-rate-list-count">3</p>
-									</li>
+									<?php $x = 1; foreach( $rating_counts as $rating ): 
+										if( $x != $rating->rating_score ):
+									?>
+										<li>
+											<p class="product-rate-list-item"><?=$x;?> Stars</p>
+											<div class="product-rate-list-bar">
+												<div style="width:0%;"></div>
+											</div>
+											<p class="product-rate-list-count">0</p>
+										</li>
+									<?php else :?>
+										<li>
+											<p class="product-rate-list-item"><?=$x;?> Stars</p>
+											<div class="product-rate-list-bar">
+												<div style="width:0%;"></div>
+											</div>
+											<p class="product-rate-list-count"><?= $rating->occurence; ?></p>
+										</li>
+									<?php endif; ?>										
+									<?php $x++;  endforeach; ?>
 								</ul>
 							</div>
 							<div class="col-md-5" style="">
@@ -570,11 +555,6 @@
 						</div>
 						<hr/>
 						<article class="product-review">
-							<div class="product-review-author">
-								<img class="product-review-author-img"
-									 src="<?= base_url('assets/landing/img/amaze_70x70.jpg'); ?>"
-									 alt="Image Alternative text" title="Image Title"/>
-							</div>
 							<div class="product-review-content">
 								<h5 class="product-review-title">{{ Review Title}}</h5>
 								<ul class="product-page-product-rating">

@@ -32,18 +32,8 @@ Class Product_model extends CI_Model{
     }
 
 
-    // function get_menu_categories(){
-    //     $select = "SELECT root.root_category_id, root.icon, root.title, root.name AS root_name, cat.name AS category_name, GROUP_CONCAT(sub.name SEPARATOR ', ') AS sub_name
-    //     FROM root_category root
-    //     JOIN (SELECT GROUP_CONCAT(c.name SEPARATOR ', ') AS name, c.root_category_id AS id, c.category_id AS cid FROM category c GROUP BY cid) AS cat ON (cat.id = root.root_category_id)
-    //     JOIN sub_category AS sub ON (cat.cid = sub.category_id)
-    //     GROUP BY root.root_category_id";
-    //     // var_dump( $this->db->query( $select )->result() );
-    //     return $this->db->query( $select )->result();
-
-    // }
-
     // To get the respective categories or sub
+    // Function used for the category page
     function get_sub_categories( $str = ''){
         $output = '';
         //check in root_category
@@ -67,6 +57,8 @@ Class Product_model extends CI_Model{
         return $output;
     }
 
+
+    // Category Description for SEO
     function category_description( $str = '' ){
         $result = '';
         $select = "SELECT description FROM root_category WHERE MATCH(name) AGAINST('$str') LIMIT 1";
@@ -90,14 +82,18 @@ Class Product_model extends CI_Model{
         return $result;
     }
 
+    // Get single variation
     function get_variation( $id = ''){
         return $this->db->query('SELECT * FROM product_variation WHERE product_id = ?', $id)->row();
     }
 
+    // Single product, get all the product variation
     function get_variations( $id ){
         return $this->db->query('SELECT * FROM product_variation WHERE product_id = ? ', $id)->result();
     }
 
+
+    // Check if the single product has variation
     function check_variation( $id ){
         $this->db->select('quantity,sale_price,discount_price');
         $this->db->where('id', $id);
@@ -105,6 +101,7 @@ Class Product_model extends CI_Model{
         return $this->db->get('product_variation')->result_array();
     }
 
+    // Get all product Images
     function get_gallery( $id ){
         $this->db->where('product_id', $id);
         $this->db->select('*');
@@ -114,7 +111,6 @@ Class Product_model extends CI_Model{
     }
 
     // Get user has favourite this property
-
     function is_favourited($uid ='', $product_id =''){
         if( $uid ){
             $this->db->where('uid', $uid);
@@ -126,6 +122,7 @@ Class Product_model extends CI_Model{
         return false;
     }
 
+    // Main Category prouduct listings
     function get_products( $d = '' , $gets = array() ){
         // $this->db->cache_on();
         $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price,g.image_name,s.first_name
@@ -284,6 +281,8 @@ Class Product_model extends CI_Model{
         return $result;
     }
 
+
+    // Get products brands
     function get_brands( $str ='' ){
         $select_query = "SELECT COUNT(*) AS `brand_count`, `brand_name` FROM `products` p ";
         if( $str != '' ){
@@ -296,6 +295,7 @@ Class Product_model extends CI_Model{
         return $this->db->query( $select_query )->result();
     }
 
+    // Get products colours
     function get_colours( $str = ''){
         $select_query = "SELECT COUNT(*) AS `colour_count`, `main_colour` AS `colour_name` FROM `products` p ";
         if( $str != ''){
@@ -308,6 +308,7 @@ Class Product_model extends CI_Model{
         return $this->db->query( $select_query )->result();
     }
 
+    // Get products attributes. used in main category
     function get_features( $str = '' ){
         $select_query = "SELECT DISTINCT JSON_UNQUOTE(JSON_EXTRACT(`attributes`, '$')) AS feature_value FROM products";
         if( $str != ''){
@@ -327,6 +328,7 @@ Class Product_model extends CI_Model{
 
 
     /**
+     * Generic function 
      * @param $table
      * @return string
      */
@@ -411,6 +413,17 @@ Class Product_model extends CI_Model{
         $this->db->where('product_id', $pid);
         $this->db->where('user_id', $uid);
         return $this->db->get($table)->row();
+    }
+
+    // Fetch single profuct reviews with its rating
+    function get_reviews( $id = '' ){
+        $select = "SELECT review.*, rating.rating_score FROM product_review review  LEFT JOIN product_rating rating ON (rating.product_id = review.product_id AND rating.user_id = review.user_id) WHERE review.product_id = $id";
+        return $this->db->query($select)->result_array();
+    }
+
+    function get_rating_counts( $pid = ''){
+        $select = "SELECT COUNT(*) as occurence, rating_score FROM product_rating WHERE product_id = $pid GROUP BY rating_score ORDER BY rating_score DESC";
+        return $this->db->query($select)->result();
     }
 }
 
