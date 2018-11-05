@@ -26,28 +26,28 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group ">
-											<label class="checkout-form-input-label" for="fname">First Name:</label>
-											<input type="text" class="form-control checkout-form-input" id="fname">
+											<label class="checkout-form-input-label" for="first_name">First Name:</label>
+											<input type="text" class="form-control checkout-form-input" id="fname" name="first_name">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label class="checkout-form-input-label" for="lname">Last Name:</label>
-											<input type="text" class="form-control checkout-form-input" id="lname">
+											<input type="text" class="form-control checkout-form-input" id="lname" name="last_name">
 										</div>
 									</div>
 
 									<div class="col-md-6">
 										<div class="form-group">
 											<label class="checkout-form-input-label" for="number_">Mobile Number</label>
-											<input type="text" class="form-control checkout-form-input" id="number_">
+											<input type="text" class="form-control checkout-form-input" id="number_" name="phone">
 										</div>
 									</div>
 
 									<div class="col-md-6">
 										<div class="form-group">
 											<label class="checkout-form-input-label" for="street">Street Address</label>
-											<input type="text" class="form-control checkout-form-input" id="street">
+											<input type="text" class="form-control checkout-form-input" id="street" name="street">
 										</div>
 									</div>
 
@@ -55,7 +55,8 @@
 										<div class="form-group">
 											<div class="form-group">
 												<label class="checkout-form-input-label" for="state">State</label>
-												<select class="form-control checkout-form-input" id="state"></select>
+												<select class="form-control checkout-form-input" id="state" name="state"><option value="">-- Select Sate --</option>
+												</select>
 											</div>
 										</div>
 									</div>
@@ -64,7 +65,8 @@
 										<div class="form-group">
 											<div class="form-group">
 												<label class="checkout-form-input-label" for="city">City</label>
-												<select class="form-control checkout-form-input" id="city"></select>
+												<select class="form-control checkout-form-input" id="city" name="area">
+												</select>
 											</div>
 										</div>
 									</div>

@@ -8,14 +8,17 @@ function ucwords(str) {
         return $1.toUpperCase();
     });
 }
+
+
 function bind_market(src, destination) {
 	$(`.${destination}`).html(src);
 }
 
 $('.create-address-btn').on('click', function (e) {
 	e.preventDefault();
-	$('#delivery_address').slideDown();
-	$('#register_address').hide();
+
+	// $('#delivery_address').slideDown();
+	// $('#register_address').hide();
 });
 
 $('.btn-new-address').on('click', function () {
@@ -30,6 +33,7 @@ $('.btn-new-address').on('click', function () {
 });
 
 $('#state').on('change', function(){
+	$("#city").empty();
 	let sid = $(this).val();
 	$.ajax({
 	    url:base_url + 'account/fetch_areas',
@@ -37,6 +41,7 @@ $('#state').on('change', function(){
 	    data: {sid: sid},
 	    dataType: 'json',
 	    success: function(d) {
+	    	$("#city").append("<option>-- Please select a city --</option>");
 	        $.each(d, function (k, v) {
 	            $('#city').append($('<option></option>').attr('value', v.id).text(ucwords(v.name)));
 	        })
