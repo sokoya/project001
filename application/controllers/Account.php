@@ -175,7 +175,6 @@ class Account extends CI_Controller {
 			$page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')));
 			$this->load->view('account/settings', $page_data);
 		}else{
-//			var_dump($this->input->post('preference'));
 			if($this->user_model->update_data(
 				base64_decode($this->input->post('user')), 
 				array('newsletter' => $this->input->post('preference')))){

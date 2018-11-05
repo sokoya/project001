@@ -446,31 +446,24 @@
 								<ul class="product-rate-list">									
 									
 									<?php
-									$array = [5,4,3,2,1];
-									$x = 5; 
-									foreach($rating_counts as $rating) : ?>
-										<?php if(in_array($rating['rating_score'], $array)) : ?>
-											<li>
-												<p class="product-rate-list-item"><?=$x;?> Stars</p>
-												<div class="product-rate-list-bar">
-													<div style="width:0%;"></div>
-												</div>
-												<p class="product-rate-list-count"><?= $rating['occurence']; ?></p>
-											</li>
-											<?php unset($array[$x]);?>
-										<?php else : ?>
-											<li>
-												<p class="product-rate-list-item"><?=$x;?> Stars</p>
-												<div class="product-rate-list-bar">
-													<div style="width:0%;"></div>
-												</div>
-												<p class="product-rate-list-count">0</p>
-											</li>
-										<?php endif; ?>
-									<?php $x -= 1; endforeach; 
-										var_dump( $array );
+									$x = 5;
+									do {?>
+										<li>
+											<p class="product-rate-list-item"><?=$x;?> Stars</p>
+											<div class="product-rate-list-bar">
+												<div style="width:0%;"></div>
+											</div>
+											<p class="product-rate-list-count">0</p>
+										</li>
+									<?php $x -= 1; } while ( $x >= 1 );
 									?>
-
+									<!-- <li>
+										<p class="product-rate-list-item"><?=$x;?> Stars</p>
+										<div class="product-rate-list-bar">
+											<div style="width:0%;"></div>
+										</div>
+										<p class="product-rate-list-count">0</p>
+									</li> -->
 								</ul>
 							</div>
 							<div class="col-md-5" style="">

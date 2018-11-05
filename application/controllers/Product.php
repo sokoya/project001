@@ -29,7 +29,7 @@ class Product extends CI_Controller
 		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
 		$this->add_count($index);
 		$page_data['rating_counts'] = $this->product->get_rating_counts( $index );
-		var_dump( $page_data['rating_counts'] );
+		// var_dump( $page_data['rating_counts'] );
 		$this->load->view('landing/product', $page_data);
 	}
 
