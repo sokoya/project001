@@ -176,6 +176,11 @@
             $('#add_new_add').addClass('btn-primary');
         }
     })
+    var selected_state_id
+    state_drop.change(function(){
+       selected_state_id = $('#state_id option:selected').attr('value');
+       
+    });
 </script>
 </body>
 </html>
