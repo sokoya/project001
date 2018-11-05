@@ -32,7 +32,7 @@
 	                                    <td>
 	                                    	<?= ngn($cart['price']); ?>
 	                                    	
-	                                    	<input type="hidden" name="order[]" value="<?= base64_encode($user->id) .'|'.$cart['id'].'|'.base64_encode($cart['options']['seller']).'|'.$cart['qty'].'|'.'Size: '. $cart['options']['size'] . '/ Colour:' . $cart['options']['colour'].'|'.$cart['price']?>">
+	                                    	<input type="hidden" name="order[]" value="<?= base64_encode($user->id) .'|'.$cart['id'].'|'.base64_encode($cart['options']['seller']).'|'.$cart['qty'].'|'.'Variation: '. $cart['options']['variation'] . '/ Colour:' . $cart['options']['colour'].'|'.$cart['price']?>">
 	                                    </td>
 	                                    <?php $subtotal += ($cart['qty'] * $cart['price'])?>
 	                                </tr>
