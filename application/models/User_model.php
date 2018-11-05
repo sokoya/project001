@@ -131,7 +131,7 @@ Class User_model extends CI_Model{
         return $this->db->get('states')->result_array();
     }
     function get_area( $sid = ''){
-        $this->db->select('id,name,price')l
+        $this->db->select('id,name,price');
         $this->db->where('sid', $sid)
         return $this->db->get('area')->result_array();
     }
