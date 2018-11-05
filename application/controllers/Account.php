@@ -155,6 +155,8 @@ class Account extends CI_Controller {
 		}
 	}
 
+	// @return
+    // id, name
 	function fetch_states(){
 		$states = $this->user->get_states();
 		header('Content-type: text/json');
