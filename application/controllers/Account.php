@@ -125,6 +125,14 @@ class Account extends CI_Controller {
         }    
 	}
 
+    // Billing Address Function
+    public function billing(){
+        $page_data['page'] = 'billing';
+        $page_data['title'] = "My Billing Address";
+        $page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id') ));
+        $this->load->view('account/billing', $page_data);
+    }
+
 	// Settings
 	public function settings(){
 		$page_data['title'] = "Account Settings";

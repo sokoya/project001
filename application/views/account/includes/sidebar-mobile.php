@@ -21,6 +21,9 @@
 			<li class="list-group-item">
 				<h4><a href="<?= base_url('account/saved'); ?>">My Saved Items</a></h4>
 			</li>
+            <li class="list-group-item">
+                <h4><a href="<?= base_url('account/billing'); ?>">My Billing Address</a></h4>
+            </li>
 			<li class="list-group-item">
 				<h4><a href="<?= base_url('account/settings'); ?>">Account Settings</a></h4>
 			</li>
