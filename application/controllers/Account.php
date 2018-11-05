@@ -163,4 +163,16 @@ class Account extends CI_Controller {
         exit;
 	}
 
+	function fetch_areas(){
+		if( $this->input->post('sid') ){
+			$sid = $this->input->post('sid');
+			$areas = $this->user->get_area( $sid );
+			header('Content-type: text/json');
+			header('Content-type: application/json');
+			echo json_encode($states);
+	        exit;
+		}
+		redirect(base_url());
+	}
+
 }

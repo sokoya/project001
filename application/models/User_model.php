@@ -130,6 +130,11 @@ Class User_model extends CI_Model{
     function get_states(){
         return $this->db->get('states')->result_array();
     }
+    function get_area( $sid = ''){
+        $this->db->select('id,name,price')l
+        $this->db->where('sid', $sid)
+        return $this->db->get('area')->result_array();
+    }
 
     function get_rows($table_name ='users', $where ){
         $this->db->where($where);

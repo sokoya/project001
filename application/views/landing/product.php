@@ -444,32 +444,32 @@
 							</div>
 							<div class="col-md-3">
 								<ul class="product-rate-list">
-									<?php $x = 1; foreach( $rating_counts as $rating ): 
-										if( $x != $rating->rating_score ):
+									<?php
+									for ($i = 1; $i <= $user->rating_score; $i++) {
+										?>
+										<li class="rated"><i class="fa fa-star"></i>
+										</li>
+										<?php
+									}
+									if ($user->rating_score < 5) {
+										for ($i = 0; $i < (5 - $user->rating_score); $i++) { ?>
+											<li><i class="fa fa-star"></i></li>
+											<?php
+										}
+									}
 									?>
-										<li>
-											<p class="product-rate-list-item"><?=$x;?> Stars</p>
-											<div class="product-rate-list-bar">
-												<div style="width:0%;"></div>
-											</div>
-											<p class="product-rate-list-count">0</p>
-										</li>
-									<?php else :?>
-										<li>
-											<p class="product-rate-list-item"><?=$x;?> Stars</p>
-											<div class="product-rate-list-bar">
-												<div style="width:0%;"></div>
-											</div>
-											<p class="product-rate-list-count"><?= $rating->occurence; ?></p>
-										</li>
-									<?php endif; ?>										
-									<?php $x++;  endforeach; ?>
+												<li>
+													<p class="product-rate-list-item"><?=$i;?> Stars</p>
+													<div class="product-rate-list-bar">
+														<div style="width:0%;"></div>
+													</div>
+													<p class="product-rate-list-count">0</p>
+												</li>
 								</ul>
 							</div>
 							<div class="col-md-5" style="">
 								<div class="row">
 									<?php
-									// var_dump( $user);
 									if ($this->session->userdata('logged_in')) :
 										$user = $this->product->get_rating_review('product_rating', 'rating_score', $profile->id, $product->id);
 										if (!$user):
