@@ -203,7 +203,7 @@ class Account extends CI_Controller {
 			$areas = $this->user->get_area( $sid );
 			header('Content-type: text/json');
 			header('Content-type: application/json');
-			echo json_encode($states);
+			echo json_encode($areas);
 	        exit;
 		}
 		redirect(base_url());

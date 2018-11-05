@@ -179,7 +179,17 @@
     var selected_state_id
     state_drop.change(function(){
        selected_state_id = $('#state_id option:selected').attr('value');
-       
+        $.ajax({
+            url:base_url + 'account/fetch_areas',
+            method: 'get',
+            data: {sid: selected_state_id},
+            dataType: 'json',
+            success: function(d) {
+                $.each(d, function (k, v) {
+                    $('#area_id').append($('<option></option>').attr('value', v.id).text(v.name));
+                })
+            }
+        })
     });
 </script>
 </body>
