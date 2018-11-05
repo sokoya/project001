@@ -62,9 +62,6 @@
                                             <label for="state_id" class="control-label">State  <span class="req">*</span></label>
                                             <select class="form-control" id="state_id">
                                                 <option selected>--select--</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
                                             </select>
                                         </div>
 
@@ -86,9 +83,6 @@
                                             <label for="area_id" class="control-label">Area  <span class="req">*</span></label>
                                             <select class="form-control" id="area_id">
                                                 <option selected>--select--</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
                                             </select>
                                         </div>
 
