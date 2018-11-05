@@ -443,23 +443,34 @@
 								<?php endif; ?>
 							</div>
 							<div class="col-md-3">
-								<ul class="product-rate-list">
+								<ul class="product-rate-list">									
 									
-										<?php
-											$x = 1;
-											do {?>
-												<li>
-													<p class="product-rate-list-item"><?=$x;?> Stars</p>
-													<div class="product-rate-list-bar">
-														<div style="width:0%;"></div>
-													</div>
-													<p class="product-rate-list-count">0</p>
-												</li>
-											<?php
-											$x++;
-										} while ( $x <= 5);
-										?>
-												
+									<?php
+									$array = [5,4,3,2,1];
+									$x = 5; 
+									foreach($rating_counts as $rating) : ?>
+										<?php if(in_array($rating['rating_score'], $array)) : ?>
+											<li>
+												<p class="product-rate-list-item"><?=$x;?> Stars</p>
+												<div class="product-rate-list-bar">
+													<div style="width:0%;"></div>
+												</div>
+												<p class="product-rate-list-count"><?= $rating['occurence']; ?></p>
+											</li>
+											<?php unset($array[$x]);?>
+										<?php else : ?>
+											<li>
+												<p class="product-rate-list-item"><?=$x;?> Stars</p>
+												<div class="product-rate-list-bar">
+													<div style="width:0%;"></div>
+												</div>
+												<p class="product-rate-list-count">0</p>
+											</li>
+										<?php endif; ?>
+									<?php $x -= 1; endforeach; 
+										var_dump( $array );
+									?>
+
 								</ul>
 							</div>
 							<div class="col-md-5" style="">
