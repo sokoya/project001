@@ -132,7 +132,7 @@ Class User_model extends CI_Model{
     }
     function get_area( $sid = ''){
         $this->db->select('id,name,price');
-        $this->db->where('sid', $sid)
+        $this->db->where('sid', $sid);
         return $this->db->get('area')->result_array();
     }
 

@@ -184,10 +184,11 @@
             method: 'get',
             data: {sid: selected_state_id},
             dataType: 'json',
-            success: function(d){
-                $.each(d, function(k,v){
+            success: function(d) {
+                $.each(d, function (k, v) {
                     $('#area_id').append($('<option></option>').attr('value', v.id).text(v.name));
                 })
+            }
         })
     });
 </script>
