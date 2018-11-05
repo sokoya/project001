@@ -178,7 +178,6 @@
 								</p>
 
 
-
 								<hr class="product-line"/>
 								<div class="product-variation">
 									<?= form_open('', 'id="variation-form"'); ?>
@@ -207,8 +206,8 @@
 																value="<?= trim($variation->variation); ?>" <?php if ($variation->quantity == 0) echo 'disabled'; ?> >
 															<?= ellipsize(trim($variation->variation), 8); ?>
 														</option>
-														
-													<?php  endforeach; ?>
+
+													<?php endforeach; ?>
 												</select>
 											</div>
 										<?php endif; ?>
@@ -236,7 +235,7 @@
 											</ul>
 										</div>
 
-										<?php if($variation->discount_price != '') : ?>
+										<?php if ($variation->discount_price != '') : ?>
 											<input type="hidden" name="product_price"
 												   value="<?= $variation->discount_price; ?>"
 												   class="pr_price_hidden"/>
@@ -245,7 +244,7 @@
 												   value="<?= $variation->sale_price; ?>"
 												   class="pr_price_hidden"/>
 										<?php endif; ?>
-										
+
 									</div>
 									<button type="submit" style="display: none;">Submit</button>
 									<?= form_close(); ?>
@@ -316,7 +315,8 @@
 					</li>
 					<li><a href="#full-spec" data-toggle="tab"><i class="fa fa-cogs nav-tab-icon"></i>Full Specs</a>
 					</li>
-					<li><a href="#review" data-toggle="tab"><i class="fa fa-star nav-tab-icon"></i>Rating and
+					<li><a href="#review" class="review-get" data-toggle="tab"><i class="fa fa-star nav-tab-icon"></i>Rating
+							and
 							Reviews</a>
 					</li>
 				</ul>
@@ -443,22 +443,23 @@
 								<?php endif; ?>
 							</div>
 							<div class="col-md-3">
-								<ul class="product-rate-list">									
-									
+								<ul class="product-rate-list">
+
 									<?php
 									$x = 5;
-									do {?>
+									do { ?>
 										<li>
-											<p class="product-rate-list-item"><?=$x;?> Stars</p>
+											<p class="product-rate-list-item"><?= $x; ?> Stars</p>
 											<div class="product-rate-list-bar">
 												<div style="width:0%;"></div>
 											</div>
 											<p class="product-rate-list-count">0</p>
 										</li>
-									<?php $x -= 1; } while ( $x >= 1 );
+										<?php $x -= 1;
+									} while ($x >= 1);
 									?>
 									<!-- <li>
-										<p class="product-rate-list-item"><?=$x;?> Stars</p>
+										<p class="product-rate-list-item"><?= $x; ?> Stars</p>
 										<div class="product-rate-list-bar">
 											<div style="width:0%;"></div>
 										</div>
@@ -553,52 +554,8 @@
 							</div>
 						</div>
 						<hr/>
-						<article class="product-review">
-							<div class="product-review-content">
-								<h5 class="product-review-title">{{ Review Title}}</h5>
-								<ul class="product-page-product-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-								</ul>
-								<p class="product-review-meta">by {{Display name}} on 08/14/2015</p>
-								<p class="product-review-body">{{ Review Content }}</p>
-								<p class="text-success">
-									<strong><i class="fa fa-check"></i> {{I would recommend it to a friend}}</strong>
-								</p>
-							</div>
-						</article>
-
-						<div class="row">
-							<div class="col-md-6">
-								<p class="category-pagination-sign">238 customer reviews found. Showing 1 - 5</p>
-							</div>
-							<div class="col-md-6">
-								<nav>
-									<ul class="pagination category-pagination pull-right">
-										<li class="active"><a href="#">1</a>
-										</li>
-										<li><a href="#">2</a>
-										</li>
-										<li><a href="#">3</a>
-										</li>
-										<li><a href="#">4</a>
-										</li>
-										<li><a href="#">5</a>
-										</li>
-										<li class="last"><a href="#"><i class="fa fa-long-arrow-right"></i></a>
-										</li>
-									</ul>
-								</nav>
-							</div>
-						</div>
+						<article class="product-review"></article>
+						
 
 					</div>
 				</div>
@@ -857,6 +814,34 @@
 		} else if (quantity.val() === '0') {
 			quantity.val(1)
 		}
+	});
+
+	$('.review-get').on('click', function () {
+		$.ajax({
+			url: base_url + "product/get_reviews",
+			method: "POST",
+			data: {pid: product_id},
+			success: function (response) {
+				$.each(response, function (key, value) {
+					$('.product-review').append(`
+					<div class="product-review-content">
+								<h5 class="product-review-title">${value.title}</h5>
+								<ul class="product-page-product-rating">
+								${Array(value.rating_score * 1).join(0).split(0).map((item, i) => `
+    									<li class="rated"><i class="fa fa-star"></i>
+									</li>
+  									`).join('')}
+								${value.rating_score < 5 ? Array(5 - value.rating_score * 1).join(0).split(0).map((item, i) => `
+    									<li><i class="fa fa-star"></i></li>
+  									`).join('') : ''}
+								</ul>
+								<p class="product-review-meta">by ${value.display_name} on ${value.published_date}</p>
+								<p class="product-review-body">${value.content}</p>
+								<hr/>
+							</div>`)
+				});
+			}
+		})
 	});
 </script>
 </body>
