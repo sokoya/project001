@@ -20,7 +20,7 @@
 						<tr>
 							<th>Product</th>
 							<th>Title</th>
-							<th>Size/Colour</th>
+							<th>Variation/Colour</th>
 							<th>Price</th>
 							<th>Quality</th>
 							<th>Total</th>
@@ -49,7 +49,7 @@
 									<span class="text text-sm">Seller: <?= $detail->name; ?></span>
 								</td>
 								<td>
-									<?= $product['options']['size'] . '/' . $product['options']['colour'];
+									<?= $product['options']['variation'] . '/' . $product['options']['colour'];
 									?>
 								</td>
 								<td><?= ngn($product['price']); ?></td>

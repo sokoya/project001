@@ -177,6 +177,8 @@
 									<?php endif; ?>
 								</p>
 
+
+
 								<hr class="product-line"/>
 								<div class="product-variation">
 									<?= form_open('', 'id="variation-form"'); ?>
@@ -192,6 +194,7 @@
 													<?php endforeach; ?>
 												</select>
 											</div>
+
 										<?php endif; ?>
 										<?php if (count($variations) > 1) : ?>
 											<div class="col-md-4">
@@ -204,7 +207,8 @@
 																value="<?= trim($variation->variation); ?>" <?php if ($variation->quantity == 0) echo 'disabled'; ?> >
 															<?= ellipsize(trim($variation->variation), 8); ?>
 														</option>
-													<?php endforeach; ?>
+														
+													<?php  endforeach; ?>
 												</select>
 											</div>
 										<?php endif; ?>
@@ -213,24 +217,6 @@
 										<input type="hidden" name="product_name" value="<?= $product->product_name; ?>">
 										<input type="hidden" name="seller"
 											   value="<?= base64_encode($product->seller_id) ?>">
-										<?php
-										if ($variation->discount_price != '') {
-											?>
-											<input type="hidden" name="product-price"
-												   value="<?= $variation->discount_price; ?>"
-												   class="pr_price_hidden"/>
-											<?php
-										} else {
-											?>
-											<input type="hidden" name="product-price"
-												   value="<?= $variation->sale_price; ?>"
-												   class="pr_price_hidden"/>
-										<?php
-										}
-										?>
-										<input type="hidden" name="product-price"
-											   value="<?= $variation->sales_price; ?>"
-											   class="pr_price_hidden"/>
 										<div class="col-md-5 quan-u">
 											<h5 class="custom-product-page-option-title">Quantity:</h5>
 											<ul>
@@ -248,9 +234,18 @@
 													</button>
 												</li>
 											</ul>
-
-
 										</div>
+
+										<?php if($variation->discount_price != '') : ?>
+											<input type="hidden" name="product_price"
+												   value="<?= $variation->discount_price; ?>"
+												   class="pr_price_hidden"/>
+										<?php else: ?>
+											<input type="hidden" name="product_price"
+												   value="<?= $variation->sale_price; ?>"
+												   class="pr_price_hidden"/>
+										<?php endif; ?>
+										
 									</div>
 									<button type="submit" style="display: none;">Submit</button>
 									<?= form_close(); ?>
