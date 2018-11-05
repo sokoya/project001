@@ -459,7 +459,7 @@
 									?>
 									<?php foreach(	$rating_counts as $score ) :?>
 											<?php
-												echo $score['rating_score'] .' has ' . $score['occurence'] , ' number of occurence <br />'; 
+												echo $score['rating_score'] .' star has ' . $score['occurence'] , ' number of occurence <br />'; 
 											?>
 									<?php endforeach;?>
 								</ul>
