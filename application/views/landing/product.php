@@ -444,27 +444,22 @@
 							</div>
 							<div class="col-md-3">
 								<ul class="product-rate-list">
-									<?php
-									for ($i = 1; $i <= $user->rating_score; $i++) {
-										?>
-										<li class="rated"><i class="fa fa-star"></i>
-										</li>
+									
 										<?php
-									}
-									if ($user->rating_score < 5) {
-										for ($i = 0; $i < (5 - $user->rating_score); $i++) { ?>
-											<li><i class="fa fa-star"></i></li>
-											<?php
-										}
-									}
-									?>
+											$x = 1;
+											do {?>
 												<li>
-													<p class="product-rate-list-item"><?=$i;?> Stars</p>
+													<p class="product-rate-list-item"><?=$x;?> Stars</p>
 													<div class="product-rate-list-bar">
 														<div style="width:0%;"></div>
 													</div>
 													<p class="product-rate-list-count">0</p>
 												</li>
+											<?php
+											$x++;
+										} while ( $x <= 5);
+										?>
+												
 								</ul>
 							</div>
 							<div class="col-md-5" style="">
