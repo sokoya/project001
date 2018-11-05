@@ -423,7 +423,7 @@ Class Product_model extends CI_Model{
 
     function get_rating_counts( $pid = ''){
         $select = "SELECT COUNT(*) as occurence, rating_score FROM product_rating WHERE product_id = $pid GROUP BY rating_score ORDER BY rating_score DESC";
-        return $this->db->query($select)->result();
+        return $this->db->query($select)->result_array();
     }
 }
 
