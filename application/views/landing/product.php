@@ -187,7 +187,8 @@
 												<select class="product-page-option-select" name="colour">
 													<?php $colour_family = json_decode($product->colour_family);
 													foreach ($colour_family as $colour): ?>
-														<option value="<?= trim($colour); ?>"><?= ucfirst($colour); ?></option>
+														<option
+															value="<?= trim($colour); ?>"><?= ucfirst($colour); ?></option>
 													<?php endforeach; ?>
 												</select>
 											</div>
@@ -212,6 +213,24 @@
 										<input type="hidden" name="product_name" value="<?= $product->product_name; ?>">
 										<input type="hidden" name="seller"
 											   value="<?= base64_encode($product->seller_id) ?>">
+										<?php
+										if ($variation->discount_price != '') {
+											?>
+											<input type="hidden" name="product-price"
+												   value="<?= $variation->discount_price; ?>"
+												   class="pr_price_hidden"/>
+											<?php
+										} else {
+											?>
+											<input type="hidden" name="product-price"
+												   value="<?= $variation->sale_price; ?>"
+												   class="pr_price_hidden"/>
+										<?php
+										}
+										?>
+										<input type="hidden" name="product-price"
+											   value="<?= $variation->sales_price; ?>"
+											   class="pr_price_hidden"/>
 										<div class="col-md-5 quan-u">
 											<h5 class="custom-product-page-option-title">Quantity:</h5>
 											<ul>
@@ -223,7 +242,7 @@
 														   id="quan"
 														   class="product-page-qty product-page-qty-input quantity"
 														   type="text"
-														   value="1" />
+														   value="1"/>
 													<button type="button"
 															class="product-page-qty product-page-qty-plus">+
 													</button>
@@ -790,7 +809,7 @@
 			error: function (error) {
 				console.log(error);
 			}
-		}); 
+		});
 	});
 	$('.add-to-cart').on('click', function () {
 		_btn = $(this);
