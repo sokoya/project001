@@ -150,7 +150,7 @@ class Account extends CI_Controller {
 					'phone2' => $phone2,
 					'aid' => cleanit($this->input->post('area'))
 				);
-				if( $this->user->insert_data('billing_address', $data) ){
+				if( is_int($this->user->insert_data('billing_address', $data)) ){
 					$this->session->set_flashdata('success_msg', 'Success: The address has been added to your account.');
 				}else{
 					$this->session->set_flashdata('error_msg', 'There was an error adding the address to your account');
