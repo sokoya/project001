@@ -4,8 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Checkout extends CI_Controller
 {
 
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
 		$this->load->helper('text');
 		if (!$this->session->userdata('logged_in')) {
@@ -17,71 +16,32 @@ class Checkout extends CI_Controller
 		}
 	}
 
-	public function index()
-	{
+	public function index(){
 		// @TODO : Check the product variation quantity and price
 		$page_data['title'] = 'Checkout';
-		if (!$this->input->post()) {
-			$this->load->model('user_model', 'user');
-			$page_data['user'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
-			$this->load->view('landing/checkout', $page_data);
-		} else {
-			// Form validation
-			// $this->form_validation->set_rules('customer_email', 'Email address','trim|required|xss_clean|valid_email');
-			$this->form_validation->set_rules('customer_name', 'Name', 'trim|required|xss_clean');
-			// $this->form_validation->set_rules('customer_phone', 'Phone number','trim|required|xss_clean');
-			// $this->form_validation->set_rules('address', 'Delivery address','trim|required|xss_clean');
-			// $this->form_validation->set_rules('card_number', 'Card number', 'trim|required|xss_clean');
-			// $this->form_validation->set_rules('cvc', 'CVC', 'trim|required|xss_clean');
-			// $this->form_validation->set_rules('cardholder_name', 'Card holder name', 'trim|required|xss_clean');
-			if ($this->form_validation->run() == FALSE) {
-				$this->session->set_flashdata('error_msg', 'There was an error with the form. Please fix the following <br />' . validation_errors());
-				redirect($_SERVER['HTTP_REFERER']);
-			}
-			// Check payment status from
-			// if payment successful
-			$this->load->helper('string');
-			$code = $this->product->generate_code('orders', 'order_code');
-			$data = array(
-				'buyer_id' => base64_decode($this->input->post('userid')),
-				'customer_name' => $this->input->post('customer_name'),
-				'customer_phone' => $this->input->post('customer_phone'),
-				'city' => $this->input->post('city'),
-				'zip_code' => $this->input->post('zip_code'),
-				'address' => $this->input->post('address'),
-				'status' => 'ordered',
-				'order_code' => $code
-			);
-
-			$count = $x = 0;
-			// count, sizeof not working for array, Imporovised
-			foreach ($this->input->post('order') as $key) {
-				$count++;
-			}
-			do {
-				// $_POST['order'] = 'userid|product_id|seller_id|qty|desc}price'
-				$order = explode('|', $_POST['order'][$x]);
-				$data['buyer_id'] = base64_decode($order[0]);
-				$data['product_id'] = $order[1];
-				$data['seller_id'] = base64_decode($order[2]);
-				$data['qty'] = $order[3];
-				$data['product_desc'] = $order[4];
-				$data['amount'] = $order[3] * $order[5];
-				$this->product->insert_data('orders', $data);
-				$x++;
-			} while ($x < $count);
-			$this->session->set_flashdata('success_msg', 'Thank you for the order, your order is in progress. Your order tracking code is  #' . $code);
-			// clear the cart session
-			$this->cart->destroy();
-			redirect('account');
-		}
+		$this->load->model('user_model', 'user');
+		$page_data['user'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
+		$page_data['addresses'] = $this->user->get_user_billing_address( $page_data['user']->id);
+		$this->load->view('landing/checkout', $page_data);
 	}
 
+	function fetch_states(){
+		$states = $this->user->get_states();
+		header('Content-type: text/json');
+		header('Content-type: application/json');
+		echo json_encode($states);
+        exit;
+	}
 
-//	public function demo()
-//	{
-//		$page_data['title'] = 'Online shopping | Buy Electronics, Phones, Fashions in Nigeria';
-//		$this->load->view('landing/home', $page_data);
-//	}
-
+	function fetch_areas(){
+		if( $this->input->get('sid') ){
+			$sid = $this->input->get('sid');
+			$areas = $this->user->get_area( $sid );
+			header('Content-type: text/json');
+			header('Content-type: application/json');
+			echo json_encode($areas);
+	        exit;
+		}
+		redirect(base_url());
+	}
 }
