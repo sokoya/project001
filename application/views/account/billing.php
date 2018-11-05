@@ -144,16 +144,21 @@
 
 <div class="gap gap-small"></div>
 <?php $this->load->view('landing/resources/footer'); ?>
-
 <?php $this->load->view('landing/resources/script'); ?>
+<script> let base_url = "<?= base_url();?>"</script>
 
 <script>
     let innercodered = "<strong><i class=\"fa fa-times\"></i> Cancel\n" +
         "                    </strong>";
     let innercodenorm ="<strong><i class=\"fa fa-plus\"></i> Add New Address\n" +
-        "                    </strong>"
+        "                    </strong>";
+    let state_drop = $('#state_id');
     $('#add_new_add').on('click', function(){
-
+            $.getJSON( base_url + 'account/fetch_states', function(d) {
+                $.each(d, function(k,v){
+                    state_drop.append($('<option></option>').attr('value', v.id).text(v.name));
+                })
+            });
         if ($('#add_new_add').hasClass('btn-primary')){
             $('#add_address').css({
                 display : 'block'
