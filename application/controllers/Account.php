@@ -166,8 +166,8 @@ class Account extends CI_Controller {
 	}
 
 	function fetch_areas(){
-		if( $this->input->post('sid') ){
-			$sid = $this->input->post('sid');
+		if( $this->input->get('sid') ){
+			$sid = $this->input->get('sid');
 			$areas = $this->user->get_area( $sid );
 			header('Content-type: text/json');
 			header('Content-type: application/json');
