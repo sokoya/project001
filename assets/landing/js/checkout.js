@@ -33,12 +33,8 @@ $('.create-address-btn').on('click', function (e) {
 				$('#processing').hide();
 				$('#status').html(`<p class="alert alert-danger">{response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
 			}
-
 		}
 	});
-
-	// $('#delivery_address').slideDown();
-	// $('#register_address').hide();
 });
 
 $('.btn-new-address').on('click', function () {
