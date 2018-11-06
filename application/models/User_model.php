@@ -56,6 +56,19 @@ Class User_model extends CI_Model{
         return $this->db->update( $table_name, $data );
     }
 
+
+
+    // update billing address
+    function update_billing_address($where = '', $bid){
+        $this->db->where($where);
+        $this->db->set('primary_address', 0, false);
+        if($this->db->update('billing_address')){
+            $this->db->where('id', $bid);
+            return $this->db->update('billing_address', array('primary_address' => 1));
+        }
+        return false;
+    }
+
     // check if the password is correct
 
     function cur_pass_match($password = null, $access = '', $table = 'users'){
