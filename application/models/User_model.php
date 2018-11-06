@@ -53,8 +53,22 @@ Class User_model extends CI_Model{
     // Update table
     function update_data( $access = '' , $data = array(), $table_name = 'users'){
         $this->db->where('id', $access);
-        $this->db->or_where('email', $access);
         return $this->db->update( $table_name, $data );
+    }
+
+
+
+    // update billing address
+    function update_billing_address($where = '', $bid){
+        $this->db->where($where);
+        $this->db->set('primary_address', 0, false);
+        if($this->db->update('billing_address')){
+            $this->db->where('id', $bid);
+            $this->db->update('billing_address', array('primary_address' => 1));
+            $select = "SELECT a.price FROM area a LEFT JOIN billing_address b ON(b.aid = a.id) WHERE b.id = $bid";
+            return $this->db->query($select)->row();
+        }
+        return false;
     }
 
     // check if the password is correct
