@@ -105,37 +105,23 @@
             </div>
             <div class="gap gap-small"></div>
             <div class="row ">
+                <?php foreach($addresses as $address ) : ?>
                 <div class="col-md-6">
-                    <div class="market-dashboard-card">
-                        <h4>Default Address</h4>
+                    <div class="market-dashboard-card" data-id="<?= $address->id; ?>">
+                        <h4><?php if($address->primary_address == 0){echo 'Set As Default Address'; } else{ echo 'Default Address';} ?></h4>
                         <hr/>
                         <p>
-                            <i class="fa fa-user"></i>&nbsp;<?= ucwords($profile->first_name) . ' ' . ucwords($profile->last_name); ?>
+                            <i class="fa fa-user"></i>&nbsp;<?= ucwords($address->first_name) . ' ' . ucwords($address->last_name); ?>
                         </p>
                         <p>
-                            <i class="fa fa-map-marker"></i>&nbsp;504F Jagaban Crescent, Ikeja, Lagos
+                            <i class="fa fa-map-marker"></i>&nbsp;<?= $address->address; ?>
                         </p>
                         <p>
-                            <i class="fa fa-phone"></i>&nbsp;080XXXXXXXX, 080XXXXXXXX
+                            <i class="fa fa-phone"></i>&nbsp;<?= $address->phone; ?> <?php if(!empty($address->phone2)) echo ', '. $address->phone2; ?>
                         </p>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="market-dashboard-card">
-                        <h4>Other Addresses</h4>
-                        <hr/>
-                        <p>
-                            Additional Addresses will appear here.
-                        </p>
-                        <p>
-                            Additional Addresses will appear here.
-                        </p>
-                        <p>
-                            Additional Addresses will appear here.
-                        </p>
-                    </div>
-                </div>
-
+                <?php endforeach; ?>
             </div>
 
         </div>
