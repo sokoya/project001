@@ -16,6 +16,7 @@ function bind_market(src, destination) {
 
 $('.create-address-btn').on('click', function (e) {
 	e.preventDefault();
+	$(this).prop('disabled', true);
 	$('#processing').show();
 	$.ajax({
 		url: base_url + "checkout/add_address",
@@ -25,11 +26,14 @@ $('.create-address-btn').on('click', function (e) {
 			if (response.status = 'success') {
 				$('#status').html(`<p class="alert alert-success">{response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
 				$('#processing').hide();
-				$('#delivery-method').load(`${base_url}checkout #delivery-method`);
+				$('#delivery-method').load(`${base_url}checkout #delivery-method`, function () {
+					$('.pickup-address').on('click', get_updates);
+				});
 			} else {
 				$('#processing').hide();
 				$('#status').html(`<p class="alert alert-danger">{response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
 			}
+
 		}
 	});
 
@@ -66,7 +70,9 @@ $('#state').on('change', function () {
 
 });
 
-$('.pickup-address').on('click', function () {
+$('.pickup-address').on('click', get_updates);
+
+function get_updates() {
 	$('.pickup-address').removeClass('custom-panel-active');
 	let ad_id = $(this).data('id');
 	let elem = $(this);
@@ -88,7 +94,7 @@ $('.pickup-address').on('click', function () {
 		error: function (response) {
 		}
 	});
-});
+}
 
 
 $(".delivery-box").on('change', function () {

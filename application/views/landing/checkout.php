@@ -238,7 +238,8 @@
 						</h3>
 					</div>
 					<ul class="list-group cs-sum-grp">
-						<li class="list-group-item cs-sm-m">Subtotal: <span class="total-sum" data-amount="40200">&#8358;40,200</span></li>
+						<li class="list-group-item cs-sm-m">Subtotal: <span class="total-sum" data-amount="40200">&#8358;40,200</span>
+						</li>
 						<li class="list-group-item cs-sm-m">Delivery Charges: <span class="charges" data-amount="1250">&#8358;1,250</span>
 						</li>
 						<li class="list-group-item cs-sm-t">Total: <span class="total-sum-charges">&#8358;41,450</span>
@@ -253,7 +254,7 @@
 		</div>
 	</div>
 	<div class="gap"></div>
-	
+
 	<?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
