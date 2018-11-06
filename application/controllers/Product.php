@@ -29,7 +29,6 @@ class Product extends CI_Controller
 		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
 		$this->add_count($index);
 		$page_data['rating_counts'] = $this->product->get_rating_counts( $index );
-		// var_dump( $page_data['rating_counts'] );
 		$this->load->view('landing/product', $page_data);
 	}
 
@@ -280,7 +279,32 @@ class Product extends CI_Controller
 
 
 
-			header('Content-type: text/json');
+    /**
+     * @param $product_id - product id
+     * @return 
+     */
+
+    function get_reviews(){
+        // $id = $_GET['id'];
+        if( $this->input->post('pid')){
+            $results = $this->product->get_reviews($id);
+            $return = array();
+            foreach( $results as $key => $values ) {
+                $res = array();
+                foreach( $values as $new_key){
+                    $res['display_name'] = ucwords($values['display_name']);
+                    $res['published_date'] = neatDate($values['published_date']);
+                    $res['content'] = $values['content'];
+                    $res['title'] = $values['title'];
+                    $res['rating_score'] = $values['rating_score'];
+                }
+                array_push( $return, $res );
+                if( count($return) >= 10 ){
+                	array_push( $return, array('is_next' => true) );
+                }
+            }
+
+            header('Content-type: text/json');
 			header('Content-type: application/json');
 			echo json_encode($return);
             exit;
