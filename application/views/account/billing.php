@@ -41,7 +41,7 @@
 				order, please go to the Orders page
 			</div>
 
-			<!--//add address here-->
+			
 			<div class="add_form" id="add_address">
 				<div>
 					<div>
