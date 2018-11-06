@@ -1250,14 +1250,12 @@ hr {
 .payment-icons-list {
 	list-style: none;
 	overflow: hidden;
-	float: right;
 	padding: 0;
 	margin: 10px 0;
 }
 
 .payment-icons-list > li {
 	float: left;
-	margin-left: 10px;
 }
 
 .payment-icons-list > li img {
