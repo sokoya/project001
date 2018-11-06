@@ -16,15 +16,18 @@ function bind_market(src, destination) {
 
 $('.create-address-btn').on('click', function (e) {
 	e.preventDefault();
+	$('#processing').show();
 	$.ajax({
 		url: base_url + "checkout/add_address",
 		method: "POST",
 		data: $('#new-address-form').serialize(),
 		success: function (response) {
 			if (response.status = 'success') {
-				$('#status').html(`<p class="alert alert-success">{response.message}</p>`).slideDown('fast').delay(300).slideUp('slow');
+				$('#status').html(`<p class="alert alert-success">{response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
+				$('#processing').hide();
 				$('#delivery-method').load(`${base_url}checkout #delivery-method`);
 			} else {
+				$('#processing').hide();
 				$('#status').html(`<p class="alert alert-danger">{response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
 			}
 		}
@@ -68,11 +71,21 @@ $('.pickup-address').on('click', function () {
 	$('.pickup-address').removeClass('custom-panel-active');
 	let ad_id = $(this).data('id');
 	$(`#${ad_id}`).prop('checked', true);
-	if ('.delivery-box') {
-		$(this).addClass('custom-panel-active');
-		$('.pay-method').show();
-		$('.delivery-warning').slideUp()
-	}
+
+	$.ajax({
+		url: base_url + "checkout/set_default_address",
+		method: 'POST',
+		data: {address_id: ad_id},
+		success: function (response) {
+			if ('.delivery-box') {
+				$(this).addClass('custom-panel-active');
+				$('.pay-method').show();
+				$('.delivery-warning').slideUp()
+			}
+		},
+		error: function (response) {
+		}
+	});
 });
 
 

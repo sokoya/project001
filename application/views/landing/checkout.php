@@ -94,21 +94,51 @@
 							create a new address
 							to continue
 						</div>
+						<div id="processing"
+							 style="display:none;position: center;top: 0;left: 0;width: auto;height: auto%;background: #f4f4f4;z-index: 99;">
+							<div class="text"
+								 style="position: absolute;top: 35%;left: 0;height: 100%;width: 100%;font-size: 18px;text-align: center;">
+								<img src="<?= base_url('assets/landing/load.gif'); ?>" alt="Processing...">
+								Processing your request. <strong
+									style="color: rgba(2.399780888618386%,61.74193548387097%,46.81068368248487%,0.843);">Please
+									Wait! </strong>
+							</div>
+						</div>
 						<div class="row" id="delivery_address_box">
+							<?= form_open(); ?>
+
 							<?php
 							if ($addresses) :
 								foreach ($addresses as $address) : ?>
 									<div class="col-md-6">
-										<div class="panel panel-default custom-panel pickup-address"
+										<div class="panel panel-default custom-panel pickup-address
+										<?php
+										if ($address->primary_address == 1) :
+											?>
+											custom-panel-active
+										<?php
+										endif;
+										?>"
 											 data-id="<?= $address->id; ?>">
 											<div class="panel-heading sub-custom-panel-head">
 												<h3 class="panel-title">
 													<div class="form-check">
 														<input class="form-check-input delivery-box" type="radio"
 															   name="address_radio1"
-															   id="<?= $address->id; ?>" value="option1">
+															   id="<?= $address->id; ?>" value="option1"
+															<?php
+															if ($address->primary_address == 1) :
+																?>
+																checked
+															<?php
+															endif;
+															?>
+														>
 														<label class="form-check-label" for="<?= $address->id; ?>">
 															Select this address
+															<?php
+															// if( $address->primar_address ==1 ) : We have a default address already set
+															?>
 														</label>
 													</div>
 													<span>Edit</span>
@@ -129,6 +159,7 @@
 								<?php
 								endforeach;
 							endif; ?>
+							<?= form_close(); ?>
 						</div>
 					</div>
 				</div>
@@ -225,7 +256,7 @@
 		</div>
 	</div>
 	<div class="gap"></div>
-
+	
 	<?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
