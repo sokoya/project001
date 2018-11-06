@@ -4,9 +4,9 @@ function format_currency(str) {
 
 
 function ucwords(str) {
-    return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
-        return $1.toUpperCase();
-    });
+	return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
+		return $1.toUpperCase();
+	});
 }
 
 
@@ -16,6 +16,7 @@ function bind_market(src, destination) {
 
 $('.create-address-btn').on('click', function (e) {
 	e.preventDefault();
+	$(this).prop('disabled', true);
 	$('#processing').show();
 	$.ajax({
 		url: base_url + "checkout/add_address",
@@ -25,56 +26,71 @@ $('.create-address-btn').on('click', function (e) {
 			if (response.status = 'success') {
 				$('#status').html(`<p class="alert alert-success">{response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
 				$('#processing').hide();
-				$('#delivery-method').load(`${base_url}checkout #delivery-method`);
-			}else{
+				$('#delivery-method').load(`${base_url}checkout #delivery-method`, function () {
+					$('.pickup-address').on('click', get_updates);
+				});
+			} else {
 				$('#processing').hide();
 				$('#status').html(`<p class="alert alert-danger">{response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
 			}
 		}
 	});
-
-	// $('#delivery_address').slideDown();
-	// $('#register_address').hide();
 });
 
 $('.btn-new-address').on('click', function () {
-	$('#register_address').slideDown('fast', function(){
-		$.getJSON( base_url + 'checkout/fetch_states', function(d) {
-            $.each(d, function(k,v){
-                $('#state').append($('<option></option>').attr('value', v.id).text(ucwords(v.name)));
-            })
-        });
+	$('#register_address').slideDown('fast', function () {
+		$.getJSON(base_url + 'checkout/fetch_states', function (d) {
+			$.each(d, function (k, v) {
+				$('#state').append($('<option></option>').attr('value', v.id).text(ucwords(v.name)));
+			})
+		});
 	});
 	$('#delivery_address').hide();
 });
 
-$('#state').on('change', function(){
+$('#state').on('change', function () {
 	$("#city").empty();
 	let sid = $(this).val();
 	$.ajax({
-	    url:base_url + 'account/fetch_areas',
-	    method: 'get',
-	    data: {sid: sid},
-	    dataType: 'json',
-	    success: function(d) {
-	    	$("#city").append("<option>-- Please select a city --</option>");
-	        $.each(d, function (k, v) {
-	            $('#city').append($('<option></option>').attr('value', v.id).text(ucwords(v.name)));
-	        })
-	    }
+		url: base_url + 'account/fetch_areas',
+		method: 'get',
+		data: {sid: sid},
+		dataType: 'json',
+		success: function (d) {
+			$("#city").append("<option>-- Please select a city --</option>");
+			$.each(d, function (k, v) {
+				$('#city').append($('<option></option>').attr('value', v.id).text(ucwords(v.name)));
+			})
+		}
 	})
 
 });
 
+$('.pickup-address').on('click', get_updates);
 
-$('.pickup-address').on('click', function () {
-	$('.delivery-box').prop('checked', true);
-	if ('.delivery-box') {
-		$('.pickup-address').addClass('custom-panel-active');
-		$('.pay-method').show();
-		$('.delivery-warning').slideUp()
-	}
-});
+function get_updates() {
+	$('.pickup-address').removeClass('custom-panel-active');
+	let ad_id = $(this).data('id');
+	let elem = $(this);
+	$(`#${ad_id}`).prop('checked', true);
+
+	$.ajax({
+		url: base_url + "checkout/set_default_address",
+		method: 'POST',
+		data: {address_id: ad_id},
+		success: function (response) {
+			if ('.delivery-box') {
+				bind_market(format_currency(response), 'charges');
+				bind_market(format_currency($('.total-sum').data('amount') + response * 1), 'total-sum-charges');
+				elem.addClass('custom-panel-active');
+				$('.pay-method').show();
+				$('.delivery-warning').slideUp()
+			}
+		},
+		error: function (response) {
+		}
+	});
+}
 
 
 $(".delivery-box").on('change', function () {
@@ -141,7 +157,7 @@ quantity.on('input', function () {
 	}
 });
 
-$(document).ready(function(){
+$(document).ready(function () {
 
 	// $.ajax({
 	// 	url: base_url + "checkout/fetch_address",
