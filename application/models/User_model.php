@@ -64,7 +64,9 @@ Class User_model extends CI_Model{
         $this->db->set('primary_address', 0, false);
         if($this->db->update('billing_address')){
             $this->db->where('id', $bid);
-            return $this->db->update('billing_address', array('primary_address' => 1));
+            $this->db->update('billing_address', array('primary_address' => 1));
+            $select = "SELECT a.price FROM area a LEFT JOIN billing_address b ON(b.aid = a.id) WHERE b.id = $bid";
+            return $this->db->query($select)->row();
         }
         return false;
     }
