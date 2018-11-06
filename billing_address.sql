@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 05, 2018 at 05:36 PM
+-- Generation Time: Nov 06, 2018 at 09:27 AM
 -- Server version: 5.7.11
 -- PHP Version: 7.0.3
 
@@ -44,7 +44,7 @@ CREATE TABLE `billing_address` (
 --
 
 INSERT INTO `billing_address` (`id`, `uid`, `sid`, `aid`, `address`, `first_name`, `last_name`, `phone`, `phone2`, `primary_address`) VALUES
-(1, 3, 1, 2, '56, Aina Akingbala Street, Ikeja Lagos State', 'Sokoya', 'Philip', '08169254598', '', 0);
+(3, 3, 1, 2, 'Omole Phase 2', 'Jeffrey', 'Chidi', '08169254598', '', 0);
 
 --
 -- Indexes for dumped tables
@@ -64,7 +64,7 @@ ALTER TABLE `billing_address`
 -- AUTO_INCREMENT for table `billing_address`
 --
 ALTER TABLE `billing_address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

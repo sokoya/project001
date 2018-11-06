@@ -23,7 +23,7 @@ $('.create-address-btn').on('click', function (e) {
 		success: function (response) {
 			if (response.status = 'success') {
 				$('#status').html(`<p class="alert alert-success">{response.message}</p>`).slideDown('fast').delay(300).slideUp('slow');
-				$( "#delivery-method" ).load( base_url + "checkout" );
+				$('#delivery-method').load(`${base_url}checkout #delivery-method`);
 			}else{
 				$('#status').html(`<p class="alert alert-danger">{response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
 			}
@@ -136,4 +136,22 @@ quantity.on('input', function () {
 	} else if (quantity.val() === '0') {
 		quantity.val(1)
 	}
+});
+
+$(document).ready(function(){
+
+	// $.ajax({
+	// 	url: base_url + "checkout/fetch_address",
+	// 	method: "GET",
+	// 	success: function (response) {
+
+	// 		// if (response.status = 'success') {
+	// 		// 	$('#status').html(`<p class="alert alert-success">{response.message}</p>`).slideDown('fast').delay(300).slideUp('slow');
+	// 		// 	$( "#delivery-method" ).load( base_url + "checkout" );
+	// 		// }else{
+	// 		// 	$('#status').html(`<p class="alert alert-danger">{response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
+	// 		// }
+	// 	}
+	// });
+	// $('#delivery_address_box').
 });
