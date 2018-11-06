@@ -28,7 +28,7 @@ class Product extends CI_Controller
 		$page_data['description'] = $this->product->get_category_detail($page_data['product']->rootcategory, 'root_category')->description;
 		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
 		$this->add_count($index);
-		$page_data['rating_counts'] = $this->product->get_rating_counts($index);
+		$page_data['rating_counts'] = $this->product->get_rating_counts( $index );
 		// var_dump( $page_data['rating_counts'] );
 		$this->load->view('landing/product', $page_data);
 	}
@@ -135,14 +135,13 @@ class Product extends CI_Controller
 	}
 
 
-	public function add_to_cart()
-	{
+	public function add_to_cart(){
 		$this->load->library('cart');
-		$variation = empty($this->input->post('variation')) ? '' : $this->input->post('variation');
-		$colour = empty($this->input->post('colour')) ? '' : $this->input->post('colour');
-		$name = preg_replace("/[^A-Za-z0-9-,. ]/", "", cleanit($this->input->post('product_name')));
+        $variation = empty($this->input->post('variation')) ? '' : $this->input->post('variation');
+        $colour = empty($this->input->post('colour')) ? '' : $this->input->post('colour');
+        $name = preg_replace("/[^A-Za-z0-9-,. ]/", "", cleanit($this->input->post('product_name')));
 
-		// contain a product ID, quantity, price, and name.
+        // contain a product ID, quantity, price, and name.
 		$data = array(
 			'id' => base64_decode($this->input->post('product_id')),
 			'qty' => $this->input->post('quantity'),
@@ -157,13 +156,13 @@ class Product extends CI_Controller
 		);
 
 
-		if ($this->cart->insert($data)) {
-			echo true;
-			exit;
-		} else {
-			echo false;
-			exit;
-		}
+		if( $this->cart->insert($data)){
+            echo true;
+            exit;
+        }else{
+            echo false;
+            exit;
+        }
 	}
 
 
@@ -253,8 +252,7 @@ class Product extends CI_Controller
 	 * @param $content - content
 	 * @return null
 	 */
-	function add_review()
-	{
+	function add_review(){
 		if ($this->input->post()) {
 			$status['status'] = 'error';
 			$data = array(
@@ -281,41 +279,17 @@ class Product extends CI_Controller
 	}
 
 
-	/**
-	 * @param $product_id - product id
-	 * @return
-	 */
-
-	function get_reviews()
-	{
-		// $id = $_GET['id'];
-		if ($this->input->post('pid')) {
-			$id = $this->input->post('pid');
-			$results = $this->product->get_reviews($id);
-			$return = array();
-			foreach ($results as $key => $values) {
-				$res = array();
-				foreach ($values as $new_key) {
-					$res['display_name'] = ucwords($values['display_name']);
-					$res['published_date'] = neatDate($values['published_date']);
-					$res['content'] = $values['content'];
-					$res['title'] = $values['title'];
-					$res['rating_score'] = $values['rating_score'];
-				}
-				array_push($return, $res);
-				if (count($return) >= 10) {
-					array_push($return, array('is_next' => true));
-				}
-			}
 
 			header('Content-type: text/json');
 			header('Content-type: application/json');
 			echo json_encode($return);
-			exit;
-		} else {
-			redirect(base_url());
-		}
-	}
+            exit;
+        }else{
+            redirect(base_url());
+        }
+    }
+
+
 
 
 }

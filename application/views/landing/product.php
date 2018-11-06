@@ -458,6 +458,13 @@
 										<?php $x -= 1;
 									} while ($x >= 1);
 									?>
+
+									<?php foreach(	$rating_counts as $score ) :?>
+											<?php
+												echo $score['rating_score'] .' star has ' . $score['occurence'] , ' number of occurence <br />'; 
+											?>
+									<?php endforeach;?>
+
 									<!-- <li>
 										<p class="product-rate-list-item"><?= $x; ?> Stars</p>
 										<div class="product-rate-list-bar">
@@ -465,6 +472,7 @@
 										</div>
 										<p class="product-rate-list-count">0</p>
 									</li> -->
+
 								</ul>
 							</div>
 							<div class="col-md-5" style="">

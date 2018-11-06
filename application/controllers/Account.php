@@ -130,12 +130,14 @@ class Account extends CI_Controller {
     	$page_data['page'] = 'billing';
     	$page_data['title'] = "My Billing Address";
     	$page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id') ));
+    	$page_data['addresses'] = $this->user->get_user_billing_address( $page_data['profile']->id); 
         if( $this->input->post() ){
 			$this->form_validation->set_rules('first_name', 'First name','trim|required|xss_clean');
 			$this->form_validation->set_rules('last_name', 'Last name','trim|required|xss_clean');
 			$this->form_validation->set_rules('phone', 'Phone','trim|required|xss_clean');
 			$this->form_validation->set_rules('state', 'State','trim|required|xss_clean');
-			$this->form_validation->set_rules('area', 'Area','trim|required|xss_clean');
+            $this->form_validation->set_rules('area', 'Area','trim|required|xss_clean');
+            $this->form_validation->set_rules('address', 'Address','trim|required|xss_clean');
 			if( $this->form_validation->run() == FALSE ){
 				$this->session->set_flashdata('error_msg', 'Please correct the following errors '. validation_errors());
 				redirect( $_SERVER['HTTP_REFERER']);
@@ -147,10 +149,16 @@ class Account extends CI_Controller {
 					'last_name' => cleanit($this->input->post('last_name')),
 					'phone' => cleanit($this->input->post('phone')),
 					'sid' => cleanit($this->input->post('state')),
+                    'address' => cleanit($this->input->post('address')),
 					'phone2' => $phone2,
+                    'aid' => cleanit($this->input->post('area')),
+					'uid' => base64_decode($this->session->userdata('logged_id')
+                    ),
+					'uid' => base64_decode($this->session->userdata('logged_id')), 
 					'aid' => cleanit($this->input->post('area'))
 				);
-				if( is_int($this->user->insert_data('billing_address', $data)) ){
+
+				if( is_int($this->user->create_account($data,'billing_address')) ){
 					$this->session->set_flashdata('success_msg', 'Success: The address has been added to your account.');
 				}else{
 					$this->session->set_flashdata('error_msg', 'There was an error adding the address to your account');

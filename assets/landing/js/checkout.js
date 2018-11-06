@@ -8,14 +8,30 @@ function ucwords(str) {
         return $1.toUpperCase();
     });
 }
+
+
 function bind_market(src, destination) {
 	$(`.${destination}`).html(src);
 }
 
 $('.create-address-btn').on('click', function (e) {
 	e.preventDefault();
-	$('#delivery_address').slideDown();
-	$('#register_address').hide();
+	$.ajax({
+		url: base_url + "checkout/add_address",
+		method: "POST",
+		data: $('#new-address-form').serialize(),
+		success: function (response) {
+			if (response.status = 'success') {
+				$('#status').html(`<p class="alert alert-success">{response.message}</p>`).slideDown('fast').delay(300).slideUp('slow');
+				$('#delivery-method').load(`${base_url}checkout #delivery-method`);
+			}else{
+				$('#status').html(`<p class="alert alert-danger">{response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
+			}
+		}
+	});
+
+	// $('#delivery_address').slideDown();
+	// $('#register_address').hide();
 });
 
 $('.btn-new-address').on('click', function () {
@@ -30,6 +46,7 @@ $('.btn-new-address').on('click', function () {
 });
 
 $('#state').on('change', function(){
+	$("#city").empty();
 	let sid = $(this).val();
 	$.ajax({
 	    url:base_url + 'account/fetch_areas',
@@ -37,6 +54,7 @@ $('#state').on('change', function(){
 	    data: {sid: sid},
 	    dataType: 'json',
 	    success: function(d) {
+	    	$("#city").append("<option>-- Please select a city --</option>");
 	        $.each(d, function (k, v) {
 	            $('#city').append($('<option></option>').attr('value', v.id).text(ucwords(v.name)));
 	        })
@@ -118,4 +136,22 @@ quantity.on('input', function () {
 	} else if (quantity.val() === '0') {
 		quantity.val(1)
 	}
+});
+
+$(document).ready(function(){
+
+	// $.ajax({
+	// 	url: base_url + "checkout/fetch_address",
+	// 	method: "GET",
+	// 	success: function (response) {
+
+	// 		// if (response.status = 'success') {
+	// 		// 	$('#status').html(`<p class="alert alert-success">{response.message}</p>`).slideDown('fast').delay(300).slideUp('slow');
+	// 		// 	$( "#delivery-method" ).load( base_url + "checkout" );
+	// 		// }else{
+	// 		// 	$('#status').html(`<p class="alert alert-danger">{response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
+	// 		// }
+	// 	}
+	// });
+	// $('#delivery_address_box').
 });
