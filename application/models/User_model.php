@@ -167,5 +167,11 @@ Class User_model extends CI_Model{
     function get_user_billing_address( $id ){
         return $this->db->query("SELECT b.*, s.name, a.name FROM billing_address b LEFT JOIN states s ON (s.id = b.sid) LEFT JOIN area a ON (a.id = b.aid) WHERE b.uid = $id")->result();
     }
+
+    function get_single_address( $uid = '', $address_id){
+        if( $uid != '' ) $this->db->where('uid', $uid);
+        $this->db->where('id', $address_id);
+        return $this->db->get('billing_address')->result_array();
+    }
     
 }
