@@ -91,7 +91,7 @@
 								if( $addresses) :
 									foreach($addresses as $address) : ?>
 									<div class="col-md-6">
-										<div class="panel panel-default custom-panel pickup-address">
+										<div class="panel panel-default custom-panel pickup-address" data-id="<?= $address->id;?>">
 											<div class="panel-heading sub-custom-panel-head">
 												<h3 class="panel-title">
 													<div class="form-check">
