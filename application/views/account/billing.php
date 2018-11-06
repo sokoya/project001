@@ -273,7 +273,7 @@ var first_name = $('#f_name').val(),
                 url:base_url + 'account/update_billing',
                 method: 'post',
                 data: {
-                    
+
                 },
                 dataType: 'json',
                 success: function(d) {
@@ -293,13 +293,38 @@ var first_name = $('#f_name').val(),
             data: {address_id: id},
             dataType: 'json',
             success: function(d) {
-                $('#f_name').val(first_name);
-                $('#l_name').val(last_name)
-                $('#state_id').val(sid)
-                $('#area_id').val(aid)
-                $('#phone').val(phone)
-                $('#phone2').val(phone2)
-                $('#address').val(address);
+                $.each(d, function (k, v) {
+
+                    $('#f_name').val(v.first_name);
+                    $('#l_name').val(v.last_name);
+
+                    $.getJSON( base_url + 'account/fetch_states', function(d) {
+                        state_drop.children('option:not(:first)').remove();
+                        $.each(d, function(k,v){
+                            state_drop.append($('<option></option>').attr('value', v.id).text(toTitleCase(v.name)));
+                            // if v.sid
+                        });
+                    });
+
+
+                    $.ajax({
+                        url:base_url + 'account/fetch_areas',
+                        method: 'get',
+                        data: {sid: v.sid},
+                        dataType: 'json',
+                        success: function(d) {
+                            $('#area_id > option:not(:first)').remove();
+                            $.each(d, function (k, v) {
+                                $('#area_id').append($(`<option></option>`).attr('value', v.id).text(toTitleCase(v.name)));
+
+                            })
+                        }
+                    })
+
+                    $('#phone').val(v.phone);
+                    $('#phone2').val(v.phone2);
+                    $('#address').val(v.address);
+                })
             }
         })
     }
