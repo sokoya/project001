@@ -6,7 +6,7 @@
                     <div class="col-md-3">
                         <section class="widget widget-links widget-light-skin">
                           <h3 class="widget-title-sm">About <?= lang('app_name'); ?></h3>
-                          <ul>
+                          <ul style="margin-left: -40px;">
                             <li><a href="#">Our Company</a></li>
                             <li><a href="#">Investor Relation</a></li>
                             <li><a href="#">Social Responsibility</a></li>
@@ -14,28 +14,11 @@
                             <li><a href="#">Jobs at <?= lang('app_name'); ?></a></li>
                           </ul>
                         </section>
-                        <!-- <ul class="main-footer-social-list">
-                            <li>
-                                <a class="fa fa-facebook" href="#"></a>
-                            </li>
-                            <li>
-                                <a class="fa fa-twitter" href="#"></a>
-                            </li>
-                            <li>
-                                <a class="fa fa-pinterest" href="#"></a>
-                            </li>
-                            <li>
-                                <a class="fa fa-instagram" href="#"></a>
-                            </li>
-                            <li>
-                                <a class="fa fa-google-plus" href="#"></a>
-                            </li>
-                        </ul> -->
                     </div>
                     <div class="col-md-3">
                         <section class="widget widget-links widget-light-skin">
                           <h3 class="widget-title-sm">Shop</h3>
-                          <ul>
+                          <ul style="margin-left: -40px;">
                             <li><a href="#">Most Sort Products</a></li>
                             <li><a href="#">Top Brands</a></li>
                             <li><a href="#">Top Sellers</a></li>
@@ -47,7 +30,7 @@
                     <div class="col-md-3">
                         <section class="widget widget-links widget-light-skin">
                           <h3 class="widget-title-sm">Resources</h3>
-                          <ul>
+                          <ul style="margin-left: -40px;">
                             <li><a href="#">Shopping Help</a></li>
                             <li><a href="#">Order Status</a></li>
                             <li><a href="#">Blogs</a></li>
@@ -62,7 +45,7 @@
                     <div class="col-md-3">
                         <section class="widget widget-links widget-light-skin">
                           <h3 class="widget-title-sm">Support</h3>
-                          <ul>
+                          <ul style="margin-left: -40px;">
                             <li><a href="#">App Downloads</a></li>
                             <li><a href="#">Contact Us</a></li>
                             <li><a href="#">FAQ</a></li>
@@ -128,10 +111,10 @@
         </div>
     </div>
 </footer>
-<div class="copyright-area">
+<div class="copyright-area text-center">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <p class="copyright-text">&copy;  2017 - <?= date('Y'); ?> <a href="<?= lang('domain'); ?>"><?= lang('app_name'); ?></a>  All rights reserved</p>
                 <p class="text-sm"><a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Site Map </a> | <a href="#">Switch View</a> </p>
             </div>

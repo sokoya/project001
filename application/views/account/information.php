@@ -30,12 +30,6 @@
 						<div class="tab-content" style="padding:16px;">
 						  	<div id="edit" class="tab-pane fade in active">
 						    	<?= form_open(); ?>
-							    	<!-- <div class="form-group row">
-							    		<label class="col-sm-3 col-form-label"><h5>Full name:</h5></label>
-							    		<div class="col-sm-9">
-							    			<input class="form-control" type="text" name="name" placeholder="Sokoya Philip"/>
-							    		</div>
-							    	</div> -->
 							    	<div class="form-group row">
 							    		<label class="col-sm-3 col-form-label"><h5>Email:</h5></label>
 							    		<div class="col-sm-9">
@@ -51,7 +45,7 @@
 							    	<div class="form-group row">
 							    		<label class="col-sm-3 col-form-label"><h5>Phone:</h5></label>
 							    		<div class="col-sm-9">
-							    			<input class="form-control" type="tel" name="phone" placeholder="Sokoya Philip" value="<?= $profile->phone?>" required/>
+							    			<input class="form-control" type="tel" name="phone" value="<?= $profile->phone?>" required/>
 							    		</div>
 							    	</div>
 							    	<div class="form-group row">
