@@ -48,7 +48,7 @@
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group">
                                             <label for="f_name" class="control-label">First Name <span class="req">*</span></label>
-                                            <input type="text" class="form-control" id="f_name" name="f_name" value="" required=""
+                                            <input type="text" class="form-control" id="f_name" name="first_name" value="" required=""
                                                    title="Please enter you first name" placeholder="First Name">
                                             <span class="help-block"></span>
                                         </div>
@@ -60,7 +60,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="state_id" class="control-label">State  <span class="req">*</span></label>
-                                            <select class="form-control" id="state_id">
+                                            <select class="form-control" id="state_id" name="state">
                                                 <option selected>--select--</option>
                                             </select>
                                         </div>
@@ -69,7 +69,7 @@
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group">
                                             <label for="l_name" class="control-label">Last Name  <span class="req">*</span></label>
-                                            <input type="text" class="form-control" id="l_name" name="l_name" value="" required=""
+                                            <input type="text" class="form-control" id="l_name" name="last_name" value="" required=""
                                                    title="Please enter you last name" placeholder="Last Name">
                                             <span class="help-block"></span>
                                         </div>
@@ -81,7 +81,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="area_id" class="control-label">Area  <span class="req">*</span></label>
-                                            <select class="form-control" id="area_id">
+                                            <select class="form-control" id="area_id" name="area">
                                                 <option selected>--select--</option>
                                             </select>
                                         </div>
@@ -95,7 +95,7 @@
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-12">
-                                        <button type="submit" class="btn btn-success btn-block" style="border-radius: 0px !important;"><strong>Add Address</strong></button>
+                                        <button type="submit" id="btn_add_add" href="javascript:;" class="btn btn-success btn-block" style="border-radius: 0px !important;"><strong>Add Address</strong></button>
                                     </div>
                                 </form>
                             </div>
@@ -145,7 +145,14 @@
 <div class="gap gap-small"></div>
 <?php $this->load->view('landing/resources/footer'); ?>
 <?php $this->load->view('landing/resources/script'); ?>
-<script> let base_url = "<?= base_url();?>"</script>
+<script>
+    let base_url = "<?= base_url();?>"
+    function toTitleCase(str) {
+        return str.replace(/(?:^|\s)\w/g, function(match) {
+            return match.toUpperCase();
+        });
+    }
+</script>
 
 <script>
     let innercodered = "<strong><i class=\"fa fa-times\"></i> Cancel\n" +
@@ -153,12 +160,13 @@
     let innercodenorm ="<strong><i class=\"fa fa-plus\"></i> Add New Address\n" +
         "                    </strong>";
     let state_drop = $('#state_id');
+    $.getJSON( base_url + 'account/fetch_states', function(d) {
+        $.each(d, function(k,v){
+            state_drop.append($('<option></option>').attr('value', v.id).text(toTitleCase(v.name)));
+        })
+    });
     $('#add_new_add').on('click', function(){
-            $.getJSON( base_url + 'account/fetch_states', function(d) {
-                $.each(d, function(k,v){
-                    state_drop.append($('<option></option>').attr('value', v.id).text(v.name));
-                })
-            });
+
         if ($('#add_new_add').hasClass('btn-primary')){
             $('#add_address').css({
                 display : 'block'
@@ -176,7 +184,7 @@
             $('#add_new_add').addClass('btn-primary');
         }
     })
-    var selected_state_id
+    var selected_state_id;
     state_drop.change(function(){
        selected_state_id = $('#state_id option:selected').attr('value');
         $.ajax({
@@ -185,12 +193,39 @@
             data: {sid: selected_state_id},
             dataType: 'json',
             success: function(d) {
+                $('#area_id > option:not(:first)').remove();
                 $.each(d, function (k, v) {
-                    $('#area_id').append($('<option></option>').attr('value', v.id).text(v.name));
+                    $('#area_id').append($('<option></option>').attr('value', v.id).text(toTitleCase(v.name)));
                 })
             }
         })
     });
+var first_name = $('#f_name').val(),
+    last_name  = $('#l_name').val(),
+    state = $('#state_id').val(),
+    area = $('#area_id').val(),
+    phone = $('#phone').val(),
+    phone2 = $('#phone2').val(),
+    address = $('#address').val();
+    $('#btn_add_add').click(function(){
+        $.ajax({
+            url:base_url + 'account/billing',
+            method: 'post',
+            data: {
+                first_name: first_name,
+                last_name : last_name,
+                state: state,
+                area : area,
+                phone : phone,
+                phone2 : phone2,
+                address : address
+            },
+            dataType: 'json',
+            success: function(d) {
+               
+            }
+        })
+    })
 </script>
 </body>
 </html>

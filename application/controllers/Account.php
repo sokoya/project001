@@ -135,7 +135,8 @@ class Account extends CI_Controller {
 			$this->form_validation->set_rules('last_name', 'Last name','trim|required|xss_clean');
 			$this->form_validation->set_rules('phone', 'Phone','trim|required|xss_clean');
 			$this->form_validation->set_rules('state', 'State','trim|required|xss_clean');
-			$this->form_validation->set_rules('area', 'Area','trim|required|xss_clean');
+            $this->form_validation->set_rules('area', 'Area','trim|required|xss_clean');
+            $this->form_validation->set_rules('address', 'Address','trim|required|xss_clean');
 			if( $this->form_validation->run() == FALSE ){
 				$this->session->set_flashdata('error_msg', 'Please correct the following errors '. validation_errors());
 				redirect( $_SERVER['HTTP_REFERER']);
@@ -147,6 +148,7 @@ class Account extends CI_Controller {
 					'last_name' => cleanit($this->input->post('last_name')),
 					'phone' => cleanit($this->input->post('phone')),
 					'sid' => cleanit($this->input->post('state')),
+                    'address' => cleanit($this->input->post('address')),
 					'phone2' => $phone2,
 					'aid' => cleanit($this->input->post('area'))
 				);
