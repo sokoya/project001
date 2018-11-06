@@ -86,7 +86,18 @@
 							create a new address
 							to continue
 						</div>
+						<div id="processing"
+							 style="display:none;position: center;top: 0;left: 0;width: auto;height: auto%;background: #f4f4f4;z-index: 99;">
+							<div class="text" style="position: absolute;top: 35%;left: 0;height: 100%;width: 100%;font-size: 18px;text-align: center;">
+								<img src="<?= base_url('assets/landing/load.gif'); ?>" alt="Processing...">
+								Processing your request. <strong
+									style="color: rgba(2.399780888618386%,61.74193548387097%,46.81068368248487%,0.843);">Please
+									Wait! </strong>
+							</div>
+						</div>
 						<div class="row" id="delivery_address_box">
+							<?= form_open(); ?>
+
 							<?php
 								if( $addresses) :
 									foreach($addresses as $address) : ?>
@@ -97,9 +108,12 @@
 													<div class="form-check">
 														<input class="form-check-input delivery-box" type="radio"
 															   name="address_radio1"
-															   id="address_radio1" value="option1">
+															   id="address_radio1" value="<?= $address->id; ?>">
 														<label class="form-check-label" for="address_radio1">
 															Select this address
+															<?php
+																// if( $address->primar_address ==1 ) : We have a default address already set
+															?>
 														</label>
 													</div>
 													<span>Edit</span>
@@ -115,6 +129,7 @@
 							<?php 
 								endforeach; 
 								endif; ?>
+							<?= form_close(); ?>
 						</div>
 					</div>
 				</div>
