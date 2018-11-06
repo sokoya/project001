@@ -23,60 +23,68 @@
 					<div class="panel-body" id="register_address" style="display: none">
 						<div class="row">
 							<div class="col-md-12">
-								<?= form_open('','id="new-address-form"'); ?>
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group ">
-												<label class="checkout-form-input-label" for="first_name">First Name:</label>
-												<input type="text" class="form-control checkout-form-input" id="fname" name="first_name" required="">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="checkout-form-input-label" for="lname">Last Name:</label>
-												<input type="text" class="form-control checkout-form-input" id="lname" name="last_name" required="">
-											</div>
-										</div>
-
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="checkout-form-input-label" for="number_">Mobile Number</label>
-												<input type="text" class="form-control checkout-form-input" id="number_" name="phone" required>
-											</div>
-										</div>
-
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="checkout-form-input-label" for="street">Street Address</label>
-												<input type="text" class="form-control checkout-form-input" id="street" name="address" required>
-											</div>
-										</div>
-
-										<div class="col-md-6">
-											<div class="form-group">
-												<div class="form-group">
-													<label class="checkout-form-input-label" for="state">State</label>
-													<select class="form-control checkout-form-input" id="state" name="state" required=""><option value="">-- Select Sate --</option>
-													</select>
-												</div>
-											</div>
-										</div>
-
-										<div class="col-md-6">
-											<div class="form-group">
-												<div class="form-group">
-													<label class="checkout-form-input-label" for="city">City</label>
-													<select class="form-control checkout-form-input" id="city" name="area" required="">
-													</select>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<button type="submit" class="btn btn-primary btn-block create-address-btn">
-												Submit
-											</button>
+								<?= form_open('', 'id="new-address-form"'); ?>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group ">
+											<label class="checkout-form-input-label" for="first_name">First
+												Name:</label>
+											<input type="text" class="form-control checkout-form-input" id="fname"
+												   name="first_name" required="">
 										</div>
 									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="checkout-form-input-label" for="lname">Last Name:</label>
+											<input type="text" class="form-control checkout-form-input" id="lname"
+												   name="last_name" required="">
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="checkout-form-input-label" for="number_">Mobile Number</label>
+											<input type="text" class="form-control checkout-form-input" id="number_"
+												   name="phone" required>
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="checkout-form-input-label" for="street">Street Address</label>
+											<input type="text" class="form-control checkout-form-input" id="street"
+												   name="address" required>
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<div class="form-group">
+												<label class="checkout-form-input-label" for="state">State</label>
+												<select class="form-control checkout-form-input" id="state" name="state"
+														required="">
+													<option value="">-- Select Sate --</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<div class="form-group">
+												<label class="checkout-form-input-label" for="city">City</label>
+												<select class="form-control checkout-form-input" id="city" name="area"
+														required="">
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<button type="submit" class="btn btn-primary btn-block create-address-btn">
+											Submit
+										</button>
+									</div>
+								</div>
 								<?= form_close(); ?>
 							</div>
 						</div>
@@ -88,7 +96,8 @@
 						</div>
 						<div id="processing"
 							 style="display:none;position: center;top: 0;left: 0;width: auto;height: auto%;background: #f4f4f4;z-index: 99;">
-							<div class="text" style="position: absolute;top: 35%;left: 0;height: 100%;width: 100%;font-size: 18px;text-align: center;">
+							<div class="text"
+								 style="position: absolute;top: 35%;left: 0;height: 100%;width: 100%;font-size: 18px;text-align: center;">
 								<img src="<?= base_url('assets/landing/load.gif'); ?>" alt="Processing...">
 								Processing your request. <strong
 									style="color: rgba(2.399780888618386%,61.74193548387097%,46.81068368248487%,0.843);">Please
@@ -99,36 +108,54 @@
 							<?= form_open(); ?>
 
 							<?php
-								if( $addresses) :
-									foreach($addresses as $address) : ?>
+							if ($addresses) :
+								foreach ($addresses as $address) : ?>
 									<div class="col-md-6">
-										<div class="panel panel-default custom-panel pickup-address" data-id="<?= $address->id;?>">
+										<div class="panel panel-default custom-panel pickup-address
+										<?php
+										if ($address->primary_address == 1) :
+											?>
+											custom-panel-active
+										<?php
+										endif;
+										?>"
+											 data-id="<?= $address->id; ?>">
 											<div class="panel-heading sub-custom-panel-head">
 												<h3 class="panel-title">
 													<div class="form-check">
 														<input class="form-check-input delivery-box" type="radio"
 															   name="address_radio1"
-															   id="address_radio1" value="<?= $address->id; ?>">
-														<label class="form-check-label" for="address_radio1">
-															Select this address
+															   id="<?= $address->id; ?>" value="option1"
 															<?php
-																// if( $address->primary_address ==1 ) : We have a default address already set
+															if ($address->primary_address == 1) :
+																?>
+																checked
+															<?php
+															endif;
 															?>
+														>
+														<label class="form-check-label" for="<?= $address->id; ?>">
+															Select this address
 														</label>
 													</div>
 													<span>Edit</span>
 												</h3>
 											</div>
 											<div class="panel-body">
-												<p class="panel-details"><i class="fa fa-user"></i><?= ucfirst($address->first_name) . ' ' . ucfirst($address->last_name)?></p>
-												<p class="panel-details"><i class="fa fa-map-marker"></i><?= $address->address; ?></p>
-												<p class="panel-details"><i class="fa fa-phone"></i><?= $address->phone; ?> <?= !empty($address->phone2) ? ','.$address->phone2 : ''; ?></p>
+												<p class="panel-details"><i
+														class="fa fa-user"></i><?= ucfirst($address->first_name) . ' ' . ucfirst($address->last_name) ?>
+												</p>
+												<p class="panel-details"><i
+														class="fa fa-map-marker"></i><?= $address->address; ?></p>
+												<p class="panel-details"><i
+														class="fa fa-phone"></i><?= $address->phone; ?> <?= !empty($address->phone2) ? ',' . $address->phone2 : ''; ?>
+												</p>
 											</div>
 										</div>
 									</div>
-							<?php 
-								endforeach; 
-								endif; ?>
+								<?php
+								endforeach;
+							endif; ?>
 							<?= form_close(); ?>
 						</div>
 					</div>
@@ -211,7 +238,8 @@
 						</h3>
 					</div>
 					<ul class="list-group cs-sum-grp">
-						<li class="list-group-item cs-sm-m">Subtotal: <span class="total-sum">&#8358;40,200</span></li>
+						<li class="list-group-item cs-sm-m">Subtotal: <span class="total-sum" data-amount="40200">&#8358;40,200</span>
+						</li>
 						<li class="list-group-item cs-sm-m">Delivery Charges: <span class="charges" data-amount="1250">&#8358;1,250</span>
 						</li>
 						<li class="list-group-item cs-sm-t">Total: <span class="total-sum-charges">&#8358;41,450</span>
