@@ -168,6 +168,16 @@ Class User_model extends CI_Model{
         return $this->db->query("SELECT b.*, s.name, a.name FROM billing_address b LEFT JOIN states s ON (s.id = b.sid) LEFT JOIN area a ON (a.id = b.aid) WHERE b.uid = $id")->result();
     }
 
+    function is_address_set( $id ){
+        $this->db->where('uid', $id);
+        $this->db->where('primary_address', 1);
+        if( $this->db->get('billing_address')->num_rows() > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     function get_single_address( $uid = '', $address_id){
         if( $uid != '' ) $this->db->where('uid', $uid);
         $this->db->where('id', $address_id);

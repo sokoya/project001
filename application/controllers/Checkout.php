@@ -24,6 +24,7 @@ class Checkout extends CI_Controller
 		$this->load->model('user_model', 'user');
 		$page_data['user'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
 		$page_data['addresses'] = $this->user->get_user_billing_address($page_data['user']->id);
+		$page_data['address_set'] = $this->user->is_address_set($page_data['user']->id);
 		$this->load->view('landing/checkout', $page_data);
 	}
 

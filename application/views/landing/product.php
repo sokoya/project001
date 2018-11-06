@@ -223,11 +223,11 @@
 										<?php if(count($variations) == 1 ): ?>
 											<?php if ($variations[0]['discount_price'] != '') : ?>
 												<input type="hidden" name="product_price"
-													   value="<?= $variation->discount_price; ?>"
+													   value="<?= $variations[0]['discount_price']; ?>"
 													   class="pr_price_hidden"/>
 											<?php else: ?>
 												<input type="hidden" name="product_price"
-													   value="<?= $variation->sale_price; ?>"
+													   value="<?= $variations[0]['sale_price']; ?>"
 													   class="pr_price_hidden"/>
 											<?php endif; ?>
 										<?php endif; ?>
@@ -243,7 +243,7 @@
 													<button type="button"
 															class="product-page-qty product-page-qty-minus">-
 													</button>
-													<input data-range="<?= $variation['quantity']; ?>" name="quantity"
+													<input data-range="<?= $variation->quantity; ?>" name="quantity"
 														   id="quan"
 														   class="product-page-qty product-page-qty-input quantity"
 														   type="text"

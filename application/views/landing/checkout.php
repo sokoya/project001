@@ -90,23 +90,26 @@
 						</div>
 					</div>
 					<div class="panel-body" id="delivery_address">
-						<div class="alert alert-warning text-center delivery-warning">Select an existing address or
-							create a new address
-							to continue
-						</div>
+						<?php
+							if( !$address_set ):
+						?>
+							<div class="alert alert-warning text-center delivery-warning">Select an existing address or
+								create a new address
+								to continue
+							</div>
+						<?php endif; ?>
 						<div id="processing"
 							 style="display:none;position: center;top: 0;left: 0;width: auto;height: auto%;background: #f4f4f4;z-index: 99;">
 							<div class="text"
 								 style="position: absolute;top: 35%;left: 0;height: 100%;width: 100%;font-size: 18px;text-align: center;">
 								<img src="<?= base_url('assets/landing/load.gif'); ?>" alt="Processing...">
 								Processing your request. <strong
-									style="color: rgba(2.399780888618386%,61.74193548387097%,46.81068368248487%,0.843);">Please
+									style="color: rgba(2.4%,61.7%,46.8,0.843);">Please
 									Wait! </strong>
 							</div>
 						</div>
 						<div class="row" id="delivery_address_box">
 							<?= form_open(); ?>
-
 							<?php
 							if ($addresses) :
 								foreach ($addresses as $address) : ?>
