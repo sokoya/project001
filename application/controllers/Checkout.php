@@ -17,9 +17,8 @@ class Checkout extends CI_Controller
 		}
 	}
 
-	public function index()
-	{
-		// @TODO : Check the product variation quantity and price
+	public function index(){
+		$this->load->library('cart');
 		$page_data['title'] = 'Checkout';
 		$this->load->model('user_model', 'user');
 		$page_data['user'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));

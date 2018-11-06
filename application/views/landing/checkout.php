@@ -129,14 +129,7 @@
 														<input class="form-check-input delivery-box" type="radio"
 															   name="address_radio1"
 															   id="<?= $address->id; ?>" value="option1"
-															<?php
-															if ($address->primary_address == 1) :
-																?>
-																checked
-															<?php
-															endif;
-															?>
-														>
+															<?php if($address->primary_address == 1) echo 'checked' ?> >
 														<label class="form-check-label" for="<?= $address->id; ?>">
 															Select this address
 														</label>
@@ -193,41 +186,38 @@
 						<div class="panel panel-default ">
 							<table class="table">
 								<tbody>
-								<tr>
-									<td><img class="panel-pr-image"
-											 src="<?= base_url('assets/landing/img/test_product_page/pd.jpg'); ?>">
-									</td>
-									<td class="parent-block panel-product-title">Sony Xperia Pro 32
-										<br/>
-										<span>Sold by <span>Philip</span> </span>
-									</td>
-
-									<td class="parent-block panel-product-quantity ">1 item(s)</span></td>
-
-									<!--									<td class="parent-block">-->
-									<!--										<ul>-->
-									<!--											<li class="product-page-qty-item">-->
-									<!--												<button type="button"-->
-									<!--														class="product-page-qty product-page-qty-minus">--->
-									<!--												</button>-->
-									<!--												<input data-range="10" name="quantity"-->
-									<!--													   id="quan"-->
-									<!--													   class="product-page-qty product-page-qty-input quantity"-->
-									<!--													   type="text"-->
-									<!--													   value="1" disabled/>-->
-									<!--												<button type="button"-->
-									<!--														class="product-page-qty product-page-qty-plus">+-->
-									<!--												</button>-->
-									<!--											</li>-->
-									<!--										</ul>-->
-									<!--									</td>-->
-									<td class="parent-block panel-product-price"><span class="pr-price"
-																					   data-amount="40200">&#8358;40,200</span>
-									</td>
-									<td class="parent-block panel-product-action"><a href="javascript:void(0)">Remove
+									<?php 
+										$subtotal = $total = 0;
+										foreach( $this->cart->contents() as $product ) :
+											$detail = $this->product->get_cart_details($product['id']);
+									?>
+									<tr>
+										<td>
+											<a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
+												<img class="panel-pr-image"
+													src="<?= base_url('data/products/' .$product['id'].'/'.$detail->image); ?> ?>"
+													alt="Carrito -marketplace <?= $product['name']; ?>"
+													title="<?= $product['name']; ?>"/>
+											</a>
+										</td>
+										<td class="parent-block panel-product-title"><?= word_limiter(htmlentities($product['name']), 7,'...' ); ?>
+											<br /><span>Sold by <span><?= $detail->name; ?></span> </span>
+										</td>
+										<td class="parent-block panel-product-quantity"><?= $product['qty']; ?> item(s)</td>
+										<td class="parent-block panel-product-price">
+											<span class="pr-price" data-amount="<?= $product['subtotal']; ?>">
+												<?php 
+													echo ngn($product['subtotal']); 
+													$subtotal += $product['subtotal']; 
+													$delivery_charge = $product['qty'] * 3000;
+												?>	
+											</span>
+										</td>
+										<td class="parent-block panel-product-action"><a href="javascript:void(0)">Remove
 											Item</a><br/>
 										<a href="javascript:void(0)">Save for later</a></td>
-								</tr>
+									</tr>
+									<?php endforeach; ?>								
 								</tbody>
 							</table>
 						</div>
@@ -238,15 +228,15 @@
 				<div class="panel panel-default">
 					<div class="panel-heading custom-panel-head">
 						<h3 class="panel-title summary-title sum-pad">Order Summary <span
-								class="panel-summary-quantity"><span class="pr-summary-count">1</span> item(s)</span>
+								class="panel-summary-quantity"><span class="pr-summary-count"><?= $this->cart->total_items(); ?></span> item(s)</span>
 						</h3>
 					</div>
 					<ul class="list-group cs-sum-grp">
-						<li class="list-group-item cs-sm-m">Subtotal: <span class="total-sum" data-amount="40200">&#8358;40,200</span>
+						<li class="list-group-item cs-sm-m">Subtotal: <span class="total-sum" data-amount="<?= $subtotal; ?>"><?= ngn($subtotal); ?></span>
 						</li>
-						<li class="list-group-item cs-sm-m">Delivery Charges: <span class="charges" data-amount="1250">&#8358;1,250</span>
+						<li class="list-group-item cs-sm-m">Delivery Charges: <span class="charges" data-amount="<?= $delivery_charge; ?>"><?= ngn($delivery_charge); ?></span>
 						</li>
-						<li class="list-group-item cs-sm-t">Total: <span class="total-sum-charges">&#8358;41,450</span>
+						<li class="list-group-item cs-sm-t">Total: <span class="total-sum-charges"><?= ngn($subtotal + $delivery_charge);?></span>
 						</li>
 						<li class="list-group-item">
 							<button class="btn btn-block btn-custom-dark continue-btn" disabled>Continue to Payment

@@ -18,9 +18,7 @@ class Product extends CI_Controller
 		// sanitize
 		if (!is_numeric(cleanit($index))) redirect(base_url());
 		$page_data['product'] = $this->product->get_product($index);
-		$page_data['variation'] = $this->product->get_variation($index);
-		var_dump($page_data['variation']);
-		exit;
+		$page_data['var'] = $this->product->get_variation($index);
 		$page_data['variations'] = $this->product->get_variations($index);
 		$page_data['gallery'] = $this->product->get_gallery($index);
 		$page_data['favourited'] = $this->product->is_favourited(base64_decode($this->session->userdata('logged_id')), $index);

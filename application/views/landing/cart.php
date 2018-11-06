@@ -9,7 +9,7 @@
 	<div class="container">
 		<?php if (!empty($this->cart->contents())) : ?>
 			<header class="page-header">
-				<h1 class="page-title">My Cart</h1>
+				<h1 class="page-title">Cart Overview</h1>
 			</header>
 			<div class="row">
 				<div class="col-md-10">
@@ -68,7 +68,9 @@
 									   href="<?= base_url('cart/remove/' . $product['rowid']); ?>"></a>
 								</td>
 							</tr>
-							<?php $x++; endforeach; ?>
+							<?php 
+							$x++; 
+						endforeach; ?>
 						</tbody>
 					</table>
 					<button type="submit" style="display: none;"></button>

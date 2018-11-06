@@ -15,7 +15,7 @@
 				<p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find
 						product</a></p>
 			</div>
-		<?php elseif (empty($product) || empty($variation) || empty($gallery)): ?>
+		<?php elseif (empty($product) || empty($var) || empty($gallery)): ?>
 			<div class="row">
 				<div class="gap-large"></div>
 				<h2 class="text-center">Oops! The product you looking does not exist.</h2>
@@ -168,12 +168,12 @@
 								<hr class="product-line"/>
 
 								<p class="product-page-price">
-									<?php if (!empty($variation->discount_price)) : ?>
-										<span class="price-cs ds-price"><?= ngn($variation->discount_price); ?></span>
+									<?php if (!empty($var->discount_price)) : ?>
+										<span class="price-cs ds-price"><?= ngn($var->discount_price); ?></span>
 										<span
-											class="product-page-price-list price-lower dn-price"><?= ngn($variation->sale_price); ?></span>
+											class="product-page-price-list price-lower dn-price"><?= ngn($var->sale_price); ?></span>
 									<?php else: ?>
-										<span class="price-cs dn-price"><?= ngn($variation->sale_price); ?></span>
+										<span class="price-cs dn-price"><?= ngn($var->sale_price); ?></span>
 									<?php endif; ?>
 								</p>
 
@@ -220,17 +220,6 @@
 												</select>
 											</div>
 										<?php endif; ?>
-										<?php if(count($variations) == 1 ): ?>
-											<?php if ($variations[0]['discount_price'] != '') : ?>
-												<input type="hidden" name="product_price"
-													   value="<?= $variations[0]['discount_price']; ?>"
-													   class="pr_price_hidden"/>
-											<?php else: ?>
-												<input type="hidden" name="product_price"
-													   value="<?= $variations[0]['sale_price']; ?>"
-													   class="pr_price_hidden"/>
-											<?php endif; ?>
-										<?php endif; ?>
 										<input type="hidden" name="product_id"
 											   value="<?= base64_encode($product->id); ?>">
 										<input type="hidden" name="product_name" value="<?= $product->product_name; ?>">
@@ -243,7 +232,7 @@
 													<button type="button"
 															class="product-page-qty product-page-qty-minus">-
 													</button>
-													<input data-range="<?= $variation->quantity; ?>" name="quantity"
+													<input data-range="<?= $var->quantity; ?>" name="quantity"
 														   id="quan"
 														   class="product-page-qty product-page-qty-input quantity"
 														   type="text"
@@ -254,6 +243,7 @@
 												</li>
 											</ul>
 										</div>
+
 
 									</div>
 									<button type="submit" style="display: none;">Submit</button>
