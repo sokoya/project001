@@ -44,4 +44,41 @@ class Checkout extends CI_Controller
 		}
 		redirect(base_url());
 	}
+
+	function add_address(){
+		$status['status'] = 'error';
+		$this->form_validation->set_rules('first_name', 'First name','trim|required|xss_clean');
+		$this->form_validation->set_rules('last_name', 'Last name','trim|required|xss_clean');
+		$this->form_validation->set_rules('phone', 'Phone','trim|required|xss_clean');
+		$this->form_validation->set_rules('state', 'State','trim|required|xss_clean');
+		$this->form_validation->set_rules('area', 'Area','trim|required|xss_clean');
+		if( $this->form_validation->run() == FALSE ){
+			$this->session->set_flashdata('error_msg', 'Please correct the following errors '. validation_errors());
+			$status['message'] = 'Please correct the following errors '. validation_errors();
+			echo json_encode($status);
+			exit;
+		}else{
+			$data = array(
+				'first_name' => cleanit($this->input->post('first_name')),
+				'last_name' => cleanit($this->input->post('last_name')),
+				'phone' => cleanit($this->input->post('phone')),
+				'sid' => cleanit($this->input->post('state')),
+				'address' => cleanit($this->input->post('address')),
+				'aid' => cleanit($this->input->post('area')),
+				'uid' => base64_decode($this->session->userdata('logged_id'))
+			);
+			if( is_int($this->user->create_account($data, 'billing_address')) ){
+				$status['status'] = 'success';
+				$status['message'] = 'Success: The address has been added to your account.';
+				echo json_encode( $status);
+				exit;
+				$this->session->set_flashdata('success_msg', 'Success: The address has been added to your account.');
+			}else{
+				$status['message'] = 'Success: There was an error adding the address to your account.';
+			}
+			echo json_encode( $status );
+			exit;
+		}
+        
+	}
 }

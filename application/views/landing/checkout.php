@@ -10,77 +10,76 @@
 	<div class="gap"></div>
 	<div class="container">
 		<h4 class="pr-over" style="font-size: 16px; color: #a0a0a0">Checkout</h4>
+		<div id="status"></div>
 		<div class="row">
 			<div class="col-md-8">
-				<div class="panel panel-default">
+				<div class="panel panel-default" id="delivery-method">
 					<div class="panel-heading custom-panel-head">
 						<h3 class="panel-title"><i class="fa fa-truck"></i>&nbsp;&nbsp; Delivery / Pickup Method
 							<button class="btn-custom-primary btn-new-address">New Address</button>
 							<button class="btn-custom-primary">Select Pickup Location</button>
 						</h3>
-
 					</div>
 					<div class="panel-body" id="register_address" style="display: none">
 						<div class="row">
 							<div class="col-md-12">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group ">
-											<label class="checkout-form-input-label" for="first_name">First Name:</label>
-											<input type="text" class="form-control checkout-form-input" id="fname" name="first_name">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="checkout-form-input-label" for="lname">Last Name:</label>
-											<input type="text" class="form-control checkout-form-input" id="lname" name="last_name">
-										</div>
-									</div>
-
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="checkout-form-input-label" for="number_">Mobile Number</label>
-											<input type="text" class="form-control checkout-form-input" id="number_" name="phone">
-										</div>
-									</div>
-
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="checkout-form-input-label" for="street">Street Address</label>
-											<input type="text" class="form-control checkout-form-input" id="street" name="street">
-										</div>
-									</div>
-
-									<div class="col-md-6">
-										<div class="form-group">
-											<div class="form-group">
-												<label class="checkout-form-input-label" for="state">State</label>
-												<select class="form-control checkout-form-input" id="state" name="state"><option value="">-- Select Sate --</option>
-												</select>
+								<?= form_open('','id="new-address-form"'); ?>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group ">
+												<label class="checkout-form-input-label" for="first_name">First Name:</label>
+												<input type="text" class="form-control checkout-form-input" id="fname" name="first_name" required="">
 											</div>
 										</div>
-									</div>
-
-									<div class="col-md-6">
-										<div class="form-group">
+										<div class="col-md-6">
 											<div class="form-group">
-												<label class="checkout-form-input-label" for="city">City</label>
-												<select class="form-control checkout-form-input" id="city" name="area">
-												</select>
+												<label class="checkout-form-input-label" for="lname">Last Name:</label>
+												<input type="text" class="form-control checkout-form-input" id="lname" name="last_name" required="">
 											</div>
 										</div>
-									</div>
 
-									<div class="col-md-6">
-										<button type="submit" class="btn btn-primary btn-block create-address-btn">
-											Submit
-										</button>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="checkout-form-input-label" for="number_">Mobile Number</label>
+												<input type="text" class="form-control checkout-form-input" id="number_" name="phone" required>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="checkout-form-input-label" for="street">Street Address</label>
+												<input type="text" class="form-control checkout-form-input" id="street" name="address" required>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group">
+												<div class="form-group">
+													<label class="checkout-form-input-label" for="state">State</label>
+													<select class="form-control checkout-form-input" id="state" name="state" required=""><option value="">-- Select Sate --</option>
+													</select>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-group">
+												<div class="form-group">
+													<label class="checkout-form-input-label" for="city">City</label>
+													<select class="form-control checkout-form-input" id="city" name="area" required="">
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<button type="submit" class="btn btn-primary btn-block create-address-btn">
+												Submit
+											</button>
+										</div>
 									</div>
-								</div>
+								<?= form_close(); ?>
 							</div>
 						</div>
-
-
 					</div>
 					<div class="panel-body" id="delivery_address">
 						<div class="alert alert-warning text-center delivery-warning">Select an existing address or
@@ -88,7 +87,6 @@
 							to continue
 						</div>
 						<div class="row">
-
 							<?php
 								if( $addresses) :
 									foreach($addresses as $address) : ?>
@@ -110,7 +108,7 @@
 											<div class="panel-body">
 												<p class="panel-details"><i class="fa fa-user"></i><?= ucfirst($address->first_name) . ' ' . ucfirst($address->last_name)?></p>
 												<p class="panel-details"><i class="fa fa-map-marker"></i><?= $address->address; ?></p>
-												<p class="panel-details"><i class="fa fa-phone"></i></i><?= $address->phone; ?> <?= !empty($address->phone2) ? ','.$address->phone2 : ''; ?></p>
+												<p class="panel-details"><i class="fa fa-phone"></i><?= $address->phone; ?> <?= !empty($address->phone2) ? ','.$address->phone2 : ''; ?></p>
 											</div>
 										</div>
 									</div>

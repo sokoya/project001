@@ -16,6 +16,19 @@ function bind_market(src, destination) {
 
 $('.create-address-btn').on('click', function (e) {
 	e.preventDefault();
+	$.ajax({
+		url: base_url + "checkout/add_address",
+		method: "POST",
+		data: $('#new-address-form').serialize(),
+		success: function (response) {
+			if (response.status = 'success') {
+				$('#status').html(`<p class="alert alert-success">{response.message}</p>`).slideDown('fast').delay(300).slideUp('slow');
+				$( "#delivery-method" ).load( base_url + "checkout" );
+			}else{
+				$('#status').html(`<p class="alert alert-danger">{response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
+			}
+		}
+	});
 
 	// $('#delivery_address').slideDown();
 	// $('#register_address').hide();
