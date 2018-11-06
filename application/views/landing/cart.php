@@ -82,6 +82,8 @@
 						<li><span>Total :</span><span><?= ngn($total); ?></span>
 						</li>
 					</ul>
+					<span class="text-sm text-danger"><strong>Delivery fee not included.</strong></span><br />
+					<br />
 					<a class="btn btn-primary" href="<?= base_url('checkout'); ?>">Checkout</a>
 				</div>
 			</div>

@@ -166,8 +166,7 @@ class Product extends CI_Controller
 	 * @return JSON
 	 */
 
-	function check_variation()
-	{
+	function check_variation(){
 		$vid = $this->input->post('vid');
 		if (!$vid) exit;
 		$result = $this->product->check_variation($vid);

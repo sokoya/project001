@@ -273,7 +273,7 @@ var first_name = $('#f_name').val(),
             $.ajax({
                 url: base_url + "checkout/add_address",
                 method: "POST",
-                data: $('#add_add_form').serialize(),
+                data: $('#new-address-form').serialize(),
                 success: function (response) {
                     // if (response.status = 'success') {
                     //     $('#status').html(`<p class="alert alert-success">response.message</p>`).slideDown('fast').delay(3000).slideUp('slow');
