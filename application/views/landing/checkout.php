@@ -112,7 +112,7 @@
 														<label class="form-check-label" for="address_radio1">
 															Select this address
 															<?php
-																// if( $address->primar_address ==1 ) : We have a default address already set
+																// if( $address->primary_address ==1 ) : We have a default address already set
 															?>
 														</label>
 													</div>
