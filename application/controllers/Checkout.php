@@ -81,13 +81,4 @@ class Checkout extends CI_Controller
 		}        
 	}
 
-	function fetch_address(){
-		if( !$this->session->userdata('logged_in') || empty($this->cart->total_items()) )redirect(base_url());
-		$results = $this->user->get_user_billing_address( base64_decode($this->session->userdata('logged_id')) );
-		if( count($results) ) {
-
-		}else{
-			
-		}
-	}
 }
