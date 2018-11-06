@@ -130,6 +130,7 @@ class Account extends CI_Controller {
     	$page_data['page'] = 'billing';
     	$page_data['title'] = "My Billing Address";
     	$page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id') ));
+    	$page_data['addresses'] = $this->user->get_user_billing_address( $page_data['user']->id);
         if( $this->input->post() ){
 			$this->form_validation->set_rules('first_name', 'First name','trim|required|xss_clean');
 			$this->form_validation->set_rules('last_name', 'Last name','trim|required|xss_clean');
