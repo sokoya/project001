@@ -4,9 +4,9 @@ function format_currency(str) {
 
 
 function ucwords(str) {
-    return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
-        return $1.toUpperCase();
-    });
+	return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
+		return $1.toUpperCase();
+	});
 }
 
 
@@ -24,7 +24,7 @@ $('.create-address-btn').on('click', function (e) {
 			if (response.status = 'success') {
 				$('#status').html(`<p class="alert alert-success">{response.message}</p>`).slideDown('fast').delay(300).slideUp('slow');
 				$('#delivery-method').load(`${base_url}checkout #delivery-method`);
-			}else{
+			} else {
 				$('#status').html(`<p class="alert alert-danger">{response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
 			}
 		}
@@ -35,39 +35,41 @@ $('.create-address-btn').on('click', function (e) {
 });
 
 $('.btn-new-address').on('click', function () {
-	$('#register_address').slideDown('fast', function(){
-		$.getJSON( base_url + 'checkout/fetch_states', function(d) {
-            $.each(d, function(k,v){
-                $('#state').append($('<option></option>').attr('value', v.id).text(ucwords(v.name)));
-            })
-        });
+	$('#register_address').slideDown('fast', function () {
+		$.getJSON(base_url + 'checkout/fetch_states', function (d) {
+			$.each(d, function (k, v) {
+				$('#state').append($('<option></option>').attr('value', v.id).text(ucwords(v.name)));
+			})
+		});
 	});
 	$('#delivery_address').hide();
 });
 
-$('#state').on('change', function(){
+$('#state').on('change', function () {
 	$("#city").empty();
 	let sid = $(this).val();
 	$.ajax({
-	    url:base_url + 'account/fetch_areas',
-	    method: 'get',
-	    data: {sid: sid},
-	    dataType: 'json',
-	    success: function(d) {
-	    	$("#city").append("<option>-- Please select a city --</option>");
-	        $.each(d, function (k, v) {
-	            $('#city').append($('<option></option>').attr('value', v.id).text(ucwords(v.name)));
-	        })
-	    }
+		url: base_url + 'account/fetch_areas',
+		method: 'get',
+		data: {sid: sid},
+		dataType: 'json',
+		success: function (d) {
+			$("#city").append("<option>-- Please select a city --</option>");
+			$.each(d, function (k, v) {
+				$('#city').append($('<option></option>').attr('value', v.id).text(ucwords(v.name)));
+			})
+		}
 	})
 
 });
 
 
 $('.pickup-address').on('click', function () {
-	$('.delivery-box').prop('checked', true);
+	$('.pickup-address').removeClass('custom-panel-active');
+	let ad_id = $(this).data('id');
+	$(`#${ad_id}`).prop('checked', true);
 	if ('.delivery-box') {
-		$('.pickup-address').addClass('custom-panel-active');
+		$(this).addClass('custom-panel-active');
 		$('.pay-method').show();
 		$('.delivery-warning').slideUp()
 	}
@@ -138,7 +140,7 @@ quantity.on('input', function () {
 	}
 });
 
-$(document).ready(function(){
+$(document).ready(function () {
 
 	// $.ajax({
 	// 	url: base_url + "checkout/fetch_address",
