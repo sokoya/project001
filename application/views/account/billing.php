@@ -90,12 +90,12 @@
                                     <div class="col-xs-12 col-md-12">
                                         <div class="form-group">
                                             <label for="address" class="control-label">Address  <span class="req">*</span></label>
-                                            <textarea class="form-control " id="address" rows="4" placeholder="Delivery Address"></textarea>
+                                            <textarea class="form-control" name="address" id="address" rows="4" placeholder="Delivery Address"></textarea>
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-12">
-                                        <button type="submit" id="btn_add_add" href="javascript:;" class="btn btn-success btn-block" style="border-radius: 0px !important;"><strong>Add Address</strong></button>
+                                        <button type="" id="btn_add_add" href="javascript:;" class="btn btn-success btn-block" style="border-radius: 0px !important;"><strong>Add Address</strong></button>
                                     </div>
                                 </form>
                             </div>
@@ -160,13 +160,14 @@
     let innercodenorm ="<strong><i class=\"fa fa-plus\"></i> Add New Address\n" +
         "                    </strong>";
     let state_drop = $('#state_id');
-    $.getJSON( base_url + 'account/fetch_states', function(d) {
-        $.each(d, function(k,v){
-            state_drop.append($('<option></option>').attr('value', v.id).text(toTitleCase(v.name)));
-        })
-    });
-    $('#add_new_add').on('click', function(){
 
+    $('#add_new_add').on('click', function(){
+        $.getJSON( base_url + 'account/fetch_states', function(d) {
+            state_drop.children('option:not(:first)').remove();
+            $.each(d, function(k,v){
+                state_drop.append($('<option></option>').attr('value', v.id).text(toTitleCase(v.name)));
+            })
+        });
         if ($('#add_new_add').hasClass('btn-primary')){
             $('#add_address').css({
                 display : 'block'
@@ -207,24 +208,27 @@ var first_name = $('#f_name').val(),
     phone = $('#phone').val(),
     phone2 = $('#phone2').val(),
     address = $('#address').val();
+
     $('#btn_add_add').click(function(){
-        $.ajax({
-            url:base_url + 'account/billing',
-            method: 'post',
-            data: {
-                first_name: first_name,
-                last_name : last_name,
-                state: state,
-                area : area,
-                phone : phone,
-                phone2 : phone2,
-                address : address
-            },
-            dataType: 'json',
-            success: function(d) {
-               
-            }
-        })
+        if (first_name != '' && last_name != '' && state != '--select--' && area != '--select--' && phone != '' && address != ''){
+            $.ajax({
+                url:base_url + 'account/billing',
+                method: 'post',
+                data: {
+                    first_name: first_name,
+                    last_name : last_name,
+                    state: state,
+                    area : area,
+                    phone : phone,
+                    phone2 : phone2,
+                    address : address
+                },
+                dataType: 'json',
+                success: function(d) {
+
+                }
+            })
+        }
     })
 </script>
 </body>
