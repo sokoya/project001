@@ -106,8 +106,7 @@ class Product extends CI_Controller
 	}
 
 
-	public function cart()
-	{
+	public function cart(){
 		if ($this->input->post()) {
 			// update
 			$data = $this->input->post();
@@ -127,8 +126,7 @@ class Product extends CI_Controller
 
 
 	// remove cart
-	public function remove_cart()
-	{
+	public function remove_cart() {
 		$this->cart->remove($this->uri->segment(3));
 		redirect('cart');
 	}
@@ -153,7 +151,6 @@ class Product extends CI_Controller
 					'seller' => base64_decode($this->input->post('seller'))
 				)
 		);
-
 		if( $this->cart->insert($data)){
             echo true;
             exit;
@@ -185,8 +182,7 @@ class Product extends CI_Controller
 	 * @param $id - product id
 	 * @return null
 	 */
-	function add_count($id)
-	{
+	function add_count($id){
 		if (!empty($id)) {
 			$this->load->helper('cookie');
 			$check_visitor = $this->input->cookie($id, FALSE);
