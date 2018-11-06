@@ -273,13 +273,7 @@ var first_name = $('#f_name').val(),
                 url:base_url + 'account/update_billing',
                 method: 'post',
                 data: {
-                    first_name: first_name,
-                    last_name : last_name,
-                    state: state,
-                    area : area,
-                    phone : phone,
-                    phone2 : phone2,
-                    address : address
+                    
                 },
                 dataType: 'json',
                 success: function(d) {
@@ -299,7 +293,13 @@ var first_name = $('#f_name').val(),
             data: {address_id: id},
             dataType: 'json',
             success: function(d) {
-
+                $('#f_name').val(first_name);
+                $('#l_name').val(last_name)
+                $('#state_id').val(sid)
+                $('#area_id').val(aid)
+                $('#phone').val(phone)
+                $('#phone2').val(phone2)
+                $('#address').val(address);
             }
         })
     }
