@@ -91,8 +91,8 @@
 					</div>
 					<div class="panel-body" id="delivery_address">
 						<?php
-							if( !$address_set ):
-						?>
+						if (!$address_set):
+							?>
 							<div class="alert alert-warning text-center delivery-warning">Select an existing address or
 								create a new address
 								to continue
@@ -160,7 +160,10 @@
 					<div class="panel-heading custom-panel-head">
 						<h3 class="panel-title"><i class="fa fa-credit-card"></i>&nbsp;&nbsp; Payment Method</h3>
 					</div>
-					<div class="panel-body pay-method" style="display: none">
+					<div class="panel-body pay-method" style="<?php
+					if (!$address_set):
+						?>display: none
+					<?php endif; ?>">
 						<div class="panel panel-default custom-panel">
 							<div class="panel-body pay-panel">
 								<div class="form-check">
