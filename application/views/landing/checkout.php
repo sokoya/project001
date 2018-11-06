@@ -86,7 +86,7 @@
 							create a new address
 							to continue
 						</div>
-						<div class="row">
+						<div class="row" id="delivery_address_box">
 							<?php
 								if( $addresses) :
 									foreach($addresses as $address) : ?>

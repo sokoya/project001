@@ -148,6 +148,7 @@ class Account extends CI_Controller {
 					'phone' => cleanit($this->input->post('phone')),
 					'sid' => cleanit($this->input->post('state')),
 					'phone2' => $phone2,
+					'uid' => base64_decode($this->session->userdata('logged_id'), 
 					'aid' => cleanit($this->input->post('area'))
 				);
 				if( is_int($this->user->insert_data('billing_address', $data)) ){
