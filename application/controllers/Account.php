@@ -216,4 +216,15 @@ class Account extends CI_Controller {
 		redirect(base_url());
 	}
 
+
+	function fetch_single_address(){
+		if( !$this->input->post() ) redirect(base_url());
+		$address_id = cleanit($this->input->get('address_id'));
+		$result = $this->user->get_single_address( base64_decode($this->session->userdata('logged_id')), $address_id);
+		header('Content-type: text/json');
+		header('Content-type: application/json');
+		echo json_encode($result);
+        exit;
+	}
+
 }
