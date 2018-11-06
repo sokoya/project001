@@ -24,9 +24,12 @@
             <li>
                 <h4 <?php if($page == 'billing') echo 'class="market-sidebar-active"' ?> ><a href="<?= base_url('account/billing'); ?>">My Billing Address</a></h4>
             </li>
-			<li>
-				<h4 <?php if($page == 'settings') echo 'class="market-sidebar-active"' ?> ><a href="<?= base_url('account/settings'); ?>">Account Settings</a></h4>
-			</li>
+            <li>
+                <h4 <?php if($page == 'settings') echo 'class="market-sidebar-active"' ?> ><a href="<?= base_url('account/settings'); ?>">Account Settings</a></h4>
+            </li>
+            <li>
+                <h4 <?php if($page == 'settings') echo 'class="market-sidebar-active"' ?> ><a href="<?= base_url('logout'); ?>">Logout</a></h4>
+            </li>
 		</ul>
 	</div>
 </div>
