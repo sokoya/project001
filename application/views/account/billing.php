@@ -48,6 +48,7 @@
                         </div>
                         <div class="add_body">
                             <div class="row">
+                                <div id="status"></div>
                                 <form id="add_add_form" method="POST" action="#">
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group">
@@ -270,16 +271,22 @@ var first_name = $('#f_name').val(),
     $('#btn_up_add').click(function(){
         if (first_name != '' && last_name != '' && state != '--select--' && area != '--select--' && phone != '' && address != ''){
             $.ajax({
-                url:base_url + 'account/update_billing',
-                method: 'post',
-                data: {
-
-                },
-                dataType: 'json',
-                success: function(d) {
-
+                url: base_url + "checkout/add_address",
+                method: "POST",
+                data: $('#add_add_form').serialize(),
+                success: function (response) {
+                    // if (response.status = 'success') {
+                    //     $('#status').html(`<p class="alert alert-success">response.message</p>`).slideDown('fast').delay(3000).slideUp('slow');
+                    //     $('#processing').hide();
+                    //     $('#delivery-method').load(`${base_url}checkout #delivery-method`, function () {
+                    //         $('.pickup-address').on('click', get_updates);
+                    //     });
+                    // } else {
+                    //     $('#processing').hide();
+                    //     $('#status').html(`<p class="alert alert-danger">{response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
+                    // }
                 }
-            })
+            });
         }
     });
 

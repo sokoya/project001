@@ -24,7 +24,7 @@ $('.create-address-btn').on('click', function (e) {
 		data: $('#new-address-form').serialize(),
 		success: function (response) {
 			if (response.status = 'success') {
-				$('#status').html(`<p class="alert alert-success">{response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
+				$('#status').html(`<p class="alert alert-success">response.message</p>`).slideDown('fast').delay(3000).slideUp('slow');
 				$('#processing').hide();
 				$('#delivery-method').load(`${base_url}checkout #delivery-method`, function () {
 					$('.pickup-address').on('click', get_updates);
