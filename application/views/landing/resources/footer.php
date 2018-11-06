@@ -89,7 +89,6 @@
                             <a class="fa fa-google-plus" href="#"></a>
                         </li>
                     </ul>
-                    <br/>
                     <ul class="payment-icons-list">
                         <li>
                             <img src="<?= base_url('assets/landing/img/payment/visa-straight-32px.png'); ?>" alt="Image Alternative text" title="Pay with Visa" />

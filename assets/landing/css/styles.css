@@ -1250,7 +1250,6 @@ hr {
 .payment-icons-list {
 	list-style: none;
 	overflow: hidden;
-	float: right;
 	padding: 0;
 	margin: 10px 0;
 }
