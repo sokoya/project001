@@ -22,8 +22,12 @@
             <?php $this->load->view('landing/msg_view'); ?>
             <div class="row">
                 <h3 class="market-sidebar-header-r hidden-sm hidden-md hidden-xs col-md-6">My Billing Address</h3>
-                <a href="#" class="btn btn-primary" style="border-radius: 0px !important; float:right;" id="add_new_add">
+                <a href="#" class="btn btn-primary add_new_add" style="border-radius: 0px !important; float:right;" id="add_new_add">
                     <strong><i class="fa fa-plus"></i> Add New Address
+                    </strong>
+                </a>
+                <a href="#" class="btn btn-danger btn_can_update" style="border-radius: 0px !important; float:right;display:none;" id="btn_can_update">
+                    <strong><i class="fa fa-times"></i> Cancel
                     </strong>
                 </a>
             </div>
@@ -39,7 +43,7 @@
                 <div>
                     <div>
                         <div>
-                            <h4 class="modal-title" id="myModalLabel">Add New Address</h4>
+                            <h4 class="modal-title" id="add_title">Add New Address</h4>
                             <p style="font-size:11px;color:red;">All fields with * are required.</p>
                         </div>
                         <div class="add_body">
@@ -97,6 +101,9 @@
                                     <div class="col-xs-12 col-md-12">
                                         <button type="" id="btn_add_add" href="javascript:;" class="btn btn-success btn-block" style="border-radius: 0px !important;"><strong>Add Address</strong></button>
                                     </div>
+                                    <div class="col-xs-12 col-md-12">
+                                        <button type="" id="btn_up_add" href="javascript:;" class="btn btn-primary btn-block" style="display:none;border-radius: 0px !important;"><strong>Update Address</strong></button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -107,8 +114,11 @@
             <div class="row ">
                 <?php foreach($addresses as $address ) : ?>
                 <div class="col-md-6">
-                    <div class="market-dashboard-card" data-id="<?= $address->id; ?>">
-                        <h4><?php if($address->primary_address == 0){echo 'Set As Default Address'; } else{ echo 'Default Address';} ?></h4>
+                    <div class="market-dashboard-card">
+                        <div class="row">
+                            <h4 class="col-md-8"><?php if($address->primary_address == 0){echo '<a href="javascript:;" id="btn_set_default">Set As Default Address</a>'; } else{ echo 'Default Address';} ?></h4>
+                            <h5 class="col-md-4"><a  onclick='get_specific_add("<?= $address->id; ?>")' href="javascript:;" class="btn_edt_add" style="float: right;">Edit</a></h5>
+                        </div>
                         <hr/>
                         <p>
                             <i class="fa fa-user"></i>&nbsp;<?= ucwords($address->first_name) . ' ' . ucwords($address->last_name); ?>
@@ -147,7 +157,7 @@
         "                    </strong>";
     let state_drop = $('#state_id');
 
-    $('#add_new_add').on('click', function(){
+    $('.add_new_add').on('click', function(){
         $.getJSON( base_url + 'account/fetch_states', function(d) {
             state_drop.children('option:not(:first)').remove();
             $.each(d, function(k,v){
@@ -216,6 +226,85 @@ var first_name = $('#f_name').val(),
             })
         }
     })
+    $('#btn_set_default').click(function(){
+
+    });
+    $('.btn_edt_add').click(function(){
+        $('#btn_add_add').css({
+            display : 'none'
+        });
+        $('#btn_can_update').css({
+            display : 'block'
+        });
+        $('#add_new_add').css({
+            display : 'none'
+        });
+        $('#btn_up_add').css({
+            display : 'block'
+        });
+        $('#add_address').css({
+            display : 'block'
+        });
+        $('#add_title').text('Edit Address');
+    });
+
+    $('#btn_can_update').click(function(){
+        $('#btn_add_add').css({
+            display : 'block'
+        });
+        $('#btn_can_update').css({
+            display : 'none'
+        });
+        $('#add_new_add').css({
+            display : 'block'
+        });
+        $('#btn_up_add').css({
+            display : 'none'
+        });
+        $('#add_address').css({
+            display : 'none'
+        });
+        $('#add_title').text('Add New Address');
+    });
+
+    $('#btn_up_add').click(function(){
+        if (first_name != '' && last_name != '' && state != '--select--' && area != '--select--' && phone != '' && address != ''){
+            $.ajax({
+                url:base_url + 'account/update_billing',
+                method: 'post',
+                data: {
+                    first_name: first_name,
+                    last_name : last_name,
+                    state: state,
+                    area : area,
+                    phone : phone,
+                    phone2 : phone2,
+                    address : address
+                },
+                dataType: 'json',
+                success: function(d) {
+
+                }
+            })
+        }
+    });
+
+
+    // Send a get method to the controller function
+    // receive : first_name: Adeniji, last_name, phone, phone2, sid, aid, address
+    let get_specific_add = function(id){
+        $.ajax({
+            url:base_url + 'account/fetch_single_address',
+            method: 'get',
+            data: {address_id: id},
+            dataType: 'json',
+            success: function(d) {
+
+            }
+        })
+    }
+
+
 </script>
 </body>
 </html>
