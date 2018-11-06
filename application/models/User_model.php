@@ -53,7 +53,6 @@ Class User_model extends CI_Model{
     // Update table
     function update_data( $access = '' , $data = array(), $table_name = 'users'){
         $this->db->where('id', $access);
-        $this->db->or_where('email', $access);
         return $this->db->update( $table_name, $data );
     }
 

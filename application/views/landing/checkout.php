@@ -136,9 +136,6 @@
 														>
 														<label class="form-check-label" for="<?= $address->id; ?>">
 															Select this address
-															<?php
-															// if( $address->primar_address ==1 ) : We have a default address already set
-															?>
 														</label>
 													</div>
 													<span>Edit</span>
