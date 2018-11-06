@@ -85,7 +85,7 @@ class Checkout extends CI_Controller
 		if( !$this->input->post() ) redirect(base_url());
 		$uid = base64_decode($this->session->userdata('logged_id'));
 		$address_id = cleanit($this->input->post('address_id'));
-		if( $this->user->updata_data($address_id, array('primary_address' => 1), 'billing_address')) {
+		if( $this->user->update_data($address_id, array('primary_address' => 1), 'billing_address')) {
 			echo true;
 		}else{
 			echo false;

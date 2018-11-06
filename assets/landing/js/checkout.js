@@ -66,10 +66,10 @@ $('#state').on('change', function () {
 
 });
 
-
 $('.pickup-address').on('click', function () {
 	$('.pickup-address').removeClass('custom-panel-active');
 	let ad_id = $(this).data('id');
+	let elem = $(this);
 	$(`#${ad_id}`).prop('checked', true);
 
 	$.ajax({
@@ -78,7 +78,9 @@ $('.pickup-address').on('click', function () {
 		data: {address_id: ad_id},
 		success: function (response) {
 			if ('.delivery-box') {
-				$(this).addClass('custom-panel-active');
+				bind_market(response, 'charges');
+				bind_market(format_currency($('.total-sum').data('amount') + response * 1), 'total-sum-charges');
+				elem.addClass('custom-panel-active');
 				$('.pay-method').show();
 				$('.delivery-warning').slideUp()
 			}
