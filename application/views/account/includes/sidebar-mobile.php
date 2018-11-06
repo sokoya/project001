@@ -27,6 +27,9 @@
 			<li class="list-group-item">
 				<h4><a href="<?= base_url('account/settings'); ?>">Account Settings</a></h4>
 			</li>
+            <li class="list-group-item">
+                <h4><a href="<?= base_url('logout'); ?>">Logout</a></h4>
+            </li>
 		</ul>
 	</li>
 </ul>
