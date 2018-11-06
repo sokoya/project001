@@ -154,7 +154,6 @@ class Product extends CI_Controller
 				)
 		);
 
-
 		if( $this->cart->insert($data)){
             echo true;
             exit;
