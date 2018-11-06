@@ -281,6 +281,7 @@ class Product extends CI_Controller
     function get_reviews(){
         // $id = $_GET['id'];
         if( $this->input->post('pid')){
+        	$id = $this->input->post('pid');
             $results = $this->product->get_reviews($id);
             $return = array();
             foreach( $results as $key => $values ) {
