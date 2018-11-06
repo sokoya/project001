@@ -78,7 +78,7 @@ $('.pickup-address').on('click', function () {
 		data: {address_id: ad_id},
 		success: function (response) {
 			if ('.delivery-box') {
-				bind_market(response, 'charges');
+				bind_market(format_currency(response), 'charges');
 				bind_market(format_currency($('.total-sum').data('amount') + response * 1), 'total-sum-charges');
 				elem.addClass('custom-panel-active');
 				$('.pay-method').show();
