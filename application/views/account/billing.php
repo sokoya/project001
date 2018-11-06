@@ -19,7 +19,6 @@
 		<?php $this->load->view('account/includes/sidebar'); ?>
 		<div class="col-md-8">
 			<?php $this->load->view('account/includes/sidebar-mobile'); ?>
-
 			<?php $this->load->view('landing/msg_view'); ?>
 			<div class="row">
 				<h3 class="market-sidebar-header-r hidden-sm hidden-md hidden-xs col-md-6">My Billing Address</h3>
@@ -40,93 +39,90 @@
 				several area in the state may arrive latter than expected. To view the most up to date status for your
 				order, please go to the Orders page
 			</div>
-
+            <div id="status"></div>
 
 			<div class="add_form" id="add_address">
-				<div>
-					<div>
-						<div>
-							<h4 class="modal-title" id="add_title">Add New Address</h4>
-							<p style="font-size:11px;color:red;">All fields with * are required.</p>
-						</div>
-						<div class="add_body">
-							<div class="row">
-								<form id="add_add_form" method="POST" action="#">
-									<div class="col-xs-12 col-md-6">
-										<div class="form-group">
-											<label for="f_name" class="control-label">First Name <span
-													class="req">*</span></label>
-											<input type="text" class="form-control" id="f_name" name="first_name"
-												   value="" required=""
-												   title="Please enter you first name" placeholder="First Name">
-											<span class="help-block"></span>
-										</div>
-										<div class="form-group">
-											<label for="phone" class="control-label">Phone Number <span
-													class="req">*</span></label>
-											<input type="tel" class="form-control" id="phone" name="phone" value=""
-												   required=""
-												   title="Please enter you phone number" placeholder="080XXXXXXXX">
-											<span class="help-block"></span>
-										</div>
-										<div class="form-group">
-											<label for="state_id" class="control-label">State <span class="req">*</span></label>
-											<select class="form-control" id="state_id" name="state">
-												<option selected>--select--</option>
-											</select>
-										</div>
+                <div>
+                    <h4 class="modal-title" id="add_title">Add New Address</h4>
+                    <p style="font-size:11px;color:red;">All fields with * are required.</p>
+                </div>
+                <div class="add_body">
+                    <div class="row">
+                        <form id="add_add_form" method="POST" action="#">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="f_name" class="control-label">First Name <span
+                                            class="req">*</span></label>
+                                    <input type="text" class="form-control" id="f_name" name="first_name"
+                                           value="" required=""
+                                           title="Please enter you first name" placeholder="First Name">
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone" class="control-label">Phone Number <span
+                                            class="req">*</span></label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" value=""
+                                           required=""
+                                           title="Please enter you phone number" placeholder="080XXXXXXXX">
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="state_id" class="control-label">State <span class="req">*</span></label>
+                                    <select class="form-control" id="state_id" name="state">
+                                        <option selected>--select--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="l_name" class="control-label">Last Name <span
+                                            class="req">*</span></label>
+                                    <input type="text" class="form-control" id="l_name" name="last_name"
+                                           value="" required=""
+                                           title="Please enter you last name" placeholder="Last Name">
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone2" class="control-label">Additional Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone2" name="phone2" value=""
+                                           title="Please enter you phone number" placeholder="080XXXXXXXX">
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="area_id" class="control-label">Area <span
+                                            class="req">*</span></label>
+                                    <select class="form-control" id="area_id" name="area">
+                                        <option selected>--select--</option>
+                                    </select>
+                                </div>
 
-									</div>
-									<div class="col-xs-12 col-md-6">
-										<div class="form-group">
-											<label for="l_name" class="control-label">Last Name <span
-													class="req">*</span></label>
-											<input type="text" class="form-control" id="l_name" name="last_name"
-												   value="" required=""
-												   title="Please enter you last name" placeholder="Last Name">
-											<span class="help-block"></span>
-										</div>
-										<div class="form-group">
-											<label for="phone2" class="control-label">Additional Phone Number</label>
-											<input type="tel" class="form-control" id="phone2" name="phone2" value=""
-												   title="Please enter you phone number" placeholder="080XXXXXXXX">
-											<span class="help-block"></span>
-										</div>
-										<div class="form-group">
-											<label for="area_id" class="control-label">Area <span
-													class="req">*</span></label>
-											<select class="form-control" id="area_id" name="area">
-												<option selected>--select--</option>
-											</select>
-										</div>
-
-									</div>
-									<div class="col-xs-12 col-md-12">
-										<div class="form-group">
-											<label for="address" class="control-label">Address <span
-													class="req">*</span></label>
-											<textarea class="form-control" name="address" id="address" rows="4"
-													  placeholder="Delivery Address"></textarea>
-											<span class="help-block"></span>
-										</div>
-									</div>
-									<div class="col-xs-12 col-md-12">
-										<button type="" id="btn_add_add" href="javascript:;"
-												class="btn btn-success btn-block"
-												style="border-radius: 0px !important;"><strong>Add Address</strong>
-										</button>
-									</div>
-									<div class="col-xs-12 col-md-12">
-										<button type="" id="btn_up_add" href="javascript:;"
-												class="btn btn-primary btn-block"
-												style="display:none;border-radius: 0px !important;"><strong>Update
-												Address</strong></button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
+                            </div>
+                            <div class="col-xs-12 col-md-12">
+                                <div class="form-group">
+                                    <label for="address" class="control-label">Address <span
+                                            class="req">*</span></label>
+                                    <textarea class="form-control" name="address" id="address" rows="4"
+                                              placeholder="Delivery Address"></textarea>
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-12">
+                                <button type="" id="btn_add_add"
+                                        class="btn btn-success btn-block"
+                                        style="border-radius: 0px !important;"><strong>Add Address</strong>
+                                </button>
+                            </div>
+                            <div class="col-xs-12 col-md-12">
+                                <button id="btn_up_add" type="submit"
+                                        class="btn btn-primary btn-block"
+                                        style="display:none;border-radius: 0px !important;"><strong>Update
+                                        Address</strong></button>
+                            </div>
+                            <input type="hidden" name="address_type" id="address_type"/>
+                            <input type="hidden" name="update_aid" id="update_aid"/>
+                        </form>
+                    </div>
+                </div>
 			</div>
 			<div class="gap gap-small"></div>
 			<div class="row ">
@@ -134,24 +130,24 @@
 					<div class="col-md-6">
 						<div class="market-dashboard-card">
 							<div class="row">
-								<h4 class="col-md-8"><?php if ($address->primary_address == 0) {
+								<h5 class="col-md-8"><?php if ($address->primary_address == 0) {
 										echo '<a href="javascript:;" id="btn_set_default">Set As Default Address</a>';
 									} else {
 										echo 'Default Address';
-									} ?></h4>
+									} ?></h5>
 								<h5 class="col-md-4"><a onclick='get_specific_add("<?= $address->id; ?>")'
-														href="javascript:;" class="btn_edt_add" style="float: right;">Edit</a>
+														href="javascript:void(0);" class="btn_edt_add" style="float: right;" data-id="<?= $address->id; ?>">Edit</a>
 								</h5>
 							</div>
 							<hr/>
 							<p>
-								<i class="fa fa-user"></i>&nbsp;<?= ucwords($address->first_name) . ' ' . ucwords($address->last_name); ?>
+								<i class="fa fa-user" style="color:dimgrey; font-size:18px;"></i>&nbsp;&nbsp;&nbsp;<?= ucwords($address->first_name) . ' ' . ucwords($address->last_name); ?>
 							</p>
 							<p>
-								<i class="fa fa-map-marker"></i>&nbsp;<?= $address->address; ?>
+								<i class="fa fa-map-marker" style="color:dimgrey; font-size:18px;"></i>&nbsp;&nbsp;&nbsp;<?= $address->address; ?>
 							</p>
 							<p>
-								<i class="fa fa-phone"></i>&nbsp;<?= $address->phone; ?> <?php if (!empty($address->phone2)) echo ', ' . $address->phone2; ?>
+								<i class="fa fa-phone" style="color:dimgrey; font-size:18px;"></i>&nbsp;&nbsp;&nbsp;<?= $address->phone; ?> <?php if (!empty($address->phone2)) echo ', ' . $address->phone2; ?>
 							</p>
 						</div>
 					</div>
@@ -183,6 +179,7 @@
 	let state_drop = $('#state_id');
 
 	$('.add_new_add').on('click', function () {
+	    $('#address_type').val('new');
 		$.getJSON(base_url + 'account/fetch_states', function (d) {
 			state_drop.children('option:not(:first)').remove();
 			$.each(d, function (k, v) {
@@ -222,94 +219,76 @@
 			}
 		})
 	});
-	var first_name = $('#f_name').val(),
-		last_name = $('#l_name').val(),
-		state = $('#state_id').val(),
-		area = $('#area_id').val(),
-		phone = $('#phone').val(),
-		phone2 = $('#phone2').val(),
-		address = $('#address').val();
 
 	$('#btn_add_add').click(function () {
-		if (first_name != '' && last_name != '' && state != '--select--' && area != '--select--' && phone != '' && address != '') {
-			$.ajax({
-				url: base_url + 'account/billing',
-				method: 'post',
-				data: {
-					first_name: first_name,
-					last_name: last_name,
-					state: state,
-					area: area,
-					phone: phone,
-					phone2: phone2,
-					address: address
-				},
-				dataType: 'json',
-				success: function (d) {
+        $.ajax({
+            url: base_url + 'account/billing',
+            method: 'post',
+            data:  $('#add_add_form').serialize() ,
+            dataType: 'json',
+            success: function (d) {
 
-				}
-			})
-		}
+            }
+        });
 	})
 	$('#btn_set_default').click(function () {
 
 	});
 	$('.btn_edt_add').click(function () {
-		$('#btn_add_add').css({
+        $('#address_type').val('update');
+        $('#update_aid').val($('.btn_edt_add').data("id"));
+		$('#btn_add_add, #add_new_add').css({
 			display: 'none'
 		});
-		$('#btn_can_update').css({
-			display: 'block'
-		});
-		$('#add_new_add').css({
-			display: 'none'
-		});
-		$('#btn_up_add').css({
-			display: 'block'
-		});
-		$('#add_address').css({
+		$('#btn_can_update, #btn_up_add, #add_address').css({
 			display: 'block'
 		});
 		$('#add_title').text('Edit Address');
 	});
 
 	$('#btn_can_update').click(function () {
-		$('#btn_add_add').css({
+		$('#btn_add_add, #add_new_add').css({
 			display: 'block'
 		});
-		$('#btn_can_update').css({
-			display: 'none'
-		});
-		$('#add_new_add').css({
-			display: 'block'
-		});
-		$('#btn_up_add').css({
-			display: 'none'
-		});
-		$('#add_address').css({
+		$('#btn_can_update, #btn_up_add, #add_address').css({
 			display: 'none'
 		});
 		$('#add_title').text('Add New Address');
+        $('#phone').val('');
+        $('#phone2').val('');
+        $('#address').val('');
+        $('#f_name').val('');
+        $('#update_aid').val('');
+        $('#l_name').val('');
+        $('#area_id > option:not(:first)').remove();
+        $('#state_id > option:not(:first)').remove();
 	});
 
 	$('#btn_up_add').click(function () {
-		if (first_name != '' && last_name != '' && state != '--select--' && area != '--select--' && phone != '' && address != '') {
-			$.ajax({
-				url: base_url + 'account/update_billing',
-				method: 'post',
-				data: {},
-				dataType: 'json',
-				success: function (d) {
-
-				}
-			})
-		}
+            $.ajax({
+                url: base_url + "account/billing",
+                method: "POST",
+                data: $('#add_add_form').serialize(),
+                success: function (response) {
+                    $('#btn_add_add, #add_new_add').css({
+                        display: 'block'
+                    });
+                    $('#btn_up_add, #add_address, #btn_can_update').css({
+                        display: 'none'
+                    });
+                    $('#add_title').text('Add New Address');
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                }
+            });
 	});
 
 
 	// Send a get method to the controller function
 	// receive : first_name: Adeniji, last_name, phone, phone2, sid, aid, address
-	let get_specific_add = function (id) {
+	let get_specific_add = function(id) {
 		$.ajax({
 			url: base_url + 'account/fetch_single_address',
 			method: 'get',
@@ -324,13 +303,10 @@
 					$.getJSON(base_url + 'account/fetch_states', function (d) {
 						state_drop.children('option:not(:first)').remove();
 						$.each(d, function (k, v) {
-							// $("select option[value='B']").attr("selected","selected");
 							state_drop.append($(`<option ${v.id === value.sid ? 'selected=selected' : ''}  ></option>`).attr('value', v.id).text(toTitleCase(`${v.name}`)));
-							// if v.sid
+
 						});
 					});
-
-
 					$.ajax({
 						url: base_url + 'account/fetch_areas',
 						method: 'get',
@@ -344,7 +320,6 @@
 							})
 						}
 					});
-
 					$('#phone').val(value.phone);
 					$('#phone2').val(value.phone2);
 					$('#address').val(value.address);
