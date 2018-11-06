@@ -84,7 +84,7 @@ Class Product_model extends CI_Model{
 
     // Get single variation
     function get_variation( $id = ''){
-        return $this->db->query('SELECT * FROM product_variation WHERE product_id = ?', $id)->row();
+        return $this->db->query('SELECT * FROM product_variation WHERE product_id = ? LIMIT 1', $id)->row();
     }
 
     // Single product, get all the product variation
