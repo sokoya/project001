@@ -151,15 +151,12 @@ class Account extends CI_Controller {
 					'sid' => cleanit($this->input->post('state')),
                     'address' => cleanit($this->input->post('address')),
 					'phone2' => $phone2,
-<<<<<<< HEAD
                     'aid' => cleanit($this->input->post('area')),
 					'uid' => base64_decode($this->session->userdata('logged_id')
-                    ));
-=======
+                    ),
 					'uid' => base64_decode($this->session->userdata('logged_id')), 
 					'aid' => cleanit($this->input->post('area'))
 				);
->>>>>>> 20e0f2cf2d3297ad9bd4436649bd452d673d3ff7
 
 				if( is_int($this->user->create_account($data,'billing_address')) ){
 					$this->session->set_flashdata('success_msg', 'Success: The address has been added to your account.');
