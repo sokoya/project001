@@ -22,12 +22,12 @@
 			<?php $this->load->view('landing/msg_view'); ?>
 			<div class="row">
 				<h3 class="market-sidebar-header-r hidden-sm hidden-md hidden-xs col-md-6">My Billing Address</h3>
-				<a href="#" class="btn btn-primary add_new_add" style="border-radius: 0px !important; float:right;"
+				<a href="javascript:void(0);" class="btn btn-primary add_new_add" style="border-radius: 0px !important; float:right;"
 				   id="add_new_add">
 					<strong><i class="fa fa-plus"></i> Add New Address
 					</strong>
 				</a>
-				<a href="#" class="btn btn-danger btn_can_update"
+				<a href="javascript:void(0);" class="btn btn-danger btn_can_update"
 				   style="border-radius: 0px !important; float:right;display:none;" id="btn_can_update">
 					<strong><i class="fa fa-times"></i> Cancel
 					</strong>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="add_body">
                     <div class="row">
-                        <form id="add_add_form" method="POST" action="#">
+                        <form id="add_add_form" method="POST" action="javascript:void(0);">
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <label for="f_name" class="control-label">First Name <span
