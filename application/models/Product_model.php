@@ -89,7 +89,7 @@ Class Product_model extends CI_Model{
 
     // Single product, get all the product variation
     function get_variations( $id ){
-        return $this->db->query('SELECT * FROM product_variation WHERE product_id = ? ', $id)->result();
+        return $this->db->query('SELECT * FROM product_variation WHERE product_id = ? ', $id)->result_array();
     }
 
 
@@ -320,10 +320,15 @@ Class Product_model extends CI_Model{
         return $this->db->query( $select_query )->result_array();
     }
 
+    // Generic single product detail
     function get_cart_details( $id ){
         return $this->db->query("SELECT s.first_name name, i.image_name image 
             FROM users s 
             LEFT JOIN product_gallery i ON (i.product_id = $id AND i.featured_image = 1) ")->row();
+    }
+
+    function get_cart_status( $id ){
+
     }
 
 

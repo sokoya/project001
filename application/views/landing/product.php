@@ -196,20 +196,40 @@
 
 										<?php endif; ?>
 										<?php if (count($variations) > 1) : ?>
+											<?php if ($variations[0]['discount_price'] != '') : ?>
+												<input type="hidden" name="product_price"
+													   value="<?= $variations[0]['discount_price']; ?>"
+													   class="pr_price_hidden"/>
+											<?php else: ?>
+												<input type="hidden" name="product_price"
+													   value="<?= $variations[0]['sale_price']; ?>"
+													   class="pr_price_hidden"/>
+											<?php endif; ?>
 											<div class="col-md-4">
 												<h5 class="custom-product-page-option-title">Variation:</h5>
 												<select class="product-page-option-select variation-select"
 														name="variation">
 													<?php foreach ($variations as $variation): ?>
-														<option title="<?= $variation->variation; ?>"
-																data-id="<?= $variation->id ?>"
-																value="<?= trim($variation->variation); ?>" <?php if ($variation->quantity == 0) echo 'disabled'; ?> >
-															<?= ellipsize(trim($variation->variation), 8); ?>
+														<option title="<?= $variation['variation']; ?>"
+																data-id="<?= $variation['id'] ?>"
+																value="<?= trim($variation['variation']); ?>" <?php if ($variation['quantity'] == 0) echo 'disabled'; ?> >
+															<?= ellipsize(trim($variation['variation']), 8); ?>
 														</option>
 
 													<?php endforeach; ?>
 												</select>
 											</div>
+										<?php endif; ?>
+										<?php if(count($variations) == 1 ): ?>
+											<?php if ($variations[0]['discount_price'] != '') : ?>
+												<input type="hidden" name="product_price"
+													   value="<?= $variation->discount_price; ?>"
+													   class="pr_price_hidden"/>
+											<?php else: ?>
+												<input type="hidden" name="product_price"
+													   value="<?= $variation->sale_price; ?>"
+													   class="pr_price_hidden"/>
+											<?php endif; ?>
 										<?php endif; ?>
 										<input type="hidden" name="product_id"
 											   value="<?= base64_encode($product->id); ?>">
@@ -223,7 +243,7 @@
 													<button type="button"
 															class="product-page-qty product-page-qty-minus">-
 													</button>
-													<input data-range="<?= $variation->quantity; ?>" name="quantity"
+													<input data-range="<?= $variation['quantity']; ?>" name="quantity"
 														   id="quan"
 														   class="product-page-qty product-page-qty-input quantity"
 														   type="text"
@@ -234,16 +254,6 @@
 												</li>
 											</ul>
 										</div>
-
-										<?php if ($variation->discount_price != '') : ?>
-											<input type="hidden" name="product_price"
-												   value="<?= $variation->discount_price; ?>"
-												   class="pr_price_hidden"/>
-										<?php else: ?>
-											<input type="hidden" name="product_price"
-												   value="<?= $variation->sale_price; ?>"
-												   class="pr_price_hidden"/>
-										<?php endif; ?>
 
 									</div>
 									<button type="submit" style="display: none;">Submit</button>
