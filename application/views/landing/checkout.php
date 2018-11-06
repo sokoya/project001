@@ -198,28 +198,29 @@
 										<br/>
 										<span>Sold by <span>Philip</span> </span>
 									</td>
-									<td class="parent-block">
-										<ul>
-											<li class="product-page-qty-item">
-												<button type="button"
-														class="product-page-qty product-page-qty-minus">-
-												</button>
-												<input data-range="10" name="quantity"
-													   id="quan"
-													   class="product-page-qty product-page-qty-input quantity"
-													   type="text"
-													   value="1" disabled/>
-												<button type="button"
-														class="product-page-qty product-page-qty-plus">+
-												</button>
-											</li>
-										</ul>
-									</td>
+
+									<td class="parent-block panel-product-quantity ">1 item(s)</span></td>
+
+									<!--									<td class="parent-block">-->
+									<!--										<ul>-->
+									<!--											<li class="product-page-qty-item">-->
+									<!--												<button type="button"-->
+									<!--														class="product-page-qty product-page-qty-minus">--->
+									<!--												</button>-->
+									<!--												<input data-range="10" name="quantity"-->
+									<!--													   id="quan"-->
+									<!--													   class="product-page-qty product-page-qty-input quantity"-->
+									<!--													   type="text"-->
+									<!--													   value="1" disabled/>-->
+									<!--												<button type="button"-->
+									<!--														class="product-page-qty product-page-qty-plus">+-->
+									<!--												</button>-->
+									<!--											</li>-->
+									<!--										</ul>-->
+									<!--									</td>-->
 									<td class="parent-block panel-product-price"><span class="pr-price"
 																					   data-amount="40200">&#8358;40,200</span>
-										<br/>
-										<span class="discount">&#8358;40,200 x</span> <span
-											class="discount-count">1</span><span class="discount"> item(s)</span></td>
+									</td>
 									<td class="parent-block panel-product-action"><a href="javascript:void(0)">Remove
 											Item</a><br/>
 										<a href="javascript:void(0)">Save for later</a></td>
