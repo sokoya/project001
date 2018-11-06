@@ -127,9 +127,12 @@ Class User_model extends CI_Model{
         return $query; 
     }
 
+    // Get states
     function get_states(){
         return $this->db->get('states')->result_array();
     }
+
+    // Get the user area
     function get_area( $sid = ''){
         $this->db->select('id,name,price');
         $this->db->where('sid', $sid);
@@ -142,5 +145,13 @@ Class User_model extends CI_Model{
     }
 
     function recover_email(){}
+
+    /*
+    * @param id = user id
+    * @return CI_result
+    */
+    function get_user_billing_address( $id ){
+        return $this->db->query("SELECT b.*, s.name, a.name FROM billing_address b LEFT JOIN states s ON (s.id = b.sid) LEFT JOIN area a ON (a.id = b.aid) WHERE b.uid = $id")->result();
+    }
     
 }

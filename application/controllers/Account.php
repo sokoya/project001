@@ -152,7 +152,7 @@ class Account extends CI_Controller {
 					'phone2' => $phone2,
 					'aid' => cleanit($this->input->post('area'))
 				);
-				if( $this->user->insert_data('billing_address', $data) ){
+				if( is_int($this->user->insert_data('billing_address', $data)) ){
 					$this->session->set_flashdata('success_msg', 'Success: The address has been added to your account.');
 				}else{
 					$this->session->set_flashdata('error_msg', 'There was an error adding the address to your account');
@@ -177,7 +177,6 @@ class Account extends CI_Controller {
 			$page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')));
 			$this->load->view('account/settings', $page_data);
 		}else{
-//			var_dump($this->input->post('preference'));
 			if($this->user_model->update_data(
 				base64_decode($this->input->post('user')), 
 				array('newsletter' => $this->input->post('preference')))){

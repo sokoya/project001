@@ -1,77 +1,84 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Checkout extends CI_Controller {
+class Checkout extends CI_Controller
+{
 
-    public function __construct(){
-        parent::__construct();
-        $this->load->helper('text');
-        if( !$this->session->userdata('logged_in') ){
-            $this->session->set_userdata('referred_from', current_url());
-            redirect('login');
-        }
-        if( empty($this->cart->total_items()) ){
-            redirect(base_url());
-        }
-    }
-
-	public function index(){
-        // @TODO : Check the product variation quantity and price
-        $page_data['title'] = 'Checkout';
-        if( !$this->input->post() ){
-            $this->load->model('user_model', 'user');
-            $page_data['user'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
-            $this->load->view('landing/checkout', $page_data);
-        }else{
-            // Form validation
-            // $this->form_validation->set_rules('customer_email', 'Email address','trim|required|xss_clean|valid_email');
-            $this->form_validation->set_rules('customer_name', 'Name','trim|required|xss_clean');
-            // $this->form_validation->set_rules('customer_phone', 'Phone number','trim|required|xss_clean');
-            // $this->form_validation->set_rules('address', 'Delivery address','trim|required|xss_clean');
-            // $this->form_validation->set_rules('card_number', 'Card number', 'trim|required|xss_clean');
-            // $this->form_validation->set_rules('cvc', 'CVC', 'trim|required|xss_clean');
-            // $this->form_validation->set_rules('cardholder_name', 'Card holder name', 'trim|required|xss_clean');
-            if( $this->form_validation->run() == FALSE ){
-                $this->session->set_flashdata('error_msg','There was an error with the form. Please fix the following <br />' . validation_errors());
-                redirect($_SERVER['HTTP_REFERER']);
-            }
-            // Check payment status from
-            // if payment successful
-            $this->load->helper('string');
-            $code  = $this->product->generate_code('orders', 'order_code');
-            $data = array(
-                'buyer_id' => base64_decode($this->input->post('userid')),
-                'customer_name' => $this->input->post('customer_name'),
-                'customer_phone'    => $this->input->post('customer_phone'),
-                'city'  => $this->input->post('city'),
-                'zip_code' => $this->input->post('zip_code'),
-                'address' => $this->input->post('address'),
-                'status' => 'ordered',
-                'order_code' => $code
-            );
-
-            $count = $x = 0;
-            // count, sizeof not working for array, Imporovised
-            foreach( $this->input->post('order') as $key){
-                $count++;
-            }
-            do {
-                // $_POST['order'] = 'userid|product_id|seller_id|qty|desc}price'
-                $order = explode('|', $_POST['order'][$x]);
-                $data['buyer_id'] = base64_decode($order[0]);
-                $data['product_id'] = $order[1];
-                $data['seller_id'] = base64_decode($order[2]);
-                $data['qty'] = $order[3];
-                $data['product_desc'] = $order[4];
-                $data['amount'] = $order[3] * $order[5];
-                $this->product->insert_data('orders', $data);
-                $x++;
-            } while ( $x < $count);
-            $this->session->set_flashdata('success_msg', 'Thank you for the order, your order is in progress. Your order tracking code is  #'.$code);
-            // clear the cart session
-            $this->cart->destroy();
-            redirect('account');
-        }
+	public function __construct(){
+		parent::__construct();
+		$this->load->helper('text');
+		if (!$this->session->userdata('logged_in')) {
+			$this->session->set_userdata('referred_from', current_url());
+			redirect('login');
+		}
+		if (empty($this->cart->total_items())) {
+			redirect(base_url());
+		}
 	}
 
+	public function index(){
+		// @TODO : Check the product variation quantity and price
+		$page_data['title'] = 'Checkout';
+		$this->load->model('user_model', 'user');
+		$page_data['user'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
+		$page_data['addresses'] = $this->user->get_user_billing_address( $page_data['user']->id);
+		$this->load->view('landing/checkout', $page_data);
+	}
+
+	function fetch_states(){
+		$states = $this->user->get_states();
+		header('Content-type: text/json');
+		header('Content-type: application/json');
+		echo json_encode($states);
+        exit;
+	}
+
+	function fetch_areas(){
+		if( $this->input->get('sid') ){
+			$sid = $this->input->get('sid');
+			$areas = $this->user->get_area( $sid );
+			header('Content-type: text/json');
+			header('Content-type: application/json');
+			echo json_encode($areas);
+	        exit;
+		}
+		redirect(base_url());
+	}
+
+	function add_address(){
+		$status['status'] = 'error';
+		$this->form_validation->set_rules('first_name', 'First name','trim|required|xss_clean');
+		$this->form_validation->set_rules('last_name', 'Last name','trim|required|xss_clean');
+		$this->form_validation->set_rules('phone', 'Phone','trim|required|xss_clean');
+		$this->form_validation->set_rules('state', 'State','trim|required|xss_clean');
+		$this->form_validation->set_rules('area', 'Area','trim|required|xss_clean');
+		if( $this->form_validation->run() == FALSE ){
+			$this->session->set_flashdata('error_msg', 'Please correct the following errors '. validation_errors());
+			$status['message'] = 'Please correct the following errors '. validation_errors();
+			echo json_encode($status);
+			exit;
+		}else{
+			$data = array(
+				'first_name' => cleanit($this->input->post('first_name')),
+				'last_name' => cleanit($this->input->post('last_name')),
+				'phone' => cleanit($this->input->post('phone')),
+				'sid' => cleanit($this->input->post('state')),
+				'address' => cleanit($this->input->post('address')),
+				'aid' => cleanit($this->input->post('area')),
+				'uid' => base64_decode($this->session->userdata('logged_id'))
+			);
+			if( is_int($this->user->create_account($data, 'billing_address')) ){
+				$status['status'] = 'success';
+				$status['message'] = 'Success: The address has been added to your account.';
+				echo json_encode( $status);
+				exit;
+				$this->session->set_flashdata('success_msg', 'Success: The address has been added to your account.');
+			}else{
+				$status['message'] = 'Success: There was an error adding the address to your account.';
+			}
+			echo json_encode( $status );
+			exit;
+		}
+        
+	}
 }

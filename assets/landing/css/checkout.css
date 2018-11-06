@@ -1,0 +1,220 @@
+.custom-panel-head {
+	background: #fff !important;
+	padding: 16px 10px 16px 14px;
+}
+
+.sub-custom-panel-head {
+	background: #fff !important;
+}
+
+.custom-panel-head > h3 > i {
+	color: #4c4c4c;
+	font-size: 22px;
+}
+
+.custom-panel-head > h3, .custom-panel-head > h3 > span {
+	font-family: 'Open Sans', arial, helvetica, sans-serif !important;
+	font-size: 16px;
+	color: #000;
+	font-weight: 600;
+}
+
+.panel-title > .form-check > label {
+	font-family: 'Open Sans', arial, helvetica, sans-serif !important;
+	font-size: 13px;
+	position: relative;
+	top: -1px;
+	left: 6px;
+	font-weight: 600;
+	color: #49a251 !important
+}
+
+.panel-title > span {
+	color: #585858;
+	font-size: 13px;
+	float: right;
+	position: relative;
+	bottom: 20px;
+	cursor: pointer;
+}
+
+.panel-details > i {
+	color: #9b9b9b !important;
+	margin-right: 10px;
+	font-size: 13px;
+}
+
+.panel-details {
+	font-size: 13px;
+	color: #000;
+	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+.custom-panel:hover {
+	cursor: pointer;
+	border: 1px solid #49a251;
+}
+
+.custom-panel-active {
+	border: 1px solid #49a251;
+}
+
+.panel-title > button {
+	float: right;
+	margin-left: 5px;
+}
+
+.pay-gate {
+	font-family: 'Open Sans', arial, helvetica, sans-serif !important;
+	font-size: 15px;
+	position: relative;
+	left: 6px;
+	font-weight: 600;
+	color: #292929 !important;
+	width: 100%;
+}
+
+.pay-gate > input {
+	margin-right: 8px;
+}
+
+.pay-gate > img {
+	float: right;
+	width: 140px;
+	height: 40px;
+}
+
+.parent-block {
+	position: relative;
+	top: 10px;
+}
+
+.panel-product-title {
+	font-size: 15px;
+	font-weight: 600;
+	color: #4e4e4e;
+	font-family: 'Open Sans', arial, helvetica, sans-serif !important;
+}
+
+.panel-product-title > span {
+	font-size: 12px;
+	position: relative;
+	top: 8px;
+	color: #4e4e4e;
+	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+.panel-product-title > span > span {
+	color: #49a251 !important
+}
+
+.panel-product-price {
+	font-size: 22px;
+	font-weight: 700;
+	color: #111;
+	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+.panel-pr-image {
+	height: 70px;
+	width: 70px;
+}
+
+.panel-product-action > a {
+	text-decoration: none;
+	color: #49a251 !important;
+	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size: 13px;
+}
+
+.panel-product-price > .discount, .panel-product-price > .discount-count {
+	font-size: 14px;
+	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	color: #9f9f9f;
+	position: relative;
+	bottom: 10px;
+}
+
+.panel-summary-quantity {
+	float: right;
+	position: relative;
+	top: 2px;
+}
+
+.summary-title, .summary-title > span {
+	font-weight: 700 !important;
+}
+
+.sum-pad {
+	padding: 2px;
+}
+
+.cs-sum-grp > .list-group-item {
+	padding: 16px;
+}
+
+.cs-sum-grp > .cs-sm-m {
+	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size: 13px;
+}
+
+.cs-sum-grp > .cs-sm-m > span {
+	float: right;
+	color: #414141;
+	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-weight: 700;
+	font-size: 15px;
+}
+
+.btn-custom-dark {
+	background: #404040;
+	color: #fff;
+}
+
+.btn-custom-dark:hover {
+	background: #5b5b5b;
+	color: #fff;
+}
+
+.btn-custom-primary {
+	background: #fff;
+	color: #49a251;
+	border: 1px solid #49a251;
+	padding: 6px;
+	border-radius: 2px;
+	font-size: 12px;
+	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	outline: none;
+}
+
+.btn-custom-primary:hover {
+	background: #49a251;
+	color: #fff;
+}
+
+.cs-sm-t {
+	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.cs-sm-t > span {
+	float: right;
+	color: #111;
+	font-size: 17px;
+}
+
+.checkout-form-input {
+	outline: none;
+	border: 1px solid #9c9c9c !important;
+	/*padding: 10px;*/
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+.checkout-form-input-label {
+	font-size: 13px;
+	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	color: #1d1d1d;
+}

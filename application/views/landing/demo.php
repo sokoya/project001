@@ -10,76 +10,87 @@
 	<div class="gap"></div>
 	<div class="container">
 		<h4 class="pr-over" style="font-size: 16px; color: #a0a0a0">Checkout</h4>
-		<div id="status"></div>
 		<div class="row">
 			<div class="col-md-8">
-				<div class="panel panel-default" id="delivery-method">
+				<div class="panel panel-default">
 					<div class="panel-heading custom-panel-head">
 						<h3 class="panel-title"><i class="fa fa-truck"></i>&nbsp;&nbsp; Delivery / Pickup Method
 							<button class="btn-custom-primary btn-new-address">New Address</button>
 							<button class="btn-custom-primary">Select Pickup Location</button>
 						</h3>
+
 					</div>
 					<div class="panel-body" id="register_address" style="display: none">
 						<div class="row">
 							<div class="col-md-12">
-								<?= form_open('','id="new-address-form"'); ?>
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group ">
-												<label class="checkout-form-input-label" for="first_name">First Name:</label>
-												<input type="text" class="form-control checkout-form-input" id="fname" name="first_name" required="">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="checkout-form-input-label" for="lname">Last Name:</label>
-												<input type="text" class="form-control checkout-form-input" id="lname" name="last_name" required="">
-											</div>
-										</div>
-
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="checkout-form-input-label" for="number_">Mobile Number</label>
-												<input type="text" class="form-control checkout-form-input" id="number_" name="phone" required>
-											</div>
-										</div>
-
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="checkout-form-input-label" for="street">Street Address</label>
-												<input type="text" class="form-control checkout-form-input" id="street" name="address" required>
-											</div>
-										</div>
-
-										<div class="col-md-6">
-											<div class="form-group">
-												<div class="form-group">
-													<label class="checkout-form-input-label" for="state">State</label>
-													<select class="form-control checkout-form-input" id="state" name="state" required=""><option value="">-- Select Sate --</option>
-													</select>
-												</div>
-											</div>
-										</div>
-
-										<div class="col-md-6">
-											<div class="form-group">
-												<div class="form-group">
-													<label class="checkout-form-input-label" for="city">City</label>
-													<select class="form-control checkout-form-input" id="city" name="area" required="">
-													</select>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<button type="submit" class="btn btn-primary btn-block create-address-btn">
-												Submit
-											</button>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group ">
+											<label class="checkout-form-input-label" for="fname">First Name:</label>
+											<input type="text" class="form-control checkout-form-input" id="fname">
 										</div>
 									</div>
-								<?= form_close(); ?>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="checkout-form-input-label" for="lname">Last Name:</label>
+											<input type="text" class="form-control checkout-form-input" id="lname">
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="checkout-form-input-label" for="number_">Mobile Number</label>
+											<input type="text" class="form-control checkout-form-input" id="number_">
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="checkout-form-input-label" for="street">Street Address</label>
+											<input type="text" class="form-control checkout-form-input" id="street">
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<div class="form-group">
+												<label class="checkout-form-input-label" for="state">State</label>
+												<select class="form-control checkout-form-input" id="state">
+													<option>Delta</option>
+													<option>Lagos</option>
+													<option>Abuja</option>
+													<option>Edo</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<div class="form-group">
+												<label class="checkout-form-input-label" for="city">City</label>
+												<select class="form-control checkout-form-input" id="city">
+													<option>Asaba</option>
+													<option>Warri</option>
+													<option>Benin</option>
+													<option>Ikeja</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<button type="submit" class="btn btn-primary btn-block create-address-btn">
+											Submit
+										</button>
+									</div>
+
+
+								</div>
 							</div>
 						</div>
+
+
 					</div>
 					<div class="panel-body" id="delivery_address">
 						<div class="alert alert-warning text-center delivery-warning">Select an existing address or
@@ -87,34 +98,32 @@
 							to continue
 						</div>
 						<div class="row">
-							<?php
-								if( $addresses) :
-									foreach($addresses as $address) : ?>
-									<div class="col-md-6">
-										<div class="panel panel-default custom-panel pickup-address">
-											<div class="panel-heading sub-custom-panel-head">
-												<h3 class="panel-title">
-													<div class="form-check">
-														<input class="form-check-input delivery-box" type="radio"
-															   name="address_radio1"
-															   id="address_radio1" value="option1">
-														<label class="form-check-label" for="address_radio1">
-															Select this address
-														</label>
-													</div>
-													<span>Edit</span>
-												</h3>
+							<div class="col-md-6">
+								<div class="panel panel-default custom-panel pickup-address">
+									<div class="panel-heading sub-custom-panel-head">
+										<h3 class="panel-title">
+											<div class="form-check">
+												<input class="form-check-input delivery-box" type="radio"
+													   name="address_radio1"
+													   id="address_radio1" value="option1">
+												<label class="form-check-label" for="address_radio1">
+													Select this address
+												</label>
 											</div>
-											<div class="panel-body">
-												<p class="panel-details"><i class="fa fa-user"></i><?= ucfirst($address->first_name) . ' ' . ucfirst($address->last_name)?></p>
-												<p class="panel-details"><i class="fa fa-map-marker"></i><?= $address->address; ?></p>
-												<p class="panel-details"><i class="fa fa-phone"></i><?= $address->phone; ?> <?= !empty($address->phone2) ? ','.$address->phone2 : ''; ?></p>
-											</div>
-										</div>
+											<span>Edit</span>
+										</h3>
 									</div>
-							<?php 
-								endforeach; 
-								endif; ?>
+									<div class="panel-body">
+										<p class="panel-details"><i class="fa fa-user"></i>Chidi Jeffrey</p>
+										<p class="panel-details"><i class="fa fa-map-marker"></i> 530A Aina Akingbala,
+											Omole Phase 2</p>
+										<p class="panel-details"><i class="fa fa-phone"></i></i>08129145241</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+
+							</div>
 						</div>
 					</div>
 				</div>
@@ -216,6 +225,5 @@
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
 <script src="<?= base_url('assets/landing/js/checkout.js'); ?>"></script>
-<script> let base_url = "<?= base_url(); ?>"; </script>
 </body>
 </html>
