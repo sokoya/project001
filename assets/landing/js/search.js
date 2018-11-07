@@ -1,9 +1,19 @@
+function highlight(hay, pin) {
+	let b = hay;
+	let q = pin;
+	q = q.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*");
+	let p = new RegExp(`(${q})`, "gi");
+	b = b.replace(p, "<span class='highlight'>$1</span>");
+	b = b.replace(/(<span>[^<>]*)((<[^>]+>)+)([^<>]*<\/span>)/, "$1</span>$2<span class='highlight'>>$4");
+	return b;
+}
+
 //format currency
 function format_currency(str) {
 	return '₦' + str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
 }
 
-$('.site-search').on('focusout', function () {
+$('body').on('click', function () {
 	$('.src-cover').hide();
 });
 
@@ -34,7 +44,7 @@ $('.site-search').on('input', function () {
 								</div>
 								<div class="col-md-10 col-10 col-xs-10 col-sm-10 col-lg-10">
 									<div class="search-display">
-										<p>${value.product_name}</p>
+										<p>${highlight(value.product_name, query)}</p>
 										<p class="price">${format_currency(value.price)}</p>
 									</div>
 								</div>
