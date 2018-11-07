@@ -178,7 +178,7 @@
 
 	$('.add_new_add').on('click', function () {
 	    $('#address_type').val('new');
-		$.getJSON(base_url + 'account/fetch_states', function (d) {
+		$.getJSON(base_url + 'ajax/fetch_states', function (d) {
 			state_drop.children('option:not(:first)').remove();
 			$.each(d, function (k, v) {
 				state_drop.append($('<option></option>').attr('value', v.id).text(toTitleCase(v.name)));
@@ -206,7 +206,7 @@
 	state_drop.change(function () {
 		selected_state_id = $('#state_id option:selected').attr('value');
 		$.ajax({
-			url: base_url + 'account/fetch_areas',
+			url: base_url + 'ajax/fetch_areas',
 			method: 'get',
 			data: {sid: selected_state_id},
 			dataType: 'json',
