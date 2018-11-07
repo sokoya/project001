@@ -219,7 +219,17 @@
 													<?php endforeach; ?>
 												</select>
 											</div>
-										<?php endif; ?>
+										<?php else: ?>
+											<?php if ($var->discount_price != '') : ?>
+												<input type="hidden" name="product_price"
+													   value="<?= $var->discount_price; ?>"
+													   class="pr_price_hidden"/>
+											<?php else: ?>
+												<input type="hidden" name="product_price"
+													   value="<?= $var->sale_price; ?>"
+													   class="pr_price_hidden"/>
+											<?php endif; ?>
+										<?php endif;?>
 										<input type="hidden" name="product_id"
 											   value="<?= base64_encode($product->id); ?>">
 										<input type="hidden" name="product_name" value="<?= $product->product_name; ?>">
