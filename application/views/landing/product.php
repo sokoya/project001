@@ -589,9 +589,10 @@
 								$split = explode('|', $image_name)
 								?>
 								<img class="product-img"
-									 src="https://res.cloudinary.com/philo001/image/upload/h_400,w_400,q_auto,f_auto,fl_lossy,dpr_auto/v<?= $split[0] . '/' . $split[1]; ?>"
-									 alt="<?= $like->product_name; ?>"
-									 title="<?= $like->product_name; ?>">
+									data-src="<?= base_url('data/products/' . $like->id.'/'.$like->image_name); ?>"
+									src="<?= base_url('data/products/' . $like->id.'/'.$like->image_name); ?>"
+									alt="<?= $like->product_name; ?>"
+									title="<?= $like->product_name; ?>">
 							</div>
 							<a class="product-link" href="<?= base_url(urlify($like->product_name, $like->id)); ?>"></a>
 							<div class="product-caption">
