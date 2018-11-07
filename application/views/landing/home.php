@@ -1,5 +1,4 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
-<link rel="stylesheet" href="<?= base_url('assets/landing/css/slider.scss'); ?>">
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
@@ -8,66 +7,58 @@
 	<?php $this->load->view('landing/resources/head_category') ?>
 
 	<?php $this->load->view('landing/resources/head_menu') ?>
-    <div class="slider-container">
-        <div class="slider-control left inactive"></div>
-        <div class="slider-control right"></div>
-        <ul class="slider-pagi"></ul>
-        <div class="slider">
-            <div class="slide slide-0 active">
-                <div class="slide__bg"></div>
-                <div class="slide__content">
-                    <svg class="slide__overlay" viewBox="0 0 720 405" preserveAspectRatio="xMaxYMax slice">
-                        <path class="slide__overlay-path" d="M0,0 150,0 500,405 0,405" />
-                    </svg>
-                    <div class="slide__text">
-                        <h2 class="slide__text-heading">Project name 1</h2>
-                        <p class="slide__text-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio veniam minus illo debitis nihil animi facere, doloremque voluptate tempore quia. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio veniam minus illo debitis nihil animi facere, doloremque voluptate tempore quia.</p>
-                        <a class="slide__text-link">Project link</a>
-                    </div>
-                </div>
-            </div>
-            <div class="slide slide-1 ">
-                <div class="slide__bg"></div>
-                <div class="slide__content">
-                    <svg class="slide__overlay" viewBox="0 0 720 405" preserveAspectRatio="xMaxYMax slice">
-                        <path class="slide__overlay-path" d="M0,0 150,0 500,405 0,405" />
-                    </svg>
-                    <div class="slide__text">
-                        <h2 class="slide__text-heading">Project name 2</h2>
-                        <p class="slide__text-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio veniam minus illo debitis nihil animi facere, doloremque voluptate tempore quia. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio veniam minus illo debitis nihil animi facere, doloremque voluptate tempore quia.</p>
-                        <a class="slide__text-link">Project link</a>
-                    </div>
-                </div>
-            </div>
-            <div class="slide slide-2">
-                <div class="slide__bg"></div>
-                <div class="slide__content">
-                    <svg class="slide__overlay" viewBox="0 0 720 405" preserveAspectRatio="xMaxYMax slice">
-                        <path class="slide__overlay-path" d="M0,0 150,0 500,405 0,405" />
-                    </svg>
-                    <div class="slide__text">
-                        <h2 class="slide__text-heading">Project name 3</h2>
-                        <p class="slide__text-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio veniam minus illo debitis nihil animi facere, doloremque voluptate tempore quia. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio veniam minus illo debitis nihil animi facere, doloremque voluptate tempore quia.</p>
-                        <a class="slide__text-link">Project link</a>
-                    </div>
-                </div>
-            </div>
-            <div class="slide slide-3">
-                <div class="slide__bg"></div>
-                <div class="slide__content">
-                    <svg class="slide__overlay" viewBox="0 0 720 405" preserveAspectRatio="xMaxYMax slice">
-                        <path class="slide__overlay-path" d="M0,0 150,0 500,405 0,405" />
-                    </svg>
-                    <div class="slide__text">
-                        <h2 class="slide__text-heading">Project name 4</h2>
-                        <p class="slide__text-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio veniam minus illo debitis nihil animi facere, doloremque voluptate tempore quia. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio veniam minus illo debitis nihil animi facere, doloremque voluptate tempore quia.</p>
-                        <a class="slide__text-link">Project link</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
+	<div class="owl-carousel owl-loaded owl-nav-dots-inner" data-options='{"items":1,"loop":true}'>
+		<div class="owl-item">
+			<div class="slider-item" style="background-color:#3D3D3D;">
+				<div class="container">
+					<div class="slider-item-inner">
+						<div class="slider-item-caption-left slider-item-caption-white">
+							<h4 class="slider-item-caption-title">Save up to $150 on Your Next Laptop</h4>
+							<p class="slider-item-caption-desc">I'm Not Gonna Pay A Lot For This Laptop.</p><a
+								class="btn btn-lg btn-ghost btn-white" href="#">Shop Now</a>
+						</div>
+						<img class="slider-item-img-right"
+							 src="<?= base_url('assets/landing/img/test_slider/1.png'); ?>" alt="Image Alternative text"
+							 title="Image Title" style="top: 60%; width: 56%;"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="owl-item">
+			<div class="slider-item"
+				 style="background-image:url(<?= base_url('assets/landing/img/concert_2_1200x500.jpg'); ?>);">
+				<div class="container">
+					<div class="slider-item-inner">
+						<div class="slider-item-caption-right slider-item-caption-white">
+							<h4 class="slider-item-caption-title">World Top Guitars from $350</h4>
+							<p class="slider-item-caption-desc">Fill It To The Rim With Guitar.</p><a
+								class="btn btn-lg btn-ghost btn-white" href="#">Shop Now</a>
+						</div>
+						<img class="slider-item-img-left" src="<?= base_url('assets/landing/img/test_slider/2.png'); ?>"
+							 alt="Image Alternative text" title="Image Title"
+							 style="transform:translateY(-50%) rotate(14deg); width: 55%;"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="owl-item">
+			<div class="slider-item" style="background-color:#93282B;">
+				<div class="container">
+					<div class="slider-item-inner">
+						<div class="slider-item-caption-left slider-item-caption-white">
+							<h4 class="slider-item-caption-title">Run! Run! Run!</h4>
+							<p class="slider-item-caption-desc">Your Running Shoes, Right Away.</p><a
+								class="btn btn-lg btn-ghost btn-white" href="#">Shop Now</a>
+						</div>
+						<img class="slider-item-img-right"
+							 src="<?= base_url('assets/landing/img/test_slider/3.png'); ?>" alt="Image Alternative text"
+							 title="Image Title"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="gap"></div>
 	<div class="container">
 		<div class="gap"></div>
@@ -441,6 +432,5 @@
 </div>
 <script> let base_url = "<?= base_url(); ?>"; </script>
 <?php $this->load->view('landing/resources/script'); ?>
-<script src="<?= base_url('assets/landing/js/slider.js'); ?>"></script>
 </body>
 </html>
