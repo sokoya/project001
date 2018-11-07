@@ -132,6 +132,7 @@ class Account extends CI_Controller {
     	$page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id') ));
     	$page_data['addresses'] = $this->user->get_user_billing_address( $page_data['profile']->id); 
         if( $this->input->post() ){
+        	$status['status'] = 'error';
 			$this->form_validation->set_rules('first_name', 'First name','trim|required|xss_clean');
 			$this->form_validation->set_rules('last_name', 'Last name','trim|required|xss_clean');
 			$this->form_validation->set_rules('phone', 'Phone','trim|required|xss_clean');
@@ -140,7 +141,9 @@ class Account extends CI_Controller {
             $this->form_validation->set_rules('address', 'Address','trim|required|xss_clean');
 			if( $this->form_validation->run() == FALSE ){
 				$this->session->set_flashdata('error_msg', 'Please correct the following errors '. validation_errors());
-				redirect( $_SERVER['HTTP_REFERER']);
+				$status['message'] = 'Please fix the following errors ' . validation_errors();
+				echo json_encode($status);
+				exit;
 			}else{
 				$phone2 = $this->input->post('phone2');
 				$phone2 = !empty($phone2) ? $phone2 : '';
@@ -149,21 +152,21 @@ class Account extends CI_Controller {
 					'last_name' => cleanit($this->input->post('last_name')),
 					'phone' => cleanit($this->input->post('phone')),
 					'sid' => cleanit($this->input->post('state')),
+                    'aid' => cleanit($this->input->post('area')),
                     'address' => cleanit($this->input->post('address')),
 					'phone2' => $phone2,
-                    'aid' => cleanit($this->input->post('area')),
-					'uid' => base64_decode($this->session->userdata('logged_id')
-                    ),
-					'uid' => base64_decode($this->session->userdata('logged_id')), 
-					'aid' => cleanit($this->input->post('area'))
 				);
-
-				if( is_int($this->user->create_account($data,'billing_address')) ){
-					$this->session->set_flashdata('success_msg', 'Success: The address has been added to your account.');
+				$uid = base64_decode($this->session->userdata('logged_id'));
+				if( $this->input->post('address_type') == 'new'){					
+					$data['uid'] = $uid;
+					$this->user->create_account($data,'billing_address');
 				}else{
-					$this->session->set_flashdata('error_msg', 'There was an error adding the address to your account');
+					// update
+					$this->user->update_data($this->input->post('update_aid'), $data, 'billing_address');
 				}
-			redirect($_SERVER['HTTP_REFERER']);
+				$status['status'] = 'success';
+				echo json_encode( $status );
+				exit;
 			}
         }else{
         	$page_data['page'] = 'billing';
