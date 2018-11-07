@@ -58,7 +58,7 @@ class Ajax extends CI_Controller
 				$res['price'] = $price;
 				array_push( $output, $res );
 			}
-			$json = json_encode($output );
+			// $json = json_encode($output );
 			header('Content-type: text/json');
 			header('Content-type: application/json');
 			echo json_encode($json);
