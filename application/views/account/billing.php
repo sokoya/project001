@@ -1,4 +1,5 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
+<link rel="stylesheet" href="<?= base_url('assets/landing/css/checkout.css'); ?>"/>
 <style>
 	.req {
 		color: red;
@@ -7,6 +8,11 @@
 	.add_form {
 		display: none;
 	}
+    .edt_anchor, .edt_anchor:hover{
+        text-decoration: none;
+        color:#49a251;
+    }
+
 </style>
 </head>
 <body>
@@ -123,34 +129,76 @@
                 </div>
 			</div>
 			<div class="gap gap-small"></div>
-			<div class="row" id="billing_address_box">
-				<?php foreach ($addresses as $address) : ?>
-					<div class="col-md-6">
-						<div class="market-dashboard-card">
-							<div class="row">
-								<h5 class="col-md-8"><?php if ($address->primary_address == 0) {
-										echo '<a href="javascript:;" id="btn_set_default">Set As Default Address</a>';
-									} else {
-										echo 'Default Address';
-									} ?></h5>
-								<h5 class="col-md-4"><a onclick='javascript:get_specific_add("<?= $address->id; ?>");edit_address(this);'
-														href="javascript:void(0);" class="btn_edt_add btn_edt_add_<?= $address->id;?>" style="float: right;" data-id="<?= $address->id; ?>">Edit</a>
-								</h5>
-							</div>
-							<hr/>
-							<p>
-								<i class="fa fa-user" style="color:dimgrey; font-size:18px;"></i>&nbsp;&nbsp;&nbsp;<?= ucwords($address->first_name) . ' ' . ucwords($address->last_name); ?>
-							</p>
-							<p>
-								<i class="fa fa-map-marker" style="color:dimgrey; font-size:18px;"></i>&nbsp;&nbsp;&nbsp;<?= $address->address; ?>
-							</p>
-							<p>
-								<i class="fa fa-phone" style="color:dimgrey; font-size:18px;"></i>&nbsp;&nbsp;&nbsp;<?= $address->phone; ?> <?php if (!empty($address->phone2)) echo ', ' . $address->phone2; ?>
-							</p>
-						</div>
-					</div>
-				<?php endforeach; ?>
-			</div>
+
+            <div class="panel-body" id="delivery_address">
+                <div id="processing"
+                     style="display:none;position: center;top: 0;left: 0;width: auto;height: auto%;background: #f4f4f4;z-index: 99;">
+                    <div class="text"
+                         style="position: absolute;top: 35%;left: 0;height: 100%;width: 100%;font-size: 18px;text-align: center;">
+                        <img src="<?= base_url('assets/landing/load.gif'); ?>" alt="Processing...">
+                        Processing your request. <strong
+                                style="color: rgba(2.4%,61.7%,46.8,0.843);">Please
+                            Wait! </strong>
+                    </div>
+                </div>
+                <div class="row" id="delivery_address_box">
+                    <?= form_open(); ?>
+                    <?php
+                    if ($addresses) :
+                        foreach ($addresses as $address) : ?>
+                            <div class="col-md-6">
+                                <div class="panel panel-default custom-panel pickup-address
+										<?php
+                                if ($address->primary_address == 1) :
+                                    ?>
+											custom-panel-active
+										<?php
+                                endif;
+                                ?>"
+                                     data-id="<?= $address->id; ?>">
+                                    <div class="panel-heading sub-custom-panel-head">
+                                        <h3 class="panel-title">
+                                            <div class="form-check">
+                                                <input class="form-check-input delivery-box" type="radio"
+                                                       name="address_radio1"
+                                                       id="<?= $address->id; ?>" value="option1"
+                                                    <?php if ($address->primary_address == 1) echo 'checked' ?> >
+                                                <label class="form-check-label" for="<?= $address->id; ?>">
+                                                    <?php
+                                                    if($address->primary_address == 1){
+                                                        echo 'Default Address';
+                                                    }else{
+                                                        echo 'Set As Default Address';
+                                                    }
+                                                    ?>
+                                                </label>
+                                            </div>
+                                            <span class="col-md-4"><a onclick='javascript:get_specific_add("<?= $address->id; ?>");edit_address(this);'
+                                                                          href="javascript:void(0);" class="edt_anchor btn_edt_add" style="float: right;" data-id="<?= $address->id; ?>">Edit</a>
+                                            </span>
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="panel-details"><i
+                                                    class="fa fa-user"></i><?= ucfirst($address->first_name) . ' ' . ucfirst($address->last_name) ?>
+                                        </p>
+                                        <div style="height:48px;">
+                                            <p class="panel-details"><i
+                                                        class="fa fa-map-marker"></i><?= $address->address; ?>
+                                            </p>
+                                        </div>
+                                        <p class="panel-details"><i
+                                                    class="fa fa-phone"></i><?= $address->phone; ?> <?= !empty($address->phone2) ? ',' . $address->phone2 : ''; ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        endforeach;
+                    endif; ?>
+                    <?= form_close(); ?>
+                </div>
+            </div>
 
 		</div>
 	</div>
@@ -167,6 +215,27 @@
 			return match.toUpperCase();
 		});
 	}
+    $('.pickup-address').on('click', get_updates);
+
+    function get_updates() {
+        $('.pickup-address').removeClass('custom-panel-active');
+        let ad_id = $(this).data('id');
+        let elem = $(this);
+        $(`#${ad_id}`).prop('checked', true);
+
+        $.ajax({
+            url: base_url + "checkout/set_default_address",
+            method: 'POST',
+            data: {address_id: ad_id},
+            success: function (response) {
+                if ('.delivery-box') {
+                    elem.addClass('custom-panel-active');
+                }
+            },
+            error: function (response) {
+            }
+        });
+    }
 </script>
 
 <script>
