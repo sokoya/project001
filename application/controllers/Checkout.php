@@ -87,8 +87,7 @@ class Checkout extends CI_Controller
 	}
 
 
-	function set_default_address()
-	{
+	function set_default_address(){
 		if (!$this->input->post()) redirect(base_url());
 		$uid = base64_decode($this->session->userdata('logged_id'));
 		$address_id = cleanit($this->input->post('address_id'));
@@ -100,5 +99,12 @@ class Checkout extends CI_Controller
 		}
 		exit;
 	}
+	public function order_completed(){
+        $page_data['page'] = 'order_completed';
+        $page_data['title'] = "Order Invoice";
+        $page_data['orders'] = $this->user->get_my_orders( base64_decode($this->session->userdata('logged_id')) );
+        $page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')) );
+        $this->load->view('landing/order_completed', $page_data);
+    }
 
 }
