@@ -33,10 +33,9 @@ $('.site-search').on('input', function () {
 						<li>No result(s) found for ${query}</li>
 					`)
 				} else {
+					let html_var = ``;
 					$.each(response, function (key, value) {
-						$('.market-search').html(`
-						<p class="search-header">Products</p>
-						<li><a href="${base_url}${value.url}">
+						html_var += `<li><a href="${base_url}${value.url}">
 							<div class="row" >
 								<div class="col-md-2 col-2 col-xs-2 col-sm-2 col-lg-2 n-margin">
 									<img src="${value.image_path}"
@@ -49,9 +48,12 @@ $('.site-search').on('input', function () {
 									</div>
 								</div>
 							</div>
-						</a></li>
-					`)
+						</a></li>`;
 					});
+					$('.market-search').html(`
+						<p class="search-header">Products</p>
+						${html_var}
+					`)
 				}
 			},
 			error: function (response) {

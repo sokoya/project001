@@ -435,11 +435,10 @@ Class Product_model extends CI_Model{
 
     function search_query($search = ''){
         // $select = "SELECT product_name FROM products WHERE product_name LIKE '%{$search}%'";
-        $select  = "SELECT p.id, p.product_name, g.image_name,v.sale_price,v.discount_price FROM products p 
-        INNER JOIN product_gallery g ON (g.product_id = p.id AND g.featured_image = 1)
+        $select  = "SELECT p.id, p.product_name, g.image_name FROM products p 
+        LEFT JOIN product_gallery g ON (g.product_id = p.id AND g.featured_image = 1)
         INNER JOIN (SELECT va.sale_price, va.discount_price,va.product_id vid FROM product_variation va  WHERE va.quantity > 0) v ON (v.vid = p.id)
-                    WHERE (p.subcategory LIKE '%$search%' AND p.product_status = 'approved') GROUP BY p.id ORDER BY p.id LIMIT 10";
-        // die( $select );
+                    WHERE p.product_name LIKE '%{$search}%' AND p.product_status = 'approved' GROUP BY p.id ORDER BY p.id LIMIT 5";
         return $this->db->query($select)->result();
     }
 }
