@@ -1,5 +1,5 @@
 <ul class="market-mobile-dropdown hidden-lg">
-	<li class="dropdown market-custom-dropdown"><a href="#" class="market-sidebar-header-r cx">Overview<i
+	<li class="dropdown market-custom-dropdown"><a href="javascript:void(0);" class="market-sidebar-header-r cx">Overview<i
 				class="drop-caret custom-drop"
 				data-toggle="dropdown"></i></a>
 		<ul class="dropdown-menu list-group custom-mobile-navbar">
