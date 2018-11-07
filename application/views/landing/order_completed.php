@@ -197,83 +197,67 @@
         <div class="main_invoice">
             <header>
                 <div class="row">
-                    <div class="col-md-6">
-                        <a target="_blank" href="https://lobianijs.com">
+                    <div class="col-xs-12 col-md-offset-5 text-center">
+                        <a target="_blank" href="javascript:void(0);">
                             <img style="height:100px;" src="<?= base_url('assets/landing/img/onitshamarket-logo.png'); ?>" data-holder-rendered="true" class="img-responsive" />
                         </a>
-                    </div>
-                    <div class="col-md-6 company-details">
-                        <h2 class="name">
-                            <a target="_blank" href="https://lobianijs.com">
-                                OnitshaMarket
-                            </a>
-                        </h2>
-                        <div>530A, Aina Akingbala Street, Ikeja, Lagos, NG.</div>
-                        <div>(123) 456-789</div>
-                        <div>www.onitshamarket.com</div>
                     </div>
                 </div>
             </header>
             <main>
                 <div class="row contacts">
-                    <div class="col invoice-to">
+                    <div class="col-md-6 invoice-to">
                         <div class="text-gray-light">INVOICE TO:</div>
-                        <h2 class="to">John Doe</h2>
+                        <h2 class="to"><?= ucwords($profile->first_name) . ' ' . ucwords($profile->last_name); ?></h2>
                         <div class="address">796 Silver Harbour, TX 79273, US</div>
-                        <div class="email"><a href="mailto:john@example.com">john@example.com</a></div>
+                        <div class="email"><a href="mailto:john@example.com"><?= $profile->email?></a></div>
                     </div>
-                    <div class="col invoice-details">
+                    <div class="col-md-6 invoice-details">
                         <h1 class="invoice-id">INVOICE 3-2-1</h1>
-                        <div class="date">Date of Invoice: 01/10/2018</div>
-                        <div class="date">Due Date: 30/10/2018</div>
+                        <div class="date">Date of Invoice: <span class="invoice_date"></span></div>
+                        <div class="date">Due Date: <span class="invoice_due"></span></div>
                     </div>
                 </div>
-                <table border="0" cellspacing="0" cellpadding="0">
+                <table border="0" cellspacing="0" cellpadding="0" class="table-responsive">
                     <thead>
                     <tr>
                         <th>#</th>
                         <th class="text-left">PRODUCT</th>
                         <th class="text-right">QUANTITY</th>
-                        <th class="text-right">HOURS</th>
+                        <th class="text-right">PRICE</th>
                         <th class="text-right">TOTAL</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td class="no">04</td>
-                        <td class="text-left"><h3>
-                                <a target="_blank" href="https://www.youtube.com/channel/UC_UMEcP_kF0z4E6KbxCpV1w">
-                                    Youtube channel
-                                </a>
+                        <td class="no">01</td>
+                        <td class="text-left"><h3>iPhone X
                             </h3>
-                            <a target="_blank" href="https://www.youtube.com/channel/UC_UMEcP_kF0z4E6KbxCpV1w">
-                                Useful videos
-                            </a>
                             to improve your Javascript skills. Subscribe and stay tuned :)
                         </td>
-                        <td class="unit">$0.00</td>
                         <td class="qty">100</td>
+                        <td class="unit">$0.00</td>
                         <td class="total">$0.00</td>
                     </tr>
                     <tr>
-                        <td class="no">01</td>
-                        <td class="text-left"><h3>Website Design</h3>Creating a recognizable design solution based on the company's existing visual identity</td>
-                        <td class="unit">$40.00</td>
+                        <td class="no">02</td>
+                        <td class="text-left"><h3>Samsung S9+</h3>Creating a recognizable design solution based on the company's existing visual identity</td>
                         <td class="qty">30</td>
+                        <td class="unit">$40.00</td>
                         <td class="total">$1,200.00</td>
                     </tr>
                     <tr>
-                        <td class="no">02</td>
-                        <td class="text-left"><h3>Website Development</h3>Developing a Content Management System-based Website</td>
-                        <td class="unit">$40.00</td>
+                        <td class="no">03</td>
+                        <td class="text-left"><h3>Acer Aspire Edge 5</h3>Developing a Content Management System-based Website</td>
                         <td class="qty">80</td>
+                        <td class="unit">$40.00</td>
                         <td class="total">$3,200.00</td>
                     </tr>
                     <tr>
-                        <td class="no">03</td>
-                        <td class="text-left"><h3>Search Engines Optimization</h3>Optimize the site for search engines (SEO)</td>
-                        <td class="unit">$40.00</td>
+                        <td class="no">04</td>
+                        <td class="text-left"><h3>Synix Smart T.V.</h3>Optimize the site for search engines (SEO)</td>
                         <td class="qty">20</td>
+                        <td class="unit">$40.00</td>
                         <td class="total">$800.00</td>
                     </tr>
                     </tbody>
@@ -314,6 +298,15 @@
 <script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
 
 <script>
+    (function(){
+        var fullDate = new Date();
+        var twoDigitMonth = ((fullDate.getMonth().length+1) === 1)? (fullDate.getMonth()+1) : '0' + (fullDate.getMonth()+1);
+
+        var currentDate = fullDate.getDate() + "/" + twoDigitMonth + "/" + fullDate.getFullYear();
+        console.log(currentDate);
+        $('.invoice_date').text(currentDate);
+    })();
+    $('.invoice_due').text(currentDate);
     $('#printInvoice').click(function(){
         Popup($('.invoice')[0].outerHTML);
         function Popup(data)
