@@ -133,8 +133,8 @@
 									} else {
 										echo 'Default Address';
 									} ?></h5>
-								<h5 class="col-md-4"><a onclick='get_specific_add("<?= $address->id; ?>")'
-														href="javascript:void(0);" class="btn_edt_add" style="float: right;" data-id="<?= $address->id; ?>">Edit</a>
+								<h5 class="col-md-4"><a onclick='javascript:get_specific_add("<?= $address->id; ?>");edit_address(this);'
+														href="javascript:void(0);" class="btn_edt_add btn_edt_add_<?= $address->id;?>" style="float: right;" data-id="<?= $address->id; ?>">Edit</a>
 								</h5>
 							</div>
 							<hr/>
@@ -231,6 +231,7 @@
                 }else{
                     $('#status').html(`<p class="alert alert-success">Your address has been added successfuly.</p>`).slideDown('fast').delay(3000).slideUp('slow');
                     $('#billing_address_box').load(`${base_url}account/billing #billing_address_box`);
+                    reset_add_form();
                 }
             }
         });
@@ -240,9 +241,10 @@
 
 	});
 
-	$('.btn_edt_add').click(function () {
+	function edit_address (el) {
+        reset_add_form();
         $('#address_type').val('update');
-        $('#update_aid').val($('.btn_edt_add').data("id"));
+        $('#update_aid').val($(el).data("id"));
 		$('#btn_add_add, #add_new_add').css({
 			display: 'none'
 		});
@@ -250,16 +252,19 @@
 			display: 'block'
 		});
 		$('#add_title').text('Edit Address');
-	});
+	};
 
 	$('#btn_can_update').click(function () {
-		$('#btn_add_add, #add_new_add').css({
-			display: 'block'
-		});
-		$('#btn_can_update, #btn_up_add, #add_address').css({
-			display: 'none'
-		});
-		$('#add_title').text('Add New Address');
+		reset_add_form();
+	});
+	function reset_add_form(){
+        $('#btn_add_add, #add_new_add').css({
+            display: 'block'
+        });
+        $('#btn_can_update, #btn_up_add, #add_address').css({
+            display: 'none'
+        });
+        $('#add_title').text('Add New Address');
         $('#phone').val('');
         $('#phone2').val('');
         $('#address').val('');
@@ -268,7 +273,7 @@
         $('#l_name').val('');
         $('#area_id > option:not(:first)').remove();
         $('#state_id > option:not(:first)').remove();
-	});
+    }
 
 	$('#btn_up_add').click(function () {
         $.ajax({
@@ -284,11 +289,10 @@
                 }else{
                     $('#status').html(`<p class="alert alert-success">Your address has been updated successfuly.</p>`).slideDown('fast').delay(3000).slideUp('slow');
                     $('#billing_address_box').load(`${base_url}account/billing #billing_address_box`);
+                    reset_add_form();
                 }                
             },
             error: function (xhr, ajaxOptions, thrownError) {
-                alert(xhr.status);
-                alert(thrownError);
             }
         });
 	});
