@@ -66,9 +66,20 @@ $('#state').on('change', function () {
 
 });
 
+function start_loading() {
+	$('.cst-loader').show();
+	$('.cst-overlay').show();
+}
+
+function finish_loading() {
+	$('.cst-loader').hide();
+	$('.cst-overlay').hide();
+}
+
 $('.pickup-address').on('click', get_updates);
 
 function get_updates() {
+	start_loading();
 	$('.pickup-address').removeClass('custom-panel-active');
 	let ad_id = $(this).data('id');
 	let elem = $(this);
@@ -86,8 +97,10 @@ function get_updates() {
 				$('.pay-method').show();
 				$('.delivery-warning').slideUp()
 			}
+			finish_loading();
 		},
 		error: function (response) {
+			finish_loading()
 		}
 	});
 }
