@@ -484,3 +484,10 @@ a,
 		left: 109px !important;
 	}
 }
+
+.search-price-discount {
+	text-decoration: line-through;
+	color: #4e4e4e;
+	font-size: 13px;
+	margin-left: 1px;
+}

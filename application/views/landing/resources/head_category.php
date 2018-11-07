@@ -52,81 +52,11 @@
 				<option value="Warehouse-Deals">Warehouse Deals</option>
 			</select>
 			<div class="form-group ">
-				<input class="form-control site-search form-search" type="text" placeholder="Search the Entire Store..."/>
+				<input class="form-control site-search form-search" type="text"
+					   placeholder="Search the Entire Store..."/>
 			</div>
 			<div class="src-cover">
 				<ul class="market-search">
-					<p class="search-header">Products</p>
-					<li><a href="#">
-							<div class="row" >
-								<div class="col-md-2 col-2 col-xs-2 col-sm-2 col-lg-2 n-margin">
-									<img src="<?= base_url('assets/landing/img/test_product_page/xperia/1-s.jpg'); ?>"
-										 class="search-image"/>
-								</div>
-								<div class="col-md-10 col-10 col-xs-10 col-sm-10 col-lg-10">
-									<div class="search-display">
-										<p>Samsung Galaxy S9 - BLACK (Dual Sim)</p>
-										<p class="price">&#8358;70,000</p>
-									</div>
-								</div>
-							</div>
-						</a></li>
-					<li><a href="#">
-							<div class="row" >
-								<div class="col-md-2 col-2 col-xs-2 col-sm-2 col-lg-2 n-margin">
-									<img src="<?= base_url('assets/landing/img/test_product_page/xperia/1-s.jpg'); ?>"
-										 class="search-image"/>
-								</div>
-								<div class="col-md-10 col-10 col-xs-10 col-sm-10 col-lg-10">
-									<div class="search-display">
-										<p>Samsung Galaxy S9 - BLACK (Dual Sim)</p>
-										<p class="price">&#8358;70,000</p>
-									</div>
-								</div>
-							</div>
-						</a></li>
-					<li><a href="#">
-							<div class="row" >
-								<div class="col-md-2 col-2 col-xs-2 col-sm-2 col-lg-2 n-margin">
-									<img src="<?= base_url('assets/landing/img/test_product_page/xperia/1-s.jpg'); ?>"
-										 class="search-image"/>
-								</div>
-								<div class="col-md-10 col-10 col-xs-10 col-sm-10 col-lg-10">
-									<div class="search-display">
-										<p>Samsung Galaxy S9 - BLACK (Dual Sim)</p>
-										<p class="price">&#8358;70,000</p>
-									</div>
-								</div>
-							</div>
-						</a></li>
-					<li><a href="#">
-							<div class="row" >
-								<div class="col-md-2 col-2 col-xs-2 col-sm-2 col-lg-2 n-margin">
-									<img src="<?= base_url('assets/landing/img/test_product_page/xperia/1-s.jpg'); ?>"
-										 class="search-image"/>
-								</div>
-								<div class="col-md-10 col-10 col-xs-10 col-sm-10 col-lg-10">
-									<div class="search-display">
-										<p>Samsung Galaxy S9 - BLACK (Dual Sim)</p>
-										<p class="price">&#8358;70,000</p>
-									</div>
-								</div>
-							</div>
-						</a></li>
-					<li><a href="#">
-							<div class="row" >
-								<div class="col-md-2 col-2 col-xs-2 col-sm-2 col-lg-2 n-margin">
-									<img src="<?= base_url('assets/landing/img/test_product_page/xperia/1-s.jpg'); ?>"
-										 class="search-image"/>
-								</div>
-								<div class="col-md-10 col-10 col-xs-10 col-sm-10 col-lg-10">
-									<div class="search-display">
-										<p>Samsung Galaxy S9 - BLACK (Dual Sim)</p>
-										<p class="price">&#8358;70,000</p>
-									</div>
-								</div>
-							</div>
-						</a></li>
 				</ul>
 			</div>
 			<a class="fa fa-search navbar-main-search-submit" href="#"></a>

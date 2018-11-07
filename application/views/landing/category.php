@@ -177,7 +177,9 @@
 						<?php endif; ?>
 						<!-- Features -->
 						<div class="category-filters-section">
-							<?php foreach ($features as $feature => $feature_value) : ?>
+							<?php foreach ($features
+
+							as $feature => $feature_value) : ?>
 							<div class="accordion" id="<?= trim($feature); ?>">
 								<div class="panel no-outline feature-attribute">
 									<div class="panel-header feature-attribute">
@@ -215,7 +217,8 @@
 				<div class="col-md-9">
 					<div id="processing"
 						 style="display:none;position: center;top: 0;left: 0;width: auto;height: auto%;background: #f4f4f4;z-index: 99;">
-						<div class="text" style="position: absolute;top: 35%;left: 0;height: 100%;width: 100%;font-size: 18px;text-align: center;">
+						<div class="text"
+							 style="position: absolute;top: 35%;left: 0;height: 100%;width: 100%;font-size: 18px;text-align: center;">
 							<img src="<?= base_url('assets/landing/load.gif'); ?>" alt="Processing...">
 							Processing your request. <strong
 								style="color: rgba(2.399780888618386%,61.74193548387097%,46.81068368248487%,0.843);">Please
@@ -241,10 +244,10 @@
 										<?php endif; ?>
 										<div class="product-img-wrap">
 											<img class="product-img"
-												data-src="<?= base_url('data/products/' . $product->id.'/'.$product->image_name); ?>"
-												src="<?= base_url('data/products/' . $product->id.'/'.$product->image_name); ?>"
-												alt="<?= $product->product_name; ?>"
-												title="<?= $product->product_name; ?>">
+												 data-src="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
+												 src="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
+												 alt="<?= $product->product_name; ?>"
+												 title="<?= $product->product_name; ?>">
 										</div>
 										<a class="product-link" title="<?= $product->product_name ?>"
 										   href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
@@ -295,19 +298,21 @@
 		</div>
 	<?php endif; ?>
 	<div class="gap"></div>
-<!--comment-->
-<?php $this->load->view('landing/resources/footer'); ?>
+	<!--comment-->
+	<?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/ionrangeslider.js'); ?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
+<script type="text/javascript"
+		src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
 <script>
-	let base_url = "<?= base_url('catalog'); ?>";
+	let base_url = "<?= base_url(); ?>";
 	let current_url = "<?= current_url()?>";
 </script>
+<script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
 <script>
 	$("#price-slider").ionRangeSlider({
 		min: 1000,
