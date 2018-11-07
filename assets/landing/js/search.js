@@ -3,6 +3,10 @@ function format_currency(str) {
 	return '₦' + str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
 }
 
+$('.site-search').on('focusout', function () {
+	$('.src-cover').hide();
+});
+
 $('.site-search').on('input', function () {
 	if ($(this).val().length === 0) {
 		$('.src-cover').hide();
