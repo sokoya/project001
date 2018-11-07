@@ -207,7 +207,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-4 "></div>
                     <div class="col-xs-12 col-md-4 text-center">
-                        <a target="_blank" href="javascript:void(0);">
+                        <a target="_blank" href="<?= base_url();?>">
                             <img style="height:100px;"
                                  src="<?= base_url('assets/landing/img/onitshamarket-logo.png'); ?>"
                                  data-holder-rendered="true"/>

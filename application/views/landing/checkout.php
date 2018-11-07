@@ -141,8 +141,11 @@
 												<p class="panel-details"><i
 														class="fa fa-user"></i><?= ucfirst($address->first_name) . ' ' . ucfirst($address->last_name) ?>
 												</p>
-												<p class="panel-details"><i
-														class="fa fa-map-marker"></i><?= $address->address; ?></p>
+                                                <div style="height:48px;">
+                                                    <p class="panel-details"><i
+                                                                class="fa fa-map-marker"></i><?= $address->address; ?>
+                                                    </p>
+                                                </div>
 												<p class="panel-details"><i
 														class="fa fa-phone"></i><?= $address->phone; ?> <?= !empty($address->phone2) ? ',' . $address->phone2 : ''; ?>
 												</p>
