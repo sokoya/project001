@@ -381,3 +381,106 @@ a,
 	color: #323232;
 }
 
+/*
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+.market-search {
+	position: absolute;
+	height: 100%;
+	top: 36px;
+	list-style-type: none;
+	z-index: 12;
+
+}
+
+.src-cover {
+	display: none;
+}
+
+.market-search > .search-header {
+	margin: 0 !important;
+	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+	color: #4e4e4e !important;
+	font-weight: 700;
+}
+
+.market-search li a, .market-search > .search-header {
+	position: relative;
+	border-left: 1px solid #efefef;
+	border-right: 1px solid #efefef;
+	background-color: #fff;
+	padding: 12px;
+	text-decoration: none;
+	font-size: 14px;
+	color: black;
+	display: block;
+}
+
+.market-search li a:hover:not(.header) {
+	background-color: #eee;
+}
+
+.navbar-main-search-submit {
+	border-radius: 0;
+}
+
+.search-image {
+	width: 60px;
+	height: 60px;
+}
+
+.search-display {
+	position: relative;
+	top: 10px;
+}
+
+.search-display > .price {
+	margin-top: -10px;
+}
+
+.n-margin {
+	margin-right: -23px;
+}
+
+@media (min-width: 600px) {
+	.market-search {
+		width: 93% !important;
+		left: 14px !important;
+	}
+}
+
+@media (min-width: 480px) {
+	.market-search {
+		width: 91% !important;
+		left: 14px !important;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.n-margin {
+		margin-right: -17px !important;
+	}
+}
+
+@media (min-width: 320px) {
+	.market-search {
+		width: 93% !important;
+		left: 14px !important;
+	}
+}
+
+@media (min-width: 801px) {
+	.market-search {
+		width: 93% !important;
+		left: 14px !important;
+	}
+}
+
+@media (min-width: 1025px) {
+	.market-search {
+		width: 82% !important;
+		left: 109px !important;
+	}
+}

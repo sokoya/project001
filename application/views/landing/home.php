@@ -68,18 +68,21 @@
 		<div class="row" data-gutter="15">
 			<div class="col-md-3 clearfix">
 				<div class="product product-half" style="margin-bottom: 10px;">
-					<div class="product-caption text-center">Let <strong><?= lang('app_name')?> Shopper</strong> do all the shopping
+					<div class="product-caption text-center">Let <strong><?= lang('app_name') ?> Shopper</strong> do all
+						the shopping
 						for you free.
 					</div>
 					<div class="product-img-wrap text-center">
 						<img class="product-img-small" style="margin: 0 auto;"
 							 src="<?= base_url('assets/landing/img/onitshamarket/carrito_shopper.png'); ?>"
-							 alt="<?= lang('app_name'); ?> Shoppers" title="Let <?= lang('app_name'); ?> Shopper do it for you"/>
+							 alt="<?= lang('app_name'); ?> Shoppers"
+							 title="Let <?= lang('app_name'); ?> Shopper do it for you"/>
 					</div>
 					<ul class="product-labels"></ul>
 					<a class="product-link" href="#"></a>
 					<div class="product-caption">
-						<a href="#"><h5 class="product-caption-title text-center"><span>Click to use </span><?= lang('app_name'); ?>
+						<a href="#"><h5 class="product-caption-title text-center">
+								<span>Click to use </span><?= lang('app_name'); ?>
 								Shopper</h5></a>
 					</div>
 				</div>
@@ -93,7 +96,9 @@
 					<ul class="product-labels"></ul>
 					<a class="product-link" href="#"></a>
 					<div class="product-caption">
-						<a href="#"><h5 class="product-caption-title text-center"><span>Want Exclusive Discounts? Get <?= lang('app_name'); ?> Gift Cards </span><?= lang('app_name'); ?>
+						<a href="#"><h5 class="product-caption-title text-center">
+								<span>Want Exclusive Discounts? Get <?= lang('app_name'); ?>
+									Gift Cards </span><?= lang('app_name'); ?>
 								Shopper</h5></a>
 					</div>
 				</div>
@@ -106,16 +111,20 @@
 						<h5><strong><?= lang('app_name'); ?> Essentials</strong></h5>
 					</div>
 					<div class="product-img-wrap">
-						<a href="<?= base_url('catalog'); ?>"> <img class="product-img" style="margin: 0 auto; height: 150px; width: 100% "
-							 src="<?= base_url('assets/landing/img/onitshamarket/carrito_essential_per_food.png'); ?>"
-							 alt="<?= lang('app_name'); ?> Essential Market" title="<?= lang('app_name'); ?> Essential"/></a>
+						<a href="<?= base_url('catalog'); ?>"> <img class="product-img"
+																	style="margin: 0 auto; height: 150px; width: 100% "
+																	src="<?= base_url('assets/landing/img/onitshamarket/carrito_essential_per_food.png'); ?>"
+																	alt="<?= lang('app_name'); ?> Essential Market"
+																	title="<?= lang('app_name'); ?> Essential"/></a>
 					</div>
 					<div class="product-caption text-center"><strong>Pet foods</strong></div>
 
 					<div class="product-img-wrap product-pt4">
-						<a href="<?= base_url('catalog'); ?>"> <img class="product-img" style="margin: 0 auto; height: 150px; width: 100%"
-							 src="<?= base_url('assets/landing/img/onitshamarket/carrito_essential_newest_gadget.png'); ?>"
-							 alt="<?= lang('app_name'); ?>_essential_newest_gadget" title="<?= lang('app_name'); ?> "/></a>
+						<a href="<?= base_url('catalog'); ?>"> <img class="product-img"
+																	style="margin: 0 auto; height: 150px; width: 100%"
+																	src="<?= base_url('assets/landing/img/onitshamarket/carrito_essential_newest_gadget.png'); ?>"
+																	alt="<?= lang('app_name'); ?>_essential_newest_gadget"
+																	title="<?= lang('app_name'); ?> "/></a>
 					</div>
 					<div class="product-caption text-center"><strong>Newest Gadget</strong></div>
 				</div>
@@ -131,7 +140,8 @@
 
 					<div class="product-img-wrap">
 						<img class="product-img" style="margin: 0 auto; width: 100%;"
-							 src="<?= base_url('assets/landing/img/onitshamarket/female_wears.png'); ?>" alt="female_wears"
+							 src="<?= base_url('assets/landing/img/onitshamarket/female_wears.png'); ?>"
+							 alt="female_wears"
 							 title="female_wears"/>
 					</div>
 					<a class="product-link" href="<?= base_url('category'); ?>"></a>
@@ -149,7 +159,8 @@
 					</div>
 					<div class="product-img-wrap">
 						<img class="product-img" style="margin: 0 auto; width: 100%; height: 370px;"
-							 src="<?= base_url('assets/landing/img/onitshamarket/male_wears.png'); ?>" alt="female_wears"
+							 src="<?= base_url('assets/landing/img/onitshamarket/male_wears.png'); ?>"
+							 alt="female_wears"
 							 title="female_wears"/>
 					</div>
 					<a class="product-link" href="<?= base_url('category'); ?>"></a>
@@ -217,7 +228,8 @@
 				<div class="row">
 					<div class="col-md-8">
 						<div class="product">
-							<div class="product-caption text-center"><strong>Stir up your appetite with <?= lang('app_name'); ?> Fresh
+							<div class="product-caption text-center"><strong>Stir up your appetite
+									with <?= lang('app_name'); ?> Fresh
 									Fruits!</strong> <span>Keep healthy with our fresh fruits for less than N200</span>
 							</div>
 							<div class="product-img-wrap text-center">
@@ -326,7 +338,8 @@
 	<div class="gap"></div>
 	<div class="container">
 		<h3 class="widget-title-sm text-center"><strong>
-				Online Shopping at <?= lang('app_name'); ?>: widest selection of quality products at the wholesale prices
+				Online Shopping at <?= lang('app_name'); ?>: widest selection of quality products at the wholesale
+				prices
 				online.</strong>
 		</h3>
 		<h5 class="text-center"> Our extensive and affordable range of products features the very latest, with the
@@ -384,7 +397,8 @@
 			<div class="owl-item">
 				<a class="banner-category owl-item-slide" href="#">
 					<img class="banner-category-img"
-						 src="<?= base_url('assets/landing/img/why-onitshamarket/fast-delivery.png') ?>" alt="Fast Delivery"
+						 src="<?= base_url('assets/landing/img/why-onitshamarket/fast-delivery.png') ?>"
+						 alt="Fast Delivery"
 						 title="Fast Delivery"/>
 					<h5 class="banner-category-title">Fast Delivery</h5>
 					<p class="banner-category-desc">Mationwide Same Day</p>
@@ -393,7 +407,8 @@
 			<div class="owl-item">
 				<a class="banner-category owl-item-slide" href="#">
 					<img class="banner-category-img"
-						 src="<?= base_url('assets/landing/img/why-onitshamarket/genuine-brands.png') ?>" alt="Genuine Brands"
+						 src="<?= base_url('assets/landing/img/why-onitshamarket/genuine-brands.png') ?>"
+						 alt="Genuine Brands"
 						 title="Genuine Brands"/>
 					<h5 class="banner-category-title">Genuine Brands</h5>
 					<p class="banner-category-desc">From all over the world</p>
@@ -401,7 +416,8 @@
 			</div>
 			<div class="owl-item">
 				<a class="banner-category owl-item-slide" href="#">
-					<img class="banner-category-img" src="<?= base_url('assets/landing/img/why-onitshamarket/247.png') ?>"
+					<img class="banner-category-img"
+						 src="<?= base_url('assets/landing/img/why-onitshamarket/247.png') ?>"
 						 alt="247 Active Support" title="247 Active Support"/>
 					<h5 class="banner-category-title">24/7</h5>
 					<p class="banner-category-desc">Customer Agents Waiting To Help You.</p>
@@ -414,6 +430,7 @@
 	<?php $this->load->view('landing/resources/footer'); ?>
 
 </div>
+<script> let base_url = "<?= base_url(); ?>"; </script>
 <?php $this->load->view('landing/resources/script'); ?>
 </body>
 </html>

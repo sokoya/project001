@@ -1,7 +1,3 @@
-function format_currency(str) {
-	return '₦' + str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-}
-
 
 function ucwords(str) {
 	return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
