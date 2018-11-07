@@ -40,7 +40,6 @@
 				order, please go to the Orders page
 			</div>
             <div id="status"></div>
-
 			<div class="add_form" id="add_address">
                 <div>
                     <h4 class="modal-title" id="add_title">Add New Address</h4>
@@ -69,7 +68,7 @@
                                 <div class="form-group">
                                     <label for="state_id" class="control-label">State <span class="req">*</span></label>
                                     <select class="form-control" id="state_id" name="state">
-                                        <option selected>--select--</option>
+                                        <option value="" selected>--select--</option>
                                     </select>
                                 </div>
                             </div>
@@ -92,10 +91,9 @@
                                     <label for="area_id" class="control-label">Area <span
                                             class="req">*</span></label>
                                     <select class="form-control" id="area_id" name="area">
-                                        <option selected>--select--</option>
+                                        <option value="" selected>--select--</option>
                                     </select>
                                 </div>
-
                             </div>
                             <div class="col-xs-12 col-md-12">
                                 <div class="form-group">
@@ -112,20 +110,20 @@
                                         style="border-radius: 0px !important;"><strong>Add Address</strong>
                                 </button>
                             </div>
+                            <input type="hidden" name="address_type" value="" id="address_type"/>
+                            <input type="hidden" name="update_aid" id="update_aid"/>
                             <div class="col-xs-12 col-md-12">
                                 <button id="btn_up_add" type="submit"
                                         class="btn btn-primary btn-block"
                                         style="display:none;border-radius: 0px !important;"><strong>Update
                                         Address</strong></button>
-                            </div>
-                            <input type="hidden" name="address_type" id="address_type"/>
-                            <input type="hidden" name="update_aid" id="update_aid"/>
+                            </div>                            
                         </form>
                     </div>
                 </div>
 			</div>
 			<div class="gap gap-small"></div>
-			<div class="row ">
+			<div class="row" id="billing_address_box">
 				<?php foreach ($addresses as $address) : ?>
 					<div class="col-md-6">
 						<div class="market-dashboard-card">
@@ -202,7 +200,8 @@
 			$('#add_new_add').removeClass('btn-danger');
 			$('#add_new_add').addClass('btn-primary');
 		}
-	})
+	});
+
 	var selected_state_id;
 	state_drop.change(function () {
 		selected_state_id = $('#state_id option:selected').attr('value');
@@ -226,14 +225,21 @@
             method: 'post',
             data:  $('#add_add_form').serialize() ,
             dataType: 'json',
-            success: function (d) {
-
+            success: function (response) {
+                if( response.status == 'error' ) {
+                    $('#status').html(`<p class="alert alert-danger">${response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
+                }else{
+                    $('#status').html(`<p class="alert alert-success">Your address has been added successfuly.</p>`).slideDown('fast').delay(3000).slideUp('slow');
+                    $('#billing_address_box').load(`${base_url}account/billing #billing_address_box`);
+                }
             }
         });
 	})
+    // Set the address as default
 	$('#btn_set_default').click(function () {
 
 	});
+
 	$('.btn_edt_add').click(function () {
         $('#address_type').val('update');
         $('#update_aid').val($('.btn_edt_add').data("id"));
@@ -265,29 +271,30 @@
 	});
 
 	$('#btn_up_add').click(function () {
-            $.ajax({
-                url: base_url + "account/billing",
-                method: "POST",
-                data: $('#add_add_form').serialize(),
-                success: function (response) {
-                    $('#btn_add_add, #add_new_add').css({
-                        display: 'block'
-                    });
-                    $('#btn_up_add, #add_address, #btn_can_update').css({
-                        display: 'none'
-                    });
-                    $('#add_title').text('Add New Address');
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status);
-                    alert(thrownError);
-                }
-            });
+        $.ajax({
+            url: base_url + "account/billing",
+            method: "POST",
+            data: $('#add_add_form').serialize(),
+            success: function (response) {
+                $('#btn_add_add, #add_new_add').css({ display: 'block' });
+                $('#btn_up_add, #add_address, #btn_can_update').css({ display: 'none' });
+                $('#add_title').text('Add New Address');
+                if( response.status == 'error' ) {
+                    $('#status').html(`<p class="alert alert-danger">${response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
+                }else{
+                    $('#status').html(`<p class="alert alert-success">Your address has been updated successfuly.</p>`).slideDown('fast').delay(3000).slideUp('slow');
+                    $('#billing_address_box').load(`${base_url}account/billing #billing_address_box`);
+                }                
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+            }
+        });
 	});
 
 
 	// Send a get method to the controller function
-	// receive : first_name: Adeniji, last_name, phone, phone2, sid, aid, address
 	let get_specific_add = function(id) {
 		$.ajax({
 			url: base_url + 'account/fetch_single_address',

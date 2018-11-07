@@ -136,8 +136,7 @@ class Product extends CI_Controller
 		$this->load->library('cart');
         $variation = empty($this->input->post('variation')) ? '' : $this->input->post('variation');
         $colour = empty($this->input->post('colour')) ? '' : $this->input->post('colour');
-        $name = preg_replace("/[^A-Za-z0-9-,. ]/", "", cleanit($this->input->post('product_name')));
-
+        $name = preg_replace("/[A-Za-z0-9-,. ]/", "", cleanit($this->input->post('product_name')));
         // contain a product ID, quantity, price, and name.
 		$data = array(
 			'id' => base64_decode($this->input->post('product_id')),
