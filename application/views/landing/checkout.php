@@ -214,7 +214,6 @@
 												<?php
 												echo ngn($product['subtotal']);
 												$subtotal += $product['subtotal'];
-												$delivery_charge = $product['qty'] * 3000;
 												?>	
 											</span>
 										</td>
@@ -235,7 +234,8 @@
 					<div class="panel-heading custom-panel-head">
 						<h3 class="panel-title summary-title sum-pad">Order Summary <span
 								class="panel-summary-quantity"><span
-									class="pr-summary-count"><?= $this->cart->total_items(); ?></span> item(s)</span>
+									class="pr-summary-count"
+									data-quantity="<?= $this->cart->total_items(); ?>"><?= $this->cart->total_items(); ?></span> item(s)</span>
 						</h3>
 					</div>
 					<ul class="list-group cs-sum-grp">
@@ -243,7 +243,7 @@
 																			data-amount="<?= $subtotal; ?>"><?= ngn($subtotal); ?></span>
 						</li>
 						<li class="list-group-item cs-sm-m">Delivery Charges: <span class="charges"
-																					data-amount="<?= $delivery_charge; ?>"><?= ngn($delivery_charge); ?></span>
+																					data-amount="<?= $delivery_charge; ?>"><?= ngn($delivery_charge * $this->cart->total_items()); ?></span>
 						</li>
 						<li class="list-group-item cs-sm-t">Total: <span
 								class="total-sum-charges"><?= ngn($subtotal + $delivery_charge); ?></span>

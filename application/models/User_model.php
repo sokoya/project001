@@ -183,5 +183,14 @@ Class User_model extends CI_Model{
         $this->db->where('id', $address_id);
         return $this->db->get('billing_address')->result_array();
     }
+
+
+	// update billing address
+	function get_default_address_price($id){
+		$select = "SELECT a.price price FROM billing_address b INNER JOIN area a ON(a.id = b.aid) WHERE b.primary_address = 1 AND b.uid = $id";
+    	return $this->db->query( $select )->row()->price;
+	}
+
+
     
 }
