@@ -45,8 +45,8 @@ class Ajax extends CI_Controller
 
 	// Function to make an auto complete search
 	function search_complete(){
-		if( $this->input->is_ajax_request() && $this->input->post()) {
-			$search = cleanit( $this->input->post('search') );
+		// if( $this->input->is_ajax_request() && $this->input->post()) {
+			$search = cleanit( $this->input->get('search') );
 			$results = $this->product->search_query( $search );
 			// var_dump( $results );
 			$output = array();
@@ -58,14 +58,13 @@ class Ajax extends CI_Controller
 				$res['price'] = $price;
 				array_push( $output, $res );
 			}
-			// $json = json_encode($output );
 			header('Content-type: text/json');
 			header('Content-type: application/json');
-			echo json_encode($json);
+			echo json_encode($output,JSON_UNESCAPED_SLASHES);
 			exit;
-		}else{
-			redirect( base_url() );
-		}
+		// }else{
+		// 	redirect( base_url() );
+		// }
 	}
 
 }
