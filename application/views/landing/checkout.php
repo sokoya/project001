@@ -211,6 +211,12 @@
 										</td>
 										<td class="parent-block panel-product-price">
 											<span class="pr-price" data-amount="<?= $product['subtotal']; ?>">
+
+												<?php 
+													echo ngn($product['subtotal']); 
+													$subtotal += $product['subtotal']; 
+													$delivery_charge += $product['qty'] * 3000;
+
 												<?php
 												echo ngn($product['subtotal']);
 												$subtotal += $product['subtotal'];
