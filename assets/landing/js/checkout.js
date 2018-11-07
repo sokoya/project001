@@ -91,8 +91,11 @@ function get_updates() {
 		data: {address_id: ad_id},
 		success: function (response) {
 			if ('.delivery-box') {
-				bind_market(format_currency(response), 'charges');
-				bind_market(format_currency($('.total-sum').data('amount') + response * 1), 'total-sum-charges');
+				let quantity_instance = $('.pr-summary-count').data('quantity') * 1;
+				let price_instance = response * 1;
+				let sub_total = price_instance * quantity_instance;
+				bind_market(format_currency(sub_total), 'charges');
+				bind_market(format_currency($('.total-sum').data('amount') + sub_total), 'total-sum-charges');
 				elem.addClass('custom-panel-active');
 				$('.pay-method').show();
 				$('.delivery-warning').slideUp()
