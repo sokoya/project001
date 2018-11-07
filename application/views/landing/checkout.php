@@ -215,10 +215,6 @@
 												<?php 
 													echo ngn($product['subtotal']); 
 													$subtotal += $product['subtotal']; 
-													$delivery_charge += $product['qty'] * 3000;
-
-												<?php
-
 												?>	
 											</span>
 										</td>

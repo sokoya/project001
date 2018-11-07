@@ -426,9 +426,17 @@ Class Product_model extends CI_Model{
         return $this->db->query($select)->result_array();
     }
 
+
+    // Rating score for single product page
     function get_rating_counts( $pid = ''){
         $select = "SELECT COUNT(*) as occurence, rating_score FROM product_rating WHERE product_id = $pid GROUP BY rating_score ORDER BY rating_score DESC";
         return $this->db->query($select)->result_array();
+    }
+
+    function search_query( $search = '' ){
+        $select  = "SELECT p.id, p.name FROM products p LEFT JOIN product_gallery g ON (g.product_id = p.id AND g.featured_image = 1)
+                    WHERE
+        ";
     }
 }
 
