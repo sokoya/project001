@@ -1,4 +1,12 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
+<style>
+	#product-name{
+		text-decoration: none;
+	}
+	#product-name:hover{
+		color: green;
+	}
+</style>
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
@@ -19,61 +27,109 @@
 				several area in the state may arrive latter than expected. To view the most up to date status for your
 				order, please go to the Orders page
 			</div>
+			<div id="status"></div>
 			<?php if(!empty($saved)) :?>
 			<div class="table-responsive">
-				<table class="table table-bordered table-hover market-saved-table">
-					<thead>
-					<tr id="market-table-head">
-						<th>Product Name</th>
-						<th>Availability</th>
-						<th>Price</th>
-						<th>Saved On</th>
-					</tr>
-					</thead>
-					<tbody>
-						<?php foreach($saved as $item ): ?>
-					<tr>
-						<td style="padding: 20px;">
-							<div class="row">
-								<div class="col-md-1 col-xs-1">									
-									<a href="javascript:void(0)" class="delete" data-pid="<?= $item->fav_id; ?>"><i class="fa fa-trash market-trash"></i></a>
+				<div id="favourite-div">
+					<table class="table table-bordered table-hover market-saved-table">
+						<thead>
+						<tr id="market-table-head">
+							<th>Product Name</th>
+							<th>Availability</th>
+							<th>Price</th>
+							<th>Saved On</th>
+						</tr>
+						</thead>
+						<tbody>
+							<?php foreach($saved as $item ): ?>
+						<tr>
+							<td style="padding: 20px;">
+								<div class="row">
+									<div class="col-md-1 col-xs-1">									
+										<a href="javascript:void(0)" class="delete" data-id="<?= $item->fav_id; ?>" data-name="<?= $item->product_name; ?>" title="Remove <?= $item->product_name;?> from your whislist"><i class="fa fa-trash market-trash"></i></a>
+									</div>
+									<div class="col-md-9 col-xs-9">
+										<img src="<?= base_url('data/products/'.$item->id.'/'.$item->image_name); ?>"
+											 class="market-left-l"
+											 title="<?= $item->product_name; ?>"
+											 style="width: 80px; height: 100%; padding-right: 4px;">
+											 <span><a id="product-name" href="<?= base_url().urlify($item->product_name, $item->id); ?>"><?= $item->product_name; ?></a></span>
+									</div>
 								</div>
-								<div class="col-md-9 col-xs-9">
-									<img src="<?= base_url('data/products/'.$item->id.'/'.$item->image_name); ?>"
-										 class="market-left-l"
-										 title="<?= $item->product_name; ?>"
-										 style="width: 60px; height: 100%; padding-right: 4px;">
-										 <span><?= $item->product_name; ?></span>
-								</div>
-							</div>
-						</td>
-						<td class="market-table-center"><?= ($item->quantity > 0 && $item->product_status =='active') ? 'In Stock' : 'Out of stock/Inactive';  ?></td>
-						<td class="market-table-center"><span style="white-space: nowrap">&#8358; <?= (!empty($item->discount_price)) ? $item->discount_price : $item->sale_price; ?></span>
-							<br/>
-							<?php if(!empty($item->discount_price)): ?>
-								<span style="text-decoration: line-through; white-space: nowrap">&#8358; <?= $item->sale_price; ?></span>
-							<?php endif; ?>
-						</td>
-						<td class="market-table-center">
-							<span style="white-space: nowrap"><?= neatDate($item->date_saved); ?></span>
-						</td>
-					</tr>
-					<?php endforeach; ?>
+							</td>
+							<td class="market-table-center"><?= ($item->quantity > 0 && $item->product_status =='approved') ? 'In Stock' : 'Out of stock/Inactive';  ?></td>
+							<td class="market-table-center"><span style="white-space: nowrap"><?= (!empty($item->discount_price)) ? ngn($item->discount_price) : ngn($item->sale_price); ?></span>
+								<br/>
+								<?php if(!empty($item->discount_price)): ?>
+									<span style="text-decoration: line-through; white-space: nowrap">&#8358; <?= $item->sale_price; ?></span>
+								<?php endif; ?>
+							</td>
+							<td class="market-table-center">
+								<span style="white-space: nowrap"><?= neatDate($item->date_saved); ?></span>
+							</td>
+						</tr>
+						<?php endforeach; ?>
 
-					</tbody>
-				</table>
+						</tbody>
+					</table>
+				</div>
 			</div>
 			<?php else : ?>
 
 			<?php endif; ?>
 		</div>
 	</div>
+	<div id="confirmation" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Confirmation</h4>
+					</div>
+					<div class="modal-body">
+						<p id="product-title">
+							Please confirm you will like to remove the item
+							<span class="text text-danger" id="product_name"></span> from your whichlist
+						</p>
+						<div class="row">
+							<div class="col-md-12">
+								<button type="button" class="btn btn-block btn-danger" id="remove">Remove</button>
+							</div>
+						</div>
+							<!-- <div class="col-md-6">
+								<button type="button" id="cart" class="btn btn-block btn-success">Go to Cart</button>
+							</div> -->
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
 
-</div>
+			</div>
+	</div>
 </div>
 <div class="gap gap-small"></div>
 <?php $this->load->view('landing/resources/footer'); ?>
-</div>
 <?php $this->load->view('landing/resources/script'); ?>
+<script>
+	$('.delete').on('click', function(){
+		let id = $(this).data('id');
+		let name = $(this).data('name');
+		$('#confirmation').modal('show');
+		$('#product_name').html(name);
+		$('#remove').on('click', function(){
+			$.ajax({
+				url: base_url + "ajax/remove_whichlist",
+				method: "POST",
+				data: {'id' : id},
+				success: function (response) {
+					$('#status').html(`<p class="alert alert-${response.status}">${response.message}.</p>`).slideDown('fast').delay(3000).slideUp('slow');
+					$('#favourite-div').load(`${base_url}account/saved #favourite-div`);
+				}
+			});
+		});
+	});
+</script>
 </body>
 </html>

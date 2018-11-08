@@ -49,8 +49,7 @@ class Product extends CI_Controller {
 
 
 	// List Product Page
-	public function catalog()
-	{
+	public function catalog(){
 		$str = $this->uri->segment(2);
 		$str = preg_replace("/[^A-Za-z0-9-]/", "", cleanit($str));
 		$page_data['searched'] = $str = preg_replace("/[^A-Za-z0-9]/", " ", cleanit($str)); // Convert the - to space

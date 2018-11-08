@@ -105,7 +105,7 @@ Class User_model extends CI_Model{
     }
 
     // Save and unsave property
-    function favourite( $uid, $pid, $action, $table_name = 'favourite' ){
+    function favourite( $uid, $pid, $action, $table_name = 'favourite', $fid='' ){
         if( $action == 'save'){
             try {
                 if( $this->db->insert($table_name, array('uid' => $uid, 'product_id' => $pid))) 
@@ -115,8 +115,7 @@ Class User_model extends CI_Model{
             }
             return $result;
         }else{
-            $this->db->where('uid', $uid);
-            $this->db->where('product_id', $pid);
+            $this->db->where('id', $fid);
             return $this->db->delete($table_name);
         }
     }
