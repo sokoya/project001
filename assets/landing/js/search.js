@@ -18,7 +18,7 @@ $('body').on('click', function () {
 });
 
 $('.site-search').on('input', function () {
-	if ($(this).val().length === 0) {
+	if ($.trim(this.value).length === 0) {
 		$('.src-cover').hide();
 	} else {
 		$('.src-cover').show();
@@ -30,7 +30,8 @@ $('.site-search').on('input', function () {
 			success: function (response) {
 				if (response === '') {
 					$('.market-search').html(`
-						<li>No result(s) found for ${query}</li>
+						<p class="search-header">No result(s) found for "${query}"</p>
+						<li></li>
 					`)
 				} else {
 					let html_var = ``;
