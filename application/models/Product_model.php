@@ -270,8 +270,7 @@ Class Product_model extends CI_Model{
         $this->db->select('subcategory');
         $this->db->where('id', $id);
         $product_detail = $this->db->get('products')->row();
-
-        $select_query = "SELECT p.id, p.product_name, v.sale_price, v.discount_price,g.image_name
+        $select_query = "SELECT p.id,p.views, p.product_name, v.sale_price, v.discount_price,g.image_name
             FROM products p                        
             JOIN product_variation AS v ON (p.id = v.product_id) 
             JOIN product_gallery AS g ON (p.id = g.product_id AND g.featured_image = 1) 
