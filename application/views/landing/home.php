@@ -1,8 +1,5 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
 <link rel="stylesheet" href="<?= base_url('assets/landing/css/home.css'); ?>">
-<style>
-
-</style>
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
@@ -632,7 +629,6 @@
     <?php $this->load->view('landing/resources/footer'); ?>
 
 </div>
-<script> let base_url = "<?= base_url(); ?>"; </script>
 <?php $this->load->view('landing/resources/script'); ?>
 </body>
 </html>
