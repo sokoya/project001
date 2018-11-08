@@ -214,12 +214,9 @@ a,
 /*}*/
 
 .cat-notify {
-	margin: 0;
 	padding: 1px;
 	text-align: center;
-	position: relative;
-	top: -50px;
-	left: -80px;
+	margin-bottom: 30px;
 }
 
 .cat-notify > p {
@@ -399,11 +396,15 @@ a,
 	display: none;
 }
 
-.market-search > .search-header {
+.market-search > .search-header, .market-search > .search-not-found {
 	margin: 0 !important;
 	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important;
 	color: #4e4e4e !important;
 	font-weight: 700;
+}
+
+.market-search > .search-not-found{
+	border-bottom: 1px solid #454545;
 }
 
 .market-search li a, .market-search > .search-header {

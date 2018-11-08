@@ -100,16 +100,26 @@
 						<li class="active"><?= ucwords($searched); ?>
 						</li>
 					</ol>
-					<div class="category-selections clearfix">
-						<button class="btn btn-custom-primary">Newest First</button>
-						<button class="btn btn-custom-primary">Best Sellers</button>
-					</div>
+					<ul class="category-selections clearfix">
+						<ul class="category-selections clearfix">
+							<li><span class="category-selections-sign">Sort by :</span>
+								<select name="order" class="category-selections-select">
+									<option selected>Newest First</option>
+									<option>Best Sellers</option>
+									<option>Trending Now</option>
+									<option>Best Raited</option>
+									<option>Price : Lowest First</option>
+									<option>Price : Highest First</option>
+									<option>Title : A - Z</option>
+									4
+									<option>Title : Z - A</option>
+								</select>
+							</li>
+						</ul>
+					</ul>
 				</header>
 			</div>
-			<div class="cat-notify">
-				<p class="n-head"><?= $searched; ?></p>
-				<p class="n-body"><strong><?= number_format(count($products)) . ' results'; ?></strong></p>
-			</div>
+			<div class="gap"></div>
 			<div class="row">
 				<div class="col-md-3">
 					<aside class="category-filters">
@@ -204,7 +214,6 @@
 						</div>
 					</aside>
 				</div>
-
 				<div class="col-md-9">
 					<div id="processing"
 						 style="display:none;position: center;top: 0;left: 0;width: auto;height: auto%;background: #f4f4f4;z-index: 99;">
@@ -217,17 +226,15 @@
 						</div>
 					</div>
 
-
 					<div id="category_body">
+						<div class="cat-notify">
+							<p class="n-head"><?= $searched; ?></p>
+							<p class="n-body"><strong><?= number_format(count($products)) . ' results'; ?></strong></p>
+						</div>
 
 						<div class="row filter_data" data-gutter="15">
-							<?php
-							$p_count = 0;
-							?>
 							<?php foreach ($products as $product) : ?>
-								<?php $p_count++ ?>
-								<div
-									class="col-md-3 <?php if ($p_count % 4 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> clearfix">
+								<div class="col-md-3 clearfix">
 									<div class="product">
 										<?php if (!empty($product->discount_price)): ?>
 											<ul class="product-labels">
@@ -236,17 +243,6 @@
 											</ul>
 										<?php endif; ?>
 										<div class="product-img-wrap">
-											<div class="product-quick-view-cover">
-												<div style="position: relative; left: -50%;">
-													<button data-title="<?= $product->product_name ?>"
-															data-pr_id="<?= $product->id ?>"
-															data-qv="<?php if ($p_count % 4 == 0) { ?>true<?php } ?>"
-															data-qvc="<?php echo $p_count ?>"
-															data-image="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
-															class="btn btn-primary product-quick-view-btn">Quick view
-													</button>
-												</div>
-											</div>
 											<img class="product-img"
 												 data-src="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
 												 src="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
@@ -283,8 +279,7 @@
 													<span
 														class="cs-price-tl"><?= ngn($product->sale_price); ?> </span>
 												<?php endif; ?>
-												<span class="pull-right category-favorite"><i class="fa fa-heart"
-																							  title="Add <?= $product->product_name; ?> to your whishlist"></i> &nbsp;</span>
+												<span class="pull-right category-favorite"><i class="fa fa-heart"></i> &nbsp;</span>
 											</div>
 										</div>
 									</div>
@@ -318,7 +313,6 @@
 	let base_url = "<?= base_url(); ?>";
 	let current_url = "<?= current_url()?>";
 </script>
-<script src="<?= base_url('assets/landing/js/quick-view.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
 <script>
 	$("#price-slider").ionRangeSlider({
