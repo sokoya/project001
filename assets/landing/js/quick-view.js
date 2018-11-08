@@ -50,7 +50,7 @@ $('.product-quick-view-btn').on('click', function () {
 			`<div class="col-md-12 test-div q_view clearfix">
 			<div class="row">
 			<div class="col-md-4">
-				<img src="${img_src}" class="q_pr_img">
+				<img src="${img_src}" class="q_pr_img" alt="${title}" title="${title}">
 			</div>
 			<div class="col-md-8">
 				<h1 class="q_pr_title">${title}</h1>
