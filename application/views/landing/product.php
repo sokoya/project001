@@ -428,18 +428,24 @@
 						<div class="row">
 							<div class="col-md-4">
 								<h3 class="product-tab-rating-title">Overall Customer Rating:</h3>
+								<?php $overall_rating = product_overall_rating($rating_counts); ?>
 								<ul class="product-page-product-rating product-rating-big">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="count">4.9</li>
+									<?php
+										$rating_rounded = round($overall_rating);
+										for ($i = 1; $i <= $rating_rounded; $i++) {
+											?>
+											<li class="rated"><i class="fa fa-star"></i>
+											</li>
+											<?php
+										}
+										if ($rating_rounded < 5) {
+											for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
+												<li><i class="fa fa-star"></i></li>
+												<?php
+											}
+										}
+									?>
+									<li class="count"><?= $overall_rating; ?></li>
 								</ul>
 								<small>{{ Number of reviews - 238 customer reviews }}</small>
 								<p><strong>98%</strong> of reviewers would recommend this product</p>
@@ -468,13 +474,6 @@
 										<?php $x -= 1;
 									} while ($x >= 1);
 									?>
-
-									<?php foreach(	$rating_counts as $score ) :?>
-											<?php
-												echo $score['rating_score'] .' star has ' . $score['occurence'] , ' number of occurence <br />'; 
-											?>
-									<?php endforeach;?>
-
 									<!-- <li>
 										<p class="product-rate-list-item"><?= $x; ?> Stars</p>
 										<div class="product-rate-list-bar">

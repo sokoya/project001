@@ -49,36 +49,49 @@ class Ajax extends CI_Controller
 
 
 	// Function to make an auto complete search
-	function search_complete()
-	{
-//		if( $this->input->is_ajax_request() && $this->input->post()) {
-		$search = cleanit($this->input->post('search'));
-		$results = $this->product->search_query($search);
-		$output = array();
-		header('Content-type: text/json');
-		header('Content-type: application/json');
-		if ($results) {
-			var_dump( $results);
-			exit;
-			foreach ($results as $result) {
-				$res['image_path'] = base_url('data/products/' . $result->id . '/' . $result->image_name);
-				$res['product_name'] = $result->product_name;
-				$res['url'] = urlify($result->product_name, $result->id);
-				$price = (!empty($result->discount_price)) ? $result->discount_price . '<span class="search-price-discount"> ' . $result->sale_price . '</span>' : $result->sale_price;
-				$res['price'] = $price;
-				array_push($output, $res);
+	function search_complete() {
+		if( $this->input->is_ajax_request() && $this->input->post()) {
+			$search = cleanit($this->input->post('search'));
+			$results = $this->product->search_query($search);
+			$output = array();
+			header('Content-type: text/json');
+			header('Content-type: application/json');
+			if ($results) {
+				foreach ($results as $result) {
+					$res['image_path'] = base_url('data/products/' . $result->id . '/' . $result->image_name);
+					$res['product_name'] = $result->product_name;
+					$res['url'] = urlify($result->product_name, $result->id);
+					$price = (!empty($result->discount_price)) ? $result->discount_price . '<span class="search-price-discount"> ' . $result->sale_price . '</span>' : $result->sale_price;
+					$res['price'] = $price;
+					array_push($output, $res);
+				}
+				echo json_encode($output, JSON_UNESCAPED_SLASHES);
+				exit;
+			} else {
+				echo json_encode('');
+				exit;
 			}
-			echo json_encode($output, JSON_UNESCAPED_SLASHES);
-			exit;
-		} else {
-			echo json_encode('');
-			exit;
+		
+		}else{
+			redirect( base_url() );
 		}
-		// $json = json_encode($output );
+	}
 
-//		}else{
-//			redirect( base_url() );
-//		}
+
+	// Remove product from whichlist
+	function remove_whichlist(){
+		if($this->input->is_ajax_request() && $this->input->post()){
+			$id = $this->input->post('id');
+			if( $this->user->favourite('','','','favourite', $id) ){
+				echo json_encode(array('status' => 'success', 'message' =>'The product has been removed from your whichlist'));
+				exit;
+			}else{
+				echo json_encode(array('status' => 'error', 'message' =>'There was an error removing the product from your whichlist.'));
+				exit;
+			}
+		}else{
+			redirect(base_url());
+		}
 	}
 
 }
