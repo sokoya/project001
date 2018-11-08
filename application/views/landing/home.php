@@ -1,4 +1,20 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
+<link rel="stylesheet" href="<?= base_url('assets/landing/css/home.css'); ?>">
+<style>
+    @media(max-width: 991px) {
+        .hide_mob{
+            display:none !important;
+        }
+    };
+    @media (max-width: 348px) {
+        .f-category{
+            height:120px !important;
+        }
+    }
+    a, a:hover{
+        text-decoration: none;
+    }
+</style>
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
@@ -59,16 +75,185 @@
 			</div>
 		</div>
 	</div>
-	<div class="gap"></div>
+
+
+    <div class="gap"></div>
+    <div class="container">
+        <div class="col-xl-12 col-md-12 content-box ">
+            <div>
+                <div class="col-xl-12 box-title ">
+                    <div class="inner"><h2><span>Top </span>
+                            Product Selections</h2>
+
+                    </div>
+                </div>
+
+                <div style="clear: both"></div>
+
+                <div class="owl-carousel owl-loaded owl-nav-out" data-options='{"items":5,"loop":true,"nav":true}' style="    margin-top: 10px;">
+                    <div class="owl-item">
+                        <a class="banner-category owl-item-slide" href="#">
+                            <img class="banner-category-img"
+                                 src="<?= base_url('assets/landing/img/why-onitshamarket/mobile.jpg'); ?>" alt="Largest"
+                                 title="Largest in the market"/>
+                            <h5 class="banner-category-title">iPhone X</h5>
+                            <p class="banner-category-desc">300,000</p>
+                        </a>
+                    </div>
+                    <div class="owl-item">
+                        <a class="banner-category owl-item-slide" href="#">
+                            <img class="banner-category-img"
+                                 src="<?= base_url('assets/landing/img/why-onitshamarket/toy.jpg'); ?>"
+                                 alt="<?= lang('app_name'); ?> Shopper" title="<?= lang('app_name'); ?> Shopper"/>
+                            <h5 class="banner-category-title">Rocking Horse</h5>
+                            <p class="banner-category-desc">45,000</p>
+                        </a>
+                    </div>
+                    <div class="owl-item">
+                        <a class="banner-category owl-item-slide" href="#">
+                            <img class="banner-category-img"
+                                 src="<?= base_url('assets/landing/img/why-onitshamarket/tv.jpg'); ?>"
+                                 alt="secured-payment" title="secured-payment"/>
+                            <h5 class="banner-category-title">Led TV</h5>
+                            <p class="banner-category-desc">250,000</p>
+                        </a>
+                    </div>
+                    <div class="owl-item">
+                        <a class="banner-category owl-item-slide" href="#">
+                            <img class="banner-category-img"
+                                 src="<?= base_url('assets/landing/img/why-onitshamarket/camera.jpg'); ?>"
+                                 alt="secured-payment" title="secured-payment"/>
+                            <h5 class="banner-category-title">HD Cam 80MP Auto</h5>
+                            <p class="banner-category-desc">250,000</p>
+                        </a>
+                    </div>
+                    <div class="owl-item">
+                        <a class="banner-category owl-item-slide" href="#">
+                            <img class="banner-category-img"
+                                 src="<?= base_url('assets/landing/img/why-onitshamarket/mobile.jpg'); ?>"
+                                 alt="Incredible Discounts" title="Discounts"/>
+                            <h5 class="banner-category-title">Samsung S9+</h5>
+                            <p class="banner-category-desc">250,000</p>
+                        </a>
+                    </div>
+                    <div class="owl-item">
+                        <a class="banner-category owl-item-slide" href="#">
+                            <img class="banner-category-img"
+                                 src="<?= base_url('assets/landing/img/why-onitshamarket/mobile.jpg') ?>"
+                                 alt="Pay on delivery" title="Pay on delivery"/>
+                            <h5 class="banner-category-title">HTC Desire Z</h5>
+                            <p class="banner-category-desc">185,000</p>
+                        </a>
+                    </div>
+                    <div class="owl-item">
+                        <a class="banner-category owl-item-slide" href="#">
+                            <img class="banner-category-img"
+                                 src="<?= base_url('assets/landing/img/why-onitshamarket/laptop-2.jpg') ?>"
+                                 alt="Pay on delivery" title="Pay on delivery"/>
+                            <h5 class="banner-category-title">HP Envy XI</h5>
+                            <p class="banner-category-desc">385,000</p>
+                        </a>
+                    </div>
+                    <div class="owl-item">
+                        <a class="banner-category owl-item-slide" href="#">
+                            <img class="banner-category-img"
+                                 src="<?= base_url('assets/landing/img/why-onitshamarket/Home-Electronics-Appliances-2.jpg') ?>"
+                                 alt="Pay on delivery" title="Pay on delivery"/>
+                            <h5 class="banner-category-title">Home Essential 5.0</h5>
+                            <p class="banner-category-desc">85,000</p>
+                        </a>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <div class="col-xl-12 col-md-12 content-box ">
+            <div class="col-xl-12  box-title no-border">
+                <div class="inner"><h2><span>Browse by</span>
+                        Category
+                </div>
+            </div>
+            <div class="row row-featured row-featured-category">
+
+                <div class="col-xl-2 col-md-3 col-sm-4 col-xs-6 f-category">
+                    <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/mobile.jpg'); ?>" class="img-responsive" alt="img">
+                        <h6 style="height:30px !important;">Phone Accessories </h6></a>
+                </div>
+
+                <div class="col-xl-2 col-md-3 col-sm-4 col-xs-6 f-category">
+                    <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/laptop-2.jpg'); ?>" class="img-responsive"
+                                                 alt="img"> <h6 style="height:30px !important;"> Laptops </h6></a>
+                </div>
+
+                <div class="col-xl-2 col-md-3 col-sm-4 col-xs-6 f-category">
+                    <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/mobile.jpg'); ?>" class="img-responsive" alt="img">
+                        <h6 style="height:30px !important;"> Mobiles </h6></a>
+                </div>
+
+                <div class="col-xl-2 col-md-3  col-sm-4 col-xs-6 f-category" >
+                    <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/tv.jpg'); ?>" class="img-responsive" alt="img"> <h6 style="height:30px !important;">
+                            Electronics </h6></a>
+                </div>
+
+                <div class="col-xl-2 col-md-3  col-sm-4 col-xs-6 f-category">
+                    <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/hdd.jpg'); ?>" class="img-responsive" alt="img">
+                        <h6 style="height:30px !important;"> Computer Accessories </h6></a>
+                </div>
+
+                <div class="col-xl-2 col-md-3  col-sm-4 col-xs-6 f-category">
+                    <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/house.jpg'); ?>" class="img-responsive"
+                                                      alt="img">
+                        <h6 style="height:30px !important;"> Real Estate </h6></a>
+                </div>
+
+                <div class="col-xl-2 col-md-3 col-sm-4 col-xs-6 f-category">
+                    <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/Home-Electronics-Appliances-2.jpg'); ?>"
+                                                 class="img-responsive" alt="img"> <h6 style="height:30px !important;"> Home Appliances </h6></a>
+                </div>
+
+                <div class="col-xl-2 col-md-3 col-sm-4 col-xs-6 f-category">
+                    <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/camera.jpg'); ?>" class="img-responsive" alt="img">
+                        <h6 style="height:30px !important;"> Cameras </h6></a>
+                </div>
+
+                <div class="col-xl-2 col-md-3 col-sm-4 col-xs-6 f-category">
+                    <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/fashion.jpg'); ?>" class="img-responsive" alt="img">
+                        <h6 style="height:30px !important;"> Fashion & Beauty </h6></a>
+                </div>
+
+                <div class="col-xl-2 col-md-3 col-sm-4 col-xs-6 f-category">
+                    <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/toy.jpg'); ?>" class="img-responsive" alt="img">
+                        <h6 style="height:30px !important;"> Kids & Baby Products </h6></a>
+                </div>
+
+                <div class="col-xl-2 col-md-3  col-sm-4 col-xs-6 f-category">
+                    <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/largest.png'); ?>" class="img-responsive" alt="img">
+                        <h6 style="height:30px !important;"> Tablets </h6></a>
+                </div>
+
+                <div class="col-xl-2 col-md-3 col-sm-4 col-xs-6 f-category" >
+                    <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/catalog.jpg'); ?>" class="img-responsive" alt="img">
+                        <h6 style="height:30px !important;"> Home & Furniture </h6></a>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+    </div>
 	<div class="container">
-		<div class="gap"></div>
-
-		<!-- <h3 class="widget-title-lg">Weekly Featured</h3> -->
-
 		<div class="row" data-gutter="15">
-			<div class="col-md-3 clearfix">
+			<div class="col-md-3 clearfix hide_mob">
 				<div class="product product-half" style="margin-bottom: 10px;">
-					<div class="product-caption text-center">Let <strong><?= lang('app_name') ?> Shopper</strong> do all
+					<div class="product-caption text-center">Let <strong><?= lang('app_name') ?></strong> do all
 						the shopping
 						for you free.
 					</div>
@@ -82,8 +267,7 @@
 					<a class="product-link" href="#"></a>
 					<div class="product-caption">
 						<a href="#"><h5 class="product-caption-title text-center">
-								<span>Click to use </span><?= lang('app_name'); ?>
-								Shopper</h5></a>
+								<span>Click Here to go to Shop Now</h5></a>
 					</div>
 				</div>
 
@@ -97,14 +281,12 @@
 					<a class="product-link" href="#"></a>
 					<div class="product-caption">
 						<a href="#"><h5 class="product-caption-title text-center">
-								<span>Want Exclusive Discounts? Get <?= lang('app_name'); ?>
-									Gift Cards </span><?= lang('app_name'); ?>
-								Shopper</h5></a>
+								<span>Want Exclusive Discounts? Shop Now</h5></a>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-md-3">
+			<div class="col-md-3 hide_mob">
 				<div class="product product-fit">
 					<ul class="product-labels"></ul>
 					<div class="product-caption">
@@ -130,7 +312,7 @@
 				</div>
 			</div>
 
-			<div class="col-md-3">
+			<div class="col-md-3 hide_mob">
 				<div class="product product-fit">
 					<ul class="product-labels"></ul>
 					<div class="product-caption">
@@ -150,7 +332,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-3 hide_mob">
 				<div class="product product-fit">
 					<ul class="product-labels"></ul>
 					<div class="product-caption text-center">
@@ -170,14 +352,15 @@
 				</div>
 			</div>
 		</div>
+        <div class="row">
 
-		<div class="gap"></div>
+        </div>
 	</div>
 	<div class="gap"></div>
 	<div class="container">
 		<!-- <h3 class="widget-title-lg">Best of Tech</h3> -->
 		<div class="row" data-gutter="15">
-			<div class="col-md-4">
+			<div class="col-md-4 col-sm-12 col-xs-12">
 				<div class="owl-carousel owl-loaded owl-nav-dots-inner"
 					 data-options='{"items":1,"loop":true,"nav":true}'>
 					<div class="owl-item">
@@ -224,16 +407,16 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-8 clearfix">
+			<div class="col-md-8 clearfix hide_mob">
 				<div class="row">
-					<div class="col-md-8">
+					<div class="col-md-8 col-sm-6 col-xs-12">
 						<div class="product">
 							<div class="product-caption text-center"><strong>Stir up your appetite
 									with <?= lang('app_name'); ?> Fresh
 									Fruits!</strong> <span>Keep healthy with our fresh fruits for less than N200</span>
 							</div>
 							<div class="product-img-wrap text-center">
-								<img class="product-img-small" style="margin: 0 auto;"
+								<img class="product-img-small img-responsive" style="margin: 0 auto;"
 									 src="<?= base_url('assets/landing/img/onitshamarket/fresh-fruit.png'); ?>"
 									 alt="fresh-fruit" title="Let <?= lang('app_name'); ?> Shopper do it for you"/>
 							</div>
@@ -245,7 +428,7 @@
 							<div class="product-caption text-center"><strong>One packed of assorted
 									wears</strong><br/><span> Male</span></div>
 							<div class="product-img-wrap text-center">
-								<img class="product-img-small" style="margin: 0 auto; width: 70%"
+								<img class="product-img-small img-responsive" style="margin: 0 auto; width: 70%"
 									 src="<?= base_url('assets/landing/img/onitshamarket/assorted-wears.png'); ?>"
 									 alt="fresh-fruit" title="Let <?= lang('app_name'); ?> Shopper do it for you"/>
 							</div>
@@ -258,7 +441,7 @@
 					<div class="col-md-3">
 						<div class="product product-half product-fit3">
 							<div class="product-img-wrap text-center">
-								<img class="product-img-small" style="margin: 0 auto; width: 80%"
+								<img class="product-img-small img-responsive" style="margin: 0 auto; width: 80%"
 									 src="<?= base_url('assets/landing/img/onitshamarket/wrist-watch.jpg'); ?>"
 									 alt="Wrstwatch" title="Wrist watch"/>
 							</div>
@@ -277,7 +460,7 @@
 					<div class="col-md-3">
 						<div class="product product-half product-fit3">
 							<div class="product-img-wrap text-center">
-								<img class="product-img-small" style="margin: 0 auto; width: 80%"
+								<img class="product-img-small img-responsive" style="margin: 0 auto; width: 80%"
 									 src="<?= base_url('assets/landing/img/onitshamarket/bag.jpg'); ?>" alt="Bag"
 									 title="Gift Cards"/>
 							</div>
@@ -296,7 +479,7 @@
 					<div class="col-md-3">
 						<div class="product product-half product-fit3">
 							<div class="product-img-wrap text-center">
-								<img class="product-img-small" style="margin: 0 auto; width: 80%"
+								<img class="product-img-small img-responsive" style="margin: 0 auto; width: 80%"
 									 src="<?= base_url('assets/landing/img/onitshamarket/touchlight.jpg'); ?>"
 									 alt="Touchlight" title="Gift Cards"/>
 							</div>
@@ -315,7 +498,7 @@
 					<div class="col-md-3">
 						<div class="product product-half product-fit3">
 							<div class="product-img-wrap text-center">
-								<img class="product-img-small" style="margin: 0 auto; width: 70%"
+								<img class="product-img-small img-responsive" style="margin: 0 auto; width: 70%"
 									 src="<?= base_url('assets/landing/img/onitshamarket/vacuum-cleaner.jpg'); ?>"
 									 alt="vacuum-cleaner" title="vacuum-cleaner"/>
 							</div>
