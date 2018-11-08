@@ -257,16 +257,34 @@
 										   href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
 										<div class="product-caption">
 											<ul class="product-caption-rating">
-												<li class="rated"><i class="fa fa-star"></i>
-												</li>
-												<li class="rated"><i class="fa fa-star"></i>
-												</li>
-												<li class="rated"><i class="fa fa-star"></i>
-												</li>
-												<li class="rated"><i class="fa fa-star"></i>
-												</li>
-												<li class="rated"><i class="fa fa-star"></i>
-												</li>
+												<?php
+													$rating_counts = $this->product->get_rating_counts( $product->id ); 
+													if( $rating_counts ) {
+														$overall_rating = product_overall_rating($rating_counts);
+														$rating_rounded = round($overall_rating);
+														for ($i = 1; $i <= $rating_rounded; $i++) {
+															?>
+															<li class="rated"><i class="fa fa-star"></i>
+															</li>
+															<?php
+														}
+														if ($rating_rounded < 5) {
+															for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
+																<li><i class="fa fa-star"></i></li>
+																<?php
+															}
+														}											
+													}else{
+
+												?>
+												<li><i class="fa fa-star"></i></li>
+												<li><i class="fa fa-star"></i></li>
+												<li><i class="fa fa-star"></i></li>
+												<li><i class="fa fa-star"></i></li>
+												<li><i class="fa fa-star"></i></li>	
+												<?php
+													}
+												?>
 												<span
 													class="text-sm pull-right"><strong>Seller: </strong><?= $product->first_name; ?></span>
 											</ul>

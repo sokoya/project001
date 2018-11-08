@@ -94,4 +94,13 @@ class Ajax extends CI_Controller
 		}
 	}
 
+	function quick_view(){
+		if( $this->input->is_ajax_request() && $this->input->post() ){
+			$pid = $this->input->post('product_id');
+			$results = $this->product->get_quick_view_details( $id );
+			echo json_encode($output, JSON_UNESCAPED_SLASHES);
+			exit;
+		}
+	}
+
 }
