@@ -83,7 +83,9 @@
             <div>
                 <div class="col-xl-12 box-title ">
                     <div class="inner"><h2><span>Top </span>
-                            Product Selections</h2>
+                            <strong>
+                                Product Selections
+                            </strong></h2>
 
                     </div>
                 </div>
@@ -173,68 +175,68 @@
         <div class="col-xl-12 col-md-12 content-box ">
             <div class="col-xl-12  box-title no-border">
                 <div class="inner"><h2><span>Browse by</span>
-                        Category
+                        <strong>Category</strong>
                 </div>
             </div>
             <div class="row row-featured row-featured-category">
 
-                <div class="col-xl-2 col-md-3 col-sm-4 col-xs-6 f-category">
+                <div class="col-xl-2 col-md-2 col-sm-4 col-xs-6 f-category">
                     <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/mobile.jpg'); ?>" class="img-responsive" alt="img">
                         <h6 style="height:30px !important;">Phone Accessories </h6></a>
                 </div>
 
-                <div class="col-xl-2 col-md-3 col-sm-4 col-xs-6 f-category">
+                <div class="col-xl-2 col-md-2 col-sm-4 col-xs-6 f-category">
                     <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/laptop-2.jpg'); ?>" class="img-responsive"
                                                  alt="img"> <h6 style="height:30px !important;"> Laptops </h6></a>
                 </div>
 
-                <div class="col-xl-2 col-md-3 col-sm-4 col-xs-6 f-category">
+                <div class="col-xl-2 col-md-2 col-sm-4 col-xs-6 f-category">
                     <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/mobile.jpg'); ?>" class="img-responsive" alt="img">
                         <h6 style="height:30px !important;"> Mobiles </h6></a>
                 </div>
 
-                <div class="col-xl-2 col-md-3  col-sm-4 col-xs-6 f-category" >
+                <div class="col-xl-2 col-md-2  col-sm-4 col-xs-6 f-category" >
                     <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/tv.jpg'); ?>" class="img-responsive" alt="img"> <h6 style="height:30px !important;">
                             Electronics </h6></a>
                 </div>
 
-                <div class="col-xl-2 col-md-3  col-sm-4 col-xs-6 f-category">
+                <div class="col-xl-2 col-md-2  col-sm-4 col-xs-6 f-category">
                     <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/hdd.jpg'); ?>" class="img-responsive" alt="img">
                         <h6 style="height:30px !important;"> Computer Accessories </h6></a>
                 </div>
 
-                <div class="col-xl-2 col-md-3  col-sm-4 col-xs-6 f-category">
+                <div class="col-xl-2 col-md-2  col-sm-4 col-xs-6 f-category">
                     <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/house.jpg'); ?>" class="img-responsive"
                                                       alt="img">
                         <h6 style="height:30px !important;"> Real Estate </h6></a>
                 </div>
 
-                <div class="col-xl-2 col-md-3 col-sm-4 col-xs-6 f-category">
+                <div class="col-xl-2 col-md-2 col-sm-4 col-xs-6 f-category">
                     <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/Home-Electronics-Appliances-2.jpg'); ?>"
                                                  class="img-responsive" alt="img"> <h6 style="height:30px !important;"> Home Appliances </h6></a>
                 </div>
 
-                <div class="col-xl-2 col-md-3 col-sm-4 col-xs-6 f-category">
+                <div class="col-xl-2 col-md-2 col-sm-4 col-xs-6 f-category">
                     <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/camera.jpg'); ?>" class="img-responsive" alt="img">
                         <h6 style="height:30px !important;"> Cameras </h6></a>
                 </div>
 
-                <div class="col-xl-2 col-md-3 col-sm-4 col-xs-6 f-category">
+                <div class="col-xl-2 col-md-2 col-sm-4 col-xs-6 f-category">
                     <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/fashion.jpg'); ?>" class="img-responsive" alt="img">
                         <h6 style="height:30px !important;"> Fashion & Beauty </h6></a>
                 </div>
 
-                <div class="col-xl-2 col-md-3 col-sm-4 col-xs-6 f-category">
+                <div class="col-xl-2 col-md-2 col-sm-4 col-xs-6 f-category">
                     <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/toy.jpg'); ?>" class="img-responsive" alt="img">
                         <h6 style="height:30px !important;"> Kids & Baby Products </h6></a>
                 </div>
 
-                <div class="col-xl-2 col-md-3  col-sm-4 col-xs-6 f-category">
+                <div class="col-xl-2 col-md-2  col-sm-4 col-xs-6 f-category">
                     <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/largest.png'); ?>" class="img-responsive" alt="img">
                         <h6 style="height:30px !important;"> Tablets </h6></a>
                 </div>
 
-                <div class="col-xl-2 col-md-3 col-sm-4 col-xs-6 f-category" >
+                <div class="col-xl-2 col-md-2 col-sm-4 col-xs-6 f-category" >
                     <a href="javascript:void(0);"><img src="<?= base_url('assets/landing/img/why-onitshamarket/catalog.jpg'); ?>" class="img-responsive" alt="img">
                         <h6 style="height:30px !important;"> Home & Furniture </h6></a>
                 </div>
