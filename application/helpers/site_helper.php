@@ -158,26 +158,32 @@ if (!function_exists('productStatus')) {
     }
 }
 
-
-// Rating score test
-
-// if(!function_exists('rating_text')){
-// 	function rating_text( $score ){
-// 		switch ($score) {
-// 			case 5:
-// 				$text = '<p class="text-success"><strong><i class="fa fa-check"></i> I would recommend it to a friend.</strong></p>';
-// 				return 
-// 				break;
-// 			case 4:
-// 				$text = '<p class="text-info"><strong><i class="fa fa-check"></i> I would recommend it to a friend.</strong></p>';
-// 				return 
-// 				break;
-			
-// 			default:
-// 				# code...
-// 				break;
-// 		}
-// 	}
-// }
+// This functions round up the overall rating
+if( !function_exists('product_overall_rating')){
+	function product_overall_rating( $results ) : float{
+		$rate5 = $rate4 = $rate3 = $rate2 = $rate1 = $total_outcome = 0;
+		foreach ($results as $key ) {
+			switch ($key['rating_score']) {
+				case 5:
+					$rate5 = $key['occurence'] * 5;
+					break;
+				case 4:
+					$rate4 = $key['occurence'] * 4;
+					break;
+				case 3:
+					$rate3 = $key['occurence'] * 3;
+					break;
+				case 2:
+					$rate2 = $key['occurence'] * 2;
+					break;
+				case 1:
+					$rate1 = $key['occurence'] * 1;
+					break;
+			}
+			$total_outcome += $key['occurence'];
+		}
+		return round($rate5/$total_outcome + $rate4/$total_outcome + $rate3/$total_outcome + $rate2/$total_outcome + $rate1/$total_outcome, 1, PHP_ROUND_HALF_UP);
+	}
+}
 
 ?>

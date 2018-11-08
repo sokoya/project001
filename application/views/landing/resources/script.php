@@ -7,4 +7,5 @@
 <script src="<?= base_url('assets/landing/js/magnific.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/custom.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
+<script> let base_url = "<?= base_url(); ?>";</script>
 
