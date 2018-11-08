@@ -105,26 +105,29 @@
 											<li class="rated"><i class="fa fa-star"></i>
 											</li>
 										</ul>
-										<p class="product-page-product-rating-sign">
+										<!-- <p class="product-page-product-rating-sign">
 											<a href="#">238 customer reviews</a> | <strong> 34 SOLDS</strong>
-										</p>
+										</p> -->
 										<p class="product-page-desc">
 											<strong
-												class="custom-product-title"><?= word_limiter(ucwords($product->product_name), 7, '...'); ?></strong>
+												class="custom-product-title"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></strong>
 										</p>
 										<p class=" text-sm text-uppercase pr-id">Product ID : <?= $product->sku; ?>
 											| Seller : <a
 												href="#"
 												id="pr-seller"><?= ucwords($product->first_name . ' ' . $product->last_name); ?></a>
 										</p>
-										<span class="text-sm text-sm-center">
-                                            <?php if (!empty($product->dimensions)): ?>
+                                        <?php if (!empty($product->dimensions)): ?>
+											<span class="text-md text-md-center">
 												<strong>Measurement: </strong><?= $product->dimensions; ?>cm
-											<?php endif; ?>
-											<?php if (!empty($product->weight)) : ?>
-												<strong> - Weight: </strong><?= $product->weight; ?>kg
-											<?php endif; ?>
-                                        </span>
+                                        	</span>
+										<?php endif; ?>
+                                        <?php if (!empty($product->weight)) : ?>
+                                        	<br />
+                                        	<span class="text-md text-md-center">
+												<strong>Weight: </strong><?= $product->weight; ?>kg
+											</span>
+										<?php endif; ?>
 									</div>
 									<div class="col-md-7">
 										<table class="table table-hover product-page-features-table">
@@ -428,24 +431,35 @@
 						<div class="row">
 							<div class="col-md-4">
 								<h3 class="product-tab-rating-title">Overall Customer Rating:</h3>
-								<?php $overall_rating = product_overall_rating($rating_counts); ?>
 								<ul class="product-page-product-rating product-rating-big">
 									<?php
-										$rating_rounded = round($overall_rating);
-										for ($i = 1; $i <= $rating_rounded; $i++) {
-											?>
-											<li class="rated"><i class="fa fa-star"></i>
-											</li>
-											<?php
-										}
-										if ($rating_rounded < 5) {
-											for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
-												<li><i class="fa fa-star"></i></li>
+										if( $rating_counts ) {
+											$overall_rating = product_overall_rating($rating_counts);
+											$rating_rounded = round($overall_rating);
+											for ($i = 1; $i <= $rating_rounded; $i++) {
+												?>
+												<li class="rated"><i class="fa fa-star"></i>
+												</li>
 												<?php
 											}
+											if ($rating_rounded < 5) {
+												for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
+													<li><i class="fa fa-star"></i></li>
+													<?php
+												}
+											}											
+										}else{
+
+									?>
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>	
+									<?php
 										}
 									?>
-									<li class="count"><?= $overall_rating; ?></li>
+									<li class="count"><?= isset($overall_rating) ? $overall_rating : ''; ?></li>
 								</ul>
 								<small>{{ Number of reviews - 238 customer reviews }}</small>
 								<p><strong>98%</strong> of reviewers would recommend this product</p>
@@ -461,30 +475,22 @@
 							<div class="col-md-3">
 								<ul class="product-rate-list">
 
-									<?php
-									$x = 5;
-									do { ?>
+									<?php 
+										$total_corrence = 0;
+										foreach($rating_counts as $rating) : 
+										$total_corrence += $rating['occurence'];
+									?>
 										<li>
-											<p class="product-rate-list-item"><?= $x; ?> Stars</p>
+											<p class="product-rate-list-item"><?= $rating['rating_score']; ?> Stars</p>
 											<div class="product-rate-list-bar">
 												<div style="width:0%;"></div>
 											</div>
-											<p class="product-rate-list-count">0</p>
-										</li>
-										<?php $x -= 1;
-									} while ($x >= 1);
-									?>
-									<!-- <li>
-										<p class="product-rate-list-item"><?= $x; ?> Stars</p>
-										<div class="product-rate-list-bar">
-											<div style="width:0%;"></div>
-										</div>
-										<p class="product-rate-list-count">0</p>
-									</li> -->
-
+											<p class="product-rate-list-count"><?= $rating['occurence']; ?></p>
+										</li>										
+									<?php endforeach; ?>
 								</ul>
 							</div>
-							<div class="col-md-5" style="">
+							<div class="col-md-5">
 								<div class="row">
 									<?php
 									if ($this->session->userdata('logged_in')) :
@@ -585,18 +591,13 @@
 				<?php
 				foreach ($likes as $like): ?>
 					<div class="col-md-3">
-						<div class="product ">
-							<!-- <ul class="product-labels">
-                                <li>hot</li>
-                            </ul> -->
-							<div class="product-img-wrap">
-								<!-- <img class="product-img"
-                                     src="<?= base_url('assets/landing/img/test_product/35.jpg'); ?>"
-                                     alt="Image Alternative text"
-                                     title="Image Title"/> -->
-								<?php $image_name = $like->image_name;
-								$split = explode('|', $image_name)
-								?>
+						<div class="product">
+							<?php if( $like->views >= 100 ): ?>
+								<ul class="product-labels">
+	                                <li>hot</li>
+	                            </ul>
+                        	<?php endif; ?>
+							<div class="product-img-wrap">								
 								<img class="product-img"
 									data-src="<?= base_url('data/products/' . $like->id.'/'.$like->image_name); ?>"
 									src="<?= base_url('data/products/' . $like->id.'/'.$like->image_name); ?>"
@@ -606,18 +607,35 @@
 							<a class="product-link" href="<?= base_url(urlify($like->product_name, $like->id)); ?>"></a>
 							<div class="product-caption">
 								<ul class="product-caption-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li><i class="fa fa-star"></i>
-									</li>
+									<?php
+										$overall_rating = $this->product->get_rating_counts( $like->id );
+										if( $overall_rating ) {
+											$overall_rating = product_overall_rating( $overall_rating );
+											$rating_rounded = round($overall_rating);
+											for ($i = 1; $i <= $rating_rounded; $i++) {
+												?>
+												<li class="rated"><i class="fa fa-star"></i></li>
+											<?php
+											}
+											if ($rating_rounded < 5) {
+												for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
+													<li><i class="fa fa-star"></i></li>
+													<?php
+												}
+											}											
+										}else{
+									?>
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>
+									<li><i class="fa fa-star"></i></li>									
+									<?php
+										}
+									?>
+									
 								</ul>
-								<h5 class="product-caption-title"><?= word_limiter(ucwords($like->product_name), 7, '...'); ?></h5>
+								<h5 class="product-caption-title"><?= character_limiter(ucwords($like->product_name), 30, '...'); ?></h5>
 								<div class="product-caption-price">
 									<?php if (!empty($like->discount_price)) : ?>
 										<span

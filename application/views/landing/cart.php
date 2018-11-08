@@ -32,14 +32,14 @@
 						$total = 0;
 						foreach ($this->cart->contents() as $product): ?>
 							<?php
-								$detail = $this->product->get_cart_details($product['id']);
+							$detail = $this->product->get_cart_details($product['id']);
 							?>
 							<tr>
 								<td class="table-shopping-cart-img">
 									<?php echo form_hidden($x . '[rowid]', $product['rowid']); ?>
 									<a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
 										<img
-											src="<?= base_url('data/products/' .$product['id'].'/'.$detail->image); ?> ?>"
+											src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image); ?> ?>"
 											alt="Carrito -marketplace <?= $product['name']; ?>"
 											title="<?= $product['name']; ?>"/>
 									</a>
@@ -68,8 +68,8 @@
 									   href="<?= base_url('cart/remove/' . $product['rowid']); ?>"></a>
 								</td>
 							</tr>
-							<?php 
-							$x++; 
+							<?php
+							$x++;
 						endforeach; ?>
 						</tbody>
 					</table>
@@ -84,8 +84,8 @@
 						<li><span>Total :</span><span><?= ngn($total); ?></span>
 						</li>
 					</ul>
-					<span class="text-sm text-danger"><strong>Delivery fee not included.</strong></span><br />
-					<br />
+					<span class="text-sm text-danger"><strong>Delivery fee not included.</strong></span><br/>
+					<br/>
 					<a class="btn btn-primary" href="<?= base_url('checkout'); ?>">Checkout</a>
 				</div>
 			</div>
@@ -110,6 +110,9 @@
 	<?php $this->load->view('landing/resources/footer'); ?>
 
 </div>
+<script>
+	let base_url = "<?= base_url(); ?>";
+</script>
 <?php $this->load->view('landing/resources/script'); ?>
 <script>
 	$(document).on('ready', function () {

@@ -186,4 +186,29 @@ if( !function_exists('product_overall_rating')){
 	}
 }
 
+
+
+
+if( !function_exists('product_percentage_rating')){
+	function product_percentage_rating( $results ) : array{
+		$rate5 = $rate4 = $rate3 = $rate2 = $rate1 = $total_outcome = 0;
+		$socres = array(1,2,3,4,5);
+		foreach ($results as $key ) { $total_outcome += $key['occurence']; }
+		foreach( $results as $key ){
+			
+		}
+		
+	}
+}
+
+
+// if( !function_exists('product_percentage_rating')){
+// 	function product_percentage_rating( $results ) : array{
+// 		$rate5 = $rate4 = $rate3 = $rate2 = $rate1 = $total_outcome = 0;
+// 		$scores = array(1,2,3,4,5);
+		
+// 		return round($rate5/$total_outcome + $rate4/$total_outcome + $rate3/$total_outcome + $rate2/$total_outcome + $rate1/$total_outcome, 1, PHP_ROUND_HALF_UP);
+// 	}
+// }
+
 ?>
