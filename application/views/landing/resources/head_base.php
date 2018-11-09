@@ -20,4 +20,7 @@
             height:36px !important;
             line-height:48px !important;
         }
+        .grey{
+            color:grey;
+        }
     </style>
