@@ -145,8 +145,7 @@
                                  src="<?= base_url('assets/landing/img/why-onitshamarket/laptop-2.jpg') ?>"
                                  alt="Pay on delivery" title="Pay on delivery"/>
                             <h5 class="banner-category-title">HP Envy XI</h5>
-                            <p class="banner-category-desc itm_price">&#8358;389,000<span
-                                        class="itm_disc"></span></p>
+                            <p class="banner-category-desc itm_price">&#8358;389,000</p>
                         </a>
                     </div>
                     <div class="owl-item">
@@ -334,10 +333,9 @@
                     <div class="product-caption">
                         <h5><strong>Your dressing your style.</strong></h5>
                     </div>
-                    <div class="gap"></div>
 
-                    <div class="product-img-wrap">
-                        <img class="product-img" style="margin: 0 auto; width: 100%;"
+                    <div class="product-img-wrap" style="height:auto !important;overflow: visible;">
+                        <img class="product-img img-responsive prd_img" style="margin: 0 auto;"
                              src="<?= base_url('assets/landing/img/onitshamarket/female_wears.png'); ?>"
                              alt="female_wears"
                              title="female_wears"/>
@@ -353,17 +351,17 @@
                     <ul class="product-labels"></ul>
                     <div class="product-caption text-center">
                         <h5><strong>Be The modern Man!</strong></h5>
-                        <span style="">Let's dress you for that perfect occassion for less than N5,000</span>
                     </div>
-                    <div class="product-img-wrap">
-                        <img class="product-img" style="margin: 0 auto; width: 100%; height: 370px;"
+                    <div class="product-img-wrap" style="height:auto !important;overflow: visible;">
+                        <img class="product-img img-responsive prd_img img_man" style="margin: 0 auto;"
                              src="<?= base_url('assets/landing/img/onitshamarket/male_wears.png'); ?>"
-                             alt="female_wears"
-                             title="female_wears"/>
+                             alt="male wears"
+                             title="male wears"/>
                     </div>
                     <a class="product-link" href="<?= base_url('category'); ?>"></a>
                     <div class="product-caption">
                         <h5 class="product-caption-title"><strong>Shop all male clothing</strong></h5>
+                        <span style="">Let's dress you for that perfect occassion for less than N5,000</span>
                     </div>
                 </div>
             </div>

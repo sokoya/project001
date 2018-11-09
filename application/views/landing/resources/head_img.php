@@ -1,4 +1,4 @@
-<div class="navbar-before mobile-hidden navbar-before-inverse">
+<div class="navbar-before hide_mobile navbar-before-inverse">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6">

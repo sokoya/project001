@@ -43,9 +43,9 @@
                         <?php endforeach; ?>
                     </ul>
                 </li>
-                <li><a class="navbar-item-top" href="<?= base_url(lang('deal_link')); ?>"><?= lang('deal'); ?></a>
+                <li class="hide_tab"><a class="navbar-item-top" href="<?= base_url(lang('deal_link')); ?>"><?= lang('deal'); ?></a>
                 </li>
-                <li><a class="navbar-item-top" href="<?= base_url(lang('new_arrival_link')); ?>"><?= lang('new_arrival'); ?></a>
+                <li class="hide_tab"><a class="navbar-item-top" href="<?= base_url(lang('new_arrival_link')); ?>"><?= lang('new_arrival'); ?></a>
                 </li>
                 <li><a class="navbar-item-top" href="<?= base_url(lang('top_seller_link')); ?>"><?= lang('top_seller'); ?></a>
                 </li>
@@ -55,7 +55,7 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li>
+                <li class="hide_ipad">
                     <a href="#"><span>Learn more about</span> <strong>Market Shopper</strong></a>
                 </li>
                 <li>
