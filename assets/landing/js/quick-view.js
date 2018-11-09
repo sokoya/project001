@@ -30,32 +30,34 @@ $.fn.quickViewNext = function (selector, steps, scope) {
 };
 
 //onclick trigger for quickview
-$('.product-quick-view-btn').on('click', function () {
-		try {
-			if ($('.q_view').isInViewport()) {
-			} else {
-				// noinspection JSCheckFunctionSignatures
-				$('html, body').animate({scrollTop: '+=150px'}, 800);
-			}
-		}
-		catch (e) {
+$('.product-quick-view-btn').on('click', get_view);
+
+function get_view() {
+	try {
+		if ($('.q_view').isInViewport()) {
+		} else {
 			// noinspection JSCheckFunctionSignatures
 			$('html, body').animate({scrollTop: '+=150px'}, 800);
 		}
+	}
+	catch (e) {
+		// noinspection JSCheckFunctionSignatures
+		$('html, body').animate({scrollTop: '+=150px'}, 800);
+	}
 
-		let pr_id = $(this).data('pr_id');
-		let title = $(this).data('title');
-		let img_src = $(this).data('image');
-		$('.test-div').remove();
-		let qv_location = $(this).quickViewNext('.product_div');
-		if ($(this).data('qv') === true) {
-			let id = $(this).data('qvc');
-			let p_id = `.product-${id}`;
-			qv_location = $(p_id);
-		}
+	let pr_id = $(this).data('pr_id');
+	let title = $(this).data('title');
+	let img_src = $(this).data('image');
+	$('.test-div').remove();
+	let qv_location = $(this).quickViewNext('.product_div');
+	if ($(this).data('qv') === true) {
+		let id = $(this).data('qvc');
+		let p_id = `.product-${id}`;
+		qv_location = $(p_id);
+	}
 
-		qv_location.after(
-			`<div class="col-md-12 test-div q_view clearfix">
+	qv_location.after(
+		`<div class="col-md-12 test-div q_view clearfix">
 			<div class="row">
 			<div class="col-md-4">
 				<img src="${img_src}" class="q_pr_img" alt="${title}" title="${title}">
@@ -78,26 +80,25 @@ $('.product-quick-view-btn').on('click', function () {
 			</div>	
 			</div>
 		</div>`
-		);
+	);
 
-		$('.close_qv').on('click', function () {
-			$('.test-div').remove();
-		});
+	$('.close_qv').on('click', function () {
+		$('.test-div').remove();
+	});
 
-		$.ajax({
-			url: base_url + 'ajax/quick_view',
-			method: 'POST',
-			data: {product_id: pr_id},
-			success: function (response) {
-				$.each(JSON.parse(response), function (key, value) {
-					$('.q_view_high').html(`
+	$.ajax({
+		url: base_url + 'ajax/quick_view',
+		method: 'POST',
+		data: {product_id: pr_id},
+		success: function (response) {
+			$.each(JSON.parse(response), function (key, value) {
+				$('.q_view_high').html(`
 					<p>${value.highlights}</p>
 					`)
-				});
-			},
-			error: () => {
-				console.log('An error occurred')
-			}
-		});
-	}
-);
+			});
+		},
+		error: () => {
+			console.log('An error occurred')
+		}
+	});
+}
