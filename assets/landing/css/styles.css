@@ -7453,6 +7453,18 @@ input[type="color"]:focus,
 	height: 220px;
 }
 
+.close_qv {
+	font-size: 22px;
+	position: absolute;
+	left: 93%;
+	cursor: pointer;
+	color: #4e4e4e;
+}
+
+.close_qv:hover{
+	color: #ff2e19;
+}
+
 .q_skeleton_highlight:empty {
 	width: 500px;
 	height: 200px;
