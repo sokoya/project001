@@ -224,7 +224,7 @@
 							<?php foreach ($products as $product) : ?>
 								<?php $p_count++ ?>
 								<div
-									class="col-md-3 <?php if ($p_count % 2 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> clearfix">
+									class="col-md-3 <?php if ($p_count % 4 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> clearfix">
 									<div class="product">
 										<?php if (!empty($product->discount_price)): ?>
 											<ul class="product-labels">
@@ -237,14 +237,14 @@
 												<div style="position: relative; left: -50%;">
 													<button data-title="<?= $product->product_name ?>"
 															data-pr_id="<?= $product->id ?>"
-															data-qv="<?php if ($p_count % 2 == 0) { ?>true<?php } ?>"
+															data-qv="<?php if ($p_count % 4 == 0) { ?>true<?php } ?>"
 															data-qvc="<?php echo $p_count ?>"
 															data-image="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
 															class="btn btn-primary product-quick-view-btn">Quick view
 													</button>
 												</div>
 											</div>
-											<img class="product-img"
+											<img class="product-img lazy"
 												 data-src="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
 												 src="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
 												 alt="<?= $product->product_name; ?>"
@@ -298,7 +298,10 @@
 													<span
 														class="cs-price-tl"><?= ngn($product->sale_price); ?> </span>
 												<?php endif; ?>
-												<span class="pull-right category-favorite"><i class="fa fa-heart"
+												<?php 
+												$category_fav = ($this->session->userdata('logged_in') && $this->product->is_favourited($profile->id, $product->id ) ) ? 'category-favorite-active' : 'category-favorite';
+												?>
+												<span class="pull-right <?= $category_fav; ?>"><i class="fa fa-heart"
 																							  title="Add <?= $product->product_name; ?> to your whishlist"></i> &nbsp;</span>
 											</div>
 										</div>
@@ -326,8 +329,6 @@
 <script src="<?= base_url('assets/landing/js/ionrangeslider.js'); ?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
-<script type="text/javascript"
-		src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
 <script>
 	let base_url = "<?= base_url(); ?>";
 	let current_url = "<?= current_url()?>";
@@ -413,6 +414,20 @@
 			}
 		});
 	});
+	 $(function() {
+        $('.lazy').Lazy({
+        	beforeLoad: function(element) {
+            // called before an elements gets handled
+            alert('Loading');
+        	},
+        	scrollDirection: 'vertical',
+	        effect: 'fadeIn',
+	        visibleOnly: true,
+	        onError: function(element) {
+	            console.log('error loading ' + element.data('src'));
+	        }
+        });
+    });
 </script>
 </body>
 </html>
