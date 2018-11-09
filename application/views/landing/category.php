@@ -216,10 +216,7 @@
 								Wait! </strong>
 						</div>
 					</div>
-
-
 					<div id="category_body">
-
 						<div class="row filter_data" data-gutter="15">
 							<?php
 							$p_count = 0;
@@ -227,7 +224,7 @@
 							<?php foreach ($products as $product) : ?>
 								<?php $p_count++ ?>
 								<div
-									class="col-md-3 <?php if ($p_count % 4 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> clearfix">
+									class="col-md-3 <?php if ($p_count % 2 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> clearfix">
 									<div class="product">
 										<?php if (!empty($product->discount_price)): ?>
 											<ul class="product-labels">
@@ -240,7 +237,7 @@
 												<div style="position: relative; left: -50%;">
 													<button data-title="<?= $product->product_name ?>"
 															data-pr_id="<?= $product->id ?>"
-															data-qv="<?php if ($p_count % 4 == 0) { ?>true<?php } ?>"
+															data-qv="<?php if ($p_count % 2 == 0) { ?>true<?php } ?>"
 															data-qvc="<?php echo $p_count ?>"
 															data-image="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
 															class="btn btn-primary product-quick-view-btn">Quick view
@@ -286,7 +283,7 @@
 													}
 												?>
 												<span
-													class="text-sm pull-right"><strong>Seller: </strong><?= $product->first_name; ?></span>
+													class="text-sm pull-right"><strong>Seller: </strong><?= ucfirst($product->first_name); ?></span>
 											</ul>
 											<h5 class="cs-title"><?= word_limiter(ucwords($product->product_name), 7, '...'); ?></h5>
 											<div class="product-caption-price">
@@ -309,7 +306,6 @@
 								</div>
 							<?php endforeach; ?>
 						</div>
-
 						<div class="row">
 							<div class="col-md-6 col-md-offset-3">
 								<?= $pagination ?>
@@ -322,7 +318,7 @@
 		</div>
 	<?php endif; ?>
 	<div class="gap"></div>
-	<!--comment-->
+
 	<?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>

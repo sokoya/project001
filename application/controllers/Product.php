@@ -100,7 +100,12 @@ class Product extends CI_Controller {
 		$page_data['sub_categories'] = $this->product->get_sub_categories($str);
 		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 		$page_data['description'] = $this->product->category_description($str);
-		$this->load->view('landing/category', $page_data);
+		$this->load->library('user_agent');
+		if( !$this->agent->is_mobile()){
+			$this->load->view('landing/category', $page_data);			
+		}else{
+			$this->load->view('landing/mobile-category', $page_data);
+		}
 	}
 
 
