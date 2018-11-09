@@ -15,3 +15,9 @@
 	<link rel="stylesheet" href="<?= base_url('assets/landing/css/styles.css'); ?>">
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/de-york.css'); ?>" title="de-york" media="all" />
     <link rel="shortcut icon" href="<?= base_url('assets/landing/img/favicon.png'); ?>" type="image/png">
+    <style>
+        .mgt_drop_menu>li{
+            height:36px !important;
+            line-height:48px !important;
+        }
+    </style>

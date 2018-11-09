@@ -22,6 +22,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <?php $this->load->view('landing/msg_view'); ?>
+                    <div class="container order_tracking_form">
+Form goes here
+                    </div>
                 </div>
             </div>
         </div>

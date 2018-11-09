@@ -77,7 +77,7 @@
                     <?php else : ?>
                         <a href="<?= base_url('login'); ?>"><span>Sign in | Join</span><strong>My Account</strong></a>
                     <?php endif; ?>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu mgt_drop_menu">
                         <?php if($this->session->userdata('logged_in') ): ?>
                             <li>
                                 <a href="<?= base_url('account'); ?>">My Accounts</a>
