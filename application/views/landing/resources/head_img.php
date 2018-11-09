@@ -1,6 +1,6 @@
-<div class="navbar-before mobile-hidden navbar-before-inverse">
+<div class="navbar-before hide_mobile navbar-before-inverse">
 	<div class="container">
-		<div class="row">
+		<div class="row head_row">
 			<div class="col-md-6">
 
 				<p class="navbar-before-sign">Everything You Need is <?= lang('app_name'); ?></p>

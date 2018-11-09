@@ -41,9 +41,9 @@
                         <?php endforeach; ?>
                     </ul>
                 </li>
-                <li><a class="navbar-item-top" href="<?= base_url(lang('deal_link')); ?>"><?= lang('deal'); ?></a>
+                <li class="hide_tab"><a class="navbar-item-top" href="<?= base_url(lang('deal_link')); ?>"><?= lang('deal'); ?></a>
                 </li>
-                <li><a class="navbar-item-top" href="<?= base_url(lang('new_arrival_link')); ?>"><?= lang('new_arrival'); ?></a>
+                <li class="hide_tab"><a class="navbar-item-top" href="<?= base_url(lang('new_arrival_link')); ?>"><?= lang('new_arrival'); ?></a>
                 </li>
                 <li><a class="navbar-item-top" href="<?= base_url(lang('top_seller_link')); ?>"><?= lang('top_seller'); ?></a>
                 </li>
@@ -53,7 +53,7 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li>
+                <li class="hide_ipad">
                     <a href="#"><span>Learn more about</span> <strong>Market Shopper</strong></a>
                 </li>
                 <li>
@@ -75,31 +75,34 @@
                     <?php else : ?>
                         <a href="<?= base_url('login'); ?>"><span>Sign in | Join</span><strong>My Account</strong></a>
                     <?php endif; ?>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu mgt_drop_menu">
                         <?php if($this->session->userdata('logged_in') ): ?>
                             <li>
-                                <a href="<?= base_url('account'); ?>">My Accounts</a>
+                                <a href="<?= base_url('account'); ?>"><span class="fa fa-user grey"></span>&nbsp;My Accounts</a>
                             </li>
                             <li>
-                                <a href="<?= base_url('account/orders'); ?>">My Orders</a>
+                                <a href="<?= base_url('account/orders'); ?>"><span class="fa fa-reorder grey"></span>&nbsp;My Orders</a>
                             </li>
                             <li>
-                                <a href="<?= base_url('account/saved'); ?>">My Saved Items</a>
+                                <a href="<?= base_url('account/order_track'); ?>"><span class="fa fa-road grey"></span>&nbsp;Order Tracking</a>
                             </li>
                             <li>
-                                <a href="<?= base_url('account/help'); ?>">Help</a>
+                                <a href="<?= base_url('account/saved'); ?>"><span class="fa fa-save grey"></span>&nbsp;My Saved Items</a>
                             </li>
                             <?php if( $profile->is_seller !== 'false' ) : ?>
                             <li>
-                                <a href="<?= base_url('seller/overview'); ?>">Seller Dashboard</a>
+                                <a href="<?= base_url('seller/overview'); ?>"><span class="fa fa-dashboard grey"></span>&nbsp;Seller Dashboard</a>
                             </li>
                             <?php else : ?>
                              <li>
-                                <a href="<?= base_url('seller/'); ?>">Become A Seller</a>
+                                <a href="<?= base_url('seller/'); ?>"><span class="fa fa-user-o grey"></span>&nbsp;Become A Seller</a>
                             </li>
                             <?php endif; ?>
                             <li>
-                                <a href="<?= base_url('logout'); ?>">Logout</a>
+                                <a href="<?= base_url('account/help'); ?>"><span class="fa fa-question-circle grey"></span>&nbsp;Help</a>
+                            </li>
+                            <li>
+                                <a href="<?= base_url('logout'); ?>"><span class="fa fa-sign-out grey"></span>&nbsp;Logout</a>
                             </li>
                         <?php else : ?>
                             <li>
