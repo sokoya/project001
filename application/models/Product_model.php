@@ -444,7 +444,7 @@ Class Product_model extends CI_Model{
 
     //  Quick view query
     function get_quick_view_details( $id ){
-        $select = "SELECT product_description, product_line, in_the_box, colour_family,highlights, product_warranty FROM [roducts] WHERE id = $id";
+        $select = "SELECT product_description, product_line, in_the_box, colour_family,highlights, product_warranty FROM products WHERE id = $id";
         return $this->db->query( $select)->result_array();
 
         // SELECT p.product_description, p.product_line, p.in_the_box, p.product_warranty, 

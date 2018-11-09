@@ -49,8 +49,9 @@ class Ajax extends CI_Controller
 
 
 	// Function to make an auto complete search
-	function search_complete() {
-		if( $this->input->is_ajax_request() && $this->input->post()) {
+	function search_complete()
+	{
+		if ($this->input->is_ajax_request() && $this->input->post()) {
 			$search = cleanit($this->input->post('search'));
 			$results = $this->product->search_query($search);
 			$output = array();
@@ -71,34 +72,36 @@ class Ajax extends CI_Controller
 				echo json_encode('');
 				exit;
 			}
-		
-		}else{
-			redirect( base_url() );
+
+		} else {
+			redirect(base_url());
 		}
 	}
 
 
 	// Remove product from whichlist
-	function remove_whichlist(){
-		if($this->input->is_ajax_request() && $this->input->post()){
+	function remove_whichlist()
+	{
+		if ($this->input->is_ajax_request() && $this->input->post()) {
 			$id = $this->input->post('id');
-			if( $this->user->favourite('','','','favourite', $id) ){
-				echo json_encode(array('status' => 'success', 'message' =>'The product has been removed from your whichlist'));
+			if ($this->user->favourite('', '', '', 'favourite', $id)) {
+				echo json_encode(array('status' => 'success', 'message' => 'The product has been removed from your whichlist'));
 				exit;
-			}else{
-				echo json_encode(array('status' => 'error', 'message' =>'There was an error removing the product from your whichlist.'));
+			} else {
+				echo json_encode(array('status' => 'error', 'message' => 'There was an error removing the product from your whichlist.'));
 				exit;
 			}
-		}else{
+		} else {
 			redirect(base_url());
 		}
 	}
 
-	function quick_view(){
-		if( $this->input->is_ajax_request() && $this->input->post() ){
+	function quick_view()
+	{
+		if ($this->input->is_ajax_request() && $this->input->post()) {
 			$pid = $this->input->post('product_id');
-			$results = $this->product->get_quick_view_details( $id );
-			echo json_encode($output, JSON_UNESCAPED_SLASHES);
+			$results = $this->product->get_quick_view_details($pid);
+			echo json_encode($results, JSON_UNESCAPED_SLASHES);
 			exit;
 		}
 	}
