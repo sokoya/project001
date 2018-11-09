@@ -444,9 +444,9 @@ Class Product_model extends CI_Model{
 
     //  Quick view query
     function get_quick_view_details( $id ){
-        $select = "SELECT product_description, product_line, in_the_box, colour_family,highlights, product_warranty FROM products WHERE id = $id";
+        $select = "SELECT product_description, product_line, in_the_box, highlights, product_warranty FROM products WHERE id = $id";
         return $this->db->query( $select)->result_array();
-
+        
         // SELECT p.product_description, p.product_line, p.in_the_box, p.product_warranty, 
         // CONCAT('[',GROUP_CONCAT(CONCAT('{',variation_name:v.variation,',',quantity:v.quantity,',',start_date:v.start_date,',',end_date:v.end_date,',',discount_price:v.discount_price,',',sale_price:v.sale_price,'}')),']') as variations
         // FROM products p

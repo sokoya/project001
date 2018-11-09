@@ -188,7 +188,7 @@
                 <div class="col-md-9">
                     <div class="row" data-gutter="15">
                         <div class="col-md-4">
-                            <div class="product product-md-left">
+                            <div class="product product-sm-left">
                                 <ul class="product-labels"></ul>
                                 <div class="product-img-wrap">
                                     <img class="product-img" src="img/test_product/man_fashion/11.jpg" alt="Image Alternative text" title="Image Title" />
@@ -207,69 +207,10 @@
                                         <li class="rated"><i class="fa fa-star"></i>
                                         </li>
                                     </ul>
-                                    <h5 class="product-caption-title">Military Shoulder Tactical Backpack Rucksacks Sport Travel Hiking Trekking Bag</h5>
+                                    <h3 class="product-caption-title">Military Shoulder Tactical Backpack Rucksacks Sport Travel Hiking Trekking Bag</h3>
                                     <div class="product-caption-price"><span class="product-caption-price-new">$138</span>
                                     </div>
                                     <ul class="product-caption-feature-list">
-                                        <li>Free Shipping</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="product product-sm-left ">
-                                <ul class="product-labels"></ul>
-                                <div class="product-img-wrap">
-                                    <img class="product-img" src="img/test_product/man_fashion/5.jpg" alt="Image Alternative text" title="Image Title" />
-                                </div>
-                                <a class="product-link" href="#"></a>
-                                <div class="product-caption">
-                                    <ul class="product-caption-rating">
-                                        <li class="rated"><i class="fa fa-star"></i>
-                                        </li>
-                                        <li class="rated"><i class="fa fa-star"></i>
-                                        </li>
-                                        <li class="rated"><i class="fa fa-star"></i>
-                                        </li>
-                                        <li class="rated"><i class="fa fa-star"></i>
-                                        </li>
-                                        <li><i class="fa fa-star"></i>
-                                        </li>
-                                    </ul>
-                                    <h5 class="product-caption-title">FootJoy FJ Sport Golf Shoes White Mens Closeout 53255 New</h5>
-                                    <div class="product-caption-price"><span class="product-caption-price-new">$53</span>
-                                    </div>
-                                    <ul class="product-caption-feature-list">
-                                        <li>Free Shipping</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="product product-sm-left ">
-                                <ul class="product-labels"></ul>
-                                <div class="product-img-wrap">
-                                    <img class="product-img" src="img/test_product/man_fashion/8.jpg" alt="Image Alternative text" title="Image Title" />
-                                </div>
-                                <a class="product-link" href="#"></a>
-                                <div class="product-caption">
-                                    <ul class="product-caption-rating">
-                                        <li class="rated"><i class="fa fa-star"></i>
-                                        </li>
-                                        <li class="rated"><i class="fa fa-star"></i>
-                                        </li>
-                                        <li class="rated"><i class="fa fa-star"></i>
-                                        </li>
-                                        <li class="rated"><i class="fa fa-star"></i>
-                                        </li>
-                                        <li class="rated"><i class="fa fa-star"></i>
-                                        </li>
-                                    </ul>
-                                    <h5 class="product-caption-title">FootJoy Contour Casual Spikeless Golf Shoes Black Mens Closeout 54284 New</h5>
-                                    <div class="product-caption-price"><span class="product-caption-price-new">$51</span>
-                                    </div>
-                                    <ul class="product-caption-feature-list">
-                                        <li>2 left</li>
                                         <li>Free Shipping</li>
                                     </ul>
                                 </div>
