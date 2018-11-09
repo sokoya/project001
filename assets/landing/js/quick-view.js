@@ -34,18 +34,6 @@ $('.product-quick-view-btn').on('click', function () {
 			qv_location = $(p_id);
 		}
 
-		$.ajax({
-			url: base_url + 'ajax/quick_view',
-			method: 'POST',
-			data: {product_id: pr_id},
-			success: function (response) {
-				console.log(response)
-			},
-			error: function (response) {
-				console.log('An error occurred somewhere')
-			}
-		});
-
 		qv_location.after(
 			`<div class="col-md-12 test-div q_view clearfix">
 			<div class="row">
@@ -54,9 +42,9 @@ $('.product-quick-view-btn').on('click', function () {
 			</div>
 			<div class="col-md-8">
 				<h1 class="q_pr_title">${title}</h1>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa deserunt
-					excepturi, ipsum necessitatibus possimus recusandae. Ad aspernatur dicta dolore
-					dolorem et hic laudantium libero natus, pariatur repudiandae tempore unde.</p>
+				<div class="q_view_high">
+					<div class="q_skeleton_highlight"></div>
+				</div>
 				<div class="row">
 				<div class="col-md-6">
 					<button class="btn btn-block btn-primary add-to-cart c-hover"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
@@ -70,5 +58,24 @@ $('.product-quick-view-btn').on('click', function () {
 			</div>
 		</div>`
 		);
+
+		$.ajax({
+			url: base_url + 'ajax/quick_view',
+			method: 'POST',
+			data: {product_id: pr_id},
+			success: function (response) {
+				$.each(JSON.parse(response), function (key, value) {
+					$('.q_view_high').html(`
+					<p>${value.highlights}</p>
+					`)
+				});
+				console.log(response)
+			},
+			error: function (response) {
+				console.log('An error occurred somewhere')
+			}
+		});
+
+
 	}
 );
