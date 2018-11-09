@@ -33,7 +33,7 @@
                             <div class="col-md-4"></div>
                             <div class="col-md-4">
                                 <img class="img-responsive" style="margin: 0 auto;"
-                                     src="<?= base_url('assets/landing/img/track.jpg'); ?>"
+                                     src="<?= base_url('assets/landing/img/track2.jpg'); ?>"
                                      alt="Track Order"
                                      title="Track Order"/>
                             </div>
