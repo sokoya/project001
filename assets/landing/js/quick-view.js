@@ -1,28 +1,23 @@
-$.fn.quickViewNext = function (selector, steps, scope) {
-	if (steps) {
-		steps = Math.floor(steps);
-	} else if (steps === 0) {
-		return this;
-	}
-	else {
-		let next = this.next(selector);
-		if (next.length) return next;
-		steps = 1;
-	}
-	scope = (scope) ? $(scope) : $(document);
-	let kids = this.find(selector);
-	let hay = $(this);
-	while (hay[0] != scope[0]) {
-		hay = hay.parent();
-		let rs = hay.find(selector).not(kids).add($(this));
-		let id = rs.index(this) + steps;
-		if (id > -1 && id < rs.length)
-			return $(rs[id]);
-	}
-	return $([]);
-};
+$.fn.isInViewport=function(){let elementTop=$(this).offset().top;let elementBottom=elementTop+$(this).outerHeight();let viewportTop=$(window).scrollTop();let viewportBottom=viewportTop+$(window).height();return elementBottom>viewportTop&&elementTop<viewportBottom};$.fn.quickViewNext=function(selector,steps,scope){if(steps){steps=Math.floor(steps)}else if(steps===0){return this}
+else{let next=this.next(selector);if(next.length)return next;steps=1}
+	scope=(scope)?$(scope):$(document);let kids=this.find(selector);let hay=$(this);while(hay[0]!=scope[0]){hay=hay.parent();let rs=hay.find(selector).not(kids).add($(this));let id=rs.index(this)+steps;if(id>-1&&id<rs.length)
+		return $(rs[id])}
+	return $([])};
 
+//onclick trigger for quickview
 $('.product-quick-view-btn').on('click', function () {
+		try {
+			if ($('.q_view').isInViewport()) {
+			} else {
+				// noinspection JSCheckFunctionSignatures
+				$('html, body').animate({scrollTop: '+=150px'}, 800);
+			}
+		}
+		catch (e) {
+			// noinspection JSCheckFunctionSignatures
+			$('html, body').animate({scrollTop: '+=150px'}, 800);
+		}
+
 		let pr_id = $(this).data('pr_id');
 		let title = $(this).data('title');
 		let img_src = $(this).data('image');
@@ -41,6 +36,7 @@ $('.product-quick-view-btn').on('click', function () {
 				<img src="${img_src}" class="q_pr_img" alt="${title}" title="${title}">
 			</div>
 			<div class="col-md-8">
+			<span class="close_qv"><i class="fa fa-times-circle-o" aria-hidden="true"></i></span>
 				<h1 class="q_pr_title">${title}</h1>
 				<div class="q_view_high">
 					<div class="q_skeleton_highlight"></div>
@@ -59,6 +55,10 @@ $('.product-quick-view-btn').on('click', function () {
 		</div>`
 		);
 
+		$('.close_qv').on('click', function () {
+			$('.test-div').remove();
+		});
+
 		$.ajax({
 			url: base_url + 'ajax/quick_view',
 			method: 'POST',
@@ -69,13 +69,8 @@ $('.product-quick-view-btn').on('click', function () {
 					<p>${value.highlights}</p>
 					`)
 				});
-				console.log(response)
 			},
-			error: function (response) {
-				console.log('An error occurred somewhere')
-			}
+			error: () => {console.log('An error occurred')}
 		});
-
-
 	}
 );
