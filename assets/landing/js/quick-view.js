@@ -1,8 +1,33 @@
-$.fn.isInViewport=function(){let elementTop=$(this).offset().top;let elementBottom=elementTop+$(this).outerHeight();let viewportTop=$(window).scrollTop();let viewportBottom=viewportTop+$(window).height();return elementBottom>viewportTop&&elementTop<viewportBottom};$.fn.quickViewNext=function(selector,steps,scope){if(steps){steps=Math.floor(steps)}else if(steps===0){return this}
-else{let next=this.next(selector);if(next.length)return next;steps=1}
-	scope=(scope)?$(scope):$(document);let kids=this.find(selector);let hay=$(this);while(hay[0]!=scope[0]){hay=hay.parent();let rs=hay.find(selector).not(kids).add($(this));let id=rs.index(this)+steps;if(id>-1&&id<rs.length)
-		return $(rs[id])}
-	return $([])};
+$.fn.isInViewport = function () {
+	let elementTop = $(this).offset().top;
+	let elementBottom = elementTop + $(this).outerHeight();
+	let viewportTop = $(window).scrollTop();
+	let viewportBottom = viewportTop + $(window).height();
+	return elementBottom > viewportTop && elementTop < viewportBottom
+};
+$.fn.quickViewNext = function (selector, steps, scope) {
+	if (steps) {
+		steps = Math.floor(steps)
+	} else if (steps === 0) {
+		return this
+	}
+	else {
+		let next = this.next(selector);
+		if (next.length) return next;
+		steps = 1
+	}
+	scope = (scope) ? $(scope) : $(document);
+	let kids = this.find(selector);
+	let hay = $(this);
+	while (hay[0] != scope[0]) {
+		hay = hay.parent();
+		let rs = hay.find(selector).not(kids).add($(this));
+		let id = rs.index(this) + steps;
+		if (id > -1 && id < rs.length)
+			return $(rs[id])
+	}
+	return $([])
+};
 
 //onclick trigger for quickview
 $('.product-quick-view-btn').on('click', function () {
@@ -70,7 +95,9 @@ $('.product-quick-view-btn').on('click', function () {
 					`)
 				});
 			},
-			error: () => {console.log('An error occurred')}
+			error: () => {
+				console.log('An error occurred')
+			}
 		});
 	}
 );
