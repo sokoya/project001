@@ -125,7 +125,7 @@
                                  src="<?= base_url('assets/landing/img/why-onitshamarket/mobile.jpg'); ?>"
                                  alt="Incredible Discounts" title="Discounts"/>
                             <h5 class="banner-category-title">Samsung S9+</h5>
-                            <p class="banner-category-desc itm_price">&#8358;325,000<span class="itm_disc"></span>
+                            <p class="banner-category-desc itm_price">&#8358;325,000
                             </p>
                         </a>
                     </div>
