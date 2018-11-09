@@ -41,7 +41,7 @@
 										 		class=""
 										 		title="<?= $order->name; ?>"
 										 		style="width: 60px; height: 100%; padding-right: 4px;">
-										 		<span><a href="<?= base_url(urlify($order->name, $order->pid)); ?>"><?= word_limiter(ucwords($order->name), 7, '...'); ?></a></span>												
+										 		<span><a style="text-decoration: #0b6427; color: #0b6427;" href="<?= base_url(urlify($order->name, $order->pid)); ?>"><?= word_limiter(ucwords($order->name), 7, '...'); ?></a></span>
 											</td>
 											<td><?= $order->order_code; ?></td>
 											<td><?= $order->product_desc; ?></td>

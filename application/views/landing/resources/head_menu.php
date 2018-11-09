@@ -6,10 +6,8 @@
                 <li class="dropdown"><a href="<?= base_url(); ?>"><span >Welcome!</span>All Categories<i class="drop-caret" data-toggle="dropdown"></i></a>
                     <ul class="dropdown-menu dropdown-menu-category">
                         <?php
-                            
-                                $categories = $this->db->query("SELECT * FROM root_category")->result();
-                            
-                            foreach($categories as $category ): ?>
+                        $categories = $this->db->query("SELECT * FROM root_category")->result();
+                        foreach($categories as $category ): ?>
                         <li><a href="<?=  base_url('catalog/' . urlify($category->name)) ; ?>" title="<?= $category->name;?>"><i class="fa fa-<?=$category->icon;?> dropdown-menu-category-icon"></i><?= $category->name; ?></a>
                             <div class="dropdown-menu-category-section">
                                 <div class="dropdown-menu-category-section-inner">

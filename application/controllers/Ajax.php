@@ -53,7 +53,8 @@ class Ajax extends CI_Controller
 	{
 		if ($this->input->is_ajax_request() && $this->input->post()) {
 			$search = cleanit($this->input->post('search'));
-			$results = $this->product->search_query($search);
+			$category = $this->input->post('category');
+			$results = $this->product->search_query($search, $category);
 			$output = array();
 			header('Content-type: text/json');
 			header('Content-type: application/json');
@@ -78,6 +79,20 @@ class Ajax extends CI_Controller
 		}
 	}
 
+ 	// Single product favourite
+	function fav(){
+		// function favourite( $uid, $pid, $action, $table_name = 'favourite', $fid='' ){
+		if (!$this->session->userdata('logged_in') || !$this->input->is_ajax_request() || !$this->input->post()) redirect(base_url());
+
+		if ($this->user->favourite(base64_decode($this->session->userdata('logged_id')), base64_decode($this->input->post('pid')),
+			$this->input->post('action'))) {
+			echo true;
+			exit;
+		} else {
+			echo false;
+			exit;
+		}
+	}
 
 	// Remove product from whichlist
 	function remove_whichlist()
