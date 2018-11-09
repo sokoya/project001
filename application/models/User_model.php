@@ -114,6 +114,10 @@ Class User_model extends CI_Model{
                 $result = $e->getMessage();
             }
             return $result;
+        }elseif( $action == 'unsave'){
+            $this->db->where('product_id', $pid);
+            $this->db->where('uid', $uid);
+            return $this->db->delete($table_name);
         }else{
             $this->db->where('id', $fid);
             return $this->db->delete($table_name);
@@ -187,7 +191,11 @@ Class User_model extends CI_Model{
 	// update billing address
 	function get_default_address_price($id){
 		$select = "SELECT a.price price FROM billing_address b INNER JOIN area a ON(a.id = b.aid) WHERE b.primary_address = 1 AND b.uid = $id";
-    	return $this->db->query( $select )->row()->price;
+        if( $this->db->query($select )->num_rows()){
+            return $this->db->query( $select )->row()->price;
+        }else{
+            return '';
+        }
 	}
 
 

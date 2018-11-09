@@ -433,20 +433,22 @@ Class Product_model extends CI_Model{
     }
 
     // Seacrh autocomplete query
-    function search_query($search = ''){
+    function search_query($search = '', $category =''){
         // $select = "SELECT product_name FROM products WHERE product_name LIKE '%{$search}%'";
         $select  = "SELECT p.id, p.product_name, g.image_name, v.sale_price, v.discount_price FROM products p 
         LEFT JOIN product_gallery g ON (g.product_id = p.id AND g.featured_image = 1)
         INNER JOIN (SELECT va.sale_price, va.discount_price,va.product_id vid FROM product_variation va  WHERE va.quantity > 0) v ON (v.vid = p.id)
-                    WHERE p.product_name LIKE '%{$search}%' AND p.product_status = 'approved' GROUP BY p.id ORDER BY p.id LIMIT 5";
+                    WHERE p.product_name LIKE '%{$search}%' AND p.product_status = 'approved'";
+        if( $category != '' ) $select .= "AND p.rootcategory = '$category' ";
+        $select .= "GROUP BY p.id ORDER BY p.id LIMIT 5";
         return $this->db->query($select)->result();
     }
 
     //  Quick view query
     function get_quick_view_details( $id ){
-        $select = "SELECT product_description, product_line, in_the_box, colour_family,highlights, product_warranty FROM products WHERE id = $id";
+        $select = "SELECT product_description, product_line, in_the_box, highlights, product_warranty FROM products WHERE id = $id";
         return $this->db->query( $select)->result_array();
-
+        
         // SELECT p.product_description, p.product_line, p.in_the_box, p.product_warranty, 
         // CONCAT('[',GROUP_CONCAT(CONCAT('{',variation_name:v.variation,',',quantity:v.quantity,',',start_date:v.start_date,',',end_date:v.end_date,',',discount_price:v.discount_price,',',sale_price:v.sale_price,'}')),']') as variations
         // FROM products p

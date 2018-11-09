@@ -178,6 +178,25 @@
 									<?php else: ?>
 										<span class="price-cs dn-price"><?= ngn($var->sale_price); ?></span>
 									<?php endif; ?>
+									<!-- <?php		 
+									$category_fav = 'category-favorite';
+									if($this->session->userdata('logged_in') ) :
+										if( $favourited) :	
+									?>
+										<span class="pull-right"><a href="javascript:void(0)" data-action="unsave" data-pid="<?= base64_encode($product->id) ?>"><i class="fa fa-heart" title="Remove <?= $product->product_name; ?> from your whishlist"></i></a>
+										</span>
+									<?php
+										else:
+									?>
+										<span class="pull-right"><a href="" data-action="save" data-pid="<?= base64_encode($product->id) ?>"><i class="fa fa-heart-o" title="Add <?= $product->product_name; ?> to your whishlist"></i></a></span>
+									<?php
+										endif;
+									else:
+									?>
+									<span class="pull-right">
+										<a href="<?= base_url('login'); ?>"><i class="fa fa-heart-o" title="Add <?= $product->product_name; ?> to your whishlist"></i></a></span>
+									<?php endif; ?> -->
+
 								</p>
 
 
@@ -256,7 +275,6 @@
 												</li>
 											</ul>
 										</div>
-
 
 									</div>
 									<button type="submit" style="display: none;">Submit</button>
@@ -697,7 +715,6 @@
 		let user = <?= !is_null($profile) ? $profile->id : "''"; ?></script>
 	<?php $this->load->view('landing/resources/footer'); ?>
 </div>
-<script type="text/javascript">let base_url = "<?= base_url(); ?>"</script>
 <?php $this->load->view('landing/resources/script'); ?>
 <script src="<?= base_url('assets/landing/js/rating.js'); ?>"></script>
 
@@ -753,7 +770,7 @@
 		pid = _this.data('pid');
 		action = _this.data('action');
 		$.ajax({
-			url: base_url + "product/fav",
+			url: base_url + "ajax/fav",
 			method: "POST",
 			data: {pid: pid, action: action, 'csrf_carrito': csrf_token},
 			success: function (data) {

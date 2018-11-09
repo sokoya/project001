@@ -17,7 +17,11 @@ $('body').on('click', function () {
 	$('.src-cover').hide();
 });
 
+$('#all-category').on('change', function(){
+	$('.site-search').val('');
+});
 $('.site-search').on('input', function () {
+    let category = $('#all-category').find(":selected").val();
 	if ($.trim(this.value).length === 0) {
 		$('.src-cover').hide();
 	} else {
@@ -25,7 +29,7 @@ $('.site-search').on('input', function () {
 		let query = $(this).val();
 		$.ajax({
 			url: base_url + 'ajax/search_complete',
-			data: {search: query},
+			data: {search: query, category:category},
 			method: 'POST',
 			success: function (response) {
 				if (response === '') {

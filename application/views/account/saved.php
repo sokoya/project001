@@ -28,9 +28,9 @@
 				order, please go to the Orders page
 			</div>
 			<div id="status"></div>
-			<?php if(!empty($saved)) :?>
 			<div class="table-responsive">
 				<div id="favourite-div">
+					<?php if( count($saved)) :?>
 					<table class="table table-bordered table-hover market-saved-table">
 						<thead>
 						<tr id="market-table-head">
@@ -41,42 +41,44 @@
 						</tr>
 						</thead>
 						<tbody>
-							<?php foreach($saved as $item ): ?>
-						<tr>
-							<td style="padding: 20px;">
-								<div class="row">
-									<div class="col-md-1 col-xs-1">									
-										<a href="javascript:void(0)" class="delete" data-id="<?= $item->fav_id; ?>" data-name="<?= $item->product_name; ?>" title="Remove <?= $item->product_name;?> from your whislist"><i class="fa fa-trash market-trash"></i></a>
-									</div>
-									<div class="col-md-9 col-xs-9">
-										<img src="<?= base_url('data/products/'.$item->id.'/'.$item->image_name); ?>"
-											 class="market-left-l"
-											 title="<?= $item->product_name; ?>"
-											 style="width: 80px; height: 100%; padding-right: 4px;">
-											 <span><a id="product-name" href="<?= base_url().urlify($item->product_name, $item->id); ?>"><?= $item->product_name; ?></a></span>
-									</div>
-								</div>
-							</td>
-							<td class="market-table-center"><?= ($item->quantity > 0 && $item->product_status =='approved') ? 'In Stock' : 'Out of stock/Inactive';  ?></td>
-							<td class="market-table-center"><span style="white-space: nowrap"><?= (!empty($item->discount_price)) ? ngn($item->discount_price) : ngn($item->sale_price); ?></span>
-								<br/>
-								<?php if(!empty($item->discount_price)): ?>
-									<span style="text-decoration: line-through; white-space: nowrap">&#8358; <?= $item->sale_price; ?></span>
-								<?php endif; ?>
-							</td>
-							<td class="market-table-center">
-								<span style="white-space: nowrap"><?= neatDate($item->date_saved); ?></span>
-							</td>
-						</tr>
-						<?php endforeach; ?>
+							<?php 
+							
+								foreach($saved as $item ): ?>
+								<tr>
+									<td style="padding: 20px;">
+										<div class="row">
+											<div class="col-md-1 col-xs-1">									
+												<a href="javascript:void(0)" class="delete" data-id="<?= $item->fav_id; ?>" data-name="<?= $item->product_name; ?>" title="Remove <?= $item->product_name;?> from your whislist"><i class="fa fa-trash market-trash"></i></a>
+											</div>
+											<div class="col-md-9 col-xs-9">
+												<img src="<?= base_url('data/products/'.$item->id.'/'.$item->image_name); ?>"
+													 class="market-left-l"
+													 title="<?= $item->product_name; ?>"
+													 style="width: 80px; height: 100%; padding-right: 4px;">
+													 <span><a id="product-name" href="<?= base_url().urlify($item->product_name, $item->id); ?>"><?= $item->product_name; ?></a></span>
+											</div>
+										</div>
+									</td>
+									<td class="market-table-center"><?= ($item->quantity > 0 && $item->product_status =='approved') ? 'In Stock' : 'Out of stock/Inactive';  ?></td>
+									<td class="market-table-center"><span style="white-space: nowrap"><?= (!empty($item->discount_price)) ? ngn($item->discount_price) : ngn($item->sale_price); ?></span>
+										<br/>
+										<?php if(!empty($item->discount_price)): ?>
+											<span style="text-decoration: line-through; white-space: nowrap">&#8358; <?= $item->sale_price; ?></span>
+										<?php endif; ?>
+									</td>
+									<td class="market-table-center">
+										<span style="white-space: nowrap"><?= neatDate($item->date_saved); ?></span>
+									</td>
+								</tr>
+							<?php endforeach;?>
 
 						</tbody>
 					</table>
+					<?php else :?>
+						<p class="market-dashboard-welcome-text">Hello <?= ucwords($profile->first_name) . ' ' . ucwords($profile->last_name); ?>. You have no product on your whishlist <a style="text-decoration: none; color: green;" href="<?= base_url(); ?>">Browse for products</a></p>
+					<?php endif; ?>
 				</div>
 			</div>
-			<?php else : ?>
-
-			<?php endif; ?>
 		</div>
 	</div>
 	<div id="confirmation" class="modal fade" role="dialog">
@@ -119,6 +121,7 @@
 		$('#confirmation').modal('show');
 		$('#product_name').html(name);
 		$('#remove').on('click', function(){
+			$('#confirmation').modal('hide');
 			$.ajax({
 				url: base_url + "ajax/remove_whichlist",
 				method: "POST",

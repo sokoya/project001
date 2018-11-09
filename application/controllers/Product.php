@@ -32,22 +32,6 @@ class Product extends CI_Controller {
 	}
 
 
-	//
-	public function fav()
-	{
-		if (!$this->session->userdata('logged_in')) redirect(base_url());
-		$this->load->model('user_model');
-		if ($this->user_model->favourite(base64_decode($this->session->userdata('logged_id')), base64_decode($this->input->post('pid')),
-			$this->input->post('action'))) {
-			echo true;
-			exit;
-		} else {
-			echo false;
-			exit;
-		}
-	}
-
-
 	// List Product Page
 	public function catalog(){
 		$str = $this->uri->segment(2);
@@ -98,9 +82,14 @@ class Product extends CI_Controller {
 		$page_data['brands'] = $this->product->get_brands($str);
 		$page_data['colours'] = $this->product->get_colours($str);
 		$page_data['sub_categories'] = $this->product->get_sub_categories($str);
-		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
+		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
 		$page_data['description'] = $this->product->category_description($str);
-		$this->load->view('landing/category', $page_data);
+		$this->load->library('user_agent');
+		if( !$this->agent->is_mobile()){
+			$this->load->view('landing/category', $page_data);			
+		}else{
+			$this->load->view('landing/mobile-category', $page_data);
+		}
 	}
 
 
