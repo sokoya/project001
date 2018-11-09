@@ -12,9 +12,12 @@
 			<li>
 				<h4 <?php if($page == 'information') echo 'class="market-sidebar-active"' ?> ><a href="<?= base_url('account/information'); ?>">Information</a></h4>
 			</li>
-			<li>
-				<h4 <?php if($page == 'orders') echo 'class="market-sidebar-active"' ?> ><a href="<?= base_url('account/orders'); ?>">My Orders</a></h4>
-			</li>
+            <li>
+                <h4 <?php if($page == 'orders') echo 'class="market-sidebar-active"' ?> ><a href="<?= base_url('account/orders'); ?>">My Orders</a></h4>
+            </li>
+            <li>
+                <h4 <?php if($page == 'order_track') echo 'class="market-sidebar-active"' ?> ><a href="<?= base_url('account/order_track'); ?>">Order Tracking</a></h4>
+            </li>
 			<!-- <li>
 				<h4 <?php if($page == 'reviews') echo 'class="market-sidebar-active"' ?> ><a href="<?= base_url('account/reviews'); ?>">My Reviews & Ratings</a></h4>
 			</li> -->

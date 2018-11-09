@@ -230,4 +230,12 @@ class Account extends CI_Controller {
         exit;
 	}
 
+    public function order_track(){
+        $page_data['page'] = 'order_track';
+        $page_data['title'] = "Order Tracking";
+        $page_data['orders'] = $this->user->get_my_orders( base64_decode($this->session->userdata('logged_id')) );
+        $page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')) );
+        $this->load->view('account/order_track', $page_data);
+    }
+
 }
