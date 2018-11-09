@@ -208,7 +208,6 @@
 <?php $this->load->view('landing/resources/footer'); ?>
 <?php $this->load->view('landing/resources/script'); ?>
 <script>
-	let base_url = "<?= base_url();?>"
 
 	function toTitleCase(str) {
 		return str.replace(/(?:^|\s)\w/g, function (match) {
