@@ -95,7 +95,7 @@
                             </li>
                             <?php else : ?>
                              <li>
-                                <a href="<?= base_url('seller/'); ?>"><span class="fa fa-user-o grey"></span>&nbsp;Become A Seller</a>
+                                <a href="<?= base_url('seller/'); ?>"><span class="fa fa-user-plus grey"></span>&nbsp;Become A Seller</a>
                             </li>
                             <?php endif; ?>
                             <li>
