@@ -89,25 +89,25 @@
                                         <ul class="row wz-step wz-icon-bw wz-nav-off mar-top">
                                             <li class="col-xs-3">
                                                 <a data-toggle="tab" href="#tab1">
-                                                    <span class="text-danger text-2x"><i class="fas fa-bookmark"></i></span>
+                                                    <span class="text-danger text-2x"><i class="fa fa-bookmark"></i></span>
                                                     <p class="text-semibold mar-no">Basic Information</p>
                                                 </a>
                                             </li>
                                             <li class="col-xs-3">
                                                 <a data-toggle="tab" href="#tab2">
-                                                    <span class="text-warning text-2x"><i class="fab fa-product-hunt"></i></span>
+                                                    <span class="text-warning text-2x"><i class="fa fa-product-hunt"></i></span>
                                                     <p class="text-semibold mar-no">Product Specification & Attributes</p>
                                                 </a>
                                             </li>
                                             <li class="col-xs-3">
                                                 <a data-toggle="tab" href="#tab3">
-                                                    <span class="text-info text-2x"><i class="fas fa-money-check"></i></span>
+                                                    <span class="text-info text-2x"><i class="fa fa-money"></i></span>
                                                     <p class="text-semibold mar-no">Product Pricing</p>
                                                 </a>
                                             </li>
                                             <li class="col-xs-3">
                                                 <a data-toggle="tab" href="#tab4">
-                                                    <span class="text-success text-2x"><i class="fas fa-images"></i></span>
+                                                    <span class="text-success text-2x"><i class="fa fa-image"></i></span>
                                                     <p class="text-semibold mar-no">Image</p>
                                                 </a>
                                             </li>

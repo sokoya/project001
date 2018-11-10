@@ -29,5 +29,13 @@
         #demo-nifty-settings{
             display: none;
         }
+        .panel-title{
+            background:#49a251 !important;
+            color:#fff;
+        }
+        .panel-title:hover{
+            background: #5de07b !important;
+            color:#fff;
+        }
     </style>
 
