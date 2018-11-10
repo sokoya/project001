@@ -4,10 +4,7 @@
         <!--================================-->
         <div class="navbar-header">
             <a href="<?= base_url(); ?>" class="navbar-brand">
-                <img src="<?= base_url('assets/landing/img/onitshamarket-logo.png'); ?>" alt="<?= lang('app_name');?>" class="brand-icon">
-                <div class="brand-title">
-                    <span class="brand-text"><?= lang('app_name'); ?></span>
-                </div>
+                <img src="<?= base_url('assets/landing/img/onitshamarket-logo.png'); ?>" alt="<?= lang('app_name');?>" class="brand-title">
             </a>
         </div>
         <!--================================-->
