@@ -23,4 +23,7 @@
         .grey{
             color:grey;
         }
+        .banner-category {
+            box-shadow: none !important;
+        }
     </style>
