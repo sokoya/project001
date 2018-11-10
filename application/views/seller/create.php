@@ -140,9 +140,9 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="col-lg-3 control-label">Brand Name
+                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Brand Name
                                                                         *</label>
-                                                                    <div class="col-lg-7">
+                                                                    <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                         <select class="form-control selectpicker"
                                                                                 name="brand_name" required=""
                                                                                 data-width="100%">
@@ -155,19 +155,25 @@
                                                                         </select>
                                                                         <span class="text-sm text-dark">Brand of the product. If brand does not exist, please copy https://goo.gl/Hw8vma into your browser and fill accordingly.</span>
                                                                     </div>
+                                                                    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="col-lg-3 control-label">Model</label>
-                                                                    <div class="col-lg-7">
+                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Model</label>
+                                                                    <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                         <input type="text" class="form-control" required
                                                                                name="model"
                                                                                placeholder="Eg:  iPhone 4S Samsung TV 4T">
                                                                     </div>
+                                                                    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="col-lg-3 control-label">Main
+                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Main
                                                                         Colour</label>
-                                                                    <div class="col-lg-7">
+                                                                    <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                         <select name="main_colour" required
                                                                                 class="selectpicker"
                                                                                 title="Choose main colour"
@@ -183,6 +189,9 @@
                                                                                 </option>
                                                                             <?php endforeach; ?>
                                                                         </select>
+                                                                    </div>
+                                                                    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -208,20 +217,23 @@
                                                         <div class="panel-collapse collapse in" id="prod-spec">
                                                             <div class="panel-body">
                                                                 <div class="form-group">
-                                                                    <label class="col-lg-3 control-label">Product
+                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Product
                                                                         Line</label>
-                                                                    <div class="col-lg-7">
+                                                                    <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                         <input type="text"
                                                                                placeholder="Enter In Here Your Store Name"
                                                                                name="product_line" class="form-control"
                                                                                required>
                                                                         <span class="text-sm text-dark">Eg: Fouani Nigeria, Trendy Woman Ltd, SEOLAK</span>
                                                                     </div>
+                                                                    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="col-lg-3 control-label">Colour
+                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Colour
                                                                         Family</label>
-                                                                    <div class="col-lg-7">
+                                                                    <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                         <select name="colour_family[]" required
                                                                                 class="selectpicker" multiple
                                                                                 title="Select colour family..."
@@ -237,11 +249,14 @@
                                                                         </select>
                                                                         <span class="text-sm text-dark">Add a generalisation of the main color, to help customers find the product using the provided color-filter in the shop</span>
                                                                     </div>
+                                                                    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="col-lg-3 control-label">Main
+                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Main
                                                                         Material</label>
-                                                                    <div class="col-lg-7">
+                                                                    <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                         <select name="main_material"
                                                                                 class="selectpicker"
                                                                                 title="Choose type..."
@@ -254,6 +269,9 @@
                                                                             <?php endforeach; ?>
                                                                         </select>
                                                                         <span class="text-sm text-dark">Eg: Leather</span>
+                                                                    </div>
+                                                                    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
                                                                     </div>
                                                                 </div>
 
@@ -275,45 +293,57 @@
                                                         <div class="panel-collapse" id="prod-desc">
                                                             <div class="panel-body">
                                                                 <div class="form-group">
-                                                                    <label class="col-lg-3 control-label">Product
+                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Product
                                                                         Description </label>
-                                                                    <div class="col-lg-7">
+                                                                    <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                         <textarea placeholder="Product description"
                                                                                   data-provide="markdown" rows="8"
                                                                                   name="product_description"
                                                                                   class="form-control"></textarea>
                                                                     </div>
+                                                                    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="col-lg-3 control-label">YouTube
+                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">YouTube
                                                                         ID</label>
-                                                                    <div class="col-lg-7">
+                                                                    <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                         <input type="email" class="form-control"
                                                                                name="youtube_id"
                                                                                placeholder="YouTube ID">
                                                                         <span class="text-sm text-dark">Example: e.g. http://www.youtube.com/watch?v=htlgaXRAe2k it is: htlgaXRAe2k</span>
                                                                     </div>
+                                                                    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="col-lg-3 control-label">What's in the
+                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">What's in the
                                                                         box?</label>
-                                                                    <div class="col-lg-7">
+                                                                    <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                         <textarea
                                                                                 placeholder="Any information in the box"
                                                                                 data-provide="markdown"
                                                                                 name="in_the_box" rows="8"
                                                                                 class="form-control"></textarea>
                                                                     </div>
+                                                                    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="col-lg-3 control-label">Highlights</label>
-                                                                    <div class="col-lg-7">
+                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Highlights</label>
+                                                                    <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                         <textarea placeholder="Additional info"
                                                                                   name="highlights"
                                                                                   data-provide="markdown" rows="8"
                                                                                   class="form-control"></textarea>
                                                                         <span class="text-sm text-dark">Enter short major highlights of the product, to make the purchase decision for the customer easier.</span>
                                                                         <span class="text-sm text-dark">Example: Best expierience ever - super fast and easy navigation - better control</span>
+                                                                    </div>
+                                                                    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -332,21 +362,27 @@
                                                         <div class="panel-collapse " id="measurement">
                                                             <div class="panel-body">
                                                                 <div class="form-group">
-                                                                    <label class="col-lg-3 control-label">Dimension</label>
-                                                                    <div class="col-lg-7">
+                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Dimension</label>
+                                                                    <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                         <input type="text"
                                                                                placeholder="Example: 12 x 3 x 90"
                                                                                name="dimensions" class="form-control">
                                                                         <span class="text-sm text-dark">Measurement of the product</span>
                                                                     </div>
+                                                                    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="col-lg-3 control-label">Weight * (in
+                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Weight * (in
                                                                         Kg)</label>
-                                                                    <div class="col-lg-7">
+                                                                    <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                         <input type="text" required
                                                                                placeholder="Weight of the product. eg 10"
                                                                                name="weight" class="form-control">
+                                                                    </div>
+                                                                    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -369,8 +405,8 @@
                                                                     <?php $x = 1;
                                                                     foreach ($specifications as $specification) : ?>
                                                                         <div class="form-group">
-                                                                            <label class="col-lg-3 control-label"><?= ucwords($specification['spec_name']); ?></label>
-                                                                            <div class="col-lg-7">
+                                                                            <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label"><?= ucwords($specification['spec_name']); ?></label>
+                                                                            <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                                 <?php if (!empty($specification['options'])) :
                                                                                     $options = json_decode($specification['options']);
                                                                                     ?>
@@ -395,6 +431,9 @@
                                                                                 <?php endif; ?>
                                                                                 <span class="text-sm text-dark"><?= $specification['description']; ?></span>
                                                                             </div>
+                                                                            <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+                                                                                <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                            </div>
                                                                         </div>
                                                                         <?php $x++; endforeach; ?>
                                                                 </div>
@@ -416,8 +455,8 @@
                                                         <div class="panel-collapse " id="additional_product_attribute">
                                                             <div class="panel-body">
                                                                 <div class="form-group">
-                                                                    <label class="col-lg-3 control-label">Cerification</label>
-                                                                    <div class="col-lg-7">
+                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Cerification</label>
+                                                                    <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                         <select name="certifications[]"
                                                                                 class="selectpicker" multiple
                                                                                 title="Example: Organic, Suitable for Allergics Fair Trade..."
@@ -457,11 +496,14 @@
                                                                         </select>
                                                                         <span class="text-sm text-dark">Select different certifications, that the product owns, or with which certifications the product was marked</span>
                                                                     </div>
+                                                                    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="col-lg-3 control-label">Product
+                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Product
                                                                         Warranty</label>
-                                                                    <div class="col-lg-7">
+                                                                    <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                         <textarea
                                                                                 placeholder="Detailed product waranty for this product"
                                                                                 name="product_warranty"
@@ -469,11 +511,14 @@
                                                                                 class="form-control"></textarea>
                                                                         <span class="text-sm text-dark">Example: Provide the warranty validity period eg. 1 Year Warranty, N/A</span>
                                                                     </div>
+                                                                    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="col-lg-3 control-label">Waranty
+                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Waranty
                                                                         Type</label>
-                                                                    <div class="col-lg-7">
+                                                                    <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                         <select name="warranty_type[]"
                                                                                 class="selectpicker" multiple
                                                                                 title="Choose warranty type..."
@@ -489,16 +534,22 @@
                                                                             </option>
                                                                         </select>
                                                                     </div>
+                                                                    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="col-lg-3 control-label">Warranty
+                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Warranty
                                                                         address</label>
-                                                                    <div class="col-lg-7">
+                                                                    <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                         <textarea name="warranty_address"
                                                                                   data-provide="markdown" rows="8"
                                                                                   placeholder="Enter the Service Centre Address. If you have multi-options selected in the Warranty Type use the sample format for addresses."
                                                                                   class="form-control"></textarea>
                                                                         <span class="text-sm text-dark">Example: Service Center Address: 20b Caro Road, Ikeja. Lagos | Repair by Vendor Address: 5 Paris Street, Yaba. Lagos.</span>
+                                                                    </div>
+                                                                    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
                                                                     </div>
                                                                 </div>
 
