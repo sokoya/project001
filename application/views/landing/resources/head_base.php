@@ -25,5 +25,6 @@
         }
         .banner-category {
             box-shadow: none !important;
+            background: transparent !important;
         }
     </style>
