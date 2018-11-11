@@ -51,7 +51,7 @@
 
 }
 
-.con-tooltip:active .tooltip{
+.con-tooltip:hover .tooltip{
     visibility: visible;
     transform: translateY(-10px);
     opacity: 1;
@@ -71,10 +71,10 @@
 }
 
 /*hover ToolTip*/
-.left:active {transform: translateX(-6px); }
+.left:hover {transform: translateX(-6px); }
 .top:hover {transform: translateY(-6px);  }
 .bottom:hover {transform: translateY(6px);}
-.right:active {transform: translateX(6px); }
+.right:hover {transform: translateX(6px); }
 
 
 

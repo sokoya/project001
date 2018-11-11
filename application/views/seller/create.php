@@ -21,6 +21,9 @@
     div.tooltip > p{
         padding-top:10px;
     }
+    .fav_drop_ico{
+        margin:15px;
+    }
 </style>
 </head>
 <body>
@@ -121,6 +124,7 @@
                                                                 <a data-parent="#accordion" data-toggle="collapse"
                                                                    href="#general-info">
                                                                     General information
+                                                                    <span class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span>
                                                                 </a>
                                                             </h4>
                                                         </div>
@@ -237,7 +241,7 @@
                                                         <div class="panel-heading">
                                                             <h4 class="panel-title text-dark">
                                                                 <a data-parent="#accordion" data-toggle="collapse"
-                                                                   href="#prod-spec">Product Specification</a>
+                                                                   href="#prod-spec">Product Specification<span class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span></a>
                                                             </h4>
                                                         </div>
                                                         <!--Accordion content-->
@@ -330,7 +334,7 @@
                                                             <h4 class="panel-title">
                                                                 <a data-parent="#accordion" data-toggle="collapse"
                                                                    href="#prod-desc">
-                                                                    Product Description
+                                                                    Product Description<span class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span>
                                                                 </a>
                                                             </h4>
                                                         </div>
@@ -424,7 +428,7 @@
                                                         <div class="panel-heading">
                                                             <h4 class="panel-title text-dark">
                                                                 <a data-parent="#accordion" data-toggle="collapse"
-                                                                   href="#measurement">Measurement</a>
+                                                                   href="#measurement">Measurement<span class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span></a>
                                                             </h4>
                                                         </div>
                                                         <!--Accordion content-->
@@ -477,7 +481,7 @@
                                                             <div class="panel-heading">
                                                                 <h4 class="panel-title text-dark">
                                                                     <a data-parent="#accordion" data-toggle="collapse"
-                                                                       href="#attribute">Product Attribute</a>
+                                                                       href="#attribute">Product Attribute<span class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span></a>
                                                                 </h4>
                                                             </div>
                                                             <!--Accordion content-->
@@ -535,7 +539,7 @@
                                                             <h4 class="panel-title text-dark">
                                                                 <a data-parent="#accordion" data-toggle="collapse"
                                                                    href="#additional_product_attribute">Additional
-                                                                    Product Attribute</a>
+                                                                    Product Attribute<span class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span></a>
                                                             </h4>
                                                         </div>
                                                         <!--Accordion content-->
@@ -771,7 +775,7 @@
 
                                                 <div class="panel">
                                                     <div class="panel-heading">
-                                                        <h3 class="panel-title">Upload Images</h3>
+                                                        <h3 class="panel-title">Upload Images<span class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span></h3>
                                                     </div>
                                                     <div class="panel-body">
                                                         <!--Dropzonejs using Bootstrap theme-->
