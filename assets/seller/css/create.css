@@ -3,17 +3,9 @@
 /*tooltip Box*/
 .con-tooltip {
 
-    position: relative;
-    background: #F2D1C9;
-
-    border-radius: 9px;
-    padding: 0 20px;
-    margin: 10px;
-
-    display: inline-block;
 
     transition: all 0.3s ease-in-out;
-    cursor: default;
+    cursor: help;
 
 }
 
@@ -23,7 +15,7 @@
     z-index: 1;
     opacity: .40;
 
-    width: 100%;
+    width: 350px;
     padding: 0px 20px;
 
     background: #333;
@@ -32,7 +24,7 @@
     position: absolute;
     top:-140%;
     left: -25%;
-
+    z-index:999;
 
     border-radius: 9px;
     font: 16px;
@@ -88,11 +80,11 @@
 
 /*left*/
 
-.left .tooltip{ top:-20%; left:-170%; }
+.left .tooltip{ top:-10px; left:-360px; }
 
 .left .tooltip::after{
     top:40%;
-    left:90%;
+    left:335px;
     transform: rotate(-90deg);
 }
 
@@ -113,11 +105,12 @@
 
 /*right*/
 
-.right .tooltip { top:-20%; left:115%; }
+.right .tooltip { top:-100%; left:115%; }
 
 .right .tooltip::after{
     top:40%;
-    left:-12%;
+    left:-10px;
     transform: rotate(90deg);
+
 }
 

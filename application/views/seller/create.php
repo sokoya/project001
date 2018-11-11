@@ -5,12 +5,13 @@
          background-color: #0067c5;
          border-radius: 100%;
          font-size: 18px;
-         margin-left: -10px;
          margin-top: 8px;
+        cursor: help;
      }
     .help_text:hover {
         color: #ffffff;
         background-color: #49a251;
+        cursor: help;
     }
 
     @media (min-width: 768px) {
@@ -136,11 +137,11 @@
                                                                         <span class="text-sm text-dark">Wide Angle Camera 10 MP - Black, Galaxy Tab A Leather Flip Case - Red</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <div class="con-tooltip right">
+                                                                        <div class="con-tooltip left">
                                                                             <p>
                                                                                 <span class="demo-pli-question help_text" title="Help Text"></span> </p>
-                                                                            <div class="tooltip ">
-                                                                                <p>Right</p>
+                                                                            <div class="tooltip">
+                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
                                                                             </div>
                                                                         </div>
                                                                     </div>
