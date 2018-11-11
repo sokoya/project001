@@ -2,10 +2,9 @@
 <style>
     .help_text {
          color: #ffffff;
-         background-color: #0067c5;
+         background-color: #252525;
          border-radius: 100%;
-         font-size: 18px;
-         margin-top: 8px;
+         margin-top: 15px;
         cursor: help;
      }
     .help_text:hover {
@@ -18,6 +17,9 @@
         .form-horizontal .control-label {
             text-align:left !important;
         }
+    }
+    div.tooltip > p{
+        padding-top:10px;
     }
 </style>
 </head>
@@ -163,7 +165,13 @@
                                                                         <span class="text-sm text-dark">Brand of the product. If brand does not exist, please copy https://goo.gl/Hw8vma into your browser and fill accordingly.</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                        <div class="con-tooltip left">
+                                                                            <p>
+                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
+                                                                            <div class="tooltip">
+                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -174,7 +182,13 @@
                                                                                placeholder="Eg:  iPhone 4S Samsung TV 4T">
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                        <div class="con-tooltip left">
+                                                                            <p>
+                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
+                                                                            <div class="tooltip">
+                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -198,7 +212,13 @@
                                                                         </select>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                        <div class="con-tooltip left">
+                                                                            <p>
+                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
+                                                                            <div class="tooltip">
+                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -234,7 +254,13 @@
                                                                         <span class="text-sm text-dark">Eg: Fouani Nigeria, Trendy Woman Ltd, SEOLAK</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                        <div class="con-tooltip left">
+                                                                            <p>
+                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
+                                                                            <div class="tooltip">
+                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -257,7 +283,13 @@
                                                                         <span class="text-sm text-dark">Add a generalisation of the main color, to help customers find the product using the provided color-filter in the shop</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                        <div class="con-tooltip left">
+                                                                            <p>
+                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
+                                                                            <div class="tooltip">
+                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -278,7 +310,13 @@
                                                                         <span class="text-sm text-dark">Eg: Leather</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                        <div class="con-tooltip left">
+                                                                            <p>
+                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
+                                                                            <div class="tooltip">
+                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
 
@@ -309,7 +347,13 @@
                                                                                   class="form-control"></textarea>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                        <div class="con-tooltip left">
+                                                                            <p>
+                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
+                                                                            <div class="tooltip">
+                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -322,7 +366,13 @@
                                                                         <span class="text-sm text-dark">Example: e.g. http://www.youtube.com/watch?v=htlgaXRAe2k it is: htlgaXRAe2k</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                        <div class="con-tooltip left">
+                                                                            <p>
+                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
+                                                                            <div class="tooltip">
+                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -336,7 +386,13 @@
                                                                                 class="form-control"></textarea>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                        <div class="con-tooltip left">
+                                                                            <p>
+                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
+                                                                            <div class="tooltip">
+                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -350,7 +406,13 @@
                                                                         <span class="text-sm text-dark">Example: Best expierience ever - super fast and easy navigation - better control</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                        <div class="con-tooltip left">
+                                                                            <p>
+                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
+                                                                            <div class="tooltip">
+                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -377,7 +439,13 @@
                                                                         <span class="text-sm text-dark">Measurement of the product</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                        <div class="con-tooltip left">
+                                                                            <p>
+                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
+                                                                            <div class="tooltip">
+                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -389,7 +457,13 @@
                                                                                name="weight" class="form-control">
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                        <div class="con-tooltip left">
+                                                                            <p>
+                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
+                                                                            <div class="tooltip">
+                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -439,7 +513,13 @@
                                                                                 <span class="text-sm text-dark"><?= $specification['description']; ?></span>
                                                                             </div>
                                                                             <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                                <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                                <div class="con-tooltip left">
+                                                                                    <p>
+                                                                                        <span class="demo-pli-question help_text" title="Help Text"></span> </p>
+                                                                                    <div class="tooltip">
+                                                                                        <p><?= $specification['description']; ?></p>
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                         <?php $x++; endforeach; ?>
@@ -504,7 +584,13 @@
                                                                         <span class="text-sm text-dark">Select different certifications, that the product owns, or with which certifications the product was marked</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                        <div class="con-tooltip left">
+                                                                            <p>
+                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
+                                                                            <div class="tooltip">
+                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -519,7 +605,13 @@
                                                                         <span class="text-sm text-dark">Example: Provide the warranty validity period eg. 1 Year Warranty, N/A</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                        <div class="con-tooltip left">
+                                                                            <p>
+                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
+                                                                            <div class="tooltip">
+                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -542,7 +634,13 @@
                                                                         </select>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                        <div class="con-tooltip left">
+                                                                            <p>
+                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
+                                                                            <div class="tooltip">
+                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -556,7 +654,13 @@
                                                                         <span class="text-sm text-dark">Example: Service Center Address: 20b Caro Road, Ikeja. Lagos | Repair by Vendor Address: 5 Paris Street, Yaba. Lagos.</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                        <div class="con-tooltip left">
+                                                                            <p>
+                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
+                                                                            <div class="tooltip">
+                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
 
