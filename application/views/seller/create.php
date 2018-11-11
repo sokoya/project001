@@ -136,7 +136,13 @@
                                                                         <span class="text-sm text-dark">Wide Angle Camera 10 MP - Black, Galaxy Tab A Leather Flip Case - Red</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <span class="demo-pli-question help_text" title="Help Text"></span>
+                                                                        <div class="con-tooltip right">
+                                                                            <p>
+                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
+                                                                            <div class="tooltip ">
+                                                                                <p>Right</p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
