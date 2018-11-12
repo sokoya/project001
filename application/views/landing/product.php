@@ -48,7 +48,7 @@
 							   data-rel="gal-1">
 								<img src="<?= base_url('data/products/'. $product->id .'/' . $featured_image->image_name); ?>"
 									 alt="<?= $product->product_name; ?>"
-									 title="<?= ucwords($product->product_name) ?>" width="500" height="500" style="max-height: 430px; max-width: 430px"/>
+									 title="<?= ucwords($product->product_name) ?>" width="500" height="500" style="max-height: 430px; max-width: 460px"/>
 							</a>
 						</div>
 					</div>
