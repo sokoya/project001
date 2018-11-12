@@ -26,7 +26,7 @@
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="demo-pli-home"></i></a></li>
                     <li><a href="#">User</a></li>
-                    <li class="active"><?= cleanit($this->uri->segment(2)); ?> </li>
+                    <li class="active">Messages </li>
                 </ol>
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                 <!--End breadcrumb-->
