@@ -290,9 +290,8 @@ Class Product_model extends CI_Model{
 
 
     // Get the status of variation
-
-    function get_variation_detail( $id ){
-        return $this->db->query("SELECT * FROM quantity, sale_price, discount_price, start_date, end_date FROM product_variation WHERE id = $id")->row();
+    function get_variation_status( $id ){
+        return $this->db->query("SELECT quantity, sale_price, discount_price, start_date, end_date FROM product_variation WHERE id = $id")->row();
     }
 
 
