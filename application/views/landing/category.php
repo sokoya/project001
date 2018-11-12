@@ -85,7 +85,8 @@
 			<div class="row">
 				<div class="gap-large"></div>
 				<h2 class="text-center">Oops! Sorry, we couldn't find products on this section.</h2>
-				<p class="text-muted text-sm text-center">You can browse for more product <a style="text-decoration: none; color: #0b6427;" href="<?= base_url(); ?>">Find
+				<p class="text-muted text-sm text-center">You can browse for more product <a
+						style="text-decoration: none; color: #0b6427;" href="<?= base_url(); ?>">Find
 						product</a></p>
 			</div>
 		</div>
@@ -217,8 +218,9 @@
 					</div>
 					<div id="category_body">
 						<div class="row filter_data" data-gutter="15">
-							<?php $p_count = 0; foreach ($products as $product) : ?>
-                                <?php  $p_count++; ?>
+							<?php $p_count = 0;
+							foreach ($products as $product) : ?>
+								<?php $p_count++; ?>
 								<div
 									class="col-md-3 <?php if ($p_count % 4 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> clearfix">
 									<div class="product">
@@ -294,23 +296,22 @@
 													<span
 														class="cs-price-tl"><?= ngn($product->sale_price); ?> </span>
 												<?php endif; ?>
-												<?php 
-												 
+												<?php
+
 												$category_fav = 'category-favorite';
-												if($this->session->userdata('logged_in') ) {
-													if( $this->product->is_favourited($profile->id, $product->id)) {
+												if ($this->session->userdata('logged_in')) {
+													if ($this->product->is_favourited($profile->id, $product->id)) {
 														$category_fav = 'category-favorite-active';
 													}
-												}												
+												}
 												?>
 												<span class="pull-right <?= $category_fav; ?>"><i class="fa fa-heart"
-																							  title="Add <?= $product->product_name; ?> to your whishlist"></i> &nbsp;</span>
+																								  title="Add <?= $product->product_name; ?> to your whishlist"></i> &nbsp;</span>
 											</div>
 										</div>
 									</div>
 								</div>
-
-							<?php  endforeach; ?>
+							<?php endforeach; ?>
 						</div>
 						<div class="row">
 							<div class="col-md-6 col-md-offset-3">
@@ -331,9 +332,12 @@
 <script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/ionrangeslider.js'); ?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script async="" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.0.2/lazysizes.min.js" type="a739b84b843135395b0102d2-text/javascript"></script>
+<script async="" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.0.2/lazysizes.min.js"
+		type="a739b84b843135395b0102d2-text/javascript"></script>
 <script>
-    if( !base_url ) {let base_url = "<?= base_url(); ?>";}
+	if (!base_url) {
+		let base_url = "<?= base_url(); ?>";
+	}
 	let current_url = "<?= current_url()?>";
 </script>
 <script src="<?= base_url('assets/landing/js/quick-view.js'); ?>"></script>
@@ -357,7 +361,7 @@
 		}
 
 		function load_page(url) {
-		    $('.cat-notify').load(`${url} .cat-notify`);
+			$('.cat-notify').load(`${url} .cat-notify`);
 			$(_category_body).load(`${url} #category_body`, function (response, status, xhr) {
 				if (status === "error") {
 					let msg = "Sorry but there was an error: ";
