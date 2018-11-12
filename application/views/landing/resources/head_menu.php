@@ -56,13 +56,14 @@
                 <li class="hide_ipad">
                     <a href="#"><span>Learn more about</span> <strong>Market Shopper</strong></a>
                 </li>
-                <li>
-                    <a href="<?= base_url(lang('cart_link')); ?>" class="navbar-item-top cart-cs">
+
+                <li class="dropdown">
+                    <a class="navbar-item-top cart-cs" data-count="<?= ($this->cart->total_items() == 0) ? '' : $this->cart->total_items(); ?>" href="<?= base_url(lang('cart_link')); ?>">
                         <strong><i class="fa fa-shopping-cart"></i> Cart
-							<span class="cart-read" style="display: <?= ($this->cart->total_items() == 0) ? 'none' : '' ?>;">
+                            <span class="cart-read" style="display: <?= ($this->cart->total_items() == 0) ? 'none' : '' ?>;">
                             <?= ($this->cart->total_items() == 0) ? '' : $this->cart->total_items(); ?>
                         </span>
-						</strong>
+                        </strong>
                     </a>
                 </li>
 

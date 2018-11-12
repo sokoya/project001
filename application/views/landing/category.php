@@ -85,7 +85,7 @@
 			<div class="row">
 				<div class="gap-large"></div>
 				<h2 class="text-center">Oops! Sorry, we couldn't find products on this section.</h2>
-				<p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find
+				<p class="text-muted text-sm text-center">You can browse for more product <a style="text-decoration: none; color: #0b6427;" href="<?= base_url(); ?>">Find
 						product</a></p>
 			</div>
 		</div>
@@ -239,7 +239,7 @@
 													</button>
 												</div>
 											</div>
-											<img class="product-img lazy"
+											<img class="product-img lazyload"
 												 data-src="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
 												 src="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
 												 alt="<?= $product->product_name; ?>"
@@ -330,9 +330,9 @@
 <script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/ionrangeslider.js'); ?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+<script async="" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.0.2/lazysizes.min.js" type="a739b84b843135395b0102d2-text/javascript"></script>
 <script>
-	let base_url = "<?= base_url(); ?>";
+    if( !base_url ) {let base_url = "<?= base_url(); ?>";}
 	let current_url = "<?= current_url()?>";
 </script>
 <script src="<?= base_url('assets/landing/js/quick-view.js'); ?>"></script>
@@ -351,11 +351,12 @@
 
 		function doReplaceState(url) {
 			let state = {current_url: url},
-				title = "Carrito MarketPlace";
+				title = "Onitshamarhet";
 			history.replaceState(state, title, url);
 		}
 
 		function load_page(url) {
+		    $('.cat-notify').load(`${url} .cat-notify`);
 			$(_category_body).load(`${url} #category_body`, function (response, status, xhr) {
 				if (status === "error") {
 					let msg = "Sorry but there was an error: ";
@@ -416,20 +417,6 @@
 			}
 		});
 	});
-	 $(function() {
-        $('.lazy').Lazy({
-        	beforeLoad: function(element) {
-            // called before an elements gets handled
-            alert('Loading');
-        	},
-        	scrollDirection: 'vertical',
-	        effect: 'fadeIn',
-	        visibleOnly: true,
-	        onError: function(element) {
-	            console.log('error loading ' + element.data('src'));
-	        }
-        });
-    });
 </script>
 </body>
 </html>

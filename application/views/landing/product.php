@@ -87,6 +87,7 @@
 						</li>
 					</ul>
 				</div>
+				
 				<div class="col-md-7">
 					<div class="row" data-gutter="10">
 						<div class="col-md-12">
@@ -515,7 +516,6 @@
 										$user = $this->product->get_rating_review('product_rating', 'rating_score', $profile->id, $product->id);
 										if (!$user):
 											?>
-											<script type="text/javascript"> let score = $user->rating_score; </script>
 											<div class="col-md-6">
 												<div class='starrr' id='star1'></div>
 											</div>
@@ -820,7 +820,7 @@
 		_btn.prop('disabled', '');
 		$('#prod-confirmation').modal('show');
 		$.ajax({
-			url: base_url + "product/add_to_cart",
+			url: base_url + "ajax/add_to_cart",
 			method: "POST",
 			data: $('#variation-form').serialize(),
 			success: function (response) {
@@ -871,7 +871,7 @@
 
 	$('.review-get').on('click', function () {
 		$.ajax({
-			url: base_url + "product/get_reviews",
+			url: base_url + "ajax/get_reviews",
 			method: "POST",
 			data: {pid: product_id},
 			success: function (response) {

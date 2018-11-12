@@ -31,16 +31,14 @@
 						<?php $x = 0;
 						$total = 0;
 						foreach ($this->cart->contents() as $product): ?>
-							<?php
-							$detail = $this->product->get_cart_details($product['id']);
-							?>
+							<?php $detail = $this->product->get_cart_details($product['id']); ?>
 							<tr>
 								<td class="table-shopping-cart-img">
 									<?php echo form_hidden($x . '[rowid]', $product['rowid']); ?>
 									<a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
 										<img
 											src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image); ?> ?>"
-											alt="Carrito -marketplace <?= $product['name']; ?>"
+											alt="Onitsha Market place <?= $product['name']; ?>"
 											title="<?= $product['name']; ?>"/>
 									</a>
 								</td>
@@ -111,7 +109,7 @@
 
 </div>
 <script>
-	let base_url = "<?= base_url(); ?>";
+    if( !base_url ) {let base_url = "<?= base_url(); ?>";}
 </script>
 <?php $this->load->view('landing/resources/script'); ?>
 <script>

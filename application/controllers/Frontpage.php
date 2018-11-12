@@ -10,6 +10,7 @@ class Frontpage extends CI_Controller {
 	public function index(){
 		// get the categories 
 		$page_data['title'] = 'Online shopping | Buy Electronics, Phones, Fashions in Nigeria';
+		$page_data['page'] = 'homepage';
 		$this->load->view('landing/home', $page_data);
 	}
 }
