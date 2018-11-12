@@ -144,7 +144,7 @@
                 <div class="row" id="delivery_address_box">
                     <?= form_open(); ?>
                     <?php
-                    if ($addresses) :
+                    if ($addresses) :{
                         foreach ($addresses as $address) : ?>
                             <div class="col-md-6">
                                 <div class="panel panel-default custom-panel pickup-address
@@ -194,8 +194,11 @@
                                 </div>
                             </div>
                         <?php
-                        endforeach;
-                    endif; ?>
+                        endforeach;}
+                    else:{
+                        echo "<p style='color:red;padding:20px;text-align: center;'>No billing/delivery address associated with this account, click add new address to add an address to your account!</p>";
+                    }endif;
+                    ; ?>
                     <?= form_close(); ?>
                 </div>
             </div>

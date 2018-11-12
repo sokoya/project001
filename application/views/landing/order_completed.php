@@ -245,7 +245,7 @@
                             <th class="text-left">PRODUCT</th>
                             <th class="text-right">QUANTITY</th>
                             <th class="text-right">VARIATION</th>
-                            <th class="text-right">PRICE</th>
+                            <th class="text-right">&#8358; PRICE</th>
                             <th class="text-right">TOTAL</th>
                         </tr>
                         </thead>
@@ -257,8 +257,8 @@
                             </td>
                             <td class="qty">3</td>
                             <td class="var">Grey</td>
-                            <td class="unit">400.00</td>
-                            <td class="total">1,200.00</td>
+                            <td class="unit">&#8358;&nbsp;400.00</td>
+                            <td class="total">&#8358;&nbsp;1,200.00</td>
                         </tr>
                         <tr>
                             <td class="no">02</td>
@@ -267,8 +267,8 @@
                             </td>
                             <td class="qty">8</td>
                             <td class="var">n/a</td>
-                            <td class="unit">400.00</td>
-                            <td class="total">3,200.00</td>
+                            <td class="unit">&#8358;&nbsp;400.00</td>
+                            <td class="total">&#8358;&nbsp;3,200.00</td>
                         </tr>
                         <tr>
                             <td class="no">03</td>
@@ -276,25 +276,25 @@
                             </td>
                             <td class="qty">2</td>
                             <td class="var">Grey</td>
-                            <td class="unit">400.00</td>
-                            <td class="total">800.00</td>
+                            <td class="unit">&#8358;&nbsp;400.00</td>
+                            <td class="total">&#8358;&nbsp;800.00</td>
                         </tr>
                         </tbody>
                         <tfoot>
                         <tr>
                             <td colspan="3"></td>
                             <td colspan="2">SUBTOTAL</td>
-                            <td>5,200.00</td>
+                            <td>&#8358;&nbsp;5,200.00</td>
                         </tr>
                         <tr>
                             <td colspan="3"></td>
                             <td colspan="2">SHIPPING</td>
-                            <td>1,300.00</td>
+                            <td>&#8358;&nbsp;1,300.00</td>
                         </tr>
                         <tr>
                             <td colspan="3"></td>
                             <td colspan="2" style="font-weight: 800;">GRAND TOTAL</td>
-                            <td>6,500.00</td>
+                            <td>&#8358;&nbsp;6,500.00</td>
                         </tr>
                         </tfoot>
                     </table>

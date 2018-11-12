@@ -32,6 +32,15 @@
 
     <?php endif;?>
     <style>
-        .mgt_drop_menu>li{ height:36px !important; line-height:48px !important;}
+        .mgt_drop_menu>li{
+            height:36px !important;
+            line-height:48px !important;
+        }
+        .grey{
+            color:grey;
+        }
+        .banner-category {
+            box-shadow: none !important;
+            background: transparent !important;t_drop_menu>li{ height:36px !important; line-height:48px !important;}
     </style>
     <script> let base_url = "<?= base_url(); ?>"</script>

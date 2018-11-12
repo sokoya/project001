@@ -85,6 +85,22 @@
     -o-transition: all 0.25s cubic-bezier(0.4, 0, 1, 1) 0s;
     transition: all 0.25s cubic-bezier(0.4, 0, 1, 1) 0s;
 }
+.banner-category:hover img {
+    -webkit-transform: scale(1) translateY(-2px);
+    -moz-transform: scale(1) translateY(-2px);
+    -o-transform: scale(1) translateY(-2px);
+    transform: scale(1) translateY(-2px);
+    opacity: .9;
+    box-shadow: #0b0b0b;
+}
+
+.banner-category:hover h5 {
+    -webkit-transform: scale(1.1) translateY(1px);
+    -moz-transform: scale(1.1) translateY(1px);
+    -o-transform: scale(1.1) translateY(1px);
+    transform: scale(1.1) translateY(1px);
+    box-shadow: #0b0b0b;
+}
 
 .f-category:hover img {
     -webkit-transform: scale(1) translateY(-3px);
@@ -420,4 +436,7 @@ a, a:hover {
 .category-header > .title,.category-header > .subtitle {
     font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-size: 16px;
+}
+.transparent{
+    background: transparent !important;
 }

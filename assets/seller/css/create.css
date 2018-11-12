@@ -1,0 +1,11 @@
+
+.bootstrap-select>.dropdown-toggle {
+    z-index:0 !important;
+}
+
+
+
+.control-label{
+    color: #4b4b4b !important;
+}
+
