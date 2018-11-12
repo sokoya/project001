@@ -113,46 +113,51 @@ class Ajax extends CI_Controller
 		}
 	}
 
-// $date1 = new DateTime("now");
-// $date2 = new DateTime("tomorrow");
 
-// var_dump($date1 == $date2);
-// var_dump($date1 < $date2);
-// var_dump($date1 > $date2);
-
-
-	// Quick view panel
-	function quick_view()
-	{
+	function quick_view(){
 		if ($this->input->is_ajax_request() && $this->input->post()) {
 			$pid = $this->input->post('product_id');
-			$result = $this->product->get_quick_view_details($pid);
+			$results  = array();
+			$desc = $this->product->get_quick_view_details($pid);
+			$now = date_create(date("Y-m-d"));
+
+			$results['description'] = $desc->product_description;
 			$variations = $this->product->get_variations( $pid );
 
-			$now =date_create(date("Y-m-d"));
-			$results = array();
-			foreach( $variations as $variation ){
-				$res['vid'] = $variation['id'];
-				$res['discount_price'] = $variation['discount_price'];
-				$res['sale_price'] = $variation['sale_price'];
-				$res['quantity'] = $variation['quantity'];
-				$res['variation_name']	= $variation['variation'];
+			// $variation_array = array('variation');
+			$array = array();
+			if( $variations ) {
+				$x = 0;
+				foreach( $variations as $variation ){
 
+					$results['variation'][$x]['vid'] = $variation['id'];
+					$results['variation'][$x]['discount_price'] = $variation['discount_price'];
+					$results['variation'][$x]['sale_price'] = $variation['sale_price'];
+					$results['variation'][$x]['quantity'] = $variation['sale_price'];
+					$results['variation'][$x]['variation_name'] = $variation['variation'];
 
-				$end_date = date_create( $variation['end_date'] );
-				$start_date = date_create( $variation['start_date'] );
-				$end_date_diff = date_diff( $end_date, $now );
-				$start_date_diff = date_diff( $start_date, $now );
-				$intend_diff = $end_date_diff->format("%R%a");
-				$intstart_diff = $start_date_diff->format("%R%a");
+					// $res['vid'] = $variation['id'];
+					// $res['discount_price'] = $variation['discount_price'];
+					// $res['sale_price'] = $variation['sale_price'];
+					// $res['quantity'] = $variation['quantity'];
+					// $res['variation_name']	= $variation['variation'][$x];
 
-				if( $intend_diff > 0  || $intstart_diff < 0 ){
-					$res['discount_price'] = $res['sale_price'];
+					$end_date = date_create( $variation['end_date'] );
+					$start_date = date_create( $variation['start_date'] );
+					$end_date_diff = date_diff( $end_date, $now );
+					$start_date_diff = date_diff( $start_date, $now );
+					$intend_diff = $end_date_diff->format("%R%a");
+					$intstart_diff = $start_date_diff->format("%R%a");
+
+					if( $intend_diff > 0  || $intstart_diff < 0 ){
+						$results['variation'][$x]['sale_price'] = $variation['discount_price'];
+					}					
+					// array_push( $array, $variation_array);
+					$x++;
 				}
-
-				$res['description'] = $result->product_description;
-				array_push( $results, $res);
 			}
+
+			// array_push( $results, $variation_array);
 			// get_variations
 			echo json_encode($results, JSON_UNESCAPED_SLASHES);
 			exit;
@@ -190,8 +195,8 @@ class Ajax extends CI_Controller
            $colour = empty($colour) ? '' : $this->input->post('colour');
            $name = cleanit($this->input->post('product_name'));
            $name = preg_replace('/^['.$this->product_name_rules.']+$/i', " ", $name);
-           // contain a product ID, quantity, price, and name.
-//           die( $name );
+           // Added to make checks if product still remains
+           $variation_id = $this->input->post('variation_id', true);
            $data = array(
                'id' => base64_decode($this->input->post('product_id')),
                'qty' => $this->input->post('quantity'),
@@ -201,7 +206,8 @@ class Ajax extends CI_Controller
                    array(
                        'variation' => $variation,
                        'colour' => $colour,
-                       'seller' => base64_decode($this->input->post('seller'))
+                       'seller' => base64_decode($this->input->post('seller')),
+                       'variation_id' => $variation_id
                    )
            );
            if( $this->cart->insert($data)){

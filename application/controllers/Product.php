@@ -96,23 +96,12 @@ class Product extends CI_Controller {
 	}
 
 
-	public function cart(){
-		if ($this->input->post()) {
-			// update
-			$data = $this->input->post();
-			if ($this->cart->update($data)) {
-				$this->session->set_flashdata('success_msg', 'Your cart has been successfully updated.');
-				redirect('cart');
-			} else {
-				$this->session->set_flashdata('error_msg', 'There was an error updating the cart');
-				redirect('cart');
-			}
-		} else {
-			$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
-			$page_data['title'] = 'My cart';
-			$page_data['page'] = 'cart';
-			$this->load->view('landing/cart', $page_data);
-		}
+	// Cart Page
+	public function cart(){		
+		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
+		$page_data['title'] = 'My cart';
+		$page_data['page'] = 'cart';
+		$this->load->view('landing/cart', $page_data);
 	}
 
 
