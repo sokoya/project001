@@ -140,7 +140,7 @@
 		$.ajax({
 			url: 'ajax/update_cart_item',
 			method: 'POST',
-			data: {cid:cid,qty:quantity},
+			data: {cid:cid,qty:quantity.val()},
 			success: function (response) {
 				console.log(response);
 				if (quantity.val() >= count) {
@@ -169,7 +169,7 @@
 		$.ajax({
 			url: 'ajax/update_cart_item',
 			method: 'POST',
-			data: {cid:cid,qty:quantity},
+			data: {cid:cid,qty:quantity.val()},
 			success: () => {
 				if (quantity.val() <= 1) {
 					minus.prop("disabled", true);
