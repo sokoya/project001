@@ -36,7 +36,7 @@
                             <p class="slider-item-caption-desc">Fill It To The Rim With Guitar.</p><a
                                     class="btn btn-lg btn-ghost btn-white" href="#">Shop Now</a>
                         </div>
-                        <img class="slider-item-img-left" src="<?= base_url('assets/landing/img/test_slider/2.png'); ?>"
+                        <img class="slider-item-img-left" src="<?= base_url('assets/landing/img/test_slider/3.png'); ?>"
                              alt="Image Alternative text" title="Image Title"
                              style="transform:translateY(-50%) rotate(14deg); width: 55%;"/>
                     </div>

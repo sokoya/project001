@@ -42,7 +42,7 @@
                         <div class="list-group bg-trans">
                             <a href="#" class="list-group-item">
                                 <div class="media-left pos-rel">
-                                    <img class="img-circle img-xs" src="img/profile-photos/2.png" alt="Profile Picture">
+                                    <!-- <img class="img-circle img-xs" src="img/profile-photos/2.png" alt="Profile Picture"> -->
                                     <i class="badge badge-success badge-stat badge-icon pull-left"></i>
                                 </div>
                                 <div class="media-body">

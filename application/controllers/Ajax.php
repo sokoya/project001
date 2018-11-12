@@ -250,21 +250,39 @@ class Ajax extends CI_Controller
     }
 
 
+    /**
+     * @param $product_id - product id
+     * @return 
+     */
 
-//<li>
-//<a class="dropdown-menu-shipping-cart-img" href="#">
-//<img src="img/cart/4.jpg" alt="Image Alternative text" title="Image Title" />
-//</a>
-//<div class="dropdown-menu-shipping-cart-inner">
-//<p class="dropdown-menu-shipping-cart-price">$77</p>
-//<p class="dropdown-menu-shipping-cart-item"><a href="#">Fossil Women's Original Boyfriend</a>
-//        </p>
-//    </div>
-//</li>
-//<li>
-//    <p class="dropdown-menu-shipping-cart-total">Total: $150</p>
-//    <button class="dropdown-menu-shipping-cart-checkout btn btn-primary">Checkout</button>
-//</li>
+    function get_reviews(){
+        // $id = $_GET['id'];
+        if( $this->input->is_ajax_request() && $this->input->post('pid')){
+        	$id = $this->input->post('pid');
+            $results = $this->product->get_reviews($id);
+            $return = array();
+            foreach( $results as $key => $values ) {
+                $res = array();
+                foreach( $values as $new_key){
+                    $res['display_name'] = ucwords($values['display_name']);
+                    $res['published_date'] = neatDate($values['published_date']);
+                    $res['content'] = $values['content'];
+                    $res['title'] = $values['title'];
+                    $res['rating_score'] = $values['rating_score'];
+                }
+                array_push( $return, $res );
+                if( count($return) >= 10 ){
+                	array_push( $return, array('is_next' => true) );
+                }
+            }
+            header('Content-type: text/json');
+			header('Content-type: application/json');
+			echo json_encode($return);
+            exit;
+        }else{
+            redirect(base_url());
+        }
+    }
 
 
 }
