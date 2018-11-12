@@ -10,6 +10,8 @@ class Ajax extends CI_Controller
 		$this->load->helper('text');
 	}
 
+    public $product_name_rules = '\w \-\. ()\:"';
+
 	public function index()
 	{
 		redirect(base_url());
@@ -120,5 +122,113 @@ class Ajax extends CI_Controller
 			exit;
 		}
 	}
+
+
+
+    /**
+     * @param $vid - variation id
+     * @return JSON
+     */
+
+    function check_variation(){
+        if( $this->input->is_ajax_request() && $this->input->post()){
+            $vid = $this->input->post('vid');
+            if (!$vid) exit;
+            $result = $this->product->check_variation($vid);
+            if (!empty($result['start_date']) && (date('Y-m-d', strtotime($result['start_date']) < get_now()) || date('Y-m-d', strtotime($result['start_date']) > get_now()))) $result['discount_price'] = '';
+            header('Content-type: text/json');
+            header('Content-type: application/json');
+            echo json_encode($result);
+            exit;
+        }else{
+            redirect(base_url());
+        }
+    }
+
+
+    function add_to_cart(){
+       if( $this->input->is_ajax_request() && $this->input->post() ){
+           $colour = $this->input->post('colour');
+           $variation = $this->input->post('variation');
+           $variation = empty($variation) ? '' : $this->input->post('variation');
+           $colour = empty($colour) ? '' : $this->input->post('colour');
+           $name = cleanit($this->input->post('product_name'));
+           $name = preg_replace('/^['.$this->product_name_rules.']+$/i', " ", $name);
+           // contain a product ID, quantity, price, and name.
+//           die( $name );
+           $data = array(
+               'id' => base64_decode($this->input->post('product_id')),
+               'qty' => $this->input->post('quantity'),
+               'price' => $this->input->post('product_price'),
+               'name' => $name,
+               'options' =>
+                   array(
+                       'variation' => $variation,
+                       'colour' => $colour,
+                       'seller' => base64_decode($this->input->post('seller'))
+                   )
+           );
+           if( $this->cart->insert($data)){
+               echo true;
+               exit;
+           }else{
+               echo false;
+               exit;
+           }
+       }else{
+           redirect(base_url());
+       }
+    }
+
+
+    function cart_items(){
+        $cart_contents = $this->cart->contents();
+        if( !empty( $cart_contents ) ){
+            $x = 1;
+            $product = '';
+            foreach( $this->cart->contents() as $content ){
+                $x++;
+                $detail = $this->product->get_cart_details($content['id']);
+                $product .= '<li>';
+                $product .= '<a class="dropdown-menu-shipping-cart-img" href="' .base_url(urlify($content["name"], $content["id"])) .'"';
+                $product .= '<img src="' .base_url('data/products/' . $content["id"] . '/' . $detail->image) .'"
+											alt="Onitshamarket ' .$content['name'].'"
+											title="' . $content['name']. '"/>';
+                $product .= '</a>';
+                $product .= '<div class="dropdown-menu-shipping-cart-inner">';
+                $product .= '<p class="dropdown-menu-shipping-cart-price">' .ngn($content['price']). ' </p>';
+                $product .= '<p class="dropdown-menu-shipping-cart-item"><a href="' .base_url(urlify($content["name"], $content["id"])) .'">'. $content["name"].'</a>';
+                $product .= '</p>';
+                $product .= '</div>';
+                $product .= '</li>';
+                if( $x == 4 ){
+                    $product .= '<li>';
+                    $product .= '<p class="dropdown-menu-shipping-cart-total"> Total : ' . $content["total"] . '</p>';
+                    $product .= '<button class="dropdown-menu-shipping-cart-checkout btn btn-primary">Checkout</button>';
+                    $product .= '</li>';
+                }
+            }
+            echo $product;
+            exit;
+        }
+    }
+
+
+
+//<li>
+//<a class="dropdown-menu-shipping-cart-img" href="#">
+//<img src="img/cart/4.jpg" alt="Image Alternative text" title="Image Title" />
+//</a>
+//<div class="dropdown-menu-shipping-cart-inner">
+//<p class="dropdown-menu-shipping-cart-price">$77</p>
+//<p class="dropdown-menu-shipping-cart-item"><a href="#">Fossil Women's Original Boyfriend</a>
+//        </p>
+//    </div>
+//</li>
+//<li>
+//    <p class="dropdown-menu-shipping-cart-total">Total: $150</p>
+//    <button class="dropdown-menu-shipping-cart-checkout btn btn-primary">Checkout</button>
+//</li>
+
 
 }

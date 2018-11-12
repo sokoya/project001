@@ -27,8 +27,18 @@ Class Product_model extends CI_Model{
         return $this->db->update( $table_name, $data );
     }
 
+
+    // Get single product
     function get_product( $id = ''){
         return $this->db->query('SELECT p.*, u.first_name, u.last_name FROM products AS p LEFT JOIN users AS u ON (p.seller_id = u.id) WHERE p.id = ? ', $id )->row();
+    }
+
+    // Get featured_image
+    function get_featured_image( $id =''){
+        $this->db->select('image_name');
+        $this->db->where('product_id', $id);
+        $this->db->where('featured_image', 1);
+        return $this->db->get('product_gallery')->row();
     }
 
 
@@ -51,7 +61,6 @@ Class Product_model extends CI_Model{
             }else{
                 // just return all the categories
                 $output = $this->db->query('SELECT name FROM root_category LIMIT 10')->result();
-
             }
         }
         return $output;
@@ -59,27 +68,35 @@ Class Product_model extends CI_Model{
 
 
     // Category Description for SEO
-    function category_description( $str = '' ){
+    function category_description( $str = '', $search_like = '' ){
         $result = '';
-        $select = "SELECT description FROM root_category WHERE MATCH(name) AGAINST('$str') LIMIT 1";
-
-        $result = $this->db->query($select)->row();
-        if( count($result) ){
-            return $result->description;
-        }else{
-            $select = "SELECT root_category_id FROM category WHERE MATCH(name) AGAINST('$str') LIMIT 1";
-            $id = $this->db->query($select)->row();
-            if( count( $id ) ){
-                $this->db->select('description');
-                $this->db->where('root_category_id', $id->root_category_id);
-                $result = $this->db->get('root_category')->row()->description;
+        if( $str != '' ){
+            $select = "SELECT description FROM root_category WHERE MATCH(name) AGAINST('$str') LIMIT 1";
+            $result = $this->db->query($select)->row();
+            if( count($result) ){
+                return $result->description;
             }else{
-                $select = "SELECT r.description FROM root_category r LEFT JOIN sub_category s ON (r.root_category_id = s.root_category_id ) 
+                $select = "SELECT root_category_id FROM category WHERE MATCH(name) AGAINST('$str') LIMIT 1";
+                $id = $this->db->query($select)->row();
+                if( count( $id ) ){
+                    $this->db->select('description');
+                    $this->db->where('root_category_id', $id->root_category_id);
+                    $result = $this->db->get('root_category')->row()->description;
+                }else{
+                    $select = "SELECT r.description FROM root_category r LEFT JOIN sub_category s ON (r.root_category_id = s.root_category_id ) 
                 WHERE MATCH(s.name) AGAINST('$str') LIMIT 1";
-                $result = $this->db->query($select)->row()->description;
+                    $result = $this->db->query($select)->row()->description;
+                }
+            }
+        }else{
+            // That means its coming from search
+            $select = "SELECT rootcategory name FROM products WHERE product_name LIKE '%{$search_like}%' ORDER BY RAND() LIMIT 1";
+            $res = $this->db->query($select)->row();
+            if( $res ){
+                $result = $this->db->query("SELECT description FROM root_category WHERE MATCH(name) AGAINST('$res->name') LIMIT 1")->row()->description;
             }
         }
-        return $result;
+        if( $result ){return $result;}else{return ''; } // We should rather return a default description
     }
 
     // Get single variation
@@ -88,7 +105,7 @@ Class Product_model extends CI_Model{
     }
 
     // Single product, get all the product variation
-    function get_variations( $id ){
+    function get_variations( $id ='' ){
         return $this->db->query('SELECT * FROM product_variation WHERE product_id = ? ', $id)->result_array();
     }
 
@@ -123,140 +140,67 @@ Class Product_model extends CI_Model{
     }
 
     // Main Category prouduct listings
-    function get_products( $d = '' , $gets = array() ){
+    function get_products( $queries = '' , $gets = array() ){
         // $this->db->cache_on();
         $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price,g.image_name,s.first_name
             FROM products p                        
             JOIN product_variation AS v ON (p.id = v.product_id) 
             JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )                
             JOIN users AS s ON p.seller_id = s.id ";
-        if( $d['str'] != '' ){
-            $select_query .= " WHERE ( MATCH(p.rootcategory) AGAINST('{$d['str']}') "; 
-            // Brand name
-            if( isset($gets['brand_name']) ){
-                $brand_name = $gets['brand_name'];
-                unset($gets['brand_name']);
-                $select_query .= " AND p.brand_name = '{$brand_name}' ";
-            }
 
-            if( isset($gets['main_colour']) ){
-                $main_colour = $gets['main_colour'];
-                unset($gets['main_colour']);
-                $select_query .= " AND p.main_colour = '{$main_colour}' ";
-            }
+        $select_query .= " WHERE ( (MATCH(p.rootcategory) AGAINST('{$queries['str']}')) OR 
+        (MATCH(p.category) AGAINST('{$queries['str']}')) OR (MATCH(p.subcategory) AGAINST('{$queries['str']}')) )";
 
-            if( isset($gets) && count($gets) ){
-                if( isset($gets['page']) ) unset($gets['page']);
+        if( count($gets) ){
+            // check for brand name
+            if( isset($gets['brand_name']) && !empty($gets['brand_name'])) {
+                $brand_name = xss_clean($gets['brand_name']);
+                $select_query .= " ( AND p,brand_name = '{$brand_name}') "; unset($gets['brand_name']);
+            }
+            // check for main colour
+            if( isset($gets['main_colour']) && !empty($gets['main_colour']) ){
+                $main_colour = xss_clean($gets['main_colour']);
+                $$select_query .= " (AND p,brand_name = '{$main_colour}') "; unset($gets['main_colour']);
+            }
+            // unset the page key
+            unset( $gets['page'] );
+
+            // Here comes the features
+            // check for get count again
+            if( count( $gets ) ){
                 foreach( $gets as $key => $value ){
                     $explode = explode(',', $value);
                     if( count($explode) > 1 ){
-                        $select_query .= " AND ( ";
+                        $select_query .= " OR ( ";
                         $array_value = array_values($explode);
                         $last = end($array_value);
+                        $key = xss_clean( $key );
                         foreach( $explode as $exp ){
                             $exp = preg_replace("/[^A-Za-z.0-9-]/", ' ', $exp);
-                            if( $exp == $last ){ 
+                            $last = preg_replace("/[^A-Za-z.0-9-]/", ' ', $last);
+                            if( $exp === $last ){
                                 $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%')";
                             }else{
                                 $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' OR";
                             }
-                        }                            
+                        }
+//                        $select_query .= " ) ";
                     }else{
-                        $value = trim($value);
+                        $value = xss_clean($value);
                         $value = preg_replace("/[^A-Za-z.0-9-]/", ' ', $value);
-                        $select_query .= " AND JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$value}%' ";
-                    }                    
-                }
-            } 
-
-            $select_query .= " )";
-
-            $select_query .= " OR (MATCH(p.category) AGAINST('{$d['str']}') ";
-            // Brand name
-            if( isset($gets['brand_name']) ){
-                $brand_name = $gets['brand_name'];
-                unset($gets['brand_name']);
-                $select_query .= " AND p.brand_name = '{$brand_name}' ";
-            }
-
-            if( isset($gets['main_colour']) ){
-                $main_colour = $gets['main_colour'];
-                unset($gets['main_colour']);
-                $select_query .= " AND p.main_colour = '{$main_colour}' ";
-            }
-
-            if( isset($gets) && count($gets) ){
-                if( isset($gets['page']) ) unset($gets['page']);
-                foreach( $gets as $key => $value ){
-                    $explode = explode(',', $value);
-                    if( count($explode) > 1 ){
-                        $select_query .= " AND ( ";
-                        $array_value = array_values($explode);
-                        $last = end($array_value);
-                        foreach( $explode as $exp ){
-                            $exp = preg_replace("/[^A-Za-z.0-9-]/", ' ', $exp);
-                            if( $exp == $last ){ 
-                                $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%')";
-                            }else{
-                                $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' OR";
-                            }
-                        }                            
-                    }else{
-                        $value = trim($value);
-                        $value = preg_replace("/[^A-Za-z.0-9]/", ' ', $value);
-                        $select_query .= " AND JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$value}%' ";
-                    }                    
+                        $select_query .= " OR (JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$value}%') ";
+                    }
                 }
             }
+        }
 
-            $select_query .= " )";
-
-            $select_query .= " OR (MATCH(p.subcategory) AGAINST('{$d['str']}') ";
-            // Brand name
-            if( isset($gets['brand_name']) ){
-                $brand_name = $gets['brand_name'];
-                unset($gets['brand_name']);
-                $select_query .= " AND p.brand_name = '{$brand_name}' ";
-            }
-            if( isset($gets['main_colour']) ){
-                $main_colour = $gets['main_colour'];
-                unset($gets['main_colour']);
-                $select_query .= " AND p.main_colour = '{$main_colour}' ";
-            }
-
-            if( isset($gets) && count($gets) ){
-                if( isset($gets['page']) ) unset($gets['page']);
-                foreach( $gets as $key => $value ){
-                    $explode = explode(',', $value);
-                    if( count($explode) > 1){
-                        $select_query .= " AND ( ";
-                        $array_value = array_values($explode);
-                        $last = end($array_value);
-                        foreach( $explode as $exp ){
-                            $exp = preg_replace("/[^A-Za-z.0-9]/", ' ', $exp);
-                            if( $exp == $last ){ 
-                                $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%')";
-                            }else{
-                                $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' OR";
-                            }
-                        }                            
-                    }else{
-                        $value = trim($value);
-                        $value = preg_replace("/[^A-Za-z.0-9]/", ' ', $value);
-                        $select_query .= " AND JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$value}%'";
-                    }                    
-                }
-            }
-
-            $select_query .= " )";
-            
-        }    
-        if( $d['is_limit'] == true ){
-            $select_query .=" GROUP BY p.id LIMIT {$d['offset']},{$d['limit']} ";
+        if( $queries['is_limit'] == true ){
+            $select_query .=" AND p.product_status = 'approved' GROUP BY p.id LIMIT {$queries['offset']},{$queries['limit']} ";
+//                     die( $select_query );
         }else{
-            $select_query .=" GROUP BY p.id";
+            $select_query .=" AND p.product_status = 'approved' GROUP BY p.id";
         }    
-        // die( $select_query );
+//         die( $select_query );
         $products_query = $this->db->query( $select_query )->result();
         // $this->db->cache_off();
         return $products_query;
@@ -282,39 +226,57 @@ Class Product_model extends CI_Model{
 
 
     // Get products brands
-    function get_brands( $str ='' ){
+    function get_brands( $category = '', $search_like = ''){
         $select_query = "SELECT COUNT(*) AS `brand_count`, `brand_name` FROM `products` p ";
-        if( $str != '' ){
-            $select_query .= " WHERE MATCH(rootcategory) AGAINST('$str') OR
-            MATCH(category) AGAINST('$str') OR
-            MATCH(subcategory) AGAINST('$str') OR
-            MATCH(brand_name) AGAINST('$str')";
+        if( $search_like != '' ){
+            if( $category != '' ){
+                $select_query .= " WHERE MATCH(rootcategory) AGAINST('$category') AND product_name LIKE '%{$search_like}%'";
+            }else{
+                $select_query .= " WHERE product_name LIKE '%{$search_like}%'";
+            }
+        }else{
+            $select_query .= " WHERE MATCH(rootcategory) AGAINST('$category') OR
+            MATCH(category) AGAINST('$category') OR
+            MATCH(subcategory) AGAINST('$category') OR
+            MATCH(brand_name) AGAINST('$category')";
         }
         $select_query .= " GROUP BY `brand_name` ORDER BY `brand_name` ";
         return $this->db->query( $select_query )->result();
     }
 
     // Get products colours
-    function get_colours( $str = ''){
+    function get_colours( $category ='', $search_like = ''){
         $select_query = "SELECT COUNT(*) AS `colour_count`, `main_colour` AS `colour_name` FROM `products` p ";
-        if( $str != ''){
-            $select_query .= " WHERE MATCH(rootcategory) AGAINST('$str') OR
-            MATCH(category) AGAINST('$str') OR
-            MATCH(subcategory) AGAINST('$str') OR
-            MATCH(brand_name) AGAINST('$str')";
+        if( $search_like != '' ){
+            if( $category != '' ){
+                $select_query .= " WHERE MATCH(rootcategory) AGAINST('$category') AND product_name LIKE '%{$search_like}%'";
+            }else{
+                $select_query .= " WHERE product_name LIKE '%{$search_like}%'";
+            }
+        }else{
+            $select_query .= " WHERE MATCH(rootcategory) AGAINST('$category') OR
+            MATCH(category) AGAINST('$category') OR
+            MATCH(subcategory) AGAINST('$category') OR
+            MATCH(brand_name) AGAINST('$category')";
         }
         $select_query .= " GROUP BY `colour_name` ORDER BY `colour_name` ";
         return $this->db->query( $select_query )->result();
     }
 
     // Get products attributes. used in main category
-    function get_features( $str = '' ){
+    function get_features($category = '', $search_like = ''){
         $select_query = "SELECT DISTINCT JSON_UNQUOTE(JSON_EXTRACT(`attributes`, '$')) AS feature_value FROM products";
-        if( $str != ''){
-            $select_query .= " WHERE MATCH(rootcategory) AGAINST('$str') OR
-            MATCH(category) AGAINST('$str') OR
-            MATCH(subcategory) AGAINST('$str') OR
-            MATCH(brand_name) AGAINST('$str')";
+        if( $search_like != '' ){
+            if( $category != '' ){
+                $select_query .= " WHERE MATCH(rootcategory) AGAINST('$category') AND product_name LIKE '%{$search_like}%'";
+            }else{
+                $select_query .= " WHERE product_name LIKE '%{$search_like}%'";
+            }
+        }else{
+            $select_query .= " WHERE MATCH(rootcategory) AGAINST('$category') OR
+            MATCH(category) AGAINST('$category') OR
+            MATCH(subcategory) AGAINST('$category') OR
+            MATCH(brand_name) AGAINST('$category')";
         }
         return $this->db->query( $select_query )->result_array();
     }
@@ -448,13 +410,89 @@ Class Product_model extends CI_Model{
     function get_quick_view_details( $id ){
         $select = "SELECT product_description, product_line, in_the_box, highlights, product_warranty FROM products WHERE id = $id";
         return $this->db->query( $select)->result_array();
-        
         // SELECT p.product_description, p.product_line, p.in_the_box, p.product_warranty, 
         // CONCAT('[',GROUP_CONCAT(CONCAT('{',variation_name:v.variation,',',quantity:v.quantity,',',start_date:v.start_date,',',end_date:v.end_date,',',discount_price:v.discount_price,',',sale_price:v.sale_price,'}')),']') as variations
         // FROM products p
         // INNER JOIN product_variation v ON (va.product_id = p.id)
         // WHERE p.id = $id AND p.product_status = 'approved'
     }
+
+
+
+    function get_search_products( $queries = array() , $gets = array() ){
+        // $this->db->cache_on();
+//        html_entity_decode($str)
+        $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price,g.image_name,s.first_name
+            FROM products p                        
+            JOIN product_variation AS v ON (p.id = v.product_id) 
+            JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )                
+            JOIN users AS s ON p.seller_id = s.id ";
+
+        if( $queries['product_name'] ) {
+            $select_query .= " WHERE p.product_name LIKE '%{$queries["product_name"]}%' ";
+        }
+        if( $queries['category'] && !empty($queries['category'])){
+            $select_query .= " AND MATCH (p.rootcategory) AGAINST ('{$queries["category"]}') ";
+        }
+        // unset the product name and category from the get
+        unset($gets['category']);
+        unset($gets['product_name']);
+        unset($gets['q']);
+        // Brand name
+        if( isset($gets['brand_name']) ){
+            $brand_name = cleanit($gets['brand_name']);
+            unset($gets['brand_name']);
+            $select_query .= " AND p.brand_name = '{$brand_name}' ";
+        }
+        // main colour
+        if( isset($gets['main_colour']) ){
+            $main_colour = cleainit($gets['main_colour']);
+            unset($gets['main_colour']);
+            $select_query .= " AND p.main_colour = '{$main_colour}' ";
+        }
+
+        if( isset($gets['page']) ) unset($gets['page']);
+
+        //  Check if we still have any get parameter
+        if( count( $gets ) ){
+            foreach( $gets as $key => $value ){
+                $explode = explode(',', $value);
+                if( count($explode) > 1 ){
+                    $select_query .= " OR ( ";
+                    $array_value = array_values($explode);
+                    $last = end($array_value);
+                    $key = xss_clean( $key );
+                    foreach( $explode as $exp ){
+                        $exp = preg_replace("/[^A-Za-z.0-9-]/", ' ', $exp);
+                        $last = preg_replace("/[^A-Za-z.0-9-]/", ' ', $last);
+                        if( $exp === $last ){
+                            $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%')";
+                        }else{
+                            $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' OR";
+                        }
+                    }
+//                        $select_query .= " ) ";
+                }else{
+                    $value = xss_clean($value);
+                    $value = preg_replace("/[^A-Za-z.0-9-]/", ' ', $value);
+                    $select_query .= " OR (JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$value}%') ";
+                }
+            }
+        }
+
+        if( $queries['is_limit'] == true ){
+            $select_query .=" GROUP BY p.id LIMIT {$queries['offset']},{$queries['limit']} ";
+        }else{
+            $select_query .=" GROUP BY p.id";
+        }
+//         die( $select_query );
+        $products_query = $this->db->query( $select_query )->result();
+        // $this->db->cache_off();
+        return $products_query;
+    }
+
+
+
 }
 
 

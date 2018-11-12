@@ -15,12 +15,23 @@
 	<link rel="stylesheet" href="<?= base_url('assets/landing/css/styles.css'); ?>">
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/de-york.css'); ?>" title="de-york" media="all" />
     <link rel="shortcut icon" href="<?= base_url('assets/landing/img/favicon.png'); ?>" type="image/png">
+    <link rel="icon" href="<?= base_url('assets/landing/img/favicon.png'); ?>" type="image/png">
+    <link rel="canonical" href="<?= current_url(); ?>"/>
+
+    <?php if( $page == 'product' ) :?>
+        <meta property="og:title" content="<?= $product->product_name; ?>" />
+        <meta property="og:type" content="product" />
+        <meta property="og:image"  content="<?= ($featured_image->image_name) ? base_url('data/products/'.$product->id.'/'. $featured_image->image_name) : ''; ?>" />
+        <meta property="og:desciption" content="<?= $description; ?>" />
+        <meta property="og:site_name" content="Onitsha Market" />
+        <meta property="og:url" content="<?= current_url(); ?>" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="<?= lang('app_name'); ?>" />
+        <meta name="twitter:creator" content="" />
+
+
+    <?php endif;?>
     <style>
-        .mgt_drop_menu>li{
-            height:36px !important;
-            line-height:48px !important;
-        }
-        .grey{
-            color:grey;
-        }
+        .mgt_drop_menu>li{ height:36px !important; line-height:48px !important;}
     </style>
+    <script> let base_url = "<?= base_url(); ?>"</script>

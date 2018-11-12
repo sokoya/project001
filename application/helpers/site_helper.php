@@ -133,7 +133,7 @@ function phoneclean($num) {
 function urlify($string, $id =''){
     $new_string = strtolower(trim(preg_replace('~[^0-9a-z]+~i', '-', html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($string, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8')), '-'));
     if( $id != '' ){
-    	return $new_string .'-'.$id.'/';    	
+    	return 'product/'. $new_string .'-'.$id.'/';
     }else{
     	return $new_string;  
     }
@@ -192,13 +192,20 @@ if( !function_exists('product_overall_rating')){
 if( !function_exists('product_percentage_rating')){
 	function product_percentage_rating( $results ) : array{
 		$rate5 = $rate4 = $rate3 = $rate2 = $rate1 = $total_outcome = 0;
-		$socres = array(1,2,3,4,5);
 		foreach ($results as $key ) { $total_outcome += $key['occurence']; }
 		foreach( $results as $key ){
 			
 		}
 		
 	}
+}
+
+function current_full_url()
+{
+    $CI =& get_instance();
+
+    $url = $CI->config->site_url($CI->uri->uri_string());
+    return $_SERVER['QUERY_STRING'] ? $url.'?'.$_SERVER['QUERY_STRING'] : $url;
 }
 
 

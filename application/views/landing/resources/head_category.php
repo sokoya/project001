@@ -7,16 +7,15 @@
 					 alt="<?= lang('app_name'); ?>" title="<?= lang('app_name'); ?>"/>
 			</a>
 		</div>
-		<form class="navbar-form navbar-left navbar-main-search navbar-main-search-category" role="search">
-			<select name="categories" id="all-category" class="navbar-main-search-category-select">
+		<form method="get" action="<?= base_url('search')?>" class="navbar-form navbar-left navbar-main-search navbar-main-search-category" role="search">
+			<select name="category" id="all-category" class="navbar-main-search-category-select">
 				<option value="">All Categories</option>
-				<option value="Appliances">Appliances</option>
 				<?php foreach( $categories as $category ) : ?>
                     <option value="<?= $category->name; ?>"><?= ucwords($category->name); ?></option>
                 <?php endforeach; ?>
 			</select>
 			<div class="form-group ">
-				<input class="form-control site-search form-search" type="text"
+				<input class="form-control site-search form-search" required name="q" autocomplete="off" type="text"
 					   placeholder="Search the Entire Store..."/>
 			</div>
 			<div class="src-cover">

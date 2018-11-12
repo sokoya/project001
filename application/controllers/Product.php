@@ -7,12 +7,12 @@ class Product extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('text');
 	}
-	public $product_name_rules = '\w \-\. ()\:';
+
 
 	public function index()
 	{
 		// $this->output->cache(60);
-		$uri = $this->uri->segment(1);
+		$uri = $this->uri->segment(2);
 		$index = substr($uri, strrpos($uri, '-') + 1);
 		// sanitize
 		if (!is_numeric(cleanit($index))) redirect(base_url());
@@ -27,7 +27,9 @@ class Product extends CI_Controller {
 		$page_data['description'] = $this->product->get_category_detail($page_data['product']->rootcategory, 'root_category')->description;
 		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
 		// $this->add_count($index);
+        $page_data['page'] = 'product';
 		$page_data['rating_counts'] = $this->product->get_rating_counts( $index );
+        $page_data['featured_image'] = $this->product->get_featured_image( $index );
 		$this->load->view('landing/product', $page_data);
 	}
 
@@ -69,10 +71,9 @@ class Product extends CI_Controller {
 		$config = $this->config->item('pagination');
 		$config['base_url'] = current_url();
 		$config['total_rows'] = $count;
-		$config['per_page'] = 50;
+		$config['per_page'] = 32;
 		$config["num_links"] = 5;
 		$this->pagination->initialize($config);
-
 		$page_data['features'] = $output_array;
 		$array['limit'] = $config['per_page'];
 		$array['offset'] = $page;
@@ -84,6 +85,7 @@ class Product extends CI_Controller {
 		$page_data['sub_categories'] = $this->product->get_sub_categories($str);
 		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
 		$page_data['description'] = $this->product->category_description($str);
+        $page_data['page'] = 'category';
 		$this->load->library('user_agent');
 		if( !$this->agent->is_mobile()){
 			$this->load->view('landing/category', $page_data);			
@@ -107,6 +109,7 @@ class Product extends CI_Controller {
 		} else {
 			$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 			$page_data['title'] = 'My cart';
+			$page_data['page'] = 'cart';
 			$this->load->view('landing/cart', $page_data);
 		}
 	}
@@ -116,53 +119,6 @@ class Product extends CI_Controller {
 	public function remove_cart() {
 		$this->cart->remove($this->uri->segment(3));
 		redirect('cart');
-	}
-
-
-	public function add_to_cart(){
-		$this->load->library('cart');
-        $variation = empty($this->input->post('variation')) ? '' : $this->input->post('variation');
-        $colour = empty($this->input->post('colour')) ? '' : $this->input->post('colour');
-        $name = preg_replace('/^['.$this->product_name_rules.']+$/i', "", cleanit($this->input->post('product_name')));
-
-        // contain a product ID, quantity, price, and name.
-		$name = cleanit($this->input->post('product_name'));
-		$data = array(
-			'id' => base64_decode($this->input->post('product_id')),
-			'qty' => $this->input->post('quantity'),
-			'price' => $this->input->post('product_price'),
-			'name' => $name,
-			'options' =>
-				array(
-					'variation' => $variation,
-					'colour' => $colour,
-					'seller' => base64_decode($this->input->post('seller'))
-				)
-		);
-		if( $this->cart->insert($data)){
-            echo true;
-            exit;
-        }else{
-            echo false;
-            exit;
-        }
-	}
-
-
-	/**
-	 * @param $vid - variation id
-	 * @return JSON
-	 */
-
-	function check_variation(){
-		$vid = $this->input->post('vid');
-		if (!$vid) exit;
-		$result = $this->product->check_variation($vid);
-		if (!empty($result['start_date']) && (date('Y-m-d', strtotime($result['start_date']) < get_now()) || date('Y-m-d', strtotime($result['start_date']) > get_now()))) $result['discount_price'] = '';
-		header('Content-type: text/json');
-		header('Content-type: application/json');
-		echo json_encode($result);
-		exit;
 	}
 
 	/**
@@ -259,8 +215,6 @@ class Product extends CI_Controller {
 		exit;
 	}
 
-
-
     /**
      * @param $product_id - product id
      * @return 
@@ -296,6 +250,68 @@ class Product extends CI_Controller {
         }
     }
 
+    // Search
+    public function search(){
+//        http://localhost/project001/search?category=Phones+%26+Tablets&q=sam
+        if( !$this->input->get('q', true) ) redirect(base_url());
+
+        $category = preg_replace("/[^A-Za-z0-9- ]/", "", cleanit($this->input->get('category', true)));
+        $product_name = $page_data['searched'] = cleanit($this->input->get('q', true));
+
+        $page_data['title'] = ucwords($category .' '. $product_name);
+        $features = $this->product->get_features($category, $product_name);
+
+        $feature_array = array();
+        foreach ($features as $feature => $values) {
+            foreach ($values as $key => $value) {
+                $variables = json_decode($value);
+                foreach ($variables as $new_key => $new_value) {
+                    if (is_array($new_value)) {
+                        $new_value = array_map("unserialize", array_unique(array_map("serialize", $new_value)));
+                        foreach ($new_value as $inkey => $invalue) $feature_array[$new_key][] = $invalue;
+                        $feature_array[$new_key] = array_unique($feature_array[$new_key], SORT_REGULAR);
+                    } else {
+                        $feature_array[$new_key][] = $new_value;
+                        $feature_array[$new_key] = array_unique($feature_array[$new_key], SORT_REGULAR);
+                    }
+                }
+            }
+        }
+        // pagination
+        $page = isset($_GET['page']) ? xss_clean($_GET['page']) : 0;
+        if ($page > 1) $page -= 1;
+
+        $array = array('category' => $category, 'product_name' => $product_name,  'is_limit' => false);
+        $x = (array)$this->product->get_search_products($array, $this->input->get());
+        $count = (count($x));
+
+        $this->load->library('pagination');
+        $this->config->load('pagination');
+        $config = $this->config->item('pagination');
+        $config['base_url'] = current_url();
+        $config['total_rows'] = $count;
+        $config['per_page'] = 32;
+        $config["num_links"] = 5;
+        $page_data['features'] = $feature_array;
+        $array['limit'] = $config['per_page'];
+        $array['offset'] = $page;
+        $array['is_limit'] = true;
+        $page_data['pagination'] = $this->pagination->create_links();
+        $page_data['products'] = $this->product->get_search_products($array, $this->input->get());
+        $page_data['brands'] = $this->product->get_brands($category, $product_name);
+        $page_data['colours'] = $this->product->get_colours($category, $product_name);
+        $page_data['sub_categories'] = $this->product->get_sub_categories($category);
+        $page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
+        $page_data['description'] = $this->product->category_description($category);
+        $page_data['page'] = 'seacch';
+        $this->pagination->initialize($config);
+        $this->load->library('user_agent');
+        if( !$this->agent->is_mobile()){
+            $this->load->view('landing/search', $page_data);
+        }else{
+            $this->load->view('landing/mobile-search', $page_data);
+        }
+    }
 
 
 

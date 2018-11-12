@@ -174,7 +174,7 @@
 										<p class="form-check-label pay-gate">
 											<input class="form-check-input payment-radio" type="radio"
 												   name="address_radio1"
-												   id="exampleRadios1" value="option1">
+												   id="paystack" value="paystack">
 											Pay with paystack
 											<img src="<?= base_url('assets/landing/img/paystack.png'); ?>">
 										</p>
@@ -281,6 +281,5 @@
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
 <script src="<?= base_url('assets/landing/js/checkout.js'); ?>"></script>
-<script> let base_url = "<?= base_url(); ?>"; </script>
 </body>
 </html>
