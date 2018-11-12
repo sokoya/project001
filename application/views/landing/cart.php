@@ -52,12 +52,31 @@
 								</td>
 								<td><?= ngn($product['price']); ?></td>
 								<td>
-									<input class="form-control quantity" name="<?= $x; ?>[qty]"
-										   data-set="<?= $product['qty']; ?>" data-id="<?= $x; ?>"
-										   style="width:10; padding:4px; font-size:12px;" type="number"
-										   value="<?= $product['qty']; ?>" min="1" max="10"/>
-									<a style="display: none;" id="<?= $x; ?>" href="javascript:void(0)"
-									   class="update-qty">Update Cart</a>
+									<!--									<input class="form-control quantity" name="-->
+									<?//= $x; ?><!--[qty]"-->
+									<!--										   data-set="-->
+									<?//= $product['qty']; ?><!--" data-id="--><?//= $x; ?><!--"-->
+									<!--										   style="width:10; padding:4px; font-size:12px;" type="number"-->
+									<!--										   value="-->
+									<?//= $product['qty']; ?><!--" min="1" max="10"/>-->
+									<!--									<a style="display: none;" id="-->
+									<?//= $x; ?><!--" href="javascript:void(0)"-->
+									<!--									   class="update-qty">Update Cart</a>-->
+									<ul>
+										<li class="product-page-qty-item">
+											<button type="button"
+													class="product-page-qty product-page-qty-minus">-
+											</button>
+											<input data-range="10" name="quantity"
+												   id="quan"
+												   class="product-page-qty product-page-qty-input quantity"
+												   type="text"
+												   value="1" disabled/>
+											<button type="button"
+													class="product-page-qty product-page-qty-plus">+
+											</button>
+										</li>
+									</ul>
 								</td>
 								<td><?php echo ngn($product['subtotal']);
 									$total += $product['subtotal']; ?></td>
@@ -109,7 +128,9 @@
 
 </div>
 <script>
-    if( !base_url ) {let base_url = "<?= base_url(); ?>";}
+	if (!base_url) {
+		let base_url = "<?= base_url(); ?>";
+	}
 </script>
 <?php $this->load->view('landing/resources/script'); ?>
 <script>
@@ -129,7 +150,74 @@
 			$('#cart-form').submit();
 		});
 
-	})
+	});
+
+	let quantity = $('#quan');
+	let count = quantity.data('range');
+	let plus = $('.product-page-qty-plus');
+	let minus = $('.product-page-qty-minus');
+
+	plus.on('click', function () {
+		plus.prop('disabled', true);
+		minus.prop("disabled", false);
+		$.ajax({
+			url: 'sdws',
+			method: 'POST',
+			data: {},
+			success: function (response) {
+				console.log(response);
+				if (quantity.val() >= count) {
+					plus.prop("disabled", true);
+				} else {
+					plus.prop("disabled", false);
+				}
+			},
+			error: response => {
+				console.log(response);
+				if (quantity.val() >= count) {
+					plus.prop("disabled", true);
+				} else {
+					plus.prop("disabled", false);
+				}
+			}
+		});
+	});
+
+	minus.on('click', function () {
+		minus.prop('disabled', true);
+		plus.prop("disabled", false);
+		if (quantity.val() <= 1) {
+			minus.prop("disabled", true);
+		}
+		$.ajax({
+			url: 'sdws',
+			method: 'POST',
+			data: {},
+			success: () => {
+				if (quantity.val() <= 1) {
+					minus.prop("disabled", true);
+				} else {
+					minus.prop("disabled", false);
+				}
+			},
+			error: () => {
+				if (quantity.val() <= 1) {
+					minus.prop("disabled", true);
+				} else {
+					minus.prop("disabled", false);
+				}
+			}
+		});
+	});
+
+	quantity.on('input', function () {
+		if (quantity.val() > count) {
+			quantity.val(count)
+		} else if (quantity.val() === '0') {
+			quantity.val(1)
+		}
+	});
+
 </script>
 </body>
 </html>
