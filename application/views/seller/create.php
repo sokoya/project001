@@ -1,12 +1,13 @@
 <?php $this->load->view('seller/templates/meta_tags'); ?>
 <style>
     .help_text {
-         color: #ffffff;
-         background-color: #252525;
-         border-radius: 100%;
-         margin-top: 15px;
+        color: #ffffff;
+        background-color: #252525;
+        border-radius: 100%;
+        margin-top: 10px;
         cursor: help;
-     }
+    }
+
     .help_text:hover {
         color: #ffffff;
         background-color: #49a251;
@@ -15,14 +16,12 @@
 
     @media (min-width: 768px) {
         .form-horizontal .control-label {
-            text-align:left !important;
+            text-align: left !important;
         }
     }
-    div.tooltip > p{
-        padding-top:10px;
-    }
-    .fav_drop_ico{
-        margin:15px;
+
+    .fav_drop_ico {
+        margin: 15px;
     }
 </style>
 </head>
@@ -52,7 +51,7 @@
                 <!--Breadcrumb-->
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                 <ol class="breadcrumb">
-                    <li><a href="#"><i class="demo-pli-home"></i></a></li>
+                    <li><a href="javascript:;"><i class="demo-pli-home"></i></a></li>
                     <li><?= $this->session->userdata('new_rootcategory'); ?></li>
                     <li><?= $this->session->userdata('new_category'); ?></li>
                     <li class="active"><?= $this->session->userdata('new_subcategory'); ?></li>
@@ -143,17 +142,17 @@
                                                                         <span class="text-sm text-dark">Wide Angle Camera 10 MP - Black, Galaxy Tab A Leather Flip Case - Red</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <div class="con-tooltip left">
-                                                                            <p>
-                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
-                                                                            <div class="tooltip">
-                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
-                                                                            </div>
-                                                                        </div>
+                                                                        <a href="javascript:;" title="Product Name"
+                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-trigger="focus"
+                                                                           data-content="I am your help and i will help you even if you dont want to be helped">
+                                                                            <i class="demo-pli-question help_text"
+                                                                               title="Help Text"></i> </a>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Brand Name
+                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Brand
+                                                                        Name
                                                                         *</label>
                                                                     <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                         <select class="form-control selectpicker"
@@ -169,13 +168,12 @@
                                                                         <span class="text-sm text-dark">Brand of the product. If brand does not exist, please copy https://goo.gl/Hw8vma into your browser and fill accordingly.</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <div class="con-tooltip left">
-                                                                            <p>
-                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
-                                                                            <div class="tooltip">
-                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
-                                                                            </div>
-                                                                        </div>
+                                                                        <a href="javascript:;" title="Brand Name"
+                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-trigger="focus"
+                                                                           data-content="I am your help and i will help you even if you dont want to be helped">
+                                                                            <i class="demo-pli-question help_text"
+                                                                               title="Help Text"></i> </a>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -186,13 +184,12 @@
                                                                                placeholder="Eg:  iPhone 4S Samsung TV 4T">
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <div class="con-tooltip left">
-                                                                            <p>
-                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
-                                                                            <div class="tooltip">
-                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
-                                                                            </div>
-                                                                        </div>
+                                                                        <a href="javascript:;" title="Model"
+                                                                           data-placement="top" data-toggle="popover"
+                                                                           data-trigger="focus"
+                                                                           data-content="I am your help and i will help you even if you dont want to be helped">
+                                                                            <i class="demo-pli-question help_text"
+                                                                               title="Help Text"></i> </a>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -216,13 +213,12 @@
                                                                         </select>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <div class="con-tooltip left">
-                                                                            <p>
-                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
-                                                                            <div class="tooltip">
-                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
-                                                                            </div>
-                                                                        </div>
+                                                                        <a href="javascript:;" title="Main Color"
+                                                                           data-placement="top" data-toggle="popover"
+                                                                           data-trigger="focus"
+                                                                           data-content="I am your help and i will help you even if you dont want to be helped">
+                                                                            <i class="demo-pli-question help_text"
+                                                                               title="Help Text"></i> </a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -241,7 +237,8 @@
                                                         <div class="panel-heading">
                                                             <h4 class="panel-title text-dark">
                                                                 <a data-parent="#accordion" data-toggle="collapse"
-                                                                   href="#prod-spec">Product Specification<span class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span></a>
+                                                                   href="#prod-spec">Product Specification<span
+                                                                            class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span></a>
                                                             </h4>
                                                         </div>
                                                         <!--Accordion content-->
@@ -258,13 +255,12 @@
                                                                         <span class="text-sm text-dark">Eg: Fouani Nigeria, Trendy Woman Ltd, SEOLAK</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <div class="con-tooltip left">
-                                                                            <p>
-                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
-                                                                            <div class="tooltip">
-                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
-                                                                            </div>
-                                                                        </div>
+                                                                        <a href="javascript:;" title="Product Line"
+                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-trigger="focus"
+                                                                           data-content="I am your help and i will help you even if you dont want to be helped">
+                                                                            <i class="demo-pli-question help_text"
+                                                                               title="Help Text"></i> </a>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -287,13 +283,12 @@
                                                                         <span class="text-sm text-dark">Add a generalisation of the main color, to help customers find the product using the provided color-filter in the shop</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <div class="con-tooltip left">
-                                                                            <p>
-                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
-                                                                            <div class="tooltip">
-                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
-                                                                            </div>
-                                                                        </div>
+                                                                        <a href="javascript:;" title="Color Family"
+                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-trigger="focus"
+                                                                           data-content="I am your help and i will help you even if you dont want to be helped">
+                                                                            <i class="demo-pli-question help_text"
+                                                                               title="Help Text"></i> </a>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -314,13 +309,12 @@
                                                                         <span class="text-sm text-dark">Eg: Leather</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <div class="con-tooltip left">
-                                                                            <p>
-                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
-                                                                            <div class="tooltip">
-                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
-                                                                            </div>
-                                                                        </div>
+                                                                        <a href="javascript:;" title="Main Material"
+                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-trigger="focus"
+                                                                           data-content="I am your help and i will help you even if you dont want to be helped">
+                                                                            <i class="demo-pli-question help_text"
+                                                                               title="Help Text"></i> </a>
                                                                     </div>
                                                                 </div>
 
@@ -334,7 +328,8 @@
                                                             <h4 class="panel-title">
                                                                 <a data-parent="#accordion" data-toggle="collapse"
                                                                    href="#prod-desc">
-                                                                    Product Description<span class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span>
+                                                                    Product Description<span
+                                                                            class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span>
                                                                 </a>
                                                             </h4>
                                                         </div>
@@ -351,13 +346,12 @@
                                                                                   class="form-control"></textarea>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <div class="con-tooltip left">
-                                                                            <p>
-                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
-                                                                            <div class="tooltip">
-                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
-                                                                            </div>
-                                                                        </div>
+                                                                        <a href="javascript:;" title="Product Description"
+                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-trigger="focus"
+                                                                           data-content="I am your help and i will help you even if you dont want to be helped">
+                                                                            <i class="demo-pli-question help_text"
+                                                                               title="Help Text"></i> </a>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -370,17 +364,17 @@
                                                                         <span class="text-sm text-dark">Example: e.g. http://www.youtube.com/watch?v=htlgaXRAe2k it is: htlgaXRAe2k</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <div class="con-tooltip left">
-                                                                            <p>
-                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
-                                                                            <div class="tooltip">
-                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
-                                                                            </div>
-                                                                        </div>
+                                                                        <a href="javascript:;" title="Youtube ID"
+                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-trigger="focus"
+                                                                           data-content="I am your help and i will help you even if you dont want to be helped">
+                                                                            <i class="demo-pli-question help_text"
+                                                                               title="Help Text"></i> </a>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">What's in the
+                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">What's
+                                                                        in the
                                                                         box?</label>
                                                                     <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                         <textarea
@@ -390,13 +384,12 @@
                                                                                 class="form-control"></textarea>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <div class="con-tooltip left">
-                                                                            <p>
-                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
-                                                                            <div class="tooltip">
-                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
-                                                                            </div>
-                                                                        </div>
+                                                                        <a href="javascript:;" title="What's in the box?"
+                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-trigger="focus"
+                                                                           data-content="I am your help and i will help you even if you dont want to be helped">
+                                                                            <i class="demo-pli-question help_text"
+                                                                               title="Help Text"></i> </a>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -410,13 +403,12 @@
                                                                         <span class="text-sm text-dark">Example: Best expierience ever - super fast and easy navigation - better control</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <div class="con-tooltip left">
-                                                                            <p>
-                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
-                                                                            <div class="tooltip">
-                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
-                                                                            </div>
-                                                                        </div>
+                                                                        <a href="javascript:;" title="Highlights"
+                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-trigger="focus"
+                                                                           data-content="I am your help and i will help you even if you dont want to be helped">
+                                                                            <i class="demo-pli-question help_text"
+                                                                               title="Help Text"></i> </a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -428,7 +420,8 @@
                                                         <div class="panel-heading">
                                                             <h4 class="panel-title text-dark">
                                                                 <a data-parent="#accordion" data-toggle="collapse"
-                                                                   href="#measurement">Measurement<span class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span></a>
+                                                                   href="#measurement">Measurement<span
+                                                                            class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span></a>
                                                             </h4>
                                                         </div>
                                                         <!--Accordion content-->
@@ -443,17 +436,17 @@
                                                                         <span class="text-sm text-dark">Measurement of the product</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <div class="con-tooltip left">
-                                                                            <p>
-                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
-                                                                            <div class="tooltip">
-                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
-                                                                            </div>
-                                                                        </div>
+                                                                        <a href="javascript:;" title="Dimension"
+                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-trigger="focus"
+                                                                           data-content="I am your help and i will help you even if you dont want to be helped">
+                                                                            <i class="demo-pli-question help_text"
+                                                                               title="Help Text"></i> </a>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Weight * (in
+                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Weight
+                                                                        * (in
                                                                         Kg)</label>
                                                                     <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                         <input type="text" required
@@ -461,13 +454,12 @@
                                                                                name="weight" class="form-control">
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <div class="con-tooltip left">
-                                                                            <p>
-                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
-                                                                            <div class="tooltip">
-                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
-                                                                            </div>
-                                                                        </div>
+                                                                        <a href="javascript:;" title="Weight (kg)"
+                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-trigger="focus"
+                                                                           data-content="I am your help and i will help you even if you dont want to be helped">
+                                                                            <i class="demo-pli-question help_text"
+                                                                               title="Help Text"></i> </a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -481,7 +473,8 @@
                                                             <div class="panel-heading">
                                                                 <h4 class="panel-title text-dark">
                                                                     <a data-parent="#accordion" data-toggle="collapse"
-                                                                       href="#attribute">Product Attribute<span class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span></a>
+                                                                       href="#attribute">Product Attribute<span
+                                                                                class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span></a>
                                                                 </h4>
                                                             </div>
                                                             <!--Accordion content-->
@@ -517,13 +510,8 @@
                                                                                 <span class="text-sm text-dark"><?= $specification['description']; ?></span>
                                                                             </div>
                                                                             <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                                <div class="con-tooltip left">
-                                                                                    <p>
-                                                                                        <span class="demo-pli-question help_text" title="Help Text"></span> </p>
-                                                                                    <div class="tooltip">
-                                                                                        <p><?= $specification['description']; ?></p>
-                                                                                    </div>
-                                                                                </div>
+                                                                                <a href="javascript:;" title="<?= ucwords($specification['spec_name']); ?>" data-placement="bottom" data-toggle="popover" data-trigger="focus" data-content="<?= $specification['description']; ?>">
+                                                                                    <i class="demo-pli-question help_text" title="Help Text"></i> </a>
                                                                             </div>
                                                                         </div>
                                                                         <?php $x++; endforeach; ?>
@@ -539,18 +527,19 @@
                                                             <h4 class="panel-title text-dark">
                                                                 <a data-parent="#accordion" data-toggle="collapse"
                                                                    href="#additional_product_attribute">Additional
-                                                                    Product Attribute<span class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span></a>
+                                                                    Product Attribute<span
+                                                                            class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span></a>
                                                             </h4>
                                                         </div>
                                                         <!--Accordion content-->
                                                         <div class="panel-collapse " id="additional_product_attribute">
                                                             <div class="panel-body">
                                                                 <div class="form-group">
-                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Cerification</label>
+                                                                    <label class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Certification</label>
                                                                     <div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
                                                                         <select name="certifications[]"
                                                                                 class="selectpicker" multiple
-                                                                                title="Example: Organic, Suitable for Allergics Fair Trade..."
+                                                                                title="Example: Organic, Suitable for Allergies Fair Trade..."
                                                                                 data-width="100%">
                                                                             <option name="AFRDI Leather">AFRDI Leather
                                                                             </option>
@@ -588,13 +577,12 @@
                                                                         <span class="text-sm text-dark">Select different certifications, that the product owns, or with which certifications the product was marked</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <div class="con-tooltip left">
-                                                                            <p>
-                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
-                                                                            <div class="tooltip">
-                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
-                                                                            </div>
-                                                                        </div>
+                                                                        <a href="javascript:;" title="Certification"
+                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-trigger="focus"
+                                                                           data-content="I am your help and i will help you even if you dont want to be helped">
+                                                                            <i class="demo-pli-question help_text"
+                                                                               title="Help Text"></i> </a>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -609,13 +597,12 @@
                                                                         <span class="text-sm text-dark">Example: Provide the warranty validity period eg. 1 Year Warranty, N/A</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <div class="con-tooltip left">
-                                                                            <p>
-                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
-                                                                            <div class="tooltip">
-                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
-                                                                            </div>
-                                                                        </div>
+                                                                        <a href="javascript:;" title="Product Warranty"
+                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-trigger="focus"
+                                                                           data-content="I am your help and i will help you even if you dont want to be helped">
+                                                                            <i class="demo-pli-question help_text"
+                                                                               title="Help Text"></i> </a>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -638,13 +625,12 @@
                                                                         </select>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <div class="con-tooltip left">
-                                                                            <p>
-                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
-                                                                            <div class="tooltip">
-                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
-                                                                            </div>
-                                                                        </div>
+                                                                        <a href="javascript:;" title="Warranty Type"
+                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-trigger="focus"
+                                                                           data-content="I am your help and i will help you even if you dont want to be helped">
+                                                                            <i class="demo-pli-question help_text"
+                                                                               title="Help Text"></i> </a>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -658,13 +644,12 @@
                                                                         <span class="text-sm text-dark">Example: Service Center Address: 20b Caro Road, Ikeja. Lagos | Repair by Vendor Address: 5 Paris Street, Yaba. Lagos.</span>
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                        <div class="con-tooltip left">
-                                                                            <p>
-                                                                                <span class="demo-pli-question help_text" title="Help Text"></span> </p>
-                                                                            <div class="tooltip">
-                                                                                <p>I am your help and i will help you even if you dont want to be helped</p>
-                                                                            </div>
-                                                                        </div>
+                                                                        <a href="javascript:;" title="Warranty Address"
+                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-trigger="focus"
+                                                                           data-content="I am your help and i will help you even if you dont want to be helped">
+                                                                            <i class="demo-pli-question help_text"
+                                                                               title="Help Text"></i> </a>
                                                                     </div>
                                                                 </div>
 
@@ -775,7 +760,9 @@
 
                                                 <div class="panel">
                                                     <div class="panel-heading">
-                                                        <h3 class="panel-title">Upload Images<span class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span></h3>
+                                                        <h3 class="panel-title">Upload Images<span
+                                                                    class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span>
+                                                        </h3>
                                                     </div>
                                                     <div class="panel-body">
                                                         <!--Dropzonejs using Bootstrap theme-->
@@ -1110,6 +1097,12 @@
         });
     }
 
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
+    });
 </script>
 </body>
 </html>

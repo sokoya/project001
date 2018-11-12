@@ -1,116 +1,11 @@
 
-
-/*tooltip Box*/
-.con-tooltip {
-
-
-    transition: all 0.3s ease-in-out;
-    cursor: help;
-
-}
 .bootstrap-select>.dropdown-toggle {
     z-index:0 !important;
 }
-/*tooltip */
-.tooltip {
-    visibility: hidden;
-    opacity: .40;
-
-    width: 350px;
-    padding: 0px 20px;
-
-    background: #49a251;
-    color: #ffffff;
-
-    position: absolute;
-    top:-140%;
-    left: -25%;
-    z-index:2 !important;
-
-    border-radius: 9px;
-
-    transform: translateY(9px);
-    transition: all 0.3s ease-in-out;
-
-    box-shadow: 0 0 3px rgba(56, 54, 54, 0.86);
-}
-
-
-/* tooltip  after*/
-.tooltip::after {
-    content: " ";
-    width: 0;
-    height: 0;
-
-    border-style: solid;
-    border-width: 12px 12.5px 0 12.5px;
-    border-color: #49a251 transparent transparent transparent;
-
-    position: absolute;
-    left: 40%;
-
-}
-
-.con-tooltip:hover .tooltip{
-    visibility: visible;
-    transform: translateY(-10px);
-    opacity: 1;
-    transition: .3s linear;
-    animation: eazeOutHelp 1s ease-in-out infinite  alternate;
-
-}
-@keyframes eazeOutHelp {
-    0%{
-        transform: translateY(6px);
-    }
-
-    100%{
-        transform: translateY(1px);
-    }
-
-}
-
-/*hover ToolTip*/
-.left:hover {transform: translateX(-6px); }
-.top:hover {transform: translateY(-6px);  }
-.bottom:hover {transform: translateY(6px);}
-.right:hover {transform: translateX(6px); }
 
 
 
-/*left*/
-
-.left .tooltip{ top:-10px; left:-360px; }
-
-.left .tooltip::after{
-    top:40%;
-    left:335px;
-    transform: rotate(-90deg);
-}
-
-
-
-
-/*bottom*/
-
-.bottom .tooltip { top:115%; left:-20%; }
-
-.bottom .tooltip::after{
-    top:-17%;
-    left:40%;
-    transform: rotate(180deg);
-}
-
-
-
-/*right*/
-
-.right .tooltip { top:-100%; left:115%; }
-
-.right .tooltip::after{
-    top:40%;
-    left:-10px;
-    transform: rotate(90deg);
-
+.control-label{
+    color: #4b4b4b !important;
 }
 

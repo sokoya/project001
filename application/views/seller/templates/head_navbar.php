@@ -1,11 +1,8 @@
-<header id="navbar">
+<header id="navbar"  style="z-index:5555;">
     <div id="navbar-container" class="boxed">
         <!--Brand logo & name-->
         <!--================================-->
         <div class="navbar-header">
-            <a href="<?= base_url(); ?>" class="navbar-brand">
-                <img src="<?= base_url('assets/landing/img/onitshamarket-logo.png'); ?>" alt="<?= lang('app_name');?>" class="brand-title">
-            </a>
         </div>
         <!--================================-->
         <!--End brand logo & name-->
