@@ -31,7 +31,10 @@
 						<?php $x = 0;
 						$total = 0;
 						foreach ($this->cart->contents() as $product): ?>
-							<?php $detail = $this->product->get_cart_details($product['id']); ?>
+							<?php 
+								$detail = $this->product->get_cart_details($product['id']);
+								$variation_detail = $this->product->get_variation_detail($product['options']['variation_id']);
+							?>
 							<tr>
 								<td class="table-shopping-cart-img">
 									<?php echo form_hidden($x . '[rowid]', $product['rowid']); ?>

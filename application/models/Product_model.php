@@ -288,8 +288,11 @@ Class Product_model extends CI_Model{
             LEFT JOIN product_gallery i ON (i.product_id = $id AND i.featured_image = 1) ")->row();
     }
 
-    function get_cart_status( $id ){
 
+    // Get the status of variation
+
+    function get_variation_detail( $id ){
+        return $this->db->query("SELECT * FROM quantity, sale_price, discount_price, start_date, end_date FROM product_variation WHERE id = $id")->row();
     }
 
 
