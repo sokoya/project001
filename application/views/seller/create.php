@@ -143,7 +143,7 @@
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
                                                                         <a href="javascript:;" title="Product Name"
-                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-placement="bottom" data-toggle="popover" tabindex="-1"
                                                                            data-trigger="focus"
                                                                            data-content="I am your help and i will help you even if you dont want to be helped">
                                                                             <i class="demo-pli-question help_text"
@@ -169,7 +169,7 @@
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
                                                                         <a href="javascript:;" title="Brand Name"
-                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-placement="bottom" data-toggle="popover" tabindex="-1"
                                                                            data-trigger="focus"
                                                                            data-content="I am your help and i will help you even if you dont want to be helped">
                                                                             <i class="demo-pli-question help_text"
@@ -185,7 +185,7 @@
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
                                                                         <a href="javascript:;" title="Model"
-                                                                           data-placement="top" data-toggle="popover"
+                                                                           data-placement="top" data-toggle="popover" tabindex="-1"
                                                                            data-trigger="focus"
                                                                            data-content="I am your help and i will help you even if you dont want to be helped">
                                                                             <i class="demo-pli-question help_text"
@@ -214,7 +214,7 @@
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
                                                                         <a href="javascript:;" title="Main Color"
-                                                                           data-placement="top" data-toggle="popover"
+                                                                           data-placement="top" data-toggle="popover" tabindex="-1"
                                                                            data-trigger="focus"
                                                                            data-content="I am your help and i will help you even if you dont want to be helped">
                                                                             <i class="demo-pli-question help_text"
@@ -256,7 +256,7 @@
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
                                                                         <a href="javascript:;" title="Product Line"
-                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-placement="bottom" data-toggle="popover" tabindex="-1"
                                                                            data-trigger="focus"
                                                                            data-content="I am your help and i will help you even if you dont want to be helped">
                                                                             <i class="demo-pli-question help_text"
@@ -284,7 +284,7 @@
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
                                                                         <a href="javascript:;" title="Color Family"
-                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-placement="bottom" data-toggle="popover" tabindex="-1"
                                                                            data-trigger="focus"
                                                                            data-content="I am your help and i will help you even if you dont want to be helped">
                                                                             <i class="demo-pli-question help_text"
@@ -310,7 +310,7 @@
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
                                                                         <a href="javascript:;" title="Main Material"
-                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-placement="bottom" data-toggle="popover" tabindex="-1"
                                                                            data-trigger="focus"
                                                                            data-content="I am your help and i will help you even if you dont want to be helped">
                                                                             <i class="demo-pli-question help_text"
@@ -347,7 +347,7 @@
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
                                                                         <a href="javascript:;" title="Product Description"
-                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-placement="bottom" data-toggle="popover" tabindex="-1"
                                                                            data-trigger="focus"
                                                                            data-content="I am your help and i will help you even if you dont want to be helped">
                                                                             <i class="demo-pli-question help_text"
@@ -365,7 +365,7 @@
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
                                                                         <a href="javascript:;" title="Youtube ID"
-                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-placement="bottom" data-toggle="popover" tabindex="-1"
                                                                            data-trigger="focus"
                                                                            data-content="I am your help and i will help you even if you dont want to be helped">
                                                                             <i class="demo-pli-question help_text"
@@ -385,7 +385,7 @@
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
                                                                         <a href="javascript:;" title="What's in the box?"
-                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-placement="bottom" data-toggle="popover" tabindex="-1"
                                                                            data-trigger="focus"
                                                                            data-content="I am your help and i will help you even if you dont want to be helped">
                                                                             <i class="demo-pli-question help_text"
@@ -404,7 +404,7 @@
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
                                                                         <a href="javascript:;" title="Highlights"
-                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-placement="bottom" data-toggle="popover" tabindex="-1"
                                                                            data-trigger="focus"
                                                                            data-content="I am your help and i will help you even if you dont want to be helped">
                                                                             <i class="demo-pli-question help_text"
@@ -437,7 +437,7 @@
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
                                                                         <a href="javascript:;" title="Dimension"
-                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-placement="bottom" data-toggle="popover" tabindex="-1"
                                                                            data-trigger="focus"
                                                                            data-content="I am your help and i will help you even if you dont want to be helped">
                                                                             <i class="demo-pli-question help_text"
@@ -455,7 +455,7 @@
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
                                                                         <a href="javascript:;" title="Weight (kg)"
-                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-placement="bottom" data-toggle="popover" tabindex="-1"
                                                                            data-trigger="focus"
                                                                            data-content="I am your help and i will help you even if you dont want to be helped">
                                                                             <i class="demo-pli-question help_text"
@@ -510,7 +510,7 @@
                                                                                 <span class="text-sm text-dark"><?= $specification['description']; ?></span>
                                                                             </div>
                                                                             <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-                                                                                <a href="javascript:;" title="<?= ucwords($specification['spec_name']); ?>" data-placement="bottom" data-toggle="popover" data-trigger="focus" data-content="<?= $specification['description']; ?>">
+                                                                                <a href="javascript:;" title="<?= ucwords($specification['spec_name']); ?>" data-placement="bottom" data-toggle="popover" tabindex="-1" data-trigger="focus" data-content="<?= $specification['description']; ?>">
                                                                                     <i class="demo-pli-question help_text" title="Help Text"></i> </a>
                                                                             </div>
                                                                         </div>
@@ -578,7 +578,7 @@
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
                                                                         <a href="javascript:;" title="Certification"
-                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-placement="bottom" data-toggle="popover" tabindex="-1"
                                                                            data-trigger="focus"
                                                                            data-content="I am your help and i will help you even if you dont want to be helped">
                                                                             <i class="demo-pli-question help_text"
@@ -598,7 +598,7 @@
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
                                                                         <a href="javascript:;" title="Product Warranty"
-                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-placement="bottom" data-toggle="popover" tabindex="-1"
                                                                            data-trigger="focus"
                                                                            data-content="I am your help and i will help you even if you dont want to be helped">
                                                                             <i class="demo-pli-question help_text"
@@ -626,7 +626,7 @@
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
                                                                         <a href="javascript:;" title="Warranty Type"
-                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-placement="bottom" data-toggle="popover" tabindex="-1"
                                                                            data-trigger="focus"
                                                                            data-content="I am your help and i will help you even if you dont want to be helped">
                                                                             <i class="demo-pli-question help_text"
@@ -645,7 +645,7 @@
                                                                     </div>
                                                                     <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
                                                                         <a href="javascript:;" title="Warranty Address"
-                                                                           data-placement="bottom" data-toggle="popover"
+                                                                           data-placement="bottom" data-toggle="popover" tabindex="-1"
                                                                            data-trigger="focus"
                                                                            data-content="I am your help and i will help you even if you dont want to be helped">
                                                                             <i class="demo-pli-question help_text"
@@ -1101,7 +1101,7 @@
 
 <script>
     $(document).ready(function () {
-        $('[data-toggle="popover"]').popover();
+        $('[data-toggle="popover"]').popover({animation:true});
     });
 </script>
 </body>
