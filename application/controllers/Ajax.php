@@ -133,7 +133,7 @@ class Ajax extends CI_Controller
 					$results['variation'][$x]['vid'] = $variation['id'];
 					$results['variation'][$x]['discount_price'] = $variation['discount_price'];
 					$results['variation'][$x]['sale_price'] = $variation['sale_price'];
-					$results['variation'][$x]['quantity'] = $variation['sale_price'];
+					$results['variation'][$x]['quantity'] = $variation['quantity'];
 					$results['variation'][$x]['variation_name'] = $variation['variation'];
 
 					// $res['vid'] = $variation['id'];
@@ -186,7 +186,7 @@ class Ajax extends CI_Controller
         }
     }
 
-
+    // Add product to cart
     function add_to_cart(){
        if( $this->input->is_ajax_request() && $this->input->post() ){
            $colour = $this->input->post('colour');
@@ -220,6 +220,21 @@ class Ajax extends CI_Controller
        }else{
            redirect(base_url());
        }
+    }
+
+
+    // Update Cart quantity
+    function update_cart_item(){
+    	
+    	if( !$this->input->post() || !$this->input->is_ajax_request() ){ redirect(base_url());}
+    	$cid = $this->input->post('cid', true);
+    	$qty = $this->input->post('qty', true);
+    	$data = array('rowid' => cleanit($cid), 'qty' => $qty);
+    	if( $this->cart->update($data) ){
+    		return true;
+    	}else{
+    		return false;
+    	}
     }
 
 
