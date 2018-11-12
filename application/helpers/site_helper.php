@@ -120,7 +120,6 @@ function cleanit($data) {
 	$data = htmlspecialchars($data);
 	return $data;
 }
-
 // Clean phone number
 function phoneclean($num) {
     $num = preg_replace('/\D/', '', $num);

@@ -113,11 +113,47 @@ class Ajax extends CI_Controller
 		}
 	}
 
+// $date1 = new DateTime("now");
+// $date2 = new DateTime("tomorrow");
+
+// var_dump($date1 == $date2);
+// var_dump($date1 < $date2);
+// var_dump($date1 > $date2);
+
+
+	// Quick view panel
 	function quick_view()
 	{
 		if ($this->input->is_ajax_request() && $this->input->post()) {
 			$pid = $this->input->post('product_id');
-			$results = $this->product->get_quick_view_details($pid);
+			$result = $this->product->get_quick_view_details($pid);
+			$variations = $this->product->get_variations( $pid );
+
+			$now =date_create(date("Y-m-d"));
+			$results = array();
+			foreach( $variations as $variation ){
+				$res['vid'] = $variation['id'];
+				$res['discount_price'] = $variation['discount_price'];
+				$res['sale_price'] = $variation['sale_price'];
+				$res['quantity'] = $variation['quantity'];
+				$res['variation_name']	= $variation['variation'];
+
+
+				$end_date = date_create( $variation['end_date'] );
+				$start_date = date_create( $variation['start_date'] );
+				$end_date_diff = date_diff( $end_date, $now );
+				$start_date_diff = date_diff( $start_date, $now );
+				$intend_diff = $end_date_diff->format("%R%a");
+				$intstart_diff = $start_date_diff->format("%R%a");
+
+				if( $intend_diff > 0  || $intstart_diff < 0 ){
+					$res['discount_price'] = $res['sale_price'];
+				}
+
+				$res['description'] = $result->product_description;
+				array_push( $results, $res);
+			}
+			// get_variations
 			echo json_encode($results, JSON_UNESCAPED_SLASHES);
 			exit;
 		}

@@ -218,6 +218,7 @@
 					<div id="category_body">
 						<div class="row filter_data" data-gutter="15">
 							<?php $p_count = 0; foreach ($products as $product) : ?>
+                                <?php  $p_count++; ?>
 								<div
 									class="col-md-3 <?php if ($p_count % 4 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> clearfix">
 									<div class="product">
@@ -308,7 +309,7 @@
 										</div>
 									</div>
 								</div>
-								<?php  $p_count++; ?>
+
 							<?php  endforeach; ?>
 						</div>
 						<div class="row">
