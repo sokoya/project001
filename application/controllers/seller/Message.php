@@ -26,7 +26,7 @@ class Message extends CI_Controller{
         $page_data['pg_name'] = 'message';
         $page_data['sub_name'] = 'message';
         $page_data['profile'] = $this->seller->get_profile_details(base64_decode($this->session->userdata('logged_id')),
-            'first_name,last_name,email,profile_pic');
+            'first_name,last_name,email,profile_pic');        
         $page_data['messages'] = $this->seller->get_message( base64_decode($this->session->userdata('logged_id')) );
         $this->load->view('seller/message', $page_data);
     }
