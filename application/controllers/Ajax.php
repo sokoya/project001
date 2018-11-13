@@ -123,7 +123,7 @@ class Ajax extends CI_Controller
 			$now = date_create(date("Y-m-d"));
 
 			$results['description'] = character_limiter($desc->product_description, 278);
-			$results['seller'] = base64_encode( $desc->seller_id );
+			$results['seller'] = $desc->seller_id;
 
 			$variation = $this->product->get_variation( $pid );
 			$results['default_vid'] = $variation->id;
