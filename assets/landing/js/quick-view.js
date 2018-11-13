@@ -29,10 +29,16 @@ $.fn.quickViewNext = function (selector, steps, scope) {
 	return $([])
 };
 
+$.fn.exists = function () {
+	return this.length !== 0;
+};
+
 //onclick trigger for quickview
 $('.product-quick-view-btn').on('click', get_view);
 
 function get_view() {
+	let _this_btn = $(this);
+	_this_btn.prop('disabled', true);
 	try {
 		if ($('.q_view').isInViewport()) {
 		} else {
@@ -50,6 +56,12 @@ function get_view() {
 	let img_src = $(this).data('image');
 	$('.test-div').remove();
 	let qv_location = $(this).quickViewNext('.product_div');
+	// if ($(this).quickViewNext('.product_div').exists()) {
+	// 	console.log('There is next');
+	// 	console.log($(this).quickViewNext('.product_div'));
+	// } else {
+	// 	console.log('No next')
+	// }
 	if ($(this).data('qv') === true) {
 		let id = $(this).data('qvc');
 		let p_id = `.product-${id}`;
@@ -57,15 +69,12 @@ function get_view() {
 	}
 
 
-	$('.close_qv').on('click', function () {
-		$('.test-div').remove();
-	});
-
 	$.ajax({
 		url: base_url + 'ajax/quick_view',
 		method: 'POST',
 		data: {product_id: pr_id},
 		success: function (response) {
+			_this_btn.prop('disabled', false);
 			let quick = JSON.parse(response);
 			qv_location.after(
 				`<div class="col-md-12 test-div q_view clearfix">
@@ -75,7 +84,21 @@ function get_view() {
 			</div>
 			<div class="col-md-8">
 			<span class="close_qv"><i class="fa fa-times-circle-o" aria-hidden="true"></i></span>
+				<h1 class="q_pr_price">&#8358;26,000</h1>
 				<h1 class="q_pr_title">${title}</h1>
+				<ul class="product-page-product-rating" style="margin-bottom: 10px;">
+					<li class="rated"><i class="fa fa-star"></i>
+					</li>
+					<li class="rated"><i class="fa fa-star"></i>
+					</li>
+					<li class="rated"><i class="fa fa-star"></i>
+					</li>
+					<li class="rated"><i class="fa fa-star"></i>
+					</li>
+					<li class="rated"><i class="fa fa-star"></i>
+					</li>
+					<li class="review-count-pr">420</li>
+				</ul>
 				<div class="q_view_high">
 					<div class="q_skeleton_highlight">${quick.description}</div>
 				</div>
@@ -85,24 +108,20 @@ function get_view() {
 						<ul>
 							<li class="product-page-qty-item">
 								<button type="button"
-										class="product-page-qty product-page-qty-minus">-
+										class="product-page-qty product-page-qty-minus" id="${pr_id}_minus" data-target="${pr_id}">-
 								</button>
-								<input data-range="10" name="quantity"
-									   id="quan"
+								<input data-range="${pr_id}" name="quantity"
+									   id="${pr_id}"
 									   class="product-page-qty product-page-qty-input quantity"
 									   type="text"
-									   value="1"/>
-								<button type="button"
-										class="product-page-qty product-page-qty-plus">+
+									   value="1" disabled/>
+								<button type="button" id="${pr_id}_plus"
+										class="product-page-qty product-page-qty-plus" data-target="${pr_id}">+
 								</button>
 							</li>
 						</ul>
 					</div>
-
-					<div class="col-md-6" id="variation_container">
-				
-					</div>
-				
+					<div class="col-md-6" id="variation_container"></div>
 				</div>
 				<div class="row">
 				<div class="col-md-6">
@@ -114,39 +133,74 @@ function get_view() {
 				</div>
 			</div>	
 			</div>
-		</div>`
-			);
-			if (quick.variation.length > 1) {
+		</div>`);
 
+			$('.close_qv').on('click', function () {
+				$('.test-div').remove();
+			});
+
+			if (quick.variation.length > 1) {
 				$('#variation_container').append(
 					`<h5 class="custom-product-page-option-title">Variation:</h5>
-<select class="product-page-option-select variation-select" id="variation_select" name="variation">
+						<select class="product-page-option-select variation-select" id="variation_select" name="variation">
 					</select>`
 				);
-
 				$.each(quick.variation, function (key, value) {
+					let constant_price = '';
+					if (value.discount_price === '') {
+						constant_price = value.sale_price
+					} else {
+						constant_price = value.discount_price
+					}
 					$('#variation_select').append($('<option>', {
 						value: value.variation_name,
-						text: value.variation_name
+						text: value.variation_name + ' - ' + format_currency(constant_price)
 					}));
-					// `<select class="product-page-option-select variation-select"	name="variation">
-					// 	<option title="${value.variation_name}"
-					// 			data-id="${value.pid}"
-					// 			value="${value.variation_name}">
-					// 		${value.variation_name}
-					// 	</option>
-					// </select>`;
-
-					// console.log(value.variation_name)
 				});
 			}
-			// $.each(JSON.parse(response), function (key, value) {
-			// 	$('.q_view_high').html(`
-			// 		<p>${value.description}</p>
-			// 		`)
-			// });
-		}
-		,
+			let plus = $('.product-page-qty-plus');
+			let minus = $('.product-page-qty-minus');
+
+			// noinspection JSJQueryEfficiency
+			$(".product-page-qty-plus").on('click', function () {
+				var currentVal = parseInt($(this).prev(".product-page-qty-input").val(), 10);
+
+				if (!currentVal || currentVal == "" || currentVal == "NaN") currentVal = 0;
+
+				$(this).prev(".product-page-qty-input").val(currentVal + 1);
+			});
+
+			// noinspection JSJQueryEfficiency
+			$(".product-page-qty-minus").on('click', function () {
+				var currentVal = parseInt($(this).next(".product-page-qty-input").val(), 10);
+				if (currentVal == "NaN") currentVal = 1;
+				if (currentVal > 1) {
+					$(this).next(".product-page-qty-input").val(currentVal - 1);
+				}
+			});
+
+			plus.prop('disabled', false);
+
+			plus.on('click', function () {
+				let target = $(this).data('target');
+				let quantity = $(`#${target}`);
+				$(`#${target}_minus`).prop("disabled", false);
+				if (quantity.val() >= quantity.data('range')) {
+					$(`#${target}_plus`).prop("disabled", true);
+				}
+			});
+
+			minus.on('click', function () {
+				let target = $(this).data('target');
+				let quantity = $(`#${target}`);
+				$(`#${target}_plus`).prop("disabled", false);
+				if (quantity.val() <= 1) {
+					$(`#${target}_minus`).prop("disabled", true);
+				}
+			});
+		},
+
+
 		error: () => {
 			console.log('An error occurred')
 		}
