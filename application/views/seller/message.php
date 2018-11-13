@@ -124,7 +124,7 @@
                                     <div class="col-sm-5 toolbar-right">
                                         <!--Details Information-->
                                         <p class="mar-no">
-                                            <small class="text-muted"><?= neatTime($message->created_on); ?></small>
+                                            <small class="text-muted"><?= neatDate($message->created_on) .' '. neatTime($message->created_on); ?></small>
                                         </p>
                                     </div>
                                 </div>
