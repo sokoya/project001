@@ -40,7 +40,7 @@
 									<?php echo form_hidden($x . '[rowid]', $product['rowid']); ?>
 									<a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
 										<img
-											src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image); ?> ?>"
+											src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image);?>"
 											alt="<?= lang('app_name'); ?> <?= $product['name']; ?>"
 											title="<?= $product['name']; ?>"/>
 									</a>
@@ -70,7 +70,7 @@
 												</button>
 												<input data-range="<?= $variation_detail->quantity; ?>" name="quantity"
 													   id="quan"
-													   class="product-page-qty product-page-qty-input quantity"
+													   class="product-page-qty product-page-qty-input quantity product-<?= $product['rowid']; ?>"
 													   type="text"
 													   value="<?= $product['qty']; ?>" disabled/>
 												<button type="button" data-cid="<?= $product['rowid']; ?>"
@@ -136,20 +136,22 @@
 </script>
 <?php $this->load->view('landing/resources/script'); ?>
 <script>
+
 	
 	let quantity = $('#quan');
 	let count = quantity.data('range');
 	let plus = $('.product-page-qty-plus');
 	let minus = $('.product-page-qty-minus');
-	let cid = $('.product-page-qty').data('cid');
 
 	plus.on('click', function () {
+		let cid = $(this).data('cid');
+		let qty = $(`product-${cid}`).val() *1;
 		plus.prop('disabled', true);
 		minus.prop("disabled", false);
 		$.ajax({
 			url: 'ajax/update_cart_item',
 			method: 'POST',
-			data: {cid:cid,qty:quantity.val()},
+			data: {cid:cid,qty:qty},
 			success: function (response) {
 				console.log(response);
 				if (quantity.val() >= count) {
@@ -170,6 +172,8 @@
 	});
 
 	minus.on('click', function () {
+		let cid = $(this).data('cid');
+		let qty = $(`product-${cid}`).val() *1 ;
 		minus.prop('disabled', true);
 		plus.prop("disabled", false);
 		if (quantity.val() <= 1) {
@@ -178,7 +182,7 @@
 		$.ajax({
 			url: 'ajax/update_cart_item',
 			method: 'POST',
-			data: {cid:cid,qty:quantity.val()},
+			data: {cid:cid,qty:qty},
 			success: () => {
 				if (quantity.val() <= 1) {
 					minus.prop("disabled", true);
