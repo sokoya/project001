@@ -29,7 +29,6 @@ class Product extends CI_Controller {
 		// $this->add_count($index);
         $page_data['page'] = 'product';
 		$page_data['rating_counts'] = $this->product->get_rating_counts( $index );
-//		var_dump($page_data['rating_counts']); exit;
         $page_data['featured_image'] = $this->product->get_featured_image( $index );
 		$this->load->view('landing/product', $page_data);
 	}
