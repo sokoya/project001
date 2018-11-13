@@ -3,6 +3,9 @@
 	.mail-list-unread {
 		font-weight: 800;
 	}
+	.mail-list-read{
+		font-weight: 100 !important;
+	}
 
 	.mail-from {
 		width: 61% !important;
@@ -96,14 +99,15 @@
 										<?php if ($messages) : ?>
 											<?php foreach ($messages->result() as $message) : ?>
 												<li class="<?php if ($message->is_read == 0) echo 'mail-list-unread'; ?> message_item"
-													style="cursor: pointer">
+													style="cursor: pointer" data-mid="<?= $message->id; ?>"
+													data-title="<?= $message->id; ?>_title">
 													<div class="mail-control">
 														<input id="<?= $message->id; ?>" class="magic-checkbox"
 															   type="checkbox">
 														<label for="<?= $message->id; ?>"></label>
 													</div>
-													<div
-														class="mail-from <?php if ($message->is_read == 0) echo 'mail-list-unread'; ?>"><?= $message->title; ?></div>
+													<div id="<?= $message->id; ?>_title"
+														 class="mail-from <?php if ($message->is_read == 0) echo 'mail-list-unread'; ?>"><?= $message->title; ?></div>
 													<div class="mail-time"><?= ago($message->created_on); ?></div>
 												</li>
 											<?php endforeach; ?>
@@ -147,7 +151,7 @@
 									<div class="nano-content" tabindex="0" style="right: -17px;">
 										<div class="mail-message">
 											Hey <?= ucfirst($profile->first_name); ?>,<br/><br/>
-											<blockquote style="font-size:14px;text-align:justify;" id="method_detail">
+											<blockquote style="font-size:14px;text-align:justify;" id="message_detail">
 												<?= $message->content; ?>
 											</blockquote>
 											<div class="pull-right">
@@ -213,21 +217,23 @@
 
 	$('.message_item').on('click', function () {
 		let message_id = $(this).data('mid');
+		let title_target = $(this).data('title');
+		$(`#${title_target}`).removeClass('mail-list-unread').addClass('mail-list-read');
 		$.ajax({
 			url: "<?= base_url(); ?>seller/message/message_detail",
 			method: 'POST',
-			data: {mid: message_id},
+			data: {'mid': message_id},
 			success: function (response) {
+				response = JSON.parse(response);
 				$('#message_title').html(`
-					This is a test title
+					${response.title}
 				`);
 				$('#message_date').html(`
-					Friday 14, Nov. 2019
+					${response.created_on}
 				`);
 				$('#message_detail').html(`
-					This is the message detail do well to respond accordingly
+					${response.content}
 				`);
-				console.log(response);
 			},
 			error: response => console.log(response)
 
