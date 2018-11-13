@@ -384,7 +384,9 @@
 									<p style="text-wrap: normal">
 										<?php
 										$certifications = json_decode($product->certifications);
-										foreach ($certifications as $type) echo '<strong>' . $type . '</strong> ';
+										if( $certifications ){
+											foreach ($certifications as $type) echo '<strong>' . $type . '</strong> ';
+										}
 										?>
 									</p>
 								</div>
