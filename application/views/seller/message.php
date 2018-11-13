@@ -206,12 +206,6 @@
 <!--=================================================-->
 <?php $this->load->view('seller/templates/scripts'); ?>
 <script>
-<<<<<<< HEAD
-    let all = $('#select-all-mail');
-    all.click(function () {
-        $('input:checkbox').prop('checked', this.checked);
-    });
-=======
 	let all = $('#select-all-mail');
 	all.click(function () {
 		$('input:checkbox').prop('checked', this.checked);
@@ -239,7 +233,6 @@
 
 		});
 	});
->>>>>>> 6f6d616bc34d07237bf43d02d8311a88c63ac161
 </script>
 </body>
 </html>
