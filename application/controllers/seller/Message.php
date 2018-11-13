@@ -10,8 +10,6 @@ class Message extends CI_Controller{
             redirect('seller/login');
         }
 
-
-        // die( base64_decode($this->session->userdata('logged_id')) );
         $user = $this->seller->get_profile( base64_decode($this->session->userdata('logged_id')) );
         if( $user->is_seller == 'false' ){
             $this->session->set_flashdata('success_msg','Please complete the below form to become a seller!');
@@ -24,16 +22,21 @@ class Message extends CI_Controller{
     }
 
     public function index(){
-        $status = cleanit($this->uri->segment(2));
         $page_data['page_title'] = 'My Messages';
         $page_data['pg_name'] = 'message';
-        $page_data['sub_name'] = $status;
+        $page_data['sub_name'] = 'message';
         $page_data['profile'] = $this->seller->get_profile_details(base64_decode($this->session->userdata('logged_id')),
             'first_name,last_name,email,profile_pic');
-        // get product
-        $page_data['products'] = $this->seller->get_product( base64_decode($this->session->userdata('logged_id')), $status
-        );
-        $page_data['type'] = $status;
+        $page_data['messages'] = $this->seller->get_message( base64_decode($this->session->userdata('logged_id')) );
         $this->load->view('seller/message', $page_data);
+    }
+
+    function message_detail(){
+        if( !$this->input->post() || !$this->input->is_ajax_request() ){ redirect(base_url());}
+        $mid = $this->input->post('mid');
+        $result = $this->seller->get_message(base64_decode($this->session->userdata('logged_id')),'', $mid);
+        echo json_encode( $result );
+        exit;
+
     }
 }

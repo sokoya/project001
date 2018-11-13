@@ -669,7 +669,7 @@
 									<?php endif; ?>
 								</div>
 								<ul class="product-caption-feature-list">
-									<li>Free Shipping</li>
+									<!-- <li>Free Shipping</li> -->
 								</ul>
 							</div>
 						</div>

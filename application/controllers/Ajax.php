@@ -191,6 +191,44 @@ class Ajax extends CI_Controller
 
 
 
+	// Quick view add 
+	function quick_view_add(){
+       if( $this->input->is_ajax_request() && $this->input->post() ){
+           $colour = $this->input->post('colour');
+           $variation = $this->input->post('variation');
+           $variation = empty($variation) ? '' : $this->input->post('variation');
+           $colour = empty($colour) ? '' : $this->input->post('colour');
+           $name = cleanit($this->input->post('product_name'));
+           $name = preg_replace('/^['.$this->product_name_rules.']+$/i', " ", $name);
+           // Added to make checks if product still remains
+           $variation_id = $this->input->post('variation_id', true);
+           $data = array(
+               'id' => $this->input->post('product_id'),
+               'qty' => $this->input->post('quantity'),
+               'price' => $this->input->post('product_price'),
+               'name' => $name,
+               'options' =>
+                   array(
+                       'variation' => $variation,
+                       'colour' => $colour,
+                       'seller' => $this->input->post('seller'),
+                       'variation_id' => $variation_id
+                   )
+           );
+           if( $this->cart->insert($data)){
+               echo true;
+               exit;
+           }else{
+               echo false;
+               exit;
+           }
+       }else{
+           redirect(base_url());
+       }
+    }
+
+
+
     /**
      * @param $vid - variation id
      * @return JSON
