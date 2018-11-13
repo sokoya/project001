@@ -8,7 +8,7 @@
                 <img src="<?= base_url('assets/landing/img/onitshamarket-logo.png');?>" alt="<?= lang('app_name');?> logo" class="brand-icon">
                 <span class="brand-text"><?= lang('app_name'); ?></span>
             </a>
-            <a href="#" class="mainnav-toggle"><i class="pci-cross pci-circle icon-lg"></i></a>
+            <a href="javascript:;" class="mainnav-toggle"><i class="pci-cross pci-circle icon-lg"></i></a>
         </div>
 
 
@@ -57,7 +57,7 @@
                         <li class="list-header">Navigation</li>
 
                         <!--Menu list item-->
-                        <li <?php if($pg_name == 'overview') echo 'class="active-sub"'?>>
+                        <li <?php if($pg_name == 'overview') echo 'class="active"'?>>
                             <a href="<?= base_url('seller/overview')?>">
                                 <i class="demo-pli-home"></i>
                                 <span class="menu-title">Overview</span>
@@ -65,8 +65,8 @@
                         </li>
 
                         <!--Menu list item-->
-                        <li <?php if($pg_name == 'product' || $pg_name == 'manage_product' ) echo 'class="active-sub"'?>>
-                            <a href="#">
+                        <li <?php if($pg_name == 'product' || $pg_name == 'manage_product' ) echo 'class="active"'?>>
+                            <a href="javascript:;">
                                 <i class="demo-pli-idea-2"></i>
                                 <span class="menu-title">Products</span>
                                 <i class="arrow"></i>
@@ -80,7 +80,7 @@
                                         <i class="demo-pli-star"></i>Add new product</a></li>
 
                                 <li>
-                                    <a href="#">
+                                    <a href="javascript:;">
                                         <i class="demo-pli-remove-user"></i>Manage Products<i class="arrow"></i></a>
                                     <!--Submenu-->
                                     <ul class="collapse">
@@ -104,8 +104,8 @@
                         <li class="list-divider"></li>
 
                         <!--Menu list item-->
-                        <li class="<?php if($pg_name == 'orders') echo 'class="active-sub"'?>">
-                            <a href="#">
+                        <li class="<?php if($pg_name == 'orders') echo 'class="active"'?>">
+                            <a href="javascript:;">
                                 <i class="demo-pli-cart-coin"></i>
                                 <span class="menu-title">Orders</span>
                                 <i class="arrow"></i>
@@ -120,7 +120,7 @@
                                 <li <?php if($sub_name =='shipped_pending') echo 'class="active-link"' ?>><a href="<?= base_url('seller/orders/?type=shipped')?>">
                                         <i class="demo-pli-monitor-2"></i>Shipped Orders</a></li>
                                 <li>
-                                    <a href="#">
+                                    <a href="javascript:;">
                                         <i class="demo-pli-folder-with-document"></i>Completed Orders<i class="arrow"></i></a>
                                     <!--Submenu-->
                                     <ul class="collapse">
@@ -139,15 +139,15 @@
 
                         <li class="list-divider"></li>
                         <?php $message_count = $this->seller->get_unread_message(base64_decode($this->session->userdata('logged_id'))); ?>
-                        <li>
+                        <li class="<?php if($pg_name == 'message') echo 'active'?>">
                             <a href="<?= base_url('seller/message'); ?>">
-                                <i class="demo-pli-inbox-full"></i>
+                                <i class="demo-pli-mail"></i>
                                 <span class="menu-title">Messages (<?= $message_count < 1 ? '' : $message_count; ?>)</span>
                             </a>
                         </li>
                         <li class="list-divider"></li>
-                        <li class="<?php if($pg_name == 'settings') echo 'class="active-sub"'?>">
-                            <a href="#">
+                        <li class="<?php if($pg_name == 'settings') echo 'class="active"'?>">
+                            <a href="javascript:;">
                                 <i class="demo-pli-gear"></i>
                                 <span class="menu-title">Settings</span>
                                 <i class="arrow"></i>
