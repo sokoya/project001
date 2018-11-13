@@ -24,5 +24,8 @@
     <script src="<?= base_url('assets/seller/plugins/datatables/media/js/jquery.dataTables.js'); ?>"></script>
     <script src="<?= base_url('assets/seller/plugins/datatables/media/js/dataTables.bootstrap.js'); ?>"></script>
     <script src="<?= base_url('assets/seller/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js'); ?>"></script>
+    <script src="<?= base_url('assets/seller/plugins/morris-js/morris.min.js'); ?>"></script>
+    <script src="<?= base_url('assets/seller/plugins/morris-js/raphael-js/raphael.min.js'); ?>"></script>
+    <script src="<?= base_url('assets/seller/js/demo/morris-js.js'); ?>"></script>
 
 <?php endif; ?>
