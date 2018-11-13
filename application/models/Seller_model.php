@@ -333,6 +333,10 @@ Class Seller_model extends CI_Model{
         }else{
             $this->db->where('seller_id', $sid);
             $this->db->where('id', $id);
+            if( $this->db->update( 'sellers_notification_message', array('is_read', 1) ) ){
+                $this->db->where('seller_id', $sid);
+                $this->db->where('id', $id);
+            }
             return $this->db->get('sellers_notification_message')->row_array();
         }
     }
