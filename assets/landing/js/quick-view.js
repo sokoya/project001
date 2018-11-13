@@ -82,7 +82,7 @@ function get_view() {
 			</div>
 			<div class="col-md-8">
 			<span class="close_qv"><i class="fa fa-times-circle-o" aria-hidden="true"></i></span>
-				<h1 class="q_pr_price" id="q_pr_price${pr_id}">${(quick.default_discount_price === '') ? format_currency(quick.default_price) : format_currency(quick.default_discount_price)}</h1>
+				<h1 class="q_pr_price" data-amount="${(quick.default_discount_price === '') ? quick.default_price : quick.default_discount_price}" id="q_pr_price${pr_id}">${(quick.default_discount_price === '') ? format_currency(quick.default_price) : format_currency(quick.default_discount_price)}</h1>
 				<h1 class="q_pr_title">${title}</h1>
 				<ul class="product-page-product-rating" style="margin-bottom: 10px;">
 					${
@@ -122,7 +122,7 @@ function get_view() {
 				</div>
 				<div class="row">
 				<div class="col-md-6">
-					<button class="btn btn-block btn-primary add-to-cart c-hover"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
+					<button class="btn btn-block btn-primary add-to-cart c-hover" id="${quick.default_vid}${quick.avg_rating}_submit" data-vid="${quick.default_vid}" data-vname="${quick.default_vname}"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
 				</div>
 				<div class="col-md-6">
 					<button class="btn btn-block btn-default fav c-hover"><i class="fa fa-star-o"></i> Wishlist</button>
@@ -132,7 +132,33 @@ function get_view() {
 			</div>
 		</div>`);
 
+			$('.add-to-cart').on('click', function () {
+
+				let quantity_available = $(`#${pr_id}`).val();
+				let price_ = $('.q_pr_price').data('amount');
+
+				$.ajax({
+					url: base_url + 'ajax/add_to_cart',
+					method: 'POST',
+					data: {
+						product_id: pr_id,
+						quantity: quantity_available,
+						product_price: price_,
+						product_name: title,
+					},
+					success: function (response) {
+
+					},
+					error: () => {
+
+					}
+				}).done(function () {
+
+				})
+			});
+
 			let default_variation_id = quick.default_vid;
+			let default_vname = quick.default_vname;
 			$('.close_qv').on('click', function () {
 				$('.test-div').remove();
 			});
@@ -150,15 +176,20 @@ function get_view() {
 					} else {
 						constant_price = value.discount_price
 					}
-					$('#variation_select').append(`<option value="${value.variation_name}" ${(value.vid == default_variation_id) ? 'selected=selected' : ''} class="variation-option" data-amount="${format_currency(constant_price)}" data-target="q_pr_price${pr_id}">${value.variation_name + ' - ' + format_currency(constant_price)}</option>`);
+					$('#variation_select').append(`<option value="${value.variation_name}" da data-vid="${default_variation_id}" ${(value.vid == default_variation_id) ? 'selected=selected' : ''} class="variation-option" data-amount="${format_currency(constant_price)}" data-target="q_pr_price${pr_id}">${value.variation_name + ' - ' + format_currency(constant_price)}</option>`);
 				});
 			}
 
 			$('#variation_select').on('change', function () {
+				let submit_btn = $(`${quick.default_vid}${quick.avg_rating}_submit`);
+				console.log(submit_btn);
 				let elem = $('#variation_select :selected');
 				let price = elem.data('amount');
 				let target = elem.data('target');
-				$(`#${target}`).html(`${price}`)
+				$(`#${target}`).html(`${price}`);
+				$('.q_pr_price').data('amount', price);
+				submit_btn.data('vid', default_variation_id);
+				submit_btn.data('vname', default_vname);
 			});
 
 			let plus = $('.product-page-qty-plus');
