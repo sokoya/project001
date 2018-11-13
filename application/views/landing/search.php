@@ -219,7 +219,7 @@
 						<div class="row filter_data" data-gutter="15">
 							<?php $p_count = 0; foreach ($products as $product) : ?>
 								<div
-									class="col-md-3 <?php if ($p_count % 4 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> clearfix">
+									class="col-md-3 <?php if ($p_count % 4 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> v-items clearfix">
 									<div class="product">
 										<?php if (!empty($product->discount_price)): ?>
 											<ul class="product-labels">
