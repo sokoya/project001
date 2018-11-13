@@ -193,10 +193,33 @@
 <!--=================================================-->
 <?php $this->load->view('seller/templates/scripts'); ?>
 <script>
-    let all = $('#select-all-mail');
-    all.click(function () {
-        $('input:checkbox').prop('checked', this.checked);
-    });
+	let all = $('#select-all-mail');
+	all.click(function () {
+		$('input:checkbox').prop('checked', this.checked);
+	});
+
+	$('.message_item').on('click', function () {
+		let message_id = $(this).data('mid');
+		$.ajax({
+			url: base_url + 'seller/message/message_detail',
+			method: 'POST',
+			data: {mid: message_id},
+			success: function (response) {
+				$('#message_title').html(`
+					This is a test title
+				`);
+				$('#message_date').html(`
+					Friday 14, Nov. 2019
+				`);
+				$('#message_detail').html(`
+					This is the message detail do well to respond accordingly
+				`);
+				console.log(response);
+			},
+			error: response => console.log(response)
+
+		});
+	});
 </script>
 </body>
 </html>
