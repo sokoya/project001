@@ -222,7 +222,7 @@
 							foreach ($products as $product) : ?>
 								<?php $p_count++; ?>
 								<div
-									class="col-md-3 <?php if ($p_count % 4 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> clearfix">
+									class="col-md-3 <?php if ($p_count % 4 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> v-items clearfix">
 									<div class="product">
 										<?php if (!empty($product->discount_price)): ?>
 											<ul class="product-labels">

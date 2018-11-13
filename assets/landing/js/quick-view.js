@@ -56,12 +56,10 @@ function get_view() {
 	let img_src = $(this).data('image');
 	$('.test-div').remove();
 	let qv_location = $(this).quickViewNext('.product_div');
-	// if ($(this).quickViewNext('.product_div').exists()) {
-	// 	console.log('There is next');
-	// 	console.log($(this).quickViewNext('.product_div'));
-	// } else {
-	// 	console.log('No next')
-	// }
+	if ($(this).quickViewNext('.product_div').exists()) {
+	} else {
+		qv_location = $(".v-items").last();
+	}
 	if ($(this).data('qv') === true) {
 		let id = $(this).data('qvc');
 		let p_id = `.product-${id}`;
@@ -87,16 +85,12 @@ function get_view() {
 				<h1 class="q_pr_price" id="q_pr_price${pr_id}">${(quick.default_discount_price === '') ? format_currency(quick.default_price) : format_currency(quick.default_discount_price)}</h1>
 				<h1 class="q_pr_title">${title}</h1>
 				<ul class="product-page-product-rating" style="margin-bottom: 10px;">
-					<li class="rated"><i class="fa fa-star"></i>
-					</li>
-					<li class="rated"><i class="fa fa-star"></i>
-					</li>
-					<li class="rated"><i class="fa fa-star"></i>
-					</li>
-					<li class="rated"><i class="fa fa-star"></i>
-					</li>
-					<li class="rated"><i class="fa fa-star"></i>
-					</li>
+					${Array(quick.avg_rating * 1).join(0).split(0).map((item, i) => `
+						<li class="rated"><i class="fa fa-star"></i></li>
+					`).join('')}
+					${quick.avg_rating < 5 ? Array(5 - quick.avg_rating * 1).join(0).split(0).map((item, i) => `
+						<li><i class="fa fa-star"></i></li>
+						`).join('') : ''}
 					<li class="review-count-pr">420</li>
 				</ul>
 				<div class="q_view_high">
