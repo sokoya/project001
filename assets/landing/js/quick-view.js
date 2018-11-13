@@ -29,10 +29,16 @@ $.fn.quickViewNext = function (selector, steps, scope) {
 	return $([])
 };
 
+$.fn.exists = function () {
+	return this.length !== 0;
+};
+
 //onclick trigger for quickview
 $('.product-quick-view-btn').on('click', get_view);
 
 function get_view() {
+	let _this_btn = $(this);
+	_this_btn.prop('disabled', true);
 	try {
 		if ($('.q_view').isInViewport()) {
 		} else {
@@ -50,23 +56,69 @@ function get_view() {
 	let img_src = $(this).data('image');
 	$('.test-div').remove();
 	let qv_location = $(this).quickViewNext('.product_div');
+	if ($(this).quickViewNext('.product_div').exists()) {
+	} else {
+		qv_location = $(".v-items").last();
+	}
 	if ($(this).data('qv') === true) {
 		let id = $(this).data('qvc');
 		let p_id = `.product-${id}`;
 		qv_location = $(p_id);
 	}
 
-	qv_location.after(
-		`<div class="col-md-12 test-div q_view clearfix">
+
+	$.ajax({
+		url: base_url + 'ajax/quick_view',
+		method: 'POST',
+		data: {product_id: pr_id},
+		success: function (response) {
+			_this_btn.prop('disabled', false);
+			let quick = JSON.parse(response);
+			qv_location.after(
+				`<div class="col-md-12 test-div q_view clearfix">
 			<div class="row">
 			<div class="col-md-4">
 				<img src="${img_src}" class="q_pr_img" alt="${title}" title="${title}">
 			</div>
 			<div class="col-md-8">
 			<span class="close_qv"><i class="fa fa-times-circle-o" aria-hidden="true"></i></span>
+				<h1 class="q_pr_price" id="q_pr_price${pr_id}">${(quick.default_discount_price === '') ? format_currency(quick.default_price) : format_currency(quick.default_discount_price)}</h1>
 				<h1 class="q_pr_title">${title}</h1>
+				<ul class="product-page-product-rating" style="margin-bottom: 10px;">
+					${
+					(quick.avg_rating * 1 === 0) ? '' :
+						Array(quick.avg_rating * 1).join(0).split(0).map((item, i) => `
+						<li class="rated"><i class="fa fa-star"></i></li>
+					`).join('')
+					}
+					${quick.avg_rating < 5 ? Array(5 - quick.avg_rating * 1).join(0).split(0).map((item, i) => `
+						<li><i class="fa fa-star"></i></li>
+						`).join('') : ''}
+					<li class="review-count-pr">${quick.total_rating}</li>
+				</ul>
 				<div class="q_view_high">
-					<div class="q_skeleton_highlight"></div>
+					<div class="q_skeleton_highlight">${quick.description}</div>
+				</div>
+				<div class="row" style="margin-top: 20px; margin-bottom: 10px">
+									<div class="col-md-6">
+					<h5 class="custom-product-page-option-title">Quantity:</h5>
+						<ul>
+							<li class="product-page-qty-item">
+								<button type="button"
+										class="product-page-qty product-page-qty-minus" id="${pr_id}_minus" data-target="${pr_id}">-
+								</button>
+								<input data-range="${quick.default_qty}" name="quantity"
+									   id="${pr_id}"
+									   class="product-page-qty product-page-qty-input quantity"
+									   type="text"
+									   value="1" disabled/>
+								<button type="button" id="${pr_id}_plus"
+										class="product-page-qty product-page-qty-plus" data-target="${pr_id}">+
+								</button>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-6" id="variation_container"></div>
 				</div>
 				<div class="row">
 				<div class="col-md-6">
@@ -76,25 +128,78 @@ function get_view() {
 					<button class="btn btn-block btn-default fav c-hover"><i class="fa fa-star-o"></i> Wishlist</button>
 				</div>
 				</div>
-
 			</div>	
 			</div>
-		</div>`
-	);
+		</div>`);
 
-	$('.close_qv').on('click', function () {
-		$('.test-div').remove();
-	});
+			let default_variation_id = quick.default_vid;
+			$('.close_qv').on('click', function () {
+				$('.test-div').remove();
+			});
 
-	$.ajax({
-		url: base_url + 'ajax/quick_view',
-		method: 'POST',
-		data: {product_id: pr_id},
-		success: function (response) {
-			$.each(JSON.parse(response), function (key, value) {
-				$('.q_view_high').html(`
-					<p>${value.highlights}</p>
-					`)
+			if (quick.variation.length > 1) {
+				$('#variation_container').append(
+					`<h5 class="custom-product-page-option-title">Variation:</h5>
+						<select class="product-page-option-select variation-select" id="variation_select" name="variation">
+					</select>`
+				);
+				$.each(quick.variation, function (key, value) {
+					let constant_price = '';
+					if (value.discount_price === '') {
+						constant_price = value.sale_price
+					} else {
+						constant_price = value.discount_price
+					}
+					$('#variation_select').append(`<option value="${value.variation_name}" ${(value.vid == default_variation_id) ? 'selected=selected' : ''} class="variation-option" data-amount="${format_currency(constant_price)}" data-target="q_pr_price${pr_id}">${value.variation_name + ' - ' + format_currency(constant_price)}</option>`);
+				});
+			}
+
+			$('#variation_select').on('change', function () {
+				let elem = $('#variation_select :selected');
+				let price = elem.data('amount');
+				let target = elem.data('target');
+				$(`#${target}`).html(`${price}`)
+			});
+
+			let plus = $('.product-page-qty-plus');
+			let minus = $('.product-page-qty-minus');
+
+			// noinspection JSJQueryEfficiency
+			$(".product-page-qty-plus").on('click', function () {
+				var currentVal = parseInt($(this).prev(".product-page-qty-input").val(), 10);
+
+				if (!currentVal || currentVal == "" || currentVal == "NaN") currentVal = 0;
+
+				$(this).prev(".product-page-qty-input").val(currentVal + 1);
+			});
+
+			// noinspection JSJQueryEfficiency
+			$(".product-page-qty-minus").on('click', function () {
+				var currentVal = parseInt($(this).next(".product-page-qty-input").val(), 10);
+				if (currentVal == "NaN") currentVal = 1;
+				if (currentVal > 1) {
+					$(this).next(".product-page-qty-input").val(currentVal - 1);
+				}
+			});
+
+			plus.prop('disabled', false);
+
+			plus.on('click', function () {
+				let target = $(this).data('target');
+				let quantity = $(`#${target}`);
+				$(`#${target}_minus`).prop("disabled", false);
+				if (quantity.val() >= quantity.data('range')) {
+					$(`#${target}_plus`).prop("disabled", true);
+				}
+			});
+
+			minus.on('click', function () {
+				let target = $(this).data('target');
+				let quantity = $(`#${target}`);
+				$(`#${target}_plus`).prop("disabled", false);
+				if (quantity.val() <= 1) {
+					$(`#${target}_minus`).prop("disabled", true);
+				}
 			});
 		},
 		error: () => {

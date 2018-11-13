@@ -7448,6 +7448,14 @@ input[type="color"]:focus,
 	margin-top: 10px;
 }
 
+.q_pr_price {
+	font-size: 18px;
+	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-weight: 700;
+	color: #0b6427;
+	margin-top: 10px;
+}
+
 .q_pr_img {
 	width: 200px;
 	height: 220px;
@@ -7461,8 +7469,12 @@ input[type="color"]:focus,
 	color: #4e4e4e;
 }
 
-.close_qv:hover{
+.close_qv:hover {
 	color: #ff2e19;
+}
+
+.review-count-pr{
+	font-size: 14px !important;
 }
 
 .q_skeleton_highlight:empty {
