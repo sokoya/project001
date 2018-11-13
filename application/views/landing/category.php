@@ -234,7 +234,7 @@
 											<div class="product-quick-view-cover">
 												<div style="position: relative; left: -50%;">
 													<button data-title="<?= $product->product_name ?>"
-															data-pr_id="<?= $product->id ?>"
+															data-pr_id="<?= base64_encode($product->id); ?>"
 															data-qv="<?php if ($p_count % 4 == 0) { ?>true<?php } ?>"
 															data-qvc="<?php echo $p_count ?>"
 															data-image="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
