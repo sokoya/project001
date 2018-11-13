@@ -85,7 +85,8 @@
 
 										<?php if ($messages) : ?>
 											<?php foreach ($messages as $message) : ?>
-												<li class="<?php if ($message->is_read == 0) echo 'mail-list-unread'; ?> message_item">
+												<li class="<?php if ($message->is_read == 0) echo 'mail-list-unread'; ?> message_item"
+													data-mid="<?= $message->id; ?>">
 													<div class="mail-control">
 														<input id="<?= $message->id; ?>" class="magic-checkbox"
 															   type="checkbox">
@@ -110,7 +111,7 @@
 							<div class="fluid message_read_view">
 
 								<div class="mar-btm pad-btm bord-btm">
-									<h1 class="page-header text-overflow">
+									<h1 class="page-header text-overflow" id="message_title">
 										{{Subject Title}}
 									</h1>
 								</div>
@@ -127,7 +128,8 @@
 									<div class="col-sm-5 toolbar-right">
 										<!--Details Information-->
 										<p class="mar-no">
-											<small class="text-muted">{{Tuesday 13, Nov. 2018}}</small>
+											<small class="text-muted" id="message_date">{{Tuesday 13, Nov. 2018}}
+											</small>
 										</p>
 									</div>
 								</div>
@@ -137,7 +139,7 @@
 									<div class="nano-content" tabindex="0" style="right: -17px;">
 										<div class="mail-message">
 											Hey John,<br/><br/>
-											<blockquote style="font-size:14px;text-align:justify;">
+											<blockquote style="font-size:14px;text-align:justify;" id="message_detail">
 												Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 												tempor
 												incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -234,7 +236,26 @@
 	});
 
 	$('.message_item').on('click', function () {
-		alert('CLicked')
+		let message_id = $(this).data('mid');
+		$.ajax({
+			url: base_url + 'seller/message/message_detail',
+			method: 'POST',
+			data: {mid: message_id},
+			success: function (response) {
+				$('#message_title').html(`
+					This is a test title
+				`);
+				$('#message_date').html(`
+					Friday 14, Nov. 2019
+				`);
+				$('#message_detail').html(`
+					This is the message detail do well to respond accordingly
+				`);
+				console.log(response);
+			},
+			error: response => console.log(response)
+
+		});
 	});
 </script>
 </body>
