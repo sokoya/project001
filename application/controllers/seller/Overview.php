@@ -25,8 +25,8 @@ class Overview extends CI_Controller{
 
     public function index(){        
         $status = cleanit($this->uri->segment(2));        
-        $page_data['page_title'] = 'Manage all products';
-        $page_data['pg_name'] = 'manage_product';
+        $page_data['page_title'] = 'Seller Dashboard';
+        $page_data['pg_name'] = 'overview';
         $page_data['sub_name'] = $status;
         $page_data['profile'] = $this->seller->get_profile_details(base64_decode($this->session->userdata('logged_id')),
             'first_name,last_name,email,profile_pic');
@@ -34,6 +34,6 @@ class Overview extends CI_Controller{
         $page_data['products'] = $this->seller->get_product( base64_decode($this->session->userdata('logged_id')), $status
             );
         $page_data['type'] = $status;
-        $this->load->view('seller/manage', $page_data);
+        $this->load->view('seller/dashboard', $page_data);
     }
 }

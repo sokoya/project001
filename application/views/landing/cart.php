@@ -20,7 +20,7 @@
 						<tr>
 							<th>Product</th>
 							<th>Title</th>
-							<th>Variation/Colour</th>
+							<th>Colour / Variation</th>
 							<th>Price</th>
 							<th>Quality</th>
 							<th>Total</th>
@@ -41,42 +41,51 @@
 									<a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
 										<img
 											src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image); ?> ?>"
-											alt="Onitsha Market place <?= $product['name']; ?>"
+											alt="<?= lang('app_name'); ?> <?= $product['name']; ?>"
 											title="<?= $product['name']; ?>"/>
 									</a>
 								</td>
 								<td class="table-shopping-cart-title"><a
 										href="<?= base_url(urlify($product['name'], $product['id'])); ?>"><?= htmlentities($product['name']); ?></a><br/>
-									<span class="text text-sm">Seller: <?= $detail->name; ?></span>
+									<span class="text text-sm">Seller: <?= !empty($detail->legal_company_name) ? $detail->legal_company_name : $detail->name; ?></span>
 								</td>
-								<td>
-									<?= $product['options']['variation'] . '/' . $product['options']['colour'];
-									?>
-								</td>
-								<td><?= ngn($product['price']); ?></td>
-								<td>
-									<ul>
-										<li class="product-page-qty-item">
-											<button type="button" data-cid="<?= $product['rowid']; ?>"
-													class="product-page-qty product-page-qty-minus">-
-											</button>
-											<input data-range="<?= $variation_detail->quantity; ?>" name="quantity"
-												   id="quan"
-												   class="product-page-qty product-page-qty-input quantity"
-												   type="text"
-												   value="<?= $product['qty']; ?>" disabled/>
-											<button type="button" data-cid="<?= $product['rowid']; ?>"
-													class="product-page-qty product-page-qty-plus">+
-											</button>
-										</li>
-									</ul>
-								</td>
-								<td><?php echo ngn($product['subtotal']);
-									$total += $product['subtotal']; ?></td>
-								<td>
-									<a class="fa fa-close table-shopping-remove"
-									   href="<?= base_url('cart/remove/' . $product['rowid']); ?>"></a>
-								</td>
+								<?php if($variation_detail->quantity < 1 
+									|| $product['qty'] > $variation_detail->quantity 
+									|| in_array( $detail->status, array('suspended', 'blocked', 'pending' )) )
+									 : ?>
+									<td colspan="4">
+                                        <span class="text-center text-semibold text-danger"><strong>This product variation is out of stock. or no longer available.</strong></span>
+									</td>
+								<?php else: ?>
+									<td>
+									<?php echo ucfirst($product['options']['colour']) ?>
+										<?= !empty($product['options']['variation']) ? '/ '.ucfirst($product['options']['variation']) : ''; ?>
+									</td>
+									<td><?= ngn($product['price']); ?></td>
+									<td>
+										<ul>
+											<li class="product-page-qty-item">
+												<button type="button" data-cid="<?= $product['rowid']; ?>"
+														class="product-page-qty product-page-qty-minus">-
+												</button>
+												<input data-range="<?= $variation_detail->quantity; ?>" name="quantity"
+													   id="quan"
+													   class="product-page-qty product-page-qty-input quantity"
+													   type="text"
+													   value="<?= $product['qty']; ?>" disabled/>
+												<button type="button" data-cid="<?= $product['rowid']; ?>"
+														class="product-page-qty product-page-qty-plus">+
+												</button>
+											</li>
+										</ul>
+										<?php $total += $product['subtotal']; ?>
+									</td>
+									<td><?php echo ngn($product['subtotal']); ?></td>
+									<td>
+										<a class="fa fa-close table-shopping-remove"
+										   href="<?= base_url('cart/remove/' . $product['rowid']); ?>"></a>
+									</td>
+								<?php endif; ?>
 							</tr>
 							<?php
 							$x++;

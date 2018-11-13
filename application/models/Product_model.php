@@ -73,7 +73,7 @@ Class Product_model extends CI_Model{
         if( $str != '' ){
             $select = "SELECT description FROM root_category WHERE MATCH(name) AGAINST('$str') LIMIT 1";
             $result = $this->db->query($select)->row();
-            if( count($result) ){
+            if( $result ){
                 return $result->description;
             }else{
                 $select = "SELECT root_category_id FROM category WHERE MATCH(name) AGAINST('$str') LIMIT 1";
@@ -283,9 +283,9 @@ Class Product_model extends CI_Model{
 
     // Generic single product detail
     function get_cart_details( $id ){
-        return $this->db->query("SELECT s.first_name name, i.image_name image 
-            FROM users s 
-            LEFT JOIN product_gallery i ON (i.product_id = $id AND i.featured_image = 1) ")->row();
+        return $this->db->query("SELECT u.first_name name, s.status, s.legal_company_name, i.image_name image FROM users u 
+            LEFT JOIN product_gallery i ON (i.product_id = $id AND i.featured_image = 1)
+            LEFT JOIN sellers s ON (u.id = s.uid) ")->row();
     }
 
 
