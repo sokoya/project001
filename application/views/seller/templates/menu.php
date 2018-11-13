@@ -57,7 +57,7 @@
                         <li class="list-header">Navigation</li>
 
                         <!--Menu list item-->
-                        <li>
+                        <li <?php if($pg_name == 'overview') echo 'class="active-sub"'?>>
                             <a href="<?= base_url('seller/overview')?>">
                                 <i class="demo-pli-home"></i>
                                 <span class="menu-title">Overview</span>

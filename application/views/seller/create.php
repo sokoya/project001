@@ -13,7 +13,9 @@
         background-color: #49a251;
         cursor: help;
     }
-
+    .form-horizontal .control-label {
+        font-weight:600;
+    }
     @media (min-width: 768px) {
         .form-horizontal .control-label {
             text-align: left !important;

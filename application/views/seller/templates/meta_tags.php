@@ -31,11 +31,11 @@
             display: none;
         }
         .panel-title{
-            background:#49a251 !important;
             color:#fff;
+            background: #57d3e0 !important;
         }
         .panel-title:hover{
-            background: #5de07b !important;
+            background: #1ca28b !important;
             color:#fff;
         }
     </style>
