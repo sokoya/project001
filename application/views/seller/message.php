@@ -81,7 +81,7 @@
                                     <ul id="demo-mail-list" class="mail-list pad-top bord-top">
 
                                         <?php if( $messages) : ?>
-                                            <?php foreach($messages->result() as $message ) : ?>
+                                            <?php foreach($messages as $message ) : ?>
                                                 <li <?php if($message->is_read == 0) echo 'mail-list-unread'; ?>>
                                                     <div class="mail-control">
                                                         <input id="<?= $message->id; ?>" class="magic-checkbox" type="checkbox">
@@ -104,10 +104,10 @@
                         </div>
                         <div class="col-md-7">
                             <div class="fluid message_read_view">
-                                <?php $message = $messages->last_row('object'); ?>
+
                                 <div class="mar-btm pad-btm bord-btm">
                                     <h1 class="page-header text-overflow">
-                                        <?= $message->title; ?>
+                                        {{Subject Title}}
                                     </h1>
                                 </div>
                                 
@@ -124,7 +124,7 @@
                                     <div class="col-sm-5 toolbar-right">
                                         <!--Details Information-->
                                         <p class="mar-no">
-                                            <small class="text-muted"><?= neatDate($message->created_on) .' '. neatTime($message->created_on); ?></small>
+                                            <small class="text-muted">{{Tuesday 13, Nov. 2018}}</small>
                                         </p>
                                     </div>
                                 </div>
@@ -133,9 +133,41 @@
                                 <div class="nano has-scrollbar" style="height: 350px;">
                                     <div class="nano-content" tabindex="0" style="right: -17px;">
                                         <div class="mail-message">
-                                            Hey <?= ucfirst($profile->first_name); ?>,<br/><br/>
+                                            Hey John,<br/><br/>
                                             <blockquote style="font-size:14px;text-align:justify;">
-                                                <?= $message->content; ?>
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                                tempor
+                                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                                quis
+                                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                                consequat.
+                                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                                dolore eu
+                                                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                                                sunt in
+                                                culpa qui officia deserunt mollit anim id est laborum.
+                                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                                                accusantium
+                                                doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
+                                                inventore
+                                                veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo
+                                                enim ipsam
+                                                voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+                                                consequuntur
+                                                magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro
+                                                quisquam
+                                                est,
+                                                qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed
+                                                quia non
+                                                numquam eius modi tempora incidunt ut labore et dolore magnam aliquam
+                                                quaerat
+                                                voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
+                                                corporis
+                                                suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis
+                                                autem vel
+                                                eum
+                                                iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
+                                                consequatur.
                                             </blockquote>
                                             <div class="pull-right">
                                                 <br><br> Regards,
@@ -193,33 +225,10 @@
 <!--=================================================-->
 <?php $this->load->view('seller/templates/scripts'); ?>
 <script>
-	let all = $('#select-all-mail');
-	all.click(function () {
-		$('input:checkbox').prop('checked', this.checked);
-	});
-
-	$('.message_item').on('click', function () {
-		let message_id = $(this).data('mid');
-		$.ajax({
-			url: base_url + 'seller/message/message_detail',
-			method: 'POST',
-			data: {mid: message_id},
-			success: function (response) {
-				$('#message_title').html(`
-					This is a test title
-				`);
-				$('#message_date').html(`
-					Friday 14, Nov. 2019
-				`);
-				$('#message_detail').html(`
-					This is the message detail do well to respond accordingly
-				`);
-				console.log(response);
-			},
-			error: response => console.log(response)
-
-		});
-	});
+    let all = $('#select-all-mail');
+    all.click(function () {
+        $('input:checkbox').prop('checked', this.checked);
+    });
 </script>
 </body>
 </html>
