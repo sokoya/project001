@@ -15,14 +15,14 @@
             <!--===================================================-->
             <div id="content-container">
                 <div id="page-head">
-                    
+
 <div class="pad-all text-center">
     <h3>Hello <?= ucwords($profile->first_name) . ' ' . ucwords($profile->last_name); ?></h3>
     <p>Welcome back to your dashboard!</p>
 </div>
                     </div>
 
-                
+
                 <!--Page content-->
                 <!--===================================================-->
                 <div id="page-content">
@@ -151,7 +151,7 @@
 
                     </div>
 					    <div class="row">
-					        <div class="col-lg-7">
+					        <div class="col-lg-6">
 					            <div id="demo-panel-network" class="panel">
 					                <div class="panel-heading">
 					                    <div class="panel-control">
@@ -169,73 +169,60 @@
 					                    </div>
 					                    <h3 class="panel-title">Sales Track</h3>
 					                </div>
-					
-					
+
+
 					                <!--chart placeholder-->
 					                <div class="pad-all">
-					                    <div id="demo-chart-network" style="height: 255px"></div>
+					                    <div id="demo-chart-network" style="height: 225px"></div>
 					                </div>
-					
-					
+
+
 					                <!--Chart information-->
 					                <div class="panel-body">
-					
+
 					                    <div class="row">
 					                        <div class="col-lg-8">
-					                            <p class="text-semibold text-uppercase text-main">CPU Temperature</p>
+					                            <p class="text-semibold text-uppercase text-main">Today</p>
 					                            <div class="row">
 					                                <div class="col-xs-5">
 					                                    <div class="media">
 					                                        <div class="media-left">
-					                                            <span class="text-3x text-thin text-main">43.7</span>
-					                                        </div>
-					                                        <div class="media-body">
-					                                            <p class="mar-no">°C</p>
+					                                            <span class="text-3x text-thin text-main">&#8358; 25,000</span>
 					                                        </div>
 					                                    </div>
 					                                </div>
 					                                <div class="col-xs-7 text-sm">
 					                                    <p>
-					                                        <span>Min Values</span>
+					                                        <span>Min Sale</span>
 					                                        <span class="pad-lft text-semibold">
-					                                        <span class="text-lg">27°</span>
-					                                        <span class="labellabel-success mar-lft">
+					                                        <span class="text-lg">&#8358; 22,000</span>
+					                                        <span class="labellabel-danger mar-lft">
 					                                            <i class="pci-caret-down text-success"></i>
-					                                            <smal>- 20</smal>
+					                                            <smal>+ &#8358; 3000</smal>
 					                                        </span>
 					                                        </span>
 					                                    </p>
 					                                    <p>
-					                                        <span>Max Values</span>
+					                                        <span>Max Sale</span>
 					                                        <span class="pad-lft text-semibold">
-					                                        <span class="text-lg">69°</span>
-					                                        <span class="labellabel-danger mar-lft">
+					                                        <span class="text-lg">&#8358; 52,000</span>
+					                                        <span class="labellabel-success mar-lft">
 					                                            <i class="pci-caret-up text-danger"></i>
-					                                            <smal>+ 57</smal>
+					                                            <smal>- &#8358; 27,000</smal>
 					                                        </span>
 					                                        </span>
 					                                    </p>
 					                                </div>
 					                            </div>
-					
-					                            <hr>
-					
-					                            <div class="pad-rgt">
-					                                <p class="text-semibold text-uppercase text-main">Today Tips</p>
-					                                <p class="text-muted mar-top">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
-					                            </div>
 					                        </div>
-					
+
 					                        <div class="col-lg-4">
-					                            <p class="text-uppercase text-semibold text-main">Bandwidth Usage</p>
+					                            <p class="text-uppercase text-semibold text-main">Total Sales Income</p>
 					                            <ul class="list-unstyled">
 					                                <li>
 					                                    <div class="media pad-btm">
 					                                        <div class="media-left">
-					                                            <span class="text-2x text-thin text-main">754.9</span>
-					                                        </div>
-					                                        <div class="media-body">
-					                                            <p class="mar-no">Mbps</p>
+					                                            <span class="text-2x text-thin text-main">&#8358; 750,000</span>
 					                                        </div>
 					                                    </div>
 					                                </li>
@@ -250,29 +237,18 @@
 					                                        </div>
 					                                    </div>
 					                                </li>
-					                                <li>
-					                                    <div class="clearfix">
-					                                        <p class="pull-left mar-no">Outcome</p>
-					                                        <p class="pull-right mar-no">10%</p>
-					                                    </div>
-					                                    <div class="progress progress-sm">
-					                                        <div class="progress-bar progress-bar-primary" style="width: 10%;">
-					                                            <span class="sr-only">10% Complete</span>
-					                                        </div>
-					                                    </div>
-					                                </li>
 					                            </ul>
 					                        </div>
 					                    </div>
 					                </div>
-					
-					
+
+
 					            </div>
 					            <!--===================================================-->
 					            <!--End network line chart-->
-					
+
 					        </div>
-					        <div class="col-lg-5">
+					        <div class="col-lg-6">
 
                                 <div class="panel">
                                     <div class="panel-heading">
@@ -285,11 +261,9 @@
                                         <div class="pad-btm form-inline">
                                             <div class="row">
                                                 <div class="col-sm-6 table-toolbar-left">
-                                                    <button class="btn btn-purple"><i class="demo-pli-add icon-fw"></i>Add</button>
                                                     <button class="btn btn-default"><i class="demo-pli-printer icon-lg"></i></button>
                                                     <div class="btn-group">
                                                         <button class="btn btn-default"><i class="demo-pli-information icon-lg"></i></button>
-                                                        <button class="btn btn-default"><i class="demo-pli-trash icon-lg"></i></button>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 table-toolbar-right">
@@ -297,7 +271,6 @@
                                                         <input type="text" autocomplete="off" class="form-control" placeholder="Search" id="demo-input-search2">
                                                     </div>
                                                     <div class="btn-group">
-                                                        <button class="btn btn-default"><i class="demo-pli-download-from-cloud icon-lg"></i></button>
                                                         <div class="btn-group dropdown">
                                                             <button class="btn btn-default btn-active-primary dropdown-toggle" data-toggle="dropdown">
                                                                 <i class="demo-pli-dot-vertical icon-lg"></i>
@@ -331,37 +304,17 @@
                                                     <td><a href="#" class="btn-link"> Order #53431</a></td>
                                                     <td>Steve N. Horton</td>
                                                     <td><span class="text-muted">Oct 22, 2014</span></td>
-                                                    <td>$45.00</td>
+                                                    <td>&#8358; 45.00</td>
                                                     <td class="text-center">
                                                         <div class="label label-table label-success">Paid</div>
                                                     </td>
                                                     <td class="text-center">-</td>
                                                 </tr>
                                                 <tr>
-                                                    <td><a href="#" class="btn-link"> Order #53432</a></td>
-                                                    <td>Charles S Boyle</td>
-                                                    <td><span class="text-muted">Oct 24, 2014</span></td>
-                                                    <td>$245.30</td>
-                                                    <td class="text-center">
-                                                        <div class="label label-table label-info">Shipped</div>
-                                                    </td>
-                                                    <td class="text-center">CGX0089734531</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="#" class="btn-link"> Order #53433</a></td>
-                                                    <td>Lucy Doe</td>
-                                                    <td><span class="text-muted">Oct 24, 2014</span></td>
-                                                    <td>$38.00</td>
-                                                    <td class="text-center">
-                                                        <div class="label label-table label-info">Shipped</div>
-                                                    </td>
-                                                    <td class="text-center">CGX0089934571</td>
-                                                </tr>
-                                                <tr>
                                                     <td><a href="#" class="btn-link"> Order #53434</a></td>
                                                     <td>Teresa L. Doe</td>
                                                     <td><span class="text-muted">Oct 15, 2014</span></td>
-                                                    <td>$77.99</td>
+                                                    <td>&#8358; 77.99</td>
                                                     <td class="text-center">
                                                         <div class="label label-table label-info">Shipped</div>
                                                     </td>
@@ -371,7 +324,7 @@
                                                     <td><a href="#" class="btn-link"> Order #53435</a></td>
                                                     <td>Teresa L. Doe</td>
                                                     <td><span class="text-muted">Oct 12, 2014</span></td>
-                                                    <td>$18.00</td>
+                                                    <td>&#8358; 18.00</td>
                                                     <td class="text-center">
                                                         <div class="label label-table label-success">Paid</div>
                                                     </td>
@@ -381,7 +334,7 @@
                                                     <td><a href="#" class="btn-link">Order #53437</a></td>
                                                     <td>Charles S Boyle</td>
                                                     <td><span class="text-muted">Oct 17, 2014</span></td>
-                                                    <td>$658.00</td>
+                                                    <td>&#8358; 658.00</td>
                                                     <td class="text-center">
                                                         <div class="label label-table label-danger">Refunded</div>
                                                     </td>
@@ -391,7 +344,7 @@
                                                     <td><a href="#" class="btn-link">Order #536584</a></td>
                                                     <td>Scott S. Calabrese</td>
                                                     <td><span class="text-muted">Oct 19, 2014</span></td>
-                                                    <td>$45.58</td>
+                                                    <td>&#8358; 45.58</td>
                                                     <td class="text-center">
                                                         <div class="label label-table label-warning">Unpaid</div>
                                                     </td>
@@ -434,9 +387,9 @@
 					        </div>
 					    </div>
 
-					
-					
-					    
+
+
+
                 </div>
                 <!--===================================================-->
                 <!--End page content-->
@@ -446,14 +399,14 @@
             <!--END CONTENT CONTAINER-->
 
 
-            
+
             <!--ASIDE-->
             <!--===================================================-->
             <aside id="aside-container">
                 <div id="aside">
                     <div class="nano">
                         <div class="nano-content">
-                            
+
                             <!--Nav tabs-->
                             <!--================================-->
                             <ul class="nav nav-tabs nav-justified">
