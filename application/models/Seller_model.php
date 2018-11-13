@@ -326,14 +326,20 @@ Class Seller_model extends CI_Model{
 
     }
 
-    function get_message($sid = '', $type = 'all', $id = ''){
+    function get_message($sid = '', $type = 'all', $id = '', $on_load = false){
         if( $type == 'all' ){
             $this->db->where('seller_id', $sid);
             return $this->db->get('sellers_notification_message')->result();
         }else{
-            $this->db->where('seller_id', $sid);
-            $this->db->where('id', $id);
-            return $this->db->get('sellers_notification_message')->row_array();
+            if( $on_load && $id == ''){
+                $this->db->where('seller_id', $sid);
+                return $this->db->get('sellers_notification_message')->last_row('array');
+            }else{
+                $this->db->where('seller_id', $sid);
+                $this->db->where('id', $id);
+                return $this->db->get('sellers_notification_message')->row_array();
+
+            }
         }
     }
 
