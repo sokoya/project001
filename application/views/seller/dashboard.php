@@ -380,10 +380,10 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-3">
                                         <p class="text-semibold text-uppercase text-main">Today</p>
                                         <div class="row">
-                                            <div class="col-xs-5">
+                                            <div class="col-xs-12">
                                                 <div class="media">
                                                     <div class="media-left">
                                                         <span class="text-3x text-thin text-main"
@@ -391,38 +391,41 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-7 text-sm">
-                                                <p>
-                                                    <span>Min Sale</span>
-                                                    <span class="pad-lft text-semibold">
-					                                        <span class="text-lg">&#8358; 22,000</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+
+                                        <div class="col-xs-12 text-sm" style="margin-top:5px;">
+                                            <p>
+                                                <span>Min Sale</span>
+                                                <span class="pad-lft text-semibold">
+					                                        <span class="text-lg">&#8358;22,000</span>
 					                                        <span class="labellabel-danger mar-lft">
 					                                            <i class="pci-caret-down text-success"></i>
-					                                            <smal>+ &#8358; 3000</smal>
+					                                            <smal>+ &#8358;3000</smal>
 					                                        </span>
 					                                        </span>
-                                                </p>
-                                                <p>
-                                                    <span>Max Sale</span>
-                                                    <span class="pad-lft text-semibold">
-					                                        <span class="text-lg">&#8358; 52,000</span>
+                                            </p>
+                                            <p>
+                                                <span>Max Sale</span>
+                                                <span class="pad-lft text-semibold">
+					                                        <span class="text-lg">&#8358;52,000</span>
 					                                        <span class="labellabel-success mar-lft">
 					                                            <i class="pci-caret-up text-danger"></i>
-					                                            <smal>- &#8358; 27,000</smal>
+					                                            <smal>- &#8358;27,000</smal>
 					                                        </span>
 					                                        </span>
-                                                </p>
-                                            </div>
+                                            </p>
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-4">
-                                        <p class="text-uppercase text-semibold text-main">Total Sales Income</p>
+                                    <div class="col-lg-3">
+                                        <p class="text-uppercase text-semibold text-main">Total Sales</p>
                                         <ul class="list-unstyled">
                                             <li>
                                                 <div class="media pad-btm">
                                                     <div class="media-left">
-                                                        <span class="text-2x text-thin text-main">&#8358; 750,000</span>
+                                                        <span class=" text-thin text-main text-bold" style="font-size: 18px;">&#8358;750,000</span>
                                                     </div>
                                                 </div>
                                             </li>

@@ -1,5 +1,10 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
 <link rel="stylesheet" href="<?= base_url('assets/landing/css/home.css'); ?>">
+<style>
+    .pro_ad{
+        min-height: auto !important;
+    }
+</style>
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
@@ -267,7 +272,7 @@
     <div class="container">
         <div class="row" data-gutter="15">
             <div class="col-md-3 clearfix hide_mob">
-                <div class="product product-half" style="margin-bottom: 10px;">
+                <div class="product product-half pro_ad" style="margin-bottom: 10px;">
                     <div class="product-caption text-center">Let <strong><?= lang('app_name') ?></strong> do all
                         the shopping
                         for you free.
@@ -286,7 +291,7 @@
                     </div>
                 </div>
 
-                <div class="product product-half">
+                <div class="product product-half pro_ad">
                     <div class="product-img-wrap text-center">
                         <img class="product-img-small" style="margin: 0 auto; width: 70%"
                              src="<?= base_url('assets/landing/img/onitshamarket/gift_cards.png'); ?>"
@@ -453,7 +458,7 @@
                 <br/>
                 <div class="row">
                     <div class="col-md-3">
-                        <div class="product product-half product-fit3">
+                        <div class="product product-half product-fit3 pro_ad">
                             <div class="product-img-wrap text-center">
                                 <img class="product-img-small img-responsive" style="margin: 0 auto; width: 80%"
                                      src="<?= base_url('assets/landing/img/onitshamarket/wrist-watch.jpg'); ?>"
@@ -472,7 +477,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="product product-half product-fit3">
+                        <div class="product product-half product-fit3 pro_ad">
                             <div class="product-img-wrap text-center">
                                 <img class="product-img-small img-responsive" style="margin: 0 auto; width: 80%"
                                      src="<?= base_url('assets/landing/img/onitshamarket/bag.jpg'); ?>" alt="Bag"
@@ -491,7 +496,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="product product-half product-fit3">
+                        <div class="product product-half product-fit3 pro_ad">
                             <div class="product-img-wrap text-center">
                                 <img class="product-img-small img-responsive" style="margin: 0 auto; width: 80%"
                                      src="<?= base_url('assets/landing/img/onitshamarket/touchlight.jpg'); ?>"
@@ -510,7 +515,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="product product-half product-fit3">
+                        <div class="product product-half product-fit3 pro_ad">
                             <div class="product-img-wrap text-center">
                                 <img class="product-img-small img-responsive" style="margin: 0 auto; width: 70%"
                                      src="<?= base_url('assets/landing/img/onitshamarket/vacuum-cleaner.jpg'); ?>"
