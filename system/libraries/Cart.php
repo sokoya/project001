@@ -63,14 +63,14 @@ class CI_Cart {
 	 *
 	 * @var string
 	 */
-	public $product_name_rules = '\d\D';
+	public $product_name_rules = '.+';
 
 	/**
 	 * only allow safe product names
 	 *
 	 * @var bool
 	 */
-	public $product_name_safe = FALSE;
+	public $product_name_safe = TRUE;
 
 	// --------------------------------------------------------------------------
 

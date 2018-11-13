@@ -10,7 +10,7 @@ class Ajax extends CI_Controller
 		$this->load->helper('text');
 	}
 
-    public $product_name_rules = '\w \-\. ()\:"';
+    public $product_name_rules = '.+';
 
 	public function index()
 	{
