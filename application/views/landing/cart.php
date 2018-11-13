@@ -82,7 +82,7 @@
 									</td>
 									<td><?php echo ngn($product['subtotal']); ?></td>
 									<td>
-										<a class="fa fa-close table-shopping-remove"
+										<a title="Remove <?= $product['name']; ?> from the cart" class="fa fa-close table-shopping-remove"
 										   href="<?= base_url('cart/remove/' . $product['rowid']); ?>"></a>
 									</td>
 								<?php endif; ?>
@@ -145,7 +145,7 @@
 
 	plus.on('click', function () {
 		let cid = $(this).data('cid');
-		let qty = $(`product-${cid}`).val() *1;
+		let qty = $(`.product-${cid}`).val() *1;
 		plus.prop('disabled', true);
 		minus.prop("disabled", false);
 		$.ajax({
@@ -173,7 +173,7 @@
 
 	minus.on('click', function () {
 		let cid = $(this).data('cid');
-		let qty = $(`product-${cid}`).val() *1 ;
+		let qty = $(`.product-${cid}`).val() *1 ;
 		minus.prop('disabled', true);
 		plus.prop("disabled", false);
 		if (quantity.val() <= 1) {
