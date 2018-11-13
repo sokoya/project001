@@ -72,7 +72,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="no_of_products">No of products you would likely be selling</label>
+                            <label for="no_of_products">No of products to be sold</label>
                             <select class="form-control" name="no_of_products">
                                 <option value="1-10">1 - 10</option>
                                 <option value="21-50">21 - 50</option>
