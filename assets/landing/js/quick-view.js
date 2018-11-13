@@ -85,13 +85,16 @@ function get_view() {
 				<h1 class="q_pr_price" id="q_pr_price${pr_id}">${(quick.default_discount_price === '') ? format_currency(quick.default_price) : format_currency(quick.default_discount_price)}</h1>
 				<h1 class="q_pr_title">${title}</h1>
 				<ul class="product-page-product-rating" style="margin-bottom: 10px;">
-					${Array(quick.avg_rating * 1).join(0).split(0).map((item, i) => `
+					${
+					(quick.avg_rating * 1 === 0) ? '' :
+						Array(quick.avg_rating * 1).join(0).split(0).map((item, i) => `
 						<li class="rated"><i class="fa fa-star"></i></li>
-					`).join('')}
+					`).join('')
+					}
 					${quick.avg_rating < 5 ? Array(5 - quick.avg_rating * 1).join(0).split(0).map((item, i) => `
 						<li><i class="fa fa-star"></i></li>
 						`).join('') : ''}
-					<li class="review-count-pr">420</li>
+					<li class="review-count-pr">${quick.total_rating}</li>
 				</ul>
 				<div class="q_view_high">
 					<div class="q_skeleton_highlight">${quick.description}</div>
@@ -147,11 +150,6 @@ function get_view() {
 					} else {
 						constant_price = value.discount_price
 					}
-					// $('#variation_select').append($('<option>', {
-					// 	value: value.variation_name,
-					// 	text: value.variation_name + ' - ' + format_currency(constant_price),
-					// }));
-
 					$('#variation_select').append(`<option value="${value.variation_name}" ${(value.vid == default_variation_id) ? 'selected=selected' : ''} class="variation-option" data-amount="${format_currency(constant_price)}" data-target="q_pr_price${pr_id}">${value.variation_name + ' - ' + format_currency(constant_price)}</option>`);
 				});
 			}
