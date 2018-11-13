@@ -316,7 +316,7 @@ Class Seller_model extends CI_Model{
 
     /**
      * @param $sid
-     * @return CI_DB_result_array
+     * @return CI_DB_int
      */
 
     function get_unread_message($sid){
@@ -324,6 +324,17 @@ Class Seller_model extends CI_Model{
         $this->db->where('is_read', 0);
         return $this->db->count_all('sellers_notification_message');
 
+    }
+
+    function get_message($sid = '', $type = 'all', $id = ''){
+        if( $type == 'all' ){
+            $this->db->where('seller_id', $sid);
+            return $this->db->get('sellers_notification_message')->result();
+        }else{
+            $this->db->where('seller_id', $sid);
+            $this->db->where('id', $id);
+            return $this->db->get('sellers_notification_message')->row_array();
+        }
     }
 
     function get_brands(){
