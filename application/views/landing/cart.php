@@ -40,7 +40,7 @@
 									<?php echo form_hidden($x . '[rowid]', $product['rowid']); ?>
 									<a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
 										<img
-											src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image); ?> ?>"
+											src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image);?>"
 											alt="<?= lang('app_name'); ?> <?= $product['name']; ?>"
 											title="<?= $product['name']; ?>"/>
 									</a>
@@ -136,6 +136,7 @@
 </script>
 <?php $this->load->view('landing/resources/script'); ?>
 <script>
+
 	
 	let quantity = $('#quan');
 	let count = quantity.data('range');
