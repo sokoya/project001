@@ -205,7 +205,7 @@
 	$('.message_item').on('click', function () {
 		let message_id = $(this).data('mid');
 		$.ajax({
-			url: base_url + 'seller/message/detail',
+			url: base_url + 'message/detail',
 			method: 'POST',
 			data: {mid: message_id},
 			success: function (response) {
