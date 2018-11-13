@@ -43,12 +43,12 @@
 				<div class="col-md-5">
 					<div class="product-page-product-wrap jqzoom-stage">
 						<div class="clearfix">
-							<a href="<?= base_url('assets/landing/img/test_product_page/xperia/1-b.jpg'); ?>"
+							<a href="<?= base_url('data/products/'. $product->id .'/' . $featured_image->image_name); ?>"
 							   id="jqzoom"
 							   data-rel="gal-1">
-								<img src="<?= base_url('assets/landing/img/test_product_page/xperia/1.jpg'); ?>"
+								<img src="<?= base_url('data/products/'. $product->id .'/' . $featured_image->image_name); ?>"
 									 alt="<?= $product->product_name; ?>"
-									 title="<?= ucwords($product->product_name) ?>"/>
+									 title="<?= ucwords($product->product_name) ?>" width="500" height="500" style="max-height: 430px; max-width: 460px"/>
 							</a>
 						</div>
 					</div>
@@ -219,6 +219,7 @@
 
 										<?php endif; ?>
 										<?php if (count($variations) > 1) : ?>
+											<input type="hidden" name="variation_id" class="variation_id" value="<?= $variations[0]['id']; ?>">
 											<?php if ($variations[0]['discount_price'] != '') : ?>
 												<input type="hidden" name="product_price"
 													   value="<?= $variations[0]['discount_price']; ?>"
@@ -238,11 +239,11 @@
 																value="<?= trim($variation['variation']); ?>" <?php if ($variation['quantity'] == 0) echo 'disabled'; ?> >
 															<?= ellipsize(trim($variation['variation']), 8); ?>
 														</option>
-
 													<?php endforeach; ?>
 												</select>
 											</div>
 										<?php else: ?>
+											<input type="hidden" name="variation_id" class="variation_id" value="<?= $var->id; ?>">
 											<?php if ($var->discount_price != '') : ?>
 												<input type="hidden" name="product_price"
 													   value="<?= $var->discount_price; ?>"
@@ -341,9 +342,9 @@
 			</div>
 
 			<div class="gap"></div>
-			<div class="tabbable product-tabs">
+			<div class="tabbable product-tabs" id="description-tab">
 				<ul class="nav nav-tabs" id="myTab">
-					<li class="active"><a href="#tab-1" data-toggle="tab"><i class="fa fa-list nav-tab-icon"></i>Overview</a>
+					<li class="active"><a href="#overview" data-toggle="tab"><i class="fa fa-list nav-tab-icon"></i>Overview</a>
 					</li>
 					<li><a href="#full-spec" data-toggle="tab"><i class="fa fa-cogs nav-tab-icon"></i>Full Specs</a>
 					</li>
@@ -480,8 +481,8 @@
 									?>
 									<li class="count"><?= isset($overall_rating) ? $overall_rating : ''; ?></li>
 								</ul>
-								<small>{{ Number of reviews - 238 customer reviews }}</small>
-								<p><strong>98%</strong> of reviewers would recommend this product</p>
+								<!-- <small>{{ Number of reviews - 238 customer reviews }}</small>
+								<p><strong>98%</strong> of reviewers would recommend this product</p> -->
 								<?php
 								if (!$this->session->userdata('logged_in')):
 									?>
@@ -732,14 +733,16 @@
 	$('.variation-select').on('change', function () {
 		let id = $(this).children(":selected").data('id');
 		let quantity = $('#quan');
+		$('.variation_id').val(id);
 		// let count = quantity.data('range');
 		$.ajax({
-			url: base_url + "product/check_variation",
+			url: base_url + "ajax/check_variation",
 			method: "POST",
 			data: {vid: id, 'csrf_carrito': csrf_token},
 			success: function (response) {
 				$.each(response, function (i, v) {
-					if (v.discount_price) {
+					// change the variation id
+										if (v.discount_price) {
 						$('.ds-price').html(format_currency(v.discount_price));
 						$('.dn-price').show();
 						$('.dn-price').html(format_currency(v.sale_price));

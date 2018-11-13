@@ -288,8 +288,10 @@ Class Product_model extends CI_Model{
             LEFT JOIN product_gallery i ON (i.product_id = $id AND i.featured_image = 1) ")->row();
     }
 
-    function get_cart_status( $id ){
 
+    // Get the status of variation
+    function get_variation_status( $id ){
+        return $this->db->query("SELECT quantity, sale_price, discount_price, start_date, end_date FROM product_variation WHERE id = $id")->row();
     }
 
 
@@ -408,13 +410,8 @@ Class Product_model extends CI_Model{
 
     //  Quick view query
     function get_quick_view_details( $id ){
-        $select = "SELECT product_description, product_line, in_the_box, highlights, product_warranty FROM products WHERE id = $id";
-        return $this->db->query( $select)->result_array();
-        // SELECT p.product_description, p.product_line, p.in_the_box, p.product_warranty, 
-        // CONCAT('[',GROUP_CONCAT(CONCAT('{',variation_name:v.variation,',',quantity:v.quantity,',',start_date:v.start_date,',',end_date:v.end_date,',',discount_price:v.discount_price,',',sale_price:v.sale_price,'}')),']') as variations
-        // FROM products p
-        // INNER JOIN product_variation v ON (va.product_id = p.id)
-        // WHERE p.id = $id AND p.product_status = 'approved'
+        $select = "SELECT product_description FROM products WHERE id = $id";
+        return $this->db->query( $select)->row();
     }
 
 

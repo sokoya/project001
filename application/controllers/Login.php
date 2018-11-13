@@ -24,6 +24,7 @@ class Login extends CI_Controller{
      * @Incoming : accepts the login POST paramters : email and password
      * */
     public function process() {
+        $page_data['page'] = 'login';
         if(!$_POST){
             redirect('login');
         }else {
@@ -43,7 +44,7 @@ class Login extends CI_Controller{
                 $user = $this->user->login($data);
                 if( !$user ) {
                     $this->session->set_flashdata('error_msg','Sorry! Incorrect username or password.');
-                    $this->load->view('landing/login');
+                    $this->load->view('landing/login', $page_data);
                 }else{
                     // @TODO
                     // Check if the user already have some products in the cart, and going to checkout

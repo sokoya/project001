@@ -8,7 +8,8 @@ class Application extends CI_Controller{
         $this->load->model('seller_model', 'seller');
         if( !$this->session->userdata('logged_in') ){
             // Ursher the person to where he is coming from
-            if( !empty($this->session->userdata('referred_from')) ) redirect($this->session->userdata('referred_from'));
+            $referred_from = $this->session->userdata('referred_from');
+            if( !empty($referred_from) ) redirect($this->session->userdata('referred_from'));
             redirect('seller/login');
         } 
 

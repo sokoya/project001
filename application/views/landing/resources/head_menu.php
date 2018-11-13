@@ -34,7 +34,7 @@
                                             <?php endforeach; ?>
                                         </div>
                                     </div>
-                                    <img class="dropdown-menu-category-section-theme-img" src="<?= base_url('assets/landing/img/test_cat/2.png'); ?>" alt="Image Alternative text" title="Image Title" style="right: -10px;" />
+                                    <img class="dropdown-menu-category-section-theme-img" src="<?= base_url('assets/landing/img/test_cat/3.png'); ?>" alt="Image Alternative text" title="Image Title" style="right: -10px;" />
                                 </div>
                             </div>
                         </li>

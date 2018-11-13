@@ -31,7 +31,10 @@
 						<?php $x = 0;
 						$total = 0;
 						foreach ($this->cart->contents() as $product): ?>
-							<?php $detail = $this->product->get_cart_details($product['id']); ?>
+							<?php 
+								$detail = $this->product->get_cart_details($product['id']);
+								$variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
+							?>
 							<tr>
 								<td class="table-shopping-cart-img">
 									<?php echo form_hidden($x . '[rowid]', $product['rowid']); ?>
@@ -52,12 +55,21 @@
 								</td>
 								<td><?= ngn($product['price']); ?></td>
 								<td>
-									<input class="form-control quantity" name="<?= $x; ?>[qty]"
-										   data-set="<?= $product['qty']; ?>" data-id="<?= $x; ?>"
-										   style="width:10; padding:4px; font-size:12px;" type="number"
-										   value="<?= $product['qty']; ?>" min="1" max="10"/>
-									<a style="display: none;" id="<?= $x; ?>" href="javascript:void(0)"
-									   class="update-qty">Update Cart</a>
+									<ul>
+										<li class="product-page-qty-item">
+											<button type="button" data-cid="<?= $product['rowid']; ?>"
+													class="product-page-qty product-page-qty-minus">-
+											</button>
+											<input data-range="<?= $variation_detail->quantity; ?>" name="quantity"
+												   id="quan"
+												   class="product-page-qty product-page-qty-input quantity"
+												   type="text"
+												   value="<?= $product['qty']; ?>" disabled/>
+											<button type="button" data-cid="<?= $product['rowid']; ?>"
+													class="product-page-qty product-page-qty-plus">+
+											</button>
+										</li>
+									</ul>
 								</td>
 								<td><?php echo ngn($product['subtotal']);
 									$total += $product['subtotal']; ?></td>
@@ -109,27 +121,80 @@
 
 </div>
 <script>
-    if( !base_url ) {let base_url = "<?= base_url(); ?>";}
+	if (!base_url) {
+		let base_url = "<?= base_url(); ?>";
+	}
 </script>
 <?php $this->load->view('landing/resources/script'); ?>
 <script>
-	$(document).on('ready', function () {
-		$('.quantity').change(function () {
-			_this = $(this);
-			let set = _this.data('set');
-			let id = _this.data('id');
-			if (set != _this.val()) {
-				$("#" + id).show();
-			} else {
-				$("#" + id).hide();
+	
+	let quantity = $('#quan');
+	let count = quantity.data('range');
+	let plus = $('.product-page-qty-plus');
+	let minus = $('.product-page-qty-minus');
+	let cid = $('.product-page-qty').data('cid');
+
+	plus.on('click', function () {
+		plus.prop('disabled', true);
+		minus.prop("disabled", false);
+		$.ajax({
+			url: 'ajax/update_cart_item',
+			method: 'POST',
+			data: {cid:cid,qty:quantity.val()},
+			success: function (response) {
+				console.log(response);
+				if (quantity.val() >= count) {
+					plus.prop("disabled", true);
+				} else {
+					plus.prop("disabled", false);
+				}
+			},
+			error: response => {
+				console.log(response);
+				if (quantity.val() >= count) {
+					plus.prop("disabled", true);
+				} else {
+					plus.prop("disabled", false);
+				}
 			}
 		});
+	});
 
-		$('.update-qty').click(function () {
-			$('#cart-form').submit();
+	minus.on('click', function () {
+		minus.prop('disabled', true);
+		plus.prop("disabled", false);
+		if (quantity.val() <= 1) {
+			minus.prop("disabled", true);
+		}
+		$.ajax({
+			url: 'ajax/update_cart_item',
+			method: 'POST',
+			data: {cid:cid,qty:quantity.val()},
+			success: () => {
+				if (quantity.val() <= 1) {
+					minus.prop("disabled", true);
+				} else {
+					minus.prop("disabled", false);
+				}
+			},
+			error: () => {
+				if (quantity.val() <= 1) {
+					minus.prop("disabled", true);
+				} else {
+					minus.prop("disabled", false);
+				}
+			}
 		});
+	});
 
-	})
+	quantity.on('input', function () {
+		if (quantity.val() > count) {
+			quantity.val(count)
+		} else if (quantity.val() === '0') {
+			quantity.val(1)
+		}
+	});
+
 </script>
 </body>
 </html>

@@ -29,6 +29,7 @@ class Product extends CI_Controller {
 		// $this->add_count($index);
         $page_data['page'] = 'product';
 		$page_data['rating_counts'] = $this->product->get_rating_counts( $index );
+//		var_dump($page_data['rating_counts']); exit;
         $page_data['featured_image'] = $this->product->get_featured_image( $index );
 		$this->load->view('landing/product', $page_data);
 	}
@@ -88,30 +89,19 @@ class Product extends CI_Controller {
         $page_data['page'] = 'category';
 		$this->load->library('user_agent');
 		if( !$this->agent->is_mobile()){
-			$this->load->view('landing/category', $page_data);			
+			$this->load->view('landing/category', $page_data);
 		}else{
 			$this->load->view('landing/mobile-category', $page_data);
 		}
 	}
 
 
-	public function cart(){
-		if ($this->input->post()) {
-			// update
-			$data = $this->input->post();
-			if ($this->cart->update($data)) {
-				$this->session->set_flashdata('success_msg', 'Your cart has been successfully updated.');
-				redirect('cart');
-			} else {
-				$this->session->set_flashdata('error_msg', 'There was an error updating the cart');
-				redirect('cart');
-			}
-		} else {
-			$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
-			$page_data['title'] = 'My cart';
-			$page_data['page'] = 'cart';
-			$this->load->view('landing/cart', $page_data);
-		}
+	// Cart Page
+	public function cart(){		
+		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
+		$page_data['title'] = 'My cart';
+		$page_data['page'] = 'cart';
+		$this->load->view('landing/cart', $page_data);
 	}
 
 
@@ -215,40 +205,7 @@ class Product extends CI_Controller {
 		exit;
 	}
 
-    /**
-     * @param $product_id - product id
-     * @return 
-     */
 
-    function get_reviews(){
-        // $id = $_GET['id'];
-        if( $this->input->post('pid')){
-        	$id = $this->input->post('pid');
-            $results = $this->product->get_reviews($id);
-            $return = array();
-            foreach( $results as $key => $values ) {
-                $res = array();
-                foreach( $values as $new_key){
-                    $res['display_name'] = ucwords($values['display_name']);
-                    $res['published_date'] = neatDate($values['published_date']);
-                    $res['content'] = $values['content'];
-                    $res['title'] = $values['title'];
-                    $res['rating_score'] = $values['rating_score'];
-                }
-                array_push( $return, $res );
-                if( count($return) >= 10 ){
-                	array_push( $return, array('is_next' => true) );
-                }
-            }
-
-            header('Content-type: text/json');
-			header('Content-type: application/json');
-			echo json_encode($return);
-            exit;
-        }else{
-            redirect(base_url());
-        }
-    }
 
     // Search
     public function search(){

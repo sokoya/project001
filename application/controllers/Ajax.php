@@ -113,11 +113,52 @@ class Ajax extends CI_Controller
 		}
 	}
 
-	function quick_view()
-	{
+
+	function quick_view(){
 		if ($this->input->is_ajax_request() && $this->input->post()) {
 			$pid = $this->input->post('product_id');
-			$results = $this->product->get_quick_view_details($pid);
+			$results  = array();
+			$desc = $this->product->get_quick_view_details($pid);
+			$now = date_create(date("Y-m-d"));
+
+			$results['description'] = $desc->product_description;
+			$variations = $this->product->get_variations( $pid );
+
+			// $variation_array = array('variation');
+			$array = array();
+			if( $variations ) {
+				$x = 0;
+				foreach( $variations as $variation ){
+
+					$results['variation'][$x]['vid'] = $variation['id'];
+					$results['variation'][$x]['discount_price'] = $variation['discount_price'];
+					$results['variation'][$x]['sale_price'] = $variation['sale_price'];
+					$results['variation'][$x]['quantity'] = $variation['quantity'];
+					$results['variation'][$x]['variation_name'] = $variation['variation'];
+
+					// $res['vid'] = $variation['id'];
+					// $res['discount_price'] = $variation['discount_price'];
+					// $res['sale_price'] = $variation['sale_price'];
+					// $res['quantity'] = $variation['quantity'];
+					// $res['variation_name']	= $variation['variation'][$x];
+
+					$end_date = date_create( $variation['end_date'] );
+					$start_date = date_create( $variation['start_date'] );
+					$end_date_diff = date_diff( $end_date, $now );
+					$start_date_diff = date_diff( $start_date, $now );
+					$intend_diff = $end_date_diff->format("%R%a");
+					$intstart_diff = $start_date_diff->format("%R%a");
+
+					if( $intend_diff > 0  || $intstart_diff < 0 ){
+						$results['variation'][$x]['sale_price'] = $variation['discount_price'];
+					}					
+					// array_push( $array, $variation_array);
+					$x++;
+				}
+			}
+
+			// array_push( $results, $variation_array);
+			// get_variations
 			echo json_encode($results, JSON_UNESCAPED_SLASHES);
 			exit;
 		}
@@ -145,7 +186,7 @@ class Ajax extends CI_Controller
         }
     }
 
-
+    // Add product to cart
     function add_to_cart(){
        if( $this->input->is_ajax_request() && $this->input->post() ){
            $colour = $this->input->post('colour');
@@ -154,8 +195,8 @@ class Ajax extends CI_Controller
            $colour = empty($colour) ? '' : $this->input->post('colour');
            $name = cleanit($this->input->post('product_name'));
            $name = preg_replace('/^['.$this->product_name_rules.']+$/i', " ", $name);
-           // contain a product ID, quantity, price, and name.
-//           die( $name );
+           // Added to make checks if product still remains
+           $variation_id = $this->input->post('variation_id', true);
            $data = array(
                'id' => base64_decode($this->input->post('product_id')),
                'qty' => $this->input->post('quantity'),
@@ -165,7 +206,8 @@ class Ajax extends CI_Controller
                    array(
                        'variation' => $variation,
                        'colour' => $colour,
-                       'seller' => base64_decode($this->input->post('seller'))
+                       'seller' => base64_decode($this->input->post('seller')),
+                       'variation_id' => $variation_id
                    )
            );
            if( $this->cart->insert($data)){
@@ -178,6 +220,21 @@ class Ajax extends CI_Controller
        }else{
            redirect(base_url());
        }
+    }
+
+
+    // Update Cart quantity
+    function update_cart_item(){
+    	
+    	if( !$this->input->post() || !$this->input->is_ajax_request() ){ redirect(base_url());}
+    	$cid = $this->input->post('cid', true);
+    	$qty = $this->input->post('qty', true);
+    	$data = array('rowid' => cleanit($cid), 'qty' => $qty);
+    	if( $this->cart->update($data) ){
+    		return true;
+    	}else{
+    		return false;
+    	}
     }
 
 
@@ -214,21 +271,39 @@ class Ajax extends CI_Controller
     }
 
 
+    /**
+     * @param $product_id - product id
+     * @return 
+     */
 
-//<li>
-//<a class="dropdown-menu-shipping-cart-img" href="#">
-//<img src="img/cart/4.jpg" alt="Image Alternative text" title="Image Title" />
-//</a>
-//<div class="dropdown-menu-shipping-cart-inner">
-//<p class="dropdown-menu-shipping-cart-price">$77</p>
-//<p class="dropdown-menu-shipping-cart-item"><a href="#">Fossil Women's Original Boyfriend</a>
-//        </p>
-//    </div>
-//</li>
-//<li>
-//    <p class="dropdown-menu-shipping-cart-total">Total: $150</p>
-//    <button class="dropdown-menu-shipping-cart-checkout btn btn-primary">Checkout</button>
-//</li>
+    function get_reviews(){
+        // $id = $_GET['id'];
+        if( $this->input->is_ajax_request() && $this->input->post('pid')){
+        	$id = $this->input->post('pid');
+            $results = $this->product->get_reviews($id);
+            $return = array();
+            foreach( $results as $key => $values ) {
+                $res = array();
+                foreach( $values as $new_key){
+                    $res['display_name'] = ucwords($values['display_name']);
+                    $res['published_date'] = neatDate($values['published_date']);
+                    $res['content'] = $values['content'];
+                    $res['title'] = $values['title'];
+                    $res['rating_score'] = $values['rating_score'];
+                }
+                array_push( $return, $res );
+                if( count($return) >= 10 ){
+                	array_push( $return, array('is_next' => true) );
+                }
+            }
+            header('Content-type: text/json');
+			header('Content-type: application/json');
+			echo json_encode($return);
+            exit;
+        }else{
+            redirect(base_url());
+        }
+    }
 
 
 }
