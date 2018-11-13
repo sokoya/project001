@@ -64,7 +64,7 @@
                                             <div class="btn-group dropdown">
                                                 <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"
                                                         type="button">
-                                                    More <i class="dropdown-caret"></i>
+                                                    Action <i class="dropdown-caret"></i>
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li><a href="javascript:;"><i class="demo-pli-mail-send"></i> Mark as read</a></li>
