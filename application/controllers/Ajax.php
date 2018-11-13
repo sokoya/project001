@@ -114,14 +114,15 @@ class Ajax extends CI_Controller
 	}
 
 
+	// Function to generate quick view on each product
 	function quick_view(){
-		if ($this->input->is_ajax_request() && $this->input->post()) {
+		if ($this->input->is_ajax_request() && $this->input->post('product_id')) {
 			$pid = $this->input->post('product_id');
 			$results  = array();
 			$desc = $this->product->get_quick_view_details($pid);
 			$now = date_create(date("Y-m-d"));
 
-			$results['description'] = $desc->product_description;
+			$results['description'] = character_limiter($desc->product_description, 278);
 			$variation = $this->product->get_variation( $pid );
 			$results['default_vid'] = $variation->id;
 			$results['default_qty'] = $variation->quantity;
@@ -145,7 +146,6 @@ class Ajax extends CI_Controller
 			if( $rating_counts ){
 				$results['avg_rating'] = round(product_overall_rating($rating_counts));
 			}
-
 			$variations = $this->product->get_variations( $pid );
 			$array = array();
 			if( $variations ) {
@@ -176,11 +176,10 @@ class Ajax extends CI_Controller
 					$x++;
 				}
 			}
-
-			// array_push( $results, $variation_array);
-			// get_variations
 			echo json_encode($results, JSON_UNESCAPED_SLASHES);
 			exit;
+		}else{
+			redirect(base_url());
 		}
 	}
 
