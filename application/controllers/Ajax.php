@@ -117,7 +117,7 @@ class Ajax extends CI_Controller
 	// Function to generate quick view on each product
 	function quick_view(){
 		if ($this->input->is_ajax_request() && $this->input->post('product_id')) {
-			$pid = $this->input->post('product_id');
+			$pid = base64_decode($this->input->post('product_id'));
 			$results  = array();
 			$desc = $this->product->get_quick_view_details($pid);
 			$now = date_create(date("Y-m-d"));
@@ -127,6 +127,7 @@ class Ajax extends CI_Controller
 
 			$variation = $this->product->get_variation( $pid );
 			$results['default_vid'] = $variation->id;
+			$results['default_vname'] = $variation->variation;
 			$results['default_qty'] = $variation->quantity;
 			$results['default_price'] = $variation->sale_price;
 			$results['default_discount_price'] = $variation->discount_price;
