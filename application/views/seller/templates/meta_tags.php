@@ -32,7 +32,7 @@
         }
         .panel-title{
             color:#fff;
-            background: #57d3e0 !important;
+            background: #425865 !important;
         }
         .panel-title:hover{
             background: #1ca28b !important;

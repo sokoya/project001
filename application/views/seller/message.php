@@ -55,18 +55,6 @@
                                                     <input id="select-all-mail" class="magic-checkbox" type="checkbox">
                                                     <label for="select-all-mail"></label>
                                                 </label>
-                                                <button data-toggle="dropdown" class="btn btn-default dropdown-toggle">
-                                                    <i class="dropdown-caret"></i></button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="javascript:;" id="demo-select-all-list">All</a></li>
-                                                    <li><a href="javascript:;" id="demo-select-none-list">None</a></li>
-                                                    <li><a href="javascript:;" id="demo-select-toggle-list">Toggle</a>
-                                                    </li>
-                                                    <li class="divider"></li>
-                                                    <li><a href="javascript:;" id="demo-select-read-list">Read</a></li>
-                                                    <li><a href="javascript:;" id="demo-select-unread-list">Unread</a>
-                                                    </li>
-                                                </ul>
                                             </div>
 
                                             <!--Refresh button-->
@@ -292,33 +280,6 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="row pad-top">
-                                    <div class="col-sm-7 toolbar-left">
-
-                                        <!--Mail toolbar-->
-                                        <button class="btn btn-default"><i class="demo-pli-printer icon-lg"></i>
-                                        </button>
-                                        <div class="btn-group btn-group">
-                                            <button class="btn btn-default"><i class="demo-pli-information icon-lg"></i>
-                                            </button>
-                                            <button class="btn btn-default"><i class="demo-pli-trash icon-lg"></i>
-                                                Delete
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-5 toolbar-right">
-                                        <!--Reply & forward buttons-->
-                                        <div class="btn-group btn-group">
-                                            <a class="btn btn-default" href="javascript:;">
-                                                <i class="demo-psi-left-4"></i>
-                                            </a>
-                                            <a class="btn btn-default" href="javascript:;">
-                                                <i class="demo-psi-right-4"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <!--Message-->
                                 <!--===================================================-->
                                 <div class="nano has-scrollbar" style="height: 350px;">
@@ -433,6 +394,12 @@
                 }
             }
         });
+    });
+</script>
+<script>
+    let all = $('#select-all-mail');
+    all.click (function () {
+        $('input:checkbox').prop('checked', this.checked);
     });
 </script>
 </body>
