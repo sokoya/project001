@@ -1,4 +1,14 @@
 <?php $this->load->view('seller/templates/meta_tags'); ?>
+<style>
+	.mail-list-unread {
+		font-weight: 800;
+	}
+
+	.mail-from {
+		width: 61% !important;
+	}
+
+</style>
 </head>
 <body>
 <div id="container" class="effect aside-float aside-bright mainnav-lg">
@@ -85,17 +95,16 @@
 
 										<?php if ($messages) : ?>
 											<?php foreach ($messages->result() as $message) : ?>
-												<li <?php if ($message->is_read == 0) echo 'mail-list-unread'; ?>>
+												<li class="<?php if ($message->is_read == 0) echo 'mail-list-unread'; ?> message_item"
+													style="cursor: pointer">
 													<div class="mail-control">
 														<input id="<?= $message->id; ?>" class="magic-checkbox"
 															   type="checkbox">
 														<label for="<?= $message->id; ?>"></label>
 													</div>
-													<div class="mail-from"><?= $message->title; ?></div>
+													<div
+														class="mail-from <?php if ($message->is_read == 0) echo 'mail-list-unread'; ?>"><?= $message->title; ?></div>
 													<div class="mail-time"><?= ago($message->created_on); ?></div>
-													<div class="mail-subject">
-														<a href=""><?= character_limiter($message->content, 80); ?></a>
-													</div>
 												</li>
 											<?php endforeach; ?>
 										<?php else: ?>
@@ -205,7 +214,7 @@
 	$('.message_item').on('click', function () {
 		let message_id = $(this).data('mid');
 		$.ajax({
-			url: base_url + 'message/detail',
+			url: "<?= base_url(); ?>seller/message/message_detail",
 			method: 'POST',
 			data: {mid: message_id},
 			success: function (response) {
