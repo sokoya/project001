@@ -26,6 +26,16 @@ class Checkout extends CI_Controller
 		$page_data['address_set'] = $this->user->is_address_set($page_data['user']->id);
 		$result = $this->user->get_default_address_price($page_data['user']->id);
 		$page_data['delivery_charge'] = (  !$result ) ? 500 : $result;
+		// Lets make a check that the product is valid to be here
+		foreach( $this->cart->contents() as $product ){
+			$detail = $this->product->get_cart_details($product['id']);
+			$variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
+			if($variation_detail->quantity < 1 || $product['qty'] > $variation_detail->quantity || in_array( $detail->status, array('suspended', 'blocked', 'pending' ))){
+				// we have an issue with this product
+				$this->cart->remove($product['rowid']);
+			}
+		}
+		if( empty($this->cart->total_items())) redirect( base_url() );
 		$this->load->view('landing/checkout', $page_data);
 	}
 
