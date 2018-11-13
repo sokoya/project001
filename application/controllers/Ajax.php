@@ -123,8 +123,11 @@ class Ajax extends CI_Controller
 			$now = date_create(date("Y-m-d"));
 
 			$results['description'] = character_limiter($desc->product_description, 278);
+			$results['seller'] = $desc->seller_id;
+
 			$variation = $this->product->get_variation( $pid );
 			$results['default_vid'] = $variation->id;
+			$results['default_vname'] = $variation->variation;
 			$results['default_qty'] = $variation->quantity;
 			$results['default_price'] = $variation->sale_price;
 			$results['default_discount_price'] = $variation->discount_price;
@@ -140,7 +143,6 @@ class Ajax extends CI_Controller
 					$results['default_discount_price'] = $variation->sale_price;
 				}
 			}
-
 			$results['avg_rating'] = $results['total_rating'] = 0;
 
 			$rating_counts = $this->product->get_rating_counts( $pid );
@@ -165,7 +167,6 @@ class Ajax extends CI_Controller
 
 					$end_date = date_create( $variation['end_date'] );
 					$start_date = date_create( $variation['start_date'] );
-
 					// Check the start date and end date before processing
 					if( !empty($start_date) && !empty($end_date) && !empty($results['variation'][$x]['discount_price']) ){
 						$end_date_diff = date_diff( $end_date, $now );
