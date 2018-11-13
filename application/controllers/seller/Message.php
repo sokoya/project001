@@ -32,10 +32,16 @@ class Message extends CI_Controller{
     }
 
     function message_detail(){
-        if( !$this->input->post() || !$this->input->is_ajax_request() ){ redirect(base_url());}
+        if( !$this->input->is_ajax_request() ){ 
+            redirect(base_url()); 
+        }
         $mid = $this->input->post('mid');
         $result = $this->seller->get_message(base64_decode($this->session->userdata('logged_id')),'', $mid);
-        echo json_encode( $result );
+        $output = array();
+        $output['title'] = $result['title'];
+        $output['content'] = $result['content'];
+        $output['created_on'] = neatDate( $result['created_on'] ) . ' ' . neatTime($result['created_on']);
+        echo json_encode( $result , JSON_UNESCAPED_SLASHES);
         exit;
 
     }
