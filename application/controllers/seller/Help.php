@@ -25,11 +25,10 @@ class Help extends CI_Controller{
     
     public function index(){
         $page_data['profile'] = $this->seller->get_profile(base64_decode($this->session->userdata('logged_id')));
-        $page_data['page_title'] = 'Profile Setting';
-        $page_data['pg_name'] = 'settings';
-        $page_data['sub_name'] = 'profile';
-        $page_data['categories'] = $this->seller->get_category_name('', 'root_category');
-        $this->load->view('seller/settings', $page_data);
+        $page_data['page_title'] = 'Help and Guidelines';
+        $page_data['pg_name'] = 'help';
+        $page_data['sub_name'] = '';
+        $this->load->view('seller/help', $page_data);
 
     }
 

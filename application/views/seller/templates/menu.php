@@ -142,7 +142,7 @@
                         <li class="<?php if($pg_name == 'message') echo 'active'?>">
                             <a href="<?= base_url('seller/message'); ?>">
                                 <i class="demo-pli-mail"></i>
-                                <span class="menu-title">Messages (<?= $message_count < 1 ? '' : $message_count; ?>)</span>
+                                <span class="menu-title">Messages (<?= $message_count < 1 ? '0' : $message_count; ?>)</span>
                             </a>
                         </li>
                         <li class="list-divider"></li>
@@ -164,7 +164,7 @@
                             </ul>
                         </li>
                         <!--Menu list item-->
-                        <li>
+                        <li <?php if($pg_name =='help') echo 'class="active"'?>>
                             <a href="<?= base_url('seller/help'); ?>">
                                 <i class="demo-pli-information"></i>
                                 <span class="menu-title">Help & Guidelines</span>
