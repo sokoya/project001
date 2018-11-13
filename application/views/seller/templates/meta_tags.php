@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><?= $page_title; ?></title>
+    <link rel="shortcut icon" href="<?= base_url('assets/landing/img/favicon.png'); ?>" type="image/png">
+    <link rel="icon" href="<?= base_url('assets/landing/img/favicon.png'); ?>" type="image/png">
+    <link rel="canonical" href="<?= current_url(); ?>"/>
     <!--=================================================-->
     <!--Open Sans Font [ OPTIONAL ]-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
@@ -21,7 +24,12 @@
         <link href="<?= base_url('assets/seller/plugins/bootstrap-select/bootstrap-select.min.css')?>" rel="stylesheet">
         <link href="<?= base_url('assets/seller/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css')?>" rel="stylesheet">
     <?php endif; ?>
-    <?php if( in_array($pg_name, array('manage_product') ) ): ?>
+    <?php if( in_array($pg_name, array('manage_product','overview','message') ) ): ?>
+        <!--DataTables [ OPTIONAL ]-->
+        <link href="<?= base_url('assets/seller/plugins/datatables/media/css/dataTables.bootstrap.css'); ?>" rel="stylesheet">
+        <link href="<?= base_url('assets/seller/plugins/datatables/extensions/Responsive/css/responsive.dataTables.min.css'); ?>" rel="stylesheet">
+    <?php endif;?>
+    <?php if( in_array($pg_name, array('overview','message') ) ): ?>
         <!--DataTables [ OPTIONAL ]-->
         <link href="<?= base_url('assets/seller/plugins/datatables/media/css/dataTables.bootstrap.css'); ?>" rel="stylesheet">
         <link href="<?= base_url('assets/seller/plugins/datatables/extensions/Responsive/css/responsive.dataTables.min.css'); ?>" rel="stylesheet">

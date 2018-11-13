@@ -32,7 +32,9 @@ class Message extends CI_Controller{
     }
 
     function message_detail(){
-        if( !$this->input->post() || !$this->input->is_ajax_request() ){ redirect(base_url());}
+        if( !$this->input->is_ajax_request() ){ 
+            redirect(base_url()); 
+        }
         $mid = $this->input->post('mid');
         $result = $this->seller->get_message(base64_decode($this->session->userdata('logged_id')),'', $mid);
         echo json_encode( $result );
