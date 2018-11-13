@@ -141,9 +141,14 @@ class Ajax extends CI_Controller
 				}
 			}
 
-			$results['avg_rating'] = 0;
+			$results['avg_rating'] = $results['total_rating'] = 0;
+
 			$rating_counts = $this->product->get_rating_counts( $pid );
 			if( $rating_counts ){
+				// Total rating count
+				foreach( $rating_counts as $counts ){
+					$results['total_rating'] += $counts['occurence'];
+				}
 				$results['avg_rating'] = round(product_overall_rating($rating_counts));
 			}
 			$variations = $this->product->get_variations( $pid );
