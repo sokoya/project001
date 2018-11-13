@@ -84,7 +84,7 @@ function get_view() {
 			</div>
 			<div class="col-md-8">
 			<span class="close_qv"><i class="fa fa-times-circle-o" aria-hidden="true"></i></span>
-				<h1 class="q_pr_price">&#8358;26,000</h1>
+				<h1 class="q_pr_price" id="q_pr_price${pr_id}">${(quick.default_discount_price === '') ? format_currency(quick.default_price) : format_currency(quick.default_discount_price)}</h1>
 				<h1 class="q_pr_title">${title}</h1>
 				<ul class="product-page-product-rating" style="margin-bottom: 10px;">
 					<li class="rated"><i class="fa fa-star"></i>
@@ -110,7 +110,7 @@ function get_view() {
 								<button type="button"
 										class="product-page-qty product-page-qty-minus" id="${pr_id}_minus" data-target="${pr_id}">-
 								</button>
-								<input data-range="${pr_id}" name="quantity"
+								<input data-range="${quick.default_qty}" name="quantity"
 									   id="${pr_id}"
 									   class="product-page-qty product-page-qty-input quantity"
 									   type="text"
@@ -135,6 +135,7 @@ function get_view() {
 			</div>
 		</div>`);
 
+			let default_variation_id = quick.default_vid;
 			$('.close_qv').on('click', function () {
 				$('.test-div').remove();
 			});
@@ -152,12 +153,22 @@ function get_view() {
 					} else {
 						constant_price = value.discount_price
 					}
-					$('#variation_select').append($('<option>', {
-						value: value.variation_name,
-						text: value.variation_name + ' - ' + format_currency(constant_price)
-					}));
+					// $('#variation_select').append($('<option>', {
+					// 	value: value.variation_name,
+					// 	text: value.variation_name + ' - ' + format_currency(constant_price),
+					// }));
+
+					$('#variation_select').append(`<option value="${value.variation_name}" ${(value.vid == default_variation_id) ? 'selected=selected' : ''} class="variation-option" data-amount="${format_currency(constant_price)}" data-target="q_pr_price${pr_id}">${value.variation_name + ' - ' + format_currency(constant_price)}</option>`);
 				});
 			}
+
+			$('#variation_select').on('change', function () {
+				let elem = $('#variation_select :selected');
+				let price = elem.data('amount');
+				let target = elem.data('target');
+				$(`#${target}`).html(`${price}`)
+			});
+
 			let plus = $('.product-page-qty-plus');
 			let minus = $('.product-page-qty-minus');
 
@@ -199,8 +210,6 @@ function get_view() {
 				}
 			});
 		},
-
-
 		error: () => {
 			console.log('An error occurred')
 		}
