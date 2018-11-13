@@ -40,7 +40,7 @@ class Message extends CI_Controller{
         $output = array();
         $output['title'] = $result['title'];
         $output['content'] = $result['content'];
-        $output['created_on'] = neatDate( $result['created_on'] ) . ' ' . neatTime($result['created_on']);
+        $output['created_on'] = neatDate( $result['created_on'] );
         echo json_encode( $result , JSON_UNESCAPED_SLASHES);
         exit;
 
