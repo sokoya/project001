@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 09, 2018 at 10:33 AM
+-- Generation Time: Nov 14, 2018 at 10:47 AM
 -- Server version: 5.7.11
 -- PHP Version: 7.0.3
 
@@ -67,8 +67,8 @@ CREATE TABLE `billing_address` (
 
 INSERT INTO `billing_address` (`id`, `uid`, `sid`, `aid`, `address`, `first_name`, `last_name`, `phone`, `phone2`, `primary_address`) VALUES
 (3, 3, 1, 2, 'Omole Phase 2', 'Jeffrey', 'Chidi', '08169254598', '', 0),
-(4, 3, 1, 1, 'No 13 Dan Ngozi Iyio Street', 'Cynthia', 'Britney', '08129128033', '', 0),
-(5, 3, 1, 2, 'MS Area', 'Mark', 'Peters', '08129128033', '', 1),
+(4, 3, 1, 1, 'No 13 Dan Ngozi Iyio Street', 'Cynthia', 'Britney', '08129128033', '', 1),
+(5, 3, 1, 2, 'MS Area', 'Mark', 'Peters', '08129128033', '', 0),
 (6, 3, 1, 2, 'Planet Estate Viciao', 'Jonathan', 'Griffin', '080142445414', '', 0);
 
 -- --------------------------------------------------------
@@ -85,6 +85,13 @@ CREATE TABLE `brands` (
   `brand_logo` varchar(255) NOT NULL,
   `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `brands`
+--
+
+INSERT INTO `brands` (`id`, `root_category_id`, `brand_name`, `description`, `brand_logo`, `status`) VALUES
+(1, 0, 'Apple', 'This is apple\'s brand', '', '');
 
 -- --------------------------------------------------------
 
@@ -161,7 +168,18 @@ CREATE TABLE `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`id`, `ip_address`, `user_agent`, `timestamp`, `data`) VALUES
-('0lgemaqpjvifbabfp29u0f33ftha21d6', '::1', '', '0000-00-00 00:00:00', 'logged_in|b:1;logged_id|s:4:"Mw==";is_seller|s:1:"1";email|s:15:"admin@gmail.com";sub_id|s:1:"1";new_rootcategory|s:16:"Phones & Tablets";new_category|s:13:"Mobile Phones";new_subcategory|s:11:"Smartphones";rootcategory|s:1:"1";category|s:1:"1";subcategory|s:1:"1";');
+('0mqgafcvh56fsp67s9qgmsa5iq61c7nu', '::1', '', '0000-00-00 00:00:00', 'logged_in|b:1;logged_id|s:4:"Mw==";is_seller|s:1:"1";email|s:15:"admin@gmail.com";'),
+('5n4r66n8hmimbj6r5dfsadikf931kndq', '::1', '', '0000-00-00 00:00:00', 'logged_in|b:1;logged_id|s:4:"Mw==";is_seller|s:1:"1";email|s:15:"admin@gmail.com";'),
+('6poq826tfleepab6a3ekpbka9so263rh', '::1', '', '0000-00-00 00:00:00', 'cart_contents|a:3:{s:10:"cart_total";d:56000;s:11:"total_items";d:4;s:32:"be24421c96a66d5dca910804f158ec6e";a:7:{s:2:"id";s:2:"11";s:3:"qty";d:4;s:5:"price";d:14000;s:4:"name";s:11:"Apple Watch";s:7:"options";a:3:{s:9:"variation";s:7:"Miranda";s:6:"seller";N;s:12:"variation_id";s:2:"15";}s:5:"rowid";s:32:"be24421c96a66d5dca910804f158ec6e";s:8:"subtotal";d:56000;}}logged_in|b:1;logged_id|s:4:"Mw==";is_seller|s:1:"1";email|s:15:"admin@gmail.com";'),
+('7pt367l9nqonu5hhh84514q6ati918k2', '::1', '', '0000-00-00 00:00:00', ''),
+('9uia09d3606o7vgcnil77mohpkalpv8s', '::1', '', '0000-00-00 00:00:00', 'logged_in|b:1;logged_id|s:4:"Mw==";is_seller|s:1:"1";email|s:15:"admin@gmail.com";'),
+('cni1u9umn7bu4dmp8iofncvcnrd7p51d', '::1', '', '0000-00-00 00:00:00', ''),
+('evgsjadgtk1p2q54rfp1sbnmeidsc1ip', '::1', '', '0000-00-00 00:00:00', 'cart_contents|a:15:{s:10:"cart_total";d:10820097;s:11:"total_items";d:61;s:32:"ba4ac0a10d6075b443e1fe11e1fb199b";a:7:{s:2:"id";s:1:"4";s:3:"qty";d:1;s:5:"price";d:0;s:4:"name";s:2:"JY";s:7:"options";a:4:{s:9:"variation";s:4:"Blue";s:6:"colour";s:0:"";s:6:"seller";N;s:12:"variation_id";s:1:"5";}s:5:"rowid";s:32:"ba4ac0a10d6075b443e1fe11e1fb199b";s:8:"subtotal";d:0;}s:32:"e9ab7eb339589333f6681a29bb898f6a";a:7:{s:2:"id";s:1:"2";s:3:"qty";d:16;s:5:"price";d:300000;s:4:"name";s:26:"Samsung Galaxy J6 - Purple";s:7:"options";a:4:{s:9:"variation";s:6:"Price1";s:6:"colour";s:0:"";s:6:"seller";N;s:12:"variation_id";s:1:"2";}s:5:"rowid";s:32:"e9ab7eb339589333f6681a29bb898f6a";s:8:"subtotal";d:4800000;}s:32:"4f1fc967838f2e4b52ef885fd05795e5";a:7:{s:2:"id";s:1:"5";s:3:"qty";d:1;s:5:"price";d:90000;s:4:"name";s:88:"Huawei P20 Lite ANE-LX3 32GB + 4GB Dual SIM LTE Factory Unlocked Smartphone (Klein Blue)";s:7:"options";a:4:{s:9:"variation";s:3:"Red";s:6:"colour";s:5:"green";s:6:"seller";s:1:"3";s:12:"variation_id";s:1:"6";}s:5:"rowid";s:32:"4f1fc967838f2e4b52ef885fd05795e5";s:8:"subtotal";d:90000;}s:32:"1451ddb90feef69473f09c3813797a56";a:7:{s:2:"id";s:1:"5";s:3:"qty";d:1;s:5:"price";d:0;s:4:"name";s:88:"Huawei P20 Lite ANE-LX3 32GB + 4GB Dual SIM LTE Factory Unlocked Smartphone (Klein Blue)";s:7:"options";a:4:{s:9:"variation";s:4:"Dark";s:6:"colour";s:0:"";s:6:"seller";N;s:12:"variation_id";s:1:"8";}s:5:"rowid";s:32:"1451ddb90feef69473f09c3813797a56";s:8:"subtotal";d:0;}s:32:"1ea0c4fc375960afce4073abf0be9380";a:7:{s:2:"id";s:2:"10";s:3:"qty";d:3;s:5:"price";d:8899;s:4:"name";s:8:"jsjsjsjs";s:7:"options";a:4:{s:9:"variation";s:1:"l";s:6:"colour";s:0:"";s:6:"seller";N;s:12:"variation_id";s:2:"14";}s:5:"rowid";s:32:"1ea0c4fc375960afce4073abf0be9380";s:8:"subtotal";d:26697;}s:32:"11c3abbfc44ea86b87ed9fb0301f82dd";a:7:{s:2:"id";s:1:"1";s:3:"qty";d:13;s:5:"price";d:223800;s:4:"name";s:56:"Samsung Galaxy S9 - BLACK (Dual Sim) - Official Warranty";s:7:"options";a:4:{s:9:"variation";s:0:"";s:6:"colour";s:0:"";s:6:"seller";N;s:12:"variation_id";s:1:"1";}s:5:"rowid";s:32:"11c3abbfc44ea86b87ed9fb0301f82dd";s:8:"subtotal";d:2909400;}s:32:"37aec734756a52ee6751aa15f9c2fa0f";a:7:{s:2:"id";s:1:"5";s:3:"qty";d:2;s:5:"price";d:90000;s:4:"name";s:88:"Huawei P20 Lite ANE-LX3 32GB + 4GB Dual SIM LTE Factory Unlocked Smartphone (Klein Blue)";s:7:"options";a:4:{s:9:"variation";s:3:"Red";s:6:"colour";s:0:"";s:6:"seller";N;s:12:"variation_id";s:1:"6";}s:5:"rowid";s:32:"37aec734756a52ee6751aa15f9c2fa0f";s:8:"subtotal";d:180000;}s:32:"3eaaaf951c50df72f012098a3273d0df";a:7:{s:2:"id";s:1:"7";s:3:"qty";d:4;s:5:"price";d:105000;s:4:"name";s:110:"Huawei Nova 3i 4GB+128GB 6.3 Inch Android 8.1 Kirin 710 Octa Core 4G Smartphone - Purple (1 Unit Per Customer)";s:7:"options";a:4:{s:9:"variation";s:5:"256GB";s:6:"colour";s:0:"";s:6:"seller";N;s:12:"variation_id";s:2:"11";}s:5:"rowid";s:32:"3eaaaf951c50df72f012098a3273d0df";s:8:"subtotal";d:420000;}s:32:"1b12a5ee8c882045aee1f9fde6a5f027";a:7:{s:2:"id";s:1:"8";s:3:"qty";d:3;s:5:"price";d:400000;s:4:"name";s:135:"Apple IPhone X 5.8-Inches Super AMOLED (3GB RAM, 256GB ROM) IOS 11.1.1, (12MP + 12MP) + 7MP 4G LTE Smartphone - Silver + Tempered Glass";s:7:"options";a:4:{s:9:"variation";s:5:"164GB";s:6:"colour";s:0:"";s:6:"seller";N;s:12:"variation_id";s:2:"12";}s:5:"rowid";s:32:"1b12a5ee8c882045aee1f9fde6a5f027";s:8:"subtotal";d:1200000;}s:32:"0cabf04a51df24bd9d4e2bb36a39498a";a:7:{s:2:"id";s:1:"4";s:3:"qty";d:3;s:5:"price";d:85000;s:4:"name";s:2:"JY";s:7:"options";a:4:{s:9:"variation";s:5:"Black";s:6:"colour";s:0:"";s:6:"seller";N;s:12:"variation_id";s:1:"4";}s:5:"rowid";s:32:"0cabf04a51df24bd9d4e2bb36a39498a";s:8:"subtotal";d:255000;}s:32:"8dd19bd8e468a8ae112f27a15df2fddb";a:7:{s:2:"id";s:1:"3";s:3:"qty";d:4;s:5:"price";d:26000;s:4:"name";s:70:"Nokia - 2 - 5&quot; - 1GB RAM, 8GB ROM - Android 7.0 8MP + 5MP - White";s:7:"options";a:4:{s:9:"variation";s:0:"";s:6:"colour";s:0:"";s:6:"seller";N;s:12:"variation_id";s:1:"3";}s:5:"rowid";s:32:"8dd19bd8e468a8ae112f27a15df2fddb";s:8:"subtotal";d:104000;}s:32:"543098569559ae91845bf05844d0ea24";a:7:{s:2:"id";s:1:"9";s:3:"qty";d:1;s:5:"price";d:70000;s:4:"name";s:8:"Iphone 8";s:7:"options";a:4:{s:9:"variation";s:9:"2GB Model";s:6:"colour";s:0:"";s:6:"seller";N;s:12:"variation_id";s:2:"13";}s:5:"rowid";s:32:"543098569559ae91845bf05844d0ea24";s:8:"subtotal";d:70000;}s:32:"cce3097733d343ba89ca4401a62118fe";a:7:{s:2:"id";s:1:"4";s:3:"qty";d:9;s:5:"price";d:85000;s:4:"name";s:2:"JY";s:7:"options";a:4:{s:9:"variation";s:5:"Black";s:6:"colour";s:0:"";s:6:"seller";s:1:"3";s:12:"variation_id";s:1:"4";}s:5:"rowid";s:32:"cce3097733d343ba89ca4401a62118fe";s:8:"subtotal";d:765000;}}logged_in|b:1;logged_id|s:4:"Mw==";is_seller|s:1:"1";email|s:15:"admin@gmail.com";rootcategory|s:1:"3";category|s:1:"3";subcategory|s:1:"3";sub_id|s:1:"3";new_rootcategory|s:11:"Electronics";new_category|s:7:"Tablets";new_subcategory|s:9:"Batteries";'),
+('f5k6blbcha5ef4leaj0pb3shjo1l35vo', '::1', '', '0000-00-00 00:00:00', 'logged_in|b:1;logged_id|s:4:"Mw==";is_seller|s:1:"1";email|s:15:"admin@gmail.com";rootcategory|s:1:"1";category|s:1:"1";subcategory|s:1:"1";sub_id|s:1:"1";new_rootcategory|s:16:"Phones & Tablets";new_category|s:13:"Mobile Phones";new_subcategory|s:11:"Smartphones";'),
+('j5fc2g9iudojjs9amhlm96aac0emkg0q', '127.0.0.1', '', '0000-00-00 00:00:00', ''),
+('rkhh2gadoc2lecbs48of7makk9haq098', '::1', '', '0000-00-00 00:00:00', ''),
+('v77ukrp4ar67uu8fakjpd1g5f9d60blb', '127.0.0.1', '', '0000-00-00 00:00:00', ''),
+('vd7rb7pb64i4g42c3h5be130a2802c1d', '::1', '', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -325,7 +343,10 @@ INSERT INTO `products` (`id`, `seller_id`, `rootcategory`, `category`, `subcateg
 (5, 3, 'Computers & Accessories', 'Phones & Tablets Accessories', 'Feature Phones', '921784', 'Huawei P20 Lite ANE-LX3 32GB + 4GB Dual SIM LTE Factory Unlocked Smartphone (Klein Blue)', 'others', 'P20 Lite', 'black', 'The Best Just Got Better\r\nLose yourself in your screen with new generation HUAWEI FullView Display. Designed for life on the go with no compromises, the HUAWEI P20 lite sports a sleek compact frame that&rsquo;s almost entirely dedicated to its 5.84-inch Full HD screen.re level, as it comes with the latest Android 8.0 Oreo.\r\n\r\nBody &amp; Soul\r\nThe HUAWEI P20 lite takes colour to a higher level. Delve deeper into Klein Blue, a radiant shade that incorporates a nanometer-level light dazzle texture. Available too in deepest Midnight Black to contrast against the vibrancy of the Full HD screen, refined classic Platinum Gold and Sakura Pink with its rich pearlescent tone.\r\n\r\nSee is Believing\r\nThe HUAWEI P20 lite features a 2280 x 1080 FHD+ screen with 96% NTSC super high-colour gamut. That means everything you see on this screen is as rich and vibrant and detailed as it can be, from your own photographs to the latest boxset.\r\n\r\nFront and Centre\r\nThe HUAWEI P20 lite has a new higher definition, wider angle, front camera. 16 megapixels with a pixel size of 1.0 &mu;m and a FOV wide angle of 78&deg;, this camera is made for snapping friends, family and social-media-worthy selfies. With a F2.0 wide aperture and a 3D retouching feature that uses intelligent recognition and facial mapping to adjust lighting and shadow, you can count on terrific portraits and close-ups too.\r\n\r\nDual-Lens Camera\r\nThe HUAWEI P20 lite&rsquo;s dual-lens rear camera ticks all the boxes and then some. The state-of-the-art 16 MP lens with a pixel size of 1.12 &mu;m and F2.2 aperture is designed to capture more light and read depth perception, allowing you to take sharp, swift snaps when you need them. Partnered with a 2 MP professional Bokeh lens &ndash; as well as 5P + 3P lenses for the subject and background &ndash; it takes stunning shots while bringing some real definition to the mix.', '', 'The Best Just Got Better\r\nLose yourself in your screen with new generation HUAWEI FullView Display. Designed for life on the go with no compromises, the HUAWEI P20 lite sports a sleek compact frame that&rsquo;s almost entirely dedicated to its 5.84-inch Full HD screen.re level, as it comes with the latest Android 8.0 Oreo.\r\n\r\nBody &amp; Soul\r\nThe HUAWEI P20 lite takes colour to a higher level. Delve deeper into Klein Blue, a radiant shade that incorporates a nanometer-level light dazzle texture. Available too in deepest Midnight Black to contrast against the vibrancy of the Full HD screen, refined classic Platinum Gold and Sakura Pink with its rich pearlescent tone.\r\n\r\nSee is Believing\r\nThe HUAWEI P20 lite features a 2280 x 1080 FHD+ screen with 96% NTSC super high-colour gamut. That means everything you see on this screen is as rich and vibrant and detailed as it can be, from your own photographs to the latest boxset.\r\n\r\nFront and Centre\r\nThe HUAWEI P20 lite has a new higher definition, wider angle, front camera. 16 megapixels with a pixel size of 1.0 &mu;m and a FOV wide angle of 78&deg;, this camera is made for snapping friends, family and social-media-worthy selfies. With a F2.0 wide aperture and a 3D retouching feature that uses intelligent recognition and facial mapping to adjust lighting and shadow, you can count on terrific portraits and close-ups too.\r\n\r\nDual-Lens Camera\r\nThe HUAWEI P20 lite&rsquo;s dual-lens rear camera ticks all the boxes and then some. The state-of-the-art 16 MP lens with a pixel size of 1.12 &mu;m and F2.2 aperture is designed to capture more light and read depth perception, allowing you to take sharp, swift snaps when you need them. Partnered with a 2 MP professional Bokeh lens &ndash; as well as 5P + 3P lenses for the subject and background &ndash; it takes stunning shots while bringing some real definition to the mix.', 'The Best Just Got Better\r\nLose yourself in your screen with new generation HUAWEI FullView Display. Designed for life on the go with no compromises, the HUAWEI P20 lite sports a sleek compact frame that&rsquo;s almost entirely dedicated to its 5.84-inch Full HD screen.re level, as it comes with the latest Android 8.0 Oreo.\r\n', 'Mobiles International LLC', '["green","yellow","black","pink","purple"]', 'leather', '5.8 x 2.8 x 0.3 inches', '12.3 ounces', '{"Sim-Type":"Dual SIM","OS-Type":"Android OS","Battery-Capacity":"5000mAh - 8000mAh","Internal-Memory":"Above 256 GB","RAM":"1.5 GB","Sceen-Size":"6.1 inches","Colour":"Red"}', 'For warranty information about this product, please click here', '["Repair by vendor"]', 'M&B', '["ASTM Certified","Eco Friendly"]', 'approved', 0, 0, '2018-11-08 01:27:51'),
 (6, 3, 'Phones & Tablets', 'Mobile Phones', 'Smartphones', '192457', 'Apple iPhone 8 4.7&quot;, 64 GB, Fully Unlocked, Gold', 'others', 'A1863-64-Gold', 'black', '4.7-Inch (diagonal) widescreen LCD multi-touch display with IPS technology and Retina HD display\r\nSplash, water, and dust resistant\r\n12MP camera with Optical image stabilization and Six?element lens\r\n4K video recording at 24 fps, 30 fps, or 60 fps\r\nAll new glass design with A color?matched, aerospace?grade aluminum band', '', '4.7-Inch (diagonal) widescreen LCD multi-touch display with IPS technology and Retina HD display\r\nSplash, water, and dust resistant\r\n12MP camera with Optical image stabilization and Six?element lens\r\n4K video recording at 24 fps, 30 fps, or 60 fps\r\nAll new glass design with A color?matched, aerospace?grade aluminum band', '4.7-Inch (diagonal) widescreen LCD multi-touch display with IPS technology and Retina HD display\r\nSplash, water, and dust resistant\r\n', 'MSFTStore', '["yellow","black","red"]', 'metal', '5.5 x 0.3 x 2.6', '5.3', '{"Sim-Type":"Nano SIM","OS-Type":"iOS","Battery-Capacity":"3450mAh","Internal-Memory":"4 GB","RAM":"6 GB","Sceen-Size":"5.7 inches","Colour":"Black"}', ' For warranty information about this product, please click here', '["Service Center","Repair by vendor","Replacement by vendor"]', 'MSFT Drive', '["AFRDI Leather","AFRDI - Australian Furnishing Research & Development Institute","ASTM Certified","Eco Friendly","FSC - Forest Stewardship Council","Fair Trade","GECA Good Environmental Choice Australia","Organic"]', 'approved', 0, 0, '2018-11-08 10:57:34'),
 (7, 3, 'Phones & Tablets', 'Mobile Phones', 'Smartphones', '354186', 'Huawei Nova 3i 4GB+128GB 6.3 Inch Android 8.1 Kirin 710 Octa Core 4G Smartphone - Purple (1 Unit Per Customer)', 'others', '3i', 'black', 'Feature\r\n1. Kirin 710 Octa Core, 4 x Cortex A73 2.2GHz + 4 x Cortex A53 1.7GHz CPU, combine with 4GB RAM + 128GB ROM, high performance, run fast and fluently.\r\n2. 6.3 inch full capacitive screen, 409PPI 2340x1080 pixel screen, multi-touch, high clear and vivid color.\r\n3. Equipped with 4 cameras, 216MP RGB + 2MP RGB AF dual rear cameras and 24.0MP RGB +2.0MP RGB FF dual front cameras. You can capture wonderful moment with ease, and take high quality pictures.\r\n4. Photography Modes: AI beauty, large aperture, painter mode, dynamic photos, professional mode, video, 3D dynamic panorama, HDR, night scene, panoramic photo, streamer shutter (include busy traffic, light painting graffiti, silk water, star track), time-lapse photography, slow motion, continuous shooting, filter, beauty video, timed photo, voice-activated photo, smile capture, turn off screen flash snapshot, watermark, document correction.\r\n5. Built in 3340mAh battery, the battery will make the phone last for several days in normal use.\r\n6. Android 8.1 operation system, EMUI 8.2 interface.', '', 'Feature\r\n1. Kirin 710 Octa Core, 4 x Cortex A73 2.2GHz + 4 x Cortex A53 1.7GHz CPU, combine with 4GB RAM + 128GB ROM, high performance, run fast and fluently.\r\n2. 6.3 inch full capacitive screen, 409PPI 2340x1080 pixel screen, multi-touch, high clear and vivid color.\r\n3. Equipped with 4 cameras, 216MP RGB + 2MP RGB AF dual rear cameras and 24.0MP RGB +2.0MP RGB FF dual front cameras. You can capture wonderful moment with ease, and take high quality pictures.', 'Feature\r\n1. Kirin 710 Octa Core, 4 x Cortex A73 2.2GHz + 4 x Cortex A53 1.7GHz CPU, combine with 4GB RAM + 128GB ROM, high performance, run fast and fluently.\r\n2. 6.3 inch full capacitive screen, 409PPI 2340x1080 pixel screen, multi-touch, high clear and vivid color.\r\n3. Equipped with 4 cameras, 216MP RGB + 2MP RGB AF dual rear cameras and 24.0MP RGB +2.0MP RGB FF dual front cameras. You can capture wonderful moment with ease, and take high quality pictures.', 'HSP International Company', '["green","yellow","black","red","pink","purple"]', 'metal', '157.6*75.2*7.6', '169', '{"Sim-Type":"Nano SIM","OS-Type":"Android OS","Battery-Capacity":"4000mAh","Internal-Memory":"256 GB","RAM":"6 GB","Sceen-Size":"6.1 inches","Colour":"Blue"}', 'Insurance against screen (30% of the cost) and liquid damage (40% of the cost)', '["Service Center","Repair by vendor","Replacement by vendor"]', 'HSP International Company', '["AFRDI Leather","AFRDI - Australian Furnishing Research & Development Institute","ASTM Certified","Australian Made","Eco Friendly","FSC - Forest Stewardship Council","Fair Trade","GECA Good Environmental Choice Australia","Organic","PEFC -Programme for t', 'approved', 0, 0, '2018-11-09 09:08:27'),
-(8, 3, 'Phones & Tablets', 'Mobile Phones', 'Smartphones', '635492', 'Apple IPhone X 5.8-Inches Super AMOLED (3GB RAM, 256GB ROM) IOS 11.1.1, (12MP + 12MP) + 7MP 4G LTE Smartphone - Silver + Tempered Glass', 'others', 'Iphone X', 'black', 'A groundbreaking iOS for an iPhone that&#039;s truly breathtaking. \r\n\r\n \r\n\r\nSpecifications\r\n\r\nCapacity\r\n\r\n GB\r\n\r\nSize &amp; Weight\r\n\r\nHeight: 5.65 inches (143.6 mm)\r\nWidth: 2.79 inches (70.9 mm)\r\nDepth: 0.30 inch (7.7 mm)\r\nWeight: 6.14 ounces (174 grams)\r\n', '', 'A groundbreaking iOS for an iPhone that&#039;s truly breathtaking. \r\n\r\n \r\n\r\nSpecifications\r\n\r\nCapacity\r\n\r\n GB\r\n\r\nSize &amp; Weight\r\n\r\nHeight: 5.65 inches (143.6 mm)\r\nWidth: 2.79 inches (70.9 mm)\r\nDepth: 0.30 inch (7.7 mm)\r\nWeight: 6.14 ounces (174 grams)\r\n', 'A groundbreaking iOS for an iPhone that&#039;s truly breathtaking. \r\n\r\n \r\n\r\nSpecifications\r\n\r\nCapacity\r\n\r\n GB\r\n\r\nSize &amp; Weight\r\n\r\nHeight: 5.65 inches (143.6 mm)\r\nWidth: 2.79 inches (70.9 mm)\r\nDepth: 0.30 inch (7.7 mm)\r\nWeight: 6.14 ounces (174 grams)\r\n', 'DALINESHOP4PHONE', '["yellow","black","red","pink"]', 'metal', '167.6*65.2*7.6', '150', '{"Sim-Type":"Nano SIM","OS-Type":"iOS","Battery-Capacity":"5000mAh - 8000mAh","Internal-Memory":"Above 256 GB","RAM":"16 GB","Sceen-Size":"6.1 inches","Colour":"Black"}', 'Service is provided by AXA Mansard Insurance\r\nLimited to repair/replacements of 1 screen AND 1 liquid damage in 365 days', '["Repair by vendor","Replacement by vendor"]', '20b Caro Road, Ikeja. Lagos ', '["ASTM Certified","Australian Made","Eco Friendly","FSC - Forest Stewardship Council","Fair Trade"]', 'approved', 0, 0, '2018-11-09 09:16:45');
+(8, 3, 'Phones & Tablets', 'Mobile Phones', 'Smartphones', '635492', 'Apple IPhone X 5.8-Inches Super AMOLED (3GB RAM, 256GB ROM) IOS 11.1.1, (12MP + 12MP) + 7MP 4G LTE Smartphone - Silver + Tempered Glass', 'others', 'Iphone X', 'black', 'A groundbreaking iOS for an iPhone that&#039;s truly breathtaking. \r\n\r\n \r\n\r\nSpecifications\r\n\r\nCapacity\r\n\r\n GB\r\n\r\nSize &amp; Weight\r\n\r\nHeight: 5.65 inches (143.6 mm)\r\nWidth: 2.79 inches (70.9 mm)\r\nDepth: 0.30 inch (7.7 mm)\r\nWeight: 6.14 ounces (174 grams)\r\n', '', 'A groundbreaking iOS for an iPhone that&#039;s truly breathtaking. \r\n\r\n \r\n\r\nSpecifications\r\n\r\nCapacity\r\n\r\n GB\r\n\r\nSize &amp; Weight\r\n\r\nHeight: 5.65 inches (143.6 mm)\r\nWidth: 2.79 inches (70.9 mm)\r\nDepth: 0.30 inch (7.7 mm)\r\nWeight: 6.14 ounces (174 grams)\r\n', 'A groundbreaking iOS for an iPhone that&#039;s truly breathtaking. \r\n\r\n \r\n\r\nSpecifications\r\n\r\nCapacity\r\n\r\n GB\r\n\r\nSize &amp; Weight\r\n\r\nHeight: 5.65 inches (143.6 mm)\r\nWidth: 2.79 inches (70.9 mm)\r\nDepth: 0.30 inch (7.7 mm)\r\nWeight: 6.14 ounces (174 grams)\r\n', 'DALINESHOP4PHONE', '["yellow","black","red","pink"]', 'metal', '167.6*65.2*7.6', '150', '{"Sim-Type":"Nano SIM","OS-Type":"iOS","Battery-Capacity":"5000mAh - 8000mAh","Internal-Memory":"Above 256 GB","RAM":"16 GB","Sceen-Size":"6.1 inches","Colour":"Black"}', 'Service is provided by AXA Mansard Insurance\r\nLimited to repair/replacements of 1 screen AND 1 liquid damage in 365 days', '["Repair by vendor","Replacement by vendor"]', '20b Caro Road, Ikeja. Lagos ', '["ASTM Certified","Australian Made","Eco Friendly","FSC - Forest Stewardship Council","Fair Trade"]', 'approved', 0, 0, '2018-11-09 09:16:45'),
+(9, 3, 'Phones & Tablets', 'Mobile Phones', 'Smartphones', '597361', 'Iphone 8', 'Apple', 'Iphone 8', 'black', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam animi delectus, doloribus facere vel velit vero. Accusantium ad blanditiis facere harum iste! Corporis dignissimos eum exercitationem labore molestiae numquam tempora.', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam animi delectus, doloribus facere vel velit vero. Accusantium ad blanditiis facere harum iste! Corporis dignissimos eum exercitationem labore molestiae numquam tempora.', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam animi delectus, doloribus facere vel velit vero. Accusantium ad blanditiis facere harum iste! Corporis dignissimos eum exercitationem labore molestiae numquam tempora.', 'Iphone Widgets Technology', '["green","black","red"]', 'metal', '12 x 3 x 90', '120', '{"Sim-Type":"Nano SIM","OS-Type":"iOS","Battery-Capacity":"5000mAh - 8000mAh","Internal-Memory":"128 GB","Sceen-Size":"6.1 inches","Colour":"Black"}', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam animi delectus, doloribus facere vel velit vero. Accusantium ad blanditiis facere harum iste! Corporis dignissimos eum exercitationem labore molestiae numquam tempora.', '["Repair by vendor","Replacement by vendor"]', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam animi delectus, doloribus facere vel velit vero. Accusantium ad blanditiis facere harum iste! Corporis dignissimos eum exercitationem labore molestiae numquam tempora.', '["AFRDI Leather","ASTM Certified"]', 'approved', 0, 0, '2018-11-12 17:36:31'),
+(10, 3, 'Phones & Tablets', 'Mobile Phones', 'Smartphones', '918237', 'jsjsjsjs', 'Apple', 'jjh', 'red', 'jh', '', '', '', 'ouu', '["pink"]', 'synthetic', 'jji', '774', '[]', '', '', '', '', 'approved', 0, 0, '2018-11-13 22:55:02'),
+(11, 3, 'Electronics', 'Tablets', 'Batteries', '286539', 'Apple Watch', 'Apple', 'Miranda', 'black', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consectetur eius eveniet illo quas quasi quia soluta tempora? Doloremque ducimus eos impedit porro quia ratione sed soluta voluptas! A, libero?', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consectetur eius eveniet illo quas quasi quia soluta tempora? Doloremque ducimus eos impedit porro quia ratione sed soluta voluptas! A, libero?', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consectetur eius eveniet illo quas quasi quia soluta tempora? Doloremque ducimus eos impedit porro quia ratione sed soluta voluptas! A, libero?', 'Miranda', '["black","red"]', 'metal', '12 x 32 x10', '20', '[]', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consectetur eius eveniet illo quas quasi quia soluta tempora? Doloremque ducimus eos impedit porro quia ratione sed soluta voluptas! A, libero?', '["Service Center","Repair by vendor","Replacement by vendor"]', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consectetur eius eveniet illo quas quasi quia soluta tempora? Doloremque ducimus eos impedit porro quia ratione sed soluta voluptas! A, libero?', '["Eco Friendly","Fair Trade","GECA Good Environmental Choice Australia"]', 'approved', 0, 0, '2018-11-14 10:27:31');
 
 -- --------------------------------------------------------
 
@@ -361,7 +382,10 @@ INSERT INTO `product_gallery` (`id`, `product_id`, `seller_id`, `image_name`, `f
 (12, 7, 3, '357603ddeaea6807e162dc5da753c83e.jpg', 1, '2018-11-09 08:08:28'),
 (13, 7, 3, 'b626355d0f149428c4fda315875b02e6.jpg', 0, '2018-11-09 08:08:28'),
 (14, 7, 3, '3aaedfa3600d385e54453b1ec22e6338.jpg', 0, '2018-11-09 08:08:28'),
-(15, 8, 3, 'eb602d7a5c4459fe04248f9f6d963ae1.jpg', 1, '2018-11-09 08:16:45');
+(15, 8, 3, 'eb602d7a5c4459fe04248f9f6d963ae1.jpg', 1, '2018-11-09 08:16:45'),
+(16, 9, 3, '6bf8a7d96b549f159f26350fcd3f06b2.jpeg', 1, '2018-11-12 16:36:31'),
+(17, 10, 3, '556d4701a9188ec8e4e662473ff9f78e.png', 1, '2018-11-13 21:55:02'),
+(18, 11, 3, '2bd6d4f09566db6354fe0b9aaf753cf5.jpg', 1, '2018-11-14 09:27:31');
 
 -- --------------------------------------------------------
 
@@ -382,8 +406,8 @@ CREATE TABLE `product_rating` (
 
 INSERT INTO `product_rating` (`id`, `product_id`, `user_id`, `rating_score`) VALUES
 (2, 4, 3, 4),
-(3, 5, 3, 4),
-(4, 8, 3, 4);
+(3, 4, 5, 4),
+(4, 4, 3, 5);
 
 -- --------------------------------------------------------
 
@@ -448,7 +472,10 @@ INSERT INTO `product_variation` (`id`, `product_id`, `variation`, `sku`, `isbn`,
 (9, 6, '64GB', '5416109', '949191910', '5', '180250', '', '', ''),
 (10, 6, '256GB', '5416102', '949191933', '10', '220450', '200100', '2018-11-20', '2018-11-29'),
 (11, 7, '256GB', '4181050', '9418161091', '10', '105000', '', '', ''),
-(12, 8, '164GB', '61111845', '4199941694', '10', '410000', '400000', '2018-11-10', '2018-11-28');
+(12, 8, '164GB', '61111845', '4199941694', '10', '410000', '400000', '2018-11-10', '2018-11-28'),
+(13, 9, '2GB Model', '461901', '6599919', '10', '80000', '70000', '2018-11-12', '2018-11-22'),
+(14, 10, 'l', '54', '525', '10', '8899', '', '', ''),
+(15, 11, 'Miranda', '941916', '49419199', '5', '14000', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -512,7 +539,7 @@ CREATE TABLE `sellers` (
 
 INSERT INTO `sellers` (`id`, `uid`, `legal_company_name`, `address`, `tin`, `reg_no`, `vat_file`, `license_to_sell`, `own_brand`, `main_category`, `no_of_products`, `bank_name`, `account_name`, `account_number`, `bvn`, `terms`, `company_pic`, `status`, `date_applied`, `disable_products`) VALUES
 (1, 1, 'My legal company name', 'my address', '71718181', 'Ng83833', 'd18cc26fbd8189e6124f1c1ee14e49c9.docx', 0, 0, 'Tv & Electronics', '', 'Guaranty Trust Bank Plc', 'Sokoya Adeniji Philip', '2820226778', '7262626228', 'Here is my information... Nothing serious', NULL, 'pending', '0000-00-00 00:00:00', 0),
-(8, 4, 'Sokoya Adeniji Company', '530A, Aina Akingbala Street, Ikeja', '717', NULL, NULL, 1, 1, 'Computers &amp; Accessories', '21-50', NULL, NULL, NULL, NULL, '', NULL, 'pending', '0000-00-00 00:00:00', 0),
+(8, 4, 'Sokoya Adeniji Company', '530A, Aina Akingbala Street, Ikeja', '717', NULL, NULL, 1, 1, 'Computers &amp; Accessories', '21-50', NULL, NULL, NULL, NULL, '', NULL, 'suspended', '0000-00-00 00:00:00', 0),
 (9, 6, 'Woyong Okey Company', '530A, Aina Akingbala Street, Ikeja', '71716', NULL, NULL, 1, 1, 'Electronics', '21-50', NULL, NULL, NULL, NULL, '', NULL, 'pending', '0000-00-00 00:00:00', 0),
 (10, 8, 'JeffDev', 'No 13 Dan Ngozi Iyio Street', '4949644', NULL, NULL, 1, 1, 'Computers &amp; Accessories', '51-100', NULL, NULL, NULL, NULL, '', NULL, 'approved', '0000-00-00 00:00:00', 0);
 
@@ -530,6 +557,22 @@ CREATE TABLE `sellers_notification_message` (
   `is_read` int(11) NOT NULL DEFAULT '0',
   `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sellers_notification_message`
+--
+
+INSERT INTO `sellers_notification_message` (`id`, `seller_id`, `title`, `content`, `is_read`, `created_on`) VALUES
+(1, 3, 'Your product listing has been suspended', 'This is to notify you the product with ( JY ) has been suspended.  <br /> Contact support if not please with this action.<br /> Regards.', 1, '2018-11-13 22:28:40'),
+(2, 3, 'Your product listing has been approved', 'This is to notify you the product with ( JY ) has been approveed  <br /> Check your listing <a href=\'onitshamarket.com/jy-4/\'>Click here to see.</a><br /> Regards.', 1, '2018-11-13 22:28:30'),
+(3, 3, 'Your product listing has been approved', 'This is to notify you the product with ( Iphone 8 ) has been approveed  <br /> Check your listing <a href=\'onitshamarket.com/iphone-8-9/\'>Click here to see.</a><br /> Regards.', 1, '2018-11-13 22:28:35'),
+(4, 3, 'Your product listing has been approved', 'This is to notify you the product with ( Iphone 7 ) has been approveed  <br /> Check your listing <a href=\'onitshamarket.com/iphone-7-10/\'>Click here to see.</a><br /> Regards.', 1, '2018-11-13 22:28:42'),
+(5, 4, 'Your account has been approved', 'Congrats, welcome to your seller dashboard.<br /> Regards.', 0, '2018-11-13 20:05:34'),
+(6, 4, 'Your account has been suspended', 'This is to notify you that your account has been suspended. <br />Contact support<br /> Regards.', 0, '2018-11-13 20:05:46'),
+(7, 3, 'Your product listing has been suspended', 'This is to notify you the product with ( Apple iPhone 8 4.7&quot;, 64 GB, Fully Unlocked, Gold ) has been suspended.  <br /> Contact support if not please with this action.<br /> Regards.', 1, '2018-11-13 22:16:25'),
+(8, 3, 'Your product listing has been approved', 'This is to notify you the product with ( jsjsjsjs ) has been approveed  <br /> Check your listing <a href=\'onitshamarket.com/jsjsjsjs-10/\'>Click here to see.</a><br /> Regards.', 0, '2018-11-13 21:55:20'),
+(9, 3, 'Your product listing has been approved', 'This is to notify you the product with ( Apple iPhone 8 4.7&quot;, 64 GB, Fully Unlocked, Gold ) has been approveed  <br /> Check your listing <a href=\'onitshamarket.com/apple-iphone-8-4-7-quot-64-gb-fully-unlocked-gold-6/\'>Click here to see.</a><br /> Regards.', 0, '2018-11-14 09:28:00'),
+(10, 3, 'Your product listing has been approved', 'This is to notify you the product with ( Apple Watch ) has been approveed  <br /> Check your listing <a href=\'onitshamarket.com/apple-watch-11/\'>Click here to see.</a><br /> Regards.', 0, '2018-11-14 09:30:08');
 
 -- --------------------------------------------------------
 
@@ -641,7 +684,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `email`, `first_name`, `last_name`, `city`, `zip_code`, `address`, `phone`, `display_name`, `profile_pic`, `gender`, `password`, `salt`, `ip`, `date_registered`, `last_login`, `newsletter`, `recovery_code`, `account_status`, `is_seller`, `is_admin`, `groups`) VALUES
 (1, 'bisi@gmail.com', 'Sokoya', 'Philip', '', '', '', '08169254598', 'mrphilo1234455', '', 'female', 'eaf859633c1bc66dc04a57f3d2579a0a0f5a626c17940a0010473222c9ee61f0', 'Dr=SLzk1viy$JP9q<=)bTn0V##gdQctp;!zmvb.g:8iur9T?!+', '127.0.0.1', '2018-08-23 16:21:31', '2018-09-04 20:44:25', 0, '', '', '1', 0, 0),
 (2, 'phil@gmail.com', 'Sokoya', 'Adeniji', '', '', '', '', '', '', '', 'f191311d9970adaf1117fbbb295cc959bb9d094329215bddfb590a9def27dee2', '*9-dTBSC-8m+QmuPv&|PKU>Ipz-Wcd^oxL<s.iAoepyAO1Wjxx', '::1', '2018-09-17 21:40:35', '2018-10-22 17:50:34', 0, '', '', '0', 0, 0),
-(3, 'admin@gmail.com', 'Chidi', 'Jeffrey', '', '', '', '', '', '', '', 'f191311d9970adaf1117fbbb295cc959bb9d094329215bddfb590a9def27dee2', '*9-dTBSC-8m+QmuPv&|PKU>Ipz-Wcd^oxL<s.iAoepyAO1Wjxx', '::1', '2018-09-17 21:40:35', '2018-11-09 08:55:04', 0, '', '', '1', 1, 0),
+(3, 'admin@gmail.com', 'Chidi', 'Jeffrey', '', '', '', '', '', '', '', 'f191311d9970adaf1117fbbb295cc959bb9d094329215bddfb590a9def27dee2', '*9-dTBSC-8m+QmuPv&|PKU>Ipz-Wcd^oxL<s.iAoepyAO1Wjxx', '::1', '2018-09-17 21:40:35', '2018-11-14 10:32:19', 0, '', '', '1', 1, 0),
 (4, 'seller@gmail.com', 'Jeff', 'Besox', '', '', '', '', '', '', '', 'ee707647928828271f6c2cd23ae10fe8bdc2f58b4745dfb3a2e8f18d7a3003c2', 'FA6rGIWT:nH+qNbY0gAC84)HpylN*aNrg9Sm?8eqERNY,ncLg:', '::1', '2018-10-22 12:21:30', '2018-10-22 15:35:22', 0, '', '', 'pending', 0, 0),
 (5, 'seller2@gmail.com', 'Phil', 'Tusey', '', '', '', '', '', '', '', 'e71997718ceebe98d6b05bf3f4b9e54d338178996973e8999282b3313fdcd10d', '8Ge(<|c=Hw9Gh@1=n!_,>vXN|OWaz,($^2wqFPAm>(*l)NnZsE', '::1', '2018-10-22 12:26:31', '2018-10-22 14:50:01', 0, '', '', 'false', 0, 0),
 (6, 'okey@gmail.com', 'Woyong', 'Okey', '', '', '', '', '', '', '', 'f74b08dc3f1fbf7c4cb26c04102f69adcb2f9446165326692350648ce9ffc3b0', 'Jd#X7j!5kHvh+?D;HOV1)(RUjoCGg<H(k|.cRtQB.pX<zwbLid', '::1', '2018-10-22 15:38:24', '2018-10-22 15:41:05', 0, '', '', 'pending', 0, 0),
@@ -808,7 +851,7 @@ ALTER TABLE `billing_address`
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `category`
 --
@@ -838,12 +881,12 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `product_gallery`
 --
 ALTER TABLE `product_gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `product_rating`
 --
@@ -858,7 +901,7 @@ ALTER TABLE `product_review`
 -- AUTO_INCREMENT for table `product_variation`
 --
 ALTER TABLE `product_variation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `root_category`
 --
@@ -873,7 +916,7 @@ ALTER TABLE `sellers`
 -- AUTO_INCREMENT for table `sellers_notification_message`
 --
 ALTER TABLE `sellers_notification_message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `specifications`
 --
