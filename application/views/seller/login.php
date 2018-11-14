@@ -19,8 +19,10 @@
 
                     </div>
                     <div class="col-md-4">
-                        <img src="<?= base_url('assets/landing/img/onitshamarket-logo.png'); ?>" alt="<?= lang('app_name'); ?>"
+                        <a href="<?= base_url(); ?>">
+                            <img src="<?= base_url('assets/landing/img/onitshamarket-logo.png'); ?>" alt="<?= lang('app_name'); ?>"
                              class="brand-title img-responsive">
+                        </a>
                     </div>
                     <div class="col-md-4">
 

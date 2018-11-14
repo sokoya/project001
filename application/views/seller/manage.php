@@ -48,24 +48,30 @@
                                 <th class="min-tablet">Average Sale Price(N)</th>
                                 <th class="min-tablet">Avg Discount Price(N)</th>
                                 <th class="min-desktop">Available</th>
-                                <?php if(in_array($type,array('pending', 'missing_images')) ): ?>
-                                    <th class="min-desktop">Action</th>
-                                <?php endif; ?>
+                                <th class="min-desktop min-tablet">Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php foreach($products as $product) : ?>
                                 <tr>
-                                    <td><?= $product['product_name']; ?></td>
+                                    <td>
+                                        <?= $product['product_name']; ?>
+                                    </td>
                                     <td><?= $product['sku'];?></td>
                                     <td><?= neatDate($product['created_on']); ?></td>
                                     <td><?= ngn($product['sale_price']); ?></td>
                                     <td><?= ngn($product['discount_price']); ?></td>
                                     <td><?= productStatus($product['product_status']); ?></td>
-                                    <?php if(in_array($type,array('pending', 'missing_images')) ): ?>
+                                    <?php if(in_array($product['product_status'],array('pending', 'missing_images')) ): ?>
                                         <td>
                                             <a href="<?= base_url('seller/product/edit/' . $product['id']); ?>">
                                                 <i class="fa fa-plus" title="Edit"></i> Edit Product
+                                            </a>
+                                        </td>
+                                    <?php elseif( $product['product_status']) : ?>
+                                        <td>
+                                            <a href="<?= base_url(urlify($product['product_name'], $product['id'])); ?>">
+                                                <i class="fa fa-plus" title="Edit"></i> View Product Online
                                             </a>
                                         </td>
                                     <?php endif; ?>

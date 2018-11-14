@@ -86,7 +86,7 @@ class Product extends CI_Controller {
 		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
 		$page_data['description'] = $this->product->category_description($str);
         $page_data['page'] = 'category';
-		$this->load->library('user_agent');
+		
 		if( !$this->agent->is_mobile()){
 			$this->load->view('landing/category', $page_data);
 		}else{

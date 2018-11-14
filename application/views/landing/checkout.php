@@ -202,7 +202,7 @@
 											<a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
 												<img class="panel-pr-image"
 													 src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image); ?> ?>"
-													 alt="Carrito -marketplace <?= $product['name']; ?>"
+													 alt="Carrito marketplace <?= $product['name']; ?>"
 													 title="<?= $product['name']; ?>"/>
 											</a>
 										</td>
@@ -214,7 +214,6 @@
 										</td>
 										<td class="parent-block panel-product-price">
 											<span class="pr-price" data-amount="<?= $product['subtotal']; ?>">
-
 												<?php 
 													echo ngn($product['subtotal']); 
 													$subtotal += $product['subtotal']; 

@@ -181,7 +181,7 @@
 					} else {
 						minus.prop("disabled", false);
 					}
-					$('.cart-row').load(base_url + 'product/cart')
+					$('.cart-row').load(base_url + 'product/cart');
 				}
 			},
 			error: response => {
@@ -219,8 +219,7 @@
 					} else {
 						minus.prop("disabled", false);
 					}
-					// 		// 	$( "#delivery-method" ).load( base_url + "checkout" );
-					$('.cart-row').load(base_url + 'product/cart')
+					$('.cart-row').load(base_url + 'product/cart');
 				}
 
 			},

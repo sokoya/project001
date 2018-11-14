@@ -235,14 +235,14 @@ Class Seller_model extends CI_Model{
 
 
     /**
+     * Confirm if the person accessing thr product is the owner
      * @param $user_id|product_id
      * @return num_rows
      */
+    
     function is_product_owner( $uid ='', $pid = ""){
         $this->db->where('seller_id', $uid);
         $this->db->where('id', $pid);
-        $this->db->where('product_status =', 'pending');
-        $this->db->or_where('product_status =', 'missing_images');
         return $this->db->get('products')->num_rows();
     }
 

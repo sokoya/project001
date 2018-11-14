@@ -31,7 +31,6 @@ class Product extends CI_Controller{
                 'subcategory' => $this->input->post('subcategory')
             );
             $this->session->set_userdata($chosen_array);
-//            print_r( $chosen_array );
             redirect('seller/product/create');
         }else{
             // Unset the category
@@ -320,26 +319,26 @@ class Product extends CI_Controller{
             $page_data['product_id'] = $id;
             $page_data['brands'] = $this->seller->get_brands();
             $this->load->view('seller/edit', $page_data);
-        }else{
-            
+        }else{            
             // Process
             $id = $this->input->post('product_id');
             $pricing_error = $image_error = 0;
             $return['status'] = 'error';
             $return['message'] = '';
-                // Product Block
+            // Product Block
             $certifications = $this->input->post('certifications');
             $certifications = (!empty($certifications) ) ? json_encode($certifications) : '';
             $warranty_type = $this->input->post('warranty_type');
             $warranty_type = ( !empty($warranty_type) ) ? json_encode( $warranty_type ) : '';
             $colour_family = $this->input->post('colour_family');
             $colour_family = ( !empty( $colour_family) ) ? json_encode( $colour_family ) : '';
+            $description = $this->input->post('product_description');
             $product_table = array(
                 'product_name' => cleanit($this->input->post('product_name')),
                 'brand_name' => cleanit($this->input->post('brand_name')),
                 'model' => cleanit($this->input->post('model')),
                 'main_colour' => $this->input->post('main_colour'),
-                'product_description' => htmlentities($this->input->post('product_description'), ENT_QUOTES),
+                'product_description' => htmlentities( $description, ENT_QUOTES),
                 'youtube_id' => cleanit($this->input->post('youtube_id')),
                 'in_the_box' => htmlentities($this->input->post('in_the_box'), ENT_QUOTES),
                 'highlights' => htmlentities($this->input->post('highlights'), ENT_QUOTES),
