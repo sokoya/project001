@@ -20,7 +20,7 @@
 						<tr>
 							<th>Product</th>
 							<th>Title</th>
-							<th>Colour / Variation</th>
+							<th>Variation</th>
 							<th>Price</th>
 							<th>Quality</th>
 							<th>Total</th>
@@ -58,7 +58,6 @@
 									</td>
 								<?php else: ?>
 									<td>
-									<?php echo ucfirst($product['options']['colour']) ?>
 										<?= !empty($product['options']['variation']) ? '/ '.ucfirst($product['options']['variation']) : ''; ?>
 									</td>
 									<td><?= ngn($product['price']); ?></td>
