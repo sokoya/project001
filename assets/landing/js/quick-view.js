@@ -20,7 +20,9 @@ function notification_message(msg, icon = 'fa fa-info-circle', notification_type
 			<i class="${icon}" aria-hidden="true"></i> ${msg}
 		</div>
 	`);
-	$(".notification").delay(5000).fadeOut();
+	$(".notification").delay(5000).fadeOut(function () {
+		$('.notification').remove();
+	});
 }
 
 $.fn.isInViewport = function () {
