@@ -49,10 +49,10 @@
 										href="<?= base_url(urlify($product['name'], $product['id'])); ?>"><?= htmlentities($product['name']); ?></a><br/>
 									<span class="text text-sm">Seller: <?= !empty($detail->legal_company_name) ? $detail->legal_company_name : $detail->name; ?></span>
 								</td>
-								<?php if($variation_detail->quantity < 1 || in_array( $detail->status, array('suspended', 'blocked', 'pending' )) )
+								<?php if($variation_detail->quantity < 1 || in_array( $detail->product_status, array('suspended', 'blocked', 'pending' )) )
 									 : ?>
 									<td colspan="4">
-                                        <span class="text-center text-semibold text-danger"><strong><?= $detail->status; ?></strong></span>
+                                        <span class="text-center text-semibold text-danger"><strong>This product variation is out of stock. or no longer available.</strong></span>
 									</td>
 								<?php else: ?>
 									<td>
