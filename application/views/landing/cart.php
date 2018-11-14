@@ -49,9 +49,7 @@
 										href="<?= base_url(urlify($product['name'], $product['id'])); ?>"><?= htmlentities($product['name']); ?></a><br/>
 									<span class="text text-sm">Seller: <?= !empty($detail->legal_company_name) ? $detail->legal_company_name : $detail->name; ?></span>
 								</td>
-								<?php if($variation_detail->quantity < 1 
-									|| $product['qty'] > $variation_detail->quantity 
-									|| in_array( $detail->status, array('suspended', 'blocked', 'pending' )) )
+								<?php if($variation_detail->quantity < 1 || in_array( $detail->status, array('suspended', 'blocked', 'pending' )) )
 									 : ?>
 									<td colspan="4">
                                         <span class="text-center text-semibold text-danger"><strong>This product variation is out of stock. or no longer available.</strong></span>
@@ -63,6 +61,7 @@
 									<td><?= ngn($product['price']); ?></td>
 									<td>
 										<ul>
+											<?php $value = ($product['qty'] > $variation_detail->quantity ) ? $variation_detail->quantity : $product['qty']; ?>
 											<li class="product-page-qty-item">
 												<button type="button" data-cid="<?= $product['rowid']; ?>"
 														class="product-page-qty product-page-qty-minus">-
@@ -71,7 +70,7 @@
 													   id="quan"
 													   class="product-page-qty product-page-qty-input quantity product-<?= $product['rowid']; ?>"
 													   type="text"
-													   value="<?= $product['qty']; ?>" disabled/>
+													   value="<?= $value; ?>" disabled/>
 												<button type="button" data-cid="<?= $product['rowid']; ?>"
 														class="product-page-qty product-page-qty-plus">+
 												</button>
