@@ -283,9 +283,11 @@ Class Product_model extends CI_Model{
 
     // Generic single product detail
     function get_cart_details( $id ){
-        return $this->db->query("SELECT u.first_name name, s.status, s.legal_company_name, i.image_name image FROM users u 
-            LEFT JOIN product_gallery i ON (i.product_id = $id AND i.featured_image = 1)
-            LEFT JOIN sellers s ON (u.id = s.uid) ")->row();
+        $select = "SELECT p.product_status, p.seller_id, s.legal_company_name, s.status, i.image_name image FROM products p
+                LEFT JOIN sellers s ON (s.id = p.seller_id)
+                LEFT JOIN product_gallery i ON (i.product_id = p.id )
+                WHERE p.id = $id";
+        return $this->db->query($select)->row();
     }
 
 
