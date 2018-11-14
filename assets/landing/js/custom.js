@@ -21,28 +21,6 @@ $('#jqzoom').jqzoom({
 });
 
 
-$('.form-group-cc-number input').payment('formatCardNumber');
-$('.form-group-cc-date input').payment('formatCardExpiry');
-$('.form-group-cc-cvc input').payment('formatCardCVC');
-
-// Register account on payment
-$('#create-account-checkbox').on('ifChecked', function () {
-	$('#create-account').removeClass('hide');
-});
-
-$('#create-account-checkbox').on('ifUnchecked', function () {
-	$('#create-account').addClass('hide');
-});
-
-$('#shipping-address-checkbox').on('ifChecked', function () {
-	$('#shipping-address').removeClass('hide');
-});
-
-$('#shipping-address-checkbox').on('ifUnchecked', function () {
-	$('#shipping-address').addClass('hide');
-});
-
-
 $('.owl-carousel').each(function () {
 	$(this).owlCarousel();
 });

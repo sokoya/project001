@@ -11,7 +11,7 @@
 			<header class="page-header">
 				<h1 class="page-title">Cart Overview</h1>
 			</header>
-			<div class="row">
+			<div class="row cart-row">
 				<div class="col-md-10">
 					<?php $this->load->view('landing/msg_view'); ?>
 					<?= form_open('', 'id="cart-form"'); ?>
@@ -56,7 +56,7 @@
 									</td>
 								<?php else: ?>
 									<td>
-										<?= !empty($product['options']['variation']) ? ucfirst($product['options']['variation']) : 'Null'; ?>
+										<?= !empty($product['options']['variation']) ? ucfirst($product['options']['variation']) : '-'; ?>
 									</td>
 									<td><?= ngn($product['price']); ?></td>
 									<td>
@@ -135,7 +135,10 @@
 <?php $this->load->view('landing/resources/script'); ?>
 <script>
 
-	
+    function bind_market(src, destination) {
+        $(`.${destination}`).html(src);
+    }
+
 	let quantity = $('#quan');
 	let count = quantity.data('range');
 	let plus = $('.product-page-qty-plus');
@@ -151,12 +154,16 @@
 			method: 'POST',
 			data: {cid:cid,qty:qty},
 			success: function (response) {
-				console.log(response);
-				if (quantity.val() >= count) {
-					plus.prop("disabled", true);
-				} else {
-					plus.prop("disabled", false);
-				}
+				if( response ){
+                    let  x = ( $('.cart-read').text() * 1 ) + 1;
+				    notification_message('The Product quantity has been updated.','fa fa-info-circle','success');
+				    bind_market( x , 'cart-read');
+                    if (quantity.val() >= 1) {
+                        plus.prop("disabled", true);
+                    } else {
+                        minus.prop("disabled", false);
+                    }
+                }
 			},
 			error: response => {
 				console.log(response);
@@ -181,12 +188,19 @@
 			url: 'ajax/update_cart_item',
 			method: 'POST',
 			data: {cid:cid,qty:qty},
-			success: () => {
-				if (quantity.val() <= 1) {
-					minus.prop("disabled", true);
-				} else {
-					minus.prop("disabled", false);
-				}
+			success: function( response) {
+                if( response ){
+                    let  x = ( $('.cart-read').text() * 1 ) - 1;
+                    notification_message('The Product quantity has been updated.','fa fa-info-circle','warning');
+                    bind_market( x , 'cart-read');
+                    if (quantity.val() <= 1) {
+                        minus.prop("disabled", true);
+                    } else {
+                        minus.prop("disabled", false);
+                    }
+                    // $('.cart-row').load(base_url + )
+                }
+
 			},
 			error: () => {
 				if (quantity.val() <= 1) {

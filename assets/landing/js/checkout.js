@@ -1,14 +1,21 @@
 
+/*
+* Uppercase first letter of a word
+* */
 function ucwords(str) {
 	return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
 		return $1.toUpperCase();
 	});
 }
 
-
+/*
+* Src :  The Element you want to achieve
+* destination in class
+* */
 function bind_market(src, destination) {
 	$(`.${destination}`).html(src);
 }
+
 
 $('.create-address-btn').on('click', function (e) {
 	e.preventDefault();

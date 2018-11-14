@@ -282,16 +282,16 @@ class Ajax extends CI_Controller
 
     // Update Cart quantity
     function update_cart_item(){
-    	
     	if( !$this->input->post() || !$this->input->is_ajax_request() ){ redirect(base_url());}
     	$cid = $this->input->post('cid', true);
     	$qty = $this->input->post('qty', true);
     	$data = array('rowid' => cleanit($cid), 'qty' => $qty);
     	if( $this->cart->update($data) ){
-    		return true;
+    		echo true;
     	}else{
-    		return false;
+    	    echo false;
     	}
+    	exit;
     }
 
 
