@@ -40,7 +40,7 @@ class Login extends CI_Controller{
                 $user = $this->seller->login($data);
                 if( $user ) {
                     if( $user->is_seller == 'false' ){
-                        $this->session->set_flashdata('error_msg','Please fill the form below.');
+                        $this->session->set_flashdata('error_msg','Please fill the form below to proceed.');
                         $session_data = array('logged_in' => true, 'logged_id' => base64_encode($user->id), 'is_seller' => $user->is_seller, 'email' => $data['email']);
                         $this->session->set_userdata($session_data);
                         // redirect them to the big form
