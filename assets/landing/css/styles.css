@@ -7511,7 +7511,7 @@ input[type="color"]:focus,
 
 .notification {
 	position: fixed;
-	bottom: 0;
+	top: 0;
 	width: 100%;
 	padding: 10px;
 	font-weight: 700;
