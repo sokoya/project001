@@ -20,7 +20,7 @@
 				<div class="container">
 					<div class="slider-item-inner">
 						<div class="slider-item-caption-left slider-item-caption-white">
-							<h4 class="slider-item-caption-title">Save up to $150 on Your Next Laptop</h4>
+							<h4 class="slider-item-caption-title">Save up to &#8358;1,500 on Your Next Laptop</h4>
 							<p class="slider-item-caption-desc">I'm Not Gonna Pay A Lot For This Laptop.</p><a
 								class="btn btn-lg btn-ghost btn-white" href="#">Shop Now</a>
 						</div>
