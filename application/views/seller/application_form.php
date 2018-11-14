@@ -23,8 +23,8 @@
 
                     </div>
                     <div class="col-md-4">
-                        <img src="<?= base_url('assets/landing/img/onitshamarket-logo.png'); ?>" alt="<?= lang('app_name'); ?>"
-                             class="brand-title img-responsive">
+                        <a href="<?= base_url(); ?>" title="<?= lang('app_name'); ?>"><img src="<?= base_url('assets/landing/img/onitshamarket-logo.png'); ?>" alt="<?= lang('app_name'); ?>"
+                                                          class="brand-title img-responsive"></a>
                     </div>
                     <div class="col-md-4">
 
@@ -56,7 +56,7 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>TIN (Taxpayer Identification Number)</label>
-                            <input type="text" class="form-control" placeholder="TIN" required name="tin">
+                            <input type="text" class="form-control" placeholder="TIN" name="tin">
                         </div>
                     </div>
                     <div class="col-sm-6">

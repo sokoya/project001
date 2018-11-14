@@ -75,7 +75,7 @@
 						</tbody>
 					</table>
 					<?php else :?>
-						<p class="market-dashboard-welcome-text">Hello <?= ucwords($profile->first_name) . ' ' . ucwords($profile->last_name); ?>. You have no product on your whishlist <a style="text-decoration: none; color: green;" href="<?= base_url(); ?>">Browse for products</a></p>
+						<p class="market-dashboard-welcome-text">You have no product on your whishlist <a style="text-decoration: none; color: green;" href="<?= base_url(); ?>">Browse for products</a></p>
 					<?php endif; ?>
 				</div>
 			</div>

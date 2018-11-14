@@ -196,9 +196,8 @@
                         <?php
                         endforeach;}
                     else:{
-                        echo "<p style='color:red;padding:20px;text-align: center;'>No billing/delivery address associated with this account, click add new address to add an address to your account!</p>";
-                    }endif;
-                    ; ?>
+                        echo "<p class=\"market-dashboard-welcome-text\">Hello <?= ucwords($profile->first_name) . ' ' . ucwords($profile->last_name); ?>. You have not added any address to this account. Click 'Add New Address' to add</p>";
+                    }endif;?>
                     <?= form_close(); ?>
                 </div>
             </div>
