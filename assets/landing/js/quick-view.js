@@ -1,3 +1,28 @@
+function notification_message(msg, icon = 'fa fa-info-circle', notification_type = '') {
+	let background = '#408d47';
+	let color = '#fff';
+	switch (notification_type) {
+		case 'success':
+			background = '#408d47';
+			break;
+		case 'error':
+			background = '#ce3f39';
+			break;
+		case 'warning':
+			background = '#f9dc1b';
+			color = '#181818';
+			break;
+		default:
+			break
+	}
+	$('body').append(`
+		<div class="notification" style="background: ${background}; color: ${color}">
+			<i class="${icon}" aria-hidden="true"></i> ${msg}
+		</div>
+	`);
+	$(".notification").delay(5000).fadeOut();
+}
+
 $.fn.isInViewport = function () {
 	let elementTop = $(this).offset().top;
 	let elementBottom = elementTop + $(this).outerHeight();
@@ -54,7 +79,7 @@ function get_view() {
 	let pr_id = $(this).data('pr_id');
 	let title = $(this).data('title');
 	let img_src = $(this).data('image');
-	$('.test-div').remove();
+	$('.overview-tab').remove();
 	let qv_location = $(this).quickViewNext('.product_div');
 	if ($(this).quickViewNext('.product_div').exists()) {
 	} else {
@@ -75,7 +100,7 @@ function get_view() {
 			_this_btn.prop('disabled', false);
 			let quick = JSON.parse(response);
 			qv_location.after(
-				`<div class="col-md-12 test-div q_view clearfix">
+				`<div class="col-md-12 overview-tab q_view clearfix">
 			<div class="row">
 			<div class="col-md-4">
 				<img src="${img_src}" class="q_pr_img" alt="${title}" title="${title}">
@@ -122,7 +147,7 @@ function get_view() {
 				</div>
 				<div class="row">
 				<div class="col-md-6">
-					<button class="btn btn-block btn-primary add-to-cart c-hover" id="${quick.default_vid}${quick.avg_rating}_submit" data-vid="${quick.default_vid}" data-vname="${quick.default_vname}"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
+					<button class="btn btn-block btn-primary add-to-cart c-hover" id="${pr_id}_submit" data-vid="${quick.default_vid}" data-vname="${quick.default_vname}"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
 				</div>
 				<div class="col-md-6">
 					<button class="btn btn-block btn-default fav c-hover"><i class="fa fa-star-o"></i> Wishlist</button>
@@ -136,21 +161,31 @@ function get_view() {
 
 				let quantity_available = $(`#${pr_id}`).val();
 				let price_ = $('.q_pr_price').data('amount');
-
+				let vid = $(`#${pr_id}_submit`).data('vid');
+				let vname = $(`#${pr_id}_submit`).data('vname');
 				$.ajax({
-					url: base_url + 'ajax/add_to_cart',
+					url: base_url + 'ajax/quick_view_add',
 					method: 'POST',
 					data: {
 						product_id: pr_id,
 						quantity: quantity_available,
 						product_price: price_,
 						product_name: title,
+						variation_id: vid,
+						variation: vname
 					},
-					success: function (response) {
+					success: () => {
+						$('.overview-tab').slideUp();
+						// $('.overview-tab').remove();
 
+						notification_message(`${title} successfully added to cart`, 'fa fa-cart-plus', 'success');
+						$('.cart-read').show();
+						let x = $('.cart-read').text() * 1;
+						let y = quantity_available * 1;
+						$('.cart-read').text(x + y);
 					},
+
 					error: () => {
-
 					}
 				}).done(function () {
 
@@ -160,7 +195,7 @@ function get_view() {
 			let default_variation_id = quick.default_vid;
 			let default_vname = quick.default_vname;
 			$('.close_qv').on('click', function () {
-				$('.test-div').remove();
+				$('.overview-tab').remove();
 			});
 
 			if (quick.variation.length > 1) {
@@ -176,20 +211,19 @@ function get_view() {
 					} else {
 						constant_price = value.discount_price
 					}
-					$('#variation_select').append(`<option value="${value.variation_name}" da data-vid="${default_variation_id}" ${(value.vid == default_variation_id) ? 'selected=selected' : ''} class="variation-option" data-amount="${format_currency(constant_price)}" data-target="q_pr_price${pr_id}">${value.variation_name + ' - ' + format_currency(constant_price)}</option>`);
+					$('#variation_select').append(`<option value="${value.variation_name}" data-vid="${value.vid}" data-vname="${value.variation_name}" ${(value.vid == default_variation_id) ? 'selected=selected' : ''} class="variation-option" data-amount="${format_currency(constant_price)}" data-target="q_pr_price${pr_id}">${value.variation_name + ' - ' + format_currency(constant_price)}</option>`);
 				});
 			}
 
 			$('#variation_select').on('change', function () {
-				let submit_btn = $(`${quick.default_vid}${quick.avg_rating}_submit`);
-				console.log(submit_btn);
+				let submit_btn = $(`#${pr_id}_submit`);
 				let elem = $('#variation_select :selected');
 				let price = elem.data('amount');
 				let target = elem.data('target');
 				$(`#${target}`).html(`${price}`);
-				$('.q_pr_price').data('amount', price);
-				submit_btn.data('vid', default_variation_id);
-				submit_btn.data('vname', default_vname);
+				$('.q_pr_price').attr('data-amount', price);
+				submit_btn.attr('data-vid', elem.data('vid'));
+				submit_btn.attr('data-vname', elem.data('vname'));
 			});
 
 			let plus = $('.product-page-qty-plus');

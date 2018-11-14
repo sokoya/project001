@@ -3,12 +3,17 @@
 	.mail-list-unread {
 		font-weight: 800;
 	}
-	.mail-list-read{
+
+	.mail-list-read {
 		font-weight: 100 !important;
 	}
 
 	.mail-from {
 		width: 61% !important;
+	}
+
+	.active-message {
+		border-left: 3px solid #2BA27D;
 	}
 
 </style>
@@ -95,10 +100,10 @@
 
 									<!--Mail list group-->
 									<ul id="demo-mail-list" class="mail-list pad-top bord-top">
-
 										<?php if ($messages) : ?>
+											<?php $mes = $messages->first_row('object'); ?>
 											<?php foreach ($messages->result() as $message) : ?>
-												<li class="<?php if ($message->is_read == 0) echo 'mail-list-unread'; ?> message_item"
+												<li class="<?php if ($message->is_read == 0) echo 'mail-list-unread'; ?> <?php if($message->id == $mes->id ) echo 'active-message'?> message_item"
 													style="cursor: pointer" data-mid="<?= $message->id; ?>"
 													data-title="<?= $message->id; ?>_title">
 													<div class="mail-control">
@@ -116,15 +121,13 @@
 										<?php endif; ?>
 									</ul>
 								</div>
-
 							</div>
 						</div>
 						<div class="col-md-7">
 							<div class="fluid message_read_view">
-								<?php $message = $messages->last_row('object'); ?>
 								<div class="mar-btm pad-btm bord-btm">
 									<h1 class="page-header text-overflow" id="message_title">
-										<?= $message->title; ?>
+										<?= !empty($mes->title) ? $mes->title : ''; ?>
 									</h1>
 								</div>
 
@@ -141,7 +144,7 @@
 										<!--Details Information-->
 										<p class="mar-no">
 											<small class="text-muted"
-												   id="message_date"><?= neatTime($message->created_on); ?></small>
+												   id="message_date"><?= !empty($mes->created_on) ? neatDate($mes->created_on) : ''; ?></small>
 										</p>
 									</div>
 								</div>
@@ -152,7 +155,7 @@
 										<div class="mail-message">
 											Hey <?= ucfirst($profile->first_name); ?>,<br/><br/>
 											<blockquote style="font-size:14px;text-align:justify;" id="message_detail">
-												<?= $message->content; ?>
+												<?= !empty($mes->content) ? $mes->content : ''; ?>
 											</blockquote>
 											<div class="pull-right">
 												<br><br> Regards,
@@ -216,6 +219,8 @@
 	});
 
 	$('.message_item').on('click', function () {
+		$('.message_item').removeClass('active-message');
+		$(this).addClass('active-message');
 		let message_id = $(this).data('mid');
 		let title_target = $(this).data('title');
 		$(`#${title_target}`).removeClass('mail-list-unread').addClass('mail-list-read');

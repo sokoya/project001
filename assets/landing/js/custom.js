@@ -92,3 +92,34 @@ $(".product-page-qty-minus").on('click', function () {
 		$(this).next(".product-page-qty-input").val(currentVal - 1);
 	}
 });
+
+
+/*
+* Notification message
+* Notification types : ['success', 'error', 'warning']
+* */
+
+function notification_message(msg, icon = 'fa fa-info-circle', notification_type = '') {
+	let background = '#408d47';
+	let color = '#fff';
+	switch (notification_type) {
+		case 'success':
+			background = '#408d47';
+			break;
+		case 'error':
+			background = '#ce3f39';
+			break;
+		case 'warning':
+			background = '#f9dc1b';
+			color = '#181818';
+			break;
+		default:
+			break
+	}
+	$('body').append(`
+		<div class="notification" style="background: ${background}; color: ${color}">
+			<i class="${icon}" aria-hidden="true"></i> ${msg}
+		</div>
+	`);
+	$(".notification").delay(5000).fadeOut();
+}
