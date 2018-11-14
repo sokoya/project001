@@ -38,21 +38,24 @@ class Login extends CI_Controller{
                 );
 
                 $user = $this->seller->login($data);
-
-                if( $user->is_seller == 'false' ){
-                    $this->session->set_flashdata('error_msg','Please fill the form below.');
-                    $session_data = array('logged_in' => true, 'logged_id' => base64_encode($user->id), 'is_seller' => $user->is_seller, 'email' => $data['email']);
-                    $this->session->set_userdata($session_data);
-                    // redirect them to the big form
-                    redirect('seller/application');
-                }elseif( $user->is_seller == 'pending' ){
-                    $this->session->set_flashdata('error_msg','Your seller application is under review. You will receive a mail on approval.');
-                    redirect($_SERVER['HTTP_RERFFER']);
+                if( $user ) {
+                    if( $user->is_seller == 'false' ){
+                        $this->session->set_flashdata('error_msg','Please fill the form below.');
+                        $session_data = array('logged_in' => true, 'logged_id' => base64_encode($user->id), 'is_seller' => $user->is_seller, 'email' => $data['email']);
+                        $this->session->set_userdata($session_data);
+                        // redirect them to the big form
+                        redirect('seller/application');
+                    }elseif( $user->is_seller == 'pending' ){
+                        $this->session->set_flashdata('error_msg','Your seller application is under review. You will receive a mail on approval.');
+                        redirect($_SERVER['HTTP_RERFFER']);
+                    }else{
+                        $session_data = array('logged_in' => true, 'logged_id' => base64_encode($user->id), 'is_seller' => $user->is_seller, 'email' => $data['email']);
+                        $this->session->set_userdata($session_data);
+                        $this->session->set_flashdata('success_msg','You are now logged in!');
+                        redirect('seller/overview');
+                    }
                 }else{
-                    $session_data = array('logged_in' => true, 'logged_id' => base64_encode($user->id), 'is_seller' => $user->is_seller, 'email' => $data['email']);
-                    $this->session->set_userdata($session_data);
-                    $this->session->set_flashdata('success_msg','You are now logged in!');
-                    redirect('seller/overview');
+                    redirect(base_url());
                 }
             }
         }

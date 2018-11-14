@@ -31,6 +31,8 @@ class Overview extends CI_Controller{
         $page_data['profile'] = $this->seller->get_profile_details(base64_decode($this->session->userdata('logged_id')),
             'first_name,last_name,email,profile_pic');
         // get product
+        // echo base64_decode($this->session->userdata('logged_id'));
+        // exit;
         $page_data['products'] = $this->seller->get_product( base64_decode($this->session->userdata('logged_id')), $status
             );
         $page_data['type'] = $status;
