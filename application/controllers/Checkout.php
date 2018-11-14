@@ -30,7 +30,7 @@ class Checkout extends CI_Controller
 		foreach( $this->cart->contents() as $product ){
 			$detail = $this->product->get_cart_details($product['id']);
 			$variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
-			if($variation_detail->quantity < 1 || $product['qty'] > $variation_detail->quantity || in_array( $detail->status, array('suspended', 'blocked', 'pending' ))){
+			if($variation_detail->quantity < 1 || $product['qty'] > $variation_detail->quantity || in_array( $detail->product_status, array('suspended', 'blocked', 'pending' ))){
 				// we have an issue with this product
 				$this->cart->remove($product['rowid']);
 			}

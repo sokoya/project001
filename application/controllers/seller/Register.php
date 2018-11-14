@@ -75,7 +75,7 @@ class Register extends CI_Controller{
                 );
                 $this->session->set_flashdata('success_msg','Congrat! Your account has been created successfully... Under review, you will be notified on approval.');
                 $id = $this->seller->login($data);
-                $session_data = array('logged_in' => true, 'logged_id' => $user_id, 'email' => $data['email'], 'is_seller' = 'false');
+                $session_data = array('logged_in' => true, 'logged_id' => base64_encode($user_id), 'email' => $data['email'], 'is_seller' = 'false');
                 $this->session->set_userdata($session_data);
                 redirect('seller/application/status');
                 // // To ursher them to where they are coming from...
