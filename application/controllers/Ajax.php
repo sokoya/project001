@@ -194,7 +194,6 @@ class Ajax extends CI_Controller
 	// Quick view add 
 	function quick_view_add(){
        if( $this->input->is_ajax_request() && $this->input->post() ){
-           $colour = $this->input->post('colour');
            $variation = $this->input->post('variation');
            $variation = empty($variation) ? '' : $this->input->post('variation');
            $name = cleanit($this->input->post('product_name'));
