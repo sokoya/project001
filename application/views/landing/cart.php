@@ -58,7 +58,7 @@
 									</td>
 								<?php else: ?>
 									<td>
-										<?= !empty($product['options']['variation']) ? '/ '.ucfirst($product['options']['variation']) : ''; ?>
+										<?= !empty($product['options']['variation']) ? '/ '.ucfirst($product['options']['variation']) : 'Null'; ?>
 									</td>
 									<td><?= ngn($product['price']); ?></td>
 									<td>
