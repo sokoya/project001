@@ -20,6 +20,7 @@
 			<div class="category-selections clearfix">
 				<button class="btn btn-custom-primary">Newest First</button>
 				<button class="btn btn-custom-primary">Best Sellers</button>
+				<button class="btn btn-custom-primary"><i class="fa fa-filter" aria-hidden="true"></i> Filter</button>
 			</div>
 		</header>
 		<div class="row">
@@ -187,66 +188,64 @@
             </div> -->
 			<div class="col-md-9">
 				<div class="row row-sm-gap" data-gutter="10">
-					<div class="col-md-3">
-						<div class="product product-sm-left ">
-							<ul class="product-labels"></ul>
-							<div class="product-img-wrap">
-								<img class="product-img" src="img/test_product/furniture/2.jpg"
-									 alt="Image Alternative text" title="Image Title"/>
-							</div>
-							<a class="product-link" href="#"></a>
-							<div class="product-caption">
-								<ul class="product-caption-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-								</ul>
-								<h5 class="product-caption-title">HomCom 24" Modern Adjustable Hydraulic Indoor /
-									Outdoor Bistro Bar Table Stand</h5>
-								<div class="product-caption-price"><span
-										class="product-caption-price-old">$91</span><span
-										class="product-caption-price-new">$37</span>
+					<?php foreach ($products as $product) : ?>
+						<div class="col-md-3">
+							<div class="product product-sm-left ">
+								<ul class="product-labels"></ul>
+								<div class="product-img-wrap">
+									<img class="product-img"
+										 src="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
+										 alt="<?= $product->product_name; ?>" title="<?= $product->product_name; ?>"/>
+								</div>
+								<a class="product-link"
+								   href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
+								<div class="product-caption">
+									<ul class="product-caption-rating">
+
+										<?php
+										$rating_counts = $this->product->get_rating_counts($product->id);
+										if ($rating_counts) {
+											$overall_rating = product_overall_rating($rating_counts);
+											$rating_rounded = round($overall_rating);
+											for ($i = 1; $i <= $rating_rounded; $i++) {
+												?>
+												<li class="rated"><i class="fa fa-star"></i>
+												</li>
+												<?php
+											}
+											if ($rating_rounded < 5) {
+												for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
+													<li><i class="fa fa-star"></i></li>
+													<?php
+												}
+											}
+										} else {
+											?>
+											<li><i class="fa fa-star"></i></li>
+											<li><i class="fa fa-star"></i></li>
+											<li><i class="fa fa-star"></i></li>
+											<li><i class="fa fa-star"></i></li>
+											<li><i class="fa fa-star"></i></li>
+											<?php
+										}
+										?>
+									</ul>
+									<h5 class="product-caption-title"><?= word_limiter(ucwords($product->product_name), 14, '...'); ?></h5>
+									<h4 class="product-caption-title"><strong>Seller: </strong><?= ucfirst($product->first_name); ?></h4>
+									<div class="product-caption-price">
+										<?php if (!empty($product->discount_price)) : ?> <span
+											class="product-caption-price-old"><?= ngn($product->sale_price); ?></span>
+											<span
+												class="product-caption-price-new"><?= ngn($product->discount_price); ?></span>
+										<?php else : ?>
+
+											<span class="product-caption-price-new"><?= ngn($product->sale_price); ?></span>
+										<?php endif; ?>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="product product-sm-left ">
-							<ul class="product-labels"></ul>
-							<div class="product-img-wrap">
-								<img class="product-img" src="img/test_product/woman_running_shoes/4.jpg"
-									 alt="Image Alternative text" title="Image Title"/>
-							</div>
-							<a class="product-link" href="#"></a>
-							<div class="product-caption">
-								<ul class="product-caption-rating">
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-									<li><i class="fa fa-star"></i>
-									</li>
-									<li><i class="fa fa-star"></i>
-									</li>
-								</ul>
-								<h5 class="product-caption-title">ASICS Women's Gel-Noosa Tri 9 Running Shoe Black/Neon
-									Coral/Green</h5>
-								<div class="product-caption-price"><span
-										class="product-caption-price-old">$59</span><span
-										class="product-caption-price-new">$18</span>
-								</div>
-							</div>
-						</div>
-					</div>
+					<?php endforeach; ?>
 				</div>
 			</div><!-- col-md-9 -->
 		</div> <!-- // row -->
