@@ -197,7 +197,6 @@ class Ajax extends CI_Controller
            $colour = $this->input->post('colour');
            $variation = $this->input->post('variation');
            $variation = empty($variation) ? '' : $this->input->post('variation');
-           $colour = empty($colour) ? '' : $this->input->post('colour');
            $name = cleanit($this->input->post('product_name'));
            $name = preg_replace('/^['.$this->product_name_rules.']+$/i', " ", $name);
            // Added to make checks if product still remains
@@ -210,7 +209,6 @@ class Ajax extends CI_Controller
                'options' =>
                    array(
                        'variation' => $variation,
-                       'colour' => $colour,
                        'seller' => $this->input->post('seller'),
                        'variation_id' => $variation_id
                    )
