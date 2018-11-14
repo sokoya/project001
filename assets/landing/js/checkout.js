@@ -34,6 +34,7 @@ $('.create-address-btn').on('click', function (e) {
 });
 
 $('.btn-new-address').on('click', function () {
+	// $(this).toggle();
 	$('#register_address').slideDown('fast', function () {
 		$.getJSON(base_url + 'checkout/fetch_states', function (d) {
 			$.each(d, function (k, v) {
