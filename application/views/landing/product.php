@@ -43,12 +43,14 @@
 				<div class="col-md-5">
 					<div class="product-page-product-wrap jqzoom-stage">
 						<div class="clearfix">
-							<a href="<?= base_url('data/products/'. $product->id .'/' . $featured_image->image_name); ?>"
+							<a href="<?= base_url('data/products/' . $product->id . '/' . $featured_image->image_name); ?>"
 							   id="jqzoom"
 							   data-rel="gal-1">
-								<img src="<?= base_url('data/products/'. $product->id .'/' . $featured_image->image_name); ?>"
-									 alt="<?= $product->product_name; ?>"
-									 title="<?= ucwords($product->product_name) ?>" width="500" height="500" style="max-height: 430px; max-width: 460px"/>
+								<img
+									src="<?= base_url('data/products/' . $product->id . '/' . $featured_image->image_name); ?>"
+									alt="<?= $product->product_name; ?>"
+									title="<?= ucwords($product->product_name) ?>" width="500" height="500"
+									style="max-height: 430px; max-width: 460px"/>
 							</a>
 						</div>
 					</div>
@@ -87,7 +89,7 @@
 						</li>
 					</ul>
 				</div>
-				
+
 				<div class="col-md-7">
 					<div class="row" data-gutter="10">
 						<div class="col-md-12">
@@ -118,14 +120,14 @@
 												href="#"
 												id="pr-seller"><?= ucwords($product->first_name . ' ' . $product->last_name); ?></a>
 										</p>
-                                        <?php if (!empty($product->dimensions)): ?>
+										<?php if (!empty($product->dimensions)): ?>
 											<span class="text-md text-md-center">
 												<strong>Measurement: </strong><?= $product->dimensions; ?>cm
                                         	</span>
 										<?php endif; ?>
-                                        <?php if (!empty($product->weight)) : ?>
-                                        	<br />
-                                        	<span class="text-md text-md-center">
+										<?php if (!empty($product->weight)) : ?>
+											<br/>
+											<span class="text-md text-md-center">
 												<strong>Weight: </strong><?= $product->weight; ?>kg
 											</span>
 										<?php endif; ?>
@@ -179,21 +181,21 @@
 									<?php else: ?>
 										<span class="price-cs dn-price"><?= ngn($var->sale_price); ?></span>
 									<?php endif; ?>
-									<!-- <?php		 
+									<!-- <?php
 									$category_fav = 'category-favorite';
-									if($this->session->userdata('logged_in') ) :
-										if( $favourited) :	
-									?>
+									if ($this->session->userdata('logged_in')) :
+										if ($favourited) :
+											?>
 										<span class="pull-right"><a href="javascript:void(0)" data-action="unsave" data-pid="<?= base64_encode($product->id) ?>"><i class="fa fa-heart" title="Remove <?= $product->product_name; ?> from your whishlist"></i></a>
 										</span>
 									<?php
 										else:
-									?>
+											?>
 										<span class="pull-right"><a href="" data-action="save" data-pid="<?= base64_encode($product->id) ?>"><i class="fa fa-heart-o" title="Add <?= $product->product_name; ?> to your whishlist"></i></a></span>
 									<?php
 										endif;
 									else:
-									?>
+										?>
 									<span class="pull-right">
 										<a href="<?= base_url('login'); ?>"><i class="fa fa-heart-o" title="Add <?= $product->product_name; ?> to your whishlist"></i></a></span>
 									<?php endif; ?> -->
@@ -206,20 +208,21 @@
 									<?= form_open('', 'id="variation-form"'); ?>
 									<div class="row">
 										<?php if (!empty($product->colour_family)) : ?>
-											<div class="col-md-3">
-												<h5 class="custom-product-page-option-title">Color:</h5>
-												<select class="product-page-option-select" name="colour">
-													<?php $colour_family = json_decode($product->colour_family);
-													foreach ($colour_family as $colour): ?>
-														<option
-															value="<?= trim($colour); ?>"><?= ucfirst($colour); ?></option>
-													<?php endforeach; ?>
-												</select>
-											</div>
+											<!--											<div class="col-md-3">-->
+											<!--												<h5 class="custom-product-page-option-title">Color:</h5>-->
+											<!--												<select class="product-page-option-select" name="colour">-->
+											<!--													--><?php //$colour_family = json_decode($product->colour_family);
+//													foreach ($colour_family as $colour): ?>
+											<!--														<option-->
+											<!--															value="--><? //= trim($colour); ?><!--">--><? //= ucfirst($colour); ?><!--</option>-->
+											<!--													--><?php //endforeach; ?>
+											<!--												</select>-->
+											<!--											</div>-->
 
 										<?php endif; ?>
 										<?php if (count($variations) > 1) : ?>
-											<input type="hidden" name="variation_id" class="variation_id" value="<?= $variations[0]['id']; ?>">
+											<input type="hidden" name="variation_id" class="variation_id"
+												   value="<?= $variations[0]['id']; ?>">
 											<?php if ($variations[0]['discount_price'] != '') : ?>
 												<input type="hidden" name="product_price"
 													   value="<?= $variations[0]['discount_price']; ?>"
@@ -243,7 +246,8 @@
 												</select>
 											</div>
 										<?php else: ?>
-											<input type="hidden" name="variation_id" class="variation_id" value="<?= $var->id; ?>">
+											<input type="hidden" name="variation_id" class="variation_id"
+												   value="<?= $var->id; ?>">
 											<?php if ($var->discount_price != '') : ?>
 												<input type="hidden" name="product_price"
 													   value="<?= $var->discount_price; ?>"
@@ -253,7 +257,7 @@
 													   value="<?= $var->sale_price; ?>"
 													   class="pr_price_hidden"/>
 											<?php endif; ?>
-										<?php endif;?>
+										<?php endif; ?>
 										<input type="hidden" name="product_id"
 											   value="<?= base64_encode($product->id); ?>">
 										<input type="hidden" name="product_name" value="<?= $product->product_name; ?>">
@@ -384,7 +388,7 @@
 									<p style="text-wrap: normal">
 										<?php
 										$certifications = json_decode($product->certifications);
-										if( $certifications ){
+										if ($certifications) {
 											foreach ($certifications as $type) echo '<strong>' . $type . '</strong> ';
 										}
 										?>
@@ -455,31 +459,31 @@
 								<h3 class="product-tab-rating-title">Overall Customer Rating:</h3>
 								<ul class="product-page-product-rating product-rating-big">
 									<?php
-										if( $rating_counts ) {
-											$overall_rating = product_overall_rating($rating_counts);
-											$rating_rounded = round($overall_rating);
-											for ($i = 1; $i <= $rating_rounded; $i++) {
-												?>
-												<li class="rated"><i class="fa fa-star"></i>
-												</li>
+									if ($rating_counts) {
+										$overall_rating = product_overall_rating($rating_counts);
+										$rating_rounded = round($overall_rating);
+										for ($i = 1; $i <= $rating_rounded; $i++) {
+											?>
+											<li class="rated"><i class="fa fa-star"></i>
+											</li>
+											<?php
+										}
+										if ($rating_rounded < 5) {
+											for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
+												<li><i class="fa fa-star"></i></li>
 												<?php
 											}
-											if ($rating_rounded < 5) {
-												for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
-													<li><i class="fa fa-star"></i></li>
-													<?php
-												}
-											}											
-										}else{
-
-									?>
-									<li><i class="fa fa-star"></i></li>
-									<li><i class="fa fa-star"></i></li>
-									<li><i class="fa fa-star"></i></li>
-									<li><i class="fa fa-star"></i></li>
-									<li><i class="fa fa-star"></i></li>	
-									<?php
 										}
+									} else {
+
+										?>
+										<li><i class="fa fa-star"></i></li>
+										<li><i class="fa fa-star"></i></li>
+										<li><i class="fa fa-star"></i></li>
+										<li><i class="fa fa-star"></i></li>
+										<li><i class="fa fa-star"></i></li>
+										<?php
+									}
 									?>
 									<li class="count"><?= isset($overall_rating) ? $overall_rating : ''; ?></li>
 								</ul>
@@ -497,18 +501,18 @@
 							<div class="col-md-3">
 								<ul class="product-rate-list">
 
-									<?php 
-										$total_corrence = 0;
-										foreach($rating_counts as $rating) : 
+									<?php
+									$total_corrence = 0;
+									foreach ($rating_counts as $rating) :
 										$total_corrence += $rating['occurence'];
-									?>
+										?>
 										<li>
 											<p class="product-rate-list-item"><?= $rating['rating_score']; ?> Stars</p>
 											<div class="product-rate-list-bar">
 												<div style="width:0%;"></div>
 											</div>
 											<p class="product-rate-list-count"><?= $rating['occurence']; ?></p>
-										</li>										
+										</li>
 									<?php endforeach; ?>
 								</ul>
 							</div>
@@ -599,7 +603,7 @@
 						</div>
 						<hr/>
 						<article class="product-review"></article>
-						
+
 
 					</div>
 				</div>
@@ -613,48 +617,48 @@
 				foreach ($likes as $like): ?>
 					<div class="col-md-3">
 						<div class="product">
-							<?php if( $like->views >= 100 ): ?>
+							<?php if ($like->views >= 100): ?>
 								<ul class="product-labels">
-	                                <li>hot</li>
-	                            </ul>
-                        	<?php endif; ?>
-							<div class="product-img-wrap">								
+									<li>hot</li>
+								</ul>
+							<?php endif; ?>
+							<div class="product-img-wrap">
 								<img class="product-img"
-									data-src="<?= base_url('data/products/' . $like->id.'/'.$like->image_name); ?>"
-									src="<?= base_url('data/products/' . $like->id.'/'.$like->image_name); ?>"
-									alt="<?= $like->product_name; ?>"
-									title="<?= $like->product_name; ?>">
+									 data-src="<?= base_url('data/products/' . $like->id . '/' . $like->image_name); ?>"
+									 src="<?= base_url('data/products/' . $like->id . '/' . $like->image_name); ?>"
+									 alt="<?= $like->product_name; ?>"
+									 title="<?= $like->product_name; ?>">
 							</div>
 							<a class="product-link" href="<?= base_url(urlify($like->product_name, $like->id)); ?>"></a>
 							<div class="product-caption">
 								<ul class="product-caption-rating">
 									<?php
-										$overall_rating = $this->product->get_rating_counts( $like->id );
-										if( $overall_rating ) {
-											$overall_rating = product_overall_rating( $overall_rating );
-											$rating_rounded = round($overall_rating);
-											for ($i = 1; $i <= $rating_rounded; $i++) {
-												?>
-												<li class="rated"><i class="fa fa-star"></i></li>
+									$overall_rating = $this->product->get_rating_counts($like->id);
+									if ($overall_rating) {
+										$overall_rating = product_overall_rating($overall_rating);
+										$rating_rounded = round($overall_rating);
+										for ($i = 1; $i <= $rating_rounded; $i++) {
+											?>
+											<li class="rated"><i class="fa fa-star"></i></li>
 											<?php
-											}
-											if ($rating_rounded < 5) {
-												for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
-													<li><i class="fa fa-star"></i></li>
-													<?php
-												}
-											}											
-										}else{
-									?>
-									<li><i class="fa fa-star"></i></li>
-									<li><i class="fa fa-star"></i></li>
-									<li><i class="fa fa-star"></i></li>
-									<li><i class="fa fa-star"></i></li>
-									<li><i class="fa fa-star"></i></li>									
-									<?php
 										}
+										if ($rating_rounded < 5) {
+											for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
+												<li><i class="fa fa-star"></i></li>
+												<?php
+											}
+										}
+									} else {
+										?>
+										<li><i class="fa fa-star"></i></li>
+										<li><i class="fa fa-star"></i></li>
+										<li><i class="fa fa-star"></i></li>
+										<li><i class="fa fa-star"></i></li>
+										<li><i class="fa fa-star"></i></li>
+										<?php
+									}
 									?>
-									
+
 								</ul>
 								<h5 class="product-caption-title"><?= character_limiter(ucwords($like->product_name), 30, '...'); ?></h5>
 								<div class="product-caption-price">
@@ -744,7 +748,7 @@
 			success: function (response) {
 				$.each(response, function (i, v) {
 					// change the variation id
-										if (v.discount_price) {
+					if (v.discount_price) {
 						$('.ds-price').html(format_currency(v.discount_price));
 						$('.dn-price').show();
 						$('.dn-price').html(format_currency(v.sale_price));
@@ -805,11 +809,11 @@
 		_btn.prop('disabled', 'disabled');
 		let colour = $('select[name="colour"]').val();
 		let variation = $('select[name="variation"]').val();
-		if (_btn.data('colour') != '' && colour == '') {
-			$('#status').html('<p class="alert alert-danger">Please select a colour.</p>').slideDown('fast').delay(3000).slideUp('slow');
-			_btn.prop('disabled', '');
-			return false;
-		}
+		// if (_btn.data('colour') != '' && colour == '') {
+		// 	$('#status').html('<p class="alert alert-danger">Please select a colour.</p>').slideDown('fast').delay(3000).slideUp('slow');
+		// 	_btn.prop('disabled', '');
+		// 	return false;
+		// }
 		if (_btn.data('variation') != '' && variation == '') {
 			$('#status').html('<p class="alert alert-danger">Please select a variation.</p>').slideDown('fast').delay(3000).slideUp('slow');
 			_btn.prop('disabled', '');
@@ -823,7 +827,8 @@
 		}
 
 		_btn.prop('disabled', '');
-		$('#prod-confirmation').modal('show');
+		// $('#prod-confirmation').modal('show');
+		notification_message('This is a confirmation that the product <?= ucwords($product->product_name); ?> has been added to the cart', 'fa fa-cart-plus', 'success');
 		$.ajax({
 			url: base_url + "ajax/add_to_cart",
 			method: "POST",

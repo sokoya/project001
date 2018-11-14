@@ -7473,7 +7473,7 @@ input[type="color"]:focus,
 	color: #ff2e19;
 }
 
-.review-count-pr{
+.review-count-pr {
 	font-size: 14px !important;
 }
 
@@ -7507,4 +7507,20 @@ input[type="color"]:focus,
 		120px 80px,
 		120px 120px;
 	}
+}
+
+.notification {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	padding: 10px;
+	font-weight: 700;
+	text-align: center;
+	z-index: 9999;
+	font-size: 14px;
+	font-family: "Open Sans", cursive;
+}
+
+.notification > i {
+	margin-right: 15px;
 }

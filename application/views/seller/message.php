@@ -4,8 +4,16 @@
 		font-weight: 800;
 	}
 
+	.mail-list-read {
+		font-weight: 100 !important;
+	}
+
 	.mail-from {
 		width: 61% !important;
+	}
+
+	.active-message {
+		border-left: 3px solid #2BA27D;
 	}
 
 </style>
@@ -92,18 +100,19 @@
 
 									<!--Mail list group-->
 									<ul id="demo-mail-list" class="mail-list pad-top bord-top">
-
 										<?php if ($messages) : ?>
+											<?php $mes = $messages->first_row('object'); ?>
 											<?php foreach ($messages->result() as $message) : ?>
-												<li class="<?php if ($message->is_read == 0) echo 'mail-list-unread'; ?> message_item"
-													style="cursor: pointer">
+												<li class="<?php if ($message->is_read == 0) echo 'mail-list-unread'; ?> <?php if($message->id == $mes->id ) echo 'active-message'?> message_item"
+													style="cursor: pointer" data-mid="<?= $message->id; ?>"
+													data-title="<?= $message->id; ?>_title">
 													<div class="mail-control">
 														<input id="<?= $message->id; ?>" class="magic-checkbox"
 															   type="checkbox">
 														<label for="<?= $message->id; ?>"></label>
 													</div>
-													<div
-														class="mail-from <?php if ($message->is_read == 0) echo 'mail-list-unread'; ?>"><?= $message->title; ?></div>
+													<div id="<?= $message->id; ?>_title"
+														 class="mail-from <?php if ($message->is_read == 0) echo 'mail-list-unread'; ?>"><?= $message->title; ?></div>
 													<div class="mail-time"><?= ago($message->created_on); ?></div>
 												</li>
 											<?php endforeach; ?>
@@ -112,15 +121,13 @@
 										<?php endif; ?>
 									</ul>
 								</div>
-
 							</div>
 						</div>
 						<div class="col-md-7">
 							<div class="fluid message_read_view">
-								<?php $message = $messages->last_row('object'); ?>
 								<div class="mar-btm pad-btm bord-btm">
 									<h1 class="page-header text-overflow" id="message_title">
-										<?= $message->title; ?>
+										<?= !empty($mes->title) ? $mes->title : ''; ?>
 									</h1>
 								</div>
 
@@ -137,7 +144,7 @@
 										<!--Details Information-->
 										<p class="mar-no">
 											<small class="text-muted"
-												   id="message_date"><?= neatTime($message->created_on); ?></small>
+												   id="message_date"><?= !empty($mes->created_on) ? neatDate($mes->created_on) : ''; ?></small>
 										</p>
 									</div>
 								</div>
@@ -147,8 +154,8 @@
 									<div class="nano-content" tabindex="0" style="right: -17px;">
 										<div class="mail-message">
 											Hey <?= ucfirst($profile->first_name); ?>,<br/><br/>
-											<blockquote style="font-size:14px;text-align:justify;" id="method_detail">
-												<?= $message->content; ?>
+											<blockquote style="font-size:14px;text-align:justify;" id="message_detail">
+												<?= !empty($mes->content) ? $mes->content : ''; ?>
 											</blockquote>
 											<div class="pull-right">
 												<br><br> Regards,
@@ -212,22 +219,26 @@
 	});
 
 	$('.message_item').on('click', function () {
+		$('.message_item').removeClass('active-message');
+		$(this).addClass('active-message');
 		let message_id = $(this).data('mid');
+		let title_target = $(this).data('title');
+		$(`#${title_target}`).removeClass('mail-list-unread').addClass('mail-list-read');
 		$.ajax({
 			url: "<?= base_url(); ?>seller/message/message_detail",
 			method: 'POST',
-			data: {mid: message_id},
+			data: {'mid': message_id},
 			success: function (response) {
+				response = JSON.parse(response);
 				$('#message_title').html(`
-					This is a test title
+					${response.title}
 				`);
 				$('#message_date').html(`
-					Friday 14, Nov. 2019
+					${response.created_on}
 				`);
 				$('#message_detail').html(`
-					This is the message detail do well to respond accordingly
+					${response.content}
 				`);
-				console.log(response);
 			},
 			error: response => console.log(response)
 
