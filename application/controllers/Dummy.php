@@ -11,7 +11,7 @@ class Dummy extends CI_Controller
 	}
 
 	public function index(){
-		var_dump( $this->get_category_children( 'no-slug-8' ) );
+		var_dump( $this->get_category_children( 'mobile-phones' ) );
 		exit;
 	}
 
