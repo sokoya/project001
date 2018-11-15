@@ -6,28 +6,26 @@
                 <li class="dropdown"><a href="<?= base_url(); ?>"><span >Welcome!</span>All Categories<i class="drop-caret" data-toggle="dropdown"></i></a>
                     <ul class="dropdown-menu dropdown-menu-category">
                         <?php
-                        $categories = $this->db->query("SELECT * FROM root_category")->result();
+                        $categories = $this->db->query("SELECT * FROM categories WHERE pid = 0")->result();
                         foreach($categories as $category ): ?>
-                        <li><a href="<?=  base_url('catalog/' . urlify($category->name)) ; ?>" title="<?= $category->name;?>"><i class="fa fa-<?=$category->icon;?> dropdown-menu-category-icon"></i><?= $category->name; ?></a>
+                        <li><a href="<?=  base_url('catalog/' . $category->slug ) ; ?>" title="<?= $category->name;?>"><i class="fa fa-<?=$category->icon;?> dropdown-menu-category-icon"></i><?= $category->name; ?></a>
                             <div class="dropdown-menu-category-section">
                                 <div class="dropdown-menu-category-section-inner">
                                     <div class="dropdown-menu-category-section-content">
                                         <div class="row">
-                                            <?php
-                                                
-                                                $main_category = $this->db->query("SELECT * FROM category WHERE root_category_id = ? ", $category->root_category_id)->result();
-                                                
+                                            <?php                                                
+                                                $main_category = $this->db->query("SELECT * FROM categories WHERE pid = ? ", $category->id)->result();
                                                 foreach( $main_category as $cat ) :
                                             ?>
                                             <div class="col-md-6">
-                                                <h5 class="custom-menu-category-drop"><a href="<?= base_url('catalog/' . urlify($cat->name)); ?>"><?= $cat->name; ?></a></h5>
+                                                <h5 class="custom-menu-category-drop"><a href="<?= base_url('catalog/' . $cat->slug); ?>"><?= $cat->name; ?></a></h5>
                                                 <ul class="dropdown-menu-category-list">
                                                     <?php
                                                         
-                                                        $sub_category = $this->db->query("SELECT name FROM sub_category WHERE root_category_id = ?  AND category_id = ? ", array($category->root_category_id, $cat->category_id))->result();
+                                                        $sub_category = $this->db->query("SELECT * FROM categories WHERE pid = ", array($cat->id))->result();
                                                         
                                                         foreach($sub_category as $sub ) : ?>
-                                                        <li><a href="<?= base_url('catalog/' . urlify($sub->name)); ?>" title="<?= $sub->name; ?>"><?= $sub->name; ?></a></li>
+                                                        <li><a href="<?= base_url('catalog/' . $sub->slug); ?>" title="<?= $sub->name; ?>"><?= $sub->name; ?></a></li>
                                                     <?php endforeach; ?>
                                                 </ul>
                                             </div>

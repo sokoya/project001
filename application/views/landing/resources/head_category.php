@@ -1,4 +1,4 @@
-<?php $categories = $this->db->query("SELECT * FROM root_category")->result(); ?>
+<?php $categories = $this->db->query("SELECT * FROM categories WHERE pid = 0")->result(); ?>
 <nav class="navbar navbar-default navbar-main-white navbar-pad-top navbar-first">
 	<div class="container">
 		<div class="navbar-header">
