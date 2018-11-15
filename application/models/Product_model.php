@@ -139,6 +139,33 @@ Class Product_model extends CI_Model{
         return false;
     }
 
+    // function get_category_children( $slug ) {
+    //     $select = "SELECT id FROM categories WHERE slug = $slug";
+    //     $result = $this->db->query($select)->row();
+
+    //     $category_result = $this->db->query("SELECT id FROM categories WHERE pid = ", $result->id)->result();
+
+    //     if( $category_result ) {
+    //         foreach( $category_result as $key ){
+    //             $result[] = $this->recussive( $key );
+    //         }
+    //     }else{
+    //         return $result->id;
+    //     }
+    // }
+
+    // $recussive_array = array();
+    // function recussive( $key ){
+    //     $query = "SELECT id FROM categories WHERE pid = $key";
+    //     $query = $this->db->query($select)->id;
+    //     if( $query ){
+    //         array_push( $recussive_array, $query->id);
+    //         $this->recussive( $query->id );
+    //     }else{
+    //         return $recussive_array;
+    //     }
+    // }
+
     // Main Category prouduct listings
     function get_products( $queries = '' , $gets = array() ){
         // $this->db->cache_on();
@@ -147,6 +174,7 @@ Class Product_model extends CI_Model{
             JOIN product_variation AS v ON (p.id = v.product_id) 
             JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )                
             JOIN users AS s ON p.seller_id = s.id ";
+
 
         $select_query .= " WHERE ( (MATCH(p.rootcategory) AGAINST('{$queries['str']}')) OR 
         (MATCH(p.category) AGAINST('{$queries['str']}')) OR (MATCH(p.subcategory) AGAINST('{$queries['str']}')) )";
