@@ -144,7 +144,6 @@
                 data: { id: id,'csrf_carrito':csrf_token },
                 dataType: 'json'
             }).done(function( msg ) {
-
             	$('.category-section').append(`
 					<div class="col-md-12 n-append" style="margin-bottom: 20px;">
             		<select class="cat form-control n-cat" required></select>
