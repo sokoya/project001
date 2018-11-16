@@ -2,7 +2,7 @@
 </head>
 <body>
     <div id="container" class="effect aside-float aside-bright mainnav-lg">
-        
+
         <!--NAVBAR-->
         <!--===================================================-->
         <?php $this->load->view('seller/templates/head_navbar'); ?>
@@ -49,9 +49,9 @@
                                         <div class="panel-body">
                                             <?= form_open(); ?>
 
-                                            <div class="row">
-                                                <div class="col-md-4" style="margin-bottom: 20px;">
-                                                    <h5 style="color: #232323;">Select Root Category</h5>
+                                            <div class="row category-section">
+                                                <div class="col-md-12" style="margin-bottom: 20px;">
+                                                    <h5 style="color: #232323; float: left">Select Category</h5>
                                                     <select class="rootcat form-control" name="rootcategory" required>
                                                         <option value=""> -- Please select the root category --</option>
                                                         <?php foreach ($root_categories->result() as $root ): ?>
@@ -60,15 +60,15 @@
                                                     </select>
                                                 </div>
 
-                                                <div class="col-md-4" style="margin-bottom: 20px;">
-                                                    <h5 style="color: #232323;">Select Category</h5>
-                                                    <select class="subcat form-control" name="category" required></select>
-                                                </div>
-
-                                                <div class="col-md-4" style="margin-bottom: 20px;">
-                                                    <h5 style="color: #232323;">Select Sub Category</h5>
-                                                    <select class="cat form-control" name="subcategory" required></select>
-                                                </div>
+<!--                                                <div class="col-md-12" style="margin-bottom: 20px;">-->
+<!--                                                    <h5 style="color: #232323;">Select Category</h5>-->
+<!--                                                    <select class="subcat form-control" name="category" required></select>-->
+<!--                                                </div>-->
+<!---->
+<!--                                                <div class="col-md-12" style="margin-bottom: 20px;">-->
+<!--                                                    <h5 style="color: #232323;">Select Sub Category</h5>-->
+<!--                                                    <select class="cat form-control" name="subcategory" required></select>-->
+<!--                                                </div>-->
                                             </div>
                                             <button class="btn btn-primary btn-block" style="margin-top: 40px;">Submit</button>
                                             <?= form_close(); ?>
@@ -77,7 +77,7 @@
                                 </div>
                             </div>
                         </div>
-					    
+
                 </div>
                 <!--===================================================-->
                 <!--End page content-->
@@ -134,6 +134,7 @@
         // });
 
         $('.rootcat').change(function ($x) {
+        	$('.n-append').remove();
             $(".subcat").empty();
             $(".cat").empty();
             let id = $(this).val();
@@ -143,10 +144,19 @@
                 data: { id: id,'csrf_carrito':csrf_token },
                 dataType: 'json'
             }).done(function( msg ) {
-                $(".subcat").append("<option>-- Please select a category --</option>");
-                $(msg).each(function(i){
-                    $(".subcat").append("<option value=" +msg[i].category_id+ ">" +msg[i].name+ "</option>")
-                });
+
+            	$('.category-section').append(`
+					<div class="col-md-12 n-append" style="margin-bottom: 20px;">
+            		<select class="cat form-control n-cat" required></select>
+
+					</select>
+					</div>
+            	`);
+
+            	$.each(msg, function (i	) {
+					$('.n-cat').append("<option value=" +msg[i].category_id+ ">" +msg[i].name+ "</option>")
+				});
+				
             });
         });
 
@@ -166,6 +176,6 @@
         });
 
     </script>
-    
+
 </body>
 </html>
