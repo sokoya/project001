@@ -249,9 +249,9 @@ class Product extends CI_Controller{
             $return = array();
             foreach( $results as $result ){
                 $res['has_child'] = 0;
-                $res['id'] = $result['id'];
-                $res['name'] = $result['name'];
-                if( $this->seller->has_child( $result['id']) ) {
+                $res['id'] = $result->id;
+                $res['name'] = $result->name;
+                if( $this->seller->has_child( $result->id) ) {
                     $res['has_child'] = 1;
                 }
                 array_push( $return , $res );
