@@ -128,27 +128,6 @@ Class Seller_model extends CI_Model{
         return $this->db->get('users')->row();
     }
 
-    
-    function get_specification( $category_id ){
-        $this->db->select('specifications');
-        $this->db->where('id', $category_id);
-        $specs = $this->db->get('categories')->row();
-        $return = array();
-
-        if( !empty($specs->specifications) || $specs->specifications !== '' ){
-            $decode = json_decode($specs->specifications);
-            foreach ( $decode as $key => $value ){
-                $this->db->select('spec_name,options,description,multiple_options');
-                $this->db->from('specifications');
-                $this->db->where('id', $value);
-                $output = $this->db->get()->row_array();
-                array_push( $return, $output );
-            }
-            return $return;
-        }else{
-            return '';
-        }
-    }
 
 
     function get_product($id, $status = ''){
@@ -197,57 +176,65 @@ Class Seller_model extends CI_Model{
         }
     }
 
+    /*
+    *Function to get the parent category of a particular category
+    *Called the parent_recurssive
+    */
+    function parent_slug_top( $id ){
+        // Select category
+        $GLOBALS['array_variable'] = array();
+        $select_category = "SELECT pid, slug FROM dummy_table WHERE id = {$id}";
+        $result = $this->db->query($select_category);
+        if( $result->num_rows() >= 1 ){
+            $pid = $result->row()->pid;
+            $this->parent_recurssive( $pid );
+            $array = array_filter($GLOBALS['array_variable']);
+            $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($array));
+            $new_array = array();
+            foreach( $it as $v ){ array_push( $new_array, $v); }
+            array_push( $new_array, $id ); // Lets push its own ID also
+            // return $new_array;
+        }else{
+            return $GLOBALS['array_variable'];
+        }
 
-    function get_category_name($id ='' , $label ='' ){
-        switch ($label){
-            case 'root_category' :
-                $this->db->select('name,root_category_id');
-                if( $id != '') $this->db->where('root_category_id', $id);
-                return $this->db->get('root_category');
-                break;
-            case 'category':
-                $this->db->select('name,category_id');
-                if($id != '' ) $this->db->where('category_id', $id);
-                return $this->db->get('category');
-                break;
-            case 'sub_category' :
-                $this->db->select('name,sub_category_id');
-                if($id != '') $this->db->where('sub_category_id', $id);
-                return $this->db->get('sub_category');
-                break;
-            default:
-                return '';
-                break;
+    }
+
+    /*
+    *Called by the parent_slug top, helps to generate the parent id
+    */
+    function parent_recurssive( $pid ){
+        $category_pid = $pid;
+        $total_categories = $this->db->get('dummy_table')->result_array();
+        $count = count( $total_categories );
+
+        $data = array();
+        for ($i=0; $i < $count; $i++) { 
+            if( $total_categories[$i]['id'] == $category_pid ){
+                array_push( $data , $total_categories[$i]['pid'] );
+            }
+        }
+        array_push( $GLOBALS['array_variable'], $data);
+        foreach ($data as $key => $value) {
+            $this->parent_recurssive($value);
         }
     }
 
-    /**
-     * @param $id
-     * @param $label
-     * @return array|string
-     */
-    function get_single_category_name($id ='' , $label ='' ){
-        switch ($label){
-            case 'root_category' :
-                $this->db->select('name,root_category_id,description');
-                if( $id != '') $this->db->where('root_category_id', $id);
-                return $this->db->get('root_category')->row();
-                break;
-            case 'category':
-                $this->db->select('name,category_id');
-                if($id != '' ) $this->db->where('category_id', $id);
-                return $this->db->get('category')->row();
-                break;
-            case 'sub_category' :
-                $this->db->select('name,sub_category_id');
-                if($id != '') $this->db->where('sub_category_id', $id);
-                return $this->db->get('sub_category')->row();
-                break;
-            default:
-                return '';
-                break;
-        }
+
+    // Get a slpecific category id by its slug
+    function category_id( $slug ){
+        $query = "SELECT id FROM categories WHERE slug = ?";
+        return $this->db->query( $query, $slug);
     }
+
+    /*
+        Return an object (name, slug, description, specifications) of all the parent of a category
+    */
+    function get_parent_name_by_ids( $id ){
+        $array = $this->parent_slug_top( $id );
+        return $this->db->query("SELECT name, slug, description, specifications FROM categories WHERE id IN ('".implode("','",$array)."')")->result();
+    }
+
 
 
     /**
@@ -292,20 +279,12 @@ Class Seller_model extends CI_Model{
      * @return CI_DB_result_array
      */
 
-    function get_specifications( $name = '' ){
-        $this->db->select('specifications');
-        $this->db->where('name', $name);
-        $result = $this->db->get('sub_category')->row();
-
-        $specs = array();
-        $spec_array = json_decode( $result->specifications );
-        foreach( $spec_array as $key ){
-            $this->db->select('spec_name,options,multiple_options,description');
-            $this->db->where('id', $key);
-            $result = $this->db->get('specifications')->row_array();
-            array_push( $specs, $result );
-        }
-        return $specs;
+    function get_specifications( $spec_id ){
+        
+        $this->db->select('spec_name,options,multiple_options,description');
+        $this->db->where('id', $key);
+        $result = $this->db->get('specifications')->row();
+        return $result;
     }
 
     /**

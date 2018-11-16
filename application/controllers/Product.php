@@ -44,20 +44,22 @@ class Product extends CI_Controller {
 		$page_data['title'] = ucwords($str);
 		$features = $this->product->get_features($str);
 		$output_array = array();
-		foreach ($features as $feature => $values) {
-			foreach ($values as $key => $value) {
-				$variables = json_decode($value);
-				foreach ($variables as $new_key => $new_value) {
-					if (is_array($new_value)) {
-						$new_value = array_map("unserialize", array_unique(array_map("serialize", $new_value)));
-						foreach ($new_value as $inkey => $invalue) $output_array[$new_key][] = $invalue;
-						$output_array[$new_key] = array_unique($output_array[$new_key], SORT_REGULAR);
-					} else {
-						$output_array[$new_key][] = $new_value;
-						$output_array[$new_key] = array_unique($output_array[$new_key], SORT_REGULAR);
+		if( $features ) {
+			foreach ($features as $feature => $values) {
+				foreach ($values as $key => $value) {
+					$variables = json_decode($value);
+					foreach ($variables as $new_key => $new_value) {
+						if (is_array($new_value)) {
+							$new_value = array_map("unserialize", array_unique(array_map("serialize", $new_value)));
+							foreach ($new_value as $inkey => $invalue) $output_array[$new_key][] = $invalue;
+							$output_array[$new_key] = array_unique($output_array[$new_key], SORT_REGULAR);
+						} else {
+							$output_array[$new_key][] = $new_value;
+							$output_array[$new_key] = array_unique($output_array[$new_key], SORT_REGULAR);
+						}
 					}
 				}
-			}
+			}			
 		}
 		// pagination
 		$page = isset($_GET['page']) ? xss_clean($_GET['page']) : 0;

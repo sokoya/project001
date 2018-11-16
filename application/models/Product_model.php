@@ -53,7 +53,7 @@ Class Product_model extends CI_Model{
         }else{
             // Select all categories then
             $query = $this->db->query("SELECT name FROM categories LIMIT 10");
-            return $this->query( $query )->result();
+            return $query->result();
         }
     }
 
@@ -62,17 +62,14 @@ Class Product_model extends CI_Model{
     function category_description( $str = '', $search_like = '' ){
         $result = '';
         if( $str != '' ){
-            $id = $this->category_id( $category);
-            $select = "SELECT description FROM categories WHERE id = {$id} LIMIT 1";
-            $result = $this->db->query($select)->row();
-            if( $result ){
+            if( $this->check_slug_availability( $str ) ){
+               $id = $this->category_id( $category);
+                $select = "SELECT description FROM categories WHERE id = {$id} LIMIT 1";
+                $result = $this->db->query($select)->description;
                 return $result->description;
-            }else{
-                // Get the setting description and return
             }
         }else{
             // That means its coming from search
-            $array = $this->slug($str);
             $query = "SELECT c.description, p.id FROM products p LEFT JOIN categories c ON (c.id = p.category_id) WHERE p.product_name LIKE '%{$search_like}%' LIMIT 1";
             return $this->db->query( $query )->description;
         }
@@ -118,7 +115,10 @@ Class Product_model extends CI_Model{
         return false;
     }
 
-
+    /*
+    *This function is to call the recurssive function and
+    *return the children id
+    */
     function slug( $slug ) : array {
         $GLOBALS['array_var'] = array();
 
@@ -138,7 +138,10 @@ Class Product_model extends CI_Model{
             return $GLOBALS['array_var'];
         }
     }
-
+    /*
+    *Called by slug
+    *To get the children id
+    */
     function recurssive( $id ){
         $category_id = $id;
         $total_categories = $this->db->get('categories')->result_array();
@@ -156,12 +159,80 @@ Class Product_model extends CI_Model{
         }
     }
 
+    /*
+    *Function to get the parent category of a particular category
+    *Called the parent_recurssive
+    */
+    function parent_slug_top( $id ){
+        // Select category
+        $GLOBALS['array_variable'] = array();
+        $select_category = "SELECT pid, slug FROM dummy_table WHERE id = {$id}";
+        $result = $this->db->query($select_category);
+        if( $result->num_rows() >= 1 ){
+            $pid = $result->row()->pid;
+            $this->parent_recurssive( $pid );
+            $array = array_filter($GLOBALS['array_variable']);
+            $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($array));
+            $new_array = array();
+            foreach( $it as $v ){ array_push( $new_array, $v); }
+            array_push( $new_array, $id ); // Lets push its own ID also
+            // return $new_array;
+        }else{
+            return $GLOBALS['array_variable'];
+        }
+
+    }
+
+    /*
+    *Called by the parent_slug top, helps to generate the parent id
+    */
+    function parent_recurssive( $pid ){
+        $category_pid = $pid;
+        $total_categories = $this->db->get('dummy_table')->result_array();
+        $count = count( $total_categories );
+
+        $data = array();
+        for ($i=0; $i < $count; $i++) { 
+            if( $total_categories[$i]['id'] == $category_pid ){
+                array_push( $data , $total_categories[$i]['pid'] );
+            }
+        }
+        array_push( $GLOBALS['array_variable'], $data);
+        foreach ($data as $key => $value) {
+            $this->parent_recurssive($value);
+        }
+    }
+
+    function check_slug_availability( $slug ){
+        $this->db->where( 'slug', $slug);
+        if( $this->db->get('categories')->num_rows() ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    // Get a slpecific category id by its slug
+    function category_id( $slug ){
+        $query = "SELECT id FROM categories WHERE slug = ?";
+        return $this->db->query( $query, $slug);
+    }
+
+    /*
+        Return an object (name, slug, description, specifications) of all the parent of a category
+    */
+    function get_parent_details( $id ){
+        $array = $this->parent_slug_top( $id );
+        return $this->db->query("SELECT name, slug, description, specifications FROM categories WHERE id IN ('".implode("','",$array)."')")->result();
+    }
+
     // "SELECT column1 FROM table WHERE column1 IN ('".implode("','",$array)."')";
     // Main Category prouduct listings
     function get_products( $queries = '' , $gets = array() ){
         // $this->db->cache_on();
         // Lets confirm the slug is valid
-        if( $this->check_slug_availability( $queries['str'] ) {
+        if( $this->check_slug_availability( $queries['str'] ) ) {
             $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price,g.image_name,s.first_name
             FROM products p                        
             JOIN product_variation AS v ON (p.id = v.product_id) 
@@ -235,24 +306,20 @@ Class Product_model extends CI_Model{
     // return objects
     function get_also_likes( $id = ''){
         // Get the category of this product
-        $this->db->select('subcategory');
+        $this->db->select('category_id');
         $this->db->where('id', $id);
-        $product_detail = $this->db->get('products')->row();
+        $product_detail_category_id = $this->db->get('products')->row()->id;
         $select_query = "SELECT p.id,p.views, p.product_name, v.sale_price, v.discount_price,g.image_name
             FROM products p                        
             JOIN product_variation AS v ON (p.id = v.product_id) 
             JOIN product_gallery AS g ON (p.id = g.product_id AND g.featured_image = 1) 
-            WHERE p.id != '$id' AND p.subcategory = '$product_detail->subcategory'
+            WHERE p.id != '$id' AND p.category_id = '$product_detail_category_id'
             GROUP BY p.id ORDER BY RAND() LIMIT 4";
         $result = $this->db->query( $select_query )->result();
         return $result;
     }
 
-    // Get a slpecific category id by its slug
-    function category_id( $slug ){
-        $query = "SELECT id FROM categories WHERE slug = ?";
-        return $this->db->query( $query, $slug);
-    }
+    
 
 
     // Get products brands
@@ -261,17 +328,25 @@ Class Product_model extends CI_Model{
 
         if( $search_like != '' ){
             if( $category != '' ){
-                $id = $this->category_id( $category);
-                $select_query .= " WHERE category_id = {$id} AND product_name LIKE '%{$search_like}%'";
+                if( $this->check_slug_availability($category) ){
+                    $id = $this->category_id( $category);
+                    $select_query .= " WHERE category_id = {$id} AND product_name LIKE '%{$search_like}%'";
+                    $select_query .= " GROUP BY `brand_name` ORDER BY `brand_name` ";
+                    return $this->db->query( $select_query )->result();
+                }
             }else{
                 $select_query .= " WHERE product_name LIKE '%{$search_like}%'";
+                $select_query .= " GROUP BY `brand_name` ORDER BY `brand_name` ";
+                return $this->db->query( $select_query )->result();
             }
         }else{
-            $id = $this->category_id( $category);
-            $select_query .= "WHERE p.category_id = {$id}";
+            if( $this->check_slug_availability($category)) {
+                $id = $this->category_id( $category);
+                $select_query .= "WHERE p.category_id = {$id}";
+            }
         }
-        $select_query .= " GROUP BY `brand_name` ORDER BY `brand_name` ";
-        return $this->db->query( $select_query )->result();
+        
+        return '';
     }
 
     // Get products colours
@@ -279,16 +354,24 @@ Class Product_model extends CI_Model{
         $select_query = "SELECT COUNT(*) AS `colour_count`, `main_colour` AS `colour_name` FROM `products` p ";
         if( $search_like != '' ){
             if( $category != '' ){
-                $id = $this->category_id( $category);
-                $select_query .= " WHERE category_id = {$id} AND product_name LIKE '%{$search_like}%'";
+                if( $this->check_slug_availability( $category )) {
+                    $id = $this->category_id( $category);
+                    $select_query .= " WHERE category_id = {$id} AND product_name LIKE '%{$search_like}%'";
+                    $select_query .= " GROUP BY `colour_name` ORDER BY `colour_name` ";
+                    return $this->db->query( $select_query )->result();
+                }
             }else{
                 $select_query .= " WHERE product_name LIKE '%{$search_like}%'";
+                $select_query .= " GROUP BY `colour_name` ORDER BY `colour_name` ";
+                return $this->db->query( $select_query )->result();
             }
         }else{
-            $select_query .= " WHERE category_id = {$id}";
+            if( $this->check_slug_availability( $category )) {
+                $id = $this->category_id( $category);
+                $select_query .= " WHERE category_id = {$id}";
+            }
         }
-        $select_query .= " GROUP BY `colour_name` ORDER BY `colour_name` ";
-        return $this->db->query( $select_query )->result();
+        return '';
     }
 
     // Get products attributes. used in main category
@@ -296,16 +379,22 @@ Class Product_model extends CI_Model{
         $select_query = "SELECT DISTINCT JSON_UNQUOTE(JSON_EXTRACT(`attributes`, '$')) AS feature_value FROM products";
         if( $search_like != '' ){
             if( $category != '' ){
-                $array = $this->slug($category);
-                $select_query .= " WHERE category_id IN ('".implode("','",$array)."') AND product_name LIKE '%{$search_like}%'";
+                if( $this->check_slug_availability( $category ) ){
+                    $array = $this->slug($category);
+                    $select_query .= " WHERE category_id IN ('".implode("','",$array)."') AND product_name LIKE '%{$search_like}%'";
+                    return $this->db->query( $select_query )->result_array();
+                }
             }else{
                 $select_query .= " WHERE product_name LIKE '%{$search_like}%'";
+                return $this->db->query( $select_query )->result_array();
             }
-        }else{
+        }elseif($this->check_slug_availability( $category )) {
             $array = $this->slug($category);
             $select_query .= "WHERE category_id IN ('".implode("','",$array)."')";
+            return $this->db->query( $select_query )->result_array();
+        }else{
+            return '';
         }
-        return $this->db->query( $select_query )->result_array();
     }
 
     // Generic single product detail
