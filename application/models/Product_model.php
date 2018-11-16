@@ -45,25 +45,16 @@ Class Product_model extends CI_Model{
     // To get the respective categories or sub
     // Function used for the category page
     function get_sub_categories( $str = ''){
-        $output = '';
-        //check in root_category
-        $query = $this->db->query("SELECT root_category_id AS id FROM root_category WHERE MATCH(name) AGAINST('$str') LIMIT 1");
-        if( $query->num_rows() == 1 ){
-            $this->db->where('root_category_id', $query->row()->id );
-            $this->db->limit(10);
-            $output = $this->db->get('category')->result();
+        // Get all the i
+        $array = $this->slug($str);
+        $query = $this->db->query("SELECT name FROM categories WHERE id IN ('". implode("','",$array). "') LIMIT 10 ");
+        if( $query->num_rows() >= 1 ) {
+            return $query->result();
         }else{
-            $query = $this->db->query("SELECT category_id AS id FROM category WHERE MATCH(name) AGAINST('$str') LIMIT 1");
-            if( $query->num_rows() == 1 ){
-                $this->db->where('category_id', $query->row()->id );
-                $this->db->limit(10);
-                $output = $this->db->get('sub_category')->result();
-            }else{
-                // just return all the categories
-                $output = $this->db->query('SELECT name FROM root_category LIMIT 10')->result();
-            }
+            // Select all categories then
+            $query = $this->db->query("SELECT name FROM categories LIMIT 10");
+            return $this->query( $query )->result();
         }
-        return $output;
     }
 
 
@@ -71,32 +62,20 @@ Class Product_model extends CI_Model{
     function category_description( $str = '', $search_like = '' ){
         $result = '';
         if( $str != '' ){
-            $select = "SELECT description FROM root_category WHERE MATCH(name) AGAINST('$str') LIMIT 1";
+            $id = $this->category_id( $category);
+            $select = "SELECT description FROM categories WHERE id = {$id} LIMIT 1";
             $result = $this->db->query($select)->row();
             if( $result ){
                 return $result->description;
             }else{
-                $select = "SELECT root_category_id FROM category WHERE MATCH(name) AGAINST('$str') LIMIT 1";
-                $id = $this->db->query($select)->row();
-                if( count( $id ) ){
-                    $this->db->select('description');
-                    $this->db->where('root_category_id', $id->root_category_id);
-                    $result = $this->db->get('root_category')->row()->description;
-                }else{
-                    $select = "SELECT r.description FROM root_category r LEFT JOIN sub_category s ON (r.root_category_id = s.root_category_id ) 
-                WHERE MATCH(s.name) AGAINST('$str') LIMIT 1";
-                    $result = $this->db->query($select)->row()->description;
-                }
+                // Get the setting description and return
             }
         }else{
             // That means its coming from search
-            $select = "SELECT rootcategory name FROM products WHERE product_name LIKE '%{$search_like}%' ORDER BY RAND() LIMIT 1";
-            $res = $this->db->query($select)->row();
-            if( $res ){
-                $result = $this->db->query("SELECT description FROM root_category WHERE MATCH(name) AGAINST('$res->name') LIMIT 1")->row()->description;
-            }
+            $array = $this->slug($str);
+            $query = "SELECT c.description, p.id FROM products p LEFT JOIN categories c ON (c.id = p.category_id) WHERE p.product_name LIKE '%{$search_like}%' LIMIT 1";
+            return $this->db->query( $query )->description;
         }
-        if( $result ){return $result;}else{return ''; } // We should rather return a default description
     }
 
     // Get single variation
@@ -139,33 +118,38 @@ Class Product_model extends CI_Model{
         return false;
     }
 
-    // function get_category_children( $slug ) {
-    //     $select = "SELECT id FROM categories WHERE slug = $slug";
-    //     $result = $this->db->query($select)->row();
 
-    //     $category_result = $this->db->query("SELECT id FROM categories WHERE pid = ", $result->id)->result();
+    function slug( $slug ) : array {
+        $GLOBALS['array_var'] = array();
+        $select_category = "SELECT id FROM dummy_table WHERE slug = ?";
+        $id = $this->db->query($select_category, $slug)->row()->id;
+        $this->recurssive( $id );
+        $array = array_filter($GLOBALS['array_var']);
+        $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($array));
+        $new_array = array();
+        foreach( $it as $v ){ array_push( $new_array, $v); }
+        array_push( $new_array, $id ); // Lets push its own ID also
+        return $new_array;
+    }
 
-    //     if( $category_result ) {
-    //         foreach( $category_result as $key ){
-    //             $result[] = $this->recussive( $key );
-    //         }
-    //     }else{
-    //         return $result->id;
-    //     }
-    // }
+    function recurssive( $id ){
+        $category_id = $id;
+        $total_categories = $this->db->get('dummy_table')->result_array();
+        $count = count( $total_categories );
 
-    // $recussive_array = array();
-    // function recussive( $key ){
-    //     $query = "SELECT id FROM categories WHERE pid = $key";
-    //     $query = $this->db->query($select)->id;
-    //     if( $query ){
-    //         array_push( $recussive_array, $query->id);
-    //         $this->recussive( $query->id );
-    //     }else{
-    //         return $recussive_array;
-    //     }
-    // }
+        $data =  array();
+        for ($i=0; $i < $count; $i++) { 
+            if( $total_categories[$i]['pid'] == $category_id ){
+                array_push( $data , $total_categories[$i]['id'] );
+            }
+        }
+        array_push( $GLOBALS['array_var'], $data);
+        foreach ($data as $key => $value) {
+            $this->recurssive($value);
+        }
+    }
 
+    // "SELECT column1 FROM table WHERE column1 IN ('".implode("','",$array)."')";
     // Main Category prouduct listings
     function get_products( $queries = '' , $gets = array() ){
         // $this->db->cache_on();
@@ -175,20 +159,21 @@ Class Product_model extends CI_Model{
             JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )                
             JOIN users AS s ON p.seller_id = s.id ";
 
+            // WHERE p.category_id IN (3,4,5,6,7,7,8,8)
+            $array = $this->slug($queries['str']);
+            $select_query .= " WHERE p.category_id IN ('".implode("','",$array)."')";
 
-        $select_query .= " WHERE ( (MATCH(p.rootcategory) AGAINST('{$queries['str']}')) OR 
-        (MATCH(p.category) AGAINST('{$queries['str']}')) OR (MATCH(p.subcategory) AGAINST('{$queries['str']}')) )";
 
         if( count($gets) ){
             // check for brand name
             if( isset($gets['brand_name']) && !empty($gets['brand_name'])) {
                 $brand_name = xss_clean($gets['brand_name']);
-                $select_query .= " ( AND p,brand_name = '{$brand_name}') "; unset($gets['brand_name']);
+                $select_query .= " ( AND p.brand_name = '{$brand_name}') "; unset($gets['brand_name']);
             }
             // check for main colour
             if( isset($gets['main_colour']) && !empty($gets['main_colour']) ){
                 $main_colour = xss_clean($gets['main_colour']);
-                $$select_query .= " (AND p,brand_name = '{$main_colour}') "; unset($gets['main_colour']);
+                $$select_query .= " (AND p.brand_name = '{$main_colour}') "; unset($gets['main_colour']);
             }
             // unset the page key
             unset( $gets['page'] );
@@ -252,21 +237,27 @@ Class Product_model extends CI_Model{
         return $result;
     }
 
+    // Get a slpecific category id by its slug
+    function category_id( $slug ){
+        $query = "SELECT id FROM categories WHERE slug = ?";
+        return $this->db->query( $query, $slug);
+    }
+
 
     // Get products brands
     function get_brands( $category = '', $search_like = ''){
         $select_query = "SELECT COUNT(*) AS `brand_count`, `brand_name` FROM `products` p ";
+
         if( $search_like != '' ){
             if( $category != '' ){
-                $select_query .= " WHERE MATCH(rootcategory) AGAINST('$category') AND product_name LIKE '%{$search_like}%'";
+                $id = $this->category_id( $category);
+                $select_query .= " WHERE category_id = {$id} AND product_name LIKE '%{$search_like}%'";
             }else{
                 $select_query .= " WHERE product_name LIKE '%{$search_like}%'";
             }
         }else{
-            $select_query .= " WHERE MATCH(rootcategory) AGAINST('$category') OR
-            MATCH(category) AGAINST('$category') OR
-            MATCH(subcategory) AGAINST('$category') OR
-            MATCH(brand_name) AGAINST('$category')";
+            $id = $this->category_id( $category);
+            $select_query .= "WHERE p.category_id = {$id}";
         }
         $select_query .= " GROUP BY `brand_name` ORDER BY `brand_name` ";
         return $this->db->query( $select_query )->result();
@@ -277,15 +268,13 @@ Class Product_model extends CI_Model{
         $select_query = "SELECT COUNT(*) AS `colour_count`, `main_colour` AS `colour_name` FROM `products` p ";
         if( $search_like != '' ){
             if( $category != '' ){
-                $select_query .= " WHERE MATCH(rootcategory) AGAINST('$category') AND product_name LIKE '%{$search_like}%'";
+                $id = $this->category_id( $category);
+                $select_query .= " WHERE category_id = {$id} AND product_name LIKE '%{$search_like}%'";
             }else{
                 $select_query .= " WHERE product_name LIKE '%{$search_like}%'";
             }
         }else{
-            $select_query .= " WHERE MATCH(rootcategory) AGAINST('$category') OR
-            MATCH(category) AGAINST('$category') OR
-            MATCH(subcategory) AGAINST('$category') OR
-            MATCH(brand_name) AGAINST('$category')";
+            $select_query .= " WHERE category_id = {$id}";
         }
         $select_query .= " GROUP BY `colour_name` ORDER BY `colour_name` ";
         return $this->db->query( $select_query )->result();
@@ -296,15 +285,14 @@ Class Product_model extends CI_Model{
         $select_query = "SELECT DISTINCT JSON_UNQUOTE(JSON_EXTRACT(`attributes`, '$')) AS feature_value FROM products";
         if( $search_like != '' ){
             if( $category != '' ){
-                $select_query .= " WHERE MATCH(rootcategory) AGAINST('$category') AND product_name LIKE '%{$search_like}%'";
+                $array = $this->slug($category);
+                $select_query .= " WHERE category_id IN ('".implode("','",$array)."') AND product_name LIKE '%{$search_like}%'";
             }else{
                 $select_query .= " WHERE product_name LIKE '%{$search_like}%'";
             }
         }else{
-            $select_query .= " WHERE MATCH(rootcategory) AGAINST('$category') OR
-            MATCH(category) AGAINST('$category') OR
-            MATCH(subcategory) AGAINST('$category') OR
-            MATCH(brand_name) AGAINST('$category')";
+            $array = $this->slug($category);
+            $select_query .= "WHERE category_id IN ('".implode("','",$array)."')";
         }
         return $this->db->query( $select_query )->result_array();
     }
@@ -448,8 +436,6 @@ Class Product_model extends CI_Model{
 
 
     function get_search_products( $queries = array() , $gets = array() ){
-        // $this->db->cache_on();
-//        html_entity_decode($str)
         $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price,g.image_name,s.first_name
             FROM products p                        
             JOIN product_variation AS v ON (p.id = v.product_id) 

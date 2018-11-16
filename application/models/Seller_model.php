@@ -165,8 +165,39 @@ Class Seller_model extends CI_Model{
     /**
      * @param $id
      * @param $label
-     * @return array|string
+     * @return DB_result_array
      */
+
+
+    function get_main_categories(){
+        $this->db->select('id, name');
+        return $this->db->get('categories')->result();
+    }
+
+
+    /**
+     * @param $id
+     * @param $label
+     * @return DB_result_array
+     */
+
+    function get_category_children( $pid ){
+        $this->db->select('id, name');
+        $this->db->where('pid', $pid);
+        return $this->db->get('categories')->result();
+    }
+
+    // Function to confirm if the category has a child
+    function has_child( $id ){
+        $this->db->where('pid', $id);
+        if( $this->db->get('categories')->num_rows() > 0 ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
     function get_category_name($id ='' , $label ='' ){
         switch ($label){
             case 'root_category' :

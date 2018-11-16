@@ -43,7 +43,7 @@ class Product extends CI_Controller{
             $page_data['sub_name'] = 'select_category';
             $page_data['profile'] = $this->seller->get_profile_details($uid,
                 'first_name,last_name,email,profile_pic');
-            $page_data['root_categories'] = $this->seller->get_category_name('', 'root_category');
+            $page_data['categories'] = $this->seller->get_main_categories();
             $this->load->view('seller/choose_category', $page_data);
         }
     }
@@ -256,23 +256,26 @@ class Product extends CI_Controller{
      * @return:  JSON categories id, name
      */
     function append_category(){
-        $id = $this->input->post('id');
-        $result = $this->seller->get_category_name($id,'category')->result_array();
-        echo json_encode($result, JSON_UNESCAPED_SLASHES);
-        exit;
+        
+        if( $this->input->is_ajax_request() && $this->input->post() ){
+            $id = $this->input->post('id');
+            $results = $this->seller->get_category_children($id);
+            $return = array();
+            foreach( $results as $result ){
+                $res['has_child'] = 0;
+                $res['id'] = $result['id'];
+                $res['name'] = $result['name'];
+                if( $this->seller->has_child( $result['id']) ) {
+                    $res['has_child'] = 1;
+                }
+                array_push( $return , $res );
+            }
+            echo json_encode($return, JSON_UNESCAPED_SLASHES);
+            exit;
+        }else{
+            redirect(base_url());
+        }
     }
-
-    /**
-     * @param int : category_id
-     * @return:  JSON sub categories id, name
-     */
-    function append_sub_category(){
-        $id = $this->input->post('id');
-        $result = $this->seller->get_category_name($id,'sub_category')->result_array();
-        echo json_encode( $result, JSON_UNESCAPED_SLASHES);
-        exit;
-    }
-
 
 
     // upload function
