@@ -38,7 +38,8 @@ class Product extends CI_Controller {
 	public function catalog(){
 		$str = $this->uri->segment(2);
 		$str = preg_replace("/[^A-Za-z0-9-]/", "", cleanit($str));
-		$page_data['searched'] = $str = preg_replace("/[^A-Za-z0-9]/", " ", cleanit($str)); // Convert the - to space
+		$page_data['searched'] = preg_replace("/[^A-Za-z0-9]/", " ", cleanit($str)); // Convert the - to space
+		$str = cleanit($str);
 		if ($str == '') redirect(base_url());
 		$page_data['title'] = ucwords($str);
 		$features = $this->product->get_features($str);

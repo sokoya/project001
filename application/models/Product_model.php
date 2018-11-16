@@ -121,17 +121,22 @@ Class Product_model extends CI_Model{
 
     function slug( $slug ) : array {
         $GLOBALS['array_var'] = array();
-        $select_category = "SELECT id FROM categories WHERE slug = '{$slug}'";
-        die( $select_category );
+
+        $select_category = "SELECT id FROM categories WHERE slug = ? ";
         $query = $this->db->query($select_category, array($slug));
 
-        $this->recurssive( $id );
-        $array = array_filter($GLOBALS['array_var']);
-        $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($array));
-        $new_array = array();
-        foreach( $it as $v ){ array_push( $new_array, $v); }
-        array_push( $new_array, $id ); // Lets push its own ID also
-        return $new_array;
+        if( $query->num_rows() >= 1 ){
+            $id = $query->row()->id;
+            $this->recurssive(  $id );
+            $array = array_filter($GLOBALS['array_var']);
+            $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($array));
+            $new_array = array();
+            foreach( $it as $v ){ array_push( $new_array, $v); }
+            array_push( $new_array, $id ); // Lets push its own ID also
+            return $new_array;            
+        }else{
+            return $GLOBALS['array_var'];
+        }
     }
 
     function recurssive( $id ){
@@ -155,70 +160,74 @@ Class Product_model extends CI_Model{
     // Main Category prouduct listings
     function get_products( $queries = '' , $gets = array() ){
         // $this->db->cache_on();
-        $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price,g.image_name,s.first_name
+        // Lets confirm the slug is valid
+        if( $this->check_slug_availability( $queries['str'] ) {
+            $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price,g.image_name,s.first_name
             FROM products p                        
             JOIN product_variation AS v ON (p.id = v.product_id) 
             JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )                
             JOIN users AS s ON p.seller_id = s.id ";
 
-            // WHERE p.category_id IN (3,4,5,6,7,7,8,8)
             $array = $this->slug($queries['str']);
             $select_query .= " WHERE p.category_id IN ('".implode("','",$array)."')";
+            if( count($gets) ){
+                // check for brand name
+                if( isset($gets['brand_name']) && !empty($gets['brand_name'])) {
+                    $brand_name = xss_clean($gets['brand_name']);
+                    $select_query .= " ( AND p.brand_name = '{$brand_name}') "; unset($gets['brand_name']);
+                }
+                // check for main colour
+                if( isset($gets['main_colour']) && !empty($gets['main_colour']) ){
+                    $main_colour = xss_clean($gets['main_colour']);
+                    $$select_query .= " (AND p.brand_name = '{$main_colour}') "; unset($gets['main_colour']);
+                }
+                // unset the page key
+                unset( $gets['page'] );
 
-
-        if( count($gets) ){
-            // check for brand name
-            if( isset($gets['brand_name']) && !empty($gets['brand_name'])) {
-                $brand_name = xss_clean($gets['brand_name']);
-                $select_query .= " ( AND p.brand_name = '{$brand_name}') "; unset($gets['brand_name']);
-            }
-            // check for main colour
-            if( isset($gets['main_colour']) && !empty($gets['main_colour']) ){
-                $main_colour = xss_clean($gets['main_colour']);
-                $$select_query .= " (AND p.brand_name = '{$main_colour}') "; unset($gets['main_colour']);
-            }
-            // unset the page key
-            unset( $gets['page'] );
-
-            // Here comes the features
-            // check for get count again
-            if( count( $gets ) ){
-                foreach( $gets as $key => $value ){
-                    $explode = explode(',', $value);
-                    if( count($explode) > 1 ){
-                        $select_query .= " OR ( ";
-                        $array_value = array_values($explode);
-                        $last = end($array_value);
-                        $key = xss_clean( $key );
-                        foreach( $explode as $exp ){
-                            $exp = preg_replace("/[^A-Za-z.0-9-]/", ' ', $exp);
-                            $last = preg_replace("/[^A-Za-z.0-9-]/", ' ', $last);
-                            if( $exp === $last ){
-                                $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%')";
-                            }else{
-                                $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' OR";
+                // Here comes the features
+                // check for get count again
+                if( count( $gets ) ){
+                    foreach( $gets as $key => $value ){
+                        $explode = explode(',', $value);
+                        if( count($explode) > 1 ){
+                            $select_query .= " OR ( ";
+                            $array_value = array_values($explode);
+                            $last = end($array_value);
+                            $key = xss_clean( $key );
+                            foreach( $explode as $exp ){
+                                $exp = preg_replace("/[^A-Za-z.0-9-]/", ' ', $exp);
+                                $last = preg_replace("/[^A-Za-z.0-9-]/", ' ', $last);
+                                if( $exp === $last ){
+                                    $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%')";
+                                }else{
+                                    $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' OR";
+                                }
                             }
+    //                        $select_query .= " ) ";
+                        }else{
+                            $value = xss_clean($value);
+                            $value = preg_replace("/[^A-Za-z.0-9-]/", ' ', $value);
+                            $select_query .= " OR (JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$value}%') ";
                         }
-//                        $select_query .= " ) ";
-                    }else{
-                        $value = xss_clean($value);
-                        $value = preg_replace("/[^A-Za-z.0-9-]/", ' ', $value);
-                        $select_query .= " OR (JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$value}%') ";
                     }
                 }
             }
+
+            if( $queries['is_limit'] == true ){
+                $select_query .=" AND p.product_status = 'approved' GROUP BY p.id LIMIT {$queries['offset']},{$queries['limit']} ";
+    //                     die( $select_query );
+            }else{
+                $select_query .=" AND p.product_status = 'approved' GROUP BY p.id";
+            }    
+    //         die( $select_query );
+            $products_query = $this->db->query( $select_query )->result();
+            // $this->db->cache_off();
+            return $products_query;
+        }else{
+            return '';
         }
 
-        if( $queries['is_limit'] == true ){
-            $select_query .=" AND p.product_status = 'approved' GROUP BY p.id LIMIT {$queries['offset']},{$queries['limit']} ";
-//                     die( $select_query );
-        }else{
-            $select_query .=" AND p.product_status = 'approved' GROUP BY p.id";
-        }    
-//         die( $select_query );
-        $products_query = $this->db->query( $select_query )->result();
-        // $this->db->cache_off();
-        return $products_query;
+        
     }
 
 
