@@ -121,7 +121,7 @@ Class Product_model extends CI_Model{
 
     function slug( $slug ) : array {
         $GLOBALS['array_var'] = array();
-        $select_category = "SELECT id FROM dummy_table WHERE slug = ?";
+        $select_category = "SELECT id FROM categories WHERE slug = ?";
         $id = $this->db->query($select_category, $slug)->row()->id;
         $this->recurssive( $id );
         $array = array_filter($GLOBALS['array_var']);
@@ -134,7 +134,7 @@ Class Product_model extends CI_Model{
 
     function recurssive( $id ){
         $category_id = $id;
-        $total_categories = $this->db->get('dummy_table')->result_array();
+        $total_categories = $this->db->get('categories')->result_array();
         $count = count( $total_categories );
 
         $data =  array();
