@@ -129,7 +129,7 @@ Class Seller_model extends CI_Model{
     }
 
     
-    function get_specification( $sub_id){
+    function get_specification( $sub_id ){
         $this->db->select('specifications');
         $this->db->where('sub_category_id', $sub_id);
         $specs = $this->db->get('sub_category')->row();
