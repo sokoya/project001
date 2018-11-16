@@ -49,9 +49,9 @@
                                         <div class="panel-body">
                                             <?= form_open(); ?>
 
-                                            <div class="row">
-                                                <div class="col-md-4" style="margin-bottom: 20px;">
-                                                    <h5 style="color: #232323;">Select Root Category</h5>
+                                            <div class="row category-section">
+                                                <div class="col-md-12" style="margin-bottom: 20px;">
+                                                    <h5 style="color: #232323; float: left">Select Root Category</h5>
                                                     <select class="rootcat form-control" name="rootcategory" required>
                                                         <option value=""> -- Please select the root category --</option>
                                                         <?php foreach ($root_categories->result() as $root ): ?>
@@ -60,12 +60,12 @@
                                                     </select>
                                                 </div>
 
-                                                <div class="col-md-4" style="margin-bottom: 20px;">
+                                                <div class="col-md-12" style="margin-bottom: 20px;">
                                                     <h5 style="color: #232323;">Select Category</h5>
                                                     <select class="subcat form-control" name="category" required></select>
                                                 </div>
 
-                                                <div class="col-md-4" style="margin-bottom: 20px;">
+                                                <div class="col-md-12" style="margin-bottom: 20px;">
                                                     <h5 style="color: #232323;">Select Sub Category</h5>
                                                     <select class="cat form-control" name="subcategory" required></select>
                                                 </div>
