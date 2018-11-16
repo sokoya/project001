@@ -256,7 +256,6 @@ class Product extends CI_Controller{
      * @return:  JSON categories id, name
      */
     function append_category(){
-        
         if( $this->input->is_ajax_request() && $this->input->post() ){
             $id = $this->input->post('id');
             $results = $this->seller->get_category_children($id);
