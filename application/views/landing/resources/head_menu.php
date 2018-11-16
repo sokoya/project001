@@ -15,19 +15,21 @@
                                         <div class="row">
                                             <?php                                                
                                                 $main_category = $this->db->query("SELECT * FROM categories WHERE pid = ? ", $category->id)->result();
+                                                if( $main_category ):
                                                 foreach( $main_category as $cat ) :
                                             ?>
                                             <div class="col-md-6">
                                                 <h5 class="custom-menu-category-drop"><a href="<?= base_url('catalog/' . $cat->slug); ?>"><?= $cat->name; ?></a></h5>
                                                 <ul class="dropdown-menu-category-list">
                                                     <?php                                                        
-                                                        $sub_category = $this->db->query("SELECT * FROM categories WHERE pid = ", array($cat->id))->result();
-                                                        foreach($sub_category as $sub ) : ?>
-                                                        <li><a href="<?= base_url('catalog/' . $sub->slug); ?>" title="<?= $sub->name; ?>"><?= $sub->name; ?></a></li>
-                                                    <?php endforeach; ?>
+                                                        $sub_category = $this->db->query("SELECT * FROM categories WHERE pid = ? ", array($cat->id))->result();
+                                                        if( $sub_category ): 
+                                                            foreach($sub_category as $sub ) : ?>
+                                                            <li><a href="<?= base_url('catalog/' . $sub->slug); ?>" title="<?= $sub->name; ?>"><?= $sub->name; ?></a></li>
+                                                    <?php endforeach; endif; ?>
                                                 </ul>
                                             </div>
-                                            <?php endforeach; ?>
+                                            <?php endforeach; endif; ?>
                                         </div>
                                     </div>
                                     <img class="dropdown-menu-category-section-theme-img" src="<?= base_url('assets/landing/img/test_cat/3.png'); ?>" alt="Image Alternative text" title="Image Title" style="right: -10px;" />
