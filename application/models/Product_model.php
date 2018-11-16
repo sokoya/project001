@@ -121,8 +121,10 @@ Class Product_model extends CI_Model{
 
     function slug( $slug ) : array {
         $GLOBALS['array_var'] = array();
-        $select_category = "SELECT id FROM categories WHERE slug = ?";
-        $id = $this->db->query($select_category, array($slug))->row()->id;
+        $select_category = "SELECT id FROM categories WHERE slug = '{$slug}'";
+        die( $select_category );
+        $query = $this->db->query($select_category, array($slug));
+
         $this->recurssive( $id );
         $array = array_filter($GLOBALS['array_var']);
         $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($array));
