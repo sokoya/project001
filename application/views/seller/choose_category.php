@@ -156,12 +156,7 @@
             	$.each(msg, function (i	) {
 					$('.n-cat').append("<option value=" +msg[i].category_id+ ">" +msg[i].name+ "</option>")
 				});
-
-
-                $(".subcat").append("<option>-- Please select a category --</option>");
-                $(msg).each(function(i){
-                    $(".subcat").append("<option value=" +msg[i].category_id+ ">" +msg[i].name+ "</option>")
-                });
+				
             });
         });
 
