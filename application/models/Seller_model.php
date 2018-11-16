@@ -129,10 +129,10 @@ Class Seller_model extends CI_Model{
     }
 
     
-    function get_specification( $sub_id){
+    function get_specification( $category_id ){
         $this->db->select('specifications');
-        $this->db->where('sub_category_id', $sub_id);
-        $specs = $this->db->get('sub_category')->row();
+        $this->db->where('id', $category_id);
+        $specs = $this->db->get('categories')->row();
         $return = array();
 
         if( !empty($specs->specifications) || $specs->specifications !== '' ){
@@ -140,7 +140,6 @@ Class Seller_model extends CI_Model{
             foreach ( $decode as $key => $value ){
                 $this->db->select('spec_name,options,description,multiple_options');
                 $this->db->from('specifications');
-//                $this->db->where('tab', $type);
                 $this->db->where('id', $value);
                 $output = $this->db->get()->row_array();
                 array_push( $return, $output );
@@ -171,6 +170,7 @@ Class Seller_model extends CI_Model{
 
     function get_main_categories(){
         $this->db->select('id, name');
+        $this->db->where('pid', 0);
         return $this->db->get('categories')->result();
     }
 

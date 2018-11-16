@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 16, 2018 at 11:30 AM
+-- Generation Time: Nov 16, 2018 at 12:13 PM
 -- Server version: 5.7.11
--- PHP Version: 7.2.7
+-- PHP Version: 7.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -43,7 +43,10 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `icon`, `pid`, `slug`, `title`, `description`, `specifications`, `image`, `name`) VALUES
-(1, 'fa-gloceries', 0, 'new-category', 'jsjsjsjsjjs', 'jsjsjsslslsjsjsjsjsjsjsjs  jsjsjlsllsl  jjsksksks', '["1","2","3"]', '42cce4ed60f67ce3267ce329202f898c.png', 'New Category');
+(1, 'bolt', 0, 'electronics', 'electronics', 'Electronics Category', '["1","2","3"]', '42cce4ed60f67ce3267ce329202f898c.png', 'Electronics'),
+(2, 'mobile', 0, 'phone-tablets', 'Buy Great Phones', 'Buy a phone today to enjoy a discount', '', '1e89c9d383da60f948263f26ff443010.jpg', 'Phone &amp; Tablets'),
+(3, 'laptop', 0, 'computing', 'Great Computing Systems', 'Great Computing Systems', '', '7e65e8743eceacb37ce53397158e96f9.jpg', 'Computing'),
+(4, 'electronic', 1, 'television-video', 'Television & Video Items sold here', 'Television & Video Items sold here', '', 'df4b74ef3ee289297464d833182b2442.png', 'Television & Video');
 
 --
 -- Indexes for dumped tables
@@ -65,7 +68,7 @@ ALTER TABLE `categories` ADD FULLTEXT KEY `name_2` (`name`);
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

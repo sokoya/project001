@@ -54,8 +54,8 @@
                                                     <h5 style="color: #232323; float: left">Select Category</h5>
                                                     <select class="rootcat form-control" name="rootcategory" required>
                                                         <option value=""> -- Please select the root category --</option>
-                                                        <?php foreach ($root_categories->result() as $root ): ?>
-                                                            <option value="<?= $root->root_category_id; ?>"><?= $root->name; ?></option>
+                                                        <?php foreach ($categories as $category ): ?>
+                                                            <option value="<?= $category->id; ?>"><?= $category->name; ?></option>
                                                         <?php endforeach; ?>
                                                     </select>
                                                 </div>

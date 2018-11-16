@@ -24,19 +24,13 @@ class Product extends CI_Controller{
     }
 
     public function index(){
-        if( $this->input->post('rootcategory') && $this->input->post('category') && $this->input->post('subcategory')  ){
-            $chosen_array = array(
-                'rootcategory' => $this->input->post('rootcategory'),
-                'category' => $this->input->post('category'),
-                'subcategory' => $this->input->post('subcategory')
-            );
-            $this->session->set_userdata($chosen_array);
+        if( $this->input->post('category_id') ){
+            $category_id =  $this->input->post('category_id');
+            $this->session->set_userdata( $category_id) ;
             redirect('seller/product/create');
         }else{
             // Unset the category
-            $this->session->unset_userdata('rootcategory');
-            $this->session->unset_userdata('category');
-            $this->session->unset_userdata('subcategory');
+            $this->session->unset_userdata('category_id');
             $uid = base64_decode($this->session->userdata('logged_id'));
             $page_data['page_title'] = 'Choose Category';
             $page_data['pg_name'] = 'product';
@@ -54,15 +48,9 @@ class Product extends CI_Controller{
     public function create(){
 
         // check if we have the category session set
-        if( $this->session->has_userdata('rootcategory')  && $this->session->has_userdata('category') && $this->session->has_userdata('subcategory') ){
-            $new_session = array();
-            $new_session['sub_id'] = $sub_id = $this->session->userdata('subcategory');
-            $new_session['new_rootcategory'] = $this->seller->get_single_category_name($this->session->userdata('rootcategory'), 'root_category')->name;
-            $new_session['new_category'] = $this->seller->get_single_category_name($this->session->userdata('category'), 'category')->name;
-            $new_session['new_subcategory'] = $this->seller->get_single_category_name($sub_id, 'sub_category')->name;
-
+        if( $this->session->has_userdata('category_id') ){
+            $sub_id = $this->session->userdata('category_id');
             $page_data['specifications'] = $this->seller->get_specification($sub_id);
-            $this->session->set_userdata( $new_session );
             // Check if post method
             $uid = base64_decode($this->session->userdata('logged_id'));
             $page_data['page_title'] = 'Add product';
@@ -71,7 +59,6 @@ class Product extends CI_Controller{
             $page_data['profile'] = $this->seller->get_profile_details( $uid ,
                 'first_name,last_name,email,profile_pic');
             $page_data['brands'] = $this->seller->get_brands();
-            // check the specification attached with the sub category
             $this->load->view('seller/create', $page_data);
         }else{
             // redirect to make a selection of category
@@ -262,9 +249,9 @@ class Product extends CI_Controller{
             $return = array();
             foreach( $results as $result ){
                 $res['has_child'] = 0;
-                $res['id'] = $result['id'];
-                $res['name'] = $result['name'];
-                if( $this->seller->has_child( $result['id']) ) {
+                $res['id'] = $result->id;
+                $res['name'] = $result->name;
+                if( $this->seller->has_child( $result->id) ) {
                     $res['has_child'] = 1;
                 }
                 array_push( $return , $res );
