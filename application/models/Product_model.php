@@ -63,15 +63,15 @@ Class Product_model extends CI_Model{
         $result = '';
         if( $str != '' ){
             if( $this->check_slug_availability( $str ) ){
-               $id = $this->category_id( $category);
+               $id = $this->category_id( $str);
                 $select = "SELECT description FROM categories WHERE id = {$id} LIMIT 1";
-                $result = $this->db->query($select)->description;
-                return $result->description;
+                $result = $this->db->query($select)->row()->description;
+                return $result;
             }
         }else{
             // That means its coming from search
             $query = "SELECT c.description, p.id FROM products p LEFT JOIN categories c ON (c.id = p.category_id) WHERE p.product_name LIKE '%{$search_like}%' LIMIT 1";
-            return $this->db->query( $query )->description;
+            return $this->db->query( $query )->row()->description;
         }
     }
 
@@ -216,7 +216,7 @@ Class Product_model extends CI_Model{
     // Get a slpecific category id by its slug
     function category_id( $slug ){
         $query = "SELECT id FROM categories WHERE slug = ?";
-        return $this->db->query( $query, $slug);
+        return $this->db->query( $query, $slug)->row()->id;
     }
 
     /*
@@ -344,7 +344,7 @@ Class Product_model extends CI_Model{
         }else{
             if( $this->check_slug_availability($category)) {
                 $id = $this->category_id( $category);
-                $select_query .= "WHERE p.category_id = {$id}";
+                $select_query .= " WHERE p.category_id = {$id}";
             }
         }
         
@@ -392,7 +392,7 @@ Class Product_model extends CI_Model{
             }
         }elseif($this->check_slug_availability( $category )) {
             $array = $this->slug($category);
-            $select_query .= "WHERE category_id IN ('".implode("','",$array)."')";
+            $select_query .= " WHERE category_id IN ('".implode("','",$array)."')";
             return $this->db->query( $select_query )->result_array();
         }else{
             return '';
@@ -429,44 +429,6 @@ Class Product_model extends CI_Model{
             $count = $this->db->count_all_results();
         } while ($count >= 1);
             return $number;
-    }
-
-
-    /**
-     * @param $id
-     * @param $label
-     * @return array|string
-     */
-    function get_category_detail($field ='' , $label ='' ){
-        switch ($label){
-            case 'root_category' :
-                $this->db->select('name,root_category_id,description');
-                if( $field != '') {
-                    $this->db->where('root_category_id', $field);
-                    $this->db->or_where('name', $field);
-                }
-                return $this->db->get('root_category')->row();
-                break;
-            case 'category':
-                $this->db->select('name,category_id');
-                if($field != '' ) {
-                    $this->db->where('category_id', $field);
-                    $this->db->or_where('name', $field);
-                }
-                return $this->db->get('category')->row();
-                break;
-            case 'sub_category' :
-                $this->db->select('name,sub_category_id');
-                if($field != '') {
-                    $this->db->where('sub_category_id', $field);
-                    $this->db->or_where('name', $field);
-                }
-                return $this->db->get('sub_category')->row();
-                break;
-            default:
-                return '';
-                break;
-        }
     }
 
 

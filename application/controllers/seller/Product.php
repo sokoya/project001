@@ -123,9 +123,7 @@ class Product extends CI_Controller{
             $product_table = array(
                 'seller_id' => base64_decode($this->session->userdata('logged_id')),
                 'sku' => $sku,
-                'rootcategory' => $this->session->userdata('new_rootcategory'),
-                'category' => $this->session->userdata('new_category'),
-                'subcategory' => $this->session->userdata('new_subcategory'),
+                'category_id' => $this->session->userdata('category_id'),
                 'product_name' => cleanit($this->input->post('product_name')),
                 'brand_name' => cleanit($this->input->post('brand_name')),
                 'model' => cleanit($this->input->post('model')),
@@ -254,6 +252,7 @@ class Product extends CI_Controller{
                 $return['message'] = 'Error: There was an error submitting one of the Image. Go to "Manage Product" to fix it.';
             }else{
                 // New product mail to be sent to the seller
+                $this->session->unset_userdata('category_id');
                 $return['status'] = 'success';
                 $return['message'] = 'Success: Your product has been created, awaiting reviews and approval. You will be notified via email.';
             }
