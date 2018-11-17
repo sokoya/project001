@@ -52,33 +52,42 @@ class Product extends CI_Controller{
         if( $this->session->has_userdata('category_id') ){
             $sub_id = $this->session->userdata('category_id');
             $spec_result  = $this->seller->get_parent_details($sub_id);
-            $specification_array = array();
+
+
+            $specification_array = $categories_name = array();
+
 
             // var_dump( $spec_result ); exit;
-            foreach( $spec_result as $result ){
-                $res['category_name'] = $result->name;
-                $res['description'] = $result->description;
-
-                if( !empty($result->specifications) ) {
+            foreach( $spec_result as $result ){               
+                $categories_name[] = $result->name;
+                if( $result->specifications !== '' ) {
                     $decode = json_decode( $result->specifications );
                     $x = 0;
+                    // var_dump( $decode);
+                    $spec_array = array();
                     foreach( $decode as $key => $value ) {
+
                         $specification = $this->seller->get_specifications( $value ); 
                         if( $specification ) {
-                            $res['specifications'][$x]['spec_id']  = $value;
-                            $res['specifications'][$x]['spec_name'] = $specification->spec_name;
-                            $res['specifications'][$x]['spec_options'] = $specification->options;
-                            $res['specifications'][$x]['multiple_options'] = $specification->multiple_options;
-                            $res['specifications'][$x]['spec_description'] = $specification->description;
+                            $spec_array['category_name'] = $result->name;
+                            $spec_array['description'] = $result->description;
+                            $spec_array['specifications'][$x]['spec_id']  = $value;
+                            $spec_array['specifications'][$x]['spec_name'] = $specification->spec_name;
+                            $spec_array['specifications'][$x]['spec_options'] = $specification->options;
+                            $spec_array['specifications'][$x]['multiple_options'] = $specification->multiple_options;
+                            $spec_array['specifications'][$x]['spec_description'] = $specification->description;
+                            $x++;
+
                         }
-                        $x++;
                     }
-                    $res = array_map("unserialize", array_unique(array_map("serialize", $res)));                    
-                    array_push( $specification_array, $res);
-                    // next($spec_result);
+                        array_push( $specification_array, $spec_array);
                 }
+                
+
             }
 
+            // var_dump( $specification_array ); exit;
+            $page_data['categories_name'] = $categories_name;
             $page_data['features'] = $specification_array;
 
             // Check if post method
