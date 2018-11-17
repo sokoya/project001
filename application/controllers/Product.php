@@ -85,10 +85,12 @@ class Product extends CI_Controller {
 		$page_data['products'] = $this->product->get_products($array, $this->input->get());
 		$page_data['brands'] = $this->product->get_brands($str);
 		$page_data['colours'] = $this->product->get_colours($str);
-		$page_data['sub_categories'] = $this->product->get_sub_categories($str);
+		$page_data['sub_categories'] = $this->product->get_categories($str);
 		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
 		$page_data['description'] = $this->product->category_description($str);
         $page_data['page'] = 'category';
+
+        // var_dump( $page_data['products']); exit();
 		
 		if( !$this->agent->is_mobile()){
 			$this->load->view('landing/category', $page_data);

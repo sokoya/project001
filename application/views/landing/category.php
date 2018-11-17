@@ -166,42 +166,42 @@
 							</div>
 						<?php endif; ?>
 						<!-- Features -->
-						<div class="category-filters-section">
-							<?php foreach ($features
-
-							as $feature => $feature_value) : ?>
-							<div class="accordion" id="<?= trim($feature); ?>">
-								<div class="panel no-outline feature-attribute">
-									<div class="panel-header feature-attribute">
-										<div class="panel-title" data-toggle="collapse"
-											 data-target="#<?= trim($feature) . '-1'; ?>" aria-expanded="true"
-											 aria-controls="<?= trim($feature) . '-1'; ?>">
-											<h3 class="widget-title-sm custom-widget-text tree-root">
-												<?= preg_replace("/[^A-Za-z 0-9]/", ' ', $feature); ?>
-											</h3>
+						<?php if($features ) : ?>
+							<div class="category-filters-section">
+								<?php $x = 1; foreach ($features as $feature => $feature_value) : ?>
+								<div class="accordion" id="<?= trim($feature); ?>">
+									<div class="panel no-outline feature-attribute">
+										<div class="panel-header feature-attribute">
+											<div class="panel-title" data-toggle="collapse"
+												 data-target="#<?= trim($feature) . '-1'; ?>" aria-expanded="true"
+												 aria-controls="<?= trim($feature) . '-1'; ?>">
+												<h3 class="widget-title-sm custom-widget-text tree-root">
+													<?= preg_replace("/[^A-Za-z 0-9]/", ' ', $feature); ?>
+												</h3>
+											</div>
 										</div>
-									</div>
-									<div id="<?= trim($feature) . '-1'; ?>" class="collapse"
-										 aria-labeledby="<?= $feature; ?>" data-parent="#<?= trim($feature); ?>">
-										<div class="panel-body">
-											<?php foreach ($feature_value as $key => $value) : ?>
-												<div class="carrito-checkbox">
-													<label class="tree-input">
-														<input class="filter" type="checkbox" name="filterset"
-															   data-type="<?= trim($feature); ?>"
-															   data-value="<?= trim(preg_replace("/[^A-Za-z0-9-]/", '_', $value)) ?>"/><?= $value; ?>
-														<span class="checkmark"></span>
-													</label>
-												</div>
+										<div id="<?= trim($feature) . '-1'; ?>" class="collapse"
+											 aria-labeledby="<?= $feature; ?>" data-parent="#<?= trim($feature); ?>">
+											<div class="panel-body">
+												<?php foreach ($feature_value as $key => $value) : ?>
+													<div class="carrito-checkbox">
+														<label class="tree-input">
+															<input class="filter" type="checkbox" name="filterset"
+																   data-type="<?= trim($feature); ?>"
+																   data-value="<?= trim(preg_replace("/[^A-Za-z0-9-]/", '_', $value)) ?>"/><?= $value; ?>
+															<span class="checkmark"></span>
+														</label>
+													</div>
 
-											<?php endforeach; ?>
+												<?php endforeach; ?>
+											</div>
 										</div>
+										<hr class="tree-line"/>
 									</div>
-									<hr class="tree-line"/>
+									<?php endforeach; ?>
 								</div>
-								<?php endforeach; ?>
 							</div>
-						</div>
+						<?php endif; ?>
 					</aside>
 				</div>
 

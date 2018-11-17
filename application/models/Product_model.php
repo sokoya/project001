@@ -44,7 +44,7 @@ Class Product_model extends CI_Model{
 
     // To get the respective categories or sub
     // Function used for the category page
-    function get_sub_categories( $str = ''){
+    function get_categories( $str = ''){
         // Get all the i
         $array = $this->slug($str);
         $query = $this->db->query("SELECT name FROM categories WHERE id IN ('". implode("','",$array). "') LIMIT 10 ");
@@ -243,6 +243,8 @@ Class Product_model extends CI_Model{
 
             $array = $this->slug($queries['str']);
             $select_query .= " WHERE p.category_id IN ('".implode("','",$array)."')";
+
+            // die($select_query);
             if( count($gets) ){
                 // check for brand name
                 if( isset($gets['brand_name']) && !empty($gets['brand_name'])) {
