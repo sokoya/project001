@@ -61,20 +61,11 @@
 												<?php endforeach; ?>
 											</select>
 										</div>
-
-										<!--                                                <div class="col-md-12" style="margin-bottom: 20px;">-->
-										<!--                                                    <h5 style="color: #232323;">Select Category</h5>-->
-										<!--                                                    <select class="subcat form-control" name="category" required></select>-->
-										<!--                                                </div>-->
-										<!---->
-										<!--                                                <div class="col-md-12" style="margin-bottom: 20px;">-->
-										<!--                                                    <h5 style="color: #232323;">Select Sub Category</h5>-->
-										<!--                                                    <select class="cat form-control" name="subcategory" required></select>-->
-										<!--                                                </div>-->
 									</div>
 									<h4 class="selected-product-c" style="font-weight: 700; display: none">Selected
 										<span
 											class="selected-product"></span></h4>
+                                    <input type="hidden" name="category_id" id="category_id" value="">
 									<button class="btn btn-primary btn-block smt-btn" style="margin-top: 40px;"
 											disabled>Submit
 									</button>
@@ -165,7 +156,7 @@
 					</div>
             	`);
 
-			$(`.n-cat-${rid}-${msg[0].id}`).append("<option>-- Please select a sub category --</option>");
+			$(`.n-cat-${rid}-${msg[0].id}`).append("<option> -- Please select a sub category -- </option>");
 			$.each(msg, function (i) {
 				$(`.n-cat-${rid}-${msg[0].id}`).append(`<option data-next='${msg[i].has_child}' value="${msg[i].id}">${msg[i].name}</option>`);
 			});
@@ -187,8 +178,10 @@
 			$('.selected-product-c').show();
 			$('.smt-btn').prop('disabled', false);
 			$('.selected-product').html($(this).find(':selected').text());
-		} else {
+            let category_id = $(this).find(':selected').val();
+            $('#category_id').val(category_id);
 
+		} else {
 			$.ajax({
 				method: "POST",
 				url: base_url + 'seller/product/append_category',

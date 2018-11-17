@@ -512,6 +512,74 @@
 															</div>
 														</div>
 													</div>
+													<?php if( !empty( $features )):
+															$y = 1;
+															foreach( $features as  $feature ) :
+													?>
+															<div class="panel">
+															<!--Accordion title-->
+															<div class="panel-heading">
+																<h4 class="panel-title text-dark">
+																	<a data-parent="#accordion" data-toggle="collapse"
+																	   href="#<?= $y; ?>"><?= $feature['category_name']; ?> Attribute<span
+																			class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span></a>
+																</h4>
+															</div>
+															<!--Accordion content-->
+															<div class="panel-collapse " id="<?= $y; ?>">
+																<div class="panel-body">
+																	<?php $x = 1;
+																	foreach ($feature['specifications'] as $specification) : ?>
+																		<div class="form-group">
+																			<label
+																				class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label"><?= ucwords($specification['spec_name']); ?></label>
+																			<div
+																				class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
+																				<?php if (!empty($specification['spec_options'])) :
+																					$options = json_decode($specification['spec_options']);
+																					?>
+																					<select class="selectpicker"
+																						<?php if ($specification['multiple_options']) {
+																							echo 'name="attribute_' . str_replace(' ', '-', $specification["spec_name"]) . '[]"';
+																							echo ' multiple';
+																						} else {
+																							echo 'name="attribute_' . str_replace(' ', '-', $specification["spec_name"]) . '"';
+																						} ?>
+																							title="<?= $specification['spec_description']; ?>"
+																							data-width="100%">
+																						<?php foreach ($options as $key => $value) : ?>
+																							<option
+																								value="<?= trim($value); ?>"><?= ucwords(trim($value)); ?></option>
+																						<?php endforeach; ?>
+																					</select>
+																				<?php else: ?>
+																					<input type="text"
+																						   placeholder="<?= $specification['spec_name']; ?>"
+																						   name="attribute_<?= str_replace(' ', '-', $specification['spec_name']); ?>"
+																						   class="form-control">
+																				<?php endif; ?>
+																				<span
+																					class="text-sm text-dark"><?= $specification['spec_description']; ?></span>
+																			</div>
+																			<div
+																				class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+																				<a href="javascript:;"
+																				   title="<?= ucwords($specification['spec_name']); ?>"
+																				   data-placement="bottom"
+																				   data-toggle="popover" tabindex="-1"
+																				   data-trigger="focus"
+																				   data-content="<?= $specification['spec_description']; ?>">
+																					<i class="demo-pli-question help_text"
+																					   title="Help Text"></i> </a>
+																			</div>
+																		</div>
+																		<?php $x++; endforeach; ?>
+																</div>
+															</div>
+															<!--/Accordion content-->
+														</div>
+
+													<?php endforeach; $y++; endif; ?>
 													<?php
 													if (isset($specifications) && !empty($specifications)) :
 														?>

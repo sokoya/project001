@@ -26,7 +26,8 @@ class Product extends CI_Controller{
     public function index(){
         if( $this->input->post('category_id') ){
             $category_id =  $this->input->post('category_id');
-            $this->session->set_userdata( $category_id) ;
+
+            $this->session->set_userdata(array('category_id' => $category_id)) ;
             redirect('seller/product/create');
         }else{
             // Unset the category
@@ -52,23 +53,33 @@ class Product extends CI_Controller{
             $sub_id = $this->session->userdata('category_id');
             $spec_result  = $this->seller->get_parent_details($sub_id);
             $specification_array = array();
-            foreach( $rspec_result as $result ){
+
+            // var_dump( $spec_result ); exit;
+            foreach( $spec_result as $result ){
                 $res['category_name'] = $result->name;
                 $res['description'] = $result->description;
+
                 if( !empty($result->specifications) ) {
-                    $decode = json_decode($result->specifications);
+                    $decode = json_decode( $result->specifications );
                     $x = 0;
                     foreach( $decode as $key => $value ) {
-                        $specification = $this->seller->get_specifications( $value );
-                        $res['specifications'][$x]['spec_id']  = $value;
-                        $res['specifications'][$x]['spec_name'] = $specification->spec_name;
-                        $res['specifications'][$x]['spec_options'] = $specification->options;
-                        $res['specifications'][$x]['spec_description'] = $specification->description;
+                        $specification = $this->seller->get_specifications( $value ); 
+                        if( $specification ) {
+                            $res['specifications'][$x]['spec_id']  = $value;
+                            $res['specifications'][$x]['spec_name'] = $specification->spec_name;
+                            $res['specifications'][$x]['spec_options'] = $specification->options;
+                            $res['specifications'][$x]['multiple_options'] = $specification->multiple_options;
+                            $res['specifications'][$x]['spec_description'] = $specification->description;
+                        }
                         $x++;
-                    }                    
+                    }
+                    $res = array_map("unserialize", array_unique(array_map("serialize", $res)));                    
+                    array_push( $specification_array, $res);
+                    // next($spec_result);
                 }
-                array_push( $specification_array, $res);
             }
+
+            $page_data['features'] = $specification_array;
 
             // Check if post method
             $uid = base64_decode($this->session->userdata('logged_id'));

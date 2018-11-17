@@ -183,7 +183,7 @@ Class Seller_model extends CI_Model{
     function parent_slug_top( $id ){
         // Select category
         $GLOBALS['array_variable'] = array();
-        $select_category = "SELECT pid, slug FROM dummy_table WHERE id = {$id}";
+        $select_category = "SELECT pid, slug FROM categories WHERE id = {$id}";
         $result = $this->db->query($select_category);
         if( $result->num_rows() >= 1 ){
             $pid = $result->row()->pid;
@@ -193,7 +193,7 @@ Class Seller_model extends CI_Model{
             $new_array = array();
             foreach( $it as $v ){ array_push( $new_array, $v); }
             array_push( $new_array, $id ); // Lets push its own ID also
-            // return $new_array;
+            return $new_array;
         }else{
             return $GLOBALS['array_variable'];
         }
@@ -201,11 +201,20 @@ Class Seller_model extends CI_Model{
     }
 
     /*
+        Return an object (name, slug, description, specifications) of all the parent of a category
+    */
+    function get_parent_details( $id ){
+        $array = $this->parent_slug_top( $id );
+        return $this->db->query("SELECT name, slug, description, specifications FROM categories WHERE id IN ('".implode("','",$array)."')")->result();
+    }
+
+
+    /*
     *Called by the parent_slug top, helps to generate the parent id
     */
     function parent_recurssive( $pid ){
         $category_pid = $pid;
-        $total_categories = $this->db->get('dummy_table')->result_array();
+        $total_categories = $this->db->get('categories')->result_array();
         $count = count( $total_categories );
 
         $data = array();
@@ -282,7 +291,7 @@ Class Seller_model extends CI_Model{
     function get_specifications( $spec_id ){
         
         $this->db->select('spec_name,options,multiple_options,description');
-        $this->db->where('id', $key);
+        $this->db->where('id', $spec_id);
         $result = $this->db->get('specifications')->row();
         return $result;
     }
