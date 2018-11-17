@@ -50,7 +50,26 @@ class Product extends CI_Controller{
         // check if we have the category session set
         if( $this->session->has_userdata('category_id') ){
             $sub_id = $this->session->userdata('category_id');
-            $page_data['specifications'] = $this->seller->get_specification($sub_id);
+            $spec_result  = $this->seller->get_parent_details($sub_id);
+            $specification_array = array();
+            foreach( $rspec_result as $result ){
+                $res['category_name'] = $result->name;
+                $res['description'] = $result->description;
+                if( !empty($result->specifications) ) {
+                    $decode = json_decode($result->specifications);
+                    $x = 0;
+                    foreach( $decode as $key => $value ) {
+                        $specification = $this->seller->get_specifications( $value );
+                        $res['specifications'][$x]['spec_id']  = $value;
+                        $res['specifications'][$x]['spec_name'] = $specification->spec_name;
+                        $res['specifications'][$x]['spec_options'] = $specification->options;
+                        $res['specifications'][$x]['spec_description'] = $specification->description;
+                        $x++;
+                    }                    
+                }
+                array_push( $specification_array, $res);
+            }
+
             // Check if post method
             $uid = base64_decode($this->session->userdata('logged_id'));
             $page_data['page_title'] = 'Add product';
