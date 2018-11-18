@@ -28,13 +28,7 @@
 					<li><a href="#">Home</a>
 					</li>
 					<li>
-						<a href="<?= base_url('catalog/' . urlify($product->rootcategory)); ?>"><?= ucwords($product->rootcategory); ?></a>
-					</li>
-					<li>
-						<a href="<?= base_url('catalog/' . urlify($product->category)); ?>"><?= ucwords($product->category); ?></a>
-					</li>
-					<li>
-						<a href="<?= base_url('catalog/' . urlify($product->subcategory)); ?>"><?= ucwords($product->subcategory); ?></a>
+						<a href="<?= base_url('catalog/' . $category_detail->slug ); ?>"><?= ucwords($category_detail->name); ?></a>
 					</li>
 					<li class="active c-a-brc"><?= ucwords($product->product_name); ?></li>
 				</ol>

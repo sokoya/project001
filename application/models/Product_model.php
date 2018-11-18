@@ -212,6 +212,13 @@ Class Product_model extends CI_Model{
         }
     }
 
+    // Get category details by its id
+    function single_category_detail( $id ){
+        $this->db->select('description, name, title, slug');
+        $this->db->where('id', $id);
+        return $this->db->get('categories')->row();
+    }
+
 
     // Get a slpecific category id by its slug
     function category_id( $slug ){
@@ -224,8 +231,6 @@ Class Product_model extends CI_Model{
     */
     function get_parent_details( $id ){
         $array = $this->parent_slug_top( $id );
-        var_dump( $array );
-        exit;
         return $this->db->query("SELECT name, slug, description, specifications FROM categories WHERE id IN ('".implode("','",$array)."')")->result();
     }
 
@@ -312,12 +317,12 @@ Class Product_model extends CI_Model{
         // Get the category of this product
         $this->db->select('category_id');
         $this->db->where('id', $id);
-        $product_detail_category_id = $this->db->get('products')->row()->id;
+        $product_detail_category_id = $this->db->get('products')->row()->category_id;
         $select_query = "SELECT p.id,p.views, p.product_name, v.sale_price, v.discount_price,g.image_name
             FROM products p                        
             JOIN product_variation AS v ON (p.id = v.product_id) 
             JOIN product_gallery AS g ON (p.id = g.product_id AND g.featured_image = 1) 
-            WHERE p.id != '$id' AND p.category_id = '$product_detail_category_id'
+            WHERE p.id != '$id' AND p.category_id = '{$product_detail_category_id}'
             GROUP BY p.id ORDER BY RAND() LIMIT 4";
         $result = $this->db->query( $select_query )->result();
         return $result;

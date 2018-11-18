@@ -282,7 +282,7 @@
 												<span
 													class="text-sm pull-right"><strong>Seller: </strong><?= ucfirst($product->first_name); ?></span>
 											</ul>
-											<h5 class="cs-title"><?= word_limiter(ucwords($product->product_name), 7, '...'); ?></h5>
+											<h5 class="cs-title"><?= character_limiter(ucwords($product->product_name), 10, '...'); ?></h5>
 											<div class="product-caption-price">
 												<?php if (!empty($product->discount_price)) : ?>
 													<span>

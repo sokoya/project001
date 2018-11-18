@@ -23,8 +23,10 @@ class Product extends CI_Controller {
 		$page_data['favourited'] = $this->product->is_favourited(base64_decode($this->session->userdata('logged_id')), $index);
 		$page_data['likes'] = $this->product->get_also_likes($index);
 		$page_data['title'] = preg_replace("/[^A-Za-z0-9]/", " ", $uri);
-		$page_data['keywords'] = $page_data['title'] . ' , ' . $page_data['product']->rootcategory . ', ' . $page_data['product']->subcategory . ', ' . $page_data['product']->category . ' ,' . $page_data['product']->brand_name;
-		$page_data['description'] = $this->product->get_category_detail($page_data['product']->rootcategory, 'root_category')->description;
+		$page_data['category_detail'] = $this->product->single_category_detail($page_data['product']->category_id);
+
+		$page_data['description'] = $page_data['category_detail']->description;
+		$page_data['keywords'] = $page_data['title'] . ' , ' . $page_data['product']->brand_name;
 		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
 		// $this->add_count($index);
         $page_data['page'] = 'product';
