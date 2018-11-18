@@ -97,7 +97,7 @@
 					<ol class="breadcrumb page-breadcrumb">
 						<li><a href="<?= base_url(); ?>">Home</a>
 						</li>
-						<li class="active"><?= ucwords($searched); ?>
+						<li class="active"><?= ucwords($category_detail->name); ?>
 						</li>
 					</ol>
 					<div class="category-selections clearfix">
@@ -107,7 +107,7 @@
 				</header>
 			</div>
 			<div class="cat-notify">
-				<p class="n-head"><?= $searched; ?></p>
+				<p class="n-head"><?= $category_detail->name; ?></p>
 				<p class="n-body"><strong><?= number_format(count($products)) . ' results'; ?></strong></p>
 			</div>
 			<div class="row">
@@ -282,7 +282,7 @@
 												<span
 													class="text-sm pull-right"><strong>Seller: </strong><?= ucfirst($product->first_name); ?></span>
 											</ul>
-											<h5 class="cs-title"><?= character_limiter(ucwords($product->product_name), 10, '...'); ?></h5>
+											<h5 class="cs-title"><?= character_limiter(ucwords($product->product_name), 20, '...'); ?></h5>
 											<div class="product-caption-price">
 												<?php if (!empty($product->discount_price)) : ?>
 													<span>

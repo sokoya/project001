@@ -58,23 +58,6 @@ Class Product_model extends CI_Model{
     }
 
 
-    // Category Description for SEO
-    function category_description( $str = '', $search_like = '' ){
-        $result = '';
-        if( $str != '' ){
-            if( $this->check_slug_availability( $str ) ){
-               $id = $this->category_id( $str);
-                $select = "SELECT description FROM categories WHERE id = {$id} LIMIT 1";
-                $result = $this->db->query($select)->row()->description;
-                return $result;
-            }
-        }else{
-            // That means its coming from search
-            $query = "SELECT c.description, p.id FROM products p LEFT JOIN categories c ON (c.id = p.category_id) WHERE p.product_name LIKE '%{$search_like}%' LIMIT 1";
-            return $this->db->query( $query )->row()->description;
-        }
-    }
-
     // Get single variation
     function get_variation( $id = ''){
         return $this->db->query('SELECT * FROM product_variation WHERE product_id = ? LIMIT 1', $id)->row();
@@ -219,6 +202,21 @@ Class Product_model extends CI_Model{
         return $this->db->get('categories')->row();
     }
 
+    // Category Description for SEO Used for Catalog and Search Controller
+    function category_details( $str = '', $search_like = '' ){
+        $result = '';
+        if( $str != '' ){
+            if( $this->check_slug_availability( $str ) ){
+                $select = "SELECT description, name, title FROM categories WHERE slug = '{$str}' LIMIT 1";
+                $result = $this->db->query($select)->row();
+                return $result;
+            }
+        }else{
+            // That means its coming from search
+            $query = "SELECT c.description,c.name,c.title, p.id FROM products p LEFT JOIN categories c ON (c.id = p.category_id) WHERE p.product_name LIKE '%{$search_like}%' LIMIT 1";
+            return $this->db->query( $query )->row();
+        }
+    }
 
     // Get a slpecific category id by its slug
     function category_id( $slug ){

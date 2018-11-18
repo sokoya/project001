@@ -22,10 +22,10 @@ class Product extends CI_Controller {
 		$page_data['gallery'] = $this->product->get_gallery($index);
 		$page_data['favourited'] = $this->product->is_favourited(base64_decode($this->session->userdata('logged_id')), $index);
 		$page_data['likes'] = $this->product->get_also_likes($index);
-		$page_data['title'] = preg_replace("/[^A-Za-z0-9]/", " ", $uri);
 		$page_data['category_detail'] = $this->product->single_category_detail($page_data['product']->category_id);
 
 		$page_data['description'] = $page_data['category_detail']->description;
+		$page_data['title'] = $page_data['category_detail']->name;
 		$page_data['keywords'] = $page_data['title'] . ' , ' . $page_data['product']->brand_name;
 		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
 		// $this->add_count($index);
@@ -40,10 +40,9 @@ class Product extends CI_Controller {
 	public function catalog(){
 		$str = $this->uri->segment(2);
 		$str = preg_replace("/[^A-Za-z0-9-]/", "", cleanit($str));
-		$page_data['searched'] = preg_replace("/[^A-Za-z0-9]/", " ", cleanit($str)); // Convert the - to space
+		
 		$str = cleanit($str);
 		if ($str == '') redirect(base_url());
-		$page_data['title'] = ucwords($str);
 		$features = $this->product->get_features($str);
 		$output_array = array();
 		if( $features ) {
@@ -89,7 +88,9 @@ class Product extends CI_Controller {
 		$page_data['colours'] = $this->product->get_colours($str);
 		$page_data['sub_categories'] = $this->product->get_categories($str);
 		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
-		$page_data['description'] = $this->product->category_description($str);
+		$page_data['category_detail'] = $this->product->category_details($str);
+		$page_data['description'] = $page_data['category_detail']->description;
+		$page_data['title'] = 'Buy ' . $page_data['category_detail']->title;
         $page_data['page'] = 'category';
 
         // var_dump( $page_data['products']); exit();
@@ -263,9 +264,13 @@ class Product extends CI_Controller {
         $page_data['products'] = $this->product->get_search_products($array, $this->input->get());
         $page_data['brands'] = $this->product->get_brands($category, $product_name);
         $page_data['colours'] = $this->product->get_colours($category, $product_name);
-        $page_data['sub_categories'] = $this->product->get_sub_categories($category);
+        $page_data['sub_categories'] = $this->product->get_categories($category);
         $page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
-        $page_data['description'] = $this->product->category_description($category);
+
+        $page_data['category_detail'] = $this->product->category_details($category);
+		$page_data['description'] = $page_data['category_detail']->description;
+		$page_data['title'] = $page_data['category_detail']->title;
+
         $page_data['page'] = 'seacch';
         $this->pagination->initialize($config);
         $this->load->library('user_agent');

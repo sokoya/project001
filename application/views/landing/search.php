@@ -96,7 +96,7 @@
 					<ol class="breadcrumb page-breadcrumb">
 						<li><a href="<?= base_url(); ?>">Home</a>
 						</li>
-						<li class="active"><?= ucwords($searched); ?>
+						<li class="active">Product matching "<?= $searched; ?>"
 						</li>
 					</ol>
 					<div class="category-selections clearfix">
@@ -281,7 +281,7 @@
 												<span
 													class="text-sm pull-right"><strong>Seller: </strong><?= ucfirst($product->first_name); ?></span>
 											</ul>
-											<h5 class="cs-title"><?= word_limiter(ucwords($product->product_name), 7, '...'); ?></h5>
+											<h5 class="cs-title"><?= character_limiter(ucwords($product->product_name), 20, '...'); ?></h5>
 											<div class="product-caption-price">
 												<?php if (!empty($product->discount_price)) : ?>
 													<span>
