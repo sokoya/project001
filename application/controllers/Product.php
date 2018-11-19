@@ -39,8 +39,7 @@ class Product extends CI_Controller {
 	// List Product Page
 	public function catalog(){
 		$str = $this->uri->segment(2);
-		$str = preg_replace("/[^A-Za-z0-9-]/", "", cleanit($str));
-		
+		$str = preg_replace("/[^A-Za-z0-9\-]/", "", cleanit($str));		
 		$str = cleanit($str);
 		if ($str == '') redirect(base_url());
 		$features = $this->product->get_features($str);

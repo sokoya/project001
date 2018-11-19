@@ -89,37 +89,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 // Database Table
 defined('DB_NAME')		OR define('DB_NAME', 'carrito');
 
+// General Settings
 
-/*
-|--------------------------------------------------------------------------
-| General Settings Constant
-|--------------------------------------------------------------------------
-|
-| Used across all site
-| 
-| 
-|
-| The three main conventions used for determining exit status codes
-| are as follows:
-|
-|    Standard C/C++ Library (stdlibc):
-|       http://www.gnu.org/software/libc/manual/html_node/Exit-Status.html
-|       (This link also contains other GNU-specific conventions)
-|    BSD sysexits.h:
-|       http://www.gsp.com/cgi-bin/man.cgi?section=3&topic=sysexits
-|    Bash scripting:
-|       http://tldp.org/LDP/abs/html/exitcodes.html
-|
-*/
+// defined('FACEBOOK_LINK') OR define('FACEBOOK_LINK', $this->config->item('facebook_link'));
 
-// Make some constant variables based on Settings
-if (!function_exists('general_settings')){
-    function general_settings(){
-        $CI =& get_instance();
-        $CI->db->from('general_settings');
-        return $CI->db->get()->row();
-    }
-}
-defined('INSTAGRAM_LINK') OR define('INSTAGRAM_LINK', general_settings()->instagram_link);
-defined('FACEBOOK_LINK') OR define('FACEBOOK_LINK', general_settings()->facebook_link);
-defined('TWITTER_LINK') OR define('TWITTER_LINK', general_settings()->twitter_link);
