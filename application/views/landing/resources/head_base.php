@@ -24,17 +24,15 @@
     <link rel="canonical" href="<?= current_url(); ?>"/>
 
     <?php if( $page == 'product' ) :?>
-        <meta property="og:title" content="<?= $product->product_name; ?>" />
-        <meta property="og:type" content="product" />
-        <meta property="og:image"  content="<?= ($featured_image->image_name) ? base_url('data/products/'.$product->id.'/'. $featured_image->image_name) : ''; ?>" />
-        <meta property="og:desciption" content="<?= $description; ?>" />
-        <meta property="og:site_name" content="Onitsha Market" />
-        <meta property="og:url" content="<?= current_url(); ?>" />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:site" content="<?= lang('app_name'); ?>" />
-        <meta name="twitter:creator" content="" />
-
-
+    <meta property="og:title" content="<?= $product->product_name; ?>" />
+    <meta property="og:type" content="product" />
+    <meta property="og:image"  content="<?= ($featured_image->image_name) ? base_url('data/products/'.$product->id.'/'. $featured_image->image_name) : ''; ?>" />
+    <meta property="og:desciption" content="<?= $description; ?>" />
+    <meta property="og:site_name" content="<?= lang('app_name'); ?>" />
+    <meta property="og:url" content="<?= current_url(); ?>" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="<?= lang('app_name'); ?>" />
+    <meta name="twitter:creator" content="" />
     <?php endif;?>
     <style>
         .mgt_drop_menu>li{

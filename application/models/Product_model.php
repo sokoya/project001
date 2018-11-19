@@ -353,6 +353,7 @@ Class Product_model extends CI_Model{
             if( $this->check_slug_availability($category)) {
                 $id = $this->category_id( $category);
                 $select_query .= " WHERE p.category_id = {$id}";
+                return $this->db->query( $select_query )->result();
             }
         }
         
@@ -379,6 +380,7 @@ Class Product_model extends CI_Model{
             if( $this->check_slug_availability( $category )) {
                 $id = $this->category_id( $category);
                 $select_query .= " WHERE category_id = {$id}";
+                return $this->db->query( $select_query )->result();
             }
         }
         return '';
