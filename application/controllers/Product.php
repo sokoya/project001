@@ -270,7 +270,7 @@ class Product extends MY_Controller {
 		$page_data['description'] = $page_data['category_detail']->description;
 		$page_data['title'] = $page_data['category_detail']->title;
 
-        $page_data['page'] = 'seacch';
+        $page_data['page'] = 'search';
         $this->pagination->initialize($config);
         $this->load->library('user_agent');
         if( !$this->agent->is_mobile()){
