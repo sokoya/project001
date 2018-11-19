@@ -7524,3 +7524,132 @@ input[type="color"]:focus,
 .notification > i {
 	margin-right: 15px;
 }
+
+.filterbar {
+	height: 100%;
+	width: 100%;
+	display: none;
+	position: fixed;
+	z-index: 999999;
+	top: 0;
+	left: 0;
+	background-color: #f4f4f4;
+	overflow-x: hidden;
+	padding-top: 45px;
+	/*transition: 0.5s;*/
+}
+
+.top_menu {
+
+	font-family: "Open Sans", cursive;
+	font-weight: 600;
+	position: relative;
+	top: -45px;
+}
+
+.top_menu > p {
+	margin: 0;
+	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+	color: #333;
+	font-size: 18px;
+}
+
+.filterbar a {
+	padding: 8px 8px 8px 10px;
+	text-decoration: none;
+	font-size: 25px;
+	color: #2e2e2e;
+	display: block;
+	transition: 0.3s;
+}
+
+.filterbar a:hover {
+	color: #424242;
+}
+
+.filterbar .update_filter {
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 36px;
+	margin-left: 50px;
+}
+
+.filter_close_btn {
+	font-weight: 400 !important;
+	color: #838383;
+	cursor: pointer;
+}
+
+@media screen and (max-height: 450px) {
+	.filterbar {
+		padding-top: 15px;
+	}
+
+	.filterbar a {
+		font-size: 18px;
+	}
+}
+
+.w-bg {
+	background: #fff;
+	padding: 10px 5px;
+	-webkit-box-shadow: 0px 5px 5px 0px rgba(176, 177, 193, 0.1);
+	box-shadow: 0px 5px 5px 0px rgba(176, 177, 193, 0.1)
+}
+
+.update_fil {
+	position: relative !important;
+	bottom: 5px !important;
+	font-size: 14px !important;
+	font-weight: 600 !important;
+	cursor: pointer !important;
+	color: #0b6427 !important;
+	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+}
+
+.filter-head {
+	background: #fff !important;
+	margin-top: -10px;
+	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+	color: #333;
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.filter-first {
+	margin-top: -38px;
+}
+
+.price_min, .price_max {
+	outline: none;
+	border: 1px solid #6b6b6b !important;
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+
+.price-submit {
+	padding: 5px 25px 5px;
+	background: #fff;
+	border: 1px solid #0b6427;
+	color: #0b6427;
+}
+
+.price-submit:hover {
+	color: #fff;
+	background: #0b6427;
+}
+.panel-line{
+	border-top: 1px solid #e1e1e1 !important;
+	margin: 0 -16px 8px;
+}
+
+.list-label{
+	font-weight: 700;
+	color: #636363;
+	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
