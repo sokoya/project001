@@ -78,7 +78,17 @@
 	<?php $this->load->view('landing/resources/head_img') ?>
 	<?php $this->load->view('landing/resources/head_category'); ?>
 	<?php $this->load->view('landing/resources/head_menu'); ?>
-
+    <?php if (empty($products)) : ?>
+        <div class="container">
+            <div class="row">
+                <div class="gap-large"></div>
+                <h2 class="text-center">Oops! Sorry, we couldn't find products on this section.</h2>
+                <p class="text-muted text-sm text-center">You can browse for more product <a
+                        style="text-decoration: none; color: #0b6427;" href="<?= base_url(); ?>">Find
+                        product</a></p>
+            </div>
+        </div>
+    <?php else : ?>
 	<div class="container">
 		<header class="page-header">
 			<ol class="breadcrumb page-breadcrumb">
@@ -432,6 +442,7 @@
 			</div>
 		</div> <!-- // row -->
 	</div>
+    <?php endif; ?>
 	<div class="gap"></div>
 
 	<?php $this->load->view('landing/resources/footer'); ?>
@@ -452,10 +463,9 @@
 <script>
 	$(document).ready(function () {
 		let _category_body = $('#category_body');
-
 		function doReplaceState(url) {
 			let state = {current_url: url},
-				title = "Carrito MarketPlace";
+				title = "Onitshamarket";
 			history.replaceState(state, title, url);
 		}
 

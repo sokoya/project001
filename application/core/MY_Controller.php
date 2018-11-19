@@ -10,5 +10,6 @@ class MY_Controller extends CI_Controller {
 		define('INSTAGRAM_LINK', $general_settings->instagram_link);
 		define('TWITTER_LINK', $general_settings->twitter_link);
 		define('DESCRIPTION', $general_settings->description);
+		define('KEYWORD', $general_settings->keywords);
 	}
 }

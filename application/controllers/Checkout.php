@@ -12,7 +12,8 @@ class Checkout extends MY_Controller
 			$this->session->set_userdata('referred_from', current_url());
 			redirect('login');
 		}
-		if (empty($this->cart->total_items())) {
+		$items = $this->cart->total_items();
+		if (empty( $items )) {
 			redirect(base_url());
 		}
 	}
@@ -23,6 +24,7 @@ class Checkout extends MY_Controller
 		$this->load->model('user_model', 'user');
 		$page_data['user'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
 		$page_data['addresses'] = $this->user->get_user_billing_address($page_data['user']->id);
+//		$page_data['pickups'] = $this->user->get_pickup_address( $id )
 		$page_data['address_set'] = $this->user->is_address_set($page_data['user']->id);
 		$result = $this->user->get_default_address_price($page_data['user']->id);
 		$page_data['delivery_charge'] = (  !$result ) ? 500 : $result;
@@ -35,7 +37,8 @@ class Checkout extends MY_Controller
 				$this->cart->remove($product['rowid']);
 			}
 		}
-		if( empty($this->cart->total_items())) redirect( base_url() );
+		$items = $this->cart->total_items();
+		if( empty($items) ) redirect( base_url() );
 		$this->load->view('landing/checkout', $page_data);
 	}
 
