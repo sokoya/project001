@@ -267,10 +267,11 @@ Class Product_model extends CI_Model{
                 // Here comes the features
                 // check for get count again
                 if( count( $gets ) ){
+                    // $select_query .= " AND ";
                     foreach( $gets as $key => $value ){
                         $explode = explode(',', $value);
                         if( count($explode) > 1 ){
-                            $select_query .= " AND ( ";
+                            $select_query .= " OR ( ";
                             $array_value = array_values($explode);
                             $last = end($array_value);
                             $key = xss_clean( $key );
@@ -283,11 +284,11 @@ Class Product_model extends CI_Model{
                                     $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' OR";
                                 }
                             }
-    //                        $select_query .= " ) ";
+                           // $select_query .= " ) ";
                         }else{
                             $value = xss_clean($value);
                             $value = preg_replace("/[^A-Za-z.0-9-]/", ' ', $value);
-                            $select_query .= " OR (JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$value}%') ";
+                            $select_query .= " AND (JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$value}%') ";
                         }
                     }
                 }
@@ -295,11 +296,10 @@ Class Product_model extends CI_Model{
 
             if( $queries['is_limit'] == true ){
                 $select_query .=" AND p.product_status = 'approved' GROUP BY p.id LIMIT {$queries['offset']},{$queries['limit']} ";
-    //                     die( $select_query );
             }else{
                 $select_query .=" AND p.product_status = 'approved' GROUP BY p.id";
             }    
-//            die( $select_query );
+            // die( $select_query );
             $products_query = $this->db->query( $select_query )->result();
             // $this->db->cache_off();
             return $products_query;
