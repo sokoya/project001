@@ -524,8 +524,10 @@
 						}
 					});
 					// load_page(url);
-					url = `?category=&q=huaw${url}`;
-					console.log(url);
+					/*
+					* Appending search result and category to Url
+					* */
+					url = `?category=${category}&q=${search}${url}`;
 
 				});
 			} else {
