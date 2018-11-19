@@ -282,13 +282,68 @@
 					</div>
 				</div>
 
+				<!--Brands-->
+				<?php if (!empty($brands)): ?>
+					<div class="panel panel-default">
+						<div
+							class="panel-heading filter-head">Brand
+							<span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel"
+																					 aria-hidden="true"
+																					 data-target="brand_static_vl"></i></span>
+						</div>
+						<div class="panel-body" id="brand_static_vl">
+							<?php foreach ($brands as $brand) : ?>
+								<div class="carrito-checkbox">
+									<label class="list-label">
+										<input class="filter" type="checkbox" name="filterset"
+											   data-type="brand_name"
+											   data-value="<?= trim($brand->brand_name); ?>"/><?= ucfirst($brand->brand_name); ?>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+								<hr class="panel-line"/>
+							<?php endforeach; ?>
+						</div>
+					</div>
+				<?php endif; ?>
+
+				<!--Main Colour-->
+				<?php if (!empty($colours)) : ?>
+					<div class="panel panel-default">
+						<div
+							class="panel-heading filter-head">Main Colour
+							<span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel"
+																					 aria-hidden="true"
+																					 data-target="color_static_vl"></i></span>
+						</div>
+						<div class="panel-body" id="color_static_vl">
+							<?php foreach ($colours as $colour) : ?>
+								<div class="carrito-checkbox">
+									<label class="list-label">
+										<input class="filter" type="checkbox" name="filterset"
+											   data-type="main_colour"
+											   data-value="<?= trim($colour->colour_name); ?>"/><?= ucfirst($colour->colour_name); ?>
+										<span class="checkmark"></span>
+									</label>
+								</div>
+								<hr class="panel-line"/>
+							<?php endforeach; ?>
+						</div>
+					</div>
+				<?php endif; ?>
+
+				<!--Features-->
 				<?php if ($features) : ?>
 					<?php $x = 1;
 					foreach ($features as $feature => $feature_value) : ?>
 						<div class="panel panel-default">
 							<div
-								class="panel-heading filter-head"><?= preg_replace("/[^A-Za-z 0-9]/", ' ', $feature); ?></div>
-							<div class="panel-body">
+								class="panel-heading filter-head"><?= preg_replace("/[^A-Za-z 0-9]/", ' ', $feature); ?>
+								<span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel"
+																						 aria-hidden="true"
+																						 data-target="<?= $feature ?>_vl"></i></span>
+							</div>
+							<div class="panel-body" id="<?= $feature ?>_vl">
 								<?php foreach ($feature_value as $key => $value) : ?>
 									<div class="carrito-checkbox">
 										<label class="list-label">
@@ -469,10 +524,16 @@
 		});
 	});
 
+	$('.close-panel').on('click', function () {
+		let target = $(this).data('target');
+		$(this).toggleClass("fa-minus fa-plus");
+		$(`#${target}`).toggle()
+	});
+
 	$('.filter_close_btn').on('click', function () {
 		filterBarClose();
 	});
-	filterBarOpen();
+	// filterBarOpen();
 	$('.filter-btn').on('click', function () {
 		filterBarOpen();
 	});
