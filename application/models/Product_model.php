@@ -219,13 +219,15 @@ Class Product_model extends CI_Model{
     }
 
     // Get a slpecific category id by its slug
+    // return CI_row
     function category_id( $slug ){
-        $query = "SELECT id FROM categories WHERE slug = ?";
-        return $this->db->query( $query, $slug)->row()->id;
+        $query = "SELECT id FROM categories WHERE slug = ? OR name = ?";
+        return $this->db->query( $query, array($slug, $slug))->row()->id;
     }
 
     /*
         Return an object (name, slug, description, specifications) of all the parent of a category
+        return CI_result
     */
     function get_parent_details( $id ){
         $array = $this->parent_slug_top( $id );
@@ -234,6 +236,7 @@ Class Product_model extends CI_Model{
 
     // "SELECT column1 FROM table WHERE column1 IN ('".implode("','",$array)."')";
     // Main Category prouduct listings
+    // Return CI_results
     function get_products( $queries = '' , $gets = array() ){
         // $this->db->cache_on();
         // Lets confirm the slug is valid
@@ -311,6 +314,7 @@ Class Product_model extends CI_Model{
 
     // @param (id) - id of the present product
     // return objects
+
     function get_also_likes( $id = ''){
         // Get the category of this product
         $this->db->select('category_id');
@@ -325,8 +329,7 @@ Class Product_model extends CI_Model{
         $result = $this->db->query( $select_query )->result();
         return $result;
     }
-
-    
+   
 
 
     // Get products brands
@@ -416,6 +419,8 @@ Class Product_model extends CI_Model{
 
 
     // Get the status of variation
+    // Before checking out
+    // Return CI_row
     function get_variation_status( $id ){
         return $this->db->query("SELECT quantity, sale_price, discount_price, start_date, end_date FROM product_variation WHERE id = $id")->row();
     }
@@ -487,11 +492,12 @@ Class Product_model extends CI_Model{
     // Seacrh autocomplete query
     function search_query($search = '', $category =''){
         // $select = "SELECT product_name FROM products WHERE product_name LIKE '%{$search}%'";
+        $id = $this->category_id( $queries['category'] );
         $select  = "SELECT p.id, p.product_name, g.image_name, v.sale_price, v.discount_price FROM products p 
         LEFT JOIN product_gallery g ON (g.product_id = p.id AND g.featured_image = 1)
         INNER JOIN (SELECT va.sale_price, va.discount_price,va.product_id vid FROM product_variation va  WHERE va.quantity > 0) v ON (v.vid = p.id)
                     WHERE p.product_name LIKE '%{$search}%' AND p.product_status = 'approved'";
-        if( $category != '' ) $select .= "AND p.rootcategory = '$category' ";
+        if( $category != '' ) $select .= "AND p.category_id = '{$id}' ";
         $select .= "GROUP BY p.id ORDER BY p.id LIMIT 5";
         return $this->db->query($select)->result();
     }
@@ -503,7 +509,7 @@ Class Product_model extends CI_Model{
     }
 
 
-
+    // SEARCH CATEGORY PRODUCTS PAGE
     function get_search_products( $queries = array() , $gets = array() ){
         $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price,g.image_name,s.first_name
             FROM products p                        
@@ -512,10 +518,11 @@ Class Product_model extends CI_Model{
             JOIN users AS s ON p.seller_id = s.id ";
 
         if( $queries['product_name'] ) {
-            $select_query .= " WHERE p.product_name LIKE '%{$queries["product_name"]}%' ";
+            $select_query .= " WHERE p.product_status = 'approved' AND p.product_name LIKE '%{$queries["product_name"]}%' ";
         }
         if( $queries['category'] && !empty($queries['category'])){
-            $select_query .= " AND MATCH (p.rootcategory) AGAINST ('{$queries["category"]}') ";
+            $id = $this->category_id( $queries['category'] );
+            $select_query .= " AND p.category_id = {$id} ";
         }
         // unset the product name and category from the get
         unset($gets['category']);
@@ -535,7 +542,6 @@ Class Product_model extends CI_Model{
         }
 
         if( isset($gets['page']) ) unset($gets['page']);
-
         //  Check if we still have any get parameter
         if( count( $gets ) ){
             foreach( $gets as $key => $value ){
@@ -568,10 +574,10 @@ Class Product_model extends CI_Model{
         }else{
             $select_query .=" GROUP BY p.id";
         }
-//         die( $select_query );
+
         $products_query = $this->db->query( $select_query )->result();
-        // $this->db->cache_off();
         return $products_query;
+        // $this->db->cache_off();
     }
 
 
