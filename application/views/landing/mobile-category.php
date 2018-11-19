@@ -260,7 +260,8 @@
             </div> -->
 			<div id="ont_filter" class="filterbar">
 				<div class="w-bg top_menu">
-					<a href="javascript:void(0)" class="update_fil" style="float: right">Update Filter</a>
+					<a href="javascript:void(0)" class="update_fil filter_btn_submit" style="float: right">Update
+						Filter</a>
 					<p><span class="filter_close_btn"><i class="fa fa-arrow-left" aria-hidden="true"></i></span> &nbsp;Filter
 					</p>
 				</div>
@@ -362,71 +363,73 @@
 
 
 			</div>
-			<div class="col-md-9">
-				<div class="row row-sm-gap" data-gutter="10">
-					<?php foreach ($products as $product) : ?>
-						<div class="col-md-3">
-							<div class="product product-sm-left ">
-								<ul class="product-labels"></ul>
-								<div class="product-img-wrap">
-									<img class="product-img"
-										 src="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
-										 alt="<?= $product->product_name; ?>"
-										 title="<?= $product->product_name; ?>"/>
-								</div>
-								<a class="product-link"
-								   href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
-								<div class="product-caption">
-									<ul class="product-caption-rating">
+			<div id="category_body">
+				<div class="col-md-9">
+					<div class="row row-sm-gap" data-gutter="10">
+						<?php foreach ($products as $product) : ?>
+							<div class="col-md-3">
+								<div class="product product-sm-left ">
+									<ul class="product-labels"></ul>
+									<div class="product-img-wrap">
+										<img class="product-img"
+											 src="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
+											 alt="<?= $product->product_name; ?>"
+											 title="<?= $product->product_name; ?>"/>
+									</div>
+									<a class="product-link"
+									   href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
+									<div class="product-caption">
+										<ul class="product-caption-rating">
 
-										<?php
-										$rating_counts = $this->product->get_rating_counts($product->id);
-										if ($rating_counts) {
-											$overall_rating = product_overall_rating($rating_counts);
-											$rating_rounded = round($overall_rating);
-											for ($i = 1; $i <= $rating_rounded; $i++) {
-												?>
-												<li class="rated"><i class="fa fa-star"></i>
-												</li>
-												<?php
-											}
-											if ($rating_rounded < 5) {
-												for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
-													<li><i class="fa fa-star"></i></li>
+											<?php
+											$rating_counts = $this->product->get_rating_counts($product->id);
+											if ($rating_counts) {
+												$overall_rating = product_overall_rating($rating_counts);
+												$rating_rounded = round($overall_rating);
+												for ($i = 1; $i <= $rating_rounded; $i++) {
+													?>
+													<li class="rated"><i class="fa fa-star"></i>
+													</li>
 													<?php
 												}
+												if ($rating_rounded < 5) {
+													for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
+														<li><i class="fa fa-star"></i></li>
+														<?php
+													}
+												}
+											} else {
+												?>
+												<li><i class="fa fa-star"></i></li>
+												<li><i class="fa fa-star"></i></li>
+												<li><i class="fa fa-star"></i></li>
+												<li><i class="fa fa-star"></i></li>
+												<li><i class="fa fa-star"></i></li>
+												<?php
 											}
-										} else {
 											?>
-											<li><i class="fa fa-star"></i></li>
-											<li><i class="fa fa-star"></i></li>
-											<li><i class="fa fa-star"></i></li>
-											<li><i class="fa fa-star"></i></li>
-											<li><i class="fa fa-star"></i></li>
-											<?php
-										}
-										?>
-									</ul>
-									<h5 class="product-caption-title"><?= word_limiter(ucwords($product->product_name), 14, '...'); ?></h5>
-									<h4 class="product-caption-title">
-										<strong>Seller: </strong><?= ucfirst($product->first_name); ?></h4>
-									<div class="product-caption-price">
-										<?php if (!empty($product->discount_price)) : ?> <span
-											class="product-caption-price-old"><?= ngn($product->sale_price); ?></span>
-											<span
-												class="product-caption-price-new"><?= ngn($product->discount_price); ?></span>
-										<?php else : ?>
+										</ul>
+										<h5 class="product-caption-title"><?= word_limiter(ucwords($product->product_name), 14, '...'); ?></h5>
+										<h4 class="product-caption-title">
+											<strong>Seller: </strong><?= ucfirst($product->first_name); ?></h4>
+										<div class="product-caption-price">
+											<?php if (!empty($product->discount_price)) : ?> <span
+												class="product-caption-price-old"><?= ngn($product->sale_price); ?></span>
+												<span
+													class="product-caption-price-new"><?= ngn($product->discount_price); ?></span>
+											<?php else : ?>
 
-											<span
-												class="product-caption-price-new"><?= ngn($product->sale_price); ?></span>
-										<?php endif; ?>
+												<span
+													class="product-caption-price-new"><?= ngn($product->sale_price); ?></span>
+											<?php endif; ?>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					<?php endforeach; ?>
-				</div>
-			</div><!-- col-md-9 -->
+						<?php endforeach; ?>
+					</div>
+				</div><!-- col-md-9 -->
+			</div>
 		</div> <!-- // row -->
 	</div>
 	<div class="gap"></div>
@@ -445,14 +448,6 @@
 </script>
 <script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
 <script>
-	$("#price-slider").ionRangeSlider({
-		min: 1000,
-		max: 50000,
-		type: 'double',
-		prefix: "&#8358;",
-		prettify: false,
-		hasGrid: true
-	});
 	$(document).ready(function () {
 		let _category_body = $('#category_body');
 
@@ -463,13 +458,14 @@
 		}
 
 		function load_page(url) {
+
 			$(_category_body).load(`${url} #category_body`, function (response, status, xhr) {
 				if (status === "error") {
 					let msg = "Sorry but there was an error: ";
 					alert(msg + xhr.status + " " + xhr.statusText);
 				}
 
-				doReplaceState(url);
+				doReplaceState(url.toLowerCase());
 
 				$('#processing').hide();
 				$(_category_body).show();
@@ -515,14 +511,21 @@
 							url += `&${obj}=${filter_string}`
 						}
 					});
-					load_page(url);
+					// load_page(url);
+					console.log(url);
 
 				});
 			} else {
 				load_page(current_url);
 			}
 		});
+		$('.filter_btn_submit').on('click', function () {
+			filterBarClose();
+			console.log(url + 'Current index');
+			load_page(url);
+		});
 	});
+
 
 	$('.close-panel').on('click', function () {
 		let target = $(this).data('target');
