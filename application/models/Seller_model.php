@@ -232,18 +232,9 @@ Class Seller_model extends CI_Model{
 
     // Get a slpecific category id by its slug
     function category_id( $slug ){
-        $query = "SELECT id FROM categories WHERE slug = ?";
-        return $this->db->query( $query, $slug);
+        $query = "SELECT id FROM categories WHERE slug = ? OR name = ?";
+        return $this->db->query( $query, array($slug, $slug));
     }
-
-    /*
-        Return an object (name, slug, description, specifications) of all the parent of a category
-    */
-    function get_parent_name_by_ids( $id ){
-        $array = $this->parent_slug_top( $id );
-        return $this->db->query("SELECT name, slug, description, specifications FROM categories WHERE id IN ('".implode("','",$array)."')")->result();
-    }
-
 
 
     /**
