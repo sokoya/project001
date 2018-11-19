@@ -88,11 +88,38 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 // My Constants
 // Database Table
 defined('DB_NAME')		OR define('DB_NAME', 'carrito');
-defined('TABLE_PREFIX')        OR define('TABLE_PREFIX', 'pr_'); // root category
-defined('ROOT_CATEGORY_TABLE')        OR define('ROOT_CATEGORY_TABLE', 'root_category'); // root category
-defined('CATEGORY_TABLE')        OR define('CATEGORY_TABLE', 'category'); // category
-defined('SUB_CATEGORY_TABLE')        OR define('SUB_CATEGORY_TABLE', 'sub_category'); // sub category
-defined('COUPONS_TABLE')        OR define('COUPONS_TABLE', 'coupons'); // Coupons and discount
-defined('PRODUCTS_TABLE')        OR define('PRODUCTS_TABLE', 'products'); // products
-defined('PRODUCT_GALLERY_TABLE')        OR define('PRODUCT_GALLERY_TABLE', 'product_gallery'); // image gallery
-defined('BUYERS_TABLE')	OR define('BUYERS_TABLE', 'users' );
+
+
+/*
+|--------------------------------------------------------------------------
+| General Settings Constant
+|--------------------------------------------------------------------------
+|
+| Used across all site
+| 
+| 
+|
+| The three main conventions used for determining exit status codes
+| are as follows:
+|
+|    Standard C/C++ Library (stdlibc):
+|       http://www.gnu.org/software/libc/manual/html_node/Exit-Status.html
+|       (This link also contains other GNU-specific conventions)
+|    BSD sysexits.h:
+|       http://www.gsp.com/cgi-bin/man.cgi?section=3&topic=sysexits
+|    Bash scripting:
+|       http://tldp.org/LDP/abs/html/exitcodes.html
+|
+*/
+
+// Make some constant variables based on Settings
+if (!function_exists('general_settings')){
+    function general_settings(){
+        $CI =& get_instance();
+        $CI->db->from('general_settings');
+        return $CI->db->get()->row();
+    }
+}
+defined('INSTAGRAM_LINK') OR define('INSTAGRAM_LINK', general_settings()->instagram_link);
+defined('FACEBOOK_LINK') OR define('FACEBOOK_LINK', general_settings()->facebook_link);
+defined('TWITTER_LINK') OR define('TWITTER_LINK', general_settings()->twitter_link);
