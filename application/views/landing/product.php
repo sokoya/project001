@@ -822,7 +822,7 @@
 
 		_btn.prop('disabled', '');
 		// $('#prod-confirmation').modal('show');
-		notification_message('This is a confirmation that the product <?= ucwords($product->product_name); ?> has been added to the cart', 'fa fa-cart-plus', 'success');
+		notification_message('<?= ucwords($product->product_name); ?>  successfully added to cart', 'fa fa-cart-plus', 'success');
 		$.ajax({
 			url: base_url + "ajax/add_to_cart",
 			method: "POST",
