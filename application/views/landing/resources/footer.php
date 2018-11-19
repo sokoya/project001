@@ -74,7 +74,7 @@
                     <p><h4 class="text text-sm">Follow us on Social Networks</h4></p>
                     <ul class="main-footer-social-list">
                         <li>
-                            <a class="fa fa-facebook" href="#"></a>
+                            <a class="fa fa-facebook" href="<?= FACEBOOK_LINK; ?>"></a>
                         </li>
                         <li>
                             <a class="fa fa-twitter" href="#"></a>

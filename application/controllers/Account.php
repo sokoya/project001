@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 // Buyers profile account
-class Account extends CI_Controller {
+class Account extends MY_Controller {
 	public function __construct(){
         // @todo
         // Check if the user is already loggedin

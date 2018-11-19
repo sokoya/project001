@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Frontpage extends CI_Controller {
+class Frontpage extends MY_Controller {
 
 	public function __construct(){
         parent::__construct();

@@ -4,6 +4,10 @@ class MY_Controller extends CI_Controller {
 	
 	function __construct() {
 		parent::__construct();
-		// Security Checks here
+		// Get the general settings
+		$general_settings = $this->db->get('general_settings')->row();
+		define('FACEBOOK_LINK', $general_settings->facebook_link);
+		define('INSTAGRAM_LINK', $general_settings->instagram_link);
+		define('TWITTER_LINK', $general_settings->twitter_link);
 	}
 }

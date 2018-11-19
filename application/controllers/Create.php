@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Create extends CI_Controller{
+class Create extends MY_Controller{
 
     public function __construct(){
         // @todo

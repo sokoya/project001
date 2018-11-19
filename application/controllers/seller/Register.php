@@ -50,7 +50,7 @@ class Register extends CI_Controller{
                 'password' => shaPassword($this->input->post('password'), $salt),
                 'ip' => $_SERVER['REMOTE_ADDR'],
                 'date_registered' => get_now(),
-                'last_login' => get_now()
+                'last_login' => get_now(),
                 'is_seller' => 'false'
             );
 
