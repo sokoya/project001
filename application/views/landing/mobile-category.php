@@ -520,9 +520,9 @@
 			}
 		});
 		$('.filter_btn_submit').on('click', function () {
-			filterBarClose();
-			console.log(url + 'Current index');
-			load_page(url);
+			filterBarClose(load_page, url);
+			// console.log(url + 'Current index');
+			// load_page(url);
 		});
 	});
 
@@ -547,9 +547,14 @@
 		$('#ont_filter').show();
 	}
 
-	function filterBarClose() {
+	function filterBarClose(callback = '', value = '') {
 		// $('#ont_filter').css({'width': 0});
-		$('#ont_filter').fadeOut();
+		$('#ont_filter').fadeOut(function () {
+			if (callback) {
+				callback(value);
+			}
+		});
+
 	}
 </script>
 </body>
