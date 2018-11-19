@@ -445,6 +445,8 @@
 		src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
 <script>
 	let current_url = "<?= current_url()?>";
+	let category = "<?= $queries['category']?>";
+	let search = "<?= $queries['q'] ?>";
 </script>
 <script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
 <script>

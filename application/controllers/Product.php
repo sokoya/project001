@@ -23,8 +23,11 @@ class Product extends MY_Controller {
 		$page_data['favourited'] = $this->product->is_favourited(base64_decode($this->session->userdata('logged_id')), $index);
 		$page_data['likes'] = $this->product->get_also_likes($index);
 		$page_data['category_detail'] = $this->product->single_category_detail($page_data['product']->category_id);
-
-		$page_data['description'] = $page_data['category_detail']->description;
+		if( $page_data['category_detail'] ){
+			$page_data['description'] = $page_data['category_detail']->description;			
+		}else{
+			$page_data['description'] = DESCRIPTION;
+		}
 		$page_data['title'] = $page_data['category_detail']->name;
 		$page_data['keywords'] = $page_data['title'] . ' , ' . $page_data['product']->brand_name;
 		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
@@ -217,13 +220,12 @@ class Product extends MY_Controller {
     public function search(){
 //        http://localhost/project001/search?category=Phones+%26+Tablets&q=sam
         if( !$this->input->get('q', true) ) redirect(base_url());
-
-        $category = preg_replace("/[^A-Za-z0-9- ]/", "", cleanit($this->input->get('category', true)));
+        $category = cleanit($this->input->get('category', true));
         $product_name = $page_data['searched'] = cleanit($this->input->get('q', true));
+        $page_data['queries'] = array('category' => $category, 'q' => $page_data['searched'] );
 
         $page_data['title'] = ucwords($category .' '. $product_name);
         $features = $this->product->get_features($category, $product_name);
-
         $feature_array = array();
         foreach ($features as $feature => $values) {
             foreach ($values as $key => $value) {
@@ -243,7 +245,6 @@ class Product extends MY_Controller {
         // pagination
         $page = isset($_GET['page']) ? xss_clean($_GET['page']) : 0;
         if ($page > 1) $page -= 1;
-
         $array = array('category' => $category, 'product_name' => $product_name,  'is_limit' => false);
         $x = (array)$this->product->get_search_products($array, $this->input->get());
         $count = (count($x));
@@ -267,9 +268,12 @@ class Product extends MY_Controller {
         $page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
 
         $page_data['category_detail'] = $this->product->category_details($category);
-		$page_data['description'] = $page_data['category_detail']->description;
+        if( $page_data['category_detail'] ){
+            $page_data['description'] = $page_data['category_detail']->description;
+        }else{
+            $page_data['description'] = DESCRIPTION;
+        }
 		$page_data['title'] = $page_data['category_detail']->title;
-
         $page_data['page'] = 'search';
         $this->pagination->initialize($config);
         $this->load->library('user_agent');
