@@ -264,14 +264,13 @@ Class Product_model extends CI_Model{
                 }
                 // unset the page key
                 unset( $gets['page'] );
-
                 // Here comes the features
                 // check for get count again
                 if( count( $gets ) ){
                     foreach( $gets as $key => $value ){
                         $explode = explode(',', $value);
                         if( count($explode) > 1 ){
-                            $select_query .= " OR ( ";
+                            $select_query .= " AND ( ";
                             $array_value = array_values($explode);
                             $last = end($array_value);
                             $key = xss_clean( $key );
@@ -300,7 +299,7 @@ Class Product_model extends CI_Model{
             }else{
                 $select_query .=" AND p.product_status = 'approved' GROUP BY p.id";
             }    
-    //         die( $select_query );
+//            die( $select_query );
             $products_query = $this->db->query( $select_query )->result();
             // $this->db->cache_off();
             return $products_query;
@@ -494,12 +493,12 @@ Class Product_model extends CI_Model{
     // Seacrh autocomplete query
     function search_query($search = '', $category =''){
         // $select = "SELECT product_name FROM products WHERE product_name LIKE '%{$search}%'";
-        $id = $this->category_id( $queries['category'] );
+        
         $select  = "SELECT p.id, p.product_name, g.image_name, v.sale_price, v.discount_price FROM products p 
         LEFT JOIN product_gallery g ON (g.product_id = p.id AND g.featured_image = 1)
         INNER JOIN (SELECT va.sale_price, va.discount_price,va.product_id vid FROM product_variation va  WHERE va.quantity > 0) v ON (v.vid = p.id)
                     WHERE p.product_name LIKE '%{$search}%' AND p.product_status = 'approved'";
-        if( $category != '' ) $select .= "AND p.category_id = '{$id}' ";
+        if( $category != '' ) { $id = $this->category_id( $category ); $select .= "AND p.category_id = '{$id}' ";}
         $select .= "GROUP BY p.id ORDER BY p.id LIMIT 5";
         return $this->db->query($select)->result();
     }
