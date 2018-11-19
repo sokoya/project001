@@ -506,12 +506,13 @@
 							}
 						});
 						if (url === '') {
-							url += `?${obj}=${filter_string}`
+							url += `&${obj}=${filter_string}`
 						} else {
 							url += `&${obj}=${filter_string}`
 						}
 					});
 					// load_page(url);
+					url = `?category=&q=huaw${url}`;
 					console.log(url);
 
 				});
