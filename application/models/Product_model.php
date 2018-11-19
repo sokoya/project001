@@ -561,11 +561,11 @@ Class Product_model extends CI_Model{
                             $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' OR";
                         }
                     }
-//                        $select_query .= " ) ";
+                   // $select_query .= " ) ";
                 }else{
                     $value = xss_clean($value);
                     $value = preg_replace("/[^A-Za-z.0-9-]/", ' ', $value);
-                    $select_query .= " OR (JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$value}%') ";
+                    $select_query .= " AND (JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$value}%') ";
                 }
             }
         }
