@@ -96,15 +96,29 @@ class Checkout extends MY_Controller
 	}
 
 	function checkout_confirm() {
+//	    echo json_encode( $_POST['formdata'] );
+//	    exit;
 	    if( $this->input->is_ajax_request() ){
-            $billing_area = cleanit( $this->input->post('selected_address') );
-            $billing_amount = $this->product->get_row("area", "price", "(WHERE id = {$billing_area})");
-            if( !$billing_amount->price ) $billing_amount = 500; // Default Billnng Address
+//	        var_dump( $_POST);
+//	        exit();
+            $address_id = cleanit( $this->input->post('selected_address') );
+            $billing_amount = $this->product->get_billing_amount($address_id);
+            if( !$billing_amount ) $billing_amount = 500; // Default Billnng Address
             // check products status in cart
             $return['status'] = 'error';
+            $data = array();
             foreach( $this->cart->contents() as $product ){
                 $detail = $this->product->get_cart_details($product['id']);
                 $variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
+                // lets use the opportunity to gather our order table info
+                $data['seller_id'] = $product['options']['seller'];
+                $data['product_id'] = $product['id'];
+                $data['qty'] = $product['qty'];
+                $data['product_variation_id'] = $product['options']['variation_id'];
+                $data['address_id'] = $address_id;
+                $data['amount'] = $product['subtotal'];
+                $data['buyer_id'] = base64_decode($this->session->userdata('logged_id'));
+                
                 if($variation_detail->quantity < 1 || $product['qty'] > $variation_detail->quantity || in_array( $detail->product_status, array('suspended', 'blocked', 'pending' ))){
                     // we have an issue with this product
                     $return['message'][] = "Sorry, the product " . $product['name']. " is out of stock.";
