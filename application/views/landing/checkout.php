@@ -79,11 +79,20 @@
 											</div>
 										</div>
 									</div>
+								</div>
+								<div class="row">
+
 									<div class="col-md-6">
 										<button type="submit" class="btn btn-primary btn-block create-address-btn">
 											Submit
 										</button>
 									</div>
+									<div class="col-md-6">
+										<button type="button" class="btn btn-warning btn-block cancel-btn">
+											Cancel
+										</button>
+									</div>
+
 								</div>
 								<?= form_close(); ?>
 							</div>
@@ -121,6 +130,13 @@
 										</p>
 									</div>
 								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<button type="button" class="btn btn-warning btn-block cancel-btn">
+									Cancel
+								</button>
 							</div>
 						</div>
 					</div>
