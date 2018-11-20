@@ -28,7 +28,7 @@ class Product extends MY_Controller {
 		}else{
 			$page_data['description'] = DESCRIPTION;
 		}
-		$page_data['title'] = $page_data['category_detail']->name;
+		$page_data['title'] = 'Buy ' . $page_data['product']->product_name;
 		$page_data['keywords'] = $page_data['title'] . ' , ' . $page_data['product']->brand_name;
 		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
 		// $this->add_count($index);
@@ -100,6 +100,7 @@ class Product extends MY_Controller {
 		if( !$this->agent->is_mobile()){
 			$this->load->view('landing/category', $page_data);
 		}else{
+            $page_data['page'] = 'mobile-category';
 			$this->load->view('landing/mobile-category', $page_data);
 		}
 	}
@@ -280,6 +281,7 @@ class Product extends MY_Controller {
         if( !$this->agent->is_mobile()){
             $this->load->view('landing/search', $page_data);
         }else{
+            $page_data['page'] = 'mobile-search';
             $this->load->view('landing/mobile-search', $page_data);
         }
     }
