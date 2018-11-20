@@ -17,7 +17,7 @@
 					<div class="panel-heading custom-panel-head">
 						<h3 class="panel-title"><i class="fa fa-truck"></i>&nbsp;&nbsp; Delivery / Pickup Method
 							<button class="btn-custom-primary btn-new-address">New Address</button>
-							<button class="btn-custom-primary">Select Pickup Location</button>
+							<button class="btn-custom-primary btn-pickup-address">Select Pickup Location</button>
 						</h3>
 					</div>
 					<div class="panel-body" id="register_address" style="display: none">
@@ -86,6 +86,41 @@
 									</div>
 								</div>
 								<?= form_close(); ?>
+							</div>
+						</div>
+					</div>
+					<div class="panel-body" id="pickup_address" style="display: none;">
+						<div class="row" id="pickup_address_box">
+							<div class="col-md-6">
+								<div class="panel panel-default custom-panel pickup-address
+											custom-panel-active"
+									 data-id="
+									">
+									<div class="panel-heading sub-custom-panel-head">
+										<h3 class="panel-title">
+											<div class="form-check">
+												<input class="form-check-input delivery-box" type="radio"
+													   name="selcted_address"
+													   id="pick_id"
+													   value="Pickup Address"
+													   checked>
+												<label class="form-check-label" for="pick_id">
+													Select this pickup address
+												</label>
+											</div>
+										</h3>
+									</div>
+									<div class="panel-body">
+										<div style="height:28px;">
+											<p class="panel-details"><i
+													class="fa fa-map-marker"></i>530A Aina Omole Phase 2 Lagos
+											</p>
+										</div>
+										<p class="panel-details"><i
+												class="fa fa-phone"></i>+234 800 324 0000
+										</p>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

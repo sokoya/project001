@@ -336,3 +336,8 @@
 	z-index: 2;
 	cursor: pointer;
 }
+
+#delivery_address {
+	overflow-y: auto;
+	max-height: 400px;
+}
