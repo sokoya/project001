@@ -149,7 +149,7 @@ function get_view() {
 				</div>
 				<div class="row">
 				<div class="col-md-6">
-					<button class="btn btn-block btn-primary add-to-cart c-hover" id="${pr_id}_submit" data-vid="${quick.default_vid}" data-vname="${quick.default_vname}"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
+					<button class="btn btn-block btn-primary add-to-cart c-hover" id="${pr_id}_submit" data-seller="${quick.seller}" data-vid="${quick.default_vid}" data-vname="${quick.default_vname}"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
 				</div>
 				<div class="col-md-6">
 					<button class="btn btn-block btn-default fav c-hover"><i class="fa fa-star-o"></i> Wishlist</button>
@@ -165,6 +165,7 @@ function get_view() {
 				let price_ = $('.q_pr_price').data('amount');
 				let vid = $(`#${pr_id}_submit`).data('vid');
 				let vname = $(`#${pr_id}_submit`).data('vname');
+				let seller = $(`#${pr_id}_submit`).data('seller');
 				$.ajax({
 					url: base_url + 'ajax/quick_view_add',
 					method: 'POST',
@@ -174,7 +175,8 @@ function get_view() {
 						product_price: price_,
 						product_name: title,
 						variation_id: vid,
-						variation: vname
+						variation: vname,
+						seller:seller
 					},
 					success: () => {
 						$('.overview-tab').slideUp();
