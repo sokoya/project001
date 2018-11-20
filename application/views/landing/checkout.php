@@ -10,6 +10,7 @@
 	<div class="gap"></div>
 	<div class="container">
 		<h4 class="pr-over" style="font-size: 16px; color: #a0a0a0">Checkout</h4>
+        <?php $this->load->view('msg_view'); ?>
 		<div id="status"></div>
 		<div class="row">
 			<div class="col-md-8">

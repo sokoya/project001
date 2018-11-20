@@ -3,14 +3,24 @@
 Class User_model extends CI_Model{
 
 
-    function get_profile( $id ='' , $table = 'users'){
+    /**
+     * @param string $id
+     * @param string $table
+     * @return mixed
+     */
+    function get_profile($id ='' , $table = 'users'){
         $this->db->where('id', $id );
         $this->db->or_where('email', $id);
         return $this->db->get($table)->row();
     }
 
-	// Login Customer
-	function login($data = array(), $table_name = 'users'){
+
+    /**
+     * @param array $data
+     * @param string $table_name
+     * @return bool|mixed
+     */
+    function login($data = array(), $table_name = 'users'){
 		if(!empty($data)) {
             $email = cleanit($data['email']);
             $this->db->where('email', $data['email']);
@@ -35,9 +45,13 @@ Class User_model extends CI_Model{
         }
 	}
 
-	// Create An Account for user
 
-	function create_account( $data = array(), $table_name = 'users'){
+    /**
+     * @param array $data
+     * @param string $table_name
+     * @return int|string
+     */
+    function create_account($data = array(), $table_name = 'users'){
 		$result = '';
 		if(!empty($data)){
 			try {
@@ -50,15 +64,24 @@ Class User_model extends CI_Model{
 		}
 	}
 
-    // Update table
-    function update_data( $access = '' , $data = array(), $table_name = 'users'){
+
+    /**
+     * @param string $access
+     * @param array $data
+     * @param string $table_name
+     * @return bool
+     */
+    function update_data($access = '' , $data = array(), $table_name = 'users'){
         $this->db->where('id', $access);
         return $this->db->update( $table_name, $data );
     }
 
 
-
-    // update billing address
+    /**
+     * @param string $where
+     * @param $bid
+     * @return bool
+     */
     function update_billing_address($where = '', $bid){
         $this->db->where($where);
         $this->db->set('primary_address', 0, false);
@@ -71,8 +94,12 @@ Class User_model extends CI_Model{
         return false;
     }
 
-    // check if the password is correct
-
+    /**
+     * @param null $password
+     * @param string $access
+     * @param string $table
+     * @return bool
+     */
     function cur_pass_match($password = null, $access = '', $table = 'users'){
         if ($password) {
             $this->db->where('id', $access);
@@ -90,7 +117,13 @@ Class User_model extends CI_Model{
         }
     }
 
-    // Change Password 
+
+    /**
+     * @param $password
+     * @param string $access
+     * @param string $table
+     * @return bool
+     */
     function change_password($password, $access = '', $table = 'users'){
         if($access == '') $access = $this->session->userdata('logged_id');
         $salt = salt(50);
@@ -104,8 +137,16 @@ Class User_model extends CI_Model{
         return $this->db->update($table, $data);
     }
 
-    // Save and unsave property
-    function favourite( $uid, $pid, $action, $table_name = 'favourite', $fid='' ){
+
+    /**
+     * @param $uid
+     * @param $pid
+     * @param $action
+     * @param string $table_name
+     * @param string $fid
+     * @return bool|mixed|string
+     */
+    function favourite($uid, $pid, $action, $table_name = 'favourite', $fid='' ){
         if( $action == 'save'){
             try {
                 if( $this->db->insert($table_name, array('uid' => $uid, 'product_id' => $pid))) 
@@ -124,8 +165,12 @@ Class User_model extends CI_Model{
         }
     }
 
-    // get all wishlist products
-    function get_saved_items( $id ){
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    function get_saved_items($id ){
         $query = $this->db->query("SELECT p.id, p.product_name, p.product_status, v.discount_price, v.sale_price,v.quantity, g.image_name, f.id as fav_id, f.date_saved
             FROM products p
             JOIN (SELECT variation.sale_price AS sale_price, variation.discount_price AS discount_price, variation.product_id , SUM(variation.quantity) AS quantity FROM product_variation variation GROUP BY variation.product_id) AS v ON( v.product_id = p.id)
@@ -135,7 +180,11 @@ Class User_model extends CI_Model{
         return $query; 
     }
 
-    function get_my_orders( $id ){
+    /**
+     * @param $id
+     * @return mixed
+     */
+    function get_my_orders($id ){
         $query = $this->db->query("SELECT p.id as pid, p.name, g.image_name, o.order_date, o.order_code, o.status, o.product_desc
         FROM orders o
         JOIN (SELECT prod.id AS id, prod.product_name AS name FROM products AS prod) AS p ON (p.id = o.product_id)
@@ -156,6 +205,11 @@ Class User_model extends CI_Model{
         return $this->db->get('area')->result_array();
     }
 
+    /**
+     * @param string $table_name
+     * @param $where
+     * @return mixed
+     */
     function get_rows($table_name ='users', $where ){
         $this->db->where($where);
         return $this->db->get( $table_name )->row();
@@ -181,15 +235,27 @@ Class User_model extends CI_Model{
         }
     }
 
-    function get_single_address( $uid = '', $address_id){
+    /**
+     * @param string $uid
+     * @param $address_id
+     * @return array
+     */
+    function get_single_address($uid = '', $address_id){
         if( $uid != '' ) $this->db->where('uid', $uid);
         $this->db->where('id', $address_id);
         return $this->db->get('billing_address')->result_array();
     }
 
+    function get_pickup_address(){
+        $this->db->get('pickup_address')->result();
+    }
 
-	// update billing address
-	function get_default_address_price($id){
+
+    /**
+     * @param $id
+     * @return string
+     */
+    function get_default_address_price($id){
 		$select = "SELECT a.price price FROM billing_address b INNER JOIN area a ON(a.id = b.aid) WHERE b.primary_address = 1 AND b.uid = $id";
         if( $this->db->query($select )->num_rows()){
             return $this->db->query( $select )->row()->price;
