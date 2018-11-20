@@ -203,7 +203,7 @@
 										<td>
 											<a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
 												<img class="panel-pr-image"
-													 src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image); ?> ?>"
+													 src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image); ?>"
 													 alt="Carrito marketplace <?= $product['name']; ?>"
 													 title="<?= $product['name']; ?>"/>
 											</a>

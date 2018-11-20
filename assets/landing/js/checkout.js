@@ -58,7 +58,7 @@ $('.create-address-btn').on('click', function (e) {
 $('.btn-new-address').on('click', function () {
 	// $(this).toggle();
 	$('#register_address').slideDown('fast', function () {
-		$.getJSON(base_url + 'checkout/fetch_states', function (d) {
+		$.getJSON(base_url + 'ajax/fetch_states', function (d) {
 			$.each(d, function (k, v) {
 				$('#state').append($('<option></option>').attr('value', v.id).text(ucwords(v.name)));
 			})
@@ -71,7 +71,7 @@ $('#state').on('change', function () {
 	$("#city").empty();
 	let sid = $(this).val();
 	$.ajax({
-		url: base_url + 'account/fetch_areas',
+		url: base_url + 'ajax/fetch_areas',
 		method: 'get',
 		data: {sid: sid},
 		dataType: 'json',

@@ -97,11 +97,30 @@ class Checkout extends MY_Controller
 
 	function checkout_confirm() {
 	    if( $this->input->is_ajax_request() ){
-            // Make some checks
+            $billing_area = cleanit( $this->input->post('selected_address') );
+            $billing_amount = $this->product->get_row("area", "price", "(WHERE id = {$billing_area})");
+            if( !$billing_amount->price ) $billing_amount = 500; // Default Billnng Address
+            // check products status in cart
+            $return['status'] = 'error';
+            foreach( $this->cart->contents() as $product ){
+                $detail = $this->product->get_cart_details($product['id']);
+                $variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
+                if($variation_detail->quantity < 1 || $product['qty'] > $variation_detail->quantity || in_array( $detail->product_status, array('suspended', 'blocked', 'pending' ))){
+                    // we have an issue with this product
+                    $return['message'][] = "Sorry, the product " . $product['name']. " is out of stock.";
+                }
+            }
+            if( !empty($return['message']) ){
+                echo json_encode( $return );
+                exit;
+            }else{
+
+            }
         }else{
 	        redirect(base_url());
         }
     }
+
 	public function order_completed(){
         $page_data['page'] = 'order_completed';
         $page_data['title'] = "Order Invoice";
