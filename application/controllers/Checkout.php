@@ -106,6 +106,7 @@ class Checkout extends MY_Controller
             $order_date = get_now();
             $order_status = 'ordered';
             $payment_method = 1;
+            $buyer_id = base64_decode($this->session->userdata('logged_id'));
             foreach( $this->cart->contents() as $product ){
                 $detail = $this->product->get_cart_details($product['id']);
                 $variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
@@ -115,6 +116,7 @@ class Checkout extends MY_Controller
                     $message .= "Sorry the product " . $product['name'] . " is out of stock <br />";
                 }else{
                     // lets use the opportunity to gather our order table for testing purpose.
+                    $data['buyer_id'] = $buyer_id;
                     $data['order_code'] = $order_code;
                     $data['order_date'] = $order_date;
                     $data['payment_method'] = $payment_method;
@@ -123,7 +125,7 @@ class Checkout extends MY_Controller
                     $data['product_id'] = $product['id'];
                     $data['qty'] = $product['qty'];
                     $data['product_variation_id'] = $product['options']['variation_id'];
-                    $data['address_id'] = $address_id;
+                    $data['billing_address_id'] = $address_id;
                     $data['amount'] = $product['subtotal'];
                     $this->product->insert_data('orders', $data);
                 }
