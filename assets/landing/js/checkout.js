@@ -23,12 +23,17 @@ $('.continue-btn').on('click', function (e) {
 		method: 'POST',
 		data: {formdata: $('#checkout_form').serialize()},
 		success: function () {
-			notification_message("Payment Successful", 'fa fa-info-circle', 'success')
+			window.location.href = base_url + 'checkout/order_completed';
+			notification_message("Payment Successful redirecting to invoice page", 'fa fa-info-circle', 'success')
 		},
 		error: response => {
 			notification_message(`An error occurred  - ${response.status} ${response.statusText}`, 'fa fa-info-circle', 'error')
 		}
 	})
+});
+
+$('.cancel-btn').on('click', function () {
+	show_page('delivery_address');
 });
 
 

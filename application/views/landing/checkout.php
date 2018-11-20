@@ -80,11 +80,20 @@
 											</div>
 										</div>
 									</div>
+								</div>
+								<div class="row">
+
 									<div class="col-md-6">
 										<button type="submit" class="btn btn-primary btn-block create-address-btn">
 											Submit
 										</button>
 									</div>
+									<div class="col-md-6">
+										<button type="button" class="btn btn-warning btn-block cancel-btn">
+											Cancel
+										</button>
+									</div>
+
 								</div>
 								<?= form_close(); ?>
 							</div>
@@ -134,6 +143,13 @@
                                 <div class="alert alert-warning text-center delivery-warning">We don't have any pickup venue available for your state/area.
                                 </div>
                             <?php endif; ?>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<button type="button" class="btn btn-warning btn-block cancel-btn">
+									Cancel
+								</button>
+							</div>
 						</div>
 					</div>
 					<div class="panel-body" id="delivery_address">
