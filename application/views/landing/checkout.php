@@ -109,53 +109,54 @@
 							</div>
 						</div>
 						<div class="row" id="delivery_address_box">
-							<?= form_open(); ?>
-							<?php
-							if ($addresses) :
-								foreach ($addresses as $address) : ?>
-									<div class="col-md-6">
-										<div class="panel panel-default custom-panel pickup-address
+							<form id="checkout_form">
+								<?php
+								if ($addresses) :
+									foreach ($addresses as $address) : ?>
+										<div class="col-md-6">
+											<div class="panel panel-default custom-panel pickup-address
 										<?php
-										if ($address->primary_address == 1) :
-											?>
+											if ($address->primary_address == 1) :
+												?>
 											custom-panel-active
 										<?php
-										endif;
-										?>"
-											 data-id="<?= $address->id; ?>">
-											<div class="panel-heading sub-custom-panel-head">
-												<h3 class="panel-title">
-													<div class="form-check">
-														<input class="form-check-input delivery-box" type="radio"
-															   name="address_radio1"
-															   id="<?= $address->id; ?>" value="option1"
-															<?php if ($address->primary_address == 1) echo 'checked' ?> >
-														<label class="form-check-label" for="<?= $address->id; ?>">
-															Select this address
-														</label>
+											endif;
+											?>"
+												 data-id="<?= $address->id; ?>">
+												<div class="panel-heading sub-custom-panel-head">
+													<h3 class="panel-title">
+														<div class="form-check">
+															<input class="form-check-input delivery-box" type="radio"
+																   name="selcted_address"
+																   id="<?= $address->id; ?>"
+																   value="<?= $address->id; ?>"
+																<?php if ($address->primary_address == 1) echo 'checked' ?> >
+															<label class="form-check-label" for="<?= $address->id; ?>">
+																Select this address
+															</label>
+														</div>
+														<span>Edit</span>
+													</h3>
+												</div>
+												<div class="panel-body">
+													<p class="panel-details"><i
+															class="fa fa-user"></i><?= ucfirst($address->first_name) . ' ' . ucfirst($address->last_name) ?>
+													</p>
+													<div style="height:28px;">
+														<p class="panel-details"><i
+																class="fa fa-map-marker"></i><?= $address->address; ?>
+														</p>
 													</div>
-													<span>Edit</span>
-												</h3>
-											</div>
-											<div class="panel-body">
-												<p class="panel-details"><i
-														class="fa fa-user"></i><?= ucfirst($address->first_name) . ' ' . ucfirst($address->last_name) ?>
-												</p>
-                                                <div style="height:28px;">
-                                                    <p class="panel-details"><i
-                                                                class="fa fa-map-marker"></i><?= $address->address; ?>
-                                                    </p>
-                                                </div>
-												<p class="panel-details"><i
-														class="fa fa-phone"></i><?= $address->phone; ?> <?= !empty($address->phone2) ? ',' . $address->phone2 : ''; ?>
-												</p>
+													<p class="panel-details"><i
+															class="fa fa-phone"></i><?= $address->phone; ?> <?= !empty($address->phone2) ? ',' . $address->phone2 : ''; ?>
+													</p>
+												</div>
 											</div>
 										</div>
-									</div>
-								<?php
-								endforeach;
-							endif; ?>
-							<?= form_close(); ?>
+									<?php
+									endforeach;
+								endif; ?>
+
 						</div>
 					</div>
 				</div>
@@ -170,15 +171,15 @@
 						<div class="panel panel-default custom-panel">
 							<div class="panel-body pay-panel">
 								<div class="form-check">
-									<form>
-										<p class="form-check-label pay-gate">
-											<input class="form-check-input payment-radio" type="radio"
-												   name="address_radio1"
-												   id="paystack" value="paystack">
-											Pay with paystack
-											<img src="<?= base_url('assets/landing/img/paystack.png'); ?>">
-										</p>
-									</form>
+
+									<p class="form-check-label pay-gate">
+										<input class="form-check-input payment-radio" type="radio"
+											   name="payment_method"
+											   id="paystack" value="paystack">
+										Pay with paystack
+										<img src="<?= base_url('assets/landing/img/paystack.png'); ?>">
+									</p>
+
 								</div>
 							</div>
 						</div>
@@ -214,9 +215,9 @@
 										</td>
 										<td class="parent-block panel-product-price">
 											<span class="pr-price" data-amount="<?= $product['subtotal']; ?>">
-												<?php 
-													echo ngn($product['subtotal']); 
-													$subtotal += $product['subtotal']; 
+												<?php
+												echo ngn($product['subtotal']);
+												$subtotal += $product['subtotal'];
 												?>	
 											</span>
 										</td>
@@ -251,12 +252,15 @@
 						<li class="list-group-item cs-sm-t">Total: <span
 								class="total-sum-charges"><?= ngn($subtotal + $delivery_charge); ?></span>
 						</li>
+
 						<li class="list-group-item">
-							<button class="btn btn-block btn-custom-dark continue-btn" disabled>Continue to Payment
+							<button type="submit" class="btn btn-block btn-custom-dark continue-btn" disabled>Continue
+								to Payment
 							</button>
 						</li>
 					</ul>
 				</div>
+				</form>
 				<div class="lds-spinner cst-loader" style="display: none;">
 					<div></div>
 					<div></div>

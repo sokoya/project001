@@ -78,289 +78,66 @@
 	<?php $this->load->view('landing/resources/head_img') ?>
 	<?php $this->load->view('landing/resources/head_category'); ?>
 	<?php $this->load->view('landing/resources/head_menu'); ?>
-    <?php if (empty($products)) : ?>
-        <div class="container">
-            <div class="row">
-                <div class="gap-large"></div>
-                <h2 class="text-center">Oops! Sorry, we couldn't find products on this section.</h2>
-                <p class="text-muted text-sm text-center">You can browse for more product <a
-                        style="text-decoration: none; color: #0b6427;" href="<?= base_url(); ?>">Find
-                        product</a></p>
-            </div>
-        </div>
-    <?php else : ?>
-	<div class="container">
-		<header class="page-header">
-			<ol class="breadcrumb page-breadcrumb">
-				<li><a href="<?= base_url(); ?>">Home</a>
-				</li>
-				<li class="active"><?= ucwords($category_detail->name); ?>
-				</li>
-			</ol>
-			<div class="category-selections clearfix">
-				<button class="btn btn-custom-primary">Newest First</button>
-				<button class="btn btn-custom-primary">Best Sellers</button>
-				<button class="btn btn-custom-primary filter-btn"><i class="fa fa-filter"
-																	 aria-hidden="true"></i> Filter
-				</button>
-			</div>
-		</header>
-		<div class="row">
-			<!-- <div class="col-md-3">
-                <aside class="category-filters">
-                    <div class="category-filters-section">
-                        <h3 class="widget-title-sm">Category</h3>
-                        <ul class="cateogry-filters-list">
-                            <li><a href="#">Clothing</a>
-                            </li>
-                            <li><a href="#">Shoes</a>
-                            </li>
-                            <li><a href="#">Accessories</a>
-                            </li>
-                            <li><a href="#">Jewerly</a>
-                            </li>
-                            <li><a href="#">Watches</a>
-                            </li>
-                            <li><a href="#">Fine Jewerly</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="category-filters-section">
-                        <h3 class="widget-title-sm">Price</h3>
-                        <input type="text" id="price-slider" />
-                    </div>
-                    <div class="category-filters-section">
-                        <h3 class="widget-title-sm">Relese Date</h3>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Last 30 days<span class="category-filters-amount">(73)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Last 90 days<span class="category-filters-amount">(79)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Comming Soon<span class="category-filters-amount">(76)</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="category-filters-section">
-                        <h3 class="widget-title-sm">Brand</h3>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />191 United<span class="category-filters-amount">(22)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Adidas<span class="category-filters-amount">(87)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Balmain<span class="category-filters-amount">(33)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Diesel<span class="category-filters-amount">(90)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Enzo<span class="category-filters-amount">(97)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Gap<span class="category-filters-amount">(94)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Hanes<span class="category-filters-amount">(76)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Jockey<span class="category-filters-amount">(39)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Just Cavalli<span class="category-filters-amount">(40)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Lacoste<span class="category-filters-amount">(10)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Lee<span class="category-filters-amount">(70)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Nike<span class="category-filters-amount">(40)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Paul Jones<span class="category-filters-amount">(72)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Puma<span class="category-filters-amount">(54)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Shark<span class="category-filters-amount">(27)</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="category-filters-section">
-                        <h3 class="widget-title-sm">Discount</h3>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />10% Off or More<span class="category-filters-amount">(13)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />25% Off or More<span class="category-filters-amount">(20)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />50% Off or More<span class="category-filters-amount">(92)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />75% Off or More<span class="category-filters-amount">(30)</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="category-filters-section">
-                        <h3 class="widget-title-sm">Features</h3>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />New<span class="category-filters-amount">(12)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Featured<span class="category-filters-amount">(69)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />On Sale<span class="category-filters-amount">(20)</span>
-                            </label>
-                        </div>
-                    </div>
-                </aside>
-            </div> -->
-			<div id="ont_filter" class="filterbar">
-				<div class="w-bg top_menu">
-					<a href="javascript:void(0)" class="update_fil filter_btn_submit" style="float: right">Update
-						Filter</a>
-					<p><span class="filter_close_btn"><i class="fa fa-arrow-left" aria-hidden="true"></i></span> &nbsp;Filter
-					</p>
+	<?php if (empty($products)) : ?>
+		<div class="container">
+			<header class="page-header">
+				<ol class="breadcrumb page-breadcrumb">
+					<li><a href="<?= base_url(); ?>">Home</a>
+					</li>
+					<li class="active"><?= ucwords($category_detail->name); ?>
+					</li>
+				</ol>
+				<div class="category-selections clearfix">
+					<button class="btn btn-custom-primary">Newest First</button>
+					<button class="btn btn-custom-primary">Best Sellers</button>
+					<button class="btn btn-custom-primary filter-btn"><i class="fa fa-filter"
+																		 aria-hidden="true"></i> Filter
+					</button>
 				</div>
-
-				<div class="panel panel-default">
-					<div class="panel-heading filter-head filter-first">Price</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-xs-4" style="padding-right: 3px">
-								<input type="text" class="form-control price_min" placeholder="&#8358; Min">
-							</div>
-							<div class="col-xs-4" style="padding-left:  3px !important; padding-right: 3px;">
-								<input type="text" class="form-control price_max" placeholder="&#8358; Max">
-							</div>
-							<div class="col-xs-4">
-								<input type="submit" class="price-submit" value="Go">
-							</div>
-						</div>
+			</header>
+			<div class="row">
+				<div id="ont_filter" class="filterbar">
+					<div class="w-bg top_menu">
+						<a href="javascript:void(0)" class="update_fil filter_btn_submit" style="float: right">Update
+							Filter</a>
+						<p><span class="filter_close_btn"><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
+							&nbsp;Filter
+						</p>
 					</div>
-				</div>
 
-				<!--Brands-->
-				<?php if (!empty($brands)): ?>
 					<div class="panel panel-default">
-						<div
-							class="panel-heading filter-head">Brand
-							<span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel"
-																					 aria-hidden="true"
-																					 data-target="brand_static_vl"></i></span>
-						</div>
-						<div class="panel-body" id="brand_static_vl">
-							<?php foreach ($brands as $brand) : ?>
-								<div class="carrito-checkbox">
-									<label class="list-label">
-										<input class="filter" type="checkbox" name="filterset"
-											   data-type="brand_name"
-											   data-value="<?= trim($brand->brand_name); ?>"/><?= ucfirst($brand->brand_name); ?>
-										<span class="checkmark"></span>
-									</label>
+						<div class="panel-heading filter-head filter-first">Price</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-xs-4" style="padding-right: 3px">
+									<input type="text" class="form-control price_min" placeholder="&#8358; Min">
 								</div>
-								<hr class="panel-line"/>
-							<?php endforeach; ?>
+								<div class="col-xs-4" style="padding-left:  3px !important; padding-right: 3px;">
+									<input type="text" class="form-control price_max" placeholder="&#8358; Max">
+								</div>
+								<div class="col-xs-4">
+									<input type="submit" class="price-submit" value="Go">
+								</div>
+							</div>
 						</div>
 					</div>
-				<?php endif; ?>
 
-				<!--Main Colour-->
-				<?php if (!empty($colours)) : ?>
-					<div class="panel panel-default">
-						<div
-							class="panel-heading filter-head">Main Colour
-							<span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel"
-																					 aria-hidden="true"
-																					 data-target="color_static_vl"></i></span>
-						</div>
-						<div class="panel-body" id="color_static_vl">
-							<?php foreach ($colours as $colour) : ?>
-								<div class="carrito-checkbox">
-									<label class="list-label">
-										<input class="filter" type="checkbox" name="filterset"
-											   data-type="main_colour"
-											   data-value="<?= trim($colour->colour_name); ?>"/><?= ucfirst($colour->colour_name); ?>
-										<span class="checkmark"></span>
-									</label>
-								</div>
-								<hr class="panel-line"/>
-							<?php endforeach; ?>
-						</div>
-					</div>
-				<?php endif; ?>
-
-				<!--Features-->
-				<?php if ($features) : ?>
-					<?php $x = 1;
-					foreach ($features as $feature => $feature_value) : ?>
+					<!--Brands-->
+					<?php if (!empty($brands)): ?>
 						<div class="panel panel-default">
 							<div
-								class="panel-heading filter-head"><?= preg_replace("/[^A-Za-z 0-9]/", ' ', $feature); ?>
+								class="panel-heading filter-head">Brand
 								<span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel"
 																						 aria-hidden="true"
-																						 data-target="<?= $feature ?>_vl"></i></span>
+																						 data-target="brand_static_vl"></i></span>
 							</div>
-							<div class="panel-body" id="<?= $feature ?>_vl">
-								<?php foreach ($feature_value as $key => $value) : ?>
+							<div class="panel-body" id="brand_static_vl">
+								<?php foreach ($brands as $brand) : ?>
 									<div class="carrito-checkbox">
 										<label class="list-label">
 											<input class="filter" type="checkbox" name="filterset"
-												   data-type="<?= trim($feature); ?>"
-												   data-value="<?= trim(preg_replace("/[^A-Za-z0-9-]/", '_', $value)) ?>"/><?= $value; ?>
+												   data-type="brand_name"
+												   data-value="<?= trim($brand->brand_name); ?>"/><?= ucfirst($brand->brand_name); ?>
 											<span class="checkmark"></span>
 										</label>
 									</div>
@@ -368,81 +145,265 @@
 								<?php endforeach; ?>
 							</div>
 						</div>
-					<?php endforeach; ?>
-				<?php endif; ?>
+					<?php endif; ?>
 
-
-			</div>
-			<div id="category_body">
-				<div class="col-md-9">
-					<div class="row row-sm-gap" data-gutter="10">
-						<?php foreach ($products as $product) : ?>
-							<div class="col-md-3">
-								<div class="product product-sm-left ">
-									<ul class="product-labels"></ul>
-									<div class="product-img-wrap">
-										<img class="product-img"
-											 src="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
-											 alt="<?= $product->product_name; ?>"
-											 title="<?= $product->product_name; ?>"/>
+					<!--Main Colour-->
+					<?php if (!empty($colours)) : ?>
+						<div class="panel panel-default">
+							<div
+								class="panel-heading filter-head">Main Colour
+								<span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel"
+																						 aria-hidden="true"
+																						 data-target="color_static_vl"></i></span>
+							</div>
+							<div class="panel-body" id="color_static_vl">
+								<?php foreach ($colours as $colour) : ?>
+									<div class="carrito-checkbox">
+										<label class="list-label">
+											<input class="filter" type="checkbox" name="filterset"
+												   data-type="main_colour"
+												   data-value="<?= trim($colour->colour_name); ?>"/><?= ucfirst($colour->colour_name); ?>
+											<span class="checkmark"></span>
+										</label>
 									</div>
-									<a class="product-link"
-									   href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
-									<div class="product-caption">
-										<ul class="product-caption-rating">
+									<hr class="panel-line"/>
+								<?php endforeach; ?>
+							</div>
+						</div>
+					<?php endif; ?>
 
-											<?php
-											$rating_counts = $this->product->get_rating_counts($product->id);
-											if ($rating_counts) {
-												$overall_rating = product_overall_rating($rating_counts);
-												$rating_rounded = round($overall_rating);
-												for ($i = 1; $i <= $rating_rounded; $i++) {
-													?>
-													<li class="rated"><i class="fa fa-star"></i>
-													</li>
-													<?php
-												}
-												if ($rating_rounded < 5) {
-													for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
-														<li><i class="fa fa-star"></i></li>
-														<?php
-													}
-												}
-											} else {
-												?>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<?php
-											}
-											?>
-										</ul>
-										<h5 class="product-caption-title"><?= word_limiter(ucwords($product->product_name), 14, '...'); ?></h5>
-										<h4 class="product-caption-title">
-											<strong>Seller: </strong><?= ucfirst($product->first_name); ?></h4>
-										<div class="product-caption-price">
-											<?php if (!empty($product->discount_price)) : ?> <span
-												class="product-caption-price-old"><?= ngn($product->sale_price); ?></span>
-												<span
-													class="product-caption-price-new"><?= ngn($product->discount_price); ?></span>
-											<?php else : ?>
-
-												<span
-													class="product-caption-price-new"><?= ngn($product->sale_price); ?></span>
-											<?php endif; ?>
+					<!--Features-->
+					<?php if ($features) : ?>
+						<?php $x = 1;
+						foreach ($features as $feature => $feature_value) : ?>
+							<div class="panel panel-default">
+								<div
+									class="panel-heading filter-head"><?= preg_replace("/[^A-Za-z 0-9]/", ' ', $feature); ?>
+									<span style="color: #4c4c4c !important; float: right"><i
+											class="fa fa-minus close-panel"
+											aria-hidden="true"
+											data-target="<?= $feature ?>_vl"></i></span>
+								</div>
+								<div class="panel-body" id="<?= $feature ?>_vl">
+									<?php foreach ($feature_value as $key => $value) : ?>
+										<div class="carrito-checkbox">
+											<label class="list-label">
+												<input class="filter" type="checkbox" name="filterset"
+													   data-type="<?= trim($feature); ?>"
+													   data-value="<?= trim(preg_replace("/[^A-Za-z0-9-]/", '_', $value)) ?>"/><?= $value; ?>
+												<span class="checkmark"></span>
+											</label>
 										</div>
-									</div>
+										<hr class="panel-line"/>
+									<?php endforeach; ?>
 								</div>
 							</div>
 						<?php endforeach; ?>
-					</div>
-				</div><!-- col-md-9 -->
+					<?php endif; ?>
+
+
+				</div>
+				<h2 class="text-center">Oops! Sorry, we couldn't find products on this section.</h2>
+				<p class="text-muted text-sm text-center">You can browse for more product <a
+						style="text-decoration: none; color: #0b6427;" href="<?= base_url(); ?>">Find
+						product</a></p>
 			</div>
-		</div> <!-- // row -->
-	</div>
-    <?php endif; ?>
+		</div>
+	<?php else : ?>
+		<div class="container">
+			<header class="page-header">
+				<ol class="breadcrumb page-breadcrumb">
+					<li><a href="<?= base_url(); ?>">Home</a>
+					</li>
+					<li class="active"><?= ucwords($category_detail->name); ?>
+					</li>
+				</ol>
+				<div class="category-selections clearfix">
+					<button class="btn btn-custom-primary">Newest First</button>
+					<button class="btn btn-custom-primary">Best Sellers</button>
+					<button class="btn btn-custom-primary filter-btn"><i class="fa fa-filter"
+																		 aria-hidden="true"></i> Filter
+					</button>
+				</div>
+			</header>
+			<div class="row">
+				<div id="ont_filter" class="filterbar">
+					<div class="w-bg top_menu">
+						<a href="javascript:void(0)" class="update_fil filter_btn_submit" style="float: right">Update
+							Filter</a>
+						<p><span class="filter_close_btn"><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
+							&nbsp;Filter
+						</p>
+					</div>
+
+					<div class="panel panel-default">
+						<div class="panel-heading filter-head filter-first">Price</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-xs-4" style="padding-right: 3px">
+									<input type="text" class="form-control price_min" placeholder="&#8358; Min">
+								</div>
+								<div class="col-xs-4" style="padding-left:  3px !important; padding-right: 3px;">
+									<input type="text" class="form-control price_max" placeholder="&#8358; Max">
+								</div>
+								<div class="col-xs-4">
+									<input type="submit" class="price-submit" value="Go">
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--Brands-->
+					<?php if (!empty($brands)): ?>
+						<div class="panel panel-default">
+							<div
+								class="panel-heading filter-head">Brand
+								<span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel"
+																						 aria-hidden="true"
+																						 data-target="brand_static_vl"></i></span>
+							</div>
+							<div class="panel-body" id="brand_static_vl">
+								<?php foreach ($brands as $brand) : ?>
+									<div class="carrito-checkbox">
+										<label class="list-label">
+											<input class="filter" type="checkbox" name="filterset"
+												   data-type="brand_name"
+												   data-value="<?= trim($brand->brand_name); ?>"/><?= ucfirst($brand->brand_name); ?>
+											<span class="checkmark"></span>
+										</label>
+									</div>
+									<hr class="panel-line"/>
+								<?php endforeach; ?>
+							</div>
+						</div>
+					<?php endif; ?>
+
+					<!--Main Colour-->
+					<?php if (!empty($colours)) : ?>
+						<div class="panel panel-default">
+							<div
+								class="panel-heading filter-head">Main Colour
+								<span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel"
+																						 aria-hidden="true"
+																						 data-target="color_static_vl"></i></span>
+							</div>
+							<div class="panel-body" id="color_static_vl">
+								<?php foreach ($colours as $colour) : ?>
+									<div class="carrito-checkbox">
+										<label class="list-label">
+											<input class="filter" type="checkbox" name="filterset"
+												   data-type="main_colour"
+												   data-value="<?= trim($colour->colour_name); ?>"/><?= ucfirst($colour->colour_name); ?>
+											<span class="checkmark"></span>
+										</label>
+									</div>
+									<hr class="panel-line"/>
+								<?php endforeach; ?>
+							</div>
+						</div>
+					<?php endif; ?>
+
+					<!--Features-->
+					<?php if ($features) : ?>
+						<?php $x = 1;
+						foreach ($features as $feature => $feature_value) : ?>
+							<div class="panel panel-default">
+								<div
+									class="panel-heading filter-head"><?= preg_replace("/[^A-Za-z 0-9]/", ' ', $feature); ?>
+									<span style="color: #4c4c4c !important; float: right"><i
+											class="fa fa-minus close-panel"
+											aria-hidden="true"
+											data-target="<?= $feature ?>_vl"></i></span>
+								</div>
+								<div class="panel-body" id="<?= $feature ?>_vl">
+									<?php foreach ($feature_value as $key => $value) : ?>
+										<div class="carrito-checkbox">
+											<label class="list-label">
+												<input class="filter" type="checkbox" name="filterset"
+													   data-type="<?= trim($feature); ?>"
+													   data-value="<?= trim(preg_replace("/[^A-Za-z0-9-]/", '_', $value)) ?>"/><?= $value; ?>
+												<span class="checkmark"></span>
+											</label>
+										</div>
+										<hr class="panel-line"/>
+									<?php endforeach; ?>
+								</div>
+							</div>
+						<?php endforeach; ?>
+					<?php endif; ?>
+
+
+				</div>
+				<div id="category_body">
+					<div class="col-md-9">
+						<div class="row row-sm-gap" data-gutter="10">
+							<?php foreach ($products as $product) : ?>
+								<div class="col-md-3">
+									<div class="product product-sm-left ">
+										<ul class="product-labels"></ul>
+										<div class="product-img-wrap">
+											<img class="product-img"
+												 src="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
+												 alt="<?= $product->product_name; ?>"
+												 title="<?= $product->product_name; ?>"/>
+										</div>
+										<a class="product-link"
+										   href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
+										<div class="product-caption">
+											<ul class="product-caption-rating">
+
+												<?php
+												$rating_counts = $this->product->get_rating_counts($product->id);
+												if ($rating_counts) {
+													$overall_rating = product_overall_rating($rating_counts);
+													$rating_rounded = round($overall_rating);
+													for ($i = 1; $i <= $rating_rounded; $i++) {
+														?>
+														<li class="rated"><i class="fa fa-star"></i>
+														</li>
+														<?php
+													}
+													if ($rating_rounded < 5) {
+														for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
+															<li><i class="fa fa-star"></i></li>
+															<?php
+														}
+													}
+												} else {
+													?>
+													<li><i class="fa fa-star"></i></li>
+													<li><i class="fa fa-star"></i></li>
+													<li><i class="fa fa-star"></i></li>
+													<li><i class="fa fa-star"></i></li>
+													<li><i class="fa fa-star"></i></li>
+													<?php
+												}
+												?>
+											</ul>
+											<h5 class="product-caption-title"><?= word_limiter(ucwords($product->product_name), 14, '...'); ?></h5>
+											<h4 class="product-caption-title">
+												<strong>Seller: </strong><?= ucfirst($product->first_name); ?></h4>
+											<div class="product-caption-price">
+												<?php if (!empty($product->discount_price)) : ?> <span
+													class="product-caption-price-old"><?= ngn($product->sale_price); ?></span>
+													<span
+														class="product-caption-price-new"><?= ngn($product->discount_price); ?></span>
+												<?php else : ?>
+
+													<span
+														class="product-caption-price-new"><?= ngn($product->sale_price); ?></span>
+												<?php endif; ?>
+											</div>
+										</div>
+									</div>
+								</div>
+							<?php endforeach; ?>
+						</div>
+					</div><!-- col-md-9 -->
+				</div>
+			</div> <!-- // row -->
+		</div>
+	<?php endif; ?>
 	<div class="gap"></div>
 
 	<?php $this->load->view('landing/resources/footer'); ?>
@@ -463,6 +424,7 @@
 <script>
 	$(document).ready(function () {
 		let _category_body = $('#category_body');
+
 		function doReplaceState(url) {
 			let state = {current_url: url},
 				title = "Onitshamarket";
