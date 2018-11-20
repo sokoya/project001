@@ -12,12 +12,11 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="<?= base_url('assets/landing/css/bootstrap.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/landing/css/font-awesome.css');?>">
-    <?php if( $page == 'category' || $page == 'search' && $this->agent->is_mobile() ) : ?>
+    <?php if( $page == 'mobile-category' || $page == 'mobile-search' && $this->agent->is_mobile() ) : ?>
     <link rel="stylesheet" href="<?= base_url('assets/landing/css/styles-mobile.css'); ?>">
     <?php  else : ?>
     <link rel="stylesheet" href="<?= base_url('assets/landing/css/styles.css'); ?>">
     <?php endif; ?>
-	<link rel="stylesheet" href="<?= base_url('assets/landing/css/styles.css'); ?>">
     
 	<link rel="stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/de-york.css'); ?>" title="de-york" media="all" />
     <link rel="shortcut icon" href="<?= base_url('assets/landing/img/favicon.png'); ?>" type="image/png">
