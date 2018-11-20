@@ -190,7 +190,7 @@
 													<h3 class="panel-title">
 														<div class="form-check">
 															<input class="form-check-input delivery-box" type="radio"
-																   name="selcted_address"
+																   name="selected_address"
 																   id="<?= $address->id; ?>"
 																   value="<?= $address->id; ?>"
 																<?php if ($address->primary_address == 1) echo 'checked' ?> >
