@@ -18,11 +18,14 @@ function bind_market(src, destination) {
 
 $('.continue-btn').on('click', function (e) {
 	e.preventDefault();
+
 	$.ajax({
 		url: base_url + 'checkout/checkout_confirm',
 		method: 'POST',
-		data: {formdata: $('#checkout_form').serialize()},
-		success: function () {
+		dataType: 'json',
+		data: $('#checkout_form').serialize(),
+
+		success: () => {
 			window.location.href = base_url + 'checkout/order_completed';
 			notification_message("Payment Successful redirecting to invoice page", 'fa fa-info-circle', 'success')
 		},
