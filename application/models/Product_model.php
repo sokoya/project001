@@ -581,6 +581,33 @@ Class Product_model extends CI_Model{
         // $this->db->cache_off();
     }
 
+    // Get row
+    // Get a row of a paticular table
+    // Return CI_row
+    function get_row( $table_name, $select ='', $condition = '' ){
+        if( $select != '' ){
+            $this->db->select($select);
+        }
+        if( !empty( $condition ) ){
+            $this->db->where( $condition );
+        }
+        return $this->db->get( $table_name )->row();
+    }
+    /**
+     * @param $table_name
+     * @param array $condition
+     * @return array
+     */
+    function get_results($table_name = '', $select = '' , $condition = '' ){
+        if( $select != '' ){
+            $this->db->select( $select );
+        }
+        if( !empty( $condition) ){
+            $this->db->where( $condition );
+        }
+        return $this->db->get( $table_name )->result();
+    }
+
 
 
 }

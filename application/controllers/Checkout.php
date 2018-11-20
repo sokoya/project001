@@ -18,25 +18,27 @@ class Checkout extends MY_Controller
 		}
 	}
 
-	public function index(){
+    public function index(){
 	    $page_data['page'] = 'checkout';
 		$page_data['title'] = 'Checkout';
 		$this->load->model('user_model', 'user');
 		$page_data['user'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
 		$page_data['addresses'] = $this->user->get_user_billing_address($page_data['user']->id);
-//		$page_data['pickups'] = $this->user->get_pickup_address( $id )
+		$page_data['pickups'] = $this->user->get_pickup_address();
 		$page_data['address_set'] = $this->user->is_address_set($page_data['user']->id);
 		$result = $this->user->get_default_address_price($page_data['user']->id);
 		$page_data['delivery_charge'] = (  !$result ) ? 500 : $result;
 		// Lets make a check that the product is valid to be here
+        $message = '';
 		foreach( $this->cart->contents() as $product ){
 			$detail = $this->product->get_cart_details($product['id']);
 			$variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
 			if($variation_detail->quantity < 1 || $product['qty'] > $variation_detail->quantity || in_array( $detail->product_status, array('suspended', 'blocked', 'pending' ))){
 				// we have an issue with this product
-				$this->cart->remove($product['rowid']);
+                $message .= "< br/> Sorry, the product " . $product['name']. " is presently out of stock";
 			}
 		}
+        $this->session->set_flashdata('error_msg', $message);
 		$items = $this->cart->total_items();
 		if( empty($items) ) redirect( base_url() );
 		$this->load->view('landing/checkout', $page_data);
@@ -92,6 +94,32 @@ class Checkout extends MY_Controller
 		}
 		exit;
 	}
+
+	function checkout_confirm() {
+	    if( $this->input->is_ajax_request() ){
+            $billing_area = cleanit( $this->input->post('selected_address') );
+            $billing_amount = $this->product->get_row("area", "price", "(WHERE id = {$billing_area})");
+            if( !$billing_amount->price ) $billing_amount = 500; // Default Billnng Address
+            // check products status in cart
+            $return['status'] = 'error';
+            foreach( $this->cart->contents() as $product ){
+                $detail = $this->product->get_cart_details($product['id']);
+                $variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
+                if($variation_detail->quantity < 1 || $product['qty'] > $variation_detail->quantity || in_array( $detail->product_status, array('suspended', 'blocked', 'pending' ))){
+                    // we have an issue with this product
+                    $return['message'][] = "Sorry, the product " . $product['name']. " is out of stock.";
+                }
+            }
+            if( !empty($return['message']) ){
+                echo json_encode( $return );
+                exit;
+            }else{
+
+            }
+        }else{
+	        redirect(base_url());
+        }
+    }
 
 	public function order_completed(){
         $page_data['page'] = 'order_completed';

@@ -10,6 +10,7 @@
 	<div class="gap"></div>
 	<div class="container">
 		<h4 class="pr-over" style="font-size: 16px; color: #a0a0a0">Checkout</h4>
+        <?php $this->load->view('msg_view'); ?>
 		<div id="status"></div>
 		<div class="row">
 			<div class="col-md-8">
@@ -100,20 +101,19 @@
 					</div>
 					<div class="panel-body" id="pickup_address" style="display: none;">
 						<div class="row" id="pickup_address_box">
+                            <?php foreach($pickups as $pickup) : ?>
 							<div class="col-md-6">
-								<div class="panel panel-default custom-panel pickup-address
-											custom-panel-active"
-									 data-id="
-									">
+								<div class="panel panel-default custom-panel pickup-address custom-panel-active"
+									 data-id="<?= $pickup->id; ?>">
 									<div class="panel-heading sub-custom-panel-head">
 										<h3 class="panel-title">
 											<div class="form-check">
 												<input class="form-check-input delivery-box" type="radio"
 													   name="selcted_address"
-													   id="pick_id"
+													   id="pickup_id_<?= $pickup->id; ?>"
 													   value="Pickup Address"
 													   checked>
-												<label class="form-check-label" for="pick_id">
+												<label class="form-check-label" for="pickup_id_<?= $pickup->id?>">
 													Select this pickup address
 												</label>
 											</div>
@@ -121,16 +121,23 @@
 									</div>
 									<div class="panel-body">
 										<div style="height:28px;">
-											<p class="panel-details"><i
-													class="fa fa-map-marker"></i>530A Aina Omole Phase 2 Lagos
-											</p>
+                                            <p class="panel-details"><i
+                                                        class="fa fa-address-card"></i><strong><?= $pickup->title;?></strong>
+                                            </p>
 										</div>
-										<p class="panel-details"><i
-												class="fa fa-phone"></i>+234 800 324 0000
+                                        <p class="panel-details"><i
+                                                    class="fa fa-map-marker"></i><?= $pickup->address;?>
+                                        </p>
+                                        <p class="panel-details"><i
+												class="fa fa-phone"></i><?= $pickup->phones; ?>
 										</p>
+                                        <p class="panel-details"><i
+                                                    class="fa fa-mail-reply"></i><?= $pickup->emails; ?>
+                                        </p>
 									</div>
 								</div>
 							</div>
+                            <?php endforeach;?>
 						</div>
 						<div class="row">
 							<div class="col-md-6">
@@ -253,13 +260,13 @@
 										<td>
 											<a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
 												<img class="panel-pr-image"
-													 src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image); ?> ?>"
+													 src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image); ?>"
 													 alt="Carrito marketplace <?= $product['name']; ?>"
 													 title="<?= $product['name']; ?>"/>
 											</a>
 										</td>
 										<td class="parent-block panel-product-title"><?= word_limiter(htmlentities($product['name']), 7, '...'); ?>
-											<br/><span>Sold by <span><?= $detail->name; ?></span> </span>
+											<br/><span>Seller <span><?= $detail->name; ?></span> </span>
 										</td>
 										<td class="parent-block panel-product-quantity"><?= $product['qty']; ?>
 											item(s)
