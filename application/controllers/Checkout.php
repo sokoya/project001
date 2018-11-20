@@ -118,7 +118,7 @@ class Checkout extends MY_Controller
                 $data['address_id'] = $address_id;
                 $data['amount'] = $product['subtotal'];
                 $data['buyer_id'] = base64_decode($this->session->userdata('logged_id'));
-                
+
                 if($variation_detail->quantity < 1 || $product['qty'] > $variation_detail->quantity || in_array( $detail->product_status, array('suspended', 'blocked', 'pending' ))){
                     // we have an issue with this product
                     $return['message'][] = "Sorry, the product " . $product['name']. " is out of stock.";
