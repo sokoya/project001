@@ -92,20 +92,19 @@
 					</div>
 					<div class="panel-body" id="pickup_address" style="display: none;">
 						<div class="row" id="pickup_address_box">
+                            <?php foreach($pickups as $pickup) : ?>
 							<div class="col-md-6">
-								<div class="panel panel-default custom-panel pickup-address
-											custom-panel-active"
-									 data-id="
-									">
+								<div class="panel panel-default custom-panel pickup-address custom-panel-active"
+									 data-id="<?= $pickup->id; ?>">
 									<div class="panel-heading sub-custom-panel-head">
 										<h3 class="panel-title">
 											<div class="form-check">
 												<input class="form-check-input delivery-box" type="radio"
 													   name="selcted_address"
-													   id="pick_id"
+													   id="pickup_id_<?= $pickup->id; ?>"
 													   value="Pickup Address"
 													   checked>
-												<label class="form-check-label" for="pick_id">
+												<label class="form-check-label" for="pickup_id_<?= $pickup->id?>">
 													Select this pickup address
 												</label>
 											</div>
@@ -113,16 +112,23 @@
 									</div>
 									<div class="panel-body">
 										<div style="height:28px;">
-											<p class="panel-details"><i
-													class="fa fa-map-marker"></i>530A Aina Omole Phase 2 Lagos
-											</p>
+                                            <p class="panel-details"><i
+                                                        class="fa fa-address-card"></i><strong><?= $pickup->title;?></strong>
+                                            </p>
 										</div>
-										<p class="panel-details"><i
-												class="fa fa-phone"></i>+234 800 324 0000
+                                        <p class="panel-details"><i
+                                                    class="fa fa-map-marker"></i><?= $pickup->address;?>
+                                        </p>
+                                        <p class="panel-details"><i
+												class="fa fa-phone"></i><?= $pickup->phones; ?>
 										</p>
+                                        <p class="panel-details"><i
+                                                    class="fa fa-mail-reply"></i><?= $pickup->emails; ?>
+                                        </p>
 									</div>
 								</div>
 							</div>
+                            <?php endforeach;?>
 						</div>
 					</div>
 					<div class="panel-body" id="delivery_address">

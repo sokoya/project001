@@ -247,7 +247,8 @@ Class User_model extends CI_Model{
     }
 
     function get_pickup_address(){
-        $this->db->get('pickup_address')->result();
+        $this->db->where('enable', 1);
+        return $this->db->get('pickup_address')->result();
     }
 
 
