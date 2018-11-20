@@ -194,13 +194,10 @@ class Ajax extends CI_Controller
 	// Quick view add 
 	function quick_view_add(){
        if( $this->input->is_ajax_request() && $this->input->post() ){
-           $variation = $this->input->post('variation');
-           $variation = empty($variation) ? '' : $this->input->post('variation');
            $name = cleanit($this->input->post('product_name'));
            $name = preg_replace('/^['.$this->product_name_rules.']+$/i', " ", $name);
            // Added to make checks if product still remains
            $variation_id = $this->input->post('variation_id', true);
-
            $data = array(
                'id' => $this->input->post('product_id'),
                'qty' => $this->input->post('quantity'),
@@ -208,13 +205,10 @@ class Ajax extends CI_Controller
                'name' => $name,
                'options' =>
                    array(
-                       'variation' => $variation,
                        'seller' => $this->input->post('seller'),
                        'variation_id' => $variation_id
                    )
            );
-           var_dump( $data );
-           exit;
            if( $this->cart->insert($data)){
                echo true;
                exit;
@@ -226,9 +220,6 @@ class Ajax extends CI_Controller
            redirect(base_url());
        }
     }
-
-
-
     /**
      * @param $vid - variation id
      * @return JSON
@@ -252,8 +243,6 @@ class Ajax extends CI_Controller
     // Add product to cart
     function add_to_cart(){
        if( $this->input->is_ajax_request() && $this->input->post() ){
-           $variation = $this->input->post('variation');
-           $variation = empty($variation) ? '' : $this->input->post('variation');
            $name = cleanit($this->input->post('product_name'));
            $name = preg_replace('/^['.$this->product_name_rules.']+$/i', " ", $name);
            // Added to make checks if product still remains
@@ -265,13 +254,10 @@ class Ajax extends CI_Controller
                'name' => $name,
                'options' =>
                    array(
-                       'variation' => $variation,
                        'seller' => base64_decode($this->input->post('seller')),
                        'variation_id' => $variation_id
                    )
            );
-           var_dump( $data );
-           exit;
            if( $this->cart->insert($data)){
                echo true;
                exit;
