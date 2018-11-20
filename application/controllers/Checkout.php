@@ -134,6 +134,9 @@ class Checkout extends MY_Controller
             if( count( $error ) > 0 ){
                 $this->session->set_flashdata('error_msg', $message);
                 redirect(base_url('cart'));
+            }else{
+                echo 'success';
+                exit;
             }
         }else{
 	        redirect(base_url());
