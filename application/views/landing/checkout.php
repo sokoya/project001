@@ -252,7 +252,7 @@
 					<div class="panel-heading custom-panel-head">
 						<h3 class="panel-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp; Review Order</h3>
 					</div>
-					<div class="panel-body">
+					<div class="panel-body" id="review_order">
 						<div class="panel panel-default ">
 							<table class="table">
 								<tbody>
@@ -270,13 +270,13 @@
 													 title="<?= $product['name']; ?>"/>
 											</a>
 										</td>
-										<td class="parent-block panel-product-title"><?= word_limiter(htmlentities($product['name']), 7, '...'); ?>
-											<br/><span>Seller <span><?= $detail->name; ?></span> </span>
+										<td class="panel-product-title"><?= word_limiter(htmlentities($product['name']), 7, '...'); ?>
+											<br/><span>Seller :<span><?= $detail->name; ?></span> </span>
 										</td>
-										<td class="parent-block panel-product-quantity"><?= $product['qty']; ?>
+										<td class="panel-product-quantity"><?= $product['qty']; ?>
 											item(s)
 										</td>
-										<td class="parent-block panel-product-price">
+										<td class="panel-product-price">
 											<span class="pr-price" data-amount="<?= $product['subtotal']; ?>">
 												<?php
 												echo ngn($product['subtotal']);
@@ -284,9 +284,6 @@
 												?>	
 											</span>
 										</td>
-										<td class="parent-block panel-product-action"><a href="javascript:void(0)">Remove
-												Item</a><br/>
-											<a href="javascript:void(0)">Save for later</a></td>
 									</tr>
 								<?php endforeach; ?>
 								</tbody>
