@@ -110,7 +110,7 @@
                                                 <h3 class="panel-title">
                                                     <div class="form-check">
                                                         <input class="form-check-input delivery-box" type="radio"
-                                                               name="selcted_address"
+                                                               name="pickup_address"
                                                                id="pickup_id_<?= $pickup->id; ?>"
                                                                value="Pickup Address"
                                                                checked>
@@ -189,7 +189,7 @@
 												<div class="panel-heading sub-custom-panel-head">
 													<h3 class="panel-title">
 														<div class="form-check">
-															<input class="form-check-input delivery-box" type="radio"
+															<input class="form-check-input delivery-box address-input" type="radio"
 																   name="selected_address"
 																   id="<?= $address->id; ?>"
 																   value="<?= $address->id; ?>"
