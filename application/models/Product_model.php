@@ -434,7 +434,7 @@ Class Product_model extends CI_Model{
      */
     function generate_code($table = 'orders', $field = 'order_code'){
         do {
-            $number = random_string('nozero', 6);
+            $number = random_string('nozero', 8);
             $this->db->where( $field, $number);
             $this->db->from($table);
             $count = $this->db->count_all_results();

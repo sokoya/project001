@@ -96,39 +96,42 @@ class Checkout extends MY_Controller
 	}
 
 	function checkout_confirm() {
-//	    echo json_encode( $_POST['formdata'] );
-//	    exit;
 	    if( $this->input->is_ajax_request() ){
-//	        var_dump( $_POST);
-//	        exit();
             $address_id = cleanit( $this->input->post('selected_address') );
-            $billing_amount = $this->product->get_billing_amount($address_id);
-            if( !$billing_amount ) $billing_amount = 500; // Default Billnng Address
-            // check products status in cart
-            $return['status'] = 'error';
+//            $billing_amount = $this->product->get_billing_amount($address_id);
+//            if( !$billing_amount ) $billing_amount = 500; // Default Billnng Address
+            $message = ''; $error = 0;
             $data = array();
+            $order_code = $this->product->generate_code('orders', 'order_code');
+            $order_date = get_now();
+            $order_status = 'ordered';
+            $payment_method = 1;
             foreach( $this->cart->contents() as $product ){
                 $detail = $this->product->get_cart_details($product['id']);
                 $variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
-                // lets use the opportunity to gather our order table info
-                $data['seller_id'] = $product['options']['seller'];
-                $data['product_id'] = $product['id'];
-                $data['qty'] = $product['qty'];
-                $data['product_variation_id'] = $product['options']['variation_id'];
-                $data['address_id'] = $address_id;
-                $data['amount'] = $product['subtotal'];
-                $data['buyer_id'] = base64_decode($this->session->userdata('logged_id'));
 
                 if($variation_detail->quantity < 1 || $product['qty'] > $variation_detail->quantity || in_array( $detail->product_status, array('suspended', 'blocked', 'pending' ))){
-                    // we have an issue with this product
-                    $return['message'][] = "Sorry, the product " . $product['name']. " is out of stock.";
+                    $error++;
+                    $message .= "Sorry the product " . $product['name'] . " is out of stock <br />";
+                }else{
+                    // lets use the opportunity to gather our order table for testing purpose.
+                    $data['order_code'] = $order_code;
+                    $data['order_date'] = $order_date;
+                    $data['payment_method'] = $payment_method;
+                    $data['status'] = $order_status;
+                    $data['seller_id'] = $product['options']['seller'];
+                    $data['product_id'] = $product['id'];
+                    $data['qty'] = $product['qty'];
+                    $data['product_variation_id'] = $product['options']['variation_id'];
+                    $data['address_id'] = $address_id;
+                    $data['amount'] = $product['subtotal'];
+                    $this->product->insert_data('orders', $data);
                 }
+                unset( $data );
             }
-            if( !empty($return['message']) ){
-                echo json_encode( $return );
-                exit;
-            }else{
-
+            if( count( $error ) > 0 ){
+                $this->session->set_flashdata('error_msg', $message);
+                redirect(base_url('cart'));
             }
         }else{
 	        redirect(base_url());

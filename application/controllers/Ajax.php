@@ -200,6 +200,7 @@ class Ajax extends CI_Controller
            $name = preg_replace('/^['.$this->product_name_rules.']+$/i', " ", $name);
            // Added to make checks if product still remains
            $variation_id = $this->input->post('variation_id', true);
+
            $data = array(
                'id' => $this->input->post('product_id'),
                'qty' => $this->input->post('quantity'),
@@ -212,6 +213,8 @@ class Ajax extends CI_Controller
                        'variation_id' => $variation_id
                    )
            );
+           var_dump( $data );
+           exit;
            if( $this->cart->insert($data)){
                echo true;
                exit;
@@ -267,6 +270,8 @@ class Ajax extends CI_Controller
                        'variation_id' => $variation_id
                    )
            );
+           var_dump( $data );
+           exit;
            if( $this->cart->insert($data)){
                echo true;
                exit;

@@ -100,6 +100,7 @@ class Product extends MY_Controller {
 		if( !$this->agent->is_mobile()){
 			$this->load->view('landing/category', $page_data);
 		}else{
+            $page_data['page'] = 'mobile-category';
 			$this->load->view('landing/mobile-category', $page_data);
 		}
 	}
@@ -280,6 +281,7 @@ class Product extends MY_Controller {
         if( !$this->agent->is_mobile()){
             $this->load->view('landing/search', $page_data);
         }else{
+            $page_data['page'] = 'mobile-search';
             $this->load->view('landing/mobile-search', $page_data);
         }
     }
