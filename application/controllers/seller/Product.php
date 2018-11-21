@@ -348,7 +348,7 @@ class Product extends CI_Controller{
             $page_data['specifications'] = $this->seller->get_specifications( $page_data['product']->subcategory);
             $page_data['variations'] = $this->seller->get_product_variation( $id );
             $page_data['product_id'] = $id;
-            $page_data['brands'] = $this->seller->get_brands();
+            $page_data['brands'] = $this->seller->get_results('brands');
             $this->load->view('seller/edit', $page_data);
         }else{            
             // Process
@@ -526,4 +526,6 @@ class Product extends CI_Controller{
         echo json_encode($result);
         exit;
     }
+
+
 }
