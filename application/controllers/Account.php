@@ -16,7 +16,6 @@ class Account extends MY_Controller {
             if( !empty($referred_from) ) redirect($referred_from);
             redirect(base_url());
         } 
-        $this->load->helper('query_helper');
     }
 
 

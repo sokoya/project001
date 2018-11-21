@@ -121,7 +121,6 @@ class Checkout extends MY_Controller
                     $data['order_date'] = $order_date;
                     $data['payment_method'] = $payment_method;
                     $data['status'] = $order_status;
-                    $data['seller_id'] = $product['options']['seller'];
                     $data['product_id'] = $product['id'];
                     $data['qty'] = $product['qty'];
                     $data['product_variation_id'] = $product['options']['variation_id'];
