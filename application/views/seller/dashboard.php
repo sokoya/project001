@@ -40,15 +40,11 @@
                                 <!--Sparkline pie chart -->
                                 <div>
                                     <div class="pad-all">
-                                        <p class="mar-no">
-                                            <span class="pull-right text-bold">34 Views</span> iPhone XS
-                                        </p>
-                                        <p class="mar-no">
-                                            <span class="pull-right text-bold">79 Views</span> Samsung S9+
-                                        </p>
-                                        <p class="mar-no">
-                                            <span class="pull-right text-bold">68 Views</span> Nikon DSLR Pro 4590
-                                        </p>
+                                        <?php if($top_views) : foreach( $top_views as $top_view ) : ?>
+                                            <p class="mar-no">
+                                                <span class="pull-right text-bold"><?= $top_view->views; ?></span> <?= character_limiter($top_view->product_name, 30);?>
+                                            </p>
+                                        <?php  endforeach; endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -109,6 +105,9 @@
 						<div id="demo-panel-network" class="panel">
 							<div class="panel-heading">
 								<h3 class="panel-title">Sales Track</h3>
+                                <?php if(!$sales_chart) : ?>
+                                    <h3 class="text-danger">No Data Available!</h3>
+                                <?php endif; ?>
 							</div>
 
 							<!--Chart information-->
@@ -375,12 +374,10 @@
 		// Chart data records -- each entry in this array corresponds to a point on
 		// the chart.
 		data: [
-			{month: '2018-09', value: 10},
-			{month: '2018-10', value: 80},
-			{month: '2018-11', value: 40},
-			{month: '2018-12', value: 60},
+            <?php foreach( $sales_chart as $chart) : ?>
+                {month: '<?= $chart->omonth; ?>', value: <?= $chart->sales; ?>},
+            <?php endforeach;?>
 		],
-
 		// The name of the data record attribute that contains x-values.
 		xkey: 'month',
 		// A list of names of data record attributes that contain y-values.
@@ -390,7 +387,6 @@
 		xLabelFormat: function (x) {
 			return months[x.getMonth()];
 		},
-
 		// Labels for the ykeys -- will be displayed when you hover over the
 		// chart.
 		labels: ['Sales']
