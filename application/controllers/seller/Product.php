@@ -150,7 +150,6 @@ class Product extends CI_Controller{
             // Since we are getting the specification name; we loop through the specification json
             // SELECT id FROM specifications WHERE spec_name = 'POST_KEY'
             $attributes = array();
-            $y = 0;
             foreach($_POST as $post => $value ){
                 if( substr_compare('attribute_',$post,0,10 ) == 0 ){
                     // we found a match
@@ -283,6 +282,11 @@ class Product extends CI_Controller{
     function append_category(){
         if( $this->input->is_ajax_request() && $this->input->post() ){
             $id = $this->input->post('id');
+            if( $id == '' ){
+                $return = array();
+                echo json_encode( $return );
+                exit;
+            }
             $results = $this->seller->get_category_children($id);
             $return = array();
             foreach( $results as $result ){

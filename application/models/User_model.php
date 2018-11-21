@@ -185,7 +185,7 @@ Class User_model extends CI_Model{
      * @return mixed
      */
     function get_my_orders($id ){
-        $query = $this->db->query("SELECT p.id as pid, p.name, g.image_name, o.order_date, o.order_code, o.status, o.product_desc
+        $query = $this->db->query("SELECT p.id as pid, p.name, g.image_name, o.order_date, o.order_code, o.status
         FROM orders o
         JOIN (SELECT prod.id AS id, prod.product_name AS name FROM products AS prod) AS p ON (p.id = o.product_id)
         JOIN product_gallery AS g ON (o.product_id = g.product_id AND g.featured_image = 1 )

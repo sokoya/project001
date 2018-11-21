@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 17, 2018 at 04:15 PM
+-- Generation Time: Nov 21, 2018 at 11:20 AM
 -- Server version: 5.7.11
--- PHP Version: 7.0.3
+-- PHP Version: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -35,20 +35,23 @@ CREATE TABLE `categories` (
   `description` varchar(255) NOT NULL,
   `specifications` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `name` varchar(255) NOT NULL,
+  `commission` int(11) NOT NULL,
+  `variation_name` varchar(255) NOT NULL,
+  `variation_options` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `icon`, `pid`, `slug`, `title`, `description`, `specifications`, `image`, `name`) VALUES
-(1, 'bolt', 0, 'electronics', 'electronics', 'Electronics Category', '["1","2","3"]', '42cce4ed60f67ce3267ce329202f898c.png', 'Electronics'),
-(2, 'mobile', 0, 'phone-tablets', 'Buy Great Phones', 'Buy a phone today to enjoy a discount', '', '1e89c9d383da60f948263f26ff443010.jpg', 'Phone &amp; Tablets'),
-(3, 'laptop', 0, 'computing', 'Great Computing Systems', 'Great Computing Systems', '', '7e65e8743eceacb37ce53397158e96f9.jpg', 'Computing'),
-(4, 'electronic', 1, 'television-video', 'Television & Video Items sold here', 'Television & Video Items sold here', '', 'df4b74ef3ee289297464d833182b2442.png', 'Television & Video'),
-(5, '', 4, 'plasma-tv-s', 'Plasma Tv\'s Group sales now live', 'Plasma Tv\'s Group sales now live', '', '308f2deed798447058d106e38301005b.png', 'Plasma Tv\'s'),
-(6, '', 5, 'lite-desk', 'Lite Desk', 'Buy a Lite Desk television today', '', '4fb6bd4e30a7d2bc9d3b5d10ce764fbd.png', 'Lite Desk');
+INSERT INTO `categories` (`id`, `icon`, `pid`, `slug`, `title`, `description`, `specifications`, `image`, `name`, `commission`, `variation_name`, `variation_options`) VALUES
+(1, 'bolt', 0, 'electronics', 'electronics', 'Electronics Category', '["1","2","3"]', '42cce4ed60f67ce3267ce329202f898c.png', 'Electronics', 0, '', ''),
+(2, 'mobile', 0, 'phone-tablets', 'Buy Great Phones', 'Buy a phone today to enjoy a discount', '', '1e89c9d383da60f948263f26ff443010.jpg', 'Phone &amp; Tablets', 0, '', ''),
+(3, 'laptop', 0, 'computing', 'Great Computing Systems', 'Great Computing Systems', '', '7e65e8743eceacb37ce53397158e96f9.jpg', 'Computing', 0, '', ''),
+(4, 'electronic', 1, 'television-video', 'Television & Video Items sold here', 'Television & Video Items sold here', '["3", "2"]', 'df4b74ef3ee289297464d833182b2442.png', 'Television & Video', 0, '', ''),
+(5, '', 4, 'plasma-tv-s', 'Plasma Tv\'s Group sales now live', 'Plasma Tv\'s Group sales now live', '', '308f2deed798447058d106e38301005b.png', 'Plasma Tv\'s', 0, '', ''),
+(6, '', 5, 'lite-desk', 'Lite Desk', 'Buy a Lite Desk television today', '["3"]', '4fb6bd4e30a7d2bc9d3b5d10ce764fbd.png', 'Lite Desk', 0, '', '');
 
 --
 -- Indexes for dumped tables
