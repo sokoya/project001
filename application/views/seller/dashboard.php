@@ -27,81 +27,81 @@
 			<!--===================================================-->
 			<div id="page-content">
 
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="panel panel-bordered-info panel-colorful media middle pad-all">
-                            <div class="media-left">
-                                <div class="pad-hor">
-                                    <i class="demo-psi-cart-coin icon-3x"></i>
-                                </div>
-                            </div>
-                            <div class="media-body">
-                                <p class="text-2x mar-no text-semibold">Top Viewed Products</p>
-                                <!--Sparkline pie chart -->
-                                <div>
-                                    <div class="pad-all">
-                                        <p class="mar-no">
-                                            <span class="pull-right text-bold">34 Views</span> iPhone XS
-                                        </p>
-                                        <p class="mar-no">
-                                            <span class="pull-right text-bold">79 Views</span> Samsung S9+
-                                        </p>
-                                        <p class="mar-no">
-                                            <span class="pull-right text-bold">68 Views</span> Nikon DSLR Pro 4590
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="panel panel-bordered-mint panel-colorful media middle pad-all">
-                            <div class="media-left">
-                                <div class="pad-hor">
-                                    <i class="demo-psi-credit-card-2 icon-3x"></i>
-                                </div>
-                            </div>
-                            <div class="media-body">
-                                <p class="text-2x mar-no text-semibold">2841</p>
-                                <p class="mar-no">Sales</p>
-                                <!--Sparkline pie chart -->
-                                <div>
-                                    <div class="pad-all">
-                                        <p class="mar-no">
-                                            <span class="pull-right text-bold">34</span> Completed
-                                        </p>
-                                        <p class="mar-no">
-                                            <span class="pull-right text-bold">79</span> Total
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="panel panel-bordered-purple panel-colorful media middle pad-all">
-                            <div class="media-left">
-                                <div class="pad-hor">
-                                    <i class="demo-psi-refresh icon-3x"></i>
-                                </div>
-                            </div>
-                            <div class="media-body">
-                                <p class="text-2x mar-no text-semibold">1</p>
-                                <p class="mar-no">Disputes</p>
-                                <!--Sparkline pie chart -->
-                                <div>
-                                    <div class="pad-all">
-                                        <p class="mar-no">
-                                            <span class="pull-right text-bold">34</span> Completed
-                                        </p>
-                                        <p class="mar-no">
-                                            <span class="pull-right text-bold">79</span> Total
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="panel panel-bordered-info panel-colorful media middle pad-all">
+							<div class="media-left">
+								<div class="pad-hor">
+									<i class="demo-psi-cart-coin icon-3x"></i>
+								</div>
+							</div>
+							<div class="media-body">
+								<p class="text-2x mar-no text-semibold">Top Viewed Products</p>
+								<!--Sparkline pie chart -->
+								<div>
+									<div class="pad-all">
+										<p class="mar-no">
+											<span class="pull-right text-bold">34 Views</span> iPhone XS
+										</p>
+										<p class="mar-no">
+											<span class="pull-right text-bold">79 Views</span> Samsung S9+
+										</p>
+										<p class="mar-no">
+											<span class="pull-right text-bold">68 Views</span> Nikon DSLR Pro 4590
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="panel panel-bordered-mint panel-colorful media middle pad-all">
+							<div class="media-left">
+								<div class="pad-hor">
+									<i class="demo-psi-credit-card-2 icon-3x"></i>
+								</div>
+							</div>
+							<div class="media-body">
+								<p class="text-2x mar-no text-semibold">2841</p>
+								<p class="mar-no">Sales</p>
+								<!--Sparkline pie chart -->
+								<div>
+									<div class="pad-all">
+										<p class="mar-no">
+											<span class="pull-right text-bold">34</span> Completed
+										</p>
+										<p class="mar-no">
+											<span class="pull-right text-bold">79</span> Total
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="panel panel-bordered-purple panel-colorful media middle pad-all">
+							<div class="media-left">
+								<div class="pad-hor">
+									<i class="demo-psi-refresh icon-3x"></i>
+								</div>
+							</div>
+							<div class="media-body">
+								<p class="text-2x mar-no text-semibold">1</p>
+								<p class="mar-no">Disputes</p>
+								<!--Sparkline pie chart -->
+								<div>
+									<div class="pad-all">
+										<p class="mar-no">
+											<span class="pull-right text-bold">34</span> Completed
+										</p>
+										<p class="mar-no">
+											<span class="pull-right text-bold">79</span> Total
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
 				</div>
 				<div class="row">
@@ -113,9 +113,7 @@
 
 							<!--Chart information-->
 							<div class="panel-body">
-								<div class="pad-all">
-									<div id="sellerchart" style="height: 250px; margin-bottom: 40px;"></div>
-								</div>
+								<div id="sellerchart" style="height: 250px; margin-bottom: 40px;"></div>
 
 								<div class="row">
 									<div class="col-lg-3">
@@ -375,10 +373,12 @@
 		// Chart data records -- each entry in this array corresponds to a point on
 		// the chart.
 		data: [
-			{month: '2018-09', value: 10},
-			{month: '2018-10', value: 80},
-			{month: '2018-11', value: 40},
-			{month: '2018-12', value: 60},
+			{month: '2018-08', value: 10},
+			{month: '2018-09', value: 140},
+			{month: '2018-09', value: 70},
+			{month: '2018-10', value: 180},
+			{month: '2018-11', value: 60},
+			{month: '2018-12', value: 160},
 		],
 
 		// The name of the data record attribute that contains x-values.
