@@ -36,33 +36,19 @@
                                 </div>
                             </div>
                             <div class="media-body">
-                                <p class="text-2x mar-no text-semibold">241</p>
-                                <p class="mar-no">Orders</p>
+                                <p class="text-2x mar-no text-semibold">Top Viewed Products</p>
                                 <!--Sparkline pie chart -->
                                 <div>
                                     <div class="pad-all">
                                         <p class="mar-no">
-                                            <span class="pull-right text-bold">34</span> Completed
+                                            <span class="pull-right text-bold">34 Views</span> iPhone XS
                                         </p>
                                         <p class="mar-no">
-                                            <span class="pull-right text-bold">79</span> Total
+                                            <span class="pull-right text-bold">79 Views</span> Samsung S9+
                                         </p>
-                                    </div>
-                                    <div class="pad-all">
-                                        <div class="pad-btm">
-                                            <div class="progress progress-sm">
-                                                <div style="width: 45%;" class="progress-bar progress-bar-info">
-                                                    <span class="sr-only">45%</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="pad-btm">
-                                            <div class="progress progress-sm">
-                                                <div style="width: 89%;" class="progress-bar progress-bar-info">
-                                                    <span class="sr-only">89%</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <p class="mar-no">
+                                            <span class="pull-right text-bold">68 Views</span> Nikon DSLR Pro 4590
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -88,22 +74,6 @@
                                             <span class="pull-right text-bold">79</span> Total
                                         </p>
                                     </div>
-                                    <div class="pad-all">
-                                        <div class="pad-btm">
-                                            <div class="progress progress-sm">
-                                                <div style="width: 45%;" class="progress-bar progress-bar-mint">
-                                                    <span class="sr-only">45%</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="pad-btm">
-                                            <div class="progress progress-sm">
-                                                <div style="width: 89%;" class="progress-bar progress-bar-mint">
-                                                    <span class="sr-only">89%</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -127,22 +97,6 @@
                                         <p class="mar-no">
                                             <span class="pull-right text-bold">79</span> Total
                                         </p>
-                                    </div>
-                                    <div class="pad-all">
-                                        <div class="pad-btm">
-                                            <div class="progress progress-sm">
-                                                <div style="width: 45%;" class="progress-bar progress-bar-purple">
-                                                    <span class="sr-only">45%</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="pad-btm">
-                                            <div class="progress progress-sm">
-                                                <div style="width: 89%;" class="progress-bar progress-bar-purple">
-                                                    <span class="sr-only">89%</span>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
