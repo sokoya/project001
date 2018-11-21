@@ -255,12 +255,24 @@ Class Product_model extends CI_Model{
                 // check for brand name
                 if( isset($gets['brand_name']) && !empty($gets['brand_name'])) {
                     $brand_name = xss_clean($gets['brand_name']);
-                    $select_query .= " ( AND p.brand_name = '{$brand_name}') "; unset($gets['brand_name']);
+                    $brands = explode(',', $brand_name);
+                    if( count($brands) > 1 ){
+                        $select_query .= " AND p.brand_name IN ('".implode("','",$brands)."') ";
+                    }else{
+                        $select_query .= " AND p.brand_name = '{$brand_name}' "; 
+                    }
+                    unset($gets['brand_name']);
                 }
                 // check for main colour
                 if( isset($gets['main_colour']) && !empty($gets['main_colour']) ){
                     $main_colour = xss_clean($gets['main_colour']);
-                    $$select_query .= " (AND p.brand_name = '{$main_colour}') "; unset($gets['main_colour']);
+                    $colours = explode(',', $main_colour);
+                    if( count( $colours ) ){
+                        $select_query .= " AND p.main_colour IN ('".implode("','",$colours)."') ";
+                    }else{
+                        $select_query .= " AND p.main_colour = '{$main_colour}' "; 
+                    }
+                    unset($gets['main_colour']);
                 }
                 // unset the page key
                 unset( $gets['page'] );
@@ -271,6 +283,7 @@ Class Product_model extends CI_Model{
                     foreach( $gets as $key => $value ){
                         $explode = explode(',', $value);
                         if( count($explode) > 1 ){
+
                             $select_query .= " OR ( ";
                             $array_value = array_values($explode);
                             $last = end($array_value);
@@ -338,20 +351,19 @@ Class Product_model extends CI_Model{
         if( $search_like != '' ){
             if( $category != '' ){
                 if( $this->check_slug_availability($category) ){
-                    $id = $this->category_id( $category);
-                    $select_query .= " WHERE category_id = {$id} AND product_name LIKE '%{$search_like}%'";
-                    $select_query .= " GROUP BY `brand_name` ORDER BY `brand_name` ";
+                    $array = $this->slug($category);
+                    $select_query .= " WHERE p.category_id IN ('".implode("','",$array)."') GROUP BY `brand_name` ORDER BY `brand_name` ";
+                    // die( $select_query);
                     return $this->db->query( $select_query )->result();
                 }
             }else{
-                $select_query .= " WHERE product_name LIKE '%{$search_like}%'";
-                $select_query .= " GROUP BY `brand_name` ORDER BY `brand_name` ";
+                $select_query .= " WHERE product_name LIKE '%{$search_like}%' GROUP BY `brand_name` ORDER BY `brand_name` ";
                 return $this->db->query( $select_query )->result();
             }
         }else{
             if( $this->check_slug_availability($category)) {
-                $id = $this->category_id( $category);
-                $select_query .= " WHERE p.category_id = {$id}";
+                $array = $this->slug($category);
+                $select_query .= " WHERE p.category_id IN ('".implode("','",$array)."') GROUP BY `brand_name` ORDER BY `brand_name` ";
                 return $this->db->query( $select_query )->result();
             }
         }
@@ -365,20 +377,18 @@ Class Product_model extends CI_Model{
         if( $search_like != '' ){
             if( $category != '' ){
                 if( $this->check_slug_availability( $category )) {
-                    $id = $this->category_id( $category);
-                    $select_query .= " WHERE category_id = {$id} AND product_name LIKE '%{$search_like}%'";
-                    $select_query .= " GROUP BY `colour_name` ORDER BY `colour_name` ";
+                    $array = $this->slug($category);
+                    $select_query .= " WHERE p.category_id IN ('".implode("','",$array)."') AND p.product_name LIKE '%{$search_like}%' GROUP BY p.`colour_name` ORDER BY p.`colour_name` ";
                     return $this->db->query( $select_query )->result();
                 }
             }else{
-                $select_query .= " WHERE product_name LIKE '%{$search_like}%'";
-                $select_query .= " GROUP BY `colour_name` ORDER BY `colour_name` ";
+                $select_query .= " WHERE p.product_name LIKE '%{$search_like}%' GROUP BY p.`colour_name` ORDER BY p.`colour_name` ";
                 return $this->db->query( $select_query )->result();
             }
         }else{
             if( $this->check_slug_availability( $category )) {
-                $id = $this->category_id( $category);
-                $select_query .= " WHERE category_id = {$id}";
+                $array = $this->slug($category);
+                $select_query .= " WHERE p.category_id IN ('".implode("','",$array)."') ";
                 return $this->db->query( $select_query )->result();
             }
         }
@@ -530,16 +540,26 @@ Class Product_model extends CI_Model{
         unset($gets['product_name']);
         unset($gets['q']);
         // Brand name
-        if( isset($gets['brand_name']) ){
-            $brand_name = cleanit($gets['brand_name']);
+        if( isset($gets['brand_name']) && !empty($gets['brand_name'])) {
+            $brand_name = xss_clean($gets['brand_name']);
+            $brands = explode(',', $brand_name);
+            if( count($brands) > 1 ){
+                $select_query .= " AND p.brand_name IN ('".implode("','",$brands)."') ";
+            }else{
+                $select_query .= " AND p.brand_name = '{$brand_name}' "; 
+            }
             unset($gets['brand_name']);
-            $select_query .= " AND p.brand_name = '{$brand_name}' ";
         }
-        // main colour
-        if( isset($gets['main_colour']) ){
-            $main_colour = cleainit($gets['main_colour']);
+        // check for main colour
+        if( isset($gets['main_colour']) && !empty($gets['main_colour']) ){
+            $main_colour = xss_clean($gets['main_colour']);
+            $colours = explode(',', $main_colour);
+            if( count( $colours ) ){
+                $select_query .= " AND p.main_colour IN ('".implode("','",$colours)."') ";
+            }else{
+                $select_query .= " AND p.main_colour = '{$main_colour}' "; 
+            }
             unset($gets['main_colour']);
-            $select_query .= " AND p.main_colour = '{$main_colour}' ";
         }
 
         if( isset($gets['page']) ) unset($gets['page']);

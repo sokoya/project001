@@ -65,7 +65,7 @@
 									<h4 class="selected-product-c" style="font-weight: 700; display: none">Selected
 										<span
 											class="selected-product"></span></h4>
-                                    <input type="hidden" name="category_id" id="category_id" value="">
+									<input type="hidden" name="category_id" id="category_id" value="">
 									<button class="btn btn-primary btn-block smt-btn" style="margin-top: 40px;"
 											disabled>Submit
 									</button>
@@ -141,14 +141,16 @@
 		$(".cat").empty();
 		$('.selected-product-c').hide();
 		let id = $(this).val();
-		$.ajax({
-			method: "POST",
-			url: base_url + 'seller/product/append_category',
-			data: {id: id, 'csrf_carrito': csrf_token},
-			dataType: 'json'
-		}).done(function (msg) {
-			let rid = getRndInteger(0, 255);
-			$('.category-section').append(`
+
+		if (id != '') {
+			$.ajax({
+				method: "POST",
+				url: base_url + 'seller/product/append_category',
+				data: {id: id, 'csrf_carrito': csrf_token},
+				dataType: 'json'
+			}).done(function (msg) {
+				let rid = getRndInteger(0, 255);
+				$('.category-section').append(`
 					<div class="col-md-12 n-append" style="margin-bottom: 20px;">
             		<select class="cat form-control n-cat-${rid}-${msg[0].id}" required></select>
 
@@ -156,14 +158,15 @@
 					</div>
             	`);
 
-			$(`.n-cat-${rid}-${msg[0].id}`).append("<option> -- Please select a sub category -- </option>");
-			$.each(msg, function (i) {
-				$(`.n-cat-${rid}-${msg[0].id}`).append(`<option data-next='${msg[i].has_child}' value="${msg[i].id}">${msg[i].name}</option>`);
+				$(`.n-cat-${rid}-${msg[0].id}`).append("<option> -- Please select a sub category -- </option>");
+				$.each(msg, function (i) {
+					$(`.n-cat-${rid}-${msg[0].id}`).append(`<option data-next='${msg[i].has_child}' value="${msg[i].id}">${msg[i].name}</option>`);
+				});
+
+				$(`.n-cat-${rid}-${msg[0].id}`).on('change', child_change);
 			});
+		}
 
-			$(`.n-cat-${rid}-${msg[0].id}`).on('change', child_change);
-
-		});
 	});
 
 
@@ -178,8 +181,8 @@
 			$('.selected-product-c').show();
 			$('.smt-btn').prop('disabled', false);
 			$('.selected-product').html($(this).find(':selected').text());
-            let category_id = $(this).find(':selected').val();
-            $('#category_id').val(category_id);
+			let category_id = $(this).find(':selected').val();
+			$('#category_id').val(category_id);
 
 		} else {
 			$.ajax({
