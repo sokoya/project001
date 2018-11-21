@@ -8,19 +8,22 @@
 		cursor: help;
 	}
 
-    .help_text:hover {
-        color: #ffffff;
-        background-color: #49a251;
-        cursor: help;
-    }
-    .form-horizontal .control-label {
-        font-weight:600;
-    }
-    @media (min-width: 768px) {
-        .form-horizontal .control-label {
-            text-align: left !important;
-        }
-    }
+	.help_text:hover {
+		color: #ffffff;
+		background-color: #49a251;
+		cursor: help;
+	}
+
+	.form-horizontal .control-label {
+		font-weight: 600;
+	}
+
+	@media (min-width: 768px) {
+		.form-horizontal .control-label {
+			text-align: left !important;
+		}
+	}
+
 	.help_text:hover {
 		color: #ffffff;
 		background-color: #49a251;
@@ -65,7 +68,7 @@
 				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 				<ol class="breadcrumb">
 					<li><a href="javascript:;"><i class="demo-pli-home"></i></a></li>
-					<?php foreach( $categories_name as $name ) : ?>
+					<?php foreach ($categories_name as $name) : ?>
 						<li><?= $name ?></li>
 					<?php endforeach; ?>
 				</ol>
@@ -96,7 +99,7 @@
 											<a data-toggle="tab" href="#tab2">
                                                 <span class="text-warning text-2x"><i
 														class="fab fa-product-hunt"></i></span>
-												<p class="text-semibold mar-no">Product Specification & Attributes</p>
+												<p class="text-semibold mar-no">Product Description & Attributes</p>
 											</a>
 										</li>
 										<li class="col-xs-3">
@@ -119,7 +122,9 @@
 								<div class="progress progress-xs">
 									<div class="progress-bar progress-bar-primary"></div>
 								</div>
-								<!--Form demo-bv-wz-form -->
+<!--								<form class="form-horizontal add_product_form "-->
+<!--									  method="POST" action=""-->
+<!--									  enctype="multipart/form-data">-->
 								<form id="demo-bv-wz-form" class="form-horizontal add_product_form "
 									  method="POST" action=""
 									  enctype="multipart/form-data">
@@ -245,33 +250,10 @@
 																			   title="Help Text"></i> </a>
 																	</div>
 																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-												<!--Product Specs: Optional fields-->
-											</div>
-
-											<!--Second tab-->
-											<div id="tab2" class="tab-pane fade">
-
-												<div class="panel-group accordion" id="accordion">
-													<div class="panel">
-														<!--Accordion title-->
-														<div class="panel-heading">
-															<h4 class="panel-title text-dark">
-																<a data-parent="#accordion" data-toggle="collapse"
-																   href="#prod-spec">Product Specification<span
-																		class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span></a>
-															</h4>
-														</div>
-														<!--Accordion content-->
-														<div class="panel-collapse collapse in" id="prod-spec">
-															<div class="panel-body">
 																<div class="form-group">
 																	<label
-																		class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Product
-																		Line</label>
+																		class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label">Shop
+																		Name</label>
 																	<div class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
 																		<input type="text"
 																			   placeholder="Enter In Here Your Store Name"
@@ -280,7 +262,7 @@
 																		<span class="text-sm text-dark">Eg: Fouani Nigeria, Trendy Woman Ltd, SEOLAK</span>
 																	</div>
 																	<div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-																		<a href="javascript:void(0);" title="Product Line"
+																		<a href="javascript:void(0);" title="Shop Name"
 																		   data-placement="bottom" data-toggle="popover"
 																		   tabindex="-1"
 																		   data-trigger="focus"
@@ -311,7 +293,8 @@
 																		<span class="text-sm text-dark">Add a generalisation of the main color, to help customers find the product using the provided color-filter in the shop</span>
 																	</div>
 																	<div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-																		<a href="javascript:void(0);" title="Color Family"
+																		<a href="javascript:void(0);"
+																		   title="Color Family"
 																		   data-placement="bottom" data-toggle="popover"
 																		   tabindex="-1"
 																		   data-trigger="focus"
@@ -341,7 +324,8 @@
 																			class="text-sm text-dark">Eg: Leather</span>
 																	</div>
 																	<div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-																		<a href="javascript:void(0);" title="Main Material"
+																		<a href="javascript:void(0);"
+																		   title="Main Material"
 																		   data-placement="bottom" data-toggle="popover"
 																		   tabindex="-1"
 																		   data-trigger="focus"
@@ -350,10 +334,34 @@
 																			   title="Help Text"></i> </a>
 																	</div>
 																</div>
-
 															</div>
 														</div>
 													</div>
+<!--													<div class="panel">-->
+<!--														<!--Accordion title-->
+<!--														<div class="panel-heading">-->
+<!--															<h4 class="panel-title text-dark">-->
+<!--																<a data-parent="#accordion" data-toggle="collapse"-->
+<!--																   href="#prod-spec">Product Specification<span-->
+<!--																		class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span></a>-->
+<!--															</h4>-->
+<!--														</div>-->
+<!--														<!--Accordion content-->
+<!--														<div class="panel-collapse collapse in" id="prod-spec">-->
+<!--															<div class="panel-body">-->
+<!--																-->
+<!---->
+<!--															</div>-->
+<!--														</div>-->
+<!--													</div>-->
+												</div>
+												<!--Product Specs: Optional fields-->
+											</div>
+
+											<!--Second tab-->
+											<div id="tab2" class="tab-pane fade">
+
+												<div class="panel-group accordion" id="accordion">
 
 													<div class="panel">
 														<!--Accordion title-->
@@ -512,74 +520,78 @@
 															</div>
 														</div>
 													</div>
-													<?php if( !empty( $features )):
-															$y = 1;
-															foreach( $features as  $feature ) :
-													?>
+													<?php if (!empty($features)):
+														$y = 1;
+														foreach ($features as $feature) :
+															?>
 															<div class="panel">
-															<!--Accordion title-->
-															<div class="panel-heading">
-																<h4 class="panel-title text-dark">
-																	<a data-parent="#accordion" data-toggle="collapse"
-																	   href="#<?= $y; ?>"><?= $feature['category_name']; ?> Attribute<span
-																			class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span></a>
-																</h4>
-															</div>
-															<!--Accordion content-->
-															<div class="panel-collapse " id="<?= $y; ?>">
-																<div class="panel-body">
-																	<?php $x = 1;
-																	foreach ($feature['specifications'] as $specification) : ?>
-																		<div class="form-group">
-																			<label
-																				class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label"><?= ucwords($specification['spec_name']); ?></label>
-																			<div
-																				class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
-																				<?php if (!empty($specification['spec_options'])) :
-																					$options = json_decode($specification['spec_options']);
-																					?>
-																					<select class="selectpicker"
-																						<?php if ($specification['multiple_options']) {
-																							echo 'name="attribute_' . str_replace(' ', '-', $specification["spec_name"]) . '[]"';
-																							echo ' multiple';
-																						} else {
-																							echo 'name="attribute_' . str_replace(' ', '-', $specification["spec_name"]) . '"';
-																						} ?>
-																							title="<?= $specification['spec_description']; ?>"
-																							data-width="100%">
-																						<?php foreach ($options as $key => $value) : ?>
-																							<option
-																								value="<?= trim($value); ?>"><?= ucwords(trim($value)); ?></option>
-																						<?php endforeach; ?>
-																					</select>
-																				<?php else: ?>
-																					<input type="text"
-																						   placeholder="<?= $specification['spec_name']; ?>"
-																						   name="attribute_<?= str_replace(' ', '-', $specification['spec_name']); ?>"
-																						   class="form-control">
-																				<?php endif; ?>
-																				<span
-																					class="text-sm text-dark"><?= $specification['spec_description']; ?></span>
-																			</div>
-																			<div
-																				class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
-																				<a href="javascript:;"
-																				   title="<?= ucwords($specification['spec_name']); ?>"
-																				   data-placement="bottom"
-																				   data-toggle="popover" tabindex="-1"
-																				   data-trigger="focus"
-																				   data-content="<?= $specification['spec_description']; ?>">
-																					<i class="demo-pli-question help_text"
-																					   title="Help Text"></i> </a>
-																			</div>
-																		</div>
-																		<?php $x++; endforeach; ?>
+																<!--Accordion title-->
+																<div class="panel-heading">
+																	<h4 class="panel-title text-dark">
+																		<a data-parent="#accordion"
+																		   data-toggle="collapse"
+																		   href="#<?= $y; ?>"><?= $feature['category_name']; ?>
+																			Attribute<span
+																				class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span></a>
+																	</h4>
 																</div>
+																<!--Accordion content-->
+																<div class="panel-collapse " id="<?= $y; ?>">
+																	<div class="panel-body">
+																		<?php $x = 1;
+																		foreach ($feature['specifications'] as $specification) : ?>
+																			<div class="form-group">
+																				<label
+																					class="col-lg-3 col-md-3 col-sm-12 col-xs-12 control-label"><?= ucwords($specification['spec_name']); ?></label>
+																				<div
+																					class="col-lg-7 col-md-7 col-sm-11 col-xs-11">
+																					<?php if (!empty($specification['spec_options'])) :
+																						$options = json_decode($specification['spec_options']);
+																						?>
+																						<select class="selectpicker"
+																							<?php if ($specification['multiple_options']) {
+																								echo 'name="attribute_' . str_replace(' ', '-', $specification["spec_name"]) . '[]"';
+																								echo ' multiple';
+																							} else {
+																								echo 'name="attribute_' . str_replace(' ', '-', $specification["spec_name"]) . '"';
+																							} ?>
+																								title="<?= $specification['spec_description']; ?>"
+																								data-width="100%">
+																							<?php foreach ($options as $key => $value) : ?>
+																								<option
+																									value="<?= trim($value); ?>"><?= ucwords(trim($value)); ?></option>
+																							<?php endforeach; ?>
+																						</select>
+																					<?php else: ?>
+																						<input type="text"
+																							   placeholder="<?= $specification['spec_name']; ?>"
+																							   name="attribute_<?= str_replace(' ', '-', $specification['spec_name']); ?>"
+																							   class="form-control">
+																					<?php endif; ?>
+																					<span
+																						class="text-sm text-dark"><?= $specification['spec_description']; ?></span>
+																				</div>
+																				<div
+																					class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+																					<a href="javascript:;"
+																					   title="<?= ucwords($specification['spec_name']); ?>"
+																					   data-placement="bottom"
+																					   data-toggle="popover"
+																					   tabindex="-1"
+																					   data-trigger="focus"
+																					   data-content="<?= $specification['spec_description']; ?>">
+																						<i class="demo-pli-question help_text"
+																						   title="Help Text"></i> </a>
+																				</div>
+																			</div>
+																			<?php $x++; endforeach; ?>
+																	</div>
+																</div>
+																<!--/Accordion content-->
 															</div>
-															<!--/Accordion content-->
-														</div>
 
-													<?php endforeach; $y++; endif; ?>
+														<?php endforeach;
+														$y++; endif; ?>
 
 													<div class="panel">
 														<!--Accordion title-->
@@ -753,28 +765,25 @@
 														<tr data-row-id="1">
 															<td>
 																<div class="form-group-sm">
-																	<label class="">Variation</label>
 																	<input title="variation" type="text"
-																		   class="form-control" name="variation[]" required/>
+																		   class="form-control" name="variation[]"
+																		   required/>
 																</div>
 															</td>
 															<td>
 																<div class="form-group-sm">
-																	<label class="">SKU</label>
 																	<input title="Seller SKU" type="text"
 																		   class="form-control" name="sku[]" required/>
 																</div>
 															</td>
 															<td>
 																<div class="form-group-sm">
-																	<label class="">ISBN </label>
 																	<input title="EAN / UPC / ISBN" type="text"
 																		   class="form-control" name="isbn[]" required/>
 																</div>
 															</td>
 															<td>
 																<div class="form-group-sm">
-																	<label class="">Quantity </label>
 																	<input title="Quantity" type="number" min="1"
 																		   max="100" class="form-control"
 																		   name="quantity[]" required/>
@@ -782,15 +791,13 @@
 															</td>
 															<td>
 																<div class="form-group-sm">
-																	<label class="">Sale Price* </label>
 																	<input title="Price" type="text"
 																		   class="form-control" required
 																		   name="sale_price[]"/>
 																</div>
 															</td>
 															<td>
-																<div class="form-group">
-																	<label class="">Discount Price </label>
+																<div class="form-group-sm">
 																	<input title="Discounted price" type="text"
 																		   class="form-control"
 																		   name="discount_price[]"/>
@@ -798,18 +805,39 @@
 															</td>
 															<td>
 																<div class="form-group-sm">
-																	<label class="">Discount Start Date</label>
-																	<input title="Starting date for this variation"
-																		   type="date" class="form-control"
-																		   name="start_date[]"/>
+																	<!--																	<input title="Starting date for this variation"-->
+																	<!--																		   type="date" class="form-control"-->
+																	<!--																		   name="start_date[]"/>-->
+																	<div class="input-group date">
+																		<input data-provide="datepicker"
+																			   class="form-control datepicker"
+																			   data-date-format="mm/dd/yyyy"
+																			   placeholder="mm/dd/yyyy"
+																			   name="start_date[]"
+																			   title="Starting date for this variation">
+																		<div class="input-group-addon">
+																			<i class="demo-pli-calendar-4"></i>
+																		</div>
+																	</div>
 																</div>
+
 															</td>
 															<td>
 																<div class="form-group-sm">
-																	<label class="">Discount End Date</label>
-																	<input title="End date for this variation"
-																		   type="date" class="form-control"
-																		   name="end_date[]"/>
+																	<!--																	<input title="End date for this variation"-->
+																	<!--																		   type="date" class="form-control"-->
+																	<!--																		   name="end_date[]"/>-->
+																	<div class="input-group date">
+																		<input data-provide="datepicker"
+																			   class="form-control datepicker"
+																			   data-date-format="mm/dd/yyyy"
+																			   placeholder="mm/dd/yyyy"
+																			   name="end_date[]"
+																			   title="End date for this variation">
+																		<div class="input-group-addon">
+																			<i class="demo-pli-calendar-4"></i>
+																		</div>
+																	</div>
 																</div>
 															</td>
 															<td class="">
@@ -986,6 +1014,10 @@
 <script src="<?= base_url('assets/seller/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js'); ?>"></script>
 
 <script type="text/javascript">
+	$('.datepicker').datepicker({
+		startDate: '0d'
+	});
+
 	$(document).on('nifty.ready', function () {
 		Dropzone.autoDiscover = false;
 		// Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
@@ -1099,79 +1131,91 @@
 		return $('tr', $(this).find('tbody')).length;
 	};
 
-	initit();
 
-	function initit() {
+	$('.add_more').on('click', add_new_row);
 
-		$('.add_more').on('click', function (x) {
-			// check if the number of variation row exceeds limit
-			let row_id = $('.pricing_table').rowCount() * 1;
-			let new_id = row_id + 1;
-			let new_row = `<tr data-row-id="${new_id}">
-                                <td>
-                                    <div class="form-group-sm">
-                                        <label class="">Variation</label>
-                                        <input title="variation" type="text" class="form-control" name="variation[]" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group-sm">
-                                        <label class="">SKU</label>
-                                        <input title="Seller SKU" type="text" class="form-control" name="sku[]" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group-sm">
-                                        <label class="">ISBN </label>
-                                        <input title="EAN / UPC / ISBN" type="text" class="form-control" name="isbn[]" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group-sm">
-                                        <label class="">Quantity </label>
-                                        <input title="Quantity" type="number" min="1" max="100" class="form-control" name="quantity[]" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group-sm">
-                                            <label class="">Sale Price* </label>
-                                            <input title="Price" type="text" class="form-control" required name="sale_price[]" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <label class="">Discount Price </label>
-                                        <input title="Discounted price" type="text" class="form-control" name="discount_price[]" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group-sm">
-                                        <label class="">Discount Start Date</label>
-                                        <input title="Starting date for this variation" type="date" class="form-control" name="start_date[]" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group-sm">
-                                        <label class="">Discount End Date</label>
-                                        <input title="End date for this variation" type="date" class="form-control" name="end_date[]" />
-                                    </div>
-                                </td>
-                                <td class="">
-                                    <div class="btn-group">
-                                        <a class="btn btn-sm btn-default btn-hover-success demo-psi-add add-tooltip add_more" href="javascript:void(0);" data-original-title="Add Another Variation" data-container="body"></a>
-                                        <a class="btn btn-sm btn-default btn-hover-danger demo-pli-trash add-tooltip delete_row" href="javascript:void(0);" data-original-title="Delete This Variation" data-container="body"></a>
-                                    </div>
-                                </td>
-                            </tr>`;
-			$('.pricing_table tbody').append(new_row);
-			initit();
+	function add_new_row() {
+		let row_id = $('.pricing_table').rowCount() * 1;
+		let new_id = row_id + 1;
+		// check if the number of variation row exceeds limit
+		$('.pricing_table tbody').append(`<tr id = "${new_id}_field">
+				<td>
+					<div class="form-group-sm">
+						<input title="variation" type="text" class="form-control" name="variation[]" />
+					</div>
+				</td>
+				<td>
+					<div class="form-group-sm">
+						<input title="Seller SKU" type="text" class="form-control" name="sku[]" />
+					</div>
+				</td>
+				<td>
+					<div class="form-group-sm">
+						<input title="EAN / UPC / ISBN" type="text" class="form-control" name="isbn[]" />
+					</div>
+				</td>
+				<td>
+					<div class="form-group-sm">
+						<input title="Quantity" type="number" min="1" max="100" class="form-control" name="quantity[]" />
+					</div>
+				</td>
+				<td>
+					<div class="form-group-sm">
+							<input title="Price" type="text" class="form-control" required name="sale_price[]" />
+					</div>
+				</td>
+				<td>
+					<div class="form-group-sm">
+						<input title="Discounted price" type="text" class="form-control" name="discount_price[]" />
+					</div>
+				</td>
+				<td>
+					<div class="form-group-sm">
+								<div class="input-group date">
+								<input data-provide="datepicker"
+									   class="form-control datepicker"
+									   data-date-format="mm/dd/yyyy"
+									   placeholder="mm/dd/yyyy"
+									   name="start_date[]"
+									   title="Starting date for this variation">
+								<div class="input-group-addon">
+									<i class="demo-pli-calendar-4"></i>
+								</div>
+							</div>
+					</div>
+				</td>
+				<td>
+					<div class="form-group-sm">
+					<div class="input-group date">
+						<input data-provide="datepicker"
+						   class="form-control datepicker"
+						   data-date-format="mm/dd/yyyy"
+						   placeholder="mm/dd/yyyy" name="end_date[]"
+						   title="End date for this variation">
+
+						   <div class="input-group-addon">
+								<i class="demo-pli-calendar-4"></i>
+							</div>
+					</div>
+					</div>
+				</td>
+				<td class="">
+					<div class="btn-group">
+						<a class="btn btn-sm btn-default btn-hover-success demo-psi-add add-tooltip add_more" href="javascript:void(0);" data-original-title="Add Another Variation" data-container="body" onclick="add_new_row()"></a>
+						<a class="btn btn-sm btn-default btn-hover-danger demo-pli-trash delete_row" href="javascript:void(0);" data-target="${new_id}_field" data-original-title="Delete This Variation" data-container="body"></a>
+					</div>
+				</td>
+                            </tr>`);
+
+		$('.delete_row').on('click', function () {
+			let target = $(this).data('target');
+			$(`#${target}`).remove();
 		});
-
-		$('.delete_row').on('click', function (x) {
-			$(this).closest('tr').remove();
-			initit()
+		$('.datepicker').datepicker({
+			startDate: '0d'
 		});
 	}
+
 
 	$(document).ready(function () {
 		$('[data-toggle="popover"]').popover({animation: true});
