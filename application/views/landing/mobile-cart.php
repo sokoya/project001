@@ -8,8 +8,8 @@
 
     <div class="container">
         <?php if (!empty($this->cart->contents())) : ?>
-            <header class="page-header">
-                <h1 class="page-title">Cart Overview</h1>
+            <header class="page-header" style="margin: 10px 0 10px !important;">
+                <h4>Cart Overview</h4>
             </header>
             <div class="row">
                 <?php $this->load->view('landing/msg_view'); ?>
@@ -24,15 +24,15 @@
             ?>
                 <div class="group-prod" style="background-color: white;margin-bottom:10px;padding:10px;text-align:justify;font-size:12px;">
                     <div class="row">
-                        <div class="col-xs-4">
+                        <div class="col-xs-5">
                             <?php echo form_hidden($x . '[rowid]', $product['rowid']); ?>
                             <a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
-                                <img class="img-responsive"
+                                <img style="width:130px !important;height:auto !important;"
                                      src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image); ?>"
                                      alt="<?= lang('app_name'); ?> <?= $product['name']; ?>"
                                      title="<?= $product['name']; ?>"/>
                             </a></div>
-                        <div class="col-xs-8">
+                        <div class="col-xs-7">
                             <div class="col-xs-12">
                                 <a
                                         href="<?= base_url(urlify($product['name'], $product['id'])); ?>"
