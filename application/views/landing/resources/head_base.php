@@ -11,6 +11,9 @@
 	<link href='http://fonts.googleapis.com/css?family=Roboto:500,300,700,400italic,400' rel='stylesheet'
 		  type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
+	<?php if ($page == 'mobile-product' && $this->agent->is_mobile()) : ?>
+		<link rel="stylesheet" href="<?= base_url('assets/landing/css/owl.carousel.min.css'); ?>">
+	<?php endif; ?>
 	<link rel="stylesheet" href="<?= base_url('assets/landing/css/bootstrap.css'); ?>">
 	<link rel="stylesheet" href="<?= base_url('assets/landing/css/font-awesome.css'); ?>">
 	<?php if ($page == 'mobile-category' || $page == 'mobile-search' || $page == 'mobile-product' || $page == 'mobile-cart' && $this->agent->is_mobile()) : ?>
