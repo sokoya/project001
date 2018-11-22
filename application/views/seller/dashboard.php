@@ -39,12 +39,15 @@
                                 <p class="text-2x mar-no text-semibold">Top Viewed Products</p>
                                 <!--Sparkline pie chart -->
                                 <div>
-                                    <div class="pad-all">
+                                    <div class="pad-all text-center">
                                         <?php if($top_views) : foreach( $top_views as $top_view ) : ?>
                                             <p class="mar-no">
                                                 <span class="pull-right text-bold"><?= $top_view->views; ?></span> <?= character_limiter($top_view->product_name, 30);?>
                                             </p>
-                                        <?php  endforeach; endif; ?>
+                                        <?php  endforeach; else: ?>
+                                        <h5 class="text-dark">You have no product!</h5>
+                                            <span><a href="<?= base_url('seller/product/create');?>">Create Product Now</a> </span>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -60,7 +63,6 @@
                             <div class="media-body">
                                 <p class="text-2x mar-no text-semibold">2841</p>
                                 <p class="mar-no">Sales</p>
-                                <!--Sparkline pie chart -->
                                 <div>
                                     <div class="pad-all">
                                         <p class="mar-no">
@@ -106,10 +108,9 @@
 							<div class="panel-heading">
 								<h3 class="panel-title">Sales Track</h3>
                                 <?php if(!$sales_chart) : ?>
-                                    <h3 class="text-danger">No Data Available!</h3>
+                                    <h3 class="text-danger text-center">No Data Available!</h3>
                                 <?php endif; ?>
 							</div>
-
 							<!--Chart information-->
 							<div class="panel-body">
 								<div id="sellerchart" style="height: 250px; margin-bottom: 40px;"></div>

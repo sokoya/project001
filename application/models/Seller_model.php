@@ -153,7 +153,6 @@ Class Seller_model extends CI_Model{
         return $this->db->get('categories')->result();
     }
 
-
     /**
      * @param $id
      * @param $label
@@ -265,36 +264,16 @@ Class Seller_model extends CI_Model{
     }
 
     /**
-     * @param $oroduct_id
-     * @return CI_DB_row
-     */
-    function get_single_product( $id ){
-        $query = "SELECT * FROM products WHERE $id";
-        return $this->db->query( $query)->row();
-    }
-
-
-    /**
      * @param $name - productsubcategory
      * @return CI_DB_result_array
      */
 
     function get_specifications( $spec_id ){
-        
+
         $this->db->select('spec_name,options,multiple_options,description');
         $this->db->where('id', $spec_id);
         $result = $this->db->get('specifications')->row();
         return $result;
-    }
-
-    /**
-     * @param $oroduct_id
-     * @return CI_DB_result_array
-     */
-
-    function get_product_variation( $id ){
-        $this->db->where('product_id', $id);
-        return $this->db->get('product_variation')->result();
     }
 
 
@@ -314,7 +293,6 @@ Class Seller_model extends CI_Model{
      * @return CI_DB_result_array
      */
     function get_orders( $id = '', $status= '' ){
-
         $query = "SELECT p.product_name,p.id pid, p.created_on created_on, o.order_date,o.id orid, g.image_name, o.customer_name, o.qty,o.amount, o.product_desc, o.status
                 FROM products p LEFT JOIN orders o ON (p.id = o.product_id)
                 LEFT JOIN product_gallery g ON (g.product_id = p.id AND g.featured_image = 1)
@@ -379,8 +357,12 @@ Class Seller_model extends CI_Model{
         return $this->db->get( $table_name )->result();
     }
 
-
-    function run_sql( $query ){
+    /**
+     * Run a general SQL
+     * @param $query
+     * @return mixed
+     */
+    function run_sql($query ){
         return $this->db->query( $query );
     }
 

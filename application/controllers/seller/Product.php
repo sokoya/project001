@@ -47,26 +47,18 @@ class Product extends CI_Controller{
      *
      */
     public function create(){
-
         // check if we have the category session set
         if( $this->session->has_userdata('category_id') ){
             $sub_id = $this->session->userdata('category_id');
             $spec_result  = $this->seller->get_parent_details($sub_id);
-
-
             $specification_array = $categories_name = array();
-
-
-            // var_dump( $spec_result ); exit;
             foreach( $spec_result as $result ){               
                 $categories_name[] = $result->name;
                 if( $result->specifications !== '' ) {
                     $decode = json_decode( $result->specifications );
                     $x = 0;
-                    // var_dump( $decode);
                     $spec_array = array();
                     foreach( $decode as $key => $value ) {
-
                         $specification = $this->seller->get_specifications( $value ); 
                         if( $specification ) {
                             $spec_array['category_name'] = $result->name;
@@ -77,19 +69,13 @@ class Product extends CI_Controller{
                             $spec_array['specifications'][$x]['multiple_options'] = $specification->multiple_options;
                             $spec_array['specifications'][$x]['spec_description'] = $specification->description;
                             $x++;
-
                         }
                     }
-                        array_push( $specification_array, $spec_array);
+                    array_push( $specification_array, $spec_array);
                 }
-                
-
             }
-
-            // var_dump( $specification_array ); exit;
             $page_data['categories_name'] = $categories_name;
             $page_data['features'] = $specification_array;
-
             // Check if post method
             $uid = base64_decode($this->session->userdata('logged_id'));
             $page_data['page_title'] = 'Add product';
@@ -97,7 +83,18 @@ class Product extends CI_Controller{
             $page_data['sub_name'] = 'add_product';
             $page_data['profile'] = $this->seller->get_profile_details( $uid ,
                 'first_name,last_name,email,profile_pic');
-            $page_data['brands'] = $this->seller->get_brands();
+            $page_data['brands'] = $this->seller->get_results('brands');
+            $category_details = $this->seller->get_row('categories', 'variation_name, variation_options', "( id = {$sub_id})");
+            $option_array = array();
+            if( !empty($category_details->variation_options) ){
+                $options = json_decode( $category_details->variation_options);
+                foreach( $options as $option ){
+                    $option_name = $this->seller->get_row('options', 'name', " (id = {$option})")->name;
+                    array_push( $option_array, $option_name);
+                }
+            }
+            $page_data['variation_name'] = $category_details->variation_name;
+            $page_data['variation_options'] = $option_array;
             $this->load->view('seller/create', $page_data);
         }else{
             // redirect to make a selection of category
@@ -108,7 +105,6 @@ class Product extends CI_Controller{
 
     public function process(){
         if( $this->input->post() || isset($_FILES) ){
-
             $pricing_error = $image_error = 0;
             $return['status'] = 'error';
             $return['message'] = '';
@@ -254,6 +250,7 @@ class Product extends CI_Controller{
                 $this->session->unset_userdata('category_id');
                 $return['status'] = 'success';
                 $return['message'] = 'Success: Your product has been created, awaiting reviews and approval. You will be notified via email.';
+                $this->session->set_flashdata('success_msg', 'Success: Your product has been created, awaiting reviews and approval. You will be notified via email.' );
             }
             echo json_encode($return);
             exit;
@@ -325,16 +322,11 @@ class Product extends CI_Controller{
         }
     }
 
-    /*
-
-    */
-
     public function edit($id = ''){
 
         $id = cleanit($id);
         if( !$this->input->post() ){
             $uid = base64_decode($this->session->userdata('logged_id'));
-            $page_data['page_title'] = 'Edit product';
             $page_data['pg_name'] = 'product';
             $page_data['sub_name'] = 'edit_product';
             $page_data['profile'] = $this->seller->get_profile_details($uid,
@@ -344,10 +336,52 @@ class Product extends CI_Controller{
                 $this->session->set_flashdata('error_msg', 'Info. : The product you are trying to access is not available to you.');
                 redirect($_SERVER['HTTP_REFERER']);
             }
-            $page_data['product'] = $this->seller->get_single_product( $id );
-            $page_data['specifications'] = $this->seller->get_specifications( $page_data['product']->subcategory);
-            $page_data['variations'] = $this->seller->get_product_variation( $id );
+
+            $page_data['product'] = $this->seller->get_row( 'products', '*', "( id = {$id})");
+            $category_id = $page_data['product']->category_id;
+            $spec_result  = $this->seller->get_parent_details($category_id);
+            $specification_array = $categories_name = array();
+
+            foreach( $spec_result as $result ){
+                $categories_name[] = $result->name;
+                if( $result->specifications !== '' ) {
+                    $decode = json_decode( $result->specifications );
+                    $x = 0;
+                    $spec_array = array();
+                    foreach( $decode as $key => $value ) {
+                        $specification = $this->seller->get_specifications( $value );
+                        if( $specification ) {
+                            $spec_array['category_name'] = $result->name;
+                            $spec_array['description'] = $result->description;
+                            $spec_array['specifications'][$x]['spec_id']  = $value;
+                            $spec_array['specifications'][$x]['spec_name'] = $specification->spec_name;
+                            $spec_array['specifications'][$x]['spec_options'] = $specification->options;
+                            $spec_array['specifications'][$x]['multiple_options'] = $specification->multiple_options;
+                            $spec_array['specifications'][$x]['spec_description'] = $specification->description;
+                            $x++;
+                        }
+                    }
+                    array_push( $specification_array, $spec_array);
+                }
+            }
+
+            $page_data['categories_name'] = $categories_name;
+            $page_data['features'] = $specification_array;
+            $category_details = $this->seller->get_row('categories', 'variation_name, variation_options', "( id = {$category_id})");
+            $option_array = array();
+            if( !empty($category_details->variation_options) ){
+                $options = json_decode( $category_details->variation_options);
+                foreach( $options as $option ){
+                    $option_name = $this->seller->get_row('options', 'name', " (id = {$option})")->name;
+                    array_push( $option_array, $option_name);
+                }
+            }
+
+            $page_data['variation_name'] = $category_details->variation_name;
+            $page_data['variation_options'] = $option_array;
+            $page_data['variations'] = $this->seller->get_results('product_variation', '*', "( product_id = {$id})");
             $page_data['product_id'] = $id;
+            $page_data['page_title'] = 'Edit product ( ' . $page_data['product']->product_name .' )';
             $page_data['brands'] = $this->seller->get_results('brands');
             $this->load->view('seller/edit', $page_data);
         }else{            

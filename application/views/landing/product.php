@@ -352,7 +352,7 @@
 					</li>
 				</ul>
 				<div class="tab-content">
-					<div class="tab-pane fade in active" id="tab-1">
+					<div class="tab-pane fade in active" id="overview">
 						<div class="product-overview-section gap-top">
 							<?php if (!empty($product->product_line)) : ?>
 								<h3 class="product-overview-title pr-over"> Product Frontline</h3>
@@ -420,6 +420,8 @@
 						</div>
 					</div>
 					<div class="tab-pane fade" id="full-spec">
+                        <?php  $specifications = json_decode($product->attributes); ?>
+                        <?php if(!empty($specifications)) : ?>
 						<table class="table">
 							<thead>
 							<tr>
@@ -429,7 +431,7 @@
 							</tr>
 							</thead>
 							<tbody>
-							<?php $specifications = json_decode($product->attributes);
+							<?php
 							foreach ($specifications as $specification => $specification_value): ?>
 								<tr>
 									<td class="product-page-features-table-specs"><?= ucwords(trim($specification)); ?></td>
@@ -446,6 +448,9 @@
 							<?php endforeach; ?>
 							</tbody>
 						</table>
+                        <?php else : ?>
+                            <h3 class="text-center text-danger"><strong>Product specification not avaialable for this item.</strong></h3>
+                        <?php endif; ?>
 					</div>
 					<div class="tab-pane fade" id="review">
 						<div class="row">
@@ -803,11 +808,6 @@
 		_btn.prop('disabled', 'disabled');
 		let colour = $('select[name="colour"]').val();
 		let variation = $('select[name="variation"]').val();
-		// if (_btn.data('colour') != '' && colour == '') {
-		// 	$('#status').html('<p class="alert alert-danger">Please select a colour.</p>').slideDown('fast').delay(3000).slideUp('slow');
-		// 	_btn.prop('disabled', '');
-		// 	return false;
-		// }
 		if (_btn.data('variation') != '' && variation == '') {
 			$('#status').html('<p class="alert alert-danger">Please select a variation.</p>').slideDown('fast').delay(3000).slideUp('slow');
 			_btn.prop('disabled', '');
