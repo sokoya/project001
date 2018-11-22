@@ -114,7 +114,6 @@
 							<!--Chart information-->
 							<div class="panel-body">
 								<div id="sellerchart" style="height: 250px; margin-bottom: 40px;"></div>
-
 								<div class="row">
 									<div class="col-lg-3">
 										<p class="text-semibold text-uppercase text-main">Today</p>
@@ -184,120 +183,120 @@
 								<h3 class="panel-title">Order Status</h3>
 							</div>
 
-                            <!--Data Table-->
-                            <!--===================================================-->
-                            <div class="panel-body">
-                                <div id="demo-dt-basic_wrapper"
-                                     class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="dataTables_length" id="demo-dt-basic_length"><label>Show <select
-                                                            name="demo-dt-basic_length" aria-controls="demo-dt-basic"
-                                                            class="form-control input-sm">
-                                                        <option value="5">5</option>
-                                                        <option value="10">10</option>
-                                                        <option value="25">25</option>
-                                                        <option value="50">50</option>
-                                                        <option value="100">100</option>
-                                                    </select> entries</label></div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div id="demo-dt-basic_filter" class="dataTables_filter pull-right">
-                                                <label><input type="search" class="form-control input-sm"
-                                                              placeholder="Search"
-                                                              aria-controls="demo-dt-basic"></label></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <table id="demo-dt-basic"
-                                                   class="table table-striped dataTable no-footer dtr-inline collapsed"
-                                                   cellspacing="0" width="100%" role="grid"
-                                                   aria-describedby="demo-dt-basic_info" style="width: 100%;">
-                                                <thead>
-                                                <tr>
-                                                    <th>Invoice</th>
-                                                    <th>User</th>
-                                                    <th>Order date</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td><a href="#" class="btn-link"> Order #53431</a></td>
-                                                    <td>Steve N. Horton</td>
-                                                    <td><span class="text-muted">Oct 22, 2014</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="#" class="btn-link"> Order #53434</a></td>
-                                                    <td>Teresa L. Doe</td>
-                                                    <td><span class="text-muted">Oct 15, 2014</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="#" class="btn-link"> Order #53435</a></td>
-                                                    <td>Teresa L. Doe</td>
-                                                    <td><span class="text-muted">Oct 12, 2014</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="#" class="btn-link">Order #53437</a></td>
-                                                    <td>Charles S Boyle</td>
-                                                    <td><span class="text-muted">Oct 17, 2014</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="#" class="btn-link">Order #536584</a></td>
-                                                    <td>Scott S. Calabrese</td>
-                                                    <td><span class="text-muted">Oct 19, 2014</span></td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-5">
-                                            <div class="dataTables_info" id="demo-dt-basic_info" role="status"
-                                                 aria-live="polite">Showing 1 to 5 of 57 entries
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-7">
-                                            <div class="dataTables_paginate paging_simple_numbers"
-                                                 id="demo-dt-basic_paginate">
-                                                <ul class="pagination">
-                                                    <li class="paginate_button previous disabled"
-                                                        id="demo-dt-basic_previous"><a href="#"
-                                                                                       aria-controls="demo-dt-basic"
-                                                                                       data-dt-idx="0" tabindex="0"><i
-                                                                    class="demo-psi-arrow-left"></i></a></li>
-                                                    <li class="paginate_button active"><a href="#"
-                                                                                          aria-controls="demo-dt-basic"
-                                                                                          data-dt-idx="1"
-                                                                                          tabindex="0">1</a></li>
-                                                    <li class="paginate_button "><a href="#"
-                                                                                    aria-controls="demo-dt-basic"
-                                                                                    data-dt-idx="2" tabindex="0">2</a>
-                                                    </li>
-                                                    <li class="paginate_button "><a href="#"
-                                                                                    aria-controls="demo-dt-basic"
-                                                                                    data-dt-idx="3" tabindex="0">3</a>
-                                                    </li>
-                                                    <li class="paginate_button disabled" id="demo-dt-basic_ellipsis"><a
-                                                                href="#" aria-controls="demo-dt-basic" data-dt-idx="4"
-                                                                tabindex="0">…</a></li>
-                                                    <li class="paginate_button "><a href="#"
-                                                                                    aria-controls="demo-dt-basic"
-                                                                                    data-dt-idx="5" tabindex="0">6</a>
-                                                    </li>
-                                                    <li class="paginate_button next" id="demo-dt-basic_next"><a href="#"
-                                                                                                                aria-controls="demo-dt-basic"
-                                                                                                                data-dt-idx="6"
-                                                                                                                tabindex="0"><i
-                                                                    class="demo-psi-arrow-right"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--===================================================-->
-                            <!--End Data Table-->
+							<!--Data Table-->
+							<!--===================================================-->
+							<div class="panel-body">
+								<div id="demo-dt-basic_wrapper"
+									 class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="dataTables_length" id="demo-dt-basic_length"><label>Show <select
+														name="demo-dt-basic_length" aria-controls="demo-dt-basic"
+														class="form-control input-sm">
+														<option value="5">5</option>
+														<option value="10">10</option>
+														<option value="25">25</option>
+														<option value="50">50</option>
+														<option value="100">100</option>
+													</select> entries</label></div>
+										</div>
+										<div class="col-sm-6">
+											<div id="demo-dt-basic_filter" class="dataTables_filter pull-right">
+												<label><input type="search" class="form-control input-sm"
+															  placeholder="Search"
+															  aria-controls="demo-dt-basic"></label></div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<table id="demo-dt-basic"
+												   class="table table-striped dataTable no-footer dtr-inline collapsed"
+												   cellspacing="0" width="100%" role="grid"
+												   aria-describedby="demo-dt-basic_info" style="width: 100%;">
+												<thead>
+												<tr>
+													<th>Invoice</th>
+													<th>User</th>
+													<th>Order date</th>
+												</tr>
+												</thead>
+												<tbody>
+												<tr>
+													<td><a href="#" class="btn-link"> Order #53431</a></td>
+													<td>Steve N. Horton</td>
+													<td><span class="text-muted">Oct 22, 2014</span></td>
+												</tr>
+												<tr>
+													<td><a href="#" class="btn-link"> Order #53434</a></td>
+													<td>Teresa L. Doe</td>
+													<td><span class="text-muted">Oct 15, 2014</span></td>
+												</tr>
+												<tr>
+													<td><a href="#" class="btn-link"> Order #53435</a></td>
+													<td>Teresa L. Doe</td>
+													<td><span class="text-muted">Oct 12, 2014</span></td>
+												</tr>
+												<tr>
+													<td><a href="#" class="btn-link">Order #53437</a></td>
+													<td>Charles S Boyle</td>
+													<td><span class="text-muted">Oct 17, 2014</span></td>
+												</tr>
+												<tr>
+													<td><a href="#" class="btn-link">Order #536584</a></td>
+													<td>Scott S. Calabrese</td>
+													<td><span class="text-muted">Oct 19, 2014</span></td>
+												</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-5">
+											<div class="dataTables_info" id="demo-dt-basic_info" role="status"
+												 aria-live="polite">Showing 1 to 5 of 57 entries
+											</div>
+										</div>
+										<div class="col-sm-7">
+											<div class="dataTables_paginate paging_simple_numbers"
+												 id="demo-dt-basic_paginate">
+												<ul class="pagination">
+													<li class="paginate_button previous disabled"
+														id="demo-dt-basic_previous"><a href="#"
+																					   aria-controls="demo-dt-basic"
+																					   data-dt-idx="0" tabindex="0"><i
+																class="demo-psi-arrow-left"></i></a></li>
+													<li class="paginate_button active"><a href="#"
+																						  aria-controls="demo-dt-basic"
+																						  data-dt-idx="1"
+																						  tabindex="0">1</a></li>
+													<li class="paginate_button "><a href="#"
+																					aria-controls="demo-dt-basic"
+																					data-dt-idx="2" tabindex="0">2</a>
+													</li>
+													<li class="paginate_button "><a href="#"
+																					aria-controls="demo-dt-basic"
+																					data-dt-idx="3" tabindex="0">3</a>
+													</li>
+													<li class="paginate_button disabled" id="demo-dt-basic_ellipsis"><a
+															href="#" aria-controls="demo-dt-basic" data-dt-idx="4"
+															tabindex="0">…</a></li>
+													<li class="paginate_button "><a href="#"
+																					aria-controls="demo-dt-basic"
+																					data-dt-idx="5" tabindex="0">6</a>
+													</li>
+													<li class="paginate_button next" id="demo-dt-basic_next"><a href="#"
+																												aria-controls="demo-dt-basic"
+																												data-dt-idx="6"
+																												tabindex="0"><i
+																class="demo-psi-arrow-right"></i></a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--===================================================-->
+							<!--End Data Table-->
 
 						</div>
 					</div>
@@ -345,9 +344,9 @@
 		// Chart data records -- each entry in this array corresponds to a point on
 		// the chart.
 		data: [
-            <?php foreach( $sales_chart as $chart) : ?>
-                {month: '<?= $chart->omonth; ?>', value: <?= $chart->sales; ?>},
-            <?php endforeach;?>
+			<?php foreach( $sales_chart as $chart) : ?>
+			{month: '<?= $chart->omonth; ?>', value: <?= $chart->sales; ?>},
+			<?php endforeach;?>
 		],
 		// The name of the data record attribute that contains x-values.
 		xkey: 'month',

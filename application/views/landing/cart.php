@@ -22,7 +22,7 @@
 							<th>Title</th>
 							<th>Variation</th>
 							<th>Price</th>
-							<th>Quality</th>
+							<th>Quantity</th>
 							<th>Total</th>
 							<th>Remove</th>
 						</tr>

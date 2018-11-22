@@ -1,9 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Product extends MY_Controller {
+class Product extends MY_Controller
+{
 
-	public function __construct(){
+	public function __construct()
+	{
 		parent::__construct();
 		$this->load->helper('text');
 	}
@@ -23,31 +25,39 @@ class Product extends MY_Controller {
 		$page_data['favourited'] = $this->product->is_favourited(base64_decode($this->session->userdata('logged_id')), $index);
 		$page_data['likes'] = $this->product->get_also_likes($index);
 		$page_data['category_detail'] = $this->product->single_category_detail($page_data['product']->category_id);
-		if( $page_data['category_detail'] ){
-			$page_data['description'] = $page_data['category_detail']->description;			
-		}else{
+		if ($page_data['category_detail']) {
+			$page_data['description'] = $page_data['category_detail']->description;
+		} else {
 			$page_data['description'] = DESCRIPTION;
 		}
 		$page_data['title'] = 'Buy ' . $page_data['product']->product_name;
 		$page_data['keywords'] = $page_data['title'] . ' , ' . $page_data['product']->brand_name;
 		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
 		// $this->add_count($index);
-        $page_data['page'] = 'product';
-		$page_data['rating_counts'] = $this->product->get_rating_counts( $index );
-        $page_data['featured_image'] = $this->product->get_featured_image( $index );
-		$this->load->view('landing/product', $page_data);
+		$page_data['page'] = 'product';
+		$page_data['rating_counts'] = $this->product->get_rating_counts($index);
+		$page_data['featured_image'] = $this->product->get_featured_image($index);
+//		$this->load->view('landing/product', $page_data);
+		$page_data['page'] = 'product';
+		if (!$this->agent->is_mobile()) {
+			$this->load->view('landing/product', $page_data);
+		} else {
+			$page_data['page'] = 'mobile-product';
+			$this->load->view('landing/mobile-product', $page_data);
+		}
 	}
 
 
 	// List Product Page
-	public function catalog(){
+	public function catalog()
+	{
 		$str = $this->uri->segment(2);
-		$str = preg_replace("/[^A-Za-z0-9\-]/", "", cleanit($str));		
+		$str = preg_replace("/[^A-Za-z0-9\-]/", "", cleanit($str));
 		$str = cleanit($str);
 		if ($str == '') redirect(base_url());
 		$features = $this->product->get_features($str);
 		$output_array = array();
-		if( $features ) {
+		if ($features) {
 			foreach ($features as $feature => $values) {
 				foreach ($values as $key => $value) {
 					$variables = json_decode($value);
@@ -62,7 +72,7 @@ class Product extends MY_Controller {
 						}
 					}
 				}
-			}			
+			}
 		}
 		// pagination
 		$page = isset($_GET['page']) ? xss_clean($_GET['page']) : 0;
@@ -93,30 +103,38 @@ class Product extends MY_Controller {
 		$page_data['category_detail'] = $this->product->category_details($str);
 		$page_data['description'] = $page_data['category_detail']->description;
 		$page_data['title'] = 'Buy ' . $page_data['category_detail']->title;
-        $page_data['page'] = 'category';
+		$page_data['page'] = 'category';
 
-        // var_dump( $page_data['products']); exit();
-		
-		if( !$this->agent->is_mobile()){
+		// var_dump( $page_data['products']); exit();
+
+		if (!$this->agent->is_mobile()) {
 			$this->load->view('landing/category', $page_data);
-		}else{
-            $page_data['page'] = 'mobile-category';
+		} else {
+			$page_data['page'] = 'mobile-category';
 			$this->load->view('landing/mobile-category', $page_data);
 		}
 	}
 
 
 	// Cart Page
-	public function cart(){		
+	public function cart()
+	{
 		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 		$page_data['title'] = 'My cart';
 		$page_data['page'] = 'cart';
-		$this->load->view('landing/cart', $page_data);
+		if (!$this->agent->is_mobile()) {
+			$this->load->view('landing/cart', $page_data);
+		} else {
+			$page_data['page'] = 'mobile-cart';
+			$this->load->view('landing/mobile-cart', $page_data);
+		}
+
 	}
 
 
 	// remove cart
-	public function remove_cart() {
+	public function remove_cart()
+	{
 		$this->cart->remove($this->uri->segment(3));
 		redirect('cart');
 	}
@@ -125,7 +143,8 @@ class Product extends MY_Controller {
 	 * @param $id - product id
 	 * @return null
 	 */
-	function add_count($id){
+	function add_count($id)
+	{
 		if (!empty($id)) {
 			$this->load->helper('cookie');
 			$check_visitor = $this->input->cookie($id, FALSE);
@@ -189,7 +208,8 @@ class Product extends MY_Controller {
 	 * @param $content - content
 	 * @return null
 	 */
-	function add_review(){
+	function add_review()
+	{
 		if ($this->input->post()) {
 			$status['status'] = 'error';
 			$data = array(
@@ -216,76 +236,75 @@ class Product extends MY_Controller {
 	}
 
 
-
-    // Search
-    public function search(){
+	// Search
+	public function search()
+	{
 //        http://localhost/project001/search?category=Phones+%26+Tablets&q=sam
-        if( !$this->input->get('q', true) ) redirect(base_url());
-        $category = cleanit($this->input->get('category', true));
-        $product_name = $page_data['searched'] = cleanit($this->input->get('q', true));
-        $page_data['queries'] = array('category' => $category, 'q' => $page_data['searched'] );
+		if (!$this->input->get('q', true)) redirect(base_url());
+		$category = cleanit($this->input->get('category', true));
+		$product_name = $page_data['searched'] = cleanit($this->input->get('q', true));
+		$page_data['queries'] = array('category' => $category, 'q' => $page_data['searched']);
 
-        $page_data['title'] = ucwords($category .' '. $product_name);
-        $features = $this->product->get_features($category, $product_name);
-        $feature_array = array();
-        foreach ($features as $feature => $values) {
-            foreach ($values as $key => $value) {
-                $variables = json_decode($value);
-                foreach ($variables as $new_key => $new_value) {
-                    if (is_array($new_value)) {
-                        $new_value = array_map("unserialize", array_unique(array_map("serialize", $new_value)));
-                        foreach ($new_value as $inkey => $invalue) $feature_array[$new_key][] = $invalue;
-                        $feature_array[$new_key] = array_unique($feature_array[$new_key], SORT_REGULAR);
-                    } else {
-                        $feature_array[$new_key][] = $new_value;
-                        $feature_array[$new_key] = array_unique($feature_array[$new_key], SORT_REGULAR);
-                    }
-                }
-            }
-        }
-        // pagination
-        $page = isset($_GET['page']) ? xss_clean($_GET['page']) : 0;
-        if ($page > 1) $page -= 1;
-        $array = array('category' => $category, 'product_name' => $product_name,  'is_limit' => false);
-        $x = (array)$this->product->get_search_products($array, $this->input->get());
-        $count = (count($x));
+		$page_data['title'] = ucwords($category . ' ' . $product_name);
+		$features = $this->product->get_features($category, $product_name);
+		$feature_array = array();
+		foreach ($features as $feature => $values) {
+			foreach ($values as $key => $value) {
+				$variables = json_decode($value);
+				foreach ($variables as $new_key => $new_value) {
+					if (is_array($new_value)) {
+						$new_value = array_map("unserialize", array_unique(array_map("serialize", $new_value)));
+						foreach ($new_value as $inkey => $invalue) $feature_array[$new_key][] = $invalue;
+						$feature_array[$new_key] = array_unique($feature_array[$new_key], SORT_REGULAR);
+					} else {
+						$feature_array[$new_key][] = $new_value;
+						$feature_array[$new_key] = array_unique($feature_array[$new_key], SORT_REGULAR);
+					}
+				}
+			}
+		}
+		// pagination
+		$page = isset($_GET['page']) ? xss_clean($_GET['page']) : 0;
+		if ($page > 1) $page -= 1;
+		$array = array('category' => $category, 'product_name' => $product_name, 'is_limit' => false);
+		$x = (array)$this->product->get_search_products($array, $this->input->get());
+		$count = (count($x));
 
-        $this->load->library('pagination');
-        $this->config->load('pagination');
-        $config = $this->config->item('pagination');
-        $config['base_url'] = current_url();
-        $config['total_rows'] = $count;
-        $config['per_page'] = 32;
-        $config["num_links"] = 5;
-        $page_data['features'] = $feature_array;
-        $array['limit'] = $config['per_page'];
-        $array['offset'] = $page;
-        $array['is_limit'] = true;
-        $page_data['pagination'] = $this->pagination->create_links();
-        $page_data['products'] = $this->product->get_search_products($array, $this->input->get());
-        $page_data['brands'] = $this->product->get_brands($category, $product_name);
-        $page_data['colours'] = $this->product->get_colours($category, $product_name);
-        $page_data['sub_categories'] = $this->product->get_categories($category);
-        $page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
+		$this->load->library('pagination');
+		$this->config->load('pagination');
+		$config = $this->config->item('pagination');
+		$config['base_url'] = current_url();
+		$config['total_rows'] = $count;
+		$config['per_page'] = 32;
+		$config["num_links"] = 5;
+		$page_data['features'] = $feature_array;
+		$array['limit'] = $config['per_page'];
+		$array['offset'] = $page;
+		$array['is_limit'] = true;
+		$page_data['pagination'] = $this->pagination->create_links();
+		$page_data['products'] = $this->product->get_search_products($array, $this->input->get());
+		$page_data['brands'] = $this->product->get_brands($category, $product_name);
+		$page_data['colours'] = $this->product->get_colours($category, $product_name);
+		$page_data['sub_categories'] = $this->product->get_categories($category);
+		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
 
-        $page_data['category_detail'] = $this->product->category_details($category);
-        if( $page_data['category_detail'] ){
-            $page_data['description'] = $page_data['category_detail']->description;
-        }else{
-            $page_data['description'] = DESCRIPTION;
-        }
+		$page_data['category_detail'] = $this->product->category_details($category);
+		if ($page_data['category_detail']) {
+			$page_data['description'] = $page_data['category_detail']->description;
+		} else {
+			$page_data['description'] = DESCRIPTION;
+		}
 		$page_data['title'] = $page_data['category_detail']->title;
-        $page_data['page'] = 'search';
-        $this->pagination->initialize($config);
-        $this->load->library('user_agent');
-        if( !$this->agent->is_mobile()){
-            $this->load->view('landing/search', $page_data);
-        }else{
-            $page_data['page'] = 'mobile-search';
-            $this->load->view('landing/mobile-search', $page_data);
-        }
-    }
-
+		$page_data['page'] = 'search';
+		$this->pagination->initialize($config);
+		$this->load->library('user_agent');
+		if (!$this->agent->is_mobile()) {
+			$this->load->view('landing/search', $page_data);
+		} else {
+			$page_data['page'] = 'mobile-search';
+			$this->load->view('landing/mobile-search', $page_data);
+		}
+	}
 
 
 }
