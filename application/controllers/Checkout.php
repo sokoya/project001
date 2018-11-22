@@ -41,7 +41,12 @@ class Checkout extends MY_Controller
         $this->session->set_flashdata('error_msg', $message);
 		$items = $this->cart->total_items();
 		if( empty($items) ) redirect( base_url() );
-		$this->load->view('landing/checkout', $page_data);
+		if (!$this->agent->is_mobile()) {
+            $this->load->view('landing/checkout', $page_data);
+        } else {
+            $page_data['page'] = 'mobile-checkout';
+            $this->load->view('landing/mobile-checkout', $page_data);
+        }
 	}
 
 	function add_address()
