@@ -11,7 +11,8 @@ class Settings extends CI_Controller{
 //        $this->session->set_userdata('referred_from', current_url());
         if( !$this->session->userdata('logged_in') ){
             // Ursher the person to where he is coming from
-            if( !empty($this->session->userdata('referred_from')) ) redirect($this->session->userdata('referred_from'));
+            $from = $this->session->userdata('referred_from');
+            if( !empty( $from ) ) redirect($this->session->userdata('referred_from'));
             redirect('seller/login');
         }
         // $this->output->enable_profiler(TRUE);
@@ -31,7 +32,7 @@ class Settings extends CI_Controller{
         $page_data['page_title'] = 'Profile Setting';
         $page_data['pg_name'] = 'settings';
         $page_data['sub_name'] = 'profile';
-        $page_data['categories'] = $this->seller->get_category_name('', 'root_category');
+        $page_data['categories'] = $this->seller->get_main_categories();
         $this->load->view('seller/settings', $page_data);
 
     }

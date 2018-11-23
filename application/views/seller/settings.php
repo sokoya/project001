@@ -167,7 +167,7 @@
                                                     <div class="col-sm-9">
                                                         <select class="demo_select2 form-control" name="main_category">
                                                             <option value="">--Select Main Product Category--</option>
-                                                            <?php foreach ($categories->result() as $root_categories ): ?>
+                                                            <?php foreach ($categories as $root_categories ): ?>
                                                                 <option value="<?= $root_categories->name; ?>" <?php if($profile->main_category == trim($root_categories->name)) echo 'selected';?> ><?= $root_categories->name; ?></option>
                                                             <?php endforeach; ?>
                                                         </select>

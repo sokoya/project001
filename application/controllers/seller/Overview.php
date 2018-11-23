@@ -34,12 +34,15 @@ class Overview extends CI_Controller
         $page_data['sub_name'] = $status;
         $page_data['profile'] = $this->seller->get_profile_details($uid,
             'first_name,last_name,email,profile_pic');
-        $page_data['completed_orders'] = $this->seller->run_sql("SELECT COUNT(*) FROM orders o INNER JOIN products p WHERE o.product_id = p.id AND p.seller_id = {$uid} AND o.status = 'completed'")->row();
-        $page_data['other_orders'] = $this->seller->run_sql("SELECT COUNT(*) FROM orders o INNER JOIN products p WHERE o.product_id = p.id AND p.seller_id = {$uid} AND o.status != 'completed'")->row();
+        $page_data['completed_orders'] = $this->seller->get_row('orders', "COUNT(*)", " (seller_id = {$uid} AND status = 'completed') ");
+        $page_data['other_orders'] = $this->seller->get_row('orders', "COUNT(*)", " (seller_id = {$uid} AND status != 'completed') ");
         $page_data['top_views'] = $this->seller->run_sql("SELECT product_name, views FROM products WHERE seller_id = {$uid} ORDER BY views DESC LIMIT 3")->result();
         $page_data['sales_chart'] = $this->seller->run_sql("SELECT COUNT(*) sales, DATE_FORMAT(order_date,'%Y-%m') omonth 
-          FROM orders o INNER JOIN products p WHERE o.product_id = p.id AND p.seller_id = {$uid} AND o.status != 'completed' GROUP BY omonth ORDER BY omonth DESC LIMIT 4")->result();
-//        var_dump($page_data['sales_chart'] );
+          FROM orders o WHERE o.seller_id = {$uid} AND o.status != 'completed' GROUP BY omonth ORDER BY omonth DESC LIMIT 4")->result();
+        $page_data['orders'] = $this->seller->run_sql("SELECT o.order_code, o.qty, o.amount, o.order_date, p.product_name FROM orders o LEFT JOIN products p ON (p.id = o.product_id) WHERE o.seller_id = {$uid} LIMIT 100")->result();
+        $page_data['sales'] = $this->seller->get_row('orders', " MIN(amount) as min_sale, MAX(amount) as max_sale, SUM(amount) as total_amount ", "( seller_id = {$uid}) ");
+//        var_dump($page_data['total_sales']);
+//        $page_data['total_sales'] = $this->seller->run_sql("SELECT MIN(o.amount) as min_sale, MAX(o.amount) as max_sale, SUM(o.amount) as total_amount FROM orders o WHERE o.seller_id = {$uid} ")->row();
         $this->load->view('seller/dashboard', $page_data);
     }
 }
