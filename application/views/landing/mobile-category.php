@@ -364,7 +364,7 @@
 
 			</div>
 			<div id="category_body">
-				<div class="col-md-9">
+				<div class="">
 					<div class="row row-sm-gap" data-gutter="10">
 						<?php foreach ($products as $product) : ?>
 							<div class="col-md-3">
