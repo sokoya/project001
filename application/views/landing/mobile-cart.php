@@ -85,7 +85,7 @@
                                                 style="font-size:14px; font-weight: bolder;"><?php echo ngn($product['subtotal']); ?></span>
                                     </p>
                                     <p>Unit Price: <span
-                                                style="color:dimgrey;font-size:11px; font-weight: bolder;"><?php echo ngn($product['price']); ?></span>
+                                                style="font-size:11px; font-weight: bolder;"><?php echo ngn($product['price']); ?></span>
                                         X <?= $product['qty']; ?></p>
                                 </div>
                             </div>
@@ -116,12 +116,12 @@
                                 </div>
                             </div>
                             <div class="row" style="font-size: 12px;">
-                                <div class="col-xs-6" style="color: #ffb300;">
+                                <div class="col-xs-6">
                                     <a class="btn panel-bordered-warning" style="font-size: 12px;"><i
                                                 class="fa fa-heart"></i> Save For
                                         Later</a>
                                 </div>
-                                <div class="col-xs-6" style="color: #f44336;">
+                                <div class="col-xs-6">
                                     <a style="font-size: 12px;" title="Remove <?= $product['name']; ?> from the cart"
                                        class="btn panel-bordered-danger pull-right"
                                        href="<?= base_url('cart/remove/' . $product['rowid']); ?>"><i

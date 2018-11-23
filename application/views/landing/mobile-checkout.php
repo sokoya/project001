@@ -9,7 +9,8 @@
         -webkit-box-shadow: 0px 5px 5px 0px rgba(176, 177, 193, 0.1);
         box-shadow: 0px 5px 5px 0px rgba(176, 177, 193, 0.1)
     }
-    .panel{
+
+    .panel {
         margin-bottom: 5px !important;
     }
 </style>
@@ -275,23 +276,31 @@
                             foreach ($this->cart->contents() as $product) :
                                 $detail = $this->product->get_cart_details($product['id']);
                                 ?>
-                                <div class="custom-card">
+                                <div class="custom-card" style="font-size: 12px;">
                                     <div class="row">
-                                        <div class="col-xs-3"><?= $product['qty']; ?>
-                                            X
+                                        <div class="col-xs-3">
+                                            <a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
+                                                <img style="width:80px !important;height:auto !important;"
+                                                     src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image); ?>"
+                                                     alt="<?= lang('app_name'); ?> <?= $product['name']; ?>"
+                                                     title="<?= $product['name']; ?>"/>
+                                            </a>
                                         </div>
-                                        <div class="col-xs-9"><?= word_limiter(htmlentities($product['name']), 7, '...'); ?>
-                                            <br/><span>Seller :<span><?= $detail->name; ?></span></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-3"></div>
-                                        <div class=" col-xs-9">
+                                        <div class="col-xs-9">
+                                            <?= word_limiter(htmlentities($product['name']), 7, '...'); ?><br/>
                                             <span class="pr-price" data-amount="<?= $product['subtotal']; ?>">
                                                     <?php
                                                     echo "Price: " . ngn($product['subtotal']);
                                                     $subtotal += $product['subtotal'];
                                                     ?>
-                                            </span>
+                                            </span> X <?= $product['qty']; ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-3"></div>
+                                        <div class=" col-xs-9">
+
+                                            <span>Sold By: <span><?= $detail->name; ?></span>
                                         </div>
                                     </div>
                                 </div>
