@@ -1,6 +1,24 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
 
 <style>
+    .panel-bordered-default{
+        border: 1px solid #bdcccf;
+        color: #696969;
+    }
+
+
+
+    .panel-bordered-warning{
+        border: 1px solid #ffb300;
+        color:#ffb300;
+    }
+
+    .panel-bordered-danger{
+        border: 1px solid #f44336;
+        color: #f44336;
+    }
+
+
     .btn_checkout {
         bottom: 0;
         left: 0;
@@ -136,7 +154,7 @@
                     </div>
                 </div>
             </div>
-            <a class="btn panel-bordered-default" href="<?= base_url(); ?>" style="width:100%;"><i
+            <a class="btn panel-bordered-default" href="<?= base_url(); ?>" style="width:100%;font-weight: bolder;"><i
                         class="fa fa-shopping-cart"></i> Continue Shopping</a>
         <?php else: ?>
             <div class="custom-fa-cover">
