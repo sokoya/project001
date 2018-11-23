@@ -68,7 +68,7 @@
 		font-size: 15px;
 	}
 
-	.product-discount-price {
+	.product-discount-price {x
 		font-size: 13px;
 		font-weight: 600;
 		color: #b0b0b0;
@@ -290,29 +290,29 @@
 	<div class="container">
 		<p class="block-title">Delivery Information</p>
 		<div class="row">
-			<div class="col-xs-1">
+			<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
 				<img src="<?= base_url('assets/landing/svg/delivery-truck.svg'); ?>" alt="Delivery Truck"
 					 style="height: 30px; width: 35px;">
 			</div>
-			<div class="col-xs-11">
+			<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
 				<p class="delivery-text">Onitsha Market delivery available, get it within 5 business days of order</p>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-1">
+			<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
 				<img src="<?= base_url('assets/landing/svg/return.svg'); ?>" alt="Delivery Truck"
 					 style="height: 30px; width: 35px;">
 			</div>
-			<div class="col-xs-11">
+			<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
 				<p class="delivery-text">Free 7 day return if available</p>
 			</div>
 		</div>
 		<div class="row" style="margin-top: 14px;">
-			<div class="col-xs-1">
+			<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
 				<img src="<?= base_url('assets/landing/svg/warranty.svg'); ?>" alt="Warranty"
 					 style="height: 30px; width: 35px;">
 			</div>
-			<div class="col-xs-11">
+			<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
 				<p class="delivery-text" style="position: relative; top: -5px;">This product has the following warranty
 					: Repair by vendor
 					<br/>
@@ -329,14 +329,15 @@
 <!--Product Description Card-->
 <div class="custom-card" style="margin-top: 5px;">
 	<div class="container">
-		<p class="block-title" style="margin-top: 5px;">Product Frontline <span
+		<p class="block-title close-panel" data-target="title_vl" style="margin-top: 5px;">Product Shop <span
 				style="color: #4c4c4c !important; float: right"><i
 					class="fa fa-minus close-panel"
 					aria-hidden="true"
 					data-target="title_vl"></i></span></p>
 		<p class="body_text" id="title_vl">Fouani Nigeria, Trendy Woman Ltd, SEOLAK</p>
 		<hr/>
-		<p class="block-title">Product Description <span style="color: #4c4c4c !important; float: right"><i
+		<p class="block-title close-panel" data-target="description_vl">Product Description <span
+				style="color: #4c4c4c !important; float: right"><i
 					class="fa fa-minus close-panel"
 					aria-hidden="true"
 					data-target="description_vl"></i></span></p>
@@ -348,7 +349,8 @@
 			necessary, making this the first true generator on the Internet.
 		</p>
 		<hr/>
-		<p class="block-title">What you will find in the box <span style="color: #4c4c4c !important; float: right"><i
+		<p class="block-title close-panel" data-target="box_vl">What you will find in the box <span
+				style="color: #4c4c4c !important; float: right"><i
 					class="fa fa-plus close-panel"
 					aria-hidden="true"
 					data-target="box_vl"></i></span></p>
@@ -476,8 +478,13 @@
 
 		$('.close-panel').on('click', function () {
 			let target = $(this).data('target');
-			$(this).toggleClass("fa-minus fa-plus");
+			if ($(this).hasClass('fa')) {
+				$(this).toggleClass("fa-minus fa-plus");
+				$(`#${target}`).toggle()
+			}
+			$(this).find('.fa').toggleClass("fa-minus fa-plus");
 			$(`#${target}`).toggle()
+
 		});
 
 		$(".owl-carousel").owlCarousel({
