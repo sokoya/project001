@@ -1,4 +1,42 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
+
+<style>
+    .panel-bordered-default{
+        border: 1px solid #bdcccf;
+        color: #696969;
+    }
+
+
+
+    .panel-bordered-warning{
+        border: 1px solid #ffb300;
+        color:#ffb300;
+    }
+
+    .panel-bordered-danger{
+        border: 1px solid #f44336;
+        color: #f44336;
+    }
+
+
+    .btn_checkout {
+        bottom: 0;
+        left: 0;
+        position: fixed;
+        right: 0;
+        z-index: 99;
+        background-color: #fff;
+        -webkit-box-shadow: 0 0.125rem 0.625rem 0 rgba(0, 0, 0, .2);
+        box-shadow: 0 0.125rem 0.625rem 0 rgba(0, 0, 0, .2);
+        padding: .625rem;
+        text-align: center;
+    }
+
+    .box_shadow {
+        -webkit-box-shadow: 0 0.25rem 0.5rem 0 rgba(0, 0, 0, .12), 0 0.125rem 0.25rem 0 rgba(0, 0, 0, .08);
+        box-shadow: 0 0.25rem 0.5rem 0 rgba(0, 0, 0, .12), 0 0.125rem 0.25rem 0 rgba(0, 0, 0, .08);
+    }
+</style>
 </head>
 <body class="cart-row">
 <div class="global-wrapper clearfix" id="global-wrapper">
@@ -8,8 +46,8 @@
 
     <div class="container">
         <?php if (!empty($this->cart->contents())) : ?>
-            <header class="page-header" style="margin: 10px 0 10px !important;">
-                <h4>Cart Overview</h4>
+            <header class="page-header" style="margin: 10px 0 10px 0;">
+                <h4 style="margin-bottom:0;">My Cart (<?= $this->cart->total_items(); ?>) Items</h4>
             </header>
             <div class="row">
                 <?php $this->load->view('landing/msg_view'); ?>
@@ -18,56 +56,49 @@
                 <?php $x = 0;
                 $total = 0;
                 foreach ($this->cart->contents() as $product): ?>
-            <?php
-            $detail = $this->product->get_cart_details($product['id']);
-            $variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
-            ?>
-                <div class="group-prod" style="background-color: white;margin-bottom:10px;padding:10px;text-align:justify;font-size:12px;">
-                    <div class="row">
-                        <div class="col-xs-5">
-                            <?php echo form_hidden($x . '[rowid]', $product['rowid']); ?>
-                            <a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
-                                <img style="width:130px !important;height:auto !important;"
-                                     src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image); ?>"
-                                     alt="<?= lang('app_name'); ?> <?= $product['name']; ?>"
-                                     title="<?= $product['name']; ?>"/>
-                            </a></div>
-                        <div class="col-xs-7">
-                            <div class="col-xs-12">
-                                <a
-                                        href="<?= base_url(urlify($product['name'], $product['id'])); ?>"
-                                        style="overflow: hidden !important;"><?= htmlentities($product['name']); ?></a><br/>
+                    <?php
+                    $detail = $this->product->get_cart_details($product['id']);
+                    $variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
+                    ?>
+                    <div class="group-prod"
+                         style="background-color: white;margin-bottom:10px;padding:10px;text-align:justify;font-size:12px;">
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <?php echo form_hidden($x . '[rowid]', $product['rowid']); ?>
+                                <a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
+                                    <img style="width:130px !important;height:auto !important;"
+                                         src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image); ?>"
+                                         alt="<?= lang('app_name'); ?> <?= $product['name']; ?>"
+                                         title="<?= $product['name']; ?>"/>
+                                </a></div>
+                            <div class="col-xs-7">
+                                <div class="col-xs-12" style="font-size: 15px;">
+                                    <a
+                                            href="<?= base_url(urlify($product['name'], $product['id'])); ?>"><?= word_limiter(htmlentities($product['name']), 7, '...'); ?></a>
+                                </div>
+                                <div class="col-xs-12">
                                 <span
-                                        class="text text-sm">Seller: <?= !empty($detail->legal_company_name) ? $detail->legal_company_name : $detail->name; ?></span>
-                            </div>
-                            <div class="col-xs-12">
-                                <?php if ($variation_detail->quantity < 1 || in_array($detail->product_status, array('suspended', 'blocked', 'pending')))
-                                    : ?>
-                                    <span class="text-center text-semibold text-danger"><strong>This product variation is out of stock. or no longer available.</strong></span>
-                                <?php else: ?>
-                                    <?php echo ngn($product['subtotal']); ?>
-                                <?php endif; ?>
+                                        class="text">Sold By: <?= !empty($detail->legal_company_name) ? $detail->legal_company_name : $detail->name; ?></span>
+                                </div>
+                                <div class="col-xs-12" style="margin-top:10px;">
+                                    <p>Qty Price: <span
+                                                style="font-size:14px; font-weight: bolder;"><?php echo ngn($product['subtotal']); ?></span>
+                                    </p>
+                                    <p>Unit Price: <span
+                                                style="font-size:11px; font-weight: bolder;"><?php echo ngn($product['price']); ?></span>
+                                        X <?= $product['qty']; ?></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="gap gap-small"></div>
-                    <div class="row">
                         <?php if ($variation_detail->quantity < 1 || in_array($detail->product_status, array('suspended', 'blocked', 'pending')))
                             : ?>
-                            <span class="text-center text-semibold text-danger"><strong>This product variation is out of stock. or no longer available.</strong></span>
+                            <span class="text-center text-semibold text-danger mar-top" style="margin-top: 10px;"><strong>This product variation is out of stock. or no longer available.</strong></span>
                         <?php else: ?>
-                            <div class="col-xs-12">
-                                <div class="col-xs-4">
-                                    <a title="Remove <?= $product['name']; ?> from the cart" class="btn btn-danger"
-                                       href="<?= base_url('cart/remove/' . $product['rowid']); ?>"><i
-                                                class="fa fa-times"></i>Remove
-
-                                    </a>
-                                </div>
-                                <div class="col-xs-8" style="padding-right:10px;">
-                                    <ul>
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-xs-6">
+                                    <ul style="margin-left: -40px;">
                                         <?php $value = ($product['qty'] > $variation_detail->quantity) ? $variation_detail->quantity : $product['qty']; ?>
-                                        <li class="product-page-qty-item">
+                                        <li class="product-page-qty-item box_shadow">
                                             <button type="button" data-cid="<?= $product['rowid']; ?>"
                                                     class="product-page-qty product-page-qty-minus">-
                                             </button>
@@ -81,12 +112,27 @@
                                             </button>
                                         </li>
                                     </ul>
+
+                                </div>
+                            </div>
+                            <div class="row" style="font-size: 12px;">
+                                <div class="col-xs-6">
+                                    <a class="btn panel-bordered-warning" style="font-size: 12px;"><i
+                                                class="fa fa-heart"></i> Save For
+                                        Later</a>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a style="font-size: 12px;" title="Remove <?= $product['name']; ?> from the cart"
+                                       class="btn panel-bordered-danger pull-right"
+                                       href="<?= base_url('cart/remove/' . $product['rowid']); ?>"><i
+                                                class="fa fa-times"></i> Remove
+
+                                    </a>
                                     <?php $total += $product['subtotal']; ?>
                                 </div>
                             </div>
                         <?php endif; ?>
                     </div>
-                </div>
                     <?php
                     $x++;
                 endforeach; ?>
@@ -95,20 +141,21 @@
                 <div class="gap gap-small"></div>
                 <div class="col-xs-12">
                     <ul class="shopping-cart-total-list">
-                        <li><span>Sub-total :</span><span>(<?= $this->cart->total_items(); ?>) items</span>
+                        <li><span>Quantity: </span><span>(<?= $this->cart->total_items(); ?>) items</span>
                         </li>
-                        <li><span>Total :</span><span><?= ngn($total); ?></span>
+                        <li><span>Total: </span><span><?= ngn($total); ?></span>
                         </li>
                     </ul>
                     <span class="text-sm text-danger"><strong>Delivery fee not included.</strong></span><br/>
                     <br/>
-                    <a class="btn btn-primary" href="<?= base_url('checkout'); ?>">Checkout</a>
+                    <div class="btn_checkout">
+                        <a class="btn btn-primary" href="<?= base_url('checkout'); ?>" style="width:100%;">Continue to
+                            Checkout</a>
+                    </div>
                 </div>
-            </div><br/>
-            <ul class="list-inline">
-                <li><a class="btn btn-default" href="<?= base_url(); ?>">Continue Shopping</a>
-                </li>
-            </ul>
+            </div>
+            <a class="btn panel-bordered-default" href="<?= base_url(); ?>" style="width:100%;font-weight: bolder;"><i
+                        class="fa fa-shopping-cart"></i> Continue Shopping</a>
         <?php else: ?>
             <div class="custom-fa-cover">
                 <i class="fa fa-cart-arrow-down empty-cart-icon custom-fa text-center"></i>
@@ -121,7 +168,7 @@
             </div>
         <?php endif; ?>
     </div>
-    <div class="lds-spinner cst-loader " style="display: none;">
+    <div class="lds-spinner cst-loader " style="display: none;height:100%;width:100%;">
         <div></div>
         <div></div>
         <div></div>
@@ -135,7 +182,7 @@
         <div></div>
         <div></div>
     </div>
-    <div class="gap"></div>
+    <div style="height:10px;"></div>
 
     <?php $this->load->view('landing/resources/footer'); ?>
 
