@@ -46,7 +46,7 @@
 
     <div class="container">
         <?php if (!empty($this->cart->contents())) : ?>
-            <header class="page-header">
+            <header class="page-header" style="margin: 10px 0 10px 0;">
                 <h4 style="margin-bottom:0;">My Cart (<?= $this->cart->total_items(); ?>) Items</h4>
             </header>
             <div class="row">
