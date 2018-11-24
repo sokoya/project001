@@ -142,14 +142,22 @@ if (!function_exists('productStatus')) {
     function productStatus($status){
         switch ($status) {
         	case 'pending':
+			case 'shipped':
+            case 'ordered':
         		return '<label class="label label-table label-warning">' . ucfirst( $status ). '</label>';
         		break;
         	case 'approved':
+			case 'delivered':
         		return '<label class="label label-table label-success">' . ucfirst( $status ). '</label>';
         		break;  
         	case 'missing_images':
 				return '<label class="label label-table label-info">' . ucfirst( $status ). '</label>';
-				break;      	
+				break;
+			case 'returned':
+			case 'failed_delivery':
+			case 'canceled':
+            	return '<label class="label label-table label-danger">' . ucfirst( $status ). '</label>';
+            	break;
         	default:
         		return '<label class="label label-table label-danger">' . ucfirst( $status ). '</label>';
         		break;

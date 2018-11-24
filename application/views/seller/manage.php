@@ -55,13 +55,13 @@
                             <?php foreach($products as $product) : ?>
                                 <tr>
                                     <td>
-                                        <?= $product['product_name']; ?>
+                                        <?php if($product['product_name'] !== null) echo $product['product_name']; ?>
                                     </td>
-                                    <td><?= $product['sku'];?></td>
-                                    <td><?= neatDate($product['created_on']); ?></td>
-                                    <td><?= ngn($product['sale_price']); ?></td>
-                                    <td><?= ngn($product['discount_price']); ?></td>
-                                    <td><?= productStatus($product['product_status']); ?></td>
+                                    <td><?php if( $product['sku'] !== null) echo $product['sku'];?></td>
+                                    <td><?php if($product['created_on']) echo neatDate($product['created_on']); ?></td>
+                                    <td><?php if($product['sale_price']) echo ngn($product['sale_price']); ?></td>
+                                    <td><?php if($product['sale_price']) echo ngn($product['discount_price']); ?></td>
+                                    <td><?php if($product['sale_price']) echo productStatus($product['product_status']); ?></td>
                                     <?php if(in_array($product['product_status'],array('pending', 'missing_images')) ): ?>
                                         <td>
                                             <a href="<?= base_url('seller/product/edit/' . $product['id']); ?>">
@@ -76,7 +76,7 @@
                                         </td>
                                     <?php endif; ?>
                                 </tr>
-                            <?php endforeach;?>
+                            <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

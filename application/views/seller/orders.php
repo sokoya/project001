@@ -26,7 +26,7 @@
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="demo-pli-home"></i></a></li>
                     <li><a href="#">Manage</a></li>
-                    <li class="active"><?= cleanit($this->uri->segment(2)); ?> products</li>
+                    <li class="active"><?= ucfirst($this->input->get('type')) ?>products</li>
                 </ol>
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                 <!--End breadcrumb-->
@@ -36,18 +36,17 @@
             <div id="page-content">
                 <div class="panel">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Showing all <?= ucfirst($this->uri->segment(3)) ?> order</h3>
+                        <h3 class="panel-title">Showing all <?= ucfirst($this->input->get('type')) ?></h3>
                     </div>
                     <div class="panel-body">
                         <table id="demo-dt-basic" class="table table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
                                 <th colspan="2">Product Name</th>
-                                <th>Buyer's name</th>
-                                <th class="min-tablet">Ordered On</th>
+                                <th class="min-tablet">Ordered Date</th>
                                 <th class="min-tablet">Qty (Amount)</th>
-                                <td class="min-tablet">Order Desc.</td>
-                                <th class="min-desktop">Action</th>
+                                <td class="min-tablet">Ordered.</td>
+                                <?php $type = $this->input->get('type'); if( empty( $type)) : ?><td class="min-tablet">Order Status</td> <?php endif;?>
                             </tr>
                             </thead>
                             <tbody>
@@ -55,14 +54,13 @@
                                 <tr>
                                     <td colspan="2">
                                         <span><img width="65" src="<?= base_url('data/products/'. $order->pid .'/'. $order->image_name); ?>"></span>
-                                        <?= $order->product_name; ?>
+                                        <?= character_limiter($order->product_name, 30); ?>
                                         <a href="<?= base_url('seller/order/detail/'. $order->orid); ?>"></a>
                                     </td>
-                                    <th><?= $order->customer_name; ?></th>
                                     <td><?= neatDate($order->order_date); ?></td>
-                                    <td><?= $order->qty .'<span class="text text-danger"> ( ' . ngn($order->amount) .' )</span>'; ?></td>
-                                    <td><?= $order->product_desc; ?></td>
-                                    <td><i class="fa fa-plus"></i></td>
+                                    <td><?= $order->qty .' Item (s) - <span class="text text-danger"> ( ' . ngn($order->amount) .' )</span>'; ?></td>
+                                    <td><?= $order->variation; ?></td>
+                                    <?php $type = $this->input->get('type'); if( empty( $type)) : ?><td class="min-tablet"><?= productStatus($order->status); ?></td> <?php endif;?>
                                 </tr>
                             <?php endforeach;?>
                             </tbody>

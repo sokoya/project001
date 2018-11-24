@@ -12,7 +12,7 @@ class Logout extends CI_Controller {
 				$this->session->unset_userdata($key);
 			}
 		}
-		redirect(base_url('seller/login'));
+		redirect(base_url());
 	}
 
 }

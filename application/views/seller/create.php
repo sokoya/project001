@@ -35,7 +35,6 @@
 			text-align: left !important;
 		}
 	}
-
 	.fav_drop_ico {
 		margin: 15px;
 	}
@@ -96,21 +95,21 @@
 											</a>
 										</li>
 										<li class="col-xs-3">
-											<a data-toggle="tab" href="#tab2">
+											<a data-toggle="tab" href="#product-description-tab">
                                                 <span class="text-warning text-2x"><i
 														class="fab fa-product-hunt"></i></span>
 												<p class="text-semibold mar-no">Product Description & Attributes</p>
 											</a>
 										</li>
 										<li class="col-xs-3">
-											<a data-toggle="tab" href="#tab3">
+											<a data-toggle="tab" href="#product-variation-tab">
                                                 <span class="text-info text-2x"><i
 														class="fas fa-money-check"></i></span>
 												<p class="text-semibold mar-no">Product Pricing</p>
 											</a>
 										</li>
 										<li class="col-xs-3">
-											<a data-toggle="tab" href="#tab4">
+											<a data-toggle="tab" href="#image-upload-tab">
 												<span class="text-success text-2x"><i class="fas fa-images"></i></span>
 												<p class="text-semibold mar-no">Image</p>
 											</a>
@@ -280,8 +279,6 @@
 																				class="selectpicker" multiple
 																				title="Select colour family..."
 																				data-width="100%">
-																			<option value="">-- Select colour family--
-																			</option>
 																			<?php
 																			$colours = explode(',', lang('colours'));
 																			foreach ($colours as $colour):
@@ -337,45 +334,26 @@
 															</div>
 														</div>
 													</div>
-<!--													<div class="panel">-->
-<!--														<!--Accordion title-->
-<!--														<div class="panel-heading">-->
-<!--															<h4 class="panel-title text-dark">-->
-<!--																<a data-parent="#accordion" data-toggle="collapse"-->
-<!--																   href="#prod-spec">Product Specification<span-->
-<!--																		class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span></a>-->
-<!--															</h4>-->
-<!--														</div>-->
-<!--														<!--Accordion content-->
-<!--														<div class="panel-collapse collapse in" id="prod-spec">-->
-<!--															<div class="panel-body">-->
-<!--																-->
-<!---->
-<!--															</div>-->
-<!--														</div>-->
-<!--													</div>-->
 												</div>
 												<!--Product Specs: Optional fields-->
 											</div>
 
 											<!--Second tab-->
-											<div id="tab2" class="tab-pane fade">
-
+											<div id="product-description-tab" class="tab-pane fade">
 												<div class="panel-group accordion" id="accordion">
-
 													<div class="panel">
 														<!--Accordion title-->
 														<div class="panel-heading">
 															<h4 class="panel-title">
 																<a data-parent="#accordion" data-toggle="collapse"
-																   href="#prod-description-tab">
+																   href="#description-tab">
 																	Product Description<span
 																		class="glyphicon glyphicon-chevron-down pull-right fav_drop_ico"></span>
 																</a>
 															</h4>
 														</div>
 														<!--Accordion content-->
-														<div class="panel-collapse" id="prod-description-tab">
+														<div class="panel-collapse" id="description-tab">
 															<div class="panel-body">
 																<div class="form-group">
 																	<label
@@ -465,7 +443,6 @@
 															</div>
 														</div>
 													</div>
-
 													<div class="panel">
 														<!--Accordion title-->
 														<div class="panel-heading">
@@ -520,6 +497,7 @@
 															</div>
 														</div>
 													</div>
+
 													<?php if (!empty($features)):
 														$y = 1;
 														foreach ($features as $feature) :
@@ -736,25 +714,27 @@
 																			   title="Help Text"></i> </a>
 																	</div>
 																</div>
-
 															</div>
 														</div>
 													</div>
 												</div>
 											</div>
 											<!--/ Second tab-->
-
 											<!--Third tab-->
-											<div id="tab3" class="tab-pane">
+											<div id="product-variation-tab" class="tab-pane">
 												<div class="table-responsive">
 													<table class="table table-vcenter mar-top pricing_table">
 														<thead>
 														<tr>
-															<th class="min-w-td">Variation</th>
+                                                            <?php if(empty($variation_name)) : ?>
+															    <th class="min-w-td">Variation *</th>
+                                                            <?php else: ?>
+                                                                <th class="min-w-td"><?= ucfirst($variation_name); ?> *</th>
+                                                            <?php  endif; ?>
 															<th>Seller SKU</th>
-															<th>EAN / UPC / ISBN</th>
-															<th>Quantity</th>
-															<th>Sale Price*</th>
+															<th>EAN / UPC / ISBN *</th>
+															<th>Quantity *</th>
+															<th>Sale Price *</th>
 															<th>Discounted Price</th>
 															<th>Start date</th>
 															<th>End date</th>
@@ -764,11 +744,20 @@
 														<tbody class="variation_body">
 														<tr data-row-id="1">
 															<td>
-																<div class="form-group-sm">
+																<div class="form-group-sm col-md-12">
+                                                                    <?php if(!empty($variation_name) && !empty($variation_options )) : ?>
+                                                                    <select class="form-control" required name="variation[]" title="variation">
+                                                                        <?php
+                                                                        foreach( $variation_options as $option_name ) : ?>
+                                                                            <option value="<?= trim( $option_name )?>"><?= trim($option_name); ?></option>
+                                                                        <?php endforeach; ?>
+                                                                    </select>
+                                                                    <?php else :?>
 																	<input title="variation" type="text"
 																		   class="form-control" name="variation[]"
 																		   required/>
-																</div>
+                                                                    <?php endif; ?>
+                                                                </div>
 															</td>
 															<td>
 																<div class="form-group-sm">
@@ -805,16 +794,13 @@
 															</td>
 															<td>
 																<div class="form-group-sm">
-																	<!--																	<input title="Starting date for this variation"-->
-																	<!--																		   type="date" class="form-control"-->
-																	<!--																		   name="start_date[]"/>-->
 																	<div class="input-group date">
 																		<input data-provide="datepicker"
 																			   class="form-control datepicker"
 																			   data-date-format="mm/dd/yyyy"
 																			   placeholder="mm/dd/yyyy"
 																			   name="start_date[]"
-																			   title="Starting date for this variation">
+																			   title="Starting date for this discount">
 																		<div class="input-group-addon">
 																			<i class="demo-pli-calendar-4"></i>
 																		</div>
@@ -824,16 +810,13 @@
 															</td>
 															<td>
 																<div class="form-group-sm">
-																	<!--																	<input title="End date for this variation"-->
-																	<!--																		   type="date" class="form-control"-->
-																	<!--																		   name="end_date[]"/>-->
 																	<div class="input-group date">
 																		<input data-provide="datepicker"
 																			   class="form-control datepicker"
 																			   data-date-format="mm/dd/yyyy"
 																			   placeholder="mm/dd/yyyy"
 																			   name="end_date[]"
-																			   title="End date for this variation">
+																			   title="End date for this discount">
 																		<div class="input-group-addon">
 																			<i class="demo-pli-calendar-4"></i>
 																		</div>
@@ -856,7 +839,7 @@
 											</div>
 
 											<!--Fourth tab-->
-											<div id="tab4" class="tab-pane mar-btm">
+											<div id="image-upload-tab" class="tab-pane mar-btm">
 
 												<div class="panel">
 													<div class="panel-heading">
@@ -1101,9 +1084,9 @@
 			} else {
 				$('#processing').hide();
 				$('.add_product_form').trigger('reset');
-				$('#status').html(`<p class="alert alert-success">Congrats the property has been posted successfully.</p>`).slideDown('fast').delay(5000).slideUp('slow');
+                window.location.href = base_url + 'seller/manage';
 			}
-			console.log(response);
+			// console.log(response);
 		});
 		myDropzone.on("errormultiple", function (files, response) {
 			// Gets triggered when there was an error sending the files.
@@ -1131,19 +1114,21 @@
 		return $('tr', $(this).find('tbody')).length;
 	};
 
+    let variation_name = `<td><div class="form-group-sm"><input title="variation" type="text" class="form-control" name="variation[]" /></div></td>`;
+    <?php if( !empty($variation_options)) : ?>
+    variation_name  = `<td><div class="form-group-sm"><select class="form-control" required name="variation[]" title="variation">
+    <?php foreach( $variation_options as $option) :?>
+        <option value="<?= $option; ?>"><?= $option; ?></option>
+    <?php endforeach; ?>
+        </select></div></td>`;
+    <?php endif; ?>
 
 	$('.add_more').on('click', add_new_row);
-
 	function add_new_row() {
 		let row_id = $('.pricing_table').rowCount() * 1;
 		let new_id = row_id + 1;
-		// check if the number of variation row exceeds limit
 		$('.pricing_table tbody').append(`<tr id = "${new_id}_field">
-				<td>
-					<div class="form-group-sm">
-						<input title="variation" type="text" class="form-control" name="variation[]" />
-					</div>
-				</td>
+				${variation_name}
 				<td>
 					<div class="form-group-sm">
 						<input title="Seller SKU" type="text" class="form-control" name="sku[]" />
@@ -1215,7 +1200,6 @@
 			startDate: '0d'
 		});
 	}
-
 
 	$(document).ready(function () {
 		$('[data-toggle="popover"]').popover({animation: true});
