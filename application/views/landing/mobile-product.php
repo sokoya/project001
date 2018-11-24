@@ -68,8 +68,8 @@
 		font-size: 15px;
 	}
 
-	.product-discount-price {x
-		font-size: 13px;
+	.product-discount-price {
+		font-size: 12px;
 		font-weight: 600;
 		color: #b0b0b0;
 		text-decoration: line-through;
@@ -188,17 +188,19 @@
 </head>
 <body style="background: #e5e5e5">
 <div class="global-wrapper clearfix" id="global-wrapper" style="margin-bottom: 3px;">
-	<?php $this->load->view('landing/resources/head_img') ?>
-	<?php $this->load->view('landing/resources/head_category'); ?>
-	<?php $this->load->view('landing/resources/head_menu'); ?>
+	<!--	--><?php //$this->load->view('landing/resources/head_img') ?>
+	<!--	--><?php //$this->load->view('landing/resources/head_category'); ?>
+	<?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
 </div>
 
 <!--Top menu back button-->
 <div class="custom-card">
 	<div class="container">
-		<p class="margin-0"><img src="<?= base_url('assets/landing/svg/back.svg'); ?>" alt="Back button"
-								 style="height: 14px; width: 14px; margin-right: 8px;"><span class="redirect-text">Go back to Electronics</span>
-		</p>
+		<a style="text-decoration: none;" href="<?= base_url('catalog/' . $category_detail->slug); ?>"><p
+				class="margin-0"><img src="<?= base_url('assets/landing/svg/back.svg'); ?>" alt="Back button"
+									  style="height: 14px; width: 14px; margin-right: 8px;"><span
+					class="redirect-text">Go back to <?= ucwords($category_detail->name); ?></span>
+			</p></a>
 	</div>
 </div>
 
@@ -218,21 +220,54 @@
 <!--Main Description card-->
 <div class="custom-card">
 	<div class="container">
-		<p class="seller-name">Sokoya Philip</p>
-		<p class="product-name">Hp Laptop core i5 7th generation - Black</p>
+		<p class="seller-name"><?= ucwords($product->first_name . ' ' . $product->last_name); ?></p>
+		<p class="product-name"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></p>
 		<div style="margin-top: 4px; margin-left: 2px">
-			<span class="rating-count">5/5</span>
+			<?php
+			if ($rating_counts) {
+				$overall_rating = product_overall_rating($rating_counts);
+			}
+
+			?>
+			<span class="rating-count"><?= isset($overall_rating) ? $overall_rating : ''; ?></span>
 			<ul style="display: inline-block" class="product-caption-rating">
-				<li class="rated"><i class="fa fa-star"></i></li>
-				<li class="rated"><i class="fa fa-star"></i></li>
-				<li class="rated"><i class="fa fa-star"></i></li>
-				<li class="rated"><i class="fa fa-star"></i></li>
-				<li class="rated"><i class="fa fa-star"></i></li>
+				<?php
+				if ($rating_counts) {
+					$overall_rating = product_overall_rating($rating_counts);
+					$rating_rounded = round($overall_rating);
+					for ($i = 1; $i <= $rating_rounded; $i++) {
+						?>
+						<li class="rated"><i class="fa fa-star"></i>
+						</li>
+						<?php
+					}
+					if ($rating_rounded < 5) {
+						for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
+							<li><i class="fa fa-star"></i></li>
+							<?php
+						}
+					}
+				} else {
+
+					?>
+					<li><i class="fa fa-star"></i></li>
+					<li><i class="fa fa-star"></i></li>
+					<li><i class="fa fa-star"></i></li>
+					<li><i class="fa fa-star"></i></li>
+					<li><i class="fa fa-star"></i></li>
+					<?php
+				}
+				?>
 				<span style="margin-left: 5px;" class="rating-total-count">(8 ratings)</span>
 			</ul>
 		</div>
-		<p class="product-price">&#8358; 45,000 <span>-10%</span></p>
-		<p class="product-discount-price">&#8358; 55,000</p>
+		<?php if (!empty($var->discount_price)) : ?>
+			<p class="product-price"><?= ngn($var->discount_price); ?>
+				<span><?= get_discount($var->sale_price, $var->discount_price) ?></span></p>
+			<p class="product-discount-price"><?= ngn($var->sale_price); ?></p>
+		<?php else: ?>
+			<p class="product-price"><?= ngn($var->sale_price); ?></p>
+		<?php endif; ?>
 
 	</div>
 </div>
@@ -240,7 +275,11 @@
 <!--Buy Card-->
 <div class="custom-card" style="margin-top: 5px;">
 	<div class="container">
-		<p class="block-title">Buy Now <span>&#8358; 45,000</span></p>
+		<?php if (!empty($var->discount_price)) : ?>
+			<p class="block-title">Buy Now <span><?= ngn($var->discount_price); ?></span></p>
+		<?php else: ?>
+			<p class="block-title">Buy Now <span><?= ngn($var->sale_price); ?></span></p>
+		<?php endif; ?>
 		<div class="row">
 			<div class="col-md-7">
 				<p class="custom-product-page-option-title">Quantity:</p>
@@ -494,6 +533,7 @@
 		});
 	});
 </script>
-<?php $this->load->view('landing/resources/footer'); ?>
+<script src="<?= base_url('assets/landing/js/mobile.js'); ?>"></script>
+<?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
 </body>
 </html>

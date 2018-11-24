@@ -228,7 +228,7 @@
 		z-index: 999;
 		color: #222;
 		width: 135px;
-		left: -55px;
+		left: -70px;
 		padding: 10px 10px;
 		top: 45px;
 		-webkit-box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.08);
@@ -374,7 +374,7 @@
 									<div class="container"
 										 style="margin-top: 0 !important; margin-bottom: 0 !important">
 										<div class="category-child">
-											<p style="padding-bottom: 5px; padding-left: 40px;"><?= $sub->name; ?></p>
+											<a style="color: #000; text-decoration: none" href="<?= base_url('catalog/' . $sub->slug); ?>"> <p style="padding-bottom: 5px; padding-left: 40px;"><?= $sub->name; ?></p></a>
 										</div>
 									</div>
 								</div>

@@ -120,24 +120,7 @@
 	<!--		--><?php //$this->load->view('landing/resources/head_category'); ?>
 	<?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
 
-	<div class="custom-card">
-		<div class="container">
-			<p class="margin-0 text-center"><span
-					class="category-text "><?= ucwords($category_detail->name); ?> Category</span>
-			</p>
-			<p class="text-center result-count"><?= number_format(count($products)) . ' products found'; ?> </p>
-		</div>
-	</div>
 
-	<div class="custom-card">
-		<div class="container">
-			<p style="text-align: center"><span class="filter-btn filter-text"><i class="fa fa-filter"
-																				  aria-hidden="true"></i> Filter</span>
-				<span class="filter-divider">|</span> <span class="sort-text"><i class="fa fa-sort"
-																				 aria-hidden="true"></i> Sort</span>
-			</p>
-		</div>
-	</div>
 
 	<div class="">
 		<div class="row">
@@ -247,6 +230,24 @@
 
 			</div>
 			<div id="category_body">
+				<div class="custom-card">
+					<div class="container">
+						<p class="margin-0 text-center"><span
+								class="category-text "><?= ucwords($category_detail->name); ?> Category</span>
+						</p>
+						<p class="text-center result-count"><?= number_format(count($products)) . ' products found'; ?> </p>
+					</div>
+				</div>
+
+				<div class="custom-card">
+					<div class="container">
+						<p style="text-align: center"><span class="filter-btn filter-text"><i class="fa fa-filter"
+																							  aria-hidden="true"></i> Filter</span>
+							<span class="filter-divider">|</span> <span class="sort-text"><i class="fa fa-sort"
+																							 aria-hidden="true"></i> Sort</span>
+						</p>
+					</div>
+				</div>
 				<div class="col-xs-12 ">
 					<div class="row row-sm-gap" data-gutter="10">
 						<?php foreach ($products as $product) : ?>

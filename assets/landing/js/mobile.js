@@ -12,6 +12,7 @@ $('.mobile-navbar').on('click', function (e) {
 });
 $('.account-dropdown').on('click', function (e) {
 	e.stopPropagation();
+	$('.mobile-navbar').hide();
 	$('.options').toggle();
 });
 $('.options').on('click', function (e) {
