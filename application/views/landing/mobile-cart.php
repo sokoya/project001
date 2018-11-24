@@ -6,8 +6,6 @@
         color: #696969;
     }
 
-
-
     .panel-bordered-warning{
         border: 1px solid #ffb300;
         color:#ffb300;
@@ -40,9 +38,9 @@
 </head>
 <body class="cart-row">
 <div class="global-wrapper clearfix" id="global-wrapper">
-    <?php $this->load->view('landing/resources/head_img') ?>
-    <?php $this->load->view('landing/resources/head_category') ?>
-    <?php $this->load->view('landing/resources/head_menu') ?>
+<!--    --><?php //$this->load->view('landing/resources/head_img') ?>
+<!--    --><?php //$this->load->view('landing/resources/head_category') ?>
+	<?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
 
     <div class="container">
         <?php if (!empty($this->cart->contents())) : ?>
@@ -183,9 +181,6 @@
         <div></div>
     </div>
     <div style="height:10px;"></div>
-
-    <?php $this->load->view('landing/resources/footer'); ?>
-
 </div>
 <script>
     if (!base_url) {
@@ -286,5 +281,6 @@
     });
 
 </script>
+<script src="<?= base_url('assets/landing/js/mobile.js'); ?>"></script>
 </body>
 </html>

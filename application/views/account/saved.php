@@ -92,7 +92,7 @@
 					<div class="modal-body">
 						<p id="product-title">
 							Please confirm you will like to remove the item
-							<span class="text text-danger" id="product_name"></span> from your whichlist
+							<span class="text text-danger" id="product_name"></span> from your wishlist
 						</p>
 						<div class="row">
 							<div class="col-md-12">
