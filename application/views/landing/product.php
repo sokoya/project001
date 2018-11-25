@@ -4,7 +4,6 @@
 <div class="global-wrapper clearfix" id="global-wrapper">
 	<?php $this->load->view('landing/resources/head_img') ?>
 	<?php $this->load->view('landing/resources/head_category') ?>
-
 	<?php $this->load->view('landing/resources/head_menu') ?>
 
 	<div class="container">
@@ -427,7 +426,6 @@
 							<tr>
 								<th class="pr-over">Specs:</th>
 								<th class="pr-over">Details:</th>
-								<th class="pr-over">Description:</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -443,7 +441,6 @@
 										endif;
 										?>
 									</td>
-									<td></td>
 								</tr>
 							<?php endforeach; ?>
 							</tbody>
@@ -473,9 +470,7 @@
 												<?php
 											}
 										}
-									} else {
-
-										?>
+									} else { ?>
 										<li><i class="fa fa-star"></i></li>
 										<li><i class="fa fa-star"></i></li>
 										<li><i class="fa fa-star"></i></li>

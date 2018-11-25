@@ -350,14 +350,16 @@
 					<div class="custom-card-child">
 						<div class="container">
 							<div class="category-child">
-								<a href="<?= base_url('catalog/' . $cat->slug); ?>" style="text-decoration: none;"><p>
+								<a href="<?= base_url('catalog/' . $cat->slug); ?>" style="text-decoration: none;">
+									<p>
 										<img
 											src="<?= base_url('assets/landing/svg/delivery-truck.svg'); ?>"
 											alt="Delivery Truck"
 											style="height: 30px; width: 35px;"> <?= $cat->name; ?> <i
 											class="fa fa-plus close-panel"
 											aria-hidden="true"
-											data-target="cat_<?= $cat->id ?>"></i></p>
+											data-target="cat_<?= $cat->id ?>"></i>
+									</p>
 								</a>
 							</div>
 

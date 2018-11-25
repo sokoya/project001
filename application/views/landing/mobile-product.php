@@ -126,8 +126,8 @@
 		font-size: 13px;
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 		position: relative;
-		top: 2px;
-		left: 10px;
+		top: -33px;
+		left: 43px;
 	}
 
 	.body_text {
@@ -188,22 +188,33 @@
 </head>
 <body style="background: #e5e5e5">
 <div class="global-wrapper clearfix" id="global-wrapper" style="margin-bottom: 3px;">
-	<!--	--><?php //$this->load->view('landing/resources/head_img') ?>
-	<!--	--><?php //$this->load->view('landing/resources/head_category'); ?>
 	<?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
 </div>
 
+<?php if( $product->product_status !== 'approved' ): ?>
+	<div class="row">
+		<h2 class="text-center">Oops! The product you looking for is not active.</h2>
+		<p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find
+				product</a></p>
+	</div>
+<?php elseif (empty($product) || empty($var) || empty($gallery)): ?>
+	<div class="row">
+		<div class="gap-large"></div>
+		<h2 class="text-center">Oops! The product you looking does not exist.</h2>
+		<p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find
+				product</a></p>
+	</div>
+<?php else : ?>
 <!--Top menu back button-->
 <div class="custom-card">
-	<div class="container">
-		<a style="text-decoration: none;" href="<?= base_url('catalog/' . $category_detail->slug); ?>"><p
-				class="margin-0"><img src="<?= base_url('assets/landing/svg/back.svg'); ?>" alt="Back button"
-									  style="height: 14px; width: 14px; margin-right: 8px;"><span
-					class="redirect-text">Go back to <?= ucwords($category_detail->name); ?></span>
-			</p></a>
-	</div>
+    <div class="container">
+        <a style="text-decoration: none;" href="<?= base_url('catalog/' . $category_detail->slug); ?>"><p
+                    class="margin-0"><img src="<?= base_url('assets/landing/svg/back.svg'); ?>" alt="Back button"
+                                          style="height: 14px; width: 14px; margin-right: 8px;"><span
+                        class="redirect-text">Go back to <?= ucwords($category_detail->name); ?></span>
+            </p></a>
+    </div>
 </div>
-
 <!--Gallery section-->
 <div class="custom-card">
 	<div class="container">
@@ -223,11 +234,11 @@
 		<p class="seller-name"><?= ucwords($product->first_name . ' ' . $product->last_name); ?></p>
 		<p class="product-name"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></p>
 		<div style="margin-top: 4px; margin-left: 2px">
+
 			<?php
 			if ($rating_counts) {
 				$overall_rating = product_overall_rating($rating_counts);
 			}
-
 			?>
 			<span class="rating-count"><?= isset($overall_rating) ? $overall_rating : ''; ?></span>
 			<ul style="display: inline-block" class="product-caption-rating">
@@ -247,18 +258,14 @@
 							<?php
 						}
 					}
-				} else {
-
-					?>
+				} else {?>
 					<li><i class="fa fa-star"></i></li>
 					<li><i class="fa fa-star"></i></li>
 					<li><i class="fa fa-star"></i></li>
 					<li><i class="fa fa-star"></i></li>
 					<li><i class="fa fa-star"></i></li>
-					<?php
-				}
-				?>
-				<span style="margin-left: 5px;" class="rating-total-count">(8 ratings)</span>
+				<?php } ?>
+				<span style="margin-left: 5px; color: #0b6427;" class="rating-total-count"><?= !empty($rating_counts) ? ' ('. count( $rating_counts ) .')' : 'O rating'?></span>
 			</ul>
 		</div>
 		<?php if (!empty($var->discount_price)) : ?>
@@ -288,7 +295,7 @@
 						<button type="button"
 								class="product-page-qty product-page-qty-minus">-
 						</button>
-						<input data-range="10" name="quantity"
+						<input data-range="<?= $var->quantity?>" name="quantity"
 							   id="quan"
 							   class="product-page-qty product-page-qty-input quantity"
 							   type="text"
@@ -303,18 +310,18 @@
 		</div>
 
 		<div class="row" style="margin-top: 10px;">
-
+            <?php if( count($variations) > 1 ) : ?>
 			<div class="col-xs-12">
-				<p class="custom-product-page-option-title">Color: </p>
+				<p class="custom-product-page-option-title">Variation: </p>
 				<div class="row variation-option-list">
-					<div class="col-xs-3"><p class="variation-option option-disabled">Red</p></div>
-					<div class="col-xs-3"><p class="variation-option">Black</p></div>
-					<div class="col-xs-3"><p class="variation-option option-disabled">Green</p></div>
-					<div class="col-xs-3"><p class="variation-option">Gold</p></div>
-					<div class="col-xs-3"><p class="variation-option">Yellow</p></div>
-					<div class="col-xs-3"><p class="variation-option">Silver</p></div>
+					<?php foreach($variations as $variation ) : ?>
+						<div class="col-xs-3"><p data-vid="<?= $variation['id']; ?>" class="variation-option <?php if($variation['quantity'] < 1) echo 'option-disabled';?>" ><?= ucfirst($variation['variation']); ?></p></div>
+					<?php endforeach; ?>
 				</div>
 			</div>
+            <?php else: ?>
+            	<input type="hidden" name="variation_id" value="<?= $var->id; ?>">
+            <?php endif; ?>
 
 		</div>
 		<button class="btn btn-block buy-btn">
@@ -352,7 +359,7 @@
 					 style="height: 30px; width: 35px;">
 			</div>
 			<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
-				<p class="delivery-text" style="position: relative; top: -5px;">This product has the following warranty
+				<p class="delivery-text">This product has the following warranty
 					: Repair by vendor
 					<br/>
 					<a href="javascript:void(0)">Learn more</a>
@@ -368,38 +375,36 @@
 <!--Product Description Card-->
 <div class="custom-card" style="margin-top: 5px;">
 	<div class="container">
+		<?php if(!empty($product->product_line)) :?>
 		<p class="block-title close-panel" data-target="title_vl" style="margin-top: 5px;">Product Shop <span
 				style="color: #4c4c4c !important; float: right"><i
 					class="fa fa-minus close-panel"
 					aria-hidden="true"
 					data-target="title_vl"></i></span></p>
-		<p class="body_text" id="title_vl">Fouani Nigeria, Trendy Woman Ltd, SEOLAK</p>
+		<p class="body_text" id="title_vl"><?= $product->product_line; ?></p>
 		<hr/>
+		<?php endif; ?>
+		<?php if( !empty($product->product_description) ) : ?>
 		<p class="block-title close-panel" data-target="description_vl">Product Description <span
 				style="color: #4c4c4c !important; float: right"><i
 					class="fa fa-minus close-panel"
 					aria-hidden="true"
 					data-target="description_vl"></i></span></p>
 		<p id="description_vl" class="body_text">
-			There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in
-			some form, by injected humour, or randomised words which don't look even slightly believable. If you are
-			going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the
-			middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as
-			necessary, making this the first true generator on the Internet.
+            <?=  word_limiter($product->product_description, 80); ?>
 		</p>
 		<hr/>
+		<?php endif; ?>
+		<?php if(!empty($product->in_the_box)) : ?>
 		<p class="block-title close-panel" data-target="box_vl">What you will find in the box <span
 				style="color: #4c4c4c !important; float: right"><i
 					class="fa fa-plus close-panel"
 					aria-hidden="true"
 					data-target="box_vl"></i></span></p>
 		<p class="body_text" style="display: none" id="box_vl">
-			There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in
-			some form, by injected humour, or randomised words which don't look even slightly believable. If you are
-			going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the
-			middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as
-			necessary, making this the first true generator on the Internet.
+			<?= $product->in_the_box; ?>
 		</p>
+		<?php endif; ?>
 	</div>
 </div>
 
@@ -415,24 +420,18 @@
 				<th>Specification</th>
 				<th>Details</th>
 			</tr>
+            <?php  $specs= json_decode($product->attributes);?>
+
 			</thead>
 			<tbody>
-			<tr>
-				<td>Ram</td>
-				<td>8GB</td>
-			</tr>
-			<tr>
-				<td>Screen Size</td>
-				<td>16 Inches</td>
-			</tr>
-			<tr>
-				<td>OS</td>
-				<td>Windows</td>
-			</tr>
-			<tr>
-				<td>Storage</td>
-				<td>1TB</td>
-			</tr>
+            <?php if(!empty( $specs )): foreach( $specs as $spec => $value  ) : ?>
+                <tr>
+                    <td><?= trim( $spec ); ?></td>
+                    <td><?php if(is_array( $value)) : foreach( $value as $val ) echo ucwords($val) . ', '; else: echo ucwords( $value); endif; ?></td>
+                </tr>
+            <?php endforeach; else : ?>
+                <td colspan="2">No Specification for this item</td>
+            <?php endif; ?>
 			</tbody>
 		</table>
 	</div>
@@ -503,7 +502,7 @@
 	</div>
 </div>
 <button class="btn btn-block rating-btn">View all reviews</button>
-
+<?php endif; ?>
 
 <!--Scripts-->
 <script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
@@ -514,7 +513,6 @@
 <script>
 	// owl carousel initialization
 	$(document).ready(function () {
-
 		$('.close-panel').on('click', function () {
 			let target = $(this).data('target');
 			if ($(this).hasClass('fa')) {
