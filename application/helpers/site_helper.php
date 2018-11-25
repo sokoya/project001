@@ -47,7 +47,7 @@ if (!function_exists('plushrs')) {
 if (!function_exists('ngn')) {
 	function ngn($amt = ''){
         if ($amt == '') $amt = '0';
-           return '₦'.number_format($amt);
+           return '₦ '.number_format($amt);
 	}
 }
 

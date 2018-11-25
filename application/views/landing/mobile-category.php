@@ -71,193 +71,59 @@
 		-ms-transform: rotate(45deg);
 		transform: rotate(45deg);
 	}
+
+	.custom-card {
+		background: #fff;
+		padding-top: 8px;
+		padding-bottom: 1px;
+		margin-bottom: 2px;
+		-webkit-box-shadow: 0px 5px 5px 0px rgba(176, 177, 193, 0.1);
+		box-shadow: 0px 5px 5px 0px rgba(176, 177, 193, 0.1)
+	}
+
+	.margin-0 {
+		margin: 0;
+	}
+
+	.category-text, .result-count {
+		font-size: 14px;
+		color: #111;
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	}
+
+	.category-text {
+		font-size: 16px;
+		font-weight: 600;
+	}
+
+	.result-count {
+		font-size: 11px;
+		color: #000000;
+	}
+
+	.filter-divider {
+		color: #1fbb31;
+		margin-left: 40px;
+		margin-right: 40px;
+	}
+
+	.filter-text, .sort-text {
+		color: #51a151;
+		font-size: 13px;
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	}
 </style>
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
-	<?php $this->load->view('landing/resources/head_img') ?>
-	<?php $this->load->view('landing/resources/head_category'); ?>
-	<?php $this->load->view('landing/resources/head_menu'); ?>
+	<!--		--><?php //$this->load->view('landing/resources/head_img') ?>
+	<!--		--><?php //$this->load->view('landing/resources/head_category'); ?>
+	<?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
 
-	<div class="container">
-		<header class="page-header">
-			<ol class="breadcrumb page-breadcrumb">
-				<li><a href="<?= base_url(); ?>">Home</a>
-				</li>
-				<li class="active"><?= ucwords($category_detail->name); ?>
-				</li>
-			</ol>
-			<div class="category-selections clearfix">
-				<button class="btn btn-custom-primary">Newest First</button>
-				<button class="btn btn-custom-primary">Best Sellers</button>
-				<button class="btn btn-custom-primary filter-btn"><i class="fa fa-filter"
-																	 aria-hidden="true"></i> Filter
-				</button>
-			</div>
-		</header>
+
+
+	<div class="">
 		<div class="row">
-			<!-- <div class="col-md-3">
-                <aside class="category-filters">
-                    <div class="category-filters-section">
-                        <h3 class="widget-title-sm">Category</h3>
-                        <ul class="cateogry-filters-list">
-                            <li><a href="#">Clothing</a>
-                            </li>
-                            <li><a href="#">Shoes</a>
-                            </li>
-                            <li><a href="#">Accessories</a>
-                            </li>
-                            <li><a href="#">Jewerly</a>
-                            </li>
-                            <li><a href="#">Watches</a>
-                            </li>
-                            <li><a href="#">Fine Jewerly</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="category-filters-section">
-                        <h3 class="widget-title-sm">Price</h3>
-                        <input type="text" id="price-slider" />
-                    </div>
-                    <div class="category-filters-section">
-                        <h3 class="widget-title-sm">Relese Date</h3>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Last 30 days<span class="category-filters-amount">(73)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Last 90 days<span class="category-filters-amount">(79)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Comming Soon<span class="category-filters-amount">(76)</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="category-filters-section">
-                        <h3 class="widget-title-sm">Brand</h3>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />191 United<span class="category-filters-amount">(22)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Adidas<span class="category-filters-amount">(87)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Balmain<span class="category-filters-amount">(33)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Diesel<span class="category-filters-amount">(90)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Enzo<span class="category-filters-amount">(97)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Gap<span class="category-filters-amount">(94)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Hanes<span class="category-filters-amount">(76)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Jockey<span class="category-filters-amount">(39)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Just Cavalli<span class="category-filters-amount">(40)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Lacoste<span class="category-filters-amount">(10)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Lee<span class="category-filters-amount">(70)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Nike<span class="category-filters-amount">(40)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Paul Jones<span class="category-filters-amount">(72)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Puma<span class="category-filters-amount">(54)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Shark<span class="category-filters-amount">(27)</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="category-filters-section">
-                        <h3 class="widget-title-sm">Discount</h3>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />10% Off or More<span class="category-filters-amount">(13)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />25% Off or More<span class="category-filters-amount">(20)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />50% Off or More<span class="category-filters-amount">(92)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />75% Off or More<span class="category-filters-amount">(30)</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="category-filters-section">
-                        <h3 class="widget-title-sm">Features</h3>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />New<span class="category-filters-amount">(12)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />Featured<span class="category-filters-amount">(69)</span>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" />On Sale<span class="category-filters-amount">(20)</span>
-                            </label>
-                        </div>
-                    </div>
-                </aside>
-            </div> -->
 			<div id="ont_filter" class="filterbar">
 				<div class="w-bg top_menu">
 					<a href="javascript:void(0)" class="update_fil filter_btn_submit" style="float: right">Update
@@ -364,7 +230,25 @@
 
 			</div>
 			<div id="category_body">
-				<div class="">
+				<div class="custom-card">
+					<div class="container">
+						<p class="margin-0 text-center"><span
+								class="category-text "><?= ucwords($category_detail->name); ?> Category</span>
+						</p>
+						<p class="text-center result-count"><?= number_format(count($products)) . ' products found'; ?> </p>
+					</div>
+				</div>
+
+				<div class="custom-card">
+					<div class="container">
+						<p style="text-align: center"><span class="filter-btn filter-text"><i class="fa fa-filter"
+																							  aria-hidden="true"></i> Filter</span>
+							<span class="filter-divider">|</span> <span class="sort-text"><i class="fa fa-sort"
+																							 aria-hidden="true"></i> Sort</span>
+						</p>
+					</div>
+				</div>
+				<div class="col-xs-12 ">
 					<div class="row row-sm-gap" data-gutter="10">
 						<?php foreach ($products as $product) : ?>
 							<div class="col-md-3">
@@ -432,130 +316,135 @@
 			</div>
 		</div> <!-- // row -->
 	</div>
-	<div class="gap"></div>
 
-	<?php $this->load->view('landing/resources/footer'); ?>
-</div>
-<script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/ionrangeslider.js'); ?>"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
-<script type="text/javascript"
-		src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
-<script>
-	let current_url = "<?= current_url()?>";
-</script>
-<script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
-<script>
-	$(document).ready(function () {
-		let _category_body = $('#category_body');
 
-		function doReplaceState(url) {
-			let state = {current_url: url},
-				title = "Carrito MarketPlace";
-			history.replaceState(state, title, url);
-		}
+	<script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
+	<script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
+	<script src="<?= base_url('assets/landing/js/ionrangeslider.js'); ?>"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+	<script type="text/javascript"
+			src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
+	<script>
+		let current_url = "<?= current_url()?>";
+	</script>
+	<script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
+	<script>
+		$(document).ready(function () {
+			let _category_body = $('#category_body');
 
-		function load_page(url) {
+			function doReplaceState(url) {
+				let state = {current_url: url},
+					title = "Carrito MarketPlace";
+				history.replaceState(state, title, url);
+			}
 
-			$(_category_body).load(`${url} #category_body`, function (response, status, xhr) {
-				if (status === "error") {
-					let msg = "Sorry but there was an error: ";
-					alert(msg + xhr.status + " " + xhr.statusText);
-				}
+			function load_page(url) {
 
-				doReplaceState(url.toLowerCase());
-
-				$('#processing').hide();
-				$(_category_body).show();
-			});
-		}
-
-		let url = '';
-		let filter_string = '';
-		$('.filter').change(function () {
-			if ($('input[name=filterset]').is(':checked')) {
-				let filter_list = {};
-				url = '';
-				filter_string = '';
-				$(_category_body).hide();
-				$('#processing').show();
-				let items = $('input[name=filterset]:checked');
-
-				items.each(function () {
-					let value = $(this).data('value');
-					let key = $(this).data('type');
-
-					if (filter_list[key]) {
-						if (jQuery.inArray(value, filter_list[key]) !== -1) {
-						} else {
-							filter_list[key].push(value)
-						}
-					} else {
-						filter_list[key] = [value];
+				$(_category_body).load(`${url} #category_body`, function (response, status, xhr) {
+					if (status === "error") {
+						let msg = "Sorry but there was an error: ";
+						alert(msg + xhr.status + " " + xhr.statusText);
 					}
+
+					doReplaceState(url.toLowerCase());
+
+					$('#processing').hide();
+					$(_category_body).show();
+				});
+			}
+
+			let url = '';
+			let filter_string = '';
+			$('.filter').change(function () {
+				if ($('input[name=filterset]').is(':checked')) {
+					let filter_list = {};
 					url = '';
-					jQuery.each(filter_list, function (obj) {
-						filter_string = '';
-						jQuery.each(filter_list[obj], function (id, values) {
-							if (filter_string === '') {
-								filter_string += values;
+					filter_string = '';
+					$(_category_body).hide();
+					$('#processing').show();
+					let items = $('input[name=filterset]:checked');
+
+					items.each(function () {
+						let value = $(this).data('value');
+						let key = $(this).data('type');
+
+						if (filter_list[key]) {
+							if (jQuery.inArray(value, filter_list[key]) !== -1) {
 							} else {
-								filter_string += ',' + values;
+								filter_list[key].push(value)
+							}
+						} else {
+							filter_list[key] = [value];
+						}
+						url = '';
+						jQuery.each(filter_list, function (obj) {
+							filter_string = '';
+							jQuery.each(filter_list[obj], function (id, values) {
+								if (filter_string === '') {
+									filter_string += values;
+								} else {
+									filter_string += ',' + values;
+								}
+							});
+							if (url === '') {
+								url += `?${obj}=${filter_string}`
+							} else {
+								url += `&${obj}=${filter_string}`
 							}
 						});
-						if (url === '') {
-							url += `?${obj}=${filter_string}`
-						} else {
-							url += `&${obj}=${filter_string}`
-						}
+						// load_page(url);
+						console.log(url);
+
 					});
-					// load_page(url);
-					console.log(url);
-
-				});
-			} else {
-				load_page(current_url);
-			}
-		});
-		$('.filter_btn_submit').on('click', function () {
-			filterBarClose(load_page, url);
-			// console.log(url + 'Current index');
-			// load_page(url);
-		});
-	});
-
-
-	$('.close-panel').on('click', function () {
-		let target = $(this).data('target');
-		$(this).toggleClass("fa-minus fa-plus");
-		$(`#${target}`).toggle()
-	});
-
-	$('.filter_close_btn').on('click', function () {
-		filterBarClose();
-	});
-	// filterBarOpen();
-	$('.filter-btn').on('click', function () {
-		filterBarOpen();
-	});
-
-	// Side bar
-	function filterBarOpen() {
-		// $('#ont_filter').css({'width': '100%'});
-		$('#ont_filter').show();
-	}
-
-	function filterBarClose(callback = '', value = '') {
-		// $('#ont_filter').css({'width': 0});
-		$('#ont_filter').fadeOut(function () {
-			if (callback) {
-				callback(value);
-			}
+				} else {
+					load_page(current_url);
+				}
+			});
+			$('.filter_btn_submit').on('click', function () {
+				filterBarClose(load_page, url);
+				// console.log(url + 'Current index');
+				// load_page(url);
+			});
 		});
 
-	}
-</script>
+
+		$('.close-panel').on('click', function (e) {
+			e.preventDefault();
+			let target = $(this).data('target');
+			$(this).toggleClass("fa-minus fa-plus");
+			$(`#${target}`).toggle()
+		});
+
+		$('.filter_close_btn').on('click', function () {
+			filterBarClose();
+		});
+		// filterBarOpen();
+		$('.filter-btn').on('click', function () {
+			filterBarOpen();
+		});
+
+		// Side bar
+		function filterBarOpen() {
+			// $('#ont_filter').css({'width': '100%'});
+			$('#ont_filter').show();
+		}
+
+		function filterBarClose(callback = '', value = '') {
+			// $('#ont_filter').css({'width': 0});
+			$('#ont_filter').fadeOut(function () {
+				if (callback) {
+					callback(value);
+				}
+			});
+
+		}
+	</script>
+
+	<script src="<?= base_url('assets/landing/js/mobile.js'); ?>"></script>
+	<?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
+</div>
+
+
 </body>
 </html>
