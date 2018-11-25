@@ -216,20 +216,18 @@ class Product extends CI_Controller{
                 $files = $_FILES;
                 for ( $x = 0; $x < $counts; $x++ ){
                     $old_name = $files['file']['name'][$x];
-                    $_FILES['file']['name'] = $files['file']['name'][$x];
-                    $_FILES['file']['type'] = $files['file']['type'][$x];
-                    $_FILES['file']['tmp_name'] = $files['file']['tmp_name'][$x];
-                    $_FILES['file']['error'] = $files['file']['error'][$x];
-                    $_FILES['file']['size'] = $files['file']['size'][$x];
+                    $_FILES['file']['name']= $files['file']['name'][$x];
+                    $_FILES['file']['type']= $files['file']['type'][$x];
+                    $_FILES['file']['tmp_name']= $files['file']['tmp_name'][$x];
+                    $_FILES['file']['error']= $files['file']['error'][$x];
+                    $_FILES['file']['size']= $files['file']['size'][$x];
 
-//                    if( !is_dir("./data/products/$product_id/") ) mkdir("./data/products/$product_id/");
-                    $product_id = md5(md5( $product_id));
-                    $upload_result = $this->upload_image($_FILES['file']['tmp_name'], $product_id);
-//                    $upload_result = $this->do_upload('file', $product_id);
+                    if( !is_dir("./data/products/$product_id/") ) mkdir("./data/products/$product_id/");
+
+                    $upload_result = $this->do_upload('file', $product_id);
 
                     if( $upload_result ){
-                        $product_gallery['image_name'] =  $upload_result['public_id'];
-//                        $product_gallery['image_name'] = $upload_result;
+                        $product_gallery['image_name'] = $upload_result;
                         $product_gallery['featured_image'] = ( isset($_POST['featured_image']) && ($old_name == $_POST['featured_image'] )) ? 1 : 0;
                         if( $counts == 1 ) $product_gallery['featured_image'] = 1;
                         if( !is_int($this->seller->insert_data('product_gallery', $product_gallery)) ){
@@ -239,6 +237,7 @@ class Product extends CI_Controller{
                         $image_error++;
                     }                    
                 }// end of for loop
+
             }
 
             // Check for errors
@@ -262,12 +261,10 @@ class Product extends CI_Controller{
     function upload_image( $filepath, $product_name ){
         $this->load->library('cloudinarylib');
         $return = \Cloudinary\Uploader::upload( $filepath, 
-                            array("tags" => $product_name,
-                                "folder" => "product",
-                                "public_id" => $product_name,
+                            array("tags" => $product_name, 
                                 "resource_type" => "image",
                                 "eager" => array(
-                                    array("width" => 500, "height" => 500, "crop" => "fill")
+                                    array("width" => 500, "height" => 500, "crop" => "pad")
                                 )
                             )
                         );

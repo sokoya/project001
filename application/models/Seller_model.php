@@ -302,6 +302,17 @@ Class Seller_model extends CI_Model
     }
 
 
+    function generate_code_for_image($table = 'product_gallery')
+    {
+        do {
+            $number = random_string('nozero', 12);
+            $this->db->where('image_name = ', $number);
+            $this->db->from($table);
+            $count = $this->db->count_all_results();
+        } while ($count >= 1);
+        return $number;
+    }
+
     /**
      * Confirm if the person accessing thr product is the owner
      * @param $user_id |product_id
