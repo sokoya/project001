@@ -341,12 +341,13 @@
 					<i class="fa fa-minus close-panel" aria-hidden="true" data-target="cat_<?= $category->id ?>"></i>
 				</p></a>
 		</div>
-		<?php
-		$main_category = $this->db->query("SELECT * FROM categories WHERE pid = ? LIMIT 6", $category->id)->result();
-		if ($main_category):
-			foreach ($main_category as $cat) :
-				?>
-				<div id="cat_<?= $category->id ?>">
+
+		<div id="cat_<?= $category->id ?>">
+			<?php
+			$main_category = $this->db->query("SELECT * FROM categories WHERE pid = ? LIMIT 6", $category->id)->result();
+			if ($main_category):
+				foreach ($main_category as $cat) :
+					?>
 					<div class="custom-card-child">
 						<div class="container">
 							<div class="category-child">
@@ -376,15 +377,18 @@
 									<div class="container"
 										 style="margin-top: 0 !important; margin-bottom: 0 !important">
 										<div class="category-child">
-											<a style="color: #000; text-decoration: none" href="<?= base_url('catalog/' . $sub->slug); ?>"> <p style="padding-bottom: 5px; padding-left: 40px;"><?= $sub->name; ?></p></a>
+											<a style="color: #000; text-decoration: none"
+											   href="<?= base_url('catalog/' . $sub->slug); ?>"><p
+													style="padding-bottom: 5px; padding-left: 40px;"><?= $sub->name; ?></p>
+											</a>
 										</div>
 									</div>
 								</div>
 								<hr class="child-hr"/>
 							<?php endforeach; endif; ?>
 					</div>
-				</div>
-			<?php endforeach; endif; ?>
+				<?php endforeach; endif; ?>
+		</div>
 	<?php endforeach; ?>
 
 </div>
