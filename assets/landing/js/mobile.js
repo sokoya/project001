@@ -87,10 +87,18 @@ $('.search-input').on('input', function () {
 						<p class="search-title">No result(s) found for "${query}"</p>
 					`);
 				} else {
-					let html_var = ``;
-					$.each(response, function (key, value) {
-						html_var += `
-							<p><a href="${base_url}${value.url}">
+					let categories_index = ``;
+					let product_index = ``;
+
+					$.each(response.categories, function (key, value) {
+						categories_index += `
+								<p><a href="${base_url}${value.url}">${value.name}</a></p>;
+						`
+					});
+
+					$.each(response.products, function (key, value) {
+						product_index += `
+						<p><a href="${base_url}${value.url}">
 							<div class="row" >
 								<div class="col-md-2 col-2 col-xs-2 col-sm-2 col-lg-2 ">
 									<img src="${value.image_path}"
@@ -103,11 +111,33 @@ $('.search-input').on('input', function () {
 									</div>
 								</div>
 							</div>
-						</a></p>`;
+						</a></p>
+						`
 					});
+
+
+					// $.each(response, function (key, value) {
+					// 	html_var += `
+					// 		<p><a href="${base_url}${value.url}">
+					// 		<div class="row" >
+					// 			<div class="col-md-2 col-2 col-xs-2 col-sm-2 col-lg-2 ">
+					// 				<img src="${value.image_path}"
+					// 					 class="mobile-search-image"/>
+					// 			</div>
+					// 			<div class="col-md-10 col-10 col-xs-10 col-sm-10 col-lg-10">
+					// 				<div class="search-titles">
+					// 					<p>${highlight(value.product_name, query)}</p>
+					// 					<p class="price">${format_currency(value.price)}</p>
+					// 				</div>
+					// 			</div>
+					// 		</div>
+					// 	</a></p>`;
+					// });
 					append_location.html(`
+						<p class="search-title">Categories</p>
+						${categories_index}
 						<p class="search-title">Products</p>
-						${html_var}
+						${product_index}
 					`)
 				}
 			},
