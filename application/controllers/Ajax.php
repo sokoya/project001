@@ -59,7 +59,7 @@ class Ajax extends CI_Controller
 
 			$output = array();
 
-            if( !isset( $category ) && !empty($category) ) {
+            if( empty($category) ) {
                 $results = $this->product->search_query_categories_brand( $search );
                 $x = 0;
                 foreach( $results as $result ){
@@ -69,7 +69,6 @@ class Ajax extends CI_Controller
                     $x++;
                 }
             }
-
             $products = $this->product->search_query($search, $category);
             $x = 0;
             foreach ($products as $result) {
