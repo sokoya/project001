@@ -75,11 +75,10 @@ class Ajax extends CI_Controller
                 $output['products'][$x]['image_path'] = base_url('data/products/' . $result->id . '/' . $result->image_name);
                 $output['products'][$x]['product_name'] = $result->product_name;
                 $output['products'][$x]['url'] = urlify($result->product_name, $result->id);
-                $price = (!empty($result->discount_price)) ? $result->discount_price . '<span class="search-price-discount"> ' . $result->sale_price . '</span>' : $result->sale_price;
+                $price = (!empty($result->discount_price)) ? $result->discount_price :  $result->sale_price ;
                 $output['products'][$x]['price'] = $price;
                 $x++;
             }
-
             header('Content-type: text/json');
             header('Content-type: application/json');
             echo json_encode( $output, JSON_UNESCAPED_SLASHES);
