@@ -62,7 +62,7 @@ class Ajax extends CI_Controller
                 $x = 0;
                 foreach( $results as $result ){
                     $output['categories'][$x]['name'] = $result->name;
-                    $output['categories'][$x]['url'] = base_url('catalog/') . $result->slug;
+                    $output['categories'][$x]['url'] = base_url('catalog/') . $result->slug .'/?q='. $search;
                     $output['categories'][$x]['total_count'] = $result->total_count;
                     $x++;
                 }

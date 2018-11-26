@@ -8,13 +8,13 @@
                         <?php
                         $categories = $this->db->query("SELECT * FROM categories WHERE pid = 0")->result();                        
                         foreach($categories as $category ): ?>
-                        <li><a href="<?=  base_url('catalog/' . $category->slug ) ; ?>" title="<?= $category->name;?>"><i class="fa fa-<?=$category->icon;?> dropdown-menu-category-icon"></i><?= $category->name; ?></a>
+                        <li><a href="<?=  base_url('catalog/' . $category->slug ) ; ?>" title="<?= $category->name;?>"><i class="fa <?=$category->icon;?> dropdown-menu-category-icon"></i><?= $category->name; ?></a>
                             <div class="dropdown-menu-category-section">
                                 <div class="dropdown-menu-category-section-inner">
                                     <div class="dropdown-menu-category-section-content">
                                         <div class="row">
                                             <?php                                                
-                                                $main_category = $this->db->query("SELECT * FROM categories WHERE pid = ? LIMIT 6", $category->id)->result();
+                                                $main_category = $this->db->query("SELECT * FROM categories WHERE pid = ?", $category->id)->result();
                                                 if( $main_category ):
                                                 foreach( $main_category as $cat ) :
                                             ?>
