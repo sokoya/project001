@@ -193,7 +193,7 @@
 
 <?php if( $product->product_status !== 'approved' ): ?>
 	<div class="row">
-		<h2 class="text-center">Oops! The product you looking for is not active.</h2>
+		<p class="text-center">Oops! The product you looking for is not active.</p>
 		<p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find
 				product</a></p>
 	</div>
@@ -439,7 +439,6 @@
 
 <!--Section Title [Ratings and Reviews]-->
 <div class="container"><p class="text-break" style="">Ratings and Reviews</p></div>
-
 <!--Product Ratings And Reviews-->
 <div class="custom-card" style="margin-top: 5px;">
 	<div class="container">
