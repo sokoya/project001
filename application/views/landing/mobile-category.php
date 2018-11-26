@@ -112,14 +112,25 @@
 		font-size: 13px;
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	}
+
+	.mobile-product {
+		padding: 15px 0;
+		background: #fff;
+		-webkit-transition: 0.3s;
+		-moz-transition: 0.3s;
+		-o-transition: 0.3s;
+		-ms-transition: 0.3s;
+		transition: 0.3s;
+		position: relative;
+		min-height: 160px !important;
+		max-height: 160px !important;
+		margin-bottom: -5px;
+	}
 </style>
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
-	<!--		--><?php //$this->load->view('landing/resources/head_img') ?>
-	<!--		--><?php //$this->load->view('landing/resources/head_category'); ?>
 	<?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
-
 
 	<div id="ont_filter" class="filterbar">
 		<div class="w-bg top_menu">
@@ -230,6 +241,7 @@
 	<div class="">
 		<div class="row">
 			<div id="category_body">
+				<!--Category Title Section-->
 				<div class="custom-card">
 					<div class="container">
 						<p class="margin-0 text-center"><span
@@ -252,7 +264,7 @@
 					<div class="row row-sm-gap" data-gutter="10">
 						<?php foreach ($products as $product) : ?>
 							<div class="col-md-3">
-								<div class="product product-sm-left ">
+								<div class="mobile-product product-sm-left ">
 									<ul class="product-labels"></ul>
 									<div class="product-img-wrap">
 										<img class="product-img"
@@ -264,7 +276,6 @@
 									   href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
 									<div class="product-caption">
 										<ul class="product-caption-rating">
-
 											<?php
 											$rating_counts = $this->product->get_rating_counts($product->id);
 											if ($rating_counts) {
