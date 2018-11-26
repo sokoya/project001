@@ -251,11 +251,52 @@
 		border-bottom: 1px solid #fffafa;
 		margin-bottom: 10px;
 	}
+
+	.mobile-search-dropdown {
+		position: absolute;
+		width: 100%;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		height: fit-content;
+		background: #fff;
+		list-style-type: none;
+		display: none;
+		-webkit-box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.08);
+		box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.08);
+		z-index: 99999;
+	}
+
+	.search-title {
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		color: #000;
+		font-size: 14px;
+	}
+
+	.mobile-search-image {
+		height: 45px;
+	}
+
+	.search-titles {
+		color: #444;
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		font-size: 13px;
+	}
+
+	.arrow-up {
+		width: 0;
+		height: 0;
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+		position: relative;
+		left: 68px;
+		bottom: 15px;
+		border-bottom: 5px solid #ffffff;
+	}
+
 </style>
 
 <nav class="navbar navbar-default mobile-nav">
 	<div class="nav-container">
-
 		<div class="navbar-header">
 			<div class="navbar-brand mobile-brand">
 				<button type="button" class="navbar-toggle collapsed mobile-toggle" data-toggle="collapse"
@@ -282,6 +323,7 @@
 
 				</span>
 			<div class="options">
+				<div class="arrow-up"></div>
 				<?php
 				$profile = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
 				?>
@@ -315,11 +357,18 @@
 		<form class="mobile-search-input" role="search">
 			<div class="inner-addon right-addon stylish-input-group">
 				<i class="fa fa-search" aria-hidden="true"></i>
-				<input type="text" class="form-control" placeholder="Search for products, brands and categories"/>
+				<input type="text" class="form-control search-input"
+					   placeholder="Search for products, brands and categories"/>
+
 			</div>
 		</form>
 	</div>
 </nav>
+<div class="mobile-search-dropdown">
+	<div class="container mobile-search-append">
+
+	</div>
+</div>
 <div id="menu_filter" class="mobile-navbar">
 	<!--login cta-->
 	<?php if (!$this->session->userdata('logged_in')): ?>
