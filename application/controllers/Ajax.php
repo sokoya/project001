@@ -56,26 +56,35 @@ class Ajax extends CI_Controller
 		if ($this->input->is_ajax_request() && $this->input->post()) {
 			$search = cleanit($this->input->post('search'));
 			$category = $this->input->post('category');
-			$results = $this->product->search_query($search, $category);
-			$output = array();
-			header('Content-type: text/json');
-			header('Content-type: application/json');
-			if ($results) {
-				foreach ($results as $result) {
-					$res['image_path'] = base_url('data/products/' . $result->id . '/' . $result->image_name);
-					$res['product_name'] = $result->product_name;
-					$res['url'] = urlify($result->product_name, $result->id);
-					$price = (!empty($result->discount_price)) ? $result->discount_price . '<span class="search-price-discount"> ' . $result->sale_price . '</span>' : $result->sale_price;
-					$res['price'] = $price;
-					array_push($output, $res);
-				}
-				echo json_encode($output, JSON_UNESCAPED_SLASHES);
-				exit;
-			} else {
-				echo json_encode('');
-				exit;
-			}
 
+			$output = array();
+
+            if( !isset( $category ) && !empty($category) ) {
+                $results = $this->product->search_query_categories_brand( $search );
+                $x = 0;
+                foreach( $results as $result ){
+                    $output['categories'][$x]['name'] = $result->name;
+                    $output['categories'][$x]['url'] = $result->slug;
+                    $output['categories'][$x]['total_count'] = $result->total_count;
+                    $x++;
+                }
+            }
+
+            $products = $this->product->search_query($search, $category);
+            $x = 0;
+            foreach ($products as $result) {
+                $output['products'][$x]['image_path'] = base_url('data/products/' . $result->id . '/' . $result->image_name);
+                $output['products'][$x]['product_name'] = $result->product_name;
+                $output['products'][$x]['url'] = urlify($result->product_name, $result->id);
+                $price = (!empty($result->discount_price)) ? $result->discount_price . '<span class="search-price-discount"> ' . $result->sale_price . '</span>' : $result->sale_price;
+                $output['products'][$x]['price'] = $price;
+                $x++;
+            }
+
+            header('Content-type: text/json');
+            header('Content-type: application/json');
+            echo json_encode( $output, JSON_UNESCAPED_SLASHES);
+            exit;
 		} else {
 			redirect(base_url());
 		}
@@ -154,7 +163,6 @@ class Ajax extends CI_Controller
 				$results['avg_rating'] = round(product_overall_rating($rating_counts));
 			}
 			$variations = $this->product->get_variations( $pid );
-			$array = array();
 			if( $variations ) {
 				$x = 0;
 				foreach( $variations as $variation ){
