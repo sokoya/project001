@@ -24,7 +24,7 @@ class Application extends CI_Controller{
         $page_data['page_title'] = 'Seller Application Form';
         $page_data['pg_name'] = 'application';
         $page_data['sub_name'] = 'application_form';
-        $page_data['categories'] = $this->seller->get_category_name('','root_category');
+        $page_data['categories'] = $this->seller->get_results('categories', 'id, name', "( pid = 0 )");
         $page_data['meta_tags'] = array( 'css/bootstrap.min.css','css/nifty.min.css','css/nifty-demo-icons.min.css','css/nifty-demo.min.css');
         $page_data['scripts'] = array('js/jquery.min.js','js/bootstrap.min.js', 'js/nifty.min.js');
         $status = $this->seller->get_seller_status(base64_decode($this->session->userdata('logged_id')));
