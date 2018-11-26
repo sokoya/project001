@@ -56,9 +56,7 @@ class Ajax extends CI_Controller
 		if ($this->input->is_ajax_request() && $this->input->post()) {
 			$search = cleanit($this->input->post('search'));
 			$category = $this->input->post('category');
-
 			$output = array();
-
             if( empty($category) ) {
                 $results = $this->product->search_query_categories( $search );
                 $x = 0;

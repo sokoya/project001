@@ -545,7 +545,7 @@ class Product extends CI_Controller{
     }
 
     public function load_images( $id = ''){
-        
+        if( !$this->input->is_ajax_request() ) redirect(base_url());
         $galleries = $this->seller->get_product_gallery($id);
         $result = array();
         foreach( $galleries as $gallery){
