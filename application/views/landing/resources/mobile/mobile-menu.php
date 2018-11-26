@@ -274,10 +274,11 @@
 
 	.mobile-search-image {
 		height: 45px;
+		width: 45px;
 	}
 
 	.search-titles {
-		color: #444;
+		color: #444 !important;
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 		font-size: 13px;
 	}

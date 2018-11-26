@@ -82,7 +82,7 @@ $('.search-input').on('input', function () {
 			data: {search: query, category: category},
 			method: 'POST',
 			success: function (response) {
-				if (response === '') {
+				if (response.products === undefined || response.products.length == 0) {
 					append_location.html(`
 						<p class="search-title">No result(s) found for "${query}"</p>
 					`);
@@ -92,7 +92,11 @@ $('.search-input').on('input', function () {
 
 					$.each(response.categories, function (key, value) {
 						categories_index += `
-								<p><a href="${base_url}${value.url}">${value.name}</a></p>;
+							<div class="search-titles">
+								<p>in <a style="text-decoration: none" href="${value.url}">${value.name}</a>
+								<span style="float:right; color:#222;">${value.total_count} <span style="color:#777 !important">Results</span></span>
+								</p>
+								</div>
 						`
 					});
 
@@ -115,24 +119,6 @@ $('.search-input').on('input', function () {
 						`
 					});
 
-
-					// $.each(response, function (key, value) {
-					// 	html_var += `
-					// 		<p><a href="${base_url}${value.url}">
-					// 		<div class="row" >
-					// 			<div class="col-md-2 col-2 col-xs-2 col-sm-2 col-lg-2 ">
-					// 				<img src="${value.image_path}"
-					// 					 class="mobile-search-image"/>
-					// 			</div>
-					// 			<div class="col-md-10 col-10 col-xs-10 col-sm-10 col-lg-10">
-					// 				<div class="search-titles">
-					// 					<p>${highlight(value.product_name, query)}</p>
-					// 					<p class="price">${format_currency(value.price)}</p>
-					// 				</div>
-					// 			</div>
-					// 		</div>
-					// 	</a></p>`;
-					// });
 					append_location.html(`
 						<p class="search-title">Categories</p>
 						${categories_index}
