@@ -511,7 +511,7 @@ Class Product_model extends CI_Model{
         return $this->db->query($select)->result();
     }
 
-    function search_query_categories_brand( $search ){
+    function search_query_categories( $search ){
         $select = "SELECT DISTINCT(p.category_id),count(*) total_count, c.name, c.slug FROM products p 
         INNER JOIN categories c ON(c.id = p.category_id) WHERE p.product_name LIKE '%{$search}%' GROUP BY p.category_id LIMIT 5";
         return $this->db->query( $select )->result();
