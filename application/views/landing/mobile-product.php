@@ -193,7 +193,7 @@
 
 <?php if ($product->product_status !== 'approved'): ?>
 	<div class="row">
-		<h2 class="text-center">Oops! The product you looking for is not active.</h2>
+		<p class="text-center">Oops! The product you looking for is not active.</p>
 		<p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find
 				product</a></p>
 	</div>
@@ -469,40 +469,63 @@
 					<li class="rated"><i class="fa fa-star"></i></li>
 					<li class="rated"><i class="fa fa-star"></i></li>
 
-				</ul>
-				<span style="float: right;" class="comment-date">22 November 2018</span>
-			</div>
-			<p class="comment-title">Great Product</p>
-			<p class="comment-detail">This is a great product I can't stop using it</p>
-			<hr class="comment-line"/>
-			<div class="comment-block">
-				<ul style="display: inline-block" class="product-caption-rating">
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
+<!--Section Title [Ratings and Reviews]-->
+<div class="container"><p class="text-break" style="">Ratings and Reviews</p></div>
+<!--Product Ratings And Reviews-->
+<div class="custom-card" style="margin-top: 5px;">
+	<div class="container">
+		<p class="block-title" style="margin-top: 5px;">Total Ratings</p>
+		<div style="margin-top: 4px; margin-left: 2px">
+			<span class="rating-count">5/5</span>
+			<ul style="display: inline-block" class="product-caption-rating">
+				<li class="rated"><i class="fa fa-star"></i></li>
+				<li class="rated"><i class="fa fa-star"></i></li>
+				<li class="rated"><i class="fa fa-star"></i></li>
+				<li class="rated"><i class="fa fa-star"></i></li>
+				<li class="rated"><i class="fa fa-star"></i></li>
+				<span style="margin-left: 5px;" class="rating-total-count">(8 ratings)</span>
+			</ul>
+		</div>
+		<hr style="margin-top: -4px;"/>
+		<p class="block-title" style="margin-top: 5px;">All Reviews</p>
+		<div class="comment-block">
+			<ul style="display: inline-block" class="product-caption-rating">
+				<li class="rated"><i class="fa fa-star"></i></li>
+				<li class="rated"><i class="fa fa-star"></i></li>
+				<li class="rated"><i class="fa fa-star"></i></li>
+				<li class="rated"><i class="fa fa-star"></i></li>
+				<li class="rated"><i class="fa fa-star"></i></li>
 
-				</ul>
-				<span style="float: right;" class="comment-date">22 November 2018</span>
-			</div>
-			<p class="comment-title">Lovely System</p>
-			<p class="comment-detail">Wonderful system my grand daughter loves it </p>
-			<hr class="comment-line"/>
-			<div class="comment-block">
-				<ul style="display: inline-block" class="product-caption-rating">
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
+			</ul>
+			<span style="float: right;" class="comment-date">22 November 2018</span>
+		</div>
+		<p class="comment-title">Great Product</p>
+		<p class="comment-detail">This is a great product I can't stop using it</p>
+		<hr class="comment-line"/>
+		<div class="comment-block">
+			<ul style="display: inline-block" class="product-caption-rating">
+				<li class="rated"><i class="fa fa-star"></i></li>
+				<li class="rated"><i class="fa fa-star"></i></li>
+				<li class="rated"><i class="fa fa-star"></i></li>
+				<li class="rated"><i class="fa fa-star"></i></li>
+				<li class="rated"><i class="fa fa-star"></i></li>
 
-				</ul>
-				<span style="float: right;" class="comment-date">22 November 2018</span>
-			</div>
-			<p class="comment-title">Good Battery</p>
-			<p class="comment-detail">Excellent battery service, lasts longer than my previous systems</p>
-			<hr class="comment-line"/>
+			</ul>
+			<span style="float: right;" class="comment-date">22 November 2018</span>
+		</div>
+		<p class="comment-title">Lovely System</p>
+		<p class="comment-detail">Wonderful system my grand daughter loves it </p>
+		<hr class="comment-line"/>
+		<div class="comment-block">
+			<ul style="display: inline-block" class="product-caption-rating">
+				<li class="rated"><i class="fa fa-star"></i></li>
+				<li class="rated"><i class="fa fa-star"></i></li>
+				<li class="rated"><i class="fa fa-star"></i></li>
+				<li class="rated"><i class="fa fa-star"></i></li>
+				<li class="rated"><i class="fa fa-star"></i></li>
+
+			</ul>
+			<span style="float: right;" class="comment-date">22 November 2018</span>
 		</div>
 	</div>
 	<button class="btn btn-block rating-btn">View all reviews</button>

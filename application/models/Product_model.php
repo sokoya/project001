@@ -502,7 +502,6 @@ Class Product_model extends CI_Model{
     // Seacrh autocomplete query
     function search_query($search = '', $category =''){
         // $select = "SELECT product_name FROM products WHERE product_name LIKE '%{$search}%'";
-        
         $select  = "SELECT p.id, p.product_name, g.image_name, v.sale_price, v.discount_price FROM products p 
         LEFT JOIN product_gallery g ON (g.product_id = p.id AND g.featured_image = 1)
         INNER JOIN (SELECT va.sale_price, va.discount_price,va.product_id vid FROM product_variation va  WHERE va.quantity > 0) v ON (v.vid = p.id)
@@ -510,6 +509,12 @@ Class Product_model extends CI_Model{
         if( $category != '' ) { $id = $this->category_id( $category ); $select .= "AND p.category_id = '{$id}' ";}
         $select .= "GROUP BY p.id ORDER BY p.id LIMIT 5";
         return $this->db->query($select)->result();
+    }
+
+    function search_query_categories_brand( $search ){
+        $select = "SELECT DISTINCT(p.category_id),count(*) total_count, c.name, c.slug FROM products p 
+        INNER JOIN categories c ON(c.id = p.category_id) WHERE p.product_name LIKE '%{$search}%' GROUP BY p.category_id LIMIT 5";
+        return $this->db->query( $select )->result();
     }
 
     //  Quick view query
