@@ -73,7 +73,7 @@ class Create extends MY_Controller{
                     'password' => $this->input->post('signuppassword')
                 );
                 $user = $this->user->login($data);
-                $session_data = array('logged_in' => true, 'logged_id' => base64_encode($user->id), 'email', 'is_seller' => $user->is_seller, 'email' => $this->input->post('email'));
+                $session_data = array('logged_in' => true, 'logged_id' => $user->id, 'is_seller' => 'false', 'email' => $this->input->post('email'));
                 $this->session->set_userdata($session_data);
                 $this->session->set_flashdata('success_msg','Account created and logged in successfully!');
                 // To ursher them to where they are coming from...

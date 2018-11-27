@@ -23,7 +23,7 @@ class Account extends MY_Controller {
 	public function index(){
 		$page_data['page'] = 'dashboard';
 		$page_data['title'] = "My dashboard";
-		$page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')) );
+		$page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
 		$this->load->view('account/dashboard', $page_data);
 	}
 
@@ -31,8 +31,8 @@ class Account extends MY_Controller {
 	public function orders(){
 		$page_data['page'] = 'orders';
 		$page_data['title'] = "My Orders";
-		$page_data['orders'] = $this->user->get_my_orders( base64_decode($this->session->userdata('logged_id')) );
-		$page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')) );
+		$page_data['orders'] = $this->user->get_my_orders( $this->session->userdata('logged_id') );
+		$page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
 		$this->load->view('account/orders', $page_data);
 	}
 
@@ -41,7 +41,7 @@ class Account extends MY_Controller {
 		$page_data['title'] = "My information";
 		if( !$this->input->post() ){
 			$page_data['page'] = 'information';
-			$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')) );
+			$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id') );
 			$this->load->view('account/information', $page_data);
 		}else{
 			$this->load->model('user_model');
@@ -84,9 +84,9 @@ class Account extends MY_Controller {
 							$this->session->set_flashdata('error_msg','<strong>Please fix the following errors</strong> <br />' . validation_errors());
 							redirect($_SERVER['HTTP_REFERER']);
 						}else{							
-							if($this->user_model->cur_pass_match($this->input->post('current_password'),base64_decode($this->session->userdata('logged_id')))){
+							if($this->user_model->cur_pass_match($this->input->post('current_password'),$this->session->userdata('logged_id'))){
 								
-								if($this->user_model->change_password($this->input->post('new_password'),base64_decode($this->session->userdata('logged_id')))){$this->session->set_flashdata('success_msg','Success, your password has been reset.');
+								if($this->user_model->change_password($this->input->post('new_password'),$this->session->userdata('logged_id'))){$this->session->set_flashdata('success_msg','Success, your password has been reset.');
 								}else{
 									$this->session->set_flashdata('error_msg','Sorry! There was an error updating the password, please try after some time...');									
 								}
@@ -107,28 +107,16 @@ class Account extends MY_Controller {
 	public function saved(){
 		$page_data['page'] = 'saved';
 		$page_data['title'] = "My saved items";
-		$page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id') ));
-		$page_data['saved'] = $this->user->get_saved_items( base64_decode($this->session->userdata('logged_id')));
+		$page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id' ));
+		$page_data['saved'] = $this->user->get_saved_items( $this->session->userdata('logged_id'));
 		$this->load->view('account/saved', $page_data);
-	}
-
-	function delete_fav(){
-		if( !$this->session->userdata('logged_in')) redirect(base_url());  
-        if($this->user_model->favourite( base64_decode($this->session->userdata('logged_id')), base64_decode($this->input->post('pid')),
-            $this->input->post('action') )){
-            echo true;
-            exit;
-        }else{
-            echo false;
-            exit;
-        }    
 	}
 
     // Billing Address Function
     public function billing(){
     	$page_data['page'] = 'billing';
     	$page_data['title'] = "My Billing Address";
-    	$page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id') ));
+    	$page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
     	$page_data['addresses'] = $this->user->get_user_billing_address( $page_data['profile']->id); 
         if( $this->input->post() ){
         	$status['status'] = 'error';
@@ -170,7 +158,7 @@ class Account extends MY_Controller {
         }else{
         	$page_data['page'] = 'billing';
         	$page_data['title'] = "My Billing Address";
-        	$page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id') ));
+        	$page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
         	$this->load->view('account/billing', $page_data);
         }
     }
@@ -182,11 +170,11 @@ class Account extends MY_Controller {
 		if( !$this->input->post()){
 			// var_dump($this->input->post('preference'));
 			$page_data['page'] = 'settings';
-			$page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')));
+			$page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id'));
 			$this->load->view('account/settings', $page_data);
 		}else{
 			if($this->user_model->update_data(
-				base64_decode($this->input->post('user')), 
+				$this->input->post('user'),
 				array('newsletter' => $this->input->post('preference')))){
 				$this->session->set_flashdata('success_msg','Success, your prefence has been updated');
 			}else{
@@ -222,7 +210,7 @@ class Account extends MY_Controller {
 	function fetch_single_address(){
 		if( !$this->input->get('address_id') ) redirect(base_url());
 		$address_id = cleanit($this->input->get('address_id'));
-		$result = $this->user->get_single_address( base64_decode($this->session->userdata('logged_id')), $address_id);
+		$result = $this->user->get_single_address( $this->session->userdata('logged_id'), $address_id);
 		header('Content-type: text/json');
 		header('Content-type: application/json');
 		echo json_encode($result);
@@ -232,8 +220,8 @@ class Account extends MY_Controller {
     public function order_track(){
         $page_data['page'] = 'order_track';
         $page_data['title'] = "Order Tracking";
-        $page_data['orders'] = $this->user->get_my_orders( base64_decode($this->session->userdata('logged_id')) );
-        $page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')) );
+        $page_data['orders'] = $this->user->get_my_orders( $this->session->userdata('logged_id') );
+        $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
         $this->load->view('account/order_track', $page_data);
     }
 
