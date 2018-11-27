@@ -138,30 +138,27 @@ Class User_model extends CI_Model{
     }
 
 
-    /**
-     * @param $uid
-     * @param $pid
-     * @param $action
-     * @param string $table_name
-     * @param string $fid
-     * @return bool|mixed|string
-     */
-    function favourite($uid, $pid, $action, $table_name = 'favourite', $fid='' ){
-        if( $action == 'save'){
-            try {
-                if( $this->db->insert($table_name, array('uid' => $uid, 'product_id' => $pid))) 
-                    return true;
-            } catch (Exception $e) {
-                $result = $e->getMessage();
-            }
-            return $result;
-        }elseif( $action == 'unsave'){
-            $this->db->where('product_id', $pid);
-            $this->db->where('uid', $uid);
-            return $this->db->delete($table_name);
+
+    function favourite_action( $pid ) {
+        $uid = $this->session->userdata('logged_id');
+        $this->db->select('id');
+        $this->db->where('product_id', $pid);
+        $this->db->where('uid', $uid);
+        $result = $this->db->get('favourite')->row();
+        if( $result ){
+            $this->db->where('id', $result->id);
+            if( $this->db->delete('favourite') ){
+                return array('status' => 'success' , 'msg' => 'The product has been removed from your wishlist');
+            }else{
+                return array('status' => 'error', 'msg' => 'There was an error removing the product from your wishlist');
+            } 
         }else{
-            $this->db->where('id', $fid);
-            return $this->db->delete($table_name);
+            $data = array('uid' => $uid, 'product_id' => $pid, 'date_saved' => get_now());
+            if( $this->create_account($data, 'favourite') ){
+                return array('status' => 'success', 'msg' => 'The product has been added to your wishlist');
+            }else{
+                return array('status' => 'error', 'msg' => 'There was an error adding the product to your wishlist');
+            }
         }
     }
 
