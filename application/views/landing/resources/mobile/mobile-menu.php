@@ -342,7 +342,7 @@
 					<?php endif; ?>
 					<a href="<?= base_url('logout'); ?>"><p>Logout</p></a>
 				<?php else : ?>
-					<a href="<?= base_url('seller/login'); ?>"><p>Login</p></a>
+					<a href="<?= base_url('login') ?>"><p>Login</p></a>
 					<div class="line-separator"></div>
 					<a href="<?= base_url('create/'); ?>"><p>Register</p></a>
 				<?php endif; ?>

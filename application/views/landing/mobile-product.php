@@ -125,6 +125,7 @@
 		margin-top: 4px;
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 		font-size: 13px;
+		color: #468c46;
 	}
 
 	.delivery-text {
@@ -271,7 +272,7 @@
 					<li><i class="fa fa-star"></i></li>
 				<?php } ?>
 				<span style="margin-left: 5px; color: #0b6427;"
-					  class="rating-total-count"><?= !empty($rating_counts) ? ' (' . count($rating_counts) . ')' : 'O rating' ?></span>
+					  class="rating-total-count"><?= !empty($rating_counts) ? ' (' . count($rating_counts) . ')' : 'rating' ?></span>
 			</ul>
 		</div>
 		<?php if (!empty($var->discount_price)) : ?>
@@ -377,7 +378,8 @@
 				<p class="wishlist-cta">Remove from Wishlist</p>
 			<?php endif; ?>
 		<?php else: ?>
-			<a href="<?= base_url('login') ?>"><p class="wishlist-cta">Save to Wishlist</p></a>
+			<a style="text-decoration: none" href="<?= base_url('login') ?>"><p class="wishlist-cta">Save to
+					Wishlist</p></a>
 		<?php endif; ?>
 
 	</div>
@@ -715,6 +717,30 @@
 			})
 
 		});
+
+		$('.wishlist-cta').on('click', function () {
+			let product_id = $('.product_id').val();
+			$.ajax({
+				url: base_url + 'ajax/favourite',
+				method: 'POST',
+				data: {
+					id: product_id
+				},
+				success: response => {
+					let parsed_response = JSON.parse(response);
+					if (parsed_response.action === 'removed') {
+						$('.wishlist-cta').html('Saved to Wishlist');
+					} else {
+						$('.wishlist-cta').html('Remove from Wishlist');
+					}
+
+					notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+				},
+				error: () => {
+					notification_message('Sorry an error occurred please try again ', 'fa fa-info-circle', error);
+				}
+			})
+		})
 	</script>
 
 	<?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>

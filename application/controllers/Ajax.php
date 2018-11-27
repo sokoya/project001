@@ -92,7 +92,7 @@ class Ajax extends CI_Controller
 		if ($this->input->is_ajax_request() && $this->input->post()) {
 			$pid = $this->input->post('id');
 			$return = $this->user->favourite_action( $pid );
-			echo json_decode( $return );
+			echo json_encode( $return );
 		} else {
 			redirect(base_url());
 		}
