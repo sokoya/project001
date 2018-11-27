@@ -247,6 +247,7 @@
 											</div>
 											<img class="product-img lazy"
 												 data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
+												 style="width: 100%"
 												 src="<?= base_url('assets/landing/img/load.gif'); ?>"
 												 alt="<?= $product->product_name; ?>"
 												 title="<?= $product->product_name; ?>">
