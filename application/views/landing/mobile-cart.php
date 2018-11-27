@@ -38,12 +38,10 @@
 </head>
 <body class="cart-row">
 <div class="global-wrapper clearfix" id="global-wrapper">
-<!--    --><?php //$this->load->view('landing/resources/head_img') ?>
-<!--    --><?php //$this->load->view('landing/resources/head_category') ?>
 	<?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
 
     <div class="container">
-        <?php if (!empty($this->cart->contents())) : ?>
+        <?php $cart_content = $this->cart->contents();if (!empty( $cart_content)) : ?>
             <header class="page-header" style="margin: 10px 0 10px 0;">
                 <h4 style="margin-bottom:0;">My Cart (<?= $this->cart->total_items(); ?>) Items</h4>
             </header>
@@ -64,8 +62,8 @@
                             <div class="col-xs-5">
                                 <?php echo form_hidden($x . '[rowid]', $product['rowid']); ?>
                                 <a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
-                                    <img style="width:130px !important;height:auto !important;"
-                                         src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image); ?>"
+                                    <img class="lazy" style="width:130px !important;height:auto !important;"
+                                         src="<?= PRODUCTS_IMAGE_PATH. $detail->image; ?>"
                                          alt="<?= lang('app_name'); ?> <?= $product['name']; ?>"
                                          title="<?= $product['name']; ?>"/>
                                 </a></div>
@@ -183,9 +181,7 @@
     <div style="height:10px;"></div>
 </div>
 <script>
-    if (!base_url) {
-        let base_url = "<?= base_url(); ?>";
-    }
+    if (!base_url) {let base_url = "<?= base_url(); ?>";}
 </script>
 <?php $this->load->view('landing/resources/script'); ?>
 <script>

@@ -86,6 +86,32 @@ Class Product_model extends CI_Model{
     }
 
 
+    /**
+     * @param $id
+     * @return mixed
+     */
+    function get_variation_status($id ){
+        return $this->db->query("SELECT quantity, sale_price, discount_price, start_date, end_date FROM product_variation WHERE id = $id")->row();
+    }
+
+    /*The funfyion helps to make a secondary check on a product before adding to cart
+     * */
+    function get_product_item( $pid, $vid, $qty ){
+        // check if the variation item is still available
+        $check1 = $this->get_variation_status( $vid );
+        if( empty( $check1 ) || $qty > $check1->quantity ){
+            return array('status' => 'error', 'msg' => 'The product variation quantity you selected is not available.' . $check1->quantity . ' item remaining' );
+        }
+        $query = "SELECT p.seller_id, p.product_name, v.discount_price, v.sale_price FROM products p WHERE id = {$pid} AND product_status = 'approved' ";
+        $result = $this->db->query( $query )->row();
+        if( !empty($result) ){
+            return array('status' => 'success', 'msg' => $result);
+        }else{
+            return array('status' => 'error', 'msg' => 'Sorry, the product is no longer active.');
+        }
+    }
+
+
 
     // Get user has favourite this property
     function is_favourited($uid ='', $product_id =''){
@@ -422,15 +448,6 @@ Class Product_model extends CI_Model{
                 WHERE p.id = $id";
         return $this->db->query($select)->row();
     }
-
-
-    // Get the status of variation
-    // Before checking out
-    // Return CI_row
-    function get_variation_status( $id ){
-        return $this->db->query("SELECT quantity, sale_price, discount_price, start_date, end_date FROM product_variation WHERE id = $id")->row();
-    }
-
 
     /**
      * Generic function 

@@ -175,28 +175,34 @@ class Ajax extends CI_Controller
 	// Quick view add 
 	function quick_view_add(){
        if( $this->input->is_ajax_request() && $this->input->post() ){
-           $name = cleanit($this->input->post('product_name'));
-           $name = preg_replace('/^['.$this->product_name_rules.']+$/i', " ", $name);
-           // Added to make checks if product still remains
-           $variation_id = $this->input->post('variation_id', true);
-           $data = array(
-               'id' => $this->input->post('product_id'),
-               'qty' => $this->input->post('quantity'),
-               'price' => $this->input->post('product_price'),
-               'name' => $name,
-               'options' =>
-                   array(
-                       'seller' => $this->input->post('seller'),
-                       'variation_id' => $variation_id
+           $pid = $this->input->post('product_id');
+           $vid = $this->input->post('variation_id');
+           $qty = $this->input->post('quantity');
+           $result = $this->product->get_product_item( $pid, $vid, $qty );
+           if( $result['status'] == 'success' ){
+               $return = $result['msg'];
+               $name = preg_replace('/^['.$this->product_name_rules.']+$/i', " ", $return->product_name);
+               $price = (!empty( $return->discount_price)) ? $return->sale_price : $return->discount_price;
+               $data = array(
+                   'id' => $pid,
+                   'qty' => $qty,
+                   'name' => $name,
+                   'price' => $price,
+                   'options' => array(
+                       'seller' => $return->seller_id,
+                       'variation_id' => $vid
                    )
-           );
-           if( $this->cart->insert($data)){
-               echo true;
+               );
+               if( $this->cart->insert($data) ){
+                   echo json_encode( array('status' => 'success' , 'msg' => 'The product ' . $return->product_name .' has been added to your cart successfully.'));
+               }else{
+                   echo json_encode(array('status' => 'error', 'msg' => 'There was an error adding the product to the cart'));
+               }
                exit;
            }else{
-               echo false;
-               exit;
+               echo json_encode( $result );
            }
+           exit;
        }else{
            redirect(base_url());
        }

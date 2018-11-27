@@ -743,13 +743,9 @@
 			url: base_url + 'ajax/quick_view_add',
 			method: 'POST',
 			data: {
-				product_id: product_id,
-				quantity: quantity_instance,
-				product_price: price,
-				product_name: product_name,
-				variation_id: variation_id,
-				variation: variation_name,
-				seller: seller_id
+                product_id: product_id,
+                variation_id: variation_id,
+                quantity: quantity_instance
 			},
 			success: () => {
 				let counter = $('.cart-count');
