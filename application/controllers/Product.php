@@ -14,6 +14,7 @@ class Product extends MY_Controller
 	public function index()
 	{
 		// $this->output->cache(60);
+
 		$uri = $this->uri->segment(2);
 		$index = substr($uri, strrpos($uri, '-') + 1);
 		// sanitize
@@ -51,6 +52,7 @@ class Product extends MY_Controller
 	// List Product Page
 	public function catalog()
 	{
+
 		$str = $this->uri->segment(2);
 		$str = preg_replace("/[^A-Za-z0-9\-]/", "", cleanit($str));
 		$str = cleanit($str);
