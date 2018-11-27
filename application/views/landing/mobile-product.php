@@ -728,7 +728,7 @@
 				},
 				success: response => {
 					let parsed_response = JSON.parse(response);
-					if (parsed_response.action === 'removed') {
+					if (parsed_response.action === 'remove') {
 						$('.wishlist-cta').html('Saved to Wishlist');
 					} else {
 						$('.wishlist-cta').html('Remove from Wishlist');
