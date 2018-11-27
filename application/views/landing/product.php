@@ -174,24 +174,6 @@
 									<?php else: ?>
 										<span class="price-cs dn-price"><?= ngn($var->sale_price); ?></span>
 									<?php endif; ?>
-									<!-- <?php
-									$category_fav = 'category-favorite';
-									if ($this->session->userdata('logged_in')) :
-										if ($favourited) :
-											?>
-										<span class="pull-right"><a href="javascript:void(0)" data-action="unsave" data-pid="<?= base64_encode($product->id) ?>"><i class="fa fa-heart" title="Remove <?= $product->product_name; ?> from your whishlist"></i></a>
-										</span>
-									<?php
-										else:
-											?>
-										<span class="pull-right"><a href="" data-action="save" data-pid="<?= base64_encode($product->id) ?>"><i class="fa fa-heart-o" title="Add <?= $product->product_name; ?> to your whishlist"></i></a></span>
-									<?php
-										endif;
-									else:
-										?>
-									<span class="pull-right">
-										<a href="<?= base_url('login'); ?>"><i class="fa fa-heart-o" title="Add <?= $product->product_name; ?> to your whishlist"></i></a></span>
-									<?php endif; ?> -->
 
 								</p>
 
@@ -200,19 +182,6 @@
 								<div class="product-variation">
 									<?= form_open('', 'id="variation-form"'); ?>
 									<div class="row">
-										<?php if (!empty($product->colour_family)) : ?>
-											<!--											<div class="col-md-3">-->
-											<!--												<h5 class="custom-product-page-option-title">Color:</h5>-->
-											<!--												<select class="product-page-option-select" name="colour">-->
-											<!--													--><?php //$colour_family = json_decode($product->colour_family);
-//													foreach ($colour_family as $colour): ?>
-											<!--														<option-->
-											<!--															value="--><? //= trim($colour); ?><!--">--><? //= ucfirst($colour); ?><!--</option>-->
-											<!--													--><?php //endforeach; ?>
-											<!--												</select>-->
-											<!--											</div>-->
-
-										<?php endif; ?>
 										<?php if (count($variations) > 1) : ?>
 											<input type="hidden" name="variation_id" class="variation_id"
 												   value="<?= $variations[0]['id']; ?>">
@@ -252,10 +221,10 @@
 											<?php endif; ?>
 										<?php endif; ?>
 										<input type="hidden" name="product_id"
-											   value="<?= base64_encode($product->id); ?>">
+											   value="<?= $product->id; ?>">
 										<input type="hidden" name="product_name" value="<?= $product->product_name; ?>">
 										<input type="hidden" name="seller"
-											   value="<?= base64_encode($product->seller_id) ?>">
+											   value="<?= $product->seller_id ?>">
 										<div class="col-md-5 quan-u">
 											<h5 class="custom-product-page-option-title">Quantity:</h5>
 											<ul>
@@ -292,14 +261,14 @@
 											?>
 											<div class="col-md-6 col-lg-6">
 												<a class="btn btn-block btn-default fav c-hover" data-action="unsave"
-												   data-pid="<?= base64_encode($product->id); ?>"
+												   data-pid="<?= $product->id; ?>"
 												   href="javascript:void(0)"><i class="fa fa-star"></i>Remove From
 													Wishlist</a>
 											</div>
 										<?php else : ?>
 											<div class="col-md-6 col-lg-6">
 												<a class="btn btn-block btn-default fav c-hover" data-action="save"
-												   data-pid="<?= base64_encode($product->id) ?>"
+												   data-pid="<?= $product->id; ?>"
 												   href="javascript:void(0)"><i class="fa fa-star-o"></i>Wishlist</a>
 											</div>
 										<?php endif; ?>

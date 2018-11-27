@@ -7,7 +7,9 @@
 	.img-bg{
 		padding: 0px !important;
 		margin-right: 0px;
+
 	}
+
 	.market-box{
 		margin-left: 0px !important;
 	}

@@ -326,7 +326,7 @@
 			<div class="options">
 				<div class="arrow-up"></div>
 				<?php
-				$profile = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
+				$profile = $this->user->get_profile($this->session->userdata('logged_id'));
 				?>
 				<?php if ($this->session->userdata('logged_in')): ?>
 					<a href="<?= base_url('account'); ?>"><p>My Account</p></a>

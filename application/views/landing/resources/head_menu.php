@@ -66,7 +66,7 @@
                 </li>
 
                 <?php
-                    $profile = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
+                    $profile = $this->user->get_profile($this->session->userdata('logged_id'));
                 ?>
                 <li class="dropdown">
                     <?php if( $this->session->userdata('logged_in') ): ?>
