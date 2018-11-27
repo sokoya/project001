@@ -41,6 +41,15 @@ Class Product_model extends CI_Model{
         return $this->db->get('product_gallery')->row();
     }
 
+    // Get all product Images
+    function get_gallery( $id ){
+        $this->db->where('product_id', $id);
+        $this->db->select('*');
+        $this->db->from('product_gallery');
+        $this->db->order_by('featured_image', 'DESC');
+        return $this->db->get()->result();
+    }
+
 
     // To get the respective categories or sub
     // Function used for the category page
@@ -76,14 +85,7 @@ Class Product_model extends CI_Model{
         return $this->db->get('product_variation')->result_array();
     }
 
-    // Get all product Images
-    function get_gallery( $id ){
-        $this->db->where('product_id', $id);
-        $this->db->select('*');
-        $this->db->from('product_gallery');
-        $this->db->group_by('product_id');
-        return $this->db->get();
-    }
+
 
     // Get user has favourite this property
     function is_favourited($uid ='', $product_id =''){

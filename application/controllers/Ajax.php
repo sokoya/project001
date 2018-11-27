@@ -70,7 +70,7 @@ class Ajax extends CI_Controller
             $products = $this->product->search_query($search, $category);
             $x = 0;
             foreach ($products as $result) {
-                $output['products'][$x]['image_path'] = base_url('data/products/' . $result->id . '/' . $result->image_name);
+                $output['products'][$x]['image_path'] = PRODUCTS_IMAGE_PATH . $result->image_name;
                 $output['products'][$x]['product_name'] = $result->product_name;
                 $output['products'][$x]['url'] = urlify($result->product_name, $result->id);
                 $price = (!empty($result->discount_price)) ? $result->discount_price :  $result->sale_price ;
@@ -160,7 +160,6 @@ class Ajax extends CI_Controller
 							$results['variation'][$x]['discount_price'] = $variation['sale_price'];
 						}
 					}
-
 					$x++;
 				}
 			}

@@ -22,7 +22,7 @@ class Product extends MY_Controller
 		$page_data['product'] = $this->product->get_product($index);
 		$page_data['var'] = $this->product->get_variation($index);
 		$page_data['variations'] = $this->product->get_variations($index);
-		$page_data['gallery'] = $this->product->get_gallery($index);
+		$page_data['galleries'] = $this->product->get_gallery($index);
 		$page_data['favourite'] = $this->product->is_favourited($this->session->userdata('logged_id'), $index);
 		$page_data['likes'] = $this->product->get_also_likes($index);
 		$page_data['category_detail'] = $this->product->single_category_detail($page_data['product']->category_id);

@@ -14,7 +14,7 @@
 				<p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find
 						product</a></p>
 			</div>
-		<?php elseif (empty($product) || empty($var) || empty($gallery)): ?>
+		<?php elseif (empty($product) || empty($var) || empty($galleries)): ?>
 			<div class="row">
 				<div class="gap-large"></div>
 				<h2 class="text-center">Oops! The product you looking does not exist.</h2>
@@ -36,51 +36,32 @@
 				<div class="col-md-5">
 					<div class="product-page-product-wrap jqzoom-stage">
 						<div class="clearfix">
-							<a href="<?= base_url('data/products/' . $product->id . '/' . $featured_image->image_name); ?>"
+							<a href="<?= PRODUCTS_IMAGE_PATH.$featured_image->image_name; ?>"
 							   id="jqzoom"
 							   data-rel="gal-1">
 								<img
-									src="<?= base_url('data/products/' . $product->id . '/' . $featured_image->image_name); ?>"
+									src="<?= PRODUCTS_IMAGE_PATH.$featured_image->image_name; ?>"
 									alt="<?= $product->product_name; ?>"
-									title="<?= ucwords($product->product_name) ?>" width="500" height="500"
-									style="max-height: 430px; max-width: 460px"/>
+									title="<?= ucwords($product->product_name) ?>" width="450"
+									style="max-width: 450px"/>
 							</a>
 						</div>
 					</div>
-					<ul class="jqzoom-list">
-						<li>
-							<a class="zoomThumbActive" href="javascript:void(0)"
-							   data-rel="{gallery:'gal-1', smallimage: '<?= base_url('assets/landing/img/test_product_page/xperia/1.jpg'); ?>', largeimage: '<?= base_url('assets/landing/img/test_product_page/xperia/1-b.jpg'); ?>'}">
-								<img src="<?= base_url('assets/landing/img/test_product_page/xperia/1-s.jpg'); ?>"
-									 alt="Image Alternative text"
-									 title="Image Title"/>
-							</a>
-						</li>
-						<li>
-							<a href="javascript:void(0)"
-							   data-rel="{gallery:'gal-1', smallimage: '<?= base_url('assets/landing/img/test_product_page/xperia/2-s.jpg'); ?>', largeimage: '<?= base_url('assets/landing/img/test_product_page/xperia/2-s.jpg'); ?>'}">
-								<img src="<?= base_url('assets/landing/img/test_product_page/xperia/2-s.jpg'); ?>"
-									 alt="Image Alternative text"
-									 title="Image Title"/>
-							</a>
-						</li>
-						<li>
-							<a href="javascript:void(0)"
-							   data-rel="{gallery:'gal-1', smallimage: '<?= base_url('assets/landing/img/test_product_page/xperia/3.jpg'); ?>', largeimage: '<?= base_url('assets/landing/img/test_product_page/xperia/3-b.jpg'); ?>'}">
-								<img src="<?= base_url('assets/landing/img/test_product_page/xperia/3-s.jpg'); ?>"
-									 alt="Image Alternative text"
-									 title="Image Title"/>
-							</a>
-						</li>
-						<li>
-							<a href="javascript:void(0)"
-							   data-rel="{gallery:'gal-1', smallimage: '<?= base_url('assets/landing/img/test_product_page/xperia/4.jpg'); ?>', largeimage: '<?= base_url('assets/landing/img/test_product_page/xperia/4-b.jpg'); ?>'}">
-								<img src="<?= base_url('assets/landing/img/test_product_page/xperia/4-s.jpg'); ?>"
-									 alt="Image Alternative text"
-									 title="Image Title"/>
-							</a>
-						</li>
-					</ul>
+                    <?php if(count( $galleries) > 1 ) :?>
+                        <ul class="jqzoom-list">
+                            <?php foreach( $galleries as $gallery ) : ?>
+                                    <li>
+                                        <a class="zoomThumbActive" href="javascript:void(0)"
+                                           data-rel="{gallery:'gal-1', smallimage: '<?= PRODUCTS_IMAGE_PATH . "c_scale,w_400/" . $gallery->image_name ?>',
+                                           largeimage: '<?=  PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>'}">
+                                            <img src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
+                                                 alt="<?= $product->product_name; ?>"
+                                                 title="<?= $product->product_name?>" width="100"/>
+                                        </a>
+                                    </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
 				</div>
 
 				<div class="col-md-7">
@@ -587,8 +568,8 @@
 							<?php endif; ?>
 							<div class="product-img-wrap">
 								<img class="product-img"
-									 data-src="<?= base_url('data/products/' . $like->id . '/' . $like->image_name); ?>"
-									 src="<?= base_url('data/products/' . $like->id . '/' . $like->image_name); ?>"
+									 data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?>"
+									 src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?>"
 									 alt="<?= $like->product_name; ?>"
 									 title="<?= $like->product_name; ?>">
 							</div>

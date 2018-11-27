@@ -237,14 +237,14 @@
 															data-pr_id="<?= $product->id; ?>"
 															data-qv="<?php if ($p_count % 4 == 0) { ?>true<?php } ?>"
 															data-qvc="<?php echo $p_count ?>"
-															data-image="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
+															data-image="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
 															class="btn btn-primary product-quick-view-btn">Quick view
 													</button>
 												</div>
 											</div>
 											<img class="product-img lazy"
-												 data-src="https://res.cloudinary.com/de9lpikx3/image/upload/<?= $product->image_name; ?>"
-												 src="https://res.cloudinary.com/de9lpikx3/image/upload/<?= $product->image_name; ?>"
+												 data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
+												 src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
 												 alt="<?= $product->product_name; ?>"
 												 title="<?= $product->product_name; ?>">
 										</div>
