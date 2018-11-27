@@ -1,3 +1,4 @@
+
 /*
 * Notification message
 * Notification types : ['success', 'error', 'warning']
@@ -21,11 +22,11 @@ function notification_message(msg, icon = 'fa fa-info-circle', notification_type
 			break
 	}
 	$('body').append(`
-		<div class="notification" style="background: ${background}; color: ${color}">
+		<div class="mobile-notification" style="background: ${background}; color: ${color}">
 			<i class="${icon}" aria-hidden="true"></i> ${msg}
 		</div>
 	`);
-	$(".notification").delay(5000).fadeOut();
+	$(".mobile-notification").delay(5000).fadeOut();
 }
 
 /*
@@ -44,9 +45,19 @@ function highlight(hay, pin) {
 //format currency
 // and prepend the Naira sign
 function format_currency(str) {
-	return '₦' + str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+	return '₦ ' + str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
 }
 
+//get discount
+function get_discount(sale_price, discount_price) {
+	let percent = Math.ceil(((sale_price - discount_price) * 100) / sale_price);
+	return `-${percent}%`
+}
+
+//bindings
+function bind_method(src, destination) {
+	$(`.${destination}`).html(src);
+}
 
 $('body').on('click', function () {
 	$('.mobile-navbar').hide();
@@ -70,7 +81,6 @@ $('.account-dropdown').on('click', function (e) {
 $('.options').on('click', function (e) {
 	e.stopPropagation();
 });
-
 
 
 $('.search-input').on('input', function () {

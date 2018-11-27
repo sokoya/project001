@@ -7509,9 +7509,9 @@ input[type="color"]:focus,
 	}
 }
 
-.notification {
+.mobile-notification {
 	position: fixed;
-	top: 0;
+	bottom: 0;
 	width: 100%;
 	padding: 10px;
 	font-weight: 700;
@@ -7521,7 +7521,7 @@ input[type="color"]:focus,
 	font-family: "Open Sans", cursive;
 }
 
-.notification > i {
+.mobile-notification > i {
 	margin-right: 15px;
 }
 
@@ -7642,12 +7642,13 @@ input[type="color"]:focus,
 	color: #fff;
 	background: #0b6427;
 }
-.panel-line{
+
+.panel-line {
 	border-top: 1px solid #e1e1e1 !important;
 	margin: 0 -16px 8px;
 }
 
-.list-label{
+.list-label {
 	font-weight: 700;
 	color: #636363;
 	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
