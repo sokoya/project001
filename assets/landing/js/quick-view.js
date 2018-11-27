@@ -172,16 +172,12 @@ function get_view() {
 					data: {
 						product_id: pr_id,
 						quantity: quantity_available,
-						product_price: price_,
-						product_name: title,
 						variation_id: vid,
-						variation: vname,
-						seller:seller
 					},
-					success: () => {
+					success: response => {
 						$('.overview-tab').slideUp();
 						// $('.overview-tab').remove();
-
+						console.log(response);
 						notification_message(`${title} successfully added to cart`, 'fa fa-cart-plus', 'success');
 						$('.cart-read').show();
 						let x = $('.cart-read').text() * 1;
