@@ -82,15 +82,27 @@ $('.search-input').on('input', function () {
 			data: {search: query, category: category},
 			method: 'POST',
 			success: function (response) {
-				if (response === '') {
+				if (response.products === undefined || response.products.length == 0) {
 					append_location.html(`
 						<p class="search-title">No result(s) found for "${query}"</p>
 					`);
 				} else {
-					let html_var = ``;
-					$.each(response, function (key, value) {
-						html_var += `
-							<p><a href="${base_url}${value.url}">
+					let categories_index = ``;
+					let product_index = ``;
+
+					$.each(response.categories, function (key, value) {
+						categories_index += `
+							<div class="search-titles">
+								<p>in <a style="text-decoration: none" href="${value.url}">${value.name}</a>
+								<span style="float:right; color:#222;">${value.total_count} <span style="color:#777 !important">Results</span></span>
+								</p>
+								</div>
+						`
+					});
+
+					$.each(response.products, function (key, value) {
+						product_index += `
+						<p><a href="${base_url}${value.url}">
 							<div class="row" >
 								<div class="col-md-2 col-2 col-xs-2 col-sm-2 col-lg-2 ">
 									<img src="${value.image_path}"
@@ -103,11 +115,15 @@ $('.search-input').on('input', function () {
 									</div>
 								</div>
 							</div>
-						</a></p>`;
+						</a></p>
+						`
 					});
+
 					append_location.html(`
+						<p class="search-title">Categories</p>
+						${categories_index}
 						<p class="search-title">Products</p>
-						${html_var}
+						${product_index}
 					`)
 				}
 			},

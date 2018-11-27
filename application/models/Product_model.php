@@ -249,7 +249,7 @@ Class Product_model extends CI_Model{
             $array = $this->slug($queries['str']);
             $select_query .= " WHERE p.category_id IN ('".implode("','",$array)."')";
 
-            // die($select_query);
+            if( isset($gets['q']) && !empty($gets['q']) ) {$select_query .= " AND p.product_name LIKE '%{$gets["q"]}%' "; unset($gets['q']); }
             if( count($gets) ){
                 // check for brand name
                 if( isset($gets['brand_name']) && !empty($gets['brand_name'])) {
@@ -513,7 +513,7 @@ Class Product_model extends CI_Model{
 
     function search_query_categories( $search ){
         $select = "SELECT DISTINCT(p.category_id),count(*) total_count, c.name, c.slug FROM products p 
-        INNER JOIN categories c ON(c.id = p.category_id) WHERE p.product_name LIKE '%{$search}%' GROUP BY p.category_id LIMIT 5";
+        INNER JOIN categories c ON(c.id = p.category_id) WHERE p.product_name LIKE '%{$search}%' AND p.product_status = 'approved' GROUP BY p.category_id LIMIT 5";
         return $this->db->query( $select )->result();
     }
 

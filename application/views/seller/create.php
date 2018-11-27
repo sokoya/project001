@@ -731,7 +731,7 @@
                                                             <?php else: ?>
                                                                 <th class="min-w-td"><?= ucfirst($variation_name); ?> *</th>
                                                             <?php  endif; ?>
-															<th>Seller SKU</th>
+															<th>Seller SKU *</th>
 															<th>EAN / UPC / ISBN *</th>
 															<th>Quantity *</th>
 															<th>Sale Price *</th>
@@ -754,32 +754,32 @@
                                                                     </select>
                                                                     <?php else :?>
 																	<input title="variation" type="text"
-																		   class="form-control" name="variation[]"
+																		   class="form-control" autocomplete="off" name="variation[]"
 																		   required/>
                                                                     <?php endif; ?>
                                                                 </div>
 															</td>
 															<td>
-																<div class="form-group-sm">
+																<div class="form-group-sm col-md-12">
 																	<input title="Seller SKU" type="text"
 																		   class="form-control" name="sku[]" required/>
 																</div>
 															</td>
 															<td>
-																<div class="form-group-sm">
+																<div class="form-group-sm col-md-12">
 																	<input title="EAN / UPC / ISBN" type="text"
 																		   class="form-control" name="isbn[]" required/>
 																</div>
 															</td>
 															<td>
-																<div class="form-group-sm">
+																<div class="form-group-sm col-md-12">
 																	<input title="Quantity" type="number" min="1"
 																		   max="100" class="form-control"
 																		   name="quantity[]" required/>
 																</div>
 															</td>
 															<td>
-																<div class="form-group-sm">
+																<div class="form-group-sm col-md-12">
 																	<input title="Price" type="text"
 																		   class="form-control" required
 																		   name="sale_price[]"/>
