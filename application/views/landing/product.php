@@ -51,10 +51,10 @@
                         <ul class="jqzoom-list">
                             <?php foreach( $galleries as $gallery ) : ?>
                                     <li>
-                                        <a class="zoomThumbActive" href="javascript:void(0)"
+                                        <a <?php if($gallery->featured_image == 1 ) echo 'zoomThumbActive';?> href="javascript:void(0)"
                                            data-rel="{gallery:'gal-1', smallimage: '<?= PRODUCTS_IMAGE_PATH . "c_scale,w_400/" . $gallery->image_name ?>',
                                            largeimage: '<?=  PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>'}">
-                                            <img src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
+                                            <img class="lazy" src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
                                                  alt="<?= $product->product_name; ?>"
                                                  title="<?= $product->product_name?>" width="100"/>
                                         </a>
