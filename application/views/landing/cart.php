@@ -40,7 +40,8 @@
 									<?php echo form_hidden($x . '[rowid]', $product['rowid']); ?>
 									<a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
 										<img
-											src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image); ?>"
+											data-src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image); ?>"
+                                            src="<?= base_url('assets/landing/img/load.gif'); ?>"
 											alt="<?= lang('app_name'); ?> <?= $product['name']; ?>"
 											title="<?= $product['name']; ?>"/>
 									</a>
@@ -153,7 +154,11 @@
 	}
 </script>
 <?php $this->load->view('landing/resources/script'); ?>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
+    $(function() {
+        $('.lazy').Lazy();
+    });
 
 	function bind_market(src, destination) {
 		$(`.${destination}`).html(src);

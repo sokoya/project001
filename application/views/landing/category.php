@@ -351,11 +351,7 @@
 		$('.lazy').Lazy({
 			scrollDirection: 'vertical',
 			effect: 'fadeIn',
-			visibleOnly: true,
-			beforeLoad: function (element) {
-			},
-			onError: function (element) {
-			}
+			visibleOnly: true
 		});
 	});
 	$("#price-slider").ionRangeSlider({

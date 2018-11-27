@@ -63,8 +63,9 @@
                                 <?php echo form_hidden($x . '[rowid]', $product['rowid']); ?>
                                 <a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
                                     <img class="lazy" style="width:130px !important;height:auto !important;"
-                                         src="<?= PRODUCTS_IMAGE_PATH. $detail->image; ?>"
-                                         alt="<?= lang('app_name'); ?> <?= $product['name']; ?>"
+                                         data-src="<?= PRODUCTS_IMAGE_PATH. $detail->image; ?>"
+                                         src="<?= base_url('assets/landing/img/load.gif'); ?>"
+                                         alt="<?= $product['name']; ?>"
                                          title="<?= $product['name']; ?>"/>
                                 </a></div>
                             <div class="col-xs-7">
@@ -183,8 +184,11 @@
 <script>
     if (!base_url) {let base_url = "<?= base_url(); ?>";}
 </script>
-<?php $this->load->view('landing/resources/script'); ?>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
+    $(function() {
+        $('.lazy').Lazy();
+    });
 
     function bind_market(src, destination) {
         $(`.${destination}`).html(src);
