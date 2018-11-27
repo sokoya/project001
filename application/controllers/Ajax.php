@@ -86,7 +86,8 @@ class Ajax extends CI_Controller
 		}
 	}
 
- 	// Remove product from whichlist
+	// Favourite and Unfavourite A Product
+
 	function favourite(){
 		if ($this->input->is_ajax_request() && $this->input->post()) {
 			$pid = $this->input->post('id');
@@ -105,10 +106,8 @@ class Ajax extends CI_Controller
 			$results  = array();
 			$desc = $this->product->get_quick_view_details($pid);
 			$now = date_create(date("Y-m-d"));
-
 			$results['description'] = character_limiter($desc->product_description, 278);
 			$results['seller'] = $desc->seller_id;
-
 			$variation = $this->product->get_variation( $pid );
 			$results['default_vid'] = $variation->id;
 			$results['default_vname'] = $variation->variation;
