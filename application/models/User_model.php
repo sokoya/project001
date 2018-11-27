@@ -148,14 +148,14 @@ Class User_model extends CI_Model{
         if( $result ){
             $this->db->where('id', $result->id);
             if( $this->db->delete('favourite') ){
-                return array('status' => 'success' , 'msg' => 'The product has been removed from your wishlist');
+                return array('status' => 'success' , 'action' => 'remove', 'msg' => 'The product has been removed from your wishlist');
             }else{
                 return array('status' => 'error', 'msg' => 'There was an error removing the product from your wishlist');
             } 
         }else{
             $data = array('uid' => $uid, 'product_id' => $pid, 'date_saved' => get_now());
             if( $this->create_account($data, 'favourite') ){
-                return array('status' => 'success', 'msg' => 'The product has been added to your wishlist');
+                return array('status' => 'success', 'action' => 'save', 'msg' => 'The product has been added to your wishlist');
             }else{
                 return array('status' => 'error', 'msg' => 'There was an error adding the product to your wishlist');
             }

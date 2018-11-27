@@ -24,6 +24,7 @@ class Pages extends MY_Controller {
         $this->load->view('landing/privacy', $page_data);
     }
 
+
     public function agreement(){
         $page_data['page'] = 'agreement';
         $page_data['title'] = "Registration Agreement";
