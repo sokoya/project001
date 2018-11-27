@@ -123,9 +123,9 @@
             <div class="col-md-12">
                 <p class="copyright-text">&copy; 2017 - <?= date('Y'); ?> <a
                             href="<?= lang('domain'); ?>"><?= lang('app_name'); ?></a> All rights reserved</p>
-                <p class="text-sm"><a href="<?= base_url('terms'); ?>">Terms of Use</a> | <a
-                            href="<?= base_url('terms/agreement'); ?>">Agreement</a> | <a
-                            href="<?= base_url('terms/privacy'); ?>">Privacy Policy</a> | <a href="#">Site
+                <p class="text-sm"><a href="<?= base_url('pages'); ?>">Terms of Use</a> | <a
+                            href="<?= base_url('pages/agreement'); ?>">Agreement</a> | <a
+                            href="<?= base_url('pages/privacy'); ?>">Privacy Policy</a> | <a href="#">Site
                         Map </a> | <a href="#">Switch View</a></p>
             </div>
         </div>
