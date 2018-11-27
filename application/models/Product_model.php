@@ -102,7 +102,7 @@ Class Product_model extends CI_Model{
         if( empty( $check1 ) || $qty > $check1->quantity ){
             return array('status' => 'error', 'msg' => 'The product variation quantity you selected is not available.' . $check1->quantity . ' item remaining' );
         }
-        $query = "SELECT p.seller_id, p.product_name, v.discount_price, v.sale_price FROM products p INNER JOIN product_variation v ON (v.id = {$vid} AND v.product_id = p.id) WHERE id = {$pid} AND product_status = 'approved' ";
+        $query = "SELECT p.seller_id, p.product_name, v.discount_price, v.sale_price FROM products p INNER JOIN product_variation v ON (v.id = {$vid} AND v.product_id = p.id) WHERE p.id = {$pid} AND p.product_status = 'approved' ";
         $result = $this->db->query( $query )->row();
         if( !empty($result) ){
             return array('status' => 'success', 'msg' => $result);
