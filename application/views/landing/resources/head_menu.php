@@ -8,24 +8,24 @@
                         <?php
                         $categories = $this->db->query("SELECT * FROM categories WHERE pid = 0")->result();                        
                         foreach($categories as $category ): ?>
-                        <li><a href="<?=  base_url('catalog/' . $category->slug ) ; ?>" title="<?= $category->name;?>"><i class="fa fa-<?=$category->icon;?> dropdown-menu-category-icon"></i><?= $category->name; ?></a>
+                        <li><a href="<?=  base_url('catalog/' . $category->slug .'/' ) ; ?>" title="<?= $category->name;?>"><i class="fa <?=$category->icon;?> dropdown-menu-category-icon"></i><?= $category->name; ?></a>
                             <div class="dropdown-menu-category-section">
                                 <div class="dropdown-menu-category-section-inner">
                                     <div class="dropdown-menu-category-section-content">
                                         <div class="row">
                                             <?php                                                
-                                                $main_category = $this->db->query("SELECT * FROM categories WHERE pid = ? LIMIT 6", $category->id)->result();
+                                                $main_category = $this->db->query("SELECT * FROM categories WHERE pid = ?", $category->id)->result();
                                                 if( $main_category ):
                                                 foreach( $main_category as $cat ) :
                                             ?>
                                             <div class="col-md-6">
-                                                <h5 class="custom-menu-category-drop"><a href="<?= base_url('catalog/' . $cat->slug); ?>"><?= $cat->name; ?></a></h5>
+                                                <h5 class="custom-menu-category-drop"><a href="<?= base_url('catalog/' . $cat->slug .'/' ); ?>"><?= $cat->name; ?></a></h5>
                                                 <ul class="dropdown-menu-category-list">
                                                     <?php                                                        
                                                         $sub_category = $this->db->query("SELECT * FROM categories WHERE pid = ? LIMIT 10 ", array($cat->id))->result();
                                                         if( $sub_category ): 
                                                             foreach($sub_category as $sub ) : ?>
-                                                            <li><a href="<?= base_url('catalog/' . $sub->slug); ?>" title="<?= $sub->name; ?>"><?= $sub->name; ?></a></li>
+                                                            <li><a href="<?= base_url('catalog/' . $sub->slug .'/' ); ?>" title="<?= $sub->name; ?>"><?= $sub->name; ?></a></li>
                                                     <?php endforeach; endif; ?>
                                                 </ul>
                                             </div>

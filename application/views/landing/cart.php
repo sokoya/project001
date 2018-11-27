@@ -7,7 +7,7 @@
 	<?php $this->load->view('landing/resources/head_menu') ?>
 
 	<div class="container">
-		<?php if (!empty($this->cart->contents())) : ?>
+		<?php $cart_contents = $this->cart->contents(); if (!empty( $cart_contents )) : ?>
 			<header class="page-header">
 				<h1 class="page-title">Cart Overview</h1>
 			</header>
@@ -55,6 +55,10 @@
 									<td colspan="4">
 										<span class="text-center text-semibold text-danger"><strong>This product variation is out of stock. or no longer available.</strong></span>
 									</td>
+                                <?php elseif( in_array($detail->is_seller, array('suspended', 'blocked', 'pending')) ) : ?>
+                                    <td colspan="4">
+                                        <span class="text-center text-semibold text-danger"><strong>The seller of this product is not available at the moment.</strong></span>
+                                    </td>
 								<?php else: ?>
 									<td>
 										<?= !empty($product['options']['variation']) ? ucfirst($product['options']['variation']) : '-'; ?>

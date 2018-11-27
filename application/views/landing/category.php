@@ -242,9 +242,9 @@
 													</button>
 												</div>
 											</div>
-											<img class="product-img lazyload"
-												 data-src="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
-												 src="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
+											<img class="product-img lazy"
+												 data-src="https://res.cloudinary.com/de9lpikx3/image/upload/<?= $product->image_name; ?>"
+												 src="https://res.cloudinary.com/de9lpikx3/image/upload/<?= $product->image_name; ?>"
 												 alt="<?= $product->product_name; ?>"
 												 title="<?= $product->product_name; ?>">
 										</div>
@@ -332,17 +332,29 @@
 <script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/ionrangeslider.js'); ?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script async="" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.0.2/lazysizes.min.js"
-		type="a739b84b843135395b0102d2-text/javascript"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
-	if (!base_url) {
-		let base_url = "<?= base_url(); ?>";
-	}
+	if (!base_url) { let base_url = "<?= base_url(); ?>";}
 	let current_url = "<?= current_url()?>";
 </script>
 <script src="<?= base_url('assets/landing/js/quick-view.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
 <script>
+    $(function() {
+
+        $('.lazy').Lazy({
+
+            scrollDirection: 'vertical',
+            effect: 'fadeIn',
+            visibleOnly: true,
+            beforeLoad: function(element) {
+                console.log('Before loading ' + element.data('src'));
+            },
+            onError: function(element) {
+                console.log('error loading ' + element.data('src'));
+            }
+        });
+    });
 	$("#price-slider").ionRangeSlider({
 		min: 1000,
 		max: 50000,

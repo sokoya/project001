@@ -26,4 +26,11 @@ class Terms extends MY_Controller {
         $this->load->view('landing/privacy', $page_data);
     }
 
+    public function agreement(){
+        $page_data['page'] = 'agreement';
+        $page_data['title'] = "Registration Agreement";
+        $page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')) );
+        $this->load->view('landing/agreement', $page_data);
+    }
+
 }

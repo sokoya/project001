@@ -9,7 +9,8 @@ class Login extends MY_Controller{
         
         if( $this->session->userdata('logged_in') ){
             // Ursher the person to where he is coming from
-            if( !empty($this->session->userdata('referred_from')) ) redirect($this->session->userdata('referred_from'));
+            $from = $this->session->userdata('referred_from');
+            if( !empty($from) ) redirect($from);
             redirect(base_url());
         }
     }
@@ -50,10 +51,11 @@ class Login extends MY_Controller{
                     // Check if the user already have some products in the cart, and going to checkout
                     // Perform every other actions necessary
                     // die( $user->id);
-                    $session_data = array('logged_in' => true, 'logged_id' => base64_encode($user->id), 'is_seller' => $user->is_seller, 'email' => $this->input->post('loginemail'));
+                    $session_data = array('logged_in' => true, 'logged_id' => $user->id, 'is_seller' => $user->is_seller, 'email' => $this->input->post('loginemail'));
                     $this->session->set_userdata($session_data);
                     $this->session->set_flashdata('success_msg','You are now logged in!');
-                    ( !empty($this->session->userdata('referred_from')) ) ? redirect($this->session->userdata('referred_from')) : redirect(base_url());
+                    $from = $this->session->userdata('referred_from');
+                    ( !empty($from) ) ? redirect($from) : redirect(base_url());
                 }
             }
         }

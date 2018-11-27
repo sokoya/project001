@@ -28,7 +28,9 @@ function notification_message(msg, icon = 'fa fa-info-circle', notification_type
 	$(".mobile-notification").delay(5000).fadeOut();
 }
 
-
+/*
+*Higligt the searched text on the result
+*/
 function highlight(hay, pin) {
 	let b = hay;
 	let q = pin;
@@ -40,6 +42,7 @@ function highlight(hay, pin) {
 }
 
 //format currency
+// and prepend the Naira sign
 function format_currency(str) {
 	return '₦ ' + str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
 }
@@ -60,6 +63,7 @@ $('body').on('click', function () {
 	$('.options').hide();
 	$('.mobile-search-dropdown').hide();
 });
+
 $('.mobile-toggle').on('click', function (e) {
 	e.stopPropagation();
 	$('.mobile-navbar').toggle();
@@ -76,6 +80,8 @@ $('.account-dropdown').on('click', function (e) {
 $('.options').on('click', function (e) {
 	e.stopPropagation();
 });
+
+
 
 $('.search-input').on('input', function () {
 	let append_location = $('.mobile-search-append');

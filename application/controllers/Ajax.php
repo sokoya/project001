@@ -56,15 +56,13 @@ class Ajax extends CI_Controller
 		if ($this->input->is_ajax_request() && $this->input->post()) {
 			$search = cleanit($this->input->post('search'));
 			$category = $this->input->post('category');
-
 			$output = array();
-
             if( empty($category) ) {
                 $results = $this->product->search_query_categories( $search );
                 $x = 0;
                 foreach( $results as $result ){
                     $output['categories'][$x]['name'] = $result->name;
-                    $output['categories'][$x]['url'] = base_url('catalog/') . $result->slug;
+                    $output['categories'][$x]['url'] = base_url('catalog/') . $result->slug .'/?q='. $search;
                     $output['categories'][$x]['total_count'] = $result->total_count;
                     $x++;
                 }
@@ -88,33 +86,12 @@ class Ajax extends CI_Controller
 		}
 	}
 
- 	// Single product favourite
-	function fav(){
-		// function favourite( $uid, $pid, $action, $table_name = 'favourite', $fid='' ){
-		if (!$this->session->userdata('logged_in') || !$this->input->is_ajax_request() || !$this->input->post()) redirect(base_url());
-
-		if ($this->user->favourite(base64_decode($this->session->userdata('logged_id')), base64_decode($this->input->post('pid')),
-			$this->input->post('action'))) {
-			echo true;
-			exit;
-		} else {
-			echo false;
-			exit;
-		}
-	}
-
-	// Remove product from whichlist
-	function remove_whichlist()
-	{
+ 	// Remove product from whichlist
+	function favourite(){
 		if ($this->input->is_ajax_request() && $this->input->post()) {
-			$id = $this->input->post('id');
-			if ($this->user->favourite('', '', '', 'favourite', $id)) {
-				echo json_encode(array('status' => 'success', 'message' => 'The product has been removed from your whichlist'));
-				exit;
-			} else {
-				echo json_encode(array('status' => 'error', 'message' => 'There was an error removing the product from your whichlist.'));
-				exit;
-			}
+			$pid = $this->input->post('id');
+			$return = $this->user->favourite_action( $pid );
+			echo json_decode( $return );
 		} else {
 			redirect(base_url());
 		}
@@ -323,7 +300,6 @@ class Ajax extends CI_Controller
             exit;
         }
     }
-
 
     /**
      * @param $product_id - product id
