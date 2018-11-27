@@ -166,9 +166,12 @@
 							</div>
 						<?php endif; ?>
 						<!-- Features -->
-						<?php if($features ) : ?>
+						<?php if ($features) : ?>
 							<div class="category-filters-section">
-								<?php $x = 1; foreach ($features as $feature => $feature_value) : ?>
+								<?php $x = 1;
+								foreach ($features
+
+								as $feature => $feature_value) : ?>
 								<div class="accordion" id="<?= trim($feature); ?>">
 									<div class="panel no-outline feature-attribute">
 										<div class="panel-header feature-attribute">
@@ -244,7 +247,7 @@
 											</div>
 											<img class="product-img lazy"
 												 data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
-												 src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
+												 src="<?= base_url('assets/landing/img/load.gif'); ?>"
 												 alt="<?= $product->product_name; ?>"
 												 title="<?= $product->product_name; ?>">
 										</div>
@@ -312,7 +315,7 @@
 								</div>
 							<?php endforeach; ?>
 						</div>
-						
+
 						<div class="row">
 							<div class="col-md-6 col-md-offset-3">
 								<?= $pagination ?>
@@ -332,29 +335,28 @@
 <script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/ionrangeslider.js'); ?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
-	if (!base_url) { let base_url = "<?= base_url(); ?>";}
+	if (!base_url) {
+		let base_url = "<?= base_url(); ?>";
+	}
 	let current_url = "<?= current_url()?>";
 </script>
 <script src="<?= base_url('assets/landing/js/quick-view.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
 <script>
-    $(function() {
-
-        $('.lazy').Lazy({
-
-            scrollDirection: 'vertical',
-            effect: 'fadeIn',
-            visibleOnly: true,
-            beforeLoad: function(element) {
-                console.log('Before loading ' + element.data('src'));
-            },
-            onError: function(element) {
-                console.log('error loading ' + element.data('src'));
-            }
-        });
-    });
+	$(function () {
+		$('.lazy').Lazy({
+			scrollDirection: 'vertical',
+			effect: 'fadeIn',
+			visibleOnly: true,
+			beforeLoad: function (element) {
+			},
+			onError: function (element) {
+			}
+		});
+	});
 	$("#price-slider").ionRangeSlider({
 		min: 1000,
 		max: 50000,
