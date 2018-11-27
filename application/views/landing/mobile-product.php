@@ -370,7 +370,16 @@
 		<button class="btn btn-block buy-btn submit-cart">
 			Add to Cart
 		</button>
-		<p class="wishlist-cta">Save to Wishlist</p>
+		<?php if ($this->session->userdata('logged_in')) : ?>
+			<?php if (!$favourite): ?>
+				<p class="wishlist-cta">Save to Wishlist</p>
+			<?php else: ?>
+				<p class="wishlist-cta">Remove from Wishlist</p>
+			<?php endif; ?>
+		<?php else: ?>
+			<a href="<?= base_url('login') ?>"><p class="wishlist-cta">Save to Wishlist</p></a>
+		<?php endif; ?>
+
 	</div>
 	<?= form_close(); ?>
 </div>

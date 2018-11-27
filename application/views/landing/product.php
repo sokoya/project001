@@ -177,7 +177,7 @@
 									<!-- <?php
 									$category_fav = 'category-favorite';
 									if ($this->session->userdata('logged_in')) :
-										if ($favourited) :
+										if ($favourite) :
 											?>
 										<span class="pull-right"><a href="javascript:void(0)" data-action="unsave" data-pid="<?= base64_encode($product->id) ?>"><i class="fa fa-heart" title="Remove <?= $product->product_name; ?> from your whishlist"></i></a>
 										</span>
