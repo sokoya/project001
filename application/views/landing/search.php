@@ -235,14 +235,14 @@
 															data-pr_id="<?= $product->id ?>"
 															data-qv="<?php if ($p_count % 4 == 0) { ?>true<?php } ?>"
 															data-qvc="<?php echo $p_count ?>"
-															data-image="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
+															data-image="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
 															class="btn btn-primary product-quick-view-btn">Quick view
 													</button>
 												</div>
 											</div>
 											<img class="product-img lazyload"
-												 data-src="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
-												 src="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
+												 data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
+                                                 src="<?= base_url('assets/landing/img/load.gif'); ?>"
 												 alt="<?= $product->product_name; ?>"
 												 title="<?= $product->product_name; ?>">
 										</div>
@@ -336,7 +336,11 @@
 </script>
 <script src="<?= base_url('assets/landing/js/quick-view.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
+    $(function() {
+        $('.lazy').Lazy();
+    });
 	$("#price-slider").ionRangeSlider({
 		min: 1000,
 		max: 50000,
