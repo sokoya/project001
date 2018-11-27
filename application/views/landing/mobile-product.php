@@ -244,7 +244,7 @@
 		<div class="container">
             <div class="owl-carousel products-gallery">
                 <?php foreach( $galleries as $gallery ) :?>
-                    <img class="product-image lazy" src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name;  ?> " alt="<?= $product->product_name; ?>"/>
+                    <img class="product-image lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name;  ?> " alt="<?= $product->product_name; ?>"/>
                 <?php endforeach; ?>
 			</div>
 		</div>
@@ -408,7 +408,7 @@
 			<p class="block-title">Delivery Information</p>
 			<div class="row">
 				<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-					<img src="<?= base_url('assets/landing/svg/delivery-truck.svg'); ?>" alt="Delivery Truck"
+					<img src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= base_url('assets/landing/svg/delivery-truck.svg'); ?>" alt="Delivery Truck"
 						 style="height: 30px; width: 35px;">
 				</div>
 				<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -418,7 +418,7 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-					<img src="<?= base_url('assets/landing/svg/return.svg'); ?>" alt="Delivery Truck"
+					<img src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= base_url('assets/landing/svg/return.svg'); ?>" alt="Delivery Truck"
 						 style="height: 30px; width: 35px;">
 				</div>
 				<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -427,7 +427,7 @@
 			</div>
 			<div class="row" style="margin-top: 14px;">
 				<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-					<img src="<?= base_url('assets/landing/svg/warranty.svg'); ?>" alt="Warranty"
+					<img src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= base_url('assets/landing/svg/warranty.svg'); ?>" alt="Warranty"
 						 style="height: 30px; width: 35px;">
 				</div>
 				<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -579,7 +579,7 @@
 			<div class="owl-carousel suggested-products">
                 <?php foreach($likes as $like) : ?>
 				<a style="text-decoration: none" href="<?= base_url(urlify($like->product_name, $like->id)); ?>">
-					<img class="suggested-image" src="<?= PRODUCTS_IMAGE_PATH.$like->image_name; ?> "/>
+					<img class="suggested-image" src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= PRODUCTS_IMAGE_PATH.$like->image_name; ?> "/>
 					<p class="suggested-image-text"><?= character_limiter($like->product_name, 15); ?></p>
 				</a>
                 <?php endforeach; ?>
@@ -598,7 +598,11 @@
 <script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/mobile.js'); ?>"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
+    $(function() {
+        $('.lazy').Lazy();
+    });
 	// owl carousel initialization
 	$(document).ready(function () {
 		$('.close-panel').on('click', function () {
@@ -731,12 +735,8 @@
 	$('.submit-cart').on('click', function (e) {
 		e.preventDefault();
 		let quantity_instance = quantity.val();
-		let price = $('.pr_price_hidden').val();
 		let variation_id = selected_variation_id;
-		let variation_name = selected_variation_name;
-		let seller_id = $('.seller_id').val();
 		let product_id = $('.product_id').val();
-		let product_name = $('.product_name').val();
 		let truncated_product_name = $('.truncated_product_name').val();
 
 		$.ajax({

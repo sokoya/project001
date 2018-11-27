@@ -567,9 +567,9 @@
 								</ul>
 							<?php endif; ?>
 							<div class="product-img-wrap">
-								<img class="product-img"
+								<img class="product-img lazy"
 									 data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?>"
-									 src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?>"
+									 src="<?= base_url('assets/landing/img/load.gif'); ?>"
 									 alt="<?= $like->product_name; ?>"
 									 title="<?= $like->product_name; ?>">
 							</div>
