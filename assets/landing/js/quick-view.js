@@ -160,12 +160,8 @@ function get_view() {
 		</div>`);
 
 			$('.add-to-cart').on('click', function () {
-
 				let quantity_available = $(`#${pr_id}`).val();
-				let price_ = $('.q_pr_price').data('amount');
 				let vid = $(`#${pr_id}_submit`).data('vid');
-				let vname = $(`#${pr_id}_submit`).data('vname');
-				let seller = $(`#${pr_id}_submit`).data('seller');
 				$.ajax({
 					url: base_url + 'ajax/quick_view_add',
 					method: 'POST',
@@ -176,13 +172,13 @@ function get_view() {
 					},
 					success: response => {
 						$('.overview-tab').slideUp();
-						// $('.overview-tab').remove();
-						console.log(response);
-						notification_message(`${title} successfully added to cart`, 'fa fa-cart-plus', 'success');
-						$('.cart-read').show();
-						let x = $('.cart-read').text() * 1;
+						let parsed_response = JSON.parse(response);
+						notification_message(parsed_response.msg, 'fa fa-cart-plus', parsed_response.status);
+						let cart_instance = $('.cart-read');
+						cart_instance.show();
+						let x = cart_instance.text() * 1;
 						let y = quantity_available * 1;
-						$('.cart-read').text(x + y);
+						cart_instance.text(x + y);
 					},
 
 					error: () => {
