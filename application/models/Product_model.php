@@ -305,15 +305,12 @@ Class Product_model extends CI_Model{
                     }
                 }
             }
-
             if( $queries['is_limit'] == true ){
                 $select_query .=" AND p.product_status = 'approved' GROUP BY p.id LIMIT {$queries['offset']},{$queries['limit']} ";
             }else{
                 $select_query .=" AND p.product_status = 'approved' GROUP BY p.id";
-            }    
-            // die( $select_query );
+            }
             $products_query = $this->db->query( $select_query )->result();
-            // $this->db->cache_off();
             return $products_query;
         }else{
             return '';
@@ -346,13 +343,11 @@ Class Product_model extends CI_Model{
     // Get products brands
     function get_brands( $category = '', $search_like = ''){
         $select_query = "SELECT COUNT(*) AS `brand_count`, `brand_name` FROM `products` p ";
-
         if( $search_like != '' ){
             if( $category != '' ){
                 if( $this->check_slug_availability($category) ){
                     $array = $this->slug($category);
-                    $select_query .= " WHERE p.category_id IN ('".implode("','",$array)."') GROUP BY `brand_name` ORDER BY `brand_name` ";
-                    // die( $select_query);
+                    $select_query .= " WHERE category_id IN ('".implode("','",$array)."') GROUP BY `brand_name` ORDER BY `brand_name` ";
                     return $this->db->query( $select_query )->result();
                 }
             }else{
@@ -362,11 +357,10 @@ Class Product_model extends CI_Model{
         }else{
             if( $this->check_slug_availability($category)) {
                 $array = $this->slug($category);
-                $select_query .= " WHERE p.category_id IN ('".implode("','",$array)."') GROUP BY `brand_name` ORDER BY `brand_name` ";
+                $select_query .= " WHERE category_id IN ('".implode("','",$array)."') GROUP BY `brand_name` ORDER BY `brand_name` ";
                 return $this->db->query( $select_query )->result();
             }
         }
-        
         return '';
     }
 
@@ -377,17 +371,17 @@ Class Product_model extends CI_Model{
             if( $category != '' ){
                 if( $this->check_slug_availability( $category )) {
                     $array = $this->slug($category);
-                    $select_query .= " WHERE p.category_id IN ('".implode("','",$array)."') AND p.product_name LIKE '%{$search_like}%' GROUP BY p.`colour_name` ORDER BY p.`colour_name` ";
+                    $select_query .= " WHERE category_id IN ('".implode("','",$array)."') AND product_name LIKE '%{$search_like}%' GROUP BY `colour_name` ORDER BY `colour_name` ";
                     return $this->db->query( $select_query )->result();
                 }
             }else{
-                $select_query .= " WHERE p.product_name LIKE '%{$search_like}%' GROUP BY p.`colour_name` ORDER BY p.`colour_name` ";
+                $select_query .= " WHERE product_name LIKE '%{$search_like}%' GROUP BY `colour_name` ORDER BY `colour_name` ";
                 return $this->db->query( $select_query )->result();
             }
         }else{
             if( $this->check_slug_availability( $category )) {
                 $array = $this->slug($category);
-                $select_query .= " WHERE p.category_id IN ('".implode("','",$array)."') ";
+                $select_query .= " WHERE category_id IN ('".implode("','",$array)."') ";
                 return $this->db->query( $select_query )->result();
             }
         }

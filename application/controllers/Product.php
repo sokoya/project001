@@ -98,9 +98,11 @@ class Product extends MY_Controller
 		$array['is_limit'] = true;
 		$page_data['pagination'] = $this->pagination->create_links();
 		$page_data['products'] = $this->product->get_products($array, $this->input->get());
-		$page_data['brands'] = $this->product->get_brands($str);
-		$page_data['colours'] = $this->product->get_colours($str);
-		$page_data['sub_categories'] = $this->product->get_categories($str);
+		$query = $this->input->get('q');
+		$q = (isset( $query) && !empty( $query )) ? cleanit($query) : '';
+		$page_data['brands'] = $this->product->get_brands($str, $q);
+		$page_data['colours'] = $this->product->get_colours($str, $q);
+		$page_data['sub_categories'] = $this->product->get_categories($str, $q);
 		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
 		$page_data['category_detail'] = $this->product->category_details($str);
 		$page_data['description'] = $page_data['category_detail']->description;
