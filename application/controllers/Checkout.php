@@ -22,7 +22,7 @@ class Checkout extends MY_Controller
 	    $page_data['page'] = 'checkout';
 		$page_data['title'] = 'Checkout';
 		$this->load->model('user_model', 'user');
-		$page_data['user'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
+		$page_data['user'] = $this->user->get_profile($this->session->userdata('logged_id'));
 		$page_data['addresses'] = $this->user->get_user_billing_address($page_data['user']->id);
 		$page_data['pickups'] = $this->user->get_pickup_address();
 		$page_data['address_set'] = $this->user->is_address_set($page_data['user']->id);
@@ -70,7 +70,7 @@ class Checkout extends MY_Controller
 				'sid' => cleanit($this->input->post('state')),
 				'address' => cleanit($this->input->post('address')),
 				'aid' => cleanit($this->input->post('area')),
-				'uid' => base64_decode($this->session->userdata('logged_id'))
+				'uid' => $this->session->userdata('logged_id')
 			);
 			if (is_int($this->user->create_account($data, 'billing_address'))) {
 				$status['status'] = 'success';
@@ -89,7 +89,7 @@ class Checkout extends MY_Controller
 
 	function set_default_address(){
 		if (!$this->input->post()) redirect(base_url());
-		$uid = base64_decode($this->session->userdata('logged_id'));
+		$uid = $this->session->userdata('logged_id');
 		$address_id = cleanit($this->input->post('address_id'));
 		$price = $this->user->update_billing_address(array('uid' => $uid) , $address_id);
 		if( $price != false ) {
@@ -111,7 +111,7 @@ class Checkout extends MY_Controller
             $order_date = get_now();
             $order_status = 'ordered';
             $payment_method = 1;
-            $buyer_id = base64_decode($this->session->userdata('logged_id'));
+            $buyer_id = $this->session->userdata('logged_id');
             foreach( $this->cart->contents() as $product ){
                 $detail = $this->product->get_cart_details($product['id']);
                 $variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
@@ -150,8 +150,8 @@ class Checkout extends MY_Controller
 	public function order_completed(){
         $page_data['page'] = 'order_completed';
         $page_data['title'] = "Order Invoice";
-        $page_data['orders'] = $this->user->get_my_orders( base64_decode($this->session->userdata('logged_id')) );
-        $page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')) );
+        $page_data['orders'] = $this->user->get_my_orders($this->session->userdata('logged_id') );
+        $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
         $this->load->view('landing/order_completed', $page_data);
     }
 

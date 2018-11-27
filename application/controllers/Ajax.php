@@ -230,13 +230,13 @@ class Ajax extends CI_Controller
            // Added to make checks if product still remains
            $variation_id = $this->input->post('variation_id', true);
            $data = array(
-               'id' => base64_decode($this->input->post('product_id')),
+               'id' => $this->input->post('product_id'),
                'qty' => $this->input->post('quantity'),
                'price' => $this->input->post('product_price'),
                'name' => $name,
                'options' =>
                    array(
-                       'seller' => base64_decode($this->input->post('seller')),
+                       'seller' => $this->input->post('seller'),
                        'variation_id' => $variation_id
                    )
            );
