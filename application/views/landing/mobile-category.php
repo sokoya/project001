@@ -268,7 +268,7 @@
 									<ul class="product-labels"></ul>
 									<div class="product-img-wrap">
 										<img class="product-img"
-											 src="<?= base_url('data/products/' . $product->id . '/' . $product->image_name); ?>"
+											 src="<?= PRODUCTS_IMAGE_PATH .$product->image_name;  ?>"
 											 alt="<?= $product->product_name; ?>"
 											 title="<?= $product->product_name; ?>"/>
 									</div>
@@ -341,6 +341,9 @@
 	</script>
 	<script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
 	<script>
+        $(function() {
+            $('.lazy').Lazy();
+        });
 		$(document).ready(function () {
 			let _category_body = $('#category_body');
 

@@ -221,7 +221,7 @@
 		<p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find
 				product</a></p>
 	</div>
-<?php elseif (empty($product) || empty($var) || empty($gallery)): ?>
+<?php elseif (empty($product) || empty($var) || empty($galleries)): ?>
 	<div class="row">
 		<div class="gap-large"></div>
 		<h2 class="text-center">Oops! The product you looking does not exist.</h2>
@@ -242,12 +242,10 @@
 	<!--Gallery section-->
 	<div class="custom-card">
 		<div class="container">
-			<div class="owl-carousel products-gallery">
-				<img class="product-image" src="<?= base_url('assets/landing/img/test_slider/1.png'); ?> "/>
-				<img class="product-image" src="<?= base_url('assets/landing/img/test_slider/1.png'); ?> "/>
-				<img class="product-image" src="<?= base_url('assets/landing/img/test_slider/1.png'); ?> "/>
-				<img class="product-image" src="<?= base_url('assets/landing/img/test_slider/1.png'); ?> "/>
-				<img class="product-image" src="<?= base_url('assets/landing/img/test_slider/1.png'); ?> "/>
+            <div class="owl-carousel products-gallery">
+                <?php foreach( $galleries as $gallery ) :?>
+                    <img class="product-image lazy" src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name;  ?> " alt="<?= $product->product_name; ?>"/>
+                <?php endforeach; ?>
 			</div>
 		</div>
 	</div>
@@ -574,32 +572,21 @@
 		<button class="btn btn-block rating-btn">View all reviews</button>
 	</div>
 	<!--Section Title [Suggested Products]-->
+    <?php if( count($likes)) :?>
 	<div class="container" style="margin-bottom: 5px;"><p class="text-break" style="">You might also like</p></div>
-
 	<div class="custom-card">
 		<div class="">
 			<div class="owl-carousel suggested-products">
-				<a style="text-decoration: none" href="#">
-					<img class="suggested-image" src="<?= base_url('assets/landing/img/test_slider/13.png'); ?> "/>
-					<p class="suggested-image-text">Ps3 Game Console - Black</p>
+                <?php foreach($likes as $like) : ?>
+				<a style="text-decoration: none" href="<?= base_url(urlify($like->product_name, $like->id)); ?>">
+					<img class="suggested-image" src="<?= PRODUCTS_IMAGE_PATH.$like->image_name; ?> "/>
+					<p class="suggested-image-text"><?= character_limiter($like->product_name, 15); ?></p>
 				</a>
-				<a style="text-decoration: none" href="#">
-					<img class="suggested-image" src="<?= base_url('assets/landing/img/test_slider/14.png'); ?> "/>
-					<p class="suggested-image-text">Nokia Lumia 870 Premium</p></a>
-				<a style="text-decoration: none" href="#">
-					<img class="suggested-image" src="<?= base_url('assets/landing/img/test_slider/15.png'); ?> "/>
-					<p class="suggested-image-text">Mk Vamps Tripple Set Bass Beat</p></a>
-				<a style="text-decoration: none" href="#">
-					<img class="suggested-image"
-						 src="<?= base_url('assets/landing/img/test_product/cameras/1.jpg'); ?> "/>
-					<p class="suggested-image-text">Ultra Hd Stage Cameras</p></a></a>
-				<a style="text-decoration: none" href="#">
-					<img class="suggested-image"
-						 src="<?= base_url('assets/landing/img/test_product/laptops/1.jpg'); ?> "/>
-					<p class="suggested-image-text">Hp Nexus 3000 Laptop - Intel Core i3</p></a></a>
+                <?php endforeach; ?>
 			</div>
 		</div>
 	</div>
+    <?php endif; ?>
 
 <?php endif; ?>
 
