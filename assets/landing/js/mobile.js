@@ -1,3 +1,4 @@
+
 /*
 * Notification message
 * Notification types : ['success', 'error', 'warning']
@@ -80,7 +81,6 @@ $('.account-dropdown').on('click', function (e) {
 $('.options').on('click', function (e) {
 	e.stopPropagation();
 });
-
 
 
 $('.search-input').on('input', function () {

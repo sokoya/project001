@@ -62,7 +62,7 @@
 		margin: 0 auto;
 	}
 
-	.navbar-toggle {
+	.navbar-toggle, .mobile-nav-logo {
 		z-index: 3;
 	}
 
@@ -308,7 +308,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<img class="mobile-nav-logo" src="<?= base_url('assets/landing/img/newlogo.png'); ?>"/>
+				<a href="<?= base_url() ?>" style="float: left"> <img class="mobile-nav-logo" src="<?= base_url('assets/landing/img/newlogo.png'); ?>"/></a>
 			</div>
 		</div>
 		<div class="navbar-util">

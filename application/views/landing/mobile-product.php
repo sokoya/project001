@@ -147,6 +147,11 @@
 		height: 260px;
 	}
 
+	.suggested-image {
+		width: 200px;
+		height: 260px;
+	}
+
 	.text-break {
 		margin-bottom: -6px;
 		padding-top: 8px;
@@ -189,6 +194,7 @@
 		background: #468c46;
 		color: #fff;
 		padding: 13px;
+		border-radius: 0;
 	}
 </style>
 </head>
@@ -224,7 +230,7 @@
 <!--Gallery section-->
 <div class="custom-card">
 	<div class="container">
-		<div class="owl-carousel">
+		<div class="owl-carousel products-gallery">
 			<img class="product-image" src="<?= base_url('assets/landing/img/test_slider/1.png'); ?> "/>
 			<img class="product-image" src="<?= base_url('assets/landing/img/test_slider/1.png'); ?> "/>
 			<img class="product-image" src="<?= base_url('assets/landing/img/test_slider/1.png'); ?> "/>
@@ -554,6 +560,22 @@
 		</div>
 	</div>
 	<button class="btn btn-block rating-btn">View all reviews</button>
+	</div>
+	<!--Section Title [Suggested Products]-->
+	<div class="container" style="margin-bottom: 5px;"><p class="text-break" style="">You might also like</p></div>
+
+	<div class="custom-card">
+		<div class="">
+			<div class="owl-carousel suggested-products">
+				<img class="suggested-image" src="<?= base_url('assets/landing/img/test_slider/13.png'); ?> "/>
+				<img class="suggested-image" src="<?= base_url('assets/landing/img/test_slider/14.png'); ?> "/>
+				<img class="suggested-image" src="<?= base_url('assets/landing/img/test_slider/15.png'); ?> "/>
+				<img class="suggested-image" src="<?= base_url('assets/landing/img/test_slider/16.png'); ?> "/>
+				<img class="suggested-image" src="<?= base_url('assets/landing/img/test_slider/7.png'); ?> "/>
+			</div>
+		</div>
+	</div>
+
 	<?php endif; ?>
 
 	<!--Scripts-->
@@ -578,10 +600,21 @@
 
 			});
 
-			$(".owl-carousel").owlCarousel({
+			$(".products-gallery").owlCarousel({
 				items: 1,
 				lazyLoad: true,
 				loop: true,
+			});
+
+			$(".suggested-products").owlCarousel({
+				loop: true,
+				center: true,
+				items: 2,
+				lazyLoad: true,
+				margin:20,
+				autoplay:true,
+				autoplayTimeout:3000,
+				autoplayHoverPause:true
 			});
 		});
 

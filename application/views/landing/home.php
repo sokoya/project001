@@ -9,10 +9,14 @@
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
 
-	<?php $this->load->view('landing/resources/head_img') ?>
-	<?php $this->load->view('landing/resources/head_category') ?>
+	<?php if ($this->agent->is_mobile()) : ?>
+		<?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
+	<?php else: ?>
+		<?php $this->load->view('landing/resources/head_img') ?>
+		<?php $this->load->view('landing/resources/head_category') ?>
 
-	<?php $this->load->view('landing/resources/head_menu') ?>
+		<?php $this->load->view('landing/resources/head_menu') ?>
+	<?php endif; ?>
 
 	<div class="owl-carousel owl-loaded owl-nav-dots-inner" data-options='{"items":1,"loop":true}'>
 		<div class="owl-item">
@@ -631,12 +635,16 @@
 	</div>
 	<div class="gap"></div>
 
-	<?php $this->load->view('landing/resources/footer'); ?>
+	<?php if ($this->agent->is_mobile()) : ?>
+		<?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
+	<?php else: ?>
+		<?php $this->load->view('landing/resources/footer'); ?>
+		<?php $this->load->view('landing/resources/script'); ?>
+	<?php endif; ?>
 
 </div>
-<?php $this->load->view('landing/resources/script'); ?>
-<script>
-	// notification_message('This is a test message', 'fa fa-info-circle', 'success');
-</script>
+<?php if ($this->agent->is_mobile()) : ?>
+	<script src="<?= base_url('assets/landing/js/mobile.js'); ?>"></script>
+<?php endif; ?>
 </body>
 </html>
