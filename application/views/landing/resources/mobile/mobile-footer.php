@@ -1,5 +1,5 @@
 <?php
-$profile = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
+$profile = $this->user->get_profile($this->session->userdata('logged_id'));
 ?>
 <div class="copyright-area text-center">
 	<div class="container">
