@@ -8,7 +8,7 @@ function ucwords(str) {
 }
 
 /*
-* Src :  The Element you want to achieve
+* Src :  The Element you want to get
 * destination in class
 * */
 function bind_market(src, destination) {

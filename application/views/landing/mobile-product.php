@@ -88,6 +88,11 @@
 		text-align: center;
 	}
 
+	.option-selected {
+		outline: 1px solid #0b6427;
+		color: #0b6427;
+	}
+
 	.option-disabled {
 		color: #bebebe;
 		text-decoration: line-through;
@@ -205,272 +210,281 @@
 				product</a></p>
 	</div>
 <?php else : ?>
-	<!--Top menu back button-->
-	<div class="custom-card">
-		<div class="container">
-			<a style="text-decoration: none;" href="<?= base_url('catalog/' . $category_detail->slug); ?>"><p
-					class="margin-0"><img src="<?= base_url('assets/landing/svg/back.svg'); ?>" alt="Back button"
-										  style="height: 14px; width: 14px; margin-right: 8px;"><span
-						class="redirect-text">Go back to <?= ucwords($category_detail->name); ?></span>
-				</p></a>
+<!--Top menu back button-->
+<div class="custom-card">
+	<div class="container">
+		<a style="text-decoration: none;" href="<?= base_url('catalog/' . $category_detail->slug); ?>"><p
+				class="margin-0"><img src="<?= base_url('assets/landing/svg/back.svg'); ?>" alt="Back button"
+									  style="height: 14px; width: 14px; margin-right: 8px;"><span
+					class="redirect-text">Go back to <?= ucwords($category_detail->name); ?></span>
+			</p></a>
+	</div>
+</div>
+<!--Gallery section-->
+<div class="custom-card">
+	<div class="container">
+		<div class="owl-carousel">
+			<img class="product-image" src="<?= base_url('assets/landing/img/test_slider/1.png'); ?> "/>
+			<img class="product-image" src="<?= base_url('assets/landing/img/test_slider/1.png'); ?> "/>
+			<img class="product-image" src="<?= base_url('assets/landing/img/test_slider/1.png'); ?> "/>
+			<img class="product-image" src="<?= base_url('assets/landing/img/test_slider/1.png'); ?> "/>
+			<img class="product-image" src="<?= base_url('assets/landing/img/test_slider/1.png'); ?> "/>
 		</div>
 	</div>
-	<!--Gallery section-->
-	<div class="custom-card">
-		<div class="container">
-			<div class="owl-carousel">
-				<img class="product-image" src="<?= base_url('assets/landing/img/test_slider/1.png'); ?> "/>
-				<img class="product-image" src="<?= base_url('assets/landing/img/test_slider/1.png'); ?> "/>
-				<img class="product-image" src="<?= base_url('assets/landing/img/test_slider/1.png'); ?> "/>
-				<img class="product-image" src="<?= base_url('assets/landing/img/test_slider/1.png'); ?> "/>
-				<img class="product-image" src="<?= base_url('assets/landing/img/test_slider/1.png'); ?> "/>
-			</div>
-		</div>
-	</div>
+</div>
 
-	<!--Main Description card-->
-	<div class="custom-card">
-		<div class="container">
-			<p class="seller-name"><?= ucwords($product->first_name . ' ' . $product->last_name); ?></p>
-			<p class="product-name"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></p>
-			<div style="margin-top: 4px; margin-left: 2px">
+<!--Main Description card-->
+<div class="custom-card">
+	<div class="container">
+		<p class="seller-name"><?= ucwords($product->first_name . ' ' . $product->last_name); ?></p>
+		<p class="product-name"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></p>
+		<div style="margin-top: 4px; margin-left: 2px">
 
+			<?php
+			if ($rating_counts) {
+				$overall_rating = product_overall_rating($rating_counts);
+			}
+			?>
+			<span class="rating-count"><?= isset($overall_rating) ? $overall_rating : ''; ?></span>
+			<ul style="display: inline-block" class="product-caption-rating">
 				<?php
 				if ($rating_counts) {
 					$overall_rating = product_overall_rating($rating_counts);
-				}
-				?>
-				<span class="rating-count"><?= isset($overall_rating) ? $overall_rating : ''; ?></span>
-				<ul style="display: inline-block" class="product-caption-rating">
-					<?php
-					if ($rating_counts) {
-						$overall_rating = product_overall_rating($rating_counts);
-						$rating_rounded = round($overall_rating);
-						for ($i = 1; $i <= $rating_rounded; $i++) {
-							?>
-							<li class="rated"><i class="fa fa-star"></i>
-							</li>
+					$rating_rounded = round($overall_rating);
+					for ($i = 1; $i <= $rating_rounded; $i++) {
+						?>
+						<li class="rated"><i class="fa fa-star"></i>
+						</li>
+						<?php
+					}
+					if ($rating_rounded < 5) {
+						for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
+							<li><i class="fa fa-star"></i></li>
 							<?php
 						}
-						if ($rating_rounded < 5) {
-							for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
-								<li><i class="fa fa-star"></i></li>
-								<?php
-							}
-						}
-					} else { ?>
-						<li><i class="fa fa-star"></i></li>
-						<li><i class="fa fa-star"></i></li>
-						<li><i class="fa fa-star"></i></li>
-						<li><i class="fa fa-star"></i></li>
-						<li><i class="fa fa-star"></i></li>
-					<?php } ?>
-					<span style="margin-left: 5px; color: #0b6427;"
-						  class="rating-total-count"><?= !empty($rating_counts) ? ' (' . count($rating_counts) . ')' : 'O rating' ?></span>
+					}
+				} else { ?>
+					<li><i class="fa fa-star"></i></li>
+					<li><i class="fa fa-star"></i></li>
+					<li><i class="fa fa-star"></i></li>
+					<li><i class="fa fa-star"></i></li>
+					<li><i class="fa fa-star"></i></li>
+				<?php } ?>
+				<span style="margin-left: 5px; color: #0b6427;"
+					  class="rating-total-count"><?= !empty($rating_counts) ? ' (' . count($rating_counts) . ')' : 'O rating' ?></span>
+			</ul>
+		</div>
+		<?php if (!empty($var->discount_price)) : ?>
+			<p class="product-price"><?= ngn($var->discount_price); ?>
+				<span><?= get_discount($var->sale_price, $var->discount_price) ?></span></p>
+			<p class="product-discount-price"><?= ngn($var->sale_price); ?></p>
+		<?php else: ?>
+			<p class="product-price"><?= ngn($var->sale_price); ?></p>
+		<?php endif; ?>
+
+	</div>
+</div>
+
+<!--Buy Card-->
+<div class="custom-card" style="margin-top: 5px;">
+	<?= form_open('', 'id="cart-form"'); ?>
+	<div class="container">
+		<?php if (!empty($var->discount_price)) : ?>
+			<p class="block-title">Buy Now <span class="price-mini"><?= ngn($var->discount_price); ?></span></p>
+		<?php else: ?>
+			<p class="block-title">Buy Now <span class="price-mini"><?= ngn($var->sale_price); ?></span></p>
+		<?php endif; ?>
+		<div class="row">
+			<div class="col-md-7">
+				<p class="custom-product-page-option-title">Quantity:</p>
+				<ul>
+					<li class="product-page-qty-item">
+						<button type="button"
+								class="product-page-qty product-page-qty-minus">-
+						</button>
+						<input data-range="<?= $var->quantity ?>" name="quantity"
+							   id="quan"
+							   class="product-page-qty product-page-qty-input quantity"
+							   type="text"
+							   value="1" disabled/>
+						<button type="button"
+								class="product-page-qty product-page-qty-plus">+
+						</button>
+					</li>
 				</ul>
+
+				<input type="hidden" name="seller" class="seller_id"
+					   value="<?= $product->seller_id ?>">
+
+				<input type="hidden" name="product_id" class="product_id"
+					   value="<?= $product->id; ?>">
+
+				<input type="hidden" name="product_name" class="product_name" value="<?= $product->product_name ?>">
+				<input type="hidden" name="truncated_product_name" class="truncated_product_name"
+					   value="<?= character_limiter(ucwords($product->product_name), 50, '...'); ?>">
 			</div>
-			<?php if (!empty($var->discount_price)) : ?>
-				<p class="product-price"><?= ngn($var->discount_price); ?>
-					<span><?= get_discount($var->sale_price, $var->discount_price) ?></span></p>
-				<p class="product-discount-price"><?= ngn($var->sale_price); ?></p>
-			<?php else: ?>
-				<p class="product-price"><?= ngn($var->sale_price); ?></p>
-			<?php endif; ?>
 
 		</div>
-	</div>
 
-	<!--Buy Card-->
-	<div class="custom-card" style="margin-top: 5px;">
-		<div class="container">
-			<?php if (!empty($var->discount_price)) : ?>
-				<p class="block-title">Buy Now <span><?= ngn($var->discount_price); ?></span></p>
-			<?php else: ?>
-				<p class="block-title">Buy Now <span><?= ngn($var->sale_price); ?></span></p>
-			<?php endif; ?>
-			<div class="row">
-				<div class="col-md-7">
-					<p class="custom-product-page-option-title">Quantity:</p>
-					<ul>
-						<li class="product-page-qty-item">
-							<button type="button"
-									class="product-page-qty product-page-qty-minus">-
-							</button>
-							<input data-range="<?= $var->quantity ?>" name="quantity"
-								   id="quan"
-								   class="product-page-qty product-page-qty-input quantity"
-								   type="text"
-								   value="1"/>
-							<button type="button"
-									class="product-page-qty product-page-qty-plus">+
-							</button>
-						</li>
-					</ul>
-				</div>
-
-			</div>
-
-			<div class="row" style="margin-top: 10px;">
-				<?php if (count($variations) > 1) : ?>
-					<div class="col-xs-12">
-						<p class="custom-product-page-option-title">Variation: </p>
-						<div class="row variation-option-list">
-							<?php foreach ($variations as $variation) : ?>
-								<div class="col-xs-3"><p data-vid="<?= $variation['id']; ?>"
-														 class="variation-option <?php if ($variation['quantity'] < 1) echo 'option-disabled'; ?>"><?= ucfirst($variation['variation']); ?></p>
-								</div>
-							<?php endforeach; ?>
-						</div>
+		<div class="row" style="margin-top: 10px;">
+			<?php if (count($variations) > 1) : ?>
+				<div class="col-xs-12">
+					<p class="custom-product-page-option-title">Variation: </p>
+					<div class="row variation-option-list">
+						<?php foreach ($variations as $variation) : ?>
+							<div class="col-xs-3"><p data-vid="<?= $variation['id']; ?>"
+													 data-vname="<?= $variation['variation'] ?>"
+													 class="variation-option <?php if ($variation['quantity'] < 1) echo 'option-disabled'; ?>  <?php if ($variations[0]['id'] == $variation['id']) echo 'option-selected'; ?>"><?= ucfirst($variation['variation']); ?></p>
+							</div>
+						<?php endforeach; ?>
 					</div>
+				</div>
+				<input type="hidden" name="variation_id" class="variation_id"
+					   value="<?= $variations[0]['id']; ?>">
+				<input type="hidden" name="variation_name" class="variation_name"
+					   value="<?= $variations[0]['variation']; ?>">
+				<?php if ($variations[0]['discount_price'] != '') : ?>
+					<input type="hidden" name="product_price"
+						   value="<?= $variations[0]['discount_price']; ?>"
+						   class="pr_price_hidden"/>
 				<?php else: ?>
-					<input type="hidden" name="variation_id" value="<?= $var->id; ?>">
+					<input type="hidden" name="product_price"
+						   value="<?= $variations[0]['sale_price']; ?>"
+						   class="pr_price_hidden"/>
 				<?php endif; ?>
-
-			</div>
-			<button class="btn btn-block buy-btn">
-				Add to Cart
-			</button>
-			<p class="wishlist-cta">Save to Wishlist</p>
-		</div>
-	</div>
-
-	<!--Delivery Information Card-->
-	<div class="custom-card" style="margin-top: 5px;">
-		<div class="container">
-			<p class="block-title">Delivery Information</p>
-			<div class="row">
-				<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-					<img src="<?= base_url('assets/landing/svg/delivery-truck.svg'); ?>" alt="Delivery Truck"
-						 style="height: 30px; width: 35px;">
-				</div>
-				<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
-					<p class="delivery-text">Onitsha Market delivery available, get it within 5 business days of
-						order</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-					<img src="<?= base_url('assets/landing/svg/return.svg'); ?>" alt="Delivery Truck"
-						 style="height: 30px; width: 35px;">
-				</div>
-				<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
-					<p class="delivery-text">Free 7 day return if available</p>
-				</div>
-			</div>
-			<div class="row" style="margin-top: 14px;">
-				<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-					<img src="<?= base_url('assets/landing/svg/warranty.svg'); ?>" alt="Warranty"
-						 style="height: 30px; width: 35px;">
-				</div>
-				<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
-					<p class="delivery-text">This product has the following warranty
-						: Repair by vendor
-						<br/>
-						<a href="javascript:void(0)">Learn more</a>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!--Section Title [Overview]-->
-	<div class="container"><p class="text-break" style="">Overview</p></div>
-
-	<!--Product Description Card-->
-	<div class="custom-card" style="margin-top: 5px;">
-		<div class="container">
-			<?php if (!empty($product->product_line)) : ?>
-				<p class="block-title close-panel" data-target="title_vl" style="margin-top: 5px;">Product Shop <span
-						style="color: #4c4c4c !important; float: right"><i
-							class="fa fa-minus close-panel"
-							aria-hidden="true"
-							data-target="title_vl"></i></span></p>
-				<p class="body_text" id="title_vl"><?= $product->product_line; ?></p>
-				<hr/>
+			<?php else: ?>
+				<input type="hidden" class="variation_id" name="variation_id" value="<?= $var->id; ?>">
+				<input type="hidden" class="variation_name" name="variation_name" value="<?= $var->variation; ?>">
+				<?php if ($var->discount_price != '') : ?>
+					<input type="hidden" name="product_price"
+						   value="<?= $var->discount_price; ?>"
+						   class="pr_price_hidden"/>
+				<?php else: ?>
+					<input type="hidden" name="product_price"
+						   value="<?= $var->sale_price; ?>"
+						   class="pr_price_hidden"/>
+				<?php endif; ?>
 			<?php endif; ?>
-			<?php if (!empty($product->product_description)) : ?>
-				<p class="block-title close-panel" data-target="description_vl">Product Description <span
-						style="color: #4c4c4c !important; float: right"><i
-							class="fa fa-minus close-panel"
-							aria-hidden="true"
-							data-target="description_vl"></i></span></p>
-				<p id="description_vl" class="body_text">
-					<?= word_limiter($product->product_description, 80); ?>
+
+		</div>
+		<button class="btn btn-block buy-btn submit-cart">
+			Add to Cart
+		</button>
+		<p class="wishlist-cta">Save to Wishlist</p>
+	</div>
+	<?= form_close(); ?>
+</div>
+
+<!--Delivery Information Card-->
+<div class="custom-card" style="margin-top: 5px;">
+	<div class="container">
+		<p class="block-title">Delivery Information</p>
+		<div class="row">
+			<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
+				<img src="<?= base_url('assets/landing/svg/delivery-truck.svg'); ?>" alt="Delivery Truck"
+					 style="height: 30px; width: 35px;">
+			</div>
+			<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
+				<p class="delivery-text">Onitsha Market delivery available, get it within 5 business days of
+					order</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
+				<img src="<?= base_url('assets/landing/svg/return.svg'); ?>" alt="Delivery Truck"
+					 style="height: 30px; width: 35px;">
+			</div>
+			<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
+				<p class="delivery-text">Free 7 day return if available</p>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 14px;">
+			<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
+				<img src="<?= base_url('assets/landing/svg/warranty.svg'); ?>" alt="Warranty"
+					 style="height: 30px; width: 35px;">
+			</div>
+			<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
+				<p class="delivery-text">This product has the following warranty
+					: Repair by vendor
+					<br/>
+					<a href="javascript:void(0)">Learn more</a>
 				</p>
-				<hr/>
-			<?php endif; ?>
-			<?php if (!empty($product->in_the_box)) : ?>
-				<p class="block-title close-panel" data-target="box_vl">What you will find in the box <span
-						style="color: #4c4c4c !important; float: right"><i
-							class="fa fa-plus close-panel"
-							aria-hidden="true"
-							data-target="box_vl"></i></span></p>
-				<p class="body_text" style="display: none" id="box_vl">
-					<?= $product->in_the_box; ?>
-				</p>
-			<?php endif; ?>
+			</div>
 		</div>
 	</div>
+</div>
 
-	<!--Section Title [Full Specifications]-->
-	<div class="container"><p class="text-break" style="">Full Specifications</p></div>
+<!--Section Title [Overview]-->
+<div class="container"><p class="text-break" style="">Overview</p></div>
 
-	<!--Product Specification Card-->
-	<div class="custom-card" style="margin-top: 5px;">
-		<div class="container">
-			<table class="table table-striped">
-				<thead>
+<!--Product Description Card-->
+<div class="custom-card" style="margin-top: 5px;">
+	<div class="container">
+		<?php if (!empty($product->product_line)) : ?>
+			<p class="block-title close-panel" data-target="title_vl" style="margin-top: 5px;">Product Shop <span
+					style="color: #4c4c4c !important; float: right"><i
+						class="fa fa-minus close-panel"
+						aria-hidden="true"
+						data-target="title_vl"></i></span></p>
+			<p class="body_text" id="title_vl"><?= $product->product_line; ?></p>
+			<hr/>
+		<?php endif; ?>
+		<?php if (!empty($product->product_description)) : ?>
+			<p class="block-title close-panel" data-target="description_vl">Product Description <span
+					style="color: #4c4c4c !important; float: right"><i
+						class="fa fa-minus close-panel"
+						aria-hidden="true"
+						data-target="description_vl"></i></span></p>
+			<p id="description_vl" class="body_text">
+				<?= word_limiter($product->product_description, 80); ?>
+			</p>
+			<hr/>
+		<?php endif; ?>
+		<?php if (!empty($product->in_the_box)) : ?>
+			<p class="block-title close-panel" data-target="box_vl">What you will find in the box <span
+					style="color: #4c4c4c !important; float: right"><i
+						class="fa fa-plus close-panel"
+						aria-hidden="true"
+						data-target="box_vl"></i></span></p>
+			<p class="body_text" style="display: none" id="box_vl">
+				<?= $product->in_the_box; ?>
+			</p>
+		<?php endif; ?>
+	</div>
+</div>
+
+<!--Section Title [Full Specifications]-->
+<div class="container"><p class="text-break" style="">Full Specifications</p></div>
+
+<!--Product Specification Card-->
+<div class="custom-card" style="margin-top: 5px;">
+	<div class="container">
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th>Specification</th>
+				<th>Details</th>
+			</tr>
+			<?php $specs = json_decode($product->attributes); ?>
+
+			</thead>
+			<tbody>
+			<?php if (!empty($specs)): foreach ($specs as $spec => $value) : ?>
 				<tr>
-					<th>Specification</th>
-					<th>Details</th>
+					<td><?= trim($spec); ?></td>
+					<td><?php if (is_array($value)) : foreach ($value as $val) echo ucwords($val) . ', '; else: echo ucwords($value); endif; ?></td>
 				</tr>
-				<?php $specs = json_decode($product->attributes); ?>
-
-				</thead>
-				<tbody>
-				<?php if (!empty($specs)): foreach ($specs as $spec => $value) : ?>
-					<tr>
-						<td><?= trim($spec); ?></td>
-						<td><?php if (is_array($value)) : foreach ($value as $val) echo ucwords($val) . ', '; else: echo ucwords($value); endif; ?></td>
-					</tr>
-				<?php endforeach; else : ?>
-					<td colspan="2">No Specification for this item</td>
-				<?php endif; ?>
-				</tbody>
-			</table>
-		</div>
+			<?php endforeach; else : ?>
+				<td colspan="2">No Specification for this item</td>
+			<?php endif; ?>
+			</tbody>
+		</table>
 	</div>
-
-	<!--Section Title [Ratings and Reviews]-->
-	<div class="container"><p class="text-break" style="">Ratings and Reviews</p></div>
-
-	<!--Product Ratings And Reviews-->
-	<div class="custom-card" style="margin-top: 5px;">
-		<div class="container">
-			<p class="block-title" style="margin-top: 5px;">Total Ratings</p>
-			<div style="margin-top: 4px; margin-left: 2px">
-				<span class="rating-count">5/5</span>
-				<ul style="display: inline-block" class="product-caption-rating">
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<span style="margin-left: 5px;" class="rating-total-count">(8 ratings)</span>
-				</ul>
-			</div>
-			<hr style="margin-top: -4px;"/>
-			<p class="block-title" style="margin-top: 5px;">All Reviews</p>
-			<div class="comment-block">
-				<ul style="display: inline-block" class="product-caption-rating">
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
+</div>
 
 <!--Section Title [Ratings and Reviews]-->
 <div class="container"><p class="text-break" style="">Ratings and Reviews</p></div>
+
 <!--Product Ratings And Reviews-->
 <div class="custom-card" style="margin-top: 5px;">
 	<div class="container">
@@ -529,36 +543,171 @@
 		</div>
 	</div>
 	<button class="btn btn-block rating-btn">View all reviews</button>
-<?php endif; ?>
+	<?php endif; ?>
 
-<!--Scripts-->
-<script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/owl.carousel.min.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/custom.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
-<script>
-	// owl carousel initialization
-	$(document).ready(function () {
-		$('.close-panel').on('click', function () {
-			let target = $(this).data('target');
-			if ($(this).hasClass('fa')) {
-				$(this).toggleClass("fa-minus fa-plus");
+	<!--Scripts-->
+	<script
+		type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
+	<script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
+	<script src="<?= base_url('assets/landing/js/owl.carousel.min.js'); ?>"></script>
+	<script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
+	<script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
+	<script src="<?= base_url('assets/landing/js/mobile.js'); ?>"></script>
+	<script>
+		// owl carousel initialization
+		$(document).ready(function () {
+			$('.close-panel').on('click', function () {
+				let target = $(this).data('target');
+				if ($(this).hasClass('fa')) {
+					$(this).toggleClass("fa-minus fa-plus");
+					$(`#${target}`).toggle()
+				}
+				$(this).find('.fa').toggleClass("fa-minus fa-plus");
 				$(`#${target}`).toggle()
+
+			});
+
+			$(".owl-carousel").owlCarousel({
+				items: 1,
+				lazyLoad: true,
+				loop: true,
+			});
+		});
+
+		let quantity = $('#quan');
+		let count = quantity.data('range');
+		let plus = $('.product-page-qty-plus');
+		let minus = $('.product-page-qty-minus');
+		let selected_variation_id = $('.variation_id').val();
+		let selected_variation_name = $('.variation_name').val();
+
+
+		$('.variation-option').on('click', function () {
+			$('.variation-option').removeClass('option-selected');
+			selected_variation_name = $(this).data('vname');
+			if ($(this).hasClass('option-disabled')) {
+				notification_message('Sorry this variation is out of stock', 'fa fa-info-circle', 'warning')
+			} else {
+				let id = $(this).data('vid');
+				$.ajax({
+					url: base_url + "ajax/check_variation",
+					method: "POST",
+					data: {vid: id, 'csrf_carrito': csrf_token},
+					success: function (response) {
+						$.each(response, function (i, v) {
+							// change the variation id
+							if (v.discount_price) {
+								bind_method(format_currency(v.discount_price), 'price-mini');
+								$('.product-price').html(`
+								${format_currency(v.discount_price)}
+									<span>${get_discount(v.sale_price, v.discount_price)}</span>
+								`);
+								bind_method(format_currency(v.sale_price), 'product-discount-price');
+								$('.product-discount-price').show();
+								$('.pr_price_hidden').val(v.discount_price);
+							} else {
+								$('.pr_price_hidden').val(v.sale_price);
+								bind_method(format_currency(v.sale_price), 'price-mini');
+								bind_method(format_currency(v.sale_price), 'product-price');
+								$('.product-discount-price').hide();
+							}
+							console.log($('.pr_price_hidden').val());
+							count = v.quantity * 1;
+							quantity.val(1);
+							minus.prop("disabled", true);
+							plus.prop("disabled", false);
+						});
+					},
+					error: function (response) {
+						alert('An error occurred')
+					}
+				});
+
+				selected_variation_id = $(this).data('vid');
+				$(this).addClass('option-selected');
+				console.log(selected_variation_id);
 			}
-			$(this).find('.fa').toggleClass("fa-minus fa-plus");
-			$(`#${target}`).toggle()
-
 		});
 
-		$(".owl-carousel").owlCarousel({
-			items: 1,
-			lazyLoad: true,
-			loop: true,
+		// noinspection JSJQueryEfficiency
+		$(".product-page-qty-plus").on('click', function () {
+			var currentVal = parseInt($(this).prev(".product-page-qty-input").val(), 10);
+
+			if (!currentVal || currentVal == "" || currentVal == "NaN") currentVal = 0;
+
+			$(this).prev(".product-page-qty-input").val(currentVal + 1);
 		});
-	});
-</script>
-<script src="<?= base_url('assets/landing/js/mobile.js'); ?>"></script>
-<?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
+
+		// noinspection JSJQueryEfficiency
+		$(".product-page-qty-minus").on('click', function () {
+			var currentVal = parseInt($(this).next(".product-page-qty-input").val(), 10);
+			if (currentVal == "NaN") currentVal = 1;
+			if (currentVal > 1) {
+				$(this).next(".product-page-qty-input").val(currentVal - 1);
+			}
+		});
+
+		plus.on('click', function () {
+			minus.prop("disabled", false);
+			if (quantity.val() >= count) {
+				plus.prop("disabled", true);
+			}
+		});
+
+		minus.on('click', function () {
+			plus.prop("disabled", false);
+			if (quantity.val() <= 1) {
+				minus.prop("disabled", true);
+			}
+		});
+
+		quantity.on('input', function () {
+			if (quantity.val() > count) {
+				quantity.val(count)
+			} else if (quantity.val() === '0') {
+				quantity.val(1)
+			}
+		});
+
+
+		$('.submit-cart').on('click', function (e) {
+			e.preventDefault();
+			let quantity_instance = quantity.val();
+			let price = $('.pr_price_hidden').val();
+			let variation_id = selected_variation_id;
+			let variation_name = selected_variation_name;
+			let seller_id = $('.seller_id').val();
+			let product_id = $('.product_id').val();
+			let product_name = $('.product_name').val();
+			let truncated_product_name = $('.truncated_product_name').val();
+
+			$.ajax({
+				url: base_url + 'ajax/quick_view_add',
+				method: 'POST',
+				data: {
+					product_id: product_id,
+					quantity: quantity_instance,
+					product_price: price,
+					product_name: product_name,
+					variation_id: variation_id,
+					variation: variation_name,
+					seller: seller_id
+				},
+				success: () => {
+					let counter = $('.cart-count');
+					counter.show();
+					let instance = counter.text() * 1;
+					counter.html(instance + (quantity_instance * 1));
+					notification_message(`${truncated_product_name} successfully added to cart`, 'fa fa-cart-plus', 'success');
+				},
+				error: () => {
+					notification_message('Sorry an error occurred somewhere', 'fa fa-info-circle', 'warning');
+				}
+			})
+
+		});
+	</script>
+
+	<?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
 </body>
 </html>
