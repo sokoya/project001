@@ -23,7 +23,7 @@ class Product extends MY_Controller
 		$page_data['var'] = $this->product->get_variation($index);
 		$page_data['variations'] = $this->product->get_variations($index);
 		$page_data['gallery'] = $this->product->get_gallery($index);
-		$page_data['favourited'] = $this->product->is_favourited(base64_decode($this->session->userdata('logged_id')), $index);
+		$page_data['favourite'] = $this->product->is_favourited($this->session->userdata('logged_id'), $index);
 		$page_data['likes'] = $this->product->get_also_likes($index);
 		$page_data['category_detail'] = $this->product->single_category_detail($page_data['product']->category_id);
 		if ($page_data['category_detail']) {
@@ -33,7 +33,7 @@ class Product extends MY_Controller
 		}
 		$page_data['title'] = 'Buy ' . $page_data['product']->product_name;
 		$page_data['keywords'] = $page_data['title'] . ' , ' . $page_data['product']->brand_name;
-		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
+		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 		// $this->add_count($index);
 		$page_data['page'] = 'product';
 		$page_data['rating_counts'] = $this->product->get_rating_counts($index);
@@ -103,7 +103,7 @@ class Product extends MY_Controller
 		$page_data['brands'] = $this->product->get_brands($str, $q);
 		$page_data['colours'] = $this->product->get_colours($str, $q);
 		$page_data['sub_categories'] = $this->product->get_categories($str, $q);
-		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
+		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 		$page_data['category_detail'] = $this->product->category_details($str);
 		$page_data['description'] = $page_data['category_detail']->description;
 		$page_data['title'] = $page_data['category_detail']->title;
@@ -287,7 +287,7 @@ class Product extends MY_Controller
 		$page_data['brands'] = $this->product->get_brands($category, $product_name);
 		$page_data['colours'] = $this->product->get_colours($category, $product_name);
 		$page_data['sub_categories'] = $this->product->get_categories($category);
-		$page_data['profile'] = $this->user->get_profile(base64_decode($this->session->userdata('logged_id')));
+		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 
 		$page_data['category_detail'] = $this->product->category_details($category);
 		if ($page_data['category_detail']) {
