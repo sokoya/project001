@@ -413,7 +413,7 @@ Class Product_model extends CI_Model{
 
     // Generic single product detail
     function get_cart_details( $id ){
-        $select = "SELECT p.product_status, p.seller_id, u.first_name name, s.legal_company_name, s.status, i.image_name image FROM products p
+        $select = "SELECT p.product_status, p.seller_id, u.first_name name, s.legal_company_name, u.is_seller, i.image_name image FROM products p
                 LEFT JOIN sellers s ON (s.id = p.seller_id)
                 LEFT JOIN users u ON (u.id = p.seller_id)
                 LEFT JOIN product_gallery i ON (i.product_id = p.id )
