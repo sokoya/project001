@@ -5,6 +5,9 @@ class Mobile extends MY_Controller
 {
 
 	public function __construct(){
+        if (!$this->agent->is_mobile()) {
+            redirect($_SERVER['HTTP_REFERER']);
+        }
 	}
 
 
@@ -17,11 +20,14 @@ class Mobile extends MY_Controller
     }
 
     public function reviews(){
-        $product_code = cleanit( $this->uri->segment(2));
-
+        $uri = cleanit( $this->uri->segment(2));
+        $index = substr($uri, strrpos($uri, '-') + 1);
+        $page_data['rating_counts'] = $this->product->get_rating_counts($index);
+        $page_data['reviews'] = $this->product->get_reviews($index);
+        $this->load->view('mobile/reviews', $page_data);
     }
 
     public function add_rating(){
-
+        $product_code = cleanit( $this->uri->segment(3));
     }
 }
