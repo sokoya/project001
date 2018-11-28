@@ -193,7 +193,7 @@
 	.rating-btn {
 		background: #468c46;
 		color: #fff;
-		padding: 13px;
+		/*padding: 13px;*/
 		border-radius: 0;
 	}
 
@@ -567,7 +567,7 @@
                 <p class="comment-detail"><?= $review['content'];?></p>
                 <hr class="comment-line"/>
                 <?php if($x == 3) : ?>
-                    <button class="btn btn-block rating-btn">View all reviews</button>
+                    <a href="<?= current_url() . 'reviews'; ?>" class="btn btn-block rating-btn">View All Reviews</a>
                 <?php break;  endif;?>
             <?php $x++; endforeach;  else : ?>
             <?php endif; ?>
