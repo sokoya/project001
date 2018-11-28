@@ -109,6 +109,7 @@ class Account extends MY_Controller {
 		$page_data['title'] = "My saved items";
 		$page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id' ));
 		$page_data['saved'] = $this->user->get_saved_items( $this->session->userdata('logged_id'));
+//		var_dump($page_data['saved']);
 		$this->load->view('account/saved', $page_data);
 	}
 
@@ -182,17 +183,6 @@ class Account extends MY_Controller {
 			}
 			redirect($_SERVER['HTTP_REFERER']);
 		}
-	}
-
-
-	function fetch_single_address(){
-		if( !$this->input->get('address_id') ) redirect(base_url());
-		$address_id = cleanit($this->input->get('address_id'));
-		$result = $this->user->get_single_address( $this->session->userdata('logged_id'), $address_id);
-		header('Content-type: text/json');
-		header('Content-type: application/json');
-		echo json_encode($result);
-        exit;
 	}
 
     public function order_track(){

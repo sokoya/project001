@@ -371,7 +371,7 @@
 	// Send a get method to the controller function
 	let get_specific_add = function(id) {
 		$.ajax({
-			url: base_url + 'account/fetch_single_address',
+			url: base_url + 'ajax/fetch_single_address',
 			method: 'get',
 			data: {address_id: id},
 			dataType: 'json',
@@ -381,7 +381,7 @@
 					$('#f_name').val(value.first_name);
 					$('#l_name').val(value.last_name);
 
-					$.getJSON(base_url + 'account/fetch_states', function (d) {
+					$.getJSON(base_url + 'ajax/fetch_states', function (d) {
 						state_drop.children('option:not(:first)').remove();
 						$.each(d, function (k, v) {
 							state_drop.append($(`<option ${v.id === value.sid ? 'selected=selected' : ''}  ></option>`).attr('value', v.id).text(toTitleCase(`${v.name}`)));
@@ -389,7 +389,7 @@
 						});
 					});
 					$.ajax({
-						url: base_url + 'account/fetch_areas',
+						url: base_url + 'ajax/fetch_areas',
 						method: 'get',
 						data: {sid: value.sid},
 						dataType: 'json',
