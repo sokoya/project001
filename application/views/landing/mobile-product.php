@@ -1,4 +1,12 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
+<?php
+function date_in_range( $start_date, $end_date, $present_date){
+    $start_ts = strtotime($start_date);
+    $end_ts = strtotime($end_date);
+    $user_ts = strtotime($present_date);
+    return ( ($user_ts >= $start_ts) && ($user_ts <= $end_ts) );
+}
+?>
 <style>
 	.custom-card {
 		background: #fff;
@@ -254,7 +262,7 @@
 	<div class="custom-card">
 		<div class="container">
 			<p class="seller-name"><?= ucwords($product->first_name . ' ' . $product->last_name); ?></p>
-			<p class="product-name"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></p>
+			<p class="product-name">Seller - <?= character_limiter(ucwords($product->product_name), 50, '...'); ?></p>
 			<div style="margin-top: 4px; margin-left: 2px">
 
 				<?php
@@ -349,40 +357,40 @@
 						<p class="custom-product-page-option-title">Variation: </p>
 						<div class="row variation-option-list">
 							<?php foreach ($variations as $variation) : ?>
-								<div class="col-xs-3"><p data-vid="<?= $variation['id']; ?>"
-														 data-vname="<?= $variation['variation'] ?>"
-														 class="variation-option <?php if ($variation['quantity'] < 1) echo 'option-disabled'; ?>  <?php if ($variations[0]['id'] == $variation['id']) echo 'option-selected'; ?>"><?= ucfirst($variation['variation']); ?></p>
+								<div class="col-xs-3">
+                                    <p data-price="<?= $variation['sale_price']; ?>"
+                                       <?php
+                                        if( !empty($variation['discount_price']) && !empty($variation['start_date']) && !empty($variation['end_date']) ) {
+                                            if( date_in_range($variation['start_date'], $variation['end_date'], get_now()) ){
+                                                ?>
+                                            data-discount="<?= $variation['discount_price']; ?>"
+                                            <?php
+                                            }
+                                       }else{ ?>
+                                            data-discount=""
+                                       <?php  } ?>
+                                       data-vid="<?= $variation['id']; ?>"
+                                       data-vname="<?= $variation['variation'] ?>"
+                                       class="variation-option <?php if ($variation['quantity'] < 1) echo 'option-disabled'; ?>
+									    <?php if ($variations[0]['id'] == $variation['id']) echo 'option-selected'; ?>">
+                                        <?= ucfirst($variation['variation']); ?>
+                                    </p>
 								</div>
 							<?php endforeach; ?>
 						</div>
 					</div>
-					<input type="hidden" name="variation_id" class="variation_id"
-						   value="<?= $variations[0]['id']; ?>">
-					<input type="hidden" name="variation_name" class="variation_name"
-						   value="<?= $variations[0]['variation']; ?>">
-					<?php if ($variations[0]['discount_price'] != '') : ?>
-						<input type="hidden" name="product_price"
-							   value="<?= $variations[0]['discount_price']; ?>"
-							   class="pr_price_hidden"/>
-					<?php else: ?>
-						<input type="hidden" name="product_price"
-							   value="<?= $variations[0]['sale_price']; ?>"
-							   class="pr_price_hidden"/>
-					<?php endif; ?>
-				<?php else: ?>
-					<input type="hidden" class="variation_id" name="variation_id" value="<?= $var->id; ?>">
-					<input type="hidden" class="variation_name" name="variation_name" value="<?= $var->variation; ?>">
-					<?php if ($var->discount_price != '') : ?>
-						<input type="hidden" name="product_price"
-							   value="<?= $var->discount_price; ?>"
-							   class="pr_price_hidden"/>
-					<?php else: ?>
-						<input type="hidden" name="product_price"
-							   value="<?= $var->sale_price; ?>"
-							   class="pr_price_hidden"/>
-					<?php endif; ?>
 				<?php endif; ?>
-
+                <input type="hidden" class="variation_id" name="variation_id" value="<?= $var->id; ?>">
+                <input type="hidden" class="variation_name" name="variation_name" value="<?= $var->variation; ?>">
+                <?php if ($var->discount_price != '') : ?>
+                    <input type="hidden" name="product_price"
+                           value="<?= $var->discount_price; ?>"
+                           class="pr_price_hidden"/>
+                <?php else: ?>
+                    <input type="hidden" name="product_price"
+                           value="<?= $var->sale_price; ?>"
+                           class="pr_price_hidden"/>
+                <?php endif; ?>
 			</div>
 			<button class="btn btn-block buy-btn submit-cart">
 				Add to Cart
