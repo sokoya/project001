@@ -28,6 +28,12 @@ class Mobile extends MY_Controller
     }
 
     public function add_rating(){
-        $product_code = cleanit( $this->uri->segment(3));
+        $uri = cleanit( $this->uri->segment(2));
+        $page_data['id'] = substr($uri, strrpos($uri, '-') + 1);
+        if( !$this->input->post() ){
+            $this->load->view('mobile/add-rating', $page_data);
+        }else{
+            // process the form
+        }
     }
 }
