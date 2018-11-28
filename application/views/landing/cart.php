@@ -191,7 +191,7 @@
 					} else {
 						minus.prop("disabled", false);
 					}
-					$('.cart-row').load(base_url + 'product/cart');
+					$('.cart-row').load(base_url + 'cart');
 				}
 			},
 			error: response => {
@@ -229,7 +229,7 @@
 					} else {
 						minus.prop("disabled", false);
 					}
-					$('.cart-row').load(base_url + 'product/cart');
+					$('.cart-row').load(base_url + 'cart');
 				}
 
 			},

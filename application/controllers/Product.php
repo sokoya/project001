@@ -305,12 +305,15 @@ class Product extends MY_Controller
      * Show all rating and reviews
      * */
     public function reviews(){
-        if (!$this->agent->is_mobile()){ redirect($_SERVER['HTTP_REFERER']);}
         $uri = cleanit( $this->uri->segment(2));
         $index = substr($uri, strrpos($uri, '-') + 1);
         $page_data['rating_counts'] = $this->product->get_rating_counts($index);
         $page_data['reviews'] = $this->product->get_reviews($index);
-        $this->load->view('mobile/reviews', $page_data);
+        if ($this->agent->is_mobile()){
+            $this->load->view('landing/mobile/reviews', $page_data);
+        }else{
+            $this->load->view('landing/reviews', $page_data);
+        }
     }
 
     /*
