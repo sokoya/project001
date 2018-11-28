@@ -117,30 +117,6 @@ class Product extends MY_Controller
 		}
 	}
 
-
-	// Cart Page
-	public function cart()
-	{
-		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
-		$page_data['title'] = 'My cart';
-		$page_data['page'] = 'cart';
-		if (!$this->agent->is_mobile()) {
-			$this->load->view('landing/cart', $page_data);
-		} else {
-			$page_data['page'] = 'mobile-cart';
-			$this->load->view('landing/mobile-cart', $page_data);
-		}
-
-	}
-
-
-	// remove cart
-	public function remove_cart()
-	{
-		$this->cart->remove($this->uri->segment(3));
-		redirect('cart');
-	}
-
 	/**
 	 * @param $id - product id
 	 * @return null
@@ -306,5 +282,49 @@ class Product extends MY_Controller
 			$this->load->view('landing/mobile-search', $page_data);
 		}
 	}
+
+
+    /*
+     * Learn more about the warranty type
+     * */
+    public function warranty(){
+        if (!$this->agent->is_mobile()){ redirect($_SERVER['HTTP_REFERER']);}
+    }
+
+    /*
+     * Product description with the specification
+     * */
+    public function description(){
+        if (!$this->agent->is_mobile()){ redirect($_SERVER['HTTP_REFERER']);}
+        $uri = cleanit( $this->uri->segment(2));
+        $index = substr($uri, strrpos($uri, '-') + 1);
+        $page_data['descriptions'] = $this->product->get_results('products', 'product_description, in_the_box, attributes', "(id = {$index})");
+    }
+
+    /*
+     * Show all rating and reviews
+     * */
+    public function reviews(){
+        if (!$this->agent->is_mobile()){ redirect($_SERVER['HTTP_REFERER']);}
+        $uri = cleanit( $this->uri->segment(2));
+        $index = substr($uri, strrpos($uri, '-') + 1);
+        $page_data['rating_counts'] = $this->product->get_rating_counts($index);
+        $page_data['reviews'] = $this->product->get_reviews($index);
+        $this->load->view('mobile/reviews', $page_data);
+    }
+
+    /*
+     * Add rating and review form
+     * */
+    public function rating(){
+        if (!$this->agent->is_mobile()){ redirect($_SERVER['HTTP_REFERER']);}
+        $uri = cleanit( $this->uri->segment(2));
+        $page_data['id'] = substr($uri, strrpos($uri, '-') + 1);
+        if( !$this->input->post() ){
+            $this->load->view('mobile/add-rating', $page_data);
+        }else{
+            // process the form
+        }
+    }
 
 }
