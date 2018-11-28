@@ -112,9 +112,13 @@ function date_in_range( $start_date, $end_date, $present_date){
 
 	.buy-btn {
 		margin-top: 3px;
-		background: #468c46;
+		background: #3d8c4d;
 		color: #fff;
 		padding: 13px;
+	}
+
+	.buy-btn:hover, .buy-btn:focus {
+		color: #fff;
 	}
 
 	.block-title {
@@ -216,6 +220,15 @@ function date_in_range( $start_date, $end_date, $present_date){
 	.suggested-image-text:hover {
 		color: #468c46;
 	}
+
+	.comment-user {
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		font-size: 12px;
+		color: #6e6e6e;
+		font-weight: 500;
+		position: relative;
+		bottom: 10px;
+	}
 </style>
 </head>
 <body style="background: #e5e5e5">
@@ -250,10 +263,12 @@ function date_in_range( $start_date, $end_date, $present_date){
 	<!--Gallery section-->
 	<div class="custom-card">
 		<div class="container">
-            <div class="owl-carousel products-gallery">
-                <?php foreach( $galleries as $gallery ) :?>
-                    <img class="product-image lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name;  ?> " alt="<?= $product->product_name; ?>"/>
-                <?php endforeach; ?>
+			<div class="owl-carousel products-gallery">
+				<?php foreach ($galleries as $gallery) : ?>
+					<img class="product-image lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
+						 data-src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?> "
+						 alt="<?= $product->product_name; ?>"/>
+				<?php endforeach; ?>
 			</div>
 		</div>
 	</div>
@@ -416,7 +431,8 @@ function date_in_range( $start_date, $end_date, $present_date){
 			<p class="block-title">Delivery Information</p>
 			<div class="row">
 				<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-					<img class="lazy"  src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= base_url('assets/landing/svg/delivery-truck.svg'); ?>" alt="Delivery Truck"
+					<img class="lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
+						 data-src="<?= base_url('assets/landing/svg/delivery-truck.svg'); ?>" alt="Delivery Truck"
 						 style="height: 30px; width: 35px;">
 				</div>
 				<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -426,7 +442,8 @@ function date_in_range( $start_date, $end_date, $present_date){
 			</div>
 			<div class="row">
 				<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-					<img class="lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= base_url('assets/landing/svg/return.svg'); ?>" alt="Delivery Truck"
+					<img class="lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
+						 data-src="<?= base_url('assets/landing/svg/return.svg'); ?>" alt="Delivery Truck"
 						 style="height: 30px; width: 35px;">
 				</div>
 				<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -435,7 +452,8 @@ function date_in_range( $start_date, $end_date, $present_date){
 			</div>
 			<div class="row" style="margin-top: 14px;">
 				<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-					<img class="lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= base_url('assets/landing/svg/warranty.svg'); ?>" alt="Warranty"
+					<img class="lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
+						 data-src="<?= base_url('assets/landing/svg/warranty.svg'); ?>" alt="Warranty"
 						 style="height: 30px; width: 35px;">
 				</div>
 				<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -523,7 +541,10 @@ function date_in_range( $start_date, $end_date, $present_date){
 	<!--Product Ratings And Reviews-->
 	<div class="custom-card" style="margin-top: 5px;">
 		<div class="container">
-			<p class="block-title" style="margin-top: 5px;">Total Ratings</p>
+			<p class="block-title" style="margin-top: 5px;">Total Ratings <span><a
+						style="text-decoration: none; color: #0b6427"
+						href="<?= base_url(urlify($product->product_name, $product->id) . 'add_rating_review'); ?>">Write a review</a> </span>
+			</p>
 			<div style="margin-top: 4px; margin-left: 2px">
 <!--				<span class="rating-count">5/5</span>-->
                 <ul style="display: inline-block" class="product-caption-rating">
@@ -573,30 +594,37 @@ function date_in_range( $start_date, $end_date, $present_date){
                 </div>
                 <p class="comment-title"><?= $review['title'];?></p>
                 <p class="comment-detail"><?= $review['content'];?></p>
+				<p class="comment-user">by Mark Jonathan</p>
                 <hr class="comment-line"/>
                 <?php if($x == 3) : ?>
-                    <a href="<?= current_url() . 'reviews'; ?>" class="btn btn-block rating-btn">View All Reviews</a>
+				<a style="text-decoration: none; color: #fff;"
+		   			href="<?= base_url(urlify($product->product_name, $product->id) . '/reviews'); ?>">
+					<button class="btn btn-block rating-btn">View all reviews</button>
+					</a>
+                    <!-- <a href="<?= current_url() . 'reviews'; ?>" class="btn btn-block rating-btn">View All Reviews</a> -->
                 <?php break;  endif;?>
             <?php $x++; endforeach;  else : ?>
             <?php endif; ?>
 		</div>
 	</div>
 	<!--Section Title [Suggested Products]-->
-    <?php if( count($likes)) :?>
-	<div class="container" style="margin-bottom: 5px;"><p class="text-break" style="">You might also like</p></div>
-	<div class="custom-card">
-		<div class="">
-			<div class="owl-carousel suggested-products">
-                <?php foreach($likes as $like) : ?>
-				<a style="text-decoration: none" href="<?= base_url(urlify($like->product_name, $like->id)); ?>">
-					<img class="suggested-image lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= PRODUCTS_IMAGE_PATH.$like->image_name; ?> "/>
-					<p class="suggested-image-text"><?= character_limiter($like->product_name, 15); ?></p>
-				</a>
-                <?php endforeach; ?>
+	<?php if (count($likes)) : ?>
+		<div class="container" style="margin-bottom: 5px;"><p class="text-break" style="">You might also like</p></div>
+		<div class="custom-card">
+			<div class="">
+				<div class="owl-carousel suggested-products">
+					<?php foreach ($likes as $like) : ?>
+						<a style="text-decoration: none"
+						   href="<?= base_url(urlify($like->product_name, $like->id)); ?>">
+							<img class="suggested-image lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
+								 data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?> "/>
+							<p class="suggested-image-text"><?= character_limiter($like->product_name, 15); ?></p>
+						</a>
+					<?php endforeach; ?>
+				</div>
 			</div>
 		</div>
-	</div>
-    <?php endif; ?>
+	<?php endif; ?>
 
 <?php endif; ?>
 
@@ -610,10 +638,9 @@ function date_in_range( $start_date, $end_date, $present_date){
 <script src="<?= base_url('assets/landing/js/mobile.js'); ?>"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
-    $(function() {
-        $('.lazy').Lazy();
-    });
-
+	$(function () {
+		$('.lazy').Lazy();
+	});
 	// owl carousel initialization
 	$(document).ready(function () {
 		$('.close-panel').on('click', function () {
@@ -754,16 +781,18 @@ function date_in_range( $start_date, $end_date, $present_date){
 			url: base_url + 'ajax/quick_view_add',
 			method: 'POST',
 			data: {
-                product_id: product_id,
-                variation_id: variation_id,
-                quantity: quantity_instance
+				product_id: product_id,
+				variation_id: variation_id,
+				quantity: quantity_instance
 			},
 			success: () => {
-				let counter = $('.cart-count');
-				counter.show();
-				let instance = counter.text() * 1;
-				counter.html(instance + (quantity_instance * 1));
-				notification_message(`${truncated_product_name} successfully added to cart`, 'fa fa-cart-plus', 'success');
+				// let counter = $('.cart-count');
+				// counter.show();
+				// let instance = counter.text() * 1;
+				// counter.html(instance + (quantity_instance * 1));
+				// notification_message(`${truncated_product_name} successfully added to cart`, 'fa fa-cart-plus', 'success');
+
+				window.location.href = base_url + 'cart';
 			},
 			error: () => {
 				notification_message('Sorry an error occurred somewhere', 'fa fa-info-circle', 'warning');
