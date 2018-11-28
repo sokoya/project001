@@ -408,7 +408,7 @@
 			<p class="block-title">Delivery Information</p>
 			<div class="row">
 				<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-					<img src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= base_url('assets/landing/svg/delivery-truck.svg'); ?>" alt="Delivery Truck"
+					<img class="lazy"  src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= base_url('assets/landing/svg/delivery-truck.svg'); ?>" alt="Delivery Truck"
 						 style="height: 30px; width: 35px;">
 				</div>
 				<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -418,7 +418,7 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-					<img src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= base_url('assets/landing/svg/return.svg'); ?>" alt="Delivery Truck"
+					<img class="lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= base_url('assets/landing/svg/return.svg'); ?>" alt="Delivery Truck"
 						 style="height: 30px; width: 35px;">
 				</div>
 				<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -427,7 +427,7 @@
 			</div>
 			<div class="row" style="margin-top: 14px;">
 				<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-					<img src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= base_url('assets/landing/svg/warranty.svg'); ?>" alt="Warranty"
+					<img class="lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= base_url('assets/landing/svg/warranty.svg'); ?>" alt="Warranty"
 						 style="height: 30px; width: 35px;">
 				</div>
 				<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -579,7 +579,7 @@
 			<div class="owl-carousel suggested-products">
                 <?php foreach($likes as $like) : ?>
 				<a style="text-decoration: none" href="<?= base_url(urlify($like->product_name, $like->id)); ?>">
-					<img class="suggested-image" src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= PRODUCTS_IMAGE_PATH.$like->image_name; ?> "/>
+					<img class="suggested-image lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= PRODUCTS_IMAGE_PATH.$like->image_name; ?> "/>
 					<p class="suggested-image-text"><?= character_limiter($like->product_name, 15); ?></p>
 				</a>
                 <?php endforeach; ?>
@@ -631,7 +631,7 @@
 			animateOut: 'slideOutDown',
 			animateIn: 'flipInX',
 			autoplay: true,
-			autoplayTimeout: 3000,
+			autoplayTimeout: 5000,
 			autoplayHoverPause: true
 		});
 	});
