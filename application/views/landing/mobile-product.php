@@ -1,4 +1,12 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
+<?php
+function date_in_range( $start_date, $end_date, $present_date){
+    $start_ts = strtotime($start_date);
+    $end_ts = strtotime($end_date);
+    $user_ts = strtotime($present_date);
+    return ( ($user_ts >= $start_ts) && ($user_ts <= $end_ts) );
+}
+?>
 <style>
 	.custom-card {
 		background: #fff;
@@ -197,7 +205,7 @@
 	.rating-btn {
 		background: #468c46;
 		color: #fff;
-		padding: 13px;
+		/*padding: 13px;*/
 		border-radius: 0;
 	}
 
@@ -268,7 +276,7 @@
 	<!--Main Description card-->
 	<div class="custom-card">
 		<div class="container">
-			<p class="seller-name"><?= ucwords($product->first_name . ' ' . $product->last_name); ?></p>
+			<p class="seller-name">Seller - <?= ucwords($product->first_name . ' ' . $product->last_name); ?></p>
 			<p class="product-name"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></p>
 			<div style="margin-top: 4px; margin-left: 2px">
 
@@ -364,40 +372,40 @@
 						<p class="custom-product-page-option-title">Variation: </p>
 						<div class="row variation-option-list">
 							<?php foreach ($variations as $variation) : ?>
-								<div class="col-xs-3"><p data-vid="<?= $variation['id']; ?>"
-														 data-vname="<?= $variation['variation'] ?>"
-														 class="variation-option <?php if ($variation['quantity'] < 1) echo 'option-disabled'; ?>  <?php if ($variations[0]['id'] == $variation['id']) echo 'option-selected'; ?>"><?= ucfirst($variation['variation']); ?></p>
+								<div class="col-xs-3">
+                                    <p data-price="<?= $variation['sale_price']; ?>"
+                                       <?php
+                                        if( !empty($variation['discount_price']) && !empty($variation['start_date']) && !empty($variation['end_date']) ) {
+                                            if( date_in_range($variation['start_date'], $variation['end_date'], get_now()) ){
+                                                ?>
+                                            data-discount="<?= $variation['discount_price']; ?>"
+                                            <?php
+                                            }
+                                       }else{ ?>
+                                            data-discount=""
+                                       <?php  } ?>
+                                       data-vid="<?= $variation['id']; ?>"
+                                       data-vname="<?= $variation['variation'] ?>"
+                                       class="variation-option <?php if ($variation['quantity'] < 1) echo 'option-disabled'; ?>
+									    <?php if ($variations[0]['id'] == $variation['id']) echo 'option-selected'; ?>">
+                                        <?= ucfirst($variation['variation']); ?>
+                                    </p>
 								</div>
 							<?php endforeach; ?>
 						</div>
 					</div>
-					<input type="hidden" name="variation_id" class="variation_id"
-						   value="<?= $variations[0]['id']; ?>">
-					<input type="hidden" name="variation_name" class="variation_name"
-						   value="<?= $variations[0]['variation']; ?>">
-					<?php if ($variations[0]['discount_price'] != '') : ?>
-						<input type="hidden" name="product_price"
-							   value="<?= $variations[0]['discount_price']; ?>"
-							   class="pr_price_hidden"/>
-					<?php else: ?>
-						<input type="hidden" name="product_price"
-							   value="<?= $variations[0]['sale_price']; ?>"
-							   class="pr_price_hidden"/>
-					<?php endif; ?>
-				<?php else: ?>
-					<input type="hidden" class="variation_id" name="variation_id" value="<?= $var->id; ?>">
-					<input type="hidden" class="variation_name" name="variation_name" value="<?= $var->variation; ?>">
-					<?php if ($var->discount_price != '') : ?>
-						<input type="hidden" name="product_price"
-							   value="<?= $var->discount_price; ?>"
-							   class="pr_price_hidden"/>
-					<?php else: ?>
-						<input type="hidden" name="product_price"
-							   value="<?= $var->sale_price; ?>"
-							   class="pr_price_hidden"/>
-					<?php endif; ?>
 				<?php endif; ?>
-
+                <input type="hidden" class="variation_id" name="variation_id" value="<?= $var->id; ?>">
+                <input type="hidden" class="variation_name" name="variation_name" value="<?= $var->variation; ?>">
+                <?php if ($var->discount_price != '') : ?>
+                    <input type="hidden" name="product_price"
+                           value="<?= $var->discount_price; ?>"
+                           class="pr_price_hidden"/>
+                <?php else: ?>
+                    <input type="hidden" name="product_price"
+                           value="<?= $var->sale_price; ?>"
+                           class="pr_price_hidden"/>
+                <?php endif; ?>
 			</div>
 			<button class="btn btn-block buy-btn submit-cart">
 				Add to Cart
@@ -538,67 +546,66 @@
 						href="<?= base_url(urlify($product->product_name, $product->id) . 'add_rating_review'); ?>">Write a review</a> </span>
 			</p>
 			<div style="margin-top: 4px; margin-left: 2px">
-				<span class="rating-count">5/5</span>
-				<ul style="display: inline-block" class="product-caption-rating">
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<span style="margin-left: 5px;" class="rating-total-count">(8 ratings)</span>
-				</ul>
-			</div>
+<!--				<span class="rating-count">5/5</span>-->
+                <ul style="display: inline-block" class="product-caption-rating">
+                <?php
+                if ($rating_counts) {
+                    $overall_rating = product_overall_rating($rating_counts);
+                    $rating_rounded = round($overall_rating);
+                    for ($i = 1; $i <= $rating_rounded; $i++) { ?>
+                        <li class="rated"><i class="fa fa-star"></i></li>
+                        <?php
+                    }if ($rating_rounded < 5) {
+                        for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
+                            <li><i class="fa fa-star"></i></li>
+                            <?php
+                        }
+                    } ?>
+                    <span style="margin-left: 5px; color: #0b6427;" class="rating-total-count">(<?= $rating_rounded; ?> reviews)</span>
+                    <?php
+                } else { ?>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <?php
+                }
+                ?>
+                </ul>
+            </div>
 			<hr style="margin-top: -4px;"/>
 			<p class="block-title" style="margin-top: 5px;">All Reviews</p>
-			<div class="comment-block">
-				<ul style="display: inline-block" class="product-caption-rating">
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-
-				</ul>
-				<span style="float: right;" class="comment-date">22 November 2018</span>
-			</div>
-			<p class="comment-title">Great Product</p>
-			<p class="comment-detail">This is a great product I can't stop using it</p>
-			<p class="comment-user">by Sokoya Philip</p>
-			<hr class="comment-line"/>
-			<div class="comment-block">
-				<ul style="display: inline-block" class="product-caption-rating">
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li><i class="fa fa-star"></i></li>
-					<li><i class="fa fa-star"></i></li>
-
-				</ul>
-				<span style="float: right;" class="comment-date">22 November 2018</span>
-			</div>
-			<p class="comment-title">Lovely System</p>
-			<p class="comment-detail">Wonderful system my grand daughter loves it </p>
-			<p class="comment-user">by Jeffrey Chidi</p>
-			<hr class="comment-line"/>
-			<div class="comment-block">
-				<ul style="display: inline-block" class="product-caption-rating">
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li><i class="fa fa-star"></i></li>
-
-				</ul>
-				<span style="float: right;" class="comment-date">22 November 2018</span>
-			</div>
-			<p class="comment-title">Excellent Speed</p>
-			<p class="comment-detail">The System boots up so fast</p>
-			<p class="comment-user">by Mark Jonathan</p>
+            <?php  $x = 1; if($reviews) :  foreach( $reviews as $review ) :?>
+                <div class="comment-block">
+                    <ul style="display: inline-block" class="product-caption-rating">
+                        <?php
+                        for ($i = 1; $i <= $review['rating_score']; $i++) { ?>
+                            <li class="rated"><i class="fa fa-star"></i></li>
+                        <?php
+                        }if ($review['rating_score'] < 5) {
+                            for ($i = 0; $i < (5 - $review['rating_score']); $i++) { ?>
+                                <li><i class="fa fa-star"></i></li>
+                        <?php
+                            }
+                        } ?>
+                    </ul>
+                    <span style="float: right;" class="comment-date"><?= neatDate($review['published_date']); ?></span>
+                </div>
+                <p class="comment-title"><?= $review['title'];?></p>
+                <p class="comment-detail"><?= $review['content'];?></p>
+				<p class="comment-user">by Mark Jonathan</p>
+                <hr class="comment-line"/>
+                <?php if($x == 3) : ?>
+				<a style="text-decoration: none; color: #fff;"
+		   			href="<?= base_url(urlify($product->product_name, $product->id) . '/reviews'); ?>">
+					<button class="btn btn-block rating-btn">View all reviews</button>
+					</a>
+                    <!-- <a href="<?= current_url() . 'reviews'; ?>" class="btn btn-block rating-btn">View All Reviews</a> -->
+                <?php break;  endif;?>
+            <?php $x++; endforeach;  else : ?>
+            <?php endif; ?>
 		</div>
-		<a style="text-decoration: none; color: #fff;"
-		   href="<?= base_url(urlify($product->product_name, $product->id) . '/reviews'); ?>">
-			<button class="btn btn-block rating-btn">View all reviews</button>
-		</a>
 	</div>
 	<!--Section Title [Suggested Products]-->
 	<?php if (count($likes)) : ?>
