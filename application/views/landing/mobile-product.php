@@ -242,10 +242,12 @@
 	<!--Gallery section-->
 	<div class="custom-card">
 		<div class="container">
-            <div class="owl-carousel products-gallery">
-                <?php foreach( $galleries as $gallery ) :?>
-                    <img class="product-image lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name;  ?> " alt="<?= $product->product_name; ?>"/>
-                <?php endforeach; ?>
+			<div class="owl-carousel products-gallery">
+				<?php foreach ($galleries as $gallery) : ?>
+					<img class="product-image lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
+						 data-src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?> "
+						 alt="<?= $product->product_name; ?>"/>
+				<?php endforeach; ?>
 			</div>
 		</div>
 	</div>
@@ -408,7 +410,8 @@
 			<p class="block-title">Delivery Information</p>
 			<div class="row">
 				<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-					<img class="lazy"  src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= base_url('assets/landing/svg/delivery-truck.svg'); ?>" alt="Delivery Truck"
+					<img class="lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
+						 data-src="<?= base_url('assets/landing/svg/delivery-truck.svg'); ?>" alt="Delivery Truck"
 						 style="height: 30px; width: 35px;">
 				</div>
 				<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -418,7 +421,8 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-					<img class="lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= base_url('assets/landing/svg/return.svg'); ?>" alt="Delivery Truck"
+					<img class="lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
+						 data-src="<?= base_url('assets/landing/svg/return.svg'); ?>" alt="Delivery Truck"
 						 style="height: 30px; width: 35px;">
 				</div>
 				<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -427,7 +431,8 @@
 			</div>
 			<div class="row" style="margin-top: 14px;">
 				<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-					<img class="lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= base_url('assets/landing/svg/warranty.svg'); ?>" alt="Warranty"
+					<img class="lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
+						 data-src="<?= base_url('assets/landing/svg/warranty.svg'); ?>" alt="Warranty"
 						 style="height: 30px; width: 35px;">
 				</div>
 				<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -572,21 +577,23 @@
 		<button class="btn btn-block rating-btn">View all reviews</button>
 	</div>
 	<!--Section Title [Suggested Products]-->
-    <?php if( count($likes)) :?>
-	<div class="container" style="margin-bottom: 5px;"><p class="text-break" style="">You might also like</p></div>
-	<div class="custom-card">
-		<div class="">
-			<div class="owl-carousel suggested-products">
-                <?php foreach($likes as $like) : ?>
-				<a style="text-decoration: none" href="<?= base_url(urlify($like->product_name, $like->id)); ?>">
-					<img class="suggested-image lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= PRODUCTS_IMAGE_PATH.$like->image_name; ?> "/>
-					<p class="suggested-image-text"><?= character_limiter($like->product_name, 15); ?></p>
-				</a>
-                <?php endforeach; ?>
+	<?php if (count($likes)) : ?>
+		<div class="container" style="margin-bottom: 5px;"><p class="text-break" style="">You might also like</p></div>
+		<div class="custom-card">
+			<div class="">
+				<div class="owl-carousel suggested-products">
+					<?php foreach ($likes as $like) : ?>
+						<a style="text-decoration: none"
+						   href="<?= base_url(urlify($like->product_name, $like->id)); ?>">
+							<img class="suggested-image lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
+								 data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?> "/>
+							<p class="suggested-image-text"><?= character_limiter($like->product_name, 15); ?></p>
+						</a>
+					<?php endforeach; ?>
+				</div>
 			</div>
 		</div>
-	</div>
-    <?php endif; ?>
+	<?php endif; ?>
 
 <?php endif; ?>
 
@@ -600,9 +607,9 @@
 <script src="<?= base_url('assets/landing/js/mobile.js'); ?>"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
-    $(function() {
-        $('.lazy').Lazy();
-    });
+	$(function () {
+		$('.lazy').Lazy();
+	});
 	// owl carousel initialization
 	$(document).ready(function () {
 		$('.close-panel').on('click', function () {
@@ -743,16 +750,18 @@
 			url: base_url + 'ajax/quick_view_add',
 			method: 'POST',
 			data: {
-                product_id: product_id,
-                variation_id: variation_id,
-                quantity: quantity_instance
+				product_id: product_id,
+				variation_id: variation_id,
+				quantity: quantity_instance
 			},
 			success: () => {
-				let counter = $('.cart-count');
-				counter.show();
-				let instance = counter.text() * 1;
-				counter.html(instance + (quantity_instance * 1));
-				notification_message(`${truncated_product_name} successfully added to cart`, 'fa fa-cart-plus', 'success');
+				// let counter = $('.cart-count');
+				// counter.show();
+				// let instance = counter.text() * 1;
+				// counter.html(instance + (quantity_instance * 1));
+				// notification_message(`${truncated_product_name} successfully added to cart`, 'fa fa-cart-plus', 'success');
+
+				window.location.href = base_url + 'cart';
 			},
 			error: () => {
 				notification_message('Sorry an error occurred somewhere', 'fa fa-info-circle', 'warning');

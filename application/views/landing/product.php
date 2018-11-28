@@ -27,7 +27,7 @@
 					<li><a href="#">Home</a>
 					</li>
 					<li>
-						<a href="<?= base_url('catalog/' . $category_detail->slug ); ?>"><?= ucwords($category_detail->name); ?></a>
+						<a href="<?= base_url('catalog/' . $category_detail->slug); ?>"><?= ucwords($category_detail->name); ?></a>
 					</li>
 					<li class="active c-a-brc"><?= ucwords($product->product_name); ?></li>
 				</ol>
@@ -36,32 +36,33 @@
 				<div class="col-md-5">
 					<div class="product-page-product-wrap jqzoom-stage">
 						<div class="clearfix">
-							<a href="<?= PRODUCTS_IMAGE_PATH.$featured_image->image_name; ?>"
+							<a href="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
 							   id="jqzoom"
 							   data-rel="gal-1">
 								<img
-									src="<?= PRODUCTS_IMAGE_PATH.$featured_image->image_name; ?>"
+									src="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
 									alt="<?= $product->product_name; ?>"
 									title="<?= ucwords($product->product_name) ?>" width="450"
 									style="max-width: 450px"/>
 							</a>
 						</div>
 					</div>
-                    <?php if(count( $galleries) > 1 ) :?>
-                        <ul class="jqzoom-list">
-                            <?php foreach( $galleries as $gallery ) : ?>
-                                    <li>
-                                        <a <?php if($gallery->featured_image == 1 ) echo 'zoomThumbActive';?> href="javascript:void(0)"
-                                           data-rel="{gallery:'gal-1', smallimage: '<?= PRODUCTS_IMAGE_PATH . "c_scale,w_400/" . $gallery->image_name ?>',
-                                           largeimage: '<?=  PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>'}">
-                                            <img class="lazy" src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
-                                                 alt="<?= $product->product_name; ?>"
-                                                 title="<?= $product->product_name?>" width="100"/>
-                                        </a>
-                                    </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php endif; ?>
+					<?php if (count($galleries) > 1) : ?>
+						<ul class="jqzoom-list">
+							<?php foreach ($galleries as $gallery) : ?>
+								<li>
+									<a <?php if ($gallery->featured_image == 1) echo 'zoomThumbActive'; ?>
+										href="javascript:void(0)"
+										data-rel="{gallery:'gal-1', smallimage: '<?= PRODUCTS_IMAGE_PATH . "c_scale,w_400/" . $gallery->image_name ?>',
+                                           largeimage: '<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>'}">
+										<img class="lazy" src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
+											 alt="<?= $product->product_name; ?>"
+											 title="<?= $product->product_name ?>" width="100"/>
+									</a>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					<?php endif; ?>
 				</div>
 
 				<div class="col-md-7">
@@ -369,35 +370,36 @@
 						</div>
 					</div>
 					<div class="tab-pane fade" id="full-spec">
-                        <?php  $specifications = json_decode($product->attributes); ?>
-                        <?php if(!empty($specifications)) : ?>
-						<table class="table">
-							<thead>
-							<tr>
-								<th class="pr-over">Specs:</th>
-								<th class="pr-over">Details:</th>
-							</tr>
-							</thead>
-							<tbody>
-							<?php
-							foreach ($specifications as $specification => $specification_value): ?>
+						<?php $specifications = json_decode($product->attributes); ?>
+						<?php if (!empty($specifications)) : ?>
+							<table class="table">
+								<thead>
 								<tr>
-									<td class="product-page-features-table-specs"><?= ucwords(trim($specification)); ?></td>
-									<td class="product-page-features-table-details">
-										<?php
-										if (is_array($specification_value)):
-											foreach ($specification_value as $key) echo ucwords(trim($key)) . ', ';
-										else: echo ucwords(trim($specification_value));
-										endif;
-										?>
-									</td>
+									<th class="pr-over">Specs:</th>
+									<th class="pr-over">Details:</th>
 								</tr>
-							<?php endforeach; ?>
-							</tbody>
-						</table>
-                        <?php else : ?>
-                            <h3 class="text-center text-danger"><strong>Product specification not avaialable for this item.</strong></h3>
-                        <?php endif; ?>
+								</thead>
+								<tbody>
+								<?php
+								foreach ($specifications as $specification => $specification_value): ?>
+									<tr>
+										<td class="product-page-features-table-specs"><?= ucwords(trim($specification)); ?></td>
+										<td class="product-page-features-table-details">
+											<?php
+											if (is_array($specification_value)):
+												foreach ($specification_value as $key) echo ucwords(trim($key)) . ', ';
+											else: echo ucwords(trim($specification_value));
+											endif;
+											?>
+										</td>
+									</tr>
+								<?php endforeach; ?>
+								</tbody>
+							</table>
+						<?php else : ?>
+							<h3 class="text-center text-danger"><strong>Product specification not avaialable for this
+									item.</strong></h3>
+						<?php endif; ?>
 					</div>
 					<div class="tab-pane fade" id="review">
 						<div class="row">
@@ -674,9 +676,11 @@
 	let count = quantity.data('range');
 	let plus = $('.product-page-qty-plus');
 	let minus = $('.product-page-qty-minus');
+
 	function format_currency(str) {
 		return '₦' + str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
 	}
+
 	$('.variation-select').on('change', function () {
 		let id = $(this).children(":selected").data('id');
 		let quantity = $('#quan');
@@ -714,28 +718,28 @@
 		});
 	});
 
-    $('.wishlist-cta').on('click', function () {
-        let product_id = $(this).data('pid');
-        $.ajax({
-            url: base_url + 'ajax/favourite',
-            method: 'POST',
-            data: {
-                id: product_id
-            },
-            success: response => {
-                let parsed_response = JSON.parse(response);
-                if (parsed_response.action === 'remove') {
-                    $('.wishlist-cta').text('Add to Wishlist');
-                } else {
-                    $('.wishlist-cta').text('Remove from Wishlist');
-                }
-                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
-            },
-            error: () => {
-                notification_message('Sorry an error occurred please try again ', 'fa fa-info-circle', error);
-            }
-        })
-    });
+	$('.wishlist-cta').on('click', function () {
+		let product_id = $(this).data('pid');
+		$.ajax({
+			url: base_url + 'ajax/favourite',
+			method: 'POST',
+			data: {
+				id: product_id
+			},
+			success: response => {
+				let parsed_response = JSON.parse(response);
+				if (parsed_response.action === 'remove') {
+					$('.wishlist-cta').text('Add to Wishlist');
+				} else {
+					$('.wishlist-cta').text('Remove from Wishlist');
+				}
+				notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+			},
+			error: () => {
+				notification_message('Sorry an error occurred please try again ', 'fa fa-info-circle', error);
+			}
+		})
+	});
 
 
 	$('.add-to-cart').on('click', function () {
@@ -757,18 +761,21 @@
 
 		_btn.prop('disabled', '');
 		// $('#prod-confirmation').modal('show');
-		notification_message('<?= ucwords($product->product_name); ?>  successfully added to cart', 'fa fa-cart-plus', 'success');
+		//notification_message('<?//= ucwords($product->product_name); ?>//  successfully added to cart', 'fa fa-cart-plus', 'success');
 		$.ajax({
 			url: base_url + "ajax/add_to_cart",
 			method: "POST",
 			data: $('#variation-form').serialize(),
 			success: function (response) {
-				if (response) {
-					$('.cart-read').show();
-					let x = $('.cart-read').text() * 1;
-					let y = $('.quantity').val() * 1;
-					$('.cart-read').text(x + y);
-				}
+				// if (response) {
+				// 	$('.cart-read').show();
+				// 	let x = $('.cart-read').text() * 1;
+				// 	let y = $('.quantity').val() * 1;
+				// 	$('.cart-read').text(x + y);
+				// }
+
+				window.location.href = base_url + 'cart';
+
 			}
 		});
 
