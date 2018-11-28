@@ -261,8 +261,8 @@ function date_in_range( $start_date, $end_date, $present_date){
 	<!--Main Description card-->
 	<div class="custom-card">
 		<div class="container">
-			<p class="seller-name"><?= ucwords($product->first_name . ' ' . $product->last_name); ?></p>
-			<p class="product-name">Seller - <?= character_limiter(ucwords($product->product_name), 50, '...'); ?></p>
+			<p class="seller-name">Seller - <?= ucwords($product->first_name . ' ' . $product->last_name); ?></p>
+			<p class="product-name"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></p>
 			<div style="margin-top: 4px; margin-left: 2px">
 
 				<?php
