@@ -28,10 +28,10 @@
 				order, please go to the Orders page
 			</div>
 			<div id="status"></div>
-			<div class="table-responsive">
+			<div class="table-responsive market-saved-table">
 				<div id="favourite-div">
 					<?php if( count($saved)) :?>
-					<table class="table table-bordered table-hover market-saved-table">
+					<table class="table table-bordered table-hover ">
 						<thead>
 						<tr id="market-table-head">
 							<th>Product Name</th>
@@ -41,18 +41,17 @@
 						</tr>
 						</thead>
 						<tbody>
-							<?php 
-							
-								foreach($saved as $item ): ?>
+							<?php foreach($saved as $item ): ?>
 								<tr>
 									<td style="padding: 20px;">
 										<div class="row">
 											<div class="col-md-1 col-xs-1">									
-												<a href="javascript:void(0)" class="delete" data-id="<?= $item->fav_id; ?>" data-name="<?= $item->product_name; ?>" title="Remove <?= $item->product_name;?> from your whislist"><i class="fa fa-trash market-trash"></i></a>
+												<a href="javascript:void(0)" class="delete" data-id="<?= $item->id; ?>" data-name="<?= $item->product_name; ?>" title="Remove <?= $item->product_name;?> from your whislist"><i class="fa fa-trash market-trash"></i></a>
 											</div>
 											<div class="col-md-9 col-xs-9">
-												<img src="<?= base_url('data/products/'.$item->id.'/'.$item->image_name); ?>"
-													 class="market-left-l"
+												<img data-src="<?= PRODUCTS_IMAGE_PATH.$item->image_name; ?>"
+                                                     src="<?= base_url('assets/landing/img/load.gif'); ?>"
+													 class="market-left-l lazy"
 													 title="<?= $item->product_name; ?>"
 													 style="width: 80px; height: 100%; padding-right: 4px;">
 													 <span><a id="product-name" href="<?= base_url().urlify($item->product_name, $item->id); ?>"><?= $item->product_name; ?></a></span>
@@ -140,6 +139,7 @@
                         $('.wishlist-cta').html('Remove from Wishlist');
                     }
                     notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+                    $('.market-saved-table').load(`${base_url}account/saved .market-saved-table`);
                 },
                 error: () => {
                     notification_message('Sorry an error occurred please try again ', 'fa fa-info-circle', error);

@@ -444,16 +444,6 @@
 							</div>
 							<div class="col-md-3">
 								<ul class="product-rate-list">
-									<li>
-										<p class="product-rate-list-item">5 Stars</p>
-										<div class="product-rate-list-bar">
-											<div style="width:60%;"></div>
-										</div>
-										<p class="product-rate-list-count">10</p>
-									</li>
-
-
-
 									<?php
 									$total_corrence = 0;
 									foreach ($rating_counts as $rating) :

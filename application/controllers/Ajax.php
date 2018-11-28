@@ -32,6 +32,17 @@ class Ajax extends CI_Controller
 		}
 	}
 
+    // Called from Account Table
+    function fetch_single_address(){
+        if( !$this->input->get('address_id') || !$this->input->is_ajax_request() ) redirect(base_url());
+        $address_id = cleanit($this->input->get('address_id'));
+        $result = $this->user->get_single_address( $this->session->userdata('logged_id'), $address_id);
+        header('Content-type: text/json');
+        header('Content-type: application/json');
+        echo json_encode($result);
+        exit;
+    }
+
 
 	// function to get all areas base on
 	// the user selected state
