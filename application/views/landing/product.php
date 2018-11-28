@@ -444,7 +444,6 @@
 							</div>
 							<div class="col-md-3">
 								<ul class="product-rate-list">
-
 									<?php
 									$total_corrence = 0;
 									foreach ($rating_counts as $rating) :
