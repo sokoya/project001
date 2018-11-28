@@ -143,7 +143,7 @@
 	}
 
 	.product-image {
-		width: 200px;
+		width: auto;
 		height: 260px;
 	}
 
