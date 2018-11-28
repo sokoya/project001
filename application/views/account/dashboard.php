@@ -24,34 +24,40 @@
 				snapshot of your recent account activity and update your account information. Select a link below to
 				view or edit information.</p>
 			<div class="row ">
-				<div class="col-md-4">
-					<div class="market-dashboard-card">
-						<h4>My Orders</h4>
-						<hr/>
-						<p>
-							Check order status make a return or write a review
-						</p>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="market-dashboard-card">
-						<h4>Account Settings</h4>
-						<hr/>
-						<p>
-							Change personal information, update address book and add authorized users
-						</p>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="market-dashboard-card">
-						<h4>My Saved Items</h4>
-						<hr/>
-						<p>
-							Manage your saved items all from one location
-						</p>
-					</div>
+                <a style="color: #0b6427; text-decoration: none;" href="<?= base_url('account/orders'); ?>">
+                    <div class="col-md-4">
+                        <div class="market-dashboard-card">
+                            <h4>My Orders</h4>
+                            <hr/>
+                            <p>
+                                Check order status make a return or write a review
+                            </p>
+                        </div>
+                    </div>
+                </a>
+                <a style="color: #0b6427; text-decoration: none; " href="<?= base_url('account/settings'); ?>">
+                    <div class="col-md-4">
+                        <div class="market-dashboard-card">
+                            <h4>Account Settings</h4>
+                            <hr/>
+                            <p>
+                                Change personal information, update address book and add authorized users
+                            </p>
+                        </div>
+                    </div>
+                </a>
+                <a style="color: #0b6427; text-decoration: none;" href="<?= base_url('account/saved'); ?>">
+                    <div class="col-md-4">
+                    <div class="market-dashboard-card">
+                            <h4>My Saved Items</h4>
+                            <hr/>
+                            <p>
+                                Manage your saved items all from one location
+                            </p>
+                        </div>
 
-				</div>
+                    </div>
+                </a>
 
 			</div>
 

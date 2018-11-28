@@ -389,12 +389,12 @@
 			</button>
 			<?php if ($this->session->userdata('logged_in')) : ?>
 				<?php if (!$favourite): ?>
-					<p class="wishlist-cta">Save to Wishlist</p>
+					<p class="wishlist-cta">Add to Wishlist</p>
 				<?php else: ?>
 					<p class="wishlist-cta">Remove from Wishlist</p>
 				<?php endif; ?>
 			<?php else: ?>
-				<a style="text-decoration: none" href="<?= base_url('login') ?>"><p class="wishlist-cta">Save to
+				<a style="text-decoration: none" href="<?= base_url('login') ?>"><p class="wishlist-cta">Add to
 						Wishlist</p></a>
 			<?php endif; ?>
 
@@ -772,11 +772,10 @@
 			success: response => {
 				let parsed_response = JSON.parse(response);
 				if (parsed_response.action === 'remove') {
-					$('.wishlist-cta').html('Saved to Wishlist');
+					$('.wishlist-cta').html('Add to Wishlist');
 				} else {
 					$('.wishlist-cta').html('Remove from Wishlist');
 				}
-
 				notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
 			},
 			error: () => {

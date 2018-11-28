@@ -114,6 +114,12 @@
 <div class="gap gap-small"></div>
 <?php $this->load->view('landing/resources/footer'); ?>
 <?php $this->load->view('landing/resources/script'); ?>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+<script>
+    $(function() {
+        $('.lazy').Lazy();
+    });
+</script>
 <script>
 	$('.delete').on('click', function(){
 		let id = $(this).data('id');
@@ -123,13 +129,21 @@
 		$('#remove').on('click', function(){
 			$('#confirmation').modal('hide');
 			$.ajax({
-				url: base_url + "ajax/remove_whichlist",
+				url: base_url + "ajax/favourite",
 				method: "POST",
 				data: {'id' : id},
-				success: function (response) {
-					$('#status').html(`<p class="alert alert-${response.status}">${response.message}.</p>`).slideDown('fast').delay(3000).slideUp('slow');
-					$('#favourite-div').load(`${base_url}account/saved #favourite-div`);
-				}
+                success: response => {
+                    let parsed_response = JSON.parse(response);
+                    if (parsed_response.action === 'remove') {
+                        $('.wishlist-cta').html('Add to Wishlist');
+                    } else {
+                        $('.wishlist-cta').html('Remove from Wishlist');
+                    }
+                    notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+                },
+                error: () => {
+                    notification_message('Sorry an error occurred please try again ', 'fa fa-info-circle', error);
+                }
 			});
 		});
 	});

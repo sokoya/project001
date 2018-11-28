@@ -238,26 +238,26 @@
 										</button>
 									</div>
 									<?php if ($this->session->userdata('logged_in')):
-										if ($favourited) :
+										if ($favourite) :
 											?>
 											<div class="col-md-6 col-lg-6">
-												<a class="btn btn-block btn-default fav c-hover" data-action="unsave"
+												<a class="btn btn-block btn-default wishlist-cta"
 												   data-pid="<?= $product->id; ?>"
 												   href="javascript:void(0)"><i class="fa fa-star"></i>Remove From
 													Wishlist</a>
 											</div>
 										<?php else : ?>
 											<div class="col-md-6 col-lg-6">
-												<a class="btn btn-block btn-default fav c-hover" data-action="save"
+												<a class="btn btn-block btn-default wishlist-cta c-hover"
 												   data-pid="<?= $product->id; ?>"
-												   href="javascript:void(0)"><i class="fa fa-star-o"></i>Wishlist</a>
+												   href="javascript:void(0)"><i class="fa fa-star-o"></i>Add to Wishlist</a>
 											</div>
 										<?php endif; ?>
 									<?php else : ?>
 										<div class="col-md-6 col-lg-6">
-											<a class="btn btn-block btn-default fav c-hover"
+											<a class="btn btn-block btn-default c-hover"
 											   href="<?= base_url('login'); ?>"><i
-													class="fa fa-star-o"></i>Wishlist</a>
+													class="fa fa-star-o"></i>Add to Wishlist</a>
 										</div>
 									<?php endif; ?>
 								</div>
@@ -675,11 +675,9 @@
 	let count = quantity.data('range');
 	let plus = $('.product-page-qty-plus');
 	let minus = $('.product-page-qty-minus');
-
 	function format_currency(str) {
 		return '₦' + str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
 	}
-
 	$('.variation-select').on('change', function () {
 		let id = $(this).children(":selected").data('id');
 		let quantity = $('#quan');
@@ -717,37 +715,30 @@
 		});
 	});
 
-	$('.fav').on('click', function (e) {
-		e.preventDefault();
-		_this = $(this);
-		pid = _this.data('pid');
-		action = _this.data('action');
-		$.ajax({
-			url: base_url + "ajax/fav",
-			method: "POST",
-			data: {pid: pid, action: action, 'csrf_carrito': csrf_token},
-			success: function (data) {
-				if (data == true) {
-					if (action == 'save') {
-						_this.find("i").addClass('fa-heart');
-						_this.find("i").removeClass('fa-heart-o');
-						_this.attr('data-action', 'unsave');
-						$('#status').html('<p class="alert alert-success">The product has been saved, go to your dashboard to view.</p>').slideDown('fast').delay(3000).slideUp('slow');
-					} else {
-						_this.find("i").removeClass('fa-heart');
-						_this.find("i").addClass('fa-heart-o');
-						_this.attr('data-action', 'save');
-						$('#status').html('<p class="alert alert-success">The product has been removed from your wishlist</p>').slideDown('fast').delay(3000).slideUp('slow');
-					}
-				} else {
-					$('#status').html('<p class="alert alert-danger">There was an error saving the product.</p>');
-				}
-			},
-			error: function (error) {
-				console.log(error);
-			}
-		});
-	});
+    $('.wishlist-cta').on('click', function () {
+        let product_id = $(this).data('pid');
+        $.ajax({
+            url: base_url + 'ajax/favourite',
+            method: 'POST',
+            data: {
+                id: product_id
+            },
+            success: response => {
+                let parsed_response = JSON.parse(response);
+                if (parsed_response.action === 'remove') {
+                    $('.wishlist-cta').text('Add to Wishlist');
+                } else {
+                    $('.wishlist-cta').text('Remove from Wishlist');
+                }
+                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+            },
+            error: () => {
+                notification_message('Sorry an error occurred please try again ', 'fa fa-info-circle', error);
+            }
+        })
+    });
+
+
 	$('.add-to-cart').on('click', function () {
 		_btn = $(this);
 		_btn.prop('disabled', 'disabled');

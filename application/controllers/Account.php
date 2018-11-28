@@ -168,9 +168,9 @@ class Account extends MY_Controller {
 		$page_data['title'] = "Account Settings";
 		$this->load->model('user_model');
 		if( !$this->input->post()){
-			// var_dump($this->input->post('preference'));
 			$page_data['page'] = 'settings';
 			$page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id'));
+			$page_data['categories'] = $this->product->get_results('categories', 'id,name', "( pid = 0 )");
 			$this->load->view('account/settings', $page_data);
 		}else{
 			if($this->user_model->update_data(
@@ -182,28 +182,6 @@ class Account extends MY_Controller {
 			}
 			redirect($_SERVER['HTTP_REFERER']);
 		}
-	}
-
-	// @return
-    // id, name
-	function fetch_states(){
-		$states = $this->user->get_states();
-		header('Content-type: text/json');
-		header('Content-type: application/json');
-		echo json_encode($states);
-        exit;
-	}
-
-	function fetch_areas(){
-		if( $this->input->get('sid') ){
-			$sid = $this->input->get('sid');
-			$areas = $this->user->get_area( $sid );
-			header('Content-type: text/json');
-			header('Content-type: application/json');
-			echo json_encode($areas);
-	        exit;
-		}
-		redirect(base_url());
 	}
 
 

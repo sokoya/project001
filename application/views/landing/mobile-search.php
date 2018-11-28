@@ -437,7 +437,6 @@
 					let msg = "Sorry but there was an error: ";
 					alert(msg + xhr.status + " " + xhr.statusText);
 				}
-
 				doReplaceState(url.toLowerCase());
 
 				$('#processing').hide();

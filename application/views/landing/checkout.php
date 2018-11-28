@@ -265,13 +265,14 @@
 										<td>
 											<a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
 												<img class="panel-pr-image"
-													 src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image); ?>"
-													 alt="Carrito marketplace <?= $product['name']; ?>"
+													 data-src="<?= PRODUCTS_IMAGE_PATH . $detail->image; ?>"
+                                                     src="<?= base_url('assets/landing/img/load.gif'); ?>"
+													 alt="<?= $product['name']; ?>"
 													 title="<?= $product['name']; ?>"/>
 											</a>
 										</td>
 										<td class="panel-product-title"><?= word_limiter(htmlentities($product['name']), 7, '...'); ?>
-											<br/><span>Seller :<span><?= $detail->name; ?></span> </span>
+											<br/><span>Seller : <span><?= $detail->name; ?></span> </span>
 										</td>
 										<td class="panel-product-quantity"><?= $product['qty']; ?>
 											item(s)
@@ -344,5 +345,11 @@
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
 <script src="<?= base_url('assets/landing/js/checkout.js'); ?>"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+<script>
+    $(function() {
+        $('.lazy').Lazy();
+    });
+</script>
 </body>
 </html>

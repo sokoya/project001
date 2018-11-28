@@ -31,8 +31,8 @@
 						<div class="col-md-6">
 							<p><input type="radio" name="preference" value="1" <?php if($profile->newsletter == true ) echo 'checked';?> title="Subscribe"> Yes I want to receive daily
 								<select style=" display : inline;" name="category" class="market-select">
-									<?php foreach( get_categories() as $categories ) : ?>
-										<option value="<?= $categories->root_category_id; ?>"><?= ucwords($categories->name); ?></option>
+									<?php foreach( $categories as $category ) : ?>
+										<option value="<?= $category->id; ?>"><?= ucwords($category->name); ?></option>
 									<?php endforeach; ?>
 								</select> offers
 							</p>

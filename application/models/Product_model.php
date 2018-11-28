@@ -234,13 +234,13 @@ Class Product_model extends CI_Model{
         $result = '';
         if( $str != '' ){
             if( $this->check_slug_availability( $str ) ){
-                $select = "SELECT description, name, title FROM categories WHERE slug = '{$str}' LIMIT 1";
+                $select = "SELECT description, name, image, title FROM categories WHERE slug = '{$str}' LIMIT 1";
                 $result = $this->db->query($select)->row();
                 return $result;
             }
         }else{
             // That means its coming from search
-            $query = "SELECT c.description,c.name,c.title, p.id FROM products p LEFT JOIN categories c ON (c.id = p.category_id) WHERE p.product_name LIKE '%{$search_like}%' LIMIT 1";
+            $query = "SELECT c.description,c.name,c.title,c.image, p.id FROM products p LEFT JOIN categories c ON (c.id = p.category_id) WHERE p.product_name LIKE '%{$search_like}%' LIMIT 1";
             return $this->db->query( $query )->row();
         }
     }

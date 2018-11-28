@@ -172,7 +172,9 @@ class Ajax extends CI_Controller
 
 
 
-	// Quick view add 
+	/*
+	 * This function handles all "add to cart" in the system called by ajax and return response.
+	 * */
 	function quick_view_add(){
        if( $this->input->is_ajax_request() && $this->input->post() ){
            $pid = $this->input->post('product_id');
@@ -182,7 +184,7 @@ class Ajax extends CI_Controller
            if( $result['status'] == 'success' ){
                $return = $result['msg'];
                $name = preg_replace('/^['.$this->product_name_rules.']+$/i', " ", $return->product_name);
-               $price = (!empty( $return->discount_price)) ? $return->sale_price : $return->discount_price;
+               $price = (empty($return->discount_price) ) ? $return->sale_price : $return->discount_price;
                $data = array(
                    'id' => $pid,
                    'qty' => $qty,
