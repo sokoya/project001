@@ -289,17 +289,27 @@ class Product extends MY_Controller
      * Learn more about the warranty type
      * */
     public function warranty(){
-        if (!$this->agent->is_mobile()){ redirect($_SERVER['HTTP_REFERER']);}
+        $uri = cleanit( $this->uri->segment(2));
+        $index = substr($uri, strrpos($uri, '-') + 1);
+        $page_data['descriptions'] = $this->product->get_results('products', 'product_warranty, warranty_type, warranty_address', "(id = {$index})");
+        if ($this->agent->is_mobile()){
+            $this->load->view('landing/mobile/warranty', $page_data);
+        }else{
+            $this->load->view('landing/warranty', $page_data);
+        }
     }
-
     /*
      * Product description with the specification
      * */
     public function description(){
-        if (!$this->agent->is_mobile()){ redirect($_SERVER['HTTP_REFERER']);}
         $uri = cleanit( $this->uri->segment(2));
         $index = substr($uri, strrpos($uri, '-') + 1);
         $page_data['descriptions'] = $this->product->get_results('products', 'product_description, in_the_box, attributes', "(id = {$index})");
+        if ($this->agent->is_mobile()){
+            $this->load->view('landing/mobile/description', $page_data);
+        }else{
+            $this->load->view('landing/description', $page_data);
+        }
     }
 
     /*
