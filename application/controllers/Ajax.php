@@ -207,8 +207,10 @@ class Ajax extends CI_Controller
                    )
                );
                if( $this->cart->insert($data) ){
+                   $this->session->set_flashdata('success',  'The product ' . $return->product_name .' has been added to your cart successfully.');
                    echo json_encode( array('status' => 'success' , 'msg' => 'The product ' . $return->product_name .' has been added to your cart successfully.'));
                }else{
+                   $this->session->set_flashdata('error',  'There was an error adding the product to your cart,');
                    echo json_encode(array('status' => 'error', 'msg' => 'There was an error adding the product to the cart'));
                }
                exit;
