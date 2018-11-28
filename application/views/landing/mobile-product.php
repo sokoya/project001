@@ -104,9 +104,13 @@
 
 	.buy-btn {
 		margin-top: 3px;
-		background: #468c46;
+		background: #3d8c4d;
 		color: #fff;
 		padding: 13px;
+	}
+
+	.buy-btn:hover, .buy-btn:focus {
+		color: #fff;
 	}
 
 	.block-title {
@@ -207,6 +211,15 @@
 
 	.suggested-image-text:hover {
 		color: #468c46;
+	}
+
+	.comment-user {
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		font-size: 12px;
+		color: #6e6e6e;
+		font-weight: 500;
+		position: relative;
+		bottom: 10px;
 	}
 </style>
 </head>
@@ -520,7 +533,10 @@
 	<!--Product Ratings And Reviews-->
 	<div class="custom-card" style="margin-top: 5px;">
 		<div class="container">
-			<p class="block-title" style="margin-top: 5px;">Total Ratings</p>
+			<p class="block-title" style="margin-top: 5px;">Total Ratings <span><a
+						style="text-decoration: none; color: #0b6427"
+						href="<?= base_url(urlify($product->product_name, $product->id) . 'add_rating_review'); ?>">Write a review</a> </span>
+			</p>
 			<div style="margin-top: 4px; margin-left: 2px">
 				<span class="rating-count">5/5</span>
 				<ul style="display: inline-block" class="product-caption-rating">
@@ -547,20 +563,22 @@
 			</div>
 			<p class="comment-title">Great Product</p>
 			<p class="comment-detail">This is a great product I can't stop using it</p>
+			<p class="comment-user">by Sokoya Philip</p>
 			<hr class="comment-line"/>
 			<div class="comment-block">
 				<ul style="display: inline-block" class="product-caption-rating">
 					<li class="rated"><i class="fa fa-star"></i></li>
 					<li class="rated"><i class="fa fa-star"></i></li>
 					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
+					<li><i class="fa fa-star"></i></li>
+					<li><i class="fa fa-star"></i></li>
 
 				</ul>
 				<span style="float: right;" class="comment-date">22 November 2018</span>
 			</div>
 			<p class="comment-title">Lovely System</p>
 			<p class="comment-detail">Wonderful system my grand daughter loves it </p>
+			<p class="comment-user">by Jeffrey Chidi</p>
 			<hr class="comment-line"/>
 			<div class="comment-block">
 				<ul style="display: inline-block" class="product-caption-rating">
@@ -568,13 +586,19 @@
 					<li class="rated"><i class="fa fa-star"></i></li>
 					<li class="rated"><i class="fa fa-star"></i></li>
 					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
+					<li><i class="fa fa-star"></i></li>
 
 				</ul>
 				<span style="float: right;" class="comment-date">22 November 2018</span>
 			</div>
+			<p class="comment-title">Excellent Speed</p>
+			<p class="comment-detail">The System boots up so fast</p>
+			<p class="comment-user">by Mark Jonathan</p>
 		</div>
-		<button class="btn btn-block rating-btn">View all reviews</button>
+		<a style="text-decoration: none; color: #fff;"
+		   href="<?= base_url(urlify($product->product_name, $product->id) . '/reviews'); ?>">
+			<button class="btn btn-block rating-btn">View all reviews</button>
+		</a>
 	</div>
 	<!--Section Title [Suggested Products]-->
 	<?php if (count($likes)) : ?>

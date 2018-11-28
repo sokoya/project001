@@ -310,6 +310,7 @@ class Product extends MY_Controller
         $page_data['rating_counts'] = $this->product->get_rating_counts($index);
         $page_data['reviews'] = $this->product->get_reviews($index);
         if ($this->agent->is_mobile()){
+			$page_data['page'] = 'mobile-reviews';
             $this->load->view('landing/mobile/reviews', $page_data);
         }else{
             $this->load->view('landing/reviews', $page_data);
@@ -319,12 +320,13 @@ class Product extends MY_Controller
     /*
      * Add rating and review form
      * */
-    public function rating(){
+    public function add_rating_review(){
         if (!$this->agent->is_mobile()){ redirect($_SERVER['HTTP_REFERER']);}
         $uri = cleanit( $this->uri->segment(2));
         $page_data['id'] = substr($uri, strrpos($uri, '-') + 1);
+		$page_data['page'] = 'add-rating';
         if( !$this->input->post() ){
-            $this->load->view('mobile/add-rating', $page_data);
+            $this->load->view('landing/mobile/add-rating', $page_data);
         }else{
             // process the form
         }
