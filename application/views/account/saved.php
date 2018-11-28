@@ -41,9 +41,7 @@
 						</tr>
 						</thead>
 						<tbody>
-							<?php 
-							
-								foreach($saved as $item ): ?>
+							<?php foreach($saved as $item ): ?>
 								<tr>
 									<td style="padding: 20px;">
 										<div class="row">
@@ -51,7 +49,8 @@
 												<a href="javascript:void(0)" class="delete" data-id="<?= $item->fav_id; ?>" data-name="<?= $item->product_name; ?>" title="Remove <?= $item->product_name;?> from your whislist"><i class="fa fa-trash market-trash"></i></a>
 											</div>
 											<div class="col-md-9 col-xs-9">
-												<img src="<?= base_url('data/products/'.$item->id.'/'.$item->image_name); ?>"
+												<img data-src="<?= PRODUCTS_IMAGE_PATH.$item->image_name; ?>"
+                                                     src=""
 													 class="market-left-l"
 													 title="<?= $item->product_name; ?>"
 													 style="width: 80px; height: 100%; padding-right: 4px;">
