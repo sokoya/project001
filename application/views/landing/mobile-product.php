@@ -775,8 +775,6 @@ function date_in_range( $start_date, $end_date, $present_date){
 		let quantity_instance = quantity.val();
 		let variation_id = selected_variation_id;
 		let product_id = $('.product_id').val();
-		let truncated_product_name = $('.truncated_product_name').val();
-
 		$.ajax({
 			url: base_url + 'ajax/quick_view_add',
 			method: 'POST',
