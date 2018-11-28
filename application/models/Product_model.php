@@ -501,7 +501,9 @@ Class Product_model extends CI_Model{
 
     // Fetch single profuct reviews with its rating
     function get_reviews( $id = '' ){
-        $select = "SELECT review.*, rating.rating_score FROM product_review review LEFT JOIN product_rating rating ON (rating.product_id = review.product_id AND rating.user_id = review.user_id) WHERE review.product_id = $id";
+        $select = "SELECT review.display_name, review.title,review.title, review.content, review.published_date, rating.rating_score 
+        FROM product_review review 
+        LEFT JOIN product_rating rating ON (rating.product_id = review.product_id AND rating.user_id = review.user_id) WHERE review.product_id = $id";
         return $this->db->query($select)->result_array();
     }
 

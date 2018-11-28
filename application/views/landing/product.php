@@ -546,8 +546,6 @@
 						</div>
 						<hr/>
 						<article class="product-review"></article>
-
-
 					</div>
 				</div>
 			</div>
