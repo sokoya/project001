@@ -180,9 +180,6 @@ class Ajax extends CI_Controller
 			redirect(base_url());
 		}
 	}
-
-
-
 	/*
 	 * This function handles all "add to cart" in the system called by ajax and return response.
 	 * */

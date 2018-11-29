@@ -121,10 +121,8 @@
 			</p>
 		</div>
 	</div>
-
 	<!--Section Title [Rate This Product]-->
 	<div class="container"><p class="text-break" style="">Rate This Product</p></div>
-
 	<div class="custom-card">
 		<div class="container">
 			<p class="block-title" style="color: #888"><i class="fa fa-info-circle" aria-hidden="true"></i> Click on a
@@ -135,35 +133,32 @@
 			<div class="rating-text" style="position: relative; left: 30px; bottom: 20px; margin-bottom: -10px;"></div>
 		</div>
 	</div>
-
 	<!--Section Title [Write A Review]-->
 	<div class="container"><p class="text-break" style="">Write A Review</p></div>
-
 	<div class="custom-card">
 		<div class="container">
+            <?= form_open(); ?>
 			<p class="form-text">Title of review *</p>
-			<input type="text" class="form-control"
+			<input type="text" class="form-control" name="title" required
 				   placeholder="Title of review"/>
-
 			<p class="form-text" style="margin-top: 6px;">Display name *</p>
-			<input type="text" class="form-control "
-				   placeholder="Display name"/>
-
+			<input type="text" name="display_name" class="form-control "
+				   placeholder="<?= !is_null($profile) ? $profile->first_name . ' ' . $profile->last_name : 'Display Name'; ?>"/>
 			<p class="form-text" style="margin-top: 6px;">Review *</p>
-			<textarea class="form-control form-override" rows="8" style="margin-bottom: 10px;"
-					  placeholder="Display name"></textarea>
-
-			<button class="btn btn-block submit-btn">
+			<textarea required name="content" class="form-control form-override" rows="8" style="margin-bottom: 10px;"
+					  placeholder="Your Review"></textarea>
+			<button type="submit" class="btn btn-block submit-btn">
 				Submit Review
 			</button>
+            <?= form_close(); ?>
 		</div>
 	</div>
 
 
 </body>
 <script>
-	let product_id = 2;
-	let user = 1;
+    let product_id = <?= $id ;?>;
+    let user = <?= !is_null($profile) ? $profile->id : "''"; ?>
 </script>
 <script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>

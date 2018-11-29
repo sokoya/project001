@@ -743,7 +743,6 @@
 	$('.add-to-cart').on('click', function () {
 		_btn = $(this);
 		_btn.prop('disabled', 'disabled');
-		let colour = $('select[name="colour"]').val();
 		let variation = $('select[name="variation"]').val();
 		if (_btn.data('variation') != '' && variation == '') {
 			$('#status').html('<p class="alert alert-danger">Please select a variation.</p>').slideDown('fast').delay(3000).slideUp('slow');
@@ -758,22 +757,12 @@
 		}
 
 		_btn.prop('disabled', '');
-		// $('#prod-confirmation').modal('show');
-		//notification_message('<?//= ucwords($product->product_name); ?>//  successfully added to cart', 'fa fa-cart-plus', 'success');
 		$.ajax({
 			url: base_url + "ajax/add_to_cart",
 			method: "POST",
 			data: $('#variation-form').serialize(),
 			success: function (response) {
-				// if (response) {
-				// 	$('.cart-read').show();
-				// 	let x = $('.cart-read').text() * 1;
-				// 	let y = $('.quantity').val() * 1;
-				// 	$('.cart-read').text(x + y);
-				// }
-
 				window.location.href = base_url + 'cart';
-
 			}
 		});
 

@@ -332,14 +332,35 @@ class Product extends MY_Controller
      * Add rating and review form
      * */
     public function add_rating_review(){
-        if (!$this->agent->is_mobile()){ redirect($_SERVER['HTTP_REFERER']);}
         $uri = cleanit( $this->uri->segment(2));
         $page_data['id'] = substr($uri, strrpos($uri, '-') + 1);
+        $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 		$page_data['page'] = 'add-rating';
         if( !$this->input->post() ){
             $this->load->view('landing/mobile/add-rating', $page_data);
         }else{
             // process the form
+            if( !$this->session->userdata('logged_in') ){
+                $this->session->set_flashdata('error_msg', 'Sorry, you need to login before writing a review');
+                $this->session->set_userdata('referred_from', current_url());
+                redirect( 'login');
+            }
+            $this->form_validation->set_rules('title', 'Title','trim|required|xss_clean');
+            $this->form_validation->set_rules('content', 'Review Content','trim|required|xss_clean');
+            if( $this->form_validation->run() == false ){
+                $this->session->set_flashdata('error_msg','There was an error, please fix <br />' . validation_errors() );
+                redirect($_SERVER['HTTP_REFERER']);
+            }else{
+                $data = array(
+                    'product_id' => $page_data['id'],
+                    'user_id' => $this->session->userdata('logged_id'),
+                    'display_name' => $this->input->post('display_name'),
+                    'title' => $this->input->post('title'),
+                    'content' => $this->input->post('content')
+                );
+                $this->product->create_edit($page_data['id'], $this->session->userdata('logged_id'), $data, 'product_review');
+                redirect(base_url().$uri);
+            }
         }
     }
 
