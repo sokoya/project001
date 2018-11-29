@@ -264,21 +264,12 @@
 											</ul>
 											<h5 class="cs-title"><?= character_limiter(ucwords($product->product_name), 20, '...'); ?></h5>
 											<div class="product-caption-price">
-
-
-
-
-												<?php if (!empty($product->discount_price)  ) : ?>
-													<span>
-													<span
-														class="cs-price-tl"><?= ngn($product->discount_price); ?></span>
-														<span
-															class="cs-price-tl-discount"><sup><?= ngn($product->sale_price); ?> </sup></span>
-													</span>
-												<?php else : ?>
-													<span
-														class="cs-price-tl"><?= ngn($product->sale_price); ?> </span>
-												<?php endif; ?>
+                                                <?php if(discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
+                                                    <span class="cs-price-tl"><?= ngn($product->discount_price); ?></span>
+                                                    <span class="cs-price-tl-discount"><sup><?= ngn($product->sale_price); ?> </sup></span>
+                                                <?php else : ?>
+                                                    <span class="cs-price-tl"><?= ngn($product->sale_price); ?> </span>
+                                                <?php endif; ?>
 												<?php
 												$category_fav = 'category-favorite';
 												if ($this->session->userdata('logged_in')) {

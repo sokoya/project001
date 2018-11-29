@@ -312,22 +312,14 @@
 						  class="rating-total-count"><?= !empty($rating_counts) ? ' (' . count($rating_counts) . ') ratings' : '' ?></span>
 				</ul>
 			</div>
-			<?php if (!empty($var->discount_price) ) : ?>
-                <?php if( !empty($var->start_date) && !empty($var->end_date) ) : ?>
-                    <?php if(date_in_range($var->start_date, $var->end_date, get_now()) ): ?>
-				        <p class="product-price"><?= ngn($var->discount_price); ?>
-					        <span><?= get_discount($var->sale_price, $var->discount_price) ?></span></p>
-                    <?php else : ?>
-                        <p class="product-discount-price"><?= ngn($var->sale_price); ?></p>
-                    <?php endif; ?>
-                <?php else: ?>
-                    <p class="product-price"><?= ngn($var->discount_price); ?>
-                        <span><?= get_discount($var->sale_price, $var->discount_price) ?></span></p>
-                <?php endif; ?>
-			<?php else: ?>
-				<p class="product-price"><?= ngn($var->sale_price); ?></p>
-				<p class="product-discount-price"></p>
-			<?php endif; ?>
+
+            <?php if(discount_check($var->discount_price, $var->start_date, $var->end_date)) : ?>
+                <p class="product-price"><?= ngn($var->discount_price); ?>
+                    <span><?= get_discount($var->sale_price, $var->discount_price) ?></span></p>
+            <?php else : ?>
+                <p class="product-price"><?= ngn($var->sale_price); ?></p>
+                <p class="product-discount-price"></p>
+            <?php endif; ?>
 
 		</div>
 	</div>
@@ -380,39 +372,10 @@
 						<div class="row variation-option-list">
 							<?php foreach ($variations as $variation) : ?>
 								<div class="col-xs-3">
-
-                                    <?php if (!empty($var->discount_price) ) : ?>
-                                        <?php if( !empty($var->start_date) && !empty($var->end_date) ) : ?>
-                                            <?php if(date_in_range($var->start_date, $var->end_date, get_now()) ): ?>
-                                                <p class="product-price"><?= ngn($var->discount_price); ?>
-                                                    <span><?= get_discount($var->sale_price, $var->discount_price) ?></span></p>
-                                            <?php else : ?>
-                                                <p class="product-discount-price"><?= ngn($var->sale_price); ?></p>
-                                            <?php endif; ?>
-                                        <?php else: ?>
-                                            <p class="product-price"><?= ngn($var->discount_price); ?>
-                                                <span><?= get_discount($var->sale_price, $var->discount_price) ?></span></p>
-                                        <?php endif; ?>
-                                    <?php else: ?>
-                                        <p class="product-price"><?= ngn($var->sale_price); ?></p>
-                                        <p class="product-discount-price"></p>
-                                    <?php endif; ?>
-
 									<p data-price="<?= $variation['sale_price']; ?>"
-                                       <?php if(!empty($variation['discount_price'])) : ?>
-                                            <?php
-                                                $start_date = $variation['start_date'] ;
-                                                $end_date = $variation['end_date'];
-                                                if( !empty( $start_date ) && !empty($end_date)) :?>
-                                                    <?php if(date_in_range( $start_date, $end_date, get_now())) :?>
-                                                        data-discount="<?= $variation['discount_price']; ?>"
-                                                    <?php else: ?>
-                                                        data-discount="empty"
-                                                    <?php endif; ?>
-                                                <?php else: ?>
-                                                    data-discount="empty"
-                                                <?php endif; ?>
-                                        <?php else :?>
+                                        <?php if( discount_check($variation['discount_price'], $variation['start_date'], $variation['end_date'])) : ?>
+                                       data-discount="<?= $variation['discount_price']; ?>"
+                                        <?php else : ?>
                                        data-discount="empty"
                                        <?php endif; ?>
 									   data-vid="<?= $variation['id']; ?>"
