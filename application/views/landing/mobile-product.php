@@ -692,41 +692,6 @@
 			quantity.val(1);
 			minus.prop("disabled", true);
 			plus.prop("disabled", false);
-
-
-			// $.ajax({
-			// 	url: base_url + "ajax/check_variation",
-			// 	method: "POST",
-			// 	data: {vid: id, 'csrf_carrito': csrf_token},
-			// 	success: function (response) {
-			// 		$.each(response, function (i, v) {
-			// 			// change the variation id
-			// 			if (v.discount_price) {
-			// 				bind_method(format_currency(v.discount_price), 'price-mini');
-			// 				$('.product-price').html(`
-			// 					${format_currency(v.discount_price)}
-			// 						<span>${get_discount(v.sale_price, v.discount_price)}</span>
-			// 					`);
-			// 				bind_method(format_currency(v.sale_price), 'product-discount-price');
-			// 				$('.product-discount-price').show();
-			// 				$('.pr_price_hidden').val(v.discount_price);
-			// 			} else {
-			// 				$('.pr_price_hidden').val(v.sale_price);
-			// 				bind_method(format_currency(v.sale_price), 'price-mini');
-			// 				bind_method(format_currency(v.sale_price), 'product-price');
-			// 				$('.product-discount-price').hide();
-			// 			}
-			// 			count = v.quantity * 1;
-			// 			quantity.val(1);
-			// 			minus.prop("disabled", true);
-			// 			plus.prop("disabled", false);
-			// 		});
-			// 	},
-			// 	error: function (response) {
-			// 		alert('An error occurred')
-			// 	}
-			// });
-
 			selected_variation_id = $(this).data('vid');
 			$(this).addClass('option-selected');
 		}
