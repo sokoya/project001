@@ -259,9 +259,10 @@ Class Product_model extends CI_Model{
         // $this->db->cache_on();
         // Lets confirm the slug is valid
         if( $this->check_slug_availability( $queries['str'] ) ) {
-            $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price,g.image_name,s.first_name
+            $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price, v.start_date,v.end_date, g.image_name,s.first_name
             FROM products p                        
-            JOIN product_variation AS v ON (p.id = v.product_id) 
+            JOIN (SELECT var.product_id, var.discount_price, var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var 
+            WHERE var.quantity > 0 ORDER BY var.id) AS v ON (p.id = v.product_id) 
             JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )                
             JOIN users AS s ON p.seller_id = s.id ";
 
@@ -525,11 +526,12 @@ Class Product_model extends CI_Model{
 
     // SEARCH CATEGORY PRODUCTS PAGE
     function get_search_products( $queries = array() , $gets = array() ){
-        $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price,g.image_name,s.first_name
+        $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price, v.start_date,v.end_date, g.image_name,s.first_name
             FROM products p                        
-            JOIN product_variation AS v ON (p.id = v.product_id) 
+            JOIN (SELECT var.product_id, var.discount_price, var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var 
+            WHERE var.quantity > 0 ORDER BY var.id) AS v ON (p.id = v.product_id) 
             JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )                
-            JOIN users AS s ON p.seller_id = s.id ";
+            JOIN users AS s ON p.seller_id = s.id";
 
         if( $queries['product_name'] ) {
             $select_query .= " WHERE p.product_status = 'approved' AND p.product_name LIKE '%{$queries["product_name"]}%' ";
