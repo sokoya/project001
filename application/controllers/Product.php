@@ -44,7 +44,7 @@ class Product extends MY_Controller
 			$this->load->view('landing/product', $page_data);
 		} else {
 			$page_data['page'] = 'mobile-product';
-			$page_data['reviews'] =  $this->product->get_reviews($index);
+			$page_data['reviews'] = $this->product->get_reviews($index);
 			$this->load->view('landing/mobile-product', $page_data);
 		}
 	}
@@ -100,7 +100,7 @@ class Product extends MY_Controller
 		$page_data['pagination'] = $this->pagination->create_links();
 		$page_data['products'] = $this->product->get_products($array, $this->input->get());
 		$query = $this->input->get('q');
-		$q = (isset( $query) && !empty( $query )) ? cleanit($query) : '';
+		$q = (isset($query) && !empty($query)) ? cleanit($query) : '';
 		$page_data['brands'] = $this->product->get_brands($str, $q);
 		$page_data['colours'] = $this->product->get_colours($str, $q);
 		$page_data['sub_categories'] = $this->product->get_categories($str, $q);
@@ -247,20 +247,23 @@ class Product extends MY_Controller
 	}
 
 
-    /*
+	/*
      * Learn more about the warranty type
      * */
-    public function warranty(){
-        $uri = cleanit( $this->uri->segment(2));
-        $index = substr($uri, strrpos($uri, '-') + 1);
-        $page_data['descriptions'] = $this->product->get_results('products', 'product_warranty, warranty_type, warranty_address', "(id = {$index})");
-        if ($this->agent->is_mobile()){
-            $this->load->view('landing/mobile/warranty', $page_data);
-        }else{
-            $this->load->view('landing/warranty', $page_data);
-        }
-    }
-    /*
+	public function warranty()
+	{
+		$uri = cleanit($this->uri->segment(2));
+		$index = substr($uri, strrpos($uri, '-') + 1);
+		$page_data['descriptions'] = $this->product->get_results('products', 'product_warranty, warranty_type, warranty_address', "(id = {$index})");
+		$page_data['page'] = 'warranty';
+		if ($this->agent->is_mobile()) {
+			$this->load->view('landing/mobile/warranty', $page_data);
+		} else {
+			$this->load->view('landing/warranty', $page_data);
+		}
+	}
+
+	/*
      * Product description with the specification
      * */
     public function description(){
@@ -273,7 +276,7 @@ class Product extends MY_Controller
         $this->load->view('landing/mobile/description', $page_data);
     }
 
-    /*
+	/*
      * Show all rating and reviews
      * */
     public function reviews(){
@@ -288,7 +291,7 @@ class Product extends MY_Controller
         $this->load->view('landing/mobile/reviews', $page_data);
     }
 
-    /*
+	/*
      * Add rating and review form
      * */
     public function add_rating_review(){
