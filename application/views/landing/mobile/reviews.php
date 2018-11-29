@@ -94,6 +94,13 @@
 		color: #222;
 	}
 
+    .rating-btn {
+        background: #468c46;
+        color: #fff;
+        /*padding: 13px;*/
+        border-radius: 0;
+    }
+
 	.text-break {
 		margin-bottom: -6px;
 		padding-top: 8px;
@@ -116,7 +123,7 @@
 <div>
 	<div class="menu-bg mobile-menu">
 		<div style="margin-left: 10px; margin-right: 10px;">
-			<a style="text-decoration: none" href="<?= base_url('product/samsung-galaxy-s9-black-dual-sim-official-warranty-1'); ?>"><p><span
+			<a style="text-decoration: none" href="<?= $url; ?>"><p><span
 						class="filter_close_btn"> <img src="<?= base_url('assets/landing/svg/left-arrow.svg'); ?>"
 													   alt="Back button"
 													   style="height: 14px; width: 14px; margin-right: 8px; margin-bottom: 2px;"></span>
@@ -168,89 +175,41 @@
 					<p class="product-rate-list-count">1</p>
 				</li>
 			</ul>
-			<a href="javascript:void(0)" class="block-title" style="color: #000;">
-				<ul style="display: inline-block; position: relative; top: 5px;" class="product-caption-rating">
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
 
-				</ul>
-				(156 ratings) <a href="<?= base_url('product/samsung-galaxy-s9-black-dual-sim-official-warranty-1/add_rating_review'); ?>"
-								 style="color: #0b6427; float: right; font-size: 14px; position: relative; top: 1px; text-decoration: none">Write
-					a review</a></a>
+			<a href="javascript:void(0)" class="block-title" style="color: #000;">
+                <ul style="display: inline-block; position: relative; top: 5px;" class="product-caption-rating">
+                    <?= rating_star_generator($rating_counts); ?>
+                </ul>
+				(<?= count($rating_counts); ?> ratings) <a href="<?= $url .'/add_rating_review'; ?>"
+								 style="color: #0b6427; float: right; font-size: 14px; position: relative; top: 1px; text-decoration: none">Write a review</a></a>
 		</div>
 	</div>
 
 	<!--Section Title [Customer Reviews]-->
-	<div class="container"><p class="text-break" style="">Product Reviews (14)</p></div>
+	<?php if($reviews): ?><div class="container"><p class="text-break" style="">Product Reviews (<?= count($reviews); ?>)</p></div><?php endif;?>
 
 	<div class="custom-card">
 		<div class="container">
-			<div class="comment-block">
-				<ul style="display: inline-block" class="product-caption-rating">
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-
-				</ul>
-				<span style="float: right;" class="comment-date">22 November 2018</span>
-			</div>
-			<p class="comment-title">Great Product</p>
-			<p class="comment-detail">This is a great product I can't stop using it</p>
-			<p class="comment-user">by Sokoya Philip</p>
-			<hr class="comment-line"/>
-			<div class="comment-block">
-				<ul style="display: inline-block" class="product-caption-rating">
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li><i class="fa fa-star"></i></li>
-					<li><i class="fa fa-star"></i></li>
-
-				</ul>
-				<span style="float: right;" class="comment-date">22 November 2018</span>
-			</div>
-			<p class="comment-title">Lovely System</p>
-			<p class="comment-detail">Wonderful system my grand daughter loves it </p>
-			<p class="comment-user">by Jeffrey Chidi</p>
-			<hr class="comment-line"/>
-			<div class="comment-block">
-				<ul style="display: inline-block" class="product-caption-rating">
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li><i class="fa fa-star"></i></li>
-
-				</ul>
-				<span style="float: right;" class="comment-date">22 November 2018</span>
-			</div>
-			<p class="comment-title">Excellent Speed</p>
-			<p class="comment-detail">The System boots up so fast</p>
-			<p class="comment-user">by Mark Jonathan</p>
-			<hr class="comment-line"/>
-			<div class="comment-block">
-				<ul style="display: inline-block" class="product-caption-rating">
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-
-				</ul>
-				<span style="float: right;" class="comment-date">24 November 2018</span>
-			</div>
-			<p class="comment-title">Buggy Sound System</p>
-			<p class="comment-detail">The systems sound system is buggy</p>
-			<p class="comment-user">by Cynthia Willson</p>
-			<hr class="comment-line"/>
+            <?php  $x = 1; if($reviews) :  foreach( $reviews as $review ) :?>
+                <div class="comment-block">
+                    <ul style="display: inline-block" class="product-caption-rating">
+                        <?= rating_single_generator($review['rating_score']); ?>
+                    </ul>
+                    <span style="float: right;" class="comment-date"><?= neatDate($review['published_date']); ?></span>
+                </div>
+                <p class="comment-title"><?= $review['title'];?></p>
+                <p class="comment-detail"><?= $review['content'];?></p>
+                <p class="comment-user"><strong>Reviewed by:</strong> <?= $review['display_name']; ?></p>
+                <hr class="comment-line"/>
+                <?php if($x == 3) : ?>
+                    <a style="text-decoration: none; color: #fff;"
+                       href="<?= $url; ?>">
+                        <button class="btn btn-block rating-btn">Show More Reviews</button>
+                    </a>
+                    <?php break;  endif;?>
+                <?php $x++; endforeach;  ?>
+            <?php endif; ?>
 		</div>
-
-		<p style="text-align: center;" class="block-title">Show more comments</p>
 	</div>
 
 </body>

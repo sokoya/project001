@@ -279,30 +279,7 @@
 										<ul class="product-caption-rating">
 											<?php
 											$rating_counts = $this->product->get_rating_counts($product->id);
-											if ($rating_counts) {
-												$overall_rating = product_overall_rating($rating_counts);
-												$rating_rounded = round($overall_rating);
-												for ($i = 1; $i <= $rating_rounded; $i++) {
-													?>
-													<li class="rated"><i class="fa fa-star"></i>
-													</li>
-													<?php
-												}
-												if ($rating_rounded < 5) {
-													for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
-														<li><i class="fa fa-star"></i></li>
-														<?php
-													}
-												}
-											} else {
-												?>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<li><i class="fa fa-star"></i></li>
-												<?php
-											}
+                                            echo rating_star_generator( $rating_counts );
 											?>
 										</ul>
 										<h5 class="product-caption-title"><?= word_limiter(ucwords($product->product_name), 14, '...'); ?></h5>

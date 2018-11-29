@@ -216,13 +216,42 @@ function current_full_url()
 }
 
 
-// if( !function_exists('product_percentage_rating')){
-// 	function product_percentage_rating( $results ) : array{
-// 		$rate5 = $rate4 = $rate3 = $rate2 = $rate1 = $total_outcome = 0;
-// 		$scores = array(1,2,3,4,5);
-		
-// 		return round($rate5/$total_outcome + $rate4/$total_outcome + $rate3/$total_outcome + $rate2/$total_outcome + $rate1/$total_outcome, 1, PHP_ROUND_HALF_UP);
-// 	}
-// }
+if( !function_exists('rating_star_generator')){
+	function rating_star_generator( $ratings ){
+		$return = '';
+		if( $ratings ) {
+            $overall_rating = product_overall_rating( $ratings );
+            $overall_rounded = round( $overall_rating );
+            for( $i = 1; $i <= $overall_rounded; $i++){
+                $return .= '<li class="rated"><i class="fa fa-star"></i></li>';
+            }
+            if( $overall_rounded < 5 ) {
+                for ( $i = 0; $i < ( 5 - $overall_rounded); $i++){
+                    $return .= '<li><i class="fa fa-star"></i></li>';
+                }
+            }
+        }else{
+			$x = 0;
+            do {
+            	$return .= '<li><i class="fa fa-star"></i></li>';
+                $x++;
+            } while ( $x <= 4);
+		}
+		return $return;
+	}
+}
 
+if( !function_exists('rating_single_generator')){
+    function rating_single_generator( $rating_score ){
+        $return = '';
+        for ($i = 1; $i <= $rating_score; $i++) {
+        	$return .= '<li class="rated"><i class="fa fa-star"></i></li>';
+        }if ($rating_score < 5) {
+            for ($i = 0; $i < (5 - $rating_score); $i++) {
+				$return .= '<li><i class="fa fa-star"></i></li>';
+            }
+        }
+        return $return;
+    }
+}
 ?>

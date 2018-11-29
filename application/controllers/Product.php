@@ -144,44 +144,6 @@ class Product extends MY_Controller
 	/**
 	 * @param $product_id - product id
 	 * @param $user_id - user id
-	 * @param $count - rating count
-	 * @return null
-	 */
-	function add_rating()
-	{
-		if ($this->input->post()) {
-			$status['status'] = 'error';
-			$data = array(
-				'product_id' => $this->input->post('product_id'),
-				'user_id' => $this->input->post('user_id'),
-				'rating_score' => $this->input->post('count')
-			);
-			// check if the user bought the product
-			if ($this->product->has_bought($data['product_id'], $data['user_id'])) {
-				$status['message'] = 'You need to be a verified buyer before rating.';
-				echo json_encode($status);
-				exit;
-			}
-			$id = $this->product->num_rows_count('product_rating', array('product_id' => $data['product_id'], 'user_id' => $data['user_id']));
-			if ($id) {
-				$this->product->product_update_data($id, array('rating_score' => $this->input->post('count')), 'product_rating');
-				$status['status'] = 'success';
-				echo json_encode($status);
-				exit;
-			}
-
-			if (is_int($this->product->insert_data('product_rating', $data))) {
-				$status['status'] = 'success';
-				echo json_encode($status);
-				exit;
-			}
-		}
-		exit;
-	}
-
-	/**
-	 * @param $product_id - product id
-	 * @param $user_id - user id
 	 * @param $title - title
 	 * @param $display_name - display_name
 	 * @param $content - content
@@ -304,12 +266,11 @@ class Product extends MY_Controller
     public function description(){
         $uri = cleanit( $this->uri->segment(2));
         $index = substr($uri, strrpos($uri, '-') + 1);
-        $page_data['descriptions'] = $this->product->get_results('products', 'product_description, in_the_box, attributes', "(id = {$index})");
-        if ($this->agent->is_mobile()){
-            $this->load->view('landing/mobile/description', $page_data);
-        }else{
-            $this->load->view('landing/description', $page_data);
-        }
+        $page_data['descrription'] = DESCRIPTION;
+        $page_data['title'] = "Product Specification and Description for  " . $uri;
+        $page_data['product_description'] = $this->product->get_results('products', 'product_description, in_the_box, attributes', "(id = {$index})");
+        $page_data['page'] = "mobile-description";
+        $this->load->view('landing/mobile/description', $page_data);
     }
 
     /*
@@ -320,12 +281,11 @@ class Product extends MY_Controller
         $index = substr($uri, strrpos($uri, '-') + 1);
         $page_data['rating_counts'] = $this->product->get_rating_counts($index);
         $page_data['reviews'] = $this->product->get_reviews($index);
-        if ($this->agent->is_mobile()){
-			$page_data['page'] = 'mobile-reviews';
-            $this->load->view('landing/mobile/reviews', $page_data);
-        }else{
-            $this->load->view('landing/reviews', $page_data);
-        }
+        $page_data['title'] = "Reviews For " . $uri;
+        $page_Data['description'] = DESCRIPTION;
+        $page_data['page'] = 'mobile-reviews';
+        $page_data['url'] = base_url('product/' . $uri);
+        $this->load->view('landing/mobile/reviews', $page_data);
     }
 
     /*
@@ -336,6 +296,9 @@ class Product extends MY_Controller
         $page_data['id'] = substr($uri, strrpos($uri, '-') + 1);
         $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 		$page_data['page'] = 'add-rating';
+		$page_data['title'] = "Write rating and reviews for " . $uri;
+		$page_data['description'] = DESCRIPTION;
+		$page_data['url'] = base_url('product/' . $uri);
         if( !$this->input->post() ){
             $this->load->view('landing/mobile/add-rating', $page_data);
         }else{
@@ -359,9 +322,49 @@ class Product extends MY_Controller
                     'content' => $this->input->post('content')
                 );
                 $this->product->create_edit($page_data['id'], $this->session->userdata('logged_id'), $data, 'product_review');
-                redirect(base_url().$uri);
+                redirect($page_data['url']);
             }
         }
     }
-
+    /**
+     * @param $product_id - product id
+     * @param $user_id - user id
+     * @param $count - rating count
+     * @return null
+     */
+    function add_rating()
+    {
+        if ($this->input->post()) {
+            $status['status'] = 'error';
+            if( !$this->session->userdata('logged_in')){
+                $this->session->set_flashdata('error_msg' ,'You need to login before you can rate.');
+                $this->session->set_userdata('referred_from', current_url());
+                redirect('login');
+            }
+            $data = array(
+                'product_id' => $this->input->post('product_id'),
+                'user_id' => $this->input->post('user_id'),
+                'rating_score' => $this->input->post('count')
+            );
+            if ($this->product->has_bought($data['product_id'], $data['user_id'])) {
+                $status['message'] = 'You need to be a verified buyer before rating.';
+                echo json_encode($status);
+                exit;
+            }
+            // check if the user bought the product
+            $id = $this->product->num_rows_count('product_rating', array('product_id' => $data['product_id'], 'user_id' => $data['user_id']));
+            if ($id) {
+                $this->product->product_update_data($id, array('rating_score' => $this->input->post('count')), 'product_rating');
+                $status['status'] = 'success';
+                echo json_encode($status);
+                exit;
+            }else{
+                if (is_int($this->product->insert_data('product_rating', $data))) {
+                    $status['status'] = 'success';
+                    echo json_encode($status);
+                    exit;
+                }
+            }
+        }
+    }
 }

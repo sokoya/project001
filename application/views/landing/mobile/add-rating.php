@@ -107,12 +107,11 @@
 	}
 </style>
 <body style="background: #efefef">
-
 <div>
 	<div class="menu-bg mobile-menu">
 		<div style="margin-left: 10px; margin-right: 10px;">
 			<a style="text-decoration: none"
-			   href="<?= base_url('product/samsung-galaxy-s9-black-dual-sim-official-warranty-1'); ?>"><p><span
+			   href="<?= $url; ?>"><p><span
 						class="filter_close_btn"> <img src="<?= base_url('assets/landing/svg/left-arrow.svg'); ?>"
 													   alt="Back button"
 													   style="height: 14px; width: 14px; margin-right: 8px; margin-bottom: 2px;"></span>
@@ -141,7 +140,7 @@
 			<p class="form-text">Title of review *</p>
 			<input type="text" class="form-control" name="title" required
 				   placeholder="Title of review"/>
-			<p class="form-text" style="margin-top: 6px;">Display name *</p>
+			<p class="form-text" style="margin-top: 6px;">Display name </p>
 			<input type="text" name="display_name" class="form-control "
 				   placeholder="<?= !is_null($profile) ? $profile->first_name . ' ' . $profile->last_name : 'Display Name'; ?>"/>
 			<p class="form-text" style="margin-top: 6px;">Review *</p>

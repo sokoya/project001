@@ -311,7 +311,7 @@ function date_in_range( $start_date, $end_date, $present_date){
 						<li><i class="fa fa-star"></i></li>
 					<?php } ?>
 					<span style="margin-left: 5px; color: #0b6427;"
-						  class="rating-total-count"><?= !empty($rating_counts) ? ' (' . count($rating_counts) . ')' : 'rating' ?></span>
+						  class="rating-total-count"><?= !empty($rating_counts) ? ' (' . count($rating_counts) . ' rating)' : 'rating' ?></span>
 				</ul>
 			</div>
 			<?php if (!empty($var->discount_price)) : ?>
@@ -598,7 +598,7 @@ function date_in_range( $start_date, $end_date, $present_date){
                 <hr class="comment-line"/>
                 <?php if($x == 3) : ?>
 				<a style="text-decoration: none; color: #fff;"
-		   			href="<?= base_url(urlify($product->product_name, $product->id) . '/reviews'); ?>">
+		   			href="<?= base_url(urlify($product->product_name, $product->id) . 'reviews'); ?>">
 					<button class="btn btn-block rating-btn">View all reviews</button>
 					</a>
                 <?php break;  endif;?>

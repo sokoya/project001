@@ -296,7 +296,7 @@
 					</li>
 					<li><a href="#full-spec" data-toggle="tab"><i class="fa fa-cogs nav-tab-icon"></i>Full Specs</a>
 					</li>
-					<li><a href="#review" class="review-get" data-toggle="tab"><i class="fa fa-star nav-tab-icon"></i>Rating
+					<li><a href="#review" data-toggle="tab"><i class="fa fa-star nav-tab-icon"></i>Rating
 							and
 							Reviews</a>
 					</li>
@@ -705,9 +705,6 @@
 					quantity.val(1);
 					minus.prop("disabled", true);
 					plus.prop("disabled", false);
-					// console.log(v.sale_price)
-					// console.log(v.discount_price)
-
 				});
 			},
 			error: function (response) {
@@ -802,33 +799,6 @@
 		}
 	});
 
-	$('.review-get').on('click', function () {
-		$.ajax({
-			url: base_url + "ajax/get_reviews",
-			method: "POST",
-			data: {pid: product_id},
-			success: function (response) {
-				$.each(response, function (key, value) {
-					$('.product-review').append(`
-					<div class="product-review-content">
-								<h5 class="product-review-title">${value.title}</h5>
-								<ul class="product-page-product-rating">
-								${Array(value.rating_score * 1).join(0).split(0).map((item, i) => `
-    									<li class="rated"><i class="fa fa-star"></i>
-									</li>
-  									`).join('')}
-								${value.rating_score < 5 ? Array(5 - value.rating_score * 1).join(0).split(0).map((item, i) => `
-    									<li><i class="fa fa-star"></i></li>
-  									`).join('') : ''}
-								</ul>
-								<p class="product-review-meta">by ${value.display_name} on ${value.published_date}</p>
-								<p class="product-review-body">${value.content}</p>
-								<hr/>
-							</div>`)
-				});
-			}
-		})
-	});
 </script>
 </body>
 </html
