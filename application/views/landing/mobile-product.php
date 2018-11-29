@@ -558,32 +558,9 @@
 			<div style="margin-top: 4px; margin-left: 2px">
 				<!--				<span class="rating-count">5/5</span>-->
 				<ul style="display: inline-block" class="product-caption-rating">
-					<?php
-					if ($rating_counts) {
-						$overall_rating = product_overall_rating($rating_counts);
-						$rating_rounded = round($overall_rating);
-						for ($i = 1; $i <= $rating_rounded; $i++) { ?>
-							<li class="rated"><i class="fa fa-star"></i></li>
-							<?php
-						}
-						if ($rating_rounded < 5) {
-							for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
-								<li><i class="fa fa-star"></i></li>
-								<?php
-							}
-						} ?>
-						<span style="margin-left: 5px; color: #0b6427;"
-							  class="rating-total-count">(<?= $rating_rounded; ?> reviews)</span>
-						<?php
-					} else { ?>
-						<li><i class="fa fa-star"></i></li>
-						<li><i class="fa fa-star"></i></li>
-						<li><i class="fa fa-star"></i></li>
-						<li><i class="fa fa-star"></i></li>
-						<li><i class="fa fa-star"></i></li>
-						<?php
-					}
-					?>
+					<?= rating_star_generator($rating_counts); ?>
+                    <span style="margin-left: 5px; color: #0b6427;"
+                          class="rating-total-count">(<?= product_overall_rating($rating_counts); ?> average rating)</span>
 				</ul>
 			</div>
 			<hr style="margin-top: -4px;"/>
@@ -591,16 +568,7 @@
             <?php  $x = 1; if($reviews) :  foreach( $reviews as $review ) :?>
                 <div class="comment-block">
                     <ul style="display: inline-block" class="product-caption-rating">
-                        <?php
-                        for ($i = 1; $i <= $review['rating_score']; $i++) { ?>
-                            <li class="rated"><i class="fa fa-star"></i></li>
-                        <?php
-                        }if ($review['rating_score'] < 5) {
-                            for ($i = 0; $i < (5 - $review['rating_score']); $i++) { ?>
-                                <li><i class="fa fa-star"></i></li>
-                        <?php
-                            }
-                        } ?>
+                        <?= rating_single_generator($review['rating_score']); ?>
                     </ul>
                     <span style="float: right;" class="comment-date"><?= neatDate($review['published_date']); ?></span>
                 </div>
