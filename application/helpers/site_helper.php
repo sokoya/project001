@@ -215,7 +215,9 @@ function current_full_url()
     return $_SERVER['QUERY_STRING'] ? $url.'?'.$_SERVER['QUERY_STRING'] : $url;
 }
 
-
+/*
+ * Rating Star Generator : This works for all the ratings (5,4,3,2,1)
+ * for also give the average score*/
 if( !function_exists('rating_star_generator')){
 	function rating_star_generator( $ratings ){
 		$return = '';
@@ -241,6 +243,9 @@ if( !function_exists('rating_star_generator')){
 	}
 }
 
+/*
+ * Calculate a single product rating and display the star
+ * */
 if( !function_exists('rating_single_generator')){
     function rating_single_generator( $rating_score ){
         $return = '';
@@ -252,6 +257,18 @@ if( !function_exists('rating_single_generator')){
             }
         }
         return $return;
+    }
+}
+
+/*
+ * Check the range of date for a discount price
+ * */
+if( !function_exists('date_in_range')){
+    function date_in_range( $start_date, $end_date, $present_date){
+        $start_ts = strtotime($start_date);
+        $end_ts = strtotime($end_date);
+        $user_ts = strtotime($present_date);
+        return ( ($user_ts >= $start_ts) && ($user_ts <= $end_ts) );
     }
 }
 ?>

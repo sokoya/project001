@@ -1,12 +1,4 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
-<?php
-function date_in_range( $start_date, $end_date, $present_date){
-    $start_ts = strtotime($start_date);
-    $end_ts = strtotime($end_date);
-    $user_ts = strtotime($present_date);
-    return ( ($user_ts >= $start_ts) && ($user_ts <= $end_ts) );
-}
-?>
 <style>
 	.custom-card {
 		background: #fff;
