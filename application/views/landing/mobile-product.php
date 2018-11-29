@@ -556,11 +556,10 @@
 						href="<?= base_url(urlify($product->product_name, $product->id) . 'add_rating_review'); ?>">Write a review</a> </span>
 			</p>
 			<div style="margin-top: 4px; margin-left: 2px">
-				<!--				<span class="rating-count">5/5</span>-->
 				<ul style="display: inline-block" class="product-caption-rating">
 					<?= rating_star_generator($rating_counts); ?>
                     <span style="margin-left: 5px; color: #0b6427;"
-                          class="rating-total-count">(<?= product_overall_rating($rating_counts); ?> average rating)</span>
+                          class="rating-total-count">(<?= product_overall_rating($rating_counts).'/5'; ?> average rating)</span>
 				</ul>
 			</div>
 			<hr style="margin-top: -4px;"/>
@@ -586,6 +585,8 @@
             <?php endif; ?>
 		</div>
 	</div>
+
+
 	<!--Section Title [Suggested Products]-->
 	<?php if (count($likes)) : ?>
 		<div class="container" style="margin-bottom: 5px;"><p class="text-break" style="">You might also like</p></div>
