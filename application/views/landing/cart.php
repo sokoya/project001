@@ -15,15 +15,15 @@
 				<div class="col-md-10">
 					<?php $this->load->view('landing/msg_view'); ?>
 					<?= form_open('', 'id="cart-form"'); ?>
-					<table class="table table table-shopping-cart">
+					<table class="table table-bordered table-striped table-shopping-cart">
 						<thead>
 						<tr>
-							<th>Product</th>
-							<th>Title</th>
-							<th>Variation</th>
-							<th>Price</th>
-							<th>Quantity</th>
-							<th>Total</th>
+							<th class="text-center">Product</th>
+							<th class="text-center">Title</th>
+							<th class="text-center">Variation</th>
+							<th class="text-center">Price</th>
+							<th class="text-center">Quantity</th>
+							<th class="text-center">Total</th>
 							<th>Remove</th>
 						</tr>
 						</thead>
@@ -36,17 +36,18 @@
 							$variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
 							?>
 							<tr>
-								<td class="table-shopping-cart-img">
+								<td class="table-shopping-cart-img text-center">
 									<?php echo form_hidden($x . '[rowid]', $product['rowid']); ?>
 									<a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
 										<img
-											data-src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image); ?>"
+											data-src="<?= PRODUCTS_IMAGE_PATH . $detail->image; ?>"
                                             src="<?= base_url('assets/landing/img/load.gif'); ?>"
 											alt="<?= lang('app_name'); ?> <?= $product['name']; ?>"
 											title="<?= $product['name']; ?>"/>
 									</a>
 								</td>
-								<td class="table-shopping-cart-title"><a
+								<td class="table-shopping-cart-title">
+                                    <a
 										href="<?= base_url(urlify($product['name'], $product['id'])); ?>"><?= htmlentities($product['name']); ?></a><br/>
 									<span
 										class="text text-sm">Seller: <?= !empty($detail->legal_company_name) ? $detail->legal_company_name : $detail->name; ?></span>
@@ -61,7 +62,7 @@
                                         <span class="text-center text-semibold text-danger"><strong>The seller of this product is not available at the moment.</strong></span>
                                     </td>
 								<?php else: ?>
-									<td>
+									<td class="text-center">
 										<?= !empty($product['options']['variation']) ? ucfirst($product['options']['variation']) : '-'; ?>
 									</td>
 									<td><?= ngn($product['price']); ?></td>
@@ -85,7 +86,7 @@
 										<?php $total += $product['subtotal']; ?>
 									</td>
 									<td><?php echo ngn($product['subtotal']); ?></td>
-									<td>
+									<td class="text-center">
 										<a title="Remove <?= $product['name']; ?> from the cart"
 										   class="fa fa-close table-shopping-remove"
 										   href="<?= base_url('cart/remove/' . $product['rowid']); ?>"></a>
@@ -190,7 +191,7 @@
 					} else {
 						minus.prop("disabled", false);
 					}
-					$('.cart-row').load(base_url + 'product/cart');
+					$('.cart-row').load(base_url + 'cart');
 				}
 			},
 			error: response => {
@@ -228,7 +229,7 @@
 					} else {
 						minus.prop("disabled", false);
 					}
-					$('.cart-row').load(base_url + 'product/cart');
+					$('.cart-row').load(base_url + 'cart');
 				}
 
 			},

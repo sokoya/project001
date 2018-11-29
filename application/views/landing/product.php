@@ -27,7 +27,7 @@
 					<li><a href="#">Home</a>
 					</li>
 					<li>
-						<a href="<?= base_url('catalog/' . $category_detail->slug ); ?>"><?= ucwords($category_detail->name); ?></a>
+						<a href="<?= base_url('catalog/' . $category_detail->slug); ?>"><?= ucwords($category_detail->name); ?></a>
 					</li>
 					<li class="active c-a-brc"><?= ucwords($product->product_name); ?></li>
 				</ol>
@@ -36,32 +36,33 @@
 				<div class="col-md-5">
 					<div class="product-page-product-wrap jqzoom-stage">
 						<div class="clearfix">
-							<a href="<?= PRODUCTS_IMAGE_PATH.$featured_image->image_name; ?>"
+							<a href="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
 							   id="jqzoom"
 							   data-rel="gal-1">
 								<img
-									src="<?= PRODUCTS_IMAGE_PATH.$featured_image->image_name; ?>"
+									src="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
 									alt="<?= $product->product_name; ?>"
 									title="<?= ucwords($product->product_name) ?>" width="450"
 									style="max-width: 450px"/>
 							</a>
 						</div>
 					</div>
-                    <?php if(count( $galleries) > 1 ) :?>
-                        <ul class="jqzoom-list">
-                            <?php foreach( $galleries as $gallery ) : ?>
-                                    <li>
-                                        <a <?php if($gallery->featured_image == 1 ) echo 'zoomThumbActive';?> href="javascript:void(0)"
-                                           data-rel="{gallery:'gal-1', smallimage: '<?= PRODUCTS_IMAGE_PATH . "c_scale,w_400/" . $gallery->image_name ?>',
-                                           largeimage: '<?=  PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>'}">
-                                            <img class="lazy" src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
-                                                 alt="<?= $product->product_name; ?>"
-                                                 title="<?= $product->product_name?>" width="100"/>
-                                        </a>
-                                    </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php endif; ?>
+					<?php if (count($galleries) > 1) : ?>
+						<ul class="jqzoom-list">
+							<?php foreach ($galleries as $gallery) : ?>
+								<li>
+									<a <?php if ($gallery->featured_image == 1) echo 'zoomThumbActive'; ?>
+										href="javascript:void(0)"
+										data-rel="{gallery:'gal-1', smallimage: '<?= PRODUCTS_IMAGE_PATH . "c_scale,w_400/" . $gallery->image_name ?>',
+                                           largeimage: '<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>'}">
+										<img class="lazy" src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
+											 alt="<?= $product->product_name; ?>"
+											 title="<?= $product->product_name ?>" width="100"/>
+									</a>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					<?php endif; ?>
 				</div>
 
 				<div class="col-md-7">
@@ -238,26 +239,26 @@
 										</button>
 									</div>
 									<?php if ($this->session->userdata('logged_in')):
-										if ($favourited) :
+										if ($favourite) :
 											?>
 											<div class="col-md-6 col-lg-6">
-												<a class="btn btn-block btn-default fav c-hover" data-action="unsave"
+												<a class="btn btn-block btn-default wishlist-cta"
 												   data-pid="<?= $product->id; ?>"
 												   href="javascript:void(0)"><i class="fa fa-star"></i>Remove From
 													Wishlist</a>
 											</div>
 										<?php else : ?>
 											<div class="col-md-6 col-lg-6">
-												<a class="btn btn-block btn-default fav c-hover" data-action="save"
+												<a class="btn btn-block btn-default wishlist-cta c-hover"
 												   data-pid="<?= $product->id; ?>"
-												   href="javascript:void(0)"><i class="fa fa-star-o"></i>Wishlist</a>
+												   href="javascript:void(0)"><i class="fa fa-star-o"></i>Add to Wishlist</a>
 											</div>
 										<?php endif; ?>
 									<?php else : ?>
 										<div class="col-md-6 col-lg-6">
-											<a class="btn btn-block btn-default fav c-hover"
+											<a class="btn btn-block btn-default c-hover"
 											   href="<?= base_url('login'); ?>"><i
-													class="fa fa-star-o"></i>Wishlist</a>
+													class="fa fa-star-o"></i>Add to Wishlist</a>
 										</div>
 									<?php endif; ?>
 								</div>
@@ -369,35 +370,36 @@
 						</div>
 					</div>
 					<div class="tab-pane fade" id="full-spec">
-                        <?php  $specifications = json_decode($product->attributes); ?>
-                        <?php if(!empty($specifications)) : ?>
-						<table class="table">
-							<thead>
-							<tr>
-								<th class="pr-over">Specs:</th>
-								<th class="pr-over">Details:</th>
-							</tr>
-							</thead>
-							<tbody>
-							<?php
-							foreach ($specifications as $specification => $specification_value): ?>
+						<?php $specifications = json_decode($product->attributes); ?>
+						<?php if (!empty($specifications)) : ?>
+							<table class="table">
+								<thead>
 								<tr>
-									<td class="product-page-features-table-specs"><?= ucwords(trim($specification)); ?></td>
-									<td class="product-page-features-table-details">
-										<?php
-										if (is_array($specification_value)):
-											foreach ($specification_value as $key) echo ucwords(trim($key)) . ', ';
-										else: echo ucwords(trim($specification_value));
-										endif;
-										?>
-									</td>
+									<th class="pr-over">Specs:</th>
+									<th class="pr-over">Details:</th>
 								</tr>
-							<?php endforeach; ?>
-							</tbody>
-						</table>
-                        <?php else : ?>
-                            <h3 class="text-center text-danger"><strong>Product specification not avaialable for this item.</strong></h3>
-                        <?php endif; ?>
+								</thead>
+								<tbody>
+								<?php
+								foreach ($specifications as $specification => $specification_value): ?>
+									<tr>
+										<td class="product-page-features-table-specs"><?= ucwords(trim($specification)); ?></td>
+										<td class="product-page-features-table-details">
+											<?php
+											if (is_array($specification_value)):
+												foreach ($specification_value as $key) echo ucwords(trim($key)) . ', ';
+											else: echo ucwords(trim($specification_value));
+											endif;
+											?>
+										</td>
+									</tr>
+								<?php endforeach; ?>
+								</tbody>
+							</table>
+						<?php else : ?>
+							<h3 class="text-center text-danger"><strong>Product specification not avaialable for this
+									item.</strong></h3>
+						<?php endif; ?>
 					</div>
 					<div class="tab-pane fade" id="review">
 						<div class="row">
@@ -444,7 +446,6 @@
 							</div>
 							<div class="col-md-3">
 								<ul class="product-rate-list">
-
 									<?php
 									$total_corrence = 0;
 									foreach ($rating_counts as $rating) :
@@ -547,8 +548,6 @@
 						</div>
 						<hr/>
 						<article class="product-review"></article>
-
-
 					</div>
 				</div>
 			</div>
@@ -717,41 +716,33 @@
 		});
 	});
 
-	$('.fav').on('click', function (e) {
-		e.preventDefault();
-		_this = $(this);
-		pid = _this.data('pid');
-		action = _this.data('action');
+	$('.wishlist-cta').on('click', function () {
+		let product_id = $(this).data('pid');
 		$.ajax({
-			url: base_url + "ajax/fav",
-			method: "POST",
-			data: {pid: pid, action: action, 'csrf_carrito': csrf_token},
-			success: function (data) {
-				if (data == true) {
-					if (action == 'save') {
-						_this.find("i").addClass('fa-heart');
-						_this.find("i").removeClass('fa-heart-o');
-						_this.attr('data-action', 'unsave');
-						$('#status').html('<p class="alert alert-success">The product has been saved, go to your dashboard to view.</p>').slideDown('fast').delay(3000).slideUp('slow');
-					} else {
-						_this.find("i").removeClass('fa-heart');
-						_this.find("i").addClass('fa-heart-o');
-						_this.attr('data-action', 'save');
-						$('#status').html('<p class="alert alert-success">The product has been removed from your wishlist</p>').slideDown('fast').delay(3000).slideUp('slow');
-					}
-				} else {
-					$('#status').html('<p class="alert alert-danger">There was an error saving the product.</p>');
-				}
+			url: base_url + 'ajax/favourite',
+			method: 'POST',
+			data: {
+				id: product_id
 			},
-			error: function (error) {
-				console.log(error);
+			success: response => {
+				let parsed_response = JSON.parse(response);
+				if (parsed_response.action === 'remove') {
+					$('.wishlist-cta').text('Add to Wishlist');
+				} else {
+					$('.wishlist-cta').text('Remove from Wishlist');
+				}
+				notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+			},
+			error: () => {
+				notification_message('Sorry an error occurred please try again ', 'fa fa-info-circle', error);
 			}
-		});
+		})
 	});
+
+
 	$('.add-to-cart').on('click', function () {
 		_btn = $(this);
 		_btn.prop('disabled', 'disabled');
-		let colour = $('select[name="colour"]').val();
 		let variation = $('select[name="variation"]').val();
 		if (_btn.data('variation') != '' && variation == '') {
 			$('#status').html('<p class="alert alert-danger">Please select a variation.</p>').slideDown('fast').delay(3000).slideUp('slow');
@@ -766,19 +757,12 @@
 		}
 
 		_btn.prop('disabled', '');
-		// $('#prod-confirmation').modal('show');
-		notification_message('<?= ucwords($product->product_name); ?>  successfully added to cart', 'fa fa-cart-plus', 'success');
 		$.ajax({
 			url: base_url + "ajax/add_to_cart",
 			method: "POST",
 			data: $('#variation-form').serialize(),
 			success: function (response) {
-				if (response) {
-					$('.cart-read').show();
-					let x = $('.cart-read').text() * 1;
-					let y = $('.quantity').val() * 1;
-					$('.cart-read').text(x + y);
-				}
+				window.location.href = base_url + 'cart';
 			}
 		});
 

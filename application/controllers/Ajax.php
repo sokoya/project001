@@ -32,6 +32,17 @@ class Ajax extends CI_Controller
 		}
 	}
 
+    // Called from Account Table
+    function fetch_single_address(){
+        if( !$this->input->get('address_id') || !$this->input->is_ajax_request() ) redirect(base_url());
+        $address_id = cleanit($this->input->get('address_id'));
+        $result = $this->user->get_single_address( $this->session->userdata('logged_id'), $address_id);
+        header('Content-type: text/json');
+        header('Content-type: application/json');
+        echo json_encode($result);
+        exit;
+    }
+
 
 	// function to get all areas base on
 	// the user selected state
@@ -169,10 +180,9 @@ class Ajax extends CI_Controller
 			redirect(base_url());
 		}
 	}
-
-
-
-	// Quick view add 
+	/*
+	 * This function handles all "add to cart" in the system called by ajax and return response.
+	 * */
 	function quick_view_add(){
        if( $this->input->is_ajax_request() && $this->input->post() ){
            $pid = $this->input->post('product_id');
@@ -182,7 +192,7 @@ class Ajax extends CI_Controller
            if( $result['status'] == 'success' ){
                $return = $result['msg'];
                $name = preg_replace('/^['.$this->product_name_rules.']+$/i', " ", $return->product_name);
-               $price = (!empty( $return->discount_price)) ? $return->sale_price : $return->discount_price;
+               $price = (empty($return->discount_price) ) ? $return->sale_price : $return->discount_price;
                $data = array(
                    'id' => $pid,
                    'qty' => $qty,
@@ -194,8 +204,10 @@ class Ajax extends CI_Controller
                    )
                );
                if( $this->cart->insert($data) ){
+                   $this->session->set_flashdata('success',  'The product ' . $return->product_name .' has been added to your cart successfully.');
                    echo json_encode( array('status' => 'success' , 'msg' => 'The product ' . $return->product_name .' has been added to your cart successfully.'));
                }else{
+                   $this->session->set_flashdata('error',  'There was an error adding the product to your cart,');
                    echo json_encode(array('status' => 'error', 'msg' => 'There was an error adding the product to the cart'));
                }
                exit;

@@ -1,4 +1,12 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
+<?php
+function date_in_range( $start_date, $end_date, $present_date){
+    $start_ts = strtotime($start_date);
+    $end_ts = strtotime($end_date);
+    $user_ts = strtotime($present_date);
+    return ( ($user_ts >= $start_ts) && ($user_ts <= $end_ts) );
+}
+?>
 <style>
 	.custom-card {
 		background: #fff;
@@ -104,9 +112,13 @@
 
 	.buy-btn {
 		margin-top: 3px;
-		background: #468c46;
+		background: #3d8c4d;
 		color: #fff;
 		padding: 13px;
+	}
+
+	.buy-btn:hover, .buy-btn:focus {
+		color: #fff;
 	}
 
 	.block-title {
@@ -143,7 +155,7 @@
 	}
 
 	.product-image {
-		width: 200px;
+		width: auto;
 		height: 260px;
 	}
 
@@ -193,7 +205,7 @@
 	.rating-btn {
 		background: #468c46;
 		color: #fff;
-		padding: 13px;
+		/*padding: 13px;*/
 		border-radius: 0;
 	}
 
@@ -207,6 +219,15 @@
 
 	.suggested-image-text:hover {
 		color: #468c46;
+	}
+
+	.comment-user {
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		font-size: 12px;
+		color: #6e6e6e;
+		font-weight: 500;
+		position: relative;
+		bottom: 10px;
 	}
 </style>
 </head>
@@ -242,10 +263,12 @@
 	<!--Gallery section-->
 	<div class="custom-card">
 		<div class="container">
-            <div class="owl-carousel products-gallery">
-                <?php foreach( $galleries as $gallery ) :?>
-                    <img class="product-image lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name;  ?> " alt="<?= $product->product_name; ?>"/>
-                <?php endforeach; ?>
+			<div class="owl-carousel products-gallery">
+				<?php foreach ($galleries as $gallery) : ?>
+					<img class="product-image lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
+						 data-src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?> "
+						 alt="<?= $product->product_name; ?>"/>
+				<?php endforeach; ?>
 			</div>
 		</div>
 	</div>
@@ -253,7 +276,7 @@
 	<!--Main Description card-->
 	<div class="custom-card">
 		<div class="container">
-			<p class="seller-name"><?= ucwords($product->first_name . ' ' . $product->last_name); ?></p>
+			<p class="seller-name">Seller - <?= ucwords($product->first_name . ' ' . $product->last_name); ?></p>
 			<p class="product-name"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></p>
 			<div style="margin-top: 4px; margin-left: 2px">
 
@@ -349,52 +372,52 @@
 						<p class="custom-product-page-option-title">Variation: </p>
 						<div class="row variation-option-list">
 							<?php foreach ($variations as $variation) : ?>
-								<div class="col-xs-3"><p data-vid="<?= $variation['id']; ?>"
-														 data-vname="<?= $variation['variation'] ?>"
-														 class="variation-option <?php if ($variation['quantity'] < 1) echo 'option-disabled'; ?>  <?php if ($variations[0]['id'] == $variation['id']) echo 'option-selected'; ?>"><?= ucfirst($variation['variation']); ?></p>
+								<div class="col-xs-3">
+                                    <p data-price="<?= $variation['sale_price']; ?>"
+                                       <?php
+                                        if( !empty($variation['discount_price']) && !empty($variation['start_date']) && !empty($variation['end_date']) ) {
+                                            if( date_in_range($variation['start_date'], $variation['end_date'], get_now()) ){
+                                                ?>
+                                            data-discount="<?= $variation['discount_price']; ?>"
+                                            <?php
+                                            }
+                                       }else{ ?>
+                                            data-discount=""
+                                       <?php  } ?>
+                                       data-vid="<?= $variation['id']; ?>"
+                                       data-vname="<?= $variation['variation'] ?>"
+                                       class="variation-option <?php if ($variation['quantity'] < 1) echo 'option-disabled'; ?>
+									    <?php if ($variations[0]['id'] == $variation['id']) echo 'option-selected'; ?>">
+                                        <?= ucfirst($variation['variation']); ?>
+                                    </p>
 								</div>
 							<?php endforeach; ?>
 						</div>
 					</div>
-					<input type="hidden" name="variation_id" class="variation_id"
-						   value="<?= $variations[0]['id']; ?>">
-					<input type="hidden" name="variation_name" class="variation_name"
-						   value="<?= $variations[0]['variation']; ?>">
-					<?php if ($variations[0]['discount_price'] != '') : ?>
-						<input type="hidden" name="product_price"
-							   value="<?= $variations[0]['discount_price']; ?>"
-							   class="pr_price_hidden"/>
-					<?php else: ?>
-						<input type="hidden" name="product_price"
-							   value="<?= $variations[0]['sale_price']; ?>"
-							   class="pr_price_hidden"/>
-					<?php endif; ?>
-				<?php else: ?>
-					<input type="hidden" class="variation_id" name="variation_id" value="<?= $var->id; ?>">
-					<input type="hidden" class="variation_name" name="variation_name" value="<?= $var->variation; ?>">
-					<?php if ($var->discount_price != '') : ?>
-						<input type="hidden" name="product_price"
-							   value="<?= $var->discount_price; ?>"
-							   class="pr_price_hidden"/>
-					<?php else: ?>
-						<input type="hidden" name="product_price"
-							   value="<?= $var->sale_price; ?>"
-							   class="pr_price_hidden"/>
-					<?php endif; ?>
 				<?php endif; ?>
-
+                <input type="hidden" class="variation_id" name="variation_id" value="<?= $var->id; ?>">
+                <input type="hidden" class="variation_name" name="variation_name" value="<?= $var->variation; ?>">
+                <?php if ($var->discount_price != '') : ?>
+                    <input type="hidden" name="product_price"
+                           value="<?= $var->discount_price; ?>"
+                           class="pr_price_hidden"/>
+                <?php else: ?>
+                    <input type="hidden" name="product_price"
+                           value="<?= $var->sale_price; ?>"
+                           class="pr_price_hidden"/>
+                <?php endif; ?>
 			</div>
 			<button class="btn btn-block buy-btn submit-cart">
 				Add to Cart
 			</button>
 			<?php if ($this->session->userdata('logged_in')) : ?>
 				<?php if (!$favourite): ?>
-					<p class="wishlist-cta">Save to Wishlist</p>
+					<p class="wishlist-cta">Add to Wishlist</p>
 				<?php else: ?>
 					<p class="wishlist-cta">Remove from Wishlist</p>
 				<?php endif; ?>
 			<?php else: ?>
-				<a style="text-decoration: none" href="<?= base_url('login') ?>"><p class="wishlist-cta">Save to
+				<a style="text-decoration: none" href="<?= base_url('login') ?>"><p class="wishlist-cta">Add to
 						Wishlist</p></a>
 			<?php endif; ?>
 
@@ -408,7 +431,8 @@
 			<p class="block-title">Delivery Information</p>
 			<div class="row">
 				<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-					<img src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= base_url('assets/landing/svg/delivery-truck.svg'); ?>" alt="Delivery Truck"
+					<img class="lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
+						 data-src="<?= base_url('assets/landing/svg/delivery-truck.svg'); ?>" alt="Delivery Truck"
 						 style="height: 30px; width: 35px;">
 				</div>
 				<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -418,7 +442,8 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-					<img src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= base_url('assets/landing/svg/return.svg'); ?>" alt="Delivery Truck"
+					<img class="lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
+						 data-src="<?= base_url('assets/landing/svg/return.svg'); ?>" alt="Delivery Truck"
 						 style="height: 30px; width: 35px;">
 				</div>
 				<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -427,7 +452,8 @@
 			</div>
 			<div class="row" style="margin-top: 14px;">
 				<div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-					<img src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= base_url('assets/landing/svg/warranty.svg'); ?>" alt="Warranty"
+					<img class="lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
+						 data-src="<?= base_url('assets/landing/svg/warranty.svg'); ?>" alt="Warranty"
 						 style="height: 30px; width: 35px;">
 				</div>
 				<div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -515,78 +541,89 @@
 	<!--Product Ratings And Reviews-->
 	<div class="custom-card" style="margin-top: 5px;">
 		<div class="container">
-			<p class="block-title" style="margin-top: 5px;">Total Ratings</p>
+			<p class="block-title" style="margin-top: 5px;">Total Ratings <span><a
+						style="text-decoration: none; color: #0b6427"
+						href="<?= base_url(urlify($product->product_name, $product->id) . 'add_rating_review'); ?>">Write a review</a> </span>
+			</p>
 			<div style="margin-top: 4px; margin-left: 2px">
-				<span class="rating-count">5/5</span>
-				<ul style="display: inline-block" class="product-caption-rating">
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<span style="margin-left: 5px;" class="rating-total-count">(8 ratings)</span>
-				</ul>
-			</div>
+<!--				<span class="rating-count">5/5</span>-->
+                <ul style="display: inline-block" class="product-caption-rating">
+                <?php
+                if ($rating_counts) {
+                    $overall_rating = product_overall_rating($rating_counts);
+                    $rating_rounded = round($overall_rating);
+                    for ($i = 1; $i <= $rating_rounded; $i++) { ?>
+                        <li class="rated"><i class="fa fa-star"></i></li>
+                        <?php
+                    }if ($rating_rounded < 5) {
+                        for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
+                            <li><i class="fa fa-star"></i></li>
+                            <?php
+                        }
+                    } ?>
+                    <span style="margin-left: 5px; color: #0b6427;" class="rating-total-count">(<?= $rating_rounded; ?> reviews)</span>
+                    <?php
+                } else { ?>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <?php
+                }
+                ?>
+                </ul>
+            </div>
 			<hr style="margin-top: -4px;"/>
-			<p class="block-title" style="margin-top: 5px;">All Reviews</p>
-			<div class="comment-block">
-				<ul style="display: inline-block" class="product-caption-rating">
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-
-				</ul>
-				<span style="float: right;" class="comment-date">22 November 2018</span>
-			</div>
-			<p class="comment-title">Great Product</p>
-			<p class="comment-detail">This is a great product I can't stop using it</p>
-			<hr class="comment-line"/>
-			<div class="comment-block">
-				<ul style="display: inline-block" class="product-caption-rating">
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-
-				</ul>
-				<span style="float: right;" class="comment-date">22 November 2018</span>
-			</div>
-			<p class="comment-title">Lovely System</p>
-			<p class="comment-detail">Wonderful system my grand daughter loves it </p>
-			<hr class="comment-line"/>
-			<div class="comment-block">
-				<ul style="display: inline-block" class="product-caption-rating">
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-					<li class="rated"><i class="fa fa-star"></i></li>
-
-				</ul>
-				<span style="float: right;" class="comment-date">22 November 2018</span>
-			</div>
+			<?php if($reviews) : ?><p class="block-title" style="margin-top: 5px;">All Reviews</p><?php endif;?>
+            <?php  $x = 1; if($reviews) :  foreach( $reviews as $review ) :?>
+                <div class="comment-block">
+                    <ul style="display: inline-block" class="product-caption-rating">
+                        <?php
+                        for ($i = 1; $i <= $review['rating_score']; $i++) { ?>
+                            <li class="rated"><i class="fa fa-star"></i></li>
+                        <?php
+                        }if ($review['rating_score'] < 5) {
+                            for ($i = 0; $i < (5 - $review['rating_score']); $i++) { ?>
+                                <li><i class="fa fa-star"></i></li>
+                        <?php
+                            }
+                        } ?>
+                    </ul>
+                    <span style="float: right;" class="comment-date"><?= neatDate($review['published_date']); ?></span>
+                </div>
+                <p class="comment-title"><?= $review['title'];?></p>
+                <p class="comment-detail"><?= $review['content'];?></p>
+                <p class="comment-user"><strong>Reviewed by:</strong> <?= $review['display_name']; ?></p>
+                <hr class="comment-line"/>
+                <?php if($x == 3) : ?>
+				<a style="text-decoration: none; color: #fff;"
+		   			href="<?= base_url(urlify($product->product_name, $product->id) . '/reviews'); ?>">
+					<button class="btn btn-block rating-btn">View all reviews</button>
+					</a>
+                <?php break;  endif;?>
+            <?php $x++; endforeach;  ?>
+            <?php endif; ?>
 		</div>
-		<button class="btn btn-block rating-btn">View all reviews</button>
 	</div>
 	<!--Section Title [Suggested Products]-->
-    <?php if( count($likes)) :?>
-	<div class="container" style="margin-bottom: 5px;"><p class="text-break" style="">You might also like</p></div>
-	<div class="custom-card">
-		<div class="">
-			<div class="owl-carousel suggested-products">
-                <?php foreach($likes as $like) : ?>
-				<a style="text-decoration: none" href="<?= base_url(urlify($like->product_name, $like->id)); ?>">
-					<img class="suggested-image" src="<?= base_url('assets/landing/img/load.gif'); ?>" data-src="<?= PRODUCTS_IMAGE_PATH.$like->image_name; ?> "/>
-					<p class="suggested-image-text"><?= character_limiter($like->product_name, 15); ?></p>
-				</a>
-                <?php endforeach; ?>
+	<?php if (count($likes)) : ?>
+		<div class="container" style="margin-bottom: 5px;"><p class="text-break" style="">You might also like</p></div>
+		<div class="custom-card">
+			<div class="">
+				<div class="owl-carousel suggested-products">
+					<?php foreach ($likes as $like) : ?>
+						<a style="text-decoration: none"
+						   href="<?= base_url(urlify($like->product_name, $like->id)); ?>">
+							<img class="suggested-image lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
+								 data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?> "/>
+							<p class="suggested-image-text"><?= character_limiter($like->product_name, 15); ?></p>
+						</a>
+					<?php endforeach; ?>
+				</div>
 			</div>
 		</div>
-	</div>
-    <?php endif; ?>
+	<?php endif; ?>
 
 <?php endif; ?>
 
@@ -600,9 +637,9 @@
 <script src="<?= base_url('assets/landing/js/mobile.js'); ?>"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
-    $(function() {
-        $('.lazy').Lazy();
-    });
+	$(function () {
+		$('.lazy').Lazy();
+	});
 	// owl carousel initialization
 	$(document).ready(function () {
 		$('.close-panel').on('click', function () {
@@ -631,7 +668,7 @@
 			animateOut: 'slideOutDown',
 			animateIn: 'flipInX',
 			autoplay: true,
-			autoplayTimeout: 3000,
+			autoplayTimeout: 5000,
 			autoplayHoverPause: true
 		});
 	});
@@ -737,22 +774,22 @@
 		let quantity_instance = quantity.val();
 		let variation_id = selected_variation_id;
 		let product_id = $('.product_id').val();
-		let truncated_product_name = $('.truncated_product_name').val();
-
 		$.ajax({
 			url: base_url + 'ajax/quick_view_add',
 			method: 'POST',
 			data: {
-                product_id: product_id,
-                variation_id: variation_id,
-                quantity: quantity_instance
+				product_id: product_id,
+				variation_id: variation_id,
+				quantity: quantity_instance
 			},
 			success: () => {
-				let counter = $('.cart-count');
-				counter.show();
-				let instance = counter.text() * 1;
-				counter.html(instance + (quantity_instance * 1));
-				notification_message(`${truncated_product_name} successfully added to cart`, 'fa fa-cart-plus', 'success');
+				// let counter = $('.cart-count');
+				// counter.show();
+				// let instance = counter.text() * 1;
+				// counter.html(instance + (quantity_instance * 1));
+				// notification_message(`${truncated_product_name} successfully added to cart`, 'fa fa-cart-plus', 'success');
+
+				window.location.href = base_url + 'cart';
 			},
 			error: () => {
 				notification_message('Sorry an error occurred somewhere', 'fa fa-info-circle', 'warning');
@@ -772,11 +809,10 @@
 			success: response => {
 				let parsed_response = JSON.parse(response);
 				if (parsed_response.action === 'remove') {
-					$('.wishlist-cta').html('Saved to Wishlist');
+					$('.wishlist-cta').html('Add to Wishlist');
 				} else {
 					$('.wishlist-cta').html('Remove from Wishlist');
 				}
-
 				notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
 			},
 			error: () => {

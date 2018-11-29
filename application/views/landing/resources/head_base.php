@@ -32,7 +32,7 @@
 		<meta property="og:title" content="<?= $product->product_name; ?>"/>
 		<meta property="og:type" content="product"/>
 		<meta property="og:image"
-			  content="<?= ($featured_image->image_name) ? base_url('data/products/' . $product->id . '/' . $featured_image->image_name) : ''; ?>"/>
+			  content="<?= ($featured_image->image_name) ? PRODUCTS_IMAGE_PATH . $featured_image->image_name : ''; ?>"/>
 		<meta property="og:desciption" content="<?= $description; ?>"/>
 		<meta property="og:site_name" content="<?= lang('app_name'); ?>"/>
 		<meta property="og:url" content="<?= current_url(); ?>"/>
