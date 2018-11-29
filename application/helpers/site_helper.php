@@ -193,9 +193,6 @@ if( !function_exists('product_overall_rating')){
 	}
 }
 
-
-
-
 if( !function_exists('product_percentage_rating')){
 	function product_percentage_rating( $results ) : array{
 		$rate5 = $rate4 = $rate3 = $rate2 = $rate1 = $total_outcome = 0;
@@ -271,4 +268,25 @@ if( !function_exists('date_in_range')){
         return ( ($user_ts >= $start_ts) && ($user_ts <= $end_ts) );
     }
 }
+
+
+
+// Check discount
+// Returns true if conditions are satisfied
+
+if( !function_exists('discount_check')){
+	function discount_check( $discount, $start_date, $end_date) {
+		if( !empty($discount )) {
+			if( !empty($start_date) && !empty($end_date) ) {
+				if( date_in_range($start_date, $end_date, get_now())){
+					return true;
+				}
+				return false;
+			}
+			return true;
+		}
+		return false;
+	}
+}
+
 ?>
