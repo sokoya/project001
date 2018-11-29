@@ -1,11 +1,13 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
 <?php
-function date_in_range( $start_date, $end_date, $present_date){
-    $start_ts = strtotime($start_date);
-    $end_ts = strtotime($end_date);
-    $user_ts = strtotime($present_date);
-    return ( ($user_ts >= $start_ts) && ($user_ts <= $end_ts) );
+function date_in_range($start_date, $end_date, $present_date)
+{
+	$start_ts = strtotime($start_date);
+	$end_ts = strtotime($end_date);
+	$user_ts = strtotime($present_date);
+	return (($user_ts >= $start_ts) && ($user_ts <= $end_ts));
 }
+
 ?>
 <style>
 	.custom-card {
@@ -155,13 +157,19 @@ function date_in_range( $start_date, $end_date, $present_date){
 	}
 
 	.product-image {
+		height: auto;
 		width: auto;
-		height: 260px;
+		margin: auto;
+		max-width: 250px;
+		max-height: 250px;
 	}
 
 	.suggested-image {
-		height: 160px;
-		width: 230px;
+		height: auto;
+		width: auto;
+		margin: auto;
+		max-width: 200px;
+		max-height: 200px;
 	}
 
 	.text-break {
@@ -311,15 +319,16 @@ function date_in_range( $start_date, $end_date, $present_date){
 						<li><i class="fa fa-star"></i></li>
 					<?php } ?>
 					<span style="margin-left: 5px; color: #0b6427;"
-						  class="rating-total-count"><?= !empty($rating_counts) ? ' (' . count($rating_counts) . ')' : 'rating' ?></span>
+						  class="rating-total-count"><?= !empty($rating_counts) ? ' (' . count($rating_counts) . ') ratings' : '' ?></span>
 				</ul>
 			</div>
-			<?php if (!empty($var->discount_price)) : ?>
+			<?php if (!empty($var->discount_price) && date_in_range($var->start_date, $var->end_date, get_now())) : ?>
 				<p class="product-price"><?= ngn($var->discount_price); ?>
 					<span><?= get_discount($var->sale_price, $var->discount_price) ?></span></p>
 				<p class="product-discount-price"><?= ngn($var->sale_price); ?></p>
 			<?php else: ?>
 				<p class="product-price"><?= ngn($var->sale_price); ?></p>
+				<p class="product-discount-price"></p>
 			<?php endif; ?>
 
 		</div>
@@ -373,39 +382,45 @@ function date_in_range( $start_date, $end_date, $present_date){
 						<div class="row variation-option-list">
 							<?php foreach ($variations as $variation) : ?>
 								<div class="col-xs-3">
-                                    <p data-price="<?= $variation['sale_price']; ?>"
-                                       <?php
-                                        if( !empty($variation['discount_price']) && !empty($variation['start_date']) && !empty($variation['end_date']) ) {
-                                            if( date_in_range($variation['start_date'], $variation['end_date'], get_now()) ){
-                                                ?>
-                                            data-discount="<?= $variation['discount_price']; ?>"
-                                            <?php
-                                            }
-                                       }else{ ?>
-                                            data-discount=""
-                                       <?php  } ?>
-                                       data-vid="<?= $variation['id']; ?>"
-                                       data-vname="<?= $variation['variation'] ?>"
-                                       class="variation-option <?php if ($variation['quantity'] < 1) echo 'option-disabled'; ?>
+									<p data-price="<?= $variation['sale_price']; ?>"
+										<?php
+										if (!empty($variation['discount_price']) && !empty($variation['start_date']) && !empty($variation['end_date'])) {
+											if (date_in_range($variation['start_date'], $variation['end_date'], get_now())) {
+												?>
+												data-discount="<?= $variation['discount_price']; ?>"
+												<?php
+											} else {
+												?>
+												data-discount="empty"
+											<?php }
+											?>
+											<?php
+										} else { ?>
+											data-discount="empty"
+										<?php } ?>
+									   data-vid="<?= $variation['id']; ?>"
+									   data-quantity='<?= $variation['quantity'] ?>'
+									   data-vname="<?= $variation['variation'] ?>"
+									   class="variation-option <?php if ($variation['quantity'] < 1) echo 'option-disabled'; ?>
 									    <?php if ($variations[0]['id'] == $variation['id']) echo 'option-selected'; ?>">
-                                        <?= ucfirst($variation['variation']); ?>
-                                    </p>
+										<?= ucfirst($variation['variation']); ?>
+									</p>
 								</div>
 							<?php endforeach; ?>
 						</div>
 					</div>
 				<?php endif; ?>
-                <input type="hidden" class="variation_id" name="variation_id" value="<?= $var->id; ?>">
-                <input type="hidden" class="variation_name" name="variation_name" value="<?= $var->variation; ?>">
-                <?php if ($var->discount_price != '') : ?>
-                    <input type="hidden" name="product_price"
-                           value="<?= $var->discount_price; ?>"
-                           class="pr_price_hidden"/>
-                <?php else: ?>
-                    <input type="hidden" name="product_price"
-                           value="<?= $var->sale_price; ?>"
-                           class="pr_price_hidden"/>
-                <?php endif; ?>
+				<input type="hidden" class="variation_id" name="variation_id" value="<?= $var->id; ?>">
+				<input type="hidden" class="variation_name" name="variation_name" value="<?= $var->variation; ?>">
+				<?php if ($var->discount_price != '') : ?>
+					<input type="hidden" name="product_price"
+						   value="<?= $var->discount_price; ?>"
+						   class="pr_price_hidden"/>
+				<?php else: ?>
+					<input type="hidden" name="product_price"
+						   value="<?= $var->sale_price; ?>"
+						   class="pr_price_hidden"/>
+				<?php endif; ?>
 			</div>
 			<button class="btn btn-block buy-btn submit-cart">
 				Add to Cart
@@ -546,65 +561,69 @@ function date_in_range( $start_date, $end_date, $present_date){
 						href="<?= base_url(urlify($product->product_name, $product->id) . 'add_rating_review'); ?>">Write a review</a> </span>
 			</p>
 			<div style="margin-top: 4px; margin-left: 2px">
-<!--				<span class="rating-count">5/5</span>-->
-                <ul style="display: inline-block" class="product-caption-rating">
-                <?php
-                if ($rating_counts) {
-                    $overall_rating = product_overall_rating($rating_counts);
-                    $rating_rounded = round($overall_rating);
-                    for ($i = 1; $i <= $rating_rounded; $i++) { ?>
-                        <li class="rated"><i class="fa fa-star"></i></li>
-                        <?php
-                    }if ($rating_rounded < 5) {
-                        for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
-                            <li><i class="fa fa-star"></i></li>
-                            <?php
-                        }
-                    } ?>
-                    <span style="margin-left: 5px; color: #0b6427;" class="rating-total-count">(<?= $rating_rounded; ?> reviews)</span>
-                    <?php
-                } else { ?>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <?php
-                }
-                ?>
-                </ul>
-            </div>
+				<!--				<span class="rating-count">5/5</span>-->
+				<ul style="display: inline-block" class="product-caption-rating">
+					<?php
+					if ($rating_counts) {
+						$overall_rating = product_overall_rating($rating_counts);
+						$rating_rounded = round($overall_rating);
+						for ($i = 1; $i <= $rating_rounded; $i++) { ?>
+							<li class="rated"><i class="fa fa-star"></i></li>
+							<?php
+						}
+						if ($rating_rounded < 5) {
+							for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
+								<li><i class="fa fa-star"></i></li>
+								<?php
+							}
+						} ?>
+						<span style="margin-left: 5px; color: #0b6427;"
+							  class="rating-total-count">(<?= $rating_rounded; ?> reviews)</span>
+						<?php
+					} else { ?>
+						<li><i class="fa fa-star"></i></li>
+						<li><i class="fa fa-star"></i></li>
+						<li><i class="fa fa-star"></i></li>
+						<li><i class="fa fa-star"></i></li>
+						<li><i class="fa fa-star"></i></li>
+						<?php
+					}
+					?>
+				</ul>
+			</div>
 			<hr style="margin-top: -4px;"/>
 			<p class="block-title" style="margin-top: 5px;">All Reviews</p>
-            <?php  $x = 1; if($reviews) :  foreach( $reviews as $review ) :?>
-                <div class="comment-block">
-                    <ul style="display: inline-block" class="product-caption-rating">
-                        <?php
-                        for ($i = 1; $i <= $review['rating_score']; $i++) { ?>
-                            <li class="rated"><i class="fa fa-star"></i></li>
-                        <?php
-                        }if ($review['rating_score'] < 5) {
-                            for ($i = 0; $i < (5 - $review['rating_score']); $i++) { ?>
-                                <li><i class="fa fa-star"></i></li>
-                        <?php
-                            }
-                        } ?>
-                    </ul>
-                    <span style="float: right;" class="comment-date"><?= neatDate($review['published_date']); ?></span>
-                </div>
-                <p class="comment-title"><?= $review['title'];?></p>
-                <p class="comment-detail"><?= $review['content'];?></p>
+			<?php $x = 1;
+			if ($reviews) : foreach ($reviews as $review) : ?>
+				<div class="comment-block">
+					<ul style="display: inline-block" class="product-caption-rating">
+						<?php
+						for ($i = 1; $i <= $review['rating_score']; $i++) { ?>
+							<li class="rated"><i class="fa fa-star"></i></li>
+							<?php
+						}
+						if ($review['rating_score'] < 5) {
+							for ($i = 0; $i < (5 - $review['rating_score']); $i++) { ?>
+								<li><i class="fa fa-star"></i></li>
+								<?php
+							}
+						} ?>
+					</ul>
+					<span style="float: right;" class="comment-date"><?= neatDate($review['published_date']); ?></span>
+				</div>
+				<p class="comment-title"><?= $review['title']; ?></p>
+				<p class="comment-detail"><?= $review['content']; ?></p>
 				<p class="comment-user">by Mark Jonathan</p>
-                <hr class="comment-line"/>
-                <?php if($x == 3) : ?>
-				<a style="text-decoration: none; color: #fff;"
-		   			href="<?= base_url(urlify($product->product_name, $product->id) . '/reviews'); ?>">
-					<button class="btn btn-block rating-btn">View all reviews</button>
+				<hr class="comment-line"/>
+				<?php if ($x == 3) : ?>
+					<a style="text-decoration: none; color: #fff;"
+					   href="<?= base_url(urlify($product->product_name, $product->id) . '/reviews'); ?>">
+						<button class="btn btn-block rating-btn">View all reviews</button>
 					</a>
-                    <!-- <a href="<?= current_url() . 'reviews'; ?>" class="btn btn-block rating-btn">View All Reviews</a> -->
-                <?php break;  endif;?>
-            <?php $x++; endforeach;  else : ?>
-            <?php endif; ?>
+					<!-- <a href="<?= current_url() . 'reviews'; ?>" class="btn btn-block rating-btn">View All Reviews</a> -->
+					<?php break; endif; ?>
+				<?php $x++; endforeach; else : ?>
+			<?php endif; ?>
 		</div>
 	</div>
 	<!--Section Title [Suggested Products]-->
@@ -657,7 +676,6 @@ function date_in_range( $start_date, $end_date, $present_date){
 		$(".products-gallery").owlCarousel({
 			items: 1,
 			lazyLoad: true,
-			loop: true,
 		});
 
 		$(".suggested-products").owlCarousel({
@@ -665,7 +683,7 @@ function date_in_range( $start_date, $end_date, $present_date){
 			center: true,
 			items: 2,
 			lazyLoad: true,
-			margin: 10,
+
 			animateOut: 'slideOutDown',
 			animateIn: 'flipInX',
 			autoplay: true,
@@ -689,43 +707,67 @@ function date_in_range( $start_date, $end_date, $present_date){
 			notification_message('Sorry this variation is out of stock', 'fa fa-info-circle', 'warning')
 		} else {
 			let id = $(this).data('vid');
-			$.ajax({
-				url: base_url + "ajax/check_variation",
-				method: "POST",
-				data: {vid: id, 'csrf_carrito': csrf_token},
-				success: function (response) {
-					$.each(response, function (i, v) {
-						// change the variation id
-						if (v.discount_price) {
-							bind_method(format_currency(v.discount_price), 'price-mini');
-							$('.product-price').html(`
-								${format_currency(v.discount_price)}
-									<span>${get_discount(v.sale_price, v.discount_price)}</span>
+			let discount_price = $(this).data('discount');
+			let price = $(this).data('price');
+			let quantity_instance = $(this).data('quantity');
+
+			if (discount_price !== 'empty') {
+				bind_method(format_currency(discount_price), 'price-mini');
+				$('.product-price').html(`
+								${format_currency(discount_price)}
+									<span>${get_discount(price, discount_price)}</span>
 								`);
-							bind_method(format_currency(v.sale_price), 'product-discount-price');
-							$('.product-discount-price').show();
-							$('.pr_price_hidden').val(v.discount_price);
-						} else {
-							$('.pr_price_hidden').val(v.sale_price);
-							bind_method(format_currency(v.sale_price), 'price-mini');
-							bind_method(format_currency(v.sale_price), 'product-price');
-							$('.product-discount-price').hide();
-						}
-						console.log($('.pr_price_hidden').val());
-						count = v.quantity * 1;
-						quantity.val(1);
-						minus.prop("disabled", true);
-						plus.prop("disabled", false);
-					});
-				},
-				error: function (response) {
-					alert('An error occurred')
-				}
-			});
+				bind_method(format_currency(price), 'product-discount-price');
+				console.log(format_currency(price));
+				$('.product-discount-price').show();
+				$('.pr_price_hidden').val(discount_price);
+			} else {
+				$('.pr_price_hidden').val(price);
+				bind_method(format_currency(price), 'price-mini');
+				bind_method(format_currency(price), 'product-price');
+				$('.product-discount-price').hide();
+			}
+			count = quantity_instance * 1;
+			quantity.val(1);
+			minus.prop("disabled", true);
+			plus.prop("disabled", false);
+
+
+			// $.ajax({
+			// 	url: base_url + "ajax/check_variation",
+			// 	method: "POST",
+			// 	data: {vid: id, 'csrf_carrito': csrf_token},
+			// 	success: function (response) {
+			// 		$.each(response, function (i, v) {
+			// 			// change the variation id
+			// 			if (v.discount_price) {
+			// 				bind_method(format_currency(v.discount_price), 'price-mini');
+			// 				$('.product-price').html(`
+			// 					${format_currency(v.discount_price)}
+			// 						<span>${get_discount(v.sale_price, v.discount_price)}</span>
+			// 					`);
+			// 				bind_method(format_currency(v.sale_price), 'product-discount-price');
+			// 				$('.product-discount-price').show();
+			// 				$('.pr_price_hidden').val(v.discount_price);
+			// 			} else {
+			// 				$('.pr_price_hidden').val(v.sale_price);
+			// 				bind_method(format_currency(v.sale_price), 'price-mini');
+			// 				bind_method(format_currency(v.sale_price), 'product-price');
+			// 				$('.product-discount-price').hide();
+			// 			}
+			// 			count = v.quantity * 1;
+			// 			quantity.val(1);
+			// 			minus.prop("disabled", true);
+			// 			plus.prop("disabled", false);
+			// 		});
+			// 	},
+			// 	error: function (response) {
+			// 		alert('An error occurred')
+			// 	}
+			// });
 
 			selected_variation_id = $(this).data('vid');
 			$(this).addClass('option-selected');
-			console.log(selected_variation_id);
 		}
 	});
 
