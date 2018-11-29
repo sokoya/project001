@@ -643,24 +643,23 @@ Class Product_model extends CI_Model{
         return $this->db->query( $select )->row()->price;
     }
 
-//$this->product->create_edit($page_data['id'], $this->session->userdata('logged_id'), $data, 'product_review');
     function create_edit( $pid, $uid, $data = array(), $table_name){
         switch ($table_name){
             case 'product_review':
-                    $id = $this->num_rows_count($table_name, "(product_id = {$pid} && user_id = {$uid})");
-                    if(!$id){
+                    $row = $this->get_row( $table_name, 'id', array('product_id' => $pid, 'user_id' => $uid) );
+                    if(!$row){
                         $this->insert_data($table_name, $data);
                     }else{
-                        $this->update_data($id, $data, $table_name);
+                        $this->update_data($row->id, $data, $table_name);
                     }
                     return true;
                 break;
             case 'product_rating':
-                $id = $this->num_rows_count($table_name, "(product_id = {$pid} && user_id = {$uid})");
-                if(!$id){
+                $row = $this->get_row( $table_name, 'id', array('product_id' => $pid, 'user_id' => $uid) );
+                if(!$row){
                     $this->insert_data($table_name, $data);
                 }else{
-                    $this->update_data($id, $data, $table_name);
+                    $this->update_data($row->id, $data, $table_name);
                 }
                 return true;
                 break;

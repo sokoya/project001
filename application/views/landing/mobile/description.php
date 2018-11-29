@@ -114,7 +114,7 @@
 	<div class="menu-bg mobile-menu">
 		<div style="margin-left: 10px; margin-right: 10px;">
 			<a style="text-decoration: none"
-			   href="<?= base_url('product/samsung-galaxy-s9-black-dual-sim-official-warranty-1'); ?>"><p><span
+			   href="<?= $url;?>"><p><span
 						class="filter_close_btn"> <img src="<?= base_url('assets/landing/svg/left-arrow.svg'); ?>"
 													   alt="Back button"
 													   style="height: 14px; width: 14px; margin-right: 8px; margin-bottom: 2px;"></span>
@@ -123,60 +123,53 @@
 			</p>
 		</div>
 	</div>
+    <?php if( $product_description ): ?>
+        <!--Section Title [Product Description]-->
+        <div class="container"><p class="text-break">Description</p></div>
 
-	<!--Section Title [Product Description]-->
-	<div class="container"><p class="text-break">Description</p></div>
+        <div class="custom-card">
+            <div class="container">
+                <p class="body_text"><?= $product_description->product_description;?></p>
+            </div>
+        </div>
 
-	<div class="custom-card">
-		<div class="container">
-			<p class="body_text">Display: 5.8”, Quad HD+ sAMOLED Single Sim Option Camera Main: Super Speed Dual Pixel
-				12 MP OIS (F1.5/F2.4) Camera Front: 8MP AF (F1.7) Processor: 10nm, Octa-core (2.7GHz Quad + 1.7GHz Quad)
-				Memory: 4GB RAM and 64GB Internal storage, External Memory: MicroSD™ up to 400 GB Battery: 3000mAh
-				Security: Intelligent Scan (Iris + Face), Fingerprint Scanner, Water and Dust Resistance: IP68 (1.5 m &
-				30 min)</p>
-		</div>
-	</div>
+        <!--Section Title [Product Specification]-->
+        <div class="container"><p class="text-break">Specifications</p></div>
 
-	<!--Section Title [Product Specification]-->
-	<div class="container"><p class="text-break">Specifications</p></div>
+        <div class="custom-card">
+            <div class="container">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Specification</th>
+                        <th>Details</th>
+                    </tr>
+                    </thead>
+                    <?php $specs = json_decode($product_description->attributes); ?>
+                    <tbody>
+                    <?php if (!empty($specs)): foreach ($specs as $spec => $value) : ?>
+                        <tr>
+                            <td><?= trim($spec); ?></td>
+                            <td><?php if (is_array($value)) : foreach ($value as $val) echo ucwords($val) . ', '; else: echo ucwords($value); endif; ?></td>
+                        </tr>
+                    <?php endforeach; else : ?>
+                        <td colspan="2">No Specification for this product</td>
+                    <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-	<div class="custom-card">
-		<div class="container">
-			<table class="table table-striped">
-				<thead>
-				<tr>
-					<th>Specification</th>
-					<th>Details</th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr>
-					<td>Sim-Type</td>
-					<td>Dual SIM</td>
-				</tr>
-				<tr>
-					<td>OS-Type</td>
-					<td>Android OS</td>
-				</tr>
-				<tr>
-					<td>Battery-Capacity</td>
-					<td>3000mAh</td>
-				</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
+        <!--Section Title [What's in the box]-->
+        <div class="container"><p class="text-break">What's in the box</p></div>
+        <div class="custom-card">
+            <div class="container">
+                <p class="body_text"><?= !empty($product_description->in_the_box) ? $product_description->in_the_box : ' --- '?></p>
+            </div>
+        </div>
+    <?php else: ?>
 
-	<!--Section Title [What's in the box]-->
-	<div class="container"><p class="text-break">What's in the box</p></div>
-	<div class="custom-card">
-		<div class="container">
-			<p class="body_text">4.7-Inch (diagonal) widescreen LCD multi-touch display with IPS technology and Retina
-				HD display Splash, water, and dust resistant 12MP camera with Optical image stabilization and
-				Six?element lens 4K video recording at 24 fps, 30 fps, or 60 fps All new glass design with A
-				color?matched, aerospace?grade aluminum band</p>
-		</div>
-	</div>
+    <?php endif; ?>
 
 </body>
 <script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>

@@ -269,9 +269,10 @@ class Product extends MY_Controller
     public function description(){
         $uri = cleanit( $this->uri->segment(2));
         $index = substr($uri, strrpos($uri, '-') + 1);
-        $page_data['descrription'] = DESCRIPTION;
+        $page_data['url'] = base_url('product/'.$uri .'/');
+        $page_data['description'] = DESCRIPTION;
         $page_data['title'] = "Product Specification and Description for  " . $uri;
-        $page_data['product_description'] = $this->product->get_results('products', 'product_description, in_the_box, attributes', "(id = {$index})");
+        $page_data['product_description'] = $this->product->get_row('products', 'product_description, in_the_box, attributes', "(id = {$index})");
         $page_data['page'] = "mobile-description";
         $this->load->view('landing/mobile/description', $page_data);
     }
@@ -287,7 +288,7 @@ class Product extends MY_Controller
         $page_data['title'] = "Reviews For " . $uri;
         $page_Data['description'] = DESCRIPTION;
         $page_data['page'] = 'mobile-reviews';
-        $page_data['url'] = base_url('product/' . $uri);
+        $page_data['url'] = base_url('product/' . $uri.'/');
         $this->load->view('landing/mobile/reviews', $page_data);
     }
 
@@ -301,7 +302,7 @@ class Product extends MY_Controller
 		$page_data['page'] = 'add-rating';
 		$page_data['title'] = "Write rating and reviews for " . $uri;
 		$page_data['description'] = DESCRIPTION;
-		$page_data['url'] = base_url('product/' . $uri);
+		$page_data['url'] = base_url('product/' . $uri.'/');
         if( !$this->input->post() ){
             $this->load->view('landing/mobile/add-rating', $page_data);
         }else{
@@ -355,18 +356,10 @@ class Product extends MY_Controller
                 exit;
             }
             // check if the user bought the product
-            $id = $this->product->num_rows_count('product_rating', array('product_id' => $data['product_id'], 'user_id' => $data['user_id']));
-            if ($id) {
-                $this->product->product_update_data($id, array('rating_score' => $this->input->post('count')), 'product_rating');
+            if($this->product->create_edit($this->input->post('product_id'), $this->session->userdata('logged_id'), $data, 'product_rating')){
                 $status['status'] = 'success';
                 echo json_encode($status);
                 exit;
-            }else{
-                if (is_int($this->product->insert_data('product_rating', $data))) {
-                    $status['status'] = 'success';
-                    echo json_encode($status);
-                    exit;
-                }
             }
         }
     }

@@ -494,7 +494,12 @@
 							aria-hidden="true"
 							data-target="description_vl"></i></span></p>
 				<p id="description_vl" class="body_text">
-					<?= word_limiter($product->product_description, 80); ?>
+					<?= word_limiter($product->product_description, 80);?>
+                    <?php if(str_word_count($product->product_description,0) > 50 ) : ?>
+                        <span><a
+                        style="text-decoration: none; color: #0b6427"
+                        href="<?= base_url(urlify($product->product_name, $product->id) . 'description'); ?>">Read More</a> </span>
+                    <?php endif; ?>
 				</p>
 				<hr/>
 			<?php endif; ?>
