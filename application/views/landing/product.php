@@ -1,5 +1,55 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
 </head>
+<style type="text/css">
+	.product-seller-cta {
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		font-size: 14px;
+		margin-bottom: 2px;
+	}
+
+	.widget-title {
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		font-size: 17px;
+	}
+
+	.fa.fa-facebook {
+		background: #46629e;
+	}
+
+	.fa.fa-twitter {
+		background: #55acee;
+	}
+
+	.fa.fa-pinterest {
+		background: #cd2129;
+	}
+
+	.fa.fa-instagram {
+		background: #457399;
+	}
+
+	.fa.fa-google-plus {
+		background: #dd4b39;
+	}
+
+	.socials {
+		float: right;
+		position: relative;
+		bottom: 40px;
+		margin-bottom: -40px;
+	}
+
+	.socials > a {
+		text-decoration: none;
+		width: 26px;
+		height: 26px;
+		line-height: 26px;
+		-webkit-border-radius: 50%;
+		border-radius: 50%;
+		text-align: center;
+		color: #fff;
+	}
+</style>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
 	<?php $this->load->view('landing/resources/head_img') ?>
@@ -147,18 +197,29 @@
 									</div>
 								</div>
 								<hr class="product-line"/>
+								<div class="row">
+									<div class="col-md-12">
+										<p class="product-page-price">
+											<?php if (!empty($var->discount_price)) : ?>
+												<span class="price-cs ds-price"><?= ngn($var->discount_price); ?></span>
+												<span
+													class="product-page-price-list price-lower dn-price"><?= ngn($var->sale_price); ?></span>
+											<?php else: ?>
+												<span class="price-cs dn-price"><?= ngn($var->sale_price); ?></span>
+											<?php endif; ?>
+										<div class="socials">
+											<a class="fa fa-facebook" href="#"></a>
+											<a class="fa fa-twitter" href="#"></a>
+											<a class="fa fa-pinterest" href="#"></a>
+											<a class="fa fa-instagram" href="#"></a>
+											<a class="fa fa-google-plus" href="#"></a>
+										</div>
+										</p>
+									</div>
+									<div class="col-md-6">
 
-								<p class="product-page-price">
-									<?php if (!empty($var->discount_price)) : ?>
-										<span class="price-cs ds-price"><?= ngn($var->discount_price); ?></span>
-										<span
-											class="product-page-price-list price-lower dn-price"><?= ngn($var->sale_price); ?></span>
-									<?php else: ?>
-										<span class="price-cs dn-price"><?= ngn($var->sale_price); ?></span>
-									<?php endif; ?>
-
-								</p>
-
+									</div>
+								</div>
 
 								<hr class="product-line"/>
 								<div class="product-variation">
@@ -264,24 +325,8 @@
 								</div>
 								<br/>
 								<div class="product-page-side-section">
-									<h5 class="product-page-side-title">Share This Product</h5>
-									<ul class="product-page-share-item">
-										<li>
-											<a class="fa fa-facebook" href="#"></a>
-										</li>
-										<li>
-											<a class="fa fa-twitter" href="#"></a>
-										</li>
-										<li>
-											<a class="fa fa-pinterest" href="#"></a>
-										</li>
-										<li>
-											<a class="fa fa-instagram" href="#"></a>
-										</li>
-										<li>
-											<a class="fa fa-google-plus" href="#"></a>
-										</li>
-									</ul>
+									<p class="product-seller-cta">Have one to sell sell your own <a
+											href="<?= base_url('seller/'); ?>">here</a></p>
 								</div>
 							</div>
 						</div>
@@ -724,13 +769,13 @@
 			success: response => {
 				let parsed_response = JSON.parse(response);
 				if (parsed_response.action === 'remove') {
-					$('.wishlist-cta').text('Add to Wishlist');
+					$('.wishlist-cta').html('<i class="fa fa-star-o"></i> Add to Wishlist');
 				} else {
-					$('.wishlist-cta').text('Remove from Wishlist');
+					$('.wishlist-cta').html('<i class="fa fa-star"></i> Remove from Wishlist');
 				}
 				notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
 			},
-			error: () => {
+			error: error => {
 				notification_message('Sorry an error occurred please try again ', 'fa fa-info-circle', error);
 			}
 		})
