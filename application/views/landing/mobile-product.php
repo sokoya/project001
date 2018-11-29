@@ -592,38 +592,35 @@ function date_in_range($start_date, $end_date, $present_date)
 				</ul>
 			</div>
 			<hr style="margin-top: -4px;"/>
-			<p class="block-title" style="margin-top: 5px;">All Reviews</p>
-			<?php $x = 1;
-			if ($reviews) : foreach ($reviews as $review) : ?>
-				<div class="comment-block">
-					<ul style="display: inline-block" class="product-caption-rating">
-						<?php
-						for ($i = 1; $i <= $review['rating_score']; $i++) { ?>
-							<li class="rated"><i class="fa fa-star"></i></li>
-							<?php
-						}
-						if ($review['rating_score'] < 5) {
-							for ($i = 0; $i < (5 - $review['rating_score']); $i++) { ?>
-								<li><i class="fa fa-star"></i></li>
-								<?php
-							}
-						} ?>
-					</ul>
-					<span style="float: right;" class="comment-date"><?= neatDate($review['published_date']); ?></span>
-				</div>
-				<p class="comment-title"><?= $review['title']; ?></p>
-				<p class="comment-detail"><?= $review['content']; ?></p>
-				<p class="comment-user">by Mark Jonathan</p>
-				<hr class="comment-line"/>
-				<?php if ($x == 3) : ?>
-					<a style="text-decoration: none; color: #fff;"
-					   href="<?= base_url(urlify($product->product_name, $product->id) . '/reviews'); ?>">
-						<button class="btn btn-block rating-btn">View all reviews</button>
+			<?php if($reviews) : ?><p class="block-title" style="margin-top: 5px;">All Reviews</p><?php endif;?>
+            <?php  $x = 1; if($reviews) :  foreach( $reviews as $review ) :?>
+                <div class="comment-block">
+                    <ul style="display: inline-block" class="product-caption-rating">
+                        <?php
+                        for ($i = 1; $i <= $review['rating_score']; $i++) { ?>
+                            <li class="rated"><i class="fa fa-star"></i></li>
+                        <?php
+                        }if ($review['rating_score'] < 5) {
+                            for ($i = 0; $i < (5 - $review['rating_score']); $i++) { ?>
+                                <li><i class="fa fa-star"></i></li>
+                        <?php
+                            }
+                        } ?>
+                    </ul>
+                    <span style="float: right;" class="comment-date"><?= neatDate($review['published_date']); ?></span>
+                </div>
+                <p class="comment-title"><?= $review['title'];?></p>
+                <p class="comment-detail"><?= $review['content'];?></p>
+                <p class="comment-user"><strong>Reviewed by:</strong> <?= $review['display_name']; ?></p>
+                <hr class="comment-line"/>
+                <?php if($x == 3) : ?>
+				<a style="text-decoration: none; color: #fff;"
+		   			href="<?= base_url(urlify($product->product_name, $product->id) . '/reviews'); ?>">
+					<button class="btn btn-block rating-btn">View all reviews</button>
 					</a>
-					<!-- <a href="<?= current_url() . 'reviews'; ?>" class="btn btn-block rating-btn">View All Reviews</a> -->
-					<?php break; endif; ?>
-				<?php $x++; endforeach; else : ?>
-			<?php endif; ?>
+                <?php break;  endif;?>
+            <?php $x++; endforeach;  ?>
+            <?php endif; ?>
 		</div>
 	</div>
 	<!--Section Title [Suggested Products]-->
@@ -817,8 +814,6 @@ function date_in_range($start_date, $end_date, $present_date)
 		let quantity_instance = quantity.val();
 		let variation_id = selected_variation_id;
 		let product_id = $('.product_id').val();
-		let truncated_product_name = $('.truncated_product_name').val();
-
 		$.ajax({
 			url: base_url + 'ajax/quick_view_add',
 			method: 'POST',

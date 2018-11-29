@@ -17,13 +17,6 @@ Class Product_model extends CI_Model{
     // Update table
     function update_data( $access = '' , $data = array(), $table_name = 'users'){
         $this->db->where('id', $access);
-        $this->db->or_where('email', $access);
-        return $this->db->update( $table_name, $data );
-    }
-
-    // Update table
-    function product_update_data( $access = '' , $data = array(), $table_name = 'products'){
-        $this->db->where('id', $access);
         return $this->db->update( $table_name, $data );
     }
 
@@ -85,7 +78,6 @@ Class Product_model extends CI_Model{
         return $this->db->get('product_variation')->result_array();
     }
 
-
     /**
      * @param $id
      * @return mixed
@@ -94,7 +86,8 @@ Class Product_model extends CI_Model{
         return $this->db->query("SELECT quantity, sale_price, discount_price, start_date, end_date FROM product_variation WHERE id = $id")->row();
     }
 
-    /*The funfyion helps to make a secondary check on a product before adding to cart
+    /*
+     *The function helps to make a secondary check on a product before adding to cart
      * */
     function get_product_item( $pid, $vid, $qty ){
         // check if the variation item is still available
@@ -110,7 +103,6 @@ Class Product_model extends CI_Model{
             return array('status' => 'error', 'msg' => 'Sorry, the product is no longer active.');
         }
     }
-
 
 
     // Get user has favourite this property
@@ -168,7 +160,6 @@ Class Product_model extends CI_Model{
             $this->recurssive($value);
         }
     }
-
     /*
     *Function to get the parent category of a particular category
     *Called the parent_recurssive
@@ -343,8 +334,6 @@ Class Product_model extends CI_Model{
         }else{
             return '';
         }
-
-        
     }
 
 
@@ -365,8 +354,6 @@ Class Product_model extends CI_Model{
         $result = $this->db->query( $select_query )->result();
         return $result;
     }
-   
-
 
     // Get products brands
     function get_brands( $category = '', $search_like = ''){
@@ -391,7 +378,6 @@ Class Product_model extends CI_Model{
         }
         return '';
     }
-
     // Get products colours
     function get_colours( $category ='', $search_like = ''){
         $select_query = "SELECT COUNT(*) AS `colour_count`, `main_colour` AS `colour_name` FROM `products` p ";
@@ -464,7 +450,6 @@ Class Product_model extends CI_Model{
             return $number;
     }
 
-
     // increase view
     function set_field( $table, $field, $set, $where ){
         $this->db->where($where);
@@ -506,7 +491,6 @@ Class Product_model extends CI_Model{
         LEFT JOIN product_rating rating ON (rating.product_id = review.product_id AND rating.user_id = review.user_id) WHERE review.product_id = $id";
         return $this->db->query($select)->result_array();
     }
-
 
     // Rating score for single product page
     function get_rating_counts( $pid = ''){
@@ -657,6 +641,30 @@ Class Product_model extends CI_Model{
 //        die( $address_id);
         $select = "SELECT b.aid, a.price FROM billing_address b LEFT JOIN area a ON (b.aid = a.id ) WHERE b.id = {$address_id}";
         return $this->db->query( $select )->row()->price;
+    }
+
+//$this->product->create_edit($page_data['id'], $this->session->userdata('logged_id'), $data, 'product_review');
+    function create_edit( $pid, $uid, $data = array(), $table_name){
+        switch ($table_name){
+            case 'product_review':
+                    $id = $this->num_rows_count($table_name, "(product_id = {$pid} && user_id = {$uid})");
+                    if(!$id){
+                        $this->insert_data($table_name, $data);
+                    }else{
+                        $this->update_data($id, $data, $table_name);
+                    }
+                    return true;
+                break;
+            case 'product_rating':
+                $id = $this->num_rows_count($table_name, "(product_id = {$pid} && user_id = {$uid})");
+                if(!$id){
+                    $this->insert_data($table_name, $data);
+                }else{
+                    $this->update_data($id, $data, $table_name);
+                }
+                return true;
+                break;
+        }
     }
 
 
