@@ -227,11 +227,11 @@
 								<div
 									class="col-md-3 <?php if ($p_count % 4 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> v-items clearfix">
 									<div class="product">
-										<?php if (!empty($product->discount_price)): ?>
-											<ul class="product-labels">
-												<li><?= get_discount($product->sale_price, $product->discount_price); ?></li>
-											</ul>
-										<?php endif; ?>
+                                        <?php if(discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
+                                            <ul class="product-labels">
+                                                <li><?= get_discount($product->sale_price, $product->discount_price); ?></li>
+                                            </ul>
+                                        <?php endif; ?>
 										<div class="product-img-wrap">
 											<div class="product-quick-view-cover">
 												<div style="position: relative; left: -50%;">
@@ -264,12 +264,14 @@
 											</ul>
 											<h5 class="cs-title"><?= character_limiter(ucwords($product->product_name), 20, '...'); ?></h5>
 											<div class="product-caption-price">
+
                                                 <?php if(discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
                                                     <span class="cs-price-tl"><?= ngn($product->discount_price); ?></span>
                                                     <span class="cs-price-tl-discount"><sup><?= ngn($product->sale_price); ?> </sup></span>
                                                 <?php else : ?>
                                                     <span class="cs-price-tl"><?= ngn($product->sale_price); ?> </span>
                                                 <?php endif; ?>
+
 												<?php
 												$category_fav = 'category-favorite';
 												if ($this->session->userdata('logged_in')) {

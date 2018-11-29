@@ -14,7 +14,7 @@ class Product extends MY_Controller
 	public function index()
 	{
 		// $this->output->cache(60);
-
+        $this->session->set_userdata('referred_from', current_url());
 		$uri = $this->uri->segment(2);
 		$index = substr($uri, strrpos($uri, '-') + 1);
 		// sanitize
@@ -53,7 +53,7 @@ class Product extends MY_Controller
 	// List Product Page
 	public function catalog()
 	{
-
+        $this->session->set_userdata('referred_from', current_url());
 		$str = $this->uri->segment(2);
 		$str = preg_replace("/[^A-Za-z0-9\-]/", "", cleanit($str));
 		$str = cleanit($str);
@@ -109,7 +109,7 @@ class Product extends MY_Controller
 		$page_data['description'] = $page_data['category_detail']->description;
 		$page_data['title'] = $page_data['category_detail']->title;
 		$page_data['page'] = 'category';
-        var_dump($page_data['products']);
+//        var_dump($page_data['products']);
 		if (!$this->agent->is_mobile()) {
 			$this->load->view('landing/category', $page_data);
 		} else {
@@ -151,6 +151,7 @@ class Product extends MY_Controller
 	 */
 	function add_review()
 	{
+        $this->session->set_userdata('referred_from', current_url());
 		if ($this->input->post()) {
 			$status['status'] = 'error';
 			$data = array(
@@ -179,6 +180,7 @@ class Product extends MY_Controller
 	// Search
 	public function search()
 	{
+        $this->session->set_userdata('referred_from', current_url());
 //        http://localhost/project001/search?category=Phones+%26+Tablets&q=sam
 		if (!$this->input->get('q', true)) redirect(base_url());
 		$category = cleanit($this->input->get('category', true));
@@ -252,6 +254,7 @@ class Product extends MY_Controller
      * */
 	public function warranty()
 	{
+        $this->session->set_userdata('referred_from', current_url());
 		$uri = cleanit($this->uri->segment(2));
 		$index = substr($uri, strrpos($uri, '-') + 1);
 		$page_data['descriptions'] = $this->product->get_results('products', 'product_warranty, warranty_type, warranty_address', "(id = {$index})");
@@ -267,6 +270,7 @@ class Product extends MY_Controller
      * Product description with the specification
      * */
     public function description(){
+        $this->session->set_userdata('referred_from', current_url());
         $uri = cleanit( $this->uri->segment(2));
         $index = substr($uri, strrpos($uri, '-') + 1);
         $page_data['url'] = base_url('product/'.$uri .'/');
@@ -296,6 +300,7 @@ class Product extends MY_Controller
      * Add rating and review form
      * */
     public function add_rating_review(){
+        $this->session->set_userdata('referred_from', current_url());
         $uri = cleanit( $this->uri->segment(2));
         $page_data['id'] = substr($uri, strrpos($uri, '-') + 1);
         $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
@@ -338,6 +343,7 @@ class Product extends MY_Controller
      */
     function add_rating()
     {
+        $this->session->set_userdata('referred_from', current_url());
         if ($this->input->post()) {
             $status['status'] = 'error';
             if( !$this->session->userdata('logged_in')){

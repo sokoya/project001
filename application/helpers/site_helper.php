@@ -279,7 +279,7 @@ if( !function_exists('discount_check')){
 		if( !empty($discount )) {
 			if( !empty($start_date) && !empty($end_date) ) {
 				if( date_in_range($start_date, $end_date, get_now())){
-					return true;
+					return false;
 				}
 				return false;
 			}

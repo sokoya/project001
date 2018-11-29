@@ -116,7 +116,6 @@ class Ajax extends CI_Controller
 			$pid = $this->input->post('product_id');
 			$results  = array();
 			$desc = $this->product->get_quick_view_details($pid);
-			$now = date_create(date("Y-m-d"));
 			$results['description'] = character_limiter($desc->product_description, 278);
 			$results['seller'] = $desc->seller_id;
 			$variation = $this->product->get_variation( $pid );
@@ -126,20 +125,14 @@ class Ajax extends CI_Controller
 			$results['default_price'] = $variation->sale_price;
 			$results['default_discount_price'] = $variation->discount_price;
 
-			$end_date = date_create( $variation->end_date );
-			$start_date = date_create( $variation->start_date );
-			if( !empty($end_date) && !empty($start_date) && !empty($variation->discount_price) ){
-				$end_date_diff = date_diff( $end_date, $now );
-				$start_date_diff = date_diff( $start_date, $now );
-				$intend_diff = $end_date_diff->format("%R%a");
-				$intstart_diff = $start_date_diff->format("%R%a");
-				if( $intend_diff > 0  || $intstart_diff < 0 ){
-					$results['default_discount_price'] = $variation->sale_price;
-				}
-			}
+			if( discount_check($variation->discount_price, $variation->start_date, $variation->end_date)) {
+                $results['default_discount_price'] = $variation->discount_price;
+            }else{
+                $results['default_discount_price'] = $variation->sale_price;
+            }
 			$results['avg_rating'] = $results['total_rating'] = 0;
-
 			$rating_counts = $this->product->get_rating_counts( $pid );
+//            rating_star_generator($rating_counts);
 			if( $rating_counts ){
 				// Total rating count
 				foreach( $rating_counts as $counts ){
@@ -151,26 +144,16 @@ class Ajax extends CI_Controller
 			if( $variations ) {
 				$x = 0;
 				foreach( $variations as $variation ){
-
 					$results['variation'][$x]['vid'] = $variation['id'];
 					$results['variation'][$x]['discount_price'] = $variation['discount_price'];
 					$results['variation'][$x]['sale_price'] = $variation['sale_price'];
 					$results['variation'][$x]['quantity'] = $variation['quantity'];
 					$results['variation'][$x]['variation_name'] = $variation['variation'];
-
-					$end_date = date_create( $variation['end_date'] );
-					$start_date = date_create( $variation['start_date'] );
-					// Check the start date and end date before processing
-					if( !empty($start_date) && !empty($end_date) && !empty($results['variation'][$x]['discount_price']) ){
-						$end_date_diff = date_diff( $end_date, $now );
-						$start_date_diff = date_diff( $start_date, $now );
-						$intend_diff = $end_date_diff->format("%R%a");
-						$intstart_diff = $start_date_diff->format("%R%a");
-
-						if( $intend_diff > 0  || $intstart_diff < 0  ){
-							$results['variation'][$x]['discount_price'] = $variation['sale_price'];
-						}
-					}
+                    if( discount_check($variation['discount_price'], $variation['start_date'], $variation['end_date'])) {
+                        $results['variation'][$x]['discount_price'] = $variation['discount_price'];
+                    }else{
+                        $results['variation'][$x]['discount_price'] = $variation['sale_price_price'];
+                    }
 					$x++;
 				}
 			}
