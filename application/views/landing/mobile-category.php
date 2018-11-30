@@ -312,8 +312,7 @@
 	<script src="<?= base_url('assets/landing/js/ionrangeslider.js'); ?>"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
-		let current_url = "<?= current_url()?>";
-	</script>
+	<script>let current_url = "<?= current_url()?>";</script>
 	<script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
 	<script>
         $(function() {
