@@ -393,35 +393,12 @@
 							<div class="col-md-4">
 								<h3 class="product-tab-rating-title">Overall Customer Rating:</h3>
 								<ul class="product-page-product-rating product-rating-big">
-									<?php
-									if ($rating_counts) {
-										$overall_rating = product_overall_rating($rating_counts);
-										$rating_rounded = round($overall_rating);
-										for ($i = 1; $i <= $rating_rounded; $i++) {
-											?>
-											<li class="rated"><i class="fa fa-star"></i>
-											</li>
-											<?php
-										}
-										if ($rating_rounded < 5) {
-											for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
-												<li><i class="fa fa-star"></i></li>
-												<?php
-											}
-										}
-									} else { ?>
-										<li><i class="fa fa-star"></i></li>
-										<li><i class="fa fa-star"></i></li>
-										<li><i class="fa fa-star"></i></li>
-										<li><i class="fa fa-star"></i></li>
-										<li><i class="fa fa-star"></i></li>
-										<?php
-									}
-									?>
-									<li class="count"><?= isset($overall_rating) ? $overall_rating : ''; ?></li>
+									<?= rating_star_generator($rating_counts); ?>
+									<li class="count">
+                                        <?php $overall_rating = product_overall_rating($rating_counts); ?>
+                                        <?= isset($overall_rating) ? $overall_rating : ''; ?>
+                                    </li>
 								</ul>
-								<!-- <small>{{ Number of reviews - 238 customer reviews }}</small>
-								<p><strong>98%</strong> of reviewers would recommend this product</p> -->
 								<?php
 								if (!$this->session->userdata('logged_in')):
 									?>
@@ -433,6 +410,7 @@
 							</div>
 							<div class="col-md-3">
 								<ul class="product-rate-list">
+                                <!-- Rating bar-->
 									<?php
 									$total_corrence = 0;
 									foreach ($rating_counts as $rating) :
@@ -483,7 +461,6 @@
 													</li>
 												</ul>
 											</div>
-
 											<div id="starr-rating-active" style="display: none;">
 												<div class="col-md-6">
 													<div class='starrr' id='star1'></div>
@@ -501,7 +478,6 @@
 											</div>
 										<?php endif; endif; ?>
 								</div>
-								<?php if ($this->session->userdata('logged_in')) : ?>
 									<div id="review_submit"></div>
 									<form id="review_form" onsubmit="return false">
 										<div class="row">
@@ -530,10 +506,8 @@
 										<input type="submit" class="btn btn-success" id="review_submit_button"
 											   value="Post Review">
 									</form>
-								<?php endif; ?>
 							</div>
 						</div>
-						<hr/>
 						<article class="product-review"></article>
 					</div>
 				</div>
@@ -554,8 +528,8 @@
 							<?php endif; ?>
 							<div class="product-img-wrap">
 								<img class="product-img lazy"
-									 data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?>"
-									 src="<?= base_url('assets/landing/img/load.gif'); ?>"
+                                     src="<?= base_url('assets/landing/img/load.gif'); ?>"
+                                     data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?>"
 									 alt="<?= $like->product_name; ?>"
 									 title="<?= $like->product_name; ?>">
 							</div>
@@ -564,35 +538,11 @@
 								<ul class="product-caption-rating">
 									<?php
 									$overall_rating = $this->product->get_rating_counts($like->id);
-									if ($overall_rating) {
-										$overall_rating = product_overall_rating($overall_rating);
-										$rating_rounded = round($overall_rating);
-										for ($i = 1; $i <= $rating_rounded; $i++) {
-											?>
-											<li class="rated"><i class="fa fa-star"></i></li>
-											<?php
-										}
-										if ($rating_rounded < 5) {
-											for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
-												<li><i class="fa fa-star"></i></li>
-												<?php
-											}
-										}
-									} else {
-										?>
-										<li><i class="fa fa-star"></i></li>
-										<li><i class="fa fa-star"></i></li>
-										<li><i class="fa fa-star"></i></li>
-										<li><i class="fa fa-star"></i></li>
-										<li><i class="fa fa-star"></i></li>
-										<?php
-									}
+									    echo rating_star_generator( $overall_rating);
 									?>
-
 								</ul>
 								<h5 class="product-caption-title"><?= character_limiter(ucwords($like->product_name), 30, '...'); ?></h5>
 								<div class="product-caption-price">
-
                                     <?php if( discount_check($like->discount_price, $like->start_date, $like->end_date)) : ?>
                                         <span class="product-caption-price-new"><?= ngn($like->discount_price); ?></span>
                                         <span class="product-caption-price-old"><sup><?= ngn($like->sale_price); ?> </sup></span>
@@ -655,6 +605,10 @@
 
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
 <script>
+    $(function () {
+        $('.lazy').Lazy();
+    });
+
 	let quantity = $('#quan');
 	let count = quantity.data('range');
 	let plus = $('.product-page-qty-plus');

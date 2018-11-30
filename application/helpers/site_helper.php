@@ -167,40 +167,33 @@ if (!function_exists('productStatus')) {
 
 // This functions round up the overall rating
 if( !function_exists('product_overall_rating')){
-	function product_overall_rating( $results ) : float{
+	function product_overall_rating( $results ) {
 		$rate5 = $rate4 = $rate3 = $rate2 = $rate1 = $total_outcome = 0;
-		foreach ($results as $key ) {
-			switch ($key['rating_score']) {
-				case 5:
-					$rate5 = $key['occurence'] * 5;
-					break;
-				case 4:
-					$rate4 = $key['occurence'] * 4;
-					break;
-				case 3:
-					$rate3 = $key['occurence'] * 3;
-					break;
-				case 2:
-					$rate2 = $key['occurence'] * 2;
-					break;
-				case 1:
-					$rate1 = $key['occurence'] * 1;
-					break;
-			}
-			$total_outcome += $key['occurence'];
-		}
-		return round($rate5/$total_outcome + $rate4/$total_outcome + $rate3/$total_outcome + $rate2/$total_outcome + $rate1/$total_outcome, 1, PHP_ROUND_HALF_UP);
-	}
-}
-
-if( !function_exists('product_percentage_rating')){
-	function product_percentage_rating( $results ) : array{
-		$rate5 = $rate4 = $rate3 = $rate2 = $rate1 = $total_outcome = 0;
-		foreach ($results as $key ) { $total_outcome += $key['occurence']; }
-		foreach( $results as $key ){
-			
-		}
-		
+		if( $results ) {
+            foreach ($results as $key ) {
+                switch ($key['rating_score']) {
+                    case 5:
+                        $rate5 = $key['occurence'] * 5;
+                        break;
+                    case 4:
+                        $rate4 = $key['occurence'] * 4;
+                        break;
+                    case 3:
+                        $rate3 = $key['occurence'] * 3;
+                        break;
+                    case 2:
+                        $rate2 = $key['occurence'] * 2;
+                        break;
+                    case 1:
+                        $rate1 = $key['occurence'] * 1;
+                        break;
+                }
+                $total_outcome += $key['occurence'];
+            }
+            return round($rate5/$total_outcome + $rate4/$total_outcome + $rate3/$total_outcome + $rate2/$total_outcome + $rate1/$total_outcome, 1, PHP_ROUND_HALF_UP);
+        }else{
+			return '';
+        }
 	}
 }
 
@@ -241,10 +234,11 @@ if( !function_exists('rating_star_generator')){
 }
 
 /*
- * Calculate a single product rating and display the star
+ * Rating single Generator:
+ * This helps to display the rounded start rate for a single product
  * */
-if( !function_exists('rating_single_generator')){
-    function rating_single_generator( $rating_score ){
+if( !function_exists('single_user_rate')){
+    function single_user_rate( $rating_score ){
         $return = '';
         for ($i = 1; $i <= $rating_score; $i++) {
         	$return .= '<li class="rated"><i class="fa fa-star"></i></li>';
@@ -257,6 +251,68 @@ if( !function_exists('rating_single_generator')){
     }
 }
 
+if( !function_exists('rating_bars')){
+    function rating_bars( $results ){
+        $rate1 = $rate2 = $rate3 = $rate4 = $rate5 = array(
+            'occurence' => 0,
+            'percentage' => 0,
+            'text' => '1 star'
+        );
+        $total_occurence = 0;
+        foreach ($results as $key ) {
+            switch ($key['rating_score']) {
+                case 5:
+                    $rate5['occurence'] = $key['occurence'];
+                    $rate5['text'] = '5 stars';
+                    break;
+                case 4:
+                    $rate4['occurence'] = $key['occurence'];
+                    $rate4['text'] = '4 stars';
+                    break;
+                case 3:
+                    $rate3['occurence'] = $key['occurence'];
+                    $rate3['text'] = '3 stars';
+                    break;
+                case 2:
+                    $rate2['occurence'] = $key['occurence'];
+                    $rate2['text'] = '2 stars';
+                    break;
+                case 1:
+                    $rate1['occurence'] = $key['occurence'];
+                    $rate1['text'] = '1 star';
+                    break;
+            }
+            $total_occurence += $key['occurence'];
+        }
+        $rate5['percentage'] = ($rate5['occurence']/$total_occurence) * 100;
+        $rate4['percentage'] = ($rate4['occurence']/$total_occurence) * 100;
+        $rate3['percentage'] = ($rate3['occurence']/$total_occurence) * 100;
+        $rate2['percentage'] = ($rate2['occurence']/$total_occurence) * 100;
+        $rate1['percentage'] = ($rate1['occurence']/$total_occurence) * 100;
+
+        $result = array();
+        array_push($result, $rate5);
+        array_push($result, $rate4);
+        array_push($result, $rate3);
+        array_push($result, $rate2);
+        array_push($result, $rate1);
+        return $result;
+    }
+}
+
+function rating_bar_desplay($query){
+    $results = rating_bars( $query );
+    $return = '';
+    foreach( $results as $result ){
+        $return .= '<li>
+                <p class="product-rate-list-item">' .$result['text']. '</p>
+                <div class="product-rate-list-bar"><div style="width: '.$result['percentage'].'%"></div></div>
+                <p class="product-rate-list-count">'.$result['occurence'].'</p>
+                </li>';
+    }
+    return $return;
+
+}
 /*
  * Check the range of date for a discount price
  * */
@@ -271,9 +327,10 @@ if( !function_exists('date_in_range')){
 
 
 
-// Check discount
-// Returns true if conditions are satisfied
-
+/*
+ * Discount check
+ * This helps to valiate if a product is having a discount and the time range for the discount
+ *  is valid*/
 if( !function_exists('discount_check')){
 	function discount_check( $discount, $start_date, $end_date) {
 		if( !empty($discount )) {

@@ -557,7 +557,7 @@
             <?php  $x = 1; if($reviews) :  foreach( $reviews as $review ) :?>
                 <div class="comment-block">
                     <ul style="display: inline-block" class="product-caption-rating">
-                        <?= rating_single_generator($review['rating_score']); ?>
+                        <?= single_user_rate($review['rating_score']); ?>
                     </ul>
                     <span style="float: right;" class="comment-date"><?= neatDate($review['published_date']); ?></span>
                 </div>
