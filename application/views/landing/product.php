@@ -484,7 +484,7 @@
 								</ul>
 							<?php endif; ?>
 							<div class="product-img-wrap">
-								<img class="product-img lazy"
+								<img class="lazy product-img"
                                      src="<?= base_url('assets/landing/img/load.gif'); ?>"
                                      data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?>"
 									 alt="<?= $like->product_name; ?>"
