@@ -72,26 +72,17 @@
 								<div class="row">
 									<div class="col-md-5">
 										<ul class="product-page-product-rating">
-											<li class="rated"><i class="fa fa-star"></i>
-											</li>
-											<li class="rated"><i class="fa fa-star"></i>
-											</li>
-											<li class="rated"><i class="fa fa-star"></i>
-											</li>
-											<li class="rated"><i class="fa fa-star"></i>
-											</li>
-											<li class="rated"><i class="fa fa-star"></i>
-											</li>
-										</ul>
-										<!-- <p class="product-page-product-rating-sign">
-											<a href="#">238 customer reviews</a> | <strong> 34 SOLDS</strong>
-										</p> -->
+                                            <?= rating_star_generator($rating_counts) ; ?>
+                                        </ul>
+										<p class="product-page-product-rating-sign">
+											<a href="#"><?= count($rating_counts); ?> customer reviews</a> | <strong> 34 SOLDS</strong>
+										</p>
 										<p class="product-page-desc">
 											<strong
 												class="custom-product-title"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></strong>
 										</p>
-										<p class=" text-sm text-uppercase pr-id">Product ID : <?= $product->sku; ?>
-											| Seller : <a
+                                        <p class=" text-sm text-uppercase pr-id"><strong>Product ID :</strong> <?= $product->sku; ?>
+                                            | <strong>Seller : </strong><a
 												href="#"
 												id="pr-seller"><?= ucwords($product->first_name . ' ' . $product->last_name); ?></a>
 										</p>
@@ -108,7 +99,7 @@
 										<?php endif; ?>
 									</div>
 									<div class="col-md-7">
-										<table class="table table-hover product-page-features-table">
+										<table class="table table-hover table-striped product-page-features-table">
 											<tbody>
 											<?php if (!empty($product->model)) : ?>
 												<tr>
@@ -126,7 +117,7 @@
 												<tr>
 													<td>Colour Family:</td>
 													<td><?php $colour_family = json_decode($product->colour_family);
-														foreach ($colour_family as $family) echo trim($family) . ', ';
+														foreach ($colour_family as $family) echo trim(ucfirst($family)) . ', ';
 														?></td>
 												</tr>
 											<?php endif; ?>
