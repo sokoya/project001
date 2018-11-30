@@ -253,12 +253,33 @@ if( !function_exists('single_user_rate')){
 
 if( !function_exists('rating_bars')){
     function rating_bars( $results ){
-        $rate1 = $rate2 = $rate3 = $rate4 = $rate5 = array(
+        $rate1 = array(
             'occurence' => 0,
             'percentage' => 0,
             'text' => '1 star'
         );
+        $rate2 = array(
+            'occurence' => 0,
+            'percentage' => 0,
+            'text' => '2 stars'
+        );
+        $rate3 = array(
+            'occurence' => 0,
+            'percentage' => 0,
+            'text' => '3 stars'
+        );
+        $rate4 = array(
+            'occurence' => 0,
+            'percentage' => 0,
+            'text' => '4 stars'
+        );
+        $rate5 = array(
+            'occurence' => 0,
+            'percentage' => 0,
+            'text' => '5 stars'
+        );
         $total_occurence = 0;
+
         foreach ($results as $key ) {
             switch ($key['rating_score']) {
                 case 5:
@@ -284,12 +305,12 @@ if( !function_exists('rating_bars')){
             }
             $total_occurence += $key['occurence'];
         }
+
         $rate5['percentage'] = ($rate5['occurence']/$total_occurence) * 100;
         $rate4['percentage'] = ($rate4['occurence']/$total_occurence) * 100;
         $rate3['percentage'] = ($rate3['occurence']/$total_occurence) * 100;
         $rate2['percentage'] = ($rate2['occurence']/$total_occurence) * 100;
         $rate1['percentage'] = ($rate1['occurence']/$total_occurence) * 100;
-
         $result = array();
         array_push($result, $rate5);
         array_push($result, $rate4);
@@ -300,15 +321,30 @@ if( !function_exists('rating_bars')){
     }
 }
 
-function rating_bar_desplay($query){
-    $results = rating_bars( $query );
+function rating_bar_display($query){
     $return = '';
-    foreach( $results as $result ){
-        $return .= '<li>
+    if( $query ) {
+        $results = rating_bars( $query );
+        foreach( $results as $result ){
+            $return .= '<li>
                 <p class="product-rate-list-item">' .$result['text']. '</p>
                 <div class="product-rate-list-bar"><div style="width: '.$result['percentage'].'%"></div></div>
-                <p class="product-rate-list-count">'.$result['occurence'].'</p>
+                <p class="product-rate-list-count">('.$result['occurence'].')</p>
                 </li>';
+        }
+    }else{
+        $x = 5;
+        do {
+            $check = ( $x == 1 ) ? ' Star ' : ' Stars';
+            $return .= "<li>
+                <p class='product-rate-list-item'>";
+            $return .= $x . $check;
+            $return .= "</p>
+                <div class='product-rate-list-bar'><div style='width: 0'></div></div>
+                <p class='product-rate-list-count'>(0)</p>
+                </li>";
+            $x = $x - 1;
+        } while ( $x > 0 );
     }
     return $return;
 

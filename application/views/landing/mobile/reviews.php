@@ -139,7 +139,7 @@
 	<div class="custom-card">
 		<div class="container">
 			<ul class="product-rate-list">
-                <?= rating_bar_desplay( $rating_counts )?>
+                <?= rating_bar_display( $rating_counts )?>
 			</ul>
 
 			<a href="javascript:void(0)" class="block-title" style="color: #000;">

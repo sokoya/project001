@@ -399,31 +399,10 @@
                                         <?= isset($overall_rating) ? $overall_rating : ''; ?>
                                     </li>
 								</ul>
-								<?php
-								if (!$this->session->userdata('logged_in')):
-									?>
-									<a href="<?= base_url('login/?ref=' . current_url()); ?>" class="btn btn-primary">Write
-										a Review</a>
-								<?php else : ?>
-									<a class="btn btn-primary" href="#">Write a Review</a>
-								<?php endif; ?>
 							</div>
 							<div class="col-md-3">
 								<ul class="product-rate-list">
-                                <!-- Rating bar-->
-									<?php
-									$total_corrence = 0;
-									foreach ($rating_counts as $rating) :
-										$total_corrence += $rating['occurence'];
-										?>
-										<li>
-											<p class="product-rate-list-item"><?= $rating['rating_score']; ?> Stars</p>
-											<div class="product-rate-list-bar">
-												<div style="width:0%;"></div>
-											</div>
-											<p class="product-rate-list-count"><?= $rating['occurence']; ?></p>
-										</li>
-									<?php endforeach; ?>
+                                    <?= rating_bar_display($rating_counts); ?>
 								</ul>
 							</div>
 							<div class="col-md-5">
@@ -442,20 +421,7 @@
 										<?php elseif ($user): ?>
 											<div id="starr-rating">
 												<ul class="product-page-product-rating product-rating-big">
-													<?php
-													for ($i = 1; $i <= $user->rating_score; $i++) {
-														?>
-														<li class="rated"><i class="fa fa-star"></i>
-														</li>
-														<?php
-													}
-													if ($user->rating_score < 5) {
-														for ($i = 0; $i < (5 - $user->rating_score); $i++) { ?>
-															<li><i class="fa fa-star"></i></li>
-															<?php
-														}
-													}
-													?>
+													<?= single_user_rate($user->rating_score); ?>
 													<li class=""><span class="text-bold" style="font-size: 12px;"><a
 																href="javascript:void(0)" class="update_rating">Update Rating</a></span>
 													</li>
