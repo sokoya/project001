@@ -35,7 +35,7 @@ class Checkout extends MY_Controller
 			$variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
 			if($variation_detail->quantity < 1 || $product['qty'] > $variation_detail->quantity || in_array( $detail->product_status, array('suspended', 'blocked', 'pending' ))){
 				// we have an issue with this product
-                $message .= "< br/> Sorry, the product " . $product['name']. " is presently out of stock";
+                $message .= "Sorry, the product " . $product['name']. " is presently out of stock";
 			}
 		}
         $this->session->set_flashdata('error_msg', $message);
