@@ -285,29 +285,7 @@
 				?>
 				<span class="rating-count"><?= isset($overall_rating) ? $overall_rating : ''; ?></span>
 				<ul style="display: inline-block" class="product-caption-rating">
-					<?php
-					if ($rating_counts) {
-						$overall_rating = product_overall_rating($rating_counts);
-						$rating_rounded = round($overall_rating);
-						for ($i = 1; $i <= $rating_rounded; $i++) {
-							?>
-							<li class="rated"><i class="fa fa-star"></i>
-							</li>
-							<?php
-						}
-						if ($rating_rounded < 5) {
-							for ($i = 0; $i < (5 - $rating_rounded); $i++) { ?>
-								<li><i class="fa fa-star"></i></li>
-								<?php
-							}
-						}
-					} else { ?>
-						<li><i class="fa fa-star"></i></li>
-						<li><i class="fa fa-star"></i></li>
-						<li><i class="fa fa-star"></i></li>
-						<li><i class="fa fa-star"></i></li>
-						<li><i class="fa fa-star"></i></li>
-					<?php } ?>
+                    <?= rating_star_generator($rating_counts); ?>
 					<span style="margin-left: 5px; color: #0b6427;"
 						  class="rating-total-count"><?= !empty($rating_counts) ? ' (' . count($rating_counts) . ') ratings' : '' ?></span>
 				</ul>
@@ -557,7 +535,7 @@
             <?php  $x = 1; if($reviews) :  foreach( $reviews as $review ) :?>
                 <div class="comment-block">
                     <ul style="display: inline-block" class="product-caption-rating">
-                        <?= rating_single_generator($review['rating_score']); ?>
+                        <?= single_user_rate($review['rating_score']); ?>
                     </ul>
                     <span style="float: right;" class="comment-date"><?= neatDate($review['published_date']); ?></span>
                 </div>

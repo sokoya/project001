@@ -139,48 +139,11 @@
 	<div class="custom-card">
 		<div class="container">
 			<ul class="product-rate-list">
-				<li>
-					<p class="product-rate-list-item">5 Stars</p>
-					<div class="product-rate-list-bar">
-						<div style="width:60%;"></div>
-					</div>
-					<p class="product-rate-list-count">156</p>
-				</li>
-				<li>
-					<p class="product-rate-list-item">4 Stars</p>
-					<div class="product-rate-list-bar">
-						<div style="width:35%;"></div>
-					</div>
-					<p class="product-rate-list-count">70</p>
-				</li>
-				<li>
-					<p class="product-rate-list-item">3 Stars</p>
-					<div class="product-rate-list-bar">
-						<div style="width:10%;"></div>
-					</div>
-					<p class="product-rate-list-count">15</p>
-				</li>
-				<li>
-					<p class="product-rate-list-item">2 Stars</p>
-					<div class="product-rate-list-bar">
-						<div style="width:15%;"></div>
-					</div>
-					<p class="product-rate-list-count">20</p>
-				</li>
-				<li>
-					<p class="product-rate-list-item">1 Stars</p>
-					<div class="product-rate-list-bar">
-						<div style="width:2%;"></div>
-					</div>
-					<p class="product-rate-list-count">1</p>
-				</li>
+                <?= rating_bar_display( $rating_counts )?>
 			</ul>
 
 			<a href="javascript:void(0)" class="block-title" style="color: #000;">
-                <ul style="display: inline-block; position: relative; top: 5px;" class="product-caption-rating">
-                    <?= rating_star_generator($rating_counts); ?>
-                </ul>
-				(<?= count($rating_counts); ?> ratings) <a href="<?= $url .'/add_rating_review'; ?>"
+				<?= product_overall_rating($rating_counts) .' based on '. count($rating_counts); ?> ratings <a href="<?= $url .'/add_rating_review'; ?>"
 								 style="color: #0b6427; float: right; font-size: 14px; position: relative; top: 1px; text-decoration: none">Write a review</a></a>
 		</div>
 	</div>
@@ -193,7 +156,7 @@
             <?php  $x = 1; if($reviews) :  foreach( $reviews as $review ) :?>
                 <div class="comment-block">
                     <ul style="display: inline-block" class="product-caption-rating">
-                        <?= rating_single_generator($review['rating_score']); ?>
+                        <?= single_user_rate($review['rating_score']); ?>
                     </ul>
                     <span style="float: right;" class="comment-date"><?= neatDate($review['published_date']); ?></span>
                 </div>
