@@ -138,3 +138,24 @@
 	});
 </script>
 </html>
+
+
+<!--<select class="product-page-option-select variation-select"-->
+<!--		name="variation">-->
+<!--	--><?php //foreach ($variations as $variation): ?>
+<!---->
+<!--		<option title="--><?//= $variation['variation']; ?><!--"-->
+<!--				data-price="--><?//= $variation['sale_price']; ?><!--"-->
+<!--			--><?php //if (discount_check($variation['discount_price'], $variation['start_date'], $variation['end_date'])) : ?>
+<!--				data-discount="--><?//= $variation['discount_price']; ?><!--"-->
+<!--			--><?php //else : ?>
+<!--				data-discount="empty"-->
+<!--			--><?php //endif; ?>
+<!--				data-vid="--><?//= $variation['id'] ?><!--"-->
+<!--				data-quantity='--><?//= $variation['quantity'] ?><!--'-->
+<!--				data-vname="--><?//= $variation['variation'] ?><!--"-->
+<!--				value="--><?//= trim($variation['variation']); ?><!--" --><?php //if ($variation['quantity'] == 0) echo 'disabled'; ?><!-- >-->
+<!--			--><?//= ellipsize(trim($variation['variation']), 8); ?>
+<!--		</option>-->
+<!--	--><?php //endforeach; ?>
+<!--</select>-->

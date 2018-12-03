@@ -1,4 +1,30 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
+<style>
+	.variation-option {
+		font-size: 12px;
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		color: #242424;
+		outline: 1px solid #d0d0d0;
+		padding: 3px;
+		width: 100%;
+		text-align: center;
+	}
+
+	.option-selected, .variation-option:hover {
+		outline: 1px solid #0b6427;
+		color: #0b6427;
+		cursor: pointer;
+	}
+
+	.option-disabled {
+		color: #bebebe;
+		text-decoration: line-through;
+	}
+
+	.variation-option-list {
+		/*margin-top: -3px;*/
+	}
+</style>
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
@@ -141,17 +167,18 @@
 
 								<p class="product-page-price">
 
-                                    <?php if(discount_check($var->discount_price, $var->start_date, $var->end_date)) : ?>
-                                        <span class="price-cs ds-price"><?= ngn($var->discount_price); ?></span>
-                                        <span class="product-page-price-list price-lower dn-price"><?= ngn($var->sale_price); ?></span>
-                                    <?php else :?>
-                                        <span class="price-cs dn-price"><?= ngn($var->sale_price); ?></span>
-                                    <?php endif; ?>
+									<?php if (discount_check($var->discount_price, $var->start_date, $var->end_date)) : ?>
+										<span class="price-cs ds-price"><?= ngn($var->discount_price); ?></span>
+										<span
+											class="product-page-price-list price-lower dn-price"><?= ngn($var->sale_price); ?></span>
+									<?php else : ?>
+										<span class="price-cs dn-price"><?= ngn($var->sale_price); ?></span>
+									<?php endif; ?>
 
-                                    <input type="hidden" name="variation_id" class="variation_id"
-                                           value="<?= $var->id; ?>">
-                                    <input type="hidden" name="product_id"
-                                           value="<?= $product->id; ?>">
+									<input type="hidden" name="variation_id" class="variation_id"
+										   value="<?= $var->id; ?>">
+									<input type="hidden" name="product_id"
+										   value="<?= $product->id; ?>">
 								</p>
 
 								<hr class="product-line"/>
@@ -159,32 +186,34 @@
 									<?= form_open('', 'id="variation-form"'); ?>
 									<div class="row">
 										<?php if (count($variations) > 1) : ?>
-											<div class="col-md-4">
+											<div class="col-md-7">
 												<h5 class="custom-product-page-option-title">Variation:</h5>
-												<select class="product-page-option-select variation-select"
-														name="variation">
+												<div class="row variation-option-list">
 													<?php foreach ($variations as $variation): ?>
 
-														<option title="<?= $variation['variation']; ?>"
-                                                                data-price="<?= $variation['sale_price']; ?>"
-                                                                <?php if( discount_check($variation['discount_price'], $variation['start_date'], $variation['end_date'])) : ?>
-                                                                    data-discount="<?= $variation['discount_price']; ?>"
-                                                                <?php else : ?>
-                                                                    data-discount="empty"
-                                                                <?php endif; ?>
+														<div class="col-xs-3">
+															<p
+																title="<?= $variation['variation']; ?>"
+																data-price="<?= $variation['sale_price']; ?>"
+																<?php if (discount_check($variation['discount_price'], $variation['start_date'], $variation['end_date'])) : ?>
+																	data-discount="<?= $variation['discount_price']; ?>"
+																<?php else : ?>
+																	data-discount="empty"
+																<?php endif; ?>
 																data-vid="<?= $variation['id'] ?>"
-                                                                data-quantity='<?= $variation['quantity'] ?>'
-                                                                data-vname="<?= $variation['variation'] ?>"
-																value="<?= trim($variation['variation']); ?>" <?php if ($variation['quantity'] == 0) echo 'disabled'; ?> >
-															<?= ellipsize(trim($variation['variation']), 8); ?>
-														</option>
+																data-quantity='<?= $variation['quantity'] ?>'
+																data-vname="<?= $variation['variation'] ?>"
+																class="variation-option <?php if ($variation['quantity'] == 0) echo 'option-disabled'; ?>">
+																<?= ellipsize(trim($variation['variation']), 8); ?>
+															</p>
+														</div>
 													<?php endforeach; ?>
+												</div>
 
-												</select>
+
 											</div>
-                                        <?php endif; ?>
+										<?php endif; ?>
 
-										<input type="hidden" name="product_name" value="<?= $product->product_name; ?>">
 										<div class="col-md-5 quan-u">
 											<h5 class="custom-product-page-option-title">Quantity:</h5>
 											<ul>
