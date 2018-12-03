@@ -14,9 +14,10 @@
 
     <?php $this->load->view('landing/resources/head_menu') ?>
     <div class="container text-center">
-        <h2 class="terms_head">Privacy &amp; Security</h2>
-        <hr style="width:100%; border:1px solid red;margin-top:-5px;"/>
         <div class="row text-justify" style="padding: 20px;background: #fff;">
+            <h2 class="terms_head text-center">Privacy &amp; Security</h2>
+<!--            <hr style="width:100%; border:1px solid red;margin-top:-5px;"/>-->
+            <div style="height:15px;"></div>
             <h3>Welcome to Onitshamarket.com, your reliable online marketplace.</h3>
             <p>
                 The web site identified by the uniform resource locator www.onitshamarket.com (the “Site”) is provided
