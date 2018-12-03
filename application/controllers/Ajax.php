@@ -152,7 +152,7 @@ class Ajax extends CI_Controller
                     if( discount_check($variation['discount_price'], $variation['start_date'], $variation['end_date'])) {
                         $results['variation'][$x]['discount_price'] = $variation['discount_price'];
                     }else{
-                        $results['variation'][$x]['discount_price'] = $variation['sale_price_price'];
+                        $results['variation'][$x]['discount_price'] = $variation['sale_price'];
                     }
 					$x++;
 				}
