@@ -225,7 +225,6 @@
 										<?php if (!empty($product->discount_price)): ?>
 											<ul class="product-labels">
 												<li><?= get_discount($product->sale_price, $product->discount_price); ?></li>
-
 											</ul>
 										<?php endif; ?>
 										<div class="product-img-wrap">
