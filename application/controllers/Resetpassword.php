@@ -19,6 +19,7 @@ class Resetpassword extends CI_Controller {
 
 	public function index(){
 		$page_data['title'] = 'Reset Password';
+        $page_data['page'] = 'register_password';
 		$this->load->view('landing/resetpassword',$page_data);
 	}
 
