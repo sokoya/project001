@@ -116,8 +116,8 @@
                                         <div class="checkbox">
                                             <label>
                                                 <input class="i-check" type="checkbox"/>
-                                                I agree to <?= lang('app_name'); ?> <a href="<?= base_url('terms'); ?>">Terms
-                                                    & Conditions</a> | <a href="#">
+                                                I agree to <?= lang('app_name'); ?> <a href="<?= base_url('pages/terms'); ?>" target="_blank">Terms
+                                                    & Conditions</a> | <a href="<?= base_url('pages/privacy'); ?>" target="_blank">
                                                     Policy.</a></label>
                                         </div>
                                     </div>
