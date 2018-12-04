@@ -120,7 +120,6 @@
 			</p>
 		</div>
 	</div>
-	<!--Section Title [Rate This Product]-->
 	<div class="container"><p class="text-break" style="">Rate This Product</p></div>
 	<div class="custom-card">
 		<div class="container">

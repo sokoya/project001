@@ -1,16 +1,17 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
 <link rel="stylesheet" href="<?= base_url('assets/landing/css/checkout.css'); ?>"/>
 <style>
-	.req {
-		color: red;
-	}
+    .req {
+        color: red;
+    }
 
-	.add_form {
-		display: none;
-	}
-    .edt_anchor, .edt_anchor:hover{
+    .add_form {
+        display: none;
+    }
+
+    .edt_anchor, .edt_anchor:hover {
         text-decoration: none;
-        color:#49a251;
+        color: #49a251;
     }
 
 </style>
@@ -18,35 +19,36 @@
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
 
-	<?php $this->load->view('landing/resources/head_menu') ?>
+    <?php $this->load->view('landing/resources/head_menu') ?>
 
-	<div class="container market-dashboard-cover">
+    <div class="container market-dashboard-cover">
 
-		<?php $this->load->view('account/includes/sidebar'); ?>
-		<div class="col-md-8">
-			<?php $this->load->view('account/includes/sidebar-mobile'); ?>
-			<?php $this->load->view('landing/msg_view'); ?>
-			<div class="row">
-				<h3 class="market-sidebar-header-r hidden-sm hidden-md hidden-xs col-md-6">My Billing Address</h3>
-				<a href="javascript:void(0);" class="btn btn-primary add_new_add" style="border-radius: 0px !important; float:right;"
-				   id="add_new_add">
-					<strong><i class="fa fa-plus"></i> Add New Address
-					</strong>
-				</a>
-				<a href="javascript:void(0);" class="btn btn-danger btn_can_update"
-				   style="border-radius: 0px !important; float:right;display:none;" id="btn_can_update">
-					<strong><i class="fa fa-times"></i> Cancel
-					</strong>
-				</a>
-			</div>
-			<hr class="market-sidebar-line-r"/>
-			<div class="alert alert-warning">
-				<i class="fa fa-warning"></i> Due to severe wildfire conditions in Calabar, deliveries To and From
-				several area in the state may arrive latter than expected. To view the most up to date status for your
-				order, please go to the Orders page
-			</div>
+        <?php $this->load->view('account/includes/sidebar'); ?>
+        <div class="col-md-8">
+            <?php $this->load->view('account/includes/sidebar-mobile'); ?>
+            <?php $this->load->view('landing/msg_view'); ?>
+            <div class="row">
+                <h3 class="market-sidebar-header-r hidden-sm hidden-md hidden-xs col-md-6">My Billing Address</h3>
+                <a href="javascript:void(0);" class="btn btn-primary add_new_add"
+                   style="border-radius: 0px !important; float:right;"
+                   id="add_new_add">
+                    <strong><i class="fa fa-plus"></i> Add New Address
+                    </strong>
+                </a>
+                <a href="javascript:void(0);" class="btn btn-danger btn_can_update"
+                   style="border-radius: 0px !important; float:right;display:none;" id="btn_can_update">
+                    <strong><i class="fa fa-times"></i> Cancel
+                    </strong>
+                </a>
+            </div>
+            <hr class="market-sidebar-line-r"/>
+            <div class="alert alert-warning">
+                <i class="fa fa-warning"></i> Due to severe wildfire conditions in Calabar, deliveries To and From
+                several area in the state may arrive latter than expected. To view the most up to date status for your
+                order, please go to the Orders page
+            </div>
             <div id="status"></div>
-			<div class="add_form" id="add_address">
+            <div class="add_form" id="add_address">
                 <div>
                     <h4 class="modal-title" id="add_title">Add New Address</h4>
                     <p style="font-size:11px;color:red;">All fields with * are required.</p>
@@ -57,7 +59,7 @@
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <label for="f_name" class="control-label">First Name <span
-                                            class="req">*</span></label>
+                                                class="req">*</span></label>
                                     <input type="text" class="form-control" id="f_name" name="first_name"
                                            value="" required=""
                                            title="Please enter you first name" placeholder="First Name">
@@ -65,7 +67,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="phone" class="control-label">Phone Number <span
-                                            class="req">*</span></label>
+                                                class="req">*</span></label>
                                     <input type="tel" class="form-control" id="phone" name="phone" value=""
                                            required=""
                                            title="Please enter you phone number" placeholder="080XXXXXXXX">
@@ -81,7 +83,7 @@
                             <div class="col-xs-12 col-md-6">
                                 <div class="form-group">
                                     <label for="l_name" class="control-label">Last Name <span
-                                            class="req">*</span></label>
+                                                class="req">*</span></label>
                                     <input type="text" class="form-control" id="l_name" name="last_name"
                                            value="" required=""
                                            title="Please enter you last name" placeholder="Last Name">
@@ -95,7 +97,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="area_id" class="control-label">Area <span
-                                            class="req">*</span></label>
+                                                class="req">*</span></label>
                                     <select class="form-control" id="area_id" name="area">
                                         <option value="" selected>--select--</option>
                                     </select>
@@ -104,7 +106,7 @@
                             <div class="col-xs-12 col-md-12">
                                 <div class="form-group">
                                     <label for="address" class="control-label">Address <span
-                                            class="req">*</span></label>
+                                                class="req">*</span></label>
                                     <textarea class="form-control" name="address" id="address" rows="4"
                                               placeholder="Delivery Address"></textarea>
                                     <span class="help-block"></span>
@@ -123,12 +125,12 @@
                                         class="btn btn-primary btn-block"
                                         style="display:none;border-radius: 0px !important;"><strong>Update
                                         Address</strong></button>
-                            </div>                            
+                            </div>
                         </form>
                     </div>
                 </div>
-			</div>
-			<div class="gap gap-small"></div>
+            </div>
+            <div class="gap gap-small"></div>
 
             <div class="panel-body" id="delivery_address">
                 <div id="processing"
@@ -165,16 +167,18 @@
                                                     <?php if ($address->primary_address == 1) echo 'checked' ?> >
                                                 <label class="form-check-label" for="<?= $address->id; ?>">
                                                     <?php
-                                                    if($address->primary_address == 1){
+                                                    if ($address->primary_address == 1) {
                                                         echo 'Default Address';
-                                                    }else{
+                                                    } else {
                                                         echo 'Set As Default Address';
                                                     }
                                                     ?>
                                                 </label>
                                             </div>
-                                            <span class="col-md-4"><a onclick='javascript:get_specific_add("<?= $address->id; ?>");edit_address(this);'
-                                                                          href="javascript:void(0);" class="edt_anchor btn_edt_add" style="float: right;" data-id="<?= $address->id; ?>">Edit</a>
+                                            <span class="col-md-4"><a
+                                                        onclick='javascript:get_specific_add("<?= $address->id; ?>");edit_address(this);'
+                                                        href="javascript:void(0);" class="edt_anchor btn_edt_add"
+                                                        style="float: right;" data-id="<?= $address->id; ?>">Edit</a>
                                             </span>
                                         </h3>
                                     </div>
@@ -194,16 +198,16 @@
                                 </div>
                             </div>
                         <?php
-                        endforeach;}
-                    else:{
+                        endforeach;
+                    } else:{
                         echo "<p class=\"market-dashboard-welcome-text\">Hello <?= ucwords($profile->first_name) . ' ' . ucwords($profile->last_name); ?>. You have not added any address to this account. Click 'Add New Address' to add</p>";
-                    }endif;?>
+                    }endif; ?>
                     <?= form_close(); ?>
                 </div>
             </div>
 
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
 
 <div class="gap gap-small"></div>
@@ -211,11 +215,12 @@
 <?php $this->load->view('landing/resources/script'); ?>
 <script>
 
-	function toTitleCase(str) {
-		return str.replace(/(?:^|\s)\w/g, function (match) {
-			return match.toUpperCase();
-		});
-	}
+    function toTitleCase(str) {
+        return str.replace(/(?:^|\s)\w/g, function (match) {
+            return match.toUpperCase();
+        });
+    }
+
     $('.pickup-address').on('click', get_updates);
 
     function get_updates() {
@@ -240,94 +245,95 @@
 </script>
 
 <script>
-	let innercodered = "<strong><i class=\"fa fa-times\"></i> Cancel\n" +
-		"                    </strong>";
-	let innercodenorm = "<strong><i class=\"fa fa-plus\"></i> Add New Address\n" +
-		"                    </strong>";
-	let state_drop = $('#state_id');
+    let innercodered = "<strong><i class=\"fa fa-times\"></i> Cancel\n" +
+        "                    </strong>";
+    let innercodenorm = "<strong><i class=\"fa fa-plus\"></i> Add New Address\n" +
+        "                    </strong>";
+    let state_drop = $('#state_id');
 
-	$('.add_new_add').on('click', function () {
-	    $('#address_type').val('new');
-		$.getJSON(base_url + 'ajax/fetch_states', function (d) {
-			state_drop.children('option:not(:first)').remove();
-			$.each(d, function (k, v) {
-				state_drop.append($('<option></option>').attr('value', v.id).text(toTitleCase(v.name)));
-			})
-		});
-		if ($('#add_new_add').hasClass('btn-primary')) {
-			$('#add_address').css({
-				display: 'block'
-			});
-			$('#add_new_add').html(innercodered);
-			$('#add_new_add').removeClass('btn-primary');
-			$('#add_new_add').addClass('btn-danger');
+    $('.add_new_add').on('click', function () {
+        $('#address_type').val('new');
+        $.getJSON(base_url + 'ajax/fetch_states', function (d) {
+            state_drop.children('option:not(:first)').remove();
+            $.each(d, function (k, v) {
+                state_drop.append($('<option></option>').attr('value', v.id).text(toTitleCase(v.name)));
+            })
+        });
+        if ($('#add_new_add').hasClass('btn-primary')) {
+            $('#add_address').css({
+                display: 'block'
+            });
+            $('#add_new_add').html(innercodered);
+            $('#add_new_add').removeClass('btn-primary');
+            $('#add_new_add').addClass('btn-danger');
 
-		} else {
-			$('#add_address').css({
-				display: 'none'
-			});
-			$('#add_new_add').html(innercodenorm);
-			$('#add_new_add').removeClass('btn-danger');
-			$('#add_new_add').addClass('btn-primary');
-		}
-	});
+        } else {
+            $('#add_address').css({
+                display: 'none'
+            });
+            $('#add_new_add').html(innercodenorm);
+            $('#add_new_add').removeClass('btn-danger');
+            $('#add_new_add').addClass('btn-primary');
+        }
+    });
 
-	var selected_state_id;
-	state_drop.change(function () {
-		selected_state_id = $('#state_id option:selected').attr('value');
-		$.ajax({
-			url: base_url + 'ajax/fetch_areas',
-			method: 'get',
-			data: {sid: selected_state_id},
-			dataType: 'json',
-			success: function (d) {
-				$('#area_id > option:not(:first)').remove();
-				$.each(d, function (k, v) {
-					$('#area_id').append($('<option></option>').attr('value', v.id).text(toTitleCase(v.name)));
-				})
-			}
-		})
-	});
+    var selected_state_id;
+    state_drop.change(function () {
+        selected_state_id = $('#state_id option:selected').attr('value');
+        $.ajax({
+            url: base_url + 'ajax/fetch_areas',
+            method: 'get',
+            data: {sid: selected_state_id},
+            dataType: 'json',
+            success: function (d) {
+                $('#area_id > option:not(:first)').remove();
+                $.each(d, function (k, v) {
+                    $('#area_id').append($('<option></option>').attr('value', v.id).text(toTitleCase(v.name)));
+                })
+            }
+        })
+    });
 
-	$('#btn_add_add').click(function () {
+    $('#btn_add_add').click(function () {
         $.ajax({
             url: base_url + 'account/billing',
             method: 'post',
-            data:  $('#add_add_form').serialize() ,
+            data: $('#add_add_form').serialize(),
             dataType: 'json',
             success: function (response) {
-                if( response.status == 'error' ) {
+                if (response.status == 'error') {
                     $('#status').html(`<p class="alert alert-danger">${response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
-                }else{
+                } else {
                     $('#status').html(`<p class="alert alert-success">Your address has been added successfuly.</p>`).slideDown('fast').delay(3000).slideUp('slow');
                     $('#billing_address_box').load(`${base_url}account/billing #billing_address_box`);
                     reset_add_form();
                 }
             }
         });
-	})
+    })
     // Set the address as default
-	$('#btn_set_default').click(function () {
+    $('#btn_set_default').click(function () {
 
-	});
+    });
 
-	function edit_address (el) {
+    function edit_address(el) {
         reset_add_form();
         $('#address_type').val('update');
         $('#update_aid').val($(el).data("id"));
-		$('#btn_add_add, #add_new_add').css({
-			display: 'none'
-		});
-		$('#btn_can_update, #btn_up_add, #add_address').css({
-			display: 'block'
-		});
-		$('#add_title').text('Edit Address');
-	};
+        $('#btn_add_add, #add_new_add').css({
+            display: 'none'
+        });
+        $('#btn_can_update, #btn_up_add, #add_address').css({
+            display: 'block'
+        });
+        $('#add_title').text('Edit Address');
+    };
 
-	$('#btn_can_update').click(function () {
-		reset_add_form();
-	});
-	function reset_add_form(){
+    $('#btn_can_update').click(function () {
+        reset_add_form();
+    });
+
+    function reset_add_form() {
         $('#btn_add_add, #add_new_add').css({
             display: 'block'
         });
@@ -345,69 +351,69 @@
         $('#state_id > option:not(:first)').remove();
     }
 
-	$('#btn_up_add').click(function () {
+    $('#btn_up_add').click(function () {
         $.ajax({
             url: base_url + "account/billing",
             method: "POST",
             data: $('#add_add_form').serialize(),
             success: function (response) {
-                $('#btn_add_add, #add_new_add').css({ display: 'block' });
-                $('#btn_up_add, #add_address, #btn_can_update').css({ display: 'none' });
+                $('#btn_add_add, #add_new_add').css({display: 'block'});
+                $('#btn_up_add, #add_address, #btn_can_update').css({display: 'none'});
                 $('#add_title').text('Add New Address');
-                if( response.status == 'error' ) {
+                if (response.status == 'error') {
                     $('#status').html(`<p class="alert alert-danger">${response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
-                }else{
+                } else {
                     $('#status').html(`<p class="alert alert-success">Your address has been updated successfuly.</p>`).slideDown('fast').delay(3000).slideUp('slow');
                     $('#billing_address_box').load(`${base_url}account/billing #billing_address_box`);
                     reset_add_form();
-                }                
+                }
             },
             error: function (xhr, ajaxOptions, thrownError) {
             }
         });
-	});
+    });
 
 
-	// Send a get method to the controller function
-	let get_specific_add = function(id) {
-		$.ajax({
-			url: base_url + 'ajax/fetch_single_address',
-			method: 'get',
-			data: {address_id: id},
-			dataType: 'json',
-			success: function (d) {
-				$.each(d, function (k, value) {
+    // Send a get method to the controller function
+    let get_specific_add = function (id) {
+        $.ajax({
+            url: base_url + 'ajax/fetch_single_address',
+            method: 'get',
+            data: {address_id: id},
+            dataType: 'json',
+            success: function (d) {
+                $.each(d, function (k, value) {
 
-					$('#f_name').val(value.first_name);
-					$('#l_name').val(value.last_name);
+                    $('#f_name').val(value.first_name);
+                    $('#l_name').val(value.last_name);
 
-					$.getJSON(base_url + 'ajax/fetch_states', function (d) {
-						state_drop.children('option:not(:first)').remove();
-						$.each(d, function (k, v) {
-							state_drop.append($(`<option ${v.id === value.sid ? 'selected=selected' : ''}  ></option>`).attr('value', v.id).text(toTitleCase(`${v.name}`)));
+                    $.getJSON(base_url + 'ajax/fetch_states', function (d) {
+                        state_drop.children('option:not(:first)').remove();
+                        $.each(d, function (k, v) {
+                            state_drop.append($(`<option ${v.id === value.sid ? 'selected=selected' : ''}  ></option>`).attr('value', v.id).text(toTitleCase(`${v.name}`)));
 
-						});
-					});
-					$.ajax({
-						url: base_url + 'ajax/fetch_areas',
-						method: 'get',
-						data: {sid: value.sid},
-						dataType: 'json',
-						success: function (d) {
-							$('#area_id > option:not(:first)').remove();
-							$.each(d, function (k, v) {
-								$('#area_id').append($(`<option ${v.id === value.aid ? 'selected=selected' : ''}></option>`).attr('value', v.id).text(toTitleCase(v.name)));
+                        });
+                    });
+                    $.ajax({
+                        url: base_url + 'ajax/fetch_areas',
+                        method: 'get',
+                        data: {sid: value.sid},
+                        dataType: 'json',
+                        success: function (d) {
+                            $('#area_id > option:not(:first)').remove();
+                            $.each(d, function (k, v) {
+                                $('#area_id').append($(`<option ${v.id === value.aid ? 'selected=selected' : ''}></option>`).attr('value', v.id).text(toTitleCase(v.name)));
 
-							})
-						}
-					});
-					$('#phone').val(value.phone);
-					$('#phone2').val(value.phone2);
-					$('#address').val(value.address);
-				})
-			}
-		})
-	}
+                            })
+                        }
+                    });
+                    $('#phone').val(value.phone);
+                    $('#phone2').val(value.phone2);
+                    $('#address').val(value.address);
+                })
+            }
+        })
+    }
 
 
 </script>

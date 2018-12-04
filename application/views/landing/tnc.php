@@ -16,7 +16,6 @@
     <div class="container text-center">
         <div class="row text-justify" style="padding: 20px;background: #fff;">
             <h2 class="terms_head text-center">Terms &amp; Conditions</h2>
-<!--            <hr style="width:100%; border:1px solid red;margin-top:-5px;"/>-->
             <p class="text-center">
                 BEFORE YOU USE OR ACCESS OUR WEB SITE, PLEASE READ THE FOLLOWING TERMS OF USE CAREFULLY. IF YOU DO NOT
                 ACCEPT ALL OF THE TERMS OF USE, PLEASE DO NOT USE OR ACCESS OUR WEB SITE.

@@ -54,7 +54,7 @@
 			box-shadow: none !important;
 			background: transparent !important;
 
-		t_drop_menu > li {
+		.t_drop_menu > li {
 			height: 36px !important;
 			line-height: 48px !important;
 		}
