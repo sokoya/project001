@@ -2,7 +2,6 @@
 
 Class User_model extends CI_Model{
 
-
     /**
      * @param string $id
      * @param string $table
@@ -13,7 +12,6 @@ Class User_model extends CI_Model{
         $this->db->or_where('email', $id);
         return $this->db->get($table)->row();
     }
-
 
     /**
      * @param array $data
@@ -64,7 +62,6 @@ Class User_model extends CI_Model{
 		}
 	}
 
-
     /**
      * @param string $access
      * @param array $data
@@ -75,7 +72,6 @@ Class User_model extends CI_Model{
         $this->db->where('id', $access);
         return $this->db->update( $table_name, $data );
     }
-
 
     /**
      * @param string $where
@@ -116,7 +112,6 @@ Class User_model extends CI_Model{
             }
         }
     }
-
 
     /**
      * @param $password
