@@ -33,7 +33,6 @@
         .invoice header {
             padding: 10px 0;
             margin-bottom: 20px;
-            /*border-bottom: 1px solid #49a251*/
         }
 
         .invoice .company-details {
@@ -64,7 +63,6 @@
 
         .invoice .invoice-details .invoice-id {
             margin-top: 0;
-            /*color: #49a251;*/
             font-size: 18px;
         }
 
@@ -96,7 +94,6 @@
 
         .invoice table td, .invoice table th {
             padding: 15px;
-            /*background: #eee;*/
             border-bottom: 1px solid #aaa;
             border-top: 1px solid #aaa
         }
@@ -110,32 +107,24 @@
         .invoice table td h3 {
             margin: 0;
             font-weight: 400;
-            /*color: #49a251;*/
             font-size: 1.2em
         }
 
-        .invoice table .qty, .invoice table .total,.invoice table .var, .invoice table .unit {
+        .invoice table .qty, .invoice table .total, .invoice table .var, .invoice table .unit {
             text-align: right;
             font-size: 1.2em
         }
 
-        .invoice table .var{
-            text-align:center;
+        .invoice table .var {
+            text-align: center;
         }
 
         .invoice table .no {
-            /*color: #fff;*/
             font-size: 1.6em;
-            /*background: #49a251*/
         }
 
         .invoice table .unit {
             background: #ddd
-        }
-
-        .invoice table .total {
-            /*background: #49a251;*/
-            /*color: #fff*/
         }
 
         .invoice table tbody tr:last-child td {
@@ -157,9 +146,7 @@
         }
 
         .invoice table tfoot tr:last-child td {
-            /*color: #49a251;*/
             font-size: 1.4em;
-            /*border-top: 1px solid #49a251*/
         }
 
         .invoice table tfoot tr td:first-child {
@@ -197,7 +184,6 @@
     <div class="toolbar hidden-print">
         <div class="text-right">
             <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
-            <!--            <button class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>-->
         </div>
         <hr>
     </div>
@@ -207,7 +193,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-4 "></div>
                     <div class="col-xs-12 col-md-4 text-center">
-                        <a target="_blank" href="<?= base_url();?>">
+                        <a target="_blank" href="<?= base_url(); ?>">
                             <img style="height:100px;"
                                  src="<?= base_url('assets/landing/img/onitshamarket-logo.png'); ?>"
                                  data-holder-rendered="true"/>
@@ -218,10 +204,15 @@
             </header>
             <main>
                 <div class="row contacts">
-                    <div class="col-md-12" style="font-weight:500;font-size:14px;">Thank you for shopping with us at onitshamarket.com! If you experience any problems related to this order contact onitshamarket.com</div><br/><br/>
+                    <div class="col-md-12" style="font-weight:500;font-size:14px;">Thank you for shopping with us at
+                        onitshamarket.com! If you experience any problems related to this order contact
+                        onitshamarket.com
+                    </div>
+                    <br/><br/>
                     <div class="col-md-6 col-xs-12 invoice-to">
                         <div class="text-gray-light">INVOICE TO:</div>
-                        <h2 class="to" style="font"><?= ucwords($profile->first_name) . ' ' . ucwords($profile->last_name); ?></h2>
+                        <h2 class="to"
+                            style="font"><?= ucwords($profile->first_name) . ' ' . ucwords($profile->last_name); ?></h2>
                         <div class="address">796 Silver Harbour, TX 79273, US</div>
                         <div class="email"><a href="mailto:<?= $profile->email ?>"><?= $profile->email ?></a></div>
                     </div>

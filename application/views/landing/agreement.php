@@ -16,7 +16,6 @@
     <div class="container text-center">
         <div class="row text-justify" style="padding: 20px;background: #fff;">
             <h2 class="terms_head text-center">Registration Agreement</h2>
-<!--            <hr style="width:100%; border:1px solid red;margin-top:-5px;"/>-->
             <p class="text-center">
                 BEFORE YOU COMPLETE THE REGISTRATION PROCESS AND BECOME OUR REGISTERED BUYER, PLEASE READ THE FOLLOWING
                 TERMS CAREFULLY. IF YOU DO NOT ACCEPT ALL OF THE REGISTRATION AGREEMENT, PLEASE DO NOT CLICK ‘’CREATE MY
@@ -277,15 +276,9 @@
         </div>
         <div style="height:15px;"></div>
     </div>
-
-
     <?php $this->load->view('landing/resources/footer'); ?>
-
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
-<script>
-
-</script>
 </body>
 </html>
 

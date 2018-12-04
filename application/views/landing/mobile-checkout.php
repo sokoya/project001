@@ -55,7 +55,6 @@
                                                    name="last_name" required="">
                                         </div>
                                     </div>
-
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="checkout-form-input-label" for="number_">Mobile Number</label>
@@ -63,7 +62,6 @@
                                                    name="phone" required>
                                         </div>
                                     </div>
-
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="checkout-form-input-label" for="street">Street Address</label>
@@ -71,7 +69,6 @@
                                                    name="address" required>
                                         </div>
                                     </div>
-
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-group">
@@ -83,7 +80,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-group">
@@ -96,7 +92,6 @@
                                     </div>
                                 </div>
                                 <div class="row">
-
                                     <div class="col-md-6">
                                         <button type="submit" class="btn btn-primary btn-block create-address-btn">
                                             Submit
@@ -107,7 +102,6 @@
                                             Cancel
                                         </button>
                                     </div>
-
                                 </div>
                                 <?= form_close(); ?>
                             </div>
@@ -236,7 +230,6 @@
                                     <?php
                                     endforeach;
                                 endif; ?>
-
                         </div>
                     </div>
                 </div>
@@ -259,7 +252,6 @@
                                         Pay with paystack
                                         <img src="<?= base_url('assets/landing/img/paystack.png'); ?>">
                                     </p>
-
                                 </div>
                             </div>
                         </div>
@@ -395,7 +387,6 @@
             </div>
         </div>
     </div>
-
     <?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <?php $this->load->view('landing/resources/script'); ?>

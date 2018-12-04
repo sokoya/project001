@@ -8,15 +8,12 @@
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
-
     <?php $this->load->view('landing/resources/head_img') ?>
     <?php $this->load->view('landing/resources/head_category') ?>
-
     <?php $this->load->view('landing/resources/head_menu') ?>
     <div class="container text-center">
         <div class="row text-justify" style="padding: 20px;background: #fff;">
             <h2 class="terms_head text-center">Terms &amp; Conditions</h2>
-<!--            <hr style="width:100%; border:1px solid red;margin-top:-5px;"/>-->
             <p class="text-center">
                 BEFORE YOU USE OR ACCESS OUR WEB SITE, PLEASE READ THE FOLLOWING TERMS OF USE CAREFULLY. IF YOU DO NOT
                 ACCEPT ALL OF THE TERMS OF USE, PLEASE DO NOT USE OR ACCESS OUR WEB SITE.
@@ -447,15 +444,9 @@
         </div>
         <div style="height:15px;"></div>
     </div>
-
-
     <?php $this->load->view('landing/resources/footer'); ?>
-
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
-<script>
-
-</script>
 </body>
 </html>
 
