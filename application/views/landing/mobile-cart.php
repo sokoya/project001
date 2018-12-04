@@ -16,7 +16,6 @@
         color: #f44336;
     }
 
-
     .btn_checkout {
         bottom: 0;
         left: 0;
@@ -109,7 +108,6 @@
                                             </button>
                                         </li>
                                     </ul>
-
                                 </div>
                             </div>
                             <div class="row" style="font-size: 12px;">
@@ -123,7 +121,6 @@
                                        class="btn panel-bordered-danger pull-right"
                                        href="<?= base_url('cart/remove/' . $product['rowid']); ?>"><i
                                                 class="fa fa-times"></i> Remove
-
                                     </a>
                                     <?php $total += $product['subtotal']; ?>
                                 </div>
