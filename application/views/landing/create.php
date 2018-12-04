@@ -5,12 +5,6 @@
         font: 12px/20px "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
-    .img-bg {
-        padding: 0px !important;
-        margin-right: 0px;
-
-    }
-
     .market-box {
         margin-left: 0px !important;
     }
@@ -19,15 +13,8 @@
         width: 100%;
         position: relative;
         opacity: 0.95;
-        background-position: center;
-        background-repeat: no-repeat;
+        background: no-repeat center;
         background-size: cover;
-    }
-
-    .market-login-box {
-        margin-left: -48px;
-        margin-right: 0px;
-        width: auto;
     }
 
     .login-box {
@@ -40,20 +27,27 @@
         -webkit-border-radius: 3px;
         border-radius: 3px;
     }
+    .panel-bordered-primary{
+        border: 1px solid #1ca28b;
+        color: #1cbb86 !important;
+        padding: 10px 50px;
+        font-size:11px;
+    }
+
+    a:hover,a:active,a::selection{
+        text-decoration: none;
+    }
 </style>
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
-    <?php $this->load->view('landing/resources/head_menu') ?>
     <div class="container-fluid" style="width: 100%">
         <div class="row">
             <div class="col-md-10 col-md-offset-1" style="margin-top: 3px;"></div>
             <div class="col-md-12 col-lg-12" style="background: #fff;">
                 <div class="row">
-                    <div class="col-md-6 img-bg hidden-xs">
-                        <img src="<?= base_url('assets/landing/cover-photo.png') ?>">
-                    </div>
-                    <div class="col-md-6 market-box">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-5 market-box">
                         <p class="text-center">
                             <a href="<?= base_url(); ?>"><img
                                         src="<?= base_url('assets/landing/img/onitshamarket-logo.png') ?>" width="20%"
@@ -116,8 +110,8 @@
                                         <div class="checkbox">
                                             <label>
                                                 <input class="i-check" type="checkbox"/>
-                                                I agree to <?= lang('app_name'); ?> <a href="<?= base_url('pages/terms'); ?>" target="_blank">Terms
-                                                    & Conditions</a> | <a href="<?= base_url('pages/privacy'); ?>" target="_blank">
+                                                I agree to <?= lang('app_name'); ?> <a href="<?= base_url('pages/terms'); ?>" target="_blank" style="color:#0ac392;">Terms
+                                                    & Conditions</a> | <a href="<?= base_url('pages/privacy'); ?>" target="_blank" style="color:#0ac392;">
                                                     Policy.</a></label>
                                         </div>
                                     </div>
@@ -125,8 +119,8 @@
                                            value="Create Account"/>
                                     <?= form_close(); ?>
                                     <br/>
-                                    <div class="form_end">
-                                        <a href="<?= base_url(lang('login_link')); ?>">Already Have An Account</a>
+                                    <div class="form_end" style="margin-top:10px;">
+                                        <a href="<?= base_url(lang('login_link')); ?>" class="panel-bordered-primary">Already Have An Account</a>
                                     </div>
                                 </div>
                             </div>
@@ -136,7 +130,6 @@
             </div>
         </div>
     </div>
-    <?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
 </body>

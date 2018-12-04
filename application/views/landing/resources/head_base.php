@@ -56,5 +56,9 @@
             height: 36px !important;
             line-height: 48px !important;
         }
+
+        a:hover,a:active{
+            text-decoration: none !important;
+        }
     </style>
     <script> let base_url = "<?= base_url(); ?>"</script>

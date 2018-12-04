@@ -1,15 +1,5 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
 <style>
-    .well {
-        padding: 5px;
-        font: 12px/20px "Helvetica Neue", Helvetica, Arial, sans-serif;
-    }
-
-    .img-bg {
-        padding: 0px !important;
-        margin-right: 0px;
-    }
-
     .market-box {
         margin-left: 0px !important;
     }
@@ -18,15 +8,8 @@
         width: 100%;
         position: relative;
         opacity: 0.95;
-        background-position: center;
-        background-repeat: no-repeat;
+        background: no-repeat center;
         background-size: cover;
-    }
-
-    .market-login-box {
-        margin-left: -48px;
-        margin-right: 0px;
-        width: auto;
     }
 
     .login-box {
@@ -39,20 +22,35 @@
         -webkit-border-radius: 3px;
         border-radius: 3px;
     }
+
+    .panel-bordered-primary {
+        border: 1px solid #1ca28b;
+        color: #1cbb86 !important;
+        padding: 10px 60px;
+        font-size: 11px;
+    }
+
+    .panel-bordered-warning {
+        border: 1px solid #ffb300;
+        color: #ffb300 !important;
+        padding: 10px 50px;
+        font-size: 11px;
+    }
+
+    a:hover, a:active, a::selection {
+        text-decoration: none;
+    }
 </style>
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
-    <?php $this->load->view('landing/resources/head_menu') ?>
     <div class="container-fluid" style="width: 100%">
         <div class="row">
             <div class="col-md-10 col-md-offset-1" style="margin-top: 3px;"></div>
             <div class="col-md-12 col-lg-12" style="background: #fff;">
                 <div class="row">
-                    <div class="col-md-6 img-bg hidden-xs">
-                        <img src="<?= base_url('assets/landing/cover-photo.png') ?>">
-                    </div>
-                    <div class="col-md-6 market-box">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-5 market-box">
                         <p class="text-center">
                             <a href="<?= base_url(); ?>" title="Go to homepage"><img
                                         src="<?= base_url('assets/landing/img/onitshamarket-logo.png') ?>" width="20%"
@@ -82,12 +80,14 @@
                                     </div>
                                     <br/>
                                     <?= form_close(); ?>
-                                    <div class="text-center" style="margin-top: 25px">
-                                        <a href="<?= base_url(lang('forgot_password_link')); ?>"><?= lang('forgot_password'); ?></a>
+                                    <div class="text-center " style="margin-top: 30px">
+                                        <a href="<?= base_url(lang('forgot_password_link')); ?>"
+                                           class=" panel-bordered-warning"><?= lang('forgot_password'); ?></a>
                                     </div>
                                     <hr class="hr-text" data-content="OR" style="margin-top: 10px">
-                                    <p class="text-center form_end text-d" style="font-size: 14px; margin-top: -40px;">
-                                        <a href="<?= base_url('create'); ?>"> Create an account</a>
+                                    <p class="text-center form_end text-d" style="font-size: 14px; margin-top: -35px;">
+                                        <a href="<?= base_url('create'); ?>" class="panel-bordered-primary"> Create an
+                                            account</a>
                                     </p>
                                 </div>
                             </div>
@@ -97,7 +97,6 @@
             </div>
         </div>
     </div>
-    <?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
 </body>
