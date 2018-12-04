@@ -52,11 +52,11 @@
                     <div class="col-md-6 market-box">
                         <p class="text-center">
                             <a href="<?= base_url(); ?>" title="Go to homepage"><img
-                                        src="<?= base_url('assets/landing/img/onitshamarket-logo.png') ?>" width="20%"
-                                        alt="market logo Image"></a>
+                                    src="<?= base_url('assets/landing/img/onitshamarket-logo.png') ?>" width="20%"
+                                    alt="market logo Image"></a>
                         </p>
                         <h3 class="widget-title text-center text-bold">
-                            Forgot Password <small>Enter Valid Email</small>
+                            Reset Password <small>Enter New Password</small>
                         </h3>
                         <div class="row">
                             <div class="col-md-2"></div>
@@ -65,9 +65,14 @@
                                 <div>
                                     <?= form_open('resetpassword/process', 'id="reset-form"'); ?>
                                     <div class="form-group">
-                                        <label><h5>Email Address*</h5></label>
-                                        <input class="form-control" type="email" name="email"
-                                               placeholder="Enter your email" autofocus="" required/>
+                                        <label><h5>Password</h5></label>
+                                        <input class="form-control" type="password" name="password"
+                                               placeholder="Enter your password" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label><h5>Password</h5></label>
+                                        <input class="form-control" type="password" name="confirm_password"
+                                               placeholder="Enter your password" required/>
                                     </div>
                                     <button type="submit" class="col-md-12 col-sm-12 col-xs-12 btn btn-success">
                                         <strong>RESET PASSWORD</strong></button>
@@ -87,12 +92,12 @@
                     <div class="col-md-6 img-bg hidden-xs">
                         <img src="<?= base_url('assets/landing/cover-photo.png') ?>">
                     </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <?php $this->load->view('landing/resources/footer'); ?>
+</div>
+<?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
 </body>

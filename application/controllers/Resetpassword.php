@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Resetpassword extends CI_Controller {
+class Resetpassword extends MY_Controller {
 
 	public function __construct(){
         // @todo
