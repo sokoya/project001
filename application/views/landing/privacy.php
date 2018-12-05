@@ -12,7 +12,7 @@
     <?php $this->load->view('landing/resources/head_category') ?>
     <?php $this->load->view('landing/resources/head_menu') ?>
     <div class="container text-center">
-        <div class="row text-justify" style="padding: 20px;background: #fff;">
+        <div class="row text-justify" style="padding: 20px;background: #fff;margin-top:20px;">
             <h2 class="terms_head text-center">Privacy &amp; Security</h2>
             <div style="height:15px;"></div>
             <h3>Welcome to Onitshamarket.com, your reliable online marketplace.</h3>
