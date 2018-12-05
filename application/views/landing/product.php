@@ -185,7 +185,6 @@
                                                 <h5 class="custom-product-page-option-title">Variation:</h5>
                                                 <div class="row variation-option-list">
                                                     <?php foreach ($variations as $variation): ?>
-
                                                         <div class="col-xs-3">
                                                             <p
                                                                     title="<?= $variation['variation']; ?>"

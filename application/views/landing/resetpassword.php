@@ -58,14 +58,13 @@
                         </p>
                         <h3 class="widget-title text-center text-bold">
                             Forgot Password
-                            <small>Enter Valid Email</small>
                         </h3>
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-8 market-board login-box">
                                 <?php $this->load->view('landing/msg_view'); ?>
                                 <div>
-                                    <?= form_open('resetpassword/process', 'id="reset-form"'); ?>
+                                    <?= form_open('resetpassword', 'id="reset-form"'); ?>
                                     <div class="form-group">
                                         <label><h5>Email Address*</h5></label>
                                         <input class="form-control" type="email" name="email"

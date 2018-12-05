@@ -44,6 +44,42 @@ Class User_model extends CI_Model{
 	}
 
 
+    public function last_login(){
+        if ($this->session->userdata('logged_id')) {
+            $array = array(
+                'last_login' => get_now(),
+                'last_ip' => $_SERVER['REMOTE_ADDR']
+            );
+            $this->db->set($array);
+            $this->db->where('id',$this->session->userdata('logged_id'));
+            $this->db->update('users');
+        }
+    }
+
+
+    public function login_user($email, $password){
+        if($email && $password) {
+            $email = cleanit($email);
+            $this->db->where(['email' => $email]);
+            if ($this->db->get('users')->row()) {
+                $this->db->where(['email' => $email]);
+                $salt = $this->db->get('users')->row()->salt;
+                if ($salt) {
+                    $password = shaPassword($password, $salt);
+                    $this->db->where('email', $email);
+                    $this->db->where('password', $password);
+                    $result = $this->db->get('users');
+                    if ($result->num_rows() == 1) {
+                        return $result->row(0)->id;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+
+
     /**
      * @param array $data
      * @param string $table_name
@@ -202,9 +238,22 @@ Class User_model extends CI_Model{
      * @param $where
      * @return mixed
      */
-    function get_rows($table_name ='users', $where ){
+    function get_row($table_name ='users', $select, $where ){
+        $this->db->select($select);
         $this->db->where($where);
         return $this->db->get( $table_name )->row();
+    }
+
+
+    function generate_code($table = 'users', $label)
+    {
+        do {
+            $number = generate_token(12);
+            $this->db->where($label, $number);
+            $this->db->from($table);
+            $count = $this->db->count_all_results();
+        } while ($count >= 1);
+        return $number;
     }
 
     function recover_email(){}

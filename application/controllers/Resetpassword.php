@@ -4,10 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Resetpassword extends MY_Controller {
 
 	public function __construct(){
-        // @todo
-        // Check if the user is already logged in
-        // Also check where the user is coming from
-        // $this->session->set_userdata('referred_from', current_url());
         parent::__construct();
         if( $this->session->userdata('logged_in') ){
             // Ursher the person to where he is coming from
@@ -18,39 +14,110 @@ class Resetpassword extends MY_Controller {
     }
 
 	public function index(){
-		$page_data['title'] = 'Reset Password';
-        $page_data['page'] = 'register_password';
+        $page_data['title'] = 'Reset Password';
+        $page_data['page'] = 'reset_password';
+        $page_data['description'] = DESCRIPTION;
+	    if( $this->input->post() ){
+            $this->form_validation->set_rules('email', 'Email Address', 'trim|required|xss_clean|valid_email');
+            if ($this->form_validation->run() === FALSE) {
+                $this->session->set_flashdata('error_msg', '<strong>Please fix the error</strong> <br />' . validation_errors());
+            }else{
+                $email = $this->input->post('email');
+                $user = $this->user->get_row('users', 'id', "email = '$email'");
+                if( $user ){
+                    $data['code'] = $code = $this->user->generate_code( 'users', 'code');
+                    if( $this->user->update_data("{$user->id}", $data, 'users')) {
+                        //@TODO Send recovery mail
+                        $this->session->set_flashdata('success_msg', "Reset mail has been sent to " . $email . " please click on the link in your email to reset your password.");
+                        redirect('login');
+                    } else {
+                        $this->session->set_flashdata('error_msg', "There was an error updating your account, please try again, and if persist, contact support.");
+                        redirect('resetpassword');
+                    }
+                }else{
+                    $this->session->set_flashdata('error_msg', "Sorry we can't find your email in our record. Create an account or contact our support team.");
+                    redirect('create');
+                }
+            }
+        }
 		$this->load->view('landing/resetpassword',$page_data);
 	}
 
-	function process(){
-		if( $this->input->post() ){
-			$this->form_validation->set_rules('resetemail','Email Address', 'trim|required|min_length[3]|valid_email');
-			$email = cleanit($this->input->post('email'));
-			if ($this->form_validation->run() == FALSE) {
-				$this->session->set_flashdata('error_msg', validation_errors());
-			} else {
-				// is email existing
-				$activation_token = generate_token(25);
-				$where = array('email' => $email);
-				$user = $this->user->get_row('users', $where);
+    public function activate(){
+        $token = cleanit($this->input->get('token'));
+        if( $token && !empty( $token )){
+            $user = $this->get_row('users', 'id,email', "code = {$token}");
+            if( $user ){
+                $this->session->set_userdata('id', $user->id);
+                $this->session->set_userdata('email', $user->email);
+                $this->session->userdata('success_msg', 'Token confirmed! Please set a new password');
+                redirect('resetpassword/reset_password');
+            }else{
+                $this->session->userdata('error_msg', 'Incorrect recovery token or has expired, please contact support team for more assistance.');
+            }
+        }
+        redirect('resetpassword');
+    }
 
-				$data = array(
-					'recover_code' => $activation_token
-				);
+    public function reset_password(){
+        $page_data['title'] = 'Change Password';
+        $page_data['page'] = 'reset_password';
+        $page_data['description'] = DESCRIPTION;
+        if( !$this->session->userdata('id')) redirect('resetpassword');
+        if( $this->input->post() ){
+            $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
+            $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean');
+            if ($this->form_validation->run() === FALSE) {
+                $this->session->set_flashdata('error_msg', '<strong>Please fix the error</strong> <br />' . validation_errors());
+            }else{
+                $id = $this->session->userdata('id');
+                $email = $this->session->userdata('email');
+                $password = cleanit($this->input->post('password'));
+                if($this->user->change_password($password, $id, 'users')){
+                    // delete the token
+                    $this->user->update_data("$id", array('code' => ''), 'users' );
+                    $this->session->unset_userdata('id');
+                    $this->session->unset_userdata('email');
 
-				$update_token = $this->user->update_data($user->id,$data,'users');
+                    $user_data = array(
+                        'logged_id' => $id,
+                        'email' => $email,
+                        'logged_in' => true
+                    );
+                    $this->session->set_userdata($user_data);
+                    $this->user->last_login();
+                    $this->session->userdata('success_msg', 'Password changed successfully, and you have been logged in.');
+                    $from = $this->session->userdata('referred_from');
+                    !empty( $from ) ? redirect( $from ) : redirect('account');
+                }
+                $this->session->userdata('error_msg', 'Error updating your new password, please contact support.');
+            }
+            redirect('resetpassword/reset_password');
+        }else{
+            $this->load->view('reset_change_password', $page_data);
+        }
+    }
 
-				if ($user->num_rows() > 0 && $update_token) {
-					if ($this->user->recover_email($email, $user->row()->name, $activation_token)) 
-						$this->session->set_flashdata('success_msg','A recovery link has been sent to your email... Please check your email for the recovery link to complete the process!');
-				} else {
-					$this->session->set_flashdata('error_msg','Email doest not exist in our records');
-				}
-				
-			}
-			redirect('resetpassword');
-		}
-	}
+    // Auto login te user
+    public function autoLogin($email = '')
+    {
+        $user = $this->user_model->get_email(urldecode($email));
+
+        if ($user) {
+            $user_data = array(
+                'user_id' => $user->id,
+                'email' => $user->email,
+                'logged_in' => true
+            );
+
+            $this->session->set_userdata($user_data);
+            $this->user_model->last_login();
+            $this->session->set_flashdata('success_msg','Congrats! Your account has been activated, welcome to your dashboard');
+            redirect('dashboard');
+        } else {
+            $this->session->set_flashdata('error_msg', 'Incorrect activation link, please contact our support team for more assistance.');
+            redirect('register');
+        }
+    }
 	
 }
