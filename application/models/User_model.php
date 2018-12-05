@@ -307,5 +307,29 @@ Class User_model extends CI_Model{
 	}
 
 
+	function recently_viewed( $pid , $user_id ){
+        // Does product exist in the record
+        $products = array();
+        $user = $this->get_row('recently_viewed', 'id,product_ids', "user_id = $user_id");
+        if( $user ){
+            $product_ids = json_decode( $user->product_ids );
+            if( !in_array( $pid, $product_ids) ){
+                array_push( $product_ids, $pid);
+                $product_ids = json_encode( $product_ids);
+                $this->update_data($user->id, array('product_ids' => $product_ids), 'recently_viewed');
+            }
+        }else{
+            // Not found
+            $products[] = $pid;
+            $data = array(
+                'user_id' => $user_id,
+                'product_ids' => json_encode($products),
+                'viewed_date' => get_now()
+            );
+            $this->create_account( $data,'recently_viewed');
+        }
+    }
+
+
     
 }

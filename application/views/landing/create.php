@@ -57,7 +57,7 @@
                             <div class="col-md-8 col-md-offset-2">
                                 <?php $this->load->view('landing/msg_view'); ?>
                                 <div class="market-board login-box">
-                                    <?= form_open('create/process', 'autocorrect="off", id="register-form"'); ?>
+                                    <?= form_open('create/process', 'autocorrect="off" autocomplete="off" id="register-form"'); ?>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -76,12 +76,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="phone_number">Phone Number*</label>
-                                        <input class="form-control" type="number" name="signup-phone" name="phone"
-                                               value="<?php if (isset($_POST['phone'])) echo $_POST['phone']; ?>"
-                                               placeholder="08022334455" required/>
-                                    </div>
+<!--                                    <div class="form-group">-->
+<!--                                        <label for="phone_number">Phone Number*</label>-->
+<!--                                        <input class="form-control" type="number" name="phone"-->
+<!--                                               value="--><?php //if (isset($_POST['phone'])) echo $_POST['phone']; ?><!--"-->
+<!--                                               placeholder="08022334455" required/>-->
+<!--                                    </div>-->
                                     <div class="form-group">
                                         <label>Email Address*</label>
                                         <input class="form-control" type="text" id="signup-email" name="signupemail"

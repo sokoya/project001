@@ -63,7 +63,7 @@
                             <div class="col-md-8 col-md-offset-2">
                                 <?php $this->load->view('landing/msg_view'); ?>
                                 <div class="market-board login-box">
-                                    <?= form_open('login/process', 'id="login-form"'); ?>
+                                    <?= form_open('login/process', 'id="login-form" autocorrect="off", autocomplete="off"'); ?>
                                     <div class="form-group">
                                         <label><h5>Email Address*</h5></label>
                                         <input class="form-control" type="email" name="loginemail"

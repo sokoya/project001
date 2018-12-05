@@ -28,6 +28,7 @@ class Resetpassword extends MY_Controller {
                     $data['code'] = $code = $this->user->generate_code( 'users', 'code');
                     if( $this->user->update_data("{$user->id}", $data, 'users')) {
                         //@TODO Send recovery mail
+
                         $this->session->set_flashdata('success_msg', "Reset mail has been sent to " . $email . " please click on the link in your email to reset your password.");
                         redirect('login');
                     } else {

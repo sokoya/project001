@@ -13,7 +13,8 @@ class Create extends MY_Controller{
         
         if( $this->session->userdata('logged_in') ){
             // Ursher the person to where he is coming from
-            if( !empty($this->session->userdata('referred_from')) ) redirect($this->session->userdata('referred_from'));
+            $from = $this->session->userdata('referred_from');
+            if( !empty( $from ) ) redirect($this->session->userdata('referred_from'));
             redirect(base_url());
         }        
     }

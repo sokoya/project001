@@ -221,6 +221,7 @@
                                                             class="product-page-qty product-page-qty-plus">+
                                                     </button>
                                                 </li>
+                                                <span class="text-sm text-danger" id="quantity-text"></span>
                                             </ul>
                                         </div>
                                     </div>
@@ -476,7 +477,7 @@
                                     <div class="form-group">
                                         <label>Review</label>
                                         <textarea title="review" id="review_detail" name="review" rows="2"
-                                                  class="form-control" required></textarea>
+                                                  class="form-control" required placeholder="Write your review on this product."></textarea>
                                     </div>
                                     <input type="submit" class="btn btn-success" id="review_submit_button"
                                            value="Post Review">
@@ -502,7 +503,7 @@
                                 </ul>
                             <?php endif; ?>
                             <div class="product-img-wrap">
-                                <img class="lazy product-img"
+                                <img class="product-img lazy"
                                      src="<?= base_url('assets/landing/img/load.gif'); ?>"
                                      data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?>"
                                      alt="<?= $like->product_name; ?>"
@@ -576,6 +577,7 @@
 <?php $this->load->view('landing/resources/script'); ?>
 <script src="<?= base_url('assets/landing/js/rating.js'); ?>"></script>
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
     $(function () {
         $('.lazy').Lazy();
@@ -679,10 +681,12 @@
     plus.on('click', function () {
         minus.prop("disabled", false);
         if (quantity.val() >= count) {
+            $('#quantity-text').html('There are only ' +count+ ' item(s) left');
             plus.prop("disabled", true);
         }
     });
     minus.on('click', function () {
+        $('#quantity-text').html('');
         plus.prop("disabled", false);
         if (quantity.val() <= 1) {
             minus.prop("disabled", true);
