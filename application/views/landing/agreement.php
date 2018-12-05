@@ -14,7 +14,7 @@
 
     <?php $this->load->view('landing/resources/head_menu') ?>
     <div class="container text-center">
-        <div class="row text-justify" style="padding: 20px;background: #fff;">
+        <div class="row text-justify" style="padding: 20px;background: #fff;margin-top:20px;">
             <h2 class="terms_head text-center">Registration Agreement</h2>
             <p class="text-center">
                 BEFORE YOU COMPLETE THE REGISTRATION PROCESS AND BECOME OUR REGISTERED BUYER, PLEASE READ THE FOLLOWING
