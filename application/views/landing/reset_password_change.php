@@ -26,19 +26,44 @@
     .panel-bordered-primary {
         border: 1px solid #1ca28b;
         color: #1cbb86 !important;
-        padding: 10px 60px;
+        padding: 10px;
         font-size: 11px;
     }
 
     .panel-bordered-warning {
-        border: 1px solid #ffb300;
-        color: #ffb300 !important;
-        padding: 10px 50px;
+        border: 1px solid #9b6a00;
+        color: #9b6a00 !important;
+        padding: 10px;
         font-size: 11px;
     }
 
     a:hover, a:active, a::selection {
         text-decoration: none;
+    }
+
+    @media screen and (max-width: 991px) {
+        .mar_top {
+            margin-top: 20px;
+        }
+
+        .revert_normal {
+            margin-left: 0 !important;
+        }
+    }
+
+    @media screen and (max-width: 885px) and (min-width: 500px) {
+        .market-board {
+            width: 80%;
+        }
+
+        .ipad_pad {
+            width: 10%;
+        }
+
+        .inline_flex {
+            display: inline-flex;
+            width: 100%;
+        }
     }
 </style>
 </head>
@@ -58,10 +83,10 @@
                     <small>Enter New Password</small>
                 </h3>
                 <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8 market-board login-box">
+                    <div class="col-md-12 inline_flex">
                         <?php $this->load->view('landing/msg_view'); ?>
-                        <div>
+                        <div class="ipad_pad"></div>
+                        <div class="market-board login-box">
                             <?= form_open('resetpassword/process', 'id="reset-form"'); ?>
                             <div class="form-group">
                                 <label><h5>Password</h5></label>
@@ -75,17 +100,19 @@
                             </div>
                             <button type="submit" class="col-md-12 col-sm-12 col-xs-12 btn btn-success">
                                 <strong>RESET PASSWORD</strong></button>
+                            <br/>
+                            <?= form_close(); ?>
+                            <hr class="hr-text" data-content="OR">
+                            <div class="row text-center" style="padding:20px;margin-top:-20px;">
+                                <a href="<?= base_url('login'); ?>"
+                                   class=" panel-bordered-warning col-md-6 col-xs-12 col-lg-6 col-sm-12 revert_normal"
+                                   style="margin-left:-5px;">Login</a>
+                                <a href="<?= base_url('create'); ?>"
+                                   class="panel-bordered-primary col-md-6 col-xs-12 col-lg-6 col-sm-12 mar_top revert_normal"
+                                   style="margin-left:5px;"> Create an
+                                    account</a>
+                            </div>
                         </div>
-                        <br/>
-                        <?= form_close(); ?>
-                        <div class="text-center" style="margin-top: 25px">
-                            <a href="<?= base_url('login'); ?>" class=" panel-bordered-warning">Login</a>
-                        </div>
-                        <hr class="hr-text" data-content="OR" style="margin-top: 10px">
-                        <p class="text-center form_end text-d" style="font-size: 14px; margin-top: -40px;">
-                            <a href="<?= base_url('create'); ?>" class="panel-bordered-primary"> Create an
-                                account</a>
-                        </p>
                     </div>
                 </div>
             </div>

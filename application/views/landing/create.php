@@ -38,17 +38,6 @@
     a:hover, a:active, a::selection {
         text-decoration: none;
     }
-
-    @media screen and (max-width: 991px) {
-        .mar_top {
-            margin-top: 20px;
-        }
-
-        .revert_normal {
-            margin-left: 0 !important;
-        }
-    }
-
     @media screen and (max-width: 885px) and (min-width: 500px) {
         .market-board {
             width: 80%;
