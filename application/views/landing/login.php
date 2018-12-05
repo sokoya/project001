@@ -26,41 +26,48 @@
     .panel-bordered-primary {
         border: 1px solid #1ca28b;
         color: #1cbb86 !important;
-        padding:10px;
+        padding: 10px;
         font-size: 11px;
     }
 
     .panel-bordered-warning {
         border: 1px solid #9b6a00;
         color: #9b6a00 !important;
-        padding:10px;
+        padding: 10px;
         font-size: 11px;
     }
 
     a:hover, a:active, a::selection {
         text-decoration: none;
     }
-    @media screen and (max-width: 991px){
+
+    @media screen and (max-width: 991px) {
         .mar_top {
-            margin-top:20px;
+            margin-top: 20px;
+        }
+        .revert_normal{
+            margin-left:0 !important;
         }
     }
-    @media screen and (max-width: 768px) and (min-width: 500px){
-        .market-board{
-            width:80%;
+
+    @media screen and (max-width: 885px) and (min-width: 500px) {
+        .market-board {
+            width: 80%;
         }
-        .ipad_pad{
-            width:10%;
+
+        .ipad_pad {
+            width: 10%;
         }
-        .inline_flex{
-            display:inline-flex;
-            width:100%;
+
+        .inline_flex {
+            display: inline-flex;
+            width: 100%;
         }
     }
 </style>
 </head>
 <body>
-<div class="global-wrapper clearfix" id="global-wrapper" style="background: #fff;">
+<div class="global-wrapper clearfix" id="global-wrapper" style="background: #fff;padding-top:20px;">
     <div class="container">
         <div class="row">
             <div class="col-md-3"></div>
@@ -95,15 +102,15 @@
                             </div>
                             <br/>
                             <?= form_close(); ?>
-                            <div class="row text-center" style="margin-top:40px;margin-bottom: 20px;">
-                                <div class="col-md-6 col-xs-12 col-lg-6 col-sm-12">
-                                    <a href="<?= base_url(lang('forgot_password_link')); ?>"
-                                       class=" panel-bordered-warning"><?= lang('forgot_password'); ?></a>
-                                </div>
-                                <div class="col-md-6 col-xs-12 col-lg-6 col-sm-12 mar_top">
-                                        <a href="<?= base_url('create'); ?>" class="panel-bordered-primary"> Create an
-                                            account</a>
-                                </div>
+                            <hr class="hr-text" data-content="OR">
+                            <div class="row text-center" style="padding:20px;margin-top:-20px;">
+                                <a href="<?= base_url(lang('forgot_password_link')); ?>"
+                                   class=" panel-bordered-warning col-md-6 col-xs-12 col-lg-6 col-sm-12 revert_normal"
+                                   style="margin-left:-5px;"><?= lang('forgot_password'); ?></a>
+                                <a href="<?= base_url('create'); ?>"
+                                   class="panel-bordered-primary col-md-6 col-xs-12 col-lg-6 col-sm-12 mar_top revert_normal"
+                                   style="margin-left:5px;"> Create an
+                                    account</a>
                             </div>
                         </div>
                     </div>

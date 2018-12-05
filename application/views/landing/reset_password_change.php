@@ -43,60 +43,54 @@
 </style>
 </head>
 <body>
-<div class="global-wrapper clearfix" id="global-wrapper">
-    <div class="container-fluid" style="width: 100%">
+<div class="global-wrapper clearfix" id="global-wrapper" style="background: #fff;padding-top:20px;">
+    <div class="container">
         <div class="row">
-            <div class="col-md-10 col-md-offset-1" style="margin-top: 3px;"></div>
-            <div class="col-md-12 col-lg-12" style="background: #fff;">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 market-box">
+                <p class="text-center">
+                    <a href="<?= base_url(); ?>" title="Go to homepage"><img
+                                src="<?= base_url('assets/landing/img/onitshamarket-logo.png') ?>" width="20%"
+                                alt="market logo Image"></a>
+                </p>
+                <h3 class="widget-title text-center text-bold">
+                    Reset Password
+                    <small>Enter New Password</small>
+                </h3>
                 <div class="row">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-5 market-box">
-                        <p class="text-center">
-                            <a href="<?= base_url(); ?>" title="Go to homepage"><img
-                                        src="<?= base_url('assets/landing/img/onitshamarket-logo.png') ?>" width="20%"
-                                        alt="market logo Image"></a>
-                        </p>
-                        <h3 class="widget-title text-center text-bold">
-                            Reset Password
-                            <small>Enter New Password</small>
-                        </h3>
-                        <div class="row">
-                            <div class="col-md-2"></div>
-                            <div class="col-md-8 market-board login-box">
-                                <?php $this->load->view('landing/msg_view'); ?>
-                                <div>
-                                    <?= form_open('resetpassword/process', 'id="reset-form"'); ?>
-                                    <div class="form-group">
-                                        <label><h5>Password</h5></label>
-                                        <input class="form-control" type="password" name="password"
-                                               placeholder="Enter your password" required/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label><h5>Password</h5></label>
-                                        <input class="form-control" type="password" name="confirm_password"
-                                               placeholder="Enter your password" required/>
-                                    </div>
-                                    <button type="submit" class="col-md-12 col-sm-12 col-xs-12 btn btn-success">
-                                        <strong>RESET PASSWORD</strong></button>
-                                </div>
-                                <br/>
-                                <?= form_close(); ?>
-                                <div class="text-center" style="margin-top: 25px">
-                                    <a href="<?= base_url('login'); ?>" class=" panel-bordered-warning">Login</a>
-                                </div>
-                                <hr class="hr-text" data-content="OR" style="margin-top: 10px">
-                                <p class="text-center form_end text-d" style="font-size: 14px; margin-top: -40px;">
-                                    <a href="<?= base_url('create'); ?>" class="panel-bordered-primary"> Create an
-                                        account</a>
-                                </p>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8 market-board login-box">
+                        <?php $this->load->view('landing/msg_view'); ?>
+                        <div>
+                            <?= form_open('resetpassword/process', 'id="reset-form"'); ?>
+                            <div class="form-group">
+                                <label><h5>Password</h5></label>
+                                <input class="form-control" type="password" name="password"
+                                       placeholder="Enter your password" required/>
                             </div>
+                            <div class="form-group">
+                                <label><h5>Password</h5></label>
+                                <input class="form-control" type="password" name="confirm_password"
+                                       placeholder="Enter your password" required/>
+                            </div>
+                            <button type="submit" class="col-md-12 col-sm-12 col-xs-12 btn btn-success">
+                                <strong>RESET PASSWORD</strong></button>
                         </div>
+                        <br/>
+                        <?= form_close(); ?>
+                        <div class="text-center" style="margin-top: 25px">
+                            <a href="<?= base_url('login'); ?>" class=" panel-bordered-warning">Login</a>
+                        </div>
+                        <hr class="hr-text" data-content="OR" style="margin-top: 10px">
+                        <p class="text-center form_end text-d" style="font-size: 14px; margin-top: -40px;">
+                            <a href="<?= base_url('create'); ?>" class="panel-bordered-primary"> Create an
+                                account</a>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
 </body>
