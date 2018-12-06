@@ -21,6 +21,22 @@
         text-decoration: line-through;
     }
 
+	.variation-option-list{
+		position: relative;
+		top: 7px;
+	}
+
+	.option-selected, .variation-option:hover {
+		outline: 1px solid #0b6427;
+		color: #0b6427;
+		cursor: pointer;
+	}
+
+	.option-disabled {
+		color: #bebebe;
+		text-decoration: line-through;
+	}
+
 </style>
 </head>
 <body>
@@ -168,12 +184,13 @@
                                         <span
                                                 class="product-page-price-list price-lower dn-price"><?= ngn($var->sale_price); ?></span>
                                     <?php else : ?>
+										<span class="price-cs ds-price"></span>
                                         <span class="price-cs dn-price"><?= ngn($var->sale_price); ?></span>
                                     <?php endif; ?>
 
                                     <input type="hidden" name="variation_id" class="variation_id"
                                            value="<?= $var->id; ?>">
-                                    <input type="hidden" name="product_id"
+                                    <input type="hidden" name="product_id" class="product_id"
                                            value="<?= $product->id; ?>">
                                 </p>
                                 <hr class="product-line"/>
@@ -579,126 +596,156 @@
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
-    $(function () {
-        $('.lazy').Lazy();
-    });
-    let quantity = $('#quan');
-    let count = quantity.data('range');
-    let plus = $('.product-page-qty-plus');
-    let minus = $('.product-page-qty-minus');
+	$(function () {
+		$('.lazy').Lazy();
+	});
+	let quantity = $('#quan');
+	let selected_variation_id = $('.variation_id').val();
+	let count = quantity.data('range');
+	let plus = $('.product-page-qty-plus');
+	let minus = $('.product-page-qty-minus');
 
-    function format_currency(str) {
-        return '₦' + str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-    }
+	function format_currency(str) {
+		return '₦ ' + str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+	}
 
-    $('.variation-select').on('change', function () {
-        let id = $(this).children(":selected").data('id');
-        let quantity = $('#quan');
-        $('.variation_id').val(id);
-        // let count = quantity.data('range');
-        $.ajax({
-            url: base_url + "ajax/check_variation",
-            method: "POST",
-            data: {vid: id, 'csrf_carrito': csrf_token},
-            success: function (response) {
-                $.each(response, function (i, v) {
-                    // change the variation id
-                    if (v.discount_price) {
-                        $('.ds-price').html(format_currency(v.discount_price));
-                        $('.dn-price').show();
-                        $('.dn-price').html(format_currency(v.sale_price));
-                        $('.pr_price_hidden').val(v.discount_price);
-                    } else {
-                        $('.pr_price_hidden').val(v.sale_price);
-                        $('.ds-price').html(format_currency(v.sale_price));
-                        $('.dn-price').hide();
-                    }
-                    count = v.quantity * 1;
-                    quantity.val(1);
-                    minus.prop("disabled", true);
-                    plus.prop("disabled", false);
-                });
-            },
-            error: function (response) {
-                alert('An error occurred')
-            }
-        });
-    });
-    $('.wishlist-cta').on('click', function () {
-        let product_id = $(this).data('pid');
-        $.ajax({
-            url: base_url + 'ajax/favourite',
-            method: 'POST',
-            data: {
-                id: product_id
-            },
-            success: response => {
-                let parsed_response = JSON.parse(response);
-                if (parsed_response.action === 'remove') {
-                    $('.wishlist-cta').text('Add to Wishlist');
-                } else {
-                    $('.wishlist-cta').text('Remove from Wishlist');
-                }
-                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
-            },
-            error: () => {
-                notification_message('Sorry an error occurred please try again ', 'fa fa-info-circle', error);
-            }
-        })
-    });
-    $('.add-to-cart').on('click', function () {
-        _btn = $(this);
-        _btn.prop('disabled', 'disabled');
-        let variation = $('select[name="variation"]').val();
-        if (_btn.data('variation') != '' && variation == '') {
-            $('#status').html('<p class="alert alert-danger">Please select a variation.</p>').slideDown('fast').delay(3000).slideUp('slow');
-            _btn.prop('disabled', '');
-            return false;
-        }
-        if ($('#quan').val() == '') {
-            $('#status').html('<p class="alert alert-danger">Please select a quantity.</p>').slideDown('fast').delay(3000).slideUp('slow');
-            _btn.prop('disabled', '');
-            return false;
-        }
-        _btn.prop('disabled', '');
-        $.ajax({
-            url: base_url + "ajax/add_to_cart",
-            method: "POST",
-            data: $('#variation-form').serialize(),
-            success: function (response) {
-                window.location.href = base_url + 'cart';
-            }
-        });
-        $('#cart').on('click', function () {
-            window.location.href = base_url + 'cart';
-        });
-    });
-    document.querySelector("#quan").addEventListener("keypress", function (evt) {
-        if (evt.which < 48 || evt.which > 57) {
-            evt.preventDefault();
-        }
-    });
-    plus.on('click', function () {
-        minus.prop("disabled", false);
-        if (quantity.val() >= count) {
-            $('#quantity-text').html('There are only ' +count+ ' item(s) left');
-            plus.prop("disabled", true);
-        }
-    });
-    minus.on('click', function () {
-        $('#quantity-text').html('');
-        plus.prop("disabled", false);
-        if (quantity.val() <= 1) {
-            minus.prop("disabled", true);
-        }
-    });
-    quantity.on('input', function () {
-        if (quantity.val() > count) {
-            quantity.val(count)
-        } else if (quantity.val() === '0') {
-            quantity.val(1)
-        }
-    });
+	$('.variation-select').on('change', function () {
+		let id = $(this).children(":selected").data('id');
+		let quantity = $('#quan');
+		$('.variation_id').val(id);
+		// let count = quantity.data('range');
+		$.ajax({
+			url: base_url + "ajax/check_variation",
+			method: "POST",
+			data: {vid: id, 'csrf_carrito': csrf_token},
+			success: function (response) {
+				$.each(response, function (i, v) {
+					// change the variation id
+					if (v.discount_price) {
+						$('.ds-price').html(format_currency(v.discount_price));
+						$('.dn-price').show();
+						$('.dn-price').html(format_currency(v.sale_price));
+						$('.pr_price_hidden').val(v.discount_price);
+					} else {
+						$('.pr_price_hidden').val(v.sale_price);
+						$('.ds-price').html(format_currency(v.sale_price));
+						$('.dn-price').hide();
+					}
+					count = v.quantity * 1;
+					quantity.val(1);
+					minus.prop("disabled", true);
+					plus.prop("disabled", false);
+				});
+			},
+			error: function (response) {
+				alert('An error occurred')
+			}
+		});
+	});
+
+
+	$('.variation-option').on('click', function () {
+		$('.variation-option').removeClass('option-selected');
+		selected_variation_name = $(this).data('vname');
+		if ($(this).hasClass('option-disabled')) {
+			notification_message('Sorry this variation is out of stock', 'fa fa-info-circle', 'warning')
+		} else {
+			let id = $(this).data('vid');
+			let discount_price = $(this).data('discount');
+			let price = $(this).data('price');
+			let quantity_instance = $(this).data('quantity');
+			if (discount_price !== 'empty') {
+				$('.ds-price').html(format_currency(discount_price));
+				$('.dn-price').show();
+				$('.dn-price').html(format_currency(price));
+				$('.pr_price_hidden').val(discount_price);
+				console.log(format_currency(price));
+			} else {
+				$('.pr_price_hidden').val(price);
+				$('.ds-price').html(format_currency(price));
+				$('.dn-price').hide();
+			}
+			count = quantity_instance * 1;
+			quantity.val(1);
+			minus.prop("disabled", true);
+			plus.prop("disabled", false);
+			selected_variation_id = $(this).data('vid');
+			$(this).addClass('option-selected');
+		}
+	});
+
+
+	$('.wishlist-cta').on('click', function () {
+		let product_id = $(this).data('pid');
+		$.ajax({
+			url: base_url + 'ajax/favourite',
+			method: 'POST',
+			data: {
+				id: product_id
+			},
+			success: response => {
+				let parsed_response = JSON.parse(response);
+				if (parsed_response.action === 'remove') {
+					$('.wishlist-cta').text('Add to Wishlist');
+				} else {
+					$('.wishlist-cta').text('Remove from Wishlist');
+				}
+				notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+			},
+			error: () => {
+				notification_message('Sorry an error occurred please try again ', 'fa fa-info-circle', error);
+			}
+		})
+	});
+	$('.add-to-cart').on('click', function () {
+
+		let quantity_instance = $('#quan').val();
+		let variation_id = selected_variation_id;
+		let product_id = $('.product_id').val();
+
+		$.ajax({
+			url: base_url + 'ajax/quick_view_add',
+			method: 'POST',
+			data: {
+				product_id: product_id,
+				variation_id: variation_id,
+				quantity: quantity_instance
+			},
+			success: () => {
+				window.location.href = base_url + 'cart';
+			},
+			error: () => {
+				notification_message('Sorry an error occurred somewhere', 'fa fa-info-circle', 'warning');
+			}
+		})
+	});
+
+	document.querySelector("#quan").addEventListener("keypress", function (evt) {
+		if (evt.which < 48 || evt.which > 57) {
+			evt.preventDefault();
+		}
+	});
+	plus.on('click', function () {
+		minus.prop("disabled", false);
+		if (quantity.val() >= count) {
+			$('#quantity-text').html('There are only ' + count + ' item(s) left');
+			plus.prop("disabled", true);
+		}
+	});
+	minus.on('click', function () {
+		$('#quantity-text').html('');
+		plus.prop("disabled", false);
+		if (quantity.val() <= 1) {
+			minus.prop("disabled", true);
+		}
+	});
+	quantity.on('input', function () {
+		if (quantity.val() > count) {
+			quantity.val(count)
+		} else if (quantity.val() === '0') {
+			quantity.val(1)
+		}
+	});
 </script>
 </body>
 </html

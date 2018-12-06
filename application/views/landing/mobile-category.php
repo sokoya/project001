@@ -308,7 +308,7 @@
 
             function doReplaceState(url) {
                 let state = {current_url: url},
-                    title = "Carrito MarketPlace";
+                    title = "Onitshamarket";
                 history.replaceState(state, title, url);
             }
 

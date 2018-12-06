@@ -52,7 +52,7 @@ $.fn.quickViewNext = function (selector, steps, scope) {
 		let id = rs.index(this) + steps;
 		if (id > -1 && id < rs.length)
 			return $(rs[id])
-	}
+	}x
 	return $([])
 };
 

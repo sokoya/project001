@@ -43,7 +43,7 @@
                                         <img
                                                 data-src="<?= PRODUCTS_IMAGE_PATH . $detail->image; ?>"
                                                 src="<?= base_url('assets/landing/img/load.gif'); ?>"
-                                                alt="<?= lang('app_name'); ?> <?= $product['name']; ?>"
+                                                alt="<?= $product['name'] . lang('app_name'); ?>"
                                                 title="<?= $product['name']; ?>"/>
                                     </a>
                                 </td>
@@ -112,7 +112,7 @@
                     </ul>
                     <span class="text-sm text-danger"><strong>Delivery fee not included.</strong></span><br/>
                     <br/>
-                    <a class="btn btn-primary" href="<?= base_url('checkout'); ?>">Checkout</a>
+                    <a class="btn btn-primary col-md-12 col-xs-12 col-sm-12" href="<?= base_url('checkout'); ?>">Checkout</a>
                 </div>
             </div>
             <ul class="list-inline">
