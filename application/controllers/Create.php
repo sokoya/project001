@@ -13,7 +13,8 @@ class Create extends MY_Controller{
         
         if( $this->session->userdata('logged_in') ){
             // Ursher the person to where he is coming from
-            if( !empty($this->session->userdata('referred_from')) ) redirect($this->session->userdata('referred_from'));
+            $from = $this->session->userdata('referred_from');
+            if( !empty( $from ) ) redirect($this->session->userdata('referred_from'));
             redirect(base_url());
         }        
     }
@@ -38,7 +39,9 @@ class Create extends MY_Controller{
         $this->form_validation->set_rules('signuprepeatpassword', 'Password','trim|required|xss_clean|min_length[8]|max_length[15]|matches[signuppassword]');
         if ($this->form_validation->run() === FALSE) {
             $this->session->set_flashdata('error_msg','<strong>There was an error with the account creation. Please fix the following</strong> <br />' . validation_errors());
-            $this->load->view('landing/create');
+            $page_data['title'] = "Create Account";
+            $page_data['page'] = 'create';
+            $this->load->view('landing/create', $page_data);
         }else{
             $salt = salt(50);
             $data = array(

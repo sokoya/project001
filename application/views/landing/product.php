@@ -10,6 +10,11 @@
 		text-align: center;
 	}
 
+	.variation-option-list{
+		position: relative;
+		top: 7px;
+	}
+
 	.option-selected, .variation-option:hover {
 		outline: 1px solid #0b6427;
 		color: #0b6427;
@@ -21,9 +26,6 @@
 		text-decoration: line-through;
 	}
 
-	.variation-option-list {
-		/*margin-top: -3px;*/
-	}
 </style>
 </head>
 <body>
@@ -90,7 +92,6 @@
 						</ul>
 					<?php endif; ?>
 				</div>
-
 				<div class="col-md-7">
 					<div class="row" data-gutter="10">
 						<div class="col-md-12">
@@ -98,17 +99,19 @@
 								<div class="row">
 									<div class="col-md-5">
 										<ul class="product-page-product-rating">
-                                            <?= rating_star_generator($rating_counts) ; ?>
-                                        </ul>
+											<?= rating_star_generator($rating_counts); ?>
+										</ul>
 										<p class="product-page-product-rating-sign">
-											<a href="#"><?= count($rating_counts); ?> customer reviews</a> | <strong> 34 SOLDS</strong>
+											<a href="#"><?= count($rating_counts); ?> customer reviews</a> | <strong> 34
+												SOLDS</strong>
 										</p>
 										<p class="product-page-desc">
 											<strong
 												class="custom-product-title"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></strong>
 										</p>
-                                        <p class=" text-sm text-uppercase pr-id"><strong>Product ID :</strong> <?= $product->sku; ?>
-                                            | <strong>Seller : </strong><a
+										<p class=" text-sm text-uppercase pr-id"><strong>Product ID
+												:</strong> <?= $product->sku; ?>
+											| <strong>Seller : </strong><a
 												href="#"
 												id="pr-seller"><?= ucwords($product->first_name . ' ' . $product->last_name); ?></a>
 										</p>
@@ -164,23 +167,21 @@
 									</div>
 								</div>
 								<hr class="product-line"/>
-
 								<p class="product-page-price">
-
 									<?php if (discount_check($var->discount_price, $var->start_date, $var->end_date)) : ?>
 										<span class="price-cs ds-price"><?= ngn($var->discount_price); ?></span>
 										<span
 											class="product-page-price-list price-lower dn-price"><?= ngn($var->sale_price); ?></span>
 									<?php else : ?>
+										<span class="price-cs ds-price"></span>
 										<span class="price-cs dn-price"><?= ngn($var->sale_price); ?></span>
 									<?php endif; ?>
 
 									<input type="hidden" name="variation_id" class="variation_id"
 										   value="<?= $var->id; ?>">
-									<input type="hidden" name="product_id"
+									<input type="hidden" name="product_id" class="product_id"
 										   value="<?= $product->id; ?>">
 								</p>
-
 								<hr class="product-line"/>
 								<div class="product-variation">
 									<?= form_open('', 'id="variation-form"'); ?>
@@ -190,7 +191,6 @@
 												<h5 class="custom-product-page-option-title">Variation:</h5>
 												<div class="row variation-option-list">
 													<?php foreach ($variations as $variation): ?>
-
 														<div class="col-xs-3">
 															<p
 																title="<?= $variation['variation']; ?>"
@@ -209,11 +209,8 @@
 														</div>
 													<?php endforeach; ?>
 												</div>
-
-
 											</div>
 										<?php endif; ?>
-
 										<div class="col-md-5 quan-u">
 											<h5 class="custom-product-page-option-title">Quantity:</h5>
 											<ul>
@@ -230,9 +227,9 @@
 															class="product-page-qty product-page-qty-plus">+
 													</button>
 												</li>
+												<span class="text-sm text-danger" id="quantity-text"></span>
 											</ul>
 										</div>
-
 									</div>
 									<button type="submit" style="display: none;">Submit</button>
 									<?= form_close(); ?>
@@ -295,7 +292,6 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="gap"></div>
 			<div class="tabbable product-tabs" id="description-tab">
 				<ul class="nav nav-tabs" id="myTab">
@@ -415,14 +411,14 @@
 								<ul class="product-page-product-rating product-rating-big">
 									<?= rating_star_generator($rating_counts); ?>
 									<li class="count">
-                                        <?php $overall_rating = product_overall_rating($rating_counts); ?>
-                                        <?= isset($overall_rating) ? $overall_rating : ''; ?>
-                                    </li>
+										<?php $overall_rating = product_overall_rating($rating_counts); ?>
+										<?= isset($overall_rating) ? $overall_rating : ''; ?>
+									</li>
 								</ul>
 							</div>
 							<div class="col-md-3">
 								<ul class="product-rate-list">
-                                    <?= rating_bar_display($rating_counts); ?>
+									<?= rating_bar_display($rating_counts); ?>
 								</ul>
 							</div>
 							<div class="col-md-5">
@@ -464,34 +460,35 @@
 											</div>
 										<?php endif; endif; ?>
 								</div>
-									<div id="review_submit"></div>
-									<form id="review_form" onsubmit="return false">
-										<div class="row">
-											<div class="col-md-6">
-												<div class="form-group">
-													<label>Title of review*</label>
-													<input type="text" name="title" placeholder="Title of the review"
-														   id="review_title"
-														   class="form-control" required>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-group">
-													<label>Display name*</label>
-													<input type="text" name="display_name" placeholder="Display name"
-														   id="review_name"
-														   class="form-control" required>
-												</div>
+								<div id="review_submit"></div>
+								<form id="review_form" onsubmit="return false">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Title of review*</label>
+												<input type="text" name="title" placeholder="Title of the review"
+													   id="review_title"
+													   class="form-control" required>
 											</div>
 										</div>
-										<div class="form-group">
-											<label>Review</label>
-											<textarea title="review" id="review_detail" name="review" rows="2"
-													  class="form-control" required></textarea>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Display name*</label>
+												<input type="text" name="display_name" placeholder="Display name"
+													   id="review_name"
+													   class="form-control" required>
+											</div>
 										</div>
-										<input type="submit" class="btn btn-success" id="review_submit_button"
-											   value="Post Review">
-									</form>
+									</div>
+									<div class="form-group">
+										<label>Review</label>
+										<textarea title="review" id="review_detail" name="review" rows="2"
+												  class="form-control" required
+												  placeholder="Write your review on this product."></textarea>
+									</div>
+									<input type="submit" class="btn btn-success" id="review_submit_button"
+										   value="Post Review">
+								</form>
 							</div>
 						</div>
 						<article class="product-review"></article>
@@ -514,8 +511,8 @@
 							<?php endif; ?>
 							<div class="product-img-wrap">
 								<img class="product-img lazy"
-                                     src="<?= base_url('assets/landing/img/load.gif'); ?>"
-                                     data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?>"
+									 src="<?= base_url('assets/landing/img/load.gif'); ?>"
+									 data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?>"
 									 alt="<?= $like->product_name; ?>"
 									 title="<?= $like->product_name; ?>">
 							</div>
@@ -524,20 +521,21 @@
 								<ul class="product-caption-rating">
 									<?php
 									$overall_rating = $this->product->get_rating_counts($like->id);
-									    echo rating_star_generator( $overall_rating);
+									echo rating_star_generator($overall_rating);
 									?>
 								</ul>
 								<h5 class="product-caption-title"><?= character_limiter(ucwords($like->product_name), 30, '...'); ?></h5>
 								<div class="product-caption-price">
-                                    <?php if( discount_check($like->discount_price, $like->start_date, $like->end_date)) : ?>
-                                        <span class="product-caption-price-new"><?= ngn($like->discount_price); ?></span>
-                                        <span class="product-caption-price-old"><sup><?= ngn($like->sale_price); ?> </sup></span>
-                                    <?php else : ?>
-                                        <span class="product-caption-price-new"><?= ngn($like->sale_price); ?> </span>
-                                    <?php endif; ?>
+									<?php if (discount_check($like->discount_price, $like->start_date, $like->end_date)) : ?>
+										<span
+											class="product-caption-price-new"><?= ngn($like->discount_price); ?></span>
+										<span
+											class="product-caption-price-old"><sup><?= ngn($like->sale_price); ?> </sup></span>
+									<?php else : ?>
+										<span class="product-caption-price-new"><?= ngn($like->sale_price); ?> </span>
+									<?php endif; ?>
 								</div>
 								<ul class="product-caption-feature-list">
-									<!-- <li>Free Shipping</li> -->
 								</ul>
 							</div>
 						</div>
@@ -547,11 +545,9 @@
 		<?php endif; ?>
 	</div>
 	<div class="gap gap-small"></div>
-	<!-- Modal -->
 
 	<div id="prod-confirmation" class="modal fade" role="dialog">
 		<div class="modal-dialog">
-			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -560,7 +556,8 @@
 				<div class="modal-body">
 					<p id="product-title">
 						This is a confirmation that the product <span
-							class="text text-danger"><?= ucwords($product->product_name); ?></span> has been added to
+							class="text text-danger"><?= ucwords($product->product_name); ?></span> has been added
+						to
 						the cart
 					</p>
 					<div class="row">
@@ -588,20 +585,20 @@
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
 <script src="<?= base_url('assets/landing/js/rating.js'); ?>"></script>
-
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
-    $(function () {
-        $('.lazy').Lazy();
-    });
-
+	$(function () {
+		$('.lazy').Lazy();
+	});
 	let quantity = $('#quan');
+	let selected_variation_id = $('.variation_id').val();
 	let count = quantity.data('range');
 	let plus = $('.product-page-qty-plus');
 	let minus = $('.product-page-qty-minus');
 
 	function format_currency(str) {
-		return '₦' + str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+		return '₦ ' + str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
 	}
 
 	$('.variation-select').on('change', function () {
@@ -638,6 +635,38 @@
 		});
 	});
 
+
+	$('.variation-option').on('click', function () {
+		$('.variation-option').removeClass('option-selected');
+		selected_variation_name = $(this).data('vname');
+		if ($(this).hasClass('option-disabled')) {
+			notification_message('Sorry this variation is out of stock', 'fa fa-info-circle', 'warning')
+		} else {
+			let id = $(this).data('vid');
+			let discount_price = $(this).data('discount');
+			let price = $(this).data('price');
+			let quantity_instance = $(this).data('quantity');
+			if (discount_price !== 'empty') {
+				$('.ds-price').html(format_currency(discount_price));
+				$('.dn-price').show();
+				$('.dn-price').html(format_currency(price));
+				$('.pr_price_hidden').val(discount_price);
+				console.log(format_currency(price));
+			} else {
+				$('.pr_price_hidden').val(price);
+				$('.ds-price').html(format_currency(price));
+				$('.dn-price').hide();
+			}
+			count = quantity_instance * 1;
+			quantity.val(1);
+			minus.prop("disabled", true);
+			plus.prop("disabled", false);
+			selected_variation_id = $(this).data('vid');
+			$(this).addClass('option-selected');
+		}
+	});
+
+
 	$('.wishlist-cta').on('click', function () {
 		let product_id = $(this).data('pid');
 		$.ajax({
@@ -660,62 +689,48 @@
 			}
 		})
 	});
-
-
 	$('.add-to-cart').on('click', function () {
-		_btn = $(this);
-		_btn.prop('disabled', 'disabled');
-		let variation = $('select[name="variation"]').val();
-		if (_btn.data('variation') != '' && variation == '') {
-			$('#status').html('<p class="alert alert-danger">Please select a variation.</p>').slideDown('fast').delay(3000).slideUp('slow');
-			_btn.prop('disabled', '');
-			return false;
-		}
 
-		if ($('#quan').val() == '') {
-			$('#status').html('<p class="alert alert-danger">Please select a quantity.</p>').slideDown('fast').delay(3000).slideUp('slow');
-			_btn.prop('disabled', '');
-			return false;
-		}
+		let quantity_instance = $('#quan').val();
+		let variation_id = selected_variation_id;
+		let product_id = $('.product_id').val();
 
-		_btn.prop('disabled', '');
 		$.ajax({
-			url: base_url + "ajax/add_to_cart",
-			method: "POST",
-			data: $('#variation-form').serialize(),
-			success: function (response) {
+			url: base_url + 'ajax/quick_view_add',
+			method: 'POST',
+			data: {
+				product_id: product_id,
+				variation_id: variation_id,
+				quantity: quantity_instance
+			},
+			success: () => {
 				window.location.href = base_url + 'cart';
+			},
+			error: () => {
+				notification_message('Sorry an error occurred somewhere', 'fa fa-info-circle', 'warning');
 			}
-		});
-
-		$('#cart').on('click', function () {
-			window.location.href = base_url + 'cart';
-		});
-
-
+		})
 	});
-
 
 	document.querySelector("#quan").addEventListener("keypress", function (evt) {
 		if (evt.which < 48 || evt.which > 57) {
 			evt.preventDefault();
 		}
 	});
-
 	plus.on('click', function () {
 		minus.prop("disabled", false);
 		if (quantity.val() >= count) {
+			$('#quantity-text').html('There are only ' + count + ' item(s) left');
 			plus.prop("disabled", true);
 		}
 	});
-
 	minus.on('click', function () {
+		$('#quantity-text').html('');
 		plus.prop("disabled", false);
 		if (quantity.val() <= 1) {
 			minus.prop("disabled", true);
 		}
 	});
-
 	quantity.on('input', function () {
 		if (quantity.val() > count) {
 			quantity.val(count)
@@ -723,7 +738,6 @@
 			quantity.val(1)
 		}
 	});
-
 </script>
 </body>
 </html

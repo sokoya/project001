@@ -14,14 +14,14 @@
 
     <?php $this->load->view('landing/resources/head_menu') ?>
     <div class="container text-center">
-        <h2 class="terms_head">Registration Agreement</h2>
-        <hr style="width:100%; border:1px solid red;margin-top:-5px;"/>
-        <p>
-            BEFORE YOU COMPLETE THE REGISTRATION PROCESS AND BECOME OUR REGISTERED BUYER, PLEASE READ THE FOLLOWING
-            TERMS CAREFULLY. IF YOU DO NOT ACCEPT ALL OF THE REGISTRATION AGREEMENT, PLEASE DO NOT CLICK ‘’CREATE MY
-            ACCOUNT” BUTTON.
-        </p>
-        <div class="row text-justify" style="padding: 20px;background: #fff;">
+        <div class="row text-justify" style="padding: 20px;background: #fff;margin-top:20px;">
+            <h2 class="terms_head text-center">Registration Agreement</h2>
+            <p class="text-center">
+                BEFORE YOU COMPLETE THE REGISTRATION PROCESS AND BECOME OUR REGISTERED BUYER, PLEASE READ THE FOLLOWING
+                TERMS CAREFULLY. IF YOU DO NOT ACCEPT ALL OF THE REGISTRATION AGREEMENT, PLEASE DO NOT CLICK ‘’CREATE MY
+                ACCOUNT” BUTTON.
+            </p>
+            <div style="height:15px;"></div>
             <h3>Introduction</h3>
             <h4>Welcome to Onitshamarket.com, your reliable online marketplace.</h4>
             <p>
@@ -276,15 +276,9 @@
         </div>
         <div style="height:15px;"></div>
     </div>
-
-
     <?php $this->load->view('landing/resources/footer'); ?>
-
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
-<script>
-
-</script>
 </body>
 </html>
 

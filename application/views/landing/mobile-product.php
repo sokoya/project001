@@ -203,7 +203,6 @@
 	.rating-btn {
 		background: #468c46;
 		color: #fff;
-		/*padding: 13px;*/
 		border-radius: 0;
 	}
 
@@ -233,7 +232,6 @@
 <div class="global-wrapper clearfix" id="global-wrapper" style="margin-bottom: 3px;">
 	<?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
 </div>
-
 <?php if ($product->product_status !== 'approved'): ?>
 	<div class="row">
 		<p class="text-center">Oops! The product you looking for is not active.</p>
@@ -248,7 +246,6 @@
 				product</a></p>
 	</div>
 <?php else : ?>
-	<!--Top menu back button-->
 	<div class="custom-card">
 		<div class="container">
 			<a style="text-decoration: none;" href="<?= base_url('catalog/' . $category_detail->slug); ?>"><p
@@ -258,7 +255,6 @@
 				</p></a>
 		</div>
 	</div>
-	<!--Gallery section-->
 	<div class="custom-card">
 		<div class="container">
 			<div class="owl-carousel products-gallery">
@@ -270,14 +266,11 @@
 			</div>
 		</div>
 	</div>
-
-	<!--Main Description card-->
 	<div class="custom-card">
 		<div class="container">
 			<p class="seller-name">Seller - <?= ucwords($product->first_name . ' ' . $product->last_name); ?></p>
 			<p class="product-name"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></p>
 			<div style="margin-top: 4px; margin-left: 2px">
-
 				<?php
 				if ($rating_counts) {
 					$overall_rating = product_overall_rating($rating_counts);
@@ -285,24 +278,20 @@
 				?>
 				<span class="rating-count"><?= isset($overall_rating) ? $overall_rating : ''; ?></span>
 				<ul style="display: inline-block" class="product-caption-rating">
-                    <?= rating_star_generator($rating_counts); ?>
+					<?= rating_star_generator($rating_counts); ?>
 					<span style="margin-left: 5px; color: #0b6427;"
 						  class="rating-total-count"><?= !empty($rating_counts) ? ' (' . count($rating_counts) . ') ratings' : '' ?></span>
 				</ul>
 			</div>
-
-            <?php if(discount_check($var->discount_price, $var->start_date, $var->end_date)) : ?>
-                <p class="product-price"><?= ngn($var->discount_price); ?>
-                    <span><?= get_discount($var->sale_price, $var->discount_price) ?></span></p>
-            <?php else : ?>
-                <p class="product-price"><?= ngn($var->sale_price); ?></p>
-                <p class="product-discount-price"></p>
-            <?php endif; ?>
-
+			<?php if (discount_check($var->discount_price, $var->start_date, $var->end_date)) : ?>
+				<p class="product-price"><?= ngn($var->discount_price); ?>
+					<span><?= get_discount($var->sale_price, $var->discount_price) ?></span></p>
+			<?php else : ?>
+				<p class="product-price"><?= ngn($var->sale_price); ?></p>
+				<p class="product-discount-price"></p>
+			<?php endif; ?>
 		</div>
 	</div>
-
-	<!--Buy Card-->
 	<div class="custom-card" style="margin-top: 5px;">
 		<?= form_open('', 'id="cart-form"'); ?>
 		<div class="container">
@@ -329,7 +318,6 @@
 							</button>
 						</li>
 					</ul>
-
 					<input type="hidden" name="seller" class="seller_id"
 						   value="<?= $product->seller_id ?>">
 
@@ -340,9 +328,7 @@
 					<input type="hidden" name="truncated_product_name" class="truncated_product_name"
 						   value="<?= character_limiter(ucwords($product->product_name), 50, '...'); ?>">
 				</div>
-
 			</div>
-
 			<div class="row" style="margin-top: 10px;">
 				<?php if (count($variations) > 1) : ?>
 					<div class="col-xs-12">
@@ -351,11 +337,11 @@
 							<?php foreach ($variations as $variation) : ?>
 								<div class="col-xs-3">
 									<p data-price="<?= $variation['sale_price']; ?>"
-                                        <?php if( discount_check($variation['discount_price'], $variation['start_date'], $variation['end_date'])) : ?>
-                                       data-discount="<?= $variation['discount_price']; ?>"
-                                        <?php else : ?>
-                                       data-discount="empty"
-                                       <?php endif; ?>
+										<?php if (discount_check($variation['discount_price'], $variation['start_date'], $variation['end_date'])) : ?>
+											data-discount="<?= $variation['discount_price']; ?>"
+										<?php else : ?>
+											data-discount="empty"
+										<?php endif; ?>
 									   data-vid="<?= $variation['id']; ?>"
 									   data-quantity='<?= $variation['quantity'] ?>'
 									   data-vname="<?= $variation['variation'] ?>"
@@ -393,12 +379,9 @@
 				<a style="text-decoration: none" href="<?= base_url('login') ?>"><p class="wishlist-cta">Add to
 						Wishlist</p></a>
 			<?php endif; ?>
-
 		</div>
 		<?= form_close(); ?>
 	</div>
-
-	<!--Delivery Information Card-->
 	<div class="custom-card" style="margin-top: 5px;">
 		<div class="container">
 			<p class="block-title">Delivery Information</p>
@@ -433,17 +416,14 @@
 					<p class="delivery-text">This product has the following warranty
 						: Repair by vendor
 						<br/>
-						<a href="javascript:void(0)">Learn more</a>
+						<a href="<?= base_url(urlify($product->product_name, $product->id) . 'warranty'); ?>">Learn
+							more</a>
 					</p>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<!--Section Title [Overview]-->
 	<div class="container"><p class="text-break" style="">Overview</p></div>
-
-	<!--Product Description Card-->
 	<div class="custom-card" style="margin-top: 5px;">
 		<div class="container">
 			<?php if (!empty($product->product_line)) : ?>
@@ -462,12 +442,12 @@
 							aria-hidden="true"
 							data-target="description_vl"></i></span></p>
 				<p id="description_vl" class="body_text">
-					<?= word_limiter($product->product_description, 80);?>
-                    <?php if(str_word_count($product->product_description,0) > 50 ) : ?>
-                        <span><a
-                        style="text-decoration: none; color: #0b6427"
-                        href="<?= base_url(urlify($product->product_name, $product->id) . 'description'); ?>">Read More</a> </span>
-                    <?php endif; ?>
+					<?= word_limiter($product->product_description, 80); ?>
+					<?php if (str_word_count($product->product_description, 0) > 50) : ?>
+						<span><a
+								style="text-decoration: none; color: #0b6427"
+								href="<?= base_url(urlify($product->product_name, $product->id) . 'description'); ?>">Read More</a> </span>
+					<?php endif; ?>
 				</p>
 				<hr/>
 			<?php endif; ?>
@@ -483,11 +463,7 @@
 			<?php endif; ?>
 		</div>
 	</div>
-
-	<!--Section Title [Full Specifications]-->
 	<div class="container"><p class="text-break" style="">Full Specifications</p></div>
-
-	<!--Product Specification Card-->
 	<div class="custom-card" style="margin-top: 5px;">
 		<div class="container">
 			<table class="table table-striped">
@@ -512,11 +488,7 @@
 			</table>
 		</div>
 	</div>
-
-	<!--Section Title [Ratings and Reviews]-->
 	<div class="container"><p class="text-break" style="">Ratings and Reviews</p></div>
-
-	<!--Product Ratings And Reviews-->
 	<div class="custom-card" style="margin-top: 5px;">
 		<div class="container">
 			<p class="block-title" style="margin-top: 5px;">Total Ratings <span><a
@@ -526,36 +498,34 @@
 			<div style="margin-top: 4px; margin-left: 2px">
 				<ul style="display: inline-block" class="product-caption-rating">
 					<?= rating_star_generator($rating_counts); ?>
-                    <span style="margin-left: 5px; color: #0b6427;"
-                          class="rating-total-count">(<?= product_overall_rating($rating_counts).'/5'; ?> average rating)</span>
+					<span style="margin-left: 5px; color: #0b6427;"
+						  class="rating-total-count">(<?= product_overall_rating($rating_counts) . '/5'; ?> average rating)</span>
 				</ul>
 			</div>
 			<hr style="margin-top: -4px;"/>
-			<?php if($reviews) : ?><p class="block-title" style="margin-top: 5px;">All Reviews</p><?php endif;?>
-            <?php  $x = 1; if($reviews) :  foreach( $reviews as $review ) :?>
-                <div class="comment-block">
-                    <ul style="display: inline-block" class="product-caption-rating">
-                        <?= single_user_rate($review['rating_score']); ?>
-                    </ul>
-                    <span style="float: right;" class="comment-date"><?= neatDate($review['published_date']); ?></span>
-                </div>
-                <p class="comment-title"><?= $review['title'];?></p>
-                <p class="comment-detail"><?= $review['content'];?></p>
-                <p class="comment-user"><strong>Reviewed by:</strong> <?= $review['display_name']; ?></p>
-                <hr class="comment-line"/>
-                <?php if($x == 3) : ?>
-				<a style="text-decoration: none; color: #fff;"
-		   			href="<?= base_url(urlify($product->product_name, $product->id) . 'reviews'); ?>">
-					<button class="btn btn-block rating-btn">View all reviews</button>
+			<?php if ($reviews) : ?><p class="block-title" style="margin-top: 5px;">All Reviews</p><?php endif; ?>
+			<?php $x = 1;
+			if ($reviews) : foreach ($reviews as $review) : ?>
+				<div class="comment-block">
+					<ul style="display: inline-block" class="product-caption-rating">
+						<?= single_user_rate($review['rating_score']); ?>
+					</ul>
+					<span style="float: right;" class="comment-date"><?= neatDate($review['published_date']); ?></span>
+				</div>
+				<p class="comment-title"><?= $review['title']; ?></p>
+				<p class="comment-detail"><?= $review['content']; ?></p>
+				<p class="comment-user"><strong>Reviewed by:</strong> <?= $review['display_name']; ?></p>
+				<hr class="comment-line"/>
+				<?php if ($x == 3) : ?>
+					<a style="text-decoration: none; color: #fff;"
+					   href="<?= base_url(urlify($product->product_name, $product->id) . 'reviews'); ?>">
+						<button class="btn btn-block rating-btn">View all reviews</button>
 					</a>
-                <?php break;  endif;?>
-            <?php $x++; endforeach;  ?>
-            <?php endif; ?>
+					<?php break; endif; ?>
+				<?php $x++; endforeach; ?>
+			<?php endif; ?>
 		</div>
 	</div>
-
-
-	<!--Section Title [Suggested Products]-->
 	<?php if (count($likes)) : ?>
 		<div class="container" style="margin-bottom: 5px;"><p class="text-break" style="">You might also like</p></div>
 		<div class="custom-card">
@@ -573,12 +543,8 @@
 			</div>
 		</div>
 	<?php endif; ?>
-
 <?php endif; ?>
-
-<!--Scripts-->
-<script
-	type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
+<script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
 <script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/owl.carousel.min.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
@@ -601,12 +567,10 @@
 			$(`#${target}`).toggle()
 
 		});
-
 		$(".products-gallery").owlCarousel({
 			items: 1,
 			lazyLoad: true,
 		});
-
 		$(".suggested-products").owlCarousel({
 			loop: true,
 			center: true,
@@ -620,15 +584,12 @@
 			autoplayHoverPause: true
 		});
 	});
-
 	let quantity = $('#quan');
 	let count = quantity.data('range');
 	let plus = $('.product-page-qty-plus');
 	let minus = $('.product-page-qty-minus');
 	let selected_variation_id = $('.variation_id').val();
 	let selected_variation_name = $('.variation_name').val();
-
-
 	$('.variation-option').on('click', function () {
 		$('.variation-option').removeClass('option-selected');
 		selected_variation_name = $(this).data('vname');
@@ -639,7 +600,6 @@
 			let discount_price = $(this).data('discount');
 			let price = $(this).data('price');
 			let quantity_instance = $(this).data('quantity');
-
 			if (discount_price !== 'empty') {
 				bind_method(format_currency(discount_price), 'price-mini');
 				$('.product-price').html(`
@@ -682,21 +642,18 @@
 			$(this).next(".product-page-qty-input").val(currentVal - 1);
 		}
 	});
-
 	plus.on('click', function () {
 		minus.prop("disabled", false);
 		if (quantity.val() >= count) {
 			plus.prop("disabled", true);
 		}
 	});
-
 	minus.on('click', function () {
 		plus.prop("disabled", false);
 		if (quantity.val() <= 1) {
 			minus.prop("disabled", true);
 		}
 	});
-
 	quantity.on('input', function () {
 		if (quantity.val() > count) {
 			quantity.val(count)
@@ -704,8 +661,6 @@
 			quantity.val(1)
 		}
 	});
-
-
 	$('.submit-cart').on('click', function (e) {
 		e.preventDefault();
 		let quantity_instance = quantity.val();
@@ -720,12 +675,6 @@
 				quantity: quantity_instance
 			},
 			success: () => {
-				// let counter = $('.cart-count');
-				// counter.show();
-				// let instance = counter.text() * 1;
-				// counter.html(instance + (quantity_instance * 1));
-				// notification_message(`${truncated_product_name} successfully added to cart`, 'fa fa-cart-plus', 'success');
-
 				window.location.href = base_url + 'cart';
 			},
 			error: () => {
@@ -758,7 +707,6 @@
 		})
 	})
 </script>
-
 <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
 </body>
 </html>

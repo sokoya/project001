@@ -219,7 +219,6 @@
 									<?php
 									endforeach;
 								endif; ?>
-
 						</div>
 					</div>
 				</div>
@@ -234,7 +233,6 @@
 						<div class="panel panel-default custom-panel">
 							<div class="panel-body pay-panel">
 								<div class="form-check">
-
 									<p class="form-check-label pay-gate">
 										<input class="form-check-input payment-radio" type="radio"
 											   name="payment_method"
@@ -242,7 +240,6 @@
 										Pay with paystack
 										<img src="<?= base_url('assets/landing/img/paystack.png'); ?>">
 									</p>
-
 								</div>
 							</div>
 						</div>
@@ -313,7 +310,6 @@
 						<li class="list-group-item cs-sm-t">Total: <span
 								class="total-sum-charges"><?= ngn($subtotal + $delivery_charge); ?></span>
 						</li>
-
 						<li class="list-group-item">
 							<button type="submit" class="btn btn-block btn-custom-dark continue-btn" disabled>Continue
 								to Payment
@@ -340,7 +336,6 @@
 		</div>
 	</div>
 	<div class="gap"></div>
-
 	<?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <?php $this->load->view('landing/resources/script'); ?>

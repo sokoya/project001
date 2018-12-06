@@ -2,7 +2,6 @@
 
 Class User_model extends CI_Model{
 
-
     /**
      * @param string $id
      * @param string $table
@@ -13,7 +12,6 @@ Class User_model extends CI_Model{
         $this->db->or_where('email', $id);
         return $this->db->get($table)->row();
     }
-
 
     /**
      * @param array $data
@@ -46,6 +44,42 @@ Class User_model extends CI_Model{
 	}
 
 
+    public function last_login(){
+        if ($this->session->userdata('logged_id')) {
+            $array = array(
+                'last_login' => get_now(),
+                'last_ip' => $_SERVER['REMOTE_ADDR']
+            );
+            $this->db->set($array);
+            $this->db->where('id',$this->session->userdata('logged_id'));
+            $this->db->update('users');
+        }
+    }
+
+
+    public function login_user($email, $password){
+        if($email && $password) {
+            $email = cleanit($email);
+            $this->db->where(['email' => $email]);
+            if ($this->db->get('users')->row()) {
+                $this->db->where(['email' => $email]);
+                $salt = $this->db->get('users')->row()->salt;
+                if ($salt) {
+                    $password = shaPassword($password, $salt);
+                    $this->db->where('email', $email);
+                    $this->db->where('password', $password);
+                    $result = $this->db->get('users');
+                    if ($result->num_rows() == 1) {
+                        return $result->row(0)->id;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+
+
     /**
      * @param array $data
      * @param string $table_name
@@ -64,7 +98,6 @@ Class User_model extends CI_Model{
 		}
 	}
 
-
     /**
      * @param string $access
      * @param array $data
@@ -75,7 +108,6 @@ Class User_model extends CI_Model{
         $this->db->where('id', $access);
         return $this->db->update( $table_name, $data );
     }
-
 
     /**
      * @param string $where
@@ -116,7 +148,6 @@ Class User_model extends CI_Model{
             }
         }
     }
-
 
     /**
      * @param $password
@@ -207,9 +238,22 @@ Class User_model extends CI_Model{
      * @param $where
      * @return mixed
      */
-    function get_rows($table_name ='users', $where ){
+    function get_row($table_name ='users', $select, $where ){
+        $this->db->select($select);
         $this->db->where($where);
         return $this->db->get( $table_name )->row();
+    }
+
+
+    function generate_code($table = 'users', $label)
+    {
+        do {
+            $number = generate_token(12);
+            $this->db->where($label, $number);
+            $this->db->from($table);
+            $count = $this->db->count_all_results();
+        } while ($count >= 1);
+        return $number;
     }
 
     function recover_email(){}
@@ -261,6 +305,30 @@ Class User_model extends CI_Model{
             return '';
         }
 	}
+
+
+	function recently_viewed( $pid , $user_id ){
+        // Does product exist in the record
+        $products = array();
+        $user = $this->get_row('recently_viewed', 'id,product_ids', "user_id = $user_id");
+        if( $user ){
+            $product_ids = json_decode( $user->product_ids );
+            if( !in_array( $pid, $product_ids) ){
+                array_push( $product_ids, $pid);
+                $product_ids = json_encode( $product_ids);
+                $this->update_data($user->id, array('product_ids' => $product_ids), 'recently_viewed');
+            }
+        }else{
+            // Not found
+            $products[] = $pid;
+            $data = array(
+                'user_id' => $user_id,
+                'product_ids' => json_encode($products),
+                'viewed_date' => get_now()
+            );
+            $this->create_account( $data,'recently_viewed');
+        }
+    }
 
 
     

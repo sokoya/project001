@@ -45,8 +45,9 @@
         .mar_top {
             margin-top: 20px;
         }
-        .revert_normal{
-            margin-left:0 !important;
+
+        .revert_normal {
+            margin-left: 0 !important;
         }
     }
 
@@ -78,35 +79,34 @@
                                 alt="market logo Image"></a>
                 </p>
                 <h3 class="widget-title text-center text-bold">
-                    Login to your account
+                    Reset Password
+                    <small>Enter New Password</small>
                 </h3>
                 <div class="row">
                     <div class="col-md-12 inline_flex">
                         <?php $this->load->view('landing/msg_view'); ?>
                         <div class="ipad_pad"></div>
                         <div class="market-board login-box">
-                            <?= form_open('login/process', 'id="login-form"'); ?>
-                            <div class="form-group">
-                                <label><h5>Email Address*</h5></label>
-                                <input class="form-control" type="email" name="loginemail"
-                                       placeholder="Enter your email" autofocus="" required/>
-                            </div>
+                            <?= form_open('resetpassword/process', 'id="reset-form"'); ?>
                             <div class="form-group">
                                 <label><h5>Password</h5></label>
-                                <input class="form-control" type="password" name="loginpassword"
+                                <input class="form-control" type="password" name="password"
                                        placeholder="Enter your password" required/>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="col-md-12 col-sm-12 col-xs-12 btn btn-success">
-                                    <strong>LOGIN</strong></button>
+                                <label><h5>Password</h5></label>
+                                <input class="form-control" type="password" name="confirm_password"
+                                       placeholder="Enter your password" required/>
                             </div>
+                            <button type="submit" class="col-md-12 col-sm-12 col-xs-12 btn btn-success">
+                                <strong>RESET PASSWORD</strong></button>
                             <br/>
                             <?= form_close(); ?>
                             <hr class="hr-text" data-content="OR">
                             <div class="row text-center" style="padding:20px;margin-top:-20px;">
-                                <a href="<?= base_url(lang('forgot_password_link')); ?>"
+                                <a href="<?= base_url('login'); ?>"
                                    class=" panel-bordered-warning col-md-6 col-xs-12 col-lg-6 col-sm-12 revert_normal"
-                                   style="margin-left:-5px;"><?= lang('forgot_password'); ?></a>
+                                   style="margin-left:-5px;">Login</a>
                                 <a href="<?= base_url('create'); ?>"
                                    class="panel-bordered-primary col-md-6 col-xs-12 col-lg-6 col-sm-12 mar_top revert_normal"
                                    style="margin-left:5px;"> Create an
