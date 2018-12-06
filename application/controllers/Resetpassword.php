@@ -27,10 +27,24 @@ class Resetpassword extends MY_Controller {
                 if( $user ){
                     $data['code'] = $code = $this->user->generate_code( 'users', 'code');
                     if( $this->user->update_data("{$user->id}", $data, 'users')) {
-                        //@TODO Send recovery mail
-
-                        $this->session->set_flashdata('success_msg', "Reset mail has been sent to " . $email . " please click on the link in your email to reset your password.");
-                        redirect('login');
+                        $this->load->model('email_model', 'email');
+                        $email_array = array(
+                            'email' => $email,
+                            'reset_link' => base_url('resetpassword/activate?token='.$code)
+                        );
+                        $status = $this->email->reset_password( $email_array);
+                        if( $status['success'] ){
+                            $this->session->set_flashdata('success_msg', "Reset mail has been sent to <strong>" . $email . "</strong> please click on the link in your email to reset your password.");
+                            redirect('login');
+                        }else{
+                            // log the error
+                            $error_action = array(
+                                'error_action' => 'ResetPassword Controller - Reset mail',
+                                'error_message' => $status['error']
+                            );
+                            $this->email->insert_data('error_logs', $error_action);
+                        }
+                        unset($email_array); unset($error_action);
                     } else {
                         $this->session->set_flashdata('error_msg', "There was an error updating your account, please try again, and if persist, contact support.");
                         redirect('resetpassword');
