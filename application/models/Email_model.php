@@ -24,6 +24,7 @@ class Email_model extends CI_Model {
         return $this->send_now($post);
     }
 
+    // Welcome user for new account creates
     function welcome_user( $data ){
         $post = array(
             'subject' => 'Welcome to ' . lang('app_name'),
@@ -33,6 +34,9 @@ class Email_model extends CI_Model {
         );
         return $this->send_now($post);
     }
+
+    // Order completed
+    function order_completed(){}
 
     // Curl function to send
     function send_now($post){
