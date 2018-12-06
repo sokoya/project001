@@ -111,8 +111,13 @@ class Product extends MY_Controller
 		$page_data['sub_categories'] = $this->product->get_categories($str, $q);
 		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 		$page_data['category_detail'] = $this->product->category_details($str);
-		$page_data['description'] = $page_data['category_detail']->description;
-		$page_data['title'] = $page_data['category_detail']->title;
+		if( $page_data['category_detail'] ) {
+            $page_data['description'] = $page_data['category_detail']->description;
+            $page_data['title'] = $page_data['category_detail']->title;
+        }else{
+            $page_data['description'] = DESCRIPTION;
+            $page_data['title'] = 'Category can not be found';
+        }
 		$page_data['page'] = 'category';
 //        var_dump($page_data['products']);
 		if (!$this->agent->is_mobile()) {
