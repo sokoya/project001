@@ -184,6 +184,7 @@
                                         <span
                                                 class="product-page-price-list price-lower dn-price"><?= ngn($var->sale_price); ?></span>
                                     <?php else : ?>
+										<span class="price-cs ds-price"></span>
                                         <span class="price-cs dn-price"><?= ngn($var->sale_price); ?></span>
                                     <?php endif; ?>
 
