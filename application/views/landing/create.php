@@ -122,7 +122,7 @@
                             <div class="well text-center">
                                 <div class="checkbox">
                                     <label>
-                                        <input class="i-check" type="checkbox"/>
+                                        <input type="checkbox"/>
                                         I agree to <?= lang('app_name'); ?> <a href="<?= base_url('pages/terms'); ?>"
                                                                                target="_blank" style="color:#0ac392;">Terms
                                             & Conditions</a> | <a href="<?= base_url('pages/privacy'); ?>"
