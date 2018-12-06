@@ -142,7 +142,7 @@ class Ajax extends CI_Controller
 			}
 			$variations = $this->product->get_variations( $pid );
 			if( $variations ) {
-				$x = 0;
+				$x = 0; $qty_check_count = 0;
 				foreach( $variations as $variation ){
 					$results['variation'][$x]['vid'] = $variation['id'];
 					$results['variation'][$x]['discount_price'] = $variation['discount_price'];
@@ -155,8 +155,10 @@ class Ajax extends CI_Controller
                         $results['variation'][$x]['discount_price'] = $variation['sale_price'];
                     }
 					$x++;
+                    if( $variation['quantity'] < 1 ) $qty_check_count++;
 				}
 			}
+			if( count( $variations ) == $qty_check_count ) $results['is_out_of_stock'] = true;
 			echo json_encode($results, JSON_UNESCAPED_SLASHES);
 			exit;
 		}else{
@@ -183,7 +185,8 @@ class Ajax extends CI_Controller
                    'price' => $price,
                    'options' => array(
                        'seller' => $return->seller_id,
-                       'variation_id' => $vid
+                       'variation_id' => $vid,
+                       'variation' => $return->variation
                    )
                );
                if( $this->cart->insert($data) ){

@@ -70,6 +70,7 @@ class Create extends MY_Controller{
                     'email' => $data['email'],
                     'recipent' => 'Dear '. $data['first_name'] . ' ' . $data['last_name']
                 );
+
                 $status = $this->email->welcome_user( $email_array);
                 if( !$status['success'] ){
                     // log the error
@@ -79,7 +80,6 @@ class Create extends MY_Controller{
                     );
                     $this->email->insert_data('error_logs', $error_action);
                 }
-
                 $data = array(
                     'email' => $this->input->post('signupemail'),
                     'password' => $this->input->post('signuppassword')

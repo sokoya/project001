@@ -53,7 +53,7 @@
                 <p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find
                         product</a></p>
             </div>
-        <?php elseif (empty($product) || empty($var) || empty($galleries)): ?>
+        <?php elseif (empty($product) || empty($galleries)): ?>
             <div class="row">
                 <div class="gap-large"></div>
                 <h2 class="text-center">Oops! The product you looking does not exist.</h2>
@@ -197,10 +197,11 @@
                                 <div class="product-variation">
                                     <?= form_open('', 'id="variation-form"'); ?>
                                     <div class="row">
-                                        <?php if (count($variations) > 1) : ?>
+                                        <?php if (count($variations) > 0) : ?>
                                             <div class="col-md-7">
                                                 <h5 class="custom-product-page-option-title">Variation:</h5>
                                                 <div class="row variation-option-list">
+                                                    <?php $qty_stock_check = 0 ;?>
                                                     <?php foreach ($variations as $variation): ?>
                                                         <div class="col-xs-3">
                                                             <p
@@ -218,6 +219,7 @@
                                                                 <?= ellipsize(trim($variation['variation']), 8); ?>
                                                             </p>
                                                         </div>
+                                                        <?php if( $variation['quantity'] < 1 ) $qty_stock_check++; ?>
                                                     <?php endforeach; ?>
                                                 </div>
                                             </div>
@@ -248,10 +250,17 @@
                                 <div id="status"></div>
                                 <div class="row">
                                     <div class="col-md-6 col-lg-6 clearfix">
-                                        <button class="btn btn-block btn-primary add-to-cart c-hover"
-                                                type="button" <?php if (!empty($product->colour_family)) echo 'data-colour="colour"'; ?> <?php if (count($variations)) echo 'data-variation="variation"'; ?> >
-                                            <i class="fa fa-shopping-cart"></i> Add to Cart
-                                        </button>
+                                        <?php if($qty_stock_check == count( $variations)) :  ?>
+                                            <button class="btn btn-block btn-primary c-hover" disabled
+                                                    type="button">
+                                                <i class="fa fa-shopping-cart"></i> Out of Stock
+                                            </button>
+                                        <?php else : ?>
+                                            <button class="btn btn-block btn-primary add-to-cart c-hover"
+                                                    type="button" <?php if (!empty($product->colour_family)) echo 'data-colour="colour"'; ?> <?php if (count($variations)) echo 'data-variation="variation"'; ?> >
+                                                <i class="fa fa-shopping-cart"></i> Add to Cart
+                                            </button>
+                                        <?php endif; ?>
                                     </div>
                                     <?php if ($this->session->userdata('logged_in')):
                                         if ($favourite) :
@@ -650,7 +659,6 @@
 		if ($(this).hasClass('option-disabled')) {
 			notification_message('Sorry this variation is out of stock', 'fa fa-info-circle', 'warning')
 		} else {
-			let id = $(this).data('vid');
 			let discount_price = $(this).data('discount');
 			let price = $(this).data('price');
 			let quantity_instance = $(this).data('quantity');
@@ -698,11 +706,9 @@
 		})
 	});
 	$('.add-to-cart').on('click', function () {
-
 		let quantity_instance = $('#quan').val();
 		let variation_id = selected_variation_id;
 		let product_id = $('.product_id').val();
-
 		$.ajax({
 			url: base_url + 'ajax/quick_view_add',
 			method: 'POST',
@@ -715,7 +721,7 @@
 				window.location.href = base_url + 'cart';
 			},
 			error: () => {
-				notification_message('Sorry an error occurred somewhere', 'fa fa-info-circle', 'warning');
+				notification_message('Sorry an error occurred while adding to cart, please contact support if problem persist.', 'fa fa-info-circle', 'warning');
 			}
 		})
 	});
