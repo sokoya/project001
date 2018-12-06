@@ -268,8 +268,8 @@
 									<ul class="product-labels"></ul>
 									<div class="product-img-wrap">
 										<img class="product-img lazy"
-											 data-src="<?= PRODUCTS_IMAGE_PATH .$product->image_name;  ?>"
-                                             src="<?= base_url('assets/landing/img/load.gif'); ?>"
+											 data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
+											 src="<?= base_url('assets/landing/img/load.gif'); ?>"
 											 alt="<?= $product->product_name; ?>"
 											 title="<?= $product->product_name; ?>"/>
 									</div>
@@ -279,7 +279,7 @@
 										<ul class="product-caption-rating">
 											<?php
 											$rating_counts = $this->product->get_rating_counts($product->id);
-                                            echo rating_star_generator( $rating_counts );
+											echo rating_star_generator($rating_counts);
 											?>
 										</ul>
 										<h5 class="product-caption-title"><?= word_limiter(ucwords($product->product_name), 14, '...'); ?></h5>
@@ -312,13 +312,14 @@
 	<script src="<?= base_url('assets/landing/js/ionrangeslider.js'); ?>"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
-		let current_url = "<?= current_url()?>";
+	<script>
+		zlet current_url = "<?= current_url()?>";
 	</script>
 	<script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
 	<script>
-        $(function() {
-            $('.lazy').Lazy();
-        });
+		$(function () {
+			$('.lazy').Lazy();
+		});
 		$(document).ready(function () {
 			let _category_body = $('#category_body');
 
