@@ -121,7 +121,8 @@
             </ul>
         <?php else: ?>
             <div class="custom-fa-cover">
-                <i class="fa fa-cart-arrow-down empty-cart-icon custom-fa text-center"></i>
+                <!--<i class="fa fa-cart-arrow-down empty-cart-icon custom-fa text-center"></i>-->
+                <img class="img-responsive text-center" style="padding: 10px; margin-top: 10px !important;" src="<?=base_url('assets/landing/img/empty_cart.png')?>"/>
             </div>
             <div class="text-center">
 

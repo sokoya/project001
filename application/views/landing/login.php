@@ -118,7 +118,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 text-center" style="display: inline-flex;margin-top:10px;">
+                    <div class="col-md-12 col-xs-12 col-sm-12 text-center" style="display: inline-flex;margin-top:10px;">
                         <img src="<?= base_url('assets/landing/img/payment/ssl-logo.png'); ?>" class="img-responsive" style="margin-left:auto;"
                              alt="Image Alternative text" title="Pay with Mastercard"/>
                         <img src="<?= base_url('assets/landing/img/payment/interswitch.png'); ?>" class="img-responsive"
