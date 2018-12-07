@@ -1064,7 +1064,7 @@ hr {
 
 .main-footer {
 	position: relative;
-	background: #49a251ab;
+	background: #49a25145;
 	padding-top: 30px;
 	border-top: 2px solid #486d97;
 	color: #fff;
@@ -1241,8 +1241,8 @@ hr {
 .copyright-area {
 	background: #49a251;
 	color: #fff;
-	-webkit-box-shadow: 0 0 3px #000;
-	box-shadow: 0 0 3px #000;
+	-webkit-box-shadow: 0 0 3px #ff3838;
+	box-shadow: 0 0 3px #ff3838;
 	position: relative;
 }
 

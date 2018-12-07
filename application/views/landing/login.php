@@ -45,8 +45,9 @@
         .mar_top {
             margin-top: 20px;
         }
-        .revert_normal{
-            margin-left:0 !important;
+
+        .revert_normal {
+            margin-left: 0 !important;
         }
     }
 
@@ -81,7 +82,8 @@
                     Login to your account
                 </h3>
                 <div class="row">
-                    <div class="col-md-12 inline_flex">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8 inline_flex">
                         <?php $this->load->view('landing/msg_view'); ?>
                         <div class="ipad_pad"></div>
                         <div class="market-board login-box">
@@ -113,6 +115,21 @@
                                     account</a>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center" style="display: inline-flex;margin-top:10px;">
+                        <img src="<?= base_url('assets/landing/img/payment/ssl-logo.png'); ?>" class="img-responsive" style="margin-left:auto;"
+                             alt="Image Alternative text" title="Pay with Mastercard"/>
+                        <img src="<?= base_url('assets/landing/img/payment/interswitch.png'); ?>" class="img-responsive"
+                             alt="Image Alternative text" title="Pay with Mastercard"/>
+                        <img src="<?= base_url('assets/landing/img/payment/allcards.jpg'); ?>" class="img-responsive" style="margin-right:auto;"
+                             alt="Image Alternative text" title="Pay with Mastercard"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center" style="margin-top:10px;">
+                        <p style="color:#4b4b4bb8 !important; font-size:12px; ">&copy; 2015 - <?= date('Y'); ?> <?= lang('company_name'); ?>. All rights reserved</p>
                     </div>
                 </div>
             </div>
