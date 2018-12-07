@@ -10,7 +10,7 @@
         <?php $cart_contents = $this->cart->contents();
         if (!empty($cart_contents)) : ?>
             <header class="page-header">
-                <h1 class="page-title">Cart Overview</h1>
+                <h1 style="color:#00000082;">Cart Overview</h1>
             </header>
             <div class="row">
                 <div class="col-md-10">

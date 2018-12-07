@@ -16,9 +16,9 @@
                     </li>
                     <li><a href="#">FAQ</a>
                     </li>
-                    <li><a href="#">Wishlist</a>
+                    <li><a href="#">Watchlist</a>
                     </li>
-                    <li><a href="#">Help</a>
+                    <li><a href="#">Support</a>
                     </li>
                 </ul>
             </div>

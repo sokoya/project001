@@ -4,12 +4,13 @@ $lang['site_state'] = 'development';
 $lang['app_name'] = 'Onitshamarket.com';
 $lang['app_email'] = '';
 $lang['notify_email'] = '';
+$lang['company_name'] = 'Internet Onitshamarketing Limited';
 $lang['domain'] = 'https://onitshamarket.com';
 
 
 
 // Menu Label and Link
-$lang['deal'] = 'Onitsha Market Deal';
+$lang['deal'] = 'Onitshamarket Deal';
 $lang['deal_link'] = 'market-deal';
 $lang['new_arrival'] = 'New Arrival';
 $lang['new_arrival_link'] = 'new-arrival';
