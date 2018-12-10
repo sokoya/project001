@@ -223,8 +223,28 @@ Class User_model extends CI_Model{
         return $query;
     }
 
-    function get_my_orders( $id ){
-        $query = "SELECT order_code, SUM(amount) as amount, SUM(qty) as qty, order_date FROM orders WHERE buyer_id = ? GROUP BY order_code";
+
+    function get_my_orders( $id, $time = ''){
+        $query = "SELECT order_code, SUM(amount) as amount, SUM(qty) as qty, order_date FROM orders WHERE buyer_id = $id";
+        if( $time != ''){
+            switch ( $time ) {
+                case 'last-6-month':
+                    $query .= " AND order_date > DATE_SUB(NOW(), INTERVAL 6 MONTH) ";
+                    break;
+                case 'this-year':
+                    $query .= " AND order_date > DATE_SUB(NOW(), INTERVAL 12 MONTH) ";
+                    break;
+                case 'previous-year':
+                    $query .= " AND order_date < DATE_SUB(NOW(), INTERVAL 12 MONTH) ";
+                    break;
+                default:
+                    $query .= '';
+                    break;
+            }
+        }else{
+            $query .= " AND MONTH(order_date) = EXTRACT(month FROM (NOW())) AND year(order_date) = EXTRACT(year FROM (NOW())) ";
+        }
+        $query .= ' GROUP BY order_code';
         return $this->db->query( $query, array($id) )->result();
     }
 

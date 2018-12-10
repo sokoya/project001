@@ -13,11 +13,6 @@
 
 			<h3 class="market-sidebar-header-r hidden-sm hidden-md hidden-xs">My Orders & Returns</h3>
 			<hr class="market-sidebar-line-r"/>
-			<div class="alert alert-warning">
-				<i class="fa fa-warning"></i> Due to severe wildfire conditions in Calabar, deliveries To and From
-				several area in the state may arrive latter than expected. To view the most up to date status for your
-				order, please go to the Orders page
-			</div>
 			<div class="row">
                 <?php if( $orders):  ?>
                     <div class="col-md-12">
@@ -25,10 +20,10 @@
                             <div class="col-md-4 col-md-push-8">
                                 <div class="form-group">
                                     <select name="order_time" id="order_time" class="form-control">
-                                        <option value="1">This Month</option>
-                                        <option value="2">Last 3 Month</option>
-                                        <option value="3">This Year</option>
-                                        <option value="4">Previous Year</option>
+                                        <option value="">This Month</option>
+                                        <option value="last-6-month" <?php if($this->input->get('time') == 'last-6-month') echo 'selected'; ?>>Last 6 Month</option>
+                                        <option value="this-year" <?php if($this->input->get('time') == 'this-year') echo 'selected'; ?>>This Year</option>
+                                        <option value="previous-year" <?php if($this->input->get('time') == 'previous-year') echo 'selected'; ?>>Previous Year</option>
                                     </select>
                                 </div>
                             </div>
@@ -50,14 +45,19 @@
                                         <tr>
                                             <td class="text-center">#<?= $order->order_code;?></td>
                                             <td class="text-center"><?= neatDate($order->order_date) ?></td>
-                                            <td class="text-center"><?= ngn($order->amount); ?></td>
                                             <td class="text-center"><?= $order->qty; ?></td>
+                                            <td class="text-center"><?= ngn($order->amount); ?></td>
                                             <td class="text-center"><a class="btn-link" style="color: #0b6427;" href="<?= base_url('account/orderstatus/' . $order->order_code); ?>">Order Status/Details</a></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
                             </div>
+                        </div>
+                    <?php elseif( $this->input->get('time')  ) :?>
+                        <div class="market-dashboard-card">
+                            <p class="market-dashboard-welcome-text">Oops! No result found found. <a
+                                        style="text-decoration: none; color: green;" href="<?= base_url('account/orders'); ?>">Go Back</a></p>
                         </div>
                     <?php else : ?>
                         <div class="market-dashboard-card">
@@ -74,5 +74,15 @@
 <?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
+<script>
+    $('#order_time').on('change', function(){
+        let val = $(this).val();
+        if( val != ''){
+            window.location = "<?= base_url('account/orders?time=')?>" + val;
+        }else{
+            window.location = "<?= base_url('account/orders')?>";
+        }
+    })
+</script>
 </body>
 </html>

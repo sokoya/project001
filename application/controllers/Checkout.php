@@ -109,7 +109,13 @@ class Checkout extends MY_Controller
             $data = array();
             $order_code = $this->product->generate_code('orders', 'order_code');
             $order_date = get_now();
-            $order_status = 'ordered';
+            $order_status = array(
+                    'processing' => array(
+                        'msg' => 'Your order payment is processing',
+                        'datetime' => get_now()
+                    )
+            );
+            $order_status = json_encode( $order_status);
             $payment_method = 1;
             $buyer_id = $this->session->userdata('logged_id');
             foreach( $this->cart->contents() as $product ){
@@ -122,6 +128,7 @@ class Checkout extends MY_Controller
                 }else{
                     // lets use the opportunity to gather our order table for testing purpose.
                     $data['buyer_id'] = $buyer_id;
+                    $data['seller_id'] = $detail->seller_id;
                     $data['order_code'] = $order_code;
                     $data['order_date'] = $order_date;
                     $data['payment_method'] = $payment_method;
