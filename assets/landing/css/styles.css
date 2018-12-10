@@ -59,6 +59,8 @@ h6,
 .widget-title-sm {
 	font-size: 17px;
 	margin-bottom: 10px;
+    color: #49a251;
+    font-weight:bolder;
 }
 
 .widget-title-lg {
@@ -101,6 +103,7 @@ a {
 html,
 body {
 	overflow-x: hidden;
+    background: #ededed;
 }
 
 hr {
