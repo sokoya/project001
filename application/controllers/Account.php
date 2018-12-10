@@ -37,13 +37,14 @@ class Account extends MY_Controller {
 	}
 
 	public function orderstatus(){
-	    $order_code = cleanit( $this->uri->segment(3));
+	    $order_code =  cleanit( $this->uri->segment(3));
 	    if( empty( $order_code) ) redirect($_SERVER['HTTP_REFERER']);
         $page_data['page'] = 'orders';
         $page_data['title'] = "My Orders";
-        $page_data['orders'] = $this->user->get_my_order_status( $this->session->userdata('logged_id') );
+        $page_data['order_code'] = $order_code;
+        $page_data['orders'] = $this->user->get_my_order_status( $this->session->userdata('logged_id'), $order_code );
         $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
-        $this->load->view('account/orders', $page_data);
+        $this->load->view('account/orderstatus', $page_data);
     }
 
 	// Personal Information and Change password

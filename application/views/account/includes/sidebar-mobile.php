@@ -16,7 +16,7 @@
                 <h4><a href="<?= base_url('account/orders'); ?>">My Orders</a></h4>
             </li>
             <li class="list-group-item">
-                <h4><a href="<?= base_url('account/order_track'); ?>">My Orders</a></h4>
+                <h4><a href="<?= base_url('account/order_track'); ?>">Track My Order</a></h4>
             </li>
             <li class="list-group-item">
                 <h4><a href="<?= base_url('account/saved'); ?>">My Watchlist</a></h4>
