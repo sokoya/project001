@@ -2,7 +2,14 @@
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
-	<?php $this->load->view('landing/resources/head_menu') ?>
+    <?php if ($this->agent->is_mobile()) : ?>
+        <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
+    <?php else: ?>
+        <?php $this->load->view('landing/resources/head_img') ?>
+        <?php $this->load->view('landing/resources/head_category') ?>
+
+        <?php $this->load->view('landing/resources/head_menu') ?>
+    <?php endif; ?>
 
 	<div class="container market-dashboard-cover">
 
