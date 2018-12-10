@@ -35,7 +35,7 @@
                         </div>
                         <div class="market-dashboard-card">
                             <div class="table-responsive">
-                            <table style="width: 100%" class="table table-stripped">
+                            <table style="width: 100%" class="table table-stripped table-bordered">
                                 <thead>
                                     <tr>
                                         <th class="text-center">Order Code</th>
@@ -48,7 +48,7 @@
                                 <tbody>
                                     <?php foreach( $orders as $order) : ?>
                                         <tr>
-                                            <td class="text-center"><?= $order->order_code;?></td>
+                                            <td class="text-center">#<?= $order->order_code;?></td>
                                             <td class="text-center"><?= neatDate($order->order_date) ?></td>
                                             <td class="text-center"><?= ngn($order->amount); ?></td>
                                             <td class="text-center"><?= $order->qty; ?></td>
@@ -57,7 +57,6 @@
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
-                            <div class="gap gap-small"></div>
                             </div>
                         </div>
                     <?php else : ?>
