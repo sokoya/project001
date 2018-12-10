@@ -122,9 +122,13 @@
     </div>
 </div>
 <div class="gap gap-small"></div>
-<?php $this->load->view('landing/resources/footer'); ?>
+<?php if ($this->agent->is_mobile()) : ?>
+    <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
+<?php else: ?>
+    <?php $this->load->view('landing/resources/footer'); ?>
+<?php endif; ?>
 <?php $this->load->view('landing/resources/script'); ?>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
     $(function () {
         $('.lazy').Lazy();
