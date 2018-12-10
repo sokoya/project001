@@ -212,13 +212,18 @@ Class User_model extends CI_Model{
      * @param $id
      * @return mixed
      */
-    function get_my_orders($id ){
+    function get_my_orders_status($id ){
         $query = $this->db->query("SELECT p.id as pid, p.name, g.image_name, o.order_date, o.order_code, o.status
         FROM orders o
         JOIN (SELECT prod.id AS id, prod.product_name AS name FROM products AS prod) AS p ON (p.id = o.product_id)
         JOIN product_gallery AS g ON (o.product_id = g.product_id AND g.featured_image = 1 )
         WHERE buyer_id = $id ORDER BY o.id DESC LIMIT 10")->result();
-        return $query; 
+        return $query;
+    }
+
+    function get_my_orders( $id ){
+        $query = "SELECT order_code, SUM(amount) as amount, SUM(qty) as qty, order_date FROM orders WHERE buyer_id = ? GROUP BY order_code ORDER BY id DESC";
+        return $this->db->query( $query, array($id) )->result();
     }
 
     // Get states

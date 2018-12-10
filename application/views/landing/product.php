@@ -701,7 +701,7 @@
 				notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
 			},
 			error: () => {
-				notification_message('Sorry an error occurred please try again ', 'fa fa-info-circle', error);
+				notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', error);
 			}
 		})
 	});
