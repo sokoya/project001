@@ -100,7 +100,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-4 col-form-label"></label>
                                     <div class="col-sm-8">
-                                        <button type="submit" class="btn btn-danger col-md-12">SAVE INFORMATION</button>
+                                        <button type="submit" class="btn btn-success col-md-12">SAVE INFORMATION</button>
                                     </div>
                                 </div>
                                 <?= form_close(); ?>

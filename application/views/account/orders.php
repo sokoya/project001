@@ -19,47 +19,59 @@
 				order, please go to the Orders page
 			</div>
 			<div class="row">
-				<div class="col-md-12">
-					<div class="market-dashboard-card">
-						<div class="table-responsive">
-							<table style="width: 100%" class="table table-stripped">
-								<thead>
-									<tr>
-										<th class="text-center">Product</th>
-										<th class="text-center">Tracking #</th>
-										<th class="text-center">Desc.</th>
-										<th class="text-center">Date</th>
-										<th class="text-center">Status</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php foreach( $orders as $order) : ?>
-										<tr>
-											<td>
-
-												<img src="<?= base_url('data/products/'.$order->pid.'/'.$order->image_name); ?>"
-										 		class=""
-										 		title="<?= $order->name; ?>"
-										 		style="width: 60px; height: 100%; padding-right: 4px;">
-										 		<span><a style="text-decoration: #0b6427; color: #0b6427;" href="<?= base_url(urlify($order->name, $order->pid)); ?>"><?= word_limiter(ucwords($order->name), 7, '...'); ?></a></span>
-											</td>
-											<td><?= $order->order_code; ?></td>
-											<td><?= $order->product_desc; ?></td>
-											<td><?= neatDate($order->order_date) ?></td>
-											<td><?= ucfirst($order->status); ?></td>
-										</tr>
-									<?php endforeach; ?>
-								</tbody>
-							</table>
-							<div class="gap gap-small"></div>
-						</div>
-					</div>
-				</div>
+                <?php if( $orders):  ?>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4 col-md-push-8">
+                                <div class="form-group">
+                                    <select name="order_time" id="order_time" class="form-control">
+                                        <option value="1">This Month</option>
+                                        <option value="2">Last 3 Month</option>
+                                        <option value="3">This Year</option>
+                                        <option value="4">Previous Year</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="market-dashboard-card">
+                            <div class="table-responsive">
+                            <table style="width: 100%" class="table table-stripped">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Order Code</th>
+                                        <th class="text-center">Date Initiated.</th>
+                                        <th class="text-center">Amount</th>
+                                        <th class="text-center">Quantity</th>
+                                        <th class="text-center">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach( $orders as $order) : ?>
+                                        <tr>
+                                            <td class="text-center"><?= $order->order_code;?></td>
+                                            <td class="text-center"><?= neatDate($order->order_date) ?></td>
+                                            <td class="text-center"><?= ngn($order->amount); ?></td>
+                                            <td class="text-center"><?= $order->qty; ?></td>
+                                            <td class="text-center"><a class="btn-link" style="color: #0b6427;" href="<?= base_url('account/orderstatus/' . $order->order_code); ?>">Order Status/Details</a></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                            <div class="gap gap-small"></div>
+                            </div>
+                        </div>
+                    <?php else : ?>
+                        <div class="market-dashboard-card">
+                        <p class="market-dashboard-welcome-text">You are yet to make orders. <a
+                                    style="text-decoration: none; color: green;" href="<?= base_url(); ?>">Browse for
+                                products</a></p>
+                        </div>
+                    <?php endif;?>
+                    </div>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="gap gap-small"></div>
 <?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
