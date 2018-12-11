@@ -60,9 +60,9 @@ Class User_model extends CI_Model{
     public function login_user($email, $password){
         if($email && $password) {
             $email = cleanit($email);
-            $this->db->where(['email' => $email]);
+            $this->db->where(array('email' => $email));
             if ($this->db->get('users')->row()) {
-                $this->db->where(['email' => $email]);
+                $this->db->where(array('email'=>$email));
                 $salt = $this->db->get('users')->row()->salt;
                 if ($salt) {
                     $password = shaPassword($password, $salt);
