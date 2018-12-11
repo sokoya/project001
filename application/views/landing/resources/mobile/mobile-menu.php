@@ -311,14 +311,13 @@
             </div>
         </div>
         <div class="navbar-util">
-				<span class="account-dropdown" style="margin-right: 5px;"><img
+				<span class="account-dropdown" style="margin-right: 5px; cursor: pointer"><img
                         <?php if ($this->session->userdata('logged_in')): ?>
                             src="<?= base_url('assets/landing/svg/user.svg'); ?>"
                         <?php else : ?>
                             src="<?= base_url('assets/landing/svg/logged-out-user.svg'); ?>"
                         <?php endif; ?>
-
-                            alt="Back button"
+                            alt="User"
                             style="height: 24px; width: 24px;">
 
 				</span>
@@ -347,12 +346,12 @@
                 <?php endif; ?>
             </div>
 
-            <span><span class="cart-count"
-                    <?= ($this->cart->total_items() == 0) ? 'style="display:none"' : '' ?>><?= $this->cart->total_items(); ?></span><a
-                        href="<?= base_url(lang('cart_link')); ?>"><img
+                <span class="cart-count"
+                    <?= ($this->cart->total_items() == 0) ? 'style="display:none"' : '' ?>><?= $this->cart->total_items(); ?></span>
+            <a href="<?= base_url(lang('cart_link')); ?>"><img
                             src="<?= base_url('assets/landing/svg/shopping-cart.svg'); ?>"
-                            alt="Back button"
-                            style="height: 24px; width: 24px;"></a></span>
+                            alt="User"
+                            style="height: 24px; width: 24px; margin-right: 4px;"></a>
         </div>
         <form class="mobile-search-input" role="search">
             <div class="inner-addon right-addon stylish-input-group">

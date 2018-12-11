@@ -57,7 +57,7 @@
                                     ?>
                                         <span class="text-danger" style="font-size: small"><a style="color: #0b6427;" class="btn-link" href="<?= PAGE_CONTACT_US; ?>">Having issue with the item?</a></span><br />
                                     <?php endif; ?>
-                                    <span class="text-center" style="font-size: small">
+                                    <span class="text-center" style="font-size: xx-small">
                                         <a class="btn btn-primary btn-sm" role="button" data-toggle="collapse" href="#<?=$x;?>" aria-expanded="false" aria-controls="<?=$x;?>">
                                             Click to see status
                                         </a>
@@ -71,7 +71,7 @@
                                 </div>
                             </div>
                                 <div class="row">
-                                    <div style="margin: 30px;" class="collapse well" id="<?=$x;?>" >
+                                    <div style="margin: 20px;" class="collapse well" id="<?=$x;?>" >
                                         <?php $status = json_decode( $order->status ); $status = (array)$status;
                                         foreach( $status as $key => $value ) :?>
                                             <p class="text-sm text-semibold">
