@@ -226,6 +226,9 @@
         position: relative;
         bottom: 10px;
     }
+    .global-wrapper{
+        min-height:0 !important;
+    }
 </style>
 </head>
 <body style="background: #e5e5e5">
