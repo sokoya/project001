@@ -250,7 +250,9 @@
                                 <div id="status"></div>
                                 <div class="row">
                                     <div class="col-md-6 col-lg-6 clearfix">
-                                        <?php if($qty_stock_check == count( $variations)) :  ?>
+                                        <?php
+                                        //            Make A check to confirm if the product is still in stock
+                                        if($qty_stock_check == count( $variations)) :  ?>
                                             <button class="btn btn-block btn-primary c-hover" disabled
                                                     type="button">
                                                 <i class="fa fa-shopping-cart"></i> Out of Stock

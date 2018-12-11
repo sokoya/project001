@@ -238,7 +238,7 @@
         <p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find
                 product</a></p>
     </div>
-<?php elseif (empty($product) || empty($var) || empty($galleries)): ?>
+<?php elseif (empty($product) || empty($galleries)): ?>
     <div class="row">
         <div class="gap-large"></div>
         <h2 class="text-center">Oops! The product you looking does not exist.</h2>
@@ -334,6 +334,7 @@
                     <div class="col-xs-12">
                         <p class="custom-product-page-option-title">Variation: </p>
                         <div class="row variation-option-list">
+                            <?php $qty_stock_check = 0 ;?>
                             <?php foreach ($variations as $variation) : ?>
                                 <div class="col-xs-3">
                                     <p data-price="<?= $variation['sale_price']; ?>"
@@ -350,6 +351,7 @@
                                         <?= ucfirst($variation['variation']); ?>
                                     </p>
                                 </div>
+                                <?php if( $variation['quantity'] < 1 ) $qty_stock_check++; ?>
                             <?php endforeach; ?>
                         </div>
                     </div>
@@ -366,9 +368,19 @@
                            class="pr_price_hidden"/>
                 <?php endif; ?>
             </div>
+
+            <?php
+//            Make A check to confirm if the product is still in stock
+            if($qty_stock_check == count( $variations)) :?>
+            <button class="btn btn-block" disabled>
+                Out of Stock
+            </button>
+            <?php else :?>
             <button class="btn btn-block buy-btn submit-cart">
                 Add to Cart
             </button>
+            <?php endif; ?>
+
             <?php if ($this->session->userdata('logged_in')) : ?>
                 <?php if (!$favourite): ?>
                     <p class="wishlist-cta">Add to Wishlist</p>

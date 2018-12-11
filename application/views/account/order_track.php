@@ -47,23 +47,17 @@
                             <div class="col-md-4"></div>
                         </div>
                         <div class="row text-center" style="margin-top: 30px;">
-                            <form>
-                                <div class="col-md-2">
-
-                                </div>
-                                <div class="input-group col-md-8">
+                            <?= form_open('account/order_track');?>
+                                <div class="input-group col-md-8 col-md-offset-2">
                                     <input type="text" class="newsletter-input form-control no_border_rad"
-                                           placeholder="Enter Tracking ID" required value="">
+                                           placeholder="Enter Tracking ID" required>
                                     <div class="input-group-btn">
                                         <button class="btn btn-primary no_border_rad" type="submit">
                                             Track Order
                                         </button>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-
-                                </div>
-                            </form>
+                            <?= form_close(); ?>
                         </div>
                         <div class="row text-center" id="order_status_show">
 
