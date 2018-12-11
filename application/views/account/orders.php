@@ -80,10 +80,11 @@
 </div>
 <?php if ($this->agent->is_mobile()) : ?>
     <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
+    <?php $this->load->view('landing/resources/mobile/mobile-script'); ?>
 <?php else: ?>
     <?php $this->load->view('landing/resources/footer'); ?>
+    <?php $this->load->view('landing/resources/script'); ?>
 <?php endif; ?>
 </div>
-<?php $this->load->view('landing/resources/script'); ?>
 </body>
 </html>

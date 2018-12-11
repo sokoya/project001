@@ -34,8 +34,7 @@
             </div>
         </div>
         <div class="owl-item">
-            <div class="slider-item"
-                 style="background-image:url(<?= base_url('assets/landing/img/concert_2_1200x500.jpg'); ?>);">
+            <div class="slider-item">
                 <div class="container">
                     <div class="slider-item-inner">
                         <div class="slider-item-caption-right slider-item-caption-white">
@@ -388,7 +387,7 @@
                     </div>
                     <div class="owl-item">
                         <div class="slider-item"
-                             style="background-image:url(<?= base_url('assets.landing/img/onitshamarket/left-slider/home-essentials.jpg'); ?>);">
+                             style="background-image:url(<?= base_url('assets/landing/img/onitshamarket/left-slider/home-essentials.jpg'); ?>);">
                             <div class="slider-item-task"></div>
                             <div class="container">
                                 <div class="slider-item-inner">
@@ -606,13 +605,11 @@
     <div class="gap"></div>
     <?php if ($this->agent->is_mobile()) : ?>
         <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
+        <?php $this->load->view('landing/resources/mobile/mobile-script'); ?>
     <?php else: ?>
         <?php $this->load->view('landing/resources/footer'); ?>
         <?php $this->load->view('landing/resources/script'); ?>
     <?php endif; ?>
 </div>
-<?php if ($this->agent->is_mobile()) : ?>
-    <script src="<?= base_url('assets/landing/js/mobile.js'); ?>"></script>
-<?php endif; ?>
 </body>
 </html>

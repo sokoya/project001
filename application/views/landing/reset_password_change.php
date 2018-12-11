@@ -65,9 +65,20 @@
             width: 100%;
         }
     }
+    @media screen and (max-width: 360px) {
+        .market-box{
+            margin-top: 0px;
+        }
+        .market-board{
+            margin-bottom: 5px;
+        }
+        div.market-board.login-box{
+            padding: 10px;
+        }
+    }
 </style>
 </head>
-<body>
+<body style="background-color: #ffffff;">
 <div class="global-wrapper clearfix" id="global-wrapper" style="background: #fff;padding-top:20px;">
     <div class="container">
         <div class="row">
@@ -78,7 +89,7 @@
                                 src="<?= base_url('assets/landing/img/onitshamarket-logo.png') ?>" width="20%"
                                 alt="market logo Image"></a>
                 </p>
-                <h3 class="widget-title text-center text-bold">
+                <h3 class="widget-title text-center text-bold text-sm">
                     Reset Password
                     <small>Enter New Password</small>
                 </h3>
