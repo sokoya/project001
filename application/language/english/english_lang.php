@@ -6,6 +6,7 @@ $lang['app_email'] = '';
 $lang['notify_email'] = '';
 $lang['company_name'] = 'Internet Onitshamarketing Limited';
 $lang['domain'] = 'https://onitshamarket.com';
+$lang['copyright'] = "&copy; 2015 -  " . date('Y') ." Internet Onitshamarketing Limited All rights reserved";
 
 
 

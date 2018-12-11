@@ -102,6 +102,7 @@ html,
 body {
 	overflow-x: hidden;
     background: #ededed;
+	height: -webkit-fill-available;
 }
 
 hr {

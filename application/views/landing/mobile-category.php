@@ -433,7 +433,7 @@
         }
     </script>
     <script src="<?= base_url('assets/landing/js/mobile.js'); ?>"></script>
-    <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
 </div>
+<?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<footer class="main-footer" style="margin-top:110px;">
+<footer class="main-footer" style="margin-top:100px;">
     <div class="container">
         <div class="row row-col-gap" data-gutter="60">
             <div class="col-md-9">
@@ -114,7 +114,6 @@
     </div>
 </footer>
 <div style="
-  position: absolute;
   right: 0;
   bottom: 0;
   left: 0;

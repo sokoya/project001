@@ -1,4 +1,3 @@
-<?php $this->load->view('landing/resources/head_base'); ?>
 <style>
     .market-box {
         margin-left: 0px !important;
@@ -65,9 +64,21 @@
             width: 100%;
         }
     }
+    @media screen and (max-width: 360px) {
+        .market-box{
+            margin-top: 0px;
+        }
+        .market-board{
+            margin-bottom: 5px;
+        }
+        div.market-board.login-box{
+            padding: 10px;
+        }
+    }
 </style>
+<?php $this->load->view('landing/resources/head_base'); ?>
 </head>
-<body>
+<body style="background-color: #ffffff;">
 <div class="global-wrapper clearfix" id="global-wrapper" style="background: #fff;padding-top:20px;">
     <div class="container">
         <div class="row">
@@ -78,7 +89,7 @@
                                 src="<?= base_url('assets/landing/img/onitshamarket-logo.png') ?>" width="20%"
                                 alt="market logo Image"></a>
                 </p>
-                <h3 class="widget-title text-center text-bold">
+                <h3 class="widget-title text-center text-bold text-sm">
                     Forgot Password
                 </h3>
                 <div class="row">
@@ -122,7 +133,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 text-center" style="margin-top:10px;">
-                        <p style="color:#4b4b4bb8 !important; font-size:12px; ">&copy; 2015 - <?= date('Y'); ?> <?= lang('company_name'); ?>. All rights reserved</p>
+                        <p style="color:#4b4b4bb8 !important; font-size:12px; "><?= lang('copyright'); ?></p>
                     </div>
                 </div>
             </div>

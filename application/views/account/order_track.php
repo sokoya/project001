@@ -47,16 +47,16 @@
                             <div class="col-md-4"></div>
                         </div>
                         <div class="row text-center" style="margin-top: 30px;">
-                            <?= form_open('account/order_track');?>
-                                <div class="input-group col-md-8 col-md-offset-2">
-                                    <input type="text" class="newsletter-input form-control no_border_rad"
-                                           placeholder="Enter Tracking ID" required>
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-primary no_border_rad" type="submit">
-                                            Track Order
-                                        </button>
-                                    </div>
+                            <?= form_open('account/order_track'); ?>
+                            <div class="input-group col-md-8 col-md-offset-2">
+                                <input type="text" class="newsletter-input form-control no_border_rad"
+                                       placeholder="Enter Tracking ID" required>
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary no_border_rad" type="submit">
+                                        Track Order
+                                    </button>
                                 </div>
+                            </div>
                             <?= form_close(); ?>
                         </div>
                         <div class="row text-center" id="order_status_show">
@@ -71,10 +71,18 @@
 <div class="gap gap-small"></div>
 <?php if ($this->agent->is_mobile()) : ?>
     <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
+    <?php $this->load->view('landing/resources/mobile/mobile-script'); ?>
 <?php else: ?>
     <?php $this->load->view('landing/resources/footer'); ?>
+    <?php $this->load->view('landing/resources/script'); ?>
 <?php endif; ?>
 </div>
-<?php $this->load->view('landing/resources/script'); ?>
+<script>
+    $('.dropdown').on('click', function () {
+        setTimeout(function () {
+            $('.dropdown-backdrop').remove();
+        }, 1000);
+    })
+</script>
 </body>
 </html>

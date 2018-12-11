@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/landing/css/font-awesome.css'); ?>">
     <?php if ($page == 'mobile-category' || $page == 'mobile-search' || $page == 'mobile-product' || $page == 'mobile-cart' || $page == 'mobile-checkout' && $this->agent->is_mobile()) : ?>
         <link rel="stylesheet" href="<?= base_url('assets/landing/css/styles-mobile.css'); ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/landing/css/styles.css'); ?>">
     <?php else : ?>
         <link rel="stylesheet" href="<?= base_url('assets/landing/css/styles.css'); ?>">
     <?php endif; ?>

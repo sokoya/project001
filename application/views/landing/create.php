@@ -38,6 +38,7 @@
     a:hover, a:active, a::selection {
         text-decoration: none;
     }
+
     @media screen and (max-width: 885px) and (min-width: 500px) {
         .market-board {
             width: 80%;
@@ -52,9 +53,28 @@
             width: 100%;
         }
     }
+
+    @media screen and (max-width: 360px) {
+        .market-box {
+            margin-top: 0 !important;
+        }
+
+        .market-board {
+            margin-bottom: 5px;
+        }
+
+        div.market-board.login-box {
+            padding: 10px;
+        }
+
+        input.form-control {
+               padding: 3px 8px !important;
+               font-size: 12px !important;
+           }
+    }
 </style>
 </head>
-<body>
+<body style="background-color: #ffffff;">
 <div class="global-wrapper clearfix" id="global-wrapper" style="background: #fff;padding-top:20px;">
     <div class="container">
         <div class="row">
@@ -73,17 +93,15 @@
                         <div class="market-board login-box">
                             <?= form_open('create/process', 'autocorrect="off", id="register-form"'); ?>
                             <div class="row">
-                                <div class="col-md-6 col-sm-6">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
                                     <div class="form-group">
-                                        <label for="first_name">First Name*</label>
                                         <input class="form-control" type="text" name="signupfirstname"
                                                value="<?php if (isset($_POST['signupfirstname'])) echo $_POST['signupfirstname']; ?>"
                                                placeholder="First name" autofocus required/>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-6">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
                                     <div class="form-group">
-                                        <label for="lastname_name">Last Name*</label>
                                         <input class="form-control" type="text" name="signuplastname"
                                                value="<?php if (isset($_POST['signuplastname'])) echo $_POST['signuplastname']; ?>"
                                                placeholder="Last Name" required/>
@@ -91,29 +109,25 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="phone_number">Phone Number*</label>
                                 <input class="form-control" type="number" name="signup-phone" name="phone"
                                        value="<?php if (isset($_POST['phone'])) echo $_POST['phone']; ?>"
                                        placeholder="08022334455" required/>
                             </div>
                             <div class="form-group">
-                                <label>Email Address*</label>
                                 <input class="form-control" type="text" id="signup-email" name="signupemail"
                                        value="<?php if (isset($_POST['signupemail'])) echo $_POST['signupemail']; ?>"
                                        placeholder="Email Address" required/>
                             </div>
                             <div class="row">
-                                <div class="col-md-6 col-sm-6">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
                                     <div class="form-group">
-                                        <label>Password*</label>
                                         <input class="form-control" type="password" id="signup-password"
                                                name="signuppassword"
                                                placeholder="Password" required/>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-6">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
                                     <div class="form-group">
-                                        <label>Repeat Password*</label>
                                         <input class="form-control" type="password" id="signup-repeat-password"
                                                name="signuprepeatpassword" placeholder="Confirm Password"
                                                required/>
@@ -142,18 +156,22 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 col-xs-12 col-sm-12 text-center" style="display: inline-flex;margin-top:10px;">
-                        <img src="<?= base_url('assets/landing/img/payment/ssl-logo.png'); ?>" class="img-responsive" style="margin-left:auto;"
+                    <div class="col-md-12 col-xs-12 col-sm-12 text-center"
+                         style="display: inline-flex;margin-top:10px;">
+                        <img src="<?= base_url('assets/landing/img/payment/ssl-logo.png'); ?>" class="img-responsive"
+                             style="margin-left:auto;"
                              alt="Image Alternative text" title="Pay with Mastercard"/>
                         <img src="<?= base_url('assets/landing/img/payment/interswitch.png'); ?>" class="img-responsive"
                              alt="Image Alternative text" title="Pay with Mastercard"/>
-                        <img src="<?= base_url('assets/landing/img/payment/allcards.jpg'); ?>" class="img-responsive" style="margin-right:auto;"
+                        <img src="<?= base_url('assets/landing/img/payment/allcards.jpg'); ?>" class="img-responsive"
+                             style="margin-right:auto;"
                              alt="Image Alternative text" title="Pay with Mastercard"/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 text-center" style="margin-top:10px;">
-                        <p style="color:#4b4b4bb8 !important; font-size:12px; ">&copy; 2015 - <?= date('Y'); ?> <?= lang('company_name'); ?>. All rights reserved</p>
+                        <p style="color:#4b4b4bb8 !important; font-size:12px; ">&copy; 2015
+                            - <?= date('Y'); ?> <?= lang('company_name'); ?>. All rights reserved</p>
                     </div>
                 </div>
             </div>

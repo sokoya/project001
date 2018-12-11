@@ -1,17 +1,17 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
 
 <style>
-    .panel-bordered-default{
+    .panel-bordered-default {
         border: 1px solid #bdcccf;
         color: #696969;
     }
 
-    .panel-bordered-warning{
+    .panel-bordered-warning {
         border: 1px solid #ffb300;
-        color:#ffb300;
+        color: #ffb300;
     }
 
-    .panel-bordered-danger{
+    .panel-bordered-danger {
         border: 1px solid #f44336;
         color: #f44336;
     }
@@ -37,10 +37,11 @@
 </head>
 <body class="cart-row">
 <div class="global-wrapper clearfix" id="global-wrapper">
-	<?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
+    <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
 
     <div class="container">
-        <?php $cart_content = $this->cart->contents();if (!empty( $cart_content)) : ?>
+        <?php $cart_content = $this->cart->contents();
+        if (!empty($cart_content)) : ?>
             <header class="page-header" style="margin: 10px 0 10px 0;">
                 <h4 style="margin-bottom:0;">My Cart (<?= $this->cart->total_items(); ?>) Items</h4>
             </header>
@@ -62,7 +63,7 @@
                                 <?php echo form_hidden($x . '[rowid]', $product['rowid']); ?>
                                 <a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
                                     <img class="lazy" style="width:130px !important;height:auto !important;"
-                                         data-src="<?= PRODUCTS_IMAGE_PATH. $detail->image; ?>"
+                                         data-src="<?= PRODUCTS_IMAGE_PATH . $detail->image; ?>"
                                          src="<?= base_url('assets/landing/img/load.gif'); ?>"
                                          alt="<?= $product['name']; ?>"
                                          title="<?= $product['name']; ?>"/>
@@ -88,7 +89,8 @@
                         </div>
                         <?php if ($variation_detail->quantity < 1 || in_array($detail->product_status, array('suspended', 'blocked', 'pending')))
                             : ?>
-                            <span class="text-center text-semibold text-danger mar-top" style="margin-top: 10px;"><strong>This product variation is out of stock. or no longer available.</strong></span>
+                            <span class="text-center text-semibold text-danger mar-top"
+                                  style="margin-top: 10px;"><strong>This product variation is out of stock. or no longer available.</strong></span>
                         <?php else: ?>
                             <div class="row" style="margin-top: 10px;">
                                 <div class="col-xs-6">
@@ -152,7 +154,8 @@
                         class="fa fa-shopping-cart"></i> Continue Shopping</a>
         <?php else: ?>
             <div class="custom-fa-cover">
-                <i class="fa fa-cart-arrow-down empty-cart-icon custom-fa text-center"></i>
+                <img class="img-responsive text-center" style="padding: 10px; margin-top: 10px !important;"
+                     src="<?= base_url('assets/landing/img/empty_cart.png') ?>"/>
             </div>
             <div class="text-center">
 
@@ -178,19 +181,10 @@
     </div>
     <div style="height:10px;"></div>
 </div>
+<?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
+<?php $this->load->view('landing/resources/mobile/mobile-script'); ?>
 <script>
-    if (!base_url) {let base_url = "<?= base_url(); ?>";}
-</script>
-<script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/mobile.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/ionrangeslider.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/jqzoom.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/magnific.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/custom.js'); ?>"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
-<script>
-    $(function() {
+    $(function () {
         $('.lazy').lazy();
     });
 
