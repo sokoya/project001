@@ -80,5 +80,12 @@
     <?php $this->load->view('landing/resources/script'); ?>
 <?php endif; ?>
 </div>
+<script>
+    $('.dropdown').on('click', function () {
+        setTimeout(function () {
+            $('.dropdown-backdrop').remove();
+        }, 1000);
+    })
+</script>
 </body>
 </html>

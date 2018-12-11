@@ -425,7 +425,11 @@
             }
         })
     }
-
+    $('.dropdown').on('click', function () {
+        setTimeout(function () {
+            $('.dropdown-backdrop').remove();
+        }, 1000);
+    })
 
 </script>
 </body>
