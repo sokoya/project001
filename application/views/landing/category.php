@@ -83,11 +83,12 @@
     <?php if (empty($products)) : ?>
         <div class="container">
             <div class="row">
-                <div class="gap-large"></div>
+                <div style="height:168px"></div>
                 <h2 class="text-center">Oops! Sorry, we couldn't find products on this section.</h2>
                 <p class="text-muted text-sm text-center">You can browse for more product <a
                             style="text-decoration: none; color: #0b6427;" href="<?= base_url(); ?>">Find
                         product</a></p>
+                <div style="height:110px"></div>
             </div>
         </div>
     <?php else : ?>
