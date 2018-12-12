@@ -347,6 +347,12 @@
                     let msg = "Sorry but there was an error: ";
                     alert(msg + xhr.status + " " + xhr.statusText);
                 }
+                $('.lazy').Lazy({
+                    scrollDirection: 'vertical',
+                    effect: 'fadeIn',
+                    visibleOnly: true
+                });
+
                 $('.product-quick-view-btn').on('click', get_view);
                 doReplaceState(url);
 

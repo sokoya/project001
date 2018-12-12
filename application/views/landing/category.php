@@ -271,16 +271,24 @@
                                                     <span class="cs-price-tl"><?= ngn($product->sale_price); ?> </span>
                                                 <?php endif; ?>
 
-                                                <?php
-                                                $category_fav = 'category-favorite';
-                                                if ($this->session->userdata('logged_in')) {
-                                                    if ($this->product->is_favourited($profile->id, $product->id)) {
-                                                        $category_fav = 'category-favorite-active';
-                                                    }
-                                                }
-                                                ?>
-                                                <span class="pull-right <?= $category_fav; ?>"><i class="fa fa-heart"
-                                                                                                  title="Add <?= $product->product_name; ?> to your whishlist"></i> &nbsp;</span>
+                                                <?php if( !$this->session->userdata('logged_in')) :?>
+                                                    <a href="<?= base_url('login'); ?>">
+                                                        <span style="margin-right:3px;" class="pull-right category-favorite">
+                                                                <i class="fa fa-heart" title="Add <?= $product->product_name; ?> to your whishlist"></i>
+                                                        </span>
+                                                    </a>
+                                                <?php else :?>
+                                                    <?php if($this->product->is_favourited($profile->id, $product->id)) : ?>
+                                                        <span style="margin-right:3px;" class="pull-right category-favorite whislist-btn" data-pid="<?= $product->id;?>">
+                                                            <i class="fa fa-heart" title="Remove <?= $product->product_name; ?> from your whishlist"></i>
+                                                        </span>
+                                                    <?php else : ?>
+                                                        <span style="margin-right:3px;" class="pull-right category-favorite whishlist-btn" data-pid="<?= $product->id;?>">
+                                                            <i class="fa fa-heart-o" title="Add <?= $product->product_name; ?> to your whishlist"></i>
+                                                        </span>
+                                                    <?php endif; ?>
+                                                <?php endif; ?>
+
                                             </div>
                                         </div>
                                     </div>
@@ -344,6 +352,39 @@
             to: max
         });
     }
+
+    $('.whishlist-btn').on('click', function () {
+        let product_id = $(this).data('pid');
+        let _this = $(this);
+        $.ajax({
+            url: base_url + 'ajax/favourite',
+            method: 'POST',
+            data: {
+                id: product_id
+            },
+            success: response => {
+                let parsed_response = JSON.parse(response);
+                if (parsed_response.action === 'remove') {
+                    _this.removeClass('category-favorite-active').addClass('.category-favorite');
+                    _this.find('i').attr('title', 'Add to your whishlist');
+                    // _this.find('i').removeClass('fa-heart', function () {
+                    //     $(this).addClass('fa-heart-o');
+                    // })
+                } else {
+                    _this.removeClass('category-favorite').addClass('.category-favorite-active');
+                    _this.find('i').attr('title', 'Remove from your whishlist');
+                    // _this.find('i').removeClass('fa-heart-o', function () {
+                    //     $(this).addClass('fa-heart');
+                    // })
+                }
+                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+            },
+            error: () => {
+                notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', error);
+            }
+        })
+    });
+
     $(document).ready(function () {
         let _category_body = $('#category_body');
 
