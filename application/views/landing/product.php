@@ -38,7 +38,7 @@
 	}
 
     .product {
-        min-width:10px !important;
+        min-height:280px !important;
     }
 
 </style>
@@ -551,10 +551,10 @@
                                 <h5 class="product-caption-title"><?= character_limiter(ucwords($like->product_name), 30, '...'); ?></h5>
                                 <div class="product-caption-price">
                                     <?php if (discount_check($like->discount_price, $like->start_date, $like->end_date)) : ?>
-                                        <span class="product-caption-price-new"><?= ngn($like->discount_price); ?></span>
+                                        <span class="product-caption-price-new" style="font-size:12px;"><?= ngn($like->discount_price); ?></span>
                                         <span class="product-caption-price-old"><sup><?= ngn($like->sale_price); ?> </sup></span>
                                     <?php else : ?>
-                                        <span class="product-caption-price-new"><?= ngn($like->sale_price); ?> </span>
+                                        <span class="product-caption-price-new" style="font-size:12px;"><?= ngn($like->sale_price); ?> </span>
                                     <?php endif; ?>
                                 </div>
                                 <ul class="product-caption-feature-list">
