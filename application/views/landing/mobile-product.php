@@ -333,11 +333,11 @@
                 </div>
             </div>
             <div class="row" style="margin-top: 10px;">
+                <?php $qty_stock_check = 0 ;?>
                 <?php if (count($variations) > 1) : ?>
                     <div class="col-xs-12">
                         <p class="custom-product-page-option-title">Variation: </p>
                         <div class="row variation-option-list">
-                            <?php $qty_stock_check = 0 ;?>
                             <?php foreach ($variations as $variation) : ?>
                                 <div class="col-xs-3">
                                     <p data-price="<?= $variation['sale_price']; ?>"

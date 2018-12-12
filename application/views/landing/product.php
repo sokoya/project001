@@ -523,7 +523,7 @@
             <div class="row" data-gutter="15">
                 <?php
                 foreach ($likes as $like): ?>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="product">
                             <?php if ($like->views >= 100): ?>
                                 <ul class="product-labels">
