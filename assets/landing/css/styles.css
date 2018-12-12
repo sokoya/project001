@@ -2756,7 +2756,7 @@ header.main {
 	-ms-transition: 0.3s;
 	transition: 0.3s;
 	position: relative;
-	min-height: 320px !important;
+	min-height: 305px !important;
 	max-height: 320px !important;
 }
 

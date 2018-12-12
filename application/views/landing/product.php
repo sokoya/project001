@@ -37,6 +37,10 @@
 		text-decoration: line-through;
 	}
 
+    .product {
+        min-width:10px !important;
+    }
+
 </style>
 </head>
 <body>
@@ -81,8 +85,7 @@
                                 <img
                                         src="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
                                         alt="<?= $product->product_name; ?>"
-                                        title="<?= ucwords($product->product_name) ?>" width="450"
-                                        style="max-width: 450px"/>
+                                        title="<?= ucwords($product->product_name) ?>"/>
                             </a>
                         </div>
                     </div>
