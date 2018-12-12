@@ -2,66 +2,114 @@
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
-	<?php $this->load->view('landing/resources/head_menu') ?>
+    <?php if ($this->agent->is_mobile()) : ?>
+        <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
+    <?php else: ?>
+        <?php $this->load->view('landing/resources/head_img') ?>
+        <?php $this->load->view('landing/resources/head_category') ?>
 
-	<div class="container market-dashboard-cover">
+        <?php $this->load->view('landing/resources/head_menu') ?>
+    <?php endif; ?>
 
-		<?php $this->load->view('account/includes/sidebar'); ?>
+    <div class="container market-dashboard-cover">
 
-		<div class="col-md-8">
-			<?php $this->load->view('account/includes/sidebar-mobile'); ?>
+        <?php $this->load->view('account/includes/sidebar'); ?>
 
-			<h3 class="market-sidebar-header-r hidden-sm hidden-md hidden-xs">My Orders & Returns</h3>
-			<hr class="market-sidebar-line-r"/>
-			<div class="alert alert-warning">
-				<i class="fa fa-warning"></i> Due to severe wildfire conditions in Calabar, deliveries To and From
-				several area in the state may arrive latter than expected. To view the most up to date status for your
-				order, please go to the Orders page
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="market-dashboard-card">
-						<div class="table-responsive">
-							<table style="width: 100%" class="table table-stripped">
-								<thead>
-									<tr>
-										<th class="text-center">Product</th>
-										<th class="text-center">Tracking #</th>
-										<th class="text-center">Desc.</th>
-										<th class="text-center">Date</th>
-										<th class="text-center">Status</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php foreach( $orders as $order) : ?>
-										<tr>
-											<td>
+        <div class="col-md-8">
+            <?php $this->load->view('account/includes/sidebar-mobile'); ?>
 
-												<img src="<?= base_url('data/products/'.$order->pid.'/'.$order->image_name); ?>"
-										 		class=""
-										 		title="<?= $order->name; ?>"
-										 		style="width: 60px; height: 100%; padding-right: 4px;">
-										 		<span><a style="text-decoration: #0b6427; color: #0b6427;" href="<?= base_url(urlify($order->name, $order->pid)); ?>"><?= word_limiter(ucwords($order->name), 7, '...'); ?></a></span>
-											</td>
-											<td><?= $order->order_code; ?></td>
-											<td><?= $order->product_desc; ?></td>
-											<td><?= neatDate($order->order_date) ?></td>
-											<td><?= ucfirst($order->status); ?></td>
-										</tr>
-									<?php endforeach; ?>
-								</tbody>
-							</table>
-							<div class="gap gap-small"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+            <h3 class="market-sidebar-header-r hidden-sm hidden-md hidden-xs">My Orders & Returns</h3>
+            <hr class="market-sidebar-line-r"/>
+            <div class="row">
+                <?php if ($orders): ?>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4 col-md-push-8">
+                            <div class="form-group">
+                                <select name="order_time" id="order_time" class="form-control">
+                                    <option value="">This Month</option>
+                                    <option value="last-6-month" <?php if ($this->input->get('time') == 'last-6-month') echo 'selected'; ?>>
+                                        Last 6 Month
+                                    </option>
+                                    <option value="this-year" <?php if ($this->input->get('time') == 'this-year') echo 'selected'; ?>>
+                                        This Year
+                                    </option>
+                                    <option value="previous-year" <?php if ($this->input->get('time') == 'previous-year') echo 'selected'; ?>>
+                                        Previous Year
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="market-dashboard-card">
+                        <div class="table-responsive">
+                            <table style="width: 100%" class="table table-stripped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">Order Code</th>
+                                    <th class="text-center">Date Initiated.</th>
+                                    <th class="text-center">Amount</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-center">Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach ($orders as $order) : ?>
+                                    <tr>
+                                        <td class="text-center">#<?= $order->order_code; ?></td>
+                                        <td class="text-center"><?= neatDate($order->order_date) ?></td>
+                                        <td class="text-center"><?= $order->qty; ?></td>
+                                        <td class="text-center"><?= ngn($order->amount); ?></td>
+                                        <td class="text-center"><a class="btn-link" style="color: #0b6427;"
+                                                                   href="<?= base_url('account/orderstatus/' . $order->order_code); ?>">Order
+                                                Status/Details</a></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <?php elseif ($this->input->get('time')) : ?>
+                        <div class="market-dashboard-card">
+                            <p class="market-dashboard-welcome-text">Oops! No result found found. <a
+                                        style="text-decoration: none; color: green;"
+                                        href="<?= base_url('account/orders'); ?>">Go Back</a></p>
+                        </div>
+                    <?php else : ?>
+                        <div class="market-dashboard-card">
+                            <p class="market-dashboard-welcome-text">You are yet to make orders. <a
+                                        style="text-decoration: none; color: green;" href="<?= base_url(); ?>">Browse
+                                    for
+                                    products</a></p>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="gap gap-small"></div>
-<?php $this->load->view('landing/resources/footer'); ?>
+<?php if ($this->agent->is_mobile()) : ?>
+    <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
+    <?php $this->load->view('landing/resources/mobile/mobile-script'); ?>
+<?php else: ?>
+    <?php $this->load->view('landing/resources/footer'); ?>
+    <?php $this->load->view('landing/resources/script'); ?>
+<?php endif; ?>
 </div>
-<?php $this->load->view('landing/resources/script'); ?>
+<script>
+    $('#order_time').on('change', function () {
+        let val = $(this).val();
+        if (val != '') {
+            window.location = "<?= base_url('account/orders?time=')?>" + val;
+        } else {
+            window.location = "<?= base_url('account/orders')?>";
+        }
+    })
+    $('.dropdown').on('click', function () {
+        setTimeout(function () {
+            $('.dropdown-backdrop').remove();
+        }, 1000);
+    })
+</script>
 </body>
 </html>

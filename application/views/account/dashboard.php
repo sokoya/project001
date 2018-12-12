@@ -2,8 +2,14 @@
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
+    <?php if ($this->agent->is_mobile()) : ?>
+        <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
+    <?php else: ?>
+        <?php $this->load->view('landing/resources/head_img') ?>
+        <?php $this->load->view('landing/resources/head_category') ?>
 
-    <?php $this->load->view('landing/resources/head_menu') ?>
+        <?php $this->load->view('landing/resources/head_menu') ?>
+    <?php endif; ?>
 
     <div class="container market-dashboard-cover">
 
@@ -66,8 +72,20 @@
     </div>
 </div>
 <div class="gap gap-small"></div>
-<?php $this->load->view('landing/resources/footer'); ?>
+<?php if ($this->agent->is_mobile()) : ?>
+    <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
+    <?php $this->load->view('landing/resources/mobile/mobile-script'); ?>
+<?php else: ?>
+    <?php $this->load->view('landing/resources/footer'); ?>
+    <?php $this->load->view('landing/resources/script'); ?>
+<?php endif; ?>
 </div>
-<?php $this->load->view('landing/resources/script'); ?>
+<script>
+    $('.dropdown').on('click', function () {
+        setTimeout(function () {
+            $('.dropdown-backdrop').remove();
+        }, 1000);
+    })
+</script>
 </body>
 </html>

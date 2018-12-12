@@ -4,18 +4,20 @@ $lang['site_state'] = 'development';
 $lang['app_name'] = 'Onitshamarket.com';
 $lang['app_email'] = '';
 $lang['notify_email'] = '';
+$lang['company_name'] = 'Internet Onitshamarketing Limited';
 $lang['domain'] = 'https://onitshamarket.com';
+$lang['copyright'] = "&copy; 2015 -  " . date('Y') ." Internet Onitshamarketing Limited All rights reserved";
 
 
 
 // Menu Label and Link
-$lang['deal'] = 'Onitsha Market Deal';
+$lang['deal'] = 'Onitshamarket Deal';
 $lang['deal_link'] = 'market-deal';
 $lang['new_arrival'] = 'New Arrival';
 $lang['new_arrival_link'] = 'new-arrival';
 $lang['top_seller'] = 'Top Seller';
 $lang['top_seller_link'] = 'top-seller';
-$lang['sell'] = 'Sell On Onitsha Market';
+$lang['sell'] = 'Sell On Onitshamarket';
 $lang['sell_link'] = 'become-a-seller';
 $lang['community'] = 'Community';
 $lang['community_link'] = 'Community';

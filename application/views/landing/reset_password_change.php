@@ -65,9 +65,20 @@
             width: 100%;
         }
     }
+    @media screen and (max-width: 360px) {
+        .market-box{
+            margin-top: 0px;
+        }
+        .market-board{
+            margin-bottom: 5px;
+        }
+        div.market-board.login-box{
+            padding: 10px;
+        }
+    }
 </style>
 </head>
-<body>
+<body style="background-color: #ffffff;">
 <div class="global-wrapper clearfix" id="global-wrapper" style="background: #fff;padding-top:20px;">
     <div class="container">
         <div class="row">
@@ -78,12 +89,13 @@
                                 src="<?= base_url('assets/landing/img/onitshamarket-logo.png') ?>" width="20%"
                                 alt="market logo Image"></a>
                 </p>
-                <h3 class="widget-title text-center text-bold">
+                <h3 class="widget-title text-center text-bold text-sm">
                     Reset Password
                     <small>Enter New Password</small>
                 </h3>
                 <div class="row">
-                    <div class="col-md-12 inline_flex">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8 inline_flex">
                         <?php $this->load->view('landing/msg_view'); ?>
                         <div class="ipad_pad"></div>
                         <div class="market-board login-box">
@@ -113,6 +125,21 @@
                                     account</a>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-xs-12 col-sm-12 text-center" style="display: inline-flex;margin-top:10px;">
+                        <img src="<?= base_url('assets/landing/img/payment/ssl-logo.png'); ?>" class="img-responsive" style="margin-left:auto;"
+                             alt="Image Alternative text" title="Pay with Mastercard"/>
+                        <img src="<?= base_url('assets/landing/img/payment/interswitch.png'); ?>" class="img-responsive"
+                             alt="Image Alternative text" title="Pay with Mastercard"/>
+                        <img src="<?= base_url('assets/landing/img/payment/allcards.jpg'); ?>" class="img-responsive" style="margin-right:auto;"
+                             alt="Image Alternative text" title="Pay with Mastercard"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center" style="margin-top:10px;">
+                        <p style="color:#4b4b4bb8 !important; font-size:12px; ">&copy; 2015 - <?= date('Y'); ?> <?= lang('company_name'); ?>. All rights reserved</p>
                     </div>
                 </div>
             </div>

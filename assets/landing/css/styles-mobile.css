@@ -110,6 +110,7 @@ hr {
 
 .global-wrapper {
 	background: #ededed;
+	min-height:calc(100vh - 82px);
 }
 
 @media (min-width: 1200px) {

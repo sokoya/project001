@@ -31,10 +31,22 @@ class Account extends MY_Controller {
 	public function orders(){
 		$page_data['page'] = 'orders';
 		$page_data['title'] = "My Orders";
-		$page_data['orders'] = $this->user->get_my_orders( $this->session->userdata('logged_id') );
-		$page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
+        $time = cleanit($this->input->get('time'));
+        $page_data['orders'] = $this->user->get_my_orders( $this->session->userdata('logged_id'), $time );
+        $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
 		$this->load->view('account/orders', $page_data);
 	}
+
+	public function orderstatus(){
+	    $order_code =  cleanit( $this->uri->segment(3));
+	    if( empty( $order_code) ) redirect($_SERVER['HTTP_REFERER']);
+        $page_data['page'] = 'orders';
+        $page_data['title'] = "My Orders";
+        $page_data['order_code'] = $order_code;
+        $page_data['orders'] = $this->user->get_my_order_status( $this->session->userdata('logged_id'), $order_code );
+        $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
+        $this->load->view('account/orderstatus', $page_data);
+    }
 
 	// Personal Information and Change password
 	public function information(){

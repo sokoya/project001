@@ -19,6 +19,13 @@
 body {
 	font-family: 'Roboto', Tahoma, Arial, helvetica, sans-serif;
 	font-size: 15px;
+	margin: 0;
+	min-height: 100%;
+}
+.btn-custom {
+	color: #fff;
+	background-color: #cdc431;
+	border-color: #cdc431;
 }
 
 h1,
@@ -50,6 +57,8 @@ h6,
 .widget-title-sm {
 	font-size: 17px;
 	margin-bottom: 10px;
+    color: #49a251;
+    font-weight:bolder;
 }
 
 .widget-title-lg {
@@ -92,6 +101,8 @@ a {
 html,
 body {
 	overflow-x: hidden;
+    background: #ededed;
+	height: -webkit-fill-available;
 }
 
 hr {
@@ -1055,7 +1066,7 @@ hr {
 
 .main-footer {
 	position: relative;
-	background: #262626;
+	background: #49a25145;
 	padding-top: 30px;
 	border-top: 2px solid #486d97;
 	color: #fff;
@@ -1224,18 +1235,22 @@ hr {
 	font-size: 15px;
 	margin-right: 15px;
 }
+.copyright-area  a, .copyright-area  a:active, .copyright-area  a::selection {
+	color:white;
+	text-decoration: none;
+}
 
 .copyright-area {
-	background: #000;
+	background: #49a251;
 	color: #fff;
-	-webkit-box-shadow: 0 0 3px #000;
-	box-shadow: 0 0 3px #000;
+	-webkit-box-shadow: 0 0 3px #ff3838;
+	box-shadow: 0 0 3px #ff3838;
 	position: relative;
 }
 
 .copyright-text {
 	font-size: 11px;
-	color: #ccc;
+	color: #ffffff;
 	margin-top: 15px;
 }
 
@@ -7010,7 +7025,7 @@ undefinedundefined.owl-height {
 .widget-categories ul > li > a, .widget-links ul > li > a {
 	display: inline-block;
 	transition: color .3s;
-	color: #505050;
+	color: #333;
 	font-size: 14px;
 	text-decoration: none;
 }

@@ -10,7 +10,7 @@
         <?php $cart_contents = $this->cart->contents();
         if (!empty($cart_contents)) : ?>
             <header class="page-header">
-                <h1 class="page-title">Cart Overview</h1>
+                <h1 style="color:#00000082;">Cart Overview</h1>
             </header>
             <div class="row">
                 <div class="col-md-10">
@@ -43,7 +43,7 @@
                                         <img
                                                 data-src="<?= PRODUCTS_IMAGE_PATH . $detail->image; ?>"
                                                 src="<?= base_url('assets/landing/img/load.gif'); ?>"
-                                                alt="<?= lang('app_name'); ?> <?= $product['name']; ?>"
+                                                alt="<?= $product['name'] . lang('app_name'); ?>"
                                                 title="<?= $product['name']; ?>"/>
                                     </a>
                                 </td>
@@ -112,7 +112,7 @@
                     </ul>
                     <span class="text-sm text-danger"><strong>Delivery fee not included.</strong></span><br/>
                     <br/>
-                    <a class="btn btn-primary" href="<?= base_url('checkout'); ?>">Checkout</a>
+                    <a class="btn btn-primary col-md-12 col-xs-12 col-sm-12" href="<?= base_url('checkout'); ?>">Checkout</a>
                 </div>
             </div>
             <ul class="list-inline">
@@ -121,7 +121,8 @@
             </ul>
         <?php else: ?>
             <div class="custom-fa-cover">
-                <i class="fa fa-cart-arrow-down empty-cart-icon custom-fa text-center"></i>
+                <!--<i class="fa fa-cart-arrow-down empty-cart-icon custom-fa text-center"></i>-->
+                <img class="img-responsive text-center" style="padding: 10px; margin-top: 10px !important;" src="<?=base_url('assets/landing/img/empty_cart.png')?>"/>
             </div>
             <div class="text-center">
 

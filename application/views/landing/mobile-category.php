@@ -308,7 +308,7 @@
 
             function doReplaceState(url) {
                 let state = {current_url: url},
-                    title = "Carrito MarketPlace";
+                    title = "Onitshamarket";
                 history.replaceState(state, title, url);
             }
 
@@ -433,7 +433,7 @@
         }
     </script>
     <script src="<?= base_url('assets/landing/js/mobile.js'); ?>"></script>
-    <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
 </div>
+<?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
 </body>
 </html>

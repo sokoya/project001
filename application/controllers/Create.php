@@ -65,12 +65,21 @@ class Create extends MY_Controller{
                 $this->session->set_flashdata('error_msg','Sorry! There was an error creating your account.' . $user_id);
                 redirect($_SERVER['HTTP_REFERER']);
             }else{
-                // @TODO
-                // Congrats we have a new registered user
-                // Add user session
-                // Send a Welcoming Mail to the user
-                // Check if he was trying to check out and ursher them there
-                // Any other action to perform. 
+                $this->load->model('email_model','email');
+                $email_array = array(
+                    'email' => $data['email'],
+                    'recipent' => 'Dear '. $data['first_name'] . ' ' . $data['last_name']
+                );
+
+                $status = $this->email->welcome_user( $email_array);
+                if( !$status['success'] ){
+                    // log the error
+                    $error_action = array(
+                        'error_action' => 'Create Controller - Welcome mail',
+                        'error_message' => $status['error']
+                    );
+                    $this->email->insert_data('error_logs', $error_action);
+                }
                 $data = array(
                     'email' => $this->input->post('signupemail'),
                     'password' => $this->input->post('signuppassword')
@@ -78,6 +87,7 @@ class Create extends MY_Controller{
                 $user = $this->user->login($data);
                 $session_data = array('logged_in' => true, 'logged_id' => $user->id, 'is_seller' => 'false', 'email' => $this->input->post('email'));
                 $this->session->set_userdata($session_data);
+                unset($session_data);unset($data); unset($error_action);
                 $this->session->set_flashdata('success_msg','Account created and logged in successfully!');
                 // To ursher them to where they are coming from...
                 redirect(base_url());               

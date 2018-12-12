@@ -261,7 +261,7 @@
 									<tr>
 										<td>
 											<a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
-												<img class="panel-pr-image"
+												<img class="panel-pr-image lazy"
 													 data-src="<?= PRODUCTS_IMAGE_PATH . $detail->image; ?>"
                                                      src="<?= base_url('assets/landing/img/load.gif'); ?>"
 													 alt="<?= $product['name']; ?>"

@@ -168,11 +168,6 @@ let count = quantity.data('range');
 let plus = $('.product-page-qty-plus');
 let minus = $('.product-page-qty-minus');
 
-document.querySelector("#quan").addEventListener("keypress", function (evt) {
-	if (evt.which < 48 || evt.which > 57) {
-		evt.preventDefault();
-	}
-});
 
 plus.on('click', function () {
 	minus.prop("disabled", false);

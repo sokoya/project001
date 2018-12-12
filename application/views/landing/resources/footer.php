@@ -1,11 +1,11 @@
-<footer class="main-footer">
+<footer class="main-footer" style="margin-top:100px;">
     <div class="container">
         <div class="row row-col-gap" data-gutter="60">
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-3">
                         <section class="widget widget-links widget-light-skin">
-                            <h3 class="widget-title-sm">About <?= lang('app_name'); ?></h3>
+                            <h3 class="widget-title-sm"><?= lang('app_name'); ?></h3>
                             <ul style="margin-left: -40px;">
                                 <li><a href="#">Our Company</a></li>
                                 <li><a href="#">Investor Relation</a></li>
@@ -59,13 +59,13 @@
             </div>
             <div class="col-md-3">
                 <h4 class="widget-title-sm">Newsletter</h4>
-                <p><?= lang('app_name'); ?> respects your <a href="#">Privacy</a></p>
+                <p><?= lang('app_name'); ?> respects your <a href="<?=base_url('pages/privacy')?>" style="color:white;">Privacy</a></p>
                 <form>
                     <div class="input-group">
                         <input type="text" class="newsletter-input form-control"
                                placeholder="Enter your email for more discounts">
                         <div class="input-group-btn">
-                            <button class="btn btn-warning" type="submit">
+                            <button class="btn btn-custom" type="submit">
                                 Subscribe
                             </button>
                         </div>
@@ -100,10 +100,6 @@
                                  alt="Image Alternative text" title="Pay with Mastercard"/>
                         </li>
                         <li>
-                            <img src="<?= base_url('assets/landing/img/payment/paypal-straight-32px.png'); ?>"
-                                 alt="Image Alternative text" title="Pay with Paypal"/>
-                        </li>
-                        <li>
                             <img src="<?= base_url('assets/landing/img/payment/visa-electron-straight-32px.png'); ?>"
                                  alt="Image Alternative text" title="Pay with Visa-electron"/>
                         </li>
@@ -117,16 +113,23 @@
         </div>
     </div>
 </footer>
-<div class="copyright-area text-center">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <p class="copyright-text">&copy; 2017 - <?= date('Y'); ?> <a
-                            href="<?= lang('domain'); ?>"><?= lang('app_name'); ?></a> All rights reserved</p>
-                <p class="text-sm"><a href="<?= base_url('pages'); ?>">Terms of Use</a> | <a
-                            href="<?= base_url('pages/agreement'); ?>">Agreement</a> | <a
-                            href="<?= base_url('pages/privacy'); ?>">Privacy Policy</a> | <a href="#">Site
-                        Map </a> | <a href="#">Switch View</a></p>
+<div style="
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index:23;
+    width: 100%;">
+    <div class="copyright-area text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="copyright-text">&copy; 2015 - <?= date('Y'); ?> <a
+                                href="<?= lang('domain'); ?>"><?= lang('company_name'); ?>.</a> All rights reserved</p>
+                    <p class="text-sm"><a href="<?= base_url('pages'); ?>">Terms of Use</a> | <a
+                                href="<?= base_url('pages/agreement'); ?>">Agreement</a> | <a
+                                href="<?= base_url('pages/privacy'); ?>">Privacy Policy</a> | <a href="#">Site
+                            Map </a> | <a href="#">Switch View</a></p>
+                </div>
             </div>
         </div>
     </div>

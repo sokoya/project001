@@ -4,7 +4,7 @@
                     data-toggle="dropdown"></i></a>
         <ul class="dropdown-menu list-group custom-mobile-navbar">
             <li class="list-group-item">
-                <h4><a href="<?= base_url(); ?>">Onitsha Market Home</a></h4>
+                <h4><a href="<?= base_url(); ?>" onclick="alert('hiya')">Onitshamarket Home</a></h4>
             </li>
             <li class="list-group-item">
                 <h4><a href="<?= base_url('account'); ?>">Overview</a></h4>
@@ -16,10 +16,10 @@
                 <h4><a href="<?= base_url('account/orders'); ?>">My Orders</a></h4>
             </li>
             <li class="list-group-item">
-                <h4><a href="<?= base_url('account/order_track'); ?>">My Orders</a></h4>
+                <h4><a href="<?= base_url('account/order_track'); ?>">Track My Order</a></h4>
             </li>
             <li class="list-group-item">
-                <h4><a href="<?= base_url('account/saved'); ?>">My Saved Items</a></h4>
+                <h4><a href="<?= base_url('account/saved'); ?>">My Watchlist</a></h4>
             </li>
             <li class="list-group-item">
                 <h4><a href="<?= base_url('account/billing'); ?>">My Billing Address</a></h4>

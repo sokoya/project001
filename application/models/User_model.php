@@ -60,9 +60,9 @@ Class User_model extends CI_Model{
     public function login_user($email, $password){
         if($email && $password) {
             $email = cleanit($email);
-            $this->db->where(['email' => $email]);
+            $this->db->where(array('email' => $email));
             if ($this->db->get('users')->row()) {
-                $this->db->where(['email' => $email]);
+                $this->db->where(array('email'=>$email));
                 $salt = $this->db->get('users')->row()->salt;
                 if ($salt) {
                     $password = shaPassword($password, $salt);
@@ -212,13 +212,40 @@ Class User_model extends CI_Model{
      * @param $id
      * @return mixed
      */
-    function get_my_orders($id ){
-        $query = $this->db->query("SELECT p.id as pid, p.name, g.image_name, o.order_date, o.order_code, o.status
+    function get_my_order_status( $id , $order_code){
+        $query = $this->db->query("SELECT p.id as pid, p.name, g.image_name, o.order_date, o.status, b.address,o.qty,o.amount, 
+        b.first_name, b.last_name, b.phone,b.phone2
         FROM orders o
         JOIN (SELECT prod.id AS id, prod.product_name AS name FROM products AS prod) AS p ON (p.id = o.product_id)
         JOIN product_gallery AS g ON (o.product_id = g.product_id AND g.featured_image = 1 )
-        WHERE buyer_id = $id ORDER BY o.id DESC LIMIT 10")->result();
-        return $query; 
+        LEFT JOIN billing_address b ON (b.id = o.billing_address_id)
+        WHERE o.buyer_id = ? AND o.order_code = ? ORDER BY o.id DESC", array( $id, $order_code ))->result();
+        return $query;
+    }
+
+
+    function get_my_orders( $id, $time = ''){
+        $query = "SELECT order_code, SUM(amount) as amount, SUM(qty) as qty, order_date FROM orders WHERE buyer_id = $id";
+        if( $time != ''){
+            switch ( $time ) {
+                case 'last-6-month':
+                    $query .= " AND order_date > DATE_SUB(NOW(), INTERVAL 6 MONTH) ";
+                    break;
+                case 'this-year':
+                    $query .= " AND order_date > DATE_SUB(NOW(), INTERVAL 12 MONTH) ";
+                    break;
+                case 'previous-year':
+                    $query .= " AND order_date < DATE_SUB(NOW(), INTERVAL 12 MONTH) ";
+                    break;
+                default:
+                    $query .= '';
+                    break;
+            }
+        }else{
+            $query .= " AND MONTH(order_date) = EXTRACT(month FROM (NOW())) AND year(order_date) = EXTRACT(year FROM (NOW())) ";
+        }
+        $query .= ' GROUP BY order_code';
+        return $this->db->query( $query, array($id) )->result();
     }
 
     // Get states
@@ -248,7 +275,7 @@ Class User_model extends CI_Model{
     function generate_code($table = 'users', $label)
     {
         do {
-            $number = generate_token(12);
+            $number = generate_token(20);
             $this->db->where($label, $number);
             $this->db->from($table);
             $count = $this->db->count_all_results();
