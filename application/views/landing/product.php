@@ -38,7 +38,7 @@
 	}
 
     .product {
-        min-height:280px !important;
+        min-height:282px !important;
     }
 
 </style>
@@ -552,7 +552,7 @@
                                 <div class="product-caption-price">
                                     <?php if (discount_check($like->discount_price, $like->start_date, $like->end_date)) : ?>
                                         <span class="product-caption-price-new" style="font-size:12px;"><?= ngn($like->discount_price); ?></span>
-                                        <span class="product-caption-price-old"><sup><?= ngn($like->sale_price); ?> </sup></span>
+                                        <span class="product-caption-price-old pull-right" style="font-size:12px;"><?= ngn($like->sale_price); ?></span>
                                     <?php else : ?>
                                         <span class="product-caption-price-new" style="font-size:12px;"><?= ngn($like->sale_price); ?> </span>
                                     <?php endif; ?>
