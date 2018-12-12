@@ -361,7 +361,7 @@ Class Product_model extends CI_Model{
         $select_query = "SELECT p.id,p.views, p.product_name, v.sale_price, v.discount_price, v.start_date, v.end_date, g.image_name
             FROM products p JOIN (SELECT var.product_id, var.discount_price, var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var 
             WHERE var.quantity > 0 ORDER BY var.id) AS v ON (p.id = v.product_id) JOIN product_gallery AS g ON (p.id = g.product_id AND g.featured_image = 1) 
-            WHERE p.id != '$id' AND p.category_id = '{$product_detail_category_id}' GROUP BY p.id ORDER BY RAND() LIMIT 4";
+            WHERE p.id != '$id' AND p.category_id = '{$product_detail_category_id}' GROUP BY p.id ORDER BY RAND() LIMIT 6";
         $result = $this->db->query( $select_query )->result();
         return $result;
     }
