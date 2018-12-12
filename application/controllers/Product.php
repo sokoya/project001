@@ -107,6 +107,9 @@ class Product extends MY_Controller
 		$query = $this->input->get('q');
 		$q = (isset($query) && !empty($query)) ? cleanit($query) : '';
 		$page_data['brands'] = $this->product->get_brands($str, $q);
+		$page_data['price_range'] = $this->product->ger_price_range($str);
+		$page_data['price_min'] = $this->input->get('price_min',true);
+		$page_data['price_max'] = $this->input->get('price_max',true);
 		$page_data['colours'] = $this->product->get_colours($str, $q);
 		$page_data['sub_categories'] = $this->product->get_categories($str, $q);
 		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
@@ -120,6 +123,7 @@ class Product extends MY_Controller
         }
 		$page_data['page'] = 'category';
 //        var_dump($page_data['products']);
+//        exit;
 		if (!$this->agent->is_mobile()) {
 			$this->load->view('landing/category', $page_data);
 		} else {
@@ -237,9 +241,11 @@ class Product extends MY_Controller
 		$page_data['products'] = $this->product->get_search_products($array, $this->input->get());
 		$page_data['brands'] = $this->product->get_brands($category, $product_name);
 		$page_data['colours'] = $this->product->get_colours($category, $product_name);
+        $page_data['price_range'] = $this->product->ger_price_range($category, $product_name);
+        $page_data['price_min'] = $this->input->get('price_min',true);
+        $page_data['price_max'] = $this->input->get('price_max',true);
 		$page_data['sub_categories'] = $this->product->get_categories($category);
 		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
-
 		$page_data['category_detail'] = $this->product->category_details($category);
 		if ($page_data['category_detail']) {
 			$page_data['description'] = $page_data['category_detail']->description;

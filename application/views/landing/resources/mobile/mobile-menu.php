@@ -353,12 +353,11 @@
                             alt="User"
                             style="height: 24px; width: 24px; margin-right: 4px;"></a>
         </div>
-        <form class="mobile-search-input" role="search">
+        <form method="get" action="<?= base_url('search'); ?>" class="mobile-search-input" role="search">
             <div class="inner-addon right-addon stylish-input-group">
                 <i class="fa fa-search" aria-hidden="true"></i>
-                <input type="text" class="form-control search-input"
-                       placeholder="Search for products, brands and categories"/>
-
+                <input class="form-control search-input" required name="q" autocomplete="off" type="text"
+                       placeholder="Search for products, brands and categories..."/>
             </div>
         </form>
     </div>
