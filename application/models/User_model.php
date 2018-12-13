@@ -199,9 +199,9 @@ Class User_model extends CI_Model{
      * @return mixed
      */
     function get_saved_items($id ){
-        $query = $this->db->query("SELECT p.id, p.product_name, p.product_status, v.discount_price, v.sale_price,v.quantity, g.image_name, f.id as fav_id, f.date_saved
+        $query = $this->db->query("SELECT p.id, p.product_name, p.product_status, v.discount_price, v.sale_price,v.quantity, v.start_date,v.end_date, g.image_name, f.id as fav_id, f.date_saved
             FROM products p
-            JOIN (SELECT variation.sale_price AS sale_price, variation.discount_price AS discount_price, variation.product_id , SUM(variation.quantity) AS quantity FROM product_variation variation GROUP BY variation.product_id) AS v ON( v.product_id = p.id)
+            JOIN (SELECT variation.sale_price AS sale_price, variation.discount_price AS discount_price, variation.start_date,variation.end_date, variation.product_id , SUM(variation.quantity) AS quantity FROM product_variation variation GROUP BY variation.product_id) AS v ON( v.product_id = p.id)
             JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )
             JOIN favourite AS f ON (f.product_id = p.id )
             WHERE f.uid = $id GROUP BY p.id ORDER BY f.date_saved")->result();

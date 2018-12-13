@@ -71,11 +71,13 @@
                                         </div>
                                     </td>
                                     <td class="market-table-center"><?= ($item->quantity > 0 && $item->product_status == 'approved') ? 'In Stock' : 'Out of stock/Inactive'; ?></td>
-                                    <td class="market-table-center"><span
-                                                style="white-space: nowrap"><?= (!empty($item->discount_price)) ? ngn($item->discount_price) : ngn($item->sale_price); ?></span>
-                                        <br/>
-                                        <?php if (!empty($item->discount_price)): ?>
-                                            <span style="text-decoration: line-through; white-space: nowrap">&#8358; <?= $item->sale_price; ?></span>
+                                    <td class="market-table-center">
+
+                                        <?php if (discount_check($item->discount_price, $item->start_date, $item->end_date)) : ?>
+                                            <span class="cs-price-tl"><?= ngn($item->discount_price); ?></span><br />
+                                            <span class="cs-price-tl-discount"><sup><?= ngn($item->sale_price); ?> </sup></span>
+                                        <?php else : ?>
+                                            <span class="cs-price-tl"><?= ngn($item->sale_price); ?> </span>
                                         <?php endif; ?>
                                     </td>
                                     <td class="market-table-center">
@@ -129,9 +131,15 @@
     <?php $this->load->view('landing/resources/footer'); ?>
     <?php $this->load->view('landing/resources/script'); ?>
 <?php endif; ?>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
     $(function () {
-        $('.lazy').Lazy();
+        $('.lazy').Lazy({
+            scrollDirection: 'vertical',
+            effect: 'fadeIn',
+            visibleOnly: true
+        });
     });
 </script>
 <script>
@@ -153,6 +161,11 @@
                     } else {
                         $('.wishlist-cta').html('Remove from Wishlist');
                     }
+                    $('.lazy').Lazy({
+                        scrollDirection: 'vertical',
+                        effect: 'fadeIn',
+                        visibleOnly: true
+                    });
                     notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
                     $('.market-saved-table').load(`${base_url}account/saved .market-saved-table`);
                 },
