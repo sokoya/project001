@@ -37,7 +37,7 @@
 <img src="<?= base_url('assets/landing/img/404cart.jpg'); ?>" class="img-responsive img_cart_404" style="margin:auto;max-width:200px;"/>
     <h2 class="hide_it_sm">Uh Oh!!</h2>
     <h5>You seem to have gone down the wrong aisle...</h5>
-    <h5 style="margin-bottom:auto;" class="hide_it_sm">Go Back <a href="<?=base_url()?>">Home</a></h5>
+    <h5 style="margin-bottom:auto;" class="hide_it_sm">Go Back <a style="color: #0b6427;" href="<?=base_url()?>">Home</a></h5>
     <div class="col-xl-12 col-md-12 content-box" style="margin-bottom:-100px;">
         <div>
             <div class="col-xl-12 box-title ">
