@@ -274,17 +274,17 @@
                                                 <?php if( !$this->session->userdata('logged_in')) :?>
                                                     <a href="<?= base_url('login'); ?>">
                                                         <span style="margin-right:3px;" class="pull-right category-favorite">
-                                                                <i class="fa fa-heart" title="Add <?= $product->product_name; ?> to your whishlist"></i>
+                                                                <i class="fa fa-heart" title="Add <?= $product->product_name; ?> to your wishlist"></i>
                                                         </span>
                                                     </a>
                                                 <?php else :?>
                                                     <?php if($this->product->is_favourited($profile->id, $product->id)) : ?>
-                                                        <span style="margin-right:3px;" class="pull-right category-favorite whislist-btn" data-pid="<?= $product->id;?>">
-                                                            <i class="fa fa-heart" title="Remove <?= $product->product_name; ?> from your whishlist"></i>
+                                                        <span style="margin-right:3px;" class="pull-right category-favorite wishlist-btn" data-pid="<?= $product->id;?>">
+                                                            <i class="fa fa-heart" title="Remove <?= $product->product_name; ?> from your wishlist"></i>
                                                         </span>
                                                     <?php else : ?>
-                                                        <span style="margin-right:3px;" class="pull-right category-favorite whishlist-btn" data-pid="<?= $product->id;?>">
-                                                            <i class="fa fa-heart-o" title="Add <?= $product->product_name; ?> to your whishlist"></i>
+                                                        <span style="margin-right:3px;" class="pull-right category-favorite wishlist-btn" data-pid="<?= $product->id;?>">
+                                                            <i class="fa fa-heart-o" title="Add <?= $product->product_name; ?> to your wishlist"></i>
                                                         </span>
                                                     <?php endif; ?>
                                                 <?php endif; ?>
@@ -353,7 +353,7 @@
         });
     }
 
-    $('.whishlist-btn').on('click', function () {
+    $('.wishlist-btn').on('click', function () {
         let product_id = $(this).data('pid');
         let _this = $(this);
         $.ajax({
@@ -366,13 +366,13 @@
                 let parsed_response = JSON.parse(response);
                 if (parsed_response.action === 'remove') {
                     _this.removeClass('category-favorite-active').addClass('.category-favorite');
-                    _this.find('i').attr('title', 'Add to your whishlist');
+                    _this.find('i').attr('title', 'Add to your wishlist');
                     // _this.find('i').removeClass('fa-heart', function () {
                     //     $(this).addClass('fa-heart-o');
                     // })
                 } else {
                     _this.removeClass('category-favorite').addClass('.category-favorite-active');
-                    _this.find('i').attr('title', 'Remove from your whishlist');
+                    _this.find('i').attr('title', 'Remove from your wishlist');
                     // _this.find('i').removeClass('fa-heart-o', function () {
                     //     $(this).addClass('fa-heart');
                     // })
