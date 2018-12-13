@@ -41,104 +41,43 @@
     <div class="col-xl-12 col-md-12 content-box" style="margin-bottom:-100px;">
         <div>
             <div class="col-xl-12 box-title ">
-                <div class="inner"><h4 class="category-header"><span class="title">You </span>
-                        <span class="subtitle">
-                                May Like
-                            </span></h4>
+                <div class="inner">
+                    <h4 class="category-header">
+                        Products you may like...
                 </div>
             </div>
             <div style="clear: both"></div>
+            <?php
+                $products = $this->product->randomproducts();
+                if( $products ) : ?>
             <div class="owl-carousel owl-loaded owl-nav-out" data-options='{"items":5,"loop":true,"nav":true}'
                  style="    margin-top: 10px;">
-                <div class="owl-item">
-                    <a class="banner-category owl-item-slide" href="#">
-                        <img class="banner-category-img img-responsive" style="height:45px;"
-                             src="<?= base_url('assets/landing/img/why-onitshamarket/mobile.jpg'); ?>" alt="Largest"
-                             title="Largest in the market"/>
-                        <h5 class="banner-category-title">iPhone X</h5>
-                        <p class="banner-category-desc itm_price">&#8358;300,000<span
-                                class="itm_disc">&#8358;365,000</span></p>
+                <?php foreach($products as $product ) : ?>
+                    <div class="owl-item">
+                    <a class="banner-category owl-item-slide" href="<?= base_url(urlify( $product->product_name, $product->id)); ?>">
+                        <img class="banner-category-img img-responsive lazy" style="height:45px;"
+                             data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
+                             src="<?= base_url('assets/landing/img/load.gif'); ?>" alt="<?= $product->product_name; ?>"
+                             title="<?= $product->product_name ?>"/>
+                        <h5 class="banner-category-title"><?= character_limiter($product->product_name, 20); ?></h5>
+                        <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
+                            <p class="banner-category-desc itm_price"><?= ngn($product->discount_price);?><span
+                                        class="itm_disc"><?= ngn($product->sale_price); ?></span>
+                                <span class="text-danger pull-right"><?= $product->item_left ?> Left</span>
+                            </p>
+                        <?php else : ?>
+                            <p class="banner-category-desc itm_price text-center"><?= ngn($product->sale_price); ?>
+                                <span class="text-danger pull-right"><?= $product->item_left ?> Left</span>
+                            </p>
+                        <?php endif; ?>
                     </a>
                 </div>
-                <div class="owl-item">
-                    <a class="banner-category owl-item-slide" href="#">
-                        <img class="banner-category-img img-responsive" style="height:45px;"
-                             src="<?= base_url('assets/landing/img/why-onitshamarket/toy.jpg'); ?>"
-                             alt="<?= lang('app_name'); ?> Shopper" title="<?= lang('app_name'); ?> Shopper"/>
-                        <h5 class="banner-category-title">Rocking Horse</h5>
-                        <p class="banner-category-desc itm_price">&#8358;65,000<span
-                                class="itm_disc">&#8358;188,000</span>
-                        </p>
-                    </a>
-                </div>
-                <div class="owl-item">
-                    <a class="banner-category owl-item-slide" href="#">
-                        <img class="banner-category-img img-responsive" style="height:45px;"
-                             src="<?= base_url('assets/landing/img/why-onitshamarket/tv.jpg'); ?>"
-                             alt="secured-payment" title="secured-payment"/>
-                        <h5 class="banner-category-title">Led TV</h5>
-                        <p class="banner-category-desc itm_price">&#8358;450,000<span
-                                class="itm_disc">&#8358;467,000</span></p>
-                    </a>
-                </div>
-                <div class="owl-item">
-                    <a class="banner-category owl-item-slide" href="#">
-                        <img class="banner-category-img img-responsive" style="height:45px;"
-                             src="<?= base_url('assets/landing/img/why-onitshamarket/camera.jpg'); ?>"
-                             alt="secured-payment" title="secured-payment"/>
-                        <h5 class="banner-category-title">HD Cam 80MP Auto</h5>
-                        <p class="banner-category-desc itm_price">&#8358;250,000<span
-                                class="itm_disc">&#8358;288,000</span></p>
-                    </a>
-                </div>
-                <div class="owl-item">
-                    <a class="banner-category owl-item-slide" href="#">
-                        <img class="banner-category-img img-responsive" style="height:45px;"
-                             src="<?= base_url('assets/landing/img/why-onitshamarket/mobile.jpg'); ?>"
-                             alt="Incredible Discounts" title="Discounts"/>
-                        <h5 class="banner-category-title">Samsung S9+</h5>
-                        <p class="banner-category-desc itm_price">&#8358;325,000
-                        </p>
-                    </a>
-                </div>
-                <div class="owl-item">
-                    <a class="banner-category owl-item-slide" href="#">
-                        <img class="banner-category-img img-responsive" style="height:45px;"
-                             src="<?= base_url('assets/landing/img/why-onitshamarket/mobile.jpg') ?>"
-                             alt="Pay on delivery" title="Pay on delivery"/>
-                        <h5 class="banner-category-title">HTC Desire Z</h5>
-                        <p class="banner-category-desc itm_price">&#8358;188,000<span class="itm_disc">&#8358;197,000</span>
-                        </p>
-                    </a>
-                </div>
-                <div class="owl-item">
-                    <a class="banner-category owl-item-slide" href="#">
-                        <img class="banner-category-img img-responsive" style="height:45px;"
-                             src="<?= base_url('assets/landing/img/why-onitshamarket/laptop-2.jpg') ?>"
-                             alt="Pay on delivery" title="Pay on delivery"/>
-                        <h5 class="banner-category-title">HP Envy XI</h5>
-                        <p class="banner-category-desc itm_price">&#8358;389,000</p>
-                    </a>
-                </div>
-                <div class="owl-item">
-                    <a class="banner-category owl-item-slide" href="#">
-                        <img class="banner-category-img img-responsive" style="height:45px;"
-                             src="<?= base_url('assets/landing/img/why-onitshamarket/Home-Electronics-Appliances-2.jpg') ?>"
-                             alt="Pay on delivery" title="Pay on delivery"/>
-                        <h5 class="banner-category-title">Home Essential 5.0</h5>
-                        <p class="banner-category-desc itm_price">&#8358;95,000<span
-                                class="itm_disc">&#8358;123,000</span>
-                        </p>
-                    </a>
-                </div>
+                <?php endforeach; ?>
             </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
-
-
-
-
 
     <?php if ($this->agent->is_mobile()) : ?>
         <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
@@ -148,5 +87,15 @@
         <?php $this->load->view('landing/resources/script'); ?>
     <?php endif; ?>
 </div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+<script>
+    $(function () {
+        $('.lazy').Lazy({
+            scrollDirection: 'vertical',
+            effect: 'fadeIn',
+            visibleOnly: true
+        });
+    });
+</script>
 </body>
 </html>
