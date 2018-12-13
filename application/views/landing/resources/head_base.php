@@ -32,7 +32,7 @@
         <meta property="og:type" content="product"/>
         <meta property="og:image"
               content="<?= ($featured_image->image_name) ? PRODUCTS_IMAGE_PATH . $featured_image->image_name : ''; ?>"/>
-        <meta property="og:desciption" content="<?= $description; ?>"/>
+        <meta property="og:description" content="<?= $description; ?>"/>
         <meta property="og:site_name" content="<?= lang('app_name'); ?>"/>
         <meta property="og:url" content="<?= current_url(); ?>"/>
         <meta name="twitter:card" content="summary"/>
