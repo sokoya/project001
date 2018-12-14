@@ -1,27 +1,27 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
 <style>
-	.variation-option {
-		font-size: 12px;
-		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-		color: #242424;
-		outline: 1px solid #d0d0d0;
-		padding: 3px;
-		width: 100%;
-		text-align: center;
-	}
+    .variation-option {
+        font-size: 12px;
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        color: #242424;
+        outline: 1px solid #d0d0d0;
+        padding: 3px;
+        width: 100%;
+        text-align: center;
+    }
 
-	.option-selected, .variation-option:hover {
-		outline: 1px solid #0b6427;
-		color: #0b6427;
-		cursor: pointer;
-	}
+    .option-selected, .variation-option:hover {
+        outline: 1px solid #0b6427;
+        color: #0b6427;
+        cursor: pointer;
+    }
 
-	.option-disabled {
-		color: #bebebe;
-		text-decoration: line-through;
-	}
+    .option-disabled {
+        color: #bebebe;
+        text-decoration: line-through;
+    }
 
-	.variation-option-list {
+	.variation-option-list{
 		position: relative;
 		top: 7px;
 	}
@@ -37,65 +37,65 @@
 		text-decoration: line-through;
 	}
 
-	.product {
-		min-height: 282px !important;
-	}
+    .product {
+        min-height:282px !important;
+    }
 
 </style>
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
-	<?php $this->load->view('landing/resources/head_img') ?>
-	<?php $this->load->view('landing/resources/head_category') ?>
-	<?php $this->load->view('landing/resources/head_menu') ?>
+    <?php $this->load->view('landing/resources/head_img') ?>
+    <?php $this->load->view('landing/resources/head_category') ?>
+    <?php $this->load->view('landing/resources/head_menu') ?>
 
-	<div class="container">
-		<?php if ($product->product_status !== 'approved') : ?>
-			<div class="row">
-				<div class="gap-large"></div>
-				<h2 class="text-center">Oops! The product you looking for is not active.</h2>
-				<p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find
-						product</a></p>
-			</div>
-		<?php elseif (empty($product) || empty($galleries)): ?>
-			<div class="row">
-				<div class="gap-large"></div>
-				<h2 class="text-center">Oops! The product you looking does not exist.</h2>
-				<p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find
-						product</a></p>
-			</div>
-		<?php else : ?>
-			<header class="page-header">
-				<ol class="breadcrumb page-breadcrumb c-brc">
-					<li><a href="#">Home</a>
-					</li>
-					<li>
-						<a href="<?= base_url('catalog/' . $category_detail->slug); ?>"><?= ucwords($category_detail->name); ?></a>
-					</li>
-					<li class="active c-a-brc"><?= ucwords($product->product_name); ?></li>
-				</ol>
-			</header>
-			<div class="row">
-				<div class="col-md-5">
-					<div class="product-page-product-wrap jqzoom-stage">
-						<div class="clearfix">
-							<a href="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
-							   id="jqzoom"
-							   data-rel="gal-1">
-								<img
-									src="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
-									alt="<?= $product->product_name; ?>"
-									title="<?= ucwords($product->product_name) ?>"/>
-							</a>
-						</div>
-					</div>
-					<?php if (count($galleries) > 1) : ?>
-						<ul class="jqzoom-list">
-							<?php foreach ($galleries as $gallery) : ?>
-								<li>
-									<a <?php if ($gallery->featured_image == 1) echo 'zoomThumbActive'; ?>
-										href="javascript:void(0)"
-										data-rel="{gallery:'gal-1', smallimage: '<?= PRODUCTS_IMAGE_PATH . "c_scale,w_400/" . $gallery->image_name ?>',
+    <div class="container">
+        <?php if ($product->product_status !== 'approved') : ?>
+            <div class="row">
+                <div class="gap-large"></div>
+                <h2 class="text-center">Oops! The product you looking for is not active.</h2>
+                <p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find
+                        product</a></p>
+            </div>
+        <?php elseif (empty($product) || empty($galleries)): ?>
+            <div class="row">
+                <div class="gap-large"></div>
+                <h2 class="text-center">Oops! The product you looking does not exist.</h2>
+                <p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find
+                        product</a></p>
+            </div>
+        <?php else : ?>
+            <header class="page-header">
+                <ol class="breadcrumb page-breadcrumb c-brc">
+                    <li><a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a href="<?= base_url('catalog/' . $category_detail->slug); ?>"><?= ucwords($category_detail->name); ?></a>
+                    </li>
+                    <li class="active c-a-brc"><?= ucwords($product->product_name); ?></li>
+                </ol>
+            </header>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="product-page-product-wrap jqzoom-stage">
+                        <div class="clearfix">
+                            <a href="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
+                               id="jqzoom"
+                               data-rel="gal-1">
+                                <img
+                                        src="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
+                                        alt="<?= $product->product_name; ?>"
+                                        title="<?= ucwords($product->product_name) ?>"/>
+                            </a>
+                        </div>
+                    </div>
+                    <?php if (count($galleries) > 1) : ?>
+                        <ul class="jqzoom-list">
+                            <?php foreach ($galleries as $gallery) : ?>
+                                <li>
+                                    <a <?php if ($gallery->featured_image == 1) echo 'zoomThumbActive'; ?>
+                                            href="javascript:void(0)"
+                                            data-rel="{gallery:'gal-1', smallimage: '<?= PRODUCTS_IMAGE_PATH . "c_scale,w_400/" . $gallery->image_name ?>',
                                            largeimage: '<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>'}">
                                         <img class="lazy" src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
                                              alt="<?= $product->product_name; ?>"
@@ -139,186 +139,63 @@
                                             <span class="text-md text-md-center">
 												<strong>Measurement: </strong><?= $product->dimensions; ?>cm
                                         	</span>
-										<?php endif; ?>
-										<?php if (!empty($product->weight)) : ?>
-											<br/>
-											<span class="text-md text-md-center">
+                                        <?php endif; ?>
+                                        <?php if (!empty($product->weight)) : ?>
+                                            <br/>
+                                            <span class="text-md text-md-center">
 												<strong>Weight: </strong><?= $product->weight; ?>kg
 											</span>
-										<?php endif; ?>
-									</div>
-									<div class="col-md-7">
-										<table class="table table-hover table-striped product-page-features-table">
-											<tbody>
-											<?php if (!empty($product->model)) : ?>
-												<tr>
-													<td>Model:</td>
-													<td><?= ucwords($product->model); ?></td>
-												</tr>
-											<?php endif; ?>
-											<?php if (!empty($product->main_colour)): ?>
-												<tr>
-													<td>Main Colour:</td>
-													<td><?= ucwords($product->main_colour); ?></td>
-												</tr>
-											<?php endif; ?>
-											<?php if (!empty($product->colour_family)): ?>
-												<tr>
-													<td>Colour Family:</td>
-													<td><?php $colour_family = json_decode($product->colour_family);
-														foreach ($colour_family as $family) echo trim(ucfirst($family)) . ', ';
-														?></td>
-												</tr>
-											<?php endif; ?>
-											<?php if (!empty($product->main_material)): ?>
-												<tr>
-													<td>Main Material:</td>
-													<td><?= ucwords($product->main_material); ?></td>
-												</tr>
-											<?php endif; ?>
-											<?php if (!empty($product->attributes)) : ?>
-												<tr>
-													<td>Features:</td>
-													<td><a href="#description-tab">See more...</a></td>
-												</tr>
-											<?php endif; ?>
-											</tbody>
-										</table>
-									</div>
-								</div>
-								<hr class="product-line"/>
-								<p class="product-page-price">
-									<?php if (discount_check($var->discount_price, $var->start_date, $var->end_date)) : ?>
-										<span class="price-cs ds-price"><?= ngn($var->discount_price); ?></span>
-										<span
-											class="product-page-price-list price-lower dn-price"><?= ngn($var->sale_price); ?></span>
-									<?php else : ?>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <table class="table table-hover table-striped product-page-features-table">
+                                            <tbody>
+                                            <?php if (!empty($product->model)) : ?>
+                                                <tr>
+                                                    <td>Model:</td>
+                                                    <td><?= ucwords($product->model); ?></td>
+                                                </tr>
+                                            <?php endif; ?>
+                                            <?php if (!empty($product->main_colour)): ?>
+                                                <tr>
+                                                    <td>Main Colour:</td>
+                                                    <td><?= ucwords($product->main_colour); ?></td>
+                                                </tr>
+                                            <?php endif; ?>
+                                            <?php if (!empty($product->colour_family)): ?>
+                                                <tr>
+                                                    <td>Colour Family:</td>
+                                                    <td><?php $colour_family = json_decode($product->colour_family);
+                                                        foreach ($colour_family as $family) echo trim(ucfirst($family)) . ', ';
+                                                        ?></td>
+                                                </tr>
+                                            <?php endif; ?>
+                                            <?php if (!empty($product->main_material)): ?>
+                                                <tr>
+                                                    <td>Main Material:</td>
+                                                    <td><?= ucwords($product->main_material); ?></td>
+                                                </tr>
+                                            <?php endif; ?>
+                                            <?php if (!empty($product->attributes)) : ?>
+                                                <tr>
+                                                    <td>Features:</td>
+                                                    <td><a href="#description-tab">See more...</a></td>
+                                                </tr>
+                                            <?php endif; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <hr class="product-line"/>
+                                <p class="product-page-price">
+                                    <?php if (discount_check($var->discount_price, $var->start_date, $var->end_date)) : ?>
+                                        <span class="price-cs ds-price"><?= ngn($var->discount_price); ?></span>
+                                        <span
+                                                class="product-page-price-list price-lower dn-price"><?= ngn($var->sale_price); ?></span>
+                                    <?php else : ?>
 										<span class="price-cs ds-price"></span>
-										<span class="price-cs dn-price"><?= ngn($var->sale_price); ?></span>
-									<?php endif; ?>
-
-									<input type="hidden" name="variation_id" class="variation_id"
-										   value="<?= $var->id; ?>">
-									<input type="hidden" name="product_id" class="product_id"
-										   value="<?= $product->id; ?>">
-
-								<ul class="product-page-share-item"
-									style="float: right; position: absolute; bottom: 223px; right: 0; margin-right: 20px;">
-									<li>
-										<a class="fa fa-facebook" href="#"></a>
-									</li>
-									<li>
-										<a class="fa fa-twitter" href="#"></a>
-									</li>
-									<li>
-										<a class="fa fa-pinterest" href="#"></a>
-									</li>
-									<li>
-										<a class="fa fa-instagram" href="#"></a>
-									</li>
-									<li>
-										<a class="fa fa-google-plus" href="#"></a>
-									</li>
-								</ul>
-								</p>
-								<hr class="product-line"/>
-								<div class="product-variation">
-									<?= form_open('', 'id="variation-form"'); ?>
-									<div class="row">
-										<?php if (count($variations) > 0) : ?>
-											<div class="col-md-7">
-												<h5 class="custom-product-page-option-title">Variation:</h5>
-												<div class="row variation-option-list">
-													<?php $qty_stock_check = 0; ?>
-													<?php foreach ($variations as $variation): ?>
-														<div class="col-xs-3">
-															<p
-																title="<?= $variation['variation']; ?>"
-																data-price="<?= $variation['sale_price']; ?>"
-																<?php if (discount_check($variation['discount_price'], $variation['start_date'], $variation['end_date'])) : ?>
-																	data-discount="<?= $variation['discount_price']; ?>"
-																<?php else : ?>
-																	data-discount="empty"
-																<?php endif; ?>
-																data-vid="<?= $variation['id'] ?>"
-																data-quantity='<?= $variation['quantity'] ?>'
-																data-vname="<?= $variation['variation'] ?>"
-																class="variation-option <?php if ($variation['quantity'] == 0) echo 'option-disabled'; ?>">
-																<?= ellipsize(trim($variation['variation']), 8); ?>
-															</p>
-														</div>
-														<?php if ($variation['quantity'] < 1) $qty_stock_check++; ?>
-													<?php endforeach; ?>
-												</div>
-											</div>
-										<?php endif; ?>
-										<div class="col-md-5 quan-u">
-											<h5 class="custom-product-page-option-title">Quantity:</h5>
-											<ul>
-												<li class="product-page-qty-item">
-													<button type="button"
-															class="product-page-qty product-page-qty-minus">-
-													</button>
-													<input data-range="<?= $var->quantity; ?>" name="quantity"
-														   id="quan"
-														   class="product-page-qty product-page-qty-input quantity"
-														   type="text"
-														   value="1"/>
-													<button type="button"
-															class="product-page-qty product-page-qty-plus">+
-													</button>
-												</li>
-												<span class="text-sm text-danger" id="quantity-text"></span>
-											</ul>
-										</div>
-									</div>
-									<button type="submit" style="display: none;">Submit</button>
-									<?= form_close(); ?>
-								</div>
-								<div id="status"></div>
-								<div class="row">
-									<div class="col-md-6 col-lg-6 clearfix">
-										<?php
-										//            Make A check to confirm if the product is still in stock
-										if ($qty_stock_check == count($variations)) : ?>
-											<button class="btn btn-block btn-primary c-hover" disabled
-													type="button">
-												<i class="fa fa-shopping-cart"></i> Out of Stock
-											</button>
-										<?php else : ?>
-											<button class="btn btn-block btn-primary add-to-cart c-hover"
-													type="button" <?php if (!empty($product->colour_family)) echo 'data-colour="colour"'; ?> <?php if (count($variations)) echo 'data-variation="variation"'; ?> >
-												<i class="fa fa-shopping-cart"></i> Add to Cart
-											</button>
-										<?php endif; ?>
-									</div>
-									<?php if ($this->session->userdata('logged_in')):
-										if ($favourite) :
-											?>
-											<div class="col-md-6 col-lg-6">
-												<a class="btn btn-block btn-default wishlist-cta"
-												   data-pid="<?= $product->id; ?>"
-												   href="javascript:void(0)"><i class="fa fa-star"></i>Remove From
-													Wishlist</a>
-											</div>
-										<?php else : ?>
-											<div class="col-md-6 col-lg-6">
-												<a class="btn btn-block btn-default wishlist-cta c-hover"
-												   data-pid="<?= $product->id; ?>"
-												   href="javascript:void(0)"><i class="fa fa-star-o"></i>Add to Wishlist</a>
-											</div>
-										<?php endif; ?>
-									<?php else : ?>
-										<div class="col-md-6 col-lg-6">
-											<a class="btn btn-block btn-default c-hover"
-											   href="<?= base_url('login'); ?>"><i
-													class="fa fa-star-o"></i>Add to Wishlist</a>
-										</div>
-									<?php endif; ?>
-								</div>
-								<br/>
-								<div class="product-page-side-section">
-									<h5 class="product-page-side-title">Share This Product</h5>
+                                        <span class="price-cs dn-price"><?= ngn($var->sale_price); ?></span>
+                                    <?php endif; ?>
 
                                     <input type="hidden" name="variation_id" class="variation_id"
                                            value="<?= $var->id; ?>">
@@ -762,42 +639,42 @@
     </div>
     <div class="gap gap-small"></div>
 
-	<div id="prod-confirmation" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Product Confirmation</h4>
-				</div>
-				<div class="modal-body">
-					<p id="product-title">
-						This is a confirmation that the product <span
-							class="text text-danger"><?= ucwords($product->product_name); ?></span> has been added
-						to
-						the cart
-					</p>
-					<div class="row">
-						<div class="col-md-6">
-							<button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Continue
-								Shopping
-							</button>
-						</div>
-						<div class="col-md-6">
-							<button type="button" id="cart" class="btn btn-block btn-success">Go to Cart</button>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
+    <div id="prod-confirmation" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Product Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="product-title">
+                        This is a confirmation that the product <span
+                                class="text text-danger"><?= ucwords($product->product_name); ?></span> has been added
+                        to
+                        the cart
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Continue
+                                Shopping
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" id="cart" class="btn btn-block btn-success">Go to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
 
-		</div>
-	</div>
-	<script type="text/javascript">
-		let product_id = <?= $product->id;?>;
-		let user = <?= !is_null($profile) ? $profile->id : "''"; ?></script>
-	<?php $this->load->view('landing/resources/footer'); ?>
+        </div>
+    </div>
+    <script type="text/javascript">
+        let product_id = <?= $product->id;?>;
+        let user = <?= !is_null($profile) ? $profile->id : "''"; ?></script>
+    <?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
 <script src="<?= base_url('assets/landing/js/rating.js'); ?>"></script>
