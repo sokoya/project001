@@ -11,6 +11,10 @@ class Frontpage extends MY_Controller {
 		// get the categories 
 		$page_data['title'] = 'Online shopping | Buy Electronics, Phones, Fashions in Nigeria';
 		$page_data['page'] = 'homepage';
-		$this->load->view('landing/home', $page_data);
+        if ($this->agent->is_mobile()) {
+            $this->load->view('landing/mobile-home', $page_data);
+        } else {
+            $this->load->view('landing/home', $page_data);
+        }
 	}
 }
