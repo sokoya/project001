@@ -44,6 +44,13 @@
 		cursor: pointer;
 	}
 
+	.card-max-side {
+		height: auto;
+		width: auto;
+		max-width: 330px;
+		max-height: 610px;
+	}
+
 	.card-max-text {
 		margin-top: 10px;
 	}
@@ -78,6 +85,119 @@
 	.card-max-view-more:hover {
 		text-decoration: none;
 		color: #0b6427;
+	}
+
+	.max-inverse {
+		background: #fff;
+		border: 1px solid #dadada;
+	}
+
+	.card-max-shade {
+		height: 100% !important;
+		width: 100%;
+		margin-top: 20px;
+		max-width: 150px;
+		max-height: 150px;
+	}
+
+	.card-max-shade:hover {
+		-webkit-filter: brightness(96%);
+		filter: brightness(96%);
+		-webkit-box-shadow: 0px 5px 5px 0px rgba(176, 177, 193, 0.1);
+		box-shadow: 0px 5px 5px 0px rgba(176, 177, 193, 0.1);
+		cursor: pointer;
+	}
+
+	.card-max-shade-text {
+		font-size: 14px;
+		font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		font-weight: 600;
+		color: #0b0b0b;
+		margin-bottom: 0 !important;
+		text-align: center;
+	}
+
+	.max-img {
+		margin-right: -15px;
+		margin-left: -15px;
+		padding-bottom: 62.5%;
+		background: no-repeat 50% 50%;
+		background-size: cover;
+		height: auto;
+		width: auto;
+		min-height: 200px;
+		border-bottom: 1px solid #dadada;
+		cursor: pointer;
+		transition: transform .2s; /* Animation */
+	}
+
+	.max-img:hover {
+		-webkit-box-shadow: 0px 5px 5px 0px rgba(176, 177, 193, 0.1);
+		box-shadow: 0px 5px 5px 0px rgba(176, 177, 193, 0.1);
+		z-index: 99999;
+		transform: scale(1.02);
+	}
+
+	.max-top {
+		color: #222;
+		font-weight: 600;
+		font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
+
+	.max-card-product {
+		position: relative;
+		top: 6px;
+		left: -3px;
+		margin: 0;
+		font-size: 13px;
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		font-weight: 600;
+	}
+
+	.max-card-product-img {
+		width: 40px;
+		height: 40px;
+		position: relative;
+		left: -12px;
+	}
+
+	.max-product-category {
+		padding-left: 3px;
+		padding-right: 0;
+		margin-bottom: 0;
+		padding-bottom: 0;
+
+	}
+
+	.max-product-row {
+		padding-top: 4px;
+		padding-bottom: 4px;
+		border-bottom: 1px solid #dadada;
+		border-left: 1px solid #dadada;
+		position: relative;
+		left: 12px;
+	}
+
+	.max-card-product-price {
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		font-size: 12px;
+		position: relative;
+		left: -3px;
+		top: 4px;
+		font-weight: 600;
+	}
+
+	.btn-dark {
+		border-radius: 0;
+		background: #07aa5e;
+		color: #fff;
+		padding: 10px;
+		left: -3px;
+		width: 223px;
+	}
+
+	.hot-row {
+		margin-bottom: 10px;
 	}
 </style>
 </head>
@@ -152,83 +272,369 @@
 
 
 			<div class="row">
-				<div class="col-md-2">
+				<div class="col-md-2 col-xs-4 hot-row">
 					<img class="card-max-img" src="<?= base_url('assets/landing/img/home/p1.jpg'); ?>"/>
-					<div class="card-max-text">
-						<p class="card-max-price">₦27,450</p>
-						<p class="card-max-discount">₦55,000</p>
-					</div>
+					<!--					<div class="card-max-text">-->
+					<!--						<p class="card-max-price">₦27,450</p>-->
+					<!--						<p class="card-max-discount">₦55,000</p>-->
+					<!--					</div>-->
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-2 col-xs-4 hot-row">
 					<img class="card-max-img" src="<?= base_url('assets/landing/img/home/p2.jpg'); ?>"/>
-					<div class="card-max-text">
-						<p class="card-max-price">₦66,000</p>
-						<p class="card-max-discount">₦155,000</p>
-					</div>
+					<!--					<div class="card-max-text">-->
+					<!--						<p class="card-max-price">₦66,000</p>-->
+					<!--						<p class="card-max-discount">₦155,000</p>-->
+					<!--					</div>-->
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-2 col-xs-4 hot-row">
 					<img class="card-max-img" src="<?= base_url('assets/landing/img/home/p3.jpg'); ?>"/>
-					<div class="card-max-text">
-						<p class="card-max-price">₦47,000</p>
-						<p class="card-max-discount">₦90,000</p>
-					</div>
+					<!--					<div class="card-max-text">-->
+					<!--						<p class="card-max-price">₦47,000</p>-->
+					<!--						<p class="card-max-discount">₦90,000</p>-->
+					<!--					</div>-->
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-2 col-xs-4 hot-row">
 					<img class="card-max-img" src="<?= base_url('assets/landing/img/home/p7.jpg'); ?>"/>
-					<div class="card-max-text">
-						<p class="card-max-price">₦80,000</p>
-						<p class="card-max-discount">₦125,000</p>
-					</div>
+					<!--					<div class="card-max-text">-->
+					<!--						<p class="card-max-price">₦80,000</p>-->
+					<!--						<p class="card-max-discount">₦125,000</p>-->
+					<!--					</div>-->
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-2 col-xs-4 hot-row">
 					<img class="card-max-img" src="<?= base_url('assets/landing/img/home/p5.jpg'); ?>"/>
-					<div class="card-max-text">
-						<p class="card-max-price">₦56,000</p>
-						<p class="card-max-discount">₦120,000</p>
-					</div>
+					<!--					<div class="card-max-text">-->
+					<!--						<p class="card-max-price">₦56,000</p>-->
+					<!--						<p class="card-max-discount">₦120,000</p>-->
+					<!--					</div>-->
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-2 col-xs-4 hot-row">
 					<img class="card-max-img" src="<?= base_url('assets/landing/img/home/p6.jpg'); ?>"/>
-					<div class="card-max-text">
-						<p class="card-max-price">₦75,000</p>
-						<p class="card-max-discount">₦95,000</p>
-					</div>
+					<!--					<div class="card-max-text">-->
+					<!--						<p class="card-max-price">₦75,000</p>-->
+					<!--						<p class="card-max-discount">₦95,000</p>-->
+					<!--					</div>-->
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="card-max">
+	<div class="container" style="margin-top: 50px">
+		<div class="card-max-header" style="margin-bottom: -20px;">
+			<p class="card-max-title">Top Electronics<a href="#" class="card-max-view-more"
+														style="top: 20px !important">View more</a></p>
+		</div>
+		<div class="card-max max-inverse">
 			<div class="row">
-				<div class="col-md-3">
-					<p>Card Locations</p>
+				<div class="col-md-4" style="padding-right: 0; margin-right: -43px !important">
+					<img class="card-max-side" src="<?= base_url('assets/landing/img/home/side.jpg'); ?>"/>
 				</div>
 				<div class="col-md-6">
 					<div class="row">
 						<div class="col-md-6">
-							<p>Card Locations</p>
+							<div class="max-img"
+								 style="background-image: url('<?= base_url('assets/landing/img/home/p7.jpg'); ?>');"></div>
 						</div>
 						<div class="col-md-6">
-							<p>Card Locations</p>
+							<div class="max-img"
+								 style="background-image: url('<?= base_url('assets/landing/img/home/f.jpg'); ?>');"></div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-4">
-							<p>Card Locations</p>
+							<img class="card-max-shade"
+								 src="<?= base_url('assets/landing/img/home/p10.jpg'); ?>"/>
+							<p class="card-max-shade-text">Swifter Solar Energy</p>
 						</div>
-						<div class="col-md-4">
-							<p>Card Locations</p>
+						<div class="col-md-4 ">
+							<img class="card-max-shade"
+								 src="<?= base_url('assets/landing/img/home/p2.jpg'); ?>"/>
+							<p class="card-max-shade-text">Dawn Warreck Swift Laces</p>
 						</div>
-						<div class="col-md-4">
-							<p>Card Locations</p>
+						<div class="col-md-4 ">
+							<img class="card-max-shade"
+								 src="<?= base_url('assets/landing/img/home/p1.jpg'); ?>"/>
+							<p class="card-max-shade-text">Stack Braces Dark</p>
 						</div>
+
 					</div>
 				</div>
-				<div class="col-md-3">
-					<p>Card Locations</p>
+				<div class="col-md-2 max-product-category">
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p1.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product"> Custom
+								Mark Outser</p>
+							<p class="max-card-product-price">₦27,500</p>
+						</div>
+					</div>
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p2.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product">M&M shoe ceilers</p>
+							<p class="max-card-product-price">₦43,000</p>
+						</div>
+					</div>
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p3.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product"> Custom
+								Mark Outser</p>
+							<p class="max-card-product-price">₦32,000</p>
+						</div>
+					</div>
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p4.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product">Iphone X pro</p>
+							<p class="max-card-product-price">₦122,500</p>
+						</div>
+					</div>
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p5.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product">Beat by Dre edition</p>
+							<p class="max-card-product-price">₦47,500</p>
+						</div>
+					</div>
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p6.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product">Iron Bed bars</p>
+							<p class="max-card-product-price">₦20,500</p>
+						</div>
+					</div>
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p7.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product">Hilder Sweaters Xl</p>
+							<p class="max-card-product-price">₦52,000</p>
+						</div>
+					</div>
+					<button class="btn btn-dark btn-block">See More</button>
+
 				</div>
 			</div>
 		</div>
+		<img src="<?= base_url('assets/landing/img/home/ad.jpg'); ?> " width="100%">
+	</div>
+	<div class="container" style="margin-top: 50px">
+		<div class="card-max-header" style="margin-bottom: -20px;">
+			<p class="card-max-title">Top Fashion<a href="#" class="card-max-view-more"
+													style="top: 20px !important">View more</a></p>
+		</div>
+		<div class="card-max max-inverse">
+			<div class="row">
+				<div class="col-md-4" style="padding-right: 0; margin-right: -43px !important">
+					<img class="card-max-side" src="<?= base_url('assets/landing/img/home/side.jpg'); ?>"/>
+				</div>
+				<div class="col-md-6">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="max-img"
+								 style="background-image: url('<?= base_url('assets/landing/img/home/p7.jpg'); ?>');"></div>
+						</div>
+						<div class="col-md-6">
+							<div class="max-img"
+								 style="background-image: url('<?= base_url('assets/landing/img/home/f.jpg'); ?>');"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<img class="card-max-shade"
+								 src="<?= base_url('assets/landing/img/home/p10.jpg'); ?>"/>
+							<p class="card-max-shade-text">Swifter Solar Energy</p>
+						</div>
+						<div class="col-md-4 ">
+							<img class="card-max-shade"
+								 src="<?= base_url('assets/landing/img/home/p2.jpg'); ?>"/>
+							<p class="card-max-shade-text">Dawn Warreck Swift Laces</p>
+						</div>
+						<div class="col-md-4 ">
+							<img class="card-max-shade"
+								 src="<?= base_url('assets/landing/img/home/p1.jpg'); ?>"/>
+							<p class="card-max-shade-text">Stack Braces Dark</p>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-md-2 max-product-category">
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p1.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product"> Custom
+								Mark Outser</p>
+							<p class="max-card-product-price">₦27,500</p>
+						</div>
+					</div>
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p2.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product">M&M shoe ceilers</p>
+							<p class="max-card-product-price">₦43,000</p>
+						</div>
+					</div>
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p3.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product"> Custom
+								Mark Outser</p>
+							<p class="max-card-product-price">₦32,000</p>
+						</div>
+					</div>
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p4.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product">Iphone X pro</p>
+							<p class="max-card-product-price">₦122,500</p>
+						</div>
+					</div>
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p5.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product">Beat by Dre edition</p>
+							<p class="max-card-product-price">₦47,500</p>
+						</div>
+					</div>
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p6.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product">Iron Bed bars</p>
+							<p class="max-card-product-price">₦20,500</p>
+						</div>
+					</div>
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p7.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product">Hilder Sweaters Xl</p>
+							<p class="max-card-product-price">₦52,000</p>
+						</div>
+					</div>
+					<button class="btn btn-dark btn-block">See More</button>
+
+				</div>
+			</div>
+		</div>
+		<img src="<?= base_url('assets/landing/img/home/ad2.jpg'); ?> " width="100%">
+	</div>
+
+	<div class="container" style="margin-top: 50px">
+		<div class="card-max-header" style="margin-bottom: -20px;">
+			<p class="card-max-title">Top Health & Beauty<a href="#" class="card-max-view-more"
+															style="top: 20px !important">View more</a></p>
+		</div>
+		<div class="card-max max-inverse">
+			<div class="row">
+				<div class="col-md-4" style="padding-right: 0; margin-right: -43px !important">
+					<img class="card-max-side" src="<?= base_url('assets/landing/img/home/side.jpg'); ?>"/>
+				</div>
+				<div class="col-md-6">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="max-img"
+								 style="background-image: url('<?= base_url('assets/landing/img/home/p7.jpg'); ?>');"></div>
+						</div>
+						<div class="col-md-6">
+							<div class="max-img"
+								 style="background-image: url('<?= base_url('assets/landing/img/home/f.jpg'); ?>');"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<img class="card-max-shade"
+								 src="<?= base_url('assets/landing/img/home/p10.jpg'); ?>"/>
+							<p class="card-max-shade-text">Swifter Solar Energy</p>
+						</div>
+						<div class="col-md-4 ">
+							<img class="card-max-shade"
+								 src="<?= base_url('assets/landing/img/home/p2.jpg'); ?>"/>
+							<p class="card-max-shade-text">Dawn Warreck Swift Laces</p>
+						</div>
+						<div class="col-md-4 ">
+							<img class="card-max-shade"
+								 src="<?= base_url('assets/landing/img/home/p1.jpg'); ?>"/>
+							<p class="card-max-shade-text">Stack Braces Dark</p>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-md-2 max-product-category">
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p1.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product"> Custom
+								Mark Outser</p>
+							<p class="max-card-product-price">₦27,500</p>
+						</div>
+					</div>
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p2.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product">M&M shoe ceilers</p>
+							<p class="max-card-product-price">₦43,000</p>
+						</div>
+					</div>
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p3.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product"> Custom
+								Mark Outser</p>
+							<p class="max-card-product-price">₦32,000</p>
+						</div>
+					</div>
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p4.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product">Iphone X pro</p>
+							<p class="max-card-product-price">₦122,500</p>
+						</div>
+					</div>
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p5.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product">Beat by Dre edition</p>
+							<p class="max-card-product-price">₦47,500</p>
+						</div>
+					</div>
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p6.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product">Iron Bed bars</p>
+							<p class="max-card-product-price">₦20,500</p>
+						</div>
+					</div>
+					<div class="row max-product-row">
+						<div class="col-md-2"><img class="max-card-product-img"
+												   src="<?= base_url('assets/landing/img/home/p7.jpg'); ?>"/></div>
+						<div class="col-md-10">
+							<p class="max-card-product">Hilder Sweaters Xl</p>
+							<p class="max-card-product-price">₦52,000</p>
+						</div>
+					</div>
+					<button class="btn btn-dark btn-block">See More</button>
+
+				</div>
+			</div>
+		</div>
+		<img src="<?= base_url('assets/landing/img/home/ad1.jpg'); ?> " width="100%">
 	</div>
 
 
