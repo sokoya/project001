@@ -59,7 +59,7 @@
             </div>
             <div class="col-md-3">
                 <h4 class="widget-title-sm">Newsletter</h4>
-                <p><?= lang('app_name'); ?> respects your <a href="<?=base_url('pages/privacy')?>" style="color:white;">Privacy</a></p>
+                <p><?= lang('app_name'); ?> respects your <a href="<?=base_url('pages/privacy')?>" style="color:#49a251;">Privacy</a></p>
                 <form>
                     <div class="input-group">
                         <input type="text" class="newsletter-input form-control"

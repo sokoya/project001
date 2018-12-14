@@ -39,7 +39,6 @@ $('.site-search').on('input', function () {
 					`)
 				} else {
 					let html_var = ``;
-
 					let categories_index = ``;
 					let product_index = ``;
 

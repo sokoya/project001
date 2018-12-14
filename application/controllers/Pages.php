@@ -21,6 +21,7 @@ class Pages extends MY_Controller {
         $page_data['page'] = 'privacy';
         $page_data['title'] = "Privacy &amp; Security";
         $page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')) );
+        $page_data['privacy'] = $this->user->get_row('page_contents', 'content', "(type='privacy')")->content;
         $this->load->view('landing/privacy', $page_data);
     }
 

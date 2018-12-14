@@ -37,6 +37,10 @@
 		text-decoration: line-through;
 	}
 
+    .product {
+        min-height:282px !important;
+    }
+
 </style>
 </head>
 <body>
@@ -81,8 +85,7 @@
                                 <img
                                         src="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
                                         alt="<?= $product->product_name; ?>"
-                                        title="<?= ucwords($product->product_name) ?>" width="450"
-                                        style="max-width: 450px"/>
+                                        title="<?= ucwords($product->product_name) ?>"/>
                             </a>
                         </div>
                     </div>
@@ -523,7 +526,7 @@
             <div class="row" data-gutter="15">
                 <?php
                 foreach ($likes as $like): ?>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="product">
                             <?php if ($like->views >= 100): ?>
                                 <ul class="product-labels">
@@ -548,10 +551,10 @@
                                 <h5 class="product-caption-title"><?= character_limiter(ucwords($like->product_name), 30, '...'); ?></h5>
                                 <div class="product-caption-price">
                                     <?php if (discount_check($like->discount_price, $like->start_date, $like->end_date)) : ?>
-                                        <span class="product-caption-price-new"><?= ngn($like->discount_price); ?></span>
-                                        <span class="product-caption-price-old"><sup><?= ngn($like->sale_price); ?> </sup></span>
+                                        <span class="product-caption-price-new" style="font-size:12px;"><?= ngn($like->discount_price); ?></span>
+                                        <span class="product-caption-price-old pull-right" style="font-size:12px;"><?= ngn($like->sale_price); ?></span>
                                     <?php else : ?>
-                                        <span class="product-caption-price-new"><?= ngn($like->sale_price); ?> </span>
+                                        <span class="product-caption-price-new" style="font-size:12px;"><?= ngn($like->sale_price); ?> </span>
                                     <?php endif; ?>
                                 </div>
                                 <ul class="product-caption-feature-list">

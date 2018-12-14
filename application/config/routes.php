@@ -58,7 +58,7 @@ $route['catalog'] = 'product/catalog/';
 $route['search'] = 'product/search/';
 $route['product/(:any)/(:any)'] = 'product/$2';
 
-$route['404_override'] = '';
+$route['404_override'] = 'errors/_404';
 $route['translate_uri_dashes'] = FALSE;
 
 // Seller

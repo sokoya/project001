@@ -142,14 +142,8 @@
             <div class="panel-heading filter-head filter-first">Price</div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-xs-4" style="padding-right: 3px">
-                        <input type="text" class="form-control price_min" placeholder="&#8358; Min">
-                    </div>
-                    <div class="col-xs-4" style="padding-left:  3px !important; padding-right: 3px;">
-                        <input type="text" class="form-control price_max" placeholder="&#8358; Max">
-                    </div>
-                    <div class="col-xs-4">
-                        <input type="submit" class="price-submit" value="Go">
+                    <div class="col-xs-10 col-xs-offset-1">
+                        <div id="price-range"></div>
                     </div>
                 </div>
             </div>
@@ -249,7 +243,7 @@
                 </div>
                 <div class="col-xs-12 ">
                     <div class="row row-sm-gap" data-gutter="10">
-                        <?php foreach ($products as $product) : ?>
+                        <?php if($products) :foreach ($products as $product) : ?>
                             <div class="col-md-3">
                                 <div class="mobile-product product-sm-left ">
                                     <ul class="product-labels"></ul>
@@ -273,20 +267,29 @@
                                         <h4 class="product-caption-title">
                                             <strong>Seller: </strong><?= ucfirst($product->first_name); ?></h4>
                                         <div class="product-caption-price">
-                                            <?php if (!empty($product->discount_price)) : ?> <span
-                                                    class="product-caption-price-old"><?= ngn($product->sale_price); ?></span>
-                                                <span
-                                                        class="product-caption-price-new"><?= ngn($product->discount_price); ?></span>
+                                            <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
+                                                <span class="product-caption-price-new"><?= ngn($product->discount_price); ?> </span>
+                                                <span class="product-caption-price-old"><sup><?= ngn($product->sale_price); ?></sup></span>
                                             <?php else : ?>
-
-                                                <span
-                                                        class="product-caption-price-new"><?= ngn($product->sale_price); ?></span>
+                                                <span class="product-caption-price-new"><?= ngn($product->sale_price); ?> </span>
                                             <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        <?php endforeach; ?>
+                        <?php endforeach; else: ?>
+                            <h2 class="text-center text-md-center">Oops! Sorry, we couldn't find products on this section.</h2>
+                            <p class="text-center text-sm">
+                                Please check your spelling for typographic error.<br />
+                                <span class="text-danger">You can also:</span>
+                            <ul class="text-center">
+                                <li>Try a different keyword search.</li>
+                            </ul>
+                            </p>
+                            <p class="text-muted text-sm text-center">You can browse for more product <a
+                                        style="text-decoration: none; color: #0b6427;" href="<?= base_url(); ?>">Find
+                                    product</a></p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -294,15 +297,38 @@
     </div>
     <script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
     <script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
-    <script src="<?= base_url('assets/landing/js/ionrangeslider.js'); ?>"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
-    <script>let current_url = "<?= current_url()?>";</script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/js/ion.rangeSlider.min.js"></script>
+    <script>
+        let current_url = "<?= current_url()?>";
+        let url = "<?= base_url('catalog/' . $category_detail->slug .'/') ?>";
+    </script>
     <script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
     <script>
         $(function () {
             $('.lazy').Lazy();
         });
+
+        $("#price-range").ionRangeSlider({
+            type: "double",
+            min: <?= $price_range->minimum; ?>,
+            max: <?= $price_range->maximum; ?>,
+            grid: true,
+            prefix: "&#8358;",
+            onFinish: function (data) {
+                window.location = url + '?price_min='+data.from+'&price_max='+data.to;
+            }
+        });
+        let my_range = $("#price-range").data("ionRangeSlider");
+        let min = '<?= $price_min ; ?>';
+        let max = '<?= $price_max ; ?>';
+        if( min != '' && max != '') {
+            my_range.update({
+                from : min,
+                to: max
+            });
+        }
+
         $(document).ready(function () {
             let _category_body = $('#category_body');
 
@@ -318,6 +344,12 @@
                         let msg = "Sorry but there was an error: ";
                         alert(msg + xhr.status + " " + xhr.statusText);
                     }
+                    $('.lazy').Lazy({
+                        scrollDirection: 'vertical',
+                        effect: 'fadeIn',
+                        visibleOnly: true
+                    });
+
                     $('.close-panel').on('click', function (e) {
                         e.preventDefault();
                         let target = $(this).data('target');

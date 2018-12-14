@@ -1,5 +1,4 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"/>
 <style type="text/css">
     .feature-attribute:hover {
         cursor: pointer;
@@ -85,9 +84,16 @@
             <div class="row">
                 <div style="height:168px"></div>
                 <h2 class="text-center">Oops! Sorry, we couldn't find products on this section.</h2>
+                <p class="text-center">
+                Please check your spelling for typographic error.<br />
+                    <span class="text-danger">You can also:</span>
+                    <ul class="text-center">
+                        <li>Try a different keyword search.</li>
+                    </ul>
+                </p>
                 <p class="text-muted text-sm text-center">You can browse for more product <a
                             style="text-decoration: none; color: #0b6427;" href="<?= base_url(); ?>">Find
-                        product</a></p>
+                        product</a> or <a href="<?= PAGE_CONTACT_US ?>">contact us</a> if still not working.</p>
                 <div style="height:110px"></div>
             </div>
         </div>
@@ -120,7 +126,7 @@
                                 <li></li>
                                 <?php foreach ($sub_categories as $category) : ?>
                                     <li>
-                                        <a href="<?= base_url('catalog/' . urlify($category->name)); ?>">
+                                        <a href="<?= base_url('catalog/' . urlify($category->name) .'/'); ?>">
                                             <?= $category->name; ?>
                                         </a>
                                     </li>
@@ -129,9 +135,7 @@
                         </div>
                         <div class="category-filters-section">
                             <h3 class="widget-title-sm custom-widget-text">Price</h3>
-                            <input type="text" id="price-slider"/>
-                            <input type="hidden" id="hidden_minimum_price" name="">
-                            <input type="hidden" id="hidden_maximum_price" name="">
+                            <div id="price-range"></div>
                         </div>
                         <?php if (!empty($brands)): ?>
                             <div class="category-filters-section">
@@ -139,7 +143,6 @@
                                 <?php foreach ($brands as $brand) : ?>
                                     <div class="carrito-checkbox">
                                         <label class="tree-input">
-
                                             <input class="filter" type="checkbox" data-type="brand_name"
                                                    name="filterset"
                                                    data-value="<?= trim($brand->brand_name); ?>"><?= ucfirst($brand->brand_name); ?>
@@ -214,18 +217,14 @@
                         <div class="text"
                              style="position: absolute;top: 35%;left: 0;height: 100%;width: 100%;font-size: 18px;text-align: center;">
                             <img src="<?= base_url('assets/landing/load.gif'); ?>" alt="Processing...">
-                            Processing your request. <strong
-                                    style="color: rgba(2.399780888618386%,61.74193548387097%,46.81068368248487%,0.843);">Please
-                                Wait! </strong>
+                            Processing your request. <strong style="color: rgba(2.399780888618386%,61.74193548387097%,46.81068368248487%,0.843);">Please Wait! </strong>
                         </div>
                     </div>
                     <div id="category_body">
                         <div class="row filter_data" data-gutter="15">
-                            <?php $p_count = 0;
-                            foreach ($products as $product) : ?>
+                            <?php $p_count = 0; foreach ($products as $product) : ?>
                                 <?php $p_count++; ?>
-                                <div
-                                        class="col-md-3 <?php if ($p_count % 4 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> v-items clearfix">
+                                <div class="col-md-3 <?php if ($p_count % 4 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> v-items clearfix">
                                     <div class="product">
                                         <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
                                             <ul class="product-labels">
@@ -272,16 +271,24 @@
                                                     <span class="cs-price-tl"><?= ngn($product->sale_price); ?> </span>
                                                 <?php endif; ?>
 
-                                                <?php
-                                                $category_fav = 'category-favorite';
-                                                if ($this->session->userdata('logged_in')) {
-                                                    if ($this->product->is_favourited($profile->id, $product->id)) {
-                                                        $category_fav = 'category-favorite-active';
-                                                    }
-                                                }
-                                                ?>
-                                                <span class="pull-right <?= $category_fav; ?>"><i class="fa fa-heart"
-                                                                                                  title="Add <?= $product->product_name; ?> to your whishlist"></i> &nbsp;</span>
+                                                <?php if( !$this->session->userdata('logged_in')) :?>
+                                                    <a href="<?= base_url('login'); ?>">
+                                                        <span style="margin-right:3px;" class="pull-right category-favorite">
+                                                                <i class="fa fa-heart" title="Add <?= $product->product_name; ?> to your wishlist"></i>
+                                                        </span>
+                                                    </a>
+                                                <?php else :?>
+                                                    <?php if($this->product->is_favourited($profile->id, $product->id)) : ?>
+                                                        <span style="margin-right:3px;" class="pull-right category-favorite wishlist-btn" data-pid="<?= $product->id;?>">
+                                                            <i class="fa fa-heart" title="Remove <?= $product->product_name; ?> from your wishlist"></i>
+                                                        </span>
+                                                    <?php else : ?>
+                                                        <span style="margin-right:3px;" class="pull-right category-favorite wishlist-btn" data-pid="<?= $product->id;?>">
+                                                            <i class="fa fa-heart-o" title="Add <?= $product->product_name; ?> to your wishlist"></i>
+                                                        </span>
+                                                    <?php endif; ?>
+                                                <?php endif; ?>
+
                                             </div>
                                         </div>
                                     </div>
@@ -305,15 +312,14 @@
 </div>
 <script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/ionrangeslider.js'); ?>"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/js/ion.rangeSlider.min.js"></script>
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
-    if (!base_url) {
-        let base_url = "<?= base_url(); ?>";
-    }
+    if (!base_url) { let base_url = "<?= base_url(); ?>";}
     let current_url = "<?= current_url()?>";
+    let url = "<?= base_url('catalog/' . $category_detail->slug .'/') ?>";
+
 </script>
 <script src="<?= base_url('assets/landing/js/quick-view.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
@@ -325,14 +331,60 @@
             visibleOnly: true
         });
     });
-    $("#price-slider").ionRangeSlider({
-        min: 1000,
-        max: 50000,
-        type: 'double',
+
+    $("#price-range").ionRangeSlider({
+        type: "double",
+        min: <?= $price_range->minimum; ?>,
+        max: <?= $price_range->maximum; ?>,
+        grid: true,
         prefix: "&#8358;",
-        prettify: false,
-        hasGrid: true
+        onFinish: function (data) {
+            window.location = url + '?price_min='+data.from+'&price_max='+data.to;
+        }
     });
+
+    let my_range = $("#price-range").data("ionRangeSlider");
+    let min = '<?= $price_min ; ?>';
+    let max = '<?= $price_max ; ?>';
+    if( min != '' && max != '') {
+        my_range.update({
+            from : min,
+            to: max
+        });
+    }
+
+    $('.wishlist-btn').on('click', function () {
+        let product_id = $(this).data('pid');
+        let _this = $(this);
+        $.ajax({
+            url: base_url + 'ajax/favourite',
+            method: 'POST',
+            data: {
+                id: product_id
+            },
+            success: response => {
+                let parsed_response = JSON.parse(response);
+                if (parsed_response.action === 'remove') {
+                    _this.removeClass('category-favorite-active').addClass('.category-favorite');
+                    _this.find('i').attr('title', 'Add to your wishlist');
+                    // _this.find('i').removeClass('fa-heart', function () {
+                    //     $(this).addClass('fa-heart-o');
+                    // })
+                } else {
+                    _this.removeClass('category-favorite').addClass('.category-favorite-active');
+                    _this.find('i').attr('title', 'Remove from your wishlist');
+                    // _this.find('i').removeClass('fa-heart-o', function () {
+                    //     $(this).addClass('fa-heart');
+                    // })
+                }
+                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+            },
+            error: () => {
+                notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', error);
+            }
+        })
+    });
+
     $(document).ready(function () {
         let _category_body = $('#category_body');
 
@@ -348,7 +400,13 @@
                 if (status === "error") {
                     let msg = "Sorry but there was an error: ";
                     alert(msg + xhr.status + " " + xhr.statusText);
+                    window.location = current_url;
                 }
+                $('.lazy').Lazy({
+                    scrollDirection: 'vertical',
+                    effect: 'fadeIn',
+                    visibleOnly: true
+                });
                 $('.product-quick-view-btn').on('click', get_view);
                 doReplaceState(url);
 
@@ -371,7 +429,6 @@
                 items.each(function () {
                     let value = $(this).data('value');
                     let key = $(this).data('type');
-
                     if (filter_list[key]) {
                         if (jQuery.inArray(value, filter_list[key]) !== -1) {
                         } else {
@@ -397,7 +454,6 @@
                         }
                     });
                     load_page(url);
-
                 });
             } else {
                 load_page(current_url);

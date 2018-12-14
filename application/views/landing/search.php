@@ -74,7 +74,6 @@
 </style>
 </head>
 <body>
-
 <div class="global-wrapper clearfix" id="global-wrapper">
     <?php $this->load->view('landing/resources/head_img') ?>
     <?php $this->load->view('landing/resources/head_category'); ?>
@@ -82,10 +81,19 @@
     <?php if (empty($products)) : ?>
         <div class="container">
             <div class="row">
-                <div class="gap-large"></div>
+                <div style="height:168px"></div>
                 <h2 class="text-center">Oops! Sorry, we couldn't find products on this section.</h2>
-                <p class="text-muted text-sm text-center">You can browse for more product <a href="<?= base_url(); ?>">Find
-                        product</a></p>
+                <p class="text-center">
+                    Please check your spelling for typographic error.<br />
+                    <span class="text-danger">You can also:</span>
+                <ul class="text-center">
+                    <li>Try a different keyword search.</li>
+                </ul>
+                </p>
+                <p class="text-muted text-sm text-center">You can browse for more product <a
+                            style="text-decoration: none; color: #0b6427;" href="<?= base_url(); ?>">Find
+                        product</a> or <a href="<?= PAGE_CONTACT_US ?>">contact us</a> if still not working.</p>
+                <div style="height:110px"></div>
             </div>
         </div>
     <?php else : ?>
@@ -126,9 +134,7 @@
                         </div>
                         <div class="category-filters-section">
                             <h3 class="widget-title-sm custom-widget-text">Price</h3>
-                            <input type="text" id="price-slider"/>
-                            <input type="hidden" id="hidden_minimum_price" name="">
-                            <input type="hidden" id="hidden_maximum_price" name="">
+                            <div id="price-range"></div>
                         </div>
                         <?php if (!empty($brands)): ?>
                             <div class="category-filters-section">
@@ -136,7 +142,6 @@
                                 <?php foreach ($brands as $brand) : ?>
                                     <div class="carrito-checkbox">
                                         <label class="tree-input">
-
                                             <input class="filter" type="checkbox" data-type="brand_name"
                                                    name="filterset"
                                                    data-value="<?= trim($brand->brand_name); ?>"><?= ucfirst($brand->brand_name); ?>
@@ -220,7 +225,7 @@
                                 <div
                                         class="col-md-3 <?php if ($p_count % 4 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> v-items clearfix">
                                     <div class="product">
-                                        <?php if (!empty($product->discount_price)): ?>
+                                        <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
                                             <ul class="product-labels">
                                                 <li><?= get_discount($product->sale_price, $product->discount_price); ?></li>
                                             </ul>
@@ -256,17 +261,13 @@
                                             </ul>
                                             <h5 class="cs-title"><?= character_limiter(ucwords($product->product_name), 20, '...'); ?></h5>
                                             <div class="product-caption-price">
-                                                <?php if (!empty($product->discount_price)) : ?>
-                                                    <span>
-													<span
-                                                            class="cs-price-tl"><?= ngn($product->discount_price); ?></span>
-														<span
-                                                                class="cs-price-tl-discount"><sup><?= ngn($product->sale_price); ?> </sup></span>
-													</span>
+                                                <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
+                                                    <span class="cs-price-tl"><?= ngn($product->discount_price); ?></span>
+                                                    <span class="cs-price-tl-discount"><sup><?= ngn($product->sale_price); ?> </sup></span>
                                                 <?php else : ?>
-                                                    <span
-                                                            class="cs-price-tl"><?= ngn($product->sale_price); ?> </span>
+                                                    <span class="cs-price-tl"><?= ngn($product->sale_price); ?> </span>
                                                 <?php endif; ?>
+
                                                 <?php
                                                 $category_fav = 'category-favorite';
                                                 if ($this->session->userdata('logged_in')) {
@@ -299,28 +300,38 @@
 </div>
 <script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/ionrangeslider.js'); ?>"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script async="" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/4.0.2/lazysizes.min.js"
-        type="a739b84b843135395b0102d2-text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/js/ion.rangeSlider.min.js"></script>
 <script>
     let current_url = "<?= current_full_url()?>";
 </script>
 <script src="<?= base_url('assets/landing/js/quick-view.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
     $(function () {
         $('.lazy').Lazy();
     });
-    $("#price-slider").ionRangeSlider({
-        min: 1000,
-        max: 50000,
-        type: 'double',
+
+    $("#price-range").ionRangeSlider({
+        type: "double",
+        min: <?= $price_range->minimum; ?>,
+        max: <?= $price_range->maximum; ?>,
+        grid: true,
         prefix: "&#8358;",
-        prettify: false,
-        hasGrid: true
+        onFinish: function (data) {
+            window.location = current_url + '&price_min='+data.from+'&price_max='+data.to;
+        }
     });
+
+    let my_range = $("#price-range").data("ionRangeSlider");
+    let min = '<?= $price_min ; ?>';
+    let max = '<?= $price_max ; ?>';
+    if( min != '' && max != '') {
+        my_range.update({
+            from : min,
+            to: max
+        });
+    }
     $(document).ready(function () {
         let _category_body = $('#category_body');
 
@@ -336,6 +347,12 @@
                     let msg = "Sorry but there was an error: ";
                     alert(msg + xhr.status + " " + xhr.statusText);
                 }
+                $('.lazy').Lazy({
+                    scrollDirection: 'vertical',
+                    effect: 'fadeIn',
+                    visibleOnly: true
+                });
+
                 $('.product-quick-view-btn').on('click', get_view);
                 doReplaceState(url);
 
