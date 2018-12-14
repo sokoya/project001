@@ -170,7 +170,8 @@
 	}
 
 	.max-product-row {
-		padding-top: 4px;
+		padding-left: 5px;
+		padding-top: 3px;
 		padding-bottom: 4px;
 		border-bottom: 1px solid #dadada;
 		border-left: 1px solid #dadada;
@@ -194,6 +195,7 @@
 		padding: 10px;
 		left: -3px;
 		width: 223px;
+		height: 45px;
 	}
 
 	.btn-dark:hover, .btn-dark:focus {
