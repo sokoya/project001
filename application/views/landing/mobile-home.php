@@ -3,8 +3,8 @@
 <link rel="stylesheet" href="<?= base_url('assets/seller/plugins/slick/slick.css'); ?>">
 <link rel="stylesheet" href="<?= base_url('assets/seller/plugins/slick/slick-theme.css'); ?>">
 <style>
-    .pro_ad {
-        min-height: auto !important;
+    .gap_small {
+        height: 20px;
     }
 
     .cat_board {
@@ -29,6 +29,31 @@
         border: 1px solid white;
         text-decoration: none;
         color: white;
+    }
+
+    .prod_img {
+        max-width: 80px;
+        margin: auto;
+    }
+
+    .products-slider {
+        background: #fff;
+        padding: 10px;
+    }
+    .products-slider span {
+        font-size: 10px;
+    }
+    .products-slider h5{
+        font-size: 11px;
+        margin-bottom:auto;
+    }
+    .home_banner{
+        height:80px;
+        background: #ffe5d7;
+        text-align: center;
+        padding-top:35px;
+        font-size: 10px;
+        font-weight: bolder;
     }
 </style>
 </head>
@@ -66,6 +91,7 @@
         </div>
     </div>
     <div class="gap"></div>
+    <!--    //top categories slider-->
     <div class="container">
         <h5>Top <span style="color:#575745">Categories</span></h5>
         <div class="categories-slider text-center">
@@ -173,270 +199,237 @@
             </div>
         </div>
     </div>
+    <div class="gap_small"></div>
     <div class="container">
-        <div class="row" data-gutter="15">
-            <div class="col-md-3 clearfix hide_mob">
-                <div class="product product-half pro_ad" style="margin-bottom: 10px;">
-                    <div class="product-caption text-center">Let <strong><?= lang('app_name') ?></strong> do all
-                        the shopping
-                        for you free.
-                    </div>
-                    <div class="product-img-wrap text-center">
-                        <img class="product-img-small" style="margin: 0 auto;"
-                             src="<?= base_url('assets/landing/img/onitshamarket/carrito_shopper.png'); ?>"
-                             alt="<?= lang('app_name'); ?> Shoppers"
-                             title="Let <?= lang('app_name'); ?> Shopper do it for you"/>
-                    </div>
-                    <ul class="product-labels"></ul>
-                    <a class="product-link" href="#"></a>
-                    <div class="product-caption">
-                        <a href="#"><h5 class="product-caption-title text-center">
-                                <span>Click Here to go to Shop Now</h5></a>
-                    </div>
-                </div>
-                <div class="product product-half pro_ad">
-                    <div class="product-img-wrap text-center">
-                        <img class="product-img-small" style="margin: 0 auto; width: 70%"
-                             src="<?= base_url('assets/landing/img/onitshamarket/gift_cards.png'); ?>"
-                             alt="<?= lang('app_name'); ?> Gift Cards" title="Gift Cards"/>
-                    </div>
-                    <ul class="product-labels"></ul>
-                    <a class="product-link" href="#"></a>
-                    <div class="product-caption">
-                        <a href="#"><h5 class="product-caption-title text-center">
-                                <span>Want Exclusive Discounts? Shop Now</h5></a>
-                    </div>
-                </div>
+        <h5>Top Selling <span style="color:#575745">Electronics</span></h5>
+        <div class="products-slider text-center">
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
+                <span>product1</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
             </div>
-            <div class="col-md-3 hide_mob">
-                <div class="product product-fit">
-                    <ul class="product-labels"></ul>
-                    <div class="product-caption">
-                        <h5><strong><?= lang('app_name'); ?> Essentials</strong></h5>
-                    </div>
-                    <div class="product-img-wrap">
-                        <a href="<?= base_url('catalog'); ?>"> <img class="product-img"
-                                                                    style="margin: 0 auto; height: 150px; width: 100% "
-                                                                    src="<?= base_url('assets/landing/img/onitshamarket/carrito_essential_per_food.png'); ?>"
-                                                                    alt="<?= lang('app_name'); ?> Essential Market"
-                                                                    title="<?= lang('app_name'); ?> Essential"/></a>
-                    </div>
-                    <div class="product-caption text-center"><strong>Pet foods</strong></div>
-
-                    <div class="product-img-wrap product-pt4">
-                        <a href="<?= base_url('catalog'); ?>"> <img class="product-img"
-                                                                    style="margin: 0 auto; height: 150px; width: 100%"
-                                                                    src="<?= base_url('assets/landing/img/onitshamarket/carrito_essential_newest_gadget.png'); ?>"
-                                                                    alt="<?= lang('app_name'); ?>_essential_newest_gadget"
-                                                                    title="<?= lang('app_name'); ?> "/></a>
-                    </div>
-                    <div class="product-caption text-center"><strong>Newest Gadget</strong></div>
-                </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/2.jpg'); ?>" class="prod_img"/>
+                <span>product2</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
             </div>
-            <div class="col-md-3 hide_mob">
-                <div class="product product-fit">
-                    <ul class="product-labels"></ul>
-                    <div class="product-caption">
-                        <h5><strong>Your dressing your style.</strong></h5>
-                    </div>
-
-                    <div class="product-img-wrap" style="height:auto !important;overflow: visible;">
-                        <img class="product-img img-responsive prd_img" style="margin: 0 auto;"
-                             src="<?= base_url('assets/landing/img/onitshamarket/female_wears.png'); ?>"
-                             alt="female_wears"
-                             title="female_wears"/>
-                    </div>
-                    <a class="product-link" href="<?= base_url('category'); ?>"></a>
-                    <div class="product-caption">
-                        <h5 class="product-caption-title text-center"><strong>Shop all female dresses</strong></h5>
-                    </div>
-                </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
+                <span>product3</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
             </div>
-            <div class="col-md-3 hide_mob">
-                <div class="product product-fit">
-                    <ul class="product-labels"></ul>
-                    <div class="product-caption text-center">
-                        <h5><strong>Be The modern Man!</strong></h5>
-                    </div>
-                    <div class="product-img-wrap" style="height:auto !important;overflow: visible;">
-                        <img class="product-img img-responsive prd_img img_man" style="margin: 0 auto;"
-                             src="<?= base_url('assets/landing/img/onitshamarket/male_wears.png'); ?>"
-                             alt="male wears"
-                             title="male wears"/>
-                    </div>
-                    <a class="product-link" href="<?= base_url('category'); ?>"></a>
-                    <div class="product-caption">
-                        <h5 class="product-caption-title"><strong>Shop all male clothing</strong></h5>
-                        <span style="">Let's dress you for that perfect occassion for less than N5,000</span>
-                    </div>
-                </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
+                <span>product4</span>
+                <h5>&#8358; 23,450</h5>
             </div>
-        </div>
-        <div class="row">
-        </div>
-    </div>
-    <div class="gap"></div>
-    <div class="container">
-        <div class="row" data-gutter="15">
-            <div class="col-md-4 col-sm-12 col-xs-12">
-                <div class="owl-carousel owl-loaded owl-nav-dots-inner"
-                     data-options='{"items":1,"loop":true,"nav":true}'>
-                    <div class="owl-item">
-                        <div class="slider-item"
-                             style="background-image:url(<?= base_url('assets/landing/img/onitshamarket/left-slider/adventure-deals.jpg'); ?>);">
-                            <div class="slider-item-task"></div>
-                            <div class="container">
-                                <div class="slider-item-inner">
-                                    <div class="slider-item-caption-left slider-item-caption-white">
-                                        <h4 class="slider-item-caption-title">Adventure Deals</h4>
-                                        <p class="slider-item-caption-desc">From Under N999.99</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="owl-item">
-                        <div class="slider-item"
-                             style="background-image:url(<?= base_url('assets/landing/img/onitshamarket/left-slider/top-bags-and-shoes.jpg'); ?>);">
-                            <div class="slider-item-task"></div>
-                            <div class="container">
-                                <div class="slider-item-inner">
-                                    <div class="slider-item-caption-right">
-                                        <h4 class="slider-item-caption-title">Top Bags And Shoes</h4>
-                                        <p class="slider-item-caption-desc">Save Upto 50% Off.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="owl-item">
-                        <div class="slider-item"
-                             style="background-image:url(<?= base_url('assets/landing/img/onitshamarket/left-slider/home-essentials.jpg'); ?>);">
-                            <div class="slider-item-task"></div>
-                            <div class="container">
-                                <div class="slider-item-inner">
-                                    <div class="slider-item-caption-left slider-item-caption-white">
-                                        <h4 class="slider-item-caption-title">Home Essentials</h4>
-                                        <p class="slider-item-caption-desc">ILIFE A6 @ N5999.99</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
+                <span>product5</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
             </div>
-            <div class="col-md-8 clearfix hide_mob">
-                <div class="row">
-                    <div class="col-md-8 col-sm-6 col-xs-12">
-                        <div class="product">
-                            <div class="product-caption text-center"><strong>Stir up your appetite
-                                    with <?= lang('app_name'); ?> Fresh
-                                    Fruits!</strong> <span>Keep healthy with our fresh fruits for less than N200</span>
-                            </div>
-                            <div class="product-img-wrap text-center">
-                                <img class="product-img-small img-responsive" style="margin: 0 auto;"
-                                     src="<?= base_url('assets/landing/img/onitshamarket/fresh-fruit.png'); ?>"
-                                     alt="fresh-fruit" title="Let <?= lang('app_name'); ?> Shopper do it for you"/>
-                            </div>
-                            <a class="product-link" href="#"></a>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="product">
-                            <div class="product-caption text-center"><strong>One packed of assorted
-                                    wears</strong><br/><span> Male</span></div>
-                            <div class="product-img-wrap text-center">
-                                <img class="product-img-small img-responsive" style="margin: 0 auto; width: 70%"
-                                     src="<?= base_url('assets/landing/img/onitshamarket/assorted-wears.png'); ?>"
-                                     alt="fresh-fruit" title="Let <?= lang('app_name'); ?> Shopper do it for you"/>
-                            </div>
-                            <a class="product-link" href="#"></a>
-                        </div>
-                    </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="product product-half product-fit3 pro_ad">
-                            <div class="product-img-wrap text-center">
-                                <img class="product-img-small img-responsive" style="margin: 0 auto; width: 80%"
-                                     src="<?= base_url('assets/landing/img/onitshamarket/wrist-watch.jpg'); ?>"
-                                     alt="Wrstwatch" title="Wrist watch"/>
-                            </div>
-                            <ul class="product-labels"></ul>
-                            <a class="product-link" href="#"></a>
-                            <div class="product-caption">
-                                <a href="#"><h5 class="text-center">Naviforce 9044 Military Style <br/> <span>Men Japan Quartz</span>
-                                    </h5></a>
-                                <div class="product-caption-price">N18,900</div>
-                                <ul class="product-caption-feature-list">
-                                    <li>45 left</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="product product-half product-fit3 pro_ad">
-                            <div class="product-img-wrap text-center">
-                                <img class="product-img-small img-responsive" style="margin: 0 auto; width: 80%"
-                                     src="<?= base_url('assets/landing/img/onitshamarket/bag.jpg'); ?>" alt="Bag"
-                                     title="Gift Cards"/>
-                            </div>
-                            <ul class="product-labels"></ul>
-                            <a class="product-link" href="#"></a>
-                            <div class="product-caption">
-                                <a href="#"><h5 class="text-center"><span>Douguyan 14 inch Laptop Backpack</span></h5>
-                                </a>
-                                <div class="product-caption-price">N3,500</div>
-                                <ul class="product-caption-feature-list">
-                                    <li>45 left</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="product product-half product-fit3 pro_ad">
-                            <div class="product-img-wrap text-center">
-                                <img class="product-img-small img-responsive" style="margin: 0 auto; width: 80%"
-                                     src="<?= base_url('assets/landing/img/onitshamarket/touchlight.jpg'); ?>"
-                                     alt="Touchlight" title="Gift Cards"/>
-                            </div>
-                            <ul class="product-labels"></ul>
-                            <a class="product-link" href="#"></a>
-                            <div class="product-caption">
-                                <a href="#"><h5 class="text-center"><span>Nitecore Concept 1 C1 Flashlight</span></h5>
-                                </a>
-                                <div class="product-caption-price">N2,699</div>
-                                <ul class="product-caption-feature-list">
-                                    <li>216 left</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="product product-half product-fit3 pro_ad">
-                            <div class="product-img-wrap text-center">
-                                <img class="product-img-small img-responsive" style="margin: 0 auto; width: 70%"
-                                     src="<?= base_url('assets/landing/img/onitshamarket/vacuum-cleaner.jpg'); ?>"
-                                     alt="vacuum-cleaner" title="vacuum-cleaner"/>
-                            </div>
-                            <ul class="product-labels"></ul>
-                            <a class="product-link" href="#"></a>
-                            <div class="product-caption">
-                                <a href="#"><h5 class="text-center"><span>ILIFE A6 Smart Robotic Vacuum Cleaner </span>
-                                    </h5></a>
-                                <div class="product-caption-price">N76,999</div>
-                                <ul class="product-caption-feature-list">
-                                    <li>10 left</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
+                <span>product6</span>
+                <h5>&#8358; 23,450</h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/2.jpg'); ?>" class="prod_img"/>
+                <span>product7</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
+                <span>product8</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
+                <span>product9</span>
+                <h5>&#8358; 23,450</h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
+                <span>product0</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
             </div>
         </div>
     </div>
+    <div class="gap_small"></div>
+    <div class="home_banner">banner 1</div>
+    <div class="gap_small"></div>
     <div class="container">
+        <h5>Top Selling <span style="color:#575745">Fashion</span></h5>
+        <div class="products-slider text-center">
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
+                <span>product1</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/2.jpg'); ?>" class="prod_img"/>
+                <span>product2</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
+                <span>product3</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
+                <span>product4</span>
+                <h5>&#8358; 23,450</h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
+                <span>product5</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
+                <span>product6</span>
+                <h5>&#8358; 23,450</h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/2.jpg'); ?>" class="prod_img"/>
+                <span>product7</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
+                <span>product8</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
+                <span>product9</span>
+                <h5>&#8358; 23,450</h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
+                <span>product0</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+        </div>
+    </div>
+    <div class="gap_small"></div>
+    <div class="home_banner">banner 2</div>
+    <div class="gap_small"></div>
+    <div class="container">
+        <h5>Top Selling <span style="color:#575745">Gadgets</span></h5>
+        <div class="products-slider text-center">
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
+                <span>product1</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/2.jpg'); ?>" class="prod_img"/>
+                <span>product2</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
+                <span>product3</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
+                <span>product4</span>
+                <h5>&#8358; 23,450</h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
+                <span>product5</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
+                <span>product6</span>
+                <h5>&#8358; 23,450</h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/2.jpg'); ?>" class="prod_img"/>
+                <span>product7</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
+                <span>product8</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
+                <span>product9</span>
+                <h5>&#8358; 23,450</h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
+                <span>product0</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+        </div>
+    </div>
+    <div class="gap_small"></div>
+    <div class="home_banner">banner 3</div>
+    <div class="gap_small"></div>
+    <div class="container">
+        <h5>Top Selling <span style="color:#575745">Laptops</span></h5>
+        <div class="products-slider text-center">
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
+                <span>product1</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/2.jpg'); ?>" class="prod_img"/>
+                <span>product2</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
+                <span>product3</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
+                <span>product4</span>
+                <h5>&#8358; 23,450</h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
+                <span>product5</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
+                <span>product6</span>
+                <h5>&#8358; 23,450</h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/2.jpg'); ?>" class="prod_img"/>
+                <span>product7</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
+                <span>product8</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
+                <span>product9</span>
+                <h5>&#8358; 23,450</h5>
+            </div>
+            <div style="">
+                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
+                <span>product0</span>
+                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="padding:30px;">
         <hr class="hr-text" data-content="Why Choose Us">
         <div class="owl-carousel owl-loaded owl-nav-out" data-options='{"items":5,"loop":true,"nav":true}'>
             <div class="owl-item">
@@ -542,6 +535,15 @@
             arrows: false,
             mobileFirst: true,
             variableWidth: true
+        });
+        $('.products-slider').slick({
+            infinite: true,
+            speed: 300,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            lazyLoad: 'ondemand',
+            arrows: false,
+            mobileFirst: true,
         });
     });
 </script>
