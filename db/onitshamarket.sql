@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 06, 2018 at 09:06 PM
+-- Generation Time: Dec 14, 2018 at 02:07 PM
 -- Server version: 5.7.11
--- PHP Version: 7.2.7
+-- PHP Version: 7.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,6 +19,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `onitshamarket`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_groups`
+--
+
+CREATE TABLE `admin_groups` (
+  `id` int(11) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `permissions` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `admin_groups`
+--
+
+INSERT INTO `admin_groups` (`id`, `name`, `permissions`) VALUES
+(1, 'Standard user', ''),
+(2, 'Administrator', '{\r\n"admin": 1,\r\n"moderator": 1\r\n}');
 
 -- --------------------------------------------------------
 
@@ -66,10 +86,10 @@ CREATE TABLE `billing_address` (
 --
 
 INSERT INTO `billing_address` (`id`, `uid`, `sid`, `aid`, `address`, `first_name`, `last_name`, `phone`, `phone2`, `primary_address`) VALUES
-(3, 3, 1, 2, 'Omole Phase 2', 'Jeffrey', 'Chidi', '08169254598', '', 1),
+(3, 3, 1, 2, 'Omole Phase 2', 'Jeffrey', 'Chidi', '08169254598', '', 0),
 (4, 3, 1, 1, 'No 13 Dan Ngozi Iyio Street', 'Cynthia', 'Britney', '08129128033', '', 0),
 (5, 3, 1, 2, 'MS Area', 'Mark', 'Peters', '08129128033', '', 0),
-(6, 3, 1, 2, 'Planet Estate Viciao', 'Jonathan', 'Griffin', '080142445414', '', 0),
+(6, 3, 1, 2, 'Planet Estate Viciao', 'Jonathan', 'Griffin', '080142445414', '', 1),
 (7, 5, 1, 1, '530A, Aina Akingbala Street, Ikeja', 'Phil', 'James', '08155445533', '', 1);
 
 -- --------------------------------------------------------
@@ -232,8 +252,7 @@ CREATE TABLE `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
-('ksbfjjfjdhto4cf9fhspmpf2ld412kqs', '::1', 1544081887, ''),
-('aoocr6gtbl7pu83gdasvv8df8s482ttr', '::1', 1544111625, 0x72656665727265645f66726f6d7c733a34373a22687474703a2f2f6c6f63616c686f73742f70726f6a6563743030312f636174616c6f672f656c656374726f6e696373223b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a3334303030303b733a31313a22746f74616c5f6974656d73223b643a343b733a33323a223336323133393534626137303538313935383164626363366139643730653365223b613a373a7b733a323a226964223b733a313a2234223b733a333a22717479223b643a343b733a343a226e616d65223b733a323a224a59223b733a353a227072696365223b643a38353030303b733a373a226f7074696f6e73223b613a333a7b733a363a2273656c6c6572223b733a313a2233223b733a31323a22766172696174696f6e5f6964223b733a313a2234223b733a393a22766172696174696f6e223b733a353a22426c61636b223b7d733a353a22726f776964223b733a33323a223336323133393534626137303538313935383164626363366139643730653365223b733a383a22737562746f74616c223b643a3334303030303b7d7d6c6f676765645f696e7c623a313b6c6f676765645f69647c733a313a2233223b69735f73656c6c65727c733a383a22617070726f766564223b656d61696c7c733a31333a2261626340676d61696c2e636f6d223b);
+('gv2b14krt375v6ce3m53f0kg9v161rnb', '::1', 1544796000, 0x72656665727265645f66726f6d7c733a34373a22687474703a2f2f6c6f63616c686f73742f70726f6a6563743030312f636174616c6f672f656c656374726f6e696373223b6c6f676765645f696e7c623a313b6c6f676765645f69647c733a313a2233223b69735f73656c6c65727c733a383a22617070726f766564223b656d61696c7c733a31333a2261626340676d61696c2e636f6d223b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a32363030303b733a31313a22746f74616c5f6974656d73223b643a313b733a33323a223137323466633138383365303038663038613363303762333036353732323937223b613a373a7b733a323a226964223b733a313a2233223b733a333a22717479223b643a313b733a343a226e616d65223b733a37303a224e6f6b6961202d2032202d20352671756f743b202d203147422052414d2c2038474220524f4d202d20416e64726f696420372e3020384d50202b20354d50202d205768697465223b733a353a227072696365223b643a32363030303b733a373a226f7074696f6e73223b613a333a7b733a363a2273656c6c6572223b733a313a2233223b733a31323a22766172696174696f6e5f6964223b733a313a2233223b733a393a22766172696174696f6e223b733a303a22223b7d733a353a22726f776964223b733a33323a223137323466633138383365303038663038613363303762333036353732323937223b733a383a22737562746f74616c223b643a32363030303b7d7d);
 
 -- --------------------------------------------------------
 
@@ -244,7 +263,7 @@ INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 CREATE TABLE `coupons` (
   `id` int(11) NOT NULL,
   `created_by` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
+  `product_id` bigint(11) NOT NULL,
   `code` varchar(10) NOT NULL,
   `description` text NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1',
@@ -259,40 +278,6 @@ CREATE TABLE `coupons` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dummy_table`
---
-
-CREATE TABLE `dummy_table` (
-  `id` int(11) NOT NULL,
-  `pid` int(11) NOT NULL,
-  `slug` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `dummy_table`
---
-
-INSERT INTO `dummy_table` (`id`, `pid`, `slug`) VALUES
-(1, 0, 'mobile-phones'),
-(2, 1, 'no-slug-1'),
-(3, 2, 'no-slug-3'),
-(4, 3, 'no-slug-4'),
-(5, 3, 'no-slug-5'),
-(6, 3, 'no-slug-6'),
-(7, 3, 'no-slug-7'),
-(8, 4, 'no-slug-8'),
-(9, 4, 'slug2-1'),
-(10, 1, 'slug2-2'),
-(11, 2, 'slug2-3'),
-(12, 2, 'slug2-4'),
-(13, 2, 'slug3-11'),
-(14, 3, 'slug3-2'),
-(15, 3, 'slug3-6'),
-(16, 3, 'slug3-7');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `error_logs`
 --
 
@@ -300,7 +285,7 @@ CREATE TABLE `error_logs` (
   `id` int(11) NOT NULL,
   `error_action` varchar(255) NOT NULL,
   `error_message` text NOT NULL,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `datetime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -334,8 +319,9 @@ INSERT INTO `favourite` (`id`, `uid`, `product_id`, `date_saved`) VALUES
 (20, 8, 1, '2018-10-24 16:30:42'),
 (21, 8, 1, '2018-10-24 16:31:12'),
 (25, 2, 23, '2018-11-28 08:31:09'),
-(26, 3, 4, '2018-11-30 19:43:23'),
-(28, 2, 7, '2018-12-06 10:35:27');
+(28, 2, 7, '2018-12-06 10:35:27'),
+(29, 3, 1, '2018-12-12 16:18:55'),
+(33, 3, 10, '2018-12-12 16:37:00');
 
 -- --------------------------------------------------------
 
@@ -361,27 +347,24 @@ CREATE TABLE `general_settings` (
 --
 
 INSERT INTO `general_settings` (`id`, `keywords`, `description`, `is_live`, `enabled_ips`, `maintenance_text`, `facebook_link`, `twitter_link`, `instagram_link`, `youtube_link`) VALUES
-(1, 'Buy, Sell, fashion wears, electronics gadget', 'Define the type of heel the shoe has  Example: e.g. Block, Cuban, Flared, Mid, Stiletto', 0, '', '', 'onitshamarket', 'onitshamarket', 'onitshamarket', 'onitshamarket');
+(1, 'Buy, Sell, fashion wears, electronics gadget', 'Define the type of heel the shoe has  Example: e.g. Block, Cuban, Flared, Mid, Stiletto', 1, '127.0.0.1, 127.0.0.2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'onitshamarket', 'onitshamarket', 'onitshamarket', 'onitshamarket');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `groups`
+-- Table structure for table `invoices`
 --
 
-CREATE TABLE `groups` (
+CREATE TABLE `invoices` (
   `id` int(11) NOT NULL,
-  `name` varchar(20) NOT NULL,
-  `permissions` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `groups`
---
-
-INSERT INTO `groups` (`id`, `name`, `permissions`) VALUES
-(1, 'Standard user', ''),
-(2, 'Administrator', '{\r\n"admin": 1,\r\n"moderator": 1\r\n}');
+  `user_id` int(11) NOT NULL,
+  `payment_id` int(11) NOT NULL,
+  `title` longtext NOT NULL,
+  `description` longtext NOT NULL,
+  `amount` varchar(255) NOT NULL,
+  `invoice_date` datetime NOT NULL,
+  `status` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -416,10 +399,11 @@ INSERT INTO `options` (`id`, `name`) VALUES
 
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
-  `order_code` varchar(10) NOT NULL,
+  `order_code` bigint(10) NOT NULL,
+  `tracking_id` bigint(20) NOT NULL,
   `buyer_id` int(11) NOT NULL,
   `seller_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
+  `product_id` bigint(11) NOT NULL,
   `billing_address_id` int(11) NOT NULL,
   `product_variation_id` int(11) NOT NULL,
   `coupon_id` int(11) NOT NULL,
@@ -427,16 +411,79 @@ CREATE TABLE `orders` (
   `pickup_location_id` int(11) NOT NULL,
   `qty` int(11) NOT NULL,
   `amount` decimal(10,0) NOT NULL,
-  `order_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` varchar(255) NOT NULL
+  `order_date` datetime NOT NULL,
+  `status` tinytext NOT NULL,
+  `active_status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Orders Table';
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `order_code`, `buyer_id`, `seller_id`, `product_id`, `billing_address_id`, `product_variation_id`, `coupon_id`, `payment_method`, `pickup_location_id`, `qty`, `amount`, `order_date`, `status`) VALUES
-(6, '73862195', 5, 3, 2, 7, 2, 0, 1, 0, 2, '600000', '2018-11-20 15:14:31', 'ordered');
+INSERT INTO `orders` (`id`, `order_code`, `tracking_id`, `buyer_id`, `seller_id`, `product_id`, `billing_address_id`, `product_variation_id`, `coupon_id`, `payment_method`, `pickup_location_id`, `qty`, `amount`, `order_date`, `status`, `active_status`) VALUES
+(6, 73862195, 0, 3, 3, 2, 7, 2, 0, 1, 0, 2, '600000', '2018-11-20 15:14:31', '{"processing":{"msg":"Your order payment is processing","datetime":"2018-12-10 16:20:58"}}', 'pending'),
+(7, 73862195, 0, 3, 3, 4, 3, 2, 0, 1, 3, 2, '600000', '2018-11-21 15:14:31', '{"processing":{"msg":"Your order payment is processing","datetime":"2018-12-10 16:20:58"}}', 'pending'),
+(8, 46189573, 0, 3, 0, 2, 6, 2, 0, 1, 0, 1, '300000', '2018-12-10 13:57:42', '{"processing":{"msg":"Your order payment is processing","datetime":"2018-12-10 16:20:58"}}', 'pending'),
+(9, 29856714, 0, 3, 3, 2, 4, 2, 0, 1, 0, 1, '300000', '2018-12-10 14:07:00', '{"processing":{"msg":"Your order payment is processing","datetime":"2018-12-10 16:20:58"}}', 'pending'),
+(10, 85936421, 0, 3, 3, 2, 5, 2, 0, 1, 0, 1, '300000', '2018-12-10 15:59:39', '{"processing":{"msg":"Your order payment is processing","datetime":"2018-12-10 16:20:58"}}', 'pending'),
+(11, 14782539, 0, 3, 3, 2, 6, 2, 0, 1, 0, 1, '300000', '2018-12-10 16:20:58', '{"processing":{"msg":"Your order payment is processing","datetime":"2018-12-10 16:20:58"}}', 'pending');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `page_contents`
+--
+
+CREATE TABLE `page_contents` (
+  `id` int(11) NOT NULL,
+  `content` longtext NOT NULL,
+  `type` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `page_contents`
+--
+
+INSERT INTO `page_contents` (`id`, `content`, `type`) VALUES
+(2, 'Welcome to Onitshamarket.com, your reliable online marketplace.\r\n\r\nThe web site identified by the uniform resource locator www.onitshamarket.com (the “Site”) is provided by Internet Onitshamarket Limited (“Onitshamarket.com”) as a service to our customers.\r\n\r\nThis Security and Privacy Policy (the “Agreement” or “Policy”) is entered into between you as a registered user of the site (“Registered User”) and Onitshamarket.com.\r\n\r\nThe security of your personal information is very important to us and we value your trust highly. We will not sell or loan your personal information to a third party under any circumstances. We will work hard to protect the security and privacy of any personal information you provide to us and will only use such information as we have described herein. By your use and access of the Site, you accept this Security and Privacy Policy.\r\nWhat personal information do we collect?\r\n\r\nYou may choose to use or access our Site without revealing any personal and transactional information about yourself, but you will need to register and create an account in order to make a purchase or take advantage of certain features and functions, including, but not limited to, “My Contacts”. If you provide us with your information, you consent to the transfer and storage of the information on our server located in United States of America (“USA.”).\r\n\r\nAs set forth in more detail below, Onitshamarket.com collects personal information that you provide when using the Site. This information includes your first and last name, email address, a password and other information required when you create your Onitshamarket.com account or when you participate in or conduct surveys and contests via the Site, email, or other media of Onitshamarket.com. In order to protect your confidentiality and verify your identity, we may ask you to confirm your personal information when you contact our Customer Service Department.\r\n\r\nIn addition to the personal information we may collect and process during registration and any surveys, we also collect, store and process the following information about our users:\r\n1. Purchase Information\r\n\r\nWhen you make a purchase from Onitshamarket.com, we collect your name and payment method information. When you create an account at Onitshamarket.com, you can choose to save your billing information in “My Profile.” You can also save one or more shipping addresses in your Onitshamarket.com Address Book.\r\n2. Services Account Information\r\n\r\nWe collect personal information from users who wish to use any of the Onitshamarket.com services, including but not limited to, Onitshamarket.com’s Transaction Platform. In order to use these services you must provide your email address and password or create an account at Onitshamarket.com.\r\n3. Cookies and Other Computer Information\r\n\r\nWhen you visit the Site, you will be assigned a permanent “cookie” (a small text file) to be stored on your computer’s hard drive. The purpose of the cookie is to identify you when you visit the Site so that we can enhance and customize your online purchasing experience.\r\n\r\nYou can choose to browse on the Site without cookies, but without these identifier files you will not be able to complete a purchase or take advantage of certain features of the Site. These features include storing your shopping cart for later use and providing a more personalized future shopping experience. Each browser is different, so check the “Help” menu of your browser to learn how to change your cookie preferences.\r\n\r\nWe also collect certain technical information from your computer each time you request a page during a visit to the Site. This information may include your Internet Protocol (IP) address, your computer’s operating system, browser type and the address of a referring web site, if any. We collect this information to enhance the quality of your experience during your visit to the Site and will not sell or loan this information to any third parties.\r\n\r\nWe also contract with third parties to provide us with data collection and reporting services regarding our customers’ activities on the Site and to track and measure the performance of our marketing efforts. These third parties may use cookies and may receive anonymous information about your browsing and buying activity on this Site. None of your personally identifiable information (such as your name, address, email address, etc.) will be received by or shared with these third parties.\r\n4. Publishing Information\r\n\r\nWhen you submit any information on the Site during your use or access, including, but not limited to, information on the Onitshamarket.com blog, the rating system, or product catalog, you are deemed to have given your permission to Onitshamarket.com to publish such information, and Onitshamarket.com and the Site hereby enjoy an irrevocable, worldwide and royalty-free, sub-licensable license to use all information provided by such user to exercise the copyright, compilation, database and publicity rights any user has in such material or information, in any media form.\r\nHow we use your personal information?\r\n\r\nWe do not sell, loan, trade or exchange any user’s personal information without such user’s consent. The information we collect on the Site may be used to enhance your shopping experience in the following ways:\r\n\r\nDeliver merchandise and services that you purchase online; Register you as a member of Onitshamarket.com; Prevent fraud; Confirm your orders; Resolve disputes and prevent prohibited and illegal activities; Enforce our Terms of Use and related agreements; Respond to your customer-service inquiries or requests; Communicate great values and featured items to you; Find and stock the products you want; and Customize, measure and improve our services and your purchase experience.\r\nWhen and with whom can we share your personal information?\r\n\r\nWe do not sell or loan your personal information to any third parties under any circumstances. We will share your personal customer information only with our agents, representatives, service providers, and contractors for limited purposes, including, but not limited to, fulfilling customer orders, offering certain products and services in connection with the Site, communicating to customers, providing customer service, storing, sharing and retrieving customers’ photo images in our Photo Center, enhancing and improving clients’ purchase experience, enabling access to our partners’ web sites, providing a personalized purchase experience and preventing fraud and completing payment method processing.\r\n\r\nAside from the purposes described above, we will not share your personal information with any other third parties unless we have your express permission or there are special circumstances, such as when Onitshamarket.com is required by the government, law enforcement body, obligee whose legitimate right has been injured, subpoena or other legal document to share such information, or if we believe it to be reasonably necessary to protect the safety of any person; to address fraud, security or technical issues; or to protect Onitshamarket.com’s rights or property. We may also share aggregated demographic and statistical information with our partners. This is not linked to any personal information that can identify any individual person.\r\nHow can you control the use of your personal information?\r\n\r\nYou can modify or delete your personal information at any time. Simply go to My Account. Log in with your ID and password, then edit or delete your personal information at your discretion.\r\nHow can we protect the security of your personal information?\r\n\r\nYour personal information is protected by the password you created when you created an account on the Site (or another password you chose after changing a previous password). Please keep this password confidential. No Customer Service Associate or any other representative of Onitshamarket.com will ever ask you for your password. The confidentiality of your password is yours to protect. You may change it at anytime by going to My Account. Log in with your email address and password, then click “Modify Details, Email & Password” and enter a new password.\r\nMinors\r\n\r\nOnitshamarket.com does not intentionally collect personal information about minors or other persons without full civil conduct capacity, but based on the properties of Internet, there is no way for Onitshamarket.com and the Site to distinguish the age or capacity of the users. By accepting this Agreement through your use or access of the Site, you certify that you are a person over 18 years old with full capacity and ability to form a legally binding contract in the jurisdiction in which you are resident or in which you are entering into this Agreement. If you do not agree to (or cannot comply with) any of the terms of this Agreement, do not use the Site.\r\n\r\nMeanwhile, if a minor or other person does not have full civil conduct capacity and has provided personal information to us without the proper consent of their parent or legal guardian, such parent or legal guardian should contact us to remove such personal information.\r\nSecurity\r\n\r\nYour information is stored on our servers located in the USA, and we adopt lots of tools, means and technologies to protect them against unauthorized access, use and disclosure. For instance, we use a technology called Secure Sockets Layer (SSL), which encrypts (or encodes) sensitive information before it is sent over the Internet. However, we are limited in our efforts by the technologies currently available, and no data transmission or storage over Internet can be guaranteed to be perfectly safe. Therefore, although we work very hard to protect your information and privacy, we do not promise or guarantee that your information will always be private and safe.\r\nGeneral\r\n\r\nWe realize that making purchases on the Site, or any other web site, requires trust on your part. We value your trust very highly and pledge to you, our clients that we will work hard to protect the security and privacy of any personal information you provide to us and that your personal information will only be used as set forth in this Policy. This includes your name, address, phone number, email address or checking account information, in addition to any other personal information that can be linked to you, personally.\r\n\r\nOnitshamarket.com may provide links to certain third party web sites. This Security and Privacy Policy applies only to activities conducted and personal information collected on the Site. Other web sites may have their own policies regarding privacy and security. We encourage you to review the privacy policies on these sites before you use and access them. You are solely responsible for your use and access of other web sites.\r\n\r\nOnitshamarket.com will obtain your consent before allowing the download of any data from the Site, and Onitshamarket.com will not automatically download any data to your computer system. Once you consent to the initial download of any data, you may receive automatic updates or patches pertaining to such software. You understand and agree that any material, including but not limited to downloaded software, required or automated updates, modifications, reinstallations, or software otherwise obtained through the use of the Site is done at your own discretion and risk and that you will be solely responsible for any damages to your computer system or loss of data that may result from any such material.\r\n\r\nOnitshamarket.com reserves the right to update or modify this Security and Privacy Policy at any time without prior notice to you. If Onitshamarket.com makes a change that, in Onitshamarket.com’s sole discretion, is material, Onitshamarket.com will notify you via e-mail to the email address associated with your account. Your use of the Site following any such change constitutes your unconditional agreement to follow and be bound by the Security and Privacy Policy as amended. Onitshamarket.com may transfer this Policy and all or part of its rights, obligations and interests to any party or entity in its sole discretion; however, a User may not assign its rights, obligations and interests under this Policy to any party or entity.\r\n\r\nTerms which have not been defined or stipulated in this Agreement shall be interpreted in accordance with the definition(s) or provision(s) of the Terms of Use of Onitshamarket.com. ', 'privacy');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` int(11) NOT NULL,
+  `transaction_id` varchar(255) NOT NULL,
+  `transaction_code` varchar(255) NOT NULL,
+  `coupon_code` varchar(255) NOT NULL,
+  `event_id` int(11) NOT NULL,
+  `purchaser_id` int(11) NOT NULL,
+  `transaction_date` datetime NOT NULL,
+  `payment_method` varchar(255) NOT NULL,
+  `amount` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payouts`
+--
+
+CREATE TABLE `payouts` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `amount` bigint(10) NOT NULL,
+  `token` longtext NOT NULL,
+  `date_requested` datetime NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `approved_by` int(11) NOT NULL,
+  `date_approved` datetime NOT NULL,
+  `amount_paid` varchar(255) NOT NULL,
+  `remark` longtext NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -502,17 +549,17 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `seller_id`, `category_id`, `sku`, `product_name`, `brand_name`, `model`, `main_colour`, `product_description`, `youtube_id`, `in_the_box`, `highlights`, `product_line`, `colour_family`, `main_material`, `dimensions`, `weight`, `attributes`, `product_warranty`, `warranty_type`, `warranty_address`, `certifications`, `product_status`, `report`, `views`, `created_on`) VALUES
 (1, 3, 6, 'X5PJUH', 'Samsung Galaxy S9 - BLACK (Dual Sim) - Official Warranty', 'Samsung', 'S9', 'Black', 'Display: 5.8&rdquo;, Quad HD+ sAMOLED\r\nSingle Sim Option\r\nCamera Main: Super Speed Dual Pixel 12 MP OIS (F1.5/F2.4)\r\nCamera Front: 8MP AF (F1.7)\r\nProcessor: 10nm, Octa-core (2.7GHz Quad + 1.7GHz Quad)\r\nMemory: 4GB RAM and 64GB Internal storage, External Memory: MicroSD&trade; up to 400 GB\r\nBattery: 3000mAh\r\nSecurity: Intelligent Scan (Iris + Face), Fingerprint Scanner, Water and Dust Resistance: IP68 (1.5 m &amp; 30 min)\r\n\r\n', '', '', '', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["Green"]', 'silicon', '1260', '300', '{"Sim-Type":"Dual SIM","OS-Type":"Android OS","Battery-Capacity":"3000mAh ","Internal-Memory":"256 GB","RAM":"6 GB","Sceen-Size":"5.9 inches","Colour":"Black"}', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#039;Content here, content here&#039;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#039;lorem ipsum&#039; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n', '["Repair by vendor"]', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n', '["Eco Friendly","FSC - Forest Stewardship Council"]', 'approved', 0, 45, '2018-10-02 11:34:56'),
-(2, 3, 6, 'BYZZSP', 'Samsung Galaxy J6 - Purple', 'Samsung', 'samsung j6', 'Purple', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["Green"]', 'plume', '1260', '1000', '{"Sim-Type":"Dual SIM","OS-Type":"Android OS","Battery-Capacity":"3000mAh ","Internal-Memory":"256 GB","RAM":"6 GB","Sceen-Size":"5.9 inches","Colour":"Black"}', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '["Repair by vendor"]', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '', 'approved', 0, 7, '2018-10-03 10:46:58'),
-(3, 3, 6, '31WUJE', 'Nokia - 2 - 5&quot; - 1GB RAM, 8GB ROM - Android 7.0 8MP + 5MP - White', 'Nokia', 'Nokia2', 'Grey', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["Green"]', 'plume', '1260', '1000', '{"Sim-Type":"Single SIM","OS-Type":"Android OS","Battery-Capacity":"5000mAh","Internal-Memory":"128 MB","Sceen-Size":"6.4 inches","Colour":"Yellow"}', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '["FSC - Forest Stewardship Council","Organic"]', 'approved', 0, 3, '2018-10-03 11:28:34'),
+(2, 3, 6, 'BYZZSP', 'Samsung Galaxy J6 - Purple', 'Samsung', 'samsung j6', 'Purple', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["Green"]', 'plume', '1260', '1000', '{"Sim-Type":"Dual SIM","OS-Type":"Android OS","Battery-Capacity":"3000mAh ","Internal-Memory":"256 GB","RAM":"6 GB","Sceen-Size":"5.9 inches","Colour":"Black"}', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '["Repair by vendor"]', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '', 'approved', 0, 10, '2018-10-03 10:46:58'),
+(3, 3, 6, '31WUJE', 'Nokia - 2 - 5&quot; - 1GB RAM, 8GB ROM - Android 7.0 8MP + 5MP - White', 'Nokia', 'Nokia2', 'Grey', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["Green"]', 'plume', '1260', '1000', '{"Sim-Type":"Single SIM","OS-Type":"Android OS","Battery-Capacity":"5000mAh","Internal-Memory":"128 MB","Sceen-Size":"6.4 inches","Colour":"Yellow"}', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '["FSC - Forest Stewardship Council","Organic"]', 'approved', 0, 6, '2018-10-03 11:28:34'),
 (4, 3, 6, '871436', 'JY', 'Android', '8S', 'black', 'Jy Phones are excelllent and sleek phones for your needs. Get a color that you love ranging from red, black, green and pink for ladies. Start buying today', '', '1 phone\r\n1 charger\r\n1 screen guard\r\n1 ear phone\r\n1 power bank\r\n', 'Jy Phones are excelllent and sleek phones for your needs. Get a color that you love', 'Jay Technology', '["green","black","red","pink"]', 'metal', '12 x 3 x 90', '20', '{"Sim-Type":"Nano SIM","OS-Type":"Android OS","Battery-Capacity":"4000mAh","Internal-Memory":"64 GB","RAM":"4 GB","Sceen-Size":"5.2 inches","Colour":"Black"}', 'This product contains a one year warranty', '["Service Center","Repair by vendor","Replacement by vendor"]', 'Service Center Address: 20b Caro Road, Ikeja. Lagos | Repair by Vendor Address: 5 Paris Street, Yaba. Lagos.', '["AFRDI Leather","ASTM Certified","Eco Friendly"]', 'approved', 0, 306, '2018-10-30 10:14:59'),
-(5, 3, 6, '921784', 'Huawei P20 Lite ANE-LX3 32GB + 4GB Dual SIM LTE Factory Unlocked Smartphone (Klein Blue)', 'others', 'P20 Lite', 'black', 'The Best Just Got Better\r\nLose yourself in your screen with new generation HUAWEI FullView Display. Designed for life on the go with no compromises, the HUAWEI P20 lite sports a sleek compact frame that&rsquo;s almost entirely dedicated to its 5.84-inch Full HD screen.re level, as it comes with the latest Android 8.0 Oreo.\r\n\r\nBody &amp; Soul\r\nThe HUAWEI P20 lite takes colour to a higher level. Delve deeper into Klein Blue, a radiant shade that incorporates a nanometer-level light dazzle texture. Available too in deepest Midnight Black to contrast against the vibrancy of the Full HD screen, refined classic Platinum Gold and Sakura Pink with its rich pearlescent tone.\r\n\r\nSee is Believing\r\nThe HUAWEI P20 lite features a 2280 x 1080 FHD+ screen with 96% NTSC super high-colour gamut. That means everything you see on this screen is as rich and vibrant and detailed as it can be, from your own photographs to the latest boxset.\r\n\r\nFront and Centre\r\nThe HUAWEI P20 lite has a new higher definition, wider angle, front camera. 16 megapixels with a pixel size of 1.0 &mu;m and a FOV wide angle of 78&deg;, this camera is made for snapping friends, family and social-media-worthy selfies. With a F2.0 wide aperture and a 3D retouching feature that uses intelligent recognition and facial mapping to adjust lighting and shadow, you can count on terrific portraits and close-ups too.\r\n\r\nDual-Lens Camera\r\nThe HUAWEI P20 lite&rsquo;s dual-lens rear camera ticks all the boxes and then some. The state-of-the-art 16 MP lens with a pixel size of 1.12 &mu;m and F2.2 aperture is designed to capture more light and read depth perception, allowing you to take sharp, swift snaps when you need them. Partnered with a 2 MP professional Bokeh lens &ndash; as well as 5P + 3P lenses for the subject and background &ndash; it takes stunning shots while bringing some real definition to the mix.', '', 'The Best Just Got Better\r\nLose yourself in your screen with new generation HUAWEI FullView Display. Designed for life on the go with no compromises, the HUAWEI P20 lite sports a sleek compact frame that&rsquo;s almost entirely dedicated to its 5.84-inch Full HD screen.re level, as it comes with the latest Android 8.0 Oreo.\r\n\r\nBody &amp; Soul\r\nThe HUAWEI P20 lite takes colour to a higher level. Delve deeper into Klein Blue, a radiant shade that incorporates a nanometer-level light dazzle texture. Available too in deepest Midnight Black to contrast against the vibrancy of the Full HD screen, refined classic Platinum Gold and Sakura Pink with its rich pearlescent tone.\r\n\r\nSee is Believing\r\nThe HUAWEI P20 lite features a 2280 x 1080 FHD+ screen with 96% NTSC super high-colour gamut. That means everything you see on this screen is as rich and vibrant and detailed as it can be, from your own photographs to the latest boxset.\r\n\r\nFront and Centre\r\nThe HUAWEI P20 lite has a new higher definition, wider angle, front camera. 16 megapixels with a pixel size of 1.0 &mu;m and a FOV wide angle of 78&deg;, this camera is made for snapping friends, family and social-media-worthy selfies. With a F2.0 wide aperture and a 3D retouching feature that uses intelligent recognition and facial mapping to adjust lighting and shadow, you can count on terrific portraits and close-ups too.\r\n\r\nDual-Lens Camera\r\nThe HUAWEI P20 lite&rsquo;s dual-lens rear camera ticks all the boxes and then some. The state-of-the-art 16 MP lens with a pixel size of 1.12 &mu;m and F2.2 aperture is designed to capture more light and read depth perception, allowing you to take sharp, swift snaps when you need them. Partnered with a 2 MP professional Bokeh lens &ndash; as well as 5P + 3P lenses for the subject and background &ndash; it takes stunning shots while bringing some real definition to the mix.', 'The Best Just Got Better\r\nLose yourself in your screen with new generation HUAWEI FullView Display. Designed for life on the go with no compromises, the HUAWEI P20 lite sports a sleek compact frame that&rsquo;s almost entirely dedicated to its 5.84-inch Full HD screen.re level, as it comes with the latest Android 8.0 Oreo.\r\n', 'Mobiles International LLC', '["green","yellow","black","pink","purple"]', 'leather', '5.8 x 2.8 x 0.3 inches', '12.3 ounces', '{"Sim-Type":"Dual SIM","OS-Type":"Android OS","Battery-Capacity":"5000mAh - 8000mAh","Internal-Memory":"Above 256 GB","RAM":"1.5 GB","Sceen-Size":"6.1 inches","Colour":"Red"}', 'For warranty information about this product, please click here', '["Repair by vendor"]', 'M&B', '["ASTM Certified","Eco Friendly"]', 'approved', 0, 0, '2018-11-08 01:27:51'),
+(5, 3, 6, '921784', 'Huawei P20 Lite ANE-LX3 32GB + 4GB Dual SIM LTE Factory Unlocked Smartphone (Klein Blue)', 'others', 'P20 Lite', 'black', 'The Best Just Got Better\r\nLose yourself in your screen with new generation HUAWEI FullView Display. Designed for life on the go with no compromises, the HUAWEI P20 lite sports a sleek compact frame that&rsquo;s almost entirely dedicated to its 5.84-inch Full HD screen.re level, as it comes with the latest Android 8.0 Oreo.\r\n\r\nBody &amp; Soul\r\nThe HUAWEI P20 lite takes colour to a higher level. Delve deeper into Klein Blue, a radiant shade that incorporates a nanometer-level light dazzle texture. Available too in deepest Midnight Black to contrast against the vibrancy of the Full HD screen, refined classic Platinum Gold and Sakura Pink with its rich pearlescent tone.\r\n\r\nSee is Believing\r\nThe HUAWEI P20 lite features a 2280 x 1080 FHD+ screen with 96% NTSC super high-colour gamut. That means everything you see on this screen is as rich and vibrant and detailed as it can be, from your own photographs to the latest boxset.\r\n\r\nFront and Centre\r\nThe HUAWEI P20 lite has a new higher definition, wider angle, front camera. 16 megapixels with a pixel size of 1.0 &mu;m and a FOV wide angle of 78&deg;, this camera is made for snapping friends, family and social-media-worthy selfies. With a F2.0 wide aperture and a 3D retouching feature that uses intelligent recognition and facial mapping to adjust lighting and shadow, you can count on terrific portraits and close-ups too.\r\n\r\nDual-Lens Camera\r\nThe HUAWEI P20 lite&rsquo;s dual-lens rear camera ticks all the boxes and then some. The state-of-the-art 16 MP lens with a pixel size of 1.12 &mu;m and F2.2 aperture is designed to capture more light and read depth perception, allowing you to take sharp, swift snaps when you need them. Partnered with a 2 MP professional Bokeh lens &ndash; as well as 5P + 3P lenses for the subject and background &ndash; it takes stunning shots while bringing some real definition to the mix.', '', 'The Best Just Got Better\r\nLose yourself in your screen with new generation HUAWEI FullView Display. Designed for life on the go with no compromises, the HUAWEI P20 lite sports a sleek compact frame that&rsquo;s almost entirely dedicated to its 5.84-inch Full HD screen.re level, as it comes with the latest Android 8.0 Oreo.\r\n\r\nBody &amp; Soul\r\nThe HUAWEI P20 lite takes colour to a higher level. Delve deeper into Klein Blue, a radiant shade that incorporates a nanometer-level light dazzle texture. Available too in deepest Midnight Black to contrast against the vibrancy of the Full HD screen, refined classic Platinum Gold and Sakura Pink with its rich pearlescent tone.\r\n\r\nSee is Believing\r\nThe HUAWEI P20 lite features a 2280 x 1080 FHD+ screen with 96% NTSC super high-colour gamut. That means everything you see on this screen is as rich and vibrant and detailed as it can be, from your own photographs to the latest boxset.\r\n\r\nFront and Centre\r\nThe HUAWEI P20 lite has a new higher definition, wider angle, front camera. 16 megapixels with a pixel size of 1.0 &mu;m and a FOV wide angle of 78&deg;, this camera is made for snapping friends, family and social-media-worthy selfies. With a F2.0 wide aperture and a 3D retouching feature that uses intelligent recognition and facial mapping to adjust lighting and shadow, you can count on terrific portraits and close-ups too.\r\n\r\nDual-Lens Camera\r\nThe HUAWEI P20 lite&rsquo;s dual-lens rear camera ticks all the boxes and then some. The state-of-the-art 16 MP lens with a pixel size of 1.12 &mu;m and F2.2 aperture is designed to capture more light and read depth perception, allowing you to take sharp, swift snaps when you need them. Partnered with a 2 MP professional Bokeh lens &ndash; as well as 5P + 3P lenses for the subject and background &ndash; it takes stunning shots while bringing some real definition to the mix.', 'The Best Just Got Better\r\nLose yourself in your screen with new generation HUAWEI FullView Display. Designed for life on the go with no compromises, the HUAWEI P20 lite sports a sleek compact frame that&rsquo;s almost entirely dedicated to its 5.84-inch Full HD screen.re level, as it comes with the latest Android 8.0 Oreo.\r\n', 'Mobiles International LLC', '["green","yellow","black","pink","purple"]', 'leather', '5.8 x 2.8 x 0.3 inches', '12.3 ounces', '{"Sim-Type":"Dual SIM","OS-Type":"Android OS","Battery-Capacity":"5000mAh - 8000mAh","Internal-Memory":"Above 256 GB","RAM":"1.5 GB","Sceen-Size":"6.1 inches","Colour":"Red"}', 'For warranty information about this product, please click here', '["Repair by vendor"]', 'M&B', '["ASTM Certified","Eco Friendly"]', 'approved', 0, 6, '2018-11-08 01:27:51'),
 (6, 3, 6, '192457', 'Apple iPhone 8 4.7&quot;, 64 GB, Fully Unlocked, Gold', 'others', 'A1863-64-Gold', 'black', '4.7-Inch (diagonal) widescreen LCD multi-touch display with IPS technology and Retina HD display\r\nSplash, water, and dust resistant\r\n12MP camera with Optical image stabilization and Six?element lens\r\n4K video recording at 24 fps, 30 fps, or 60 fps\r\nAll new glass design with A color?matched, aerospace?grade aluminum band', '', '4.7-Inch (diagonal) widescreen LCD multi-touch display with IPS technology and Retina HD display\r\nSplash, water, and dust resistant\r\n12MP camera with Optical image stabilization and Six?element lens\r\n4K video recording at 24 fps, 30 fps, or 60 fps\r\nAll new glass design with A color?matched, aerospace?grade aluminum band', '4.7-Inch (diagonal) widescreen LCD multi-touch display with IPS technology and Retina HD display\r\nSplash, water, and dust resistant\r\n', 'MSFTStore', '["yellow","black","red"]', 'metal', '5.5 x 0.3 x 2.6', '5.3', '{"Sim-Type":"Nano SIM","OS-Type":"iOS","Battery-Capacity":"3450mAh","Internal-Memory":"4 GB","RAM":"6 GB","Sceen-Size":"5.7 inches","Colour":"Black"}', ' For warranty information about this product, please click here', '["Service Center","Repair by vendor","Replacement by vendor"]', 'MSFT Drive', '["AFRDI Leather","AFRDI - Australian Furnishing Research & Development Institute","ASTM Certified","Eco Friendly","FSC - Forest Stewardship Council","Fair Trade","GECA Good Environmental Choice Australia","Organic"]', 'approved', 0, 0, '2018-11-08 10:57:34'),
 (7, 3, 6, '354186', 'Huawei Nova 3i 4GB+128GB 6.3 Inch Android 8.1 Kirin 710 Octa Core 4G Smartphone - Purple (1 Unit Per Customer)', 'others', '3i', 'black', 'Feature\r\n1. Kirin 710 Octa Core, 4 x Cortex A73 2.2GHz + 4 x Cortex A53 1.7GHz CPU, combine with 4GB RAM + 128GB ROM, high performance, run fast and fluently.\r\n2. 6.3 inch full capacitive screen, 409PPI 2340x1080 pixel screen, multi-touch, high clear and vivid color.\r\n3. Equipped with 4 cameras, 216MP RGB + 2MP RGB AF dual rear cameras and 24.0MP RGB +2.0MP RGB FF dual front cameras. You can capture wonderful moment with ease, and take high quality pictures.\r\n4. Photography Modes: AI beauty, large aperture, painter mode, dynamic photos, professional mode, video, 3D dynamic panorama, HDR, night scene, panoramic photo, streamer shutter (include busy traffic, light painting graffiti, silk water, star track), time-lapse photography, slow motion, continuous shooting, filter, beauty video, timed photo, voice-activated photo, smile capture, turn off screen flash snapshot, watermark, document correction.\r\n5. Built in 3340mAh battery, the battery will make the phone last for several days in normal use.\r\n6. Android 8.1 operation system, EMUI 8.2 interface.', '', 'Feature\r\n1. Kirin 710 Octa Core, 4 x Cortex A73 2.2GHz + 4 x Cortex A53 1.7GHz CPU, combine with 4GB RAM + 128GB ROM, high performance, run fast and fluently.\r\n2. 6.3 inch full capacitive screen, 409PPI 2340x1080 pixel screen, multi-touch, high clear and vivid color.\r\n3. Equipped with 4 cameras, 216MP RGB + 2MP RGB AF dual rear cameras and 24.0MP RGB +2.0MP RGB FF dual front cameras. You can capture wonderful moment with ease, and take high quality pictures.', 'Feature\r\n1. Kirin 710 Octa Core, 4 x Cortex A73 2.2GHz + 4 x Cortex A53 1.7GHz CPU, combine with 4GB RAM + 128GB ROM, high performance, run fast and fluently.\r\n2. 6.3 inch full capacitive screen, 409PPI 2340x1080 pixel screen, multi-touch, high clear and vivid color.\r\n3. Equipped with 4 cameras, 216MP RGB + 2MP RGB AF dual rear cameras and 24.0MP RGB +2.0MP RGB FF dual front cameras. You can capture wonderful moment with ease, and take high quality pictures.', 'HSP International Company', '["green","yellow","black","red","pink","purple"]', 'metal', '157.6*75.2*7.6', '169', '{"Sim-Type":"Nano SIM","OS-Type":"Android OS","Battery-Capacity":"4000mAh","Internal-Memory":"256 GB","RAM":"6 GB","Sceen-Size":"6.1 inches","Colour":"Blue"}', 'Insurance against screen (30% of the cost) and liquid damage (40% of the cost)', '["Service Center","Repair by vendor","Replacement by vendor"]', 'HSP International Company', '["AFRDI Leather","AFRDI - Australian Furnishing Research & Development Institute","ASTM Certified","Australian Made","Eco Friendly","FSC - Forest Stewardship Council","Fair Trade","GECA Good Environmental Choice Australia","Organic","PEFC -Programme for t', 'approved', 0, 0, '2018-11-09 09:08:27'),
 (8, 3, 4, '635492', 'Apple IPhone X 5.8-Inches Super AMOLED (3GB RAM, 256GB ROM) IOS 11.1.1, (12MP + 12MP) + 7MP 4G LTE Smartphone - Silver + Tempered Glass', 'others', 'Iphone X', 'black', 'A groundbreaking iOS for an iPhone that&#039;s truly breathtaking. \r\n\r\n \r\n\r\nSpecifications\r\n\r\nCapacity\r\n\r\n GB\r\n\r\nSize &amp; Weight\r\n\r\nHeight: 5.65 inches (143.6 mm)\r\nWidth: 2.79 inches (70.9 mm)\r\nDepth: 0.30 inch (7.7 mm)\r\nWeight: 6.14 ounces (174 grams)\r\n', '', 'A groundbreaking iOS for an iPhone that&#039;s truly breathtaking. \r\n\r\n \r\n\r\nSpecifications\r\n\r\nCapacity\r\n\r\n GB\r\n\r\nSize &amp; Weight\r\n\r\nHeight: 5.65 inches (143.6 mm)\r\nWidth: 2.79 inches (70.9 mm)\r\nDepth: 0.30 inch (7.7 mm)\r\nWeight: 6.14 ounces (174 grams)\r\n', 'A groundbreaking iOS for an iPhone that&#039;s truly breathtaking. \r\n\r\n \r\n\r\nSpecifications\r\n\r\nCapacity\r\n\r\n GB\r\n\r\nSize &amp; Weight\r\n\r\nHeight: 5.65 inches (143.6 mm)\r\nWidth: 2.79 inches (70.9 mm)\r\nDepth: 0.30 inch (7.7 mm)\r\nWeight: 6.14 ounces (174 grams)\r\n', 'DALINESHOP4PHONE', '["yellow","black","red","pink"]', 'metal', '167.6*65.2*7.6', '150', '{"Sim-Type":"Nano SIM","OS-Type":"iOS","Battery-Capacity":"5000mAh - 8000mAh","Internal-Memory":"Above 256 GB","RAM":"16 GB","Sceen-Size":"6.1 inches","Colour":"Black"}', 'Service is provided by AXA Mansard Insurance\r\nLimited to repair/replacements of 1 screen AND 1 liquid damage in 365 days', '["Repair by vendor","Replacement by vendor"]', '20b Caro Road, Ikeja. Lagos ', '["ASTM Certified","Australian Made","Eco Friendly","FSC - Forest Stewardship Council","Fair Trade"]', 'approved', 0, 0, '2018-11-09 09:16:45'),
 (9, 3, 4, '597361', 'Iphone 8', 'Apple', 'Iphone 8', 'black', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam animi delectus, doloribus facere vel velit vero. Accusantium ad blanditiis facere harum iste! Corporis dignissimos eum exercitationem labore molestiae numquam tempora.', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam animi delectus, doloribus facere vel velit vero. Accusantium ad blanditiis facere harum iste! Corporis dignissimos eum exercitationem labore molestiae numquam tempora.', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam animi delectus, doloribus facere vel velit vero. Accusantium ad blanditiis facere harum iste! Corporis dignissimos eum exercitationem labore molestiae numquam tempora.', 'Iphone Widgets Technology', '["green","black","red"]', 'metal', '12 x 3 x 90', '120', '{"Sim-Type":"Nano SIM","OS-Type":"iOS","Battery-Capacity":"5000mAh - 8000mAh","Internal-Memory":"128 GB","Sceen-Size":"6.1 inches","Colour":"Black"}', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam animi delectus, doloribus facere vel velit vero. Accusantium ad blanditiis facere harum iste! Corporis dignissimos eum exercitationem labore molestiae numquam tempora.', '["Repair by vendor","Replacement by vendor"]', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam animi delectus, doloribus facere vel velit vero. Accusantium ad blanditiis facere harum iste! Corporis dignissimos eum exercitationem labore molestiae numquam tempora.', '["AFRDI Leather","ASTM Certified"]', 'approved', 0, 0, '2018-11-12 17:36:31'),
 (10, 3, 4, '918237', 'jsjsjsjs', 'Apple', 'jjh', 'red', 'jh', '', '', '', 'ouu', '["pink"]', 'synthetic', 'jji', '774', '[]', '', '', '', '', 'approved', 0, 0, '2018-11-13 22:55:02'),
 (11, 3, 8, '286539', 'Apple Watch', 'Apple', 'Miranda', 'black', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consectetur eius eveniet illo quas quasi quia soluta tempora? Doloremque ducimus eos impedit porro quia ratione sed soluta voluptas! A, libero?', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consectetur eius eveniet illo quas quasi quia soluta tempora? Doloremque ducimus eos impedit porro quia ratione sed soluta voluptas! A, libero?', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consectetur eius eveniet illo quas quasi quia soluta tempora? Doloremque ducimus eos impedit porro quia ratione sed soluta voluptas! A, libero?', 'Miranda', '["black","red"]', 'metal', '12 x 32 x10', '20', '[]', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consectetur eius eveniet illo quas quasi quia soluta tempora? Doloremque ducimus eos impedit porro quia ratione sed soluta voluptas! A, libero?', '["Service Center","Repair by vendor","Replacement by vendor"]', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consectetur eius eveniet illo quas quasi quia soluta tempora? Doloremque ducimus eos impedit porro quia ratione sed soluta voluptas! A, libero?', '["Eco Friendly","Fair Trade","GECA Good Environmental Choice Australia"]', 'approved', 0, 0, '2018-11-14 10:27:31'),
-(12, 3, 6, '481653', 'Hisense 32-Inch 32N2176H Full HD LED TV', 'others', 'Hicense', 'black', '12 Months Warranty\r\nScreen Size: 32&quot; \r\nScreen Type: LED\r\nScreen Resolution: Full HD 1920 x 1080 pixels\r\nConnectivity: HDMI: 2, USB: Yes x2, AV Input (Audio &amp; Video)', '', '12 Months Warranty\r\nScreen Size: 32&quot; \r\nScreen Type: LED\r\nScreen Resolution: Full HD 1920 x 1080 pixels\r\nConnectivity: HDMI: 2, USB: Yes x2, AV Input (Audio &amp; Video)', '12 Months Warranty\r\nScreen Size: 32&quot; \r\nScreen Type: LED\r\nScreen Resolution: Full HD 1920 x 1080 pixels\r\nConnectivity: HDMI: 2, USB: Yes x2, AV Input (Audio &amp; Video)', 'PhilTech Technologies', '["black"]', 'metal', '13 X 45 X 30', '1000', '[]', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '["Eco Friendly"]', 'approved', 0, 0, '2018-11-17 21:04:07'),
+(12, 3, 6, '481653', 'Hisense 32-Inch 32N2176H Full HD LED TV', 'others', 'Hicense', 'black', '12 Months Warranty\r\nScreen Size: 32&quot; \r\nScreen Type: LED\r\nScreen Resolution: Full HD 1920 x 1080 pixels\r\nConnectivity: HDMI: 2, USB: Yes x2, AV Input (Audio &amp; Video)', '', '12 Months Warranty\r\nScreen Size: 32&quot; \r\nScreen Type: LED\r\nScreen Resolution: Full HD 1920 x 1080 pixels\r\nConnectivity: HDMI: 2, USB: Yes x2, AV Input (Audio &amp; Video)', '12 Months Warranty\r\nScreen Size: 32&quot; \r\nScreen Type: LED\r\nScreen Resolution: Full HD 1920 x 1080 pixels\r\nConnectivity: HDMI: 2, USB: Yes x2, AV Input (Audio &amp; Video)', 'PhilTech Technologies', '["black"]', 'metal', '13 X 45 X 30', '1000', '[]', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '["Eco Friendly"]', 'approved', 0, 1, '2018-11-17 21:04:07'),
 (13, 2, 11, '87592643', 'Samsung Galaxy J6+, 6&quot;, 32gb+3gb Ram, 13mp, (dual Sim) 4g - Black', 'others', 'Samsung', 'black', '**Smooth Operations**\r\n\r\nThe Samsung Galaxy A6 comes preloaded with the Android 8.0 Oreo which gives you access to all the life-enhancing apps available on the Google Play Store. The Android 8.0 takes system performance to a higher level with the possibility of optimizing memory and improving your touchscreen so that it responds faster and more accurately than ever before. \r\n\r\n \r\n**Technical Specifications**\r\n\r\n**Display**\r\n\r\n    Type: Super AMOLED capacitive touchscreen, 16M colors\r\n    Size: 6 inches, 80.1 cm2 (~76.5% screen-to-body ratio)\r\n    Resolution: 720 x 1480 pixels, 18.5:9 ratio (~293 ppi density)\r\n    Multitouch\r\n    Protection: Corning Gorilla Glass (unspecified version)\r\n\r\n**Platform**    \r\n\r\n    OS: Android 8.0 (Oreo)\r\n    Chipset: Exynos 7870 Octa\r\n    CPU: Octa-core 1.6 GHz Cortex-A53\r\n    GPU: Mali-T830 MP1\r\n\r\n**Memory**    \r\n\r\n    Card slot: microSD, up to 256 GB (dedicated slot)\r\n    Internal: 64 GB, 4 GB RAM\r\n\r\n**Camera**\r\n\r\n    Primary: 13 MP, f/1.9, 28mm, AF\r\n    Features: LED flash, panorama, HDR\r\n    Video: 1080p@30fps\r\n    Secondary: 8 MP, f/1.9\r\n    Features: LED flash\r\n    Video    \r\n\r\n**Sound**   \r\n\r\n    Alert types: Vibration; MP3, WAV ringtones\r\n    Loudspeaker\r\n    3.5mm jack\r\n\r\n**Communications**    \r\n\r\n    WLAN: Wi-Fi 802.11 b/g/n, Wi-Fi Direct, hotspot\r\n    Bluetooth: 4.2, A2DP, LE\r\n    GPS: with A-GPS, GLONASS, BDS\r\n    Radio: Stereo FM radio, recording\r\n    USB: microUSB 2.0, USB On-The-Go\r\n\r\n**Features**    \r\n\r\n    Sensors: Fingerprint (rear-mounted), accelerometer, proximity\r\n    Messaging: SMS(threaded view), MMS, Email, Push Email, IM\r\n    Browser: HTML5\r\n    MP4/H.264 player\r\n    MP3/WAV/eAAC+/FLAC player\r\n    Photo/video editor\r\n    Document viewer\r\n\r\n**Battery**         \r\n\r\n    Non-removable Li-Ion 3300 mAh battery\r\n    Talk time: Up to 21 h (3G)\r\n    Music play: Up to 76 h\r\n', '', '', '', 'PhilTech Technologies', '["black"]', 'metal', '13 X 45 X 30', '1000', '[]', '', '["Repair by vendor","Replacement by vendor"]', '', '["AFRDI - Australian Furnishing Research & Development Institute","Australian Made","FSC - Forest Stewardship Council","GECA Good Environmental Choice Australia","PEFC -Programme for the Endorcement of Forest Certification","Timber Certificate"]', 'pending', 0, 0, '2018-11-22 11:53:02'),
 (14, 3, 36, '86347215', 'Product posting to Cloudinary test', 'Apple', 'eehehe', 'pink', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\n    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\n    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\n    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\n    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\n    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\n    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\n    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\n    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\n    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\n    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\n    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\n    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\n    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\n    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\n    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["pink"]', 'textile', '13 X 45 X 30', '1000', '[]', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\n    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\n    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\n    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\n    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\n    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '["Repair by vendor","Replacement by vendor"]', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\n    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\n    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\n    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\n    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\n    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '', 'pending', 0, 0, '2018-11-25 21:41:59'),
 (15, 3, 36, '34129675', 'Hello This is Product Name', 'others', 'Hicense', 'purple', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\n    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\n    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\n    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\n    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\n    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\n    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\n    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\n    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\n    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\n    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\n    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\n    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\n    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\n    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\n    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'PhilTech Technologies', '["purple"]', 'glass', '13 X 45 X 30', '1000', '[]', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\n    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\n    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\n    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\n    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\n    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\n    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\n    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\n    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\n    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\n    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '["Fair Trade"]', 'pending', 0, 0, '2018-11-25 21:55:21'),
@@ -533,7 +580,7 @@ INSERT INTO `products` (`id`, `seller_id`, `category_id`, `sku`, `product_name`,
 
 CREATE TABLE `product_gallery` (
   `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
+  `product_id` bigint(11) NOT NULL,
   `seller_id` int(11) NOT NULL,
   `image_name` varchar(255) NOT NULL,
   `featured_image` tinyint(1) NOT NULL DEFAULT '0',
@@ -573,7 +620,7 @@ INSERT INTO `product_gallery` (`id`, `product_id`, `seller_id`, `image_name`, `f
 
 CREATE TABLE `product_rating` (
   `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
+  `product_id` bigint(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `rating_score` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Product review and rating';
@@ -596,7 +643,7 @@ INSERT INTO `product_rating` (`id`, `product_id`, `user_id`, `rating_score`) VAL
 
 CREATE TABLE `product_review` (
   `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
+  `product_id` bigint(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `display_name` varchar(55) NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -624,7 +671,7 @@ INSERT INTO `product_review` (`id`, `product_id`, `user_id`, `display_name`, `ti
 
 CREATE TABLE `product_variation` (
   `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
+  `product_id` bigint(11) NOT NULL,
   `variation` varchar(255) NOT NULL,
   `sku` varchar(50) NOT NULL,
   `isbn` varchar(50) NOT NULL,
@@ -677,7 +724,7 @@ INSERT INTO `product_variation` (`id`, `product_id`, `variation`, `sku`, `isbn`,
 CREATE TABLE `recently_viewed` (
   `id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL,
-  `product_ids` varchar(255) NOT NULL,
+  `product_ids` text NOT NULL,
   `viewed_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -686,7 +733,7 @@ CREATE TABLE `recently_viewed` (
 --
 
 INSERT INTO `recently_viewed` (`id`, `user_id`, `product_ids`, `viewed_date`) VALUES
-(1, 3, '["1"]', '2018-12-06 06:36:52'),
+(1, 3, '["1","2","5","3","12"]', '2018-12-06 06:36:52'),
 (2, 2, '["7","4"]', '2018-12-06 11:34:05');
 
 -- --------------------------------------------------------
@@ -726,7 +773,7 @@ CREATE TABLE `sellers` (
 --
 
 INSERT INTO `sellers` (`id`, `uid`, `legal_company_name`, `address`, `tin`, `reg_no`, `vat_file`, `license_to_sell`, `platform_selling`, `own_brand`, `main_category`, `no_of_products`, `product_condition`, `seller_phone`, `bank_name`, `account_name`, `account_number`, `account_type`, `bvn`, `terms`, `company_pic`, `date_applied`, `disable_products`) VALUES
-(1, 3, 'My legal company name', 'my address', '71718181', 'Ng83833', 'There was an error', 0, '', 0, 'Electronics', '', '', '', 'Guaranty Trust Bank Plc', 'Sokoya Adeniji Philip', '2820226778', '', '7262626228', 'Here is my information... Nothing serious', NULL, '0000-00-00 00:00:00', 0),
+(1, 3, 'Schoolville Limited', 'my address', '71718181', 'Ng83833', 'There was an error', 0, '', 0, 'Gloceries', '', '', '08169254598', 'Guaranty Trust Bank Plc', 'Sokoya Adeniji Philip', '2820226778', '', '7262626228', 'Here is my information... Nothing serious... Thank you', NULL, '0000-00-00 00:00:00', 0),
 (8, 4, 'Sokoya Adeniji Company', '530A, Aina Akingbala Street, Ikeja', '717', NULL, NULL, 1, '', 1, 'Computers &amp; Accessories', '21-50', '', '', NULL, NULL, NULL, '', NULL, '', NULL, '0000-00-00 00:00:00', 0),
 (9, 6, 'Woyong Okey Company', '530A, Aina Akingbala Street, Ikeja', '71716', NULL, NULL, 1, '', 1, 'Electronics', '21-50', '', '', NULL, NULL, NULL, '', NULL, '', NULL, '0000-00-00 00:00:00', 0),
 (10, 8, 'JeffDev', 'No 13 Dan Ngozi Iyio Street', '4949644', NULL, NULL, 1, '', 1, 'Computers &amp; Accessories', '51-100', '', '', NULL, NULL, NULL, '', NULL, '', NULL, '0000-00-00 00:00:00', 0),
@@ -747,7 +794,7 @@ CREATE TABLE `sellers_notification_message` (
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
   `is_read` int(11) NOT NULL DEFAULT '0',
-  `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_on` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -755,25 +802,25 @@ CREATE TABLE `sellers_notification_message` (
 --
 
 INSERT INTO `sellers_notification_message` (`id`, `seller_id`, `title`, `content`, `is_read`, `created_on`) VALUES
-(1, 3, 'Your product listing has been suspended', 'This is to notify you the product with ( JY ) has been suspended.  <br /> Contact support if not please with this action.<br /> Regards.', 1, '2018-11-13 22:28:40'),
-(2, 3, 'Your product listing has been approved', 'This is to notify you the product with ( JY ) has been approveed  <br /> Check your listing <a href=\'onitshamarket.com/jy-4/\'>Click here to see.</a><br /> Regards.', 1, '2018-11-13 22:28:30'),
-(3, 3, 'Your product listing has been approved', 'This is to notify you the product with ( Iphone 8 ) has been approveed  <br /> Check your listing <a href=\'onitshamarket.com/iphone-8-9/\'>Click here to see.</a><br /> Regards.', 1, '2018-11-13 22:28:35'),
-(4, 3, 'Your product listing has been approved', 'This is to notify you the product with ( Iphone 7 ) has been approveed  <br /> Check your listing <a href=\'onitshamarket.com/iphone-7-10/\'>Click here to see.</a><br /> Regards.', 1, '2018-11-13 22:28:42'),
-(5, 4, 'Your account has been approved', 'Congrats, welcome to your seller dashboard.<br /> Regards.', 0, '2018-11-13 20:05:34'),
-(6, 4, 'Your account has been suspended', 'This is to notify you that your account has been suspended. <br />Contact support<br /> Regards.', 0, '2018-11-13 20:05:46'),
-(7, 3, 'Your product listing has been suspended', 'This is to notify you the product with ( Apple iPhone 8 4.7&quot;, 64 GB, Fully Unlocked, Gold ) has been suspended.  <br /> Contact support if not please with this action.<br /> Regards.', 1, '2018-11-13 22:16:25'),
-(8, 3, 'Your product listing has been approved', 'This is to notify you the product with ( jsjsjsjs ) has been approveed  <br /> Check your listing <a href=\'onitshamarket.com/jsjsjsjs-10/\'>Click here to see.</a><br /> Regards.', 0, '2018-11-13 21:55:20'),
-(9, 3, 'Your product listing has been approved', 'This is to notify you the product with ( Apple iPhone 8 4.7&quot;, 64 GB, Fully Unlocked, Gold ) has been approveed  <br /> Check your listing <a href=\'onitshamarket.com/apple-iphone-8-4-7-quot-64-gb-fully-unlocked-gold-6/\'>Click here to see.</a><br /> Regards.', 0, '2018-11-14 09:28:00'),
-(10, 3, 'Your product listing has been approved', 'This is to notify you the product with ( Apple Watch ) has been approveed  <br /> Check your listing <a href=\'onitshamarket.com/apple-watch-11/\'>Click here to see.</a><br /> Regards.', 0, '2018-11-14 09:30:08'),
-(11, 9, 'Your account has been approved', 'Congrats, welcome to your seller dashboard.<br /> Regards.', 1, '2018-11-14 14:53:47'),
-(12, 3, 'Your account has been approved', 'Congrats, welcome to your seller dashboard.<br /> Regards.', 0, '2018-11-27 08:20:37'),
-(13, 6, 'Your account has been approved', 'Congrats, welcome to your seller dashboard.<br /> Regards.', 0, '2018-11-27 08:21:50'),
-(14, 8, 'Your account has been suspended', 'This is to notify you that your account has been suspended. <br />Contact support<br /> Regards.', 0, '2018-11-27 08:22:27'),
-(15, 8, 'Your account has been approved', 'Congrats, welcome to your seller dashboard.<br /> Regards.', 0, '2018-11-27 08:22:34'),
-(16, 4, 'Your account has been approved', 'Congrats, welcome to your seller dashboard.<br /> Regards.', 0, '2018-11-27 08:22:57'),
-(17, 4, 'Your account has been suspended', 'This is to notify you that your account has been suspended. <br />Contact support<br /> Regards.', 0, '2018-11-27 08:23:00'),
-(18, 4, 'Your account has been approved', 'Congrats, welcome to your seller dashboard.<br /> Regards.', 0, '2018-11-27 08:26:06'),
-(19, 3, 'Your product listing has been approved', 'This is to notify you the product with ( Hisense 32-Inch 32N2176H Full HD LED TV ) has been approveed  <br /> Check your listing <a href=\'http://onitshamarket.com/hisense-32-inch-32n2176h-full-hd-led-tv-16/\'>Click here to see.</a><br /> Regards.', 0, '2018-11-27 08:26:31');
+(1, 3, 'Your product listing has been suspended', 'This is to notify you the product with ( JY ) has been suspended.  <br /> Contact support if not please with this action.<br /> Regards.', 1, '2018-12-08 06:16:52'),
+(2, 3, 'Your product listing has been approved', 'This is to notify you the product with ( JY ) has been approveed  <br /> Check your listing <a href=\'onitshamarket.com/jy-4/\'>Click here to see.</a><br /> Regards.', 1, '2018-12-08 06:16:52'),
+(3, 3, 'Your product listing has been approved', 'This is to notify you the product with ( Iphone 8 ) has been approveed  <br /> Check your listing <a href=\'onitshamarket.com/iphone-8-9/\'>Click here to see.</a><br /> Regards.', 1, '2018-12-08 06:16:52'),
+(4, 3, 'Your product listing has been approved', 'This is to notify you the product with ( Iphone 7 ) has been approveed  <br /> Check your listing <a href=\'onitshamarket.com/iphone-7-10/\'>Click here to see.</a><br /> Regards.', 1, '2018-12-08 06:16:52'),
+(5, 4, 'Your account has been approved', 'Congrats, welcome to your seller dashboard.<br /> Regards.', 0, '2018-11-13 21:05:34'),
+(6, 4, 'Your account has been suspended', 'This is to notify you that your account has been suspended. <br />Contact support<br /> Regards.', 0, '2018-11-13 21:05:46'),
+(7, 3, 'Your product listing has been suspended', 'This is to notify you the product with ( Apple iPhone 8 4.7&quot;, 64 GB, Fully Unlocked, Gold ) has been suspended.  <br /> Contact support if not please with this action.<br /> Regards.', 1, '2018-12-08 06:16:52'),
+(8, 3, 'Your product listing has been approved', 'This is to notify you the product with ( jsjsjsjs ) has been approveed  <br /> Check your listing <a href=\'onitshamarket.com/jsjsjsjs-10/\'>Click here to see.</a><br /> Regards.', 1, '2018-12-08 06:16:52'),
+(9, 3, 'Your product listing has been approved', 'This is to notify you the product with ( Apple iPhone 8 4.7&quot;, 64 GB, Fully Unlocked, Gold ) has been approveed  <br /> Check your listing <a href=\'onitshamarket.com/apple-iphone-8-4-7-quot-64-gb-fully-unlocked-gold-6/\'>Click here to see.</a><br /> Regards.', 1, '2018-12-08 06:16:52'),
+(10, 3, 'Your product listing has been approved', 'This is to notify you the product with ( Apple Watch ) has been approveed  <br /> Check your listing <a href=\'onitshamarket.com/apple-watch-11/\'>Click here to see.</a><br /> Regards.', 1, '2018-12-08 06:16:52'),
+(11, 9, 'Your account has been approved', 'Congrats, welcome to your seller dashboard.<br /> Regards.', 1, '2018-11-14 15:53:47'),
+(12, 3, 'Your account has been approved', 'Congrats, welcome to your seller dashboard.<br /> Regards.', 1, '2018-12-08 06:16:52'),
+(13, 6, 'Your account has been approved', 'Congrats, welcome to your seller dashboard.<br /> Regards.', 0, '2018-11-27 09:21:50'),
+(14, 8, 'Your account has been suspended', 'This is to notify you that your account has been suspended. <br />Contact support<br /> Regards.', 0, '2018-11-27 09:22:27'),
+(15, 8, 'Your account has been approved', 'Congrats, welcome to your seller dashboard.<br /> Regards.', 0, '2018-11-27 09:22:34'),
+(16, 4, 'Your account has been approved', 'Congrats, welcome to your seller dashboard.<br /> Regards.', 0, '2018-11-27 09:22:57'),
+(17, 4, 'Your account has been suspended', 'This is to notify you that your account has been suspended. <br />Contact support<br /> Regards.', 0, '2018-11-27 09:23:00'),
+(18, 4, 'Your account has been approved', 'Congrats, welcome to your seller dashboard.<br /> Regards.', 0, '2018-11-27 09:26:06'),
+(19, 3, 'Your product listing has been approved', 'This is to notify you the product with ( Hisense 32-Inch 32N2176H Full HD LED TV ) has been approveed  <br /> Check your listing <a href=\'http://onitshamarket.com/hisense-32-inch-32n2176h-full-hd-led-tv-16/\'>Click here to see.</a><br /> Regards.', 1, '2018-12-08 06:16:52');
 
 -- --------------------------------------------------------
 
@@ -793,8 +840,9 @@ CREATE TABLE `se_sessions` (
 --
 
 INSERT INTO `se_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
-('5jfrmlhgqhk66egmqd48bdfus41503ov', '::1', 1544111411, ''),
-('so0a8ile02771r79glrh4ppmpff0ajod', '::1', 1544088387, '');
+('so0a8ile02771r79glrh4ppmpff0ajod', '::1', 1544088387, ''),
+('oitsehgqi77khvqde7mrdfddv64esmgb', '::1', 1544547023, 0x6c6f676765645f696e7c623a313b6c6f676765645f69647c733a313a2233223b73656c6c65725f7374617475737c733a383a22617070726f766564223b656d61696c7c733a31333a2261626340676d61696c2e636f6d223b),
+('ganm6m078aclfvnvkprlf4jlq59pd1he', '::1', 1544698849, 0x6c6f676765645f696e7c623a313b6c6f676765645f69647c733a313a2233223b73656c6c65725f7374617475737c733a383a22617070726f766564223b656d61696c7c733a31333a2261626340676d61696c2e636f6d223b63617465676f72795f69647c733a313a2232223b);
 
 -- --------------------------------------------------------
 
@@ -882,7 +930,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `email`, `first_name`, `last_name`, `city`, `zip_code`, `address`, `phone`, `display_name`, `profile_pic`, `gender`, `password`, `salt`, `code`, `ip`, `date_registered`, `last_login`, `newsletter`, `recovery_code`, `account_status`, `is_seller`, `is_admin`, `groups`) VALUES
 (1, 'bisi@gmail.com', 'Sokoya', 'Philip', '', '', '', '08169254598', 'mrphilo1234455', '', 'female', 'eaf859633c1bc66dc04a57f3d2579a0a0f5a626c17940a0010473222c9ee61f0', 'Dr=SLzk1viy$JP9q<=)bTn0V##gdQctp;!zmvb.g:8iur9T?!+', '', '127.0.0.1', '2018-08-23 16:21:31', '2018-09-04 20:44:25', 0, '', '', '1', 0, 0),
 (2, 'phil@gmail.com', 'Sokoya', 'Adeniji', '', '', '', '', '', '', '', 'f191311d9970adaf1117fbbb295cc959bb9d094329215bddfb590a9def27dee2', '*9-dTBSC-8m+QmuPv&|PKU>Ipz-Wcd^oxL<s.iAoepyAO1Wjxx', '', '::1', '2018-09-17 21:40:35', '2018-12-06 07:52:56', 0, '', '', '0', 0, 0),
-(3, 'abc@gmail.com', 'Chidi', 'Jeffrey', '', '', '', '', '', '', '', 'becf0711bf86d9a715a88c8fd476f6e39fcabb5bfeec223f72f526867eb60672', '8j:#gW.VHjvUX:lwx0@6lUpBe8R35z1DRDRrT0!2VFj;fmlkhm', '', '::1', '2018-09-17 21:40:35', '2018-12-06 20:08:21', 0, '', '', 'approved', 1, 2),
+(3, 'abc@gmail.com', 'Chidi', 'Jeffrey', '', '', '', '', '', '', '', 'becf0711bf86d9a715a88c8fd476f6e39fcabb5bfeec223f72f526867eb60672', '8j:#gW.VHjvUX:lwx0@6lUpBe8R35z1DRDRrT0!2VFj;fmlkhm', '', '::1', '2018-09-17 21:40:35', '2018-12-14 08:19:34', 0, '', '', 'approved', 1, 2),
 (4, 'seller@gmail.com', 'Jeff', 'Besox', '', '', '', '', '', '', '', 'ee707647928828271f6c2cd23ae10fe8bdc2f58b4745dfb3a2e8f18d7a3003c2', 'FA6rGIWT:nH+qNbY0gAC84)HpylN*aNrg9Sm?8eqERNY,ncLg:', '', '::1', '2018-10-22 12:21:30', '2018-10-22 15:35:22', 0, '', '', 'approved', 0, 0),
 (5, 'seller2@gmail.com', 'Phil', 'Tusey', '', '', '', '', '', '', '', 'e71997718ceebe98d6b05bf3f4b9e54d338178996973e8999282b3313fdcd10d', '8Ge(<|c=Hw9Gh@1=n!_,>vXN|OWaz,($^2wqFPAm>(*l)NnZsE', '', '::1', '2018-10-22 12:26:31', '2018-11-20 15:07:59', 0, '', '', 'false', 0, 0),
 (6, 'okey@gmail.com', 'Woyong', 'Okey', '', '', '', '', '', '', '', 'f74b08dc3f1fbf7c4cb26c04102f69adcb2f9446165326692350648ce9ffc3b0', 'Jd#X7j!5kHvh+?D;HOV1)(RUjoCGg<H(k|.cRtQB.pX<zwbLid', '', '::1', '2018-10-22 15:38:24', '2018-10-22 15:41:05', 0, '', '', 'approved', 0, 0),
@@ -896,6 +944,12 @@ INSERT INTO `users` (`id`, `email`, `first_name`, `last_name`, `city`, `zip_code
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin_groups`
+--
+ALTER TABLE `admin_groups`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `area`
@@ -943,12 +997,6 @@ ALTER TABLE `coupons`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `dummy_table`
---
-ALTER TABLE `dummy_table`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `error_logs`
 --
 ALTER TABLE `error_logs`
@@ -967,9 +1015,9 @@ ALTER TABLE `general_settings`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `groups`
+-- Indexes for table `invoices`
 --
-ALTER TABLE `groups`
+ALTER TABLE `invoices`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -982,6 +1030,24 @@ ALTER TABLE `options`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `page_contents`
+--
+ALTER TABLE `page_contents`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payouts`
+--
+ALTER TABLE `payouts`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1071,6 +1137,11 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `admin_groups`
+--
+ALTER TABLE `admin_groups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `area`
 --
 ALTER TABLE `area`
@@ -1101,11 +1172,6 @@ ALTER TABLE `category`
 ALTER TABLE `coupons`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `dummy_table`
---
-ALTER TABLE `dummy_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
---
 -- AUTO_INCREMENT for table `error_logs`
 --
 ALTER TABLE `error_logs`
@@ -1114,17 +1180,17 @@ ALTER TABLE `error_logs`
 -- AUTO_INCREMENT for table `favourite`
 --
 ALTER TABLE `favourite`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `general_settings`
 --
 ALTER TABLE `general_settings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `groups`
+-- AUTO_INCREMENT for table `invoices`
 --
-ALTER TABLE `groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `invoices`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `options`
 --
@@ -1134,7 +1200,22 @@ ALTER TABLE `options`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `page_contents`
+--
+ALTER TABLE `page_contents`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `payouts`
+--
+ALTER TABLE `payouts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `pickup_address`
 --
