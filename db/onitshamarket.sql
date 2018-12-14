@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 14, 2018 at 02:07 PM
+-- Generation Time: Dec 14, 2018 at 02:47 PM
 -- Server version: 5.7.11
 -- PHP Version: 7.0.3
 
@@ -252,7 +252,7 @@ CREATE TABLE `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
-('gv2b14krt375v6ce3m53f0kg9v161rnb', '::1', 1544796000, 0x72656665727265645f66726f6d7c733a34373a22687474703a2f2f6c6f63616c686f73742f70726f6a6563743030312f636174616c6f672f656c656374726f6e696373223b6c6f676765645f696e7c623a313b6c6f676765645f69647c733a313a2233223b69735f73656c6c65727c733a383a22617070726f766564223b656d61696c7c733a31333a2261626340676d61696c2e636f6d223b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a32363030303b733a31313a22746f74616c5f6974656d73223b643a313b733a33323a223137323466633138383365303038663038613363303762333036353732323937223b613a373a7b733a323a226964223b733a313a2233223b733a333a22717479223b643a313b733a343a226e616d65223b733a37303a224e6f6b6961202d2032202d20352671756f743b202d203147422052414d2c2038474220524f4d202d20416e64726f696420372e3020384d50202b20354d50202d205768697465223b733a353a227072696365223b643a32363030303b733a373a226f7074696f6e73223b613a333a7b733a363a2273656c6c6572223b733a313a2233223b733a31323a22766172696174696f6e5f6964223b733a313a2233223b733a393a22766172696174696f6e223b733a303a22223b7d733a353a22726f776964223b733a33323a223137323466633138383365303038663038613363303762333036353732323937223b733a383a22737562746f74616c223b643a32363030303b7d7d);
+('gv2b14krt375v6ce3m53f0kg9v161rnb', '::1', 1544797102, 0x72656665727265645f66726f6d7c733a34373a22687474703a2f2f6c6f63616c686f73742f70726f6a6563743030312f636174616c6f672f656c656374726f6e696373223b6c6f676765645f696e7c623a313b6c6f676765645f69647c733a313a2233223b69735f73656c6c65727c733a383a22617070726f766564223b656d61696c7c733a31333a2261626340676d61696c2e636f6d223b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a32363030303b733a31313a22746f74616c5f6974656d73223b643a313b733a33323a223137323466633138383365303038663038613363303762333036353732323937223b613a373a7b733a323a226964223b733a313a2233223b733a333a22717479223b643a313b733a343a226e616d65223b733a37303a224e6f6b6961202d2032202d20352671756f743b202d203147422052414d2c2038474220524f4d202d20416e64726f696420372e3020384d50202b20354d50202d205768697465223b733a353a227072696365223b643a32363030303b733a373a226f7074696f6e73223b613a333a7b733a363a2273656c6c6572223b733a313a2233223b733a31323a22766172696174696f6e5f6964223b733a313a2233223b733a393a22766172696174696f6e223b733a303a22223b7d733a353a22726f776964223b733a33323a223137323466633138383365303038663038613363303762333036353732323937223b733a383a22737562746f74616c223b643a32363030303b7d7d);
 
 -- --------------------------------------------------------
 
@@ -348,6 +348,26 @@ CREATE TABLE `general_settings` (
 
 INSERT INTO `general_settings` (`id`, `keywords`, `description`, `is_live`, `enabled_ips`, `maintenance_text`, `facebook_link`, `twitter_link`, `instagram_link`, `youtube_link`) VALUES
 (1, 'Buy, Sell, fashion wears, electronics gadget', 'Define the type of heel the shoe has  Example: e.g. Block, Cuban, Flared, Mid, Stiletto', 1, '127.0.0.1, 127.0.0.2', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'onitshamarket', 'onitshamarket', 'onitshamarket', 'onitshamarket');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `homepage_setting`
+--
+
+CREATE TABLE `homepage_setting` (
+  `id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `position` int(11) NOT NULL,
+  `top1` varchar(255) NOT NULL,
+  `top2` varchar(255) NOT NULL,
+  `bottom1` varchar(255) NOT NULL,
+  `bottom2` varchar(255) NOT NULL,
+  `bottom3` varchar(255) NOT NULL,
+  `left1` varchar(255) NOT NULL,
+  `left2` varchar(255) NOT NULL,
+  `left3` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Category Display Settings for Homepage';
 
 -- --------------------------------------------------------
 
@@ -1015,6 +1035,12 @@ ALTER TABLE `general_settings`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `homepage_setting`
+--
+ALTER TABLE `homepage_setting`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `invoices`
 --
 ALTER TABLE `invoices`
@@ -1186,6 +1212,11 @@ ALTER TABLE `favourite`
 --
 ALTER TABLE `general_settings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `homepage_setting`
+--
+ALTER TABLE `homepage_setting`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `invoices`
 --
