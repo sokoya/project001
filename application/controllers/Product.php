@@ -44,6 +44,7 @@ class Product extends MY_Controller
         }else{
             // Browser history
         }
+        $this->add_count($page_data['product']->id);
 		$page_data['page'] = 'product';
 		if (!$this->agent->is_mobile()) {
 			$this->load->view('landing/product', $page_data);
@@ -136,24 +137,24 @@ class Product extends MY_Controller
 	 * @param $id - product id
 	 * @return null
 	 */
-	function add_count($id)
-	{
-		if (!empty($id)) {
-			$this->load->helper('cookie');
-			$check_visitor = $this->input->cookie($id, FALSE);
-			// get the visitor Ip address
-			$ip = $this->input->ip_address();
-			if ($check_visitor == false) {
-				$cookie = array(
-					"name" => $id,
-					"value" => $ip,
-					"secure" => false
-				);
-				$this->input->set_cookie($cookie);
-				$this->product->set_field('products', 'views', 'views+1', array('id' => $id));
-			}
-		}
-	}
+    function add_count($id){
+        $this->load->helper('cookie');
+        $check_visitor = $this->input->cookie($id, FALSE);
+        // get the visitor Ip address
+        $ip = $this->input->ip_address();
+        $expire = (int) 7200;
+        if ($check_visitor == false) {
+            $cookie = array(
+                "name"   => $id,
+                "value"  => $ip,
+                "expire" =>  $expire,
+                "secure" => false
+            );
+            $this->input->set_cookie($cookie);
+            // set
+            $this->product->set_field('products', 'views','views+1',array('id' => $id));
+        }
+    }
 
 	/**
 	 * @param $product_id - product id
@@ -267,28 +268,28 @@ class Product extends MY_Controller
 
 	/*
      * Learn more about the warranty type
+	 * Used for mobile devices
      * */
 	public function warranty()
 	{
         $this->session->set_userdata('referred_from', current_url());
 		$uri = cleanit($this->uri->segment(2));
 		$index = substr($uri, strrpos($uri, '-') + 1);
+		if( !$index ) redirect(base_url());
 		$page_data['descriptions'] = $this->product->get_results('products', 'product_warranty, warranty_type, warranty_address', "(id = {$index})");
 		$page_data['page'] = 'warranty';
-		if ($this->agent->is_mobile()) {
-			$this->load->view('landing/mobile/warranty', $page_data);
-		} else {
-			$this->load->view('landing/warranty', $page_data);
-		}
+		$this->load->view('landing/mobile/warranty', $page_data);
 	}
 
 	/*
      * Product description with the specification
+	 * Used for mobile devices
      * */
     public function description(){
         $this->session->set_userdata('referred_from', current_url());
         $uri = cleanit( $this->uri->segment(2));
         $index = substr($uri, strrpos($uri, '-') + 1);
+        if( !$index ) redirect( base_url());
         $page_data['url'] = base_url('product/'.$uri .'/');
         $page_data['description'] = DESCRIPTION;
         $page_data['title'] = "Product Specification and Description for  " . $uri;
@@ -299,10 +300,13 @@ class Product extends MY_Controller
 
 	/*
      * Show all rating and reviews
+	 * Used for Mobile deviced
      * */
     public function reviews(){
+        $this->session->set_userdata('referred_from', current_url());
         $uri = cleanit( $this->uri->segment(2));
         $index = substr($uri, strrpos($uri, '-') + 1);
+        if( !$index) redirect(base_url());
         $page_data['rating_counts'] = $this->product->get_rating_counts($index);
         $page_data['reviews'] = $this->product->get_reviews($index);
         $page_data['title'] = "Reviews For " . $uri;
@@ -319,6 +323,7 @@ class Product extends MY_Controller
         $this->session->set_userdata('referred_from', current_url());
         $uri = cleanit( $this->uri->segment(2));
         $page_data['id'] = substr($uri, strrpos($uri, '-') + 1);
+//        if( !$page_data['id'] || !is_int($page_data['id'])) redirect(base_url());
         $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 		$page_data['page'] = 'add-rating';
 		$page_data['title'] = "Write rating and reviews for " . $uri;

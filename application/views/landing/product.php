@@ -97,40 +97,46 @@
 										href="javascript:void(0)"
 										data-rel="{gallery:'gal-1', smallimage: '<?= PRODUCTS_IMAGE_PATH . "c_scale,w_400/" . $gallery->image_name ?>',
                                            largeimage: '<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>'}">
-										<img class="lazy" src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
-											 alt="<?= $product->product_name; ?>"
-											 title="<?= $product->product_name ?>" width="100"/>
-									</a>
-								</li>
-							<?php endforeach; ?>
-						</ul>
-					<?php endif; ?>
-				</div>
-				<div class="col-md-7">
-					<div class="row" data-gutter="10">
-						<div class="col-md-12">
-							<div class="box">
-								<div class="row">
-									<div class="col-md-5">
-										<ul class="product-page-product-rating">
-											<?= rating_star_generator($rating_counts); ?>
-										</ul>
-										<p class="product-page-product-rating-sign">
-											<a href="#"><?= count($rating_counts); ?> customer reviews</a> | <strong> 34
-												SOLDS</strong>
-										</p>
-										<p class="product-page-desc">
-											<strong
-												class="custom-product-title"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></strong>
-										</p>
-										<p class=" text-sm text-uppercase pr-id"><strong>Product ID
-												:</strong> <?= $product->sku; ?>
-											| <strong>Seller : </strong><a
-												href="#"
-												id="pr-seller"><?= ucwords($product->first_name . ' ' . $product->last_name); ?></a>
-										</p>
-										<?php if (!empty($product->dimensions)): ?>
-											<span class="text-md text-md-center">
+                                        <img class="lazy" src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
+                                             alt="<?= $product->product_name; ?>"
+                                             title="<?= $product->product_name ?>" width="100"/>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
+                </div>
+                <div class="col-md-7">
+                    <div class="row" data-gutter="10">
+                        <div class="col-md-12">
+                            <div class="box">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <ul class="product-page-product-rating">
+                                            <?= rating_star_generator($rating_counts); ?>
+                                        </ul>
+                                        <p class="product-page-product-rating-sign">
+                                            <?php if( count($rating_counts)) :?>
+                                                <a href="#review"><?= count($rating_counts); ?> customer reviews</a> | <strong> 34
+                                                    SOLDS</strong>
+                                            <?php else : ?>
+                                                <a href="#reviews">Be the first to rate this product</a> | <strong> 34
+                                                    SOLDS</strong>
+                                            <?php endif; ?>
+
+                                        </p>
+                                        <p class="product-page-desc">
+                                            <strong
+                                                    class="custom-product-title"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></strong>
+                                        </p>
+                                        <p class=" text-sm text-uppercase pr-id"><strong>Product ID
+                                                :</strong> <?= $product->sku; ?>
+                                            | <strong>Seller : </strong><a
+                                                    href="#"
+                                                    id="pr-seller"><?= ucwords($product->first_name . ' ' . $product->last_name); ?></a>
+                                        </p>
+                                        <?php if (!empty($product->dimensions)): ?>
+                                            <span class="text-md text-md-center">
 												<strong>Measurement: </strong><?= $product->dimensions; ?>cm
                                         	</span>
 										<?php endif; ?>
@@ -314,266 +320,447 @@
 								<div class="product-page-side-section">
 									<h5 class="product-page-side-title">Share This Product</h5>
 
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="gap"></div>
-			<div class="tabbable product-tabs" id="description-tab">
-				<ul class="nav nav-tabs" id="myTab">
-					<li class="active"><a href="#overview" data-toggle="tab"><i class="fa fa-list nav-tab-icon"></i>Overview</a>
-					</li>
-					<li><a href="#full-spec" data-toggle="tab"><i class="fa fa-cogs nav-tab-icon"></i>Full Specs</a>
-					</li>
-					<li><a href="#review" data-toggle="tab"><i class="fa fa-star nav-tab-icon"></i>Rating
-							and
-							Reviews</a>
-					</li>
-				</ul>
-				<div class="tab-content">
-					<div class="tab-pane fade in active" id="overview">
-						<div class="product-overview-section gap-top">
-							<?php if (!empty($product->product_line)) : ?>
-								<h3 class="product-overview-title pr-over"> Product Frontline</h3>
-								<div class="product-overview-desc">
-									<p><?= $product->product_line; ?></p>
-								</div>
-							<?php endif; ?>
-							<?php if (!empty($product->product_description)): ?>
-								<h3 class="product-overview-title pr-over">Product Description</h3>
-								<div class="product-overview-desc">
-									<p style="text-wrap: normal">
-										<?= $product->product_description; ?>
-									</p>
-								</div>
-							<?php endif; ?>
-							<?php if (!empty($product->in_the_box)): ?>
-								<h3 class="product-overview-title pr-over">What you will find in the box</h3>
-								<div class="product-overview-desc">
-									<p style="text-wrap: normal">
-										<?= $product->in_the_box; ?>
-									</p>
-								</div>
-							<?php endif; ?>
-							<?php if (!empty($product->certifications)): ?>
-								<h3 class="product-overview-title pr-over">Certifications</h3>
-								<div class="product-overview-desc">
-									<p style="text-wrap: normal">
-										<?php
-										$certifications = json_decode($product->certifications);
-										if ($certifications) {
-											foreach ($certifications as $type) echo '<strong>' . $type . '</strong> ';
-										}
-										?>
-									</p>
-								</div>
-							<?php endif; ?>
-							<?php if (!empty($product->warranty_type)): ?>
-								<h3 class="product-overview-title pr-over">Warranty Type</h3>
-								<div class="product-overview-desc">
-									<p style="text-wrap: normal">
-										This product has the following warranty :
-										<?php
-										$warranty_type = json_decode($product->warranty_type);
-										foreach ($warranty_type as $type) echo '<strong>' . $type . '</strong> ';
-										?>
-									</p>
-								</div>
-							<?php endif; ?>
-							<?php if (!empty($product->product_warranty)): ?>
-								<h3 class="product-overview-title pr-over">Product Warranty</h3>
-								<div class="product-overview-desc">
-									<p style="text-wrap: normal">
-										<?= $product->product_warranty; ?>
-									</p>
-								</div>
-							<?php endif; ?>
-							<?php if (!empty($product->warranty_address)): ?>
-								<h3 class="product-overview-title pr-over">Warranty Address</h3>
-								<div class="product-overview-desc">
-									<p style="text-wrap: normal">
-										<?= $product->warranty_address; ?>
-									</p>
-								</div>
-							<?php endif; ?>
-						</div>
-					</div>
-					<div class="tab-pane fade" id="full-spec">
-						<?php $specifications = json_decode($product->attributes); ?>
-						<?php if (!empty($specifications)) : ?>
-							<table class="table">
-								<thead>
-								<tr>
-									<th class="pr-over">Specs:</th>
-									<th class="pr-over">Details:</th>
-								</tr>
-								</thead>
-								<tbody>
-								<?php
-								foreach ($specifications as $specification => $specification_value): ?>
-									<tr>
-										<td class="product-page-features-table-specs"><?= ucwords(trim($specification)); ?></td>
-										<td class="product-page-features-table-details">
-											<?php
-											if (is_array($specification_value)):
-												foreach ($specification_value as $key) echo ucwords(trim($key)) . ', ';
-											else: echo ucwords(trim($specification_value));
-											endif;
-											?>
-										</td>
-									</tr>
-								<?php endforeach; ?>
-								</tbody>
-							</table>
-						<?php else : ?>
-							<h3 class="text-center text-danger"><strong>Product specification not avaialable for this
-									item.</strong></h3>
-						<?php endif; ?>
-					</div>
-					<div class="tab-pane fade" id="review">
-						<div class="row">
-							<div class="col-md-4">
-								<h3 class="product-tab-rating-title">Overall Customer Rating:</h3>
-								<ul class="product-page-product-rating product-rating-big">
-									<?= rating_star_generator($rating_counts); ?>
-									<li class="count">
-										<?php $overall_rating = product_overall_rating($rating_counts); ?>
-										<?= isset($overall_rating) ? $overall_rating : ''; ?>
-									</li>
-								</ul>
-							</div>
-							<div class="col-md-3">
-								<ul class="product-rate-list">
-									<?= rating_bar_display($rating_counts); ?>
-								</ul>
-							</div>
-							<div class="col-md-5">
-								<div class="row">
-									<?php
-									if ($this->session->userdata('logged_in')) :
-										$user = $this->product->get_rating_review('product_rating', 'rating_score', $profile->id, $product->id);
-										if (!$user):
-											?>
-											<div class="col-md-6">
-												<div class='starrr' id='star1'></div>
-											</div>
-											<div class="col-md-6">
-												<div class="rating-text"></div>
-											</div>
-										<?php elseif ($user): ?>
-											<div id="starr-rating">
-												<ul class="product-page-product-rating product-rating-big">
-													<?= single_user_rate($user->rating_score); ?>
-													<li class=""><span class="text-bold" style="font-size: 12px;"><a
-																href="javascript:void(0)" class="update_rating">Update Rating</a></span>
-													</li>
-												</ul>
-											</div>
-											<div id="starr-rating-active" style="display: none;">
-												<div class="col-md-6">
-													<div class='starrr' id='star1'></div>
-												</div>
-												<div class="col-md-6">
-													<div class="rating-text"></div>
-												</div>
-											</div>
-										<?php else : ?>
-											<div class="col-md-6">
-												<div class='starrr' id='star1'></div>
-											</div>
-											<div class="col-md-6">
-												<div class="rating-text"></div>
-											</div>
-										<?php endif; endif; ?>
-								</div>
-								<div id="review_submit"></div>
-								<form id="review_form" onsubmit="return false">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Title of review*</label>
-												<input type="text" name="title" placeholder="Title of the review"
-													   id="review_title"
-													   class="form-control" required>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Display name*</label>
-												<input type="text" name="display_name" placeholder="Display name"
-													   id="review_name"
-													   class="form-control" required>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<label>Review</label>
-										<textarea title="review" id="review_detail" name="review" rows="2"
-												  class="form-control" required
-												  placeholder="Write your review on this product."></textarea>
-									</div>
-									<input type="submit" class="btn btn-success" id="review_submit_button"
-										   value="Post Review">
-								</form>
-							</div>
-						</div>
-						<article class="product-review"></article>
-					</div>
-				</div>
-			</div>
-			<div class="gap"></div>
-			<?php if (count($likes)) { ?>
-				<h3 class="widget-title">You Might Also Like</h3>
-			<?php } ?>
-			<div class="row" data-gutter="15">
-				<?php
-				foreach ($likes as $like): ?>
-					<div class="col-md-2">
-						<div class="product">
-							<?php if ($like->views >= 100): ?>
-								<ul class="product-labels">
-									<li>hot</li>
-								</ul>
-							<?php endif; ?>
-							<div class="product-img-wrap">
-								<img class="product-img lazy"
-									 src="<?= base_url('assets/landing/img/load.gif'); ?>"
-									 data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?>"
-									 alt="<?= $like->product_name; ?>"
-									 title="<?= $like->product_name; ?>">
-							</div>
-							<a class="product-link" href="<?= base_url(urlify($like->product_name, $like->id)); ?>"></a>
-							<div class="product-caption">
-								<ul class="product-caption-rating">
-									<?php
-									$overall_rating = $this->product->get_rating_counts($like->id);
-									echo rating_star_generator($overall_rating);
-									?>
-								</ul>
-								<h5 class="product-caption-title"><?= character_limiter(ucwords($like->product_name), 30, '...'); ?></h5>
-								<div class="product-caption-price">
-									<?php if (discount_check($like->discount_price, $like->start_date, $like->end_date)) : ?>
-										<span class="product-caption-price-new"
-											  style="font-size:12px;"><?= ngn($like->discount_price); ?></span>
-										<span class="product-caption-price-old pull-right"
-											  style="font-size:12px;"><?= ngn($like->sale_price); ?></span>
-									<?php else : ?>
-										<span class="product-caption-price-new"
-											  style="font-size:12px;"><?= ngn($like->sale_price); ?> </span>
-									<?php endif; ?>
-								</div>
-								<ul class="product-caption-feature-list">
-								</ul>
-							</div>
-						</div>
-					</div>
-				<?php endforeach; ?>
-			</div>
-		<?php endif; ?>
-	</div>
-	<div class="gap gap-small"></div>
+                                    <input type="hidden" name="variation_id" class="variation_id"
+                                           value="<?= $var->id; ?>">
+                                    <input type="hidden" name="product_id" class="product_id"
+                                           value="<?= $product->id; ?>">
+                                </p>
+                                <hr class="product-line"/>
+                                <div class="product-variation">
+                                    <?= form_open('', 'id="variation-form"'); ?>
+                                    <div class="row">
+                                        <?php if (count($variations) > 0) : ?>
+                                            <div class="col-md-7">
+                                                <h5 class="custom-product-page-option-title">Variation:</h5>
+                                                <div class="row variation-option-list">
+                                                    <?php $qty_stock_check = 0 ;?>
+                                                    <?php foreach ($variations as $variation): ?>
+                                                        <div class="col-xs-3">
+                                                                <p title="<?= $variation['variation']; ?>"
+                                                                        data-price="<?= $variation['sale_price']; ?>"
+                                                                    <?php if (discount_check($variation['discount_price'], $variation['start_date'], $variation['end_date'])) : ?>
+                                                                        data-discount="<?= $variation['discount_price']; ?>"
+                                                                    <?php else : ?>
+                                                                        data-discount="empty"
+                                                                    <?php endif; ?>
+                                                                        data-vid="<?= $variation['id'] ?>"
+                                                                        data-quantity='<?= $variation['quantity'] ?>'
+                                                                        data-vname="<?= $variation['variation'] ?>"
+                                                                        class="variation-option <?php if ($variation['quantity'] == 0) echo 'option-disabled'; ?>">
+                                                                    <?= ellipsize(trim($variation['variation']), 8); ?>
+                                                                </p>
+                                                            </div>
+                                                        <?php if( $variation['quantity'] < 1 ) $qty_stock_check++; ?>
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
+                                        <div class="col-md-5 quan-u">
+                                            <h5 class="custom-product-page-option-title">Quantity:</h5>
+                                            <ul>
+                                                <li class="product-page-qty-item">
+                                                    <button type="button"
+                                                            class="product-page-qty product-page-qty-minus">-
+                                                    </button>
+                                                    <input data-range="<?= $var->quantity; ?>" name="quantity"
+                                                           id="quan"
+                                                           class="product-page-qty product-page-qty-input quantity"
+                                                           type="text"
+                                                           value="1"/>
+                                                    <button type="button"
+                                                            class="product-page-qty product-page-qty-plus">+
+                                                    </button>
+                                                </li>
+                                                <span class="text-sm text-danger" id="quantity-text"></span>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <button type="submit" style="display: none;">Submit</button>
+                                    <?= form_close(); ?>
+                                </div>
+                                <div id="status"></div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6 clearfix">
+                                        <?php
+                                        //            Make A check to confirm if the product is still in stock
+                                        if($qty_stock_check == count( $variations)) :  ?>
+                                            <button class="btn btn-block btn-primary c-hover" disabled
+                                                    type="button">
+                                                <i class="fa fa-shopping-cart"></i> Out of Stock
+                                            </button>
+                                        <?php else : ?>
+                                            <button class="btn btn-block btn-primary add-to-cart c-hover"
+                                                    type="button" <?php if (!empty($product->colour_family)) echo 'data-colour="colour"'; ?> <?php if (count($variations)) echo 'data-variation="variation"'; ?> >
+                                                <i class="fa fa-shopping-cart"></i> Add to Cart
+                                            </button>
+                                        <?php endif; ?>
+                                    </div>
+                                    <?php if ($this->session->userdata('logged_in')):
+                                        if ($favourite) :
+                                            ?>
+                                            <div class="col-md-6 col-lg-6">
+                                                <a class="btn btn-block btn-default wishlist-cta"
+                                                   data-pid="<?= $product->id; ?>"
+                                                   href="javascript:void(0)"><i class="fa fa-star"></i>Remove From
+                                                    Wishlist</a>
+                                            </div>
+                                        <?php else : ?>
+                                            <div class="col-md-6 col-lg-6">
+                                                <a class="btn btn-block btn-default wishlist-cta c-hover"
+                                                   data-pid="<?= $product->id; ?>"
+                                                   href="javascript:void(0)"><i class="fa fa-star-o"></i>Add to Wishlist</a>
+                                            </div>
+                                        <?php endif; ?>
+                                    <?php else : ?>
+                                        <div class="col-md-6 col-lg-6">
+                                            <a class="btn btn-block btn-default c-hover"
+                                               href="<?= base_url('login'); ?>"><i
+                                                        class="fa fa-star-o"></i>Add to Wishlist</a>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                <br/>
+                                <div class="product-page-side-section">
+                                    <h5 class="product-page-side-title">Share This Product</h5>
+                                    <ul class="product-page-share-item">
+                                        <li>
+                                            <a class="fa fa-facebook" href="#"></a>
+                                        </li>
+                                        <li>
+                                            <a class="fa fa-twitter" href="#"></a>
+                                        </li>
+                                        <li>
+                                            <a class="fa fa-pinterest" href="#"></a>
+                                        </li>
+                                        <li>
+                                            <a class="fa fa-instagram" href="#"></a>
+                                        </li>
+                                        <li>
+                                            <a class="fa fa-google-plus" href="#"></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--  Specification details -->
+            <div class="gap"></div>
+            <div class="tabbable product-tabs" id="description-tab">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="active"><a href="#overview" data-toggle="tab"><i class="fa fa-list nav-tab-icon"></i>Overview</a>
+                    </li>
+                    <li><a href="#full-spec" data-toggle="tab"><i class="fa fa-cogs nav-tab-icon"></i>Full Specs</a>
+                    </li>
+                    <li><a href="#review" data-toggle="tab"><i class="fa fa-star nav-tab-icon"></i>Rating
+                            and
+                            Reviews</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="overview">
+                        <div class="product-overview-section gap-top">
+                            <?php if (!empty($product->product_line)) : ?>
+                                <h3 class="product-overview-title pr-over"> Product Frontline</h3>
+                                <div class="product-overview-desc">
+                                    <p><?= $product->product_line; ?></p>
+                                </div>
+                            <?php endif; ?>
+                            <?php if (!empty($product->product_description)): ?>
+                                <h3 class="product-overview-title pr-over">Product Description</h3>
+                                <div class="product-overview-desc">
+                                    <p style="text-wrap: normal">
+                                        <?= $product->product_description; ?>
+                                    </p>
+                                </div>
+                            <?php endif; ?>
+                            <?php if (!empty($product->in_the_box)): ?>
+                                <h3 class="product-overview-title pr-over">What you will find in the box</h3>
+                                <div class="product-overview-desc">
+                                    <p style="text-wrap: normal">
+                                        <?= $product->in_the_box; ?>
+                                    </p>
+                                </div>
+                            <?php endif; ?>
+                            <?php if (!empty($product->certifications)): ?>
+                                <h3 class="product-overview-title pr-over">Certifications</h3>
+                                <div class="product-overview-desc">
+                                    <p style="text-wrap: normal">
+                                        <?php
+                                        $certifications = json_decode($product->certifications);
+                                        if ($certifications) {
+                                            foreach ($certifications as $type) echo '<strong>' . $type . '</strong> ';
+                                        }
+                                        ?>
+                                    </p>
+                                </div>
+                            <?php endif; ?>
+                            <?php if (!empty($product->warranty_type)): ?>
+                                <h3 class="product-overview-title pr-over">Warranty Type</h3>
+                                <div class="product-overview-desc">
+                                    <p style="text-wrap: normal">
+                                        This product has the following warranty :
+                                        <?php
+                                        $warranty_type = json_decode($product->warranty_type);
+                                        foreach ($warranty_type as $type) echo '<strong>' . $type . '</strong> ';
+                                        ?>
+                                    </p>
+                                </div>
+                            <?php endif; ?>
+                            <?php if (!empty($product->product_warranty)): ?>
+                                <h3 class="product-overview-title pr-over">Product Warranty</h3>
+                                <div class="product-overview-desc">
+                                    <p style="text-wrap: normal">
+                                        <?= $product->product_warranty; ?>
+                                    </p>
+                                </div>
+                            <?php endif; ?>
+                            <?php if (!empty($product->warranty_address)): ?>
+                                <h3 class="product-overview-title pr-over">Warranty Address</h3>
+                                <div class="product-overview-desc">
+                                    <p style="text-wrap: normal">
+                                        <?= $product->warranty_address; ?>
+                                    </p>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="full-spec">
+                        <?php $specifications = json_decode($product->attributes); ?>
+                        <?php if (!empty($specifications)) : ?>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="pr-over">Specs:</th>
+                                    <th class="pr-over">Details:</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                foreach ($specifications as $specification => $specification_value): ?>
+                                    <tr>
+                                        <td class="product-page-features-table-specs"><?= ucwords(trim($specification)); ?></td>
+                                        <td class="product-page-features-table-details">
+                                            <?php
+                                            if (is_array($specification_value)):
+                                                foreach ($specification_value as $key) echo ucwords(trim($key)) . ', ';
+                                            else: echo ucwords(trim($specification_value));
+                                            endif;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        <?php else : ?>
+                            <h3 class="text-center text-danger"><strong>Product specification not avaialable for this
+                                    item.</strong></h3>
+                        <?php endif; ?>
+                    </div>
+                    <div class="tab-pane fade" id="review">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h3 class="product-tab-rating-title">Overall Customer Rating:</h3>
+                                <ul class="product-page-product-rating product-rating-big">
+                                    <?= rating_star_generator($rating_counts); ?>
+                                    <li class="count">
+                                        <?php $overall_rating = product_overall_rating($rating_counts); ?>
+                                        <?= isset($overall_rating) ? $overall_rating : ''; ?>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3">
+                                <ul class="product-rate-list">
+                                    <?= rating_bar_display($rating_counts); ?>
+                                </ul>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="row">
+                                    <?php
+                                    if ($this->session->userdata('logged_in')) :
+                                        $user = $this->product->get_rating_review('product_rating', 'rating_score', $profile->id, $product->id);
+                                        if (!$user):
+                                            ?>
+                                            <div class="col-md-6">
+                                                <div class='starrr' id='star1'></div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="rating-text"></div>
+                                            </div>
+                                        <?php elseif ($user): ?>
+                                            <div id="starr-rating">
+                                                <ul class="product-page-product-rating product-rating-big">
+                                                    <?= single_user_rate($user->rating_score); ?>
+                                                    <li class=""><span class="text-bold" style="font-size: 12px;"><a
+                                                                    href="javascript:void(0)" class="update_rating">Update Rating</a></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div id="starr-rating-active" style="display: none;">
+                                                <div class="col-md-6">
+                                                    <div class='starrr' id='star1'></div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="rating-text"></div>
+                                                </div>
+                                            </div>
+                                        <?php else : ?>
+                                            <div class="col-md-6">
+                                                <div class='starrr' id='star1'></div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="rating-text"></div>
+                                            </div>
+                                        <?php endif; endif; ?>
+                                </div>
+                                <div id="review_submit"></div>
+                                <form id="review_form" onsubmit="return false">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Title of review*</label>
+                                                <input type="text" name="title" placeholder="Title of the review"
+                                                       id="review_title"
+                                                       class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Display name*</label>
+                                                <input type="text" name="display_name" placeholder="Display name"
+                                                       id="review_name"
+                                                       class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Review</label>
+                                        <textarea title="review" id="review_detail" name="review" rows="2"
+                                                  class="form-control" required placeholder="Write your review on this product."></textarea>
+                                    </div>
+                                    <input type="submit" class="btn btn-success" id="review_submit_button"
+                                           value="Post Review">
+                                </form>
+                            </div>
+                        </div>
+                        <article class="product-review"></article>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gap"></div>
+            <?php $excludes = array();?>
+            <?php if (count($likes))  :  ?>
+                <h3 class="widget-title">You Might Also Like</h3>
+                <div class="row" data-gutter="15">
+                    <?php foreach ($likes as $like): ?>
+                        <div class="col-md-2">
+                            <div class="product">
+                                <?php if ($like->views >= 100): ?>
+                                    <ul class="product-labels">
+                                        <li>hot deal</li>
+                                    </ul>
+                                <?php endif; ?>
+                                <?php if (discount_check($like->discount_price, $like->start_date, $like->end_date)): ?>
+                                    <ul class="product-labels">
+                                        <li><?= get_discount($like->sale_price, $like->discount_price); ?></li>
+                                    </ul>
+                                <?php endif; ?>
+                                <div class="product-img-wrap">
+                                    <img class="product-img lazy"
+                                         src="<?= base_url('assets/landing/img/load.gif'); ?>"
+                                         data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?>"
+                                         alt="<?= $like->product_name; ?>"
+                                         title="<?= $like->product_name; ?>">
+                                </div>
+                                <a class="product-link" href="<?= base_url(urlify($like->product_name, $like->id)); ?>"></a>
+                                <div class="product-caption">
+                                    <ul class="product-caption-rating">
+                                        <?php
+                                        $overall_rating = $this->product->get_rating_counts($like->id);
+                                        echo rating_star_generator($overall_rating);
+                                        ?>
+                                        <li class="pull-right"><span class="text-danger" style="font-size: 12px;"><strong><?= $like->item_left; ?> left</strong></span></li>
+                                    </ul>
+                                    <h5 class="product-caption-title"><?= character_limiter(ucwords($like->product_name), 30, '...'); ?></h5>
+                                    <div class="product-caption-price">
+                                        <?php if (discount_check($like->discount_price, $like->start_date, $like->end_date)) : ?>
+                                            <span class="product-caption-price-new" style="font-size:12px;"><?= ngn($like->discount_price); ?></span>
+                                            <span class="product-caption-price-old pull-right" style="font-size:12px;"><?= ngn($like->sale_price); ?></span>
+                                        <?php else : ?>
+                                            <span class="product-caption-price-new" style="font-size:12px;"><?= ngn($like->sale_price); ?> </span>
+                                        <?php endif; ?>
+                                    </div>
+                                    <ul class="product-caption-feature-list">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    <?php array_push( $excludes, $like->id); ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if( $this->session->userdata('logged_in')) :
+                array_push( $excludes, $product->id);
+                $recently_viewed = $this->user->get_recently_viewed( $this->session->userdata('logged_id') , $excludes);
+                if( $recently_viewed && count( $recently_viewed) ) : ?>
+                    <div class="gap gap-small"></div>
+                    <h3 class="widget-title">Products you recently viewed</h3>
+                    <div class="row" data-gutter="15">
+                        <?php foreach ($recently_viewed as $viewed): ?>
+                            <div class="col-md-2">
+                                <div class="product">
+                                    <?php if ($viewed->views >= 100): ?>
+                                        <ul class="product-labels">
+                                            <li>hot</li>
+                                        </ul>
+                                    <?php endif; ?>
+                                    <div class="product-img-wrap">
+                                        <img class="product-img lazy"
+                                             src="<?= base_url('assets/landing/img/load.gif'); ?>"
+                                             data-src="<?= PRODUCTS_IMAGE_PATH . $viewed->image_name; ?>"
+                                             alt="<?= $viewed->product_name; ?>"
+                                             title="<?= $viewed->product_name; ?>">
+                                    </div>
+                                    <a class="product-link" href="<?= base_url(urlify($viewed->product_name, $viewed->id)); ?>"></a>
+                                    <div class="product-caption">
+                                        <ul class="product-caption-rating">
+                                            <?php
+                                            $overall_rating = $this->product->get_rating_counts($viewed->id);
+                                            echo rating_star_generator($overall_rating);
+                                            ?>
+                                            <li class="pull-right"><span class="text-danger" style="font-size: 12px;"><strong><?= $viewed->item_left; ?> left</strong></span></li>
+                                        </ul>
+                                        <h5 class="product-caption-title"><?= character_limiter(ucwords($viewed->product_name), 30, '...'); ?></h5>
+                                        <div class="product-caption-price">
+                                            <?php if (discount_check($viewed->discount_price, $viewed->start_date, $viewed->end_date)) : ?>
+                                                <span class="product-caption-price-new" style="font-size:12px;"><?= ngn($viewed->discount_price); ?></span>
+                                                <span class="product-caption-price-old pull-right" style="font-size:12px;"><?= ngn($viewed->sale_price); ?></span>
+                                            <?php else : ?>
+                                                <span class="product-caption-price-new" style="font-size:12px;"><?= ngn($viewed->sale_price); ?> </span>
+                                            <?php endif; ?>
+                                        </div>
+                                        <ul class="product-caption-feature-list">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php
+                    // recently_viewed and count
+                endif; ?>
+            <?php
+                // Logged in check
+            endif; ?>
+        <?php
+            // /endif product is valid
+        endif; ?>
+    </div>
+    <div class="gap gap-small"></div>
 
 	<div id="prod-confirmation" class="modal fade" role="dialog">
 		<div class="modal-dialog">

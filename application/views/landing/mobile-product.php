@@ -551,6 +551,7 @@
                             <img class="suggested-image lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
                                  data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?> "/>
                             <p class="suggested-image-text"><?= character_limiter($like->product_name, 15); ?></p>
+                            <span class="text-bold"><?= $like->item_left; ?> left</span>
                         </a>
                     <?php endforeach; ?>
                 </div>
