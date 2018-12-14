@@ -11,6 +11,6 @@ class MY_Controller extends CI_Controller {
 		define('TWITTER_LINK', $general_settings->twitter_link);
 		define('DESCRIPTION', $general_settings->description);
 		define('KEYWORD', $general_settings->keywords);
-//		define('BILLING')
+		
 	}
 }

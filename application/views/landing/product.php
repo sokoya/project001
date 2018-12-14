@@ -116,8 +116,14 @@
                                             <?= rating_star_generator($rating_counts); ?>
                                         </ul>
                                         <p class="product-page-product-rating-sign">
-                                            <a href="#"><?= count($rating_counts); ?> customer reviews</a> | <strong> 34
-                                                SOLDS</strong>
+                                            <?php if( count($rating_counts)) :?>
+                                                <a href="#review"><?= count($rating_counts); ?> customer reviews</a> | <strong> 34
+                                                    SOLDS</strong>
+                                            <?php else : ?>
+                                                <a href="#reviews">Be the first to rate this product</a> | <strong> 34
+                                                    SOLDS</strong>
+                                            <?php endif; ?>
+
                                         </p>
                                         <p class="product-page-desc">
                                             <strong
@@ -207,21 +213,20 @@
                                                     <?php $qty_stock_check = 0 ;?>
                                                     <?php foreach ($variations as $variation): ?>
                                                         <div class="col-xs-3">
-                                                            <p
-                                                                    title="<?= $variation['variation']; ?>"
-                                                                    data-price="<?= $variation['sale_price']; ?>"
-                                                                <?php if (discount_check($variation['discount_price'], $variation['start_date'], $variation['end_date'])) : ?>
-                                                                    data-discount="<?= $variation['discount_price']; ?>"
-                                                                <?php else : ?>
-                                                                    data-discount="empty"
-                                                                <?php endif; ?>
-                                                                    data-vid="<?= $variation['id'] ?>"
-                                                                    data-quantity='<?= $variation['quantity'] ?>'
-                                                                    data-vname="<?= $variation['variation'] ?>"
-                                                                    class="variation-option <?php if ($variation['quantity'] == 0) echo 'option-disabled'; ?>">
-                                                                <?= ellipsize(trim($variation['variation']), 8); ?>
-                                                            </p>
-                                                        </div>
+                                                                <p title="<?= $variation['variation']; ?>"
+                                                                        data-price="<?= $variation['sale_price']; ?>"
+                                                                    <?php if (discount_check($variation['discount_price'], $variation['start_date'], $variation['end_date'])) : ?>
+                                                                        data-discount="<?= $variation['discount_price']; ?>"
+                                                                    <?php else : ?>
+                                                                        data-discount="empty"
+                                                                    <?php endif; ?>
+                                                                        data-vid="<?= $variation['id'] ?>"
+                                                                        data-quantity='<?= $variation['quantity'] ?>'
+                                                                        data-vname="<?= $variation['variation'] ?>"
+                                                                        class="variation-option <?php if ($variation['quantity'] == 0) echo 'option-disabled'; ?>">
+                                                                    <?= ellipsize(trim($variation['variation']), 8); ?>
+                                                                </p>
+                                                            </div>
                                                         <?php if( $variation['quantity'] < 1 ) $qty_stock_check++; ?>
                                                     <?php endforeach; ?>
                                                 </div>
@@ -317,6 +322,8 @@
                     </div>
                 </div>
             </div>
+
+            <!--  Specification details -->
             <div class="gap"></div>
             <div class="tabbable product-tabs" id="description-tab">
                 <ul class="nav nav-tabs" id="myTab">
@@ -519,52 +526,116 @@
                     </div>
                 </div>
             </div>
+
             <div class="gap"></div>
-            <?php if (count($likes)) { ?>
+            <?php $excludes = array();?>
+            <?php if (count($likes))  :  ?>
                 <h3 class="widget-title">You Might Also Like</h3>
-            <?php } ?>
-            <div class="row" data-gutter="15">
-                <?php
-                foreach ($likes as $like): ?>
-                    <div class="col-md-2">
-                        <div class="product">
-                            <?php if ($like->views >= 100): ?>
-                                <ul class="product-labels">
-                                    <li>hot</li>
-                                </ul>
-                            <?php endif; ?>
-                            <div class="product-img-wrap">
-                                <img class="product-img lazy"
-                                     src="<?= base_url('assets/landing/img/load.gif'); ?>"
-                                     data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?>"
-                                     alt="<?= $like->product_name; ?>"
-                                     title="<?= $like->product_name; ?>">
-                            </div>
-                            <a class="product-link" href="<?= base_url(urlify($like->product_name, $like->id)); ?>"></a>
-                            <div class="product-caption">
-                                <ul class="product-caption-rating">
-                                    <?php
-                                    $overall_rating = $this->product->get_rating_counts($like->id);
-                                    echo rating_star_generator($overall_rating);
-                                    ?>
-                                </ul>
-                                <h5 class="product-caption-title"><?= character_limiter(ucwords($like->product_name), 30, '...'); ?></h5>
-                                <div class="product-caption-price">
-                                    <?php if (discount_check($like->discount_price, $like->start_date, $like->end_date)) : ?>
-                                        <span class="product-caption-price-new" style="font-size:12px;"><?= ngn($like->discount_price); ?></span>
-                                        <span class="product-caption-price-old pull-right" style="font-size:12px;"><?= ngn($like->sale_price); ?></span>
-                                    <?php else : ?>
-                                        <span class="product-caption-price-new" style="font-size:12px;"><?= ngn($like->sale_price); ?> </span>
-                                    <?php endif; ?>
+                <div class="row" data-gutter="15">
+                    <?php foreach ($likes as $like): ?>
+                        <div class="col-md-2">
+                            <div class="product">
+                                <?php if ($like->views >= 100): ?>
+                                    <ul class="product-labels">
+                                        <li>hot deal</li>
+                                    </ul>
+                                <?php endif; ?>
+                                <?php if (discount_check($like->discount_price, $like->start_date, $like->end_date)): ?>
+                                    <ul class="product-labels">
+                                        <li><?= get_discount($like->sale_price, $like->discount_price); ?></li>
+                                    </ul>
+                                <?php endif; ?>
+                                <div class="product-img-wrap">
+                                    <img class="product-img lazy"
+                                         src="<?= base_url('assets/landing/img/load.gif'); ?>"
+                                         data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?>"
+                                         alt="<?= $like->product_name; ?>"
+                                         title="<?= $like->product_name; ?>">
                                 </div>
-                                <ul class="product-caption-feature-list">
-                                </ul>
+                                <a class="product-link" href="<?= base_url(urlify($like->product_name, $like->id)); ?>"></a>
+                                <div class="product-caption">
+                                    <ul class="product-caption-rating">
+                                        <?php
+                                        $overall_rating = $this->product->get_rating_counts($like->id);
+                                        echo rating_star_generator($overall_rating);
+                                        ?>
+                                        <li class="pull-right"><span class="text-danger" style="font-size: 12px;"><strong><?= $like->item_left; ?> left</strong></span></li>
+                                    </ul>
+                                    <h5 class="product-caption-title"><?= character_limiter(ucwords($like->product_name), 30, '...'); ?></h5>
+                                    <div class="product-caption-price">
+                                        <?php if (discount_check($like->discount_price, $like->start_date, $like->end_date)) : ?>
+                                            <span class="product-caption-price-new" style="font-size:12px;"><?= ngn($like->discount_price); ?></span>
+                                            <span class="product-caption-price-old pull-right" style="font-size:12px;"><?= ngn($like->sale_price); ?></span>
+                                        <?php else : ?>
+                                            <span class="product-caption-price-new" style="font-size:12px;"><?= ngn($like->sale_price); ?> </span>
+                                        <?php endif; ?>
+                                    </div>
+                                    <ul class="product-caption-feature-list">
+                                    </ul>
+                                </div>
                             </div>
                         </div>
+                    <?php array_push( $excludes, $like->id); ?>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if( $this->session->userdata('logged_in')) :
+                array_push( $excludes, $product->id);
+                $recently_viewed = $this->user->get_recently_viewed( $this->session->userdata('logged_id') , $excludes);
+                if( $recently_viewed && count( $recently_viewed) ) : ?>
+                    <div class="gap gap-small"></div>
+                    <h3 class="widget-title">Products you recently viewed</h3>
+                    <div class="row" data-gutter="15">
+                        <?php foreach ($recently_viewed as $viewed): ?>
+                            <div class="col-md-2">
+                                <div class="product">
+                                    <?php if ($viewed->views >= 100): ?>
+                                        <ul class="product-labels">
+                                            <li>hot</li>
+                                        </ul>
+                                    <?php endif; ?>
+                                    <div class="product-img-wrap">
+                                        <img class="product-img lazy"
+                                             src="<?= base_url('assets/landing/img/load.gif'); ?>"
+                                             data-src="<?= PRODUCTS_IMAGE_PATH . $viewed->image_name; ?>"
+                                             alt="<?= $viewed->product_name; ?>"
+                                             title="<?= $viewed->product_name; ?>">
+                                    </div>
+                                    <a class="product-link" href="<?= base_url(urlify($viewed->product_name, $viewed->id)); ?>"></a>
+                                    <div class="product-caption">
+                                        <ul class="product-caption-rating">
+                                            <?php
+                                            $overall_rating = $this->product->get_rating_counts($viewed->id);
+                                            echo rating_star_generator($overall_rating);
+                                            ?>
+                                            <li class="pull-right"><span class="text-danger" style="font-size: 12px;"><strong><?= $viewed->item_left; ?> left</strong></span></li>
+                                        </ul>
+                                        <h5 class="product-caption-title"><?= character_limiter(ucwords($viewed->product_name), 30, '...'); ?></h5>
+                                        <div class="product-caption-price">
+                                            <?php if (discount_check($viewed->discount_price, $viewed->start_date, $viewed->end_date)) : ?>
+                                                <span class="product-caption-price-new" style="font-size:12px;"><?= ngn($viewed->discount_price); ?></span>
+                                                <span class="product-caption-price-old pull-right" style="font-size:12px;"><?= ngn($viewed->sale_price); ?></span>
+                                            <?php else : ?>
+                                                <span class="product-caption-price-new" style="font-size:12px;"><?= ngn($viewed->sale_price); ?> </span>
+                                            <?php endif; ?>
+                                        </div>
+                                        <ul class="product-caption-feature-list">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
+                <?php
+                    // recently_viewed and count
+                endif; ?>
+            <?php
+                // Logged in check
+            endif; ?>
+        <?php
+            // /endif product is valid
+        endif; ?>
     </div>
     <div class="gap gap-small"></div>
 

@@ -260,7 +260,7 @@ Class Product_model extends CI_Model{
         // $this->db->cache_on();
         // Lets confirm the slug is valid
         if( $this->check_slug_availability( $queries['str'] ) ) {
-            $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price, v.start_date,v.end_date, g.image_name,s.first_name
+            $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left, g.image_name,s.first_name
             FROM products p";
             if( isset($gets['price_min']) && !empty($gets['price_min']) && isset($gets['price_max']) && !empty($gets['price_max']) ){
                 $min = xss_clean($gets['price_min']); $max = xss_clean($gets['price_max']);
@@ -358,7 +358,7 @@ Class Product_model extends CI_Model{
         $this->db->select('category_id');
         $this->db->where('id', $id);
         $product_detail_category_id = $this->db->get('products')->row()->category_id;
-        $select_query = "SELECT p.id,p.views, p.product_name, v.sale_price, v.discount_price, v.start_date, v.end_date, g.image_name
+        $select_query = "SELECT p.id,p.views, p.product_name, v.sale_price, v.discount_price, v.start_date, v.end_date, SUM(v.quantity) as item_left, g.image_name
             FROM products p JOIN (SELECT var.product_id, var.discount_price, var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var 
             WHERE var.quantity > 0 ORDER BY var.id) AS v ON (p.id = v.product_id) JOIN product_gallery AS g ON (p.id = g.product_id AND g.featured_image = 1) 
             WHERE p.id != '$id' AND p.category_id = '{$product_detail_category_id}' GROUP BY p.id ORDER BY RAND() LIMIT 6";
@@ -413,15 +413,17 @@ Class Product_model extends CI_Model{
         return '';
     }
 
-    // Get products minimum price range
+    /*
+     * Get price range which will be used for price filter, on category, search page
+     * */
     function ger_price_range( $category , $product_name = ''){
         if( $this->check_slug_availability( $category )) {
             $array = $this->slug($category);
-            $select = "SELECT MIN(v.sale_price) minimum, MAX(v.sale_price) maximum FROM product_variation v LEFT JOIN products p ON(v.product_id = p.id) WHERE p.category_id IN ('".implode("','",$array)."') ";
+            $select = "SELECT v.sale_price minimum, v.sale_price maximum FROM product_variation v LEFT JOIN products p ON(v.product_id = p.id) WHERE p.category_id IN ('".implode("','",$array)."') ";
             return $this->db->query( $select )->row();
         }elseif( $product_name != ''){
             $product_name = xss_clean($product_name);
-            $select = "SELECT MIN(v.sale_price) minimum, MAX(v.sale_price) maximum FROM product_variation v LEFT JOIN products p ON(v.product_id = p.id) WHERE p.product_name LIKE '%{$product_name}%'";
+            $select = "SELECT v.sale_price minimum, v.sale_price maximum FROM product_variation v LEFT JOIN products p ON(v.product_id = p.id) WHERE p.product_name LIKE '%{$product_name}%'";
             return $this->db->query( $select)->row();
         }
     }
@@ -474,7 +476,7 @@ Class Product_model extends CI_Model{
             return $number;
     }
 
-    // increase view
+    // increase view or dynamically set a value
     function set_field( $table, $field, $set, $where ){
         $this->db->where($where);
         $this->db->set($field, $set, false);
@@ -548,7 +550,7 @@ Class Product_model extends CI_Model{
 
     // SEARCH CATEGORY PRODUCTS PAGE
     function get_search_products( $queries = array() , $gets = array() ){
-        $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price, v.start_date,v.end_date, g.image_name,s.first_name
+        $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left,  g.image_name,s.first_name
             FROM products p";
         if( isset($gets['price_min']) && !empty($gets['price_min']) && isset($gets['price_max']) && !empty($gets['price_max']) ){
             $min = xss_clean($gets['price_min']); $max = xss_clean($gets['price_max']);

@@ -333,7 +333,9 @@ Class User_model extends CI_Model{
         }
 	}
 
-
+    /*
+     * Add or update the user recently viewed
+     * */
 	function recently_viewed( $pid , $user_id ){
         // Does product exist in the record
         $products = array();
@@ -346,7 +348,6 @@ Class User_model extends CI_Model{
                 $this->update_data($user->id, array('product_ids' => $product_ids), 'recently_viewed');
             }
         }else{
-            // Not found
             $products[] = $pid;
             $data = array(
                 'user_id' => $user_id,
@@ -357,6 +358,40 @@ Class User_model extends CI_Model{
         }
     }
 
+    function toPlainArray( $array ){
+	    $output = '';
+	    foreach( $array as $arr ){
+	        $output .= $arr .", ";
+        }
+        return (array) substr( $output, 0, -2);
+    }
 
-    
+    /*
+     * Get recently viewed products if found else return false based on the user
+     * excludes containes the present product id and probably the get_also_likes product_id
+     * */
+    function get_recently_viewed( $user_id, $excludes = array()){
+        $this->db->where('user_id', $user_id );
+        $ids = $this->db->get('recently_viewed')->row()->product_ids;
+        if( $ids ){
+            $ids = json_decode( $ids, true );
+//            var_dump( $ids ); exit;
+            if( !empty( $excludes ) ){
+                foreach( $excludes as $exclude => $value ){
+                    if (($key = array_search( $value, $ids)) !== false) {
+                        unset($ids[$key]);
+                    }
+                }
+            }
+
+            $select_query = "SELECT p.id, p.product_name,p.views, v.sale_price, v.discount_price, v.start_date, v.end_date, SUM(v.quantity) as item_left, g.image_name
+            FROM products p JOIN (SELECT var.product_id, var.discount_price,var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var
+            WHERE var.quantity > 0 ORDER BY var.id) AS v ON (p.id = v.product_id) JOIN product_gallery AS g ON (p.id = g.product_id AND g.featured_image = 1)
+            WHERE p.id IN ('". implode("','",$ids). "') GROUP BY p.id ORDER BY RAND() LIMIT 6 ";
+            return $this->db->query( $select_query )->result();
+        }else{
+            return false;
+        }
+
+    }
 }
