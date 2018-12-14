@@ -14,8 +14,21 @@
     }
 
     .cat_img {
-        max-width: 50px;
+        max-width: 58px;
         margin: auto;
+    }
+
+    .slide_float {
+        margin-top: -120px;
+        margin-left: auto;
+        margin-right: auto;
+        color: white;
+    }
+
+    .btn-shopnow, .btn-shopnow:active, .btn-shopnow::selection {
+        border: 1px solid white;
+        text-decoration: none;
+        color: white;
     }
 </style>
 </head>
@@ -23,18 +36,34 @@
 <div class="global-wrapper clearfix" id="global-wrapper">
     <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
     <div class="main-slider row text-center" style="height:150px;">
-        <div style="background: rgb(85, 49, 79);height:192px;"><img
-                    src="<?= base_url('assets/landing/img/test_slider/1.png'); ?>" class="img-responsive"
-                    style="max-width:240px;margin:auto;padding:20px;"/></div>
-        <div style="background: rgb(142, 138, 136);height:192px;"><img
-                    src="<?= base_url('assets/landing/img/test_slider/13.png'); ?>" class="img-responsive"
-                    style="max-width:240px;margin:auto;padding:20px;"/></div>
-        <div style="background: rgb(175, 171, 149);height:192px;"><img
-                    src="<?= base_url('assets/landing/img/test_slider/3.png'); ?>" class="img-responsive"
-                    style="max-width:210px;margin:auto;padding:20px;"/></div>
-        <div style="background: rgb(62, 63, 62);height:192px;"><img
-                    src="<?= base_url('assets/landing/img/test_slider/14.png'); ?>" class="img-responsive"
-                    style="max-width:240px;margin:auto;padding:20px;"/></div>
+        <div style="background: rgb(85, 49, 79);height:192px;">
+            <img src="<?= base_url('assets/landing/img/test_slider/1.png'); ?>" class="img-responsive"
+                 style="max-width:240px;margin:auto;padding:20px;"/>
+            <div class="slide_float">
+                Low Price Rate Alert<br/><a class="btn btn-shopnow">Shop Now</a>
+            </div>
+        </div>
+        <div style="background: rgb(142, 138, 136);height:192px;">
+            <img src="<?= base_url('assets/landing/img/test_slider/13.png'); ?>" class="img-responsive"
+                 style="max-width:240px;margin:auto;padding:20px;"/>
+            <div class="slide_float">
+                Low Price Rate Alert<br/><a class="btn btn-shopnow">Shop Now</a>
+            </div>
+        </div>
+        <div style="background: rgb(175, 171, 149);height:192px;">
+            <img src="<?= base_url('assets/landing/img/test_slider/3.png'); ?>" class="img-responsive"
+                 style="max-width:210px;margin:auto;padding:20px;"/>
+            <div class="slide_float">
+                Low Price Rate Alert<br/><a class="btn btn-shopnow">Shop Now</a>
+            </div>
+        </div>
+        <div style="background: rgb(62, 63, 62);height:192px;">
+            <img src="<?= base_url('assets/landing/img/test_slider/14.png'); ?>" class="img-responsive"
+                 style="max-width:240px;margin:auto;padding:20px;"/>
+            <div class="slide_float">
+                Low Price Rate Alert<br/><a class="btn btn-shopnow">Shop Now</a>
+            </div>
+        </div>
     </div>
     <div class="gap"></div>
     <div class="container">
@@ -42,66 +71,109 @@
         <div class="categories-slider text-center">
             <div class="cat_board">
                 <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/why-onitshamarket/mobile.jpg'); ?>" class="img-responsive"
+                     src="<?= base_url('assets/landing/img/cat_icons/028-smartphones.png'); ?>"
                      alt="img">
                 <span style="font-size:10px;margin-bottom:auto;">Mobile Devices</span>
             </div>
             <div class="cat_board">
                 <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/why-onitshamarket/laptop-2.jpg'); ?>" class="img-responsive"
-                     alt="img">
-                <span style="font-size:10px;margin-bottom:auto;">Laptops</span>
-            </div>
-            <div class="cat_board">
-                <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/why-onitshamarket/tv.jpg'); ?>" class="img-responsive"
+                     src="<?= base_url('assets/landing/img/cat_icons/television.png'); ?>"
                      alt="img">
                 <span style="font-size:10px;margin-bottom:auto;">Electronics</span>
             </div>
             <div class="cat_board">
                 <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/why-onitshamarket/hdd.jpg'); ?>" class="img-responsive"
+                     src="<?= base_url('assets/landing/img/cat_icons/cable.png'); ?>"
+                     alt="img">
+                <span style="font-size:10px;margin-bottom:auto;">Phone Accessories</span>
+            </div>
+            <div class="cat_board">
+                <img class="cat_img"
+                     src="<?= base_url('assets/landing/img/cat_icons/t-shirt.png'); ?>"
+                     alt="img">
+                <span style="font-size:10px;margin-bottom:auto;">Men's Fashion</span>
+            </div>
+            <div class="cat_board">
+                <img class="cat_img"
+                     src="<?= base_url('assets/landing/img/cat_icons/050-monitor.png'); ?>"
+                     alt="img">
+                <span style="font-size:10px;margin-bottom:auto;">Computers</span>
+            </div>
+            <div class="cat_board">
+                <img class="cat_img"
+                     src="<?= base_url('assets/landing/img/cat_icons/hairdryer.png'); ?>"
+                     alt="img">
+                <span style="font-size:10px;margin-bottom:auto;">Lady's Fashion</span>
+            </div>
+            <div class="cat_board">
+                <img class="cat_img"
+                     src="<?= base_url('assets/landing/img/cat_icons/036-laptop.png'); ?>"
+                     alt="img">
+                <span style="font-size:10px;margin-bottom:auto;">Laptops</span>
+            </div>
+            <div class="cat_board">
+                <img class="cat_img"
+                     src="<?= base_url('assets/landing/img/cat_icons/keyboard.png'); ?>"
                      alt="img">
                 <span style="font-size:10px;margin-bottom:auto;">PC Accessories</span>
             </div>
             <div class="cat_board">
                 <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/why-onitshamarket/house.jpg'); ?>" class="img-responsive"
+                     src="<?= base_url('assets/landing/img/cat_icons/market.png'); ?>"
                      alt="img">
                 <span style="font-size:10px;margin-bottom:auto;">Real Estate</span>
             </div>
             <div class="cat_board">
                 <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/why-onitshamarket/fashion.jpg'); ?>" class="img-responsive"
-                     alt="img">
-                <span style="font-size:10px;margin-bottom:auto;">Fashion</span>
-            </div>
-            <div class="cat_board">
-                <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/why-onitshamarket/mobile.jpg'); ?>" class="img-responsive"
+                     src="<?= base_url('assets/landing/img/cat_icons/002-chair.png'); ?>"
                      alt="img">
                 <span style="font-size:10px;margin-bottom:auto;">Furniture</span>
             </div>
             <div class="cat_board">
                 <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/why-onitshamarket/toy.jpg'); ?>" class="img-responsive"
+                     src="<?= base_url('assets/landing/img/cat_icons/001-duck.png'); ?>"
                      alt="img">
                 <span style="font-size:10px;margin-bottom:auto;">Kids</span>
             </div>
             <div class="cat_board">
                 <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/why-onitshamarket/camera.jpg'); ?>" class="img-responsive"
+                     src="<?= base_url('assets/landing/img/cat_icons/004-gamer.png'); ?>"
+                     alt="img">
+                <span style="font-size:10px;margin-bottom:auto;">Console</span>
+            </div>
+            <div class="cat_board">
+                <img class="cat_img"
+                     src="<?= base_url('assets/landing/img/cat_icons/smartwatch.png'); ?>"
+                     alt="img">
+                <span style="font-size:10px;margin-bottom:auto;">Wearable</span>
+            </div>
+            <div class="cat_board">
+                <img class="cat_img"
+                     src="<?= base_url('assets/landing/img/cat_icons/003-camera.png'); ?>"
                      alt="img">
                 <span style="font-size:10px;margin-bottom:auto;">Camera</span>
             </div>
             <div class="cat_board">
                 <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/why-onitshamarket/Home-Electronics-Appliances-2.jpg'); ?>" class="img-responsive"
+                     src="<?= base_url('assets/landing/img/cat_icons/005-tablet.png'); ?>"
+                     alt="img">
+                <span style="font-size:10px;margin-bottom:auto;">Tablets</span>
+            </div>
+            <div class="cat_board">
+                <img class="cat_img"
+                     src="<?= base_url('assets/landing/img/cat_icons/washing-machine.png'); ?>"
                      alt="img">
                 <span style="font-size:10px;margin-bottom:auto;">Appliances</span>
             </div>
+            <div class="cat_board">
+                <img class="cat_img"
+                     src="<?= base_url('assets/landing/img/cat_icons/headphones.png'); ?>"
+                     alt="img">
+                <span style="font-size:10px;margin-bottom:auto;">Headsets</span>
+            </div>
         </div>
     </div>
+</div>
 </div>
 <div class="container">
     <div class="row" data-gutter="15">
