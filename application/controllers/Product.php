@@ -123,8 +123,8 @@ class Product extends MY_Controller
             $page_data['title'] = 'Category can not be found';
         }
 		$page_data['page'] = 'category';
-//        var_dump($page_data['products']);
-//        exit;
+        var_dump($page_data['products']);
+        exit;
 		if (!$this->agent->is_mobile()) {
 			$this->load->view('landing/category', $page_data);
 		} else {
