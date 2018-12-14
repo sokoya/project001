@@ -278,8 +278,8 @@
                                 </div>
                             </div>
                         <?php endforeach; else: ?>
-                            <h2 class="text-center">Oops! Sorry, we couldn't find products on this section.</h2>
-                            <p class="text-center">
+                            <h2 class="text-center text-md-center">Oops! Sorry, we couldn't find products on this section.</h2>
+                            <p class="text-center text-sm">
                                 Please check your spelling for typographic error.<br />
                                 <span class="text-danger">You can also:</span>
                             <ul class="text-center">
@@ -297,9 +297,8 @@
     </div>
     <script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
     <script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/js/ion.rangeSlider.min.js"></script>
-
     <script>
         let current_url = "<?= current_url()?>";
         let url = "<?= base_url('catalog/' . $category_detail->slug .'/') ?>";

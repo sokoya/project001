@@ -666,16 +666,19 @@ Class Product_model extends CI_Model{
 
 
     /**
+     * Get an amount of an address, for checkout calculation
      * @param $address_id
      * @return mixed
      */
-//SELECT b.aid, a.price FROM billing_address b LEFT JOIN area a ON (b.aid = a.id ) WHERE b.id =
     function get_billing_amount($address_id ){
 //        die( $address_id);
         $select = "SELECT b.aid, a.price FROM billing_address b LEFT JOIN area a ON (b.aid = a.id ) WHERE b.id = {$address_id}";
         return $this->db->query( $select )->row()->price;
     }
 
+    /*
+     * Function fot user to create or edit rating and review
+     * */
     function create_edit( $pid, $uid, $data = array(), $table_name){
         switch ($table_name){
             case 'product_review':
@@ -699,6 +702,38 @@ Class Product_model extends CI_Model{
         }
     }
 
+    /*
+     * Get a random products
+     * Used for places like error 404
+     * @params we can take category as id = 1,2,3,4, or string 'electronics' or as an array of category eg array(2,5,8,9)
+     * */
+    /**
+     * @param string $category
+     * @param string $count
+     * @return mixed
+     */
+    function randomproducts($category = '', $count =''){
+        $select_query = " SELECT p.id, p.product_name, v.sale_price, v.discount_price, v.start_date, v.end_date, SUM(v.quantity) as item_left, g.image_name
+        FROM products p JOIN (SELECT var.product_id, var.discount_price,var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var
+        WHERE var.quantity > 0 ORDER BY var.id) AS v on(p.id = v.product_id) JOIN product_gallery AS g ON (p.id = g.product_id AND g.featured_image = 1)";
+        if( $category != '' ){
+            if( is_int( $category) ){
+                $select_query .= " WHERE p.category_id = {$category}";
+            }elseif( is_array( $category) ){
+                $select_query .= " WHERE p.category_id IN ('". implode("','",$category). "') ";
+            }else{
+                // coming as a name or slug
+                $id = $this->category_id( $category );
+                $select_query .= " WHERE p.category_id = {$id} ";
+            }
+        }
+        if( $count != '' ){
+            $select_query .= " GROUP BY p.id ORDER BY RAND() LIMIT {$count} ";
+        }else{
+            $select_query .= " GROUP BY p.id ORDER BY RAND() LIMIT 12";
+        }
+        return $this->db->query($select_query)->result();
+    }
 
 
 }
