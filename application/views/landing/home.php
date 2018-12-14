@@ -196,6 +196,10 @@
 		width: 223px;
 	}
 
+	.btn-dark:hover, .btn-dark:focus {
+		color: #fff;
+	}
+
 	.hot-row {
 		margin-bottom: 10px;
 	}
