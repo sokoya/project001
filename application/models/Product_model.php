@@ -413,21 +413,6 @@ Class Product_model extends CI_Model{
         return '';
     }
 
-    /*
-     * Get price range which will be used for price filter, on category, search page
-     * */
-    function ger_price_range( $category , $product_name = ''){
-        if( $this->check_slug_availability( $category )) {
-            $array = $this->slug($category);
-            $select = "SELECT v.sale_price minimum, v.sale_price maximum FROM product_variation v LEFT JOIN products p ON(v.product_id = p.id) WHERE p.category_id IN ('".implode("','",$array)."') ";
-            return $this->db->query( $select )->row();
-        }elseif( $product_name != ''){
-            $product_name = xss_clean($product_name);
-            $select = "SELECT v.sale_price minimum, v.sale_price maximum FROM product_variation v LEFT JOIN products p ON(v.product_id = p.id) WHERE p.product_name LIKE '%{$product_name}%'";
-            return $this->db->query( $select)->row();
-        }
-    }
-
     // Get products attributes. used in main category
     function get_features($category = '', $search_like = ''){
         $select_query = "SELECT DISTINCT JSON_UNQUOTE(JSON_EXTRACT(`attributes`, '$')) AS feature_value FROM products";
