@@ -8,7 +8,7 @@ class Frontpage extends MY_Controller {
     }
 
 	public function index(){
-		// get the categories 
+        $this->output->cache(60);
 		$page_data['title'] = 'Online shopping | Buy Electronics, Phones, Fashions in Nigeria';
 		$page_data['page'] = 'homepage';
         if ($this->agent->is_mobile()) {
