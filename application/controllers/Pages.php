@@ -24,6 +24,12 @@ class Pages extends MY_Controller {
         $page_data['privacy'] = $this->user->get_row('page_contents', 'content', "(type='privacy')")->content;
         $this->load->view('landing/privacy', $page_data);
     }
+    public function contact(){
+        $page_data['page'] = 'contact';
+        $page_data['title'] = "Contact";
+        $page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')) );
+        $this->load->view('landing/contact', $page_data);
+    }
 
 
     public function agreement(){

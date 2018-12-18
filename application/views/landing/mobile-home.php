@@ -48,10 +48,8 @@
         margin-bottom:auto;
     }
     .home_banner{
-        height:80px;
-        background: #ffe5d7;
+        height:auto;
         text-align: center;
-        padding-top:35px;
         font-size: 10px;
         font-weight: bolder;
     }
@@ -256,7 +254,9 @@
         </div>
     </div>
     <div class="gap_small"></div>
-    <div class="home_banner">banner 1</div>
+    <div class="home_banner container">
+        <img src="<?= base_url('assets/landing/img/home/ad.jpg'); ?> " class="img-responsive">
+    </div>
     <div class="gap_small"></div>
     <div class="container">
         <h5>Top Selling <span style="color:#575745">Fashion</span></h5>
@@ -314,7 +314,9 @@
         </div>
     </div>
     <div class="gap_small"></div>
-    <div class="home_banner">banner 2</div>
+    <div class="home_banner container">
+        <img src="<?= base_url('assets/landing/img/home/aaa.jpg'); ?> " class="img-responsive">
+    </div>
     <div class="gap_small"></div>
     <div class="container">
         <h5>Top Selling <span style="color:#575745">Gadgets</span></h5>
@@ -372,7 +374,9 @@
         </div>
     </div>
     <div class="gap_small"></div>
-    <div class="home_banner">banner 3</div>
+    <div class="home_banner container">
+        <img src="<?= base_url('assets/landing/img/home/ab.jpg'); ?> " class="img-responsive">
+    </div>
     <div class="gap_small"></div>
     <div class="container">
         <h5>Top Selling <span style="color:#575745">Laptops</span></h5>

@@ -12,11 +12,11 @@
                     </li>
                     <li><a href="#">Blog</a>
                     </li>
-                    <li><a href="#">Contact Us</a>
+                    <li><a href="<?=base_url('pages/contact');?>">Contact Us</a>
                     </li>
                     <li><a href="#">FAQ</a>
                     </li>
-                    <li><a href="#">Watchlist</a>
+                    <li><a href="<?=base_url('account/saved');?>">Watchlist</a>
                     </li>
                     <li><a href="#">Support</a>
                     </li>
