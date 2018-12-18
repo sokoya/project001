@@ -413,21 +413,6 @@ Class Product_model extends CI_Model{
         return '';
     }
 
-    /*
-     * Get price range which will be used for price filter, on category, search page
-     * */
-    function ger_price_range( $category , $product_name = ''){
-        if( $this->check_slug_availability( $category )) {
-            $array = $this->slug($category);
-            $select = "SELECT v.sale_price minimum, v.sale_price maximum FROM product_variation v LEFT JOIN products p ON(v.product_id = p.id) WHERE p.category_id IN ('".implode("','",$array)."') ";
-            return $this->db->query( $select )->row();
-        }elseif( $product_name != ''){
-            $product_name = xss_clean($product_name);
-            $select = "SELECT v.sale_price minimum, v.sale_price maximum FROM product_variation v LEFT JOIN products p ON(v.product_id = p.id) WHERE p.product_name LIKE '%{$product_name}%'";
-            return $this->db->query( $select)->row();
-        }
-    }
-
     // Get products attributes. used in main category
     function get_features($category = '', $search_like = ''){
         $select_query = "SELECT DISTINCT JSON_UNQUOTE(JSON_EXTRACT(`attributes`, '$')) AS feature_value FROM products";
@@ -735,6 +720,20 @@ Class Product_model extends CI_Model{
             $select_query .= " GROUP BY p.id ORDER BY RAND() LIMIT 12";
         }
         return $this->db->query($select_query)->result();
+    }
+    /*
+     * Lets get all the queries for desktop views at the frontpage
+     * */
+    function desktop_display(){
+        $select = "SELECT h.*, c.name, c.slug, p.id,p.product_name, v.sale_price, v.discount_price, v.start_date, v.end_date, SUM(v.quantity) as item_left, g.image_name
+          FROM homepage_setting h 
+          LEFT JOIN categories c ON (c.id = h.category_id)
+          JOIN (SELECT prod.id, prod.product_name FROM products prod ORDER BY prod.views LIMIT 12) p ON (p.id = h.category_id)
+          JOIN (SELECT var.product_id, var.discount_price,var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var
+          WHERE var.quantity > 0 ORDER BY var.id) AS v on( p.id = v.product_id)
+          JOIN product_gallery AS g ON (p.id = g.product_id AND g.featured_image = 1)
+          WHERE h.status = 'active' ORDER BY h.position";
+        $this->db->query( $select);
     }
 
 

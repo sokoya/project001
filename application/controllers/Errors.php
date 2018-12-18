@@ -1,16 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Errors extends CI_Controller {
-    public function __construct(){
-        parent::__construct();
-        $general_settings = $this->db->get('general_settings')->row();
-        define('FACEBOOK_LINK', $general_settings->facebook_link);
-        define('INSTAGRAM_LINK', $general_settings->instagram_link);
-        define('TWITTER_LINK', $general_settings->twitter_link);
-        define('DESCRIPTION', $general_settings->description);
-        define('KEYWORD', $general_settings->keywords);
-    }
-
+class Errors extends MY_Controller {
 
     public function index(){
         redirect('errors/_404');
