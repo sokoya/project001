@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 14, 2018 at 02:56 PM
+-- Generation Time: Dec 27, 2018 at 12:15 PM
 -- Server version: 5.7.11
 -- PHP Version: 7.0.3
 
@@ -252,7 +252,11 @@ CREATE TABLE `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
-('gv2b14krt375v6ce3m53f0kg9v161rnb', '::1', 1544798948, 0x72656665727265645f66726f6d7c733a34373a22687474703a2f2f6c6f63616c686f73742f70726f6a6563743030312f636174616c6f672f656c656374726f6e696373223b6c6f676765645f696e7c623a313b6c6f676765645f69647c733a313a2233223b69735f73656c6c65727c733a383a22617070726f766564223b656d61696c7c733a31333a2261626340676d61696c2e636f6d223b636172745f636f6e74656e74737c613a333a7b733a31303a22636172745f746f74616c223b643a32363030303b733a31313a22746f74616c5f6974656d73223b643a313b733a33323a223137323466633138383365303038663038613363303762333036353732323937223b613a373a7b733a323a226964223b733a313a2233223b733a333a22717479223b643a313b733a343a226e616d65223b733a37303a224e6f6b6961202d2032202d20352671756f743b202d203147422052414d2c2038474220524f4d202d20416e64726f696420372e3020384d50202b20354d50202d205768697465223b733a353a227072696365223b643a32363030303b733a373a226f7074696f6e73223b613a333a7b733a363a2273656c6c6572223b733a313a2233223b733a31323a22766172696174696f6e5f6964223b733a313a2233223b733a393a22766172696174696f6e223b733a303a22223b7d733a353a22726f776964223b733a33323a223137323466633138383365303038663038613363303762333036353732323937223b733a383a22737562746f74616c223b643a32363030303b7d7d);
+('ksbfjjfjdhto4cf9fhspmpf2ld412kqs', '::1', 1545286273, 0x72656665727265645f66726f6d7c733a35353a22687474703a2f2f6c6f63616c686f73742f70726f6a6563743030312f636174616c6f672f626c752d7261792d6476642d706c6179657273223b),
+('i9fsgaq8884krnf62n4te9t20iomab5s', '::1', 1545143735, 0x72656665727265645f66726f6d7c733a34373a22687474703a2f2f6c6f63616c686f73742f70726f6a6563743030312f636174616c6f672f656c656374726f6e696373223b),
+('glfslv85lpb2dsj13thv992kj0ao54a0', '::1', 1545153193, 0x72656665727265645f66726f6d7c733a35313a22687474703a2f2f6c6f63616c686f73742f70726f6a6563743030312f636174616c6f672f6469676974616c2d63616d65726173223b),
+('nn6k436cfvkbs8tp9thvvbfdhpc6dl9i', '::1', 1545209126, ''),
+('ucomh9tdib2sqlvbalme98o1v2vt1tr8', '::1', 1545286266, 0x72656665727265645f66726f6d7c733a35313a22687474703a2f2f6c6f63616c686f73742f70726f6a6563743030312f636174616c6f672f6469676974616c2d63616d65726173223b);
 
 -- --------------------------------------------------------
 
@@ -359,16 +363,17 @@ CREATE TABLE `homepage_setting` (
   `id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `position` int(11) NOT NULL,
-  `top1` varchar(255) NOT NULL,
-  `top2` varchar(255) NOT NULL,
-  `bottom1` varchar(255) NOT NULL,
-  `bottom2` varchar(255) NOT NULL,
-  `bottom3` varchar(255) NOT NULL,
-  `left1` varchar(255) NOT NULL,
-  `left2` varchar(255) NOT NULL,
-  `left3` varchar(255) NOT NULL,
-  `bottom_advert` varchar(255) NOT NULL
+  `content` text NOT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'inactive'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Category Display Settings for Homepage';
+
+--
+-- Dumping data for table `homepage_setting`
+--
+
+INSERT INTO `homepage_setting` (`id`, `category_id`, `position`, `content`, `status`) VALUES
+(2, 6, 1, '[\n  {\n    "img": "da6a510198317078e2395a753ef3b73d.jpg",\n    "position": "bottom_banner",\n    "link": "http://localhost/project001/tv-and-electronics"\n  },\n  {\n    "img": "f.jpg",\n    "position": "top1",\n    "link": "http://localhost/project001/tv-and-electronics"\n  },\n  {\n    "img": "f.jpg",\n    "position": "top2",\n    "link": "http://localhost/project001/tv-and-electronics"\n  },\n  {\n    "img": "5f4bb83f54b08f179501ee9a64819056.jpg",\n    "position": "bottom1",\n    "link": "http://localhost/project001/tv-and-electronics"\n  },\n  {\n    "img": "c80901a19624f054737b10a7139011a0.jpg",\n    "position": "bottom2",\n    "link": "http://localhost/project001/tv-and-electronics"\n  },\n  {\n    "img": "55835983eb197061d44f8c812be202f2.jpg",\n    "position": "bottom3",\n    "link": "http://localhost/project001/tv-and-electronics"\n  }\n]', 'active'),
+(3, 4, 2, '[\r\n  {\r\n    "img": "da6a510198317078e2395a753ef3b73d.jpg",\r\n    "position": "bottom_banner",\r\n    "link": "http://localhost/project001/tv-and-electronics"\r\n  },\r\n  {\r\n    "img": "f.jpg",\r\n    "position": "top1",\r\n    "link": "http://localhost/project001/tv-and-electronics"\r\n  },\r\n  {\r\n    "img": "f.jpg",\r\n    "position": "top2",\r\n    "link": "http://localhost/project001/tv-and-electronics"\r\n  },\r\n  {\r\n    "img": "5f4bb83f54b08f179501ee9a64819056.jpg",\r\n    "position": "bottom1",\r\n    "link": "http://localhost/project001/tv-and-electronics"\r\n  },\r\n  {\r\n    "img": "c80901a19624f054737b10a7139011a0.jpg",\r\n    "position": "bottom2",\r\n    "link": "http://localhost/project001/tv-and-electronics"\r\n  },\r\n  {\r\n    "img": "55835983eb197061d44f8c812be202f2.jpg",\r\n    "position": "bottom3",\r\n    "link": "http://localhost/project001/tv-and-electronics"\r\n  }\r\n]', 'active');
 
 -- --------------------------------------------------------
 
@@ -409,8 +414,7 @@ INSERT INTO `options` (`id`, `name`) VALUES
 (4, 'XL'),
 (5, 'XXL'),
 (6, 'XXXL'),
-(7, 'L'),
-(8, '');
+(7, 'L');
 
 -- --------------------------------------------------------
 
@@ -570,7 +574,7 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `seller_id`, `category_id`, `sku`, `product_name`, `brand_name`, `model`, `main_colour`, `product_description`, `youtube_id`, `in_the_box`, `highlights`, `product_line`, `colour_family`, `main_material`, `dimensions`, `weight`, `attributes`, `product_warranty`, `warranty_type`, `warranty_address`, `certifications`, `product_status`, `report`, `views`, `created_on`) VALUES
 (1, 3, 6, 'X5PJUH', 'Samsung Galaxy S9 - BLACK (Dual Sim) - Official Warranty', 'Samsung', 'S9', 'Black', 'Display: 5.8&rdquo;, Quad HD+ sAMOLED\r\nSingle Sim Option\r\nCamera Main: Super Speed Dual Pixel 12 MP OIS (F1.5/F2.4)\r\nCamera Front: 8MP AF (F1.7)\r\nProcessor: 10nm, Octa-core (2.7GHz Quad + 1.7GHz Quad)\r\nMemory: 4GB RAM and 64GB Internal storage, External Memory: MicroSD&trade; up to 400 GB\r\nBattery: 3000mAh\r\nSecurity: Intelligent Scan (Iris + Face), Fingerprint Scanner, Water and Dust Resistance: IP68 (1.5 m &amp; 30 min)\r\n\r\n', '', '', '', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["Green"]', 'silicon', '1260', '300', '{"Sim-Type":"Dual SIM","OS-Type":"Android OS","Battery-Capacity":"3000mAh ","Internal-Memory":"256 GB","RAM":"6 GB","Sceen-Size":"5.9 inches","Colour":"Black"}', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#039;Content here, content here&#039;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#039;lorem ipsum&#039; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n', '["Repair by vendor"]', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n', '["Eco Friendly","FSC - Forest Stewardship Council"]', 'approved', 0, 45, '2018-10-02 11:34:56'),
-(2, 3, 6, 'BYZZSP', 'Samsung Galaxy J6 - Purple', 'Samsung', 'samsung j6', 'Purple', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["Green"]', 'plume', '1260', '1000', '{"Sim-Type":"Dual SIM","OS-Type":"Android OS","Battery-Capacity":"3000mAh ","Internal-Memory":"256 GB","RAM":"6 GB","Sceen-Size":"5.9 inches","Colour":"Black"}', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '["Repair by vendor"]', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '', 'approved', 0, 10, '2018-10-03 10:46:58'),
+(2, 3, 6, 'BYZZSP', 'Samsung Galaxy J6 - Purple', 'Samsung', 'samsung j6', 'Purple', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["Green"]', 'plume', '1260', '1000', '{"Sim-Type":"Dual SIM","OS-Type":"Android OS","Battery-Capacity":"3000mAh ","Internal-Memory":"256 GB","RAM":"6 GB","Sceen-Size":"5.9 inches","Colour":"Black"}', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '["Repair by vendor"]', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '', 'approved', 0, 11, '2018-10-03 10:46:58'),
 (3, 3, 6, '31WUJE', 'Nokia - 2 - 5&quot; - 1GB RAM, 8GB ROM - Android 7.0 8MP + 5MP - White', 'Nokia', 'Nokia2', 'Grey', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', 'Fouani Nigeria, Trendy Woman Ltd, SEOLAK', '["Green"]', 'plume', '1260', '1000', '{"Sim-Type":"Single SIM","OS-Type":"Android OS","Battery-Capacity":"5000mAh","Internal-Memory":"128 MB","Sceen-Size":"6.4 inches","Colour":"Yellow"}', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#039;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#039;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.', '["FSC - Forest Stewardship Council","Organic"]', 'approved', 0, 6, '2018-10-03 11:28:34'),
 (4, 3, 6, '871436', 'JY', 'Android', '8S', 'black', 'Jy Phones are excelllent and sleek phones for your needs. Get a color that you love ranging from red, black, green and pink for ladies. Start buying today', '', '1 phone\r\n1 charger\r\n1 screen guard\r\n1 ear phone\r\n1 power bank\r\n', 'Jy Phones are excelllent and sleek phones for your needs. Get a color that you love', 'Jay Technology', '["green","black","red","pink"]', 'metal', '12 x 3 x 90', '20', '{"Sim-Type":"Nano SIM","OS-Type":"Android OS","Battery-Capacity":"4000mAh","Internal-Memory":"64 GB","RAM":"4 GB","Sceen-Size":"5.2 inches","Colour":"Black"}', 'This product contains a one year warranty', '["Service Center","Repair by vendor","Replacement by vendor"]', 'Service Center Address: 20b Caro Road, Ikeja. Lagos | Repair by Vendor Address: 5 Paris Street, Yaba. Lagos.', '["AFRDI Leather","ASTM Certified","Eco Friendly"]', 'approved', 0, 306, '2018-10-30 10:14:59'),
 (5, 3, 6, '921784', 'Huawei P20 Lite ANE-LX3 32GB + 4GB Dual SIM LTE Factory Unlocked Smartphone (Klein Blue)', 'others', 'P20 Lite', 'black', 'The Best Just Got Better\r\nLose yourself in your screen with new generation HUAWEI FullView Display. Designed for life on the go with no compromises, the HUAWEI P20 lite sports a sleek compact frame that&rsquo;s almost entirely dedicated to its 5.84-inch Full HD screen.re level, as it comes with the latest Android 8.0 Oreo.\r\n\r\nBody &amp; Soul\r\nThe HUAWEI P20 lite takes colour to a higher level. Delve deeper into Klein Blue, a radiant shade that incorporates a nanometer-level light dazzle texture. Available too in deepest Midnight Black to contrast against the vibrancy of the Full HD screen, refined classic Platinum Gold and Sakura Pink with its rich pearlescent tone.\r\n\r\nSee is Believing\r\nThe HUAWEI P20 lite features a 2280 x 1080 FHD+ screen with 96% NTSC super high-colour gamut. That means everything you see on this screen is as rich and vibrant and detailed as it can be, from your own photographs to the latest boxset.\r\n\r\nFront and Centre\r\nThe HUAWEI P20 lite has a new higher definition, wider angle, front camera. 16 megapixels with a pixel size of 1.0 &mu;m and a FOV wide angle of 78&deg;, this camera is made for snapping friends, family and social-media-worthy selfies. With a F2.0 wide aperture and a 3D retouching feature that uses intelligent recognition and facial mapping to adjust lighting and shadow, you can count on terrific portraits and close-ups too.\r\n\r\nDual-Lens Camera\r\nThe HUAWEI P20 lite&rsquo;s dual-lens rear camera ticks all the boxes and then some. The state-of-the-art 16 MP lens with a pixel size of 1.12 &mu;m and F2.2 aperture is designed to capture more light and read depth perception, allowing you to take sharp, swift snaps when you need them. Partnered with a 2 MP professional Bokeh lens &ndash; as well as 5P + 3P lenses for the subject and background &ndash; it takes stunning shots while bringing some real definition to the mix.', '', 'The Best Just Got Better\r\nLose yourself in your screen with new generation HUAWEI FullView Display. Designed for life on the go with no compromises, the HUAWEI P20 lite sports a sleek compact frame that&rsquo;s almost entirely dedicated to its 5.84-inch Full HD screen.re level, as it comes with the latest Android 8.0 Oreo.\r\n\r\nBody &amp; Soul\r\nThe HUAWEI P20 lite takes colour to a higher level. Delve deeper into Klein Blue, a radiant shade that incorporates a nanometer-level light dazzle texture. Available too in deepest Midnight Black to contrast against the vibrancy of the Full HD screen, refined classic Platinum Gold and Sakura Pink with its rich pearlescent tone.\r\n\r\nSee is Believing\r\nThe HUAWEI P20 lite features a 2280 x 1080 FHD+ screen with 96% NTSC super high-colour gamut. That means everything you see on this screen is as rich and vibrant and detailed as it can be, from your own photographs to the latest boxset.\r\n\r\nFront and Centre\r\nThe HUAWEI P20 lite has a new higher definition, wider angle, front camera. 16 megapixels with a pixel size of 1.0 &mu;m and a FOV wide angle of 78&deg;, this camera is made for snapping friends, family and social-media-worthy selfies. With a F2.0 wide aperture and a 3D retouching feature that uses intelligent recognition and facial mapping to adjust lighting and shadow, you can count on terrific portraits and close-ups too.\r\n\r\nDual-Lens Camera\r\nThe HUAWEI P20 lite&rsquo;s dual-lens rear camera ticks all the boxes and then some. The state-of-the-art 16 MP lens with a pixel size of 1.12 &mu;m and F2.2 aperture is designed to capture more light and read depth perception, allowing you to take sharp, swift snaps when you need them. Partnered with a 2 MP professional Bokeh lens &ndash; as well as 5P + 3P lenses for the subject and background &ndash; it takes stunning shots while bringing some real definition to the mix.', 'The Best Just Got Better\r\nLose yourself in your screen with new generation HUAWEI FullView Display. Designed for life on the go with no compromises, the HUAWEI P20 lite sports a sleek compact frame that&rsquo;s almost entirely dedicated to its 5.84-inch Full HD screen.re level, as it comes with the latest Android 8.0 Oreo.\r\n', 'Mobiles International LLC', '["green","yellow","black","pink","purple"]', 'leather', '5.8 x 2.8 x 0.3 inches', '12.3 ounces', '{"Sim-Type":"Dual SIM","OS-Type":"Android OS","Battery-Capacity":"5000mAh - 8000mAh","Internal-Memory":"Above 256 GB","RAM":"1.5 GB","Sceen-Size":"6.1 inches","Colour":"Red"}', 'For warranty information about this product, please click here', '["Repair by vendor"]', 'M&B', '["ASTM Certified","Eco Friendly"]', 'approved', 0, 6, '2018-11-08 01:27:51'),
@@ -868,6 +872,27 @@ INSERT INTO `se_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sliders`
+--
+
+CREATE TABLE `sliders` (
+  `id` int(11) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `img_link` varchar(255) NOT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'inactive'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sliders`
+--
+
+INSERT INTO `sliders` (`id`, `image`, `img_link`, `status`) VALUES
+(2, '29d4e20322d28cc7014b7551c95b93a8.png', 'https://www.jumia.com.ng/priddi-international-pack-of-5-round-neck-plain-t-shirts-multicolour-1-unit-per-customer-9515603.html', 'active'),
+(3, '29d4e20322d28cc7014b7551c95b93a8.png', 'https://www.jumia.com.ng/priddi-international-pack-of-5-round-neck-plain-t-shirts-multicolour-1-unit-per-customer-9515603.html', 'active');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `specifications`
 --
 
@@ -951,7 +976,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `email`, `first_name`, `last_name`, `city`, `zip_code`, `address`, `phone`, `display_name`, `profile_pic`, `gender`, `password`, `salt`, `code`, `ip`, `date_registered`, `last_login`, `newsletter`, `recovery_code`, `account_status`, `is_seller`, `is_admin`, `groups`) VALUES
 (1, 'bisi@gmail.com', 'Sokoya', 'Philip', '', '', '', '08169254598', 'mrphilo1234455', '', 'female', 'eaf859633c1bc66dc04a57f3d2579a0a0f5a626c17940a0010473222c9ee61f0', 'Dr=SLzk1viy$JP9q<=)bTn0V##gdQctp;!zmvb.g:8iur9T?!+', '', '127.0.0.1', '2018-08-23 16:21:31', '2018-09-04 20:44:25', 0, '', '', '1', 0, 0),
 (2, 'phil@gmail.com', 'Sokoya', 'Adeniji', '', '', '', '', '', '', '', 'f191311d9970adaf1117fbbb295cc959bb9d094329215bddfb590a9def27dee2', '*9-dTBSC-8m+QmuPv&|PKU>Ipz-Wcd^oxL<s.iAoepyAO1Wjxx', '', '::1', '2018-09-17 21:40:35', '2018-12-06 07:52:56', 0, '', '', '0', 0, 0),
-(3, 'abc@gmail.com', 'Chidi', 'Jeffrey', '', '', '', '', '', '', '', 'becf0711bf86d9a715a88c8fd476f6e39fcabb5bfeec223f72f526867eb60672', '8j:#gW.VHjvUX:lwx0@6lUpBe8R35z1DRDRrT0!2VFj;fmlkhm', '', '::1', '2018-09-17 21:40:35', '2018-12-14 08:19:34', 0, '', '', 'approved', 1, 2),
+(3, 'abc@gmail.com', 'Chidi', 'Jeffrey', '', '', '', '', '', '', '', 'becf0711bf86d9a715a88c8fd476f6e39fcabb5bfeec223f72f526867eb60672', '8j:#gW.VHjvUX:lwx0@6lUpBe8R35z1DRDRrT0!2VFj;fmlkhm', '', '::1', '2018-09-17 21:40:35', '2018-12-19 11:28:52', 0, '', '', 'approved', 1, 2),
 (4, 'seller@gmail.com', 'Jeff', 'Besox', '', '', '', '', '', '', '', 'ee707647928828271f6c2cd23ae10fe8bdc2f58b4745dfb3a2e8f18d7a3003c2', 'FA6rGIWT:nH+qNbY0gAC84)HpylN*aNrg9Sm?8eqERNY,ncLg:', '', '::1', '2018-10-22 12:21:30', '2018-10-22 15:35:22', 0, '', '', 'approved', 0, 0),
 (5, 'seller2@gmail.com', 'Phil', 'Tusey', '', '', '', '', '', '', '', 'e71997718ceebe98d6b05bf3f4b9e54d338178996973e8999282b3313fdcd10d', '8Ge(<|c=Hw9Gh@1=n!_,>vXN|OWaz,($^2wqFPAm>(*l)NnZsE', '', '::1', '2018-10-22 12:26:31', '2018-11-20 15:07:59', 0, '', '', 'false', 0, 0),
 (6, 'okey@gmail.com', 'Woyong', 'Okey', '', '', '', '', '', '', '', 'f74b08dc3f1fbf7c4cb26c04102f69adcb2f9446165326692350648ce9ffc3b0', 'Jd#X7j!5kHvh+?D;HOV1)(RUjoCGg<H(k|.cRtQB.pX<zwbLid', '', '::1', '2018-10-22 15:38:24', '2018-10-22 15:41:05', 0, '', '', 'approved', 0, 0),
@@ -1142,6 +1167,12 @@ ALTER TABLE `se_sessions`
   ADD KEY `se_sessions_timestamp` (`timestamp`);
 
 --
+-- Indexes for table `sliders`
+--
+ALTER TABLE `sliders`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `specifications`
 --
 ALTER TABLE `specifications`
@@ -1217,7 +1248,7 @@ ALTER TABLE `general_settings`
 -- AUTO_INCREMENT for table `homepage_setting`
 --
 ALTER TABLE `homepage_setting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `invoices`
 --
@@ -1227,7 +1258,7 @@ ALTER TABLE `invoices`
 -- AUTO_INCREMENT for table `options`
 --
 ALTER TABLE `options`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `orders`
 --
@@ -1293,6 +1324,11 @@ ALTER TABLE `sellers`
 --
 ALTER TABLE `sellers_notification_message`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+--
+-- AUTO_INCREMENT for table `sliders`
+--
+ALTER TABLE `sliders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `specifications`
 --
