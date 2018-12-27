@@ -91,7 +91,7 @@ defined('DB_NAME')		OR define('DB_NAME', 'onitshamarket');
 
 // General Settings
 defined('PRODUCTS_IMAGE_PATH') OR define('PRODUCTS_IMAGE_PATH', "https://res.cloudinary.com/de9lpikx3/image/upload/");
-// defined('FACEBOOK_LINK') OR define('FACEBOOK_LINK', $this->config->item('facebook_link'));
+defined('CATEGORY_HOMEPAGE_DIR') OR define('CATEGORY_HOMEPAGE_DIR', $_SERVER['DOCUMENT_ROOT'] .'/contents/home/');
 
 
 defined('PAGE_CONTACT_US') or define('PAGE_CONTACT_US', "https://www.onitshamarket.com/contact/");

@@ -108,8 +108,8 @@ class Product extends MY_Controller
 		$query = $this->input->get('q');
 		$q = (isset($query) && !empty($query)) ? cleanit($query) : '';
 		$page_data['brands'] = $this->product->get_brands($str, $q);
-		$page_data['price_min'] = $this->input->get('price_min',true);
-		$page_data['price_max'] = $this->input->get('price_max',true);
+		$page_data['price_min'] = cleanit($this->input->get('price_min',true));
+		$page_data['price_max'] = cleanit($this->input->get('price_max',true));
 		$page_data['colours'] = $this->product->get_colours($str, $q);
 		$page_data['sub_categories'] = $this->product->get_categories($str, $q);
 		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
@@ -122,12 +122,12 @@ class Product extends MY_Controller
             $page_data['title'] = 'Category can not be found';
         }
 		$page_data['page'] = 'category';
-//        var_dump($page_data['products']);
-//        exit;
-
-        $array = (array) $page_data['products'];
-        $page_data['min'] = min(array_map(function($array) { return $array->sale_price; }, $array));
-        $page_data['max'] = max(array_map(function($array) { return $array->sale_price; }, $array));
+		$page_data['min'] = $page_data['max'] = '';
+		if( $page_data['products'] ){
+            $array = (array) $page_data['products'];
+            $page_data['min'] = min(array_map(function($array) { return $array->sale_price; }, $array));
+            $page_data['max'] = max(array_map(function($array) { return $array->sale_price; }, $array));
+        }
 
 		if (!$this->agent->is_mobile()) {
 			$this->load->view('landing/category', $page_data);
@@ -259,9 +259,12 @@ class Product extends MY_Controller
 		$page_data['title'] = $page_data['category_detail']->title;
 		$page_data['page'] = 'search';
 		$this->pagination->initialize($config);
-        $array = (array) $page_data['products'];
-        $page_data['min'] = min(array_map(function($array) { return $array->sale_price; }, $array));
-        $page_data['max'] = max(array_map(function($array) { return $array->sale_price; }, $array));
+        $page_data['min'] = $page_data['max'] = '';
+        if( $page_data['products'] ){
+            $array = (array) $page_data['products'];
+            $page_data['min'] = min(array_map(function($array) { return $array->sale_price; }, $array));
+            $page_data['max'] = max(array_map(function($array) { return $array->sale_price; }, $array));
+        }
 		$this->load->library('user_agent');
 		if (!$this->agent->is_mobile()) {
 			$this->load->view('landing/search', $page_data);

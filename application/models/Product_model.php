@@ -266,6 +266,7 @@ Class Product_model extends CI_Model{
                 $min = xss_clean($gets['price_min']); $max = xss_clean($gets['price_max']);
                 $min = preg_replace("/[^0-9]/", '', $min);
                 $max = preg_replace("/[^0-9]/", '', $max);
+                if( $min == '' ) $min = 0; if( $max == '' ) $max == 0;
                 $select_query .= " JOIN (SELECT var.product_id, var.discount_price, var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var 
             WHERE var.quantity > 0 AND var.sale_price BETWEEN {$min} AND {$max} ORDER BY var.id) AS v ON (p.id = v.product_id) ";
                 unset($gets['price_min']); unset($gets['price_max']);
@@ -303,10 +304,8 @@ Class Product_model extends CI_Model{
                     }
                     unset($gets['main_colour']);
                 }
-
                 // unset the page key
                 unset( $gets['page'] );
-
                 // Here comes the features
                 // check for get count again
                 if( count( $gets ) ){
@@ -322,6 +321,7 @@ Class Product_model extends CI_Model{
                             foreach( $explode as $exp ){
                                 $exp = preg_replace("/[^A-Za-z.0-9-]/", ' ', $exp);
                                 $last = preg_replace("/[^A-Za-z.0-9-]/", ' ', $last);
+                                if( $key == '' ) $key = 0; if( $last == '') $last = 0;
                                 if( $exp === $last ){
                                     $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%')";
                                 }else{
@@ -725,17 +725,16 @@ Class Product_model extends CI_Model{
      * Lets get all the queries for desktop views at the frontpage
      * */
     function desktop_display(){
-        $select = "SELECT h.*, c.name, c.slug, p.id,p.product_name, v.sale_price, v.discount_price, v.start_date, v.end_date, SUM(v.quantity) as item_left, g.image_name
-          FROM homepage_setting h 
-          LEFT JOIN categories c ON (c.id = h.category_id)
-          JOIN (SELECT prod.id, prod.product_name FROM products prod ORDER BY prod.views LIMIT 12) p ON (p.id = h.category_id)
-          JOIN (SELECT var.product_id, var.discount_price,var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var
-          WHERE var.quantity > 0 ORDER BY var.id) AS v on( p.id = v.product_id)
-          JOIN product_gallery AS g ON (p.id = g.product_id AND g.featured_image = 1)
-          WHERE h.status = 'active' ORDER BY h.position";
-        $this->db->query( $select);
+        $select = "SELECT h.*, c.name, c.slug FROM homepage_setting h LEFT JOIN categories c ON (c.id = h.category_id)WHERE h.status = 'active' ORDER BY h.position";
+        return $this->db->query( $select)->result();
     }
 
+    /*
+     * Run your SQL as you wish
+     * */
+    function run_sql( $sql ){
+        return $this->db->query( $sql )->result();
+    }
 
 }
 

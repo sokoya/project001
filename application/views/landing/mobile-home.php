@@ -59,380 +59,67 @@
 <div class="global-wrapper clearfix" id="global-wrapper">
     <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
     <div class="main-slider row text-center" style="height:150px;">
-        <div style="background: rgb(85, 49, 79);height:192px;">
-            <img src="<?= base_url('assets/landing/img/test_slider/1.png'); ?>" class="img-responsive"
-                 style="max-width:240px;margin:auto;padding:20px;"/>
-            <div class="slide_float">
-                Low Price Rate Alert<br/><a class="btn btn-shopnow">Shop Now</a>
+        <?php foreach( $sliders as $slider ) :?>
+            <div style="background: rgb(65,85,84);height:192px;">
+                <a href="<?= $slider->img_link; ?>">
+                    <img src="./../contents/home/sliders/<?= $slider->image?>" class="img-responsive" style="max-width:240px;margin:auto;padding:20px;"/>
+                </a>
+<!--                <div class="slide_float"> 85, 49, 79-->
+<!--                    Low Price Rate Alert<br/><a class="btn btn-shopnow">Shop Now</a>-->
+<!--                </div>-->
             </div>
-        </div>
-        <div style="background: rgb(142, 138, 136);height:192px;">
-            <img src="<?= base_url('assets/landing/img/test_slider/13.png'); ?>" class="img-responsive"
-                 style="max-width:240px;margin:auto;padding:20px;"/>
-            <div class="slide_float">
-                Low Price Rate Alert<br/><a class="btn btn-shopnow">Shop Now</a>
-            </div>
-        </div>
-        <div style="background: rgb(175, 171, 149);height:192px;">
-            <img src="<?= base_url('assets/landing/img/test_slider/3.png'); ?>" class="img-responsive"
-                 style="max-width:210px;margin:auto;padding:20px;"/>
-            <div class="slide_float">
-                Low Price Rate Alert<br/><a class="btn btn-shopnow">Shop Now</a>
-            </div>
-        </div>
-        <div style="background: rgb(62, 63, 62);height:192px;">
-            <img src="<?= base_url('assets/landing/img/test_slider/14.png'); ?>" class="img-responsive"
-                 style="max-width:240px;margin:auto;padding:20px;"/>
-            <div class="slide_float">
-                Low Price Rate Alert<br/><a class="btn btn-shopnow">Shop Now</a>
-            </div>
-        </div>
+        <?php endforeach;?>
     </div>
     <div class="gap"></div>
     <!--    //top categories slider-->
     <div class="container">
         <h5>Top <span style="color:#575745">Categories</span></h5>
         <div class="categories-slider text-center">
-            <div class="cat_board">
-                <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/cat_icons/028-smartphones.png'); ?>"
-                     alt="img">
-                <span style="font-size:10px;margin-bottom:auto;">Mobile Devices</span>
-            </div>
-            <div class="cat_board">
-                <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/cat_icons/television.png'); ?>"
-                     alt="img">
-                <span style="font-size:10px;margin-bottom:auto;">Electronics</span>
-            </div>
-            <div class="cat_board">
-                <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/cat_icons/cable.png'); ?>"
-                     alt="img">
-                <span style="font-size:10px;margin-bottom:auto;">Phone Accessories</span>
-            </div>
-            <div class="cat_board">
-                <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/cat_icons/t-shirt.png'); ?>"
-                     alt="img">
-                <span style="font-size:10px;margin-bottom:auto;">Men's Fashion</span>
-            </div>
-            <div class="cat_board">
-                <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/cat_icons/050-monitor.png'); ?>"
-                     alt="img">
-                <span style="font-size:10px;margin-bottom:auto;">Computers</span>
-            </div>
-            <div class="cat_board">
-                <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/cat_icons/hairdryer.png'); ?>"
-                     alt="img">
-                <span style="font-size:10px;margin-bottom:auto;">Lady's Fashion</span>
-            </div>
-            <div class="cat_board">
-                <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/cat_icons/036-laptop.png'); ?>"
-                     alt="img">
-                <span style="font-size:10px;margin-bottom:auto;">Laptops</span>
-            </div>
-            <div class="cat_board">
-                <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/cat_icons/keyboard.png'); ?>"
-                     alt="img">
-                <span style="font-size:10px;margin-bottom:auto;">PC Accessories</span>
-            </div>
-            <div class="cat_board">
-                <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/cat_icons/market.png'); ?>"
-                     alt="img">
-                <span style="font-size:10px;margin-bottom:auto;">Real Estate</span>
-            </div>
-            <div class="cat_board">
-                <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/cat_icons/002-chair.png'); ?>"
-                     alt="img">
-                <span style="font-size:10px;margin-bottom:auto;">Furniture</span>
-            </div>
-            <div class="cat_board">
-                <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/cat_icons/001-duck.png'); ?>"
-                     alt="img">
-                <span style="font-size:10px;margin-bottom:auto;">Kids</span>
-            </div>
-            <div class="cat_board">
-                <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/cat_icons/004-gamer.png'); ?>"
-                     alt="img">
-                <span style="font-size:10px;margin-bottom:auto;">Console</span>
-            </div>
-            <div class="cat_board">
-                <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/cat_icons/smartwatch.png'); ?>"
-                     alt="img">
-                <span style="font-size:10px;margin-bottom:auto;">Wearable</span>
-            </div>
-            <div class="cat_board">
-                <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/cat_icons/003-camera.png'); ?>"
-                     alt="img">
-                <span style="font-size:10px;margin-bottom:auto;">Camera</span>
-            </div>
-            <div class="cat_board">
-                <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/cat_icons/005-tablet.png'); ?>"
-                     alt="img">
-                <span style="font-size:10px;margin-bottom:auto;">Tablets</span>
-            </div>
-            <div class="cat_board">
-                <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/cat_icons/washing-machine.png'); ?>"
-                     alt="img">
-                <span style="font-size:10px;margin-bottom:auto;">Appliances</span>
-            </div>
-            <div class="cat_board">
-                <img class="cat_img"
-                     src="<?= base_url('assets/landing/img/cat_icons/headphones.png'); ?>"
-                     alt="img">
-                <span style="font-size:10px;margin-bottom:auto;">Headsets</span>
-            </div>
+            <?php foreach($main_categories as $category ) : ?>
+                <div class="cat_board">
+                    <a style="color: #0b0b0b;" href="<?= base_url('catalog/' . $category->slug . '/'); ?>">
+                        <img class="cat_img"
+                             src="<?= base_url('assets/landing/img/cat_icons/028-smartphones.png'); ?>"
+                             alt="Shop for <?= $category->name; ?>">
+                        <span style="font-size:10px;margin-bottom:auto;"><?= $category->name; ?></span>
+                    </a>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
-    <div class="gap_small"></div>
-    <div class="container">
-        <h5>Top Selling <span style="color:#575745">Electronics</span></h5>
-        <div class="products-slider text-center">
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
-                <span>product1</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/2.jpg'); ?>" class="prod_img"/>
-                <span>product2</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
-                <span>product3</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
-                <span>product4</span>
-                <h5>&#8358; 23,450</h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
-                <span>product5</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
-                <span>product6</span>
-                <h5>&#8358; 23,450</h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/2.jpg'); ?>" class="prod_img"/>
-                <span>product7</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
-                <span>product8</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
-                <span>product9</span>
-                <h5>&#8358; 23,450</h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
-                <span>product0</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
+
+    <?php foreach ($category_listing as $listing ) :
+            $products = $this->product->randomproducts( (int)$listing->category_id, 12 );
+        ?>
+        <div class="gap_small"></div>
+        <div class="container">
+            <h5>Top Selling <span style="color:#575745"><a href="<?= base_url('catalog/' . $listing->slug . '/'); ?>"><?= $listing->name?></a></span></h5>
+            <div class="products-slider text-center">
+                <?php foreach ( $products as $product ) :?>
+                <a style="color: #0b0b0b" href="<?= base_url(urlify($product->product_name, $product->id)); ?>">
+                    <div style="">
+
+                        <img src="<?= PRODUCTS_IMAGE_PATH .$product->image_name ?>" class="prod_img"/>
+                        <span><?= character_limiter($product->product_name, 15)?></span>
+                        <?php
+                        if(discount_check($product->discount_price, $product->start_date, $product->end_date )) : ?>
+                            <h5><?= ngn($product->discount_price); ?><small style="text-decoration: line-through;color:#e48b84"><?= ngn($product->sale_price); ?></small>
+                            </h5>
+                            <small class="pull-right text-danger"><?= $product->item_left; ?> Item left</small>
+                        <?php else : ?>
+                            <h5><?= ngn($product->sale_price); ?><small class="pull-right text-danger"><?= $product->item_left; ?> Item left</small></h5>
+                        <?php endif; ?>
+                    </div>
+                </a>
+                <?php endforeach; ?>
             </div>
         </div>
-    </div>
-    <div class="gap_small"></div>
-    <div class="home_banner container">
-        <img src="<?= base_url('assets/landing/img/home/ad.jpg'); ?> " class="img-responsive">
-    </div>
-    <div class="gap_small"></div>
-    <div class="container">
-        <h5>Top Selling <span style="color:#575745">Fashion</span></h5>
-        <div class="products-slider text-center">
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
-                <span>product1</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/2.jpg'); ?>" class="prod_img"/>
-                <span>product2</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
-                <span>product3</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
-                <span>product4</span>
-                <h5>&#8358; 23,450</h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
-                <span>product5</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
-                <span>product6</span>
-                <h5>&#8358; 23,450</h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/2.jpg'); ?>" class="prod_img"/>
-                <span>product7</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
-                <span>product8</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
-                <span>product9</span>
-                <h5>&#8358; 23,450</h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
-                <span>product0</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
+        <div class="gap_small"></div>
+        <div class="home_banner container">
+            <img src="<?= base_url('assets/landing/img/home/aaa.jpg'); ?> " class="img-responsive">
         </div>
-    </div>
-    <div class="gap_small"></div>
-    <div class="home_banner container">
-        <img src="<?= base_url('assets/landing/img/home/aaa.jpg'); ?> " class="img-responsive">
-    </div>
-    <div class="gap_small"></div>
-    <div class="container">
-        <h5>Top Selling <span style="color:#575745">Gadgets</span></h5>
-        <div class="products-slider text-center">
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
-                <span>product1</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/2.jpg'); ?>" class="prod_img"/>
-                <span>product2</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
-                <span>product3</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
-                <span>product4</span>
-                <h5>&#8358; 23,450</h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
-                <span>product5</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
-                <span>product6</span>
-                <h5>&#8358; 23,450</h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/2.jpg'); ?>" class="prod_img"/>
-                <span>product7</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
-                <span>product8</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
-                <span>product9</span>
-                <h5>&#8358; 23,450</h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
-                <span>product0</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-        </div>
-    </div>
-    <div class="gap_small"></div>
-    <div class="home_banner container">
-        <img src="<?= base_url('assets/landing/img/home/ab.jpg'); ?> " class="img-responsive">
-    </div>
-    <div class="gap_small"></div>
-    <div class="container">
-        <h5>Top Selling <span style="color:#575745">Laptops</span></h5>
-        <div class="products-slider text-center">
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
-                <span>product1</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/2.jpg'); ?>" class="prod_img"/>
-                <span>product2</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
-                <span>product3</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
-                <span>product4</span>
-                <h5>&#8358; 23,450</h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
-                <span>product5</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
-                <span>product6</span>
-                <h5>&#8358; 23,450</h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/2.jpg'); ?>" class="prod_img"/>
-                <span>product7</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
-                <span>product8</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/1.jpg'); ?>" class="prod_img"/>
-                <span>product9</span>
-                <h5>&#8358; 23,450</h5>
-            </div>
-            <div style="">
-                <img src="<?= base_url('assets/landing/img/tprod/3.jpg'); ?>" class="prod_img"/>
-                <span>product0</span>
-                <h5>&#8358; 23,450 <small style="text-decoration: line-through;color:#e48b84">&#8358; 27,000</small></h5>
-            </div>
-        </div>
-    </div>
+    <?php endforeach; ?>
+
     <div class="container" style="padding:30px;">
         <hr class="hr-text" data-content="Why Choose Us">
         <div class="owl-carousel owl-loaded owl-nav-out" data-options='{"items":5,"loop":true,"nav":true}'>
