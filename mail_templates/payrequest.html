@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html charset=UTF-8"/>
+    <title>Payment Request</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-size-adjust: none;
+            width: 100% !important;
+            height: 100%;
+            line-height: 1.6em;
+        }
+
+        table td {
+            vertical-align: middle;
+        }
+
+        body {
+            background-color: #ecf0f5;
+            color: #6c7b88
+        }
+
+        .body-wrap {
+            background-color: #ecf0f5;
+            width: 100%;
+        }
+
+        .container {
+            display: block !important;
+            max-width: 600px !important;
+            margin: 10px auto !important;
+            clear: both !important;
+        }
+
+        .content {
+            max-width: 600px;
+            margin: 0 auto;
+            display: block;
+            padding: 20px;
+        }
+
+        .main {
+            background-color: #fff;
+            border-bottom: 2px solid #d7d7d7;
+        }
+
+        .content-wrap {
+            padding: 20px;
+        }
+
+        .content-block {
+            padding: 0 0 20px;
+            text-align: justify;
+        }
+
+        .footer {
+            width: 100%;
+            clear: both;
+            color: #999;
+            padding: 20px;
+        }
+
+        .footer p, .footer a, .footer td {
+            color: #999;
+            font-size: 12px;
+        }
+
+        h1, h2, h3 {
+            font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            color: #1a2c3f;
+            margin: 30px 0 0;
+            line-height: 1.2em;
+            font-weight: 400;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 500;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+
+        h3 {
+            font-size: 18px;
+        }
+
+        h4 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        p, ul, ol {
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+
+        p li, ul li, ol li {
+            margin-left: 5px;
+            list-style-position: inside;
+        }
+
+        .btn-primary {
+            text-decoration: none;
+            color: #FFF;
+            background-color: #2BA27D;
+            border: solid #2BA27D;
+            border-width: 10px 20px;
+            line-height: 2em;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            display: inline-block;
+            text-transform: capitalize;
+        }
+
+        td a, td a:hover, td a::selection {
+            text-decoration: none;
+            color: white;
+        }
+
+        tr.menu {
+            height: 50px;
+        }
+
+        .aligncenter {
+            text-align: center !important;
+        }
+
+        @media screen and (max-width: 360px) {
+            .grocery {
+                display: none !important;
+            }
+        }
+
+        @media screen and (max-width: 240px) {
+            .fashion {
+                display: none !important;
+            }
+        }
+
+        @media only screen and (max-width: 640px) {
+            body {
+                padding: 0 !important;
+            }
+
+            .menu td a {
+                font-size: 8px !important;
+            }
+
+            tr.menu {
+                height: auto !important;
+            }
+
+            h1, h2, h3, h4 {
+                font-weight: 800 !important;
+                margin: 20px 0 5px !important;
+            }
+
+            h1 {
+                font-size: 22px !important;
+            }
+
+            h2 {
+                font-size: 18px !important;
+            }
+
+            h3 {
+                font-size: 16px !important;
+            }
+
+            .container {
+                padding: 0 !important;
+                width: 100% !important;
+            }
+
+            .content {
+                padding: 0 !important;
+            }
+
+            .content-wrap {
+                padding: 10px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+<table class="body-wrap">
+    <tbody>
+    <tr>
+        <td></td>
+        <td class="container" width="600">
+            <div class="content">
+                <table class="main" width="100%" cellpadding="0" cellspacing="0" itemprop="action">
+                    <tbody>
+                    <tr>
+                        <td class="content-wrap">
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tbody>
+                                <tr>
+                                    <td style="padding: 10px;">
+                                        <table width="100%" cellpadding="0" cellspacing="1">
+                                            <tr>
+                                                <td colspan="6" style="text-align: center;background:white;">
+                                                    <img src="newlogo.png" style="margin:auto;max-width: 60%;"
+                                                         alt="Onitshamaket.com">
+                                                </td>
+                                            </tr>
+                                            <tr style="background: #2BA27D;color:white;text-align: center;"
+                                                class="menu">
+                                                <td class="electronic"><a>Electronics</a></td>
+                                                <td class="fashion"><a>Fashion</a></td>
+                                                <td class="grocery"><a>Groceries</a></td>
+                                                <td class="computer"><a>Computers</a></td>
+                                                <td class="phone"><a>Phones</a></td>
+                                                <td class="toy"><a>Kids Toys</a></td>
+                                            </tr>
+                                        </table>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px;">
+                                        <table width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td class="content-block">
+                                                    <h3>Payment Request</h3>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="content-block">
+                                                    Dear Seller,<br>
+                                                    We have sent you this email in response to your payment request
+                                                    initiated on your account on onitshamarket.com
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="content-block">
+                                                    To confirm you made this request and we can proceed to process your
+                                                    transaction, please follow the link
+                                                    below:
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="content-block aligncenter">
+                                                    <a href="#" class="btn-primary">Confirm Request</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="content-block">
+                                                    We recommend that you keep your password secure and not share it
+                                                    with anyone.
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="content-block">
+                                                    If you did not initiate this payment request please contact us at
+                                                    support@onitshamarket.com
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="content-block">
+                                                    onitshamarket.com Customer Service
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="footer">
+                    <table width="100%" cellspacing="0" cellpadding="0">
+                        <tbody>
+                        <tr>
+                            <td style="text-align: center;">
+                                <img style="width:20px"
+                                     src="https://www.sendible.com/hs-fs/hubfs/Imported_Blog_Media/facebook.png?width=120&height=120&name=facebook.png"
+                                     alt="Facebook"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <img style="width:20px"
+                                     src="https://www.sendible.com/hs-fs/hubfs/Imported_Blog_Media/twitter-1.png?width=120&height=120&name=twitter-1.png"
+                                     alt="Twitter"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <img style="width:20px"
+                                     src="https://www.sendible.com/hs-fs/hubfs/Imported_Blog_Media/sm-icons-instagram-app-icon.png?width=120&height=120&name=sm-icons-instagram-app-icon.png"
+                                     alt="Instagram"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-family:'Open Sans', Arial, sans-serif; font-size:11px; line-height:18px; color:#999999;"
+                                valign="top" align="center"><a href="#" target="_blank"
+                                                               style="color:#999999; text-decoration:underline;">PRIVACY
+                                STATEMENT</a> | <a href="#" target="_blank"
+                                                   style="color:#999999; text-decoration:underline;">TERMS OF
+                                SERVICE</a> | <a href="#" target="_blank"
+                                                 style="color:#999999; text-decoration:underline;">RETURNS</a><br>
+                                © 2018 Onitshamarket.com. All Rights Reserved.<br>
+                                If you do not wish to receive any further emails from us, please <a href="#"
+                                                                                                    target="_blank"
+                                                                                                    style="text-decoration:none; color:#999999;">unsubscribe</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
