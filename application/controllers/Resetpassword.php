@@ -23,27 +23,27 @@ class Resetpassword extends MY_Controller {
                 $this->session->set_flashdata('error_msg', '<strong>Please fix the error</strong> <br />' . validation_errors());
             }else{
                 $email = $this->input->post('email');
-                $user = $this->user->get_row('users', 'id', "email = '$email'");
+                $user = $this->user->get_row('users', 'id, first_name', "email = '$email'");
                 if( $user ){
                     $data['code'] = $code = $this->user->generate_code( 'users', 'code');
                     if( $this->user->update_data("{$user->id}", $data, 'users')) {
                         $this->load->model('email_model', 'email');
                         $email_array = array(
                             'email' => $email,
-                            'reset_link' => base_url('resetpassword/activate?token='.$code)
+                            'reset_link' => base_url('resetpassword/activate?token='.$code),
+                            'recipent' => 'Dear '. $data['first_name']
                         );
-                        $status = $this->email->reset_password( $email_array);
-                        if( $status['success'] ){
+                        try {
+                            $this->email->reset_password( $email_array);
                             $this->session->set_flashdata('success_msg', "Reset mail has been sent to <strong>" . $email . "</strong> please click on the link in your email to reset your password.");
-                            redirect('login');
-                        }else{
-                            // log the error
+                        } catch (Exception $e) {
                             $error_action = array(
-                                'error_action' => 'ResetPassword Controller - Reset mail',
-                                'error_message' => $status['error']
+                                'error_action' => 'Create controller - Welcome mail',
+                                'error_message' => $e->getMessage()
                             );
                             $this->email->insert_data('error_logs', $error_action);
                         }
+                        redirect('login');
                         unset($email_array); unset($error_action);
                     } else {
                         $this->session->set_flashdata('error_msg', "There was an error updating your account, please try again, and if persist, contact support.");
@@ -61,7 +61,7 @@ class Resetpassword extends MY_Controller {
     public function activate(){
         $token = cleanit($this->input->get('token'));
         if( $token && !empty( $token )){
-            $user = $this->get_row('users', 'id,email', "code = {$token}");
+            $user = $this->user->get_row('users', 'id,email', array('code' => $token));
             if( $user ){
                 $this->session->set_userdata('id', $user->id);
                 $this->session->set_userdata('email', $user->email);
@@ -109,7 +109,7 @@ class Resetpassword extends MY_Controller {
             }
             redirect('resetpassword/reset_password');
         }else{
-            $this->load->view('reset_change_password', $page_data);
+            $this->load->view('landing/reset_password_change', $page_data);
         }
     }
 

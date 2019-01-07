@@ -18,10 +18,12 @@ class Email_model extends CI_Model {
             'subject' => 'Reset Password Confirmation',
             'to' => $data['email'],
             'template' => 'UserPasswordReset',
+            'merge_recipent' => $data['recipent'],
             'merge_reset_link' => $data['reset_link'],
             'isTransactional' => false
         );
         return $this->send_now($post);
+
     }
 
     // Welcome user for new account creates
@@ -30,6 +32,7 @@ class Email_model extends CI_Model {
             'subject' => 'Welcome to ' . lang('app_name'),
             'to' => $data['email'],
             'template' => 'WelcomeNewUser',
+            'merge_recipent' => $data['recipent'],
             'isTransactional' => false
         );
         return $this->send_now($post);

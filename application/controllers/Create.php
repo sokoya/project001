@@ -58,10 +58,6 @@ class Create extends MY_Controller{
 
             $user_id = $this->user->create_account($data, 'users');
             if( !is_numeric($user_id) ) {
-                // check if site is live
-                // if( $lang['site_state'] == 'development' ) {
-                //     $output_array['message'] = $user_id;
-                // }
                 $this->session->set_flashdata('error_msg','Sorry! There was an error creating your account.' . $user_id);
                 redirect($_SERVER['HTTP_REFERER']);
             }else{
@@ -71,12 +67,12 @@ class Create extends MY_Controller{
                     'recipent' => 'Dear '. $data['first_name'] . ' ' . $data['last_name']
                 );
 
-                $status = $this->email->welcome_user( $email_array);
-                if( !$status['success'] ){
-                    // log the error
+                try {
+                    $this->email->welcome_user( $email_array );
+                } catch (Exception $e) {
                     $error_action = array(
-                        'error_action' => 'Create Controller - Welcome mail',
-                        'error_message' => $status['error']
+                        'error_action' => 'Create controller - Welcome mail',
+                        'error_message' => $e->getMessage()
                     );
                     $this->email->insert_data('error_logs', $error_action);
                 }

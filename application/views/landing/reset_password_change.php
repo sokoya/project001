@@ -99,7 +99,7 @@
                         <?php $this->load->view('landing/msg_view'); ?>
                         <div class="ipad_pad"></div>
                         <div class="market-board login-box">
-                            <?= form_open('resetpassword/process', 'id="reset-form"'); ?>
+                            <?= form_open('resetpassword/reset_password', 'id="reset-form"'); ?>
                             <div class="form-group">
                                 <label><h5>Password</h5></label>
                                 <input class="form-control" type="password" name="password"

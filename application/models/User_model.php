@@ -48,7 +48,7 @@ Class User_model extends CI_Model{
         if ($this->session->userdata('logged_id')) {
             $array = array(
                 'last_login' => get_now(),
-                'last_ip' => $_SERVER['REMOTE_ADDR']
+                'ip' => $_SERVER['REMOTE_ADDR']
             );
             $this->db->set($array);
             $this->db->where('id',$this->session->userdata('logged_id'));

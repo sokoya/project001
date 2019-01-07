@@ -389,7 +389,7 @@
             <img src="http://localhost/project001/assets/landing/img/home/ad.jpg " width="100%">
         </div>
     <?php endforeach; ?>
-    
+
     <!--    Why choose us-->
     <div class="gap"></div>
     <div class="container">
