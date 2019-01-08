@@ -90,7 +90,7 @@ class Resetpassword extends MY_Controller {
                 $password = cleanit($this->input->post('password'));
                 if($this->user->change_password($password, $id, 'users')){
                     // delete the token
-                    $this->user->update_data("$id", array('code' => ''), 'users' );
+                    $this->user->update_data($id, array('code' => ''), 'users' );
                     $this->session->unset_userdata('id');
                     $this->session->unset_userdata('email');
 
