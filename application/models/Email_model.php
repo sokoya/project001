@@ -1,7 +1,6 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Email_model extends CI_Model {
-
     // Insert data
     function insert_data($table = 'error_logs', $data = array()){
         try {
