@@ -1,4 +1,6 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
+<link rel="stylesheet" href="<?= base_url('assets/seller/plugins/slick/slick.css'); ?>">
+<link rel="stylesheet" href="<?= base_url('assets/seller/plugins/slick/slick-theme.css'); ?>">
 <style>
     .pro_ad {
         min-height: auto !important;
@@ -7,6 +9,9 @@
     .card-max {
         margin-top: 30px;
         margin-bottom: 30px;
+    }
+    .home_slider img{
+        margin:auto;    
     }
 
     .card-max-header {
@@ -214,6 +219,26 @@
 
         <?php $this->load->view('landing/resources/head_menu') ?>
     <?php endif; ?>
+    <div class="home_slider row text-center">
+        <div>
+            <img src="http://kenwheeler.github.io/slick/img/fonz1.png" />
+        </div>
+        <div>
+            <img src="http://kenwheeler.github.io/slick/img/fonz2.png" />
+        </div>
+        <div>
+            <img src="http://kenwheeler.github.io/slick/img/fonz3.png" />
+        </div>
+        <div>
+            <img src="http://kenwheeler.github.io/slick/img/fonz1.png" />
+        </div>
+        <div>
+            <img src="http://kenwheeler.github.io/slick/img/fonz2.png" />
+        </div>
+        <div>
+            <img src="http://kenwheeler.github.io/slick/img/fonz3.png" />
+        </div>
+    </div>
     <div class="owl-carousel owl-loaded owl-nav-dots-inner" data-options='{"items":1,"loop":true}'>
         <div class="owl-item">
             <div class="slider-item" style="background-color:#3D3D3D;">
@@ -481,5 +506,20 @@
 <?php if ($this->agent->is_mobile()) : ?>
     <script src="<?= base_url('assets/landing/js/mobile.js'); ?>"></script>
 <?php endif; ?>
+<script src="<?= base_url('assets/seller/plugins/slick/slick.js') ?>"></script>
+<script>
+    $('.home_slider').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots: true,
+        infinite: true,
+        cssEase: 'linear',
+        speed: 500,
+        lazyLoad: 'ondemand',
+        autoplay: true,
+        autoplaySpeed: 8000,
+        arrows: true,
+    });
+</script>
 </body>
 </html>
