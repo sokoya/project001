@@ -306,10 +306,15 @@
 <script>
     (function () {
         let fullDate = new Date();
-        let twoDigitMonth = ((fullDate.getMonth()) >= 10) ? (fullDate.getMonth() + 1) : '0' + (fullDate.getMonth() + 1);
-        let twoDigitDay = ((fullDate.getDate().length) === 1) ? (fullDate.getDate()) : '0' + (fullDate.getDate());
+        let twoDigitMonth = tdm("month", fullDate.getMonth());
+
+        function tdm(type = "", data = "") {
+            if (type === "month") return ((data.length) === 1) ? (data + 1) : '0' + (data + 1);
+            if (type === "day") return (data >= 10) ? (data) : '0' + (data);
+        }
+        let twoDigitDay = tdm("day", fullDate.getDate());
         let currentDate = twoDigitDay + "/" + twoDigitMonth + "/" + fullDate.getFullYear();
-        let dueDate = twoDigitDay + '/' + (twoDigitMonth + 1) + "/" + fullDate.getFullYear();
+        let dueDate = twoDigitDay + '/' + tdm("month", fullDate.getMonth() + 1) + "/" + fullDate.getFullYear();
         $('.invoice_date').text(currentDate);
         $('.invoice_due').text(dueDate);
     })();

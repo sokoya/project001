@@ -66,7 +66,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="hide_ipad">
-                    <a href="#"><span>Learn more about</span> <strong>Market Shopper</strong></a>
+                    <a href="#"><span>Learn more about</span> <strong>OM Shopper</strong></a>
                 </li>
 
                 <li class="dropdown">
