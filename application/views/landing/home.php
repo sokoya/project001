@@ -119,13 +119,10 @@
     .max-img {
         margin-right: -15px;
         margin-left: -15px;
-        padding-bottom: 62.5%;
-        background: no-repeat 50% 50%;
-        background-size: cover;
+        padding-top: 30px;
         height: auto;
         width: auto;
         min-height: 200px;
-        border-bottom: 1px solid #dadada;
         cursor: pointer;
         transition: transform .2s; /* Animation */
     }
@@ -334,24 +331,25 @@
                         <img class="card-max-side" src="http://localhost/project001/assets/landing/img/home/side.jpg"/>
                     </div>
                     <div class="col-md-6">
-                        <div class="row">
+                        <div class="row" style="border-bottom: 1px solid #dadada; background: url(<?=base_url('assets/landing/img/home/dimension.png')?>) repeat;">
                             <?php  foreach( $banners as $banner ):
                                 if( in_array( $banner->position, array('top1', 'top2'))) :  ?>
                                     <a href="<?= $banner->link; ?>">
                                         <div class="col-md-6">
-                                            <div class="max-img"
-                                                 style="background-image: url(<?= './../contents/home/' . $banner->img; ?>);"></div>
+                                            <div class="max-img">
+                                                <img class="img-responsive" src="<?=base_url('assets/landing/img/home/banner.png')?>"/>
+                                            </div>
                                         </div>
                                     </a>
                                 <?php endif; ?>
                                 <?php  endforeach; ?>
                         </div>
-                        <div class="row">
+                        <div class="row" style="padding-top:35px;">
                             <?php  foreach( $banners as $banner ): if( in_array( $banner->position, array('bottom1', 'bottom2', 'bottom3'))  ) : ?>
                                     <div class="col-md-4">
                                         <a href="<?= $banner->link; ?>">
                                             <img class="card-max-shade"
-                                                 src="<?= './../contents/home/' . $banner->img; ?>" alt="<?= lang('app_name'); ?>"/>
+                                                 src="<?=base_url('assets/landing/img/home/banner.png')?>" alt="<?= lang('app_name'); ?>"/>
                                             <p class="card-max-shade-text">Swifter Solar Energy</p>
                                         </a>
                                     </div>
