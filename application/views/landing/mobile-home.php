@@ -105,7 +105,7 @@
                         if(discount_check($product->discount_price, $product->start_date, $product->end_date )) : ?>
                             <h5><?= ngn($product->discount_price); ?><small style="text-decoration: line-through;color:#e48b84"><?= ngn($product->sale_price); ?></small>
                             </h5>
-                            <small class="pull-right text-danger"><?= $product->item_left; ?> Item left</small>
+                            <h5><small class="pull-right text-danger"><?= $product->item_left; ?> Item left</small></h5>
                         <?php else : ?>
                             <h5><?= ngn($product->sale_price); ?><small class="pull-right text-danger"><?= $product->item_left; ?> Item left</small></h5>
                         <?php endif; ?>
@@ -137,7 +137,7 @@
                     <img class="banner-category-img"
                          src="<?= base_url('assets/landing/img/why-onitshamarket/carrito-shopper.png'); ?>"
                          alt="<?= lang('app_name'); ?> Shopper" title="<?= lang('app_name'); ?> Shopper"/>
-                    <h5 class="banner-category-title">Jewelry</h5>
+                    <h5 class="banner-category-title">OM Shopper</h5>
                     <p class="banner-category-desc">Automated shopping assistant</p>
                 </a>
             </div>
@@ -213,7 +213,7 @@
             slidesToScroll: 1,
             lazyLoad: 'ondemand',
             autoplay: true,
-            autoplaySpeed: 8000,
+            autoplaySpeed: 6000,
             arrows: true,
             mobileFirst: true
         });

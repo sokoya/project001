@@ -13,6 +13,15 @@
 
     .home_slider img {
         margin: auto;
+        width: 100%;
+        max-height: 500px;
+        height: auto;
+        min-height: auto;
+    }
+    .home_slider{
+        height:auto;
+        max-height: 450px;
+        min-height: auto;
     }
 
     .card-max-header {
@@ -220,33 +229,51 @@
 
         <?php $this->load->view('landing/resources/head_menu') ?>
     <?php endif; ?>
-    <div class="home_slider row text-center" style="height:480px;">
+    <div class="home_slider row text-center">
         <div style="background:rgb(1, 8, 14)">
-            <img src="<?= base_url('assets/landing/img/home/smarttv.jpg') ?>"/>
+            <div class="container">
+                <img src="<?= base_url('assets/landing/img/home/smarttv.jpg') ?>"/>
+            </div>
         </div>
         <div style="background:rgb(22, 25, 30)">
-            <img src="<?= base_url('assets/landing/img/home/main.jpg') ?>"/>
+            <div class="container">
+                <img src="<?= base_url('assets/landing/img/home/main.jpg') ?>"/>
+            </div>
         </div>
         <div style="background:rgb(255, 255, 255)">
-            <img src="<?= base_url('assets/landing/img/home/bbdre.jpg') ?>"/>
+            <div class="container">
+                <img src="<?= base_url('assets/landing/img/home/bbdre.jpg') ?>"/>
+            </div>
         </div>
         <div style="background:rgb(0, 166, 218)">
-            <img src="<?= base_url('assets/landing/img/home/baby.jpg') ?>"/>
+            <div class="container">
+                <img src="<?= base_url('assets/landing/img/home/baby.jpg') ?>"/>
+            </div>
         </div>
         <div style="background:rgb(12, 0, 36">
-            <img src="<?= base_url('assets/landing/img/home/cam.jpg') ?>"/>
+            <div class="container">
+                <img src="<?= base_url('assets/landing/img/home/cam.jpg') ?>"/>
+            </div>
         </div>
         <div style="background:rgb(107, 111, 112)">
-            <img src="<?= base_url('assets/landing/img/home/headp.jpg') ?>"/>
+            <div class="container">
+                <img src="<?= base_url('assets/landing/img/home/headp.jpg') ?>"/>
+            </div>
         </div>
         <div style="background:rgb(212, 234, 255)">
-            <img src="<?= base_url('assets/landing/img/home/sami.jpg') ?>"/>
+            <div class="container">
+                <img src="<?= base_url('assets/landing/img/home/sami.jpg') ?>"/>
+            </div>
         </div>
         <div style="background:rgb(0,0,0)">
-            <img src="<?= base_url('assets/landing/img/home/iphone.png') ?>"/>
+            <div class="container">
+                <img src="<?= base_url('assets/landing/img/home/iphone.png') ?>"/>
+            </div>
         </div>
         <div style="background:rgb(255, 255, 255)">
-            <img src="<?= base_url('assets/landing/img/home/nike.jpg') ?>"/>
+            <div class="container">
+                <img src="<?= base_url('assets/landing/img/home/nike.jpg') ?>"/>
+            </div>
         </div>
     </div>
     <div class="container">
@@ -481,7 +508,7 @@
         speed: 500,
         lazyLoad: 'ondemand',
         autoplay: true,
-        autoplaySpeed: 4000
+        autoplaySpeed: 3000
     });
 </script>
 </body>
