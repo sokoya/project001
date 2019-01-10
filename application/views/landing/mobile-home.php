@@ -62,7 +62,7 @@
         <?php foreach( $sliders as $slider ) :?>
             <div style="background: rgb(65,85,84);height:192px;">
                 <a href="<?= $slider->img_link; ?>">
-                    <img src="./../contents/home/sliders/<?= $slider->image?>" class="img-responsive" style="max-width:240px;margin:auto;padding:20px;"/>
+                    <img src="<?= base_url('assets/landing/img/test_slider/1.png'); ?>" class="img-responsive" style="max-width:240px;margin:auto;padding:20px;"/>
                 </a>
 <!--                <div class="slide_float"> 85, 49, 79-->
 <!--                    Low Price Rate Alert<br/><a class="btn btn-shopnow">Shop Now</a>-->

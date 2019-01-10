@@ -10,8 +10,9 @@
         margin-top: 30px;
         margin-bottom: 30px;
     }
-    .home_slider img{
-        margin:auto;    
+
+    .home_slider img {
+        margin: auto;
     }
 
     .card-max-header {
@@ -219,75 +220,33 @@
 
         <?php $this->load->view('landing/resources/head_menu') ?>
     <?php endif; ?>
-    <div class="home_slider row text-center">
-        <div>
-            <img src="http://kenwheeler.github.io/slick/img/fonz1.png" />
+    <div class="home_slider row text-center" style="height:480px;">
+        <div style="background:rgb(1, 8, 14)">
+            <img src="<?= base_url('assets/landing/img/home/smarttv.jpg') ?>"/>
         </div>
-        <div>
-            <img src="http://kenwheeler.github.io/slick/img/fonz2.png" />
+        <div style="background:rgb(22, 25, 30)">
+            <img src="<?= base_url('assets/landing/img/home/main.jpg') ?>"/>
         </div>
-        <div>
-            <img src="http://kenwheeler.github.io/slick/img/fonz3.png" />
+        <div style="background:rgb(255, 255, 255)">
+            <img src="<?= base_url('assets/landing/img/home/bbdre.jpg') ?>"/>
         </div>
-        <div>
-            <img src="http://kenwheeler.github.io/slick/img/fonz1.png" />
+        <div style="background:rgb(0, 166, 218)">
+            <img src="<?= base_url('assets/landing/img/home/baby.jpg') ?>"/>
         </div>
-        <div>
-            <img src="http://kenwheeler.github.io/slick/img/fonz2.png" />
+        <div style="background:rgb(12, 0, 36">
+            <img src="<?= base_url('assets/landing/img/home/cam.jpg') ?>"/>
         </div>
-        <div>
-            <img src="http://kenwheeler.github.io/slick/img/fonz3.png" />
+        <div style="background:rgb(107, 111, 112)">
+            <img src="<?= base_url('assets/landing/img/home/headp.jpg') ?>"/>
         </div>
-    </div>
-    <div class="owl-carousel owl-loaded owl-nav-dots-inner" data-options='{"items":1,"loop":true}'>
-        <div class="owl-item">
-            <div class="slider-item" style="background-color:#3D3D3D;">
-                <div class="container">
-                    <div class="slider-item-inner">
-                        <div class="slider-item-caption-left slider-item-caption-white">
-                            <h4 class="slider-item-caption-title">Save up to &#8358;1,500 on Your Next Laptop</h4>
-                            <p class="slider-item-caption-desc">I'm Not Gonna Pay A Lot For This Laptop.</p><a
-                                    class="btn btn-lg btn-ghost btn-white" href="#">Shop Now</a>
-                        </div>
-                        <img class="slider-item-img-right"
-                             src="<?= base_url('assets/landing/img/test_slider/1.png'); ?>" alt="Image Alternative text"
-                             title="Image Title" style="top: 60%; width: 56%;"/>
-                    </div>
-                </div>
-            </div>
+        <div style="background:rgb(212, 234, 255)">
+            <img src="<?= base_url('assets/landing/img/home/sami.jpg') ?>"/>
         </div>
-        <div class="owl-item">
-            <div class="slider-item"
-                 style="background-image:url(<?= base_url('assets/landing/img/concert_2_1200x500.jpg'); ?>);">
-                <div class="container">
-                    <div class="slider-item-inner">
-                        <div class="slider-item-caption-right slider-item-caption-white">
-                            <h4 class="slider-item-caption-title">World Top Guitars from $350</h4>
-                            <p class="slider-item-caption-desc">Fill It To The Rim With Guitar.</p><a
-                                    class="btn btn-lg btn-ghost btn-white" href="#">Shop Now</a>
-                        </div>
-                        <img class="slider-item-img-left" src="<?= base_url('assets/landing/img/test_slider/2.png'); ?>"
-                             alt="Image Alternative text" title="Image Title"
-                             style="transform:translateY(-50%) rotate(14deg); width: 55%;"/>
-                    </div>
-                </div>
-            </div>
+        <div style="background:rgb(0,0,0)">
+            <img src="<?= base_url('assets/landing/img/home/iphone.png') ?>"/>
         </div>
-        <div class="owl-item">
-            <div class="slider-item" style="background-color:#93282B;">
-                <div class="container">
-                    <div class="slider-item-inner">
-                        <div class="slider-item-caption-left slider-item-caption-white">
-                            <h4 class="slider-item-caption-title">Run! Run! Run!</h4>
-                            <p class="slider-item-caption-desc">Your Running Shoes, Right Away.</p><a
-                                    class="btn btn-lg btn-ghost btn-white" href="#">Shop Now</a>
-                        </div>
-                        <img class="slider-item-img-right"
-                             src="<?= base_url('assets/landing/img/test_slider/2.png'); ?>" alt="Image Alternative text"
-                             title="Image Title"/>
-                    </div>
-                </div>
-            </div>
+        <div style="background:rgb(255, 255, 255)">
+            <img src="<?= base_url('assets/landing/img/home/nike.jpg') ?>"/>
         </div>
     </div>
     <div class="container">
@@ -343,63 +302,69 @@
         </div>
     </div>
 
-    <?php foreach( $categories as $category ) : ?>
+    <?php foreach ($categories as $category) : ?>
         <div class="container" style="margin-top: 50px">
             <div class="card-max-header" style="margin-bottom: -20px;">
                 <p class="card-max-title"><?= $category->name; ?>
-                    <a href="<?= base_url('catalog/' . $category->slug . '/'); ?>" class="card-max-view-more" style="top: 20px !important">View More</a></p>
+                    <a href="<?= base_url('catalog/' . $category->slug . '/'); ?>" class="card-max-view-more"
+                       style="top: 20px !important">View More</a></p>
             </div>
-            <?php $banners = json_decode( $category->content); ?>
+            <?php $banners = json_decode($category->content); ?>
             <div class="card-max max-inverse">
                 <div class="row">
                     <div class="col-md-4" style="padding-right: 0; margin-right: -43px !important">
                         <img class="card-max-side" src="http://localhost/project001/assets/landing/img/home/side.jpg"/>
                     </div>
                     <div class="col-md-6">
-                        <div class="row" style="border-bottom: 1px solid #dadada; background: url(<?=base_url('assets/landing/img/home/dimension.png')?>) repeat;">
-                            <?php  foreach( $banners as $banner ):
-                                if( in_array( $banner->position, array('top1', 'top2'))) :  ?>
+                        <div class="row"
+                             style="border-bottom: 1px solid #dadada; background: url(<?= base_url('assets/landing/img/home/dimension.png') ?>) repeat;">
+                            <?php foreach ($banners as $banner):
+                                if (in_array($banner->position, array('top1', 'top2'))) : ?>
                                     <a href="<?= $banner->link; ?>">
                                         <div class="col-md-6">
                                             <div class="max-img">
-                                                <img class="img-responsive" src="<?=base_url('assets/landing/img/home/banner.png')?>"/>
+                                                <img class="img-responsive"
+                                                     src="<?= base_url('assets/landing/img/home/banner.png') ?>"/>
                                             </div>
                                         </div>
                                     </a>
                                 <?php endif; ?>
-                                <?php  endforeach; ?>
+                            <?php endforeach; ?>
                         </div>
                         <div class="row" style="padding-top:35px;">
-                            <?php  foreach( $banners as $banner ): if( in_array( $banner->position, array('bottom1', 'bottom2', 'bottom3'))  ) : ?>
-                                    <div class="col-md-4">
-                                        <a href="<?= $banner->link; ?>">
-                                            <img class="card-max-shade"
-                                                 src="<?=base_url('assets/landing/img/home/banner.png')?>" alt="<?= lang('app_name'); ?>"/>
-                                            <p class="card-max-shade-text">Swifter Solar Energy</p>
-                                        </a>
-                                    </div>
-                                <?php endif; ?>
+                            <?php foreach ($banners as $banner): if (in_array($banner->position, array('bottom1', 'bottom2', 'bottom3'))) : ?>
+                                <div class="col-md-4">
+                                    <a href="<?= $banner->link; ?>">
+                                        <img class="card-max-shade"
+                                             src="<?= base_url('assets/landing/img/home/banner.png') ?>"
+                                             alt="<?= lang('app_name'); ?>"/>
+                                        <p class="card-max-shade-text">Swifter Solar Energy</p>
+                                    </a>
+                                </div>
+                            <?php endif; ?>
                             <?php endforeach; ?>
                         </div>
                     </div>
-                    <?php $randoms = $this->product->randomproducts( (int)$category->category_id, 6); ?>
+                    <?php $randoms = $this->product->randomproducts((int)$category->category_id, 6); ?>
                     <div class="col-md-2 max-product-category">
-                        <?php foreach( $randoms as $random ) :?>
+                        <?php foreach ($randoms as $random) : ?>
                             <div class="row max-product-row">
                                 <div class="col-md-2"><img class="max-card-product-img"
-                                                           src="<?= PRODUCTS_IMAGE_PATH . $random->image_name; ?>"/></div>
+                                                           src="<?= PRODUCTS_IMAGE_PATH . $random->image_name; ?>"/>
+                                </div>
                                 <div class="col-md-10">
-                                    <p class="max-card-product"><?= character_limiter($random->product_name, 20)?></p>
+                                    <p class="max-card-product"><?= character_limiter($random->product_name, 20) ?></p>
                                     <?php
-                                    if( discount_check( $random->discount_price, $random->start_date, $random->end_date )) :
+                                    if (discount_check($random->discount_price, $random->start_date, $random->end_date)) :
                                         ?>
-                                        <p class="max-card-product-price"><?= ngn($random->discount_price)?>
+                                        <p class="max-card-product-price"><?= ngn($random->discount_price) ?>
                                             <sub class="max-card-product-price"><?= ngn($random->sale_price); ?></sub>
-                                            <span class="pull-md-right pull-lg-right"><?= $random->item_left?> item left</span>
+                                            <span class="pull-md-right pull-lg-right"><?= $random->item_left ?> item left</span>
                                         </p>
                                     <?php else: ?>
-                                        <p class="max-card-product-price"><?= ngn($random->sale_price)?>
-                                            <span class="pull-md-right pull-lg-right text-danger"><?= $random->item_left?> item left</span>
+                                        <p class="max-card-product-price"><?= ngn($random->sale_price) ?>
+                                            <span class="pull-md-right pull-lg-right text-danger"><?= $random->item_left ?>
+                                                item left</span>
                                         </p>
                                     <?php endif; ?>
                                 </div>
@@ -513,12 +478,10 @@
         slidesToScroll: 1,
         dots: true,
         infinite: true,
-        cssEase: 'linear',
         speed: 500,
         lazyLoad: 'ondemand',
         autoplay: true,
-        autoplaySpeed: 8000,
-        arrows: true,
+        autoplaySpeed: 4000
     });
 </script>
 </body>
