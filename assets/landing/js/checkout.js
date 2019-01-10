@@ -15,25 +15,26 @@ function bind_market(src, destination) {
 	$(`.${destination}`).html(src);
 }
 
-
 $('.continue-btn').on('click', function (e) {
-	e.preventDefault();
-
-	$.ajax({
-		url: base_url + 'checkout/checkout_confirm',
-		method: 'POST',
-		dataType: 'json',
-		data: $('#checkout_form').serialize(),
-
-		success: () => {
-			window.location.href = base_url + 'checkout/order_completed';
-			notification_message("Payment Successful redirecting to invoice page", 'fa fa-info-circle', 'success')
-		},
-		error: response => {
-			notification_message(`An error occurred  - ${response.status} ${response.statusText}`, 'fa fa-info-circle', 'error')
-		}
-	})
+	$('#checkout_form').submit();
 });
+// $('.continue-btn').on('click', function (e) {
+// 	e.preventDefault();
+// 	$.ajax({
+// 		// url: base_url + 'checkout/checkout_confirm',
+// 		url : base_url + 'checkout/dump',
+// 		method: 'POST',
+// 		dataType: 'json',
+// 		data: $('#checkout_form').serialize(),
+// 		success: () => {
+// 			window.location.href = base_url + 'checkout/order_completed';
+// 			notification_message("Payment Successful redirecting to invoice page", 'fa fa-info-circle', 'success')
+// 		},
+// 		error: response => {
+// 			notification_message(`An error occurred  - ${response.status} ${response.statusText}`, 'fa fa-info-circle', 'error')
+// 		}
+// 	})
+// });
 
 $('.cancel-btn').on('click', function () {
 	show_page('delivery_address');
@@ -44,10 +45,24 @@ $('.create-address-btn').on('click', function (e) {
 	e.preventDefault();
 	$(this).prop('disabled', true);
 	$('#processing').show();
+	var first_name = $('#fname').val();
+	var last_name = $('#lname').val();
+	var phone		= $('#number_').val();
+	var address	= $('#street').val();
+	var state = $('#state').val();
+	var area	= $('#city').val();
+	var data = {
+		'first_name' : first_name,
+		'last_name' : last_name,
+		'phone'	: phone,
+		'address' : address,
+		'state'	: state,
+		'area' : area
+	};
 	$.ajax({
 		url: base_url + "checkout/add_address",
 		method: "POST",
-		data: $('#new-address-form').serialize(),
+		data: data,
 		success: function (response) {
 			if (response.status = 'success') {
 				$('#status').html(`<p class="alert alert-success">${response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
@@ -119,7 +134,6 @@ function get_updates() {
 	let ad_id = $(this).data('id');
 	let elem = $(this);
 	$(`#${ad_id}`).prop('checked', true);
-
 	$.ajax({
 		url: base_url + "checkout/set_default_address",
 		method: 'POST',
@@ -142,7 +156,6 @@ function get_updates() {
 		}
 	});
 }
-
 
 $(".delivery-box").on('change', function () {
 	if (this.checked) {

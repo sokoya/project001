@@ -164,4 +164,11 @@ class Checkout extends MY_Controller
         $this->load->view('landing/order_completed', $page_data);
     }
 
+
+    public function stripe(){
+        $page_data['page'] = 'stripe_home';
+        $page_data['title'] = "Checkout Complete";
+        $this->load->view('landing/checkout_stripe_home', $page_data);
+    }
+
 }
