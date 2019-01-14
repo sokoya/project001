@@ -221,35 +221,21 @@
                         if (!$address_set):
                             ?>display: none
                         <?php endif; ?>">
-
-                            <div class="panel panel-default custom-panel">
-                                <div class="panel-body pay-panel">
-                                    <div class="form-check">
-                                        <p class="form-check-label pay-gate">
-                                            <input class="form-check-input payment-radio" type="radio"
-                                                   name="payment_method"
-                                                   id="stripe" value="1">
-                                            Pay with Stripe
-                                            <img src="<?= base_url('assets/landing/img/paystack.png'); ?>">
-                                        </p>
+                            <?php foreach( $methods as $method ) : ?>
+                                <div class="panel panel-default custom-panel">
+                                    <div class="panel-body pay-panel">
+                                        <div class="form-check">
+                                            <p class="form-check-label pay-gate">
+                                                <input class="form-check-input payment-radio" type="radio"
+                                                       name="payment_method"
+                                                       id="stripe" value="1">
+                                                Pay with Stripe
+                                                <img src="<?= base_url('assets/landing/img/paystack.png'); ?>">
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-<!--                            <div class="panel panel-default custom-panel">-->
-<!--                                <div class="panel-body pay-panel">-->
-<!--                                    <div class="form-check">-->
-<!--                                        <p class="form-check-label pay-gate">-->
-<!--                                            <input class="form-check-input payment_method payment-radio" type="radio"-->
-<!--                                                   name="payment_method"-->
-<!--                                                   id="pay_on_delivery" value="2">-->
-<!--                                            Pay on Delivery-->
-<!--                                            <img src="--><?//= base_url('assets/landing/img/paystack.png'); ?><!--">-->
-<!--                                        </p>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-
+                            <?php endforeach; ?>
                         </div>
                     </div>
                     <div class="panel panel-default">

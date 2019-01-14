@@ -15,26 +15,26 @@ function bind_market(src, destination) {
 	$(`.${destination}`).html(src);
 }
 
-$('.continue-btn').on('click', function (e) {
-	$('#checkout_form').submit();
-});
 // $('.continue-btn').on('click', function (e) {
-// 	e.preventDefault();
-// 	$.ajax({
-// 		// url: base_url + 'checkout/checkout_confirm',
-// 		url : base_url + 'checkout/dump',
-// 		method: 'POST',
-// 		dataType: 'json',
-// 		data: $('#checkout_form').serialize(),
-// 		success: () => {
-// 			window.location.href = base_url + 'checkout/order_completed';
-// 			notification_message("Payment Successful redirecting to invoice page", 'fa fa-info-circle', 'success')
-// 		},
-// 		error: response => {
-// 			notification_message(`An error occurred  - ${response.status} ${response.statusText}`, 'fa fa-info-circle', 'error')
-// 		}
-// 	})
+// 	$('#checkout_form').submit();
 // });
+$('.continue-btn').on('click', function (e) {
+	e.preventDefault();
+	$.ajax({
+		// url: base_url + 'checkout/checkout_confirm',
+		url : base_url + 'checkout/dump',
+		method: 'POST',
+		dataType: 'json',
+		data: $('#checkout_form').serialize(),
+		success: () => {
+			// window.location.href = base_url + 'checkout/order_completed';
+			notification_message("Payment Successful redirecting to invoice page", 'fa fa-info-circle', 'success')
+		},
+		error: response => {
+			// notification_message(`An error occurred  - ${response.status} ${response.statusText}`, 'fa fa-info-circle', 'error')
+		}
+	})
+});
 
 $('.cancel-btn').on('click', function () {
 	show_page('delivery_address');

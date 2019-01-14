@@ -40,6 +40,7 @@ class Checkout extends MY_Controller
 		}
         $this->session->set_flashdata('error_msg', $message);
 		$items = $this->cart->total_items();
+		$page_data['methods'] =  ;
 		if( empty($items) ) redirect( base_url() );
 		if (!$this->agent->is_mobile()) {
             $this->load->view('landing/checkout', $page_data);
@@ -166,9 +167,8 @@ class Checkout extends MY_Controller
 
 
     public function stripe(){
-        $page_data['page'] = 'stripe_home';
-        $page_data['title'] = "Checkout Complete";
-        $this->load->view('landing/checkout_stripe_home', $page_data);
+        var_dump( $_POST );
+        exit;
     }
 
 }
