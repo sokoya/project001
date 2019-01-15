@@ -60,14 +60,12 @@
     <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
     <div class="main-slider row text-center" style="height:150px;">
         <?php foreach( $sliders as $slider ) :?>
-            <div style="background: rgb(65,85,84);height:192px;">
                 <a href="<?= $slider->img_link; ?>">
-                    <img src="<?= base_url('assets/landing/img/test_slider/1.png'); ?>" class="img-responsive" style="max-width:240px;margin:auto;padding:20px;"/>
+                    <img src="<?= base_url('assets/landing/img/home/homeslide2.png'); ?>" class="img-responsive" style="margin:auto;padding:20px;"/>
                 </a>
 <!--                <div class="slide_float"> 85, 49, 79-->
 <!--                    Low Price Rate Alert<br/><a class="btn btn-shopnow">Shop Now</a>-->
 <!--                </div>-->
-            </div>
         <?php endforeach;?>
     </div>
     <div class="gap"></div>
@@ -116,7 +114,7 @@
         </div>
         <div class="gap_small"></div>
         <div class="home_banner container">
-            <img src="<?= base_url('assets/landing/img/home/aaa.jpg'); ?> " class="img-responsive">
+            <img src="<?= base_url('assets/landing/img/home/banner2.png'); ?> " class="img-responsive">
         </div>
     <?php endforeach; ?>
 

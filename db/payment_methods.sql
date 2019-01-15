@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 14, 2019 at 07:27 PM
+-- Generation Time: Jan 15, 2019 at 12:15 PM
 -- Server version: 5.7.11
--- PHP Version: 7.0.3
+-- PHP Version: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -35,6 +35,15 @@ CREATE TABLE `payment_methods` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `payment_methods`
+--
+
+INSERT INTO `payment_methods` (`id`, `name`, `settings`, `notes`, `status`) VALUES
+(1, 'Paystack', '[{"key":"a54cfe453d32"}]', 'Paystack payment method settings', 0),
+(2, 'Interswitch API', '[{"raw_":"api_enabled"}]', 'Interswitch payment gateway', 1),
+(3, 'Pay on Delivery', 'Pay on Delivery', 'Pay on delivery', 0);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -52,7 +61,7 @@ ALTER TABLE `payment_methods`
 -- AUTO_INCREMENT for table `payment_methods`
 --
 ALTER TABLE `payment_methods`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

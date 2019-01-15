@@ -18,8 +18,9 @@
         height: auto;
         min-height: auto;
     }
-    .home_slider{
-        height:auto;
+
+    .home_slider {
+        height: auto;
         max-height: 450px;
         min-height: auto;
     }
@@ -215,6 +216,7 @@
 
     .hot-row {
         margin-bottom: 10px;
+        padding:10px;
     }
 </style>
 </head>
@@ -230,49 +232,19 @@
         <?php $this->load->view('landing/resources/head_menu') ?>
     <?php endif; ?>
     <div class="home_slider row text-center">
-        <div style="background:rgb(1, 8, 14)">
+        <div>
             <div class="container">
-                <img src="<?= base_url('assets/landing/img/home/smarttv.jpg') ?>"/>
+                <img src="<?= base_url('assets/landing/img/home/homeslide1.png') ?>"/>
             </div>
         </div>
-        <div style="background:rgb(22, 25, 30)">
+        <div>
             <div class="container">
-                <img src="<?= base_url('assets/landing/img/home/main.jpg') ?>"/>
+                <img src="<?= base_url('assets/landing/img/home/homeslide2.png') ?>"/>
             </div>
         </div>
-        <div style="background:rgb(255, 255, 255)">
+        <div>
             <div class="container">
-                <img src="<?= base_url('assets/landing/img/home/bbdre.jpg') ?>"/>
-            </div>
-        </div>
-        <div style="background:rgb(0, 166, 218)">
-            <div class="container">
-                <img src="<?= base_url('assets/landing/img/home/baby.jpg') ?>"/>
-            </div>
-        </div>
-        <div style="background:rgb(12, 0, 36">
-            <div class="container">
-                <img src="<?= base_url('assets/landing/img/home/cam.jpg') ?>"/>
-            </div>
-        </div>
-        <div style="background:rgb(107, 111, 112)">
-            <div class="container">
-                <img src="<?= base_url('assets/landing/img/home/headp.jpg') ?>"/>
-            </div>
-        </div>
-        <div style="background:rgb(212, 234, 255)">
-            <div class="container">
-                <img src="<?= base_url('assets/landing/img/home/sami.jpg') ?>"/>
-            </div>
-        </div>
-        <div style="background:rgb(0,0,0)">
-            <div class="container">
-                <img src="<?= base_url('assets/landing/img/home/iphone.png') ?>"/>
-            </div>
-        </div>
-        <div style="background:rgb(255, 255, 255)">
-            <div class="container">
-                <img src="<?= base_url('assets/landing/img/home/nike.jpg') ?>"/>
+                <img src="<?= base_url('assets/landing/img/home/homeslide3.png') ?>"/>
             </div>
         </div>
     </div>
@@ -284,42 +256,42 @@
             </div>
             <div class="row">
                 <div class="col-md-2 col-xs-4 hot-row">
-                    <img class="card-max-img" src="<?= base_url('assets/landing/img/home/p1.jpg'); ?>"/>
+                    <img class="card-max-img" src="<?= base_url('assets/landing/img/home/hotsale8.png'); ?>"/>
                     <!--					<div class="card-max-text">-->
                     <!--						<p class="card-max-price">₦27,450</p>-->
                     <!--						<p class="card-max-discount">₦55,000</p>-->
                     <!--					</div>-->
                 </div>
                 <div class="col-md-2 col-xs-4 hot-row">
-                    <img class="card-max-img" src="<?= base_url('assets/landing/img/home/p2.jpg'); ?>"/>
+                    <img class="card-max-img" src="<?= base_url('assets/landing/img/home/hotsale4.png'); ?>"/>
                     <!--					<div class="card-max-text">-->
                     <!--						<p class="card-max-price">₦66,000</p>-->
                     <!--						<p class="card-max-discount">₦155,000</p>-->
                     <!--					</div>-->
                 </div>
                 <div class="col-md-2 col-xs-4 hot-row">
-                    <img class="card-max-img" src="<?= base_url('assets/landing/img/home/p3.jpg'); ?>"/>
+                    <img class="card-max-img" src="<?= base_url('assets/landing/img/home/hotsale2.png'); ?>"/>
                     <!--					<div class="card-max-text">-->
                     <!--						<p class="card-max-price">₦47,000</p>-->
                     <!--						<p class="card-max-discount">₦90,000</p>-->
                     <!--					</div>-->
                 </div>
                 <div class="col-md-2 col-xs-4 hot-row">
-                    <img class="card-max-img" src="<?= base_url('assets/landing/img/home/p7.jpg'); ?>"/>
+                    <img class="card-max-img" src="<?= base_url('assets/landing/img/home/hotsale7.png'); ?>"/>
                     <!--					<div class="card-max-text">-->
                     <!--						<p class="card-max-price">₦80,000</p>-->
                     <!--						<p class="card-max-discount">₦125,000</p>-->
                     <!--					</div>-->
                 </div>
                 <div class="col-md-2 col-xs-4 hot-row">
-                    <img class="card-max-img" src="<?= base_url('assets/landing/img/home/p5.jpg'); ?>"/>
+                    <img class="card-max-img" src="<?= base_url('assets/landing/img/home/hotsale0.png'); ?>"/>
                     <!--					<div class="card-max-text">-->
                     <!--						<p class="card-max-price">₦56,000</p>-->
                     <!--						<p class="card-max-discount">₦120,000</p>-->
                     <!--					</div>-->
                 </div>
                 <div class="col-md-2 col-xs-4 hot-row">
-                    <img class="card-max-img" src="<?= base_url('assets/landing/img/home/p6.jpg'); ?>"/>
+                    <img class="card-max-img" src="<?= base_url('assets/landing/img/home/hotsale5.png'); ?>"/>
                     <!--					<div class="card-max-text">-->
                     <!--						<p class="card-max-price">₦75,000</p>-->
                     <!--						<p class="card-max-discount">₦95,000</p>-->
@@ -401,7 +373,7 @@
                     </div>
                 </div>
             </div>
-            <img src="http://localhost/project001/assets/landing/img/home/ad.jpg " width="100%">
+            <img src="http://localhost/project001/assets/landing/img/home/banner1.png" width="100%">
         </div>
     <?php endforeach; ?>
 
