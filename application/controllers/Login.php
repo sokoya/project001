@@ -50,7 +50,7 @@ class Login extends MY_Controller{
                     // Check if the user already have some products in the cart, and going to checkout
                     // Perform every other actions necessary
                     // die( $user->id);
-                    $session_data = array('logged_in' => true, 'logged_id' => $user->id, 'is_seller' => $user->is_seller, 'email' => $this->input->post('loginemail'));
+                    $session_data = array('logged_in' => true, 'logged_id' => $user->id, 'email' => $this->input->post('loginemail'));
                     $this->session->set_userdata($session_data);
                     $this->session->set_flashdata('success_msg','You are now logged in!');
                     $from = $this->session->userdata('referred_from');

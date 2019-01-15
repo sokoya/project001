@@ -453,7 +453,7 @@ Class Product_model extends CI_Model{
      */
     function generate_code($table = 'orders', $field = 'order_code'){
         do {
-            $number = random_string('nozero', 8);
+            $number = random_string('nozero', 9);
             $this->db->where( $field, $number);
             $this->db->from($table);
             $count = $this->db->count_all_results();
@@ -658,7 +658,6 @@ Class Product_model extends CI_Model{
      * @return mixed
      */
     function get_billing_amount($address_id ){
-//        die( $address_id);
         $select = "SELECT b.aid, a.price FROM billing_address b LEFT JOIN area a ON (b.aid = a.id ) WHERE b.id = {$address_id}";
         return $this->db->query( $select )->row()->price;
     }
@@ -734,6 +733,13 @@ Class Product_model extends CI_Model{
      * */
     function run_sql( $sql ){
         return $this->db->query( $sql )->result();
+    }
+
+
+    function get_commission( $pid ){
+        $category_id = $this->get_row('products', 'category_id', array( 'id' => $pid))->category_id;
+        $price = $this->get_row('categories', 'commission', array('id' => $category_id))->commission;
+        return $price;
     }
 
 }

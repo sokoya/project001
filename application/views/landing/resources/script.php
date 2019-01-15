@@ -1,6 +1,6 @@
 <script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
-<script src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <?php if(!in_array($page, array('login','create','reset_password'))) :?>
 <script src="<?= base_url('assets/landing/js/owl.carousel.min.js'); ?>"></script>
 <script src="<?= base_url('assets/landing/js/ionrangeslider.js'); ?>"></script>
