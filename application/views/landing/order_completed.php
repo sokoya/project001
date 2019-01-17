@@ -202,11 +202,10 @@
                     <div class="col-xs-12 col-md-4 "></div>
                 </div>
             </header>
-            <main>
                 <div class="row contacts">
                     <div class="col-md-12" style="font-weight:500;font-size:14px;">Thank you for shopping with us at
                         onitshamarket.com! If you experience any problems related to this order contact
-                        onitshamarket.com
+                        <a href="mailto:info@onitshamarket.com">info@onitshamarket.com</a>
                     </div>
                     <br/><br/>
                     <div class="col-md-6 col-xs-12 invoice-to">
@@ -217,8 +216,8 @@
                         <div class="email"><a href="mailto:<?= $profile->email ?>"><?= $profile->email ?></a></div>
                     </div>
                     <div class="col-md-6 col-xs-12 invoice-details">
-                        <h1 class="invoice-id">INVOICE REFERENCE: <span>4822234</span></h1>
-                        <div class="date">Date of Invoice: <span class="invoice_date"></span></div>
+                        <h1 class="invoice-id">INVOICE REFERENCE: <span><?= $order; ?></span></h1>
+                        <div class="date">Date of Invoice: <span class="invoice_date"><??></span></div>
                         <div class="date">Due Date: <span class="invoice_due"></span></div>
                     </div>
                 </div>
@@ -241,56 +240,40 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="no">01</td>
-                            <td class="text-left"><h3>Samsung S9+</h3>Creating a recognizable design solution based on
-                                the company's existing visual identity
-                            </td>
-                            <td class="qty">3</td>
-                            <td class="var">Grey</td>
-                            <td class="unit">&#8358;&nbsp;400.00</td>
-                            <td class="total">&#8358;&nbsp;1,200.00</td>
-                        </tr>
-                        <tr>
-                            <td class="no">02</td>
-                            <td class="text-left"><h3>Acer Aspire Edge 5</h3>Developing a Content Management
-                                System-based Website
-                            </td>
-                            <td class="qty">8</td>
-                            <td class="var">n/a</td>
-                            <td class="unit">&#8358;&nbsp;400.00</td>
-                            <td class="total">&#8358;&nbsp;3,200.00</td>
-                        </tr>
-                        <tr>
-                            <td class="no">03</td>
-                            <td class="text-left"><h3>Synix Smart T.V.</h3>Optimize the site for search engines (SEO)
-                            </td>
-                            <td class="qty">2</td>
-                            <td class="var">Grey</td>
-                            <td class="unit">&#8358;&nbsp;400.00</td>
-                            <td class="total">&#8358;&nbsp;800.00</td>
-                        </tr>
+                            <?php $x = 1; $subtotal = $shipping = 0; foreach( $orders as $order ) : ?>
+                                <tr>
+                                    <td class="no"><?= $x; ?></td>
+                                    <td class="text-left"><h3><?= ucwords($order->product_name);?></h3></td>
+                                    <td class="qty"><?= $order->qty; ?></td>
+                                    <td class="var"><?= $order->variation; ?></td>
+                                    <td class="unit"><?= ngn($order->amount); ?></td>
+                                    <td class="total"><?= ngn($order->amount * $order->qty); ?></td>
+                                    <?php
+                                        $subtotal += $order->amount;
+                                        $shipping += $order->delivery_charge;
+                                    ?>
+                                </tr>
+                            <?php $x++; endforeach;?>
                         </tbody>
                         <tfoot>
                         <tr>
                             <td colspan="3"></td>
                             <td colspan="2">SUBTOTAL</td>
-                            <td>&#8358;&nbsp;5,200.00</td>
+                            <td><?= ngn($subtotal); ?></td>
                         </tr>
                         <tr>
                             <td colspan="3"></td>
                             <td colspan="2">SHIPPING</td>
-                            <td>&#8358;&nbsp;1,300.00</td>
+                            <td><?= ngn($shipping);?></td>
                         </tr>
                         <tr>
                             <td colspan="3"></td>
                             <td colspan="2" style="font-weight: 800;">GRAND TOTAL</td>
-                            <td>&#8358;&nbsp;6,500.00</td>
+                            <td><?= $subtotal + $shipping;?></td>
                         </tr>
                         </tfoot>
                     </table>
                 </div>
-            </main>
             <footer>
                 <p style="font-size: 14px;">&copy; onitshamarket.com</p>
             </footer>
@@ -304,20 +287,6 @@
 <script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
 
 <script>
-    (function () {
-        let fullDate = new Date();
-        let twoDigitMonth = tdm("month", fullDate.getMonth());
-
-        function tdm(type = "", data = "") {
-            if (type === "month") return ((data.length) === 1) ? (data + 1) : '0' + (data + 1);
-            if (type === "day") return (data >= 10) ? (data) : '0' + (data);
-        }
-        let twoDigitDay = tdm("day", fullDate.getDate());
-        let currentDate = twoDigitDay + "/" + twoDigitMonth + "/" + fullDate.getFullYear();
-        let dueDate = twoDigitDay + '/' + tdm("month", fullDate.getMonth() + 1) + "/" + fullDate.getFullYear();
-        $('.invoice_date').text(currentDate);
-        $('.invoice_due').text(dueDate);
-    })();
     $('#printInvoice').click(function () {
         window.print();
     });

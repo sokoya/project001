@@ -310,7 +310,7 @@
                                                                                         data-amount="<?= $delivery_charge; ?>"><?= ngn($delivery_charge * $this->cart->total_items()); ?></span>
                             </li>
                             <li class="list-group-item cs-sm-t">Total: <span
-                                    class="total-sum-charges" data-amount="<?= ngn($subtotal + $delivery_charge); ?>" ><?= $subtotal + $delivery_charge; ?></span>
+                                    class="total-sum-charges" data-amount="<?= ngn($subtotal + $delivery_charge); ?>" ><?= ngn($subtotal + $delivery_charge); ?></span>
                             </li>
                             <input type="hidden" name="total_charge" id="total_charge" value="<?= $subtotal + $delivery_charge; ?>">
                             <li class="list-group-item">

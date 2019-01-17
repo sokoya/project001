@@ -17,8 +17,7 @@
                             </div>
                         <?php endif ?>
                         <div id="payment-errors"></div>
-                        <form method="post" id="paymentFrm" enctype="multipart/form-data" action="<?php echo base_url('checkout/check'); ?>">
-
+                        <form method="post" id="paymentFrm" enctype="multipart/form-data" onsubmit="return false;" action="<?php echo base_url('checkout/check'); ?>">
                             <div class="form-group">
                                 <input type="number" name="card_num" id="card_num" class="form-control" placeholder="Card Number" autocomplete="off" value="<?php echo set_value('card_num'); ?>" required>
                             </div>
@@ -37,7 +36,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <input type="text" name="cvc" id="card-cvc" maxlength="3" class="form-control" autocomplete="off" placeholder="CVC" value="<?php echo set_value('cvc'); ?>" required>
@@ -46,7 +44,7 @@
                             </div>
                             <div class="form-group text-right">
                                 <button class="btn btn-secondary" type="reset">Reset</button>
-                                <button type="submit" id="payBtn" class="btn btn-success">Submit Payment</button>
+                                <button type="button" id="payBtn" class="btn btn-success">Submit Payment</button>
                             </div>
                         </form>
                     </div>
@@ -101,5 +99,8 @@
 <?php $this->load->view('landing/resources/script'); ?>
 <script src="<?= base_url('assets/landing/js/checkout.js'); ?>"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+<script>
+
+</script>
 </body>
 </html>

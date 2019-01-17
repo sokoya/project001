@@ -223,7 +223,9 @@ Class User_model extends CI_Model{
         return $query;
     }
 
-
+    /*
+     * Get users orders
+     * */
     function get_my_orders( $id, $time = ''){
         $query = "SELECT order_code, SUM(amount) as amount, SUM(qty) as qty, order_date FROM orders WHERE buyer_id = $id";
         if( $time != ''){
@@ -375,7 +377,6 @@ Class User_model extends CI_Model{
         $ids = $this->db->get('recently_viewed')->row()->product_ids;
         if( $ids ){
             $ids = json_decode( $ids, true );
-//            var_dump( $ids ); exit;
             if( !empty( $excludes ) ){
                 foreach( $excludes as $exclude => $value ){
                     if (($key = array_search( $value, $ids)) !== false) {
@@ -383,7 +384,6 @@ Class User_model extends CI_Model{
                     }
                 }
             }
-
             $select_query = "SELECT p.id, p.product_name,p.views, v.sale_price, v.discount_price, v.start_date, v.end_date, SUM(v.quantity) as item_left, g.image_name
             FROM products p JOIN (SELECT var.product_id, var.discount_price,var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var
             WHERE var.quantity > 0 ORDER BY var.id) AS v ON (p.id = v.product_id) JOIN product_gallery AS g ON (p.id = g.product_id AND g.featured_image = 1)
@@ -392,6 +392,15 @@ Class User_model extends CI_Model{
         }else{
             return false;
         }
+    }
 
+    /*
+     * Get most recent order for invoice
+     * */
+    function get_my_lastorders( $order, $buyer_id ){
+        $query = "SELECT  p.product_name, o.amount, o.order_date, o.delivery_charge, o.qty, v.variation FROM orders o 
+            JOIN product_variation v ON (o.product_variation_id = v.id)
+            JOIN products p ON (o.product_id = p.id) WHERE o.order_code = {$order} AND o.buyer_id = {$buyer_id}";
+        return $this->db->query( $query );
     }
 }

@@ -90,7 +90,6 @@ class Product extends MY_Controller
 		$array = array('str' => $str, 'is_limit' => false);
 		$x = (array)$this->product->get_products($array, $this->input->get());
 		$count = (count($x));
-
 		$this->load->library('pagination');
 		$this->config->load('pagination');
 		$config = $this->config->item('pagination');

@@ -46,48 +46,10 @@ $('.continue-btn').on('click', function (e) {
 
 });
 
-//Pay Button for Stripe Payment
-$('#payBtn').on('click', function (e) {
-    // Get the token
-    //create single-use token to charge the user
-    Stripe.createToken({
-        number: $('#card_num').val(),
-        cvc: $('#card-cvc').val(),
-        exp_month: $('#card-expiry-month').val(),
-        exp_year: $('#card-expiry-year').val()
-    }, stripeResponseHandler);
-    //submit from callback
-    return false;
-});
-
-function stripeResponseHandler(status, response){
-    if( response.error){
-        $('#payBtn').removeAttr("disabled");
-        //display the errors on the form
-        // $('#payment-errors').attr('hidden', 'false');
-        $('#payment-errors').addClass('alert alert-danger');
-        $("#payment-errors").html(response.error.message);
-    }else{
-        //This would be changed to the stripe card form
-        var form$ = $("#checkout_form");
-        //get token id
-        var token = response['id'];
-        //insert the token into the form
-        form$.append("<input type='hidden' name='stripeToken' value='" + token + "' />");
-        //insert every other element
-        form$.append("<input type='hidden' name='delivery_charge' value='" + delivery_charge+"' />");
-        form$.append("<input type='hidden' name='total_charge' value='" + total_charge+"' />");
-        //Check the payment method to type to know what to do
-        //submit form to the server
-        form$.get(0).submit();
-
-    }
-}
 
 $('.cancel-btn').on('click', function () {
 	show_page('delivery_address');
 });
-
 
 $('.create-address-btn').on('click', function (e) {
 	e.preventDefault();
@@ -273,6 +235,50 @@ quantity.on('input', function () {
 });
 
 $(document).ready(function () {
+
+    $('#payBtn').on('click', function (e) {
+        // alert('Here...');
+        e.preventDefault();
+        $(this).prop('disabled', 'disabled');
+        // Get the token
+        //create single-use token to charge the user
+        Stripe.createToken({
+            number: $('#card_num').val(),
+            cvc: $('#card-cvc').val(),
+            exp_month: $('#card-expiry-month').val(),
+            exp_year: $('#card-expiry-year').val()
+        }, stripeResponseHandler);
+        //submit from callback
+        return false;
+    });
+
+    function stripeResponseHandler(status, response){
+        if( response.error){
+            $('#payBtn').removeAttr("disabled");
+            //display the errors on the form
+            // $('#payment-errors').attr('hidden', 'false');
+            $('#payment-errors').addClass('alert alert-danger');
+            $("#payment-errors").html(response.error.message);
+        }else{
+            //This would be changed to the stripe card form
+            var form$ = $("#paymentFrm");
+            //get token id
+            var token = response['id'];
+            //insert the token into the form
+            form$.append("<input type='hidden' name='stripeToken' value='" + token + "' />");
+            //insert every other element
+            //Check the payment method to type to know what to do
+            //submit form to the server
+            form$.get(0).submit();
+
+        }
+    }
+
+
+
+
+        // alert('Here');
+
 
 	// $.ajax({
 	// 	url: base_url + "checkout/fetch_address",

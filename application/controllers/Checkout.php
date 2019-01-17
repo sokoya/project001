@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Checkout extends MY_Controller
 {
 
@@ -107,12 +106,6 @@ class Checkout extends MY_Controller
      * */
 	function checkout_confirm() {
 	    if( $this->input->is_ajax_request() ){
-            // Incoming Data
-            /* $_POST['selected_address']
-                $_POST['payment_method']
-                $_POST['total_charge']
-                $_POST['delivery_charge']
-            */
             $address_id = cleanit( $this->input->post('selected_address', true) );
             $billing_amount = $this->product->get_billing_amount($address_id);
             if( !$billing_amount ) $billing_amount = 500; // Default Billnng Address
@@ -177,7 +170,7 @@ class Checkout extends MY_Controller
             // We need to confirm if there is still an item in the cart
             $item_left = $this->cart->total_items();
             if( !empty( $item_left ) && !empty( $total) ){
-                $this->session->set_userdata(array('order_code' => $order_code, 'total' => $total));
+                $this->session->set_userdata(array('order_code' => $order_code, 'amount' => $total));
                 $return['status'] = 'success';
                 $return['order'] = $order_code;
                 echo json_encode( $return );
@@ -192,9 +185,21 @@ class Checkout extends MY_Controller
 	public function order_completed(){
         $page_data['page'] = 'order_completed';
         $page_data['title'] = "Order Invoice";
-        $page_data['orders'] = $this->user->get_my_orders($this->session->userdata('logged_id') );
-        $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
-        $this->load->view('landing/order_completed', $page_data);
+        $email = $this->session->userdata('email');
+        $order = $this->session->userdata('order_code');
+        $uid = $this->session->userdata('logged_id');
+        $page_data['profile'] = $this->user->get_profile( $uid );
+        $orders = $this->user->get_my_lastorders($order, $uid);
+        if( $uid && $order && $orders ){
+            // Send mail to the user
+            $page_data['order_code'] = $order;
+            $page_data['orders'] = $orders->result();
+            // Remove all session
+            $this->load->view('landing/order_completed', $page_data);
+        }else{
+            $this->session->set_flashdata('error_msg', 'Start shopping...');
+            redirect(base_url());
+        }
     }
 
     public function stripe(){
@@ -204,31 +209,24 @@ class Checkout extends MY_Controller
         $this->load->view('landing/stripe/product_form', $page_data);
     }
 
-    public function check()
-    {
+    public function check(){
         //check whether stripe token is not empty
-        if(!empty($_POST['stripeToken']))
-        {
+        if(!empty($_POST['stripeToken'])){
             //get token, card and user info from the form
             $email = $this->session->userdata('email');
             $order = $this->session->userdata('order_code');
             $amount = $this->session->userdata('amount');
+//            die( $amount . ' - ' . $email . ' - ' . $order);
             $token = $this->input->post('stripeToken', true);
-            $card_num = $this->input->post('card_num', true);
-            $card_cvc = $this->input->post('cvc', true);
-            $card_exp_month = $this->input->post('exp_month', true);
-            $card_exp_year = $this->input->post('exp_year', true);
             //include Stripe PHP library
             require_once APPPATH."third_party/stripe/init.php";
-
             //set api key
             $stripe = array(
-                "secret_key"      => "YOUR_SECRET_KEY",
+                "secret_key"      => "sk_test_j1NHfDoinTtxm25PyGNuV4xw",
                 "publishable_key" => "pk_test_nod5swtRu9mKvMZB28838BY8"
             );
 
             \Stripe\Stripe::setApiKey($stripe['secret_key']);
-
             //add customer to stripe
             $customer = \Stripe\Customer::create(array(
                 'email' => $email,
@@ -236,82 +234,50 @@ class Checkout extends MY_Controller
             ));
 
             //item information
-            $itemNumber = $order;
-            $itemPrice = $amount;
+            $itemPrice = $amount * 100 ;
             $currency = "ngn";
-            $orderID = $order;
 
             //charge a credit or a debit card
             $charge = \Stripe\Charge::create(array(
                 'customer' => $customer->id,
                 'amount'   => $itemPrice,
                 'currency' => $currency,
-                'description' => $itemNumber,
+                'description' => "Payment for order -" . $order,
                 'metadata' => array(
-                    'item_id' => $orderID
+                    'order_code' => $order,
+                    'buyer_id'   => $this->session->userdata('logged_id')
                 )
             ));
-
             //retrieve charge details
             $chargeJson = $charge->jsonSerialize();
-
             //check whether the charge is successful
-            if($chargeJson['amount_refunded'] == 0 && empty($chargeJson['failure_code']) && $chargeJson['paid'] == 1 && $chargeJson['captured'] == 1)
-            {
+            if($chargeJson['amount_refunded'] == 0 && empty($chargeJson['failure_code']) && $chargeJson['paid'] == 1 && $chargeJson['captured'] == 1){
                 //order details
                 $amount = $chargeJson['amount'];
                 $balance_transaction = $chargeJson['balance_transaction'];
-                $currency = $chargeJson['currency'];
                 $status = $chargeJson['status'];
                 $date = date("Y-m-d H:i:s");
-
-                //insert tansaction data into the database
-//                $dataDB = array(
-//                    'card_num' => $card_num,
-//                    'card_cvc' => $card_cvc,
-//                    'card_exp_month' => $card_exp_month,
-//                    'card_exp_year' => $card_exp_year,
-//                    'item_code' => $itemNumber,
-//                    'item_price' => $itemPrice,
-//                    'item_price_currency' => $currency,
-//                    'paid_amount' => $amount,
-//                    'paid_amount_currency' => $currency,
-//                    'transaction_id' => $balance_transaction,
-//                    'payment_status' => $status,
-//                    'created' => $date,
-//                    'modified' => $date
-//                );
-                $dataDB = array(
-                    'item_price_currency' => $currency,
-                    'paid_amount' => $amount,
-                    'paid_amount_currency' => $currency,
+                $data = array(
+                    'paid_amount' => $amount/100,
                     'transaction_id' => $balance_transaction,
                     'payment_status' => $status,
-                    'created' => $date,
-                    'modified' => $date
+                    'payment_created' => $date,
+                    'payment_modified' => $date
                 );
-
-                if ($this->db->insert('charge', $dataDB)) {
-                    if($this->db->insert_id() && $status == 'succeeded'){
-                        $data['insertID'] = $this->db->insert_id();
-                        $this->load->view('payment_success', $data);
-                        // redirect('Welcome/payment_success','refresh');
-                    }else{
-                        echo "Transaction has been failed";
-                    }
+                // Update
+                if( $this->product->update_items( $order, $data )){
+                    $this->session->userdata('success_msg', "Order completed.");
+                    redirect('checkout/order_completed');
+                }else{
+                    $this->session->userdata('error_msg', "Transaction failed.Please try again.");
+                    redirect(base_url());
                 }
-                else
-                {
-                    echo "not inserted. Transaction has been failed";
-                }
-
+            }else{
+                $this->session->userdata('error_msg', "Invalid Transaction Token.");
+                redirect('checkout');
             }
-            else
-            {
-                echo "Invalid Token";
-                $statusMsg = "";
-            }
+        }else{
+            redirect(base_url());
         }
     }
-
 }

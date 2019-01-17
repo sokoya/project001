@@ -735,11 +735,26 @@ Class Product_model extends CI_Model{
         return $this->db->query( $sql )->result();
     }
 
-
+    /*
+     * Get commisssion price for a certain product
+     * */
     function get_commission( $pid ){
         $category_id = $this->get_row('products', 'category_id', array( 'id' => $pid))->category_id;
         $price = $this->get_row('categories', 'commission', array('id' => $category_id))->commission;
         return $price;
+    }
+
+    /*
+     * Update order item with code number*/
+    function update_items( $order_code, $data) {
+        try {
+            $this->db->where('order_code', $order_code);
+            return $this->db->update('orders', $data);
+        } catch (Exception $e) {
+            $error_array = array('error_action' => 'Failed to Update Order', 'error_message' => "A payment was successful for {$order_code} but could'nt update.");
+            $this->product->insert_data('error_logs', $error_array);
+        }
+        return false;
     }
 
 }
