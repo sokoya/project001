@@ -398,9 +398,65 @@ Class User_model extends CI_Model{
      * Get most recent order for invoice
      * */
     function get_my_lastorders( $order, $buyer_id ){
-        $query = "SELECT  p.product_name, o.amount, o.order_date, o.delivery_charge, o.qty, v.variation FROM orders o 
-            JOIN product_variation v ON (o.product_variation_id = v.id)
-            JOIN products p ON (o.product_id = p.id) WHERE o.order_code = {$order} AND o.buyer_id = {$buyer_id}";
+        $query = "SELECT  p.id, p.product_name, o.seller_id, u.email selleremail, o.amount, o.order_date, o.delivery_charge, o.qty, v.variation FROM orders o
+JOIN product_variation v ON (o.product_variation_id = v.id)
+JOIN users u ON (u.id = o.seller_id)
+JOIN products p ON (o.product_id = p.id) WHERE o.order_code = {$order} AND o.buyer_id = {$buyer_id}";
         return $this->db->query( $query );
+    }
+
+
+    /*
+     * Get just one single row of the last order to send SMS and mail*/
+    function get_last_singleorder( $order, $buyer_id ){
+        $query = "SELECT o.amount, CONCAT(b.first_name, ' ', b.last_name) billingname, CONCAT(b.phone, ', ', b.phone2) billingphone,
+CONCAT(b.address, ' ', s.name, ', ', a.name) billingaddress, p.name paymentname, o.order_date, o.payment_method,
+se.seller_phone, se.legal_company_name
+FROM orders o LEFT JOIN billing_address b ON(b.id = o.billing_address_id)
+LEFT JOIN states s ON(s.id = b.sid) LEFT JOIN area a ON(a.id = b.aid)
+LEFT JOIN payment_methods p ON (o.payment_method = p.id)
+LEFT JOIN sellers se ON (se.uid = o.seller_id)
+WHERE o.order_code = {$order} AND o.buyer_id = {$buyer_id} ORDER BY o.id DESC LIMIT 1";
+        return $this->db->query( $query )->row();
+    }
+
+    /*
+     * Get all orders for this order_code and the seller id
+     * For email purpose.
+     * */
+    /**
+     * @param $order
+     * @return mixed
+     */
+    function get_sellers_by_code($order ){
+        $query = "SELECT DISTINCT(o.seller_id), u.email FROM orders o JOIN users u ON (u.id = o.seller_id) WHERE order_code = {$order}";
+        return $this->db->query( $query )->result();
+    }
+
+    /*
+     * Generate the seller details */
+    /**
+     * @param $order
+     * @return array
+     */
+    function get_sellers_details($order){
+        $sellers = $this->get_sellers_by_code( $order);
+        $res = array();
+        foreach( $sellers as $seller ){
+            $res['email'] = $seller->email;
+            $query = "SELECT o.product_id,o.qty, p.product_name, g.image_name FROM orders o JOIN products p ON(p.id = o.product_id)
+            JOIN product_gallery g ON(g.product_id = o.product_id AND g.featured_image = 1 )
+            WHERE o.seller_id = {$seller->seller_id} AND o.order_code = {$order}";
+            $details = $this->db->query( $query )->result();
+            $x = 0;
+            foreach( $details as $detail ){
+                $res['products'][$x]['qty'] = $detail->qty;
+                $res['products'][$x]['product_id'] = $detail->product_id;
+                $res['products'][$x]['product_name'] = $detail->product_name;
+                $res['products'][$x]['image_name'] = $detail->image_name;
+                $x++;
+            }
+        }
+        return $res;
     }
 }

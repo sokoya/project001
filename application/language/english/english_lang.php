@@ -48,5 +48,7 @@ $lang['countries'] = 'Afghanistan, Albania, Algeria, American Samoa, Andorra, An
 $lang['banks'] = 'Access Bank Plc, Citibank Nigeria Limited, Diamond Bank Plc, Ecobank Nigeria Plc, Enterprise Bank , Fidelity Bank Plc, FIRST BANK NIGERIA LIMITED, First City Monument Bank Plc, Guaranty Trust Bank Plc, Heritage Banking Company Ltd, Key Stone Bank, MainStreet Bank, Skye Bank Plc, Stanbic IBTC Bank Ltd, Standard Chartered Bank Nigeria Ltd, Sterling Bank Plc, SunTrust Bank Nigeria Limited, Union Bank of Nigeria Plc, United Bank For Africa Plc, Unity Bank Plc, Wema Bank Plc, Zenith Bank Plc';
 
 
+//Others
+$lang['sellers_url'] = 'https://www.seller.onitshamarket.com/';
 
 ?>

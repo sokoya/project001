@@ -222,28 +222,27 @@
                             if (!$address_set):
                                 ?>display: none
                             <?php endif; ?>">
-    <!--                            --><?php //foreach( $methods as $method ) : ?>
-                                <?php
-                                $x = 1;
-                                do { ?>
+                                <?php $x = 1; foreach( $methods as $method ) : ?>
                                     <div class="panel panel-default custom-panel pay-method">
                                         <div class="panel-body pay-panel">
                                             <div class="form-check">
                                                 <p class="form-check-label pay-gate">
                                                     <input class="form-check-input payment-radio" type="radio"
                                                            name="payment_method"
-                                                           id="payment_method_<?= $x; ?>" value="<?= $x; ?>">
-                                                    Pay with Stripe
-                                                    <img src="<?= base_url('assets/landing/img/paystack.png'); ?>">
+                                                           data-name="<?= trim($method->name); ?>"
+                                                           data-pid="<?= $method->id; ?>"
+                                                           id="payment_method_<?= $method->id; ?>" value="<?= $method->id; ?>">
+                                                    <?= $method->name; ?>
+<!--                                                    <img src="--><?//= base_url('assets/landing/img/paystack.png'); ?><!--">-->
+                                                </p>
+                                                <div class="gap-top"></div>
+                                                <p class="text-sm pad-all">
+                                                    <?= htmlspecialchars_decode($method->notes); ?>
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
-                                <?php
-                                    $x++;
-                                } while ($x <= 3);
-                                ?>
-    <!--                            --><?php //endforeach; ?>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                         <div class="panel panel-default">
@@ -255,7 +254,7 @@
                                     <table class="table">
                                         <tbody>
                                         <?php
-                                        $subtotal = $total = 0;
+                                        $subtotal = $total = $qty = 0 ;
                                         foreach ($this->cart->contents() as $product) :
                                             $detail = $this->product->get_cart_details($product['id']);
                                             ?>
@@ -280,6 +279,7 @@
                                                         <?php
                                                         echo ngn($product['subtotal']);
                                                         $subtotal += $product['subtotal'];
+                                                        $qty += $product['qty'];
                                                         ?>
                                                     </span>
                                                 </td>
@@ -307,12 +307,13 @@
                                                                                 data-amount="<?= $subtotal; ?>"><?= ngn($subtotal); ?></span>
                             </li>
                             <li class="list-group-item cs-sm-m">Delivery Charges: <span class="charges"
-                                                                                        data-amount="<?= $delivery_charge; ?>"><?= ngn($delivery_charge * $this->cart->total_items()); ?></span>
+                                                                                        data-amount="<?= $delivery_charge; ?>"><?= ngn($delivery_charge * $qty); ?></span>
                             </li>
                             <li class="list-group-item cs-sm-t">Total: <span
-                                    class="total-sum-charges" data-amount="<?= ngn($subtotal + $delivery_charge); ?>" ><?= ngn($subtotal + $delivery_charge); ?></span>
+                                    class="total-sum-charges" data-amount="<?= $subtotal + ($delivery_charge * $qty) ; ?>" ><?= ngn($subtotal + ($delivery_charge * $qty) ); ?></span>
                             </li>
-                            <input type="hidden" name="total_charge" id="total_charge" value="<?= $subtotal + $delivery_charge; ?>">
+                            <input type="hidden" name="total_charge" id="total_charge" value="<?= $subtotal + ($delivery_charge * $qty); ?>">
+                            <input type="hidden" name="qty" id="qty" value="<?= $qty; ?>">
                             <li class="list-group-item">
                                 <button type="submit" class="btn btn-block btn-custom-dark continue-btn" disabled>Continue
                                     to Payment

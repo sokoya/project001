@@ -12,6 +12,7 @@ class Cart extends MY_Controller
         $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
         $page_data['title'] = 'My cart';
         $page_data['page'] = 'cart';
+        $this->session->set_tempdata('checkout','checkout_time',600);
         if (!$this->agent->is_mobile()) {
             $this->load->view('landing/cart', $page_data);
         } else {

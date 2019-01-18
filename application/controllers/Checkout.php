@@ -6,7 +6,6 @@ class Checkout extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->helper('text');
 		if (!$this->session->userdata('logged_in')) {
 			$this->session->set_userdata('referred_from', current_url());
 			redirect('login');
@@ -18,6 +17,10 @@ class Checkout extends MY_Controller
 	}
 
     public function index(){
+	    if( !$this->session->tempdata('checkout') ) {
+	        $this->session->set_flashdata('success_msg', 'Your cart has been updated');
+	        redirect('cart');
+        }
 	    $page_data['page'] = 'checkout';
 		$page_data['title'] = 'Checkout';
 		$this->load->model('user_model', 'user');
@@ -39,7 +42,7 @@ class Checkout extends MY_Controller
 		}
         $this->session->set_flashdata('error_msg', $message);
 		$items = $this->cart->total_items();
-//		$page_data['methods'] =  ;
+		$page_data['methods'] = $this->product->get_results('payment_methods', '*', "(status = 1)");
 		if( empty($items) ) redirect( base_url() );
 		if (!$this->agent->is_mobile()) {
             $this->load->view('landing/checkout', $page_data);
@@ -105,27 +108,29 @@ class Checkout extends MY_Controller
      * Save user orders to the DB
      * */
 	function checkout_confirm() {
+//        $this->session->unset_tempdata('item');
 	    if( $this->input->is_ajax_request() ){
+
             $address_id = cleanit( $this->input->post('selected_address', true) );
             $billing_amount = $this->product->get_billing_amount($address_id);
             if( !$billing_amount ) $billing_amount = 500; // Default Billnng Address
 
-            $message = ''; $error = 0; $data = $return = array();
+            $error = $subtotal = 0; $data = $return = array();
             $order_code = $this->product->generate_code('orders', 'order_code');
             $order_date = get_now();
             $order_status = array( 'processing' => array( 'msg' => 'Order is under process.','datetime' => get_now()) );
             $order_status = json_encode( $order_status);
             $active_status = 'pending';
             $total = $this->input->post('total_charge', true);
-
+//            first_name=&last_name=&phone=&address=&state=&selected_address=6&payment_method=1&total_charge=601800&delivery_charge=1800
             $payment_method = $this->input->post('payment_method', true);
-            $delivery_charge = $this->input->post('delivery_charge', true);
+            $qty = $this->input->post('qty', true);
+            $billing_amount = $billing_amount * $qty;
             $buyer_id = $this->session->userdata('logged_id');
             foreach( $this->cart->contents() as $product ){
+
                 $detail = $this->product->get_cart_details($product['id']);
                 $variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
-                $price = $this->product->get_commission( $product['id'] );
-                $commission = ( $price / 100 ) * (int)$product['subtotal'];
 
                 if($variation_detail->quantity < 1 || $product['qty'] > $variation_detail->quantity || in_array( $detail->product_status, array('suspended', 'blocked', 'pending' ))){
                     $return['status'] = 'error';
@@ -136,13 +141,13 @@ class Checkout extends MY_Controller
                     try {
                         // remove from cart
                         $this->cart->remove($cid);
-                        // remove the amount
-
                     }catch (Exception $x ){
                         $error_array = array('error_action' => 'Cart Removal Error', 'error_message' => 'On checkout when performing checks on cart item');
                         $this->product->insert_data('error_logs', $error_array);
                     }
                 }else{
+                    $price = $this->product->get_commission( $product['id'] );
+                    $commission = ( $price / 100 ) * (int)$product['subtotal'];
                     // Populate the Order table data
                     $data['buyer_id'] = $buyer_id;
                     $data['seller_id'] = $detail->seller_id;
@@ -155,12 +160,13 @@ class Checkout extends MY_Controller
                     $data['qty'] = $product['qty'];
                     $data['product_variation_id'] = $product['options']['variation_id'];
                     $data['billing_address_id'] = $address_id;
-                    $data['delivery_charge'] = $delivery_charge;
+                    $data['delivery_charge'] = $billing_amount;
                     $data['commission'] = $commission;
                     $data['amount'] = $product['subtotal'];
                     $this->product->insert_data('orders', $data);
                 }
                 unset( $data );
+                $subtotal += $product['subtotal'];
             }
             if(  $error > 0 ){
                 $return['message'] = $error;
@@ -170,9 +176,9 @@ class Checkout extends MY_Controller
             // We need to confirm if there is still an item in the cart
             $item_left = $this->cart->total_items();
             if( !empty( $item_left ) && !empty( $total) ){
+                $total = $subtotal + $billing_amount;
                 $this->session->set_userdata(array('order_code' => $order_code, 'amount' => $total));
                 $return['status'] = 'success';
-                $return['order'] = $order_code;
                 echo json_encode( $return );
                 exit;
             }
@@ -182,19 +188,52 @@ class Checkout extends MY_Controller
         }
     }
 
+    // Order completed
 	public function order_completed(){
-        $page_data['page'] = 'order_completed';
-        $page_data['title'] = "Order Invoice";
-        $email = $this->session->userdata('email');
         $order = $this->session->userdata('order_code');
+        $page_data['page'] = 'order_completed';
+        $page_data['title'] = "Order Invoice - {$order}";
         $uid = $this->session->userdata('logged_id');
-        $page_data['profile'] = $this->user->get_profile( $uid );
+        $page_data['profile'] = $user = $this->user->get_profile( $uid );
         $orders = $this->user->get_my_lastorders($order, $uid);
         if( $uid && $order && $orders ){
-            // Send mail to the user
             $page_data['order_code'] = $order;
             $page_data['orders'] = $orders->result();
-            // Remove all session
+            $page_data['ordersingledetail'] = $detail = $this->user->get_last_singleorder($order, $uid);
+            try {
+                // Send mail to the user
+                // Remove all session relating to the Order
+                $this->session->unset_tempdata('checkout');
+                $this->session->unset_userdata(array('cart_contents','order_code','amount'));
+                // Send SMS
+                $link = base_url('account/orderstatus/') . $order;
+                if( SMS_FOR_ORDERS ) {
+                    $short_url = get_bitly_short_url( $link , BITLY_USERNAME, BITLY_API);
+                    $seller_message = "Hello {$detail->legal_company_name}, a new order has just been confirmed. Login to your portal for details.";
+                    $buyer_message = "Dear " .ucfirst($user->first_name) . ", your order {$order} has been confirmed! Visit {$short_url} and check your email for complete details. Thank you!";
+                    $sms_array = array( $detail->seller_phone => $seller_message,$user->phone => $buyer_message);
+                    $this->load->library('AfricaSMS', $sms_array);
+                    $this->africasms->sendsms();
+                }
+                // Send Mail
+                $this->load->model('email_model','myemail');
+                $sellerdetails = $this->user->get_sellers_details($order);
+//                var_dump( $sellerdetails);
+                // send mail to the buyer
+                $recipent['name'] = ucwords($page_data['profile']->first_name . ' ' . $page_data['profile']->last_name);
+                $recipent['email'] = $page_data['profile']->email;
+                try {
+                    $this->myemail->sendBuyerOrder($orders->result(), $detail, $order, $link, $recipent );
+                    $this->myemail->sendSellerOrder($sellerdetails);
+                } catch (Exception $e) {
+                    $error_action = array(
+                        'error_action' => 'Checkout controller - Sending mail to the buyer',
+                        'error_message' => $e->getMessage()
+                    );
+                    $this->user->create_account($error_action, 'error_logs');
+                }
+            } catch (Exception $e) {
+            }
             $this->load->view('landing/order_completed', $page_data);
         }else{
             $this->session->set_flashdata('error_msg', 'Start shopping...');
@@ -209,6 +248,7 @@ class Checkout extends MY_Controller
         $this->load->view('landing/stripe/product_form', $page_data);
     }
 
+    // Payment Check for Interswitch (Stripe)
     public function check(){
         //check whether stripe token is not empty
         if(!empty($_POST['stripeToken'])){
@@ -280,4 +320,5 @@ class Checkout extends MY_Controller
             redirect(base_url());
         }
     }
+
 }

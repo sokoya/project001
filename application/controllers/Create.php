@@ -74,7 +74,7 @@ class Create extends MY_Controller{
                         'error_action' => 'Create controller - Welcome mail',
                         'error_message' => $e->getMessage()
                     );
-                    $this->email->insert_data('error_logs', $error_action);
+                    $this->user->create_account($error_action, 'error_logs');
                 }
                 $data = array(
                     'email' => $this->input->post('signupemail'),

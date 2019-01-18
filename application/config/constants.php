@@ -92,6 +92,19 @@ defined('DB_NAME')		OR define('DB_NAME', 'onitshamarket');
 // General Settings
 defined('PRODUCTS_IMAGE_PATH') OR define('PRODUCTS_IMAGE_PATH', "https://res.cloudinary.com/de9lpikx3/image/upload/");
 defined('CATEGORY_HOMEPAGE_DIR') OR define('CATEGORY_HOMEPAGE_DIR', $_SERVER['DOCUMENT_ROOT'] .'/contents/home/');
-
-
 defined('PAGE_CONTACT_US') or define('PAGE_CONTACT_US', "https://www.onitshamarket.com/contact/");
+
+// Details
+// Bitly
+defined('BITLY_USERNAME') OR define('BITLY_USERNAME', 'sokoyaphilip');
+defined('BITLY_API') OR define('BITLY_API', '172c6fb6841362cd510ac05bc704cf545825a295');
+
+// SMS
+defined('SMS_USERNAME') OR define('SMS_USERNAME', 'ArtisansUsers');
+defined('SMS_API') OR define('SMS_API', '2825a7e7a5988803c97852627500f5fc658964550c8cfe5616305acb352f127a');
+defined('SMS_FOR_ORDERS') OR define('SMS_FOR_ORDERS', FALSE);
+
+//Elastic Email
+defined('ELASTIC_EMAIL_API') OR define('ELASTIC_EMAIL_API', 'f818fbbb-bb76-4de0-ad47-e458303b0d12');
+
+

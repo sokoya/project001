@@ -21,23 +21,26 @@ $('.continue-btn').on('click', function (e) {
     $(this).prop('disabled', 'disabled');
 	e.preventDefault();
     var delivery_charge = $('.charges').data('amount');
-    // var total_charge = $('#total_charge').val();
     var payment_method = $("input[name=payment_method]:checked").val();
+    var payment_name = $("input[name=payment_method]:checked").data('name');
+
     $.ajax({
-        // url: base_url + 'checkout/checkout_confirm',
         url : base_url + 'checkout/checkout_confirm',
         method: 'POST',
         dataType: 'json',
         data: $('#checkout_form').serialize() + "&delivery_charge="+delivery_charge,
         success: (data) => {
-            notification_message("Saving your orders... Redirecting you to payment portal in 5 seconds ", 'fa fa-info-circle', 'success');
-            if( data.status == 'success'){
-                // Incoming : order_code
-                // redirect to strip payment form
-                // redirect to payment Portal
-                window.location.href = base_url + "checkout/stripe";
+            if( data.status == 'success') {
+                if (payment_method == 1 || payment_name == 'Payment on Delivery') {
+                    // Payment on delivery
+                    setInterval(function(){ notification_message("Saving your orders... ", 'fa fa-info-circle', 'success'); }, 3000);
+                    window.location.href = base_url + 'checkout/order_completed';
+                } else if (payment_method == 2 || payment_name == 'Interswitch Webpay') {
+                    // Interswitch Payment
+                    setInterval(function(){ notification_message("Saving your orders... Redirecting you to payment portal in 5 seconds ", 'fa fa-info-circle', 'success'); }, 3000);
+                    window.location.href = base_url + "checkout/stripe";
+                }
             }
-            // window.location.href = base_url + 'checkout/order_completed';
         },
         error: response => {
             notification_message(`An error occurred  - ${response.status} ${response.statusText}`, 'fa fa-info-circle', 'error')
@@ -155,7 +158,9 @@ function get_updates() {
 				let sub_total = price_instance * quantity_instance;
 				bind_market(format_currency(sub_total), 'charges');
 				bind_market(format_currency($('.total-sum').data('amount') + sub_total), 'total-sum-charges');
-				$('#total_charges').val( $('.total-sum').data('amount') + sub_total );
+				$('#total_charge').val( $('.total-sum').data('amount') + sub_total );
+				$('#qty').val(quantity_instance);
+
 				elem.addClass('custom-panel-active');
 				$('.pay-method').show();
 				$('.delivery-warning').slideUp()

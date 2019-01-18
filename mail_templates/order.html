@@ -315,21 +315,25 @@
                                 <tr>
                                     <td style="padding: 10px;">
                                         <table width="100%" cellpadding="0" cellspacing="1">
-                                            <tr>
-                                                <td colspan="6" style="text-align: center;background:white;">
-                                                    <img src="newlogo.png" style="margin:auto;max-width: 60%;"
-                                                         alt="Onitshamaket.com">
-                                                </td>
-                                            </tr>
-                                            <tr style="background: #2BA27D;color:white;text-align: center;"
-                                                class="menu">
-                                                <td class="electronic"><a>Electronics</a></td>
-                                                <td class="fashion"><a>Fashion</a></td>
-                                                <td class="grocery"><a>Groceries</a></td>
-                                                <td class="computer"><a>Computers</a></td>
-                                                <td class="phone"><a>Phones</a></td>
-                                                <td class="toy"><a>Kids Toys</a></td>
-                                            </tr>
+                                            <tr style="margin: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px;">
+                                            <td colspan="6" style="text-align: center; background: white; margin: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: middle;">
+                                              <img src="https://www.onitshamarket.com/assets/logo.png" style="margin: 0px; max-width: 100%; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px;" alt="Onitshamaket.com">
+                                            </td>
+                                          </tr>
+                                            <tr style="background: rgb(43, 162, 125); color: white; text-align: center; margin: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; height: 50px;" class="menu">
+                                            <td class="electronic" style="margin: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: middle;">
+                                              <a href="https://www.onitshamarket.com/electonics/" style="margin: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; text-decoration: none; color: white;">Electronics</a></td>
+                                            <td class="fashion" style="margin: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: middle;">
+                                              <a href="https://www.onitshamarket.com/fashion/" style="margin: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; text-decoration: none; color: white;">Fashion</a></td>
+                                            <td class="grocery" style="margin: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: middle;">
+                                              <a href="https://www.onitshamarket.com/gloceries/" style="margin: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; text-decoration: none; color: white;">Groceries</a></td>
+                                            <td class="computer" style="margin: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: middle;">
+                                              <a href="https://www.onitshamarket.com/computers/" style="margin: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; text-decoration: none; color: white;">Computers</a></td>
+                                            <td class="phone" style="margin: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: middle;">
+                                              <a href="https://www.onitshamarket.com/phones/" style="margin: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; text-decoration: none; color: white;">Phones</a></td>
+                                            <td class="toy" style="margin: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: middle;">
+                                              <a style="margin: 0px; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; text-decoration: none; color: white;">Kids Toys</a></td>
+                                          </tr>
                                         </table>
 
                                     </td>
@@ -342,15 +346,11 @@
                                                     <table class="invoice">
                                                         <tr>
                                                             <td>
-                                                                Dear Customer,<br>
-                                                                Shipping To: Customer Name<br>
-                                                                Invoice Number: XXXXXXXXX<br>
-                                                                Shipping Address: 530A Aina Akingbala Str, Omole Phase
-                                                                II.<br>
-                                                                Payment Method: Pay on Delivery<br>
-                                                                Shipping Method: Standard Shipping<br>
-                                                                Shipping Tracking: VX098675134<br>
-                                                                Estimated Arrival: 29/12/2018
+                                                                Dear <?= ucwords($profile->first_name) . ' ' . ucwords($profile->last_name); ?>,<br>
+                                                                <b>Shipping To:</b> <?= $detail->billingname; ?><br>
+                                                                <b>Order Number:</b> <?= $order_code; ?><br>
+                                                                <b>Shipping Address:</b> <?= $detail->billingaddress; ?><br>
+                                                                <b>Payment Method:</b> <?= $detail->paymentname;?><br>
                                                                 <h3>Order Summary</h3>
                                                             </td>
                                                         </tr>
@@ -361,7 +361,6 @@
                                                                     <thead>
                                                                     <tr>
                                                                         <th>#</th>
-                                                                        <th>Image</th>
                                                                         <th>Item</th>
                                                                         <th class="aligncenter price">Price</th>
                                                                         <th class="aligncenter">Quantity</th>
@@ -369,39 +368,41 @@
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                    <tr>
-                                                                        <td>1</td>
-                                                                        <td></td>
-                                                                        <td>Product 1</td>
-                                                                        <td class="aligncenter price">&#8358; 1900.99
-                                                                        </td>
-                                                                        <td class="aligncenter">1</td>
-                                                                        <td class="alignright">&#8358; 1900.99</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>2</td>
-                                                                        <td></td>
-                                                                        <td>Product 2</td>
-                                                                        <td class="aligncenter price">&#8358; 1250.00
-                                                                        </td>
-                                                                        <td class="aligncenter">2</td>
-                                                                        <td class="alignright">&#8358; 2500.00</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>3</td>
-                                                                        <td></td>
-                                                                        <td>Product 3</td>
-                                                                        <td class="aligncenter price">&#8358; 4000.00
-                                                                        </td>
-                                                                        <td class="aligncenter">1</td>
-                                                                        <td class="alignright">&#8358; 4000.00</td>
-                                                                    </tr>
-                                                                    <tr class="total">
-                                                                        <td colspan="3"></td>
-                                                                        <td class="price"></td>
-                                                                        <td class="aligncenter">Total</td>
-                                                                        <td class="alignright">&#8358; 8400.99</td>
-                                                                    </tr>
+                                                                        <?php $x = 1; $subtotal = $shipping = 0; foreach( $orders as $order ) : ?>
+                                                                            <tr>
+                                                                                <td>0<?= $x; ?></td>
+                                                                                <td>
+                                                                                    <?php
+                                                                                        $pr = urlify($order->product_name, $order->pid); 
+                                                                                        if( $order->variation ){
+                                                                                            $pr .= ' ' . $order->variation;
+                                                                                        }
+                                                                                        echo $pr;
+                                                                                    ?>
+                                                                                </td>
+                                                                                <td class="aligncenter price">&#8358; 
+                                                                                    <?= $order->amount/$order->qty; ?></td>
+                                                                                <td class="aligncenter"><?= $order->qty; ?></td>
+                                                                                <td class="alignright">&#8358; <?= $order->amount; ?>
+                                                                                    <?php 
+                                                                                        $subtotal += $order->amount; 
+                                                                                        $shipping = $order->delivery_charge;
+                                                                                    ?>
+                                                                                </td>
+                                                                            </tr>
+                                                                        <?php endforeach; ?>
+                                                                        <tr class="total">
+                                                                            <td colspan="2"></td>
+                                                                            <td class="price"></td>
+                                                                            <td class="aligncenter">Delivery Fee</td>
+                                                                            <td class="alignright">&#8358; <?= $shipping; ?></td>
+                                                                        </tr>
+                                                                        <tr class="total">
+                                                                            <td colspan="2"></td>
+                                                                            <td class="price"></td>
+                                                                            <td class="aligncenter">Total</td>
+                                                                            <td class="alignright">&#8358; <?= $subtotal; ?></td>
+                                                                        </tr>
                                                                     </tbody>
                                                                 </table>
                                                             </td>
@@ -411,13 +412,13 @@
                                             </tr>
                                             <tr>
                                                 <td class="content-block aligncenter">
-                                                    <a href="#" class="btn-primary">View in browser</a>
+                                                    <a href="<?= $link; ?>" class="btn-primary">View in browser</a>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="content-block aligncenter">
-                                                    In case of any question or help feel free to contact our customer
-                                                    support representatives through support@onitshamarket.com
+                                                    In case of any question or help feel free to contact our sales
+                                                    support representatives through sales@onitshamarket.com
                                                 </td>
                                             </tr>
                                         </table>

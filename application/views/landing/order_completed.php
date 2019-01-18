@@ -205,25 +205,26 @@
                 <div class="row contacts">
                     <div class="col-md-12" style="font-weight:500;font-size:14px;">Thank you for shopping with us at
                         onitshamarket.com! If you experience any problems related to this order contact
-                        <a href="mailto:info@onitshamarket.com">info@onitshamarket.com</a>
+                        <a href="mailto:sales@onitshamarket.com">sales@onitshamarket.com</a> referring to the invoice number <b><?= $order_code?></b>
                     </div>
-                    <br/><br/>
+                    <div style="margin-top: 20px;"></div>
                     <div class="col-md-6 col-xs-12 invoice-to">
                         <div class="text-gray-light">INVOICE TO:</div>
                         <h2 class="to"
                             style="font"><?= ucwords($profile->first_name) . ' ' . ucwords($profile->last_name); ?></h2>
-                        <div class="address">796 Silver Harbour, TX 79273, US</div>
-                        <div class="email"><a href="mailto:<?= $profile->email ?>"><?= $profile->email ?></a></div>
+                        <div class="name"><?= $ordersingledetail->billingname; ?></div>
+                        <div class="phone"><?= $ordersingledetail->billingphone; ?></div>
+                        <div class="address"><?= $ordersingledetail->billingaddress; ?>.</div>
+                        <div class="email"><a href="mailto:<?= $profile->email; ?>"><?= $profile->email; ?></a></div>
                     </div>
                     <div class="col-md-6 col-xs-12 invoice-details">
-                        <h1 class="invoice-id">INVOICE REFERENCE: <span><?= $order; ?></span></h1>
-                        <div class="date">Date of Invoice: <span class="invoice_date"><??></span></div>
-                        <div class="date">Due Date: <span class="invoice_due"></span></div>
+                        <h1 class="invoice-id">INVOICE REFERENCE: <span><?= $order_code; ?></span></h1>
+                        <div class="date">Date of Invoice: <span class="invoice_date"><?= date('Y-m-d h:i:s', strtotime($ordersingledetail->order_date) ); ?></span></div>
                     </div>
                 </div>
                 <div class="notices">
                     <div>NOTICE:</div>
-                    <div class="notice">A copy of this invoice has been sent to the email attached to your account.
+                    <div class="notice">A copy of this invoice has been sent to the email attached to your account <b>( <?= $profile->email ?> )</b>.
                     </div>
                 </div>
                 <br/>
@@ -233,24 +234,24 @@
                         <tr>
                             <th>#</th>
                             <th class="text-left">PRODUCT</th>
-                            <th class="text-right">QUANTITY</th>
                             <th class="text-right">VARIATION</th>
-                            <th class="text-right">&#8358; PRICE</th>
+                            <th class="text-right">QUANTITY</th>
+                            <th class="text-right">PRICE</th>
                             <th class="text-right">TOTAL</th>
                         </tr>
                         </thead>
                         <tbody>
                             <?php $x = 1; $subtotal = $shipping = 0; foreach( $orders as $order ) : ?>
                                 <tr>
-                                    <td class="no"><?= $x; ?></td>
+                                    <td class="no">0<?= $x; ?></td>
                                     <td class="text-left"><h3><?= ucwords($order->product_name);?></h3></td>
-                                    <td class="qty"><?= $order->qty; ?></td>
                                     <td class="var"><?= $order->variation; ?></td>
-                                    <td class="unit"><?= ngn($order->amount); ?></td>
-                                    <td class="total"><?= ngn($order->amount * $order->qty); ?></td>
+                                    <td class="qty"><?= $order->qty; ?></td>
+                                    <td class="unit"><?= ngn($order->amount / $order->qty); ?></td>
+                                    <td class="total"><?= ngn($order->amount); ?></td>
                                     <?php
-                                        $subtotal += $order->amount;
-                                        $shipping += $order->delivery_charge;
+                                        $subtotal += $order->amount ;
+                                        $shipping = $order->delivery_charge;
                                     ?>
                                 </tr>
                             <?php $x++; endforeach;?>
@@ -268,14 +269,19 @@
                         </tr>
                         <tr>
                             <td colspan="3"></td>
+                            <td colspan="2">Payment Method</td>
+                            <td><?= $ordersingledetail->paymentname;?></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"></td>
                             <td colspan="2" style="font-weight: 800;">GRAND TOTAL</td>
-                            <td><?= $subtotal + $shipping;?></td>
+                            <td><?= ngn($subtotal + $shipping);?></td>
                         </tr>
                         </tfoot>
                     </table>
                 </div>
             <footer>
-                <p style="font-size: 14px;">&copy; onitshamarket.com</p>
+                <p style="font-size: 14px;"><?= lang('copyright'); ?></p>
             </footer>
         </div>
         <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
