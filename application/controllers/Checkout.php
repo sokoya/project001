@@ -317,6 +317,20 @@ class Checkout extends MY_Controller
                 redirect('checkout');
             }
         }else{
+            // Payment uncompleted
+            $order = $this->session->userdata('order_code');
+            $uid = $this->session->userdata('logged_id');
+            $profile = $this->user->get_profile($uid);
+            $buyer['name'] =  'Dear ' . ucwords( $profile->first_name . ' ' . $profile->last_name);
+            $buyer['email'] = $profile->email;
+            // Send mail ro the user
+            $this->load->model('email_model','myemail');
+            try {
+                $this->myemail->paymentUncompleted( $order, $uid , $buyer);
+                $this->session->set_flashdata('error_msg','Your payment could not be completed.');
+                
+            } catch (Exception $e) {
+            }
             redirect(base_url());
         }
     }
