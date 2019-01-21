@@ -1,5 +1,5 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
-<link rel="stylesheet" href="<?= base_url('assets/landing/css/checkout.css'); ?>"/>
+<link rel="stylesheet" href="<?= base_url('assets/css/checkout.css'); ?>"/>
 <style>
     .req {
         color: red;
@@ -22,8 +22,6 @@
         <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
     <?php else: ?>
         <?php $this->load->view('landing/resources/head_img') ?>
-        <?php $this->load->view('landing/resources/head_category') ?>
-
         <?php $this->load->view('landing/resources/head_menu') ?>
     <?php endif; ?>
 
@@ -143,7 +141,7 @@
                      style="display:none;position: center;top: 0;left: 0;width: auto;height: auto%;background: #f4f4f4;z-index: 99;">
                     <div class="text"
                          style="position: absolute;top: 35%;left: 0;height: 100%;width: 100%;font-size: 18px;text-align: center;">
-                        <img src="<?= base_url('assets/landing/load.gif'); ?>" alt="Processing...">
+                        <img src="<?= base_url('assets/load.gif'); ?>" alt="Processing...">
                         Processing your request. <strong
                                 style="color: rgba(2.4%,61.7%,46.8,0.843);">Please
                             Wait! </strong>

@@ -5,7 +5,7 @@ class Frontpage extends MY_Controller {
     }
 
 	public function index(){
-        $this->output->enable_profiler(TRUE);
+//        $this->output->enable_profiler(TRUE);
 		$page_data['title'] = 'Online shopping | Buy Electronics, Phones, Fashions in Nigeria';
 		$page_data['page'] = 'homepage';
 		$page_data['sliders'] = $this->product->get_results('sliders', 'image,img_link', "( status = 'active')");

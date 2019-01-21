@@ -21,6 +21,7 @@ class Checkout extends MY_Controller
 	        $this->session->set_flashdata('success_msg', 'Your cart has been updated');
 	        redirect('cart');
         }
+		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 	    $page_data['page'] = 'checkout';
 		$page_data['title'] = 'Checkout';
 		$this->load->model('user_model', 'user');
@@ -80,7 +81,6 @@ class Checkout extends MY_Controller
 				$status['message'] = 'Success: The address has been added to your account.';
 				echo json_encode($status);
 				exit;
-				$this->session->set_flashdata('success_msg', 'Success: The address has been added to your account.');
 			} else {
 				$status['message'] = 'Success: There was an error adding the address to your account.';
 			}

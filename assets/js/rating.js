@@ -121,6 +121,8 @@ var pid = product_id;
 		}
 	});
 })(window.jQuery, window);
+
+
 $('#star1').starrr({
 	change: function (e, value) {
 		if (value) {

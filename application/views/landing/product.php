@@ -46,7 +46,6 @@
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
     <?php $this->load->view('landing/resources/head_img') ?>
-    <?php $this->load->view('landing/resources/head_category') ?>
     <?php $this->load->view('landing/resources/head_menu') ?>
 
     <div class="container">
@@ -117,10 +116,9 @@
                                         </ul>
                                         <p class="product-page-product-rating-sign">
                                             <?php if( count($rating_counts)) :?>
-                                                <a href="#review"><?= count($rating_counts); ?> customer reviews</a> | <strong> 34
-                                                    SOLDS</strong>
+                                                <a href="#description-tab"><?= count($rating_counts); ?> customer reviews</a> <strong></strong>
                                             <?php else : ?>
-                                                <a href="#reviews">Be the first to rate this product</a>  <strong> <!-- Number ofsold -->
+                                                <a href="#description-tab">Be the first to rate this product</a>  <strong> <!-- Number ofsold -->
                                                     SOLDS</strong>
                                             <?php endif; ?>
 
@@ -338,7 +336,7 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="overview">
-                        <div class="product-overview-section gap-top">
+                        <div class="product-overview-section">
                             <?php if (!empty($product->product_line)) : ?>
                                 <h3 class="product-overview-title pr-over"> Product Frontline</h3>
                                 <div class="product-overview-desc">
@@ -508,6 +506,7 @@
                                                 <label>Display name*</label>
                                                 <input type="text" name="display_name" placeholder="Display name"
                                                        id="review_name"
+													   value="<?= $profile->first_name . ' ' . $profile->last_name;?>"
                                                        class="form-control" required>
                                             </div>
                                         </div>
@@ -522,7 +521,9 @@
                                 </form>
                             </div>
                         </div>
-                        <article class="product-review"></article>
+                        <article class="product-review">
+							<!-- Show list of reviews and rates -->
+						</article>
                     </div>
                 </div>
             </div>
@@ -673,11 +674,12 @@
     </div>
     <script type="text/javascript">
         let product_id = <?= $product->id;?>;
-        let user = <?= !is_null($profile) ? $profile->id : "''"; ?></script>
+        let user = <?= !is_null($profile) ? $profile->id : "''"; ?>;
+	</script>
     <?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
-<script src="<?= base_url('assets/landing/js/rating.js'); ?>"></script>
+<script src="<?= base_url('assets/js/rating.js'); ?>"></script>
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
@@ -830,4 +832,4 @@
 	});
 </script>
 </body>
-</html
+</html>

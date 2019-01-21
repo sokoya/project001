@@ -13,8 +13,6 @@
         <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
     <?php else: ?>
         <?php $this->load->view('landing/resources/head_img') ?>
-        <?php $this->load->view('landing/resources/head_category') ?>
-
         <?php $this->load->view('landing/resources/head_menu') ?>
     <?php endif; ?>
 
@@ -40,16 +38,16 @@
                             <div class="col-md-4"></div>
                             <div class="col-md-4">
                                 <img class="img-responsive" style="margin: 0 auto;"
-                                     src="<?= base_url('assets/landing/img/track2.jpg'); ?>"
+                                     src="<?= base_url('assets/img/track2.jpg'); ?>"
                                      alt="Track Order"
                                      title="Track Order"/>
                             </div>
                             <div class="col-md-4"></div>
                         </div>
                         <div class="row text-center" style="margin-top: 30px;">
-                            <?= form_open('account/order_track'); ?>
+							<form method="get" action="<?= base_url('account/orderstatus/'); ?>">
                             <div class="input-group col-md-8 col-md-offset-2">
-                                <input type="text" class="newsletter-input form-control no_border_rad"
+                                <input type="text" name="order_code" class="newsletter-input form-control no_border_rad"
                                        placeholder="Enter Tracking ID" required>
                                 <div class="input-group-btn">
                                     <button class="btn btn-primary no_border_rad" type="submit">
@@ -57,7 +55,8 @@
                                     </button>
                                 </div>
                             </div>
-                            <?= form_close(); ?>
+							</form>
+
                         </div>
                         <div class="row text-center" id="order_status_show">
 

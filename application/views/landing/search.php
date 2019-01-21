@@ -76,7 +76,6 @@
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
     <?php $this->load->view('landing/resources/head_img') ?>
-    <?php $this->load->view('landing/resources/head_category'); ?>
     <?php $this->load->view('landing/resources/head_menu'); ?>
     <?php if (empty($products)) : ?>
         <div class="container">
