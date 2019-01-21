@@ -4,12 +4,23 @@
         color: #48bc6e;
         margin-top: 10px;
     }
+
+    <?php if ($this->agent->is_mobile()) : ?>
+    p {
+        font-size: 13px;
+        line-height: 15px;
+    }
+    <?php endif?>
 </style>
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
-    <?php $this->load->view('landing/resources/head_img') ?>
-    <?php $this->load->view('landing/resources/head_menu') ?>
+    <?php if ($this->agent->is_mobile()) : ?>
+        <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
+    <?php else: ?>
+        <?php $this->load->view('landing/resources/head_img') ?>
+        <?php $this->load->view('landing/resources/head_menu') ?>
+    <?php endif; ?>
     <div class="container text-center">
         <div class="row text-justify" style="padding: 20px;background: #fff;margin-top:20px;">
             <h2 class="terms_head text-center">Terms &amp; Conditions</h2>
@@ -443,9 +454,14 @@
         </div>
         <div style="height:15px;"></div>
     </div>
-    <?php $this->load->view('landing/resources/footer'); ?>
+    <?php if ($this->agent->is_mobile()) : ?>
+        <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
+        <?php $this->load->view('landing/resources/mobile/mobile-script'); ?>
+    <?php else: ?>
+        <?php $this->load->view('landing/resources/footer'); ?>
+        <?php $this->load->view('landing/resources/script'); ?>
+    <?php endif; ?>
 </div>
-<?php $this->load->view('landing/resources/script'); ?>
 </body>
 </html>
 
