@@ -13,6 +13,10 @@
         font-size:16px !important;
         text-align: left;
     }
+    h3{
+        font-size:18px !important;
+        text-align: left;
+    }
     <?php endif?>
 </style>
 </head>
