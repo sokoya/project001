@@ -252,7 +252,7 @@
     <div class="custom-card">
         <div class="container">
             <a style="text-decoration: none;" href="<?= base_url('catalog/' . $category_detail->slug); ?>"><p
-                        class="margin-0"><img src="<?= base_url('assets/landing/svg/back.svg'); ?>" alt="Back button"
+                        class="margin-0"><img src="<?= base_url('assets/svg/back.svg'); ?>" alt="Back button"
                                               style="height: 14px; width: 14px; margin-right: 8px;"><span
                             class="redirect-text">Go back to <?= ucwords($category_detail->name); ?></span>
                 </p></a>
@@ -262,7 +262,7 @@
         <div class="container">
             <div class="owl-carousel products-gallery">
                 <?php foreach ($galleries as $gallery) : ?>
-                    <img class="product-image lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
+                    <img class="product-image lazy" src="<?= base_url('assets/load.gif'); ?>"
                          data-src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?> "
                          alt="<?= $product->product_name; ?>"/>
                 <?php endforeach; ?>
@@ -402,8 +402,8 @@
             <p class="block-title">Delivery Information</p>
             <div class="row">
                 <div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-                    <img class="lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
-                         data-src="<?= base_url('assets/landing/svg/delivery-truck.svg'); ?>" alt="Delivery Truck"
+                    <img class="lazy" src="<?= base_url('assets/img/load.gif'); ?>"
+                         data-src="<?= base_url('assets/svg/delivery-truck.svg'); ?>" alt="Delivery Truck"
                          style="height: 30px; width: 35px;">
                 </div>
                 <div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -413,8 +413,8 @@
             </div>
             <div class="row">
                 <div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-                    <img class="lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
-                         data-src="<?= base_url('assets/landing/svg/return.svg'); ?>" alt="Delivery Truck"
+                    <img class="lazy" src="<?= base_url('assets/img/load.gif'); ?>"
+                         data-src="<?= base_url('assets/svg/return.svg'); ?>" alt="Delivery Truck"
                          style="height: 30px; width: 35px;">
                 </div>
                 <div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -423,8 +423,8 @@
             </div>
             <div class="row" style="margin-top: 14px;">
                 <div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-                    <img class="lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
-                         data-src="<?= base_url('assets/landing/svg/warranty.svg'); ?>" alt="Warranty"
+                    <img class="lazy" src="<?= base_url('assets/img/load.gif'); ?>"
+                         data-src="<?= base_url('assets/svg/warranty.svg'); ?>" alt="Warranty"
                          style="height: 30px; width: 35px;">
                 </div>
                 <div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -548,7 +548,7 @@
                     <?php foreach ($likes as $like) : ?>
                         <a style="text-decoration: none"
                            href="<?= base_url(urlify($like->product_name, $like->id)); ?>">
-                            <img class="suggested-image lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
+                            <img class="suggested-image lazy" src="<?= base_url('assets/img/load.gif'); ?>"
                                  data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?> "/>
                             <p class="suggested-image-text"><?= character_limiter($like->product_name, 15); ?></p>
                             <span class="text-bold"><?= $like->item_left; ?> left</span>
@@ -560,11 +560,11 @@
     <?php endif; ?>
 <?php endif; ?>
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
-<script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/owl.carousel.min.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/mobile.js'); ?>"></script>
+<script src="<?= base_url('assets/js/jquery.js'); ?>"></script>
+<script src="<?= base_url('assets/js/owl.carousel.min.js'); ?>"></script>
+<script src="<?= base_url('assets/js/bootstrap.js'); ?>"></script>
+<script src="<?= base_url('assets/js/search.js'); ?>"></script>
+<script src="<?= base_url('assets/js/mobile.js'); ?>"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
     $(function () {

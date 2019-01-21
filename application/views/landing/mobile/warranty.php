@@ -87,7 +87,7 @@
         <div style="margin-left: 10px; margin-right: 10px;">
             <a style="text-decoration: none"
                href="<?= base_url('product/samsung-galaxy-s9-black-dual-sim-official-warranty-1'); ?>"><p><span
-                            class="filter_close_btn"> <img src="<?= base_url('assets/landing/svg/left-arrow.svg'); ?>"
+                            class="filter_close_btn"> <img src="<?= base_url('assets/svg/left-arrow.svg'); ?>"
                                                            alt="Back button"
                                                            style="height: 14px; width: 14px; margin-right: 8px; margin-bottom: 2px;"></span>
             </a>
@@ -101,8 +101,8 @@
         <div class="container">
             <div class="row" style="margin-top: 14px;">
                 <div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-                    <img class="lazy" src="<?= base_url('assets/landing/img/load.gif'); ?>"
-                         data-src="<?= base_url('assets/landing/svg/warranty.svg'); ?>" alt="Warranty"
+                    <img class="lazy" src="<?= base_url('assets/img/load.gif'); ?>"
+                         data-src="<?= base_url('assets/svg/warranty.svg'); ?>" alt="Warranty"
                          style="height: 30px; width: 35px;">
                 </div>
                 <div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -122,9 +122,9 @@
         </div>
     </div>
 </body>
-<script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/mobile.js'); ?>"></script>
+<script src="<?= base_url('assets/js/jquery.js'); ?>"></script>
+<script src="<?= base_url('assets/js/bootstrap.js'); ?>"></script>
+<script src="<?= base_url('assets/js/mobile.js'); ?>"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
     $(function () {

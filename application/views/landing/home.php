@@ -1,6 +1,6 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
-<link rel="stylesheet" href="<?= base_url('assets/seller/plugins/slick/slick.css'); ?>">
-<link rel="stylesheet" href="<?= base_url('assets/seller/plugins/slick/slick-theme.css'); ?>">
+<link rel="stylesheet" href="<?= base_url('assets/plugins/slick/slick.css'); ?>">
+<link rel="stylesheet" href="<?= base_url('assets/plugins/slick/slick-theme.css'); ?>">
 <style>
     .pro_ad {
         min-height: auto !important;
@@ -227,24 +227,22 @@
         <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
     <?php else: ?>
         <?php $this->load->view('landing/resources/head_img') ?>
-        <?php $this->load->view('landing/resources/head_category') ?>
-
         <?php $this->load->view('landing/resources/head_menu') ?>
     <?php endif; ?>
     <div class="home_slider row text-center">
         <div>
             <div class="container">
-                <img src="<?= base_url('assets/landing/img/home/homeslide1.png') ?>"/>
+                <img src="<?= base_url('assets/img/home/homeslide1.png') ?>"/>
             </div>
         </div>
         <div>
             <div class="container">
-                <img src="<?= base_url('assets/landing/img/home/homeslide2.png') ?>"/>
+                <img src="<?= base_url('assets/img/home/homeslide2.png') ?>"/>
             </div>
         </div>
         <div>
             <div class="container">
-                <img src="<?= base_url('assets/landing/img/home/homeslide3.png') ?>"/>
+                <img src="<?= base_url('assets/img/home/homeslide3.png') ?>"/>
             </div>
         </div>
     </div>
@@ -256,42 +254,42 @@
             </div>
             <div class="row">
                 <div class="col-md-2 col-xs-4 hot-row">
-                    <img class="card-max-img" src="<?= base_url('assets/landing/img/home/hotsale8.png'); ?>"/>
+                    <img class="card-max-img" src="<?= base_url('assets/img/home/hotsale8.png'); ?>"/>
                     <!--					<div class="card-max-text">-->
                     <!--						<p class="card-max-price">₦27,450</p>-->
                     <!--						<p class="card-max-discount">₦55,000</p>-->
                     <!--					</div>-->
                 </div>
                 <div class="col-md-2 col-xs-4 hot-row">
-                    <img class="card-max-img" src="<?= base_url('assets/landing/img/home/hotsale4.png'); ?>"/>
+                    <img class="card-max-img" src="<?= base_url('assets/img/home/hotsale4.png'); ?>"/>
                     <!--					<div class="card-max-text">-->
                     <!--						<p class="card-max-price">₦66,000</p>-->
                     <!--						<p class="card-max-discount">₦155,000</p>-->
                     <!--					</div>-->
                 </div>
                 <div class="col-md-2 col-xs-4 hot-row">
-                    <img class="card-max-img" src="<?= base_url('assets/landing/img/home/hotsale2.png'); ?>"/>
+                    <img class="card-max-img" src="<?= base_url('assets/img/home/hotsale2.png'); ?>"/>
                     <!--					<div class="card-max-text">-->
                     <!--						<p class="card-max-price">₦47,000</p>-->
                     <!--						<p class="card-max-discount">₦90,000</p>-->
                     <!--					</div>-->
                 </div>
                 <div class="col-md-2 col-xs-4 hot-row">
-                    <img class="card-max-img" src="<?= base_url('assets/landing/img/home/hotsale7.png'); ?>"/>
+                    <img class="card-max-img" src="<?= base_url('assets/img/home/hotsale7.png'); ?>"/>
                     <!--					<div class="card-max-text">-->
                     <!--						<p class="card-max-price">₦80,000</p>-->
                     <!--						<p class="card-max-discount">₦125,000</p>-->
                     <!--					</div>-->
                 </div>
                 <div class="col-md-2 col-xs-4 hot-row">
-                    <img class="card-max-img" src="<?= base_url('assets/landing/img/home/hotsale0.png'); ?>"/>
+                    <img class="card-max-img" src="<?= base_url('assets/img/home/hotsale0.png'); ?>"/>
                     <!--					<div class="card-max-text">-->
                     <!--						<p class="card-max-price">₦56,000</p>-->
                     <!--						<p class="card-max-discount">₦120,000</p>-->
                     <!--					</div>-->
                 </div>
                 <div class="col-md-2 col-xs-4 hot-row">
-                    <img class="card-max-img" src="<?= base_url('assets/landing/img/home/hotsale5.png'); ?>"/>
+                    <img class="card-max-img" src="<?= base_url('assets/img/home/hotsale5.png'); ?>"/>
                     <!--					<div class="card-max-text">-->
                     <!--						<p class="card-max-price">₦75,000</p>-->
                     <!--						<p class="card-max-discount">₦95,000</p>-->
@@ -300,7 +298,7 @@
             </div>
         </div>
     </div>
-
+    <?php $categories = $this->product->desktop_display(); ?>
     <?php foreach ($categories as $category) : ?>
         <div class="container" style="margin-top: 50px">
             <div class="card-max-header" style="margin-bottom: -20px;">
@@ -312,18 +310,18 @@
             <div class="card-max max-inverse">
                 <div class="row">
                     <div class="col-md-4" style="padding-right: 0; margin-right: -43px !important">
-                        <img class="card-max-side" src="http://localhost/project001/assets/landing/img/home/side.jpg"/>
+                        <img class="card-max-side" src="http://localhost/project001/assets/img/home/side.jpg"/>
                     </div>
                     <div class="col-md-6">
                         <div class="row"
-                             style="border-bottom: 1px solid #dadada; background: url(<?= base_url('assets/landing/img/home/dimension.png') ?>) repeat;">
+                             style="border-bottom: 1px solid #dadada; background: url(<?= base_url('assets/img/home/dimension.png') ?>) repeat;">
                             <?php foreach ($banners as $banner):
                                 if (in_array($banner->position, array('top1', 'top2'))) : ?>
                                     <a href="<?= $banner->link; ?>">
                                         <div class="col-md-6">
                                             <div class="max-img">
                                                 <img class="img-responsive"
-                                                     src="<?= base_url('assets/landing/img/home/banner.png') ?>"/>
+                                                     src="<?= base_url('assets/img/home/banner.png') ?>"/>
                                             </div>
                                         </div>
                                     </a>
@@ -335,7 +333,7 @@
                                 <div class="col-md-4">
                                     <a href="<?= $banner->link; ?>">
                                         <img class="card-max-shade"
-                                             src="<?= base_url('assets/landing/img/home/banner.png') ?>"
+                                             src="<?= base_url('assets/img/home/banner.png') ?>"
                                              alt="<?= lang('app_name'); ?>"/>
                                         <p class="card-max-shade-text">Swifter Solar Energy</p>
                                     </a>
@@ -353,9 +351,7 @@
                                 </div>
                                 <div class="col-md-10">
                                     <p class="max-card-product"><?= character_limiter($random->product_name, 20) ?></p>
-                                    <?php
-                                    if (discount_check($random->discount_price, $random->start_date, $random->end_date)) :
-                                        ?>
+                                    <?php if (discount_check($random->discount_price, $random->start_date, $random->end_date)) : ?>
                                         <p class="max-card-product-price"><?= ngn($random->discount_price) ?>
                                             <sub class="max-card-product-price"><?= ngn($random->sale_price); ?></sub>
                                             <span class="pull-md-right pull-lg-right"><?= $random->item_left ?> item left</span>
@@ -373,91 +369,13 @@
                     </div>
                 </div>
             </div>
-            <img src="http://localhost/project001/assets/landing/img/home/banner1.png" width="100%">
+            <img src="http://localhost/project001/assets/img/home/banner1.png" width="100%">
         </div>
     <?php endforeach; ?>
 
     <!--    Why choose us-->
     <div class="gap"></div>
-    <div class="container">
-        <hr class="hr-text" data-content="Why Choose Us">
-        <div class="owl-carousel owl-loaded owl-nav-out" data-options='{"items":5,"loop":true,"nav":true}'>
-            <div class="owl-item">
-                <a class="banner-category owl-item-slide" href="#">
-                    <img class="banner-category-img"
-                         src="<?= base_url('assets/landing/img/why-onitshamarket/largest.png'); ?>" alt="Largest"
-                         title="Largest in the market"/>
-                    <h5 class="banner-category-title">Largest</h5>
-                    <p class="banner-category-desc">Range of products to choose from.</p>
-                </a>
-            </div>
-            <div class="owl-item">
-                <a class="banner-category owl-item-slide" href="#">
-                    <img class="banner-category-img"
-                         src="<?= base_url('assets/landing/img/why-onitshamarket/carrito-shopper.png'); ?>"
-                         alt="<?= lang('app_name'); ?> Shopper" title="<?= lang('app_name'); ?> Shopper"/>
-                    <h5 class="banner-category-title">Jewelry</h5>
-                    <p class="banner-category-desc">Automated shopping assistant</p>
-                </a>
-            </div>
-            <div class="owl-item">
-                <a class="banner-category owl-item-slide" href="#">
-                    <img class="banner-category-img"
-                         src="<?= base_url('assets/landing/img/why-onitshamarket/secured-payment.png'); ?>"
-                         alt="secured-payment" title="secured-payment"/>
-                    <h5 class="banner-category-title">Secured Payment</h5>
-                    <p class="banner-category-desc">On all your debit/credit cards</p>
-                </a>
-            </div>
-            <div class="owl-item">
-                <a class="banner-category owl-item-slide" href="#">
-                    <img class="banner-category-img"
-                         src="<?= base_url('assets/landing/img/why-onitshamarket/incredible-discounts.png'); ?>"
-                         alt="Incredible Discounts" title="Discounts"/>
-                    <h5 class="banner-category-title">Incredible Discounts</h5>
-                    <p class="banner-category-desc">On all products, all season.</p>
-                </a>
-            </div>
-            <div class="owl-item">
-                <a class="banner-category owl-item-slide" href="#">
-                    <img class="banner-category-img"
-                         src="<?= base_url('assets/landing/img/why-onitshamarket/pay-on-delivery.png') ?>"
-                         alt="Pay on delivery" title="Pay on delivery"/>
-                    <h5 class="banner-category-title">Pay On Delivery</h5>
-                    <p class="banner-category-desc">On all products</p>
-                </a>
-            </div>
-            <div class="owl-item">
-                <a class="banner-category owl-item-slide" href="#">
-                    <img class="banner-category-img"
-                         src="<?= base_url('assets/landing/img/why-onitshamarket/fast-delivery.png') ?>"
-                         alt="Fast Delivery"
-                         title="Fast Delivery"/>
-                    <h5 class="banner-category-title">Fast Delivery</h5>
-                    <p class="banner-category-desc">Mationwide Same Day</p>
-                </a>
-            </div>
-            <div class="owl-item">
-                <a class="banner-category owl-item-slide" href="#">
-                    <img class="banner-category-img"
-                         src="<?= base_url('assets/landing/img/why-onitshamarket/genuine-brands.png') ?>"
-                         alt="Genuine Brands"
-                         title="Genuine Brands"/>
-                    <h5 class="banner-category-title">Genuine Brands</h5>
-                    <p class="banner-category-desc">From all over the world</p>
-                </a>
-            </div>
-            <div class="owl-item">
-                <a class="banner-category owl-item-slide" href="#">
-                    <img class="banner-category-img"
-                         src="<?= base_url('assets/landing/img/why-onitshamarket/247.png') ?>"
-                         alt="247 Active Support" title="247 Active Support"/>
-                    <h5 class="banner-category-title">24/7</h5>
-                    <p class="banner-category-desc">Customer Agents Waiting To Help You.</p>
-                </a>
-            </div>
-        </div>
-    </div>
+    <?php $this->load->view('landing/resources/why-onitshamarket');?>
 
     <?php if ($this->agent->is_mobile()) : ?>
         <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
@@ -468,9 +386,9 @@
 </div>
 
 <?php if ($this->agent->is_mobile()) : ?>
-    <script src="<?= base_url('assets/landing/js/mobile.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/mobile.js'); ?>"></script>
 <?php endif; ?>
-<script src="<?= base_url('assets/seller/plugins/slick/slick.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/slick/slick.js') ?>"></script>
 <script>
     $('.home_slider').slick({
         slidesToShow: 1,

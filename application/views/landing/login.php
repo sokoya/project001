@@ -86,7 +86,7 @@
             <div class="col-md-6 market-box">
                 <p class="text-center">
                     <a href="<?= base_url(); ?>" title="Go to homepage"><img
-                                src="<?= base_url('assets/landing/img/onitshamarket-logo.png') ?>" width="20%"
+                                src="<?= base_url('assets/img/onitshamarket-logo.png') ?>" width="20%"
                                 alt="market logo Image"></a>
                 </p>
                 <h3 class="text-center text-bold text-sm">
@@ -130,11 +130,11 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 col-xs-12 col-sm-12 text-center" style="display: inline-flex;margin-top:10px;">
-                        <img src="<?= base_url('assets/landing/img/payment/ssl-logo.png'); ?>" class="img-responsive" style="margin-left:auto;"
+                        <img src="<?= base_url('assets/img/payment/ssl-logo.png'); ?>" class="img-responsive" style="margin-left:auto;"
                              alt="Image Alternative text" title="Pay with Mastercard"/>
-                        <img src="<?= base_url('assets/landing/img/payment/interswitch.png'); ?>" class="img-responsive"
+                        <img src="<?= base_url('assets/img/payment/interswitch.png'); ?>" class="img-responsive"
                              alt="Image Alternative text" title="Pay with Mastercard"/>
-                        <img src="<?= base_url('assets/landing/img/payment/allcards.jpg'); ?>" class="img-responsive" style="margin-right:auto;"
+                        <img src="<?= base_url('assets/img/payment/allcards.jpg'); ?>" class="img-responsive" style="margin-right:auto;"
                              alt="Image Alternative text" title="Pay with Mastercard"/>
                     </div>
                 </div>

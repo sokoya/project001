@@ -169,9 +169,7 @@
                             </div>
                         <?php endif; ?>
                         <div class="category-filters-section">
-                            <?php foreach ($features
-
-                            as $feature => $feature_value) : ?>
+                            <?php foreach ($features as $feature => $feature_value) : ?>
                             <div class="accordion" id="<?= trim($feature); ?>">
                                 <div class="panel no-outline feature-attribute">
                                     <div class="panel-header feature-attribute">
@@ -211,7 +209,7 @@
                          style="display:none;position: center;top: 0;left: 0;width: auto;height: auto%;background: #f4f4f4;z-index: 99;">
                         <div class="text"
                              style="position: absolute;top: 35%;left: 0;height: 100%;width: 100%;font-size: 18px;text-align: center;">
-                            <img src="<?= base_url('assets/landing/load.gif'); ?>" alt="Processing...">
+                            <img src="<?= base_url('assets/load.gif'); ?>" alt="Processing...">
                             Processing your request. <strong
                                     style="color: rgba(2.399780888618386%,61.74193548387097%,46.81068368248487%,0.843);">Please
                                 Wait! </strong>
@@ -244,7 +242,7 @@
                                             </div>
                                             <img class="product-img lazyload"
                                                  data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
-                                                 src="<?= base_url('assets/landing/img/load.gif'); ?>"
+                                                 src="<?= base_url('assets/load.gif'); ?>"
                                                  alt="<?= $product->product_name; ?>"
                                                  title="<?= $product->product_name; ?>">
                                         </div>
@@ -298,14 +296,14 @@
     <div class="gap"></div>
     <?php $this->load->view('landing/resources/footer'); ?>
 </div>
-<script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
+<script src="<?= base_url('assets/js/jquery.js'); ?>"></script>
+<script src="<?= base_url('assets/js/bootstrap.js'); ?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/js/ion.rangeSlider.min.js"></script>
 <script>
     let current_url = "<?= current_full_url()?>";
 </script>
-<script src="<?= base_url('assets/landing/js/quick-view.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
+<script src="<?= base_url('assets/js/quick-view.js'); ?>"></script>
+<script src="<?= base_url('assets/js/search.js'); ?>"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
     $(function () {

@@ -11,10 +11,11 @@ class Account extends MY_Controller {
         parent::__construct();
         $this->load->model('user_model', 'user');
         if( !$this->session->userdata('logged_in') ){
+            $this->session->set_flashdata('error_msg', 'You need to login to access the page.');
             // Ursher the person to where he is coming from
             $referred_from = $this->session->userdata('referred_from');
             if( !empty($referred_from) ) redirect($referred_from);
-            redirect(base_url());
+            redirect(base_url('login'));
         } 
     }
 
@@ -31,9 +32,30 @@ class Account extends MY_Controller {
 	public function orders(){
 		$page_data['page'] = 'orders';
 		$page_data['title'] = "My Orders";
+		$time = '';
+        $page = isset($_GET['page']) ? xss_clean($_GET['page']) : 0;
+        if ($page > 1) $page -= 1;
+        $id = $this->session->userdata('logged_id');
         $time = cleanit($this->input->get('time'));
-        $page_data['orders'] = $this->user->get_my_orders( $this->session->userdata('logged_id'), $time );
-        $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
+
+        $array = array('time' => $time, 'is_limit' => false);
+        $x = (array)$this->user->get_my_orders( $id ,$array);
+        $count = (count($x));
+        $this->load->library('pagination');
+        $this->config->load('pagination');
+        $config = $this->config->item('pagination');
+        $config['base_url'] = current_url();
+        $config['total_rows'] = $count;
+        $config['per_page'] = 10;
+        $config["num_links"] = 5;
+        $this->pagination->initialize($config);
+        $array['limit'] = $config['per_page'];
+        $array['offset'] = $page;
+        $array['is_limit'] = true;
+        $page_data['pagination'] = $this->pagination->create_links();
+
+        $page_data['orders'] = $this->user->get_my_orders( $id, $array );
+        $page_data['profile'] = $this->user->get_profile( $id );
 		$this->load->view('account/orders', $page_data);
 	}
 
@@ -119,9 +141,28 @@ class Account extends MY_Controller {
 	public function saved(){
 		$page_data['page'] = 'saved';
 		$page_data['title'] = "My saved items";
-		$page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id' ));
-		$page_data['saved'] = $this->user->get_saved_items( $this->session->userdata('logged_id'));
-//		var_dump($page_data['saved']);
+        $id = $this->session->userdata('logged_id');
+        $page_data['profile'] = $this->user->get_profile( $id);
+
+        $page = isset($_GET['page']) ? xss_clean($_GET['page']) : 0;
+        if ($page > 1) $page -= 1;
+        $array = array('is_limit' => false);
+        $x = (array)$this->user->get_saved_items( $id ,$array);
+        $count = (count($x));
+        $this->load->library('pagination');
+        $this->config->load('pagination');
+        $config = $this->config->item('pagination');
+        $config['base_url'] = current_url();
+        $config['total_rows'] = $count;
+        $config['per_page'] = 1;
+        $config["num_links"] = 5;
+        $this->pagination->initialize($config);
+        $array['limit'] = $config['per_page'];
+        $array['offset'] = $page;
+        $array['is_limit'] = true;
+        $page_data['pagination'] = $this->pagination->create_links();
+
+		$page_data['saved'] = $this->user->get_saved_items( $id, $array);
 		$this->load->view('account/saved', $page_data);
 	}
 
@@ -200,8 +241,10 @@ class Account extends MY_Controller {
     public function order_track(){
         $page_data['page'] = 'order_track';
         $page_data['title'] = "Order Tracking";
-        $page_data['orders'] = $this->user->get_my_orders( $this->session->userdata('logged_id') );
-        $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
+        $array = array('time' =>'' , 'is_limit' => false);
+        $id = $this->session->userdata('logged_id');
+        $page_data['orders'] = $this->user->get_my_orders( $id , $array );
+        $page_data['profile'] = $this->user->get_profile( $id );
         $this->load->view('account/order_track', $page_data);
     }
 

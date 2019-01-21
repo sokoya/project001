@@ -1,6 +1,15 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<!--    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132785278-1"></script>-->
+<!--    <script>-->
+<!--        window.dataLayer = window.dataLayer || [];-->
+<!--        function gtag(){dataLayer.push(arguments);}-->
+<!--        gtag('js', new Date());-->
+<!---->
+<!--        gtag('config', 'UA-132785278-1');-->
+<!--    </script>-->
     <title><?= !isset($title) ? 'Welcome ' : ucwords($title) ?> | <?= lang('app_name'); ?></title>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
@@ -12,27 +21,28 @@
           type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
     <?php if ($page == 'mobile-product' && $this->agent->is_mobile()) : ?>
-        <link rel="stylesheet" href="<?= base_url('assets/landing/css/owl.carousel.min.css'); ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/owl.carousel.min.css'); ?>">
     <?php endif; ?>
-    <link rel="stylesheet" href="<?= base_url('assets/landing/css/bootstrap.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/landing/css/font-awesome.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.css'); ?>">
+
     <?php if ($page == 'mobile-category' || $page == 'mobile-search' || $page == 'mobile-product' || $page == 'mobile-cart' || $page == 'mobile-checkout' && $this->agent->is_mobile()) : ?>
-        <link rel="stylesheet" href="<?= base_url('assets/landing/css/styles-mobile.css'); ?>">
-        <link rel="stylesheet" href="<?= base_url('assets/landing/css/styles.css'); ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/styles.css'); ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/styles-mobile.css'); ?>">
     <?php else : ?>
-        <link rel="stylesheet" href="<?= base_url('assets/landing/css/styles.css'); ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/styles.css'); ?>">
     <?php endif; ?>
-    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/landing/css/schemes/de-york.css'); ?>"
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/schemes/de-york.css'); ?>"
           title="de-york" media="all"/>
-    <link rel="shortcut icon" href="<?= base_url('assets/landing/img/favicon.png'); ?>" type="image/png">
-    <link rel="icon" href="<?= base_url('assets/landing/img/favicon.png'); ?>" type="image/png">
+    <link rel="shortcut icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
+    <link rel="icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
     <link rel="canonical" href="<?= current_url(); ?>"/>
     <?php if ($page == 'product') : ?>
         <meta property="og:title" content="<?= $product->product_name; ?>"/>
         <meta property="og:type" content="product"/>
         <meta property="og:image"
               content="<?= ($featured_image->image_name) ? PRODUCTS_IMAGE_PATH . $featured_image->image_name : ''; ?>"/>
-        <meta property="og:description" content="<?= $description; ?>"/>
+        <meta property="og:description" content="<?php isset($description) ? $description : lang('site_description') ?>"/>
         <meta property="og:site_name" content="<?= lang('app_name'); ?>"/>
         <meta property="og:url" content="<?= current_url(); ?>"/>
         <meta name="twitter:card" content="summary"/>

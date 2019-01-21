@@ -328,7 +328,7 @@ class Checkout extends MY_Controller
             try {
                 $this->myemail->paymentUncompleted( $order, $uid , $buyer);
                 $this->session->set_flashdata('error_msg','Your payment could not be completed.');
-                
+
             } catch (Exception $e) {
             }
             redirect(base_url());

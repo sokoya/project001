@@ -1,5 +1,5 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
-<link rel="stylesheet" href="<?= base_url('assets/landing/css/home.css'); ?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/home.css'); ?>">
 <style>
     .view_constraint{
         min-height:calc(100vh - 629px);
@@ -34,7 +34,7 @@
 
 
 <div class="container view_constraint text-center">
-<img src="<?= base_url('assets/landing/img/404cart.jpg'); ?>" class="img-responsive img_cart_404" style="margin:auto;max-width:200px;"/>
+<img src="<?= base_url('assets/img/404cart.jpg'); ?>" class="img-responsive img_cart_404" style="margin:auto;max-width:200px;"/>
     <h2 class="hide_it_sm">Uh Oh!!</h2>
     <h5>You seem to have gone down the wrong aisle...</h5>
     <h5 style="margin-bottom:auto;" class="hide_it_sm">Go Back <a style="color: #0b6427;" href="<?=base_url()?>">Home</a></h5>
@@ -57,7 +57,7 @@
                     <a class="banner-category owl-item-slide" href="<?= base_url(urlify( $product->product_name, $product->id)); ?>">
                         <img class="banner-category-img img-responsive lazy" style="height:45px;"
                              data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
-                             src="<?= base_url('assets/landing/img/load.gif'); ?>" alt="<?= $product->product_name; ?>"
+                             src="<?= base_url('assets/img/load.gif'); ?>" alt="<?= $product->product_name; ?>"
                              title="<?= $product->product_name ?>"/>
                         <h5 class="banner-category-title"><?= character_limiter($product->product_name, 20); ?></h5>
                         <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>

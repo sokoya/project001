@@ -250,7 +250,7 @@
                                     <div class="product-img-wrap">
                                         <img class="product-img lazy"
                                              data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
-                                             src="<?= base_url('assets/landing/img/load.gif'); ?>"
+                                             src="<?= base_url('assets/img/load.gif'); ?>"
                                              alt="<?= $product->product_name; ?>"
                                              title="<?= $product->product_name; ?>"/>
                                     </div>
@@ -295,15 +295,15 @@
             </div>
         </div>
     </div>
-    <script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
-    <script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/jquery.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/bootstrap.js'); ?>"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/js/ion.rangeSlider.min.js"></script>
     <script>
         let current_url = "<?= current_url()?>";
         let url = "<?= base_url('catalog/' . $category_detail->slug .'/') ?>";
     </script>
-    <script src="<?= base_url('assets/landing/js/search.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/search.js'); ?>"></script>
     <script>
         $(function () {
             $('.lazy').Lazy();
@@ -464,7 +464,7 @@
             });
         }
     </script>
-    <script src="<?= base_url('assets/landing/js/mobile.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/mobile.js'); ?>"></script>
 </div>
 <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
 </body>

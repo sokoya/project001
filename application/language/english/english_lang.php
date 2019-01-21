@@ -4,9 +4,11 @@ $lang['site_state'] = 'development';
 $lang['app_name'] = 'Onitshamarket.com';
 $lang['app_email'] = '';
 $lang['notify_email'] = '';
+$lang['sale_email'] = '';
 $lang['company_name'] = 'Internet Onitshamarketing Limited';
 $lang['domain'] = 'https://onitshamarket.com';
 $lang['copyright'] = "&copy; 2015 -  " . date('Y') ." Internet Onitshamarketing Limited All rights reserved";
+$lang['site_description'] = "Welcome to onitshamarket.com - Buy electronics, phones, fashions in Nigeria";
 
 
 
@@ -49,6 +51,6 @@ $lang['banks'] = 'Access Bank Plc, Citibank Nigeria Limited, Diamond Bank Plc, E
 
 
 //Others
-$lang['sellers_url'] = 'https://www.seller.onitshamarket.com/';
+$lang['seller_url'] = 'https://www.seller.onitshamarket.com/';
 
 ?>

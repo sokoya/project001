@@ -115,7 +115,7 @@
         <div style="margin-left: 10px; margin-right: 10px;">
             <a style="text-decoration: none"
                href="<?= $url; ?>"><p><span
-                            class="filter_close_btn"> <img src="<?= base_url('assets/landing/svg/left-arrow.svg'); ?>"
+                            class="filter_close_btn"> <img src="<?= base_url('assets/svg/left-arrow.svg'); ?>"
                                                            alt="Back button"
                                                            style="height: 14px; width: 14px; margin-right: 8px; margin-bottom: 2px;"></span>
             </a>
@@ -164,7 +164,7 @@
     <?php else: ?>
     <?php endif; ?>
 </body>
-<script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/mobile.js'); ?>"></script>
+<script src="<?= base_url('assets/js/jquery.js'); ?>"></script>
+<script src="<?= base_url('assets/js/bootstrap.js'); ?>"></script>
+<script src="<?= base_url('assets/js/mobile.js'); ?>"></script>
 </html>

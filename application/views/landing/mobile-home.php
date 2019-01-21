@@ -1,7 +1,7 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
-<link rel="stylesheet" href="<?= base_url('assets/landing/css/home.css'); ?>">
-<link rel="stylesheet" href="<?= base_url('assets/seller/plugins/slick/slick.css'); ?>">
-<link rel="stylesheet" href="<?= base_url('assets/seller/plugins/slick/slick-theme.css'); ?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/home.css'); ?>">
+<link rel="stylesheet" href="<?= base_url('assets/plugins/slick/slick.css'); ?>">
+<link rel="stylesheet" href="<?= base_url('assets/plugins/slick/slick-theme.css'); ?>">
 <style>
     .gap_small {
         height: 20px;
@@ -61,7 +61,7 @@
     <div class="main-slider row text-center" style="height:150px;">
         <?php foreach( $sliders as $slider ) :?>
                 <a href="<?= $slider->img_link; ?>">
-                    <img src="<?= base_url('assets/landing/img/home/homeslide2.png'); ?>" class="img-responsive" style="margin:auto;padding:20px;"/>
+                    <img src="<?= base_url('assets/img/home/homeslide2.png'); ?>" class="img-responsive" style="margin:auto;padding:20px;"/>
                 </a>
 <!--                <div class="slide_float"> 85, 49, 79-->
 <!--                    Low Price Rate Alert<br/><a class="btn btn-shopnow">Shop Now</a>-->
@@ -77,7 +77,7 @@
                 <div class="cat_board">
                     <a style="color: #0b0b0b;" href="<?= base_url('catalog/' . $category->slug . '/'); ?>">
                         <img class="cat_img"
-                             src="<?= base_url('assets/landing/img/cat_icons/028-smartphones.png'); ?>"
+                             src="<?= base_url('assets/img/cat_icons/028-smartphones.png'); ?>"
                              alt="Shop for <?= $category->name; ?>">
                         <span style="font-size:10px;margin-bottom:auto;"><?= $category->name; ?></span>
                     </a>
@@ -114,7 +114,7 @@
         </div>
         <div class="gap_small"></div>
         <div class="home_banner container">
-            <img src="<?= base_url('assets/landing/img/home/banner2.png'); ?> " class="img-responsive">
+            <img src="<?= base_url('assets/img/home/banner2.png'); ?> " class="img-responsive">
         </div>
     <?php endforeach; ?>
 
@@ -124,7 +124,7 @@
             <div class="owl-item">
                 <a class="banner-category owl-item-slide" href="#">
                     <img class="banner-category-img"
-                         src="<?= base_url('assets/landing/img/why-onitshamarket/largest.png'); ?>" alt="Largest"
+                         src="<?= base_url('assets/img/why-onitshamarket/largest.png'); ?>" alt="Largest"
                          title="Largest in the market"/>
                     <h5 class="banner-category-title">Largest</h5>
                     <p class="banner-category-desc">Range of products to choose from.</p>
@@ -133,7 +133,7 @@
             <div class="owl-item">
                 <a class="banner-category owl-item-slide" href="#">
                     <img class="banner-category-img"
-                         src="<?= base_url('assets/landing/img/why-onitshamarket/carrito-shopper.png'); ?>"
+                         src="<?= base_url('assets/img/why-onitshamarket/carrito-shopper.png'); ?>"
                          alt="<?= lang('app_name'); ?> Shopper" title="<?= lang('app_name'); ?> Shopper"/>
                     <h5 class="banner-category-title">OM Shopper</h5>
                     <p class="banner-category-desc">Automated shopping assistant</p>
@@ -142,7 +142,7 @@
             <div class="owl-item">
                 <a class="banner-category owl-item-slide" href="#">
                     <img class="banner-category-img"
-                         src="<?= base_url('assets/landing/img/why-onitshamarket/secured-payment.png'); ?>"
+                         src="<?= base_url('assets/img/why-onitshamarket/secured-payment.png'); ?>"
                          alt="secured-payment" title="secured-payment"/>
                     <h5 class="banner-category-title">Secured Payment</h5>
                     <p class="banner-category-desc">On all your debit/credit cards</p>
@@ -151,7 +151,7 @@
             <div class="owl-item">
                 <a class="banner-category owl-item-slide" href="#">
                     <img class="banner-category-img"
-                         src="<?= base_url('assets/landing/img/why-onitshamarket/incredible-discounts.png'); ?>"
+                         src="<?= base_url('assets/img/why-onitshamarket/incredible-discounts.png'); ?>"
                          alt="Incredible Discounts" title="Discounts"/>
                     <h5 class="banner-category-title">Incredible Discounts</h5>
                     <p class="banner-category-desc">On all products, all season.</p>
@@ -160,7 +160,7 @@
             <div class="owl-item">
                 <a class="banner-category owl-item-slide" href="#">
                     <img class="banner-category-img"
-                         src="<?= base_url('assets/landing/img/why-onitshamarket/pay-on-delivery.png') ?>"
+                         src="<?= base_url('assets/img/why-onitshamarket/pay-on-delivery.png') ?>"
                          alt="Pay on delivery" title="Pay on delivery"/>
                     <h5 class="banner-category-title">Pay On Delivery</h5>
                     <p class="banner-category-desc">On all products</p>
@@ -169,7 +169,7 @@
             <div class="owl-item">
                 <a class="banner-category owl-item-slide" href="#">
                     <img class="banner-category-img"
-                         src="<?= base_url('assets/landing/img/why-onitshamarket/fast-delivery.png') ?>"
+                         src="<?= base_url('assets/img/why-onitshamarket/fast-delivery.png') ?>"
                          alt="Fast Delivery"
                          title="Fast Delivery"/>
                     <h5 class="banner-category-title">Fast Delivery</h5>
@@ -179,7 +179,7 @@
             <div class="owl-item">
                 <a class="banner-category owl-item-slide" href="#">
                     <img class="banner-category-img"
-                         src="<?= base_url('assets/landing/img/why-onitshamarket/genuine-brands.png') ?>"
+                         src="<?= base_url('assets/img/why-onitshamarket/genuine-brands.png') ?>"
                          alt="Genuine Brands"
                          title="Genuine Brands"/>
                     <h5 class="banner-category-title">Genuine Brands</h5>
@@ -189,7 +189,7 @@
             <div class="owl-item">
                 <a class="banner-category owl-item-slide" href="#">
                     <img class="banner-category-img"
-                         src="<?= base_url('assets/landing/img/why-onitshamarket/247.png') ?>"
+                         src="<?= base_url('assets/img/why-onitshamarket/247.png') ?>"
                          alt="247 Active Support" title="247 Active Support"/>
                     <h5 class="banner-category-title">24/7</h5>
                     <p class="banner-category-desc">Customer Agents Waiting To Help You.</p>
@@ -199,7 +199,7 @@
     </div>
     <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
     <?php $this->load->view('landing/resources/mobile/mobile-script'); ?>
-    <script src="<?= base_url('assets/seller/plugins/slick/slick.js') ?>"></script>
+    <script src="<?= base_url('assets/plugins/slick/slick.js') ?>"></script>
 </div>
 <script>
     $(document).ready(function () {

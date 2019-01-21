@@ -15,14 +15,14 @@
         <div class="row text-justify" style="padding: 20px;background: #fff;margin-top:20px;">
             <h2 class="terms_head text-center">Privacy &amp; Security</h2>
             <div style="height:15px;"></div>
-            <h3>Welcome to Onitshamarket.com, your reliable online marketplace.</h3>
+            <h3>Welcome to <?= lang('app_name'); ?>, your reliable online marketplace.</h3>
             <p>
                 The web site identified by the uniform resource locator www.onitshamarket.com (the “Site”) is provided
-                by Internet Onitshamarket Limited (“Onitshamarket.com”) as a service to our customers.
+                by Internet Onitshamarket Limited (“<?= lang('app_name'); ?>”) as a service to our customers.
             </p>
             <p>
                 This Security and Privacy Policy (the “Agreement” or “Policy”) is entered into between you as a
-                registered user of the site (“Registered User”) and Onitshamarket.com.
+                registered user of the site (“Registered User”) and <?= lang('app_name'); ?>.
             </p>
             <p>
                 The security of your personal information is very important to us and we value your trust highly. We
@@ -41,10 +41,10 @@
                 provide us with your information, you consent to the transfer and storage of the information on our
                 server located in United States of America (“USA.”).
             </p>
-            <p> As set forth in more detail below, Onitshamarket.com collects personal information that you provide when
+            <p> As set forth in more detail below, <?= lang('app_name'); ?> collects personal information that you provide when
                 using the Site. This information includes your first and last name, email address, a password and other
-                information required when you create your Onitshamarket.com account or when you participate in or
-                conduct surveys and contests via the Site, email, or other media of Onitshamarket.com. In order to
+                information required when you create your <?= lang('app_name'); ?> account or when you participate in or
+                conduct surveys and contests via the Site, email, or other media of <?= lang('app_name'); ?>. In order to
                 protect your confidentiality and verify your identity, we may ask you to confirm your personal
                 information when you contact our Customer Service Department.
             </p>
@@ -54,16 +54,16 @@
             <div style="height:15px;"></div>
             <h4>1. Purchase Information</h4>
             <p>
-                When you make a purchase from Onitshamarket.com, we collect your name and payment method information.
-                When you create an account at Onitshamarket.com, you can choose to save your billing information in “My
-                Profile.” You can also save one or more shipping addresses in your Onitshamarket.com Address Book.
+                When you make a purchase from <?= lang('app_name'); ?>, we collect your name and payment method information.
+                When you create an account at <?= lang('app_name'); ?>, you can choose to save your billing information in “My
+                Profile.” You can also save one or more shipping addresses in your <?= lang('app_name'); ?> Address Book.
             </p>
             <div style="height:15px;"></div>
             <h4>2. Services Account Information</h4>
             <p>
-                We collect personal information from users who wish to use any of the Onitshamarket.com services,
-                including but not limited to, Onitshamarket.com’s Transaction Platform. In order to use these services
-                you must provide your email address and password or create an account at Onitshamarket.com.
+                We collect personal information from users who wish to use any of the <?= lang('app_name'); ?> services,
+                including but not limited to, <?= lang('app_name'); ?>’s Transaction Platform. In order to use these services
+                you must provide your email address and password or create an account at <?= lang('app_name'); ?>.
             </p>
             <div style="height:15px;"></div>
             <h4>3. Cookies and Other Computer Information</h4>
@@ -94,8 +94,8 @@
             <h4>4. Publishing Information</h4>
             <p>
                 When you submit any information on the Site during your use or access, including, but not limited to,
-                information on the Onitshamarket.com blog, the rating system, or product catalog, you are deemed to have
-                given your permission to Onitshamarket.com to publish such information, and Onitshamarket.com and the
+                information on the <?= lang('app_name'); ?> blog, the rating system, or product catalog, you are deemed to have
+                given your permission to <?= lang('app_name'); ?> to publish such information, and <?= lang('app_name'); ?> and the
                 Site hereby enjoy an irrevocable, worldwide and royalty-free, sub-licensable license to use all
                 information provided by such user to exercise the copyright, compilation, database and publicity rights
                 any user has in such material or information, in any media form.
@@ -108,7 +108,7 @@
                 ways:
             </p>
             <p style="font-style: italic;">Deliver merchandise and services that you purchase online; Register you as a
-                member of Onitshamarket.com;
+                member of <?= lang('app_name'); ?>;
                 Prevent fraud; Confirm your orders; Resolve disputes and prevent prohibited and illegal activities;
                 Enforce our Terms of Use and related agreements; Respond to your customer-service inquiries or requests;
                 Communicate great values and featured items to you; Find and stock the products you want; and Customize,
@@ -127,10 +127,10 @@
             </p>
             <p>Aside from the purposes described above, we will not share your personal information with any other third
                 parties unless we have your express permission or there are special circumstances, such as when
-                Onitshamarket.com is required by the government, law enforcement body, obligee whose legitimate right
+                <?= lang('app_name'); ?> is required by the government, law enforcement body, obligee whose legitimate right
                 has been injured, subpoena or other legal document to share such information, or if we believe it to be
                 reasonably necessary to protect the safety of any person; to address fraud, security or technical
-                issues; or to protect Onitshamarket.com’s rights or property. We may also share aggregated demographic
+                issues; or to protect <?= lang('app_name'); ?>’s rights or property. We may also share aggregated demographic
                 and statistical information with our partners. This is not linked to any personal information that can
                 identify any individual person.
             </p>
@@ -145,7 +145,7 @@
             <p>
                 Your personal information is protected by the password you created when you created an account on the
                 Site (or another password you chose after changing a previous password). Please keep this password
-                confidential. No Customer Service Associate or any other representative of Onitshamarket.com will ever
+                confidential. No Customer Service Associate or any other representative of <?= lang('app_name'); ?> will ever
                 ask you for your password. The confidentiality of your password is yours to protect. You may change it
                 at anytime by going to My Account. Log in with your email address and password, then click “Modify
                 Details, Email & Password” and enter a new password.
@@ -153,9 +153,9 @@
             <div style="height:15px;"></div>
             <h3>Minors</h3>
             <p>
-                Onitshamarket.com does not intentionally collect personal information about minors or other persons
+                <?= lang('app_name'); ?> does not intentionally collect personal information about minors or other persons
                 without full civil conduct capacity, but based on the properties of Internet, there is no way for
-                Onitshamarket.com and the Site to distinguish the age or capacity of the users. By accepting this
+                <?= lang('app_name'); ?> and the Site to distinguish the age or capacity of the users. By accepting this
                 Agreement through your use or access of the Site, you certify that you are a person over 18 years old
                 with full capacity and ability to form a legally binding contract in the jurisdiction in which you are
                 resident or in which you are entering into this Agreement. If you do not agree to (or cannot comply
@@ -187,31 +187,31 @@
                 address or checking account information, in addition to any other personal information that can be
                 linked to you, personally.
             </p>
-            <p>Onitshamarket.com may provide links to certain third party web sites. This Security and Privacy Policy
+            <p><?= lang('app_name'); ?> may provide links to certain third party web sites. This Security and Privacy Policy
                 applies only to activities conducted and personal information collected on the Site. Other web sites may
                 have their own policies regarding privacy and security. We encourage you to review the privacy policies
                 on these sites before you use and access them. You are solely responsible for your use and access of
                 other web sites.
             </p>
-            <p>Onitshamarket.com will obtain your consent before allowing the download of any data from the Site, and
-                Onitshamarket.com will not automatically download any data to your computer system. Once you consent to
+            <p><?= lang('app_name'); ?> will obtain your consent before allowing the download of any data from the Site, and
+                <?= lang('app_name'); ?> will not automatically download any data to your computer system. Once you consent to
                 the initial download of any data, you may receive automatic updates or patches pertaining to such
                 software. You understand and agree that any material, including but not limited to downloaded software,
                 required or automated updates, modifications, reinstallations, or software otherwise obtained through
                 the use of the Site is done at your own discretion and risk and that you will be solely responsible for
                 any damages to your computer system or loss of data that may result from any such material.
             </p>
-            <p> Onitshamarket.com reserves the right to update or modify this Security and Privacy Policy at any time
-                without prior notice to you. If Onitshamarket.com makes a change that, in Onitshamarket.com’s sole
-                discretion, is material, Onitshamarket.com will notify you via e-mail to the email address associated
+            <p> <?= lang('app_name'); ?> reserves the right to update or modify this Security and Privacy Policy at any time
+                without prior notice to you. If <?= lang('app_name'); ?> makes a change that, in <?= lang('app_name'); ?>’s sole
+                discretion, is material, <?= lang('app_name'); ?> will notify you via e-mail to the email address associated
                 with your account. Your use of the Site following any such change constitutes your unconditional
-                agreement to follow and be bound by the Security and Privacy Policy as amended. Onitshamarket.com may
+                agreement to follow and be bound by the Security and Privacy Policy as amended. <?= lang('app_name'); ?> may
                 transfer this Policy and all or part of its rights, obligations and interests to any party or entity in
                 its sole discretion; however, a User may not assign its rights, obligations and interests under this
                 Policy to any party or entity.
             </p>
             <p> Terms which have not been defined or stipulated in this Agreement shall be interpreted in accordance
-                with the definition(s) or provision(s) of the Terms of Use of Onitshamarket.com.
+                with the definition(s) or provision(s) of the Terms of Use of <?= lang('app_name'); ?>.
             </p>
         </div>
         <div style="height:15px;"></div>

@@ -16,7 +16,7 @@ $profile = $this->user->get_profile($this->session->userdata('logged_id'));
                             <?php if ($profile->is_seller !== 'false') : ?>
                                 <a href="<?= base_url('seller/overview'); ?>" style="font-size: 9px;">Seller Dashboard</a>
                             <?php else : ?>
-                                <a href="<?= base_url('seller/'); ?>" style="font-size: 9px;">Become a Seller</a>
+                                <a href="<?= lang('seller_url'); ?>" style="font-size: 9px;">Become a Seller</a>
                             <?php endif; ?>
                         <?php else : ?>
                             <a href="<?= base_url('create/'); ?>" style="font-size: 9px;">Create an Account</a>

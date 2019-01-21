@@ -92,19 +92,19 @@
                     </ul>
                     <ul class="payment-icons-list">
                         <li>
-                            <img src="<?= base_url('assets/landing/img/payment/visa-straight-32px.png'); ?>"
+                            <img src="<?= base_url('assets/img/payment/visa-straight-32px.png'); ?>"
                                  alt="Image Alternative text" title="Pay with Visa"/>
                         </li>
                         <li>
-                            <img src="<?= base_url('assets/landing/img/payment/mastercard-straight-32px.png'); ?>"
+                            <img src="<?= base_url('assets/img/payment/mastercard-straight-32px.png'); ?>"
                                  alt="Image Alternative text" title="Pay with Mastercard"/>
                         </li>
                         <li>
-                            <img src="<?= base_url('assets/landing/img/payment/visa-electron-straight-32px.png'); ?>"
+                            <img src="<?= base_url('assets/img/payment/visa-electron-straight-32px.png'); ?>"
                                  alt="Image Alternative text" title="Pay with Visa-electron"/>
                         </li>
                         <li>
-                            <img src="<?= base_url('assets/landing/img/payment/maestro-straight-32px.png'); ?>"
+                            <img src="<?= base_url('assets/img/payment/maestro-straight-32px.png'); ?>"
                                  alt="Image Alternative text" title="Pay with Maestro"/>
                         </li>
                     </ul>
@@ -128,7 +128,7 @@
                     <p class="text-sm"><a href="<?= base_url('pages'); ?>">Terms of Use</a> | <a
                                 href="<?= base_url('pages/agreement'); ?>">Agreement</a> | <a
                                 href="<?= base_url('pages/privacy'); ?>">Privacy Policy</a> | <a href="#">Site
-                            Map </a> | <a href="#">Switch View</a></p>
+                            Map </a> </p>
                 </div>
             </div>
         </div>

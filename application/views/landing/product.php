@@ -120,7 +120,7 @@
                                                 <a href="#review"><?= count($rating_counts); ?> customer reviews</a> | <strong> 34
                                                     SOLDS</strong>
                                             <?php else : ?>
-                                                <a href="#reviews">Be the first to rate this product</a> | <strong> 34
+                                                <a href="#reviews">Be the first to rate this product</a>  <strong> <!-- Number ofsold -->
                                                     SOLDS</strong>
                                             <?php endif; ?>
 

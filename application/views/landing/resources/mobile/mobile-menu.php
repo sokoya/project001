@@ -307,15 +307,15 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a href="<?= base_url() ?>" style="float: left"> <img class="mobile-nav-logo"
-                                                                      src="<?= base_url('assets/landing/img/newlogo.png'); ?>"/></a>
+                                                                      src="<?= base_url('assets/img/newlogo.png'); ?>"/></a>
             </div>
         </div>
         <div class="navbar-util">
 				<span class="account-dropdown" style="margin-right: 5px; cursor: pointer"><img
                         <?php if ($this->session->userdata('logged_in')): ?>
-                            src="<?= base_url('assets/landing/svg/user.svg'); ?>"
+                            src="<?= base_url('assets/svg/user.svg'); ?>"
                         <?php else : ?>
-                            src="<?= base_url('assets/landing/svg/logged-out-user.svg'); ?>"
+                            src="<?= base_url('assets/svg/logged-out-user.svg'); ?>"
                         <?php endif; ?>
                             alt="User"
                             style="height: 24px; width: 24px;">
@@ -349,7 +349,7 @@
                 <span class="cart-count"
                     <?= ($this->cart->total_items() == 0) ? 'style="display:none"' : '' ?>><?= $this->cart->total_items(); ?></span>
             <a href="<?= base_url(lang('cart_link')); ?>"><img
-                            src="<?= base_url('assets/landing/svg/shopping-cart.svg'); ?>"
+                            src="<?= base_url('assets/svg/shopping-cart.svg'); ?>"
                             alt="User"
                             style="height: 24px; width: 24px; margin-right: 4px;"></a>
         </div>
@@ -397,7 +397,7 @@
                                 <a href="<?= base_url('catalog/' . $cat->slug); ?>" style="text-decoration: none;">
                                     <p>
                                         <img
-                                                src="<?= base_url('assets/landing/svg/delivery-truck.svg'); ?>"
+                                                src="<?= base_url('assets/svg/delivery-truck.svg'); ?>"
                                                 alt="Delivery Truck"
                                                 style="height: 30px; width: 35px;"> <?= $cat->name; ?> <i
                                                 class="fa fa-plus close-panel"

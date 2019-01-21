@@ -95,6 +95,11 @@
                     <?php endif; ?>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <?= $pagination ;?>
+                </div>
+            </div>
         </div>
     </div>
     <div id="confirmation" class="modal fade" role="dialog">

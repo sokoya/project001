@@ -1,9 +1,10 @@
 <?php $categories = $this->db->query("SELECT * FROM categories WHERE pid = 0 LIMIT 10")->result(); ?>
+
 <nav class="navbar navbar-default navbar-main-white navbar-pad-top navbar-first">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="<?= base_url() ?>">
-                <img src="<?= base_url('assets/landing/img/onitshamarket-logo.png'); ?>" id="navbar-img"
+                <img src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>" id="navbar-img"
                      alt="<?= lang('app_name'); ?>" title="<?= lang('app_name'); ?>"/>
             </a>
         </div>
@@ -41,4 +42,10 @@
             </div>
         </ul>
     </div>
+    <?php if($this->session->flashdata('error_msg') || $this->session->flashdata('success_msg') && $page =='homepage') : ?>
+        <div class="container text-center">
+            <?php $this->load->view('msg_view'); ?>
+        </div>
+    <?php endif; ?>
 </nav>
+

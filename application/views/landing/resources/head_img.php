@@ -10,8 +10,8 @@
                 <ul class="nav navbar-nav  navbar-right navbar-right-no-mar hidden-xs hidden-md custom-nav">
                     <li><a href="#">About Us</a>
                     </li>
-                    <li><a href="#">Blog</a>
-                    </li>
+<!--                    <li><a href="#">Blog</a>-->
+<!--                    </li>-->
                     <li><a href="<?=base_url('pages/contact');?>">Contact Us</a>
                     </li>
                     <li><a href="#">FAQ</a>

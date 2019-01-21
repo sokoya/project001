@@ -1,3 +1,55 @@
+<!-- Head Category Starts -->
+<?php $categories = $this->db->query("SELECT id,name,slug,icon FROM categories WHERE pid = 0 LIMIT 10")->result(); ?>
+<nav class="navbar navbar-default navbar-main-white navbar-pad-top navbar-first">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="<?= base_url() ?>">
+                <img src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>" id="navbar-img"
+                     alt="<?= lang('app_name'); ?>" title="<?= lang('app_name'); ?>"/>
+            </a>
+        </div>
+        <form method="get" action="<?= base_url('search') ?>"
+              class="navbar-form navbar-left navbar-main-search navbar-main-search-category" role="search">
+            <select name="category" id="all-category" class="navbar-main-search-category-select">
+                <option value="">All Categories</option>
+                <?php foreach ($categories as $category) : ?>
+                    <option value="<?= $category->name; ?>"><?= ucwords($category->name); ?></option>
+                <?php endforeach; ?>
+            </select>
+            <div class="form-group ">
+                <input class="form-control site-search form-search" required name="q" autocomplete="off" type="text"
+                       placeholder="Search the Entire Store..."/>
+            </div>
+            <div class="src-cover">
+                <ul class="market-search">
+                </ul>
+            </div>
+            <a class="fa fa-search navbar-main-search-submit" href="#"></a>
+        </form>
+        <ul class="nav navbar-nav navbar-right navbar-mob-item-left" style="padding:-2px;">
+            <li>
+                <a href="#"><span>Save big</span> on our App <i class="fa fa-arrow-down"></i></a>
+            </li>
+            <li>
+                <a href="#"><span>About</span> <?= lang('app_name'); ?></a>
+            </li>
+            <div class="navbar-header">
+                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse"
+                        data-target="#main-nav-collapse" area_expanded="false"><span
+                            class="sr-only">Main Menu</span><span class="icon-bar"></span><span
+                            class="icon-bar"></span><span class="icon-bar"></span>
+                </button>
+            </div>
+        </ul>
+    </div>
+    <?php if($this->session->flashdata('error_msg') || $this->session->flashdata('success_msg') && $page =='homepage') : ?>
+        <div class="container text-center">
+            <?php $this->load->view('msg_view'); ?>
+        </div>
+    <?php endif; ?>
+</nav>
+<!-- Head category finish -->
+
 <nav class="navbar-default navbar-main-white yamm">
     <div class="container">
         <div class="collapse navbar-collapse navbar-collapse-no-pad" id="main-nav-collapse">
@@ -6,7 +58,6 @@
                                 class="drop-caret" data-toggle="dropdown"></i></a>
                     <ul class="dropdown-menu dropdown-menu-category">
                         <?php
-                        $categories = $this->db->query("SELECT * FROM categories WHERE pid = 0")->result();
                         foreach ($categories as $category): ?>
                             <li><a href="<?= base_url('catalog/' . $category->slug . '/'); ?>"
                                    title="<?= $category->name; ?>"><i
@@ -17,7 +68,7 @@
                                         <div class="dropdown-menu-category-section-content">
                                             <div class="row">
                                                 <?php
-                                                $main_category = $this->db->query("SELECT * FROM categories WHERE pid = ?", $category->id)->result();
+                                                $main_category = $this->db->query("SELECT id,name,slug FROM categories WHERE pid = ? ", $category->id)->result();
                                                 if ($main_category):
                                                     foreach ($main_category as $cat) :
                                                         ?>
@@ -27,7 +78,7 @@
                                                             </h5>
                                                             <ul class="dropdown-menu-category-list">
                                                                 <?php
-                                                                $sub_category = $this->db->query("SELECT * FROM categories WHERE pid = ? LIMIT 10 ", array($cat->id))->result();
+                                                                $sub_category = $this->db->query("SELECT id,name,slug FROM categories WHERE pid = ? LIMIT 10 ", array($cat->id))->result();
                                                                 if ($sub_category):
                                                                     foreach ($sub_category as $sub) : ?>
                                                                         <li>
@@ -41,7 +92,7 @@
                                             </div>
                                         </div>
                                         <img class="dropdown-menu-category-section-theme-img"
-                                             src="<?= base_url('assets/landing/img/test_cat/3.png'); ?>"
+                                             src="<?= base_url('assets/img/test_cat/3.png'); ?>"
                                              alt="Image Alternative text" title="Image Title" style="right: -10px;"/>
                                     </div>
                                 </div>
@@ -81,18 +132,14 @@
                         </strong>
                     </a>
                 </li>
-
-                <?php
-                $profile = $this->user->get_profile($this->session->userdata('logged_id'));
-                ?>
                 <li class="dropdown">
-                    <?php if ($this->session->userdata('logged_in')): ?>
+                    <?php if ($profile): ?>
                         <a href="<?= base_url('account'); ?>"><span>Welcome</span><strong><?= ucfirst($profile->first_name); ?></strong></a>
                     <?php else : ?>
                         <a href="<?= base_url('login'); ?>"><span>Sign in | Join</span><strong>My Account</strong></a>
                     <?php endif; ?>
                     <ul class="dropdown-menu mgt_drop_menu">
-                        <?php if ($this->session->userdata('logged_in')): ?>
+                        <?php if ($profile): ?>
                             <li>
                                 <a href="<?= base_url('account'); ?>"><span class="fa fa-user grey"></span>&nbsp;My
                                     Accounts</a>

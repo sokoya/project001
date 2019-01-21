@@ -198,13 +198,20 @@ Class User_model extends CI_Model{
      * @param $id
      * @return mixed
      */
-    function get_saved_items($id ){
-        $query = $this->db->query("SELECT p.id, p.product_name, p.product_status, v.discount_price, v.sale_price,v.quantity, v.start_date,v.end_date, g.image_name, f.id as fav_id, f.date_saved
+    function get_saved_items($id , $array = array()){
+        $sql = "SELECT p.id, p.product_name, p.product_status, v.discount_price, v.sale_price,v.quantity, v.start_date,v.end_date, g.image_name, f.id as fav_id, f.date_saved
             FROM products p
             JOIN (SELECT variation.sale_price AS sale_price, variation.discount_price AS discount_price, variation.start_date,variation.end_date, variation.product_id , SUM(variation.quantity) AS quantity FROM product_variation variation GROUP BY variation.product_id) AS v ON( v.product_id = p.id)
             JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )
             JOIN favourite AS f ON (f.product_id = p.id )
-            WHERE f.uid = $id GROUP BY p.id ORDER BY f.date_saved")->result();
+            WHERE f.uid = $id ";
+        $limit = $array['is_limit'];
+        if( $limit == true ){
+            $sql .=" GROUP BY p.id ORDER BY f.date_saved LIMIT " .$array['offset']. "," .$array['limit'];
+        }else{
+            $sql .= ' GROUP BY p.id ORDER BY f.date_saved';
+        }
+        $query = $this->db->query($sql)->result();
         return $query; 
     }
 
@@ -226,10 +233,10 @@ Class User_model extends CI_Model{
     /*
      * Get users orders
      * */
-    function get_my_orders( $id, $time = ''){
+    function get_my_orders( $id, $array = array()){
         $query = "SELECT order_code, SUM(amount) as amount, SUM(qty) as qty, order_date FROM orders WHERE buyer_id = $id";
-        if( $time != ''){
-            switch ( $time ) {
+        if( $array['time'] != ''){
+            switch ( $array['time'] ) {
                 case 'last-6-month':
                     $query .= " AND order_date > DATE_SUB(NOW(), INTERVAL 6 MONTH) ";
                     break;
@@ -246,7 +253,12 @@ Class User_model extends CI_Model{
         }else{
             $query .= " AND MONTH(order_date) = EXTRACT(month FROM (NOW())) AND year(order_date) = EXTRACT(year FROM (NOW())) ";
         }
-        $query .= ' GROUP BY order_code';
+        $limit = $array['is_limit'];
+        if( $limit == true ){
+            $query .=" GROUP BY order_code LIMIT " .$array['offset']. "," .$array['limit'];
+        }else{
+            $query .= ' GROUP BY order_code';
+        }
         return $this->db->query( $query, array($id) )->result();
     }
 
