@@ -6,8 +6,6 @@
         <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
     <?php else: ?>
         <?php $this->load->view('landing/resources/head_img') ?>
-        <?php $this->load->view('landing/resources/head_category') ?>
-
         <?php $this->load->view('landing/resources/head_menu') ?>
     <?php endif; ?>
 
@@ -52,7 +50,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <h5 class="market-dashboard-welcome-text">Payment Method: </h5>
-                                        <span class="market-dashboard-welcome-text-body">InterSwitch Payment</span><br/>
+                                        <span class="market-dashboard-welcome-text-body"><?= $order->payment_method?></span><br/>
                                         <?php
                                         $date1 = date_create($order->order_date);
                                         $date2 = date_create(get_now());
@@ -73,7 +71,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <h5 class="market-dashboard-welcome-text">Shipping Address: </h5>
-                                        <span class="market-dashboard-welcome-text-body"><?= ucwords($order->first_name . ' ' . $order->last_name) ?>
+                                        <span class="market-dashboard-welcome-text-body"><strong><?= ucwords($order->first_name . ' ' . $order->last_name) ?></strong>
                                             <br/><?= $order->address; ?>
                                             <br/><?= $order->phone; ?> <?php if (!empty($order->phone2)) echo ',' . $order->phone2; ?>
                                     </span>

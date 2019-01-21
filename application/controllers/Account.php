@@ -66,6 +66,7 @@ class Account extends MY_Controller {
         $page_data['title'] = "My Orders";
         $page_data['order_code'] = $order_code;
         $page_data['orders'] = $this->user->get_my_order_status( $this->session->userdata('logged_id'), $order_code );
+//        var_dump($page_data['orders']);
         $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
         $this->load->view('account/orderstatus', $page_data);
     }

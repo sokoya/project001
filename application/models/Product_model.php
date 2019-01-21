@@ -724,7 +724,7 @@ Class Product_model extends CI_Model{
      * Lets get all the queries for desktop views at the frontpage
      * */
     function desktop_display(){
-        $select = "SELECT h.*, c.name, c.slug FROM homepage_setting h LEFT JOIN categories c ON (c.id = h.category_id) WHERE h.status = 'active' ORDER BY h.position";
+        $select = "SELECT h.*, c.name, c.slug FROM homepage_setting h LEFT JOIN categories c ON (c.id = h.category_id) WHERE h.status = 'active' ORDER BY h.position LIMIT 1";
         return $this->db->query( $select)->result();
     }
 

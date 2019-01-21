@@ -220,12 +220,13 @@ Class User_model extends CI_Model{
      * @return mixed
      */
     function get_my_order_status( $id , $order_code){
-        $query = $this->db->query("SELECT p.id as pid, p.name, g.image_name, o.order_date, o.status, b.address,o.qty,o.amount, 
+        $query = $this->db->query("SELECT p.id as pid, p.name, g.image_name, o.order_date, pay.name payment_method, o.status, o.active_status, b.address,o.qty,o.amount, 
         b.first_name, b.last_name, b.phone,b.phone2
         FROM orders o
         JOIN (SELECT prod.id AS id, prod.product_name AS name FROM products AS prod) AS p ON (p.id = o.product_id)
         JOIN product_gallery AS g ON (o.product_id = g.product_id AND g.featured_image = 1 )
         LEFT JOIN billing_address b ON (b.id = o.billing_address_id)
+        LEFT JOIN payment_methods pay ON (pay.id = o.payment_method)
         WHERE o.buyer_id = ? AND o.order_code = ? ORDER BY o.id DESC", array( $id, $order_code ))->result();
         return $query;
     }

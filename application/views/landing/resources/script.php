@@ -10,4 +10,4 @@
 <script src="<?= base_url('assets/js/custom.js'); ?>"></script>
 <script src="<?= base_url('assets/js/search.js'); ?>"></script>
 <?php endif?>
-<!--<script type="text/javascript" src="https://js.stripe.com/v2/"></script>-->
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>

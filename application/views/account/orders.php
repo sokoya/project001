@@ -6,8 +6,6 @@
         <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
     <?php else: ?>
         <?php $this->load->view('landing/resources/head_img') ?>
-        <?php $this->load->view('landing/resources/head_category') ?>
-
         <?php $this->load->view('landing/resources/head_menu') ?>
     <?php endif; ?>
 
@@ -56,7 +54,7 @@
                                 <tbody>
                                 <?php foreach ($orders as $order) : ?>
                                     <tr>
-                                        <td class="text-center">#<?= $order->order_code; ?></td>
+                                        <td class="text-center"><?= $order->order_code; ?></td>
                                         <td class="text-center"><?= neatDate($order->order_date) ?></td>
                                         <td class="text-center"><?= $order->qty; ?></td>
                                         <td class="text-center"><?= ngn($order->amount); ?></td>

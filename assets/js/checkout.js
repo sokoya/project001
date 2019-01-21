@@ -18,34 +18,38 @@ function bind_market(src, destination) {
 Stripe.setPublishableKey('pk_test_nod5swtRu9mKvMZB28838BY8');
 
 $('.continue-btn').on('click', function (e) {
-    $(this).prop('disabled', 'disabled');
+	$(this).prop('disabled', 'disabled');
 	e.preventDefault();
-    var delivery_charge = $('.charges').data('amount');
-    var payment_method = $("input[name=payment_method]:checked").val();
-    var payment_name = $("input[name=payment_method]:checked").data('name');
+	var delivery_charge = $('.charges').data('amount');
+	var payment_method = $("input[name=payment_method]:checked").val();
+	var payment_name = $("input[name=payment_method]:checked").data('name');
 
-    $.ajax({
-        url : base_url + 'checkout/checkout_confirm',
-        method: 'POST',
-        dataType: 'json',
-        data: $('#checkout_form').serialize() + "&delivery_charge="+delivery_charge,
-        success: (data) => {
-            if( data.status == 'success') {
-                if (payment_method == 1 || payment_name == 'Payment on Delivery') {
-                    // Payment on delivery
-                    setInterval(function(){ notification_message("Saving your orders... ", 'fa fa-info-circle', 'success'); }, 3000);
-                    window.location.href = base_url + 'checkout/order_completed';
-                } else if (payment_method == 2 || payment_name == 'Interswitch Webpay') {
-                    // Interswitch Payment
-                    setInterval(function(){ notification_message("Saving your orders... Redirecting you to payment portal in 5 seconds ", 'fa fa-info-circle', 'success'); }, 3000);
-                    window.location.href = base_url + "checkout/stripe";
-                }
-            }
-        },
-        error: response => {
-            notification_message(`An error occurred  - ${response.status} ${response.statusText}`, 'fa fa-info-circle', 'error')
-        }
-    })
+	$.ajax({
+		url: base_url + 'checkout/checkout_confirm',
+		method: 'POST',
+		dataType: 'json',
+		data: $('#checkout_form').serialize() + "&delivery_charge=" + delivery_charge,
+		success: (data) => {
+			if (data.status == 'success') {
+				if (payment_method == 1 || payment_name == 'Payment on Delivery') {
+					// Payment on delivery
+					setInterval(function () {
+						notification_message("Saving your orders... ", 'fa fa-info-circle', 'success');
+					}, 3000);
+					window.location.href = base_url + 'checkout/order_completed';
+				} else if (payment_method == 2 || payment_name == 'Interswitch Webpay') {
+					// Interswitch Payment
+					setInterval(function () {
+						notification_message("Saving your orders... Redirecting you to payment portal in 5 seconds ", 'fa fa-info-circle', 'success');
+					}, 3000);
+					window.location.href = base_url + "checkout/stripe";
+				}
+			}
+		},
+		error: response => {
+			notification_message(`An error occurred  - ${response.status} ${response.statusText}`, 'fa fa-info-circle', 'error')
+		}
+	})
 
 });
 
@@ -60,17 +64,17 @@ $('.create-address-btn').on('click', function (e) {
 	$('#processing').show();
 	var first_name = $('#fname').val();
 	var last_name = $('#lname').val();
-	var phone		= $('#number_').val();
-	var address	= $('#street').val();
+	var phone = $('#number_').val();
+	var address = $('#street').val();
 	var state = $('#state').val();
-	var area	= $('#city').val();
+	var area = $('#city').val();
 	var data = {
-		'first_name' : first_name,
-		'last_name' : last_name,
-		'phone'	: phone,
-		'address' : address,
-		'state'	: state,
-		'area' : area
+		'first_name': first_name,
+		'last_name': last_name,
+		'phone': phone,
+		'address': address,
+		'state': state,
+		'area': area
 	};
 	$.ajax({
 		url: base_url + "checkout/add_address",
@@ -158,7 +162,7 @@ function get_updates() {
 				let sub_total = price_instance * quantity_instance;
 				bind_market(format_currency(sub_total), 'charges');
 				bind_market(format_currency($('.total-sum').data('amount') + sub_total), 'total-sum-charges');
-				$('#total_charge').val( $('.total-sum').data('amount') + sub_total );
+				$('#total_charge').val($('.total-sum').data('amount') + sub_total);
 				$('#qty').val(quantity_instance);
 
 				elem.addClass('custom-panel-active');
@@ -186,9 +190,9 @@ $(".delivery-box").on('change', function () {
 // });
 
 $('.pay-method').on('click', function () {
-    $('.pay-panel').removeClass('custom-panel-active');
-    $(this).find('.pay-panel').addClass('custom-panel-active');
-    $(this).find('.payment-radio').prop('checked', true);
+	$('.pay-panel').removeClass('custom-panel-active');
+	$(this).find('.pay-panel').addClass('custom-panel-active');
+	$(this).find('.payment-radio').prop('checked', true);
 	// $('.payment-radio').prop('checked', true);
 	// $('.pay-panel').addClass('custom-panel-active');
 	$('.continue-btn').prop('disabled', false);
@@ -241,48 +245,46 @@ quantity.on('input', function () {
 
 $(document).ready(function () {
 
-    $('#payBtn').on('click', function (e) {
-        // alert('Here...');
-        e.preventDefault();
-        $(this).prop('disabled', 'disabled');
-        // Get the token
-        //create single-use token to charge the user
-        Stripe.createToken({
-            number: $('#card_num').val(),
-            cvc: $('#card-cvc').val(),
-            exp_month: $('#card-expiry-month').val(),
-            exp_year: $('#card-expiry-year').val()
-        }, stripeResponseHandler);
-        //submit from callback
-        return false;
-    });
+	$('#payBtn').on('click', function (e) {
+		// alert('Here...');
+		e.preventDefault();
+		$(this).prop('disabled', 'disabled');
+		// Get the token
+		//create single-use token to charge the user
+		Stripe.createToken({
+			number: $('#card_num').val(),
+			cvc: $('#card-cvc').val(),
+			exp_month: $('#card-expiry-month').val(),
+			exp_year: $('#card-expiry-year').val()
+		}, stripeResponseHandler);
+		//submit from callback
+		return false;
+	});
 
-    function stripeResponseHandler(status, response){
-        if( response.error){
-            $('#payBtn').removeAttr("disabled");
-            //display the errors on the form
-            // $('#payment-errors').attr('hidden', 'false');
-            $('#payment-errors').addClass('alert alert-danger');
-            $("#payment-errors").html(response.error.message);
-        }else{
-            //This would be changed to the stripe card form
-            var form$ = $("#paymentFrm");
-            //get token id
-            var token = response['id'];
-            //insert the token into the form
-            form$.append("<input type='hidden' name='stripeToken' value='" + token + "' />");
-            //insert every other element
-            //Check the payment method to type to know what to do
-            //submit form to the server
-            form$.get(0).submit();
+	function stripeResponseHandler(status, response) {
+		if (response.error) {
+			$('#payBtn').removeAttr("disabled");
+			//display the errors on the form
+			// $('#payment-errors').attr('hidden', 'false');
+			$('#payment-errors').addClass('alert alert-danger');
+			$("#payment-errors").html(response.error.message);
+		} else {
+			//This would be changed to the stripe card form
+			var form$ = $("#paymentFrm");
+			//get token id
+			var token = response['id'];
+			//insert the token into the form
+			form$.append("<input type='hidden' name='stripeToken' value='" + token + "' />");
+			//insert every other element
+			//Check the payment method to type to know what to do
+			//submit form to the server
+			form$.get(0).submit();
 
-        }
-    }
-
-
+		}
+	}
 
 
-        // alert('Here');
+	// alert('Here');
 
 
 	// $.ajax({
