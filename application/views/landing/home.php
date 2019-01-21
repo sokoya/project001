@@ -216,7 +216,7 @@
 
     .hot-row {
         margin-bottom: 10px;
-        padding:10px;
+        padding: 10px;
     }
 </style>
 </head>
@@ -231,18 +231,24 @@
     <?php endif; ?>
     <div class="home_slider row text-center">
         <div>
-            <div class="container">
-                <img src="<?= base_url('assets/img/home/homeslide1.png') ?>"/>
+            <div style="background-color: rgb(12,23,44)">
+                <div class="container">
+                    <img src="<?= base_url('assets/img/home/homeslide1.png') ?>"/>
+                </div>
             </div>
         </div>
         <div>
-            <div class="container">
-                <img src="<?= base_url('assets/img/home/homeslide2.png') ?>"/>
+            <div style="background-color: rgb(12,23,44)">
+                <div class="container">
+                    <img src="<?= base_url('assets/img/home/homeslide2.png') ?>"/>
+                </div>
             </div>
         </div>
         <div>
-            <div class="container">
-                <img src="<?= base_url('assets/img/home/homeslide3.png') ?>"/>
+            <div style="background-color: rgb(168,201,255)">
+                <div class="container">
+                    <img src="<?= base_url('assets/img/home/homeslide3.png') ?>"/>
+                </div>
             </div>
         </div>
     </div>
@@ -375,7 +381,7 @@
 
     <!--    Why choose us-->
     <div class="gap"></div>
-    <?php $this->load->view('landing/resources/why-onitshamarket');?>
+    <?php $this->load->view('landing/resources/why-onitshamarket'); ?>
 
     <?php if ($this->agent->is_mobile()) : ?>
         <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
