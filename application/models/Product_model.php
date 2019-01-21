@@ -415,7 +415,7 @@ Class Product_model extends CI_Model{
 
     // Get products attributes. used in main category
     function get_features($category = '', $search_like = ''){
-        $select_query = "SELECT DISTINCT JSON_UNQUOTE(JSON_EXTRACT(`attributes`, '$')) AS feature_value FROM products";
+        $select_query = "SELECT DISTINCT ( json_unquote(json_extract(`attributes`, '$'))) AS feature_value FROM products";
         if( $search_like != '' ){
             if( $category != '' ){
                 if( $this->check_slug_availability( $category ) ){

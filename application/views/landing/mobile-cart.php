@@ -64,7 +64,7 @@
                                 <a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
                                     <img class="lazy" style="width:130px !important;height:auto !important;"
                                          data-src="<?= PRODUCTS_IMAGE_PATH . $detail->image; ?>"
-                                         src="<?= base_url('assets/landing/img/load.gif'); ?>"
+                                         src="<?= base_url('assets/load.gif'); ?>"
                                          alt="<?= $product['name']; ?>"
                                          title="<?= $product['name']; ?>"/>
                                 </a></div>
@@ -155,7 +155,7 @@
         <?php else: ?>
             <div class="custom-fa-cover">
                 <img class="img-responsive text-center" style="padding: 10px; margin-top: 10px !important;"
-                     src="<?= base_url('assets/landing/img/empty_cart.png') ?>"/>
+                     src="<?= base_url('assets/img/empty_cart.png') ?>"/>
             </div>
             <div class="text-center">
 

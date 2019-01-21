@@ -236,7 +236,7 @@ class Checkout extends MY_Controller
             }
             $this->load->view('landing/order_completed', $page_data);
         }else{
-            $this->session->set_flashdata('error_msg', 'Start shopping...');
+            $this->session->set_flashdata('error_msg', 'Error with you order. Staet shopping...');
             redirect(base_url());
         }
     }

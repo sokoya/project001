@@ -292,7 +292,6 @@
         <?php $this->load->view('landing/resources/script'); ?>
     <?php endif; ?>
 </div>
-
 </body>
 </html>
 
