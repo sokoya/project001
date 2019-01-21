@@ -1,15 +1,15 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-<!--    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132785278-1"></script>-->
-<!--    <script>-->
-<!--        window.dataLayer = window.dataLayer || [];-->
-<!--        function gtag(){dataLayer.push(arguments);}-->
-<!--        gtag('js', new Date());-->
-<!---->
-<!--        gtag('config', 'UA-132785278-1');-->
-<!--    </script>-->
+<!--     Global site tag (gtag.js) - Google Analytics-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132785278-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-132785278-1');
+    </script>
     <title><?= !isset($title) ? 'Welcome ' : ucwords($title) ?> | <?= lang('app_name'); ?></title>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
@@ -17,7 +17,7 @@
     <meta name="description" content="<?= !empty($description) ? $description : ''; ?>">
     <meta name="robots" content="index,follow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:500,300,700,400italic,400' rel='stylesheet'
+    <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400italic,400' rel='stylesheet'
           type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
     <?php if ($page == 'mobile-product' && $this->agent->is_mobile()) : ?>

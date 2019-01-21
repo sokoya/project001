@@ -280,7 +280,11 @@
     </div>
     <?php $this->load->view('landing/resources/footer'); ?>
 </div>
-<?php $this->load->view('landing/resources/script'); ?>
+<?php if ($this->agent->is_mobile()) : ?>
+    <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
+<?php else : ?>
+    <?php $this->load->view('landing/resources/script'); ?>
+<?php endif; ?>
 </body>
 </html>
 
