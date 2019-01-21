@@ -4,6 +4,12 @@
         color: #48bc6e;
         margin-top: 10px;
     }
+    <?php if ($this->agent->is_mobile()) : ?>
+    p {
+        font-size: 13px;
+        line-height: 15px;
+    }
+    <?php endif?>
 </style>
 </head>
 <body>
@@ -278,9 +284,15 @@
         </div>
         <div style="height:15px;"></div>
     </div>
-    <?php $this->load->view('landing/resources/footer'); ?>
+    <?php if ($this->agent->is_mobile()) : ?>
+        <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
+        <?php $this->load->view('landing/resources/mobile/mobile-script'); ?>
+    <?php else: ?>
+        <?php $this->load->view('landing/resources/footer'); ?>
+        <?php $this->load->view('landing/resources/script'); ?>
+    <?php endif; ?>
 </div>
-<?php $this->load->view('landing/resources/script'); ?>
+
 </body>
 </html>
 
