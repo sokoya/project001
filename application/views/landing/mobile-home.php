@@ -7,6 +7,10 @@
         height: 20px;
     }
 
+    .slick-initialized {
+        visibility: visible;
+    }
+
     .cat_board {
         background-color: #fff;
         padding: 10px;
@@ -40,15 +44,18 @@
         background: #fff;
         padding: 10px;
     }
+
     .products-slider span {
         font-size: 10px;
     }
-    .products-slider h5{
+
+    .products-slider h5 {
         font-size: 11px;
-        margin-bottom:auto;
+        margin-bottom: auto;
     }
-    .home_banner{
-        height:auto;
+
+    .home_banner {
+        height: auto;
         text-align: center;
         font-size: 10px;
         font-weight: bolder;
@@ -58,22 +65,23 @@
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
     <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
-    <div class="main-slider row text-center" style="height:150px;">
-        <?php foreach( $sliders as $slider ) :?>
-                <a href="<?= $slider->img_link; ?>">
-                    <img src="<?= base_url('assets/img/home/homeslide2.png'); ?>" class="img-responsive" style="margin:auto;padding:20px;"/>
-                </a>
-<!--                <div class="slide_float"> 85, 49, 79-->
-<!--                    Low Price Rate Alert<br/><a class="btn btn-shopnow">Shop Now</a>-->
-<!--                </div>-->
-        <?php endforeach;?>
+    <div class="main-slider row text-center slider_show" style="height:150px;visibility: hidden;">
+        <?php foreach ($sliders as $slider) : ?>
+            <a href="<?= $slider->img_link; ?>">
+                <img src="<?= base_url('assets/img/home/homeslide2.png'); ?>" class="img-responsive"
+                     style="margin:auto;padding:20px;"/>
+            </a>
+            <!--                <div class="slide_float"> 85, 49, 79-->
+            <!--                    Low Price Rate Alert<br/><a class="btn btn-shopnow">Shop Now</a>-->
+            <!--                </div>-->
+        <?php endforeach; ?>
     </div>
     <div class="gap"></div>
     <!--    //top categories slider-->
     <div class="container">
         <h5>Top <span style="color:#575745">Categories</span></h5>
-        <div class="categories-slider text-center">
-            <?php foreach($main_categories as $category ) : ?>
+        <div class="categories-slider text-center slider_show" style="visibility: hidden;">
+            <?php foreach ($main_categories as $category) : ?>
                 <div class="cat_board">
                     <a style="color: #0b0b0b;" href="<?= base_url('catalog/' . $category->slug . '/'); ?>">
                         <img class="cat_img"
@@ -86,29 +94,36 @@
         </div>
     </div>
 
-    <?php foreach ($category_listing as $listing ) :
-            $products = $this->product->randomproducts( (int)$listing->category_id, 12 );
+    <?php foreach ($category_listing as $listing) :
+        $products = $this->product->randomproducts((int)$listing->category_id, 12);
         ?>
         <div class="gap_small"></div>
         <div class="container">
-            <h5>Top Selling <span style="color:#575745"><a href="<?= base_url('catalog/' . $listing->slug . '/'); ?>"><?= $listing->name?></a></span></h5>
-            <div class="products-slider text-center">
-                <?php foreach ( $products as $product ) :?>
-                <a style="color: #0b0b0b" href="<?= base_url(urlify($product->product_name, $product->id)); ?>">
-                    <div style="">
+            <h5>Top Selling <span style="color:#575745"><a
+                            href="<?= base_url('catalog/' . $listing->slug . '/'); ?>"><?= $listing->name ?></a></span>
+            </h5>
+            <div class="products-slider text-center slider_show" style="visibility: hidden;">
+                <?php foreach ($products as $product) : ?>
+                    <a style="color: #0b0b0b" href="<?= base_url(urlify($product->product_name, $product->id)); ?>">
+                        <div style="">
 
-                        <img src="<?= PRODUCTS_IMAGE_PATH .$product->image_name ?>" class="prod_img"/>
-                        <span><?= character_limiter($product->product_name, 15)?></span>
-                        <?php
-                        if(discount_check($product->discount_price, $product->start_date, $product->end_date )) : ?>
-                            <h5><?= ngn($product->discount_price); ?><small style="text-decoration: line-through;color:#e48b84"><?= ngn($product->sale_price); ?></small>
-                            </h5>
-                            <h5><small class="pull-right text-danger"><?= $product->item_left; ?> Item left</small></h5>
-                        <?php else : ?>
-                            <h5><?= ngn($product->sale_price); ?><small class="pull-right text-danger"><?= $product->item_left; ?> Item left</small></h5>
-                        <?php endif; ?>
-                    </div>
-                </a>
+                            <img src="<?= PRODUCTS_IMAGE_PATH . $product->image_name ?>" class="prod_img"/>
+                            <span><?= character_limiter($product->product_name, 15) ?></span>
+                            <?php
+                            if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
+                                <h5><?= ngn($product->discount_price); ?>
+                                    <small style="text-decoration: line-through;color:#e48b84"><?= ngn($product->sale_price); ?></small>
+                                </h5>
+                                <h5>
+                                    <small class="pull-right text-danger"><?= $product->item_left; ?> Item left</small>
+                                </h5>
+                            <?php else : ?>
+                                <h5><?= ngn($product->sale_price); ?>
+                                    <small class="pull-right text-danger"><?= $product->item_left; ?> Item left</small>
+                                </h5>
+                            <?php endif; ?>
+                        </div>
+                    </a>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -203,6 +218,7 @@
 </div>
 <script>
     $(document).ready(function () {
+        $('.slider_show').css({"visibility":"visible"})
         $('.main-slider').slick({
             dots: true,
             infinite: true,
