@@ -9,6 +9,10 @@
         font-size: 13px;
         line-height: 15px;
     }
+    h4{
+        font-size:16px !important;
+        text-align: left;
+    }
     <?php endif?>
 </style>
 </head>
