@@ -1,4 +1,4 @@
-<div id="cookieConsent" class="text-center" style="z-index: 999;position: absolute;bottom:0;width:100%;padding:10px 20px 10px;font-size:12px;background-color:#3b4045;color:#ffffff;display:none;-webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+<div id="cookieConsent" class="text-center" style="z-index: 999;position: fixed;bottom:5px;width:100%;padding:10px 20px 10px;font-size:12px;background-color:#3b4045;color:#ffffff;display:none;-webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);">
     <p class="pt-3 pr-2">We use cookies to improve your website experience</p>
     <a type="button" class="btn btn-primary" style="-webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);

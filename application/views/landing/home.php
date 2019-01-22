@@ -239,7 +239,7 @@
         <?php $this->load->view('landing/resources/head_img') ?>
         <?php $this->load->view('landing/resources/head_menu') ?>
     <?php endif; ?>
-    <div class="home_slider row text-center" style="visibility: hidden;">
+    <div class="home_slider text-center" style="visibility: hidden;">
         <div>
             <div style="background-color: rgb(12,23,44)">
                 <div class="container">
@@ -414,10 +414,11 @@
             slidesToShow: 1,
             slidesToScroll: 1,
             dots: true,
+            arrows: false,
             infinite: true,
             speed: 500,
             lazyLoad: 'ondemand',
-            autoplay: true,
+            autoplay: false,
             autoplaySpeed: 3000
         });
     })

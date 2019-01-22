@@ -1,14 +1,16 @@
 <?php
 
-Class User_model extends CI_Model{
+Class User_model extends CI_Model
+{
 
     /**
      * @param string $id
      * @param string $table
      * @return mixed
      */
-    function get_profile($id ='' , $table = 'users'){
-        $this->db->where('id', $id );
+    function get_profile($id = '', $table = 'users')
+    {
+        $this->db->where('id', $id);
         $this->db->or_where('email', $id);
         return $this->db->get($table)->row();
     }
@@ -18,12 +20,13 @@ Class User_model extends CI_Model{
      * @param string $table_name
      * @return bool|mixed
      */
-    function login($data = array(), $table_name = 'users'){
-		if(!empty($data)) {
+    function login($data = array(), $table_name = 'users')
+    {
+        if (!empty($data)) {
             $email = cleanit($data['email']);
             $this->db->where('email', $data['email']);
-            if ($this->db->get($table_name)->row()){
-                $this->db->where('email',$data['email']);
+            if ($this->db->get($table_name)->row()) {
+                $this->db->where('email', $data['email']);
                 $salt = $this->db->get($table_name)->row()->salt;
                 if ($salt) {
                     $password = shaPassword($data['password'], $salt);
@@ -31,9 +34,9 @@ Class User_model extends CI_Model{
                     $this->db->where('password', $password);
                     $result = $this->db->get('users');
                     if ($result->num_rows() == 1) {
-                    	$c_update = array('last_login' => get_now(), 'ip' => $_SERVER['REMOTE_ADDR'] );
-                    	$this->db->where('email', $data['email']);
-                    	$this->db->update($table_name, $c_update);
+                        $c_update = array('last_login' => get_now(), 'ip' => $_SERVER['REMOTE_ADDR']);
+                        $this->db->where('email', $data['email']);
+                        $this->db->update($table_name, $c_update);
                         return $result->row();
                     } else {
                         return false;
@@ -41,28 +44,30 @@ Class User_model extends CI_Model{
                 }
             }
         }
-	}
+    }
 
 
-    public function last_login(){
+    public function last_login()
+    {
         if ($this->session->userdata('logged_id')) {
             $array = array(
                 'last_login' => get_now(),
                 'ip' => $_SERVER['REMOTE_ADDR']
             );
             $this->db->set($array);
-            $this->db->where('id',$this->session->userdata('logged_id'));
+            $this->db->where('id', $this->session->userdata('logged_id'));
             $this->db->update('users');
         }
     }
 
 
-    public function login_user($email, $password){
-        if($email && $password) {
+    public function login_user($email, $password)
+    {
+        if ($email && $password) {
             $email = cleanit($email);
             $this->db->where(array('email' => $email));
             if ($this->db->get('users')->row()) {
-                $this->db->where(array('email'=>$email));
+                $this->db->where(array('email' => $email));
                 $salt = $this->db->get('users')->row()->salt;
                 if ($salt) {
                     $password = shaPassword($password, $salt);
@@ -79,45 +84,16 @@ Class User_model extends CI_Model{
         }
     }
 
-
-    /**
-     * @param array $data
-     * @param string $table_name
-     * @return int|string
-     */
-    function create_account($data = array(), $table_name = 'users'){
-		$result = '';
-		if(!empty($data)){
-			try {
-				$this->db->insert($table_name, $data);
-				$result = $this->db->insert_id();
-			} catch (Exception $e) {
-				$result = $e->getMessage();
-			}
-			return $result;
-		}
-	}
-
-    /**
-     * @param string $access
-     * @param array $data
-     * @param string $table_name
-     * @return bool
-     */
-    function update_data($access = '' , $data = array(), $table_name = 'users'){
-        $this->db->where('id', $access);
-        return $this->db->update( $table_name, $data );
-    }
-
     /**
      * @param string $where
      * @param $bid
      * @return bool
      */
-    function update_billing_address($where = '', $bid){
+    function update_billing_address($where = '', $bid)
+    {
         $this->db->where($where);
         $this->db->set('primary_address', 0, false);
-        if($this->db->update('billing_address')){
+        if ($this->db->update('billing_address')) {
             $this->db->where('id', $bid);
             $this->db->update('billing_address', array('primary_address' => 1));
             $select = "SELECT a.price FROM area a LEFT JOIN billing_address b ON(b.aid = a.id) WHERE b.id = $bid";
@@ -132,7 +108,8 @@ Class User_model extends CI_Model{
      * @param string $table
      * @return bool
      */
-    function cur_pass_match($password = null, $access = '', $table = 'users'){
+    function cur_pass_match($password = null, $access = '', $table = 'users')
+    {
         if ($password) {
             $this->db->where('id', $access);
             $this->db->or_where('email', $access);
@@ -155,50 +132,69 @@ Class User_model extends CI_Model{
      * @param string $table
      * @return bool
      */
-    function change_password($password, $access = '', $table = 'users'){
-        if($access == '') $access = $this->session->userdata('logged_id');
+    function change_password($password, $access = '', $table = 'users')
+    {
+        if ($access == '') $access = $this->session->userdata('logged_id');
         $salt = salt(50);
         $password = shaPassword($password, $salt);
         $data = array(
             'password' => $password,
             'salt' => $salt
         );
-        $this->db->where('id',  $access);
-        $this->db->or_where('email',$access);
+        $this->db->where('id', $access);
+        $this->db->or_where('email', $access);
         return $this->db->update($table, $data);
     }
 
-
-
-    function favourite_action( $pid ) {
+    function favourite_action($pid)
+    {
         $uid = $this->session->userdata('logged_id');
         $this->db->select('id');
         $this->db->where('product_id', $pid);
         $this->db->where('uid', $uid);
         $result = $this->db->get('favourite')->row();
-        if( $result ){
+        if ($result) {
             $this->db->where('id', $result->id);
-            if( $this->db->delete('favourite') ){
-                return array('status' => 'success' , 'action' => 'remove', 'msg' => 'The product has been removed from your wishlist');
-            }else{
+            if ($this->db->delete('favourite')) {
+                return array('status' => 'success', 'action' => 'remove', 'msg' => 'The product has been removed from your wishlist');
+            } else {
                 return array('status' => 'error', 'msg' => 'There was an error removing the product from your wishlist');
-            } 
-        }else{
+            }
+        } else {
             $data = array('uid' => $uid, 'product_id' => $pid, 'date_saved' => get_now());
-            if( $this->create_account($data, 'favourite') ){
+            if ($this->create_account($data, 'favourite')) {
                 return array('status' => 'success', 'action' => 'save', 'msg' => 'The product has been added to your wishlist');
-            }else{
+            } else {
                 return array('status' => 'error', 'msg' => 'There was an error adding the product to your wishlist');
             }
         }
     }
 
+    /**
+     * @param array $data
+     * @param string $table_name
+     * @return int|string
+     */
+    function create_account($data = array(), $table_name = 'users')
+    {
+        $result = '';
+        if (!empty($data)) {
+            try {
+                $this->db->insert($table_name, $data);
+                $result = $this->db->insert_id();
+            } catch (Exception $e) {
+                $result = $e->getMessage();
+            }
+            return $result;
+        }
+    }
 
     /**
      * @param $id
      * @return mixed
      */
-    function get_saved_items($id , $array = array()){
+    function get_saved_items($id, $array = array())
+    {
         $sql = "SELECT p.id, p.product_name, p.product_status, v.discount_price, v.sale_price,v.quantity, v.start_date,v.end_date, g.image_name, f.id as fav_id, f.date_saved
             FROM products p
             JOIN (SELECT variation.sale_price AS sale_price, variation.discount_price AS discount_price, variation.start_date,variation.end_date, variation.product_id , SUM(variation.quantity) AS quantity FROM product_variation variation GROUP BY variation.product_id) AS v ON( v.product_id = p.id)
@@ -206,20 +202,21 @@ Class User_model extends CI_Model{
             JOIN favourite AS f ON (f.product_id = p.id )
             WHERE f.uid = $id ";
         $limit = $array['is_limit'];
-        if( $limit == true ){
-            $sql .=" GROUP BY p.id ORDER BY f.date_saved LIMIT " .$array['offset']. "," .$array['limit'];
-        }else{
+        if ($limit == true) {
+            $sql .= " GROUP BY p.id ORDER BY f.date_saved LIMIT " . $array['offset'] . "," . $array['limit'];
+        } else {
             $sql .= ' GROUP BY p.id ORDER BY f.date_saved';
         }
         $query = $this->db->query($sql)->result();
-        return $query; 
+        return $query;
     }
 
     /**
      * @param $id
      * @return mixed
      */
-    function get_my_order_status( $id , $order_code){
+    function get_my_order_status($id, $order_code)
+    {
         $query = $this->db->query("SELECT p.id as pid, p.name, g.image_name, o.order_date, pay.name payment_method, o.status, o.active_status, b.address,o.qty,o.amount, 
         b.first_name, b.last_name, b.phone,b.phone2
         FROM orders o
@@ -227,17 +224,15 @@ Class User_model extends CI_Model{
         JOIN product_gallery AS g ON (o.product_id = g.product_id AND g.featured_image = 1 )
         LEFT JOIN billing_address b ON (b.id = o.billing_address_id)
         LEFT JOIN payment_methods pay ON (pay.id = o.payment_method)
-        WHERE o.buyer_id = ? AND o.order_code = ? ORDER BY o.id DESC", array( $id, $order_code ))->result();
+        WHERE o.buyer_id = ? AND o.order_code = ? ORDER BY o.id DESC", array($id, $order_code))->result();
         return $query;
     }
 
-    /*
-     * Get users orders
-     * */
-    function get_my_orders( $id, $array = array()){
+    function get_my_orders($id, $array = array())
+    {
         $query = "SELECT order_code, SUM(amount) as amount, SUM(qty) as qty, order_date FROM orders WHERE buyer_id = $id";
-        if( $array['time'] != ''){
-            switch ( $array['time'] ) {
+        if ($array['time'] != '') {
+            switch ($array['time']) {
                 case 'last-6-month':
                     $query .= " AND order_date > DATE_SUB(NOW(), INTERVAL 6 MONTH) ";
                     break;
@@ -251,41 +246,37 @@ Class User_model extends CI_Model{
                     $query .= '';
                     break;
             }
-        }else{
+        } else {
             $query .= " AND MONTH(order_date) = EXTRACT(month FROM (NOW())) AND year(order_date) = EXTRACT(year FROM (NOW())) ";
         }
         $limit = $array['is_limit'];
-        if( $limit == true ){
-            $query .=" GROUP BY order_code LIMIT " .$array['offset']. "," .$array['limit'];
-        }else{
+        if ($limit == true) {
+            $query .= " GROUP BY order_code LIMIT " . $array['offset'] . "," . $array['limit'];
+        } else {
             $query .= ' GROUP BY order_code';
         }
-        return $this->db->query( $query, array($id) )->result();
+        return $this->db->query($query, array($id))->result();
     }
 
-    // Get states
-    function get_states(){
+    /*
+     * Get users orders
+     * */
+
+    function get_states()
+    {
         return $this->db->get('states')->result_array();
     }
 
-    // Get the user area
-    function get_area( $sid = ''){
+    // Get states
+
+    function get_area($sid = '')
+    {
         $this->db->select('id,name,price');
         $this->db->where('sid', $sid);
         return $this->db->get('area')->result_array();
     }
 
-    /**
-     * @param string $table_name
-     * @param $where
-     * @return mixed
-     */
-    function get_row($table_name ='users', $select, $where ){
-        $this->db->select($select);
-        $this->db->where($where);
-        return $this->db->get( $table_name )->row();
-    }
-
+    // Get the user area
 
     function generate_code($table = 'users', $label)
     {
@@ -298,101 +289,136 @@ Class User_model extends CI_Model{
         return $number;
     }
 
-    function recover_email(){}
+    function recover_email()
+    {
+    }
+
+    function get_user_billing_address($id)
+    {
+        return $this->db->query("SELECT b.*, s.name, a.name FROM billing_address b LEFT JOIN states s ON (s.id = b.sid) LEFT JOIN area a ON (a.id = b.aid) WHERE b.uid = $id")->result();
+    }
+
+    function is_address_set($id)
+    {
+        $this->db->where('uid', $id);
+        $this->db->where('primary_address', 1);
+        if ($this->db->get('billing_address')->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /*
     * @param id = user id
     * @return CI_result
     */
-    function get_user_billing_address( $id ){
-        return $this->db->query("SELECT b.*, s.name, a.name FROM billing_address b LEFT JOIN states s ON (s.id = b.sid) LEFT JOIN area a ON (a.id = b.aid) WHERE b.uid = $id")->result();
-    }
-
-    function is_address_set( $id ){
-        $this->db->where('uid', $id);
-        $this->db->where('primary_address', 1);
-        if( $this->db->get('billing_address')->num_rows() > 0){
-            return true;
-        }else{
-            return false;
-        }
-    }
 
     /**
      * @param string $uid
      * @param $address_id
      * @return array
      */
-    function get_single_address($uid = '', $address_id){
-        if( $uid != '' ) $this->db->where('uid', $uid);
+    function get_single_address($uid = '', $address_id)
+    {
+        if ($uid != '') $this->db->where('uid', $uid);
         $this->db->where('id', $address_id);
         return $this->db->get('billing_address')->result_array();
     }
 
-    function get_pickup_address(){
+    function get_pickup_address()
+    {
         $this->db->where('enable', 1);
         return $this->db->get('pickup_address')->result();
     }
-
 
     /**
      * @param $id
      * @return string
      */
-    function get_default_address_price($id){
-		$select = "SELECT a.price price FROM billing_address b INNER JOIN area a ON(a.id = b.aid) WHERE b.primary_address = 1 AND b.uid = $id";
-        if( $this->db->query($select )->num_rows()){
-            return $this->db->query( $select )->row()->price;
-        }else{
+    function get_default_address_price($id)
+    {
+        $select = "SELECT a.price price FROM billing_address b INNER JOIN area a ON(a.id = b.aid) WHERE b.primary_address = 1 AND b.uid = $id";
+        if ($this->db->query($select)->num_rows()) {
+            return $this->db->query($select)->row()->price;
+        } else {
             return '';
         }
-	}
+    }
 
-    /*
-     * Add or update the user recently viewed
-     * */
-	function recently_viewed( $pid , $user_id ){
+    function recently_viewed($pid, $user_id)
+    {
         // Does product exist in the record
         $products = array();
         $user = $this->get_row('recently_viewed', 'id,product_ids', "user_id = $user_id");
-        if( $user ){
-            $product_ids = json_decode( $user->product_ids );
-            if( !in_array( $pid, $product_ids) ){
-                array_push( $product_ids, $pid);
-                $product_ids = json_encode( $product_ids);
+        if ($user) {
+            $product_ids = json_decode($user->product_ids);
+            if (!in_array($pid, $product_ids)) {
+                array_push($product_ids, $pid);
+                $product_ids = json_encode($product_ids);
                 $this->update_data($user->id, array('product_ids' => $product_ids), 'recently_viewed');
             }
-        }else{
+        } else {
             $products[] = $pid;
             $data = array(
                 'user_id' => $user_id,
                 'product_ids' => json_encode($products),
                 'viewed_date' => get_now()
             );
-            $this->create_account( $data,'recently_viewed');
+            $this->create_account($data, 'recently_viewed');
         }
     }
 
-    function toPlainArray( $array ){
-	    $output = '';
-	    foreach( $array as $arr ){
-	        $output .= $arr .", ";
+    /**
+     * @param string $table_name
+     * @param $where
+     * @return mixed
+     */
+    function get_row($table_name = 'users', $select, $where)
+    {
+        $this->db->select($select);
+        $this->db->where($where);
+        return $this->db->get($table_name)->row();
+    }
+
+    /*
+     * Add or update the user recently viewed
+     * */
+
+    /**
+     * @param string $access
+     * @param array $data
+     * @param string $table_name
+     * @return bool
+     */
+    function update_data($access = '', $data = array(), $table_name = 'users')
+    {
+        $this->db->where('id', $access);
+        return $this->db->update($table_name, $data);
+    }
+
+    function toPlainArray($array)
+    {
+        $output = '';
+        foreach ($array as $arr) {
+            $output .= $arr . ", ";
         }
-        return (array) substr( $output, 0, -2);
+        return (array)substr($output, 0, -2);
     }
 
     /*
      * Get recently viewed products if found else return false based on the user
      * excludes containes the present product id and probably the get_also_likes product_id
      * */
-    function get_recently_viewed( $user_id, $excludes = array()){
-        $this->db->where('user_id', $user_id );
+    function get_recently_viewed($user_id, $excludes = array())
+    {
+        $this->db->where('user_id', $user_id);
         $ids = $this->db->get('recently_viewed')->row()->product_ids;
-        if( $ids ){
-            $ids = json_decode( $ids, true );
-            if( !empty( $excludes ) ){
-                foreach( $excludes as $exclude => $value ){
-                    if (($key = array_search( $value, $ids)) !== false) {
+        if ($ids) {
+            $ids = json_decode($ids, true);
+            if (!empty($excludes)) {
+                foreach ($excludes as $exclude => $value) {
+                    if (($key = array_search($value, $ids)) !== false) {
                         unset($ids[$key]);
                     }
                 }
@@ -400,9 +426,9 @@ Class User_model extends CI_Model{
             $select_query = "SELECT p.id, p.product_name,p.views, v.sale_price, v.discount_price, v.start_date, v.end_date, SUM(v.quantity) as item_left, g.image_name
             FROM products p JOIN (SELECT var.product_id, var.discount_price,var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var
             WHERE var.quantity > 0 ORDER BY var.id) AS v ON (p.id = v.product_id) JOIN product_gallery AS g ON (p.id = g.product_id AND g.featured_image = 1)
-            WHERE p.id IN ('". implode("','",$ids). "') GROUP BY p.id ORDER BY RAND() LIMIT 6 ";
-            return $this->db->query( $select_query )->result();
-        }else{
+            WHERE p.id IN ('" . implode("','", $ids) . "') GROUP BY p.id ORDER BY RAND() LIMIT 6 ";
+            return $this->db->query($select_query)->result();
+        } else {
             return false;
         }
     }
@@ -410,18 +436,20 @@ Class User_model extends CI_Model{
     /*
      * Get most recent order for invoice
      * */
-    function get_my_lastorders( $order, $buyer_id ){
+    function get_my_lastorders($order, $buyer_id)
+    {
         $query = "SELECT  p.id, p.product_name, o.seller_id, u.email selleremail, o.amount, o.order_date, o.delivery_charge, o.qty, v.variation FROM orders o
 JOIN product_variation v ON (o.product_variation_id = v.id)
 JOIN users u ON (u.id = o.seller_id)
 JOIN products p ON (o.product_id = p.id) WHERE o.order_code = {$order} AND o.buyer_id = {$buyer_id}";
-        return $this->db->query( $query );
+        return $this->db->query($query);
     }
 
 
     /*
      * Get just one single row of the last order to send SMS and mail*/
-    function get_last_singleorder( $order, $buyer_id ){
+    function get_last_singleorder($order, $buyer_id)
+    {
         $query = "SELECT o.amount, CONCAT(b.first_name, ' ', b.last_name) billingname, CONCAT(b.phone, ', ', b.phone2) billingphone,
 CONCAT(b.address, ' ', s.name, ', ', a.name) billingaddress, p.name paymentname, o.order_date, o.payment_method,
 se.seller_phone, se.legal_company_name
@@ -430,39 +458,30 @@ LEFT JOIN states s ON(s.id = b.sid) LEFT JOIN area a ON(a.id = b.aid)
 LEFT JOIN payment_methods p ON (o.payment_method = p.id)
 LEFT JOIN sellers se ON (se.uid = o.seller_id)
 WHERE o.order_code = {$order} AND o.buyer_id = {$buyer_id} ORDER BY o.id DESC LIMIT 1";
-        return $this->db->query( $query )->row();
+        return $this->db->query($query)->row();
     }
 
     /*
      * Get all orders for this order_code and the seller id
      * For email purpose.
      * */
-    /**
-     * @param $order
-     * @return mixed
-     */
-    function get_sellers_by_code($order ){
-        $query = "SELECT DISTINCT(o.seller_id), u.email FROM orders o JOIN users u ON (u.id = o.seller_id) WHERE order_code = {$order}";
-        return $this->db->query( $query )->result();
-    }
 
-    /*
-     * Generate the seller details */
     /**
      * @param $order
      * @return array
      */
-    function get_sellers_details($order){
-        $sellers = $this->get_sellers_by_code( $order);
+    function get_sellers_details($order)
+    {
+        $sellers = $this->get_sellers_by_code($order);
         $res = array();
-        foreach( $sellers as $seller ){
+        foreach ($sellers as $seller) {
             $res['email'] = $seller->email;
             $query = "SELECT o.product_id,o.qty, p.product_name, g.image_name FROM orders o JOIN products p ON(p.id = o.product_id)
             JOIN product_gallery g ON(g.product_id = o.product_id AND g.featured_image = 1 )
             WHERE o.seller_id = {$seller->seller_id} AND o.order_code = {$order}";
-            $details = $this->db->query( $query )->result();
+            $details = $this->db->query($query)->result();
             $x = 0;
-            foreach( $details as $detail ){
+            foreach ($details as $detail) {
                 $res['products'][$x]['qty'] = $detail->qty;
                 $res['products'][$x]['product_id'] = $detail->product_id;
                 $res['products'][$x]['product_name'] = $detail->product_name;
@@ -471,5 +490,28 @@ WHERE o.order_code = {$order} AND o.buyer_id = {$buyer_id} ORDER BY o.id DESC LI
             }
         }
         return $res;
+    }
+
+    /*
+     * Generate the seller details */
+
+    /**
+     * @param $order
+     * @return mixed
+     */
+    function get_sellers_by_code($order)
+    {
+        $query = "SELECT DISTINCT(o.seller_id), u.email FROM orders o JOIN users u ON (u.id = o.seller_id) WHERE order_code = {$order}";
+        return $this->db->query($query)->result();
+    }
+
+    function auto_version($file = '')
+    {
+        if (!file_exists($file)):
+            return $file;
+        else:
+            $mtime = filemtime($file);
+            return $file . '?' . $mtime;
+        endif;
     }
 }
