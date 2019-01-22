@@ -13,6 +13,8 @@ function format_currency(str) {
 	return '₦' + str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
 }
 
+
+
 $('body').on('click', function () {
 	$('.src-cover').hide();
 });
@@ -29,7 +31,7 @@ $('.site-search').on('input', function () {
 		let query = $(this).val();
 		$.ajax({
 			url: base_url + 'ajax/search_complete',
-			data: {search: query, category: category},
+			data: {search: query,category: category},
 			method: 'POST',
 			success: function (response) {
 				if (response.products === undefined || response.products.length == 0) {
