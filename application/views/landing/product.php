@@ -257,7 +257,7 @@
                                 <div class="row">
                                     <div class="col-md-6 col-lg-6 clearfix">
                                         <?php
-                                        //            Make A check to confirm if the product is still in stock
+                                        // Make A check to confirm if the product is still in stock
                                         if($qty_stock_check == count( $variations)) :  ?>
                                             <button class="btn btn-block btn-primary c-hover" disabled
                                                     type="button">
@@ -522,7 +522,26 @@
                             </div>
                         </div>
                         <article class="product-review">
-							<!-- Show list of reviews and rates -->
+                            <?php
+                            if ($reviews) : $x = 1 ; foreach ($reviews as $review) : ?>
+                                <div class="comment-block">
+                                    <ul style="display: inline-block" class="product-caption-rating">
+                                        <?= single_user_rate($review['rating_score']); ?>
+                                    </ul>
+                                    <span style="float: right;" class="comment-date"><?= neatDate($review['published_date']); ?></span>
+                                </div>
+                                <p class="comment-user"><strong>Reviewed by: </strong> <?= $review['display_name']; ?></p>
+                                <p class="comment-title"><strong>Title: </strong><?= $review['title']; ?></p>
+                                <p class="comment-detail"><strong>Content: </strong><?= $review['content']; ?></p>
+                                <hr class="comment-line"/>
+                                <?php if ($x == 50) : ?>
+                                <a style="text-decoration: none; color: #fff;"
+                                   href="<?= base_url(urlify($product->product_name, $product->id) . 'reviews'); ?>">
+                                    <button class="btn btn-block ">View all reviews</button>
+                                </a>
+                                <?php break; endif; ?>
+                                <?php $x++; endforeach; ?>
+                            <?php endif; ?>
 						</article>
                     </div>
                 </div>
