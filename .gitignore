@@ -36,3 +36,6 @@ application/config/database.php
 application/views/landing/mempty
 phpstorm.php
 application/views/landing/np
+
+##yuicompressor
+node_modules
