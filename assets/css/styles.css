@@ -101,8 +101,9 @@ a {
 /****** Miscellaneous ******/
 html,
 body {
-	overflow-x: hidden;
 	background: #ededed;
+	height: 100%;
+	margin: 0
 }
 
 hr {

@@ -31,7 +31,7 @@
         <link rel="stylesheet" href="<?= base_url('assets/css/styles.css'); ?>">
         <link rel="stylesheet" href="<?= base_url('assets/css/styles-mobile.css'); ?>">
     <?php else : ?>
-        <link rel="stylesheet" href="<?= base_url('assets/css/styles.css'); ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/styles.css?v=1'); ?>">
     <?php endif; ?>
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/schemes/de-york.css'); ?>"
           title="de-york" media="all"/>
