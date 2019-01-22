@@ -392,7 +392,6 @@
         </div>
     <?php endforeach; ?>
 
-    <!--    Why choose us-->
     <div class="gap"></div>
     <?php $this->load->view('landing/resources/why-onitshamarket'); ?>
 
