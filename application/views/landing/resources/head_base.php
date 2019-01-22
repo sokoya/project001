@@ -16,15 +16,15 @@
     <meta name="description" content="<?= !empty($description) ? $description : lang('description'); ?>">
     <meta name="robots" content="index,follow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=0" name="viewpoint" />
+    <meta content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=0" name="viewport" />
     <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400italic,400' rel='stylesheet'
           type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
     <?php if ($page == 'mobile-product' && $this->agent->is_mobile()) : ?>
-        <link rel="stylesheet" href="<?= $this->user->auto_version('assets/css/owl.carousel.min.css'); ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/owl.carousel.min.css'); ?>">
     <?php endif; ?>
-    <link rel="stylesheet" href="<?= $this->user->auto_version('assets/css/bootstrap.css'); ?>">
-    <link rel="stylesheet" href="<?= $this->user->auto_version('assets/css/font-awesome.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.css'); ?>">
 
     <?php if ($page == 'mobile-category' || $page == 'mobile-search' || $page == 'mobile-product' || $page == 'mobile-cart' || $page == 'mobile-checkout' && $this->agent->is_mobile()) : ?>
         <link rel="stylesheet" href="<?= $this->user->auto_version('assets/css/styles.css'); ?>">
@@ -34,8 +34,8 @@
     <?php endif; ?>
     <link rel="stylesheet" type="text/css" href="<?= $this->user->auto_version('assets/css/schemes/de-york.css'); ?>"
           title="de-york" media="all"/>
-    <link rel="shortcut icon" href="<?= $this->user->auto_version('assets/img/favicon.png'); ?>" type="image/png">
-    <link rel="icon" href="<?= $this->user->auto_version('assets/img/favicon.png'); ?>" type="image/png">
+    <link rel="shortcut icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
+    <link rel="icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
     <link rel="canonical" href="<?= current_url(); ?>"/>
     <?php if ($page == 'product') : ?>
         <meta property="og:title" content="<?= $product->product_name; ?>"/>
