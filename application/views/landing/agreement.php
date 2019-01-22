@@ -4,10 +4,22 @@
         color: #48bc6e;
         margin-top: 10px;
     }
+
+    p:not(.foot-link), h3:not(.foot-link), h4:not(.foot-link) {
+        color: grey;
+    }
     <?php if ($this->agent->is_mobile()) : ?>
     p {
         font-size: 13px;
         line-height: 15px;
+    }
+    h2{
+        font-size:20px !important;
+        text-align: left;
+    }
+    h3{
+        font-size:18px !important;
+        text-align: left;
     }
     h4{
         font-size:16px !important;
