@@ -46,11 +46,11 @@ class Product extends MY_Controller
         }
         $this->add_count($page_data['product']->id);
 		$page_data['page'] = 'product';
+        $page_data['reviews'] = $this->product->get_reviews($index);
 		if (!$this->agent->is_mobile()) {
 			$this->load->view('landing/product', $page_data);
 		} else {
 			$page_data['page'] = 'mobile-product';
-			$page_data['reviews'] = $this->product->get_reviews($index);
 			$this->load->view('landing/mobile-product', $page_data);
 		}
 	}
