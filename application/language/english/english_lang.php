@@ -9,6 +9,9 @@ $lang['company_name'] = 'Internet Onitshamarketing Limited';
 $lang['domain'] = 'https://onitshamarket.com';
 $lang['copyright'] = "&copy; 2015 -  " . date('Y') ." Internet Onitshamarketing Limited All rights reserved";
 $lang['site_description'] = "Welcome to onitshamarket.com - Buy electronics, phones, fashions in Nigeria";
+$lang['keywords'] = "Fashion,Top Brands, Nigeria E commerce, Fast Shipping, Secure Sales, Order Online, Groceries,Mobile phones, Electronics appliances,Shoes, Household Appliances, Wines, Babies, Toys,Sports, Fitness, Books, Ecommerce, Online Sales, Sales, Wears, Trending";
+$lang['description'] = "Shop for the trending Phones, Fashion, Electronics in Nigeria wears, Computers, Accessories, Shoes, Household Equipments, Wines, Babies, Toys, Furnitures, Groceries, Sport and Fitness,";
+
 
 
 
