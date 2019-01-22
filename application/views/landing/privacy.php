@@ -4,17 +4,25 @@
         color: #48bc6e;
         margin-top: 10px;
     }
+
+    p:not(.foot-link), h3:not(.foot-link), h4:not(.foot-link) {
+        color: grey;
+    }
     <?php if ($this->agent->is_mobile()) : ?>
     p {
         font-size: 13px;
         line-height: 15px;
     }
-    h4{
-        font-size:16px !important;
+    h2{
+        font-size:20px !important;
         text-align: left;
     }
     h3{
         font-size:18px !important;
+        text-align: left;
+    }
+    h4{
+        font-size:16px !important;
         text-align: left;
     }
     <?php endif?>
@@ -58,10 +66,12 @@
                 provide us with your information, you consent to the transfer and storage of the information on our
                 server located in United States of America (“USA.”).
             </p>
-            <p> As set forth in more detail below, <?= lang('app_name'); ?> collects personal information that you provide when
+            <p> As set forth in more detail below, <?= lang('app_name'); ?> collects personal information that you
+                provide when
                 using the Site. This information includes your first and last name, email address, a password and other
                 information required when you create your <?= lang('app_name'); ?> account or when you participate in or
-                conduct surveys and contests via the Site, email, or other media of <?= lang('app_name'); ?>. In order to
+                conduct surveys and contests via the Site, email, or other media of <?= lang('app_name'); ?>. In order
+                to
                 protect your confidentiality and verify your identity, we may ask you to confirm your personal
                 information when you contact our Customer Service Department.
             </p>
@@ -71,15 +81,19 @@
             <div style="height:15px;"></div>
             <h4>1. Purchase Information</h4>
             <p>
-                When you make a purchase from <?= lang('app_name'); ?>, we collect your name and payment method information.
-                When you create an account at <?= lang('app_name'); ?>, you can choose to save your billing information in “My
-                Profile.” You can also save one or more shipping addresses in your <?= lang('app_name'); ?> Address Book.
+                When you make a purchase from <?= lang('app_name'); ?>, we collect your name and payment method
+                information.
+                When you create an account at <?= lang('app_name'); ?>, you can choose to save your billing information
+                in “My
+                Profile.” You can also save one or more shipping addresses in your <?= lang('app_name'); ?> Address
+                Book.
             </p>
             <div style="height:15px;"></div>
             <h4>2. Services Account Information</h4>
             <p>
                 We collect personal information from users who wish to use any of the <?= lang('app_name'); ?> services,
-                including but not limited to, <?= lang('app_name'); ?>’s Transaction Platform. In order to use these services
+                including but not limited to, <?= lang('app_name'); ?>’s Transaction Platform. In order to use these
+                services
                 you must provide your email address and password or create an account at <?= lang('app_name'); ?>.
             </p>
             <div style="height:15px;"></div>
@@ -111,8 +125,10 @@
             <h4>4. Publishing Information</h4>
             <p>
                 When you submit any information on the Site during your use or access, including, but not limited to,
-                information on the <?= lang('app_name'); ?> blog, the rating system, or product catalog, you are deemed to have
-                given your permission to <?= lang('app_name'); ?> to publish such information, and <?= lang('app_name'); ?> and the
+                information on the <?= lang('app_name'); ?> blog, the rating system, or product catalog, you are deemed
+                to have
+                given your permission to <?= lang('app_name'); ?> to publish such information,
+                and <?= lang('app_name'); ?> and the
                 Site hereby enjoy an irrevocable, worldwide and royalty-free, sub-licensable license to use all
                 information provided by such user to exercise the copyright, compilation, database and publicity rights
                 any user has in such material or information, in any media form.
@@ -144,10 +160,12 @@
             </p>
             <p>Aside from the purposes described above, we will not share your personal information with any other third
                 parties unless we have your express permission or there are special circumstances, such as when
-                <?= lang('app_name'); ?> is required by the government, law enforcement body, obligee whose legitimate right
+                <?= lang('app_name'); ?> is required by the government, law enforcement body, obligee whose legitimate
+                right
                 has been injured, subpoena or other legal document to share such information, or if we believe it to be
                 reasonably necessary to protect the safety of any person; to address fraud, security or technical
-                issues; or to protect <?= lang('app_name'); ?>’s rights or property. We may also share aggregated demographic
+                issues; or to protect <?= lang('app_name'); ?>’s rights or property. We may also share aggregated
+                demographic
                 and statistical information with our partners. This is not linked to any personal information that can
                 identify any individual person.
             </p>
@@ -162,7 +180,8 @@
             <p>
                 Your personal information is protected by the password you created when you created an account on the
                 Site (or another password you chose after changing a previous password). Please keep this password
-                confidential. No Customer Service Associate or any other representative of <?= lang('app_name'); ?> will ever
+                confidential. No Customer Service Associate or any other representative of <?= lang('app_name'); ?> will
+                ever
                 ask you for your password. The confidentiality of your password is yours to protect. You may change it
                 at anytime by going to My Account. Log in with your email address and password, then click “Modify
                 Details, Email & Password” and enter a new password.
@@ -170,7 +189,8 @@
             <div style="height:15px;"></div>
             <h3>Minors</h3>
             <p>
-                <?= lang('app_name'); ?> does not intentionally collect personal information about minors or other persons
+                <?= lang('app_name'); ?> does not intentionally collect personal information about minors or other
+                persons
                 without full civil conduct capacity, but based on the properties of Internet, there is no way for
                 <?= lang('app_name'); ?> and the Site to distinguish the age or capacity of the users. By accepting this
                 Agreement through your use or access of the Site, you certify that you are a person over 18 years old
@@ -204,25 +224,32 @@
                 address or checking account information, in addition to any other personal information that can be
                 linked to you, personally.
             </p>
-            <p><?= lang('app_name'); ?> may provide links to certain third party web sites. This Security and Privacy Policy
+            <p><?= lang('app_name'); ?> may provide links to certain third party web sites. This Security and Privacy
+                Policy
                 applies only to activities conducted and personal information collected on the Site. Other web sites may
                 have their own policies regarding privacy and security. We encourage you to review the privacy policies
                 on these sites before you use and access them. You are solely responsible for your use and access of
                 other web sites.
             </p>
-            <p><?= lang('app_name'); ?> will obtain your consent before allowing the download of any data from the Site, and
-                <?= lang('app_name'); ?> will not automatically download any data to your computer system. Once you consent to
+            <p><?= lang('app_name'); ?> will obtain your consent before allowing the download of any data from the Site,
+                and
+                <?= lang('app_name'); ?> will not automatically download any data to your computer system. Once you
+                consent to
                 the initial download of any data, you may receive automatic updates or patches pertaining to such
                 software. You understand and agree that any material, including but not limited to downloaded software,
                 required or automated updates, modifications, reinstallations, or software otherwise obtained through
                 the use of the Site is done at your own discretion and risk and that you will be solely responsible for
                 any damages to your computer system or loss of data that may result from any such material.
             </p>
-            <p> <?= lang('app_name'); ?> reserves the right to update or modify this Security and Privacy Policy at any time
-                without prior notice to you. If <?= lang('app_name'); ?> makes a change that, in <?= lang('app_name'); ?>’s sole
-                discretion, is material, <?= lang('app_name'); ?> will notify you via e-mail to the email address associated
+            <p> <?= lang('app_name'); ?> reserves the right to update or modify this Security and Privacy Policy at any
+                time
+                without prior notice to you. If <?= lang('app_name'); ?> makes a change that,
+                in <?= lang('app_name'); ?>’s sole
+                discretion, is material, <?= lang('app_name'); ?> will notify you via e-mail to the email address
+                associated
                 with your account. Your use of the Site following any such change constitutes your unconditional
-                agreement to follow and be bound by the Security and Privacy Policy as amended. <?= lang('app_name'); ?> may
+                agreement to follow and be bound by the Security and Privacy Policy as amended. <?= lang('app_name'); ?>
+                may
                 transfer this Policy and all or part of its rights, obligations and interests to any party or entity in
                 its sole discretion; however, a User may not assign its rights, obligations and interests under this
                 Policy to any party or entity.

@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <section class="widget widget-links widget-light-skin">
-                            <h3 class="widget-title-sm"><?= lang('app_name'); ?></h3>
+                            <h3 class="widget-title-sm foot-link"><?= lang('app_name'); ?></h3>
                             <ul style="margin-left: -40px;">
                                 <li><a href="#">Our Company</a></li>
                                 <li><a href="#">Investor Relation</a></li>
@@ -17,7 +17,7 @@
                     </div>
                     <div class="col-md-3">
                         <section class="widget widget-links widget-light-skin">
-                            <h3 class="widget-title-sm">Shop</h3>
+                            <h3 class="widget-title-sm foot-link">Shop</h3>
                             <ul style="margin-left: -40px;">
                                 <li><a href="#">Most Sort Products</a></li>
                                 <li><a href="#">Top Brands</a></li>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-md-3">
                         <section class="widget widget-links widget-light-skin">
-                            <h3 class="widget-title-sm">Resources</h3>
+                            <h3 class="widget-title-sm foot-link">Resources</h3>
                             <ul style="margin-left: -40px;">
                                 <li><a href="#">Shopping Help</a></li>
                                 <li><a href="#">Order Status</a></li>
@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-md-3">
                         <section class="widget widget-links widget-light-skin">
-                            <h3 class="widget-title-sm">Support</h3>
+                            <h3 class="widget-title-sm foot-link">Support</h3>
                             <ul style="margin-left: -40px;">
                                 <li><a href="#">App Downloads</a></li>
                                 <li><a href="<?=base_url('pages/contact');?>">Contact Us</a></li>
@@ -58,8 +58,8 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <h4 class="widget-title-sm">Newsletter</h4>
-                <p><?= lang('app_name'); ?> respects your <a href="<?=base_url('pages/privacy')?>" style="color:#49a251;">Privacy</a></p>
+                <h4 class="widget-title-sm foot-link">Newsletter</h4>
+                <p class="foot-link"><?= lang('app_name'); ?> respects your <a href="<?=base_url('pages/privacy')?>" style="color:#49a251;">Privacy</a></p>
                 <form>
                     <div class="input-group">
                         <input type="text" class="newsletter-input form-control"
@@ -72,7 +72,7 @@
                     </div>
                 </form>
                 <div>
-                    <p><h4 class="text text-sm">Follow us on Social Networks</h4></p>
+                    <p><h4 class="text text-sm foot-link">Follow us on Social Networks</h4></p>
                     <ul class="main-footer-social-list">
                         <li>
                             <a class="fa fa-facebook" href="<?= FACEBOOK_LINK; ?>"></a>
@@ -123,9 +123,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p class="copyright-text">&copy; 2015 - <?= date('Y'); ?> <a
+                    <p class="copyright-text foot-link">&copy; 2015 - <?= date('Y'); ?> <a
                                 href="<?= lang('domain'); ?>"><?= lang('company_name'); ?>.</a> All rights reserved</p>
-                    <p class="text-sm"><a href="<?= base_url('pages'); ?>">Terms of Use</a> | <a
+                    <p class="text-sm foot-link"><a href="<?= base_url('pages'); ?>">Terms of Use</a> | <a
                                 href="<?= base_url('pages/agreement'); ?>">Agreement</a> | <a
                                 href="<?= base_url('pages/privacy'); ?>">Privacy Policy</a> | <a href="#">Site
                             Map </a> </p>

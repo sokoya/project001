@@ -198,7 +198,7 @@ class Account extends MY_Controller {
                     'address' => cleanit($this->input->post('address')),
 					'phone2' => $phone2,
 				);
-				$uid = base64_decode($this->session->userdata('logged_id'));
+				$uid = $this->session->userdata('logged_id');
 				if( $this->input->post('address_type') == 'new'){					
 					$data['uid'] = $uid;
 					$this->user->create_account($data,'billing_address');

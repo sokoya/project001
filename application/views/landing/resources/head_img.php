@@ -3,7 +3,7 @@
         <div class="row head_row">
             <div class="col-md-6">
 
-                <p class="navbar-before-sign">Everything You Need is <?= lang('app_name'); ?></p>
+                <p class="navbar-before-sign foot-link">Everything You Need is <?= lang('app_name'); ?></p>
 
             </div>
             <div class="col-md-6">
