@@ -65,7 +65,7 @@
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
     <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
-    <div class="main-slider row text-center slider_show" style="height:150px;visibility: hidden;">
+    <div class="main-slider text-center slider_show" style="height:150px;visibility: hidden;">
         <?php foreach ($sliders as $slider) : ?>
             <a href="<?= $slider->img_link; ?>">
                 <img src="<?= base_url('assets/img/home/homeslide2.png'); ?>" class="img-responsive"
@@ -228,7 +228,7 @@
             lazyLoad: 'ondemand',
             autoplay: true,
             autoplaySpeed: 6000,
-            arrows: true,
+            arrows: false,
             mobileFirst: true
         });
         $('.categories-slider').slick({
