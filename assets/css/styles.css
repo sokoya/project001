@@ -1236,23 +1236,17 @@ hr {
 	font-size: 15px;
 	margin-right: 15px;
 }
-
-.copyright-area a, .copyright-area a:active, .copyright-area a::selection {
-	color: white;
-	text-decoration: none;
-}
-
 .copyright-area {
-	background: #49a251;
+	background: #000;
 	color: #fff;
-	-webkit-box-shadow: 0 0 3px #ff3838;
-	box-shadow: 0 0 3px #ff3838;
+	-webkit-box-shadow: 0 0 3px #000;
+	box-shadow: 0 0 3px #000;
 	position: relative;
 }
 
 .copyright-text {
 	font-size: 11px;
-	color: #ffffff;
+	color: #ccc;
 	margin-top: 15px;
 }
 

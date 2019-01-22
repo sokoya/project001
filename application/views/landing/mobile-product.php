@@ -298,7 +298,7 @@
     <div class="custom-card" style="margin-top: 5px;">
         <?= form_open('', 'id="cart-form"'); ?>
         <div class="container">
-            <?php if (!empty($var->discount_price)) : ?>
+            <?php if (!empty($var->discount_price) && discount_check($var->discount_price, $var->start_date, $var->end_date)) : ?>
                 <p class="block-title">Buy Now <span class="price-mini"><?= ngn($var->discount_price); ?></span></p>
             <?php else: ?>
                 <p class="block-title">Buy Now <span class="price-mini"><?= ngn($var->sale_price); ?></span></p>
@@ -320,6 +320,7 @@
                                     class="product-page-qty product-page-qty-plus">+
                             </button>
                         </li>
+                        <span class="text-sm text-danger" id="quantity-text"></span>
                     </ul>
                     <input type="hidden" name="seller" class="seller_id"
                            value="<?= $product->seller_id ?>">
@@ -373,7 +374,7 @@
             </div>
 
             <?php
-//            Make A check to confirm if the product is still in stock
+            // Product still in stock
             if($qty_stock_check == count( $variations)) :?>
             <button class="btn btn-block" disabled>
                 Out of Stock
@@ -407,7 +408,7 @@
                          style="height: 30px; width: 35px;">
                 </div>
                 <div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
-                    <p class="delivery-text">Onitsha Market delivery available, get it within 5 business days of
+                    <p class="delivery-text">Onitshamarket delivery available, get it within 5 business days of
                         order</p>
                 </div>
             </div>
@@ -606,6 +607,7 @@
     let selected_variation_id = $('.variation_id').val();
     let selected_variation_name = $('.variation_name').val();
     $('.variation-option').on('click', function () {
+        $('#quantity-text').text(''); // Clear the notification showing the number of item left
         $('.variation-option').removeClass('option-selected');
         selected_variation_name = $(this).data('vname');
         if ($(this).hasClass('option-disabled')) {
@@ -645,7 +647,6 @@
         var currentVal = parseInt($(this).prev(".product-page-qty-input").val(), 10);
 
         if (!currentVal || currentVal == "" || currentVal == "NaN") currentVal = 0;
-
         $(this).prev(".product-page-qty-input").val(currentVal + 1);
     });
 
@@ -660,10 +661,12 @@
     plus.on('click', function () {
         minus.prop("disabled", false);
         if (quantity.val() >= count) {
+            $('#quantity-text').html('There are only ' + count + ' item(s) left');
             plus.prop("disabled", true);
         }
     });
     minus.on('click', function () {
+        $('#quantity-text').text(''); // Clear the notification showing the number of item left
         plus.prop("disabled", false);
         if (quantity.val() <= 1) {
             minus.prop("disabled", true);
