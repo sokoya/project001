@@ -203,7 +203,7 @@
 															</label>
 														</div>
 														<span>Delete</span>
-														<!--														Todo: Replace with delete method-->
+														<!--Todo: Replace with delete method-->
 													</h3>
 												</div>
 												<div class="panel-body">

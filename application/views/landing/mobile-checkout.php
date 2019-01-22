@@ -17,9 +17,12 @@
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
-    <?php $this->load->view('landing/resources/head_img') ?>
-    <?php $this->load->view('landing/resources/head_category') ?>
-    <?php $this->load->view('landing/resources/head_menu') ?>
+    <?php if ($this->agent->is_mobile()) : ?>
+        <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
+    <?php else: ?>
+        <?php $this->load->view('landing/resources/head_img') ?>
+        <?php $this->load->view('landing/resources/head_menu') ?>
+    <?php endif; ?>
     <div class="container">
         <header class="page-header" style="margin: 10px 0 10px !important;">
             <h4>Checkout</h4>
@@ -38,7 +41,6 @@
                     <div class="panel-body" id="register_address" style="display: none">
                         <div class="row">
                             <div class="col-md-12">
-                                <?= form_open('', 'id="new-address-form"'); ?>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group ">
@@ -57,14 +59,16 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="checkout-form-input-label" for="number_">Mobile Number</label>
+                                            <label class="checkout-form-input-label" for="number_">Mobile
+                                                Number</label>
                                             <input type="text" class="form-control checkout-form-input" id="number_"
                                                    name="phone" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="checkout-form-input-label" for="street">Street Address</label>
+                                            <label class="checkout-form-input-label" for="street">Street
+                                                Address</label>
                                             <input type="text" class="form-control checkout-form-input" id="street"
                                                    name="address" required>
                                         </div>
@@ -73,7 +77,8 @@
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <label class="checkout-form-input-label" for="state">State</label>
-                                                <select class="form-control checkout-form-input" id="state" name="state"
+                                                <select class="form-control checkout-form-input" id="state"
+                                                        name="state"
                                                         required="">
                                                     <option value="">-- Select Sate --</option>
                                                 </select>
@@ -84,7 +89,8 @@
                                         <div class="form-group">
                                             <div class="form-group">
                                                 <label class="checkout-form-input-label" for="city">City</label>
-                                                <select class="form-control checkout-form-input" id="city" name="area"
+                                                <select class="form-control checkout-form-input" id="city"
+                                                        name="area"
                                                         required="">
                                                 </select>
                                             </div>
@@ -92,18 +98,17 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <button type="submit" class="btn btn-primary btn-block create-address-btn">
+                                    <div class="col-md-6 col-xs-4 col-sm-4">
+                                        <button type="button" class="btn btn-primary btn-block create-address-btn">
                                             Submit
                                         </button>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 col-xs-push-4 col-sm-push-4 pull-right">
                                         <button type="button" class="btn btn-warning btn-block cancel-btn">
                                             Cancel
                                         </button>
                                     </div>
                                 </div>
-                                <?= form_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -237,24 +242,34 @@
                     <div class="panel-heading custom-panel-head">
                         <h3 class="panel-title"><i class="fa fa-credit-card"></i>&nbsp;&nbsp; Payment Method</h3>
                     </div>
-                    <div class="panel-body pay-method" style="<?php
+                    <div class="panel-body" style="<?php
                     if (!$address_set):
                         ?>display: none
                     <?php endif; ?>">
-                        <div class="panel panel-default custom-panel">
-                            <div class="panel-body pay-panel">
-                                <div class="form-check">
-
-                                    <p class="form-check-label pay-gate">
-                                        <input class="form-check-input payment-radio" type="radio"
-                                               name="payment_method"
-                                               id="paystack" value="paystack">
-                                        Pay with paystack
-                                        <img src="<?= base_url('assets/img/paystack.png'); ?>">
-                                    </p>
+                        <?php $x = 1;
+                        foreach ($methods as $method) : ?>
+                            <div class="panel panel-default custom-panel pay-method">
+                                <div class="panel-body pay-panel">
+                                    <div class="form-check">
+                                        <p class="form-check-label pay-gate">
+                                            <input class="form-check-input payment-radio" type="radio"
+                                                   name="payment_method"
+                                                   data-name="<?= trim($method->name); ?>"
+                                                   data-pid="<?= $method->id; ?>"
+                                                   id="payment_method_<?= $method->id; ?>"
+                                                   value="<?= $method->id; ?>">
+                                            <?= $method->name; ?>
+                                            <!--                                                    <img src="-->
+                                            <? //= base_url('assets/img/paystack.png'); ?><!--">-->
+                                        </p>
+                                        <div class="gap-top"></div>
+                                        <p class="text-sm pad-all">
+                                            <?= htmlspecialchars_decode($method->notes); ?>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
                 <div class="panel panel-default">
@@ -272,9 +287,10 @@
                                     <div class="row">
                                         <div class="col-xs-3">
                                             <a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
-                                                <img style="width:80px !important;height:auto !important;"
-                                                     src="<?= base_url('data/products/' . $product['id'] . '/' . $detail->image); ?>"
-                                                     alt="<?= lang('app_name'); ?> <?= $product['name']; ?>"
+                                                <img style="width:80px !important;height:auto !important;" class="lazy"
+                                                     data-src="<?= PRODUCTS_IMAGE_PATH . $detail->image; ?>"
+                                                     src="<?= base_url('assets/img/load.gif'); ?>"
+                                                     alt="<?= $product['name']; ?>"
                                                      title="<?= $product['name']; ?>"/>
                                             </a>
                                         </div>
@@ -291,7 +307,6 @@
                                     <div class="row">
                                         <div class="col-xs-3"></div>
                                         <div class=" col-xs-9">
-
                                             <span>Sold By: <span><?= $detail->name; ?></span>
                                         </div>
                                     </div>
@@ -350,18 +365,18 @@
                     <h4 class="block-title">Delivery Information</h4>
                     <div class="row">
                         <div class="col-xs-2">
-                            <img src="http://localhost/project001/assets/svg/delivery-truck.svg"
+                            <img src="<?= base_url('assets/svg/delivery-truck.svg'); ?>"
                                  alt="Delivery Truck" style="height: 30px; width: 35px;">
                         </div>
                         <div class="col-xs-10">
-                            <p class="delivery-text">Onitsha Market delivery available, get it within 5 business
+                            <p class="delivery-text">Onitshamarket.com delivery available, get it within 5 business
                                 days of
                                 order</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-2">
-                            <img src="http://localhost/project001/assets/svg/return.svg"
+                            <img src="<?= base_url('assets/svg/return.svg'); ?>"
                                  alt="Delivery Truck"
                                  style="height: 30px; width: 35px;">
                         </div>
@@ -371,7 +386,7 @@
                     </div>
                     <div class="row" style="margin-top: 14px;">
                         <div class="col-xs-2">
-                            <img src="http://localhost/project001/assets/svg/warranty.svg" alt="Warranty"
+                            <img src="<?= base_url('assets/svg/warranty.svg'); ?>" alt="Warranty"
                                  style="height: 30px; width: 35px;">
                         </div>
                         <div class="col-xs-10">
@@ -387,9 +402,19 @@
             </div>
         </div>
     </div>
-    <?php $this->load->view('landing/resources/footer'); ?>
 </div>
-<?php $this->load->view('landing/resources/script'); ?>
+<?php if ($this->agent->is_mobile()) : ?>
+    <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
+    <?php $this->load->view('landing/resources/mobile/mobile-script'); ?>
+<?php else: ?>
+    <?php $this->load->view('landing/resources/footer'); ?>
+    <?php $this->load->view('landing/resources/script'); ?>
+<?php endif; ?>
+<script>
+    $(function () {
+        $('.lazy').Lazy();
+    });
+</script>
 <script src="<?= base_url('assets/js/checkout.js'); ?>"></script>
 </body>
 </html>

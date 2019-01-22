@@ -331,13 +331,17 @@
                     <div class="line-separator"></div>
                     <a href="<?= base_url('account/orders'); ?>"><p>My Orders</p></a>
                     <div class="line-separator"></div>
-                    <?php if ($profile->is_seller !== 'false') : ?>
-                        <a href="<?= base_url('seller/overview'); ?>"><p>Seller Dashboard</p></a>
-                        <div class="line-separator"></div>
-                    <?php else : ?>
-                        <a href="<?= base_url('seller/'); ?>"><p>Become a Seller</p></a>
-                        <div class="line-separator"></div>
-                    <?php endif; ?>
+                    <a href="<?= base_url('account/order_track'); ?>"><p>Track Order</p></a>
+                    <div class="line-separator"></div>
+<!--                    --><?php //if ($profile->is_seller !== 'false') : ?>
+<!--                        <a href="--><?//= base_url('seller/overview'); ?><!--"><p>Seller Dashboard</p></a>-->
+<!--                        <div class="line-separator"></div>-->
+<!--                    --><?php //else : ?>
+<!--                        <a href="--><?//= base_url('seller/'); ?><!--"><p>Become a Seller</p></a>-->
+<!--                        <div class="line-separator"></div>-->
+<!--                    --><?php //endif; ?>
+                    <a href="<?= base_url('account/saved'); ?>"><p>My Wishlist</p></a>
+                    <div class="line-separator"></div>
                     <a href="<?= base_url('logout'); ?>"><p>Logout</p></a>
                 <?php else : ?>
                     <a href="<?= base_url('login') ?>"><p>Login</p></a>

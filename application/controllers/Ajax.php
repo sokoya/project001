@@ -177,6 +177,7 @@ class Ajax extends CI_Controller
            if( $result['status'] == 'success' ){
                $return = $result['msg'];
                $name = preg_replace('/^['.$this->product_name_rules.']+$/i', " ", $return->product_name);
+//               die( $name );
                $price = (empty($return->discount_price) ) ? $return->sale_price : $return->discount_price;
                $data = array(
                    'id' => $pid,

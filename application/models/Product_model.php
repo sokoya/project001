@@ -93,7 +93,7 @@ Class Product_model extends CI_Model{
         // check if the variation item is still available
         $check1 = $this->get_variation_status( $vid );
         if( empty( $check1 ) || $qty > $check1->quantity ){
-            return array('status' => 'error', 'msg' => 'The product variation quantity you selected is not available.' . $check1->quantity . ' item remaining' );
+            return array('status' => 'error', 'msg' => 'The product variation quantity you selected is not available.' . $check1->quantity . ' item remaining.' );
         }
         // check2 : is the seller on vacation
         $query = "SELECT p.seller_id, p.product_name, v.discount_price, v.sale_price, v.variation FROM products p INNER JOIN product_variation v ON (v.id = {$vid} AND v.product_id = p.id) WHERE p.id = {$pid} AND p.product_status = 'approved' ";
