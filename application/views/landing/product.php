@@ -21,24 +21,24 @@
         text-decoration: line-through;
     }
 
-	.variation-option-list{
-		position: relative;
-		top: 7px;
-	}
+    .variation-option-list {
+        position: relative;
+        top: 7px;
+    }
 
-	.option-selected, .variation-option:hover {
-		outline: 1px solid #0b6427;
-		color: #0b6427;
-		cursor: pointer;
-	}
+    .option-selected, .variation-option:hover {
+        outline: 1px solid #0b6427;
+        color: #0b6427;
+        cursor: pointer;
+    }
 
-	.option-disabled {
-		color: #bebebe;
-		text-decoration: line-through;
-	}
+    .option-disabled {
+        color: #bebebe;
+        text-decoration: line-through;
+    }
 
     .product {
-        min-height:282px !important;
+        min-height: 282px !important;
     }
 
 </style>
@@ -82,6 +82,7 @@
                                id="jqzoom"
                                data-rel="gal-1">
                                 <img
+                                        class="img-responsive"
                                         src="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
                                         alt="<?= $product->product_name; ?>"
                                         title="<?= ucwords($product->product_name) ?>"/>
@@ -115,10 +116,12 @@
                                             <?= rating_star_generator($rating_counts); ?>
                                         </ul>
                                         <p class="product-page-product-rating-sign">
-                                            <?php if( count($rating_counts)) :?>
-                                                <a href="#description-tab"><?= count($rating_counts); ?> customer reviews</a> <strong></strong>
+                                            <?php if (count($rating_counts)) : ?>
+                                                <a href="#description-tab"><?= count($rating_counts); ?> customer
+                                                    reviews</a> <strong></strong>
                                             <?php else : ?>
-                                                <a href="#description-tab">Be the first to rate this product</a>  <strong> <!-- Number ofsold -->
+                                                <a href="#description-tab">Be the first to rate this product</a>
+                                                <strong> <!-- Number ofsold -->
                                                     SOLDS</strong>
                                             <?php endif; ?>
 
@@ -191,7 +194,7 @@
                                         <span
                                                 class="product-page-price-list price-lower dn-price"><?= ngn($var->sale_price); ?></span>
                                     <?php else : ?>
-										<span class="price-cs ds-price"></span>
+                                        <span class="price-cs ds-price"></span>
                                         <span class="price-cs dn-price"><?= ngn($var->sale_price); ?></span>
                                     <?php endif; ?>
 
@@ -208,24 +211,24 @@
                                             <div class="col-md-7">
                                                 <h5 class="custom-product-page-option-title">Variation:</h5>
                                                 <div class="row variation-option-list">
-                                                    <?php $qty_stock_check = 0 ;?>
+                                                    <?php $qty_stock_check = 0; ?>
                                                     <?php foreach ($variations as $variation): ?>
                                                         <div class="col-xs-3">
-                                                                <p title="<?= $variation['variation']; ?>"
-                                                                        data-price="<?= $variation['sale_price']; ?>"
-                                                                    <?php if (discount_check($variation['discount_price'], $variation['start_date'], $variation['end_date'])) : ?>
-                                                                        data-discount="<?= $variation['discount_price']; ?>"
-                                                                    <?php else : ?>
-                                                                        data-discount="empty"
-                                                                    <?php endif; ?>
-                                                                        data-vid="<?= $variation['id'] ?>"
-                                                                        data-quantity='<?= $variation['quantity'] ?>'
-                                                                        data-vname="<?= $variation['variation'] ?>"
-                                                                        class="variation-option <?php if ($variation['quantity'] == 0) echo 'option-disabled'; ?>">
-                                                                    <?= ellipsize(trim($variation['variation']), 8); ?>
-                                                                </p>
-                                                            </div>
-                                                        <?php if( $variation['quantity'] < 1 ) $qty_stock_check++; ?>
+                                                            <p title="<?= $variation['variation']; ?>"
+                                                               data-price="<?= $variation['sale_price']; ?>"
+                                                                <?php if (discount_check($variation['discount_price'], $variation['start_date'], $variation['end_date'])) : ?>
+                                                                    data-discount="<?= $variation['discount_price']; ?>"
+                                                                <?php else : ?>
+                                                                    data-discount="empty"
+                                                                <?php endif; ?>
+                                                               data-vid="<?= $variation['id'] ?>"
+                                                               data-quantity='<?= $variation['quantity'] ?>'
+                                                               data-vname="<?= $variation['variation'] ?>"
+                                                               class="variation-option <?php if ($variation['quantity'] == 0) echo 'option-disabled'; ?>">
+                                                                <?= ellipsize(trim($variation['variation']), 8); ?>
+                                                            </p>
+                                                        </div>
+                                                        <?php if ($variation['quantity'] < 1) $qty_stock_check++; ?>
                                                     <?php endforeach; ?>
                                                 </div>
                                             </div>
@@ -258,7 +261,7 @@
                                     <div class="col-md-6 col-lg-6 clearfix">
                                         <?php
                                         // Make A check to confirm if the product is still in stock
-                                        if($qty_stock_check == count( $variations)) :  ?>
+                                        if ($qty_stock_check == count($variations)) : ?>
                                             <button class="btn btn-block btn-primary c-hover" disabled
                                                     type="button">
                                                 <i class="fa fa-shopping-cart"></i> Out of Stock
@@ -506,7 +509,7 @@
                                                 <label>Display name*</label>
                                                 <input type="text" name="display_name" placeholder="Display name"
                                                        id="review_name"
-													   value="<?= $profile->first_name . ' ' . $profile->last_name;?>"
+                                                       value="<?= $profile->first_name . ' ' . $profile->last_name; ?>"
                                                        class="form-control" required>
                                             </div>
                                         </div>
@@ -514,7 +517,8 @@
                                     <div class="form-group">
                                         <label>Review</label>
                                         <textarea title="review" id="review_detail" name="review" rows="2"
-                                                  class="form-control" required placeholder="Write your review on this product."></textarea>
+                                                  class="form-control" required
+                                                  placeholder="Write your review on this product."></textarea>
                                     </div>
                                     <input type="submit" class="btn btn-success" id="review_submit_button"
                                            value="Post Review">
@@ -523,121 +527,81 @@
                         </div>
                         <article class="product-review">
                             <?php
-                            if ($reviews) : $x = 1 ; foreach ($reviews as $review) : ?>
-                                <div class="comment-block">
-                                    <ul style="display: inline-block" class="product-caption-rating">
-                                        <?= single_user_rate($review['rating_score']); ?>
-                                    </ul>
-                                    <span style="float: right;" class="comment-date"><?= neatDate($review['published_date']); ?></span>
-                                </div>
-                                <p class="comment-user"><strong>Reviewed by: </strong> <?= $review['display_name']; ?></p>
-                                <p class="comment-title"><strong>Title: </strong><?= $review['title']; ?></p>
-                                <p class="comment-detail"><strong>Content: </strong><?= $review['content']; ?></p>
-                                <hr class="comment-line"/>
-                                <?php if ($x == 50) : ?>
-                                <a style="text-decoration: none; color: #fff;"
-                                   href="<?= base_url(urlify($product->product_name, $product->id) . 'reviews'); ?>">
-                                    <button class="btn btn-block ">View all reviews</button>
-                                </a>
-                                <?php break; endif; ?>
-                                <?php $x++; endforeach; ?>
+                            if ($reviews) : $x = 1;
+                                foreach ($reviews as $review) : ?>
+                                    <div class="comment-block">
+                                        <ul style="display: inline-block" class="product-caption-rating">
+                                            <?= single_user_rate($review['rating_score']); ?>
+                                        </ul>
+                                        <span style="float: right;"
+                                              class="comment-date"><?= neatDate($review['published_date']); ?></span>
+                                    </div>
+                                    <p class="comment-user"><strong>Reviewed
+                                            by: </strong> <?= $review['display_name']; ?></p>
+                                    <p class="comment-title"><strong>Title: </strong><?= $review['title']; ?></p>
+                                    <p class="comment-detail"><strong>Content: </strong><?= $review['content']; ?></p>
+                                    <hr class="comment-line"/>
+                                    <?php if ($x == 50) : ?>
+                                        <a style="text-decoration: none; color: #fff;"
+                                           href="<?= base_url(urlify($product->product_name, $product->id) . 'reviews'); ?>">
+                                            <button class="btn btn-block ">View all reviews</button>
+                                        </a>
+                                        <?php break; endif; ?>
+                                    <?php $x++; endforeach; ?>
                             <?php endif; ?>
-						</article>
+                        </article>
                     </div>
                 </div>
             </div>
 
             <div class="gap"></div>
-            <?php $excludes = array();?>
-            <?php if (count($likes))  :  ?>
-                <h3 class="widget-title col-md-12">You Might Also Like</h3>
-                <div class="col-md-12" data-gutter="15">
-                    <?php foreach ($likes as $like): ?>
-                        <div class="col-md-2 col-md-12">
-                            <div class="product">
-                                <?php if ($like->views >= 100): ?>
-                                    <ul class="product-labels">
-                                        <li>hot deal</li>
-                                    </ul>
-                                <?php endif; ?>
-                                <?php if (discount_check($like->discount_price, $like->start_date, $like->end_date)): ?>
-                                    <ul class="product-labels">
-                                        <li><?= get_discount($like->sale_price, $like->discount_price); ?></li>
-                                    </ul>
-                                <?php endif; ?>
-                                <div class="product-img-wrap">
-                                    <img class="product-img lazy"
-                                         src="<?= base_url('assets/landing/img/load.gif'); ?>"
-                                         data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?>"
-                                         alt="<?= $like->product_name; ?>"
-                                         title="<?= $like->product_name; ?>">
-                                </div>
-                                <a class="product-link" href="<?= base_url(urlify($like->product_name, $like->id)); ?>"></a>
-                                <div class="product-caption">
-                                    <ul class="product-caption-rating">
-                                        <?php
-                                        $overall_rating = $this->product->get_rating_counts($like->id);
-                                        echo rating_star_generator($overall_rating);
-                                        ?>
-                                        <li class="pull-right"><span class="text-danger" style="font-size: 12px;"><strong><?= $like->item_left; ?> left</strong></span></li>
-                                    </ul>
-                                    <h5 class="product-caption-title"><?= character_limiter(ucwords($like->product_name), 30, '...'); ?></h5>
-                                    <div class="product-caption-price">
-                                        <?php if (discount_check($like->discount_price, $like->start_date, $like->end_date)) : ?>
-                                            <span class="product-caption-price-new" style="font-size:12px;"><?= ngn($like->discount_price); ?></span>
-                                            <span class="product-caption-price-old pull-right" style="font-size:12px;"><?= ngn($like->sale_price); ?></span>
-                                        <?php else : ?>
-                                            <span class="product-caption-price-new" style="font-size:12px;"><?= ngn($like->sale_price); ?> </span>
-                                        <?php endif; ?>
-                                    </div>
-                                    <ul class="product-caption-feature-list">
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    <?php array_push( $excludes, $like->id); ?>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
-
-            <?php if( $this->session->userdata('logged_in')) :
-                array_push( $excludes, $product->id);
-                $recently_viewed = $this->user->get_recently_viewed( $this->session->userdata('logged_id') , $excludes);
-                if( $recently_viewed && count( $recently_viewed) ) : ?>
-                    <div class="gap gap-small"></div>
-                    <h3 class="widget-title col-md-12">Products you recently viewed</h3>
-                    <div class="col-md-12" data-gutter="15">
-                        <?php foreach ($recently_viewed as $viewed): ?>
-                            <div class="col-md-2">
+            <?php $excludes = array(); ?>
+            <?php if (count($likes))  : ?>
+                <div class="container">
+                    <h3 class="widget-title">You Might Also Like</h3>
+                    <div class="row" data-gutter="15">
+                        <?php foreach ($likes as $like): ?>
+                            <div class="col-md-2 col-md-12">
                                 <div class="product">
-                                    <?php if ($viewed->views >= 100): ?>
+                                    <?php if ($like->views >= 100): ?>
                                         <ul class="product-labels">
-                                            <li>hot</li>
+                                            <li>hot deal</li>
+                                        </ul>
+                                    <?php endif; ?>
+                                    <?php if (discount_check($like->discount_price, $like->start_date, $like->end_date)): ?>
+                                        <ul class="product-labels">
+                                            <li><?= get_discount($like->sale_price, $like->discount_price); ?></li>
                                         </ul>
                                     <?php endif; ?>
                                     <div class="product-img-wrap">
                                         <img class="product-img lazy"
                                              src="<?= base_url('assets/landing/img/load.gif'); ?>"
-                                             data-src="<?= PRODUCTS_IMAGE_PATH . $viewed->image_name; ?>"
-                                             alt="<?= $viewed->product_name; ?>"
-                                             title="<?= $viewed->product_name; ?>">
+                                             data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?>"
+                                             alt="<?= $like->product_name; ?>"
+                                             title="<?= $like->product_name; ?>">
                                     </div>
-                                    <a class="product-link" href="<?= base_url(urlify($viewed->product_name, $viewed->id)); ?>"></a>
+                                    <a class="product-link"
+                                       href="<?= base_url(urlify($like->product_name, $like->id)); ?>"></a>
                                     <div class="product-caption">
                                         <ul class="product-caption-rating">
                                             <?php
-                                            $overall_rating = $this->product->get_rating_counts($viewed->id);
+                                            $overall_rating = $this->product->get_rating_counts($like->id);
                                             echo rating_star_generator($overall_rating);
                                             ?>
-                                            <li class="pull-right"><span class="text-danger" style="font-size: 12px;"><strong><?= $viewed->item_left; ?> left</strong></span></li>
+                                            <li class="pull-right"><span class="text-danger"
+                                                                         style="font-size: 12px;"><strong><?= $like->item_left; ?>
+                                                        left</strong></span></li>
                                         </ul>
-                                        <h5 class="product-caption-title"><?= character_limiter(ucwords($viewed->product_name), 30, '...'); ?></h5>
+                                        <h5 class="product-caption-title"><?= character_limiter(ucwords($like->product_name), 30, '...'); ?></h5>
                                         <div class="product-caption-price">
-                                            <?php if (discount_check($viewed->discount_price, $viewed->start_date, $viewed->end_date)) : ?>
-                                                <span class="product-caption-price-new" style="font-size:12px;"><?= ngn($viewed->discount_price); ?></span>
-                                                <span class="product-caption-price-old pull-right" style="font-size:12px;"><?= ngn($viewed->sale_price); ?></span>
+                                            <?php if (discount_check($like->discount_price, $like->start_date, $like->end_date)) : ?>
+                                                <span class="product-caption-price-new"
+                                                      style="font-size:12px;"><?= ngn($like->discount_price); ?></span>
+                                                <span class="product-caption-price-old pull-right"
+                                                      style="font-size:12px;"><?= ngn($like->sale_price); ?></span>
                                             <?php else : ?>
-                                                <span class="product-caption-price-new" style="font-size:12px;"><?= ngn($viewed->sale_price); ?> </span>
+                                                <span class="product-caption-price-new"
+                                                      style="font-size:12px;"><?= ngn($like->sale_price); ?> </span>
                                             <?php endif; ?>
                                         </div>
                                         <ul class="product-caption-feature-list">
@@ -645,7 +609,67 @@
                                     </div>
                                 </div>
                             </div>
+                            <?php array_push($excludes, $like->id); ?>
                         <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($this->session->userdata('logged_in')) :
+                array_push($excludes, $product->id);
+                $recently_viewed = $this->user->get_recently_viewed($this->session->userdata('logged_id'), $excludes);
+                if ($recently_viewed && count($recently_viewed)) : ?>
+                    <div class="gap gap-small"></div>
+
+                    <div class="container">
+                        <h3 class="widget-title">Products you recently viewed</h3>
+                        <div class="row" data-gutter="15">
+                            <?php foreach ($recently_viewed as $viewed): ?>
+                                <div class="col-md-2">
+                                    <div class="product">
+                                        <?php if ($viewed->views >= 100): ?>
+                                            <ul class="product-labels">
+                                                <li>hot</li>
+                                            </ul>
+                                        <?php endif; ?>
+                                        <div class="product-img-wrap">
+                                            <img class="product-img lazy"
+                                                 src="<?= base_url('assets/landing/img/load.gif'); ?>"
+                                                 data-src="<?= PRODUCTS_IMAGE_PATH . $viewed->image_name; ?>"
+                                                 alt="<?= $viewed->product_name; ?>"
+                                                 title="<?= $viewed->product_name; ?>">
+                                        </div>
+                                        <a class="product-link"
+                                           href="<?= base_url(urlify($viewed->product_name, $viewed->id)); ?>"></a>
+                                        <div class="product-caption">
+                                            <ul class="product-caption-rating">
+                                                <?php
+                                                $overall_rating = $this->product->get_rating_counts($viewed->id);
+                                                echo rating_star_generator($overall_rating);
+                                                ?>
+                                                <li class="pull-right"><span class="text-danger"
+                                                                             style="font-size: 12px;"><strong><?= $viewed->item_left; ?>
+                                                            left</strong></span></li>
+                                            </ul>
+                                            <h5 class="product-caption-title"><?= character_limiter(ucwords($viewed->product_name), 30, '...'); ?></h5>
+                                            <div class="product-caption-price">
+                                                <?php if (discount_check($viewed->discount_price, $viewed->start_date, $viewed->end_date)) : ?>
+                                                    <span class="product-caption-price-new"
+                                                          style="font-size:12px;"><?= ngn($viewed->discount_price); ?></span>
+                                                    <span class="product-caption-price-old pull-right"
+                                                          style="font-size:12px;"><?= ngn($viewed->sale_price); ?></span>
+                                                <?php else : ?>
+                                                    <span class="product-caption-price-new"
+                                                          style="font-size:12px;"><?= ngn($viewed->sale_price); ?> </span>
+                                                <?php endif; ?>
+                                            </div>
+                                            <ul class="product-caption-feature-list">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                 <?php
                     // recently_viewed and count
@@ -694,7 +718,7 @@
     <script type="text/javascript">
         let product_id = <?= $product->id;?>;
         let user = <?= !is_null($profile) ? $profile->id : "''"; ?>;
-	</script>
+    </script>
     <?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
@@ -702,153 +726,153 @@
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
-	$(function () {
-		$('.lazy').Lazy();
-	});
-	let quantity = $('#quan');
-	let selected_variation_id = $('.variation_id').val();
-	let count = quantity.data('range');
-	let plus = $('.product-page-qty-plus');
-	let minus = $('.product-page-qty-minus');
+    $(function () {
+        $('.lazy').Lazy();
+    });
+    let quantity = $('#quan');
+    let selected_variation_id = $('.variation_id').val();
+    let count = quantity.data('range');
+    let plus = $('.product-page-qty-plus');
+    let minus = $('.product-page-qty-minus');
 
-	function format_currency(str) {
-		return '₦ ' + str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-	}
+    function format_currency(str) {
+        return '₦ ' + str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+    }
 
-	$('.variation-select').on('change', function () {
-		let id = $(this).children(":selected").data('id');
-		let quantity = $('#quan');
-		$('.variation_id').val(id);
-		// let count = quantity.data('range');
-		$.ajax({
-			url: base_url + "ajax/check_variation",
-			method: "POST",
-			data: {vid: id, 'csrf_carrito': csrf_token},
-			success: function (response) {
-				$.each(response, function (i, v) {
-					// change the variation id
-					if (v.discount_price) {
-						$('.ds-price').html(format_currency(v.discount_price));
-						$('.dn-price').show();
-						$('.dn-price').html(format_currency(v.sale_price));
-						$('.pr_price_hidden').val(v.discount_price);
-					} else {
-						$('.pr_price_hidden').val(v.sale_price);
-						$('.ds-price').html(format_currency(v.sale_price));
-						$('.dn-price').hide();
-					}
-					count = v.quantity * 1;
-					quantity.val(1);
-					minus.prop("disabled", true);
-					plus.prop("disabled", false);
-				});
-			},
-			error: function (response) {
-				alert('An error occurred')
-			}
-		});
-	});
-
-
-	$('.variation-option').on('click', function () {
-		$('.variation-option').removeClass('option-selected');
-		selected_variation_name = $(this).data('vname');
-		if ($(this).hasClass('option-disabled')) {
-			notification_message('Sorry this variation is out of stock', 'fa fa-info-circle', 'warning')
-		} else {
-			let discount_price = $(this).data('discount');
-			let price = $(this).data('price');
-			let quantity_instance = $(this).data('quantity');
-			if (discount_price !== 'empty') {
-				$('.ds-price').html(format_currency(discount_price));
-				$('.dn-price').show();
-				$('.dn-price').html(format_currency(price));
-				$('.pr_price_hidden').val(discount_price);
-				console.log(format_currency(price));
-			} else {
-				$('.pr_price_hidden').val(price);
-				$('.ds-price').html(format_currency(price));
-				$('.dn-price').hide();
-			}
-			count = quantity_instance * 1;
-			quantity.val(1);
-			minus.prop("disabled", true);
-			plus.prop("disabled", false);
-			selected_variation_id = $(this).data('vid');
-			$(this).addClass('option-selected');
-		}
-	});
+    $('.variation-select').on('change', function () {
+        let id = $(this).children(":selected").data('id');
+        let quantity = $('#quan');
+        $('.variation_id').val(id);
+        // let count = quantity.data('range');
+        $.ajax({
+            url: base_url + "ajax/check_variation",
+            method: "POST",
+            data: {vid: id, 'csrf_carrito': csrf_token},
+            success: function (response) {
+                $.each(response, function (i, v) {
+                    // change the variation id
+                    if (v.discount_price) {
+                        $('.ds-price').html(format_currency(v.discount_price));
+                        $('.dn-price').show();
+                        $('.dn-price').html(format_currency(v.sale_price));
+                        $('.pr_price_hidden').val(v.discount_price);
+                    } else {
+                        $('.pr_price_hidden').val(v.sale_price);
+                        $('.ds-price').html(format_currency(v.sale_price));
+                        $('.dn-price').hide();
+                    }
+                    count = v.quantity * 1;
+                    quantity.val(1);
+                    minus.prop("disabled", true);
+                    plus.prop("disabled", false);
+                });
+            },
+            error: function (response) {
+                alert('An error occurred')
+            }
+        });
+    });
 
 
-	$('.wishlist-cta').on('click', function () {
-		let product_id = $(this).data('pid');
-		$.ajax({
-			url: base_url + 'ajax/favourite',
-			method: 'POST',
-			data: {
-				id: product_id
-			},
-			success: response => {
-				let parsed_response = JSON.parse(response);
-				if (parsed_response.action === 'remove') {
-					$('.wishlist-cta').text('Add to Wishlist');
-				} else {
-					$('.wishlist-cta').text('Remove from Wishlist');
-				}
-				notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
-			},
-			error: () => {
-				notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', error);
-			}
-		})
-	});
-	$('.add-to-cart').on('click', function () {
-		let quantity_instance = $('#quan').val();
-		let variation_id = selected_variation_id;
-		let product_id = $('.product_id').val();
-		$.ajax({
-			url: base_url + 'ajax/quick_view_add',
-			method: 'POST',
-			data: {
-				product_id: product_id,
-				variation_id: variation_id,
-				quantity: quantity_instance
-			},
-			success: () => {
-				window.location.href = base_url + 'cart';
-			},
-			error: () => {
-				notification_message('Sorry an error occurred while adding to cart, please contact support if problem persist.', 'fa fa-info-circle', 'warning');
-			}
-		})
-	});
+    $('.variation-option').on('click', function () {
+        $('.variation-option').removeClass('option-selected');
+        selected_variation_name = $(this).data('vname');
+        if ($(this).hasClass('option-disabled')) {
+            notification_message('Sorry this variation is out of stock', 'fa fa-info-circle', 'warning')
+        } else {
+            let discount_price = $(this).data('discount');
+            let price = $(this).data('price');
+            let quantity_instance = $(this).data('quantity');
+            if (discount_price !== 'empty') {
+                $('.ds-price').html(format_currency(discount_price));
+                $('.dn-price').show();
+                $('.dn-price').html(format_currency(price));
+                $('.pr_price_hidden').val(discount_price);
+                console.log(format_currency(price));
+            } else {
+                $('.pr_price_hidden').val(price);
+                $('.ds-price').html(format_currency(price));
+                $('.dn-price').hide();
+            }
+            count = quantity_instance * 1;
+            quantity.val(1);
+            minus.prop("disabled", true);
+            plus.prop("disabled", false);
+            selected_variation_id = $(this).data('vid');
+            $(this).addClass('option-selected');
+        }
+    });
 
-	document.querySelector("#quan").addEventListener("keypress", function (evt) {
-		if (evt.which < 48 || evt.which > 57) {
-			evt.preventDefault();
-		}
-	});
-	plus.on('click', function () {
-		minus.prop("disabled", false);
-		if (quantity.val() >= count) {
-			$('#quantity-text').html('There are only ' + count + ' item(s) left');
-			plus.prop("disabled", true);
-		}
-	});
-	minus.on('click', function () {
-		$('#quantity-text').html('');
-		plus.prop("disabled", false);
-		if (quantity.val() <= 1) {
-			minus.prop("disabled", true);
-		}
-	});
-	quantity.on('input', function () {
-		if (quantity.val() > count) {
-			quantity.val(count)
-		} else if (quantity.val() === '0') {
-			quantity.val(1)
-		}
-	});
+
+    $('.wishlist-cta').on('click', function () {
+        let product_id = $(this).data('pid');
+        $.ajax({
+            url: base_url + 'ajax/favourite',
+            method: 'POST',
+            data: {
+                id: product_id
+            },
+            success: response => {
+                let parsed_response = JSON.parse(response);
+                if (parsed_response.action === 'remove') {
+                    $('.wishlist-cta').text('Add to Wishlist');
+                } else {
+                    $('.wishlist-cta').text('Remove from Wishlist');
+                }
+                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+            },
+            error: () => {
+                notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', error);
+            }
+        })
+    });
+    $('.add-to-cart').on('click', function () {
+        let quantity_instance = $('#quan').val();
+        let variation_id = selected_variation_id;
+        let product_id = $('.product_id').val();
+        $.ajax({
+            url: base_url + 'ajax/quick_view_add',
+            method: 'POST',
+            data: {
+                product_id: product_id,
+                variation_id: variation_id,
+                quantity: quantity_instance
+            },
+            success: () => {
+                window.location.href = base_url + 'cart';
+            },
+            error: () => {
+                notification_message('Sorry an error occurred while adding to cart, please contact support if problem persist.', 'fa fa-info-circle', 'warning');
+            }
+        })
+    });
+
+    document.querySelector("#quan").addEventListener("keypress", function (evt) {
+        if (evt.which < 48 || evt.which > 57) {
+            evt.preventDefault();
+        }
+    });
+    plus.on('click', function () {
+        minus.prop("disabled", false);
+        if (quantity.val() >= count) {
+            $('#quantity-text').html('There are only ' + count + ' item(s) left');
+            plus.prop("disabled", true);
+        }
+    });
+    minus.on('click', function () {
+        $('#quantity-text').html('');
+        plus.prop("disabled", false);
+        if (quantity.val() <= 1) {
+            minus.prop("disabled", true);
+        }
+    });
+    quantity.on('input', function () {
+        if (quantity.val() > count) {
+            quantity.val(count)
+        } else if (quantity.val() === '0') {
+            quantity.val(1)
+        }
+    });
 </script>
 </body>
 </html>
