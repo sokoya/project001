@@ -1,16 +1,11 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
-<link rel="stylesheet" href="<?= base_url('assets/css/home.css'); ?>">
+<link rel="stylesheet" href="<?= $this->user->auto_version('assets/css/home.css'); ?>">
 <link rel="stylesheet" href="<?= base_url('assets/plugins/slick/slick.css'); ?>">
 <link rel="stylesheet" href="<?= base_url('assets/plugins/slick/slick-theme.css'); ?>">
 <style>
     .gap_small {
         height: 20px;
     }
-
-    .slick-initialized {
-        visibility: visible;
-    }
-
     .cat_board {
         background-color: #fff;
         padding: 10px;
@@ -20,19 +15,6 @@
     .cat_img {
         max-width: 58px;
         margin: auto;
-    }
-
-    .slide_float {
-        margin-top: -120px;
-        margin-left: auto;
-        margin-right: auto;
-        color: white;
-    }
-
-    .btn-shopnow, .btn-shopnow:active, .btn-shopnow::selection {
-        border: 1px solid white;
-        text-decoration: none;
-        color: white;
     }
 
     .prod_img {
@@ -133,7 +115,7 @@
         </div>
     <?php endforeach; ?>
 
-    <div class="container" style="padding:30px;">
+    <div class="container" style="padding:40px;">
         <hr class="hr-text" data-content="Why Choose Us">
         <div class="owl-carousel owl-loaded owl-nav-out" data-options='{"items":5,"loop":true,"nav":true}'>
             <div class="owl-item">
