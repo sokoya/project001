@@ -511,7 +511,7 @@ WHERE o.order_code = {$order} AND o.buyer_id = {$buyer_id} ORDER BY o.id DESC LI
             return $file;
         else:
             $mtime = filemtime($file);
-            return base_url().$file . '?' . $mtime;
+            return base_url() . $file . '?' . $mtime;
         endif;
     }
 }
