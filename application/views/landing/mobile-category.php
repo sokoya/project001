@@ -311,8 +311,8 @@
 
         $("#price-range").ionRangeSlider({
             type: "double",
-            min: <?= $price_range->minimum; ?>,
-            max: <?= $price_range->maximum; ?>,
+            min: <?= $min; ?>,
+            max: <?= $max; ?>,
             grid: true,
             prefix: "&#8358;",
             onFinish: function (data) {

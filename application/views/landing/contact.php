@@ -1,5 +1,5 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
-<link rel="stylesheet" href="<?= base_url('assets/landing/css/home.css'); ?>">
+<link rel="stylesheet" href="<?= $this->user->auto_version(base_url('assets/css/home.css')); ?>">
 <style>
     .view_constraint {
         min-height: calc(100vh - 629px);
@@ -43,8 +43,6 @@
         <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
     <?php else: ?>
         <?php $this->load->view('landing/resources/head_img') ?>
-        <?php $this->load->view('landing/resources/head_category') ?>
-
         <?php $this->load->view('landing/resources/head_menu') ?>
     <?php endif; ?>
 
@@ -52,7 +50,7 @@
     <div class="container view_constraint text-center">
         <div class="row row_sp_con">
             <div class="col-md-4 col-lg-5 col-sm-6 col-xs-12">
-                <img src="<?= base_url('assets/landing/img/contact.png'); ?>" style="max-width:200px;"/>
+                <img src="<?= base_url('assets/img/contact.png'); ?>" style="max-width:200px;"/>
                 <hr align="center" width="80%"/>
                 <h3 style="background: #fff;margin-top:-27px;width:fit-content;font-size:14px;text-align: center;margin-left:auto;margin-right: auto;font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
                     CONTACT US

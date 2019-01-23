@@ -53,16 +53,15 @@ $route['default_controller'] = 'frontpage';
 
 //Product Page
 $route['product/(:any)-(:num)'] = 'product/index/$2/';
-$route['catalog/(:any)'] = 'product/catalog/$1/'; // List all product base on a rootcategory,category,sub, or brand
+$route['catalog/(:any)'] = 'product/catalog/$1/';
 $route['catalog'] = 'product/catalog/';
 $route['search'] = 'product/search/';
-$route['product/(:any)/(:any)'] = 'product/$2';
+$route['product/(:any)/(:any)'] = 'product/index/$2';
 
 $route['404_override'] = 'errors/_404';
 $route['translate_uri_dashes'] = FALSE;
-
-// Seller
-$route['seller'] = "seller/login";
+$route['sitemap\.xml'] = "Seo/index";
+$route['robots\.txt'] = "Seo/robots";
 //$route['seller/message/detail'] = "seller/message/detail";
 
 // $route['seller/product/load_images/(:any)'] = "seller/edit/$1/";

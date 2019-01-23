@@ -613,7 +613,7 @@
         if ($(this).hasClass('option-disabled')) {
             notification_message('Sorry this variation is out of stock', 'fa fa-info-circle', 'warning')
         } else {
-            let id = $(this).data('vid');
+            // let id = $(this).data('vid');
             let discount_price = $(this).data('discount');
             let price = $(this).data('price');
             let quantity_instance = $(this).data('quantity');
