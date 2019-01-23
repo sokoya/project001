@@ -54,6 +54,7 @@
         <meta name="twitter:site" content="<?= lang('app_name'); ?>"/>
         <meta name="twitter:creator" content=""/>
     <?php endif; ?>
+    <meta name="google-site-verification" content="xGjxCwvClqtUIevfyrQ-HWU7OcjspMEVmXMAPcpzz7Y" />
     <style>
         .mgt_drop_menu > li {
             height: 36px !important;
