@@ -86,12 +86,12 @@
 										<?php $total += $product['subtotal']; ?>
 									</td>
 									<td><?php echo ngn($product['subtotal']); ?></td>
-									<td class="text-center">
-										<a title="Remove <?= $product['name']; ?> from the cart"
-										   class="fa fa-close table-shopping-remove"
-										   href="<?= base_url('cart/remove/' . $product['rowid']); ?>"></a>
-									</td>
 								<?php endif; ?>
+                                <td class="text-center">
+                                    <a title="Remove <?= $product['name']; ?> from the cart"
+                                       class="fa fa-close table-shopping-remove"
+                                       href="<?= base_url('cart/remove/' . $product['rowid']); ?>"></a>
+                                </td>
 							</tr>
 							<?php
 							$x++;

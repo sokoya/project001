@@ -1,0 +1,15 @@
+save for later on cart mobile
+increase count in mobile cart
+sort in catalog not working, sort by newest, price, best seller
+nopages desktop:
+	onitshamarket deal
+	new arrival
+	top seller
+	sell on onitsha market
+	community
+	learn more about on shopper
+about us
+faq
+customer support
+
+seller not available shouldn't check out
