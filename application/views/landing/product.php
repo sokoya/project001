@@ -550,10 +550,10 @@
             <div class="gap"></div>
             <?php $excludes = array();?>
             <?php if (count($likes))  :  ?>
-                <h3 class="widget-title">You Might Also Like</h3>
-                <div class="row" data-gutter="15">
+                <h3 class="widget-title col-md-12">You Might Also Like</h3>
+                <div class="col-md-12" data-gutter="15">
                     <?php foreach ($likes as $like): ?>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-md-12">
                             <div class="product">
                                 <?php if ($like->views >= 100): ?>
                                     <ul class="product-labels">
@@ -605,8 +605,8 @@
                 $recently_viewed = $this->user->get_recently_viewed( $this->session->userdata('logged_id') , $excludes);
                 if( $recently_viewed && count( $recently_viewed) ) : ?>
                     <div class="gap gap-small"></div>
-                    <h3 class="widget-title">Products you recently viewed</h3>
-                    <div class="row" data-gutter="15">
+                    <h3 class="widget-title col-md-12">Products you recently viewed</h3>
+                    <div class="col-md-12" data-gutter="15">
                         <?php foreach ($recently_viewed as $viewed): ?>
                             <div class="col-md-2">
                                 <div class="product">
