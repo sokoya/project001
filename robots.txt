@@ -1,6 +1,7 @@
-User-agent: Googlebot
-Disallow: /checkout/order_completed/
-Noindex
+User-agent: *
+Disallow: /checkout/order_completed
+Disallow: /assets
+Disallow: /ajax
 
 
 Sitemap: https://www.onitshamarket.com/sitemap.xml
