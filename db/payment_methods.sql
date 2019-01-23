@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 15, 2019 at 12:15 PM
+-- Generation Time: Jan 23, 2019 at 11:29 AM
 -- Server version: 5.7.11
--- PHP Version: 7.2.7
+-- PHP Version: 7.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -39,9 +39,8 @@ CREATE TABLE `payment_methods` (
 --
 
 INSERT INTO `payment_methods` (`id`, `name`, `settings`, `notes`, `status`) VALUES
-(1, 'Paystack', '[{"key":"a54cfe453d32"}]', 'Paystack payment method settings', 0),
-(2, 'Interswitch API', '[{"raw_":"api_enabled"}]', 'Interswitch payment gateway', 1),
-(3, 'Pay on Delivery', 'Pay on Delivery', 'Pay on delivery', 0);
+(1, 'Payment on Delivery', '', 'Important information on this payment method:\n1. Payment must be made before opening a package;\n2. Once the seal is broken, item can only be returned if it is damaged, or has any missing item(s);\n3. Please ensure you have the exact amount for your order.\n\n**Please note, we will never ask you to make payment via SMS or email.**\n', 1),
+(2, 'Interswitch Webpay', '["secret_key:sk_test_j1NHfDoinTtxm25PyGNuV4xw","publishable_key:pk_test_nod5swtRu9mKvMZB28838BY8"]', 'We are going to redirect you to our secured online platform, where you will be able to pay with your Naira Mastercard, Visa or Verve cards.\n\nPlease have your phone ready for SMS token to complete payment.\nDo not hesitate to call us on 08070994845 if you have any question.\n\n**Please note, we will never ask you to make payment via SMS or email.**', 1);
 
 --
 -- Indexes for dumped tables
@@ -61,7 +60,7 @@ ALTER TABLE `payment_methods`
 -- AUTO_INCREMENT for table `payment_methods`
 --
 ALTER TABLE `payment_methods`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

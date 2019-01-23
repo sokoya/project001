@@ -29,14 +29,12 @@
     <?php endif; ?>
     <link rel="stylesheet" href="<?= $this->user->auto_version(base_url('assets/css/bootstrap.css')); ?>">
     <link rel="stylesheet" href="<?= $this->user->auto_version(base_url('assets/css/font-awesome.css')); ?>">
-
     <?php if ($page == 'mobile-category' || $page == 'mobile-search' || $page == 'mobile-product' || $page == 'mobile-cart' || $page == 'mobile-checkout' && $this->agent->is_mobile()) : ?>
         <link rel="stylesheet" href="<?= $this->user->auto_version(base_url('assets/css/styles.css')); ?>">
         <link rel="stylesheet" href="<?= $this->user->auto_version(base_url('assets/css/styles-mobile.css')); ?>">
     <?php else : ?>
         <link rel="stylesheet" href="<?= $this->user->auto_version(base_url('assets/css/styles.css')); ?>">
     <?php endif; ?>
-
     <link rel="stylesheet" type="text/css" href="<?= $this->user->auto_version(base_url('assets/css/schemes/de-york.css')); ?>"
           title="de-york" media="all"/>
     <link rel="shortcut icon" href="<?= $this->user->auto_version(base_url('assets/img/favicon.png')); ?>" type="image/png">
@@ -51,7 +49,7 @@
         <meta property="og:site_name" content="<?= lang('app_name'); ?>"/>
         <meta property="og:url" content="<?= current_url(); ?>"/>
         <meta name="twitter:card" content="summary"/>
-        <meta name="twitter:site" content="<?= lang('app_name'); ?>"/>
+        <meta name="twitter:site" content="<?= base_url(); ?>"/>
         <meta name="twitter:creator" content=""/>
     <?php endif; ?>
     <meta name="google-site-verification" content="xGjxCwvClqtUIevfyrQ-HWU7OcjspMEVmXMAPcpzz7Y" />

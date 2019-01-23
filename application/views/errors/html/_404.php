@@ -41,7 +41,7 @@
             <div class="col-xl-12 box-title ">
                 <div class="inner">
                     <h4 class="category-header">
-                        Products you may like...
+                        Recommended For You
                 </div>
             </div>
             <div style="clear: both"></div>
