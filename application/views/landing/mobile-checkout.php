@@ -290,7 +290,7 @@
                                                 <a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
                                                     <img style="width:80px !important;height:auto !important;" class="lazy"
                                                          data-src="<?= PRODUCTS_IMAGE_PATH . $detail->image; ?>"
-                                                         src="<?= base_url('assets/img/load.gif'); ?>"
+                                                         src="<?= base_url('assets/load.gif'); ?>"
                                                          alt="<?= $product['name']; ?>"
                                                          title="<?= $product['name']; ?>"/>
                                                 </a>
@@ -421,6 +421,6 @@
         $('.lazy').Lazy();
     });
 </script>
-<script src="<?= base_url('assets/js/checkout.js'); ?>"></script>
+<script src="<?= $this->user->auto_version('assets/js/checkout.js'); ?>"></script>
 </body>
 </html>

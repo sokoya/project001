@@ -37,8 +37,8 @@
     <?php endif; ?>
     <link rel="stylesheet" type="text/css" href="<?= $this->user->auto_version('assets/css/schemes/de-york.css'); ?>"
           title="de-york" media="all"/>
-    <link rel="shortcut icon" href="<?= $this->user->auto_version('assets/img/favicon.png'); ?>" type="image/png">
-    <link rel="icon" href="<?= $this->user->auto_version('assets/img/favicon.png'); ?>" type="image/png">
+    <link rel="shortcut icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
+    <link rel="icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
     <link rel="canonical" href="<?= current_url(); ?>"/>
     <?php if ($page == 'product') : ?>
         <meta property="og:title" content="<?= $product->product_name; ?>"/>
