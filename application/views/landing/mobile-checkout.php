@@ -126,8 +126,7 @@
                                                             <input class="form-check-input delivery-box" type="radio"
                                                                    name="pickup_address"
                                                                    id="pickup_id_<?= $pickup->id; ?>"
-                                                                   value="Pickup Address"
-                                                                   checked>
+                                                                   value="Pickup Address">
                                                             <label class="form-check-label"
                                                                    for="pickup_id_<?= $pickup->id ?>">
                                                                 Select this pickup address
@@ -243,7 +242,7 @@
                         <div class="panel-heading custom-panel-head">
                             <h3 class="panel-title"><i class="fa fa-credit-card"></i>&nbsp;&nbsp; Payment Method</h3>
                         </div>
-                        <div class="panel-body" style="<?php
+                        <div class="panel-body payment_method_body" style="<?php
                         if (!$address_set):
                             ?>display: none
                         <?php endif; ?>">

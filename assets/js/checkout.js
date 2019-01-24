@@ -163,8 +163,8 @@ function get_updates() {
 				bind_market(format_currency(sub_total), 'charges');
 				bind_market(format_currency($('.total-sum').data('amount') + sub_total), 'total-sum-charges');
 				$('#total_charge').val($('.total-sum').data('amount') + sub_total);
-				$('#qty').val(quantity_instance);
-
+                $('#qty').val(quantity_instance);
+                $('.payment_method_body').show(300);
 				elem.addClass('custom-panel-active');
 				$('.pay-method').show();
 				$('.delivery-warning').slideUp()
