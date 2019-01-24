@@ -21,9 +21,9 @@ $('.continue-btn').on('click', function (e) {
 	$(this).prop('disabled', 'disabled');
 	e.preventDefault();
 	var delivery_charge = $('.charges').data('amount');
-	var payment_method = $("input[name=payment_method]:checked").val();
-	var payment_name = $("input[name=payment_method]:checked").data('name');
-
+	var payment = $("input[name=payment_method]:checked");
+	var payment_method = payment.val();
+	var payment_name = payment.data('name');
 	$.ajax({
 		url: base_url + 'checkout/checkout_confirm',
 		method: 'POST',

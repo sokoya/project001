@@ -1,5 +1,5 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
-<link rel="stylesheet" href="<?= base_url('assets/landing/css/checkout.css'); ?>"/>
+<link rel="stylesheet" href="<?= base_url('assets/css/checkout.css'); ?>"/>
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
@@ -97,7 +97,7 @@
     <div class="gap"></div>
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
-<script src="<?= base_url('assets/landing/js/checkout.js'); ?>"></script>
+<script src="<?= $this->user->auto_version('assets/js/checkout.js'); ?>"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
 

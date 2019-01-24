@@ -256,7 +256,6 @@ class Ajax extends CI_Controller
        }
     }
 
-
     // Update Cart quantity
     function update_cart_item(){
     	if( !$this->input->post() || !$this->input->is_ajax_request() ){ redirect(base_url());}
@@ -270,8 +269,7 @@ class Ajax extends CI_Controller
     	}
     	exit;
     }
-
-
+    
     function cart_items(){
         $cart_contents = $this->cart->contents();
         if( !empty( $cart_contents ) ){
@@ -282,7 +280,7 @@ class Ajax extends CI_Controller
                 $detail = $this->product->get_cart_details($content['id']);
                 $product .= '<li>';
                 $product .= '<a class="dropdown-menu-shipping-cart-img" href="' .base_url(urlify($content["name"], $content["id"])) .'"';
-                $product .= '<img src="' .base_url('data/products/' . $content["id"] . '/' . $detail->image) .'"
+                $product .= '<img src="' . PRODUCTS_IMAGE_PATH . $detail->image .'"
 											alt="Onitshamarket ' .$content['name'].'"
 											title="' . $content['name']. '"/>';
                 $product .= '</a>';
@@ -337,6 +335,5 @@ class Ajax extends CI_Controller
             redirect(base_url());
         }
     }
-
 
 }

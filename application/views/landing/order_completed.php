@@ -6,14 +6,14 @@
     <meta content="utf-8" http-equiv="encoding">
     <meta name="keywords" content="<?= !empty($keywords) ? ucwords($keywords) : ''; ?>"/>
     <meta name="description" content="<?= !empty($description) ? $description : ''; ?>">
-    <meta name="robots" content="nofollow">
+    <meta name="robots" content="nofollow,noindex">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='http://fonts.googleapis.com/css?family=Roboto:500,300,700,400italic,400' rel='stylesheet'
           type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="<?= base_url('assets/landing/css/bootstrap.css'); ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/landing/css/font-awesome.css'); ?>">
-    <link rel="shortcut icon" href="<?= base_url('assets/landing/img/favicon.png'); ?>" type="image/png">
+    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.css'); ?>">
+    <link rel="shortcut icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
     <style>
         #invoice {
             padding: 30px;
@@ -193,9 +193,9 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-4 "></div>
                     <div class="col-xs-12 col-md-4 text-center">
-                        <a target="_blank" href="<?= base_url(); ?>">
+                        <a href="<?= base_url(); ?>">
                             <img style="height:100px;"
-                                 src="<?= base_url('assets/landing/img/onitshamarket-logo.png'); ?>"
+                                 src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>"
                                  data-holder-rendered="true"/>
                         </a>
                     </div>
@@ -219,7 +219,7 @@
                     </div>
                     <div class="col-md-6 col-xs-12 invoice-details">
                         <h1 class="invoice-id">INVOICE REFERENCE: <span><?= $order_code; ?></span></h1>
-                        <div class="date">Date of Invoice: <span class="invoice_date"><?= date('Y-m-d h:i:s', strtotime($ordersingledetail->order_date) ); ?></span></div>
+                        <div class="date">Date of Invoice: <span class="invoice_date"><?= date('Y-m-d H:i:s', strtotime($ordersingledetail->order_date) ); ?></span></div>
                     </div>
                 </div>
                 <div class="notices">
@@ -289,8 +289,8 @@
     </div>
 </div>
 </body>
-<script src="<?= base_url('assets/landing/js/jquery.js'); ?>"></script>
-<script src="<?= base_url('assets/landing/js/bootstrap.js'); ?>"></script>
+<script src="<?= base_url('assets/js/jquery.js'); ?>"></script>
+<script src="<?= base_url('assets/js/bootstrap.js'); ?>"></script>
 
 <script>
     $('#printInvoice').click(function () {

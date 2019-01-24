@@ -162,7 +162,7 @@ class Checkout extends MY_Controller
                     $data['billing_address_id'] = $address_id;
                     $data['delivery_charge'] = $billing_amount;
                     $data['commission'] = $commission;
-                    $data['amount'] = $product['subtotal'];
+                    $data['amount'] = $product['price'];
                     $this->product->insert_data('orders', $data);
                 }
                 unset( $data );

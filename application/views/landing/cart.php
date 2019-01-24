@@ -40,9 +40,8 @@
 									<?php echo form_hidden($x . '[rowid]', $product['rowid']); ?>
 									<a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
 										<img class="lazy"
-											 data-src="<?= PRODUCTS_IMAGE_PATH . $detail->image; ?>"
-											 src="<?= base_url('assets/img/load.gif'); ?>"
-											 alt="<?= $product['name'] . lang('app_name'); ?>"
+											 src="<?= PRODUCTS_IMAGE_PATH . $detail->image; ?>"
+											 alt="<?= $product['name'] ?>"
 											 title="<?= $product['name']; ?>"/>
 									</a>
 								</td>

@@ -126,6 +126,9 @@
         max-height: 160px !important;
         margin-bottom: -5px;
     }
+    #filter-category{
+        cursor: pointer;
+    }
 </style>
 </head>
 <body>
@@ -135,7 +138,7 @@
         <div class="w-bg top_menu">
             <a href="javascript:void(0)" class="update_fil filter_btn_submit" style="float: right">Update
                 Filter</a>
-            <p><span class="filter_close_btn"><i class="fa fa-arrow-left" aria-hidden="true"></i></span> &nbsp;Filter
+            <p class="filter_close_btn" style="cursor: pointer;"><span><i class="fa fa-arrow-left" aria-hidden="true"></i></span> Go Back
             </p>
         </div>
         <div class="panel panel-default">
@@ -152,8 +155,7 @@
             <div class="panel panel-default">
                 <div
                         class="panel-heading filter-head">Brand
-                    <span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel"
-                                                                             aria-hidden="true"
+                    <span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel" aria-hidden="true"
                                                                              data-target="brand_static_vl"></i></span>
                 </div>
                 <div class="panel-body" id="brand_static_vl">
@@ -174,7 +176,7 @@
         <?php if (!empty($colours)) : ?>
             <div class="panel panel-default">
                 <div
-                        class="panel-heading filter-head">Main Colour
+                        class="panel-heading filter-head" style="cursor: pointer;">Main Colour
                     <span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel"
                                                                              aria-hidden="true"
                                                                              data-target="color_static_vl"></i></span>
@@ -234,9 +236,9 @@
                 </div>
                 <div class="custom-card">
                     <div class="container">
-                        <p style="text-align: center"><span class="filter-btn filter-text"><i class="fa fa-filter"
+                        <p style="text-align: center; cursor: pointer;"><span class="filter-btn filter-text"><i class="fa fa-filter"
                                                                                               aria-hidden="true"></i> Filter</span>
-                            <span class="filter-divider">|</span> <span class="sort-text"><i class="fa fa-sort"
+                            <span class="filter-divider">|</span> <span class="sort-btn sort-text"><i class="fa fa-sort"
                                                                                              aria-hidden="true"></i> Sort</span>
                         </p>
                     </div>
@@ -278,7 +280,8 @@
                                 </div>
                             </div>
                         <?php endforeach; else: ?>
-                            <h2 class="text-center text-md-center">Oops! Sorry, we couldn't find products on this section.</h2>
+                        <div style="margin-top: 30px;"></div>
+                            <h3 class="text-center text-md-center">Oops! Sorry, we couldn't find products on this section.</h3>
                             <p class="text-center text-sm">
                                 Please check your spelling for typographic error.<br />
                                 <span class="text-danger">You can also:</span>
@@ -305,9 +308,6 @@
     </script>
     <script src="<?= base_url('assets/js/search.js'); ?>"></script>
     <script>
-        $(function () {
-            $('.lazy').Lazy();
-        });
 
         $("#price-range").ionRangeSlider({
             type: "double",
@@ -356,6 +356,7 @@
                         $(this).toggleClass("fa-minus fa-plus");
                         $(`#${target}`).toggle()
                     });
+
                     $('.filter_close_btn').on('click', function () {
                         filterBarClose();
                     });

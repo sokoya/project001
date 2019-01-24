@@ -53,6 +53,11 @@
         <meta name="twitter:creator" content=""/>
     <?php endif; ?>
     <meta name="google-site-verification" content="xGjxCwvClqtUIevfyrQ-HWU7OcjspMEVmXMAPcpzz7Y" />
+    <script>
+        window.onresize = function(event) {
+            document.location.reload(true);
+        }
+    </script>
     <style>
         .mgt_drop_menu > li {
             height: 36px !important;

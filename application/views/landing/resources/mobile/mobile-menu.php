@@ -319,7 +319,6 @@
                         <?php endif; ?>
                             alt="User"
                             style="height: 24px; width: 24px;">
-
 				</span>
             <div class="options">
                 <div class="arrow-up"></div>
@@ -333,13 +332,6 @@
                     <div class="line-separator"></div>
                     <a href="<?= base_url('account/order_track'); ?>"><p>Track Order</p></a>
                     <div class="line-separator"></div>
-<!--                    --><?php //if ($profile->is_seller !== 'false') : ?>
-<!--                        <a href="--><?//= base_url('seller/overview'); ?><!--"><p>Seller Dashboard</p></a>-->
-<!--                        <div class="line-separator"></div>-->
-<!--                    --><?php //else : ?>
-<!--                        <a href="--><?//= base_url('seller/'); ?><!--"><p>Become a Seller</p></a>-->
-<!--                        <div class="line-separator"></div>-->
-<!--                    --><?php //endif; ?>
                     <a href="<?= base_url('account/saved'); ?>"><p>My Wishlist</p></a>
                     <div class="line-separator"></div>
                     <a href="<?= base_url('logout'); ?>"><p>Logout</p></a>
@@ -384,7 +376,7 @@
     $categories = $this->db->query("SELECT * FROM categories WHERE pid = 0")->result();
     foreach ($categories as $category): ?>
         <div class="container">
-            <a href="<?= base_url('catalog/' . $category->slug); ?>" style="text-decoration: none">
+            <a href="<?= base_url('catalog/' . $category->slug .'/'); ?>" style="text-decoration: none">
                 <p class="text-break" style="padding-top: 10px; padding-bottom: 15px;"><?= $category->name; ?>
                     <i class="fa fa-minus close-panel" aria-hidden="true" data-target="cat_<?= $category->id ?>"></i>
                 </p></a>
@@ -398,7 +390,7 @@
                     <div class="custom-card-child">
                         <div class="container">
                             <div class="category-child">
-                                <a href="<?= base_url('catalog/' . $cat->slug); ?>" style="text-decoration: none;">
+                                <a href="<?= base_url('catalog/' . $cat->slug .'/'); ?>" style="text-decoration: none;">
                                     <p>
                                         <img
                                                 src="<?= base_url('assets/svg/delivery-truck.svg'); ?>"
@@ -424,7 +416,7 @@
                                          style="margin-top: 0 !important; margin-bottom: 0 !important">
                                         <div class="category-child">
                                             <a style="color: #000; text-decoration: none"
-                                               href="<?= base_url('catalog/' . $sub->slug); ?>"><p
+                                               href="<?= base_url('catalog/' . $sub->slug .'/'); ?>"><p
                                                         style="padding-bottom: 5px; padding-left: 40px;"><?= $sub->name; ?></p>
                                             </a>
                                         </div>

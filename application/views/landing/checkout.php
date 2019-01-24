@@ -365,7 +365,7 @@
 	<?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
-<script src="<?= base_url('assets/js/checkout.js'); ?>"></script>
+<script src="<?= $this->user->auto_version('assets/js/checkout.js'); ?>"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
 	$(function () {

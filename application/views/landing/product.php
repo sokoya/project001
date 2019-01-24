@@ -509,7 +509,7 @@
                                                 <label>Display name*</label>
                                                 <input type="text" name="display_name" placeholder="Display name"
                                                        id="review_name"
-                                                       value="<?= $profile->first_name . ' ' . $profile->last_name; ?>"
+                                                       value="<?= ($profile) ? $profile->first_name . ' ' . $profile->last_name : ''; ?>"
                                                        class="form-control" required>
                                             </div>
                                         </div>
@@ -575,7 +575,7 @@
                                     <?php endif; ?>
                                     <div class="product-img-wrap">
                                         <img class="product-img lazy"
-                                             src="<?= base_url('assets/landing/img/load.gif'); ?>"
+                                             src="<?= base_url('assets/load.gif'); ?>"
                                              data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?>"
                                              alt="<?= $like->product_name; ?>"
                                              title="<?= $like->product_name; ?>">
@@ -620,7 +620,6 @@
                 $recently_viewed = $this->user->get_recently_viewed($this->session->userdata('logged_id'), $excludes);
                 if ($recently_viewed && count($recently_viewed)) : ?>
                     <div class="gap gap-small"></div>
-
                     <div class="container">
                         <h3 class="widget-title">Products you recently viewed</h3>
                         <div class="row" data-gutter="15">
@@ -694,8 +693,7 @@
                     <p id="product-title">
                         This is a confirmation that the product <span
                                 class="text text-danger"><?= ucwords($product->product_name); ?></span> has been added
-                        to
-                        the cart
+                        to your cart
                     </p>
                     <div class="row">
                         <div class="col-md-6">
@@ -722,7 +720,7 @@
     <?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
-<script src="<?= base_url('assets/js/rating.js'); ?>"></script>
+<script src="<?= $this->user->auto_version('assets/js/rating.js'); ?>"></script>
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
@@ -736,7 +734,7 @@
     let minus = $('.product-page-qty-minus');
 
     function format_currency(str) {
-        return '₦ ' + str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+        return '₦' + str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
     }
 
     $('.variation-select').on('change', function () {
@@ -826,6 +824,7 @@
             }
         })
     });
+
     $('.add-to-cart').on('click', function () {
         let quantity_instance = $('#quan').val();
         let variation_id = selected_variation_id;

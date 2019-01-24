@@ -63,14 +63,13 @@
                                 <?php echo form_hidden($x . '[rowid]', $product['rowid']); ?>
                                 <a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
                                     <img class="lazy" style="width:130px !important;height:auto !important;"
-                                         data-src="<?= PRODUCTS_IMAGE_PATH . $detail->image; ?>"
-                                         src="<?= base_url('assets/load.gif'); ?>"
+                                         src="<?= PRODUCTS_IMAGE_PATH . $detail->image; ?>"
                                          alt="<?= $product['name']; ?>"
                                          title="<?= $product['name']; ?>"/>
                                 </a></div>
                             <div class="col-xs-7">
                                 <div class="col-xs-12" style="font-size: 15px;">
-                                    <a
+                                    <a style="color: #0b6427; text-decoration: none;"
                                             href="<?= base_url(urlify($product['name'], $product['id'])); ?>"><?= word_limiter(htmlentities($product['name']), 7, '...'); ?></a>
                                 </div>
                                 <div class="col-xs-12">
@@ -109,18 +108,38 @@
                                                     class="product-page-qty product-page-qty-plus">+
                                             </button>
                                         </li>
+                                        <span class="text-center text-danger" id="notif_<?= $product['rowid'] ?>"></span>
                                     </ul>
                                 </div>
                             </div>
                             <div class="row" style="font-size: 12px;">
-                                <div class="col-xs-6">
-                                    <a class="btn panel-bordered-warning" style="font-size: 12px;"><i
-                                                class="fa fa-heart"></i> Save For
-                                        Later</a>
-                                </div>
-                                <div class="col-xs-6">
+                                <?php if ($this->session->userdata('logged_in')):
+                                    $favourite = $this->product->is_favourited($this->session->userdata('logged_id'), $product['id']);
+                                    if ($favourite) :
+                                        ?>
+                                        <div class="col-md-6 col-xs-8 col-lg-6">
+                                            <a class="btn btn-block btn-default panel-bordered-warning wishlist-cta"
+                                               data-pid="<?= $product['id']; ?>"
+                                               href="javascript:void(0)"><i class="fa fa-star"></i>Remove From
+                                                Wishlist</a>
+                                        </div>
+                                    <?php else : ?>
+                                        <div class="col-md-6 col-xs-8 col-lg-6">
+                                            <a class="btn btn-block btn-default panel-bordered-warning wishlist-cta c-hover"
+                                               data-pid="<?= $product['id']; ?>"
+                                               href="javascript:void(0)"><i class="fa fa-star-o"></i>Add to Wishlist</a>
+                                        </div>
+                                    <?php endif; ?>
+                                <?php else : ?>
+                                    <div class="col-md-6 col-xs-6 col-lg-6">
+                                        <a class="btn btn-block btn-default panel-bordered-warning c-hover"
+                                           href="<?= base_url('login'); ?>"><i
+                                                    class="fa fa-star-o"></i>Add to Wishlist</a>
+                                    </div>
+                                <?php endif; ?>
+                                <div class="col-xs-4">
                                     <a style="font-size: 12px;" title="Remove <?= $product['name']; ?> from the cart"
-                                       class="btn panel-bordered-danger pull-right"
+                                       class="btn panel-bordered-danger"
                                        href="<?= base_url('cart/remove/' . $product['rowid']); ?>"><i
                                                 class="fa fa-times"></i> Remove
                                     </a>
@@ -198,9 +217,16 @@
     let minus = $('.product-page-qty-minus');
 
     plus.on('click', function () {
-        $('.cst-loader').show();
         let cid = $(this).data('cid');
         let qty = $(`.product-${cid}`).val() * 1;
+        if (quantity.val() > count) {
+            plus.prop("disabled", true);
+            quantity.val(count);
+            $('#notif_' + cid).text(`There are only ${count} item(s) left`);
+            return false;
+        }
+        $('.cst-loader').show();
+
         plus.prop('disabled', true);
         minus.prop("disabled", false);
         $.ajax({
@@ -213,12 +239,12 @@
                     let x = ($('.cart-read').text() * 1) + 1;
                     notification_message('The Product quantity has been updated.', 'fa fa-info-circle', 'success');
                     bind_market(x, 'cart-read');
-                    if (quantity.val() >= 10) {
+                    if (quantity.val() > count) {
                         plus.prop("disabled", true);
                     } else {
                         minus.prop("disabled", false);
                     }
-                    $('.cart-row').load(base_url + 'product/cart');
+                    $('.cart-row').load(base_url + 'cart');
                 }
             },
             error: response => {
@@ -256,7 +282,8 @@
                     } else {
                         minus.prop("disabled", false);
                     }
-                    $('.cart-row').load(base_url + 'product/cart');
+                    $('.cart-row').load(base_url + 'cart');
+                    $('.lazy').lazy();
                 }
 
             },
@@ -278,6 +305,28 @@
         }
     });
 
+    $('.wishlist-cta').on('click', function () {
+        let product_id = $(this).data('pid');
+        $.ajax({
+            url: base_url + 'ajax/favourite',
+            method: 'POST',
+            data: {
+                id: product_id
+            },
+            success: response => {
+                let parsed_response = JSON.parse(response);
+                if (parsed_response.action === 'remove') {
+                    $('.wishlist-cta').text('Add to Wishlist');
+                } else {
+                    $('.wishlist-cta').text('Remove from Wishlist');
+                }
+                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+            },
+            error: () => {
+                notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', error);
+            }
+        })
+    });
 </script>
 </body>
 </html>
