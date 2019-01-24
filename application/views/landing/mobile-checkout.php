@@ -26,7 +26,7 @@
     <div class="container">
         <header class="page-header" style="margin: 10px 0 10px !important;">
             <h4>Checkout</h4>
-            <button class="btn-custom-primary btn-new-address">New Address</button>
+            <button class="btn-custom-primary btn-new-address">Add New Address</button>
             <button class="btn-custom-primary btn-pickup-address">Select Pickup Location</button>
         </header>
         <?php $this->load->view('msg_view'); ?>
@@ -264,7 +264,7 @@
                                                 <? //= base_url('assets/img/paystack.png'); ?><!--">-->
                                             </p>
                                             <div class="gap-top"></div>
-                                            <p class="text-sm pad-all">
+                                            <p class="text-sm pad-all payment_note" style="display:none;">
                                                 <?= htmlspecialchars_decode($method->notes); ?>
                                             </p>
                                         </div>
@@ -420,6 +420,11 @@
     $(function () {
         $('.lazy').Lazy();
     });
+    $('.pay-panel').on('click', function () {
+        let self = $(this);
+        $('p.payment_note').hide(300);
+        self.find('p.payment_note').show(300);
+    })
 </script>
 <script src="<?= $this->user->auto_version('assets/js/checkout.js'); ?>"></script>
 </body>

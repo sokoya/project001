@@ -22,8 +22,8 @@
 					<div class="panel panel-default" id="delivery-method">
 						<div class="panel-heading custom-panel-head">
 							<h3 class="panel-title"><i class="fa fa-truck"></i>&nbsp;&nbsp; Delivery / Pickup Method
-								<button class="btn-custom-primary btn-new-address">New Address</button>
-								<button class="btn-custom-primary btn-pickup-address">Select Pickup Location</button>
+                                <button class="btn-custom-primary btn-pickup-address">Select Pickup Location</button>
+								<button class="btn-custom-primary btn-new-address">Add New Address</button>
 							</h3>
 						</div>
 						<div class="panel-body" id="register_address" style="display: none">
@@ -252,7 +252,7 @@
 												<? //= base_url('assets/img/paystack.png'); ?><!--">-->
 											</p>
 											<div class="gap-top"></div>
-											<p class="text-sm pad-all">
+											<p class="text-sm pad-all payment_note" style="display:none;">
 												<?= htmlspecialchars_decode($method->notes); ?>
 											</p>
 										</div>
@@ -371,6 +371,11 @@
 	$(function () {
 		$('.lazy').Lazy();
 	});
+	$('.pay-panel').on('click', function () {
+        let self = $(this);
+        $('p.payment_note').hide(300);
+        self.find('p.payment_note').show(300);
+    })
 </script>
 </body>
 </html>
