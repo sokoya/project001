@@ -89,9 +89,13 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 // Database Table
 defined('DB_NAME')		OR define('DB_NAME', 'onitshamarket');
 
-// General Settings
+defined('CATEGORY_IMAGE_PATH') OR define('CATEGORY_IMAGE_PATH', $_SERVER['DOCUMENT_ROOT'] .'/global/images/category/'); # Dropdown Category Image
+defined('CATEGORY_HOME_IMAGE_PATH') OR define('CATEGORY_HOME_IMAGE_PATH', $_SERVER['DOCUMENT_ROOT'] .'/global/images/home/'); #Home category images
+defined('SLIDER_IMAGE_PATH') OR define('SLIDER_IMAGE_PATH', $_SERVER['DOCUMENT_ROOT'] .'/global/images/sliders/'); # Slider Image
 defined('PRODUCTS_IMAGE_PATH') OR define('PRODUCTS_IMAGE_PATH', "https://res.cloudinary.com/de9lpikx3/image/upload/");
-defined('CATEGORY_HOMEPAGE_DIR') OR define('CATEGORY_HOMEPAGE_DIR', $_SERVER['DOCUMENT_ROOT'] .'/contents/home/');
+
+
+// General Settings
 defined('PAGE_CONTACT_US') or define('PAGE_CONTACT_US', "https://www.onitshamarket.com/contact/");
 
 // Details
