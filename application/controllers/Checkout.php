@@ -218,7 +218,6 @@ class Checkout extends MY_Controller
                 // Send Mail
                 $this->load->model('email_model','myemail');
                 $sellerdetails = $this->user->get_sellers_details($order);
-//                var_dump( $sellerdetails);
                 // send mail to the buyer
                 $recipent['name'] = ucwords($page_data['profile']->first_name . ' ' . $page_data['profile']->last_name);
                 $recipent['email'] = $page_data['profile']->email;

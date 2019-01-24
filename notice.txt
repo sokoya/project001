@@ -1,5 +1,5 @@
-save for later on cart mobile
-increase count in mobile cart
+save for later on cart mobile - FIXED
+increase count in mobile cart - FIXED
 sort in catalog not working, sort by newest, price, best seller
 nopages desktop:
 	onitshamarket deal
@@ -12,4 +12,4 @@ about us
 faq
 customer support
 
-seller not available shouldn't check out
+seller not available shouldn't check out - FIXED

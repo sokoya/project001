@@ -8,7 +8,7 @@
     <meta name="description" content="<?= !empty($description) ? $description : ''; ?>">
     <meta name="robots" content="nofollow,noindex">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:500,300,700,400italic,400' rel='stylesheet'
+    <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400italic,400' rel='stylesheet'
           type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css'); ?>">

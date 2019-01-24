@@ -240,27 +240,15 @@
         <?php $this->load->view('landing/resources/head_menu') ?>
     <?php endif; ?>
     <div class="home_slider text-center" style="visibility: hidden;">
-        <div>
-            <div style="background-color: rgb(12,23,44)">
-                <div class="container">
-                    <img src="<?= base_url('assets/img/home/homeslide1.png') ?>"/>
+        <?php foreach( $sliders as $slider ) : ?>
+            <div>
+                <div style="background-color: rgb(12,23,44)">
+                    <div class="container">
+                        <img src="<?= SLIDER_IMAGE_PATH . $slider->image; ?>"/>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div>
-            <div style="background-color: rgb(12,23,44)">
-                <div class="container">
-                    <img src="<?= base_url('assets/img/home/homeslide2.png') ?>"/>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div style="background-color: rgb(168,201,255)">
-                <div class="container">
-                    <img src="<?= base_url('assets/img/home/homeslide3.png') ?>"/>
-                </div>
-            </div>
-        </div>
+        <?php endforeach; ?>
     </div>
     <div class="container">
         <div class="card-max">
