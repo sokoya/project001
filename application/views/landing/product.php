@@ -79,7 +79,7 @@
             <div class="row">
                 <div class="col-md-5" style="height:450px;">
                     <div class="product-slider-for" style="visibility: hidden ;height: 400px;">
-                        <div class="product-page-product-wrap">
+                        <div class="">
                             <div class="easyzoom easyzoom--overlay">
                                 <a href="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
                                    class="">
@@ -94,7 +94,7 @@
                         <?php if (count($galleries) > 1) : ?>
                             <?php foreach ($galleries as $gallery) : ?>
                                 <?php if ($featured_image->image_name != $gallery->image_name): ?>
-                                    <div class="product-page-product-wrap">
+                                    <div class="">
                                         <div class="easyzoom easyzoom--overlay">
                                             <a href="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
                                                class=""
