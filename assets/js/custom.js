@@ -8,7 +8,7 @@ $("#price-slider").ionRangeSlider({
 	hasGrid: false
 });
 
-$('#jqzoom').jqzoom({
+$('.jqzoom').jqzoom({
 	zoomType: 'standard',
 	lens: true,
 	preloadImages: false,
@@ -17,7 +17,7 @@ $('#jqzoom').jqzoom({
 	zoomHeight: 460,
 	// xOffset:390,
 	yOffset: 0,
-	position: 'left'
+	position: 'right'
 });
 
 

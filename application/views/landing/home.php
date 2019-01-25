@@ -67,23 +67,33 @@
     }
 
     .card-max-text {
-        margin-top: 10px;
+        display: none;
+        margin-top: -180px;
+        margin-left: 2px;
+        position: absolute;
+        border-radius: 10px;
+        height: 90%;
+        width: 90%;
+        padding: 20px;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.6);
     }
 
     .card-max-price {
         font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size: 18px;
-        color: #0b0b0b;
+        color: #ffffff;
         font-weight: 600;
-        margin-bottom: 1px;
+        margin: auto;
     }
 
     .card-max-discount {
         font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size: 14px;
-        color: #444444;
+        color: #fafafa;
         font-weight: 500;
-        margin-bottom: 1px;
+        margin: auto;
+        margin-top: 20px;
         text-decoration: line-through;
     }
 
@@ -227,7 +237,25 @@
         padding: 10px;
     }
 
+    .btn_view_product {
+        color: #ffffff;
+        border: 2px solid #fff;
+        text-decoration: none;
+        padding: 10px;
+        position: absolute;
+        width: fit-content;
+        margin-left: -63px;
+        margin-top: 20px;
+    }
 
+    .btn_view_product:hover {
+        color: #000000;
+        font-weight: bold;
+        background-color: #ffffff;
+        text-decoration: none;
+        padding: 10px;
+        cursor: pointer;
+    }
 </style>
 </head>
 <body>
@@ -240,7 +268,7 @@
         <?php $this->load->view('landing/resources/head_menu') ?>
     <?php endif; ?>
     <div class="home_slider text-center" style="visibility: hidden;">
-        <?php foreach( $sliders as $slider ) : ?>
+        <?php foreach ($sliders as $slider) : ?>
             <div>
                 <div style="background-color: rgb(12,23,44)">
                     <div class="container">
@@ -259,45 +287,51 @@
             <div class="row">
                 <div class="col-md-2 col-xs-4 hot-row">
                     <img class="card-max-img" src="<?= base_url('assets/img/home/hotsale8.png'); ?>"/>
-                    <!--					<div class="card-max-text">-->
-                    <!--						<p class="card-max-price">₦27,450</p>-->
-                    <!--						<p class="card-max-discount">₦55,000</p>-->
-                    <!--					</div>-->
+                    <div class="card-max-text">
+                        <p class="card-max-discount">₦55,000</p>
+                        <p class="card-max-price">₦27,450</p>
+                        <a class="btn_view_product" href="//image_url"><i class="fa fa-search"></i>View Product</a>
+                    </div>
                 </div>
                 <div class="col-md-2 col-xs-4 hot-row">
                     <img class="card-max-img" src="<?= base_url('assets/img/home/hotsale4.png'); ?>"/>
-                    <!--					<div class="card-max-text">-->
-                    <!--						<p class="card-max-price">₦66,000</p>-->
-                    <!--						<p class="card-max-discount">₦155,000</p>-->
-                    <!--					</div>-->
+                    <div class="card-max-text">
+                        <p class="card-max-discount">₦155,000</p>
+                        <p class="card-max-price">₦66,000</p>
+                        <a class="btn_view_product" href="//image_url"><i class="fa fa-search"></i>View Product</a>
+                    </div>
                 </div>
                 <div class="col-md-2 col-xs-4 hot-row">
                     <img class="card-max-img" src="<?= base_url('assets/img/home/hotsale2.png'); ?>"/>
-                    <!--					<div class="card-max-text">-->
-                    <!--						<p class="card-max-price">₦47,000</p>-->
-                    <!--						<p class="card-max-discount">₦90,000</p>-->
-                    <!--					</div>-->
+                    <div class="card-max-text">
+                        <p class="card-max-discount">₦90,000</p>
+                        <p class="card-max-price">₦47,000</p>
+                        <a class="btn_view_product" href="//image_url"><i class="fa fa-search"></i>View Product</a>
+                    </div>
                 </div>
                 <div class="col-md-2 col-xs-4 hot-row">
                     <img class="card-max-img" src="<?= base_url('assets/img/home/hotsale7.png'); ?>"/>
-                    <!--					<div class="card-max-text">-->
-                    <!--						<p class="card-max-price">₦80,000</p>-->
-                    <!--						<p class="card-max-discount">₦125,000</p>-->
-                    <!--					</div>-->
+                    <div class="card-max-text">
+                        <p class="card-max-discount">₦125,000</p>
+                        <p class="card-max-price">₦80,000</p>
+                        <a class="btn_view_product" href="//image_url"><i class="fa fa-search"></i>View Product</a>
+                    </div>
                 </div>
                 <div class="col-md-2 col-xs-4 hot-row">
                     <img class="card-max-img" src="<?= base_url('assets/img/home/hotsale0.png'); ?>"/>
-                    <!--					<div class="card-max-text">-->
-                    <!--						<p class="card-max-price">₦56,000</p>-->
-                    <!--						<p class="card-max-discount">₦120,000</p>-->
-                    <!--					</div>-->
+                    <div class="card-max-text">
+                        <p class="card-max-discount">₦120,000</p>
+                        <p class="card-max-price">₦56,000</p>
+                        <a class="btn_view_product" href="//image_url"><i class="fa fa-search"></i>View Product</a>
+                    </div>
                 </div>
                 <div class="col-md-2 col-xs-4 hot-row">
                     <img class="card-max-img" src="<?= base_url('assets/img/home/hotsale5.png'); ?>"/>
-                    <!--					<div class="card-max-text">-->
-                    <!--						<p class="card-max-price">₦75,000</p>-->
-                    <!--						<p class="card-max-discount">₦95,000</p>-->
-                    <!--					</div>-->
+                    <div class="card-max-text">
+                        <p class="card-max-discount">₦95,000</p>
+                        <p class="card-max-price">₦75,000</p>
+                        <a class="btn_view_product" href="//image_url"><i class="fa fa-search"></i>View Product</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -409,7 +443,22 @@
             autoplay: false,
             autoplaySpeed: 3000
         });
-    })
+    });
+    $('.card-max-img').hover(
+        function () {
+            let self = $(this);
+            self.siblings('.card-max-text').css({"display": "block"});
+        },
+        function () {
+            let self = $(this);
+            setTimeout(
+                function () {
+                    self.siblings('.card-max-text').css({"display": "none"});
+                },
+                2000
+            );
+        }
+    )
 </script>
 </body>
 </html>

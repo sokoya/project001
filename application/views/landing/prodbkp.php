@@ -1,7 +1,4 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
-<link rel="stylesheet" href="<?= base_url('assets/plugins/slick/slick.css'); ?>">
-<link rel="stylesheet" href="<?= base_url('assets/plugins/slick/slick-theme.css'); ?>">
-<link rel="stylesheet" href="<?= base_url('assets/plugins/eazyzoom/easyzoom.css'); ?>">
 <style>
     .variation-option {
         font-size: 12px;
@@ -43,6 +40,7 @@
     .product {
         min-height: 282px !important;
     }
+
 </style>
 </head>
 <body>
@@ -77,64 +75,38 @@
                 </ol>
             </header>
             <div class="row">
-                <div class="col-md-5" style="height:450px;">
-                    <div class="product-slider-for" style="visibility: hidden ;height: 400px;">
-                        <div class="product-page-product-wrap">
-                            <div class="easyzoom easyzoom--overlay">
-                                <a href="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
-                                   class="">
-                                    <img
-                                            style="max-width:99%"
-                                            src="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
-                                            alt="<?= $product->product_name; ?>"
-                                            title="<?= ucwords($product->product_name) ?>"/>
-                                </a>
-                            </div>
-                        </div>
-                        <?php if (count($galleries) > 1) : ?>
-                            <?php foreach ($galleries as $gallery) : ?>
-                                <?php if ($featured_image->image_name != $gallery->image_name): ?>
-                                    <div class="product-page-product-wrap">
-                                        <div class="easyzoom easyzoom--overlay">
-                                            <a href="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
-                                               class=""
-                                               title="<?= ucwords($product->product_name) ?>">
-                                                <img
-                                                        style="width:99%"
-                                                        src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
-                                                        alt="<?= $product->product_name; ?>"
-                                                        title="<?= ucwords($product->product_name) ?>"/>
-                                            </a>
-                                        </div>
-                                    </div>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </div>
-                    <div class="product-slider-nav" style="visibility: hidden ;height: 50px;margin-top:40px;">
-                        <div style="margin:auto;">
-                            <img
-                                    style="max-width:40px;"
+                <div class="col-md-5">
+                    <div class="product-page-product-wrap jqzoom-stage">
+                        <div class="clearfix">
+                            <a href="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
+                               id="jqzoom"
+                               data-rel="gal-1">
+                                <img
+                                    class="img-responsive"
                                     src="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
                                     alt="<?= $product->product_name; ?>"
                                     title="<?= ucwords($product->product_name) ?>"/>
+                            </a>
                         </div>
-                        <?php if (count($galleries) > 1) : ?>
-                            <?php foreach ($galleries as $gallery) : ?>
-                                <?php if ($featured_image->image_name != $gallery->image_name): ?>
-                                    <div>
-                                        <img
-                                                style="max-width:40px;"
-                                                src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
-                                                alt="<?= $product->product_name; ?>"
-                                                title="<?= ucwords($product->product_name) ?>"/>
-                                    </div>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
                     </div>
+                    <?php if (count($galleries) > 1) : ?>
+                        <ul class="jqzoom-list">
+                            <?php foreach ($galleries as $gallery) : ?>
+                                <li>
+                                    <a <?php if ($gallery->featured_image == 1) echo 'zoomThumbActive'; ?>
+                                        href="javascript:void(0)"
+                                        data-rel="{gallery:'gal-1', smallimage: '<?= PRODUCTS_IMAGE_PATH . "c_scale,w_400/" . $gallery->image_name ?>',
+                                           largeimage: '<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>'}">
+                                        <img class="lazy" src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
+                                             alt="<?= $product->product_name; ?>"
+                                             title="<?= $product->product_name ?>" width="100"/>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
                 </div>
-                <div class="col-md-7" style="height:450px;">
+                <div class="col-md-7">
                     <div class="row" data-gutter="10">
                         <div class="col-md-12">
                             <div class="box">
@@ -156,13 +128,13 @@
                                         </p>
                                         <p class="product-page-desc">
                                             <strong
-                                                    class="custom-product-title"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></strong>
+                                                class="custom-product-title"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></strong>
                                         </p>
                                         <p class=" text-sm text-uppercase pr-id"><strong>Product ID
                                                 :</strong> <?= $product->sku; ?>
                                             | <strong>Seller : </strong><a
-                                                    href="#"
-                                                    id="pr-seller"><?= ucwords($product->first_name . ' ' . $product->last_name); ?></a>
+                                                href="#"
+                                                id="pr-seller"><?= ucwords($product->first_name . ' ' . $product->last_name); ?></a>
                                         </p>
                                         <?php if (!empty($product->dimensions)): ?>
                                             <span class="text-md text-md-center">
@@ -220,7 +192,7 @@
                                     <?php if (discount_check($var->discount_price, $var->start_date, $var->end_date)) : ?>
                                         <span class="price-cs ds-price"><?= ngn($var->discount_price); ?></span>
                                         <span
-                                                class="product-page-price-list price-lower dn-price"><?= ngn($var->sale_price); ?></span>
+                                            class="product-page-price-list price-lower dn-price"><?= ngn($var->sale_price); ?></span>
                                     <?php else : ?>
                                         <span class="price-cs ds-price"></span>
                                         <span class="price-cs dn-price"><?= ngn($var->sale_price); ?></span>
@@ -321,7 +293,7 @@
                                         <div class="col-md-6 col-lg-6">
                                             <a class="btn btn-block btn-default c-hover"
                                                href="<?= base_url('login'); ?>"><i
-                                                        class="fa fa-star-o"></i>Add to Wishlist</a>
+                                                    class="fa fa-star-o"></i>Add to Wishlist</a>
                                         </div>
                                     <?php endif; ?>
                                 </div>
@@ -500,7 +472,7 @@
                                                 <ul class="product-page-product-rating product-rating-big">
                                                     <?= single_user_rate($user->rating_score); ?>
                                                     <li class=""><span class="text-bold" style="font-size: 12px;"><a
-                                                                    href="javascript:void(0)" class="update_rating">Update Rating</a></span>
+                                                                href="javascript:void(0)" class="update_rating">Update Rating</a></span>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -720,7 +692,7 @@
                 <div class="modal-body">
                     <p id="product-title">
                         This is a confirmation that the product <span
-                                class="text text-danger"><?= ucwords($product->product_name); ?></span> has been added
+                            class="text text-danger"><?= ucwords($product->product_name); ?></span> has been added
                         to your cart
                     </p>
                     <div class="row">
@@ -748,13 +720,10 @@
     <?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
-<script src="<?= base_url('assets/plugins/slick/slick.js') ?>"></script>
-<script src="<?= base_url('assets/plugins/eazyzoom/easyzoom.js') ?>"></script>
 <script src="<?= $this->user->auto_version('assets/js/rating.js'); ?>"></script>
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
-    var $easyzoom = $('.easyzoom').easyZoom();
     $(function () {
         $('.lazy').Lazy();
     });
@@ -902,28 +871,6 @@
         } else if (quantity.val() === '0') {
             quantity.val(1)
         }
-    });
-
-    $(document).ready(function () {
-        $('.product-slider-for').css({"visibility": "visible"});
-        $('.product-slider-nav').css({"visibility": "visible"});
-        $('.product-slider-for').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false,
-            fade: true,
-            lazyLoad: 'ondemand',
-            asNavFor: '.product-slider-nav'
-        });
-        $('.product-slider-nav').slick({
-            slidesToShow: 6,
-            slidesToScroll: 1,
-            asNavFor: '.product-slider-for',
-            dots: false,
-            infinite: true,
-            lazyLoad: 'ondemand',
-            focusOnSelect: true
-        });
     });
 </script>
 </body>
