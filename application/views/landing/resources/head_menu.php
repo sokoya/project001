@@ -1,5 +1,5 @@
 <!-- Head Category Starts -->
-<?php $categories = $this->db->query("SELECT id,name,slug,icon FROM categories WHERE pid = 0 LIMIT 10")->result(); ?>
+<?php $categories = $this->db->query("SELECT id,name,slug,icon,image FROM categories WHERE pid = 0 LIMIT 10")->result(); ?>
 <nav class="navbar navbar-default navbar-main-white navbar-pad-top navbar-first">
     <div class="container">
         <div class="navbar-header">
@@ -92,8 +92,8 @@
                                             </div>
                                         </div>
                                         <img class="dropdown-menu-category-section-theme-img"
-                                             src="<?= base_url('assets/img/test_cat/3.png'); ?>"
-                                             alt="Image Alternative text" title="Image Title" style="right: -10px;"/>
+                                             src="<?= CATEGORY_IMAGE_PATH . $category->image; ?>"
+                                             alt="<?= $category->name; ?>" title="<?= $category->name; ?>" style="right: -10px;"/>
                                     </div>
                                 </div>
                             </li>
