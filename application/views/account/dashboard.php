@@ -18,11 +18,6 @@
             <?php $this->load->view('landing/msg_view'); ?>
             <h3 class="market-sidebar-header-r hidden-sm hidden-md hidden-xs">Overview</h3>
             <hr class="market-sidebar-line-r"/>
-            <div class="alert alert-warning">
-                <i class="fa fa-warning"></i> Due to severe wildfire conditions in Calabar, deliveries To and From
-                several area in the state may arrive latter than expected. To view the most up to date status for your
-                order, please go to the Orders page
-            </div>
             <p class="market-dashboard-welcome-text">
                 Hello <?= ucwords($profile->first_name) . ' ' . ucwords($profile->last_name); ?></p>
             <p class="market-dashboard-welcome-text-body">From your My Account Dashboard you have the ability to view a

@@ -28,11 +28,6 @@
 
             <h3 class="market-sidebar-header-r hidden-sm hidden-md hidden-xs">My Saved Items</h3>
             <hr class="market-sidebar-line-r"/>
-            <div class="alert alert-warning">
-                <i class="fa fa-warning"></i> Due to severe wildfire conditions in Calabar, deliveries To and From
-                several area in the state may arrive latter than expected. To view the most up to date status for your
-                order, please go to the Orders page
-            </div>
             <div id="status"></div>
             <div class="table-responsive market-saved-table">
                 <div id="favourite-div">
