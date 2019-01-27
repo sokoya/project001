@@ -42,7 +42,7 @@
             </div>
         </ul>
     </div>
-    <?php if($this->session->flashdata('error_msg') || $this->session->flashdata('success_msg') && $page =='homepage') : ?>
+    <?php if($this->session->flashdata('error_msg') && $page =='homepage') : ?>
         <div class="container text-center">
             <?php $this->load->view('msg_view'); ?>
         </div>

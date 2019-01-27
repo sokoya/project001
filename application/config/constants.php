@@ -93,7 +93,11 @@ defined('DB_NAME')		OR define('DB_NAME', 'onitshamarket');
 defined('CATEGORY_IMAGE_PATH') OR define('CATEGORY_IMAGE_PATH', '../global/images/category/'); # Dropdown Category Image
 defined('CATEGORY_HOME_IMAGE_PATH') OR define('CATEGORY_HOME_IMAGE_PATH','../global/images/home/'); #Home category images
 defined('SLIDER_IMAGE_PATH') OR define('SLIDER_IMAGE_PATH', '../global/images/sliders/'); # Slider Image
-defined('PRODUCTS_IMAGE_PATH') OR define('PRODUCTS_IMAGE_PATH', "https://res.cloudinary.com/de9lpikx3/image/upload/");
+defined('CLOUDINARY_CLOUD_NAME') OR define('CLOUDINARY_CLOUD_NAME', "onitshamarket");
+defined('CLOUDINARY_API_KEY') OR define('CLOUDINARY_API_KEY', "225471712598732");
+defined('CLOUDINARY_API_SECRET') OR define('CLOUDINARY_API_SECRET', "CAg5I2si21ibz-bFx-U759ljqTk");
+defined('PRODUCT_IMAGE_FOLDER') OR define('PRODUCT_IMAGE_FOLDER', "onitshamarket/product/");
+defined('PRODUCTS_IMAGE_PATH') OR define('PRODUCTS_IMAGE_PATH', "https://res.cloudinary.com/onitshamarket/" . PRODUCT_IMAGE_FOLDER);
 
 
 // General Settings
