@@ -84,7 +84,7 @@
                                 <a href="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
                                    class="">
                                     <img
-                                            style="max-width:99%"
+                                            style="max-width:95%"
                                             src="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
                                             alt="<?= $product->product_name; ?>"
                                             title="<?= ucwords($product->product_name) ?>"/>
@@ -100,7 +100,7 @@
                                                class=""
                                                title="<?= ucwords($product->product_name) ?>">
                                                 <img
-                                                        style="width:99%"
+                                                        style="width:95%"
                                                         src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
                                                         alt="<?= $product->product_name; ?>"
                                                         title="<?= ucwords($product->product_name) ?>"/>
