@@ -364,6 +364,8 @@
                             and
                             Reviews</a>
                     </li>
+                    <li><a href="#customer_qa" data-toggle="tab"><i class="fa fa-comment nav-tab-icon"></i>Customer Q&A</a>
+                    </li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="overview">
@@ -578,6 +580,109 @@
                                     <?php $x++; endforeach; ?>
                             <?php endif; ?>
                         </article>
+                    </div>
+                    <div class="tab-pane fade" id="customer_qa">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <form class="product-page-qa-form">
+                                    <div class="row" data-gutter="10">
+                                        <div class="col-md-10">
+                                            <div class="form-group">
+                                                <input class="form-control" type="text"
+                                                       placeholder="Have a question? Feel free to ask."/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <input class="btn btn-primary btn-block" type="submit" value="Ask"/>
+                                        </div>
+                                    </div>
+                                </form>
+                                <article class="product-page-qa">
+                                    <div class="product-page-qa-question">
+                                        <p class="product-page-qa-text">Is this the 6.6 inch screen?</p>
+                                        <p class="product-page-qa-meta">asked by Brandon Burgess on 08/14/2015</p>
+                                    </div>
+                                    <div class="product-page-qa-answer">
+                                        <p class="product-page-qa-text">No, this is the 6.4 inch screen</p>
+                                        <p class="product-page-qa-meta">answered on 08/14/2015</p>
+                                    </div>
+                                </article>
+                                <article class="product-page-qa">
+                                    <div class="product-page-qa-question">
+                                        <p class="product-page-qa-text">for those who owns this model phone in USA, may
+                                            I know if this phone has the 4G LTE in Tmobile's network? Thank you in
+                                            advance.</p>
+                                        <p class="product-page-qa-meta">asked by Joseph Watson on 08/14/2015</p>
+                                    </div>
+                                    <div class="product-page-qa-answer">
+                                        <p class="product-page-qa-text">Yes. can use TMobile LTE 1700MHZ.</p>
+                                        <p class="product-page-qa-meta">answered on 08/14/2015</p>
+                                    </div>
+                                </article>
+                                <article class="product-page-qa">
+                                    <div class="product-page-qa-question">
+                                        <p class="product-page-qa-text">I'm from Puerto Rico! this phone work for
+                                            me???</p>
+                                        <p class="product-page-qa-meta">asked by Dylan Taylor on 08/14/2015</p>
+                                    </div>
+                                    <div class="product-page-qa-answer">
+                                        <p class="product-page-qa-text">Yes... It will work with any gsm radio system in
+                                            the world... It does not work, however on any cdma radio system...</p>
+                                        <p class="product-page-qa-meta">answered on 08/14/2015</p>
+                                    </div>
+                                </article>
+                                <article class="product-page-qa">
+                                    <div class="product-page-qa-question">
+                                        <p class="product-page-qa-text">so this phone works on tmobile current network
+                                            ll i have to do is switch the sim card?</p>
+                                        <p class="product-page-qa-meta">asked by Blake Hardacre on 08/14/2015</p>
+                                    </div>
+                                    <div class="product-page-qa-answer">
+                                        <p class="product-page-qa-text">the phone works fine with T-mobile's 4G LTE
+                                            network, all you have to do is get a micro-sim card and insert it to start
+                                            using your phone, if you already have a micro-sim sized card then just plug
+                                            in.</p>
+                                        <p class="product-page-qa-meta">answered on 08/14/2015</p>
+                                    </div>
+                                </article>
+                                <article class="product-page-qa">
+                                    <div class="product-page-qa-question">
+                                        <p class="product-page-qa-text">does it work on the boost mobile network?</p>
+                                        <p class="product-page-qa-meta">asked by Sarah Slater on 08/14/2015</p>
+                                    </div>
+                                    <div class="product-page-qa-answer">
+                                        <p class="product-page-qa-text">It only works on gms networks so you have to
+                                            check I think boost mobile is cmd network like verizon towers not sure</p>
+                                        <p class="product-page-qa-meta">answered on 08/14/2015</p>
+                                    </div>
+                                </article>
+                                <article class="product-page-qa">
+                                    <div class="product-page-qa-question">
+                                        <p class="product-page-qa-text">Is this version waterproof?</p>
+                                        <p class="product-page-qa-meta">asked by Oliver Ross on 08/14/2015</p>
+                                    </div>
+                                    <div class="product-page-qa-answer">
+                                        <p class="product-page-qa-text">All Sony Xperia z lines are water proof the Sony
+                                            Xperia z1,z2,z3,z ultra all of those</p>
+                                        <p class="product-page-qa-meta">answered on 08/14/2015</p>
+                                    </div>
+                                </article>
+                                <article class="product-page-qa">
+                                    <div class="product-page-qa-question">
+                                        <p class="product-page-qa-text">how strong is the phone..does the screen crack
+                                            easily ?</p>
+                                        <p class="product-page-qa-meta">asked by Neil Davidson on 08/14/2015</p>
+                                    </div>
+                                    <div class="product-page-qa-answer">
+                                        <p class="product-page-qa-text">Is strong enough to keep running even if it
+                                            drops a few times, but I reckon if you kick it it Will smash, as any
+                                            smartphone in the World. I had it for 3 months and it hasn't got a
+                                            scratch.</p>
+                                        <p class="product-page-qa-meta">answered on 08/14/2015</p>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
