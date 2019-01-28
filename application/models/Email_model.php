@@ -16,6 +16,7 @@ class Email_model extends CI_Model {
         $post = array(
             'subject' => 'Reset Password Confirmation',
             'to' => $data['email'],
+            'from' => 'info@onitshamarket.com',
             'template' => 'UserPasswordReset',
             'merge_recipent' => $data['recipent'],
             'merge_reset_link' => $data['reset_link'],
@@ -30,6 +31,7 @@ class Email_model extends CI_Model {
         $post = array(
             'subject' => 'Welcome to ' . lang('app_name'),
             'to' => $data['email'],
+            'from' => 'info@onitshamarket.com',
             'template' => 'WelcomeNewUser',
             'merge_recipent' => $data['recipent'],
             'isTransactional' => false
@@ -44,7 +46,8 @@ class Email_model extends CI_Model {
     function send_now($post){
         $url = 'https://api.elasticemail.com/v2/email/send';
         try{
-            $post['from'] = 'philo4u2c@gmail.com';
+
+            $post['from'] = isset( $post['from']) ? $post['from'] : 'noreply@onitshamarket.com';
             $post['fromName'] = 'Onitshamarket';
             $post['apikey'] = ELASTIC_EMAIL_API;
             $ch = curl_init();
@@ -122,11 +125,11 @@ class Email_model extends CI_Model {
                 </div>';
         $email_msg .= '</div></td><td></td></tr></table></body></html>';
 
-        return $this->do_email($email_msg , 'Your Onitshamarket Order - ' . $order_code. ' has been confirmed.', $recipent['email'], 'philo4u2c@gmail.com');
+        return $this->do_email($email_msg , 'Your Onitshamarket Order - ' . $order_code. ' has been confirmed.', $recipent['email'], 'sales@onitshamarket.com');
         	
     }
 
-    // Send mail to sellers about the orders
+    // Send mail to sellers about the new orders
     function sendSellerOrder( $selleretails ){
 //        $link = lang('sellers_url') . 'orders/';
         $link = "https://seller.onitshamarket.com/orders/";
@@ -145,10 +148,13 @@ class Email_model extends CI_Model {
         $msg .= '</tbody></table></td></tr>';
         $msg .='</table> </td></tr><tr> <td class="content-block aligncenter"> <a href="' .$link. '" style="text-decoration: none;" class="btn-primary">View In Your Dashboard</a> </td></tr>';
         $msg .= '<tr> <td class="content-block aligncenter"> In case of any question or help feel free to contact our customer sales support representatives through <a href="mailto:sales@onitshamarket.com" style="text-decoration: none; color: #0b6427;">sales@onitshamarket.com</a> </td></tr></table> </td></tr></tbody> </table> </td></tr></tbody> </table> <div class="footer"> <table width="100%" cellspacing="0" cellpadding="0"> <tbody> <tr> <td style="text-align: center;"> <img style="width:20px" src="https://www.sendible.com/hs-fs/hubfs/Imported_Blog_Media/facebook.png?width=120&height=120&name=facebook.png" alt="Facebook"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img style="width:20px" src="https://www.sendible.com/hs-fs/hubfs/Imported_Blog_Media/twitter-1.png?width=120&height=120&name=twitter-1.png" alt="Twitter"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img style="width:20px" src="https://www.sendible.com/hs-fs/hubfs/Imported_Blog_Media/sm-icons-instagram-app-icon.png?width=120&height=120&name=sm-icons-instagram-app-icon.png" alt="Instagram"/> </td></tr><tr> <td style="font-family:\'Open Sans\', Arial, sans-serif; font-size:11px; line-height:18px; color:#999999;" valign="top" align="center"><a href="#" target="_blank" style="color:#999999; text-decoration:underline;">PRIVACY STATEMENT</a> | <a href="#" target="_blank" style="color:#999999; text-decoration:underline;">TERMS OF SERVICE</a> | <a href="#" target="_blank" style="color:#999999; text-decoration:underline;">RETURNS</a><br>© 2018 Onitshamarket.com. All Rights Reserved.<br>If you do not wish to receive any further emails from us, please <a href="#" target="_blank" style="text-decoration:none; color:#999999;">unsubscribe</a> </td></tr></tbody> </table> </div></div></td><td></td></tr></table></body></html>';
-        return $this->do_email($msg , 'Congrats! New Order Request. ' , $selleretails['email'], 'philo4u2c@gmail.com');
+        return $this->do_email($msg , 'Congrats! New Order Request. ' , $selleretails['email'], 'sales@onitshamarket.com');
     }
 
 
+    /*
+     *Send payment uncompleted notifucation to buyer
+     * */
     function paymentUncompleted( $order_code , $uid, $buyer ){
         $orders = $this->get_my_lastorders( $order_code, $uid);
         //  head
@@ -177,7 +183,7 @@ class Email_model extends CI_Model {
         $msg .= '</table> </td></tr><tr> <td class="content-block aligncenter"> <a href="'. base_url() .'" class="btn-primary">Continue Shopping</a> </td></tr><tr> <td class="content-block aligncenter"> In case of any question or help feel free to contact our sales support representatives through <span style="text-decoration: none; color: #0b6427;">sales@onitshamarket.com</span> </td></tr></table> </td></tr>';
         // Body end
         $msg .= '</tbody> </table> </td></tr></tbody> </table> <div class="footer"> <table width="100%" cellspacing="0" cellpadding="0"> <tbody> <tr> <td style="text-align: center;"> <img style="width:20px" src="https://www.sendible.com/hs-fs/hubfs/Imported_Blog_Media/facebook.png?width=120&height=120&name=facebook.png" alt="Facebook"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img style="width:20px" src="https://www.sendible.com/hs-fs/hubfs/Imported_Blog_Media/twitter-1.png?width=120&height=120&name=twitter-1.png" alt="Twitter"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img style="width:20px" src="https://www.sendible.com/hs-fs/hubfs/Imported_Blog_Media/sm-icons-instagram-app-icon.png?width=120&height=120&name=sm-icons-instagram-app-icon.png" alt="Instagram"/> </td></tr><tr> <td style="font-family:\'Open Sans\', Arial, sans-serif; font-size:11px; line-height:18px; color:#999999;" valign="top" align="center"><a href="#" target="_blank" style="color:#999999; text-decoration:underline;">PRIVACY STATEMENT</a> | <a href="#" target="_blank" style="color:#999999; text-decoration:underline;">TERMS OF SERVICE</a> | <a href="#" target="_blank" style="color:#999999; text-decoration:underline;">RETURNS</a><br>© 2018 Onitshamarket.com. All Rights Reserved.<br>If you do not wish to receive any further emails from us, please <a href="#" target="_blank" style="text-decoration:none; color:#999999;">unsubscribe</a> </td></tr></tbody> </table> </div></div></td><td></td></tr></table></body></html>';
-        return $this->do_email($msg, 'Your Order - '. $order_code .' payment could not be completed.', $buyer['email'], 'philo4u2c@gmail.com');
+        return $this->do_email($msg, 'Your Order - '. $order_code .' payment could not be completed.', $buyer['email'], 'sales@onitshamarket.com');
 
     }
     /***custom email sender****/
@@ -197,14 +203,12 @@ class Email_model extends CI_Model {
         $this->email->initialize($config);
         $system_name	=	lang('app_name');
         if($from == NULL)
-            $from		=	lang('notify_email');
-
+            $from		=	'noreply@onitshamarket.com';
         $this->email->from($from, $system_name);
         $this->email->to($to);
         $this->email->subject($sub);
         $this->email->message($msg);
         $this->email->send();
         return true;
-
     }
 }

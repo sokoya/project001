@@ -657,9 +657,16 @@ Class Product_model extends CI_Model{
      * @param $address_id
      * @return mixed
      */
-    function get_billing_amount($address_id ){
-        $select = "SELECT b.aid, a.price FROM billing_address b LEFT JOIN area a ON (b.aid = a.id ) WHERE b.id = {$address_id}";
-        return $this->db->query( $select )->row()->price;
+    function get_billing_amount($id, $type = 'billing' ){
+        if( $type == 'pickup' ){
+            // Getting result for pickup
+            $select = "SELECT charge FROM pickup_address WHERE id = {$id}";
+            return $this->db->query( $select )->row()->charge;
+        }else{
+            $select = "SELECT b.aid, a.price FROM billing_address b LEFT JOIN area a ON (b.aid = a.id ) WHERE b.id = {$id}";
+            return $this->db->query( $select )->row()->price;
+        }
+
     }
 
     /*

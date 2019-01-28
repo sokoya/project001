@@ -110,6 +110,16 @@ class Checkout extends MY_Controller
 	function checkout_confirm() {
 //        $this->session->unset_tempdata('item');
 	    if( $this->input->is_ajax_request() ){
+	        /*
+             * Note the seller might have checked pickup address or billing address
+             *
+             * An example of selecting pickup address
+             * pickup_address	3
+               payment_method	1
+               total_charge	16900
+               qty	1
+               delivery_charge	500
+             * */
 
             $address_id = cleanit( $this->input->post('selected_address', true) );
             $billing_amount = $this->product->get_billing_amount($address_id);
