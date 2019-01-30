@@ -26,14 +26,11 @@ class Product extends MY_Controller
 		$page_data['favourite'] = $this->product->is_favourited($this->session->userdata('logged_id'), $index);
 		$page_data['likes'] = $this->product->get_also_likes($index);
 		$page_data['category_detail'] = $this->product->single_category_detail($page_data['product']->category_id);
-		if ($page_data['category_detail']) {
-			$page_data['description'] = $page_data['category_detail']->description;
-		} else {
-			$page_data['description'] = DESCRIPTION;
-		}
-		$page_data['title'] = 'Buy ' . $page_data['product']->product_name;
-		$page_data['keywords'] = $page_data['title'] . ' , ' . $page_data['product']->brand_name;
-		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
+        $page_data['title'] = 'Buy ' . $page_data['product']->product_name;
+        $page_data['keywords'] = $page_data['title'] . ' , ' . $page_data['product']->brand_name;
+        if ($page_data['category_detail']) { $page_data['description'] = $page_data['title'] . ' ' . $page_data['category_detail']->description;
+        } else { $page_data['description'] = DESCRIPTION; }
+        $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 		// $this->add_count($index);
 		$page_data['page'] = 'product';
 		$page_data['rating_counts'] = $this->product->get_rating_counts($index);
@@ -44,6 +41,7 @@ class Product extends MY_Controller
         }else{
             // Browser history
         }
+        $page_data['questions'] = $this->product->get_results('qna', "*", "( status = 'approved') ");
         $this->add_count($page_data['product']->id);
 		$page_data['page'] = 'product';
         $page_data['reviews'] = $this->product->get_reviews($index);
@@ -154,7 +152,6 @@ class Product extends MY_Controller
                 "secure" => false
             );
             $this->input->set_cookie($cookie);
-            // set
             $this->product->set_field('products', 'views','views+1',array('id' => $id));
         }
     }

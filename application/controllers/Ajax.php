@@ -336,4 +336,39 @@ class Ajax extends CI_Controller
         }
     }
 
+    function upvote(){
+
+        $respond = array('status' => 'error');
+        if( $this->input->is_ajax_request() && $this->input->post()){
+            $qid = $this->input->post('qid', true);
+            $this->load->helper('cookie');
+            $check_visitor = $this->input->cookie($qid, FALSE);
+            $ip = $this->input->ip_address();
+            $expire = (int) 98000;
+            if( $check_visitor == false ){
+                $cookie = array(
+                    'name'      => $qid,
+                    'value'     => $ip,
+                    'expire'    => $expire,
+                    'secure'    => false,
+                    'domain'    => base_url(),
+                    'httponly'  => true
+                );
+                $this->input->set_cookie( $cookie );
+                if( $this->product->set_field('qna', 'upvotes', 'upvotes+1', array('id' => $qid) ) ){
+                    $respond['status'] = 'success';
+                    $respond['msg'] = 'Feedback has been sent. Thank you.';
+                    echo json_encode( $respond ); exit;
+                }
+            }else{
+                $respond['status'] = 'success';
+                $respond['msg'] = 'Feedback has been sent. Thank you.';
+                echo json_encode( $respond ); exit;
+            }
+        }else{
+            echo json_encode( $respond );  exit;
+        }
+    }
+
+
 }

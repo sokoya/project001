@@ -23,7 +23,10 @@ Class Product_model extends CI_Model{
 
     // Get single product
     function get_product( $id = ''){
-        return $this->db->query('SELECT p.*, u.first_name, u.last_name FROM products AS p LEFT JOIN users AS u ON (p.seller_id = u.id) WHERE p.id = ? ', $id )->row();
+        return $this->db->query('SELECT p.*, u.first_name, u.last_name, v.quantity 
+        FROM products AS p LEFT JOIN users AS u ON (p.seller_id = u.id) 
+        LEFT JOIN (SELECT var.product_id, SUM(var.qty) quantity FROM orders var) AS v ON ( p.id = v.product_id) 
+        WHERE p.id = ? ', $id )->row();
     }
 
     // Get featured_image
@@ -124,13 +127,12 @@ Class Product_model extends CI_Model{
     */
     function slug( $slug ) : array {
         $GLOBALS['array_var'] = array();
-
         $select_category = "SELECT id FROM categories WHERE slug = ? ";
         $query = $this->db->query($select_category, array($slug));
 
         if( $query->num_rows() >= 1 ){
             $id = $query->row()->id;
-            $this->recurssive(  $id );
+            $this->recurssive( $id );
             $array = array_filter($GLOBALS['array_var']);
             $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($array));
             $new_array = array();
@@ -470,7 +472,7 @@ Class Product_model extends CI_Model{
     function set_field( $table, $field, $set, $where ){
         $this->db->where($where);
         $this->db->set($field, $set, false);
-        $this->db->update($table);
+        return $this->db->update($table);
     }
 
     // check if user has bought a product
@@ -768,6 +770,7 @@ Class Product_model extends CI_Model{
         }
         return false;
     }
+
 
 }
 

@@ -13,6 +13,12 @@
         text-align: center;
     }
 
+    .seemore-btn {
+        background: #468c46;
+        color: #fff;
+        border-radius: 0;
+    }
+
     .option-selected, .variation-option:hover {
         outline: 1px solid #0b6427;
         color: #0b6427;
@@ -149,8 +155,7 @@
                                                     reviews</a> <strong></strong>
                                             <?php else : ?>
                                                 <a href="#description-tab">Be the first to rate this product</a>
-                                                <strong> <!-- Number ofsold -->
-                                                    SOLDS</strong>
+                                                <strong><?= is_null($product->quantity) ? 0 : $product->quantity; ?> SOLD</strong>
                                             <?php endif; ?>
 
                                         </p>
@@ -358,8 +363,10 @@
                 <ul class="nav nav-tabs" id="myTab">
                     <li class="active"><a href="#overview" data-toggle="tab"><i class="fa fa-list nav-tab-icon"></i>Overview</a>
                     </li>
+                    <?php if( !empty( $product->product_description) ) : ?>
                     <li><a href="#full-spec" data-toggle="tab"><i class="fa fa-cogs nav-tab-icon"></i>Full Specs</a>
                     </li>
+                    <?php endif; ?>
                     <li><a href="#review" data-toggle="tab"><i class="fa fa-star nav-tab-icon"></i>Rating
                             and
                             Reviews</a>
@@ -376,14 +383,6 @@
                                     <p><?= $product->product_line; ?></p>
                                 </div>
                             <?php endif; ?>
-                            <?php if (!empty($product->product_description)): ?>
-                                <h3 class="product-overview-title pr-over">Product Description</h3>
-                                <div class="product-overview-desc">
-                                    <p style="text-wrap: normal">
-                                        <?= $product->product_description; ?>
-                                    </p>
-                                </div>
-                            <?php endif; ?>
                             <?php if (!empty($product->in_the_box)): ?>
                                 <h3 class="product-overview-title pr-over">What you will find in the box</h3>
                                 <div class="product-overview-desc">
@@ -392,6 +391,33 @@
                                     </p>
                                 </div>
                             <?php endif; ?>
+                            <?php $specifications = json_decode($product->attributes); if (!empty($specifications)) : ?>
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th class="pr-over">Specs:</th>
+                                        <th class="pr-over">Details:</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                    foreach ($specifications as $specification => $specification_value): ?>
+                                        <tr>
+                                            <td class="product-page-features-table-specs"><?= ucwords(trim($specification)); ?></td>
+                                            <td class="product-page-features-table-details">
+                                                <?php
+                                                if (is_array($specification_value)):
+                                                    foreach ($specification_value as $key) echo ucwords(trim($key)) . ', ';
+                                                else: echo ucwords(trim($specification_value));
+                                                endif;
+                                                ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            <?php endif; ?>
+
                             <?php if (!empty($product->certifications)): ?>
                                 <h3 class="product-overview-title pr-over">Certifications</h3>
                                 <div class="product-overview-desc">
@@ -436,36 +462,16 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="full-spec">
-                        <?php $specifications = json_decode($product->attributes); ?>
-                        <?php if (!empty($specifications)) : ?>
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th class="pr-over">Specs:</th>
-                                    <th class="pr-over">Details:</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php
-                                foreach ($specifications as $specification => $specification_value): ?>
-                                    <tr>
-                                        <td class="product-page-features-table-specs"><?= ucwords(trim($specification)); ?></td>
-                                        <td class="product-page-features-table-details">
-                                            <?php
-                                            if (is_array($specification_value)):
-                                                foreach ($specification_value as $key) echo ucwords(trim($key)) . ', ';
-                                            else: echo ucwords(trim($specification_value));
-                                            endif;
-                                            ?>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        <?php else : ?>
-                            <h3 class="text-center text-danger"><strong>Product specification not avaialable for this
-                                    item.</strong></h3>
+
+                        <?php if (!empty($product->product_description)): ?>
+                            <h3 class="product-overview-title pr-over">Product Description</h3>
+                            <div class="product-overview-desc">
+                                <p style="text-wrap: normal">
+                                    <?= $product->product_description; ?>
+                                </p>
+                            </div>
                         <?php endif; ?>
+
                     </div>
                     <div class="tab-pane fade" id="review">
                         <div class="row">
@@ -584,103 +590,50 @@
                     <div class="tab-pane fade" id="customer_qa">
                         <div class="row">
                             <div class="col-md-8 col-md-offset-2">
-                                <form class="product-page-qa-form">
-                                    <div class="row" data-gutter="10">
-                                        <div class="col-md-10">
-                                            <div class="form-group">
-                                                <input class="form-control" type="text"
-                                                       placeholder="Have a question? Feel free to ask."/>
+
+                                <?php if(count( $questions )) :
+                                    $x = 0 ; foreach( $questions as $question ) : ?>
+                                <article class="product-page-qa">
+                                    <div class="product-page-qa-question">
+                                        <p class="product-page-qa-text">
+                                            <?= $question->question ?>
+                                            <a class="product-review-rate pull-right upvote" data-qid="<?= $question->id; ?>" href="javascript:void(0)" title="Find this question helpful?"><i class="fa fa-thumbs-up"></i><?=$question->upvotes;?></a>
+                                        </p>
+                                        <p class="product-page-qa-meta">asked by <?= $question->display_name ?> on <?= neatDate($question->qtimestamp) . ' ' . neatTime($question->qtimestamp); ?></p>
+                                    </div>
+                                    <?php if( !empty( $question->answer)) : ?>
+                                    <div class="product-page-qa-answer">
+                                        <p class="product-page-qa-text"><?= $question->answer; ?></p>
+                                        <p class="product-page-qa-meta">answered on <?= neatDate($question->atimestamp); ?></p>
+                                    </div>
+                                    <?php endif; ?>
+                                    <?php if( $x == 10 ): ?>
+                                    <div class="gap-small">
+                                        <a style="text-decoration: none; color: #fff;"
+                                           href="<?= base_url(urlify($product->product_name, $product->id) . 'reviews'); ?>">
+                                            <button class="btn btn-block seemore-btn">View all question and answers</button>
+                                        </a>
+                                    </div>
+                                    <?php break; endif; ?>
+                                </article>
+                                <?php $x++; endforeach; else:?>
+                                    <div class="gap">
+                                        <h3 class="text-center">No  question have been asked on this product yet, be the first to ask. </h3>
+                                    </div>
+                                    <form class="product-page-qa-form">
+                                        <div class="row" data-gutter="10">
+                                            <div class="col-md-10">
+                                                <div class="form-group">
+                                                    <input class="form-control" type="text" required
+                                                           placeholder="Have a question? Feel free to ask."/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input class="btn btn-primary btn-block qna-btn" type="submit" value="Ask"/>
                                             </div>
                                         </div>
-                                        <div class="col-md-2">
-                                            <input class="btn btn-primary btn-block" type="submit" value="Ask"/>
-                                        </div>
-                                    </div>
-                                </form>
-                                <article class="product-page-qa">
-                                    <div class="product-page-qa-question">
-                                        <p class="product-page-qa-text">Is this the 6.6 inch screen?</p>
-                                        <p class="product-page-qa-meta">asked by Brandon Burgess on 08/14/2015</p>
-                                    </div>
-                                    <div class="product-page-qa-answer">
-                                        <p class="product-page-qa-text">No, this is the 6.4 inch screen</p>
-                                        <p class="product-page-qa-meta">answered on 08/14/2015</p>
-                                    </div>
-                                </article>
-                                <article class="product-page-qa">
-                                    <div class="product-page-qa-question">
-                                        <p class="product-page-qa-text">for those who owns this model phone in USA, may
-                                            I know if this phone has the 4G LTE in Tmobile's network? Thank you in
-                                            advance.</p>
-                                        <p class="product-page-qa-meta">asked by Joseph Watson on 08/14/2015</p>
-                                    </div>
-                                    <div class="product-page-qa-answer">
-                                        <p class="product-page-qa-text">Yes. can use TMobile LTE 1700MHZ.</p>
-                                        <p class="product-page-qa-meta">answered on 08/14/2015</p>
-                                    </div>
-                                </article>
-                                <article class="product-page-qa">
-                                    <div class="product-page-qa-question">
-                                        <p class="product-page-qa-text">I'm from Puerto Rico! this phone work for
-                                            me???</p>
-                                        <p class="product-page-qa-meta">asked by Dylan Taylor on 08/14/2015</p>
-                                    </div>
-                                    <div class="product-page-qa-answer">
-                                        <p class="product-page-qa-text">Yes... It will work with any gsm radio system in
-                                            the world... It does not work, however on any cdma radio system...</p>
-                                        <p class="product-page-qa-meta">answered on 08/14/2015</p>
-                                    </div>
-                                </article>
-                                <article class="product-page-qa">
-                                    <div class="product-page-qa-question">
-                                        <p class="product-page-qa-text">so this phone works on tmobile current network
-                                            ll i have to do is switch the sim card?</p>
-                                        <p class="product-page-qa-meta">asked by Blake Hardacre on 08/14/2015</p>
-                                    </div>
-                                    <div class="product-page-qa-answer">
-                                        <p class="product-page-qa-text">the phone works fine with T-mobile's 4G LTE
-                                            network, all you have to do is get a micro-sim card and insert it to start
-                                            using your phone, if you already have a micro-sim sized card then just plug
-                                            in.</p>
-                                        <p class="product-page-qa-meta">answered on 08/14/2015</p>
-                                    </div>
-                                </article>
-                                <article class="product-page-qa">
-                                    <div class="product-page-qa-question">
-                                        <p class="product-page-qa-text">does it work on the boost mobile network?</p>
-                                        <p class="product-page-qa-meta">asked by Sarah Slater on 08/14/2015</p>
-                                    </div>
-                                    <div class="product-page-qa-answer">
-                                        <p class="product-page-qa-text">It only works on gms networks so you have to
-                                            check I think boost mobile is cmd network like verizon towers not sure</p>
-                                        <p class="product-page-qa-meta">answered on 08/14/2015</p>
-                                    </div>
-                                </article>
-                                <article class="product-page-qa">
-                                    <div class="product-page-qa-question">
-                                        <p class="product-page-qa-text">Is this version waterproof?</p>
-                                        <p class="product-page-qa-meta">asked by Oliver Ross on 08/14/2015</p>
-                                    </div>
-                                    <div class="product-page-qa-answer">
-                                        <p class="product-page-qa-text">All Sony Xperia z lines are water proof the Sony
-                                            Xperia z1,z2,z3,z ultra all of those</p>
-                                        <p class="product-page-qa-meta">answered on 08/14/2015</p>
-                                    </div>
-                                </article>
-                                <article class="product-page-qa">
-                                    <div class="product-page-qa-question">
-                                        <p class="product-page-qa-text">how strong is the phone..does the screen crack
-                                            easily ?</p>
-                                        <p class="product-page-qa-meta">asked by Neil Davidson on 08/14/2015</p>
-                                    </div>
-                                    <div class="product-page-qa-answer">
-                                        <p class="product-page-qa-text">Is strong enough to keep running even if it
-                                            drops a few times, but I reckon if you kick it it Will smash, as any
-                                            smartphone in the World. I had it for 3 months and it hasn't got a
-                                            scratch.</p>
-                                        <p class="product-page-qa-meta">answered on 08/14/2015</p>
-                                    </div>
-                                </article>
+                                    </form>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -748,7 +701,7 @@
                 </div>
             <?php endif; ?>
 
-            <?php if ($this->session->userdata('logged_in')) :
+            <?php if ($this->session->userdata('logged_in')):
                 array_push($excludes, $product->id);
                 $recently_viewed = $this->user->get_recently_viewed($this->session->userdata('logged_id'), $excludes);
                 if ($recently_viewed && count($recently_viewed)) : ?>
@@ -766,7 +719,7 @@
                                         <?php endif; ?>
                                         <div class="product-img-wrap">
                                             <img class="product-img lazy"
-                                                 src="<?= base_url('assets/landing/img/load.gif'); ?>"
+                                                 src="<?= base_url('assets/img/load.gif'); ?>"
                                                  data-src="<?= PRODUCTS_IMAGE_PATH . $viewed->image_name; ?>"
                                                  alt="<?= $viewed->product_name; ?>"
                                                  title="<?= $viewed->product_name; ?>">
@@ -1007,6 +960,23 @@
         } else if (quantity.val() === '0') {
             quantity.val(1)
         }
+    });
+
+    $('.upvote').on('click', function(){
+        var qid = $(this).data('qid');
+        $.ajax({
+            url: base_url + 'ajax/upvote',
+            method: 'POST',
+            data: { qid: qid },
+            success: response => {
+                let parsed_response = JSON.parse(response);
+                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+            },
+            error: () => {
+                notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', error);
+            }
+        })
+
     });
 
     $(document).ready(function () {

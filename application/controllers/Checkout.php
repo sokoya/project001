@@ -8,7 +8,7 @@ class Checkout extends MY_Controller
 		parent::__construct();
 		if (!$this->session->userdata('logged_in')) {
 			$this->session->set_userdata('referred_from', current_url());
-			redirect('login');
+			redirect('login/');
 		}
 		$items = $this->cart->total_items();
 		if (empty( $items )) {
@@ -19,7 +19,7 @@ class Checkout extends MY_Controller
     public function index(){
 	    if( !$this->session->tempdata('checkout') ) {
 	        $this->session->set_flashdata('success_msg', 'Your cart has been updated');
-	        redirect('cart');
+	        redirect('cart/');
         }
 		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 	    $page_data['page'] = 'checkout';
@@ -63,26 +63,26 @@ class Checkout extends MY_Controller
 		$this->form_validation->set_rules('area', 'Area', 'trim|required|xss_clean');
 		if ($this->form_validation->run() == FALSE) {
 			$this->session->set_flashdata('error_msg', 'Please correct the following errors ' . validation_errors());
-			$status['message'] = 'Please correct the following errors ' . validation_errors();
+			$status['msg'] = 'Please correct the following errors ' . validation_errors();
 			echo json_encode($status);
 			exit;
 		} else {
 			$data = array(
-				'first_name' => cleanit($this->input->post('first_name')),
-				'last_name' => cleanit($this->input->post('last_name')),
-				'phone' => cleanit($this->input->post('phone')),
-				'sid' => cleanit($this->input->post('state')),
-				'address' => cleanit($this->input->post('address')),
-				'aid' => cleanit($this->input->post('area')),
+				'first_name' => cleanit($this->input->post('first_name', true)),
+				'last_name' => cleanit($this->input->post('last_name', true)),
+				'phone' => cleanit($this->input->post('phone', true)),
+				'sid' => cleanit($this->input->post('state', true)),
+				'address' => cleanit($this->input->post('address', true)),
+				'aid' => cleanit($this->input->post('area', true)),
 				'uid' => $this->session->userdata('logged_id')
 			);
 			if (is_int($this->user->create_account($data, 'billing_address'))) {
 				$status['status'] = 'success';
-				$status['message'] = 'Success: The address has been added to your account.';
+				$status['msg'] = 'Success: The address has been added to your account.';
 				echo json_encode($status);
 				exit;
 			} else {
-				$status['message'] = 'Success: There was an error adding the address to your account.';
+				$status['msg'] = 'Error: There was an error adding the address to your account.';
 			}
 			echo json_encode($status);
 			exit;
@@ -104,6 +104,7 @@ class Checkout extends MY_Controller
 		exit;
 	}
 
+
     /*
      * Save user orders to the DB
      * */
@@ -120,10 +121,18 @@ class Checkout extends MY_Controller
                qty	1
                delivery_charge	500
              * */
-
-            $address_id = cleanit( $this->input->post('selected_address', true) );
-            $billing_amount = $this->product->get_billing_amount($address_id);
-            if( !$billing_amount ) $billing_amount = 500; // Default Billnng Address
+            $charge = 0;
+            // Check either pickup or delivery
+            $pickup_id = $this->input->post('pickup_address');
+            $is_delivery = false;
+            if( $pickup_id ) {
+                $charge = $this->product->get_billing_amount($pickup_id, 'pickup');
+            }else{
+                $is_delivery = true;
+                $address_id = cleanit( $this->input->post('selected_address', true) );
+                $charge = $this->product->get_billing_amount($address_id);
+            }
+            if( $charge == 0 ) $charge = 500;
 
             $error = $subtotal = 0; $data = $return = array();
             $order_code = $this->product->generate_code('orders', 'order_code');
@@ -135,7 +144,7 @@ class Checkout extends MY_Controller
 //            first_name=&last_name=&phone=&address=&state=&selected_address=6&payment_method=1&total_charge=601800&delivery_charge=1800
             $payment_method = $this->input->post('payment_method', true);
             $qty = $this->input->post('qty', true);
-            $billing_amount = $billing_amount * $qty;
+            $billing_amount = $charge * $qty;
             $buyer_id = $this->session->userdata('logged_id');
             foreach( $this->cart->contents() as $product ){
 
@@ -169,7 +178,13 @@ class Checkout extends MY_Controller
                     $data['product_id'] = $product['id'];
                     $data['qty'] = $product['qty'];
                     $data['product_variation_id'] = $product['options']['variation_id'];
-                    $data['billing_address_id'] = $address_id;
+                    if( $is_delivery ) {
+                        $data['pickup_location_id'] = $pickup_id;
+                        $data['billing_address_id'] = '';
+                    }else{
+                        $data['pickup_location_id'] = '';
+                        $data['billing_address_id'] = $address_id;
+                    }
                     $data['delivery_charge'] = $billing_amount;
                     $data['commission'] = $commission;
                     $data['amount'] = $product['price'];
@@ -323,7 +338,7 @@ class Checkout extends MY_Controller
                 }
             }else{
                 $this->session->userdata('error_msg', "Invalid Transaction Token.");
-                redirect('checkout');
+                redirect('checkout/');
             }
         }else{
             // Payment uncompleted

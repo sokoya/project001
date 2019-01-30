@@ -42,12 +42,17 @@
                         <div class="panel-body" id="register_address" style="display: none">
                             <div class="row">
                                 <div class="col-md-12">
+                                    <div class="gap-top col-md-10 col-md-offset-1">
+                                        <div class="alert alert-warning">
+                                            <p class="text-center">Billing address is where you will like us to deliver the item(s) to.</p>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group ">
                                                 <label class="checkout-form-input-label" for="first_name">First
                                                     Name:</label>
-                                                <input type="text" class="form-control checkout-form-input" id="fname"
+                                                <input type="text" title="Your first name" class="form-control checkout-form-input" id="fname"
                                                        name="first_name" required="">
                                             </div>
                                         </div>
@@ -78,6 +83,7 @@
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <label class="checkout-form-input-label" for="state">State</label>
+
                                                     <select class="form-control checkout-form-input" id="state"
                                                             name="state"
                                                             required="">
@@ -89,7 +95,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <div class="form-group">
-                                                    <label class="checkout-form-input-label" for="city">City</label>
+                                                    <label class="checkout-form-input-label" for="city">City ( Select the city we cover at the moment )</label>
                                                     <select class="form-control checkout-form-input" id="city"
                                                             name="area"
                                                             required="">
@@ -99,12 +105,12 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6 col-xs-4 col-sm-4">
+                                        <div class="col-md-6">
                                             <button type="button" class="btn btn-primary btn-block create-address-btn">
                                                 Submit
                                             </button>
                                         </div>
-                                        <div class="col-md-6 col-xs-4 col-sm-4 col-sm-push-4 pull-right">
+                                        <div class="col-md-6">
                                             <button type="button" class="btn btn-warning btn-block cancel-btn">
                                                 Cancel
                                             </button>
@@ -116,14 +122,20 @@
                         <div class="panel-body" id="pickup_address" style="display: none;">
                             <div class="row" id="pickup_address_box">
                                 <?php if ($pickups) : ?>
+                                    <div class="gap-top col-md-10 col-md-offset-1">
+                                        <div class="alert alert-warning">
+                                            <p class="text-center"> Alternatively, you can select any of our pickup address where it will be convenient for you to pickup the item(s).</p>
+                                        </div>
+                                    </div>
                                     <?php foreach ($pickups as $pickup) : ?>
                                         <div class="col-md-6">
-                                            <div class="panel panel-default custom-panel pickup-address custom-panel-active"
-                                                 data-id="<?= $pickup->id; ?>">
+                                            <div class="panel panel-default custom-panel pickup-address"
+                                                 data-paddress="<?= $pickup->title . ' ' . $pickup->address; ?>"
+                                                 data-id="<?= $pickup->id; ?>" data-pamount="<?= $pickup->charge; ?>">
                                                 <div class="panel-heading sub-custom-panel-head">
-                                                    <h3 class="panel-title">
+                                                    <div class="panel-title">
                                                         <div class="form-check">
-                                                            <input class="form-check-input delivery-box" type="radio"
+                                                            <input title="Select Pickup Location" class="form-check-input delivery-box" type="radio"
                                                                    name="pickup_address"
                                                                    id="pickup_id_<?= $pickup->id; ?>"
                                                                    value="Pickup Address">
@@ -132,7 +144,7 @@
                                                                 Select this pickup address
                                                             </label>
                                                         </div>
-                                                    </h3>
+                                                    </div>
                                                 </div>
                                                 <div class="panel-body">
                                                     <div style="height:28px;">
@@ -171,9 +183,8 @@
                             <?php
                             if (!$address_set):
                                 ?>
-                                <div class="alert alert-warning text-center delivery-warning">Select an existing address or
-                                    create a new address
-                                    to continue
+                                <div class="alert alert-warning text-center delivery-warning">You need to select an existing billing address of create a new one.
+                                    <button class="btn-custom-primary btn-new-address"><strong>Add New Delivery Address</strong></button>
                                 </div>
                             <?php endif; ?>
                             <div id="processing"
@@ -192,19 +203,13 @@
                                     if ($addresses) :
                                         foreach ($addresses as $address) : ?>
                                             <div class="col-md-6">
-                                                <div class="panel panel-default custom-panel pickup-address
-                                            <?php
-                                                if ($address->primary_address == 1) :
-                                                    ?>
-                                                custom-panel-active
-                                            <?php
-                                                endif;
-                                                ?>"
+                                                <div class="panel panel-default custom-panel delivery-address
+                                                <?= ($address->primary_address == 1) ? 'custom-panel-active' : '';?>"
                                                      data-id="<?= $address->id; ?>">
                                                     <div class="panel-heading sub-custom-panel-head">
-                                                        <h3 class="panel-title">
+                                                        <div class="panel-title">
                                                             <div class="form-check">
-                                                                <input class="form-check-input delivery-box address-input"
+                                                                <input title="Select this as your primary delivery address" class="form-check-input delivery-box address-input"
                                                                        type="radio"
                                                                        name="selected_address"
                                                                        id="<?= $address->id; ?>"
@@ -214,8 +219,8 @@
                                                                     Select this address
                                                                 </label>
                                                             </div>
-                                                            <span>Edit</span>
-                                                        </h3>
+                                                            <span class="delete-delivery" data-bid="<?= $address->id; ?>">Delete</span>
+                                                        </div>
                                                     </div>
                                                     <div class="panel-body">
                                                         <p class="panel-details"><i

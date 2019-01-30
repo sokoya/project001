@@ -23,23 +23,18 @@
                         <div class="panel-heading custom-panel-head">
                             <h3 class="panel-title"><i class="fa fa-truck"></i>&nbsp;&nbsp; Delivery / Pickup Method
                                 <button class="btn-custom-primary btn-pickup-address">Select Pickup Location</button>
-                                <button class="btn-custom-primary btn-new-address">Add New Delivery Address</button>
+                                <button class="btn-custom-primary btn-new-address">Add New Address</button>
                             </h3>
                         </div>
                         <div class="panel-body" id="register_address" style="display: none">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="gap-top col-md-10 col-md-offset-1">
-                                        <div class="alert alert-warning">
-                                            <p class="text-center">Billing address is where you will like us to deliver the item(s) to.</p>
-                                        </div>
-                                    </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group ">
                                                 <label class="checkout-form-input-label" for="first_name">First
                                                     Name:</label>
-                                                <input type="text" title="Your first name" class="form-control checkout-form-input" id="fname"
+                                                <input type="text" class="form-control checkout-form-input" id="fname"
                                                        name="first_name" required="">
                                             </div>
                                         </div>
@@ -70,7 +65,6 @@
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <label class="checkout-form-input-label" for="state">State</label>
-
                                                     <select class="form-control checkout-form-input" id="state"
                                                             name="state"
                                                             required="">
@@ -82,7 +76,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <div class="form-group">
-                                                    <label class="checkout-form-input-label" for="city">City ( Select the city we cover at the moment )</label>
+                                                    <label class="checkout-form-input-label" for="city">City</label>
                                                     <select class="form-control checkout-form-input" id="city"
                                                             name="area"
                                                             required="">
@@ -109,20 +103,21 @@
                         <div class="panel-body" id="pickup_address" style="display: none;">
                             <div class="row" id="pickup_address_box">
                                 <?php if ($pickups) : ?>
-                                    <div class="gap-top col-md-10 col-md-offset-1">
-                                        <div class="alert alert-warning">
-                                            <p class="text-center"> Alternatively, you can select any of our pickup address where it will be convenient for you to pickup the item(s).</p>
-                                        </div>
+                                <div class="gap-top col-md-10 col-md-offset-1">
+                                    <div class="alert alert-warning">
+                                        <p>
+                                            <h5> Alternatively, you can select any of our pickup address where it will be convenient for you to pickup the item(s).</h5>
+                                        </p>
                                     </div>
+                                </div>
                                     <?php foreach ($pickups as $pickup) : ?>
                                         <div class="col-md-6">
                                             <div class="panel panel-default custom-panel pickup-address"
-                                                 data-paddress="<?= $pickup->title . ' ' . $pickup->address; ?>"
-                                                 data-id="<?= $pickup->id; ?>" data-pamount="<?= $pickup->charge; ?>">
+                                                    data-id="<?= $pickup->id; ?>">
                                                 <div class="panel-heading sub-custom-panel-head">
-                                                    <div class="panel-title">
+                                                    <h3 class="panel-title">
                                                         <div class="form-check">
-                                                            <input title="Select Pickup Location" class="form-check-input pickup-location" type="radio"
+                                                            <input class="form-check-input pickup-location" type="radio"
                                                                    name="pickup_address"
                                                                    id="pickup_id_<?= $pickup->id; ?>"
                                                                    value="<?= $pickup->id; ?>">
@@ -131,7 +126,7 @@
                                                                 Select this pickup address
                                                             </label>
                                                         </div>
-                                                    </div>
+                                                    </h3>
                                                 </div>
                                                 <div class="panel-body">
                                                     <div style="height:28px;">
@@ -170,8 +165,10 @@
                             <?php
                             if (!$address_set):
                                 ?>
-                                <div class="alert alert-warning text-center delivery-warning">You need to select an existing billing address of create a new one.
-                                    <button class="btn-custom-primary btn-new-address"><strong>Add New Delivery Address</strong></button>
+                                <div class="alert alert-warning text-center delivery-warning">Select an existing address
+                                    or
+                                    create a new address
+                                    to continue. Alternatively, you can choose any of our pickup address.
                                 </div>
                             <?php endif; ?>
                             <div id="processing"
@@ -185,17 +182,13 @@
                                 </div>
                             </div>
                             <div class="row" id="delivery_address_box">
-                                <?php
-                                if ($addresses) :
-                                    foreach ($addresses as $address) : ?>
+                                <?php if ($addresses) : foreach ($addresses as $address) : ?>
                                         <div class="col-md-6">
-                                            <div class="panel panel-default custom-panel delivery-address
-                                                <?= ($address->primary_address == 1) ? 'custom-panel-active' : '';?>"
-                                                 data-id="<?= $address->id; ?>">
+                                            <div class="panel panel-default custom-panel delivery-address <?= ($address->primary_address == 1) ? 'custom-panel-active' : ''; ?> data-id='<?= trim($address->id); ?>'" >
                                                 <div class="panel-heading sub-custom-panel-head">
                                                     <div class="panel-title">
                                                         <div class="form-check">
-                                                            <input title="Select this as your primary delivery address" class="form-check-input address-box address-input"
+                                                            <input class="form-check-input address-box address-input"
                                                                    type="radio"
                                                                    name="selected_address"
                                                                    id="<?= $address->id; ?>"
@@ -205,27 +198,22 @@
                                                                 Select this address
                                                             </label>
                                                         </div>
-                                                        <span class="delete-delivery" data-bid="<?= $address->id; ?>">Delete</span>
+                                                        <span class="delete-address" data-aid="<?= $address->id; ?>">Delete</span>
                                                     </div>
                                                 </div>
                                                 <div class="panel-body">
-                                                    <p class="panel-details"><i
-                                                                class="fa fa-user"></i><?= ucfirst($address->first_name) . ' ' . ucfirst($address->last_name) ?>
+                                                    <p class="panel-details"><i class="fa fa-user"></i><?= ucfirst($address->first_name) . ' ' . ucfirst($address->last_name) ?>
                                                     </p>
                                                     <div style="height:28px;">
-                                                        <p class="panel-details" title="<?= $address->address ?>"><i
-                                                                    class="fa fa-map-marker"></i><?= character_limiter($address->address, 38); ?>
+                                                        <p class="panel-details" title="<?= $address->address ?>"><i class="fa fa-map-marker"></i><?= character_limiter($address->address, 38); ?>
                                                         </p>
                                                     </div>
-                                                    <p class="panel-details"><i
-                                                                class="fa fa-phone"></i><?= $address->phone; ?> <?= !empty($address->phone2) ? ',' . $address->phone2 : ''; ?>
+                                                    <p class="panel-details"><i class="fa fa-phone"></i><?= $address->phone; ?> <?= !empty($address->phone2) ? ',' . $address->phone2 : ''; ?>
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
-                                    <?php
-                                    endforeach;
-                                endif; ?>
+                                <?php endforeach; endif; ?>
                             </div>
                         </div>
                     </div>
@@ -243,7 +231,7 @@
                                     <div class="panel-body pay-panel">
                                         <div class="form-check">
                                             <p class="form-check-label pay-gate">
-                                                <input title="<?= $method->name; ?>" class="form-check-input payment-radio" type="radio"
+                                                <input class="form-check-input payment-radio" type="radio"
                                                        name="payment_method"
                                                        data-name="<?= trim($method->name); ?>"
                                                        data-pid="<?= $method->id; ?>"
@@ -311,7 +299,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="col-md-4">
                     <div class="cst-overlay"></div>
@@ -370,8 +357,5 @@
 <?php $this->load->view('landing/resources/script'); ?>
 <script src="<?= $this->user->auto_version('assets/js/checkout.js'); ?>"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
-<script>
-
-</script>
 </body>
 </html>

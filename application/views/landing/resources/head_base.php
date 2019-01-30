@@ -5,11 +5,9 @@
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132785278-1"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
-
 		function gtag() {
 			dataLayer.push(arguments);
 		}
-
 		gtag('js', new Date());
 		gtag('config', 'UA-132785278-1');
 	</script>
@@ -27,8 +25,9 @@
 	<meta content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=0" name="viewport"/>
 	<link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400italic,400' rel='stylesheet'
 		  type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
-	<?php if ($page == 'mobile-product' && $this->agent->is_mobile()) : ?>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600|Oxygen' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="<?= base_url('assets/css/offline.css'); ?>">
+    <?php if ($page == 'mobile-product' && $this->agent->is_mobile()) : ?>
 		<link rel="stylesheet" href="<?= $this->user->auto_version('assets/css/owl.carousel.min.css'); ?>">
 	<?php endif; ?>
 	<link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css'); ?>">
@@ -41,7 +40,6 @@
 	<?php endif; ?>
 	<link rel="stylesheet" type="text/css" href="<?= $this->user->auto_version('assets/css/schemes/de-york.css'); ?>"
 		  title="de-york" media="all"/>
-	<link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
 	<link rel="shortcut icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
 	<link rel="icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
 	<link rel="canonical" href="<?= current_url(); ?>"/>
@@ -59,36 +57,26 @@
 		<meta name="twitter:creator" content=""/>
 	<?php endif; ?>
 	<meta name="google-site-verification" content="xGjxCwvClqtUIevfyrQ-HWU7OcjspMEVmXMAPcpzz7Y"/>
-	<script>
-		window.onresize = function (event) {
-			document.location.reload(true);
-		}
-	</script>
 	<style>
-		body {
-			font-family: 'Oxygen', sans-serif !important;
-		}
-
-		.mgt_drop_menu > li {
-			height: 36px !important;
-			line-height: 48px !important;
-		}
-
-		.grey {
-			color: grey;
-		}
-
-		.banner-category {
-			box-shadow: none !important;
-			background: transparent !important;
-
-		.t_drop_menu > li {
-			height: 36px !important;
-			line-height: 48px !important;
-		}
-
-		a:hover, a:active {
-			text-decoration: none !important;
-		}
+		body { font-family: 'Oxygen', sans-serif !important; }
+		.mgt_drop_menu > li { height: 36px !important; line-height: 48px !important; }
+		.grey { color: grey; }
+		.banner-category { box-shadow: none !important; background: transparent !important; }
+        .t_drop_menu > li { height: 36px !important; line-height: 48px !important; }
+        a:hover, a:active { text-decoration: none !important; }
 	</style>
 	<script> let base_url = "<?= base_url(); ?>"</script>
+    <link rel="manifest" href="/manifest.json" />
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+            OneSignal.init({
+                appId: "f6fefe3f-948f-4ef0-ba09-76804a498441",
+                autoRegister: false,
+                notifyButton: {
+                    enable: true,
+                },
+            });
+        });
+    </script>

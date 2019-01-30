@@ -4110,6 +4110,11 @@ header.main {
 	color: #fff;
 	text-decoration: none;
 }
+product-review-rate:visited{
+	background: #486d97;
+	color: #fff;
+	text-decoration: none;
+}
 
 .product-review-rate .fa {
 	margin-right: 3px;

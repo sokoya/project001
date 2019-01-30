@@ -251,7 +251,7 @@
 <?php else : ?>
     <div class="custom-card">
         <div class="container">
-            <a style="text-decoration: none;" href="<?= base_url('catalog/' . $category_detail->slug); ?>"><p
+            <a style="text-decoration: none;" href="<?= base_url('catalog/' . $category_detail->slug.'/'); ?>"><p
                         class="margin-0"><img src="<?= base_url('assets/svg/back.svg'); ?>" alt="Back button"
                                               style="height: 14px; width: 14px; margin-right: 8px;"><span
                             class="redirect-text">Go back to <?= ucwords($category_detail->name); ?></span>
@@ -311,7 +311,7 @@
                             <button type="button"
                                     class="product-page-qty product-page-qty-minus">-
                             </button>
-                            <input data-range="<?= $var->quantity ?>" name="quantity"
+                            <input title="Add" data-range="<?= $var->quantity ?>" name="quantity"
                                    id="quan"
                                    class="product-page-qty product-page-qty-input quantity"
                                    type="text"
@@ -320,8 +320,8 @@
                                     class="product-page-qty product-page-qty-plus">+
                             </button>
                         </li>
-                        <span class="text-sm text-danger" id="quantity-text"></span>
                     </ul>
+                    <span class="text-sm text-danger" id="quantity-text"></span>
                     <input type="hidden" name="seller" class="seller_id"
                            value="<?= $product->seller_id ?>">
 

@@ -49,10 +49,11 @@
                 <?php $this->load->view('landing/msg_view'); ?>
                 <?= form_open('', 'id="cart-form"'); ?>
 
-                <?php $x = 0;
-                $total = 0;
+                <?php $x = 0; $total = 0;
+                $excludes = array(); # This is used to exludes product from recently viewed
                 foreach ($this->cart->contents() as $product): ?>
                     <?php
+                    array_push($excludes, $product['id']);
                     $detail = $this->product->get_cart_details($product['id']);
                     $variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
                     ?>
@@ -183,6 +184,8 @@
                             class="fa fa-long-arrow-right"></i></a>
             </div>
         <?php endif; ?>
+
+
     </div>
     <div class="lds-spinner cst-loader " style="display: none;height:100%;width:100%;">
         <div></div>
@@ -198,7 +201,68 @@
         <div></div>
         <div></div>
     </div>
-    <div style="height:10px;"></div>
+    <div class="gap"></div>
+    <!--  Products recently viewed   -->
+    <?php if ($this->session->userdata('logged_in')) :
+        $recently_viewed = $this->user->get_recently_viewed($this->session->userdata('logged_id'), $excludes);
+        if ($recently_viewed && count($recently_viewed)) : ?>
+            <div class="gap gap-small"></div>
+            <div class="container">
+                <h3 class="widget-title">Products you recently viewed.</h3>
+                <div class="row" data-gutter="15">
+                    <?php foreach ($recently_viewed as $viewed): ?>
+                        <div class="col-md-2">
+                            <div class="product">
+                                <?php if ($viewed->views >= 100): ?>
+                                    <ul class="product-labels">
+                                        <li>hot</li>
+                                    </ul>
+                                <?php endif; ?>
+                                <div class="product-img-wrap">
+                                    <img class="product-img lazy"
+                                         src="<?= base_url('assets/img/load.gif'); ?>"
+                                         data-src="<?= PRODUCTS_IMAGE_PATH . $viewed->image_name; ?>"
+                                         alt="<?= $viewed->product_name; ?>"
+                                         title="<?= $viewed->product_name; ?>">
+                                </div>
+                                <a class="product-link"
+                                   href="<?= base_url(urlify($viewed->product_name, $viewed->id)); ?>"></a>
+                                <div class="product-caption">
+                                    <ul class="product-caption-rating">
+                                        <?php
+                                        $overall_rating = $this->product->get_rating_counts($viewed->id);
+                                        echo rating_star_generator($overall_rating);
+                                        ?>
+                                        <li class="pull-right"><span class="text-danger"
+                                                                     style="font-size: 12px;"><strong><?= $viewed->item_left; ?>
+                                                    left</strong></span></li>
+                                    </ul>
+                                    <h5 class="product-caption-title"><?= character_limiter(ucwords($viewed->product_name), 30, '...'); ?></h5>
+                                    <div class="product-caption-price">
+                                        <?php if (discount_check($viewed->discount_price, $viewed->start_date, $viewed->end_date)) : ?>
+                                            <span class="product-caption-price-new"
+                                                  style="font-size:12px;"><?= ngn($viewed->discount_price); ?></span>
+                                            <span class="product-caption-price-old pull-right"
+                                                  style="font-size:12px;"><?= ngn($viewed->sale_price); ?></span>
+                                        <?php else : ?>
+                                            <span class="product-caption-price-new"
+                                                  style="font-size:12px;"><?= ngn($viewed->sale_price); ?> </span>
+                                        <?php endif; ?>
+                                    </div>
+                                    <ul class="product-caption-feature-list">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php
+            // recently_viewed and count
+        endif; ?>
+    <?php endif; ?>
+    <div class="gap"></div>
+
 </div>
 <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
 <?php $this->load->view('landing/resources/mobile/mobile-script'); ?>
