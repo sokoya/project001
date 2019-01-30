@@ -771,6 +771,22 @@ Class Product_model extends CI_Model{
         return false;
     }
 
+    function get_shipping_type( $id, $type ){
+        switch ($type) {
+            case 'shipping':
+                $query = "SELECT CONCAT(b.first_name, ' ', b.lase_name) billingname , CONCAT(b.phone, ' ', b.phone2) billingphone,
+                CONCAT(b.address, ' ', s.name , ', ', a.name) billingaddress FROM billing_address b
+                LEFT JOIN states s ON(s.id = b.sid)
+                LEFT JOIN area a ON(a.id = b.aid) WHERE b.id = ?";
+                return $this->db->query( $query, array( $id ))->row();
+                break;
+            case 'pickup':
+                $query = "SELECT title, phones, emails, address FROM pickup_address WHERE id = ? ";
+                return $this->db->query( $query, array( $id ))->row();
+                break;
+        }
+    }
+
 
 }
 

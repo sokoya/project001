@@ -450,14 +450,12 @@ JOIN products p ON (o.product_id = p.id) WHERE o.order_code = {$order} AND o.buy
      * Get just one single row of the last order to send SMS and mail*/
     function get_last_singleorder($order, $buyer_id)
     {
-        $query = "SELECT o.amount, CONCAT(b.first_name, ' ', b.last_name) billingname, CONCAT(b.phone, ', ', b.phone2) billingphone,
-CONCAT(b.address, ' ', s.name, ', ', a.name) billingaddress, p.name paymentname, o.order_date, o.payment_method,
-se.seller_phone, se.legal_company_name
-FROM orders o LEFT JOIN billing_address b ON(b.id = o.billing_address_id)
-LEFT JOIN states s ON(s.id = b.sid) LEFT JOIN area a ON(a.id = b.aid)
-LEFT JOIN payment_methods p ON (o.payment_method = p.id)
-LEFT JOIN sellers se ON (se.uid = o.seller_id)
-WHERE o.order_code = {$order} AND o.buyer_id = {$buyer_id} ORDER BY o.id DESC LIMIT 1";
+        $query = "SELECT o.amount,o.pickup_location_id, o.billing_address_id, p.name paymentname, o.order_date, o.payment_method,
+        se.seller_phone, se.legal_company_name
+        FROM orders o 
+        LEFT JOIN payment_methods p ON (o.payment_method = p.id)
+        LEFT JOIN sellers se ON (se.uid = o.seller_id)
+        WHERE o.order_code = {$order} AND o.buyer_id = {$buyer_id} ORDER BY o.id DESC LIMIT 1";
         return $this->db->query($query)->row();
     }
 

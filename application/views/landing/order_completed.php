@@ -212,9 +212,19 @@
                         <div class="text-gray-light">INVOICE TO:</div>
                         <h2 class="to"
                             style="font"><?= ucwords($profile->first_name) . ' ' . ucwords($profile->last_name); ?></h2>
-                        <div class="name"><?= $ordersingledetail->billingname; ?></div>
-                        <div class="phone"><?= $ordersingledetail->billingphone; ?></div>
-                        <div class="address"><?= $ordersingledetail->billingaddress; ?>.</div>
+                        <?php if( $ordersingledetail->billing_address_id != 0 ) : $address = $this->product->get_shipping_type( $ordersingledetail->billing_address_id, 'shipping') ?>
+                            <p>
+                                <strong>Shipping Type : </strong> Shipping Address
+                            </p>
+                            <div class="name"><?= $address->billingname; ?></div>
+                            <div class="phone"><?= $address->billingphone; ?></div>
+                            <div class="address"><?= $address->billingaddress; ?>.</div>
+                        <?php else : $address = $this->product->get_shipping_type( $ordersingledetail->pickup_location_id, 'pickup'); ?>
+                            <p> <strong>Shipping Type : </strong> Pickup Location </p>
+                            <div class="name"><?= $address->title; ?></div>
+                            <div class="phone"><?= $address->phones . ' Email : ' . $address->emails; ?></div>
+                            <div class="address"><?= $address->billingaddress; ?>.</div>
+                        <?php endif;?>
                         <div class="email"><a href="mailto:<?= $profile->email; ?>"><?= $profile->email; ?></a></div>
                     </div>
                     <div class="col-md-6 col-xs-12 invoice-details">
@@ -264,7 +274,7 @@
                         </tr>
                         <tr>
                             <td colspan="3"></td>
-                            <td colspan="2">SHIPPING</td>
+                            <td colspan="2">SHIPPING FEE</td>
                             <td><?= ngn($shipping);?></td>
                         </tr>
                         <tr>
