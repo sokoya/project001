@@ -41,7 +41,7 @@ class Product extends MY_Controller
         }else{
             // Browser history
         }
-        $page_data['questions'] = $this->product->get_results('qna', "*", "( status = 'approved') ");
+        $page_data['questions'] = $this->product->get_results('qna', "*", "( status = 'approved' && pid = {$index}) ");
         $this->add_count($page_data['product']->id);
 		$page_data['page'] = 'product';
         $page_data['reviews'] = $this->product->get_reviews($index);
