@@ -169,17 +169,6 @@
                                                     href="#"
                                                     id="pr-seller"><?= ucwords($product->first_name . ' ' . $product->last_name); ?></a>
                                         </p>
-                                        <?php if (!empty($product->dimensions)): ?>
-                                            <span class="text-md text-md-center">
-												<strong>Measurement: </strong><?= $product->dimensions; ?>cm
-                                        	</span>
-                                        <?php endif; ?>
-                                        <?php if (!empty($product->weight)) : ?>
-                                            <br/>
-                                            <span class="text-md text-md-center">
-												<strong>Weight: </strong><?= $product->weight; ?>kg
-											</span>
-                                        <?php endif; ?>
                                     </div>
                                     <div class="col-md-7">
                                         <table class="table table-hover table-striped product-page-features-table">
@@ -358,7 +347,7 @@
             </div>
 
             <!--  Specification details -->
-            <div class="gap"></div>
+            <div class="gap"></div><div class="gap"></div>
             <div class="tabbable product-tabs" id="description-tab">
                 <ul class="nav nav-tabs" id="myTab">
                     <li class="active"><a href="#overview" data-toggle="tab"><i class="fa fa-list nav-tab-icon"></i>Overview</a>
@@ -383,6 +372,19 @@
                                     <p><?= $product->product_line; ?></p>
                                 </div>
                             <?php endif; ?>
+
+                            <?php if (!empty($product->dimensions)): ?>
+                                <span class="text-md text-md-center">
+												<strong>Measurement: </strong><?= $product->dimensions; ?>cm
+                                        	</span>
+                            <?php endif; ?>
+                            <?php if (!empty($product->weight)) : ?>
+                                <br/>
+                                <span class="text-md text-md-center">
+												<strong>Weight: </strong><?= $product->weight; ?>kg
+											</span>
+                            <?php endif; ?>
+                            
                             <?php if (!empty($product->in_the_box)): ?>
                                 <h3 class="product-overview-title pr-over">What you will find in the box</h3>
                                 <div class="product-overview-desc">
