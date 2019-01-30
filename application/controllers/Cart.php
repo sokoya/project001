@@ -13,14 +13,16 @@ class Cart extends MY_Controller
         $page_data['title'] = 'My cart';
         $page_data['page'] = 'cart';
         $this->session->set_tempdata('checkout','checkout_time',600);
-        foreach ($this->cart->contents() as $product){
-            $variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
-            if( $variation_detail->quantity < $product['qty'] ){
-                $qty_array = array('qty' => $variation_detail->quantity , 'rowid' => $product['rowid']);
-                try {
-                    $this->update_cart_item( $qty_array );
-                    $this->session->set_flashdata('success_msg', "Your cart has been updated.");
-                } catch (Exception $e) {
+        if( $this->cart->contents() ) {
+            foreach ($this->cart->contents() as $product){
+                $variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
+                if( $variation_detail && $variation_detail->quantity < $product['qty'] ){
+                    $qty_array = array('qty' => $variation_detail->quantity , 'rowid' => $product['rowid']);
+                    try {
+                        $this->update_cart_item( $qty_array );
+                        $this->session->set_flashdata('success_msg', "Your cart has been updated.");
+                    } catch (Exception $e) {
+                    }
                 }
             }
         }

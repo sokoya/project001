@@ -66,17 +66,13 @@
         a:hover, a:active { text-decoration: none !important; }
 	</style>
 	<script> let base_url = "<?= base_url(); ?>"</script>
-    <link rel="manifest" href="/manifest.json" />
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-    <script>
-        var OneSignal = window.OneSignal || [];
-        OneSignal.push(function() {
-            OneSignal.init({
-                appId: "f6fefe3f-948f-4ef0-ba09-76804a498441",
-                autoRegister: false,
-                notifyButton: {
-                    enable: true,
-                },
-            });
-        });
-    </script>
+<!--    <link rel="manifest" href="/manifest.json" />-->
+<!--    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>-->
+<!--    <script>-->
+<!--        var OneSignal = window.OneSignal || [];-->
+<!--        OneSignal.push(function() {-->
+<!--            OneSignal.init({-->
+<!--                appId: "f6fefe3f-948f-4ef0-ba09-76804a498441",-->
+<!--            });-->
+<!--        });-->
+<!--    </script>-->

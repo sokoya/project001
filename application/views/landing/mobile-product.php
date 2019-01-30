@@ -387,12 +387,12 @@
 
             <?php if ($this->session->userdata('logged_in')) : ?>
                 <?php if (!$favourite): ?>
-                    <p class="wishlist-cta">Add to Wishlist</p>
+                    <p style="cursor: pointer;" class="wishlist-cta">Add to Wishlist</p>
                 <?php else: ?>
-                    <p class="wishlist-cta">Remove from Wishlist</p>
+                    <p style="cursor: pointer;" class="wishlist-cta">Remove from Wishlist</p>
                 <?php endif; ?>
             <?php else: ?>
-                <a style="text-decoration: none" href="<?= base_url('login') ?>"><p class="wishlist-cta">Add to
+                <a style="text-decoration: none; cursor: pointer;" href="<?= base_url('login') ?>"><p class="wishlist-cta">Add to
                         Wishlist</p></a>
             <?php endif; ?>
         </div>
@@ -592,7 +592,6 @@
             center: true,
             items: 2,
             lazyLoad: true,
-
             animateOut: 'slideOutDown',
             animateIn: 'flipInX',
             autoplay: true,

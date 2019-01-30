@@ -348,7 +348,7 @@
             <div class="card-max max-inverse">
                 <div class="row">
                     <div class="col-md-4" style="padding-right: 0; margin-right: -43px !important">
-                        <img class="card-max-side" src="http://localhost/project001/assets/img/home/side.jpg"/>
+                        <img class="card-max-side" src="<?= base_url('assets/img/home/side.jpg'); ?>"/>
                     </div>
                     <div class="col-md-6">
                         <div class="row"
@@ -410,7 +410,7 @@
                     </div>
                 </div>
             </div>
-            <img src="http://localhost/project001/assets/img/home/banner1.png" width="100%">
+            <img src="<?= base_url('assets/img/home/banner1.png'); ?>" width="100%">
         </div>
     <?php endforeach; ?>
 

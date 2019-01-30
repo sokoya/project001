@@ -1,14 +1,14 @@
-<div id="cookieConsent" class="text-center" style="z-index: 999;position: fixed;bottom:5px;width:100%;padding:10px 20px 10px;font-size:12px;background-color:#3b4045;color:#ffffff;display:none;-webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);">
-    <p class="pt-3 pr-2">We use cookies to improve your website experience</p>
-    <a type="button" class="btn btn-primary" style="-webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);border-radius: 0;">Learn more <i
-                class="fa fa-book ml-1"></i></a>
-    <a type="button" class="btn btn-outline-primary cookieConsentOK" style="-webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;border: 1px solid #fff;color:#fff;">That's
-        Fine</a>
-    <a style="top:20px;right:10px;color:#fff;padding: 3px;font-size: 14px;width: 25px;height: 25px;border-radius: 100%;position: absolute;z-index: 22;" href="javascript:;" id="closeCookie"><i class="fa fa-times"></i></a>
-</div>
+<!--<div id="cookieConsent" class="text-center" style="z-index: 999;position: fixed;bottom:5px;width:100%;padding:10px 20px 10px;font-size:12px;background-color:#3b4045;color:#ffffff;display:none;-webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);-->
+<!--    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);">-->
+<!--    <p class="pt-3 pr-2">We use cookies to improve your website experience</p>-->
+<!--    <a type="button" class="btn btn-primary" style="-webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);-->
+<!--    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);border-radius: 0;">Learn more <i-->
+<!--                class="fa fa-book ml-1"></i></a>-->
+<!--    <a type="button" class="btn btn-outline-primary cookieConsentOK" style="-webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);-->
+<!--    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);-webkit-border-radius: 0;-moz-border-radius: 0;border-radius: 0;border: 1px solid #fff;color:#fff;">That's-->
+<!--        Fine</a>-->
+<!--    <a style="top:20px;right:10px;color:#fff;padding: 3px;font-size: 14px;width: 25px;height: 25px;border-radius: 100%;position: absolute;z-index: 22;" href="javascript:;" id="closeCookie"><i class="fa fa-times"></i></a>-->
+<!--</div>-->
 <script>
     if (!base_url) {
         let base_url = "<?= base_url(); ?>";

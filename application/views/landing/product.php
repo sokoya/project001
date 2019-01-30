@@ -805,6 +805,7 @@
     </script>
     <?php $this->load->view('landing/resources/footer'); ?>
 </div>
+
 <?php $this->load->view('landing/resources/script'); ?>
 <script src="<?= base_url('assets/plugins/slick/slick.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/eazyzoom/easyzoom.js') ?>"></script>
