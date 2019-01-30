@@ -1,5 +1,5 @@
 <script src="<?= base_url('assets/js/jquery.js'); ?>"></script>
-<script src="<?= base_url('assets/js/offline.min.js'); ?>"></script>
+<!--<script src="--><?//= base_url('assets/js/offline.min.js'); ?><!--"></script>-->
 <script src="<?= base_url('assets/js/bootstrap.js'); ?>"></script>
 <?php if(!in_array($page, array('login','create','reset_password', 'terms', 'privacy', 'contact', 'agreement', 'contact'))) :?>
 <script src="<?= base_url('assets/js/owl.carousel.min.js'); ?>"></script>

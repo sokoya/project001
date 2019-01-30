@@ -108,7 +108,7 @@
                                                 <img
                                                         style="width:95%"
                                                         src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
-                                                        alt="<?= $product->product_name; ?>"
+                                                        alt="Onitshamarket <?= $category_detail->name; ?>"
                                                         title="<?= ucwords($product->product_name) ?>"/>
                                             </a>
                                         </div>
@@ -374,17 +374,22 @@
                             <?php endif; ?>
 
                             <?php if (!empty($product->dimensions)): ?>
-                                <span class="text-md text-md-center">
-												<strong>Measurement: </strong><?= $product->dimensions; ?>cm
-                                        	</span>
+                                <h3 class="product-overview-title pr-over">Measurement</h3>
+                                <div class="product-overview-desc">
+                                    <p style="text-wrap: normal">
+                                        <?= $product->dimensions; ?>
+                                    </p>
+                                </div>
                             <?php endif; ?>
                             <?php if (!empty($product->weight)) : ?>
-                                <br/>
-                                <span class="text-md text-md-center">
-												<strong>Weight: </strong><?= $product->weight; ?>kg
-											</span>
+                                <h3 class="product-overview-title pr-over">Weight</h3>
+                                <div class="product-overview-desc">
+                                    <p style="text-wrap: normal">
+                                        <?= $product->weight; ?>
+                                    </p>
+                                </div>
                             <?php endif; ?>
-                            
+
                             <?php if (!empty($product->in_the_box)): ?>
                                 <h3 class="product-overview-title pr-over">What you will find in the box</h3>
                                 <div class="product-overview-desc">
