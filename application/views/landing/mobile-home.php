@@ -50,12 +50,9 @@
     <div class="main-slider text-center slider_show" style="height:150px;visibility: hidden;">
         <?php foreach ($sliders as $slider) : ?>
             <a href="<?= $slider->img_link; ?>">
-                <img src="<?= base_url('assets/img/home/homeslide2.png'); ?>" class="img-responsive"
+                <img src="<?= SLIDER_IMAGE_PATH . $slider->image; ?>" class="img-responsive"
                      style="margin:auto;padding:20px;"/>
             </a>
-            <!--                <div class="slide_float"> 85, 49, 79-->
-            <!--                    Low Price Rate Alert<br/><a class="btn btn-shopnow">Shop Now</a>-->
-            <!--                </div>-->
         <?php endforeach; ?>
     </div>
     <div class="gap"></div>

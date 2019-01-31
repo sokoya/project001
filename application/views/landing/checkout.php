@@ -31,7 +31,7 @@
                                 <div class="col-md-12">
                                     <div class="gap-top col-md-10 col-md-offset-1">
                                         <div class="alert alert-warning">
-                                            <p class="text-center">Billing address is where you will like us to deliver the item(s) to.</p>
+                                            <p class="text-center">Select the address you will like us to deliver the goods to.</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -92,12 +92,13 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                             <button type="button" class="btn btn-primary btn-block create-address-btn">
                                                 Submit
                                             </button>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-push-4">
                                             <button type="button" class="btn btn-warning btn-block cancel-btn">
                                                 Cancel
                                             </button>
@@ -159,7 +160,13 @@
                                 <?php endif; ?>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-5">
+                                    <button type="button" class="btn btn-success btn-block cancel-btn">
+                                        Select
+                                    </button>
+                                </div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-5">
                                     <button type="button" class="btn btn-warning btn-block cancel-btn">
                                         Cancel
                                     </button>

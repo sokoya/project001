@@ -24,7 +24,7 @@
             </li>
             <li>
                 <h4 <?php if ($page == 'saved') echo 'class="market-sidebar-active"' ?> ><a
-                            href="<?= base_url('account/saved'); ?>">My Watchlist</a></h4>
+                            href="<?= base_url('account/saved'); ?>">My Wishlist</a></h4>
             </li>
             <li>
                 <h4 <?php if ($page == 'billing') echo 'class="market-sidebar-active"' ?> ><a

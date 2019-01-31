@@ -19,7 +19,7 @@
                 <h4><a href="<?= base_url('account/order_track'); ?>">Track My Order</a></h4>
             </li>
             <li class="list-group-item">
-                <h4><a href="<?= base_url('account/saved'); ?>">My Watchlist</a></h4>
+                <h4><a href="<?= base_url('account/saved'); ?>">My Wishlist</a></h4>
             </li>
             <li class="list-group-item">
                 <h4><a href="<?= base_url('account/billing'); ?>">My Billing Address</a></h4>
