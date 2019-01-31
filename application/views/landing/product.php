@@ -155,7 +155,8 @@
                                                     reviews</a> <strong></strong>
                                             <?php else : ?>
                                                 <a href="#description-tab">Be the first to rate this product</a>
-                                                <strong><?= is_null($product->quantity) ? 0 : $product->quantity; ?> SOLD</strong>
+                                                <strong><?= is_null($product->quantity) ? 0 : $product->quantity; ?>
+                                                    SOLD</strong>
                                             <?php endif; ?>
 
                                         </p>
@@ -347,14 +348,15 @@
             </div>
 
             <!--  Specification details -->
-            <div class="gap"></div><div class="gap"></div>
+            <div class="gap"></div>
+            <div class="gap"></div>
             <div class="tabbable product-tabs" id="description-tab">
                 <ul class="nav nav-tabs" id="myTab">
                     <li class="active"><a href="#overview" data-toggle="tab"><i class="fa fa-list nav-tab-icon"></i>Overview</a>
                     </li>
-                    <?php if( !empty( $product->product_description) ) : ?>
-                    <li><a href="#full-spec" data-toggle="tab"><i class="fa fa-cogs nav-tab-icon"></i>Full Specs</a>
-                    </li>
+                    <?php if (!empty($product->product_description)) : ?>
+                        <li><a href="#full-spec" data-toggle="tab"><i class="fa fa-cogs nav-tab-icon"></i>Full Specs</a>
+                        </li>
                     <?php endif; ?>
                     <li><a href="#review" data-toggle="tab"><i class="fa fa-star nav-tab-icon"></i>Rating
                             and
@@ -398,7 +400,8 @@
                                     </p>
                                 </div>
                             <?php endif; ?>
-                            <?php $specifications = json_decode($product->attributes); if (!empty($specifications)) : ?>
+                            <?php $specifications = json_decode($product->attributes);
+                            if (!empty($specifications)) : ?>
                                 <table class="table">
                                     <thead>
                                     <tr>
@@ -552,7 +555,7 @@
                                                 <label>Display name*</label>
                                                 <input type="text" name="display_name" placeholder="Display name"
                                                        id="review_name"
-                                                       value="<?= ($profile) ? $profile->first_name . ' ' . $profile->last_name : ''; ?>"
+                                                       value="<?= ($profile) ? $profile->first_name . ' ' . $profile->last_name : 'an intended buyer'; ?>"
                                                        class="form-control" required>
                                             </div>
                                         </div>
@@ -597,50 +600,64 @@
                     <div class="tab-pane fade" id="customer_qa">
                         <div class="row">
                             <div class="col-md-8 col-md-offset-2">
-
-                                <?php if(count( $questions )) :
-                                    $x = 0 ; foreach( $questions as $question ) : ?>
-                                <article class="product-page-qa">
-                                    <div class="product-page-qa-question">
-                                        <p class="product-page-qa-text">
-                                            <?= $question->question ?>
-                                            <a class="product-review-rate pull-right upvote" data-qid="<?= $question->id; ?>" href="javascript:void(0)" title="Find this question helpful?"><i class="fa fa-thumbs-up"></i><?=$question->upvotes;?></a>
-                                        </p>
-                                        <p class="product-page-qa-meta">asked by <?= $question->display_name ?> on <?= neatDate($question->qtimestamp) . ' ' . neatTime($question->qtimestamp); ?></p>
-                                    </div>
-                                    <?php if( !empty( $question->answer)) : ?>
-                                    <div class="product-page-qa-answer">
-                                        <p class="product-page-qa-text"><?= $question->answer; ?></p>
-                                        <p class="product-page-qa-meta">answered on <?= neatDate($question->atimestamp); ?></p>
-                                    </div>
-                                    <?php endif; ?>
-                                    <?php if( $x == 10 ): ?>
-                                    <div class="gap-small">
-                                        <a style="text-decoration: none; color: #fff;"
-                                           href="<?= base_url(urlify($product->product_name, $product->id) . 'reviews'); ?>">
-                                            <button class="btn btn-block seemore-btn">View all question and answers</button>
-                                        </a>
-                                    </div>
-                                    <?php break; endif; ?>
-                                </article>
-                                <?php $x++; endforeach; else:?>
+                                <?php if (count($questions) < 1) : ?>
                                     <div class="gap">
-                                        <h3 class="text-center">No  question have been asked on this product yet, be the first to ask. </h3>
+                                        <h4 class="text-center">No question has been asked on this product yet, be the
+                                            first to ask. </h4>
                                     </div>
-                                    <form class="product-page-qa-form">
-                                        <div class="row" data-gutter="10">
-                                            <div class="col-md-10">
-                                                <div class="form-group">
-                                                    <input class="form-control" type="text" required
-                                                           placeholder="Have a question? Feel free to ask."/>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <input class="btn btn-primary btn-block qna-btn" type="submit" value="Ask"/>
+                                <?php endif ?>
+                                <form class="product-page-qa-form" id="question_form" onsubmit="javascript:void(0);">
+                                    <div class="row" data-gutter="10">
+                                        <div class="col-md-10">
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" required id="question"
+                                                       placeholder="Have a question? Feel free to ask."/>
                                             </div>
                                         </div>
-                                    </form>
-                                <?php endif; ?>
+                                        <div class="col-md-2">
+                                            <input class="btn btn-primary btn-block qna-btn"
+                                                   data-user="<?= ($this->session->userdata('logged_in')) ? $profile->first_name .' '.$profile->last_name : 'An Intending Buyer'; ?>"
+                                                   type="submit" value="Ask"/>
+                                        </div>
+                                    </div>
+                                </form>
+                                <?php if (count($questions)):
+                                    $x = 0;
+                                    foreach ($questions as $question) : ?>
+                                        <article class="product-page-qa">
+                                            <div class="product-page-qa-question">
+                                                <p class="product-page-qa-text">
+                                                    <?= $question->question ?>
+                                                    <a class="product-review-rate pull-right upvote"
+                                                       data-qid="<?= $question->id; ?>" href="javascript:void(0)"
+                                                       title="Find this question helpful?"><i
+                                                                class="fa fa-thumbs-up"></i><?= $question->upvotes; ?>
+                                                    </a>
+                                                </p>
+                                                <p class="product-page-qa-meta">asked by <?= $question->display_name ?>
+                                                    on <?= neatDate($question->qtimestamp) . ' ' . neatTime($question->qtimestamp); ?></p>
+                                            </div>
+                                            <?php if (!empty($question->answer)) : ?>
+                                                <div class="product-page-qa-answer">
+                                                    <p class="product-page-qa-text"><?= $question->answer; ?></p>
+                                                    <p class="product-page-qa-meta">answered
+                                                        on <?= neatDate($question->atimestamp); ?></p>
+                                                </div>
+                                            <?php endif; ?>
+                                            <?php if ($x == 10): ?>
+                                                <div class="gap-small">
+                                                    <a style="text-decoration: none; color: #fff;"
+                                                       href="<?= base_url(urlify($product->product_name, $product->id) . 'reviews'); ?>">
+                                                        <button class="btn btn-block seemore-btn">View all question and
+                                                            answers
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                                <?php break; endif; ?>
+                                        </article>
+                                        <?php $x++;
+                                    endforeach;
+                                endif; ?>
                             </div>
                         </div>
                     </div>
@@ -970,21 +987,50 @@
         }
     });
 
-    $('.upvote').on('click', function(){
+    $('.upvote').on('click', function () {
         var qid = $(this).data('qid');
         $.ajax({
             url: base_url + 'ajax/upvote',
             method: 'POST',
-            data: { qid: qid },
+            data: {qid: qid},
             success: response => {
                 let parsed_response = JSON.parse(response);
                 notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
             },
             error: () => {
-                notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', error);
+                notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', "error");
             }
         })
 
+    });
+    $('#question_form').on('submit', function (e) {
+        e.preventDefault()
+        let question = $('#question').val();
+        var btn = $('.qna-btn');
+        btn.value = "Asking...";
+        btn.removeClass('btn-primary').addClass('btn-default');
+        btn.prop('disabled', true);
+        let display_name = btn.data('user');
+        let pid = "<?= $product->id; ?>";
+        $.ajax({
+            url: base_url + 'ajax/ask_a_question',
+            method: 'POST',
+            data: {'pid': pid, 'display_name': display_name, 'question': question},
+            success: response => {
+                let parsed_response = JSON.parse(response);
+                $('#question').val("");
+                btn.prop('disabled', false);
+                btn.value = "Ask";
+                btn.removeClass('btn-default').addClass('btn-primary');
+                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+            },
+            error: () => {
+                notification_message('An error occurred while submitting your question. Try again.', 'fa fa-info-circle', "error");
+                btn.prop('disabled', false);
+                btn.value = "Ask";
+                btn.removeClass('btn-default').addClass('btn-primary');
+            }
+        })
     });
 
     $(document).ready(function () {

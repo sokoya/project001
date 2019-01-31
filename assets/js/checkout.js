@@ -288,6 +288,6 @@ $(function () {
 });
 $('.pay-panel').on('click', function () {
     let self = $(this);
-    $('p.payment_note').hide(300);
-    self.find('p.payment_note').show(300);
+    $('p.payment_note').hide();
+    self.find('p.payment_note').show();
 })
