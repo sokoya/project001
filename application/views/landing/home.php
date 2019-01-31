@@ -272,7 +272,7 @@
             <div>
                 <div style="background-color: rgb(12,23,44)">
                     <div class="container">
-                        <img class="lazy" src="<?= base_url('assets/load.gif'); ?>" data-src="<?= SLIDER_IMAGE_PATH . $slider->image; ?>" alt="Onitshamrket"/>
+                        <img src="<?= SLIDER_IMAGE_PATH . $slider->image; ?>" alt="Onitshamrket"/>
                     </div>
                 </div>
             </div>
@@ -350,9 +350,9 @@
                     <?php foreach( $banners as $banner ) : ?>
                         <?php if(in_array($banner->position, array('left1', 'left2'))) :?>
                             <div class="col-md-4" style="padding-right: 0; margin-right: -43px !important">
-                                <img class="card-max-side"
+                                <img class="card-max-side lazy"
                                      data-src="<?= CATEGORY_IMAGE_PATH . $banner->img ; ?>"
-                                     src="<?= base_url('assets/loaf.gif'); ?>"/>
+                                     src="<?= base_url('assets/load.gif'); ?>"/>
                             </div>
                         <?php endif;?>
                     <?php endforeach; ?>
@@ -364,7 +364,7 @@
                                     <a href="<?= $banner->link; ?>">
                                         <div class="col-md-6">
                                             <div class="max-img">
-                                                <img class="img-responsive"
+                                                <img class="img-responsive lazy"
                                                      data-src="<?= CATEGORY_IMAGE_PATH .  $banner->img;?>"
                                                      src="<?= base_url('assets/load.gif') ?>"/>
                                             </div>
@@ -377,7 +377,7 @@
                             <?php foreach ($banners as $banner): if (in_array($banner->position, array('bottom1', 'bottom2', 'bottom3'))) : ?>
                                 <div class="col-md-4">
                                     <a href="<?= $banner->link; ?>">
-                                        <img class="card-max-shade"
+                                        <img class="card-max-shade lazy"
                                              data-src="<?= CATEGORY_IMAGE_PATH . $banner->img; ?>"
                                              src="<?= base_url('assets/load.gif') ?>"
                                              alt="<?= lang('app_name'); ?>"/>
@@ -393,7 +393,7 @@
                         <?php foreach ($randoms as $random) : ?>
                             <div class="row max-product-row">
                                 <div class="col-md-2">
-                                    <img class="max-card-product-img"
+                                    <img class="max-card-product-img lazy"
                                          src="<?= base_url('assets/img/load.gif'); ?>"
                                          data-src="<?= PRODUCTS_IMAGE_PATH . $random->image_name; ?>"/>
                                 </div>
