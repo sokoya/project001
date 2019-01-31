@@ -272,7 +272,7 @@
             <div>
                 <div style="background-color: rgb(12,23,44)">
                     <div class="container">
-                        <img src="<?= SLIDER_IMAGE_PATH . $slider->image; ?>"/>
+                        <img class="lazy" src="<?= base_url('assets/load.gif'); ?>" data-src="<?= SLIDER_IMAGE_PATH . $slider->image; ?>" alt="Onitshamrket"/>
                     </div>
                 </div>
             </div>
@@ -347,9 +347,15 @@
             <?php $banners = json_decode($category->content); ?>
             <div class="card-max max-inverse">
                 <div class="row">
-                    <div class="col-md-4" style="padding-right: 0; margin-right: -43px !important">
-                        <img class="card-max-side" src="<?= base_url('assets/img/home/side.jpg'); ?>"/>
-                    </div>
+                    <?php foreach( $banners as $banner ) : ?>
+                        <?php if(in_array($banner->position, array('left1', 'left2'))) :?>
+                            <div class="col-md-4" style="padding-right: 0; margin-right: -43px !important">
+                                <img class="card-max-side"
+                                     data-src="<?= CATEGORY_IMAGE_PATH . $banner->img ; ?>"
+                                     src="<?= base_url('assets/loaf.gif'); ?>"/>
+                            </div>
+                        <?php endif;?>
+                    <?php endforeach; ?>
                     <div class="col-md-6">
                         <div class="row"
                              style="border-bottom: 1px solid #dadada; background: url(<?= base_url('assets/img/home/dimension.png') ?>) repeat;">
@@ -359,7 +365,8 @@
                                         <div class="col-md-6">
                                             <div class="max-img">
                                                 <img class="img-responsive"
-                                                     src="<?= base_url('assets/img/home/banner.png') ?>"/>
+                                                     data-src="<?= CATEGORY_IMAGE_PATH .  $banner->img;?>"
+                                                     src="<?= base_url('assets/load.gif') ?>"/>
                                             </div>
                                         </div>
                                     </a>
@@ -371,7 +378,8 @@
                                 <div class="col-md-4">
                                     <a href="<?= $banner->link; ?>">
                                         <img class="card-max-shade"
-                                             src="<?= base_url('assets/img/home/banner.png') ?>"
+                                             data-src="<?= CATEGORY_IMAGE_PATH . $banner->img; ?>"
+                                             src="<?= base_url('assets/load.gif') ?>"
                                              alt="<?= lang('app_name'); ?>"/>
                                         <p class="card-max-shade-text">Swifter Solar Energy</p>
                                     </a>
@@ -384,8 +392,10 @@
                     <div class="col-md-2 max-product-category">
                         <?php foreach ($randoms as $random) : ?>
                             <div class="row max-product-row">
-                                <div class="col-md-2"><img class="max-card-product-img"
-                                                           src="<?= PRODUCTS_IMAGE_PATH . $random->image_name; ?>"/>
+                                <div class="col-md-2">
+                                    <img class="max-card-product-img"
+                                         src="<?= base_url('assets/img/load.gif'); ?>"
+                                         data-src="<?= PRODUCTS_IMAGE_PATH . $random->image_name; ?>"/>
                                 </div>
                                 <a class="max-card-link"
                                    href="<?= base_url(urlify($random->product_name, $random->id)); ?>">
@@ -429,7 +439,15 @@
     <script src="<?= base_url('assets/js/mobile.js'); ?>"></script>
 <?php endif; ?>
 <script src="<?= base_url('assets/plugins/slick/slick.js') ?>"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
+    $(function () {
+        $('.lazy').Lazy({
+            scrollDirection: 'vertical',
+            effect: 'fadeIn',
+            visibleOnly: true
+        });
+    });
     $(document).ready(function () {
         $('.home_slider').css({"visibility": "visible"})
         $('.home_slider').slick({
