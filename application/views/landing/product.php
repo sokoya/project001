@@ -1007,15 +1007,14 @@
         e.preventDefault()
         let question = $('#question').val();
         var btn = $('.qna-btn');
-        btn.value = "Asking...";
+        btn.value = "Processing...";
         btn.removeClass('btn-primary').addClass('btn-default');
         btn.prop('disabled', true);
         let display_name = btn.data('user');
-        let pid = "<?= $product->id; ?>";
         $.ajax({
             url: base_url + 'ajax/ask_a_question',
             method: 'POST',
-            data: {'pid': pid, 'display_name': display_name, 'question': question},
+            data: {'pid': product_id, 'display_name': display_name, 'question': question},
             success: response => {
                 let parsed_response = JSON.parse(response);
                 $('#question').val("");

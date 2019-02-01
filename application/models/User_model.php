@@ -513,7 +513,4 @@ JOIN products p ON (o.product_id = p.id) WHERE o.order_code = {$order} AND o.buy
         endif;
     }
 
-    function ask_a_question($data = array()){
-        return $this->db->insert('qna',$data);
-    }
 }

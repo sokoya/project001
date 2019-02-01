@@ -391,17 +391,21 @@ class Ajax extends CI_Controller
     function ask_a_question()
     {
         if ($this->input->is_ajax_request() && $this->input->post()) {
-            $pid = $this->input->post('pid');
-            $display_name = $this->input->post('display_name');
-            $question = $this->input->post('question');
+            $pid = $this->input->post('pid', true);
+            $display_name = $this->input->post('display_name', true);
+            $question = cleanit($this->input->post('question', true));
             $qtimestamp = get_now();
             $status = "pending";
-            if ($this->user->ask_a_question(array('pid' => $pid, 'display_name' => $display_name, 'question' => $question, 'qtimestamp' => $qtimestamp, 'status' => $status))) {
+            if ($this->product->insert_data('qna',
+                                array('pid' => $pid,
+                                    'display_name' => $display_name,
+                                    'question' => $question,
+                                    'qtimestamp' => $qtimestamp,
+                                    'status' => $status))) {
                 $respond['status'] = 'success';
-                $respond['msg'] = 'Your question has been asked successfully. Thank you.';
+                $respond['msg'] = 'Your question has been submitted. Thank you.';
                 echo json_encode($respond);
             } else {
-                $this->session->set_flashdata('error_msg', 'There was an error performing that action. Contact webmaster');
                 $respond['status'] = 'error';
                 $respond['msg'] = 'An error occurred while submitting your question. Try again.';
                 echo json_encode($respond);
