@@ -47,7 +47,7 @@
     }
 
     .product {
-        min-height: 282px !important;
+        min-height: unset !important;
     }
 </style>
 </head>

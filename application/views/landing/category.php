@@ -4,6 +4,10 @@
         cursor: pointer;
     }
 
+    .product{
+        min-height: unset !important;
+    }
+
     .carrito-checkbox {
         display: block;
         position: relative;
@@ -265,7 +269,7 @@
                                                 <span
                                                         class="text-sm pull-right"><strong>Seller: </strong><?= ucfirst($product->first_name); ?></span>
                                             </ul>
-                                            <h5 class="cs-title"><?= character_limiter(ucwords($product->product_name), 20, '...'); ?></h5>
+                                            <h5 class="cs-title"><?= character_limiter(ucwords($product->product_name), 10, '...'); ?></h5>
                                             <div class="product-caption-price">
 
                                                 <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
