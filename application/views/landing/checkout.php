@@ -92,13 +92,13 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-6">
                                             <button type="button" class="btn btn-primary btn-block create-address-btn">
                                                 Submit
                                             </button>
                                         </div>
-                                        <div class="col-md-2"></div>
-                                        <div class="col-md-push-4">
+<!--                                        <div class="col-md-2"></div>-->
+                                        <div class="col-md-6">
                                             <button type="button" class="btn btn-warning btn-block cancel-btn">
                                                 Cancel
                                             </button>
@@ -197,7 +197,7 @@
                                     foreach ($addresses as $address) : ?>
                                         <div class="col-md-6">
                                             <div class="panel panel-default custom-panel delivery-address
-                                                <?= ($address->primary_address == 1) ? 'custom-panel-active' : '';?>"
+                                                "
                                                  data-id="<?= $address->id; ?>">
                                                 <div class="panel-heading sub-custom-panel-head">
                                                     <div class="panel-title">
@@ -207,7 +207,7 @@
                                                                    name="selected_address"
                                                                    id="<?= $address->id; ?>"
                                                                    value="<?= $address->id; ?>"
-                                                                <?php if ($address->primary_address == 1) echo 'checked' ?> >
+                                                                 >
                                                             <label class="form-check-label" for="<?= $address->id; ?>">
                                                                 Select this address
                                                             </label>

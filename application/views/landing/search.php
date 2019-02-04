@@ -90,7 +90,7 @@
                     Please check your spelling for typographic error.<br />
                     <span class="text-danger">You can also:</span>
                 <ul class="text-center">
-                    <li>Try a different keyword search.</li>
+                    <li style="list-style-type: none">Try a different keyword search.</li>
                 </ul>
                 </p>
                 <p class="text-muted text-sm text-center">You can browse for more product <a
