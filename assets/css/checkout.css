@@ -338,3 +338,8 @@
 	overflow-y: auto;
 	max-height: 300px;
 }
+
+#pickup_address {
+	overflow-y: auto;
+	max-height: 300px !important;
+}
