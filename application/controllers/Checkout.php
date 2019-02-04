@@ -109,20 +109,13 @@ class Checkout extends MY_Controller
      * Save user orders to the DB
      * */
 	function checkout_confirm() {
-//        $this->session->unset_tempdata('item');
 	    if( $this->input->is_ajax_request() ){
 	        /*
              * Note the seller might have checked pickup address or billing address
-             *
-             * An example of selecting pickup address
-             * pickup_address	3
-               payment_method	1
-               total_charge	16900
-               qty	1
-               delivery_charge	500
-             * */
+             */
             $charge = 0;
             // Check either pickup or delivery
+            $pickup_id = $address_id = '';
             $pickup_id = $this->input->post('pickup_address');
             $is_delivery = false;
             if( $pickup_id ) {
@@ -147,10 +140,8 @@ class Checkout extends MY_Controller
             $billing_amount = $charge * $qty;
             $buyer_id = $this->session->userdata('logged_id');
             foreach( $this->cart->contents() as $product ){
-
                 $detail = $this->product->get_cart_details($product['id']);
                 $variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
-
                 if($variation_detail->quantity < 1 || $product['qty'] > $variation_detail->quantity || in_array( $detail->product_status, array('suspended', 'blocked', 'pending' ))){
                     $return['status'] = 'error';
                     $error++;
@@ -178,13 +169,8 @@ class Checkout extends MY_Controller
                     $data['product_id'] = $product['id'];
                     $data['qty'] = $product['qty'];
                     $data['product_variation_id'] = $product['options']['variation_id'];
-                    if( $is_delivery ) {
-                        $data['pickup_location_id'] = $pickup_id;
-                        $data['billing_address_id'] = '';
-                    }else{
-                        $data['pickup_location_id'] = '';
-                        $data['billing_address_id'] = $address_id;
-                    }
+                    $data['pickup_location_id'] = $pickup_id;
+                    $data['billing_address_id'] = $address_id;
                     $data['delivery_charge'] = $billing_amount;
                     $data['commission'] = $commission;
                     $data['amount'] = $product['price'];

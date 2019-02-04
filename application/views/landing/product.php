@@ -940,6 +940,10 @@
     });
 
     $('.add-to-cart').on('click', function () {
+        if( !$(`p.variation-option`).hasClass('option-selected') ){
+            notification_message("Please select a variation.", 'fa fa-info-circle', 'error');
+            return false;
+        }
         let quantity_instance = $('#quan').val();
         let variation_id = selected_variation_id;
         let product_id = $('.product_id').val();

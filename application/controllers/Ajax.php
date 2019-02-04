@@ -119,7 +119,12 @@ class Ajax extends CI_Controller
             $pid = $this->input->post('product_id');
             $results = array();
             $desc = $this->product->get_quick_view_details($pid);
-            $results['description'] = character_limiter($desc->product_description, 278);
+            // check for images in the description
+            $content = preg_replace("/<img[^>]+\>/i", "(image)", $desc->product_description);
+            if( strlen($content) > 300 ) {
+                $content = substr($content, 0, strpos($content, ' ', 300)).'...';
+            }
+            $results['description'] = $content;
             $results['seller'] = $desc->seller_id;
             $variation = $this->product->get_variation($pid);
             $results['default_vid'] = $variation->id;
