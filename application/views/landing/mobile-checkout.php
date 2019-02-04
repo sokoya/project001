@@ -203,8 +203,7 @@
                                     if ($addresses) :
                                         foreach ($addresses as $address) : ?>
                                             <div class="col-md-6">
-                                                <div class="panel panel-default custom-panel delivery-address
-                                                <?= ($address->primary_address == 1) ? 'custom-panel-active' : '';?>"
+                                                <div class="panel panel-default custom-panel delivery-address"
                                                      data-id="<?= $address->id; ?>">
                                                     <div class="panel-heading sub-custom-panel-head">
                                                         <div class="panel-title">
@@ -214,7 +213,7 @@
                                                                        name="selected_address"
                                                                        id="<?= $address->id; ?>"
                                                                        value="<?= $address->id; ?>"
-                                                                    <?php if ($address->primary_address == 1) echo 'checked' ?> >
+                                                                     >
                                                                 <label class="form-check-label" for="<?= $address->id; ?>">
                                                                     Select this address
                                                                 </label>
@@ -247,10 +246,8 @@
                         <div class="panel-heading custom-panel-head">
                             <h3 class="panel-title"><i class="fa fa-credit-card"></i>&nbsp;&nbsp; Payment Method</h3>
                         </div>
-                        <div class="panel-body payment_method_body" style="<?php
-                        if (!$address_set):
-                            ?>display: none
-                        <?php endif; ?>">
+                        <div class="panel-body payment_method_body" style="
+                        display: none;">
                             <?php $x = 1;
                             foreach ($methods as $method) : ?>
                                 <div class="panel panel-default custom-panel pay-method">
