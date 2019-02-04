@@ -342,4 +342,5 @@
 #pickup_address {
 	overflow-y: auto;
 	max-height: 300px !important;
+	padding-bottom: 30px;
 }

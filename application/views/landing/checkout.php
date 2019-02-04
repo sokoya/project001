@@ -122,6 +122,7 @@
 									<?php foreach ($pickups as $pickup) : ?>
 										<div class="col-md-6">
 											<div class="panel panel-default custom-panel pickup-address"
+												 style="padding-bottom: 20px"
 												 data-paddress="<?= $pickup->title . ' ' . $pickup->address; ?>"
 												 data-id="<?= $pickup->id; ?>" data-pamount="<?= $pickup->charge; ?>">
 												<div class="panel-heading sub-custom-panel-head">
