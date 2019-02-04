@@ -28,6 +28,7 @@ class Checkout extends MY_Controller
 		$page_data['user'] = $this->user->get_profile($this->session->userdata('logged_id'));
 		$page_data['addresses'] = $this->user->get_user_billing_address($page_data['user']->id);
 		$page_data['pickups'] = $this->user->get_pickup_address();
+		$page_data['address_set'] = $this->user->is_address_set($page_data['user']->id);
 		$result = $this->user->get_default_address_price($page_data['user']->id);
 		$page_data['delivery_charge'] = (  !$result ) ? 500 : $result;
 		// Lets make a check that the product is valid to be here
