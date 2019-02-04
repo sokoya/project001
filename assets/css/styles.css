@@ -584,8 +584,12 @@ hr {
 }
 
 .lazy {
-	width: 80px!important;
-	margin: auto!important;
+	width: 80px !important;
+	margin: auto !important;
+}
+
+.cat-lazy {
+	width: 100% !important;
 }
 
 .dropdown-menu-category-section-inner {
@@ -625,11 +629,17 @@ hr {
 
 .dropdown-menu-category-list > li > a {
 	color: #595959;
+	font-size: 13px;
 }
 
 .dropdown-menu-category-list > li > a:hover {
 	text-decoration: none;
 	color: #486d97;
+	font-size: 13px;
+}
+
+.navbar-nav > li > .dropdown-menu {
+	margin-top: -2px;
 }
 
 .dropdown-menu-category-list > li > p {
@@ -908,8 +918,6 @@ hr {
 .navbar {
 	padding: 7px;
 }
-
-
 
 .main-header-list > li > a {
 	position: relative;
@@ -1575,6 +1583,7 @@ hr {
 
 .page-breadcrumb > li.active {
 	color: #595959;
+	font-weight: bold;
 }
 
 .page-breadcrumb > li > a {

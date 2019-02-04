@@ -248,7 +248,7 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            <img class="product-img lazy"
+                                            <img class="product-img lazy cat-lazy"
                                                  data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
                                                  style=""
                                                  src="<?= base_url('assets/img/load.gif'); ?>"
