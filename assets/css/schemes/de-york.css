@@ -394,7 +394,10 @@ a,
 
 .src-cover {
 	display: none;
+	width: 100% !important
 }
+
+.market-search{width: 10% !important}
 
 .market-search > .search-header, .market-search > .search-not-found {
 	margin: 0 !important;
@@ -455,8 +458,8 @@ a,
 
 @media (min-width: 480px) {
 	.market-search {
-		width: 91% !important;
-		left: 14px !important;
+		width: 100% !important;
+		left: -35px !important;
 	}
 }
 
@@ -466,33 +469,33 @@ a,
 	}
 }
 
-@media (min-width: 320px) {
-	.market-search {
-		width: 93% !important;
-		left: 14px !important;
-	}
-}
+/*@media (min-width: 320px) {*/
+	/*.market-search {*/
+		/*width: 93% !important;*/
+		/*left: 14px !important;*/
+	/*}*/
+/*}*/
 
-@media (min-width: 801px) {
-	.market-search {
-		width: 93% !important;
-		left: 14px !important;
-	}
-}
+/*@media (min-width: 801px) {*/
+	/*.market-search {*/
+		/*width: 93% !important;*/
+		/*left: 14px !important;*/
+	/*}*/
+/*}*/
 
-@media (min-width: 1025px) {
-	.market-search {
-		width: 82% !important;
-		left: 109px !important;
-	}
-}
+/*@media (min-width: 1025px) {*/
+	/*.market-search {*/
+		/*width: 82% !important;*/
+		/*left: 109px !important;*/
+	/*}*/
+/*}*/
 
-.search-price-discount {
-	text-decoration: line-through;
-	color: #4e4e4e;
-	font-size: 13px;
-	margin-left: 1px;
-}
+/*.search-price-discount {*/
+	/*text-decoration: line-through;*/
+	/*color: #4e4e4e;*/
+	/*font-size: 13px;*/
+	/*margin-left: 1px;*/
+/*}*/
 
 .highlight {
 	color: #000;

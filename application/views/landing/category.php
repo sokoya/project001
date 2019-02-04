@@ -253,8 +253,8 @@
                                             </div>
                                             <img class="product-img lazy"
                                                  data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
-                                                 style="width: 90%;"
-                                                 src="<?= base_url('assets/load.gif'); ?>"
+                                                 style=""
+                                                 src="<?= base_url('assets/img/load.gif'); ?>"
                                                  alt="<?= $product->product_name; ?>"
                                                  title="<?= $product->product_name; ?>">
                                         </div>
