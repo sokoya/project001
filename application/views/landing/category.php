@@ -179,9 +179,7 @@
                         <?php if ($features) : ?>
                             <div class="category-filters-section">
                                 <?php $x = 1;
-                                foreach ($features
-
-                                as $feature => $feature_value) : ?>
+                                foreach ($features as $feature => $feature_value) : ?>
                                 <div class="accordion" id="<?= trim($feature); ?>">
                                     <div class="panel no-outline feature-attribute">
                                         <div class="panel-header feature-attribute">
@@ -217,7 +215,6 @@
                         <?php endif; ?>
                     </aside>
                 </div>
-
                 <div class="col-md-9">
                     <div id="processing"
                          style="display:none;position: center;top: 0;left: 0;width: auto;height: auto%;background: #f4f4f4;z-index: 99;">
