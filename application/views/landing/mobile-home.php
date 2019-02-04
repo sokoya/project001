@@ -72,6 +72,7 @@
             <?php endforeach; ?>
         </div>
     </div>
+    <div class="gap"></div>
 
     <?php foreach ($category_listing as $listing) :
         $products = $this->product->randomproducts((int)$listing->category_id, 12);
