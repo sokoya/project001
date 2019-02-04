@@ -47,7 +47,7 @@
     }
 
     .product {
-        min-height: 282px !important;
+        min-height: unset !important;
     }
 </style>
 </head>
@@ -122,7 +122,7 @@
                             <img
                                     style="max-width:40px;"
                                     src="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
-                                    alt="<?= $product->product_name; ?>"
+                                    alt="<?= character_limiter($product->product_name,10); ?>"
                                     title="<?= ucwords($product->product_name) ?>"/>
                         </div>
                         <?php if (count($galleries) > 1) : ?>
@@ -132,7 +132,7 @@
                                         <img
                                                 style="max-width:40px;"
                                                 src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
-                                                alt="<?= $product->product_name; ?>"
+                                                alt="<?= character_limiter($product->product_name,10); ?>"
                                                 title="<?= ucwords($product->product_name) ?>"/>
                                     </div>
                                 <?php endif; ?>
