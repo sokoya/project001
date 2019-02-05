@@ -458,7 +458,7 @@
             infinite: true,
             speed: 500,
             lazyLoad: 'ondemand',
-            autoplay: false,
+            autoplay: true,
             autoplaySpeed: 3000
         });
     });

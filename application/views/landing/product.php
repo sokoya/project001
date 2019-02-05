@@ -232,27 +232,33 @@
 									<div class="row">
 										<?php if (count($variations) > 0) : ?>
 											<div class="col-md-7">
-												<h5 class="custom-product-page-option-title">Variation:</h5>
-												<div class="row variation-option-list">
-													<?php $qty_stock_check = 0; ?>
-													<?php foreach ($variations as $variation): ?>
-														<div class="col-xs-3">
-															<p title="<?= $variation['variation']; ?>"
-															   data-price="<?= $variation['sale_price']; ?>"
-																<?php if (discount_check($variation['discount_price'], $variation['start_date'], $variation['end_date'])) : ?>
-																	data-discount="<?= $variation['discount_price']; ?>"
-																<?php else : ?>
-																	data-discount="empty"
-																<?php endif; ?>
-															   data-vid="<?= $variation['id'] ?>"
-															   data-quantity='<?= $variation['quantity'] ?>'
-															   data-vname="<?= $variation['variation'] ?>"
-															   class="variation-option <?php if ($variation['quantity'] == 0) echo 'option-disabled'; ?>">
-																<?= trim($variation['variation']); ?>
-															</p>
+												<div class="row">
+													<div class="col-md-3">
+														<h5 class="custom-product-page-option-title">Variation:</h5>
+													</div>
+													<div class="col-md-9">
+														<div class="row variation-option-list">
+															<?php $qty_stock_check = 0; ?>
+															<?php foreach ($variations as $variation): ?>
+																<div class="col-xs-3">
+																	<p title="<?= $variation['variation']; ?>"
+																	   data-price="<?= $variation['sale_price']; ?>"
+																		<?php if (discount_check($variation['discount_price'], $variation['start_date'], $variation['end_date'])) : ?>
+																			data-discount="<?= $variation['discount_price']; ?>"
+																		<?php else : ?>
+																			data-discount="empty"
+																		<?php endif; ?>
+																	   data-vid="<?= $variation['id'] ?>"
+																	   data-quantity='<?= $variation['quantity'] ?>'
+																	   data-vname="<?= $variation['variation'] ?>"
+																	   class="variation-option <?php if ($variation['quantity'] == 0) echo 'option-disabled'; ?>">
+																		<?= trim($variation['variation']); ?>
+																	</p>
+																</div>
+																<?php if ($variation['quantity'] < 1) $qty_stock_check++; ?>
+															<?php endforeach; ?>
 														</div>
-														<?php if ($variation['quantity'] < 1) $qty_stock_check++; ?>
-													<?php endforeach; ?>
+													</div>
 												</div>
 											</div>
 										<?php endif; ?>
