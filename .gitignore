@@ -40,3 +40,4 @@ application/views/landing/np
 
 ## Yuicompressor
 node_modules
+application/config/database.php
