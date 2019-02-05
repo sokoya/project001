@@ -90,7 +90,7 @@
                     Please check your spelling for typographic error.<br />
                     <span class="text-danger">You can also:</span>
                 <ul class="text-center">
-                    <li>Try a different keyword search.</li>
+                    <li style="list-style-type: none">Try a different keyword search.</li>
                 </ul>
                 </p>
                 <p class="text-muted text-sm text-center">You can browse for more product <a
@@ -128,7 +128,7 @@
                                 <li></li>
                                 <?php foreach ($sub_categories as $category) : ?>
                                     <li>
-                                        <a href="<?= base_url('catalog/' . urlify($category->name)); ?>">
+                                        <a href="<?= base_url('catalog/' . urlify($category->name) .'/'); ?>">
                                             <?= $category->name; ?>
                                         </a>
                                     </li>
@@ -171,40 +171,43 @@
                                 <?php endforeach; ?>
                             </div>
                         <?php endif; ?>
-                        <div class="category-filters-section">
-                            <?php foreach ($features as $feature => $feature_value) : ?>
-                            <div class="accordion" id="<?= trim($feature); ?>">
-                                <div class="panel no-outline feature-attribute">
-                                    <div class="panel-header feature-attribute">
-                                        <div class="panel-title" data-toggle="collapse"
-                                             data-target="#<?= trim($feature) . '-1'; ?>" aria-expanded="true"
-                                             aria-controls="<?= trim($feature) . '-1'; ?>">
-                                            <h3 class="widget-title-sm custom-widget-text tree-root">
-                                                <?= preg_replace("/[^A-Za-z 0-9]/", ' ', $feature); ?>
-                                            </h3>
+                        <?php if ($features) : ?>
+                            <div class="category-filters-section">
+                                <?php $x = 1;
+                                foreach ($features as $feature => $feature_value) : ?>
+                                <div class="accordion" id="<?= trim($feature); ?>">
+                                    <div class="panel no-outline feature-attribute">
+                                        <div class="panel-header feature-attribute">
+                                            <div class="panel-title" data-toggle="collapse"
+                                                 data-target="#<?= trim($feature) . '-1'; ?>" aria-expanded="true"
+                                                 aria-controls="<?= trim($feature) . '-1'; ?>">
+                                                <h3 class="widget-title-sm custom-widget-text tree-root">
+                                                    <?= preg_replace("/[^A-Za-z 0-9]/", ' ', $feature); ?>
+                                                </h3>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div id="<?= trim($feature) . '-1'; ?>" class="collapse"
-                                         aria-labeledby="<?= $feature; ?>" data-parent="#<?= trim($feature); ?>">
-                                        <div class="panel-body">
-                                            <?php foreach ($feature_value as $key => $value) : ?>
-                                                <div class="carrito-checkbox">
-                                                    <label class="tree-input">
-                                                        <input class="filter" type="checkbox" name="filterset"
-                                                               data-type="<?= trim($feature); ?>"
-                                                               data-value="<?= trim(preg_replace("/[^A-Za-z0-9-]/", '_', $value)) ?>"/><?= $value; ?>
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </div>
+                                        <div id="<?= trim($feature) . '-1'; ?>" class="collapse"
+                                             aria-labeledby="<?= $feature; ?>" data-parent="#<?= trim($feature); ?>">
+                                            <div class="panel-body">
+                                                <?php foreach ($feature_value as $key => $value) : ?>
+                                                    <div class="carrito-checkbox">
+                                                        <label class="tree-input">
+                                                            <input class="filter" type="checkbox" name="filterset"
+                                                                   data-type="<?= trim($feature); ?>"
+                                                                   data-value="<?= trim(preg_replace("/[^A-Za-z0-9-]/", '_', $value)) ?>"/><?= $value; ?>
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
 
-                                            <?php endforeach; ?>
+                                                <?php endforeach; ?>
+                                            </div>
                                         </div>
+                                        <hr class="tree-line"/>
                                     </div>
-                                    <hr class="tree-line"/>
+                                    <?php endforeach; ?>
                                 </div>
-                                <?php endforeach; ?>
                             </div>
-                        </div>
+                        <?php endif; ?>
                     </aside>
                 </div>
                 <div class="col-md-9">
@@ -213,18 +216,14 @@
                         <div class="text"
                              style="position: absolute;top: 35%;left: 0;height: 100%;width: 100%;font-size: 18px;text-align: center;">
                             <img src="<?= base_url('assets/load.gif'); ?>" alt="Processing...">
-                            Processing your request. <strong
-                                    style="color: rgba(2.399780888618386%,61.74193548387097%,46.81068368248487%,0.843);">Please
-                                Wait! </strong>
+                            Processing your request. <strong style="color: rgba(2.399780888618386%,61.74193548387097%,46.81068368248487%,0.843);">Please Wait! </strong>
                         </div>
                     </div>
                     <div id="category_body">
                         <div class="row filter_data" data-gutter="15">
-                            <?php $p_count = 0;
-                            foreach ($products as $product) : ?>
+                            <?php $p_count = 0; foreach ($products as $product) : ?>
                                 <?php $p_count++; ?>
-                                <div
-                                        class="col-md-3 <?php if ($p_count % 4 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> v-items clearfix">
+                                <div class="col-md-3 <?php if ($p_count % 4 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> v-items clearfix">
                                     <div class="product">
                                         <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
                                             <ul class="product-labels">
@@ -234,8 +233,9 @@
                                         <div class="product-img-wrap">
                                             <div class="product-quick-view-cover">
                                                 <div style="position: relative; left: -50%;">
+                                                    <!--                                                    --><?php //$image_name = explode('/', $product->image_name); ?>
                                                     <button data-title="<?= $product->product_name ?>"
-                                                            data-pr_id="<?= $product->id ?>"
+                                                            data-pr_id="<?= $product->id; ?>"
                                                             data-qv="<?php if ($p_count % 4 == 0) { ?>true<?php } ?>"
                                                             data-qvc="<?php echo $p_count ?>"
                                                             data-image="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
@@ -243,9 +243,10 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            <img class="product-img lazyload"
+                                            <img class="product-img lazy"
                                                  data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
-                                                 src="<?= base_url('assets/load.gif'); ?>"
+                                                 style=""
+                                                 src="<?= base_url('assets/img/load.gif'); ?>"
                                                  alt="<?= $product->product_name; ?>"
                                                  title="<?= $product->product_name; ?>">
                                         </div>
@@ -260,8 +261,9 @@
                                                 <span
                                                         class="text-sm pull-right"><strong>Seller: </strong><?= ucfirst($product->first_name); ?></span>
                                             </ul>
-                                            <h5 class="cs-title"><?= character_limiter(ucwords($product->product_name), 20, '...'); ?></h5>
+                                            <h5 class="cs-title"><?= character_limiter(ucwords($product->product_name), 10, '...'); ?></h5>
                                             <div class="product-caption-price">
+
                                                 <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
                                                     <span class="cs-price-tl"><?= ngn($product->discount_price); ?></span>
                                                     <span class="cs-price-tl-discount"><sup><?= ngn($product->sale_price); ?> </sup></span>
@@ -269,22 +271,31 @@
                                                     <span class="cs-price-tl"><?= ngn($product->sale_price); ?> </span>
                                                 <?php endif; ?>
 
-                                                <?php
-                                                $category_fav = 'category-favorite';
-                                                if ($this->session->userdata('logged_in')) {
-                                                    if ($this->product->is_favourited($profile->id, $product->id)) {
-                                                        $category_fav = 'category-favorite-active';
-                                                    }
-                                                }
-                                                ?>
-                                                <span class="pull-right <?= $category_fav; ?>"><i class="fa fa-heart"
-                                                                                                  title="Add <?= $product->product_name; ?> to your whishlist"></i> &nbsp;</span>
+                                                <?php if( !$this->session->userdata('logged_in')) :?>
+                                                    <a href="<?= base_url('login'); ?>">
+                                                        <span style="margin-right:3px;" class="pull-right category-favorite">
+                                                                <i class="fa fa-heart" title="Add <?= $product->product_name; ?> to your wishlist"></i>
+                                                        </span>
+                                                    </a>
+                                                <?php else :?>
+                                                    <?php if($this->product->is_favourited($profile->id, $product->id)) : ?>
+                                                        <span style="margin-right:3px;" class="pull-right category-favorite wishlist-btn" data-pid="<?= $product->id;?>">
+                                                            <i class="fa fa-heart" title="Remove <?= $product->product_name; ?> from your wishlist"></i>
+                                                        </span>
+                                                    <?php else : ?>
+                                                        <span style="margin-right:3px;" class="pull-right category-favorite wishlist-btn" data-pid="<?= $product->id;?>">
+                                                            <i class="fa fa-heart-o" title="Add <?= $product->product_name; ?> to your wishlist"></i>
+                                                        </span>
+                                                    <?php endif; ?>
+                                                <?php endif; ?>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
                         </div>
+
                         <div class="row">
                             <div class="col-md-6 col-md-offset-3">
                                 <?= $pagination ?>

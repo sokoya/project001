@@ -95,7 +95,7 @@
                 Please check your spelling for typographic error.<br />
                     <span class="text-danger">You can also:</span>
                     <ul class="text-center">
-                        <li>Try a different keyword search.</li>
+                        <li style="list-style-type: none">Try a different keyword search.</li>
                     </ul>
                 </p>
                 <p class="text-muted text-sm text-center">You can browse for more product <a
@@ -179,9 +179,7 @@
                         <?php if ($features) : ?>
                             <div class="category-filters-section">
                                 <?php $x = 1;
-                                foreach ($features
-
-                                as $feature => $feature_value) : ?>
+                                foreach ($features as $feature => $feature_value) : ?>
                                 <div class="accordion" id="<?= trim($feature); ?>">
                                     <div class="panel no-outline feature-attribute">
                                         <div class="panel-header feature-attribute">
@@ -217,7 +215,6 @@
                         <?php endif; ?>
                     </aside>
                 </div>
-
                 <div class="col-md-9">
                     <div id="processing"
                          style="display:none;position: center;top: 0;left: 0;width: auto;height: auto%;background: #f4f4f4;z-index: 99;">
@@ -251,10 +248,10 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            <img class="product-img lazy"
+                                            <img class="product-img lazy cat-lazy"
                                                  data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
-                                                 style="width: 90%;"
-                                                 src="<?= base_url('assets/load.gif'); ?>"
+                                                 style=""
+                                                 src="<?= base_url('assets/img/load.gif'); ?>"
                                                  alt="<?= $product->product_name; ?>"
                                                  title="<?= $product->product_name; ?>">
                                         </div>

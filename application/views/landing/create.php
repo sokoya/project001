@@ -109,7 +109,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" type="text" name="signup-phone" name="phone"
+                                <input class="form-control" type="text" name="phone"
                                        value="<?php if (isset($_POST['phone'])) echo $_POST['phone']; ?>"
                                        placeholder="08022334455" required/>
                             </div>

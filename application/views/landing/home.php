@@ -102,7 +102,7 @@
         font-size: 13px;
         font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
         color: #444;
-        z-index: 100;
+        z-index: 1;
         position: relative;
         top: 45px;
     }
@@ -458,7 +458,7 @@
             infinite: true,
             speed: 500,
             lazyLoad: 'ondemand',
-            autoplay: false,
+            autoplay: true,
             autoplaySpeed: 3000
         });
     });

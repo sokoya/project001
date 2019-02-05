@@ -56,6 +56,7 @@
         <?php endforeach; ?>
     </div>
     <div class="gap"></div>
+    <div class="gap_small"></div>
     <!--    //top categories slider-->
     <div class="container">
         <h5>Top <span style="color:#575745">Categories</span></h5>
@@ -72,7 +73,7 @@
             <?php endforeach; ?>
         </div>
     </div>
-
+    <div class="gap"></div>
     <?php foreach ($category_listing as $listing) :
         $products = $this->product->randomproducts((int)$listing->category_id, 12);
         ?>
