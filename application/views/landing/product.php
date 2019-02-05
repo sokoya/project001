@@ -357,10 +357,10 @@
 			<div class="gap"></div>
 			<div class="tabbable product-tabs" id="description-tab">
 				<ul class="nav nav-tabs" id="myTab">
-					<li class="active"><a href="#overview" data-toggle="tab"><i class="fa fa-list nav-tab-icon"></i>Overview</a>
+					<li class="active"><a href="#overview" data-toggle="tab"><i class="fa fa-cogs nav-tab-icon"></i>Specs</a>
 					</li>
 					<?php if (!empty($product->product_description)) : ?>
-						<li><a href="#full-spec" data-toggle="tab"><i class="fa fa-cogs nav-tab-icon"></i>Full Specs</a>
+						<li><a href="#full-spec" data-toggle="tab"><i class="fa fa-list nav-tab-icon"></i>Full Description</a>
 						</li>
 					<?php endif; ?>
 					<li><a href="#review" data-toggle="tab"><i class="fa fa-star nav-tab-icon"></i>Rating
