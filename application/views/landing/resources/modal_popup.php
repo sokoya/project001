@@ -20,7 +20,7 @@
                     </div>
                     <button class="btn btn-block btn-success" style="margin-top:5px;">Login</button>
                 </form>
-                OR
+                <h4 style="margin:10px 0 10px;">OR</h4>
                 <form id="form_ask_id">
                     Provide your details for follow up
                     <div class="row">
