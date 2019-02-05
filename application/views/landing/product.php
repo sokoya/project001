@@ -56,6 +56,7 @@
     <?php $this->load->view('landing/resources/head_img') ?>
     <?php $this->load->view('landing/resources/head_menu') ?>
 
+    <?php $this->load->view('landing/resources/modal_popup'); ?>
     <div class="container">
         <?php if ($product->product_status !== 'approved') : ?>
             <div class="row">
