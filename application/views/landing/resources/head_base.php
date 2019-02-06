@@ -23,8 +23,6 @@
 	<?php endif; ?>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=0" name="viewport"/>
-<!--	<link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400italic,400' rel='stylesheet'-->
-<!--		  type='text/css'>-->
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600|Oxygen' rel='stylesheet' type='text/css'>
 <!--    <link rel="stylesheet" href="--><?//= base_url('assets/css/offline.css'); ?><!--">-->
 <!--    <link rel="stylesheet" href="--><?//= base_url('assets/css/offline-theme.min.css'); ?><!--">-->

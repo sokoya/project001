@@ -140,7 +140,8 @@
                    placeholder="Title of review"/>
             <p class="form-text" style="margin-top: 6px;">Display name </p>
             <input type="text" name="display_name" class="form-control "
-                   placeholder="<?= !is_null($profile) ? $profile->first_name . ' ' . $profile->last_name : 'Display Name'; ?>"/>
+                   value="<?= !is_null($profile) ? (!empty( $profile->display_name)) ? $profile->display_name :  $profile->first_name . ' ' . $profile->last_name : 'Display Name'; ?>"
+            />
             <p class="form-text" style="margin-top: 6px;">Review *</p>
             <textarea required name="content" class="form-control form-override" rows="8" style="margin-bottom: 10px;"
                       placeholder="Your Review"></textarea>

@@ -269,8 +269,6 @@ class Product extends MY_Controller
 			$this->load->view('landing/mobile-search', $page_data);
 		}
 	}
-
-
 	/*
      * Learn more about the warranty type
 	 * Used for mobile devices

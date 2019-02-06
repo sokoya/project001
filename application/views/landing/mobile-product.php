@@ -458,9 +458,7 @@
                 <p id="description_vl" class="body_text">
                     <?= word_limiter($product->product_description, 80); ?>
                     <?php if (str_word_count($product->product_description, 0) > 50) : ?>
-                        <span><a
-                                    style="text-decoration: none; color: #0b6427"
-                                    href="<?= base_url(urlify($product->product_name, $product->id) . 'description'); ?>">Read More</a> </span>
+                        <span><a style="text-decoration: none; color: #0b6427" href="<?= base_url( urlify($product->product_name, $product->id) . 'description/'); ?>">Read More</a> </span>
                     <?php endif; ?>
                 </p>
                 <hr/>
@@ -507,7 +505,7 @@
         <div class="container">
             <p class="block-title" style="margin-top: 5px;">Total Ratings <span><a
                             style="text-decoration: none; color: #0b6427"
-                            href="<?= base_url(urlify($product->product_name, $product->id) . 'add_rating_review'); ?>">Write a review</a> </span>
+                            href="<?= base_url(urlify($product->product_name, $product->id) . 'add_rating_review/'); ?>">Write a review</a> </span>
             </p>
             <div style="margin-top: 4px; margin-left: 2px">
                 <ul style="display: inline-block" class="product-caption-rating">
@@ -544,14 +542,14 @@
         <div class="container" style="margin-bottom: 5px;"><p class="text-break" style="">You might also like</p></div>
         <div class="custom-card">
             <div class="">
-                <div class="owl-carousel suggested-products">
+                <div class="owl-carousel suggested-products" data-count="<?= count($likes); ?>">
                     <?php foreach ($likes as $like) : ?>
                         <a style="text-decoration: none"
                            href="<?= base_url(urlify($like->product_name, $like->id)); ?>">
-                            <img class="suggested-image lazy" src="<?= base_url('assets/img/load.gif'); ?>"
+                            <img class="suggested-image lazy" src="<?= base_url('assets/load.gif'); ?>"
                                  data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?> "/>
                             <p class="suggested-image-text"><?= character_limiter($like->product_name, 15); ?></p>
-                            <span class="text-bold"><?= $like->item_left; ?> left</span>
+                            <span class="text-bold text-center"><?= $like->item_left; ?> left</span>
                         </a>
                     <?php endforeach; ?>
                 </div>
@@ -590,8 +588,11 @@
             items: 1,
             lazyLoad: true,
         });
+        let loop = true;
+        var x =  $('.suggested-products').data('count');
+        if( x <= 3 ) {loop = false;}
         $(".suggested-products").owlCarousel({
-            loop: true,
+            loop: loop,
             center: true,
             items: 2,
             lazyLoad: true,

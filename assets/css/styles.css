@@ -583,10 +583,10 @@ hr {
 	z-index: 9999;
 }
 
-.lazy {
-	width: 80px !important;
-	margin: auto !important;
-}
+/*.lazy {*/
+	/*width: 80px !important;*/
+	/*margin: auto !important;*/
+/*}*/
 
 .cat-lazy {
 	width: 100% !important;
