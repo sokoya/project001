@@ -1,5 +1,6 @@
 <!-- Head Category Starts -->
 <?php
+
 $category_cache = "SELECT id,name,slug,icon,image FROM categories WHERE pid = 0 LIMIT 10";
 //if(!$this->memcached_library->get($category_cache) && $this->memcached_library->get($category_cache) == '') {
 

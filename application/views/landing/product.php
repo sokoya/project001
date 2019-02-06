@@ -846,6 +846,10 @@
     var $easyzoom = $('.easyzoom').easyZoom();
     $(function () {
         $('.lazy').Lazy();
+        $('.prod_description img').each(function() {
+            $(this).addClass('img-responsive');
+            $(this).attr('Onitshamarket');
+        });
     });
     let quantity = $('#quan');
     let selected_variation_id = $('.variation_id').val();

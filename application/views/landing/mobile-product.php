@@ -262,8 +262,7 @@
         <div class="container">
             <div class="owl-carousel products-gallery">
                 <?php foreach ($galleries as $gallery) : ?>
-                    <img class="product-image lazy" src="<?= base_url('assets/load.gif'); ?>"
-                         data-src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?> "
+                    <img class="product-image" src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?> "
                          alt="<?= $product->product_name; ?>"/>
                 <?php endforeach; ?>
             </div>
@@ -570,6 +569,10 @@
 <script>
     $(function () {
         $('.lazy').Lazy();
+        $('.prod_description img').each(function() {
+            $(this).addClass('img-responsive');
+            $(this).attr('Onitshamarket');
+        });
     });
     // owl carousel initialization
     $(document).ready(function () {

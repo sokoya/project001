@@ -101,4 +101,17 @@ class Tests extends MY_Controller
         $this->benchmark->mark('code_end');
         echo $this->benchmark->elapsed_time('code_start', 'code_end');
     }
+
+    public function memcache() {
+//        $this->load->driver('cache', array(
+//            'adapter' => 'memcached',
+//            'backup' => 'file'
+//        ));
+//        var_dump($this->cache->get('foo'));
+//        $this->cache->save('foo', 'test test', 300);
+//        var_dump($this->cache->get('foo'));
+
+        $memcached_enabled = $this->cache->memcached->is_supported();
+        if(!$memcached_enabled) {  echo "Memcached is not installed";  die; }
+    }
 }
