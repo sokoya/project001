@@ -1,13 +1,13 @@
 <!-- Head Category Starts -->
 <?php
 $category_cache = "SELECT id,name,slug,icon,image FROM categories WHERE pid = 0 LIMIT 10";
-if(!$this->memcached_library->get($category_cache) && $this->memcached_library->get($category_cache) == '') {
+//if(!$this->memcached_library->get($category_cache) && $this->memcached_library->get($category_cache) == '') {
 
     $categories = $this->db->query($category_cache)->result();
-    $this->memcached_library->add($category_cache, $categories);
-} else {
-    $categories = $this->memcached_library->get($category_cache);
-}
+//    $this->memcached_library->add($category_cache, $categories);
+//} else {
+//    $categories = $this->memcached_library->get($category_cache);
+//}
 
 ?>
 <nav class="navbar navbar-default navbar-main-white navbar-pad-top navbar-first yamm">

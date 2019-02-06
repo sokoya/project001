@@ -1014,7 +1014,7 @@
 
     });
     $('#question_form').on('submit', function (e) {
-        e.preventDefault()
+        e.preventDefault();
         let question = $('#question').val();
         var btn = $('.qna-btn');
         btn.val("Processing...");
@@ -1050,7 +1050,7 @@
         }
     });
     $('#form_ask_id').on('submit', function (e) {
-        e.preventDefault()
+        e.preventDefault();
         let question = $('#question').val();
         var btn = $('.qna-btn');
         let display_name = $('#question_display_name').val();

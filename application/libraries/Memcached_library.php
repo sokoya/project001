@@ -96,11 +96,10 @@ class Memcached_library
                 $this->add($this->key_name($multi['key']), $multi['value'], $multi['expiration']);
             }
         } else {
-
             switch ($this->client_type) {
                 case 'Memcache':
-//                    $add_status = $this->m->add($this->key_name($key), $value, $this->config['config']['compression'], $expiration);
-                    $add_status = $this->add($this->key_name($key), $value, $expiration);
+                    $add_status = $this->m->add($this->key_name($key), $value, $this->config['config']['compression'], $expiration);
+//                    $add_status = $this->add($this->key_name($key), $value, $expiration);
                     break;
                 default:
                 case 'Memcached':
