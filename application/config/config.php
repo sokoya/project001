@@ -408,10 +408,10 @@ $config['sess_regenerate_destroy'] = FALSE;
 |       'cookie_httponly') will also affect sessions.
 |
 */
-$config['cookie_prefix']	= '';
-$config['cookie_domain']	= '';
+$config['cookie_prefix']	= 'onitsham_cookie';
+$config['cookie_domain']	= '.onitshamarket.com';
 $config['cookie_path']		= '/';
-$config['cookie_secure']	= FALSE;
+$config['cookie_secure']	= TRUE;
 $config['cookie_httponly'] 	= FALSE;
 
 /*
@@ -440,7 +440,7 @@ $config['standardize_newlines'] = FALSE;
 |          for backwards compatibility purposes!
 |
 */
-$config['global_xss_filtering'] = FALSE;
+$config['global_xss_filtering'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------
@@ -457,7 +457,7 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
 $config['csrf_protection'] = FALSE;
-$config['csrf_token_name'] = 'csrf_carrito';
+$config['csrf_token_name'] = 'csrf_onitsha';
 $config['csrf_cookie_name'] = 'csrf_cookie';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
@@ -495,13 +495,13 @@ $config['compress_output'] = FALSE;
 | Master Time Reference
 |--------------------------------------------------------------------------
 |
-| Options are 'local' or any PHP supported timezone. This preference tells
-| the system whether to use your server's local time as the master 'now'
+| Options are 'testing' or any PHP supported timezone. This preference tells
+| the system whether to use your server's testing time as the master 'now'
 | reference, or convert it to the configured one timezone. See the 'date
 | helper' page of the user guide for information regarding date handling.
 |
 */
-$config['time_reference'] = 'local';
+$config['time_reference'] = 'testing';
 
 /*
 |--------------------------------------------------------------------------

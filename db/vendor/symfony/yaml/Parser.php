@@ -1043,7 +1043,7 @@ class Parser
     }
 
     /**
-     * A local wrapper for `preg_match` which will throw a ParseException if there
+     * A testing wrapper for `preg_match` which will throw a ParseException if there
      * is an internal error in the PCRE engine.
      *
      * This avoids us needing to check for "false" every time PCRE is used

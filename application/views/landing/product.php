@@ -560,7 +560,7 @@
 												<label>Display name*</label>
 												<input type="text" name="display_name" placeholder="Display name"
 													   id="review_name"
-													   value="<?= ($profile) ? $profile->first_name . ' ' . $profile->last_name : 'an intended buyer'; ?>"
+													   value="<?= ($profile) ? (!empty($profile->display_name))  ? $profile->display_name : $profile->first_name . ' ' . $profile->last_name : 'an intended buyer'; ?>"
 													   class="form-control" required>
 											</div>
 										</div>

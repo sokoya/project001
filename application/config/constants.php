@@ -104,9 +104,12 @@ defined('PRODUCTS_IMAGE_PATH') OR define('PRODUCTS_IMAGE_PATH', "https://res.clo
 defined('SLIDER_IMAGE_FOLDER') OR define('SLIDER_IMAGE_FOLDER',  'onitshamarket/images/slider/'); # Slider Image
 defined('SLIDER_IMAGE_PATH') OR define('SLIDER_IMAGE_PATH',  'https://res.cloudinary.com/onitshamarket/' .SLIDER_IMAGE_FOLDER); # Slider Image
 
+defined('STATIC_CATEGORY_FOLDER') OR define('STATIC_CATEGORY_FOLDER',  'onitshamarket/images/static/'); # Category Header Image
+defined('STATIC_CATEGORY_PATH') OR define('STATIC_CATEGORY_PATH',  'https://res.cloudinary.com/onitshamarket/image/upload/q_auto:low/f_auto/' .STATIC_CATEGORY_FOLDER); # Category Header Image
+
 
 // General Settings
-defined('PAGE_CONTACT_US') or define('PAGE_CONTACT_US', "https://www.onitshamarket.com/contact/");
+defined('PAGE_CONTACT_US') or define('PAGE_CONTACT_US', "https://www.onitshamarket.com/pages/contact/");
 
 // Details
 // Bitly

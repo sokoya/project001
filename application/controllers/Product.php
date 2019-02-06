@@ -248,11 +248,11 @@ class Product extends MY_Controller
 		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 		$page_data['category_detail'] = $this->product->category_details($category);
 		if ($page_data['category_detail']) {
-			$page_data['description'] = $page_data['category_detail']->description;
+            $page_data['title'] = $page_data['category_detail']->title;
+            $page_data['description'] = $page_data['category_detail']->description;
 		} else {
 			$page_data['description'] = DESCRIPTION;
 		}
-		$page_data['title'] = $page_data['category_detail']->title;
 		$page_data['page'] = 'search';
 		$this->pagination->initialize($config);
         $page_data['min'] = $page_data['max'] = '';
