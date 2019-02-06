@@ -27,7 +27,7 @@ $memcached = array();
 $memcached['servers'] = array(
     'default' => array(
         'host' => 'localhost',
-        'port' => '11211',
+        'port' => '8080',
         'weight' => '1',
         'persistent' => false,
     )
