@@ -93,7 +93,7 @@
                     <li style="list-style-type: none">Try a different keyword search.</li>
                 </ul>
                 </p>
-                <p class="text-muted text-sm text-center">You can browse for more product <a
+                <p class="text-muted text-sm text-center"><a
                             style="text-decoration: none; color: #0b6427;" href="<?= base_url(); ?>">Find
                         product</a> or <a href="<?= PAGE_CONTACT_US ?>">contact us</a> if still not working.</p>
                 <div style="height:110px"></div>

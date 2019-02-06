@@ -1,5 +1,15 @@
 <!-- Head Category Starts -->
-<?php $categories = $this->db->query("SELECT id,name,slug,icon,image FROM categories WHERE pid = 0 LIMIT 10")->result(); ?>
+<?php
+$category_cache = "SELECT id,name,slug,icon,image FROM categories WHERE pid = 0 LIMIT 10";
+if(!$this->memcached_library->get($category_cache) && $this->memcached_library->get($category_cache) == '') {
+
+    $categories = $this->db->query($category_cache)->result();
+    $this->memcached_library->add($category_cache, $categories);
+} else {
+    $categories = $this->memcached_library->get($category_cache);
+}
+
+?>
 <nav class="navbar navbar-default navbar-main-white navbar-pad-top navbar-first yamm">
 	<div class="container">
 		<div class="navbar-header">
@@ -48,7 +58,7 @@
 										</div>
 									</div>
 									<img class="dropdown-menu-category-section-theme-img"
-										 src="<?= CATEGORY_IMAGE_PATH . $category->image; ?>"
+										 src="<?= STATIC_CATEGORY_PATH . $category->image; ?>"
 										 alt="<?= $category->name; ?>" title="<?= $category->name; ?>"
 										 style="right: -10px;"/>
 								</div>

@@ -31,7 +31,7 @@ class Resetpassword extends MY_Controller {
                         $email_array = array(
                             'email' => $email,
                             'reset_link' => base_url('resetpassword/activate?token='.$code),
-                            'recipent' => 'Dear '. $data['first_name']
+                            'recipent' => 'Hello '
                         );
                         try {
                             $this->email->reset_password( $email_array);

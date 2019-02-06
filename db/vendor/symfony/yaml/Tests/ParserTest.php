@@ -651,7 +651,7 @@ EOF;
 
         return array(
             'yaml-tag' => array($yamlTag),
-            'local-tag' => array($localTag),
+            'testing-tag' => array($localTag),
         );
     }
 

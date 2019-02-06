@@ -70,11 +70,11 @@ require 'main.php';
           } catch (\Cloudinary\Api\NotFound $e) {
               $api->create_upload_preset(array("name"=>$upload_preset, "unsigned"=>TRUE, "folder"=>"preset_folder"));
           }
-          # The callback URL is set to point to an HTML file on the local server which works-around restrictions 
+          # The callback URL is set to point to an HTML file on the testing server which works-around restrictions
           # in older browsers (e.g., IE) which don't full support CORS.
           echo cl_unsigned_image_upload_tag('test', $upload_preset, array("tags" => "direct_photo_album", "callback" => $cors_location, "html" => array("multiple" => true)));          
         } else {
-          # The callback URL is set to point to an HTML file on the local server which works-around restrictions 
+          # The callback URL is set to point to an HTML file on the testing server which works-around restrictions
           # in older browsers (e.g., IE) which don't full support CORS.
           echo cl_image_upload_tag('test', array("tags" => "direct_photo_album", "callback" => $cors_location, "html" => array("multiple" => true)));
         }

@@ -9,13 +9,7 @@
                     <p class="text-sm foot-link"><a href="<?= base_url('pages'); ?>" style="font-size: 9px;">Terms of Use</a> | <a
                                 href="<?= base_url('pages/agreement'); ?>" style="font-size: 9px;">Agreement</a> | <a
                                 href="<?= base_url('pages/privacy'); ?>" style="font-size: 9px;">Privacy Policy</a> |
-                        <?php if ($this->session->userdata('logged_in')): ?>
-                            <?php if ($profile->is_seller !== 'false') : ?>
-                                <a href="<?= lang('seller_url'); ?>" style="font-size: 9px;">Seller Dashboard</a>
-                            <?php else : ?>
-                                <a href="<?= lang('seller_url'); ?>" style="font-size: 9px;">Become a Seller</a>
-                            <?php endif; ?>
-                        <?php else : ?>
+                        <?php if (!$this->session->userdata('logged_in')): ?>
                             <a href="<?= base_url('create/'); ?>" style="font-size: 9px;">Create an Account</a>
                         <?php endif; ?>
                     </p>
