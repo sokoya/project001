@@ -399,6 +399,7 @@ class Ajax extends CI_Controller
             $pid = $this->input->post('pid', true);
             $display_name = $this->input->post('display_name', true);
             $question = cleanit($this->input->post('question', true));
+            $data = $this->input->post('data', true);
             $qtimestamp = get_now();
             $status = "pending";
             if ($this->product->insert_data('qna',
@@ -406,6 +407,7 @@ class Ajax extends CI_Controller
                                     'display_name' => $display_name,
                                     'question' => $question,
                                     'qtimestamp' => $qtimestamp,
+                                    'data' => $data,
                                     'status' => $status))) {
                 $respond['status'] = 'success';
                 $respond['msg'] = 'Your question has been submitted. Thank you.';
