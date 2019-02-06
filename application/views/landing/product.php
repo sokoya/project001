@@ -627,7 +627,7 @@
                                     </div>
                                 </form>
                                 <?php if (count($questions)):
-                                    $x = 0;
+                                    $x = 1;
                                     foreach ($questions as $question) : ?>
                                         <article class="product-page-qa">
                                             <div class="product-page-qa-question">
