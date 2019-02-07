@@ -640,11 +640,13 @@
                                             <div class="product-page-qa-question">
                                                 <p class="product-page-qa-text">
                                                     <?= $question->question ?>
+                                                    <?php if( $this->session->userdata('logged_in')) : ?>
                                                     <a class="product-review-rate pull-right upvote"
                                                        data-qid="<?= $question->id; ?>" href="javascript:void(0)"
                                                        title="Find this question helpful?"><i
                                                                 class="fa fa-thumbs-up"></i><?= $question->upvotes; ?>
                                                     </a>
+                                                    <?php endif; ?>
                                                 </p>
                                                 <p class="product-page-qa-meta">asked by <?= $question->display_name ?>
                                                     on <?= neatDate($question->qtimestamp) . ' ' . neatTime($question->qtimestamp); ?></p>

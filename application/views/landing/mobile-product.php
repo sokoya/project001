@@ -555,7 +555,7 @@
                         </div>
                         <div class="col-md-2">
                             <input class="btn btn-primary btn-block qna-btn"
-                                   data-user="<?= ($this->session->userdata('logged_in')) ? $profile->first_name . ' ' . $profile->last_name : ''; ?>"
+                                   data-user="<?= !is_null($profile) ? (!empty( $profile->display_name)) ? $profile->display_name :  $profile->first_name . ' ' . $profile->last_name : ''; ?>"
                                    type="submit" value="Ask"/>
                         </div>
                     </div>
