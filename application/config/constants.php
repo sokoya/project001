@@ -124,4 +124,3 @@ defined('SMS_FOR_ORDERS') OR define('SMS_FOR_ORDERS', FALSE);
 //Elastic Email
 defined('ELASTIC_EMAIL_API') OR define('ELASTIC_EMAIL_API', '5fe25354-f5e7-4bee-8001-ab0080b72c4c');
 
-
