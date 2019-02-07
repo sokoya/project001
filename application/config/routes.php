@@ -56,7 +56,8 @@ $route['product/(:any)-(:num)'] = 'product/index/$2/';
 $route['catalog/(:any)'] = 'product/catalog/$1/';
 $route['catalog'] = 'product/catalog/';
 $route['search'] = 'product/search/';
-$route['product/(:any)/(:any)'] = 'product/index/$2';
+//$route['product/(:any)/(:any)'] = 'product/index/$2';
+$route['product/(:any)/(:any)'] = 'product/$2';
 
 $route['404_override'] = 'errors/_404';
 $route['translate_uri_dashes'] = FALSE;

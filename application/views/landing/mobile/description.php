@@ -167,4 +167,13 @@
 <script src="<?= base_url('assets/js/jquery.js'); ?>"></script>
 <script src="<?= base_url('assets/js/bootstrap.js'); ?>"></script>
 <script src="<?= base_url('assets/js/mobile.js'); ?>"></script>
+<script>
+    $(function(){
+        $('.prod_description img').each(function() {
+            $(this).addClass('img-responsive');
+            $(this).attr('Onitshamarket');
+        });
+    });
+
+</script>
 </html>

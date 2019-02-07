@@ -356,7 +356,7 @@
             <div class="gap"></div>
             <div class="tabbable product-tabs" id="description-tab">
                 <ul class="nav nav-tabs" id="myTab">
-                    <li class="active"><a href="#overview" data-toggle="tab"><i class="fa fa-cogs nav-tab-icon"></i>Specs</a>
+                    <li class="active"><a href="#overview" data-toggle="tab"><i class="fa fa-cogs nav-tab-icon"></i>Overview</a>
                     </li>
                     <?php if (!empty($product->product_description)) : ?>
                         <li><a href="#full-spec" data-toggle="tab"><i class="fa fa-list nav-tab-icon"></i>Full
@@ -560,7 +560,7 @@
                                                 <label>Display name*</label>
                                                 <input type="text" name="display_name" placeholder="Display name"
                                                        id="review_name"
-                                                       value="<?= ($profile) ? $profile->first_name . ' ' . $profile->last_name : 'an intended buyer'; ?>"
+                                                       value="<?= !is_null($profile) ? (!empty( $profile->display_name)) ? $profile->display_name :  $profile->first_name . ' ' . $profile->last_name : 'Display Name'; ?>"
                                                        class="form-control" required>
                                             </div>
                                         </div>
@@ -846,6 +846,10 @@
     var $easyzoom = $('.easyzoom').easyZoom();
     $(function () {
         $('.lazy').Lazy();
+        $('.prod_description img').each(function() {
+            $(this).addClass('img-responsive');
+            $(this).attr('Onitshamarket');
+        });
     });
     let quantity = $('#quan');
     let selected_variation_id = $('.variation_id').val();

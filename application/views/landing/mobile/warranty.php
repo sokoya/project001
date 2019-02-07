@@ -107,18 +107,52 @@
                 </div>
                 <div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
                     <p class="delivery-text">This product has the following warranty
-                        : Repair by vendor
+                        <?php
+                        $warranty_type = json_decode($product->warranty_type);
+                        if( $warranty_type ) {
+                            foreach ($warranty_type as $type) echo '<strong>' . $type . '</strong> ';
+                        }else{
+                            echo 'No product warranty for this product,';
+                        }
+                        ?>
                     </p>
                 </div>
             </div>
         </div>
     </div>
+
+    <?php if($product->product_warranty) : ?>
+    <div class="container"><p class="text-break">Product Warranty</p></div>
+    <div class="custom-card">
+        <div class="container">
+            <p class="body_text">
+                <?= $product->product_warranty; ?>
+            </p>
+        </div>
+    </div>
+    <?php endif; ?>
+
+    <?php if( $product->warranty_address) : ?>
+    <div class="container"><p class="text-break">Product Warranty</p></div>
+    <div class="custom-card">
+        <div class="container">
+            <p class="body_text">
+                <?= $product->warranty_address; ?>
+            </p>
+        </div>
+    </div>
+    <?php endif; ?>
+
     <div class="container"><p class="text-break">Warranty Description</p></div>
     <div class="custom-card">
         <div class="container">
-            <p class="body_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium amet blanditiis
-                dolorem esse explicabo inventore ipsum itaque magnam nam nemo nihil, nobis numquam odio perferendis quis
-                quo reiciendis vel veniam.</p>
+            <p class="body_text">
+                <?php
+                    if(!empty( $product->description )) {
+                    $product->description;
+                }
+                ?>
+            </p>
         </div>
     </div>
 </body>
@@ -129,6 +163,10 @@
 <script>
     $(function () {
         $('.lazy').Lazy();
+        $('.prod_description img').each(function() {
+            $(this).addClass('img-responsive');
+            $(this).attr('Onitshamarket');
+        });
     });
 </script>
 </html>
