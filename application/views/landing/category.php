@@ -115,8 +115,8 @@
                         </li>
                     </ol>
                     <div class="category-selections clearfix">
-                        <button class="btn btn-custom-primary">Newest First</button>
-                        <button class="btn btn-custom-primary">Best Sellers</button>
+                        <a href="<?= base_url('catalog/' . urlify($category->name) .'/?order_by=best_rating'); ?>">Best Rating</a>
+                        <a class="btn btn-custom-primary" title="Filter by best seller" href="<?= base_url(); ?>">Best Seller</a>
                     </div>
                 </header>
             </div>

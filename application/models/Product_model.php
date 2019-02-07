@@ -306,6 +306,17 @@ Class Product_model extends CI_Model{
                     }
                     unset($gets['main_colour']);
                 }
+                // Best rating
+//                if( isset($gets['order_by']) && !empty($gets['order_by']) ){
+//                    $order_by = xss_clean($gets['order_by']);
+//                    switch ($order_by) {
+//                        case 'best_rating':
+//                            $select_query .= " JOIN "
+//                            break;
+//
+//                    }
+//                    unset($gets['sort']);
+//                }
                 // unset the page key
                 unset( $gets['page'] );
                 // Here comes the features
@@ -315,7 +326,6 @@ Class Product_model extends CI_Model{
                     foreach( $gets as $key => $value ){
                         $explode = explode(',', $value);
                         if( count($explode) > 1 ){
-
                             $select_query .= " OR ( ";
                             $array_value = array_values($explode);
                             $last = end($array_value);
@@ -728,9 +738,9 @@ Class Product_model extends CI_Model{
             }
         }
         if( $count != '' ){
-            $select_query .= " GROUP BY p.id ORDER BY RAND() LIMIT {$count} ";
+            $select_query .= " AND product_status = 'approved' GROUP BY p.id ORDER BY RAND() LIMIT {$count} ";
         }else{
-            $select_query .= " GROUP BY p.id ORDER BY RAND() LIMIT 12";
+            $select_query .= " AND product_status = 'approved' GROUP BY p.id ORDER BY RAND() LIMIT 12";
         }
         return $this->db->query($select_query)->result();
     }
@@ -787,7 +797,18 @@ Class Product_model extends CI_Model{
         }
     }
 
+    /*
+    * Top sales algorithm for homepage
+    * Condition : views, no of sales , added whishlist , time posted
+    * */
+    function get_top_sales(){
+        $query = "SELECT p.id, p.sku, p.category_id FROM products p 
+              JOIN orders o ON (o.product_id = p.id) WHERE 
+              p.product_status = 'approved' AND o.order_date <= DATE_SUB(CURDATE() ,INTERVAL 1 DAY) 
+              GROUP BY p.id ORDER BY o.order_date, o.qty LIMIT 0,6";
+        return $this->db->query( $query )->result();
+    }
+
 
 }
-
 

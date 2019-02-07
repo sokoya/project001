@@ -123,12 +123,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p class="copyright-text foot-link">&copy; 2015 - <?= date('Y'); ?> <a
+                    <p class="copyright-text foot-link">&copy; 2015 - <?= date('Y'); ?> <a title="Onitshamarket"
                                 href="<?= lang('domain'); ?>"><?= lang('company_name'); ?>.</a> All rights reserved</p>
-                    <p class="text-sm foot-link"><a href="<?= base_url('pages'); ?>">Terms of Use</a> | <a
-                                href="<?= base_url('pages/agreement'); ?>">Agreement</a> | <a
-                                href="<?= base_url('pages/privacy'); ?>">Privacy Policy</a> | <a href="#">Site
-                            Map </a> </p>
+                    <p class="text-sm foot-link"><a href="<?= base_url('pages'); ?>">Terms of Use</a> | <a title="Onitshamarket agreement"
+                                href="<?= base_url('pages/agreement'); ?>">Agreement</a> | <a title="Terms and condition"
+                                href="<?= base_url('pages/privacy'); ?>">Privacy Policy</a> |
+                            <a title="Sitemap" href="https://www.onitshamarket.com/sitemap.xml">Site
+                            Map </a> | <a title="Become a seller" target="_blank" href="https://seller.onitshamarket.com">Become a Seller</a> </p>
                 </div>
             </div>
         </div>

@@ -402,8 +402,7 @@
             <p class="block-title">Delivery Information</p>
             <div class="row">
                 <div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-                    <img class="lazy" src="<?= base_url('assets/img/load.gif'); ?>"
-                         data-src="<?= base_url('assets/svg/delivery-truck.svg'); ?>" alt="Delivery Truck"
+                    <img src="<?= base_url('assets/svg/delivery-truck.svg'); ?>" alt="Delivery Truck"
                          style="height: 30px; width: 35px;">
                 </div>
                 <div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -413,8 +412,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-                    <img class="lazy" src="<?= base_url('assets/img/load.gif'); ?>"
-                         data-src="<?= base_url('assets/svg/return.svg'); ?>" alt="Delivery Truck"
+                    <img src="<?= base_url('assets/svg/return.svg'); ?>" alt="Delivery Truck"
                          style="height: 30px; width: 35px;">
                 </div>
                 <div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -423,8 +421,7 @@
             </div>
             <div class="row" style="margin-top: 14px;">
                 <div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-                    <img class="lazy" src="<?= base_url('assets/img/load.gif'); ?>"
-                         data-src="<?= base_url('assets/svg/warranty.svg'); ?>" alt="Warranty"
+                    <img src="<?= base_url('assets/svg/warranty.svg'); ?>" alt="Warranty"
                          style="height: 30px; width: 35px;">
                 </div>
                 <div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -437,8 +434,15 @@
             </div>
         </div>
     </div>
-    <div class="container"><p class="text-break" style="">Overview</p></div>
-    <div class="custom-card" style="margin-top: 5px;">
+    <div class="container close-panel" data-target="overview_data">
+        <p class="text-break" style="">
+            Overview
+            <span style="color: #4c4c4c !important; float: right">
+                <i class="fa fa-minus close-panel" aria-hidden="true" data-target="overview_data"></i>
+            </span>
+        </p>
+    </div>
+    <div class="custom-card" id="overview_data" style="margin-top: 5px;">
         <div class="container">
             <?php if (!empty($product->product_line)) : ?>
                 <p class="block-title close-panel" data-target="title_vl" style="margin-top: 5px;">Product Shop <span
@@ -457,7 +461,7 @@
                                 data-target="description_vl"></i></span></p>
                 <p id="description_vl" class="body_text">
                     <?= word_limiter($product->product_description, 80); ?>
-                    <?php if (str_word_count($product->product_description, 0) > 50) : ?>
+                    <?php if (str_word_count($product->product_description, 0) > 40) : ?>
                         <span><a style="text-decoration: none; color: #0b6427" href="<?= base_url( urlify($product->product_name, $product->id) . 'description/'); ?>">Read More</a> </span>
                     <?php endif; ?>
                 </p>
@@ -475,8 +479,14 @@
             <?php endif; ?>
         </div>
     </div>
-    <div class="container"><p class="text-break" style="">Full Specifications</p></div>
-    <div class="custom-card" style="margin-top: 5px;">
+    <div class="container close-panel" data-target="full_spec">
+        <p class="text-break">
+            Full Specifications
+            <span style="color: #4c4c4c !important; float: right">
+                <i class="fa fa-minus close-panel" aria-hidden="true" data-target="full_spec"></i>
+            </span>
+        </p></div>
+    <div class="custom-card" id="full_spec" style="margin-top: 5px;">
         <div class="container">
             <table class="table table-striped">
                 <thead>
@@ -500,8 +510,15 @@
             </table>
         </div>
     </div>
-    <div class="container"><p class="text-break" style="">Ratings and Reviews</p></div>
-    <div class="custom-card" style="margin-top: 5px;">
+    <div class="container close-panel" data-target="rating_overview">
+        <p class="text-break" style="">
+            Ratings and Reviews
+            <span style="color: #4c4c4c !important; float: right">
+                <i class="fa fa-minus close-panel" aria-hidden="true" data-target="rating_overview"></i>
+            </span>
+        </p>
+    </div>
+    <div class="custom-card" id="rating_overview" style="margin-top: 5px;">
         <div class="container">
             <p class="block-title" style="margin-top: 5px;">Total Ratings <span><a
                             style="text-decoration: none; color: #0b6427"
@@ -538,6 +555,78 @@
             <?php endif; ?>
         </div>
     </div>
+    <div class="container close-panel" data-target="customer_qa">
+        <p class="text-break" style="">
+            Customer Questions
+            <span style="color: #4c4c4c !important; float: right">
+                <i class="fa fa-minus close-panel" aria-hidden="true" data-target="customer_qa"></i>
+            </span>
+        </p>
+    </div>
+    <div class="custom-card" id="customer_qa" style="margin-top: 5px;">
+        <div class="container">
+            <div>
+                <?php if (count($questions) < 1) : ?>
+                    <div class="gap">
+                        <h4 class="text-center">No question has been asked on this product yet, be the
+                            first to ask. </h4>
+                    </div>
+                <?php endif ?>
+                <form class="product-page-qa-form" id="question_form" onsubmit="javascript:void(0);">
+                    <div class="row" data-gutter="10">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <input class="form-control" type="text" required id="question"
+                                       placeholder="Have a question? Feel free to ask."/>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <input class="btn btn-primary btn-block qna-btn"
+                                   data-user="<?= !is_null($profile) ? (!empty( $profile->display_name)) ? $profile->display_name :  $profile->first_name . ' ' . $profile->last_name : ''; ?>"
+                                   type="submit" value="Ask"/>
+                        </div>
+                    </div>
+                </form>
+                <?php if (count($questions)):
+                    $x = 1;
+                    foreach ($questions as $question) : ?>
+                        <article class="product-page-qa">
+                            <div class="product-page-qa-question">
+                                <p class="product-page-qa-text">
+                                    <?= $question->question ?>
+                                    <a class="product-review-rate pull-right upvote"
+                                       data-qid="<?= $question->id; ?>" href="javascript:void(0)"
+                                       title="Find this question helpful?"><i
+                                                class="fa fa-thumbs-up"></i><?= $question->upvotes; ?>
+                                    </a>
+                                </p>
+                                <p class="product-page-qa-meta">asked by <?= $question->display_name ?>
+                                    on <?= neatDate($question->qtimestamp) . ' ' . neatTime($question->qtimestamp); ?></p>
+                            </div>
+                            <?php if (!empty($question->answer)) : ?>
+                                <div class="product-page-qa-answer">
+                                    <p class="product-page-qa-text"><?= $question->answer; ?></p>
+                                    <p class="product-page-qa-meta">answered
+                                        on <?= neatDate($question->atimestamp); ?></p>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($x == 3): ?>
+                                <div class="gap-small">
+                                    <a style="text-decoration: none; color: #fff;"
+                                       href="<?= base_url(urlify($product->product_name, $product->id) . 'reviews'); ?>">
+                                        <button class="btn btn-block btn-default seemore-btn">View all question and
+                                            answers
+                                        </button>
+                                    </a>
+                                </div>
+                                <?php break; endif; ?>
+                        </article>
+                        <?php $x++;
+                    endforeach;
+                endif; ?>
+            </div>
+        </div>
+    </div>
     <?php if (count($likes)) : ?>
         <div class="container" style="margin-bottom: 5px;"><p class="text-break" style="">You might also like</p></div>
         <div class="custom-card">
@@ -546,7 +635,7 @@
                     <?php foreach ($likes as $like) : ?>
                         <a style="text-decoration: none"
                            href="<?= base_url(urlify($like->product_name, $like->id)); ?>">
-                            <img class="suggested-image lazy" src="<?= base_url('assets/load.gif'); ?>"
+                            <img class="suggested-image lazy" style="width: 80" src="<?= base_url('assets/load.gif'); ?>"
                                  data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?> "/>
                             <p class="suggested-image-text"><?= character_limiter($like->product_name, 15); ?></p>
                             <span class="text-bold text-center"><?= $like->item_left; ?> left</span>
@@ -557,6 +646,7 @@
         </div>
     <?php endif; ?>
 <?php endif; ?>
+<?php $this->load->view('landing/resources/modal_popup'); ?>
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
 <script src="<?= base_url('assets/js/jquery.js'); ?>"></script>
 <script src="<?= base_url('assets/js/owl.carousel.min.js'); ?>"></script>
@@ -727,6 +817,91 @@
             }
         })
     })
+    $('.upvote').on('click', function () {
+        var qid = $(this).data('qid');
+        $.ajax({
+            url: base_url + 'ajax/upvote',
+            method: 'POST',
+            data: {qid: qid},
+            success: response => {
+                let parsed_response = JSON.parse(response);
+                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+            },
+            error: () => {
+                notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', "error");
+            }
+        })
+
+    });
+    $('#question_form').on('submit', function (e) {
+        e.preventDefault();
+        let question = $('#question').val();
+        var btn = $('.qna-btn');
+        btn.val("Processing...");
+        btn.removeClass('btn-primary').addClass('btn-default');
+        btn.prop('disabled', true);
+        let display_name = btn.data('user');
+        if (display_name === "") {
+            $('#modal_popup').modal('show');
+        } else {
+            $.ajax({
+                url: base_url + 'ajax/ask_a_question',
+                method: 'POST',
+                data: {
+                    'pid': product_id,
+                    'display_name': display_name,
+                    'question': question,
+                    'data': data},
+                success: response => {
+                    let parsed_response = JSON.parse(response);
+                    $('#question').val("");
+                    btn.prop('disabled', false);
+                    btn.val("Ask");
+                    btn.removeClass('btn-default').addClass('btn-primary');
+                    notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+                },
+                error: () => {
+                    notification_message('An error occurred while submitting your question. Try again.', 'fa fa-info-circle', "error");
+                    btn.prop('disabled', false);
+                    btn.val("Ask");
+                    btn.removeClass('btn-default').addClass('btn-primary');
+                }
+            })
+        }
+    });
+    $('#form_ask_id').on('submit', function (e) {
+        e.preventDefault();
+        let question = $('#question').val();
+        var btn = $('.qna-btn');
+        let display_name = $('#question_display_name').val();
+        data = $('#question_data').val();
+        $.ajax({
+            url: base_url + 'ajax/ask_a_question',
+            method: 'POST',
+            data: {'pid': product_id, 'display_name': display_name, 'question': question, 'data': data},
+            success: response => {
+                let parsed_response = JSON.parse(response);
+                $('#modal_popup').modal('hide');
+                $('#question').val("");
+                btn.prop('disabled', false);
+                btn.value = "Ask";
+                btn.removeClass('btn-default').addClass('btn-primary');
+                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+            },
+            error: () => {
+                notification_message('An error occurred while submitting your question. Try again.', 'fa fa-info-circle', "error");
+                btn.prop('disabled', false);
+                btn.value = "Ask";
+                btn.removeClass('btn-default').addClass('btn-primary');
+            }
+        })
+    });
+    $('#modal_popup').on('hide.bs.modal', function(){
+        let btn = $('.qna-btn');
+        btn.prop('disabled', false);
+        btn.val("Ask");
+        btn.removeClass('btn-default').addClass('btn-primary');
+    });
 </script>
 <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
 </body>
