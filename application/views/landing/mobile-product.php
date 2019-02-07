@@ -403,8 +403,7 @@
             <p class="block-title">Delivery Information</p>
             <div class="row">
                 <div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-                    <img class="lazy" src="<?= base_url('assets/img/load.gif'); ?>"
-                         data-src="<?= base_url('assets/svg/delivery-truck.svg'); ?>" alt="Delivery Truck"
+                    <img src="<?= base_url('assets/svg/delivery-truck.svg'); ?>" alt="Delivery Truck"
                          style="height: 30px; width: 35px;">
                 </div>
                 <div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -414,8 +413,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-                    <img class="lazy" src="<?= base_url('assets/img/load.gif'); ?>"
-                         data-src="<?= base_url('assets/svg/return.svg'); ?>" alt="Delivery Truck"
+                    <img src="<?= base_url('assets/svg/return.svg'); ?>" alt="Delivery Truck"
                          style="height: 30px; width: 35px;">
                 </div>
                 <div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -424,8 +422,7 @@
             </div>
             <div class="row" style="margin-top: 14px;">
                 <div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-                    <img class="lazy" src="<?= base_url('assets/img/load.gif'); ?>"
-                         data-src="<?= base_url('assets/svg/warranty.svg'); ?>" alt="Warranty"
+                    <img src="<?= base_url('assets/svg/warranty.svg'); ?>" alt="Warranty"
                          style="height: 30px; width: 35px;">
                 </div>
                 <div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
@@ -541,6 +538,71 @@
             <?php endif; ?>
         </div>
     </div>
+    <div class="container"><p class="text-break" style="">Customer Questions</p></div>
+    <div class="custom-card" style="margin-top: 5px;">
+        <div class="container">
+            <div>
+                <?php if (count($questions) < 1) : ?>
+                    <div class="gap">
+                        <h4 class="text-center">No question has been asked on this product yet, be the
+                            first to ask. </h4>
+                    </div>
+                <?php endif ?>
+                <form class="product-page-qa-form" id="question_form" onsubmit="javascript:void(0);">
+                    <div class="row" data-gutter="10">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <input class="form-control" type="text" required id="question"
+                                       placeholder="Have a question? Feel free to ask."/>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <input class="btn btn-primary btn-block qna-btn"
+                                   data-user="<?= ($this->session->userdata('logged_in')) ? $profile->first_name . ' ' . $profile->last_name : ''; ?>"
+                                   type="submit" value="Ask"/>
+                        </div>
+                    </div>
+                </form>
+                <?php if (count($questions)):
+                    $x = 1;
+                    foreach ($questions as $question) : ?>
+                        <article class="product-page-qa">
+                            <div class="product-page-qa-question">
+                                <p class="product-page-qa-text">
+                                    <?= $question->question ?>
+                                    <a class="product-review-rate pull-right upvote"
+                                       data-qid="<?= $question->id; ?>" href="javascript:void(0)"
+                                       title="Find this question helpful?"><i
+                                                class="fa fa-thumbs-up"></i><?= $question->upvotes; ?>
+                                    </a>
+                                </p>
+                                <p class="product-page-qa-meta">asked by <?= $question->display_name ?>
+                                    on <?= neatDate($question->qtimestamp) . ' ' . neatTime($question->qtimestamp); ?></p>
+                            </div>
+                            <?php if (!empty($question->answer)) : ?>
+                                <div class="product-page-qa-answer">
+                                    <p class="product-page-qa-text"><?= $question->answer; ?></p>
+                                    <p class="product-page-qa-meta">answered
+                                        on <?= neatDate($question->atimestamp); ?></p>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($x == 10): ?>
+                                <div class="gap-small">
+                                    <a style="text-decoration: none; color: #fff;"
+                                       href="<?= base_url(urlify($product->product_name, $product->id) . 'reviews'); ?>">
+                                        <button class="btn btn-block seemore-btn">View all question and
+                                            answers
+                                        </button>
+                                    </a>
+                                </div>
+                                <?php break; endif; ?>
+                        </article>
+                        <?php $x++;
+                    endforeach;
+                endif; ?>
+            </div>
+        </div>
+    </div>
     <?php if (count($likes)) : ?>
         <div class="container" style="margin-bottom: 5px;"><p class="text-break" style="">You might also like</p></div>
         <div class="custom-card">
@@ -560,6 +622,7 @@
         </div>
     <?php endif; ?>
 <?php endif; ?>
+<?php $this->load->view('landing/resources/modal_popup'); ?>
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
 <script src="<?= base_url('assets/js/jquery.js'); ?>"></script>
 <script src="<?= base_url('assets/js/owl.carousel.min.js'); ?>"></script>
@@ -723,6 +786,91 @@
             }
         })
     })
+    $('.upvote').on('click', function () {
+        var qid = $(this).data('qid');
+        $.ajax({
+            url: base_url + 'ajax/upvote',
+            method: 'POST',
+            data: {qid: qid},
+            success: response => {
+                let parsed_response = JSON.parse(response);
+                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+            },
+            error: () => {
+                notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', "error");
+            }
+        })
+
+    });
+    $('#question_form').on('submit', function (e) {
+        e.preventDefault();
+        let question = $('#question').val();
+        var btn = $('.qna-btn');
+        btn.val("Processing...");
+        btn.removeClass('btn-primary').addClass('btn-default');
+        btn.prop('disabled', true);
+        let display_name = btn.data('user');
+        if (display_name === "") {
+            $('#modal_popup').modal('show');
+        } else {
+            $.ajax({
+                url: base_url + 'ajax/ask_a_question',
+                method: 'POST',
+                data: {
+                    'pid': product_id,
+                    'display_name': display_name,
+                    'question': question,
+                    'data': data},
+                success: response => {
+                    let parsed_response = JSON.parse(response);
+                    $('#question').val("");
+                    btn.prop('disabled', false);
+                    btn.val("Ask");
+                    btn.removeClass('btn-default').addClass('btn-primary');
+                    notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+                },
+                error: () => {
+                    notification_message('An error occurred while submitting your question. Try again.', 'fa fa-info-circle', "error");
+                    btn.prop('disabled', false);
+                    btn.val("Ask");
+                    btn.removeClass('btn-default').addClass('btn-primary');
+                }
+            })
+        }
+    });
+    $('#form_ask_id').on('submit', function (e) {
+        e.preventDefault();
+        let question = $('#question').val();
+        var btn = $('.qna-btn');
+        let display_name = $('#question_display_name').val();
+        data = $('#question_data').val();
+        $.ajax({
+            url: base_url + 'ajax/ask_a_question',
+            method: 'POST',
+            data: {'pid': product_id, 'display_name': display_name, 'question': question, 'data': data},
+            success: response => {
+                let parsed_response = JSON.parse(response);
+                $('#modal_popup').modal('hide');
+                $('#question').val("");
+                btn.prop('disabled', false);
+                btn.value = "Ask";
+                btn.removeClass('btn-default').addClass('btn-primary');
+                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+            },
+            error: () => {
+                notification_message('An error occurred while submitting your question. Try again.', 'fa fa-info-circle', "error");
+                btn.prop('disabled', false);
+                btn.value = "Ask";
+                btn.removeClass('btn-default').addClass('btn-primary');
+            }
+        })
+    });
+    $('#modal_popup').on('hide.bs.modal', function(){
+        let btn = $('.qna-btn');
+        btn.prop('disabled', false);
+        btn.val("Ask");
+        btn.removeClass('btn-default').addClass('btn-primary');
+    });
 </script>
 <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
 </body>
