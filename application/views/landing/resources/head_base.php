@@ -41,6 +41,7 @@
 		  title="de-york" media="all"/>
 	<link rel="shortcut icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
 	<link rel="icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
+    <meta name="theme-color" content="#2a9651" />
 	<link rel="canonical" href="<?= current_url(); ?>"/>
 	<?php if ($page == 'product') : ?>
 		<meta property="og:title" content="<?= $product->product_name; ?>"/>
