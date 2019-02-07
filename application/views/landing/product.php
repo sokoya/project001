@@ -254,7 +254,7 @@
                                                                        data-vid="<?= $variation['id'] ?>"
                                                                        data-quantity='<?= $variation['quantity'] ?>'
                                                                        data-vname="<?= $variation['variation'] ?>"
-                                                                       class="variation-option <?php if ($variation['quantity'] == 0) echo 'option-disabled'; ?>">
+                                                                       class="variation-option <?php if( count($variations) == 1 ) echo 'option-selected'; ?> <?php if($variation['quantity'] == 0) echo 'option-disabled'; ?>">
                                                                         <?= trim($variation['variation']); ?>
                                                                     </p>
                                                                 </div>
@@ -644,7 +644,7 @@
                                                     <a class="product-review-rate pull-right upvote"
                                                        data-qid="<?= $question->id; ?>" href="javascript:void(0)"
                                                        title="Find this question helpful?"><i
-                                                                class="fa fa-thumbs-up"></i><?= $question->upvotes; ?>
+                                                                class="fa fa-thumbs-up"></i><?= ($question->upvotes != 0 ) ? $question->upvotes : ''; ?>
                                                     </a>
                                                     <?php endif; ?>
                                                 </p>
