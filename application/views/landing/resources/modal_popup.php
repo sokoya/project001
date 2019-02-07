@@ -7,37 +7,35 @@
                 <h3><b>To Ask A Question</b></h3></p>
             </div>
             <div class="modal-body">
-                <div class="panel">
-                    <div class="panel-heading">
-                        <div class="panel-control">
-                            <button class="btn btn-default" data-panel="minmax"><i class="demo-psi-chevron-up"></i>
-                            </button>
-                        </div>
-                        <h5 class="text-center panel-heading">Already Have an Account?</h5>
-                    </div>
-                    <div class="collapse">
-                        <div class="panel-body">
-                            Please Login
-                            <form method="post" class="gap-small" autocomplete="off"
-                                  action="<?= base_url('login/process') ?>">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <input type="email" class="form-control" name="loginemail"
-                                               placeholder="email@sample.com" required/>
-                                    </div>
+                <p>
+                    <a style="border: 1px solid green;width:100%;cursor:pointer;color:green;text-decoration: none;padding:5px 20px 5px;" data-toggle="collapse" data-target="#collapseLogin"
+                            aria-expanded="false" aria-controls="collapseExample">
+                        Already Have an account?
+                    </a>
+                </p>
+                <div class="collapse" id="collapseLogin">
+                    <div class="card card-body">
+                        Please Login
+                        <form method="post" class="gap-small" autocomplete="off"
+                              action="<?= base_url('login/process') ?>">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="email" class="form-control" name="loginemail"
+                                           placeholder="email@sample.com" required/>
                                 </div>
-                                <div class="row" style="margin-top:5px;">
-                                    <div class="col-md-12">
-                                        <input type="password" class="form-control" name="loginpassword"
-                                               placeholder="password" required/>
-                                    </div>
+                            </div>
+                            <div class="row" style="margin-top:5px;">
+                                <div class="col-md-12">
+                                    <input type="password" class="form-control" name="loginpassword"
+                                           placeholder="password" required/>
                                 </div>
-                                <div class="gap-small"></div>
-                                <button class="btn btn-block btn-success" style="margin-top:5px;">Login</button>
-                            </form>
-                        </div>
+                            </div>
+                            <div class="gap-small"></div>
+                            <button class="btn btn-block btn-success" style="margin-top:5px;">Login</button>
+                        </form>
                     </div>
                 </div>
+
                 <div id="question_div">
                     <hr class="hr-text" data-content="OR">
                     <form id="form_ask_id">

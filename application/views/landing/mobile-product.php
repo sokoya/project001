@@ -434,8 +434,15 @@
             </div>
         </div>
     </div>
-    <div class="container"><p class="text-break" style="">Overview</p></div>
-    <div class="custom-card" style="margin-top: 5px;">
+    <div class="container close-panel" data-target="overview_data">
+        <p class="text-break" style="">
+            Overview
+            <span style="color: #4c4c4c !important; float: right">
+                <i class="fa fa-minus close-panel" aria-hidden="true" data-target="overview_data"></i>
+            </span>
+        </p>
+    </div>
+    <div class="custom-card" id="overview_data" style="margin-top: 5px;">
         <div class="container">
             <?php if (!empty($product->product_line)) : ?>
                 <p class="block-title close-panel" data-target="title_vl" style="margin-top: 5px;">Product Shop <span
@@ -472,8 +479,14 @@
             <?php endif; ?>
         </div>
     </div>
-    <div class="container"><p class="text-break" style="">Full Specifications</p></div>
-    <div class="custom-card" style="margin-top: 5px;">
+    <div class="container close-panel" data-target="full_spec">
+        <p class="text-break">
+            Full Specifications
+            <span style="color: #4c4c4c !important; float: right">
+                <i class="fa fa-minus close-panel" aria-hidden="true" data-target="full_spec"></i>
+            </span>
+        </p></div>
+    <div class="custom-card" id="full_spec" style="margin-top: 5px;">
         <div class="container">
             <table class="table table-striped">
                 <thead>
@@ -497,8 +510,15 @@
             </table>
         </div>
     </div>
-    <div class="container"><p class="text-break" style="">Ratings and Reviews</p></div>
-    <div class="custom-card" style="margin-top: 5px;">
+    <div class="container close-panel" data-target="rating_overview">
+        <p class="text-break" style="">
+            Ratings and Reviews
+            <span style="color: #4c4c4c !important; float: right">
+                <i class="fa fa-minus close-panel" aria-hidden="true" data-target="rating_overview"></i>
+            </span>
+        </p>
+    </div>
+    <div class="custom-card" id="rating_overview" style="margin-top: 5px;">
         <div class="container">
             <p class="block-title" style="margin-top: 5px;">Total Ratings <span><a
                             style="text-decoration: none; color: #0b6427"
@@ -535,8 +555,15 @@
             <?php endif; ?>
         </div>
     </div>
-    <div class="container"><p class="text-break" style="">Customer Questions</p></div>
-    <div class="custom-card" style="margin-top: 5px;">
+    <div class="container close-panel" data-target="customer_qa">
+        <p class="text-break" style="">
+            Customer Questions
+            <span style="color: #4c4c4c !important; float: right">
+                <i class="fa fa-minus close-panel" aria-hidden="true" data-target="customer_qa"></i>
+            </span>
+        </p>
+    </div>
+    <div class="custom-card" id="customer_qa" style="margin-top: 5px;">
         <div class="container">
             <div>
                 <?php if (count($questions) < 1) : ?>
@@ -583,11 +610,11 @@
                                         on <?= neatDate($question->atimestamp); ?></p>
                                 </div>
                             <?php endif; ?>
-                            <?php if ($x == 10): ?>
+                            <?php if ($x == 3): ?>
                                 <div class="gap-small">
                                     <a style="text-decoration: none; color: #fff;"
                                        href="<?= base_url(urlify($product->product_name, $product->id) . 'reviews'); ?>">
-                                        <button class="btn btn-block seemore-btn">View all question and
+                                        <button class="btn btn-block btn-default seemore-btn">View all question and
                                             answers
                                         </button>
                                     </a>
