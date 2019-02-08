@@ -73,10 +73,10 @@
         <?php else : ?>
             <header class="page-header">
                 <ol class="breadcrumb page-breadcrumb c-brc">
-                    <li><a href="#">Home</a>
+                    <li><a href="<?= base_url(); ?>">Home</a>
                     </li>
                     <li>
-                        <a href="<?= base_url('catalog/' . $category_detail->slug); ?>"><?= ucwords($category_detail->name); ?></a>
+                        <a href="<?= base_url('catalog/' . $category_detail->slug .'/'); ?>"><?= ucwords($category_detail->name); ?></a>
                     </li>
                     <li class="active c-a-brc"><?= ucwords($product->product_name); ?></li>
                 </ol>
@@ -116,7 +116,8 @@
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </div>
-                    <div class="product-slider-nav" style="visibility: hidden ;height: 50px;margin-top:40px;">
+                    <?php if(count($galleries) > 1) : ?>
+                        <div class="product-slider-nav" style="visibility: hidden ;height: 50px;margin-top:40px;">
                         <div style="margin:auto;">
                             <img
                                     style="max-width:40px;"
@@ -131,13 +132,14 @@
                                         <img
                                                 style="max-width:40px;"
                                                 src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
-                                                alt="<?= character_limiter($product->product_name, 10); ?>"
+                                                alt="<?= character_limiter($product->product_name, 5); ?>"
                                                 title="<?= ucwords($product->product_name) ?>"/>
                                     </div>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </div>
+                    <?php endif; ?>
                 </div>
                 <div class="col-md-7" style="height:450px;">
                     <div class="row" data-gutter="10">
@@ -162,11 +164,14 @@
                                             <strong
                                                     class="custom-product-title"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></strong>
                                         </p>
-                                        <p class=" text-sm text-uppercase pr-id"><strong>Product ID
-                                                :</strong> <?= $product->sku; ?>
-                                            | <strong>Seller : </strong><a
-                                                    href="#"
-                                                    id="pr-seller"><?= ucwords($product->first_name . ' ' . $product->last_name); ?></a>
+                                        <p class="text-sm pr-id">
+                                            <strong>Product ID :</strong> <?= $product->sku; ?>
+                                            <a href="#">Have an item like this to sell? Create One.</a>
+                                        </p>
+                                        <p class="text-sm text-uppercase">
+                                            <strong>Seller : </strong><a href="#" id="pr-seller">
+                                                <?= ucwords($product->first_name . ' ' . $product->last_name); ?>
+                                            </a>
                                         </p>
                                     </div>
                                     <div class="col-md-7">
@@ -231,9 +236,9 @@
                                         <?php if (count($variations) > 0) : ?>
                                             <div class="col-md-7">
                                                 <div class="row">
-                                                    <div class="col-md-3">
-                                                        <h5 class="custom-product-page-option-title">Variation:</h5>
-                                                    </div>
+<!--                                                    <div class="col-md-3">-->
+<!--                                                        <h5 class="custom-product-page-option-title">Variation:</h5>-->
+<!--                                                    </div>-->
                                                     <div class="col-md-9">
                                                         <div class="row variation-option-list">
                                                             <?php $qty_stock_check = 0; ?>
@@ -249,7 +254,7 @@
                                                                        data-vid="<?= $variation['id'] ?>"
                                                                        data-quantity='<?= $variation['quantity'] ?>'
                                                                        data-vname="<?= $variation['variation'] ?>"
-                                                                       class="variation-option <?php if ($variation['quantity'] == 0) echo 'option-disabled'; ?>">
+                                                                       class="variation-option <?php if( count($variations) == 1 ) echo 'option-selected'; ?> <?php if($variation['quantity'] == 0) echo 'option-disabled'; ?>">
                                                                         <?= trim($variation['variation']); ?>
                                                                     </p>
                                                                 </div>
@@ -560,7 +565,7 @@
                                                 <label>Display name*</label>
                                                 <input type="text" name="display_name" placeholder="Display name"
                                                        id="review_name"
-                                                       value="<?= !is_null($profile) ? (!empty( $profile->display_name)) ? $profile->display_name :  $profile->first_name . ' ' . $profile->last_name : 'Display Name'; ?>"
+                                                       value="<?= !is_null($profile) ? (!empty( $profile->display_name)) ? $profile->display_name :  $profile->first_name . ' ' . $profile->last_name : ''; ?>"
                                                        class="form-control" required>
                                             </div>
                                         </div>
@@ -571,8 +576,12 @@
                                                   class="form-control" required
                                                   placeholder="Write your review on this product."></textarea>
                                     </div>
+                                    <?php if(is_null($profile)) : ?>
+                                        <a href="<?= base_url('login'); ?>" class="btn btn-success" id="review_submit_button">Post Review</a>
+                                    <?php else :?>
                                     <input type="submit" class="btn btn-success" id="review_submit_button"
                                            value="Post Review">
+                                    <?php endif;?>
                                 </form>
                             </div>
                         </div>
@@ -584,11 +593,9 @@
                                         <ul style="display: inline-block" class="product-caption-rating">
                                             <?= single_user_rate($review['rating_score']); ?>
                                         </ul>
-                                        <span style="float: right;"
-                                              class="comment-date"><?= neatDate($review['published_date']); ?></span>
                                     </div>
                                     <p class="comment-user"><strong>Reviewed
-                                            by: </strong> <?= $review['display_name']; ?></p>
+                                            by: </strong> <?= $review['display_name']; ?> <b> on :</b> <span class="comment-date"><?= neatDate($review['published_date']); ?></span> </p>
                                     <p class="comment-title"><strong>Title: </strong><?= $review['title']; ?></p>
                                     <p class="comment-detail"><strong>Content: </strong><?= $review['content']; ?></p>
                                     <hr class="comment-line"/>
@@ -621,7 +628,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <input class="btn btn-primary btn-block qna-btn"
-                                                   data-user="<?= ($this->session->userdata('logged_in')) ? $profile->first_name . ' ' . $profile->last_name : ''; ?>"
+                                                   data-user="<?= ($this->session->userdata('logged_in')) ? empty($profile->display_name) ? $profile->first_name . ' ' . $profile->last_name : $profile->display_name : ''; ?>"
                                                    type="submit" value="Ask"/>
                                         </div>
                                     </div>
@@ -633,11 +640,13 @@
                                             <div class="product-page-qa-question">
                                                 <p class="product-page-qa-text">
                                                     <?= $question->question ?>
+                                                    <?php if( $this->session->userdata('logged_in')) : ?>
                                                     <a class="product-review-rate pull-right upvote"
                                                        data-qid="<?= $question->id; ?>" href="javascript:void(0)"
                                                        title="Find this question helpful?"><i
-                                                                class="fa fa-thumbs-up"></i><?= $question->upvotes; ?>
+                                                                class="fa fa-thumbs-up"></i><?= ($question->upvotes != 0 ) ? $question->upvotes : ''; ?>
                                                     </a>
+                                                    <?php endif; ?>
                                                 </p>
                                                 <p class="product-page-qa-meta">asked by <?= $question->display_name ?>
                                                     on <?= neatDate($question->qtimestamp) . ' ' . neatTime($question->qtimestamp); ?></p>
@@ -831,6 +840,7 @@
     <script type="text/javascript">
         product_id = <?= $product->id;?>;
         data = "<?= ($this->session->userdata('logged_in')) ? $profile->email : ""; ?>";
+        user = "<?= !is_null($profile->id) ? $profile->id : ''; ?>"
     </script>
     <?php $this->load->view('landing/resources/footer'); ?>
 </div>

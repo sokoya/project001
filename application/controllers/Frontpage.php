@@ -17,6 +17,8 @@ class Frontpage extends MY_Controller {
             WHERE h.status = 'active' ORDER BY h.position");
             $this->load->view('landing/mobile-home', $page_data);
         } else {
+
+            $page_data['top_sales'] = $this->product->get_top_sales();
             $this->load->view('landing/home', $page_data);
         }
 	}
