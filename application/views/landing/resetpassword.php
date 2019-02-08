@@ -12,7 +12,7 @@
     }
 
     .login-box {
-        padding: 15px;
+        padding: 15px 15px 5px !important;
     }
 
     .market-box {
@@ -23,6 +23,7 @@
     }
 
     .panel-bordered-primary {
+        border-radius:3px;
         border: 1px solid #1ca28b;
         color: #1cbb86 !important;
         padding: 10px;
@@ -30,6 +31,7 @@
     }
 
     .panel-bordered-warning {
+        border-radius:3px;
         border: 1px solid #9b6a00;
         color: #9b6a00 !important;
         padding: 10px;

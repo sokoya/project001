@@ -7371,13 +7371,13 @@ input[type="color"]:focus,
 }
 
 .market-board {
-    margin-left: 3px;
-    border: 1px solid #969696;
-    border-radius: 6px;
-    padding: 10px;
-    border-top: 2px solid #44a94b;
-    min-height: 140px;
-    margin-bottom: 10px;
+	margin-left: 3px;
+	border-radius: 6px;
+	padding: 10px;
+	border: 1px solid #44a94b;
+	min-height: 140px;
+	margin-bottom: 10px;
+	box-shadow:1px 0 20px rgba(0,0,0,0.5)
 }
 
 #navbar-img {
