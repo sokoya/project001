@@ -1,10 +1,10 @@
 <div class="modal fade" id="modal_popup" tabindex="-1" role="dialog"
      aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-notify" role="document" style="width:350px;margin: 30px auto;">
+    <div class="modal-dialog modal-sm modal-notify" role="document" style="width:320px;margin: 30px auto;">
         <div class="modal-content text-center">
             <div class="modal-header d-flex justify-content-center bg-warning">
                 <p class="heading text-justify">
-                <h3><b>To Ask A Question</b></h3></p>
+                <h3><b>Make Enquiry</b></h3></p>
             </div>
             <div class="modal-body">
                 <p>
@@ -39,7 +39,7 @@
                 <div id="question_div">
                     <hr class="hr-text" data-content="OR">
                     <form id="form_ask_id">
-                        Provide your details for follow up
+                        Provide your detail to notify you
                         <div class="gap-small"></div>
                         <div class="row">
                             <div class="col-md-12">
