@@ -7517,6 +7517,19 @@ input[type="color"]:focus,
     height: 220px;
 }
 
+.arrow-up {
+    width: 0;
+    top: 10px;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    position: relative;
+    left: 68px;
+    margin-bottom: -5px;
+    display: none;
+    border-bottom: 12px solid #fff;
+}
+
 .close_qv {
     font-size: 22px;
     position: absolute;
