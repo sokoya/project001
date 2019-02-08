@@ -148,6 +148,5 @@
     </div>
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
-<script></script>
 </body>
 </html>
