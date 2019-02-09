@@ -254,7 +254,7 @@
                                                                        data-vid="<?= $variation['id'] ?>"
                                                                        data-quantity='<?= $variation['quantity'] ?>'
                                                                        data-vname="<?= $variation['variation'] ?>"
-                                                                       class="variation-option <?php if( count($variations) == 1 ) echo 'option-selected'; ?> <?php if($variation['quantity'] == 0) echo 'option-disabled'; ?>">
+                                                                       class="variation-option <?php if ($variation['quantity'] == 0) echo 'option-disabled'; ?>">
                                                                         <?= trim($variation['variation']); ?>
                                                                     </p>
                                                                 </div>
@@ -640,13 +640,11 @@
                                             <div class="product-page-qa-question">
                                                 <p class="product-page-qa-text">
                                                     <?= $question->question ?>
-                                                    <?php if( $this->session->userdata('logged_in')) : ?>
                                                     <a class="product-review-rate pull-right upvote"
                                                        data-qid="<?= $question->id; ?>" href="javascript:void(0)"
                                                        title="Find this question helpful?"><i
-                                                                class="fa fa-thumbs-up"></i><?= ($question->upvotes != 0 ) ? $question->upvotes : ''; ?>
+                                                                class="fa fa-thumbs-up"></i><?= $question->upvotes; ?>
                                                     </a>
-                                                    <?php endif; ?>
                                                 </p>
                                                 <p class="product-page-qa-meta">asked by <?= $question->display_name ?>
                                                     on <?= neatDate($question->qtimestamp) . ' ' . neatTime($question->qtimestamp); ?></p>
@@ -838,9 +836,9 @@
         </div>
     </div>
     <script type="text/javascript">
-        product_id = <?= $product->id;?>;
-        data = "<?= ($this->session->userdata('logged_in')) ? $profile->email : ""; ?>";
-        user = "<?= !is_null($profile->id) ? $profile->id : ''; ?>"
+        let product_id = "<?= $product->id;?>";
+        let data = "<?= ($this->session->userdata('logged_in')) ? $profile->email : ""; ?>";
+        let user = "<?= ($this->session->userdata('logged_in')) ? $profile->id : ''; ?>"
     </script>
     <?php $this->load->view('landing/resources/footer'); ?>
 </div>
