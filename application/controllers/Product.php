@@ -25,10 +25,13 @@ class Product extends MY_Controller
 		$page_data['galleries'] = $this->product->get_gallery($index);
 		$page_data['favourite'] = $this->product->is_favourited($this->session->userdata('logged_id'), $index);
 		$page_data['likes'] = $this->product->get_also_likes($index);
-		$page_data['category_detail'] = $this->product->single_category_detail($page_data['product']->category_id);
+		$page_data['category_detail'] = $this->product->single_category_detail( $page_data['product']->category_id );
+
         $page_data['title'] = 'Buy ' . $page_data['product']->product_name;
         $page_data['keywords'] = $page_data['title'] . ' , ' . $page_data['product']->brand_name;
-        if ($page_data['category_detail']) { $page_data['description'] = $page_data['title'] . ' ' . $page_data['category_detail']->description;
+        if ($page_data['category_detail']) {
+            $page_data['description'] = $page_data['title'] . ' ' . $page_data['category_detail']->description;
+//            $page_data['breadcrumb'] = $this->product->get_parent_details( $page_data['product']->category_id );
         } else { $page_data['description'] = DESCRIPTION; }
         $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 		// $this->add_count($index);
@@ -38,9 +41,7 @@ class Product extends MY_Controller
 		// Recently viewed
         if( $this->session->userdata('logged_in')){
             $this->user->recently_viewed($page_data['product']->id , $this->session->userdata('logged_id'));
-        }else{
-            // Browser history
-        }
+        }else{ }
         $page_data['questions'] = $this->product->get_results('qna', "*", "( status = 'approved' && pid = {$index}) ");
         $this->add_count($page_data['product']->id);
 		$page_data['page'] = 'product';

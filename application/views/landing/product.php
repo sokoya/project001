@@ -49,6 +49,15 @@
     .product {
         min-height: unset !important;
     }
+    a{
+        color: #0b6427;
+    }
+    a:hover{
+        color: #0b6427;
+    }
+    a:visited{
+        color: #0b6427;
+    }
 </style>
 </head>
 <body>
@@ -166,7 +175,7 @@
                                         </p>
                                         <p class="text-sm pr-id">
                                             <strong>Product ID :</strong> <?= $product->sku; ?>
-                                            <a href="#">Have an item like this to sell? Create One.</a>
+                                            <a href="#" id="to_sell">Have an item like this to sell? Create One.</a>
                                         </p>
                                         <p class="text-sm text-uppercase">
                                             <strong>Seller : </strong><a href="#" id="pr-seller">
@@ -255,7 +264,7 @@
                                                                        data-quantity='<?= $variation['quantity'] ?>'
                                                                        data-vname="<?= $variation['variation'] ?>"
                                                                        class="variation-option <?php if( count($variations) == 1 ) echo 'option-selected'; ?> <?php if($variation['quantity'] == 0) echo 'option-disabled'; ?>">
-                                                                        <?= trim($variation['variation']); ?>
+                                                                        <b><?= trim($variation['variation']); ?></b>
                                                                     </p>
                                                                 </div>
                                                                 <?php if ($variation['quantity'] < 1) $qty_stock_check++; ?>
@@ -595,7 +604,7 @@
                                         </ul>
                                     </div>
                                     <p class="comment-user"><strong>Reviewed
-                                            by: </strong> <?= $review['display_name']; ?> <b> on :</b> <span class="comment-date"><?= neatDate($review['published_date']); ?></span> </p>
+                                            by : </strong> <?= $review['display_name']; ?> <b> on :</b> <span class="comment-date"><?= neatDate($review['published_date']); ?></span> </p>
                                     <p class="comment-title"><strong>Title: </strong><?= $review['title']; ?></p>
                                     <p class="comment-detail"><strong>Content: </strong><?= $review['content']; ?></p>
                                     <hr class="comment-line"/>
