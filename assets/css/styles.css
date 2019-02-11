@@ -7371,13 +7371,13 @@ input[type="color"]:focus,
 }
 
 .market-board {
-	margin-left: 3px;
-	border-radius: 6px;
-	padding: 10px;
-	border: 1px solid #44a94b;
-	min-height: 140px;
-	margin-bottom: 10px;
-	box-shadow:1px 0 20px rgba(0,0,0,0.5)
+    margin-left: 3px;
+    border-radius: 6px;
+    padding: 10px;
+    border: 1px solid #44a94b;
+    min-height: 140px;
+    margin-bottom: 10px;
+    box-shadow: 1px 0 20px rgba(0, 0, 0, 0.5)
 }
 
 #navbar-img {
@@ -7433,6 +7433,37 @@ input[type="color"]:focus,
 #review_submit > span {
     font-family: "Open Sans", cursive;
     font-size: 13px;
+}
+
+.dropdown-menu-category-section {
+    border-top: 1px solid #eeeeee;
+    width: 66.66vw;
+}
+
+.nav-category-container {
+    display: flex;
+    flex: 1;
+    flex-direction: row
+}
+
+.nav-category-one {
+    flex: 2
+}
+
+.nav-category-two {
+    flex: 1
+}
+
+.navbar {
+    border-bottom: 1px solid #dadada;
+}
+
+
+.nav-category-img {
+    width: 94%;
+    height: 97%;
+    margin-left: 20px;
+    margin-right: -20px;
 }
 
 .category-favorite > i {
