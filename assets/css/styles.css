@@ -7437,7 +7437,7 @@ input[type="color"]:focus,
 
 .dropdown-menu-category-section {
     border-top: 1px solid #eeeeee;
-    width: 66.66vw;
+    width: 66.30vw;
 }
 
 .nav-category-container {
@@ -7611,12 +7611,12 @@ input[type="color"]:focus,
 
 .notification {
     position: fixed;
-    right:10px;
-    top:150px;
-    margin:auto;
+    right: 10px;
+    top: 150px;
+    margin: auto;
     padding: 30px;
     font-weight: 700;
-    font-size:16px;
+    font-size: 16px;
     text-align: center;
     z-index: 9999;
     font-family: "Open Sans", cursive;
