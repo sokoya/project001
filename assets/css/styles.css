@@ -7437,7 +7437,8 @@ input[type="color"]:focus,
 
 .dropdown-menu-category-section {
     border-top: 1px solid #eeeeee;
-    width: 66.30vw;
+    width: 63.50vw;
+    /*width: 910px;*/
 }
 
 .nav-category-container {
@@ -7451,7 +7452,7 @@ input[type="color"]:focus,
 }
 
 .nav-category-two {
-    flex: 1
+    flex: 1;
 }
 
 .navbar {

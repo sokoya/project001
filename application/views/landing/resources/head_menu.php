@@ -58,7 +58,7 @@ $categories = $this->db->query($category_cache)->result();
                                                         </div>
                                                     <?php endforeach; endif; ?>
                                             </div>
-                                            <div class="nav-category-two">
+                                            <div class="">
                                                 <!-- Konga image is used here for development-->
                                                 <img class="nav-category-img"
                                                      src="https://backend.konga.com/media/customcmsmenu/item/Computers_Accessories_1.png"
