@@ -87,7 +87,7 @@
                 <div style="height:168px"></div>
                 <h2 class="text-center">Oops! Sorry, we couldn't find products on this section.</h2>
                 <p class="text-center">
-                    Please check your spelling for typographic error.<br />
+                    Please check your spelling for typographic error.<br/>
                     <span class="text-danger">You can also:</span>
                 <ul class="text-center">
                     <li style="list-style-type: none">Try a different keyword search.</li>
@@ -128,7 +128,7 @@
                                 <li></li>
                                 <?php foreach ($sub_categories as $category) : ?>
                                     <li>
-                                        <a href="<?= base_url('catalog/' . urlify($category->name) .'/'); ?>">
+                                        <a href="<?= base_url('catalog/' . urlify($category->name) . '/'); ?>">
                                             <?= $category->name; ?>
                                         </a>
                                     </li>
@@ -174,7 +174,9 @@
                         <?php if ($features) : ?>
                             <div class="category-filters-section">
                                 <?php $x = 1;
-                                foreach ($features as $feature => $feature_value) : ?>
+                                foreach ($features
+
+                                as $feature => $feature_value) : ?>
                                 <div class="accordion" id="<?= trim($feature); ?>">
                                     <div class="panel no-outline feature-attribute">
                                         <div class="panel-header feature-attribute">
@@ -216,12 +218,15 @@
                         <div class="text"
                              style="position: absolute;top: 35%;left: 0;height: 100%;width: 100%;font-size: 18px;text-align: center;">
                             <img src="<?= base_url('assets/load.gif'); ?>" alt="Processing...">
-                            Processing your request. <strong style="color: rgba(2.399780888618386%,61.74193548387097%,46.81068368248487%,0.843);">Please Wait! </strong>
+                            Processing your request. <strong
+                                    style="color: rgba(2.399780888618386%,61.74193548387097%,46.81068368248487%,0.843);">Please
+                                Wait! </strong>
                         </div>
                     </div>
                     <div id="category_body">
                         <div class="row filter_data" data-gutter="15">
-                            <?php $p_count = 0; foreach ($products as $product) : ?>
+                            <?php $p_count = 0;
+                            foreach ($products as $product) : ?>
                                 <?php $p_count++; ?>
                                 <div class="col-md-3 <?php if ($p_count % 4 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> v-items clearfix">
                                     <div class="product">
@@ -239,6 +244,7 @@
                                                             data-qv="<?php if ($p_count % 4 == 0) { ?>true<?php } ?>"
                                                             data-qvc="<?php echo $p_count ?>"
                                                             data-image="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
+                                                            data-arrow="arrow-<?= $product->id ?>"
                                                             class="btn btn-primary product-quick-view-btn">Quick view
                                                     </button>
                                                 </div>
@@ -271,20 +277,28 @@
                                                     <span class="cs-price-tl"><?= ngn($product->sale_price); ?> </span>
                                                 <?php endif; ?>
 
-                                                <?php if( !$this->session->userdata('logged_in')) :?>
+                                                <?php if (!$this->session->userdata('logged_in')) : ?>
                                                     <a href="<?= base_url('login'); ?>">
-                                                        <span style="margin-right:3px;" class="pull-right category-favorite">
-                                                                <i class="fa fa-heart" title="Add <?= $product->product_name; ?> to your wishlist"></i>
+                                                        <span style="margin-right:3px;"
+                                                              class="pull-right category-favorite">
+                                                                <i class="fa fa-heart"
+                                                                   title="Add <?= $product->product_name; ?> to your wishlist"></i>
                                                         </span>
                                                     </a>
-                                                <?php else :?>
-                                                    <?php if($this->product->is_favourited($profile->id, $product->id)) : ?>
-                                                        <span style="margin-right:3px;" class="pull-right category-favorite wishlist-btn" data-pid="<?= $product->id;?>">
-                                                            <i class="fa fa-heart" title="Remove <?= $product->product_name; ?> from your wishlist"></i>
+                                                <?php else : ?>
+                                                    <?php if ($this->product->is_favourited($profile->id, $product->id)) : ?>
+                                                        <span style="margin-right:3px;"
+                                                              class="pull-right category-favorite wishlist-btn"
+                                                              data-pid="<?= $product->id; ?>">
+                                                            <i class="fa fa-heart"
+                                                               title="Remove <?= $product->product_name; ?> from your wishlist"></i>
                                                         </span>
                                                     <?php else : ?>
-                                                        <span style="margin-right:3px;" class="pull-right category-favorite wishlist-btn" data-pid="<?= $product->id;?>">
-                                                            <i class="fa fa-heart-o" title="Add <?= $product->product_name; ?> to your wishlist"></i>
+                                                        <span style="margin-right:3px;"
+                                                              class="pull-right category-favorite wishlist-btn"
+                                                              data-pid="<?= $product->id; ?>">
+                                                            <i class="fa fa-heart-o"
+                                                               title="Add <?= $product->product_name; ?> to your wishlist"></i>
                                                         </span>
                                                     <?php endif; ?>
                                                 <?php endif; ?>
@@ -292,6 +306,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div id="arrow-<?= $product->id ?>" class="arrow-up"></div>
                                 </div>
                             <?php endforeach; ?>
                         </div>
@@ -318,7 +333,8 @@
 </script>
 <script src="<?= base_url('assets/js/quick-view.js'); ?>"></script>
 <script src="<?= base_url('assets/js/search.js'); ?>"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
     $(function () {
         $('.lazy').Lazy();
@@ -331,16 +347,16 @@
         grid: true,
         prefix: "&#8358;",
         onFinish: function (data) {
-            window.location = current_url + '&price_min='+data.from+'&price_max='+data.to;
+            window.location = current_url + '&price_min=' + data.from + '&price_max=' + data.to;
         }
     });
 
     let my_range = $("#price-range").data("ionRangeSlider");
-    let min = '<?= $price_min ; ?>';
-    let max = '<?= $price_max ; ?>';
-    if( min != '' && max != '') {
+    let min = '<?= $price_min; ?>';
+    let max = '<?= $price_max; ?>';
+    if (min != '' && max != '') {
         my_range.update({
-            from : min,
+            from: min,
             to: max
         });
     }

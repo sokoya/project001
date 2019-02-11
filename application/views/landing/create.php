@@ -18,7 +18,7 @@
     }
 
     .login-box {
-        padding: 15px;
+        padding: 20px 15px 30px;
     }
 
     .market-box {
@@ -29,6 +29,9 @@
     }
 
     .panel-bordered-primary {
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
         border: 1px solid #1ca28b;
         color: #1cbb86 !important;
         padding: 10px 50px;
@@ -82,7 +85,7 @@
             <div class="col-md-6 market-box">
                 <p class="text-center">
                     <a href="<?= base_url(); ?>"><img
-                                src="<?= base_url('assets/img/onitshamarket-logo.png') ?>" width="20%"
+                                src="<?= base_url('assets/img/onitshamarket-logo.png') ?>" width="30%"
                                 alt="market logo Image"></a>
                 </p>
                 <div class="row">
@@ -145,7 +148,7 @@
                                             Policy.</a></label>
                                 </div>
                             </div>
-                            <input class="market_btn_create col-md-12 col-sm-12 col-xs-12" type="submit"
+                            <input style="border-radius:3px;" class="market_btn_create col-md-12 col-sm-12 col-xs-12" type="submit"
                                    value="Create Account"/>
                             <?= form_close(); ?>
                             <br/><br/><br/><br/>

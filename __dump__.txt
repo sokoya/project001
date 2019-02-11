@@ -185,3 +185,17 @@
         </div>
     </div>
 </nav>
+
+
+
+
+
+
+
+Menu
+
+
+<img class="dropdown-menu-category-section-theme-img"
+                                         src="<?= STATIC_CATEGORY_PATH . $category->image; ?>"
+                                         alt="<?= $category->name; ?>" title="<?= $category->name; ?>"
+                                         style="right: -10px;"/>
