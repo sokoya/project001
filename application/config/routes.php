@@ -63,6 +63,8 @@ $route['404_override'] = 'errors/_404';
 $route['translate_uri_dashes'] = FALSE;
 $route['sitemap\.xml'] = "Seo/index";
 $route['robots\.txt'] = "Seo/robots";
-//$route['seller/message/detail'] = "seller/message/detail";
+
+//Order code
+$route['t/(:any)'] = 't/code/$1';
 
 // $route['seller/product/load_images/(:any)'] = "seller/edit/$1/";
