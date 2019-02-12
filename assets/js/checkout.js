@@ -1,4 +1,5 @@
 var state_is_fetched = false;
+
 /*
 * Uppercase first letter of a word
 * */
@@ -59,6 +60,7 @@ $('.cancel-btn').on('click', function () {
     show_page('delivery_address');
 });
 
+// todo :Location
 $('.create-address-btn').on('click', function (e) {
     e.preventDefault();
     $(this).prop('disabled', true);
@@ -87,6 +89,7 @@ $('.create-address-btn').on('click', function (e) {
                 $('#processing').hide();
                 $('#delivery-method').load(`${base_url}checkout #delivery-method`, function () {
                     $('.billing-address').on('click', get_updates);
+                    $('.delivery-address').on('click', get_updates);
                 });
             } else {
                 $('#processing').hide();
@@ -104,7 +107,7 @@ show_page = page => {
 };
 
 $('.btn-new-address').on('click', function () {
-    if( !state_is_fetched ) {
+    if (!state_is_fetched) {
         $.getJSON(base_url + 'ajax/fetch_states', function (d) {
             state_is_fetched = true;
             $.each(d, function (k, v) {
@@ -149,12 +152,12 @@ function finish_loading() {
 
 
 $('.pickup-address').on('click', get_pickup_updates);
-$('.delivery-address').on('click', get_updates)
+$('.delivery-address').on('click', get_updates);
 
 /*
 * Pickup location updates
 * */
-function get_pickup_updates(){
+function get_pickup_updates() {
     start_loading();
     $('.pickup-address').removeClass('custom-panel-active');
     $('.address-input').prop('checked', false);
@@ -178,6 +181,7 @@ function get_pickup_updates(){
     $('.delivery-warning').text(`You selected our ${pickup_address} pickup address.`);
     setTimeout(finish_loading, 420);
 }
+
 /*
 * Get updates for billing address
 * */
