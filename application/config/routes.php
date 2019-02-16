@@ -67,4 +67,8 @@ $route['robots\.txt'] = "Seo/robots";
 //Order code
 $route['t/(:any)'] = 't/code/$1';
 
-// $route['seller/product/load_images/(:any)'] = "seller/edit/$1/";
+//Payment & Checkout
+$route['interswitch/webpay/'] = 'checkout/interswitch';
+$route['interswitch/response'] = 'checkout/response/';
+$route['order_completed'] = 'checkout/order_completed/';
+

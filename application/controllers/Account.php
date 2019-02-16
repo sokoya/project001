@@ -66,7 +66,17 @@ class Account extends MY_Controller {
         $page_data['title'] = "My Orders";
         $page_data['order_code'] = $order_code;
         $page_data['orders'] = $this->user->get_my_order_status( $this->session->userdata('logged_id'), $order_code );
-//        var_dump($page_data['orders']);
+        if( $page_data['orders'] ){
+//            var_dump($page_data['orders'] ); exit;
+            $orders = $page_data['orders'];
+            if( $orders[0]->billing_address_id == 0){
+                $page_data['shipping_type'] = 'pickup';
+                $page_data['shipping_address'] = $this->user->get_shipping_type( $orders[0]->pickup_location_id, 'pickup');
+            }else{
+                $page_data['shipping_type'] = 'delivery';
+                $page_data['shipping_address'] = $this->user->get_shipping_type( $orders[0]->billing_address_id, 'delivery');
+            }
+        }
         $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
         $this->load->view('account/orderstatus', $page_data);
     }

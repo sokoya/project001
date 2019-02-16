@@ -193,7 +193,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-4 "></div>
                     <div class="col-xs-12 col-md-4 text-center">
-                        <a href="<?= base_url(); ?>">
+                        <a title="Go back home" href="<?= base_url(); ?>">
                             <img style="height:100px;"
                                  src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>"
                                  data-holder-rendered="true"/>
@@ -212,23 +212,30 @@
                         <div class="text-gray-light">INVOICE TO:</div>
                         <h2 class="to"
                             style="font"><?= ucwords($profile->first_name) . ' ' . ucwords($profile->last_name); ?></h2>
+                        <br />
                         <?php if( $ordersingledetail->billing_address_id != 0 ) : $address = $this->product->get_shipping_type( $ordersingledetail->billing_address_id, 'shipping') ?>
                             <p>
-                                <strong>Shipping Type : </strong> Shipping Address
+                                <strong>Shipping Type ( Billing Address ): </strong>
                             </p>
                             <div class="name"><?= $address->billingname; ?></div>
                             <div class="phone"><?= $address->billingphone; ?></div>
                             <div class="address"><?= $address->billingaddress; ?>.</div>
                         <?php else : $address = $this->product->get_shipping_type( $ordersingledetail->pickup_location_id, 'pickup'); ?>
-                            <p> <strong>Shipping Type : </strong> Pickup Location </p>
+                            <p><strong>Shipping Type ( Pickup Location  ): </strong></p>
                             <div class="name"><?= $address->title; ?></div>
-                            <div class="phone"><?= $address->phones . ' Email : ' . $address->emails; ?></div>
-                            <div class="address"><?= $address->billingaddress; ?>.</div>
+                            <div class="phone"><?= $address->phones . ' <br />Email : ' . $address->emails; ?></div>
+                            <div class="address"><?= $address->address; ?>.</div>
                         <?php endif;?>
                         <div class="email"><a href="mailto:<?= $profile->email; ?>"><?= $profile->email; ?></a></div>
                     </div>
                     <div class="col-md-6 col-xs-12 invoice-details">
-                        <h1 class="invoice-id">INVOICE REFERENCE: <span><?= $order_code; ?></span></h1>
+                        <h4>Order ID: <span><?= $order_code; ?></span></h4>
+                        <?php if( !is_null($ordersingledetail->payRef)) : ?>
+                            <h4>Payment Reference: <span><?= $ordersingledetail->payRef; ?></span></h4>
+                        <?php endif; ?>
+                        <?php if( !is_null($ordersingledetail->txnref)) : ?>
+                            <h4>Transaction Reference: <span><?= $ordersingledetail->txnref; ?></span></h4>
+                        <?php endif; ?>
                         <div class="date">Date of Invoice: <span class="invoice_date"><?= date('Y-m-d H:i:s', strtotime($ordersingledetail->order_date) ); ?></span></div>
                     </div>
                 </div>
@@ -257,10 +264,10 @@
                                     <td class="text-left"><h3><?= ucwords($order->product_name);?></h3></td>
                                     <td class="var"><?= $order->variation; ?></td>
                                     <td class="qty"><?= $order->qty; ?></td>
-                                    <td class="unit"><?= ngn($order->amount / $order->qty); ?></td>
+                                    <td class="unit"><?= ngn($order->amount * $order->qty); ?></td>
                                     <td class="total"><?= ngn($order->amount); ?></td>
                                     <?php
-                                        $subtotal += $order->amount ;
+                                        $subtotal += $order->amount * $order->qty;
                                         $shipping = $order->delivery_charge;
                                     ?>
                                 </tr>
@@ -298,7 +305,7 @@
         <div></div>
     </div>
 </div>
-</body>
+
 <script src="<?= base_url('assets/js/jquery.js'); ?>"></script>
 <script src="<?= base_url('assets/js/bootstrap.js'); ?>"></script>
 
@@ -307,4 +314,5 @@
         window.print();
     });
 </script>
+</body>
 </html>

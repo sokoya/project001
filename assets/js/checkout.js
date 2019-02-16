@@ -17,7 +17,6 @@ function bind_market(src, destination) {
     $(`.${destination}`).html(src);
 }
 
-Stripe.setPublishableKey('pk_test_nod5swtRu9mKvMZB28838BY8');
 
 $('.continue-btn').on('click', function (e) {
     $(this).prop('disabled', 'disabled');
@@ -35,16 +34,19 @@ $('.continue-btn').on('click', function (e) {
             if (data.status == 'success') {
                 if (payment_method == 1 || payment_name == 'Payment on Delivery') {
                     // Payment on delivery
-                    setInterval(function () {
+                    setTimeout(function () {
                         notification_message("Saving your orders... ", 'fa fa-info-circle', 'success');
                     }, 3000);
                     window.location.href = base_url + 'checkout/order_completed';
                 } else if (payment_method == 2 || payment_name == 'Interswitch Webpay') {
                     // Interswitch Payment
-                    setInterval(function () {
+                    setTimeout(function () {
                         notification_message("Saving your orders... Redirecting you to payment portal in 5 seconds ", 'fa fa-info-circle', 'success');
                     }, 3000);
-                    window.location.href = base_url + "checkout/stripe";
+                    // window.location.href = base_url + "checkout/stripe";
+                    window.location.href = base_url + "checkout/interswitch/webpay/";
+                }else{
+                    window.location.href = base_url;
                 }
             }
         },
@@ -60,7 +62,6 @@ $('.cancel-btn').on('click', function () {
     show_page('delivery_address');
 });
 
-// todo :Location
 $('.create-address-btn').on('click', function (e) {
     e.preventDefault();
     $(this).prop('disabled', true);
@@ -181,7 +182,6 @@ function get_pickup_updates() {
     $('.delivery-warning').text(`You selected our ${pickup_address} pickup address.`);
     setTimeout(finish_loading, 420);
 }
-
 /*
 * Get updates for billing address
 * */
@@ -228,10 +228,6 @@ $(".delivery-box").on('change', function () {
     }
 });
 
-// $('.payment-radio').on('click', function () {
-//     alert('You clicked me');
-// });
-
 $('.pay-method').on('click', function () {
     $('.pay-panel').removeClass('custom-panel-active');
     $(this).find('.pay-panel').addClass('custom-panel-active');
@@ -245,53 +241,12 @@ $('.payment-radio').on('change', function () {
     $('.pay-panel').addClass('custom-panel-active');
     $('.continue-btn').prop('disabled', false)
 });
-
-$(document).ready(function () {
-
-    $('#payBtn').on('click', function (e) {
-        // alert('Here...');
-        e.preventDefault();
-        $(this).prop('disabled', 'disabled');
-        // Get the token
-        //create single-use token to charge the user
-        Stripe.createToken({
-            number: $('#card_num').val(),
-            cvc: $('#card-cvc').val(),
-            exp_month: $('#card-expiry-month').val(),
-            exp_year: $('#card-expiry-year').val()
-        }, stripeResponseHandler);
-        //submit from callback
-        return false;
-    });
-
-    function stripeResponseHandler(status, response) {
-        if (response.error) {
-            $('#payBtn').removeAttr("disabled");
-            //display the errors on the form
-            // $('#payment-errors').attr('hidden', 'false');
-            $('#payment-errors').addClass('alert alert-danger');
-            $("#payment-errors").html(response.error.message);
-        } else {
-            //This would be changed to the stripe card form
-            var form$ = $("#paymentFrm");
-            //get token id
-            var token = response['id'];
-            //insert the token into the form
-            form$.append("<input type='hidden' name='stripeToken' value='" + token + "' />");
-            //insert every other element
-            //Check the payment method to type to know what to do
-            //submit form to the server
-            form$.get(0).submit();
-
-        }
-    }
-});
-
 $(function () {
     $('.lazy').Lazy();
 });
+
 $('.pay-panel').on('click', function () {
     let self = $(this);
-    $('p.payment_note').hide();
-    self.find('p.payment_note').show();
+    $('div.payment_note').hide();
+    self.find('div.payment_note').show();
 })

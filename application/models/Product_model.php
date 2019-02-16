@@ -13,6 +13,16 @@ Class Product_model extends CI_Model{
         return $result;
     }
 
+    /*
+     * Insert multiple rows */
+    function insert_batch( $table = 'orders', $data ){
+        try {
+            return $this->db->insert_batch($table, $data);
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
 
     // Update table
     function update_data( $access = '' , $data = array(), $table_name = 'users'){
@@ -784,7 +794,7 @@ Class Product_model extends CI_Model{
     function get_shipping_type( $id, $type ){
         switch ($type) {
             case 'shipping':
-                $query = "SELECT CONCAT(b.first_name, ' ', b.lase_name) billingname , CONCAT(b.phone, ' ', b.phone2) billingphone,
+                $query = "SELECT CONCAT(b.first_name, ' ', b.last_name) billingname , CONCAT(b.phone, ' ', b.phone2) billingphone,
                 CONCAT(b.address, ' ', s.name , ', ', a.name) billingaddress FROM billing_address b
                 LEFT JOIN states s ON(s.id = b.sid)
                 LEFT JOIN area a ON(a.id = b.aid) WHERE b.id = ?";

@@ -265,14 +265,12 @@
                                                        id="payment_method_<?= $method->id; ?>"
                                                        value="<?= $method->id; ?>">
                                                 <?= $method->name; ?>
-                                                <!--                                                    <img src="-->
-                                                <? //= base_url('assets/img/paystack.png');
-                                                ?><!--">-->
+                                                <img src="<?= STATIC_CATEGORY_PATH . $method->img_name; ?>" alt="-">
                                             </p>
                                             <div class="gap-top"></div>
-                                            <p class="text-sm pad-all payment_note" style="display:none;">
+                                            <div class="text-sm pad-all payment_note" style="display:none;">
                                                 <?= htmlspecialchars_decode($method->notes); ?>
-                                            </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -354,7 +352,7 @@
                             <input type="hidden" name="qty" id="qty" value="<?= $qty; ?>">
                             <li class="list-group-item">
                                 <button type="submit" class="btn btn-block btn-custom-dark continue-btn" disabled>
-                                    Continue
+                                    Proceed
                                     to Payment
                                 </button>
                             </li>

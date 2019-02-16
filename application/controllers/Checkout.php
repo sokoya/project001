@@ -14,6 +14,7 @@ class Checkout extends MY_Controller
 		if (empty( $items )) {
 			redirect(base_url());
 		}
+		$this->load->library('sitelib', 'site');
 	}
 
     public function index(){
@@ -104,21 +105,18 @@ class Checkout extends MY_Controller
 		exit;
 	}
 
-
     /*
      * Save user orders to the DB
      * */
 	function checkout_confirm() {
 	    if( $this->input->is_ajax_request() ){
-	        /*
-             * Note the seller might have checked pickup address or billing address
-             */
+	        /*  Note the seller might have checked pickup address or billing address */
             $charge = 0;
             // Check either pickup or delivery
-            $pickup_id = $address_id = '';
-            $pickup_id = $this->input->post('pickup_address');
+            $pickup_id = $address_id = 0;
             $is_delivery = false;
-            if( $pickup_id ) {
+            if( $this->input->post('pickup_address') ) {
+                $pickup_id = $this->input->post('pickup_address');
                 $charge = $this->product->get_billing_amount($pickup_id, 'pickup');
             }else{
                 $is_delivery = true;
@@ -126,7 +124,6 @@ class Checkout extends MY_Controller
                 $charge = $this->product->get_billing_amount($address_id);
             }
             if( $charge == 0 ) $charge = 500;
-
             $error = $subtotal = 0; $data = $return = array();
             $order_code = $this->product->generate_code('orders', 'order_code');
             $order_date = get_now();
@@ -134,11 +131,11 @@ class Checkout extends MY_Controller
             $order_status = json_encode( $order_status);
             $active_status = 'pending';
             $total = $this->input->post('total_charge', true);
-//            first_name=&last_name=&phone=&address=&state=&selected_address=6&payment_method=1&total_charge=601800&delivery_charge=1800
             $payment_method = $this->input->post('payment_method', true);
             $qty = $this->input->post('qty', true);
             $billing_amount = $charge * $qty;
             $buyer_id = $this->session->userdata('logged_id');
+            $txn_ref = 'TX-'.$order_code.'-'.time();
             foreach( $this->cart->contents() as $product ){
                 $detail = $this->product->get_cart_details($product['id']);
                 $variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
@@ -159,47 +156,75 @@ class Checkout extends MY_Controller
                     $price = $this->product->get_commission( $product['id'] );
                     $commission = ( $price / 100 ) * (int)$product['subtotal'];
                     // Populate the Order table data
-                    $data['buyer_id'] = $buyer_id;
-                    $data['seller_id'] = $detail->seller_id;
-                    $data['order_code'] = $order_code;
-                    $data['order_date'] = $order_date;
-                    $data['payment_method'] = $payment_method;
-                    $data['status'] = $order_status;
-                    $data['active_status'] = $active_status;
-                    $data['product_id'] = $product['id'];
-                    $data['qty'] = $product['qty'];
-                    $data['product_variation_id'] = $product['options']['variation_id'];
-                    $data['pickup_location_id'] = $pickup_id;
-                    $data['billing_address_id'] = $address_id;
-                    $data['delivery_charge'] = $billing_amount;
-                    $data['commission'] = $commission;
-                    $data['amount'] = $product['price'];
-                    $this->product->insert_data('orders', $data);
+                    $res['buyer_id'] = $buyer_id;
+                    $res['seller_id'] = $detail->seller_id;
+                    $res['order_code'] = $order_code;
+                    $res['order_date'] = $order_date;
+                    $res['payment_method'] = $payment_method;
+                    $res['status'] = $order_status;
+                    $res['active_status'] = $active_status;
+                    $res['product_id'] = $product['id'];
+                    $res['qty'] = $product['qty'];
+                    $res['product_variation_id'] = $product['options']['variation_id'];
+                    $res['pickup_location_id'] = $pickup_id;
+                    $res['billing_address_id'] = $address_id;
+                    $res['delivery_charge'] = $billing_amount;
+                    $res['commission'] = $commission;
+                    $res['amount'] = $product['price'];
+                    $res['txnref'] = $txn_ref;
+                    array_push( $data, $res );
                 }
-                unset( $data );
                 $subtotal += $product['subtotal'];
             }
+
+            $item_left = $this->cart->total_items();
             if(  $error > 0 ){
                 $return['message'] = $error;
-                echo json_encode( $return );
+                echo json_encode($return);
                 exit;
-            }
-            // We need to confirm if there is still an item in the cart
-            $item_left = $this->cart->total_items();
-            if( !empty( $item_left ) && !empty( $total) ){
+            }elseif( !empty($item_left) && !empty( $total) ){
                 $total = $subtotal + $billing_amount;
-                $this->session->set_userdata(array('order_code' => $order_code, 'amount' => $total));
-                $return['status'] = 'success';
-                echo json_encode( $return );
-                exit;
+                    // Lets insert our orders into the database
+                if(  $this->product->insert_batch( 'orders', $data ) ){
+                    unset( $data);
+                    // check the payment method, if Interswitch (2) compile the array session
+                    $txn_ref = 'TX|'.$order_code.'|'.time();
+                    $token = simple_crypt( $txn_ref, 'e');
+                    $amt = $total * 100 ;
+                    if( (int)$payment_method == 2 ){
+                        $redirect_url =  base_url('interswitch/response/?t=' . $token);
+                        $hash = hash('SHA512', $txn_ref.INTERSWITCH_PRODUCT_ID.INTERSWITCH_PAY_ITEM_ID.$amt.$redirect_url.INTERSWITCH_MAC_KEY) ;
+                        $profile = $this->product->get_row('users', 'first_name, last_name', array('id' => $buyer_id));
+                        $name = $profile->first_name . ' '. $profile->last_name;
+                        $interswitch_session = array(
+                            'product_id'    =>  INTERSWITCH_PRODUCT_ID,
+                            'pay_item_id'   =>  INTERSWITCH_PAY_ITEM_ID,
+                            'amount'        =>  $amt,
+                            'currency'      =>  566,
+                            'site_redirect_url' => $redirect_url,
+                            'txn_ref'       =>  $txn_ref,
+                            'cust_id'       => $buyer_id,
+                            'cust_name'     => $name,
+                            'hash'          => $hash
+                        );
+                        $this->session->set_userdata(array('inter' => $interswitch_session));
+                    }
+                    $this->session->set_userdata(array('order_code' => $order_code, 'txn_ref' => $txn_ref, 'amount' => $amt));
+                    $return['status'] = 'success';
+                    echo json_encode($return);
+                    exit;
+                }else{
+                    $return['message'] = 'There was an error processing your order.';
+                    echo json_encode($return);
+                    exit;
+                }
             }
-
         }else{
 	        redirect(base_url());
         }
     }
 
-    // Order completed
+    // Order Completed
 	public function order_completed(){
         $order = $this->session->userdata('order_code');
         $page_data['page'] = 'order_completed';
@@ -215,7 +240,7 @@ class Checkout extends MY_Controller
                 // Send mail to the user
                 // Remove all session relating to the Order
                 $this->session->unset_tempdata('checkout');
-                $this->session->unset_userdata(array('cart_contents','order_code','amount'));
+                $this->session->unset_userdata(array('inter', 'order_code', 'txn_ref', 'amount', 'cart_contents'));
                 // Send SMS
                 $link = base_url('account/orderstatus/') . $order;
                 if( SMS_FOR_ORDERS ) {
@@ -246,7 +271,7 @@ class Checkout extends MY_Controller
             }
             $this->load->view('landing/order_completed', $page_data);
         }else{
-            $this->session->set_flashdata('error_msg', 'Error with you order. Staet shopping...');
+            $this->session->set_flashdata('error_msg', 'Error with you order. Start shopping...');
             redirect(base_url());
         }
     }
@@ -319,7 +344,7 @@ class Checkout extends MY_Controller
                     $this->session->userdata('success_msg', "Order completed.");
                     redirect('checkout/order_completed');
                 }else{
-                    $this->session->userdata('error_msg', "Transaction failed.Please try again.");
+                    $this->session->userdata('error_msg', "Transaction failed. Please try again.");
                     redirect(base_url());
                 }
             }else{
@@ -338,9 +363,122 @@ class Checkout extends MY_Controller
             try {
                 $this->myemail->paymentUncompleted( $order, $uid , $buyer);
                 $this->session->set_flashdata('error_msg','Your payment could not be completed.');
-
             } catch (Exception $e) {
             }
+            redirect(base_url());
+        }
+    }
+
+    // Interswitch webpay
+    public function interswitch(){
+	    if( $this->session->userdata('inter') ){
+//            ini_set('session.cache_limiter','public');
+//            session_cache_limiter(false);
+            $this->load->view('landing/interswitch/webpay');
+        }else{
+            $this->session->set_flashdata('error', 'Please update your cart...');
+        }
+    }
+
+    /*
+     * Response from Interswitch Payment Gateway
+     * @param : t = encrypted txn_ref
+     * */
+    public function response(){
+	    // Check the txn_ref session and validate the token
+        $token = $this->input->get('t', true);
+        $txn_ref = $this->session->userdata('txn_ref');
+        $is_token = simple_crypt( $token, 'd');
+	    if( $txn_ref && ( $txn_ref == $is_token ) ) {
+            // Check the ResponseCode
+            $amount = $this->session->userdata('amount');
+            $order_code = $this->session->userdata('order_code');
+            $curl_info_data  = array( 'txn_ref'   => $txn_ref, 'amount'    => $amount, 'order_code' =>  $order_code );
+            $response = $this->site->interswitch_curl( $curl_info_data ); // return a JSON
+            switch ($response['ResponseCode']) {
+                case '00':
+                    // Confirm. Payment made successfully. :)
+                    $this->update_payment_status( $response );
+                    break;
+                case 'Z0':
+                    // Transaction not completed status - Requery
+                    $response = $this->site->interswitch_curl( $curl_info_data );
+                    if( $response['ResponseCode'] == '00' ){
+                        // We can't requery again... I am weak. Notify unsuccessful payment
+                        $this->update_payment_status( $response, false );
+                    }else{
+                        $this->update_payment_status( $response );
+                    }
+                    break;
+                default:
+                    // Order Payment was Not Successful
+//                    var_dump( $response ); exit;
+                    $this->update_payment_status( $response, false );
+                    break;
+            }
+        }else{
+	        $this->session->set_flashdata('error_msg', 'Either txn_ref || $txn_ref != $is_token');
+	        redirect( base_url() );
+        }
+    }
+
+    /*
+     * @param; response: Interswitch JSON response
+     * status : boolean ( true - successful or false - unsuccessful )
+     * */
+    function update_payment_status( $response, $status = true ){
+        // We are good to go
+        $order_code = $this->session->userdata('order_code');
+        $this->load->model('email_model','myemail');
+        $uid = $this->session->userdata('logged_id');
+        $profile = $this->product->get_row('users', 'first_name, last_name, email, phone', array('id' => $uid));
+        if( $status ){
+            // Success
+            $PaymentReference = (isset($response['PaymentReference'])) ? $response['PaymentReference'] : null;
+            $RetrievalReferenceNumber = (isset($response['RetrievalReferenceNumber'])) ? $response['RetrievalReferenceNumber'] : null;
+            $update_data = array(
+                'active_stats' => 'certified',
+                'paymentDesc'   => $response['ResponseDescription'],
+                'payRef'        => $PaymentReference,
+                'retRef'        => $RetrievalReferenceNumber,
+                'apprAmt'       => $response['Amount']/100,
+                'responseCode'  => $response['ResponseCode']
+            );
+            // show order complete page
+            try {
+                $this->product->update_items($order_code, $update_data);
+                $this->session->set_flashdata('success_msg', 'Thank you for shopping with us, your order has been received.');
+                redirect('order_completed');
+            } catch (Exception $e) {
+            }
+        }else{
+            $PaymentReference = (isset($response['PaymentReference'])) ? $response['PaymentReference'] : null;
+            $RetrievalReferenceNumber = (isset($response['RetrievalReferenceNumber'])) ? $response['RetrievalReferenceNumber'] : null;
+            $update_data = array(
+                'paymentDesc'   => $response['ResponseDescription'],
+                'payRef'        => $PaymentReference,
+                'retRef'        => $RetrievalReferenceNumber,
+                'apprAmt'       => $response['Amount']/100,
+                'responseCode'  => $response['ResponseCode']
+            );
+            try {
+                $this->product->update_items($order_code, $update_data);
+                $buyer['name'] = 'Dear '. $profile->first_name . ' '. $profile->last_name;
+                $buyer['email'] = $profile->email;
+//                @TODO
+//                $this->myemail->paymentUncompleted( $order_code, $uid , $buyer);
+                // Lets also send a message
+                if( SMS_FOR_ORDERS) {
+                    $buyer_message = "Dear " .ucfirst($profile->first_name) . ", your order {$order_code} payment was not successful. check your email for complete details. Thank you!";
+                    $sms_array = array( $profile->phone => $buyer_message );
+                    $this->load->library('AfricaSMS', $sms_array);
+                    $this->africasms->sendsms();
+                }
+            } catch (Exception $e) {
+
+            }
+            $this->session->set_flashdata('error_msg', "We couldn't validate the payment, please try again or use another payment method. If error persist please contact us.");
+            $this->session->unset_userdata(array('inter', 'order_code', 'txn_ref', 'amount'));
             redirect(base_url());
         }
     }

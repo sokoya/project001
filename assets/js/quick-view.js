@@ -149,7 +149,7 @@ function get_view() {
 				</div>
 				<div class="row">
 				<div class="col-md-6">
-					<button class="btn btn-block btn-primary add-to-cart c-hover" id="${pr_id}_submit" data-seller="${quick.seller}" data-vid="${quick.default_vid}" data-vname="${quick.default_vname}"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
+					<button class="btn btn-block btn-primary add-to-cart c-hover" data-bid="${pr_id}" id="${pr_id}_submit" data-seller="${quick.seller}" data-vid="${quick.default_vid}" data-vname="${quick.default_vname}"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
 				</div>
 				<div class="col-md-6">
 					<button class="btn btn-block btn-default fav c-hover"><i class="fa fa-star-o"></i> Wishlist</button>
@@ -160,6 +160,7 @@ function get_view() {
 		</div>`);
 
             $('.add-to-cart').on('click', function () {
+                let btn_id = $(this).data('data-bid');
                 let quantity_available = $(`#${pr_id}`).val();
                 let vid = $(`#${pr_id}_submit`).data('vid');
                 $.ajax({
@@ -179,8 +180,8 @@ function get_view() {
                         let x = cart_instance.text() * 1;
                         let y = quantity_available * 1;
                         cart_instance.text(x + y);
+                        $('.arrow-up').hide();
                     },
-
                     error: () => {
                     }
                 }).done(function () {

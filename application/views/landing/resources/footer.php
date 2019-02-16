@@ -92,20 +92,24 @@
                     </ul>
                     <ul class="payment-icons-list">
                         <li>
+                            <img src="<?= base_url('assets/img/payment/interswitch.png'); ?>"
+                                 alt="Interswitch Payment" title="Pay with Interswitch"/>
+                        </li>
+                        <li>
                             <img src="<?= base_url('assets/img/payment/visa-straight-32px.png'); ?>"
-                                 alt="Image Alternative text" title="Pay with Visa"/>
+                                 alt="Pay with Visa" title="Pay with Visa"/>
                         </li>
                         <li>
                             <img src="<?= base_url('assets/img/payment/mastercard-straight-32px.png'); ?>"
-                                 alt="Image Alternative text" title="Pay with Mastercard"/>
+                                 alt="Pay with Mastercard" title="Pay with Mastercard"/>
                         </li>
                         <li>
                             <img src="<?= base_url('assets/img/payment/visa-electron-straight-32px.png'); ?>"
-                                 alt="Image Alternative text" title="Pay with Visa-electron"/>
+                                 alt="Pay with Visa Electron" title="Pay with Visa-electron"/>
                         </li>
                         <li>
                             <img src="<?= base_url('assets/img/payment/maestro-straight-32px.png'); ?>"
-                                 alt="Image Alternative text" title="Pay with Maestro"/>
+                                 alt="Pay with Maestro" title="Pay with Maestro"/>
                         </li>
                     </ul>
                 </div>

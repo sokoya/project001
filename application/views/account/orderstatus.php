@@ -32,7 +32,7 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <img data-src="<?= PRODUCTS_IMAGE_PATH . $order->image_name; ?>"
-                                                     src="<?= base_url('assets/landing/img/load.gif'); ?>"
+                                                     src="<?= base_url('assets/load.gif'); ?>"
                                                      class="lazy"
                                                      title="<?= $order->name; ?>"
                                                      style="width: 80px; height: 100%; padding-right: 4px;">
@@ -48,7 +48,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <h5 class="market-dashboard-welcome-text">Payment Method: </h5>
                                         <span class="market-dashboard-welcome-text-body"><?= $order->payment_method?></span><br/>
                                         <?php
@@ -69,12 +69,22 @@
                                         </a>
                                     </span>
                                     </div>
-                                    <div class="col-md-3">
-                                        <h5 class="market-dashboard-welcome-text">Shipping Address: </h5>
-                                        <span class="market-dashboard-welcome-text-body"><strong><?= ucwords($order->first_name . ' ' . $order->last_name) ?></strong>
-                                            <br/><?= $order->address; ?>
-                                            <br/><?= $order->phone; ?> <?php if (!empty($order->phone2)) echo ',' . $order->phone2; ?>
-                                    </span>
+                                    <div class="col-md-4">
+                                        <h5 class="market-dashboard-welcome-text">Delivery Type: </h5>
+                                        <h6><?= ucwords($shipping_type)?> Address</h6>
+                                        <div class="market-dashboard-welcome-text-body">
+                                            <?php if( $shipping_type == 'pickup') :  ?>
+                                                <strong><?= ucwords($shipping_address->title); ?></strong>
+                                                <br/><?= $shipping_address->address; ?>
+                                                <br/><?= $shipping_address->phones; ?>
+                                                <br /><?= $shipping_address->emails?>
+                                            <?php else : ?>
+                                                <strong><?= ucwords($shipping_address->first_name . ' '. $shipping_address->last_name); ?></strong>
+                                                <br/><?= $shipping_address->address; ?>
+                                                <br/><?= $shipping_address->phone .', '. $shipping_address->phone2 ; ?>
+                                                <br /><?= $shipping_address->state. ', '. $shipping_address->area; ?>
+                                            <?php endif; ?>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -84,7 +94,7 @@
                                         foreach ($status as $key => $value) :?>
                                             <p class="text-sm text-semibold">
                                                 <strong>- <?= $value->msg; ?></strong><br/>
-                                                <?= date('d/m/Y H:i:s', strtotime($value->datetime)) ?>
+                                                <span class="text-danger"><?= date('d/m/Y H:i:s', strtotime($value->datetime)) ?></span>
                                             </p>
                                         <?php endforeach; ?>
                                     </div>
@@ -109,6 +119,8 @@
     <?php $this->load->view('landing/resources/footer'); ?>
     <?php $this->load->view('landing/resources/script'); ?>
 <?php endif; ?>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 </div>
 <script>
     $(function () {
