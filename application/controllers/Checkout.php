@@ -14,7 +14,7 @@ class Checkout extends MY_Controller
 		if (empty( $items )) {
 			redirect(base_url());
 		}
-		$this->load->library('sitelib', 'site');
+		$this->load->library('sitelib');
 	}
 
     public function index(){
@@ -188,7 +188,6 @@ class Checkout extends MY_Controller
                 if(  $this->product->insert_batch( 'orders', $data ) ){
                     unset( $data);
                     // check the payment method, if Interswitch (2) compile the array session
-                    $txn_ref = 'TX|'.$order_code.'|'.time();
                     $token = simple_crypt( $txn_ref, 'e');
                     $amt = $total * 100 ;
                     if( (int)$payment_method == 2 ){
@@ -233,6 +232,9 @@ class Checkout extends MY_Controller
         $page_data['profile'] = $user = $this->user->get_profile( $uid );
         $orders = $this->user->get_my_lastorders($order, $uid);
         if( $uid && $order && $orders ){
+            foreach( $orders->result() as $key ){
+                $this->product->set_field('product_variation', 'quantity', "quantity-{$key->qty}", array('id' => $key->product_variation_id));
+            }
             $page_data['order_code'] = $order;
             $page_data['orders'] = $orders->result();
             $page_data['ordersingledetail'] = $detail = $this->user->get_last_singleorder($order, $uid);
@@ -246,20 +248,22 @@ class Checkout extends MY_Controller
                 if( SMS_FOR_ORDERS ) {
                     $short_url = get_bitly_short_url( $link , BITLY_USERNAME, BITLY_API);
                     $seller_message = "Hello {$detail->legal_company_name}, a new order has just been confirmed. Login to your portal for details.";
-                    $buyer_message = "Dear " .ucfirst($user->first_name) . ", your order {$order} has been confirmed! Visit {$short_url} and check your email for complete details. Thank you!";
+//                    {$short_url}
+                    $buyer_message = "Dear " .ucfirst($user->first_name) . ", your order {$order} has been confirmed! Visit your account and check your email for complete details. Thank you!";
                     $sms_array = array( $detail->seller_phone => $seller_message,$user->phone => $buyer_message);
                     $this->load->library('AfricaSMS', $sms_array);
                     $this->africasms->sendsms();
                 }
                 // Send Mail
                 $this->load->model('email_model','myemail');
-                $sellerdetails = $this->user->get_sellers_details($order);
+
                 // send mail to the buyer
                 $recipent['name'] = ucwords($page_data['profile']->first_name . ' ' . $page_data['profile']->last_name);
                 $recipent['email'] = $page_data['profile']->email;
                 try {
-                    $this->myemail->sendBuyerOrder($orders->result(), $detail, $order, $link, $recipent );
-                    $this->myemail->sendSellerOrder($sellerdetails);
+                    $this->myemail->orderCompleted($orders->result(),$order, $recipent );
+//                    $sellerdetails = $this->user->get_sellers_details($order);
+//                    $this->myemail->sendSellerOrder($sellerdetails);
                 } catch (Exception $e) {
                     $error_action = array(
                         'error_action' => 'Checkout controller - Sending mail to the buyer',
@@ -276,107 +280,13 @@ class Checkout extends MY_Controller
         }
     }
 
-    public function stripe(){
-        $page_data['page'] = 'stripe';
-        $page_data['title'] = "Stripe Payment Gateway";
-        $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
-        $this->load->view('landing/stripe/product_form', $page_data);
-    }
-
-    // Payment Check for Interswitch (Stripe)
-    public function check(){
-        //check whether stripe token is not empty
-        if(!empty($_POST['stripeToken'])){
-            //get token, card and user info from the form
-            $email = $this->session->userdata('email');
-            $order = $this->session->userdata('order_code');
-            $amount = $this->session->userdata('amount');
-//            die( $amount . ' - ' . $email . ' - ' . $order);
-            $token = $this->input->post('stripeToken', true);
-            //include Stripe PHP library
-            require_once APPPATH."third_party/stripe/init.php";
-            //set api key
-            $stripe = array(
-                "secret_key"      => "sk_test_j1NHfDoinTtxm25PyGNuV4xw",
-                "publishable_key" => "pk_test_nod5swtRu9mKvMZB28838BY8"
-            );
-
-            \Stripe\Stripe::setApiKey($stripe['secret_key']);
-            //add customer to stripe
-            $customer = \Stripe\Customer::create(array(
-                'email' => $email,
-                'source'  => $token
-            ));
-
-            //item information
-            $itemPrice = $amount * 100 ;
-            $currency = "ngn";
-
-            //charge a credit or a debit card
-            $charge = \Stripe\Charge::create(array(
-                'customer' => $customer->id,
-                'amount'   => $itemPrice,
-                'currency' => $currency,
-                'description' => "Payment for order -" . $order,
-                'metadata' => array(
-                    'order_code' => $order,
-                    'buyer_id'   => $this->session->userdata('logged_id')
-                )
-            ));
-            //retrieve charge details
-            $chargeJson = $charge->jsonSerialize();
-            //check whether the charge is successful
-            if($chargeJson['amount_refunded'] == 0 && empty($chargeJson['failure_code']) && $chargeJson['paid'] == 1 && $chargeJson['captured'] == 1){
-                //order details
-                $amount = $chargeJson['amount'];
-                $balance_transaction = $chargeJson['balance_transaction'];
-                $status = $chargeJson['status'];
-                $date = date("Y-m-d H:i:s");
-                $data = array(
-                    'paid_amount' => $amount/100,
-                    'transaction_id' => $balance_transaction,
-                    'payment_status' => $status,
-                    'payment_created' => $date,
-                    'payment_modified' => $date
-                );
-                // Update
-                if( $this->product->update_items( $order, $data )){
-                    $this->session->userdata('success_msg', "Order completed.");
-                    redirect('checkout/order_completed');
-                }else{
-                    $this->session->userdata('error_msg', "Transaction failed. Please try again.");
-                    redirect(base_url());
-                }
-            }else{
-                $this->session->userdata('error_msg', "Invalid Transaction Token.");
-                redirect('checkout/');
-            }
-        }else{
-            // Payment uncompleted
-            $order = $this->session->userdata('order_code');
-            $uid = $this->session->userdata('logged_id');
-            $profile = $this->user->get_profile($uid);
-            $buyer['name'] =  'Dear ' . ucwords( $profile->first_name . ' ' . $profile->last_name);
-            $buyer['email'] = $profile->email;
-            // Send mail ro the user
-            $this->load->model('email_model','myemail');
-            try {
-                $this->myemail->paymentUncompleted( $order, $uid , $buyer);
-                $this->session->set_flashdata('error_msg','Your payment could not be completed.');
-            } catch (Exception $e) {
-            }
-            redirect(base_url());
-        }
-    }
-
     // Interswitch webpay
     public function interswitch(){
 	    if( $this->session->userdata('inter') ){
-//            ini_set('session.cache_limiter','public');
-//            session_cache_limiter(false);
             $this->load->view('landing/interswitch/webpay');
         }else{
             $this->session->set_flashdata('error', 'Please update your cart...');
+            redirect('cart/');
         }
     }
 
@@ -394,7 +304,7 @@ class Checkout extends MY_Controller
             $amount = $this->session->userdata('amount');
             $order_code = $this->session->userdata('order_code');
             $curl_info_data  = array( 'txn_ref'   => $txn_ref, 'amount'    => $amount, 'order_code' =>  $order_code );
-            $response = $this->site->interswitch_curl( $curl_info_data ); // return a JSON
+            $response = $this->sitelib->interswitch_curl( $curl_info_data ); // return a JSON
             switch ($response['ResponseCode']) {
                 case '00':
                     // Confirm. Payment made successfully. :)
@@ -402,7 +312,7 @@ class Checkout extends MY_Controller
                     break;
                 case 'Z0':
                     // Transaction not completed status - Requery
-                    $response = $this->site->interswitch_curl( $curl_info_data );
+                    $response = $this->sitelib->interswitch_curl( $curl_info_data );
                     if( $response['ResponseCode'] == '00' ){
                         // We can't requery again... I am weak. Notify unsuccessful payment
                         $this->update_payment_status( $response, false );
@@ -417,7 +327,7 @@ class Checkout extends MY_Controller
                     break;
             }
         }else{
-	        $this->session->set_flashdata('error_msg', 'Either txn_ref || $txn_ref != $is_token');
+	        $this->session->set_flashdata('error_msg', 'There was an error valdating your transansaction.');
 	        redirect( base_url() );
         }
     }
@@ -436,14 +346,24 @@ class Checkout extends MY_Controller
             // Success
             $PaymentReference = (isset($response['PaymentReference'])) ? $response['PaymentReference'] : null;
             $RetrievalReferenceNumber = (isset($response['RetrievalReferenceNumber'])) ? $response['RetrievalReferenceNumber'] : null;
+            $row = $this->product->get_row('orders', 'status', array('order_code' => $order_code));
+            $json_array = json_decode($row->status, true);
+            $array = array("cancelled" => array('msg' => "Order payment was successful: {$response['ResponseDescription']}", 'datetime' => get_now()));
+            $status_array = array_merge($json_array, $array);
+            $status_array = json_encode($status_array);
             $update_data = array(
-                'active_stats' => 'certified',
+                'active_status' => 'certified',
+                'payment_made' => 'success',
+                'status'  => $status_array,
                 'paymentDesc'   => $response['ResponseDescription'],
                 'payRef'        => $PaymentReference,
                 'retRef'        => $RetrievalReferenceNumber,
                 'apprAmt'       => $response['Amount']/100,
                 'responseCode'  => $response['ResponseCode']
             );
+
+            // Insert the record to payment table
+
             // show order complete page
             try {
                 $this->product->update_items($order_code, $update_data);
@@ -454,7 +374,17 @@ class Checkout extends MY_Controller
         }else{
             $PaymentReference = (isset($response['PaymentReference'])) ? $response['PaymentReference'] : null;
             $RetrievalReferenceNumber = (isset($response['RetrievalReferenceNumber'])) ? $response['RetrievalReferenceNumber'] : null;
+
+            $row = $this->product->get_row('orders', 'status', array('order_code' => $order_code));
+            $json_array = json_decode($row->status, true);
+            $array = array("cancelled" => array('msg' => "Order was marked as cancelled : {$response['ResponseDescription']}", 'datetime' => get_now()));
+            $status_array = array_merge($json_array, $array);
+            $status_array = json_encode($status_array);
+
             $update_data = array(
+                'active_status' => 'cancelled',
+                'status'  => $status_array,
+                'payment_made' => 'fail',
                 'paymentDesc'   => $response['ResponseDescription'],
                 'payRef'        => $PaymentReference,
                 'retRef'        => $RetrievalReferenceNumber,
@@ -463,13 +393,13 @@ class Checkout extends MY_Controller
             );
             try {
                 $this->product->update_items($order_code, $update_data);
-                $buyer['name'] = 'Dear '. $profile->first_name . ' '. $profile->last_name;
+                $buyer['name'] = $profile->first_name . ' '. $profile->last_name;
                 $buyer['email'] = $profile->email;
 //                @TODO
-//                $this->myemail->paymentUncompleted( $order_code, $uid , $buyer);
+                $this->myemail->paymentUncompleted( $order_code, $buyer);
                 // Lets also send a message
                 if( SMS_FOR_ORDERS) {
-                    $buyer_message = "Dear " .ucfirst($profile->first_name) . ", your order {$order_code} payment was not successful. check your email for complete details. Thank you!";
+                    $buyer_message = "Dear " .ucfirst($profile->first_name) . ", your order {$order_code} payment was not successful: {$response['ResponseDescription']}. check your email for complete details. Thank you!";
                     $sms_array = array( $profile->phone => $buyer_message );
                     $this->load->library('AfricaSMS', $sms_array);
                     $this->africasms->sendsms();
@@ -477,7 +407,8 @@ class Checkout extends MY_Controller
             } catch (Exception $e) {
 
             }
-            $this->session->set_flashdata('error_msg', "We couldn't validate the payment, please try again or use another payment method. If error persist please contact us.");
+            $txn_ref = $this->session->userdata('txn_ref');
+            $this->session->set_flashdata('error_msg', "We couldn't validate the payment, please try again. Reason: {$response['ResponseDescription']}, Transaction Reference: {$txn_ref}. If error persist please contact us.");
             $this->session->unset_userdata(array('inter', 'order_code', 'txn_ref', 'amount'));
             redirect(base_url());
         }

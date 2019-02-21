@@ -217,7 +217,7 @@ Class User_model extends CI_Model
      */
     function get_my_order_status($id, $order_code)
     {
-        $query = $this->db->query("SELECT p.id as pid, p.name, g.image_name, o.order_date, pay.name payment_method, o.status, o.active_status, o.qty,o.amount, o.billing_address_id, o.pickup_location_id
+        $query = $this->db->query("SELECT p.id as pid, p.name, g.image_name, o.order_date, pay.name payment_method,o.responseCode, o.status, o.active_status, o.qty,o.amount, o.billing_address_id, o.pickup_location_id
         FROM orders o
         JOIN (SELECT prod.id AS id, prod.product_name AS name FROM products AS prod) AS p ON (p.id = o.product_id)
         JOIN product_gallery AS g ON (o.product_id = g.product_id AND g.featured_image = 1 )
@@ -433,12 +433,20 @@ Class User_model extends CI_Model
     /*
      * Get most recent order for invoice
      * */
+    /*
+   * Get most recent order for invoice
+   * */
     function get_my_lastorders($order, $buyer_id)
     {
-        $query = "SELECT  p.id, p.product_name, o.seller_id, u.email selleremail, o.amount, o.pickup_location_id, o.billing_address_id, o.order_date, o.delivery_charge, o.qty, v.variation FROM orders o
-JOIN product_variation v ON (o.product_variation_id = v.id)
-JOIN users u ON (u.id = o.seller_id)
-JOIN products p ON (o.product_id = p.id) WHERE o.order_code = {$order} AND o.buyer_id = {$buyer_id}";
+        $query = "SELECT p.id, p.product_name, o.seller_id, o.product_id, u.email selleremail, o.amount, o.pickup_location_id, o.billing_address_id, o.order_date, 
+        o.delivery_charge, o.qty,o.product_variation_id, o.txnref, o.payRef, o.paymentDesc,
+        v.variation, g.image_name, pay.name payment_method FROM orders o
+        JOIN product_variation v ON (o.product_variation_id = v.id)
+        JOIN products p ON (o.product_id = p.id) 
+        JOIN product_gallery g ON (g.product_id = p.id AND g.featured_image = 1)
+        JOIN users u ON (u.id = o.seller_id)
+        JOIN payment_methods pay ON ( pay.id = o.payment_method)
+        WHERE o.order_code = {$order} AND o.buyer_id = {$buyer_id}";
         return $this->db->query($query);
     }
 

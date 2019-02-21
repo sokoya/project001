@@ -55,7 +55,7 @@
                                         $date1 = date_create($order->order_date);
                                         $date2 = date_create(get_now());
                                         $diff = date_diff($date1, $date2);
-                                        if ($diff->format("%a") <= 7):
+                                        if ($diff->format("%a") <= 7 && ($order->payment_method == 2 && $order->responseCode == '00') ) :
                                             ?>
                                             <span class="text-danger" style="font-size: small"><a
                                                         style="color: #0b6427;" class="btn-link"

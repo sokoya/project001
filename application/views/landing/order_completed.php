@@ -261,11 +261,14 @@
                             <?php $x = 1; $subtotal = $shipping = 0; foreach( $orders as $order ) : ?>
                                 <tr>
                                     <td class="no">0<?= $x; ?></td>
-                                    <td class="text-left"><h3><?= ucwords($order->product_name);?></h3></td>
+                                    <td class="text-left">
+                                        <img src="<?= PRODUCTS_IMAGE_PATH,$order->image_name; ?>" alt="Item Image" width="40" height="40">
+                                        <h3><?= ucwords($order->product_name);?></h3>
+                                    </td>
                                     <td class="var"><?= $order->variation; ?></td>
                                     <td class="qty"><?= $order->qty; ?></td>
-                                    <td class="unit"><?= ngn($order->amount * $order->qty); ?></td>
-                                    <td class="total"><?= ngn($order->amount); ?></td>
+                                    <td class="unit"><?= ngn($order->amount); ?></td>
+                                    <td class="total"><?= ngn($order->amount  * $order->qty); ?></td>
                                     <?php
                                         $subtotal += $order->amount * $order->qty;
                                         $shipping = $order->delivery_charge;

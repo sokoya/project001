@@ -14,6 +14,12 @@
                                 <li><a href="#">Jobs at <?= lang('app_name'); ?></a></li>
                             </ul>
                         </section>
+                        <div style="font-size: 12px;">
+                            <p>
+                                <h4 class="text text-sm foot-link">Office Address: </h4>
+                                <?= lang('office_address'); ?><br /><?= lang('contact_no'); ?>
+                            </p>
+                        </div>
                     </div>
                     <div class="col-md-3">
                         <section class="widget widget-links widget-light-skin">
@@ -92,7 +98,7 @@
                     </ul>
                     <ul class="payment-icons-list">
                         <li>
-                            <img src="<?= base_url('assets/img/payment/interswitch.png'); ?>"
+                            <img width="100" src="<?= base_url('assets/img/payment/interswitch_logo.png') ?>"
                                  alt="Interswitch Payment" title="Pay with Interswitch"/>
                         </li>
                         <li>
@@ -113,6 +119,7 @@
                         </li>
                     </ul>
                 </div>
+
             </div>
         </div>
     </div>
