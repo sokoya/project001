@@ -148,7 +148,7 @@ Class Product_model extends CI_Model{
             $new_array = array();
             foreach( $it as $v ){ array_push( $new_array, $v); }
             array_push( $new_array, $id ); // Lets push its own ID also
-            return $new_array;            
+            return $new_array;
         }else{
             return $GLOBALS['array_var'];
         }
@@ -163,7 +163,7 @@ Class Product_model extends CI_Model{
         $count = count( $total_categories );
 
         $data =  array();
-        for ($i=0; $i < $count; $i++) { 
+        for ($i=0; $i < $count; $i++) {
             if( $total_categories[$i]['pid'] == $category_id ){
                 array_push( $data , $total_categories[$i]['id'] );
             }
@@ -206,7 +206,7 @@ Class Product_model extends CI_Model{
         $count = count( $total_categories );
 
         $data = array();
-        for ($i=0; $i < $count; $i++) { 
+        for ($i=0; $i < $count; $i++) {
             if( $total_categories[$i]['id'] == $category_pid ){
                 array_push( $data , $total_categories[$i]['pid'] );
             }
@@ -301,7 +301,7 @@ Class Product_model extends CI_Model{
                     if( count($brands) > 1 ){
                         $select_query .= " AND p.brand_name IN ('".implode("','",$brands)."') ";
                     }else{
-                        $select_query .= " AND p.brand_name = '{$brand_name}' "; 
+                        $select_query .= " AND p.brand_name = '{$brand_name}' ";
                     }
                     unset($gets['brand_name']);
                 }
@@ -312,7 +312,7 @@ Class Product_model extends CI_Model{
                     if( count( $colours ) ){
                         $select_query .= " AND p.main_colour IN ('".implode("','",$colours)."') ";
                     }else{
-                        $select_query .= " AND p.main_colour = '{$main_colour}' "; 
+                        $select_query .= " AND p.main_colour = '{$main_colour}' ";
                     }
                     unset($gets['main_colour']);
                 }
@@ -350,7 +350,7 @@ Class Product_model extends CI_Model{
                                     $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' OR";
                                 }
                             }
-                           // $select_query .= " ) ";
+                            // $select_query .= " ) ";
                         }else{
                             $value = xss_clean($value);
                             $value = preg_replace("/[^A-Za-z.0-9-]/", ' ', $value);
@@ -466,7 +466,7 @@ Class Product_model extends CI_Model{
     // Generic single product detail
     function get_cart_details( $id ){
         $select = "SELECT p.product_status, p.seller_id, u.first_name name, s.legal_company_name, u.is_seller, i.image_name image FROM products p
-                LEFT JOIN sellers s ON (s.id = p.seller_id)
+                LEFT JOIN sellers s ON (s.uid = p.seller_id)
                 LEFT JOIN users u ON (u.id = p.seller_id)
                 LEFT JOIN product_gallery i ON (i.product_id = p.id )
                 WHERE p.id = $id";
@@ -474,11 +474,18 @@ Class Product_model extends CI_Model{
     }
 
     /**
-     * Generic function 
+     * Generic function
      * @param $table
      * @return string
      */
     function generate_code($table = 'orders', $field = 'order_code'){
+        do {
+            $number = random_string('nozero', 9);
+            $this->db->where( $field, $number);
+            $this->db->from($table);
+            $count = $this->db->count_all_results();
+        } while ($count >= 1);
+        return $number;
     }
 
     // increase view or dynamically set a value
@@ -504,7 +511,7 @@ Class Product_model extends CI_Model{
             return $this->db->get($table_name)->row()->id;
         }else{
             return false;
-        }        
+        }
     }
 
     // Select on rating || review
@@ -589,7 +596,7 @@ Class Product_model extends CI_Model{
             if( count($brands) > 1 ){
                 $select_query .= " AND p.brand_name IN ('".implode("','",$brands)."') ";
             }else{
-                $select_query .= " AND p.brand_name = '{$brand_name}' "; 
+                $select_query .= " AND p.brand_name = '{$brand_name}' ";
             }
             unset($gets['brand_name']);
         }
@@ -600,7 +607,7 @@ Class Product_model extends CI_Model{
             if( count( $colours ) ){
                 $select_query .= " AND p.main_colour IN ('".implode("','",$colours)."') ";
             }else{
-                $select_query .= " AND p.main_colour = '{$main_colour}' "; 
+                $select_query .= " AND p.main_colour = '{$main_colour}' ";
             }
             unset($gets['main_colour']);
         }
@@ -624,7 +631,7 @@ Class Product_model extends CI_Model{
                             $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' OR";
                         }
                     }
-                   // $select_query .= " ) ";
+                    // $select_query .= " ) ";
                 }else{
                     $value = xss_clean($value);
                     $value = preg_replace("/[^A-Za-z.0-9-]/", ' ', $value);
@@ -695,13 +702,13 @@ Class Product_model extends CI_Model{
     function create_edit( $pid, $uid, $data = array(), $table_name){
         switch ($table_name){
             case 'product_review':
-                    $row = $this->get_row( $table_name, 'id', array('product_id' => $pid, 'user_id' => $uid) );
-                    if(!$row){
-                        $this->insert_data($table_name, $data);
-                    }else{
-                        $this->update_data($row->id, $data, $table_name);
-                    }
-                    return true;
+                $row = $this->get_row( $table_name, 'id', array('product_id' => $pid, 'user_id' => $uid) );
+                if(!$row){
+                    $this->insert_data($table_name, $data);
+                }else{
+                    $this->update_data($row->id, $data, $table_name);
+                }
+                return true;
                 break;
             case 'product_rating':
                 $row = $this->get_row( $table_name, 'id', array('product_id' => $pid, 'user_id' => $uid) );
