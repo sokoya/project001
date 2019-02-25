@@ -545,6 +545,7 @@ class Email_model extends CI_Model {
 
 
     function do_email($msg=NULL, $sub=NULL, $to=NULL, $from=NULL){
+
         $config = array();
         $config['useragent']	= "CodeIgniter";
 //        $config['mailpath']		= "/usr/bin/sendmail"; // or "/usr/sbin/sendmail"
@@ -556,6 +557,7 @@ class Email_model extends CI_Model {
         $config['newline']		= "\r\n";
         $config['wordwrap']		= TRUE;
         $this->load->library('email');
+//        $this->email->clear();
         $this->email->initialize($config);
         $system_name	=	lang('app_name');
         if($from == NULL)

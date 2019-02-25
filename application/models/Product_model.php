@@ -479,13 +479,6 @@ Class Product_model extends CI_Model{
      * @return string
      */
     function generate_code($table = 'orders', $field = 'order_code'){
-        do {
-            $number = random_string('nozero', 9);
-            $this->db->where( $field, $number);
-            $this->db->from($table);
-            $count = $this->db->count_all_results();
-        } while ($count >= 1);
-            return $number;
     }
 
     // increase view or dynamically set a value
