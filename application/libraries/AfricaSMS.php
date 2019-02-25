@@ -34,6 +34,7 @@ class AfricaSMS {
         }
     }
 
+    // Sanitize the phone number
     function remove( $recipent ){
         $recipent = preg_replace('/^0/','+234',$recipent);
         return $recipent;

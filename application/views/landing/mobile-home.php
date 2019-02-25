@@ -47,6 +47,11 @@
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
     <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
+    <?php if ($this->session->flashdata('error_msg') && $page == 'homepage') : ?>
+        <div class="container text-center">
+            <?php $this->load->view('msg_view'); ?>
+        </div>
+    <?php endif; ?>
     <div class="main-slider text-center slider_show" style="height:150px;visibility: hidden;">
         <?php foreach ($sliders as $slider) : ?>
             <a href="<?= $slider->img_link; ?>">

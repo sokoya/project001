@@ -46,8 +46,8 @@
                                 <tr>
                                     <th class="text-center">Order Code</th>
                                     <th class="text-center">Date Initiated.</th>
-                                    <th class="text-center">Amount</th>
                                     <th class="text-center">Quantity</th>
+                                    <th class="text-center">Amount</th>
                                     <th class="text-center">Status</th>
                                 </tr>
                                 </thead>

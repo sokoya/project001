@@ -119,9 +119,18 @@ defined('BITLY_API') OR define('BITLY_API', '172c6fb6841362cd510ac05bc704cf54582
 // SMS
 defined('SMS_USERNAME') OR define('SMS_USERNAME', 'ArtisansUsers');
 defined('SMS_API') OR define('SMS_API', '2825a7e7a5988803c97852627500f5fc658964550c8cfe5616305acb352f127a');
-defined('SMS_FOR_ORDERS') OR define('SMS_FOR_ORDERS', FALSE);
+defined('SMS_FOR_ORDERS') OR define('SMS_FOR_ORDERS', false);
 
 //Elastic Email
 defined('ELASTIC_EMAIL_API') OR define('ELASTIC_EMAIL_API', '5fe25354-f5e7-4bee-8001-ab0080b72c4c');
+
+
+defined('INTERSWITCH_MAC_KEY') OR define('INTERSWITCH_MAC_KEY', 'D3D1D05AFE42AD50818167EAC73C109168A0F108F32645C8B59E897FA930DA44F9230910DAC9E20641823799A107A02068F7BC0F4CC41D2952E249552255710F');
+defined('INTERSWITCH_PRODUCT_ID') OR define('INTERSWITCH_PRODUCT_ID', '1076');
+defined('INTERSWITCH_PAY_ITEM_ID') OR define('INTERSWITCH_PAY_ITEM_ID', '101');
+defined('INTERSWITCH_RESPONSE_URL') OR define('INTERSWITCH_RESPONSE_URL', 'https://sandbox.interswitchng.com/collections/api/v1/gettransaction.json'); // Live : https://webpay.interswitchng.com/collections/api/v1/gettransaction.json
+//defined('INTERSWITCH_REQUERY_URL') OR define('INTERSWITCH_REQUERY_URL', 'https://sandbox.interswitchng.com/collections/api/v1/gettransaction.json');  //"https://webpay.interswitchng.com/collections/api/v1/gettransaction.json?$ponmo"; // LIVE
+defined('INTERSWITCH_HOST_URL') OR define('INTERSWITCH_HOST_URL', 'sandbox.interswitchng.com'); // webpay.interswitchng.com
+defined('INTERSWITCH_ACTION_URL') OR define('INTERSWITCH_ACTION_URL', 'https://sandbox.interswitchng.com/collections/w/pay'); // Live : https://webpay.interswitchng.com/collections/w/pay
 
 

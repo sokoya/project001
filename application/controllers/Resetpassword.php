@@ -34,14 +34,13 @@ class Resetpassword extends MY_Controller {
                             'recipent' => 'Hello '
                         );
                         try {
-                            $this->email->reset_password( $email_array);
+                            $u = $this->email->reset_password( $email_array);
                             $this->session->set_flashdata('success_msg', "Reset mail has been sent to <strong>" . $email . "</strong> please click on the link in your email to reset your password.");
                         } catch (Exception $e) {
                             $error_action = array(
                                 'error_action' => 'Create controller - Welcome mail',
-                                'error_message' => $e->getMessage()
+                                'error_message' => 'There was an error sending an email - ' .$e
                             );
-                            $this->email->insert_data('error_logs', $error_action);
                         }
                         redirect('login');
                         unset($email_array); unset($error_action);

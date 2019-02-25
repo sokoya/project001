@@ -135,7 +135,7 @@
                         <img src="<?= base_url('assets/img/payment/ssl-logo.png'); ?>" class="img-responsive" style="margin-left:auto;"
                              alt="Image Alternative text" title="Pay with Mastercard"/>
                         <img src="<?= base_url('assets/img/payment/interswitch.png'); ?>" class="img-responsive"
-                             alt="Image Alternative text" title="Pay with Mastercard"/>
+                             alt="Image Alternative text" title="Pay with Interswitch"/>
                         <img src="<?= base_url('assets/img/payment/allcards.jpg'); ?>" class="img-responsive" style="margin-right:auto;"
                              alt="Image Alternative text" title="Pay with Mastercard"/>
                     </div>
