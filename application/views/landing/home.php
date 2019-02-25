@@ -5,12 +5,10 @@
     .pro_ad {
         min-height: auto !important;
     }
-
     .card-max {
         margin-top: 30px;
         margin-bottom: 30px;
     }
-
     .home_slider img {
         margin: auto;
         width: 100%;
