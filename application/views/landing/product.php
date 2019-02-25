@@ -49,6 +49,15 @@
     .product {
         min-height: unset !important;
     }
+    a{
+        color: #0b6427;
+    }
+    a:hover{
+        color: #0b6427;
+    }
+    a:visited{
+        color: #0b6427;
+    }
 </style>
 </head>
 <body>
@@ -166,7 +175,7 @@
                                         </p>
                                         <p class="text-sm pr-id">
                                             <strong>Product ID :</strong> <?= $product->sku; ?>
-                                            <a href="#">Have an item like this to sell? Create One.</a>
+                                            <a href="#" id="to_sell">Have an item like this to sell? Create One.</a>
                                         </p>
                                         <p class="text-sm text-uppercase">
                                             <strong>Seller : </strong><a href="#" id="pr-seller">
@@ -254,8 +263,8 @@
                                                                        data-vid="<?= $variation['id'] ?>"
                                                                        data-quantity='<?= $variation['quantity'] ?>'
                                                                        data-vname="<?= $variation['variation'] ?>"
-                                                                       class="variation-option <?php if ($variation['quantity'] == 0) echo 'option-disabled'; ?>">
-                                                                        <?= trim($variation['variation']); ?>
+                                                                       class="variation-option <?php if( count($variations) == 1 ) echo 'option-selected'; ?> <?php if($variation['quantity'] == 0) echo 'option-disabled'; ?>">
+                                                                        <b><?= trim($variation['variation']); ?></b>
                                                                     </p>
                                                                 </div>
                                                                 <?php if ($variation['quantity'] < 1) $qty_stock_check++; ?>
@@ -595,7 +604,7 @@
                                         </ul>
                                     </div>
                                     <p class="comment-user"><strong>Reviewed
-                                            by: </strong> <?= $review['display_name']; ?> <b> on :</b> <span class="comment-date"><?= neatDate($review['published_date']); ?></span> </p>
+                                            by : </strong> <?= $review['display_name']; ?> <b> on :</b> <span class="comment-date"><?= neatDate($review['published_date']); ?></span> </p>
                                     <p class="comment-title"><strong>Title: </strong><?= $review['title']; ?></p>
                                     <p class="comment-detail"><strong>Content: </strong><?= $review['content']; ?></p>
                                     <hr class="comment-line"/>
@@ -640,11 +649,13 @@
                                             <div class="product-page-qa-question">
                                                 <p class="product-page-qa-text">
                                                     <?= $question->question ?>
+                                                    <?php if( $this->session->userdata('logged_in')) : ?>
                                                     <a class="product-review-rate pull-right upvote"
                                                        data-qid="<?= $question->id; ?>" href="javascript:void(0)"
                                                        title="Find this question helpful?"><i
-                                                                class="fa fa-thumbs-up"></i><?= $question->upvotes; ?>
+                                                                class="fa fa-thumbs-up"></i><?= ($question->upvotes != 0 ) ? $question->upvotes : ''; ?>
                                                     </a>
+                                                    <?php endif; ?>
                                                 </p>
                                                 <p class="product-page-qa-meta">asked by <?= $question->display_name ?>
                                                     on <?= neatDate($question->qtimestamp) . ' ' . neatTime($question->qtimestamp); ?></p>
@@ -836,9 +847,9 @@
         </div>
     </div>
     <script type="text/javascript">
-        let product_id = "<?= $product->id;?>";
-        let data = "<?= ($this->session->userdata('logged_in')) ? $profile->email : ""; ?>";
-        let user = "<?= ($this->session->userdata('logged_in')) ? $profile->id : ''; ?>"
+        product_id = <?= $product->id;?>;
+        data = "<?= ($this->session->userdata('logged_in')) ? $profile->email : ""; ?>";
+        user = "<?= !is_null($profile->id) ? $profile->id : ''; ?>"
     </script>
     <?php $this->load->view('landing/resources/footer'); ?>
 </div>

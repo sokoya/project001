@@ -63,6 +63,12 @@ $route['404_override'] = 'errors/_404';
 $route['translate_uri_dashes'] = FALSE;
 $route['sitemap\.xml'] = "Seo/index";
 $route['robots\.txt'] = "Seo/robots";
-//$route['seller/message/detail'] = "seller/message/detail";
 
-// $route['seller/product/load_images/(:any)'] = "seller/edit/$1/";
+//Order code
+$route['t/(:any)'] = 't/code/$1';
+
+//Payment & Checkout
+$route['interswitch/webpay/'] = 'checkout/interswitch';
+$route['interswitch/response'] = 'checkout/response/';
+$route['order_completed'] = 'checkout/order_completed/';
+

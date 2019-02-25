@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+ini_set("date.timezone", "UTC");
 date_default_timezone_set('Africa/Lagos');
 /*
 |--------------------------------------------------------------------------

@@ -32,7 +32,7 @@ class Ajax extends CI_Controller
         }
     }
 
-    // Called from Account Table
+    // Called from Account Tabledata
     function fetch_single_address()
     {
         if (!$this->input->get('address_id') || !$this->input->is_ajax_request()) redirect(base_url());

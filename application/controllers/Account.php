@@ -60,13 +60,28 @@ class Account extends MY_Controller {
 	}
 
 	public function orderstatus(){
-	    $order_code =  cleanit( $this->uri->segment(3));
-	    if( empty( $order_code) ) redirect($_SERVER['HTTP_REFERER']);
+        $order_code = $this->input->get('order_code', true);
+        if( empty( $order_code) ) {
+            $order_code = cleanit( $this->uri->segment(3));
+        }
+	    if( empty( $order_code) ) {
+	        $this->session->set_flashdata('error_msg',"Please enter your valid order refrence number");
+	        redirect($_SERVER['HTTP_REFERER']);
+        }
         $page_data['page'] = 'orders';
         $page_data['title'] = "My Orders";
         $page_data['order_code'] = $order_code;
         $page_data['orders'] = $this->user->get_my_order_status( $this->session->userdata('logged_id'), $order_code );
-//        var_dump($page_data['orders']);
+        if( $page_data['orders'] ){
+            $orders = $page_data['orders'];
+            if( $orders[0]->billing_address_id == 0){
+                $page_data['shipping_type'] = 'pickup';
+                $page_data['shipping_address'] = $this->user->get_shipping_type( $orders[0]->pickup_location_id, 'pickup');
+            }else{
+                $page_data['shipping_type'] = 'delivery';
+                $page_data['shipping_address'] = $this->user->get_shipping_type( $orders[0]->billing_address_id, 'delivery');
+            }
+        }
         $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
         $this->load->view('account/orderstatus', $page_data);
     }

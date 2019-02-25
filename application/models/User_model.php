@@ -217,14 +217,12 @@ Class User_model extends CI_Model
      */
     function get_my_order_status($id, $order_code)
     {
-        $query = $this->db->query("SELECT p.id as pid, p.name, g.image_name, o.order_date, pay.name payment_method, o.status, o.active_status, b.address,o.qty,o.amount, 
-        b.first_name, b.last_name, b.phone,b.phone2
+        $query = $this->db->query("SELECT p.id as pid, p.name, g.image_name, o.order_date, pay.name payment_method,o.responseCode, o.status, o.active_status, o.qty,o.amount, o.billing_address_id, o.pickup_location_id
         FROM orders o
         JOIN (SELECT prod.id AS id, prod.product_name AS name FROM products AS prod) AS p ON (p.id = o.product_id)
         JOIN product_gallery AS g ON (o.product_id = g.product_id AND g.featured_image = 1 )
-        LEFT JOIN billing_address b ON (b.id = o.billing_address_id)
         LEFT JOIN payment_methods pay ON (pay.id = o.payment_method)
-        WHERE o.buyer_id = ? AND o.order_code = ? ORDER BY o.id DESC", array($id, $order_code))->result();
+        WHERE o.buyer_id = ? AND o.order_code = ? GROUP BY o.product_id ORDER BY o.id DESC", array($id, $order_code))->result();
         return $query;
     }
 
@@ -251,9 +249,9 @@ Class User_model extends CI_Model
         }
         $limit = $array['is_limit'];
         if ($limit == true) {
-            $query .= " GROUP BY order_code LIMIT " . $array['offset'] . "," . $array['limit'];
+            $query .= " GROUP BY order_code ORDER BY id DESC LIMIT " . $array['offset'] . "," . $array['limit'];
         } else {
-            $query .= ' GROUP BY order_code';
+            $query .= ' GROUP BY order_code ORDER BY id DESC';
         }
         return $this->db->query($query, array($id))->result();
     }
@@ -326,8 +324,7 @@ Class User_model extends CI_Model
         return $this->db->get('billing_address')->result_array();
     }
 
-    function get_pickup_address()
-    {
+    function get_pickup_address(){
         $this->db->where('enable', 1);
         return $this->db->get('pickup_address')->result();
     }
@@ -436,21 +433,29 @@ Class User_model extends CI_Model
     /*
      * Get most recent order for invoice
      * */
+    /*
+   * Get most recent order for invoice
+   * */
     function get_my_lastorders($order, $buyer_id)
     {
-        $query = "SELECT  p.id, p.product_name, o.seller_id, u.email selleremail, o.amount, o.order_date, o.delivery_charge, o.qty, v.variation FROM orders o
-JOIN product_variation v ON (o.product_variation_id = v.id)
-JOIN users u ON (u.id = o.seller_id)
-JOIN products p ON (o.product_id = p.id) WHERE o.order_code = {$order} AND o.buyer_id = {$buyer_id}";
+        $query = "SELECT p.id, p.product_name, o.seller_id, o.product_id, u.email selleremail, o.amount, o.pickup_location_id, o.billing_address_id, o.order_date, 
+        o.delivery_charge, o.qty,o.product_variation_id, o.txnref, o.payRef, o.paymentDesc,
+        v.variation, g.image_name, pay.name payment_method FROM orders o
+        JOIN product_variation v ON (o.product_variation_id = v.id)
+        JOIN products p ON (o.product_id = p.id) 
+        JOIN product_gallery g ON (g.product_id = p.id AND g.featured_image = 1)
+        JOIN users u ON (u.id = o.seller_id)
+        JOIN payment_methods pay ON ( pay.id = o.payment_method)
+        WHERE o.order_code = {$order} AND o.buyer_id = {$buyer_id}";
         return $this->db->query($query);
     }
 
-
     /*
-     * Get just one single row of the last order to send SMS and mail*/
+     * Get just one single row of the last order to send SMS and mail
+     * */
     function get_last_singleorder($order, $buyer_id)
     {
-        $query = "SELECT o.amount,o.pickup_location_id, o.billing_address_id, p.name paymentname, o.order_date, o.payment_method,
+        $query = "SELECT o.amount,o.payRef, o.txnref, o.pickup_location_id, o.billing_address_id, p.name paymentname, o.order_date, o.payment_method,
         se.seller_phone, se.legal_company_name
         FROM orders o 
         LEFT JOIN payment_methods p ON (o.payment_method = p.id)
@@ -511,6 +516,19 @@ JOIN products p ON (o.product_id = p.id) WHERE o.order_code = {$order} AND o.buy
             $mtime = filemtime($file);
             return base_url() . $file . '?' . $mtime;
         endif;
+    }
+
+    function get_shipping_type( $id , $type = 'delivery'){
+        if( $type  == 'delivery'){
+            $select = "SELECT b.first_name, b.last_name, b.phone, b.phone2, b.address, s.name state, a.name area FROM billing_address b
+            LEFT JOIN states s ON (s.id = b.sid)
+            LEFT JOIN area a ON (a.id = b.aid) WHERE b.id = {$id}";
+            return $this->db->query( $select )->row();
+        }else{
+            // Pickup Location
+            $select = "SELECT title, phones, emails, address FROM pickup_address WHERE id = {$id}";
+            return $this->db->query( $select )->row();
+        }
     }
 
 }

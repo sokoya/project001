@@ -14,6 +14,12 @@
                                 <li><a href="#">Jobs at <?= lang('app_name'); ?></a></li>
                             </ul>
                         </section>
+                        <div style="font-size: 12px;">
+                            <p>
+                                <h4 class="text text-sm foot-link">Office Address: </h4>
+                                <?= lang('office_address'); ?><br /><?= lang('contact_no'); ?>
+                            </p>
+                        </div>
                     </div>
                     <div class="col-md-3">
                         <section class="widget widget-links widget-light-skin">
@@ -92,23 +98,28 @@
                     </ul>
                     <ul class="payment-icons-list">
                         <li>
+                            <img width="100" src="<?= base_url('assets/img/payment/interswitch_logo.png') ?>"
+                                 alt="Interswitch Payment" title="Pay with Interswitch"/>
+                        </li>
+                        <li>
                             <img src="<?= base_url('assets/img/payment/visa-straight-32px.png'); ?>"
-                                 alt="Image Alternative text" title="Pay with Visa"/>
+                                 alt="Pay with Visa" title="Pay with Visa"/>
                         </li>
                         <li>
                             <img src="<?= base_url('assets/img/payment/mastercard-straight-32px.png'); ?>"
-                                 alt="Image Alternative text" title="Pay with Mastercard"/>
+                                 alt="Pay with Mastercard" title="Pay with Mastercard"/>
                         </li>
                         <li>
                             <img src="<?= base_url('assets/img/payment/visa-electron-straight-32px.png'); ?>"
-                                 alt="Image Alternative text" title="Pay with Visa-electron"/>
+                                 alt="Pay with Visa Electron" title="Pay with Visa-electron"/>
                         </li>
                         <li>
                             <img src="<?= base_url('assets/img/payment/maestro-straight-32px.png'); ?>"
-                                 alt="Image Alternative text" title="Pay with Maestro"/>
+                                 alt="Pay with Maestro" title="Pay with Maestro"/>
                         </li>
                     </ul>
                 </div>
+
             </div>
         </div>
     </div>

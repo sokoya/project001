@@ -11,7 +11,6 @@
 <script src="<?= $this->user->auto_version('assets/js/custom.js'); ?>"></script>
 <script src="<?= $this->user->auto_version('assets/js/search.js'); ?>"></script>
 <?php endif?>
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <!-- Start of HubSpot Embed Code -->
 <!--<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/5357566.js"></script>-->
 <!-- End of HubSpot Embed Code -->
