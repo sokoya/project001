@@ -24,11 +24,8 @@ date_default_timezone_set('Africa/Lagos');
 | a PHP script and you can easily do that on your own.
 |
 */
-if( ENVIRONMENT == 'production') {
-    $config['base_url'] = "https://www.onitshamarket.com";
-}else{
-    $config['base_url'] = "http://localhost/project001";
-}
+
+$config['base_url'] = "https://www.onitshamarket.com";
 
 /*
 |--------------------------------------------------------------------------

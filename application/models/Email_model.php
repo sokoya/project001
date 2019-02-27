@@ -1,17 +1,8 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Email_model extends CI_Model {
-    // Insert data
-    function insert_data($table = 'error_logs', $data = array()){
-        try {
-            $this->db->insert($table, $data);
-            $result = $this->db->insert_id();
-        } catch (Exception $e) {
-            $result = $e->getMessage();
-        }
-        return $result;
-    }
 
+    
     function reset_password( $data ){
         $post = array(
             'subject' => 'Reset Password Confirmation',
@@ -545,7 +536,6 @@ class Email_model extends CI_Model {
 
 
     function do_email($msg=NULL, $sub=NULL, $to=NULL, $from=NULL){
-
         $config = array();
         $config['useragent']	= "CodeIgniter";
 //        $config['mailpath']		= "/usr/bin/sendmail"; // or "/usr/sbin/sendmail"
@@ -557,7 +547,7 @@ class Email_model extends CI_Model {
         $config['newline']		= "\r\n";
         $config['wordwrap']		= TRUE;
         $this->load->library('email');
-//        $this->email->clear();
+        $this->email->clear();
         $this->email->initialize($config);
         $system_name	=	lang('app_name');
         if($from == NULL)
