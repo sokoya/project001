@@ -6,6 +6,7 @@ if(! defined('ENVIRONMENT') )
 
     switch($domain) {
         case 'onitshamarket.com' :
+        case 'www.onitshamarket.com':
             define('ENVIRONMENT', 'production');
             break;
 
