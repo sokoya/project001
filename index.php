@@ -54,7 +54,20 @@ ini_set('max_execution_time', 0);
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+//	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+
+//	switch (strtolower($_SERVER['HTTP_HOST'])){
+//        case "localhost":
+//            define("ENVIRONMENT", 'development');
+//            break;
+//        default:
+//            define("ENVIRONMENT", 'production');
+//            break;
+//    }
+
+require 'environment.php';
+
+//die( ENVIRONMENT );
 
 /*
  *---------------------------------------------------------------

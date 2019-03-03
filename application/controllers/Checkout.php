@@ -208,6 +208,9 @@ class Checkout extends MY_Controller
                         );
                         $this->session->set_userdata(array('inter' => $interswitch_session));
                     }
+
+                    // Send mail to admin
+
                     $this->session->set_userdata(array('order_code' => $order_code, 'txn_ref' => $txn_ref, 'amount' => $amt));
                     $return['status'] = 'success';
                     echo json_encode($return);
