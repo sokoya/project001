@@ -15,13 +15,13 @@ $categories = $this->db->query($category_cache)->result();
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="<?= base_url() ?>">
-                <img src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>" id="navbar-img"
+                <img src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>" style="width: 100px" id="navbar-img"
                      alt="<?= lang('app_name'); ?>" title="<?= lang('app_name'); ?>"/>
             </a>
         </div>
         <ul class="nav navbar-nav">
             <li class="dropdown"><a href="<?= base_url(); ?>"><span>Welcome!</span><span
-                            style="font-size: 13px; font-weight: bold; color: #333; margin-top: 6px">All Categories</span><i
+                            style="font-size: 13px; font-weight: bold; color: #333; margin-top: 6px">Categories</span><i
                             class="drop-caret" data-toggle="dropdown"></i></a>
                 <ul class="dropdown-menu dropdown-menu-category">
                     <?php
@@ -87,9 +87,9 @@ $categories = $this->db->query($category_cache)->result();
                 <ul class="market-search">
                 </ul>
             </div>
-            <a class="fa fa-search navbar-main-search-submit" href="#"></a>
+            <button class="fa fa-search navbar-main-search-submit" type="submit" ></button>
         </form>
-        <ul class="nav navbar-nav navbar-right navbar-mob-item-left" style="padding:-2px;">
+        <ul class="nav navbar-nav navbar-mob-item-left" style="padding:-2px; margin-left: 40px">
             <li class="dropdown">
                 <a class="navbar-item-top cart-cs"
                    data-count="<?= ($this->cart->total_items() == 0) ? '' : $this->cart->total_items(); ?>"

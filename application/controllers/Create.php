@@ -61,6 +61,7 @@ class Create extends MY_Controller
 				'is_seller' => 'false'
 			);
 
+
 			$user_id = $this->user->create_account($data, 'users');
 			if (!is_numeric($user_id)) {
 				$this->session->set_flashdata('error_msg', 'Sorry! There was an error creating your account.' . $user_id);

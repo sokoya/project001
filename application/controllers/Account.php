@@ -4,10 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // Buyers profile account
 class Account extends MY_Controller {
 	public function __construct(){
-        // @todo
-        // Check if the user is already loggedin
-        // Also check where the user is coming from
-        // $this->session->set_userdata('referred_from', current_url());
+
         parent::__construct();
         $this->load->model('user_model', 'user');
         if( !$this->session->userdata('logged_in') ){

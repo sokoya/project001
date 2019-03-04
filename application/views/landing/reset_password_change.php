@@ -87,8 +87,8 @@
             <div class="col-md-3"></div>
             <div class="col-md-6 market-box">
                 <p class="text-center">
-                    <a href="<?= base_url(); ?>" title="Go to homepage"><img
-                                src="<?= base_url('assets/landing/img/onitshamarket-logo.png') ?>" width="30%"
+                    <a title="Go to homepage" href="<?= base_url(); ?>"><img
+                                src="<?= base_url('assets/img/onitshamarket-logo.png') ?>" width="30%"
                                 alt="market logo Image"></a>
                 </p>
                 <h3 class="widget-title text-center text-bold text-sm">
@@ -108,7 +108,7 @@
                                        placeholder="Enter your password" required/>
                             </div>
                             <div class="form-group">
-                                <label><h5>Password</h5></label>
+                                <label><h5>Confirm Password</h5></label>
                                 <input class="form-control" type="password" name="confirm_password"
                                        placeholder="Enter your password" required/>
                             </div>
@@ -130,12 +130,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 col-xs-12 col-sm-12 text-center" style="display: inline-flex;margin-top:10px;">
-                        <img src="<?= base_url('assets/landing/img/payment/ssl-logo.png'); ?>" class="img-responsive" style="margin-left:auto;"
+                    <div class="col-md-12 col-xs-12 col-sm-12 text-center"
+                         style="display: inline-flex;margin-top:10px;">
+                        <img src="<?= base_url('assets/img/payment/ssl-logo.png'); ?>" class="img-responsive"
+                             style="margin-left:auto;"
                              alt="Image Alternative text" title="Pay with Mastercard"/>
-                        <img src="<?= base_url('assets/landing/img/payment/interswitch.png'); ?>" class="img-responsive"
-                             alt="Image Alternative text" title="Pay with Mastercard"/>
-                        <img src="<?= base_url('assets/landing/img/payment/allcards.jpg'); ?>" class="img-responsive" style="margin-right:auto;"
+                        <img src="<?= base_url('assets/img/payment/interswitch.png'); ?>" class="img-responsive"
+                             alt="Pay with Interswitch" title="Pay with interswitch"/>
+                        <img src="<?= base_url('assets/img/payment/allcards.jpg'); ?>" class="img-responsive"
+                             style="margin-right:auto;"
                              alt="Image Alternative text" title="Pay with Mastercard"/>
                     </div>
                 </div>
