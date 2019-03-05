@@ -226,8 +226,9 @@
         position: relative;
         bottom: 10px;
     }
-    .global-wrapper{
-        min-height:0 !important;
+
+    .global-wrapper {
+        min-height: 0 !important;
     }
 </style>
 </head>
@@ -251,7 +252,7 @@
 <?php else : ?>
     <div class="custom-card">
         <div class="container">
-            <a style="text-decoration: none;" href="<?= base_url('catalog/' . $category_detail->slug.'/'); ?>"><p
+            <a style="text-decoration: none;" href="<?= base_url('catalog/' . $category_detail->slug . '/'); ?>"><p
                         class="margin-0"><img src="<?= base_url('assets/svg/back.svg'); ?>" alt="Back button"
                                               style="height: 14px; width: 14px; margin-right: 8px;"><span
                             class="redirect-text">Go back to <?= ucwords($category_detail->name); ?></span>
@@ -333,7 +334,7 @@
                 </div>
             </div>
             <div class="row" style="margin-top: 10px;">
-                <?php $qty_stock_check = 0 ;?>
+                <?php $qty_stock_check = 0; ?>
                 <?php if (count($variations) > 1) : ?>
                     <div class="col-xs-12">
                         <p class="custom-product-page-option-title">Variation: </p>
@@ -354,7 +355,7 @@
                                         <?= ucfirst($variation['variation']); ?>
                                     </p>
                                 </div>
-                                <?php if( $variation['quantity'] < 1 ) $qty_stock_check++; ?>
+                                <?php if ($variation['quantity'] < 1) $qty_stock_check++; ?>
                             <?php endforeach; ?>
                         </div>
                     </div>
@@ -374,14 +375,14 @@
 
             <?php
             // Product still in stock
-            if($qty_stock_check == count( $variations)) :?>
-            <button class="btn btn-block" disabled>
-                Out of Stock
-            </button>
-            <?php else :?>
-            <button class="btn btn-block buy-btn submit-cart">
-                Add to Cart
-            </button>
+            if ($qty_stock_check == count($variations)) :?>
+                <button class="btn btn-block" disabled>
+                    Out of Stock
+                </button>
+            <?php else : ?>
+                <button class="btn btn-block buy-btn submit-cart">
+                    Add to Cart
+                </button>
             <?php endif; ?>
 
             <?php if ($this->session->userdata('logged_in')) : ?>
@@ -391,7 +392,8 @@
                     <p style="cursor: pointer;" class="wishlist-cta">Remove from Wishlist</p>
                 <?php endif; ?>
             <?php else: ?>
-                <a style="text-decoration: none; cursor: pointer;" href="<?= base_url('login') ?>"><p class="wishlist-cta">Add to
+                <a style="text-decoration: none; cursor: pointer;" href="<?= base_url('login') ?>"><p
+                            class="wishlist-cta">Add to
                         Wishlist</p></a>
             <?php endif; ?>
         </div>
@@ -462,7 +464,8 @@
                 <p id="description_vl" class="body_text">
                     <?= word_limiter($product->product_description, 80); ?>
                     <?php if (str_word_count($product->product_description, 0) > 40) : ?>
-                        <span><a style="text-decoration: none; color: #0b6427" href="<?= base_url( urlify($product->product_name, $product->id) . 'description/'); ?>">Read More</a> </span>
+                        <span><a style="text-decoration: none; color: #0b6427"
+                                 href="<?= base_url(urlify($product->product_name, $product->id) . 'description/'); ?>">Read More</a> </span>
                     <?php endif; ?>
                 </p>
                 <hr/>
@@ -582,7 +585,7 @@
                         </div>
                         <div class="col-md-2">
                             <input class="btn btn-primary btn-block qna-btn"
-                                   data-user="<?= !is_null($profile) ? (!empty( $profile->display_name)) ? $profile->display_name :  $profile->first_name . ' ' . $profile->last_name : ''; ?>"
+                                   data-user="<?= !is_null($profile) ? (!empty($profile->display_name)) ? $profile->display_name : $profile->first_name . ' ' . $profile->last_name : ''; ?>"
                                    type="submit" value="Ask"/>
                         </div>
                     </div>
@@ -635,7 +638,8 @@
                     <?php foreach ($likes as $like) : ?>
                         <a style="text-decoration: none"
                            href="<?= base_url(urlify($like->product_name, $like->id)); ?>">
-                            <img class="suggested-image lazy" style="width: 80px" src="<?= base_url('assets/load.gif'); ?>"
+                            <img class="suggested-image lazy" style="width: 80px"
+                                 src="<?= base_url('assets/load.gif'); ?>"
                                  data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?> "/>
                             <p class="suggested-image-text"><?= character_limiter($like->product_name, 15); ?></p>
                             <span class="text-bold text-center"><?= $like->item_left; ?> left</span>
@@ -657,7 +661,7 @@
 <script>
     $(function () {
         $('.lazy').Lazy();
-        $('.prod_description img').each(function() {
+        $('.prod_description img').each(function () {
             $(this).addClass('img-responsive');
             $(this).attr('Onitshamarket');
         });
@@ -677,10 +681,13 @@
         $(".products-gallery").owlCarousel({
             items: 1,
             lazyLoad: true,
+            dots: true,
         });
         let loop = true;
-        var x =  $('.suggested-products').data('count');
-        if( x <= 3 ) {loop = false;}
+        var x = $('.suggested-products').data('count');
+        if (x <= 3) {
+            loop = false;
+        }
         $(".suggested-products").owlCarousel({
             loop: loop,
             center: true,
@@ -851,7 +858,8 @@
                     'pid': product_id,
                     'display_name': display_name,
                     'question': question,
-                    'data': data},
+                    'data': data
+                },
                 success: response => {
                     let parsed_response = JSON.parse(response);
                     $('#question').val("");
@@ -896,7 +904,7 @@
             }
         })
     });
-    $('#modal_popup').on('hide.bs.modal', function(){
+    $('#modal_popup').on('hide.bs.modal', function () {
         let btn = $('.qna-btn');
         btn.prop('disabled', false);
         btn.val("Ask");

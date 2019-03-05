@@ -16,20 +16,25 @@
                         </section>
                         <div style="font-size: 12px;">
                             <p>
-                                <h4 class="text text-sm foot-link">Office Address: </h4>
-                                <?= lang('office_address'); ?><br /><?= lang('contact_no'); ?>
+                            <h4 class="text text-sm foot-link">Office Address: </h4>
+                            <?= lang('office_address'); ?><br/><?= lang('contact_no'); ?>
                             </p>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <section class="widget widget-links widget-light-skin">
-                            <h3 class="widget-title-sm foot-link">Shop</h3>
+                            <h3 class="widget-title-sm foot-link">Markets</h3>
                             <ul style="margin-left: -40px;">
-                                <li><a href="#">Most Sort Products</a></li>
-                                <li><a href="#">Top Brands</a></li>
-                                <li><a href="#">Top Sellers</a></li>
-                                <li><a href="#">Special Offers</a></li>
-                                <li><a href="#">Outlets</a></li>
+                                <li><a href="#">Onitsha Market, Anambra</a></li>
+                                <li><a href="#">Balogun Market, Lagos</a></li>
+                                <li><a href="#">Ariaria Int'l Market, Abia</a></li>
+                                <li><a href="#">Alaba Int'l Market, Lagos</a></li>
+                                <li><a href="#">Idumota Market, Lagos</a></li>
+                                <li><a href="#">Kurmi Market, Kano</a></li>
+                                <li><a href="#">Ogbete Market, Enugu</a></li>
+                                <li><a href="#">Oil Mill Market, Port-Harcourt</a></li>
+                                <li><a href="#">Bodija Market, Ibadan, Oyo</a></li>
+                                <li><a href="#">Computer Village, Lagos</a></li>
                             </ul>
                         </section>
                     </div>
@@ -53,7 +58,7 @@
                             <h3 class="widget-title-sm foot-link">Support</h3>
                             <ul style="margin-left: -40px;">
                                 <li><a href="#">App Downloads</a></li>
-                                <li><a href="<?=base_url('pages/contact');?>">Contact Us</a></li>
+                                <li><a href="<?= base_url('pages/contact'); ?>">Contact Us</a></li>
                                 <li><a href="#">FAQ</a></li>
                                 <li><a href="#">Live Chat</a></li>
                                 <li><a href="#">Waranty and Returns</a></li>
@@ -65,7 +70,8 @@
             </div>
             <div class="col-md-3">
                 <h4 class="widget-title-sm foot-link">Newsletter</h4>
-                <p class="foot-link"><?= lang('app_name'); ?> respects your <a href="<?=base_url('pages/privacy')?>" style="color:#49a251;">Privacy</a></p>
+                <p class="foot-link"><?= lang('app_name'); ?> respects your <a href="<?= base_url('pages/privacy') ?>"
+                                                                               style="color:#49a251;">Privacy</a></p>
                 <form>
                     <div class="input-group">
                         <input type="text" class="newsletter-input form-control"
@@ -135,12 +141,16 @@
             <div class="row">
                 <div class="col-md-12">
                     <p class="copyright-text foot-link">&copy; 2015 - <?= date('Y'); ?> <a title="Onitshamarket"
-                                href="<?= lang('domain'); ?>"><?= lang('company_name'); ?>.</a> All rights reserved</p>
-                    <p class="text-sm foot-link"><a href="<?= base_url('pages'); ?>">Terms of Use</a> | <a title="Onitshamarket agreement"
-                                href="<?= base_url('pages/agreement'); ?>">Agreement</a> | <a title="Terms and condition"
+                                                                                           href="<?= lang('domain'); ?>"><?= lang('company_name'); ?>
+                            .</a> All rights reserved</p>
+                    <p class="text-sm foot-link"><a href="<?= base_url('pages'); ?>">Terms of Use</a> | <a
+                                title="Onitshamarket agreement"
+                                href="<?= base_url('pages/agreement'); ?>">Agreement</a> | <a
+                                title="Terms and condition"
                                 href="<?= base_url('pages/privacy'); ?>">Privacy Policy</a> |
-                            <a title="Sitemap" href="https://www.onitshamarket.com/sitemap.xml">Site
-                            Map </a> | <a title="Become a seller" target="_blank" href="https://seller.onitshamarket.com">Become a Seller</a> </p>
+                        <a title="Sitemap" href="https://www.onitshamarket.com/sitemap.xml">Site
+                            Map </a> | <a title="Become a seller" target="_blank"
+                                          href="https://seller.onitshamarket.com">Become a Seller</a></p>
                 </div>
             </div>
         </div>

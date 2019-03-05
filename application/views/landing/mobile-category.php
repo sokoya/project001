@@ -126,7 +126,8 @@
         max-height: 160px !important;
         margin-bottom: -5px;
     }
-    #filter-category{
+
+    #filter-category {
         cursor: pointer;
     }
 </style>
@@ -138,7 +139,8 @@
         <div class="w-bg top_menu">
             <a href="javascript:void(0)" class="update_fil filter_btn_submit" style="float: right">Update
                 Filter</a>
-            <p class="filter_close_btn" style="cursor: pointer;"><span><i class="fa fa-arrow-left" aria-hidden="true"></i></span> Go Back
+            <p class="filter_close_btn" style="cursor: pointer;"><span><i class="fa fa-arrow-left"
+                                                                          aria-hidden="true"></i></span> Go Back
             </p>
         </div>
         <div class="panel panel-default">
@@ -155,7 +157,8 @@
             <div class="panel panel-default">
                 <div
                         class="panel-heading filter-head">Brand
-                    <span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel" aria-hidden="true"
+                    <span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel"
+                                                                             aria-hidden="true"
                                                                              data-target="brand_static_vl"></i></span>
                 </div>
                 <div class="panel-body" id="brand_static_vl">
@@ -236,16 +239,17 @@
                 </div>
                 <div class="custom-card">
                     <div class="container">
-                        <p style="text-align: center; cursor: pointer;"><span class="filter-btn filter-text"><i class="fa fa-filter"
-                                                                                              aria-hidden="true"></i> Filter</span>
+                        <p style="text-align: center; cursor: pointer;"><span class="filter-btn filter-text"><i
+                                        class="fa fa-filter"
+                                        aria-hidden="true"></i> Filter</span>
                             <span class="filter-divider">|</span> <span class="sort-btn sort-text"><i class="fa fa-sort"
-                                                                                             aria-hidden="true"></i> Sort</span>
+                                                                                                      aria-hidden="true"></i> Sort</span>
                         </p>
                     </div>
                 </div>
                 <div class="col-xs-12 ">
                     <div class="row row-sm-gap" data-gutter="10">
-                        <?php if($products) :foreach ($products as $product) : ?>
+                        <?php if ($products) :foreach ($products as $product) : ?>
                             <div class="col-md-3">
                                 <div class="mobile-product product-sm-left ">
                                     <ul class="product-labels"></ul>
@@ -280,10 +284,11 @@
                                 </div>
                             </div>
                         <?php endforeach; else: ?>
-                        <div style="margin-top: 30px;"></div>
-                            <h3 class="text-center text-md-center">Oops! Sorry, we couldn't find products on this section.</h3>
+                            <div style="margin-top: 30px;"></div>
+                            <h3 class="text-center text-md-center">Oops! Sorry, we couldn't find products on this
+                                section.</h3>
                             <p class="text-center text-sm">
-                                Please check your spelling for typographic error.<br />
+                                Please check your spelling for typographic error.<br/>
                                 <span class="text-danger">You can also:</span>
                             <ul class="text-center">
                                 <li style="list-style-type: none">Try a different keyword search.</li>
@@ -300,14 +305,20 @@
     </div>
     <script src="<?= base_url('assets/js/jquery.js'); ?>"></script>
     <script src="<?= base_url('assets/js/bootstrap.js'); ?>"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/js/ion.rangeSlider.min.js"></script>
     <script>
         let current_url = "<?= current_url()?>";
-        let url = "<?= base_url('catalog/' . $category_detail->slug .'/') ?>";
+        let url = "<?= base_url('catalog/' . $category_detail->slug . '/') ?>";
     </script>
     <script src="<?= base_url('assets/js/search.js'); ?>"></script>
     <script>
+        $('.lazy').Lazy({
+            scrollDirection: 'vertical',
+            effect: 'fadeIn',
+            visibleOnly: true
+        });
 
         $("#price-range").ionRangeSlider({
             type: "double",
@@ -316,15 +327,15 @@
             grid: true,
             prefix: "&#8358;",
             onFinish: function (data) {
-                window.location = url + '?price_min='+data.from+'&price_max='+data.to;
+                window.location = url + '?price_min=' + data.from + '&price_max=' + data.to;
             }
         });
         let my_range = $("#price-range").data("ionRangeSlider");
-        let min = '<?= $price_min ; ?>';
-        let max = '<?= $price_max ; ?>';
-        if( min != '' && max != '') {
+        let min = '<?= $price_min; ?>';
+        let max = '<?= $price_max; ?>';
+        if (min != '' && max != '') {
             my_range.update({
-                from : min,
+                from: min,
                 to: max
             });
         }
