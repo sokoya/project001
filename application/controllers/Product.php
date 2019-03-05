@@ -20,6 +20,8 @@ class Product extends MY_Controller
 		// sanitize
 		if (!is_numeric(cleanit($index))) redirect(base_url());
 		$page_data['product'] = $this->product->get_product($index);
+
+//		var_dump($page_data['product'] ); exit;
 		$page_data['var'] = $this->product->get_variation($index);
 		$page_data['variations'] = $this->product->get_variations($index);
 		$page_data['galleries'] = $this->product->get_gallery($index);
@@ -34,7 +36,9 @@ class Product extends MY_Controller
 //            $page_data['breadcrumb'] = $this->product->get_parent_details( $page_data['product']->category_id );
         } else { $page_data['description'] = DESCRIPTION; }
         $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
-		// $this->add_count($index);
+		 $this->add_count($index);
+//		 var_dump( $page_data['profile'] );exit;
+
 		$page_data['page'] = 'product';
 		$page_data['rating_counts'] = $this->product->get_rating_counts($index);
 		$page_data['featured_image'] = $this->product->get_featured_image($index);
