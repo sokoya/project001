@@ -49,13 +49,16 @@
     .product {
         min-height: unset !important;
     }
-    a{
+
+    a {
         color: #0b6427;
     }
-    a:hover{
+
+    a:hover {
         color: #0b6427;
     }
-    a:visited{
+
+    a:visited {
         color: #0b6427;
     }
 </style>
@@ -85,7 +88,7 @@
                     <li><a href="<?= base_url(); ?>">Home</a>
                     </li>
                     <li>
-                        <a href="<?= base_url('catalog/' . $category_detail->slug .'/'); ?>"><?= ucwords($category_detail->name); ?></a>
+                        <a href="<?= base_url('catalog/' . $category_detail->slug . '/'); ?>"><?= ucwords($category_detail->name); ?></a>
                     </li>
                     <li class="active c-a-brc"><?= ucwords($product->product_name); ?></li>
                 </ol>
@@ -125,29 +128,29 @@
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </div>
-                    <?php if(count($galleries) > 1) : ?>
+                    <?php if (count($galleries) > 1) : ?>
                         <div class="product-slider-nav" style="visibility: hidden ;height: 50px;margin-top:40px;">
-                        <div style="margin:auto;">
-                            <img
-                                    style="max-width:40px;"
-                                    src="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
-                                    alt="<?= character_limiter($product->product_name, 10); ?>"
-                                    title="<?= ucwords($product->product_name) ?>"/>
+                            <div style="margin:auto;">
+                                <img
+                                        style="max-width:40px;"
+                                        src="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
+                                        alt="<?= character_limiter($product->product_name, 10); ?>"
+                                        title="<?= ucwords($product->product_name) ?>"/>
+                            </div>
+                            <?php if (count($galleries) > 1) : ?>
+                                <?php foreach ($galleries as $gallery) : ?>
+                                    <?php if ($featured_image->image_name != $gallery->image_name): ?>
+                                        <div>
+                                            <img
+                                                    style="max-width:40px;"
+                                                    src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
+                                                    alt="<?= character_limiter($product->product_name, 5); ?>"
+                                                    title="<?= ucwords($product->product_name) ?>"/>
+                                        </div>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
-                        <?php if (count($galleries) > 1) : ?>
-                            <?php foreach ($galleries as $gallery) : ?>
-                                <?php if ($featured_image->image_name != $gallery->image_name): ?>
-                                    <div>
-                                        <img
-                                                style="max-width:40px;"
-                                                src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
-                                                alt="<?= character_limiter($product->product_name, 5); ?>"
-                                                title="<?= ucwords($product->product_name) ?>"/>
-                                    </div>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </div>
                     <?php endif; ?>
                 </div>
                 <div class="col-md-7" style="height:450px;">
@@ -223,21 +226,44 @@
                                     </div>
                                 </div>
                                 <hr class="product-line"/>
-                                <p class="product-page-price">
-                                    <?php if (discount_check($var->discount_price, $var->start_date, $var->end_date)) : ?>
-                                        <span class="price-cs ds-price"><?= ngn($var->discount_price); ?></span>
-                                        <span
-                                                class="product-page-price-list price-lower dn-price"><?= ngn($var->sale_price); ?></span>
-                                    <?php else : ?>
-                                        <span class="price-cs ds-price"></span>
-                                        <span class="price-cs dn-price"><?= ngn($var->sale_price); ?></span>
-                                    <?php endif; ?>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <p class="product-page-price">
+                                            <?php if (discount_check($var->discount_price, $var->start_date, $var->end_date)) : ?>
+                                                <span class="price-cs ds-price"><?= ngn($var->discount_price); ?></span>
+                                                <span
+                                                        class="product-page-price-list price-lower dn-price"><?= ngn($var->sale_price); ?></span>
+                                            <?php else : ?>
+                                                <span class="price-cs ds-price"></span>
+                                                <span class="price-cs dn-price"><?= ngn($var->sale_price); ?></span>
+                                            <?php endif; ?>
 
-                                    <input type="hidden" name="variation_id" class="variation_id"
-                                           value="<?= $var->id; ?>">
-                                    <input type="hidden" name="product_id" class="product_id"
-                                           value="<?= $product->id; ?>">
-                                </p>
+                                            <input type="hidden" name="variation_id" class="variation_id"
+                                                   value="<?= $var->id; ?>">
+                                            <input type="hidden" name="product_id" class="product_id"
+                                                   value="<?= $product->id; ?>">
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <ul style="float: right" class="product-page-price product-page-share-item">
+                                            <li>
+                                                <a class="fa fa-facebook" href="#"></a>
+                                            </li>
+                                            <li>
+                                                <a class="fa fa-twitter" href="#"></a>
+                                            </li>
+                                            <li>
+                                                <a class="fa fa-pinterest" href="#"></a>
+                                            </li>
+                                            <li>
+                                                <a class="fa fa-instagram" href="#"></a>
+                                            </li>
+                                            <li>
+                                                <a class="fa fa-google-plus" href="#"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                                 <hr class="product-line"/>
                                 <div class="product-variation">
                                     <?= form_open('', 'id="variation-form"'); ?>
@@ -245,9 +271,9 @@
                                         <?php if (count($variations) > 0) : ?>
                                             <div class="col-md-7">
                                                 <div class="row">
-<!--                                                    <div class="col-md-3">-->
-<!--                                                        <h5 class="custom-product-page-option-title">Variation:</h5>-->
-<!--                                                    </div>-->
+                                                    <!--                                                    <div class="col-md-3">-->
+                                                    <!--                                                        <h5 class="custom-product-page-option-title">Variation:</h5>-->
+                                                    <!--                                                    </div>-->
                                                     <div class="col-md-9">
                                                         <div class="row variation-option-list">
                                                             <?php $qty_stock_check = 0; ?>
@@ -263,7 +289,7 @@
                                                                        data-vid="<?= $variation['id'] ?>"
                                                                        data-quantity='<?= $variation['quantity'] ?>'
                                                                        data-vname="<?= $variation['variation'] ?>"
-                                                                       class="variation-option <?php if( count($variations) == 1 ) echo 'option-selected'; ?> <?php if($variation['quantity'] == 0) echo 'option-disabled'; ?>">
+                                                                       class="variation-option <?php if (count($variations) == 1) echo 'option-selected'; ?> <?php if ($variation['quantity'] == 0) echo 'option-disabled'; ?>">
                                                                         <b><?= trim($variation['variation']); ?></b>
                                                                     </p>
                                                                 </div>
@@ -339,26 +365,6 @@
                                     <?php endif; ?>
                                 </div>
                                 <br/>
-                                <div class="product-page-side-section">
-                                    <h5 class="product-page-side-title">Share This Product</h5>
-                                    <ul class="product-page-share-item">
-                                        <li>
-                                            <a class="fa fa-facebook" href="#"></a>
-                                        </li>
-                                        <li>
-                                            <a class="fa fa-twitter" href="#"></a>
-                                        </li>
-                                        <li>
-                                            <a class="fa fa-pinterest" href="#"></a>
-                                        </li>
-                                        <li>
-                                            <a class="fa fa-instagram" href="#"></a>
-                                        </li>
-                                        <li>
-                                            <a class="fa fa-google-plus" href="#"></a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -574,7 +580,7 @@
                                                 <label>Display name*</label>
                                                 <input type="text" name="display_name" placeholder="Display name"
                                                        id="review_name"
-                                                       value="<?= !is_null($profile) ? (!empty( $profile->display_name)) ? $profile->display_name :  $profile->first_name . ' ' . $profile->last_name : ''; ?>"
+                                                       value="<?= !is_null($profile) ? (!empty($profile->display_name)) ? $profile->display_name : $profile->first_name . ' ' . $profile->last_name : ''; ?>"
                                                        class="form-control" required>
                                             </div>
                                         </div>
@@ -585,12 +591,13 @@
                                                   class="form-control" required
                                                   placeholder="Write your review on this product."></textarea>
                                     </div>
-                                    <?php if(is_null($profile)) : ?>
-                                        <a href="<?= base_url('login'); ?>" class="btn btn-success" id="review_submit_button">Post Review</a>
-                                    <?php else :?>
-                                    <input type="submit" class="btn btn-success" id="review_submit_button"
-                                           value="Post Review">
-                                    <?php endif;?>
+                                    <?php if (is_null($profile)) : ?>
+                                        <a href="<?= base_url('login'); ?>" class="btn btn-success"
+                                           id="review_submit_button">Post Review</a>
+                                    <?php else : ?>
+                                        <input type="submit" class="btn btn-success" id="review_submit_button"
+                                               value="Post Review">
+                                    <?php endif; ?>
                                 </form>
                             </div>
                         </div>
@@ -604,7 +611,9 @@
                                         </ul>
                                     </div>
                                     <p class="comment-user"><strong>Reviewed
-                                            by : </strong> <?= $review['display_name']; ?> <b> on :</b> <span class="comment-date"><?= neatDate($review['published_date']); ?></span> </p>
+                                            by : </strong> <?= $review['display_name']; ?> <b> on :</b> <span
+                                                class="comment-date"><?= neatDate($review['published_date']); ?></span>
+                                    </p>
                                     <p class="comment-title"><strong>Title: </strong><?= $review['title']; ?></p>
                                     <p class="comment-detail"><strong>Content: </strong><?= $review['content']; ?></p>
                                     <hr class="comment-line"/>
@@ -649,12 +658,12 @@
                                             <div class="product-page-qa-question">
                                                 <p class="product-page-qa-text">
                                                     <?= $question->question ?>
-                                                    <?php if( $this->session->userdata('logged_in')) : ?>
-                                                    <a class="product-review-rate pull-right upvote"
-                                                       data-qid="<?= $question->id; ?>" href="javascript:void(0)"
-                                                       title="Find this question helpful?"><i
-                                                                class="fa fa-thumbs-up"></i><?= ($question->upvotes != 0 ) ? $question->upvotes : ''; ?>
-                                                    </a>
+                                                    <?php if ($this->session->userdata('logged_in')) : ?>
+                                                        <a class="product-review-rate pull-right upvote"
+                                                           data-qid="<?= $question->id; ?>" href="javascript:void(0)"
+                                                           title="Find this question helpful?"><i
+                                                                    class="fa fa-thumbs-up"></i><?= ($question->upvotes != 0) ? $question->upvotes : ''; ?>
+                                                        </a>
                                                     <?php endif; ?>
                                                 </p>
                                                 <p class="product-page-qa-meta">asked by <?= $question->display_name ?>
@@ -867,7 +876,7 @@
     var $easyzoom = $('.easyzoom').easyZoom();
     $(function () {
         $('.lazy').Lazy();
-        $('.prod_description img').each(function() {
+        $('.prod_description img').each(function () {
             $(this).addClass('img-responsive');
             $(this).attr('Onitshamarket');
         });
@@ -1056,7 +1065,8 @@
                     'pid': product_id,
                     'display_name': display_name,
                     'question': question,
-                    'data': data},
+                    'data': data
+                },
                 success: response => {
                     let parsed_response = JSON.parse(response);
                     $('#question').val("");
@@ -1101,7 +1111,7 @@
             }
         })
     });
-    $('#modal_popup').on('hide.bs.modal', function(){
+    $('#modal_popup').on('hide.bs.modal', function () {
         let btn = $('.qna-btn');
         btn.prop('disabled', false);
         btn.val("Ask");
