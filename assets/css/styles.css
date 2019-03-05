@@ -7461,10 +7461,10 @@ input[type="color"]:focus,
 
 
 .nav-category-img {
-    width: 94%;
+    width: 90%;
     height: 97%;
     margin-left: 20px;
-    margin-right: -20px;
+    margin-right: -10px;
 }
 
 .category-favorite > i {
