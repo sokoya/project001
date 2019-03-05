@@ -3,7 +3,61 @@
 <link rel="stylesheet" href="<?= base_url('assets/plugins/slick/slick-theme.css'); ?>">
 <link rel="stylesheet" href="<?= base_url('assets/plugins/eazyzoom/easyzoom.css'); ?>">
 <style>
-    .variation-option{font-size:12px;font-family:HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;color:#242424;outline:#d0d0d0 solid 1px;padding:3px;width:100%;text-align:center}.seemore-btn{background:#468c46;color:#fff;border-radius:0}.variation-option-list{position:relative;top:7px}.option-selected,.variation-option:hover{outline:#0b6427 solid 1px;color:#0b6427;cursor:pointer}.option-disabled{color:#bebebe;text-decoration:line-through}.product{min-height:unset!important}a,a:hover,a:visited{color:#0b6427}
+    .variation-option {
+        font-size: 12px;
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        color: #242424;
+        outline: 1px solid #d0d0d0;
+        padding: 3px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .seemore-btn {
+        background: #468c46;
+        color: #fff;
+        border-radius: 0;
+    }
+
+    .option-selected, .variation-option:hover {
+        outline: 1px solid #0b6427;
+        color: #0b6427;
+        cursor: pointer;
+    }
+
+    .option-disabled {
+        color: #bebebe;
+        text-decoration: line-through;
+    }
+
+    .variation-option-list {
+        position: relative;
+        top: 7px;
+    }
+
+    .option-selected, .variation-option:hover {
+        outline: 1px solid #0b6427;
+        color: #0b6427;
+        cursor: pointer;
+    }
+
+    .option-disabled {
+        color: #bebebe;
+        text-decoration: line-through;
+    }
+
+    .product {
+        min-height: unset !important;
+    }
+    a{
+        color: #0b6427;
+    }
+    a:hover{
+        color: #0b6427;
+    }
+    a:visited{
+        color: #0b6427;
+    }
 </style>
 </head>
 <body>
@@ -31,7 +85,7 @@
                     <li><a href="<?= base_url(); ?>">Home</a>
                     </li>
                     <li>
-                        <a href="<?= base_url('catalog/' . $category_detail->slug . '/'); ?>"><?= ucwords($category_detail->name); ?></a>
+                        <a href="<?= base_url('catalog/' . $category_detail->slug .'/'); ?>"><?= ucwords($category_detail->name); ?></a>
                     </li>
                     <li class="active c-a-brc"><?= ucwords($product->product_name); ?></li>
                 </ol>
@@ -71,29 +125,29 @@
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </div>
-                    <?php if (count($galleries) > 1) : ?>
+                    <?php if(count($galleries) > 1) : ?>
                         <div class="product-slider-nav" style="visibility: hidden ;height: 50px;margin-top:40px;">
-                            <div style="margin:auto;">
-                                <img
-                                        style="max-width:40px;"
-                                        src="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
-                                        alt="<?= character_limiter($product->product_name, 10); ?>"
-                                        title="<?= ucwords($product->product_name) ?>"/>
-                            </div>
-                            <?php if (count($galleries) > 1) : ?>
-                                <?php foreach ($galleries as $gallery) : ?>
-                                    <?php if ($featured_image->image_name != $gallery->image_name): ?>
-                                        <div>
-                                            <img
-                                                    style="max-width:40px;"
-                                                    src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
-                                                    alt="<?= character_limiter($product->product_name, 5); ?>"
-                                                    title="<?= ucwords($product->product_name) ?>"/>
-                                        </div>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                            <?php endif; ?>
+                        <div style="margin:auto;">
+                            <img
+                                    style="max-width:40px;"
+                                    src="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
+                                    alt="<?= character_limiter($product->product_name, 10); ?>"
+                                    title="<?= ucwords($product->product_name) ?>"/>
                         </div>
+                        <?php if (count($galleries) > 1) : ?>
+                            <?php foreach ($galleries as $gallery) : ?>
+                                <?php if ($featured_image->image_name != $gallery->image_name): ?>
+                                    <div>
+                                        <img
+                                                style="max-width:40px;"
+                                                src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
+                                                alt="<?= character_limiter($product->product_name, 5); ?>"
+                                                title="<?= ucwords($product->product_name) ?>"/>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </div>
                     <?php endif; ?>
                 </div>
                 <div class="col-md-7" style="height:450px;">
@@ -169,44 +223,21 @@
                                     </div>
                                 </div>
                                 <hr class="product-line"/>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <p class="product-page-price">
-                                            <?php if (discount_check($var->discount_price, $var->start_date, $var->end_date)) : ?>
-                                                <span class="price-cs ds-price"><?= ngn($var->discount_price); ?></span>
-                                                <span
-                                                        class="product-page-price-list price-lower dn-price"><?= ngn($var->sale_price); ?></span>
-                                            <?php else : ?>
-                                                <span class="price-cs ds-price"></span>
-                                                <span class="price-cs dn-price"><?= ngn($var->sale_price); ?></span>
-                                            <?php endif; ?>
+                                <p class="product-page-price">
+                                    <?php if (discount_check($var->discount_price, $var->start_date, $var->end_date)) : ?>
+                                        <span class="price-cs ds-price"><?= ngn($var->discount_price); ?></span>
+                                        <span
+                                                class="product-page-price-list price-lower dn-price"><?= ngn($var->sale_price); ?></span>
+                                    <?php else : ?>
+                                        <span class="price-cs ds-price"></span>
+                                        <span class="price-cs dn-price"><?= ngn($var->sale_price); ?></span>
+                                    <?php endif; ?>
 
-                                            <input type="hidden" name="variation_id" class="variation_id"
-                                                   value="<?= $var->id; ?>">
-                                            <input type="hidden" name="product_id" class="product_id"
-                                                   value="<?= $product->id; ?>">
-                                        </p>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <ul style="float: right" class="product-page-price product-page-share-item">
-                                            <li>
-                                                <a class="fa fa-facebook" href="#"></a>
-                                            </li>
-                                            <li>
-                                                <a class="fa fa-twitter" href="#"></a>
-                                            </li>
-                                            <li>
-                                                <a class="fa fa-pinterest" href="#"></a>
-                                            </li>
-                                            <li>
-                                                <a class="fa fa-instagram" href="#"></a>
-                                            </li>
-                                            <li>
-                                                <a class="fa fa-google-plus" href="#"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                    <input type="hidden" name="variation_id" class="variation_id"
+                                           value="<?= $var->id; ?>">
+                                    <input type="hidden" name="product_id" class="product_id"
+                                           value="<?= $product->id; ?>">
+                                </p>
                                 <hr class="product-line"/>
                                 <div class="product-variation">
                                     <?= form_open('', 'id="variation-form"'); ?>
@@ -214,9 +245,9 @@
                                         <?php if (count($variations) > 0) : ?>
                                             <div class="col-md-7">
                                                 <div class="row">
-                                                    <!--                                                    <div class="col-md-3">-->
-                                                    <!--                                                        <h5 class="custom-product-page-option-title">Variation:</h5>-->
-                                                    <!--                                                    </div>-->
+<!--                                                    <div class="col-md-3">-->
+<!--                                                        <h5 class="custom-product-page-option-title">Variation:</h5>-->
+<!--                                                    </div>-->
                                                     <div class="col-md-9">
                                                         <div class="row variation-option-list">
                                                             <?php $qty_stock_check = 0; ?>
@@ -232,7 +263,7 @@
                                                                        data-vid="<?= $variation['id'] ?>"
                                                                        data-quantity='<?= $variation['quantity'] ?>'
                                                                        data-vname="<?= $variation['variation'] ?>"
-                                                                       class="variation-option <?php if (count($variations) == 1) echo 'option-selected'; ?> <?php if ($variation['quantity'] == 0) echo 'option-disabled'; ?>">
+                                                                       class="variation-option <?php if( count($variations) == 1 ) echo 'option-selected'; ?> <?php if($variation['quantity'] == 0) echo 'option-disabled'; ?>">
                                                                         <b><?= trim($variation['variation']); ?></b>
                                                                     </p>
                                                                 </div>
@@ -308,7 +339,26 @@
                                     <?php endif; ?>
                                 </div>
                                 <br/>
-
+                                <div class="product-page-side-section">
+                                    <h5 class="product-page-side-title">Share This Product</h5>
+                                    <ul class="product-page-share-item">
+                                        <li>
+                                            <a class="fa fa-facebook" href="#"></a>
+                                        </li>
+                                        <li>
+                                            <a class="fa fa-twitter" href="#"></a>
+                                        </li>
+                                        <li>
+                                            <a class="fa fa-pinterest" href="#"></a>
+                                        </li>
+                                        <li>
+                                            <a class="fa fa-instagram" href="#"></a>
+                                        </li>
+                                        <li>
+                                            <a class="fa fa-google-plus" href="#"></a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -524,7 +574,7 @@
                                                 <label>Display name*</label>
                                                 <input type="text" name="display_name" placeholder="Display name"
                                                        id="review_name"
-                                                       value="<?= !is_null($profile) ? (!empty($profile->display_name)) ? $profile->display_name : $profile->first_name . ' ' . $profile->last_name : ''; ?>"
+                                                       value="<?= !is_null($profile) ? (!empty( $profile->display_name)) ? $profile->display_name :  $profile->first_name . ' ' . $profile->last_name : ''; ?>"
                                                        class="form-control" required>
                                             </div>
                                         </div>
@@ -535,13 +585,12 @@
                                                   class="form-control" required
                                                   placeholder="Write your review on this product."></textarea>
                                     </div>
-                                    <?php if (is_null($profile)) : ?>
-                                        <a href="<?= base_url('login'); ?>" class="btn btn-success"
-                                           id="review_submit_button">Post Review</a>
-                                    <?php else : ?>
-                                        <input type="submit" class="btn btn-success" id="review_submit_button"
-                                               value="Post Review">
-                                    <?php endif; ?>
+                                    <?php if(is_null($profile)) : ?>
+                                        <a href="<?= base_url('login'); ?>" class="btn btn-success" id="review_submit_button">Post Review</a>
+                                    <?php else :?>
+                                    <input type="submit" class="btn btn-success" id="review_submit_button"
+                                           value="Post Review">
+                                    <?php endif;?>
                                 </form>
                             </div>
                         </div>
@@ -555,9 +604,7 @@
                                         </ul>
                                     </div>
                                     <p class="comment-user"><strong>Reviewed
-                                            by : </strong> <?= $review['display_name']; ?> <b> on :</b> <span
-                                                class="comment-date"><?= neatDate($review['published_date']); ?></span>
-                                    </p>
+                                            by : </strong> <?= $review['display_name']; ?> <b> on :</b> <span class="comment-date"><?= neatDate($review['published_date']); ?></span> </p>
                                     <p class="comment-title"><strong>Title: </strong><?= $review['title']; ?></p>
                                     <p class="comment-detail"><strong>Content: </strong><?= $review['content']; ?></p>
                                     <hr class="comment-line"/>
@@ -602,12 +649,12 @@
                                             <div class="product-page-qa-question">
                                                 <p class="product-page-qa-text">
                                                     <?= $question->question ?>
-                                                    <?php if ($this->session->userdata('logged_in')) : ?>
-                                                        <a class="product-review-rate pull-right upvote"
-                                                           data-qid="<?= $question->id; ?>" href="javascript:void(0)"
-                                                           title="Find this question helpful?"><i
-                                                                    class="fa fa-thumbs-up"></i><?= ($question->upvotes != 0) ? $question->upvotes : ''; ?>
-                                                        </a>
+                                                    <?php if( $this->session->userdata('logged_in')) : ?>
+                                                    <a class="product-review-rate pull-right upvote"
+                                                       data-qid="<?= $question->id; ?>" href="javascript:void(0)"
+                                                       title="Find this question helpful?"><i
+                                                                class="fa fa-thumbs-up"></i><?= ($question->upvotes != 0 ) ? $question->upvotes : ''; ?>
+                                                    </a>
                                                     <?php endif; ?>
                                                 </p>
                                                 <p class="product-page-qa-meta">asked by <?= $question->display_name ?>
@@ -799,11 +846,7 @@
 
         </div>
     </div>
-    <script type="text/javascript">
-        let product_id = "<?= $product->id;?>";
-        let data = "<?= ($this->session->userdata('logged_in')) ? $profile->email : ""; ?>";
-        let user = "<?= !is_null($profile->id) ? '{$profile->id}' : ''; ?>";
-    </script>
+
     <?php $this->load->view('landing/resources/footer'); ?>
 </div>
 
@@ -811,11 +854,280 @@
 <?php $this->load->view('landing/resources/script'); ?>
 <script src="<?= base_url('assets/plugins/slick/slick.js') ?>"></script>
 <script src="<?= base_url('assets/plugins/eazyzoom/easyzoom.js') ?>"></script>
-<script src="<?= $this->user->auto_version('assets/js/rating.js'); ?>"></script>
+
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+<script type="text/javascript">
+    let product_id = <?= $product;?>;
+    let data = "<?= ($this->session->userdata('logged_in')) ? $profile->email : ""; ?>";
+    let user = "<?= !is_null($profile->id) ? $profile->id : ''; ?>"
+</script>
+<script src="<?= $this->user->auto_version('assets/js/rating.js'); ?>"></script>
 <script>
-    var $easyzoom=$(".easyzoom").easyZoom();$(function(){$(".lazy").Lazy(),$(".prod_description img").each(function(){$(this).addClass("img-responsive"),$(this).attr("Onitshamarket")})});let quantity=$("#quan"),selected_variation_id=$(".variation_id").val(),count=quantity.data("range"),plus=$(".product-page-qty-plus"),minus=$(".product-page-qty-minus");function format_currency(a){return"\u20A6"+a.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g,"$1,")}$(".variation-select").on("change",function(){let a=$(this).children(":selected").data("id"),b=$("#quan");$(".variation_id").val(a),$.ajax({url:base_url+"ajax/check_variation",method:"POST",data:{vid:a,csrf_carrito:csrf_token},success:function(a){$.each(a,function(a,c){c.discount_price?($(".ds-price").html(format_currency(c.discount_price)),$(".dn-price").show(),$(".dn-price").html(format_currency(c.sale_price)),$(".pr_price_hidden").val(c.discount_price)):($(".pr_price_hidden").val(c.sale_price),$(".ds-price").html(format_currency(c.sale_price)),$(".dn-price").hide()),count=1*c.quantity,b.val(1),minus.prop("disabled",!0),plus.prop("disabled",!1)})},error:function(){alert("An error occurred")}})}),$(".variation-option").on("click",function(){if($(".variation-option").removeClass("option-selected"),selected_variation_name=$(this).data("vname"),$(this).hasClass("option-disabled"))notification_message("Sorry this variation is out of stock","fa fa-info-circle","warning");else{let a=$(this).data("discount"),b=$(this).data("price"),c=$(this).data("quantity");"empty"===a?($(".pr_price_hidden").val(b),$(".ds-price").html(format_currency(b)),$(".dn-price").hide()):($(".ds-price").html(format_currency(a)),$(".dn-price").show(),$(".dn-price").html(format_currency(b)),$(".pr_price_hidden").val(a),console.log(format_currency(b))),count=1*c,quantity.val(1),minus.prop("disabled",!0),plus.prop("disabled",!1),selected_variation_id=$(this).data("vid"),$(this).addClass("option-selected")}}),$(".wishlist-cta").on("click",function(){let a=$(this).data("pid");$.ajax({url:base_url+"ajax/favourite",method:"POST",data:{id:a},success:a=>{let b=JSON.parse(a);"remove"===b.action?$(".wishlist-cta").text("Add to Wishlist"):$(".wishlist-cta").text("Remove from Wishlist"),notification_message(b.msg,"fa fa-info-circle",b.status)},error:()=>{notification_message("Sorry an error occurred please try again. ","fa fa-info-circle",error)}})}),$(".add-to-cart").on("click",function(){if(!$(`p.variation-option`).hasClass("option-selected"))return notification_message("Please select a variation.","fa fa-info-circle","error"),!1;let a=$("#quan").val(),b=selected_variation_id,c=$(".product_id").val();$.ajax({url:base_url+"ajax/quick_view_add",method:"POST",data:{product_id:c,variation_id:b,quantity:a},success:()=>{window.location.href=base_url+"cart"},error:()=>{notification_message("Sorry an error occurred while adding to cart, please contact support if problem persist.","fa fa-info-circle","warning")}})}),document.querySelector("#quan").addEventListener("keypress",function(a){(48>a.which||57<a.which)&&a.preventDefault()}),plus.on("click",function(){minus.prop("disabled",!1),quantity.val()>=count&&($("#quantity-text").html("There are only "+count+" item(s) left"),plus.prop("disabled",!0))}),minus.on("click",function(){$("#quantity-text").html(""),plus.prop("disabled",!1),1>=quantity.val()&&minus.prop("disabled",!0)}),quantity.on("input",function(){quantity.val()>count?quantity.val(count):"0"===quantity.val()&&quantity.val(1)}),$(".upvote").on("click",function(){var a=$(this).data("qid");$.ajax({url:base_url+"ajax/upvote",method:"POST",data:{qid:a},success:a=>{let b=JSON.parse(a);notification_message(b.msg,"fa fa-info-circle",b.status)},error:()=>{notification_message("Sorry an error occurred please try again. ","fa fa-info-circle","error")}})}),$("#question_form").on("submit",function(a){a.preventDefault();let b=$("#question").val();var c=$(".qna-btn");c.val("Processing..."),c.removeClass("btn-primary").addClass("btn-default"),c.prop("disabled",!0);let d=c.data("user");""===d?$("#modal_popup").modal("show"):$.ajax({url:base_url+"ajax/ask_a_question",method:"POST",data:{pid:product_id,display_name:d,question:b,data:data},success:a=>{let b=JSON.parse(a);$("#question").val(""),c.prop("disabled",!1),c.val("Ask"),c.removeClass("btn-default").addClass("btn-primary"),notification_message(b.msg,"fa fa-info-circle",b.status)},error:()=>{notification_message("An error occurred while submitting your question. Try again.","fa fa-info-circle","error"),c.prop("disabled",!1),c.val("Ask"),c.removeClass("btn-default").addClass("btn-primary")}})}),$("#form_ask_id").on("submit",function(a){a.preventDefault();let b=$("#question").val();var c=$(".qna-btn");let d=$("#question_display_name").val();data=$("#question_data").val(),$.ajax({url:base_url+"ajax/ask_a_question",method:"POST",data:{pid:product_id,display_name:d,question:b,data:data},success:a=>{let b=JSON.parse(a);$("#modal_popup").modal("hide"),$("#question").val(""),c.prop("disabled",!1),c.value="Ask",c.removeClass("btn-default").addClass("btn-primary"),notification_message(b.msg,"fa fa-info-circle",b.status)},error:()=>{notification_message("An error occurred while submitting your question. Try again.","fa fa-info-circle","error"),c.prop("disabled",!1),c.value="Ask",c.removeClass("btn-default").addClass("btn-primary")}})}),$("#modal_popup").on("hide.bs.modal",function(){let a=$(".qna-btn");a.prop("disabled",!1),a.val("Ask"),a.removeClass("btn-default").addClass("btn-primary")}),$(document).ready(function(){$(".product-slider-for").css({visibility:"visible"}),$(".product-slider-nav").css({visibility:"visible"}),$(".product-slider-for").slick({slidesToShow:1,slidesToScroll:1,arrows:!1,fade:!0,lazyLoad:"ondemand",asNavFor:".product-slider-nav"}),$(".product-slider-nav").slick({slidesToShow:6,slidesToScroll:1,asNavFor:".product-slider-for",dots:!1,infinite:!0,lazyLoad:"ondemand",focusOnSelect:!0})});
+    var $easyzoom = $('.easyzoom').easyZoom();
+    $(function () {
+        $('.lazy').Lazy();
+        $('.prod_description img').each(function() {
+            $(this).addClass('img-responsive');
+            $(this).attr('Onitshamarket');
+        });
+    });
+    let quantity = $('#quan');
+    let selected_variation_id = $('.variation_id').val();
+    let count = quantity.data('range');
+    let plus = $('.product-page-qty-plus');
+    let minus = $('.product-page-qty-minus');
+
+    function format_currency(str) {
+        return '₦' + str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+    }
+
+    $('.variation-select').on('change', function () {
+        let id = $(this).children(":selected").data('id');
+        let quantity = $('#quan');
+        $('.variation_id').val(id);
+        // let count = quantity.data('range');
+        $.ajax({
+            url: base_url + "ajax/check_variation",
+            method: "POST",
+            data: {vid: id, 'csrf_carrito': csrf_token},
+            success: function (response) {
+                $.each(response, function (i, v) {
+                    // change the variation id
+                    if (v.discount_price) {
+                        $('.ds-price').html(format_currency(v.discount_price));
+                        $('.dn-price').show();
+                        $('.dn-price').html(format_currency(v.sale_price));
+                        $('.pr_price_hidden').val(v.discount_price);
+                    } else {
+                        $('.pr_price_hidden').val(v.sale_price);
+                        $('.ds-price').html(format_currency(v.sale_price));
+                        $('.dn-price').hide();
+                    }
+                    count = v.quantity * 1;
+                    quantity.val(1);
+                    minus.prop("disabled", true);
+                    plus.prop("disabled", false);
+                });
+            },
+            error: function (response) {
+                alert('An error occurred')
+            }
+        });
+    });
+
+
+    $('.variation-option').on('click', function () {
+        $('.variation-option').removeClass('option-selected');
+        selected_variation_name = $(this).data('vname');
+        if ($(this).hasClass('option-disabled')) {
+            notification_message('Sorry this variation is out of stock', 'fa fa-info-circle', 'warning')
+        } else {
+            let discount_price = $(this).data('discount');
+            let price = $(this).data('price');
+            let quantity_instance = $(this).data('quantity');
+            if (discount_price !== 'empty') {
+                $('.ds-price').html(format_currency(discount_price));
+                $('.dn-price').show();
+                $('.dn-price').html(format_currency(price));
+                $('.pr_price_hidden').val(discount_price);
+                console.log(format_currency(price));
+            } else {
+                $('.pr_price_hidden').val(price);
+                $('.ds-price').html(format_currency(price));
+                $('.dn-price').hide();
+            }
+            count = quantity_instance * 1;
+            quantity.val(1);
+            minus.prop("disabled", true);
+            plus.prop("disabled", false);
+            selected_variation_id = $(this).data('vid');
+            $(this).addClass('option-selected');
+        }
+    });
+
+
+    $('.wishlist-cta').on('click', function () {
+        let product_id = $(this).data('pid');
+        $.ajax({
+            url: base_url + 'ajax/favourite',
+            method: 'POST',
+            data: {
+                id: product_id
+            },
+            success: response => {
+                let parsed_response = JSON.parse(response);
+                if (parsed_response.action === 'remove') {
+                    $('.wishlist-cta').text('Add to Wishlist');
+                } else {
+                    $('.wishlist-cta').text('Remove from Wishlist');
+                }
+                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+            },
+            error: () => {
+                notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', error);
+            }
+        })
+    });
+
+    $('.add-to-cart').on('click', function () {
+        if (!$(`p.variation-option`).hasClass('option-selected')) {
+            notification_message("Please select a variation.", 'fa fa-info-circle', 'error');
+            return false;
+        }
+        let quantity_instance = $('#quan').val();
+        let variation_id = selected_variation_id;
+        let product_id = $('.product_id').val();
+        $.ajax({
+            url: base_url + 'ajax/quick_view_add',
+            method: 'POST',
+            data: {
+                product_id: product_id,
+                variation_id: variation_id,
+                quantity: quantity_instance
+            },
+            success: () => {
+                window.location.href = base_url + 'cart';
+            },
+            error: () => {
+                notification_message('Sorry an error occurred while adding to cart, please contact support if problem persist.', 'fa fa-info-circle', 'warning');
+            }
+        })
+    });
+
+    document.querySelector("#quan").addEventListener("keypress", function (evt) {
+        if (evt.which < 48 || evt.which > 57) {
+            evt.preventDefault();
+        }
+    });
+    plus.on('click', function () {
+        minus.prop("disabled", false);
+        if (quantity.val() >= count) {
+            $('#quantity-text').html('There are only ' + count + ' item(s) left');
+            plus.prop("disabled", true);
+        }
+    });
+    minus.on('click', function () {
+        $('#quantity-text').html('');
+        plus.prop("disabled", false);
+        if (quantity.val() <= 1) {
+            minus.prop("disabled", true);
+        }
+    });
+    quantity.on('input', function () {
+        if (quantity.val() > count) {
+            quantity.val(count)
+        } else if (quantity.val() === '0') {
+            quantity.val(1)
+        }
+    });
+
+    $('.upvote').on('click', function () {
+        var qid = $(this).data('qid');
+        $.ajax({
+            url: base_url + 'ajax/upvote',
+            method: 'POST',
+            data: {qid: qid},
+            success: response => {
+                let parsed_response = JSON.parse(response);
+                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+            },
+            error: () => {
+                notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', "error");
+            }
+        })
+
+    });
+    $('#question_form').on('submit', function (e) {
+        e.preventDefault();
+        let question = $('#question').val();
+        var btn = $('.qna-btn');
+        btn.val("Processing...");
+        btn.removeClass('btn-primary').addClass('btn-default');
+        btn.prop('disabled', true);
+        let display_name = btn.data('user');
+        if (display_name === "") {
+            $('#modal_popup').modal('show');
+        } else {
+            $.ajax({
+                url: base_url + 'ajax/ask_a_question',
+                method: 'POST',
+                data: {
+                    'pid': product_id,
+                    'display_name': display_name,
+                    'question': question,
+                    'data': data},
+                success: response => {
+                    let parsed_response = JSON.parse(response);
+                    $('#question').val("");
+                    btn.prop('disabled', false);
+                    btn.val("Ask");
+                    btn.removeClass('btn-default').addClass('btn-primary');
+                    notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+                },
+                error: () => {
+                    notification_message('An error occurred while submitting your question. Try again.', 'fa fa-info-circle', "error");
+                    btn.prop('disabled', false);
+                    btn.val("Ask");
+                    btn.removeClass('btn-default').addClass('btn-primary');
+                }
+            })
+        }
+    });
+    $('#form_ask_id').on('submit', function (e) {
+        e.preventDefault();
+        let question = $('#question').val();
+        var btn = $('.qna-btn');
+        let display_name = $('#question_display_name').val();
+        data = $('#question_data').val();
+        $.ajax({
+            url: base_url + 'ajax/ask_a_question',
+            method: 'POST',
+            data: {'pid': product_id, 'display_name': display_name, 'question': question, 'data': data},
+            success: response => {
+                let parsed_response = JSON.parse(response);
+                $('#modal_popup').modal('hide');
+                $('#question').val("");
+                btn.prop('disabled', false);
+                btn.value = "Ask";
+                btn.removeClass('btn-default').addClass('btn-primary');
+                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+            },
+            error: () => {
+                notification_message('An error occurred while submitting your question. Try again.', 'fa fa-info-circle', "error");
+                btn.prop('disabled', false);
+                btn.value = "Ask";
+                btn.removeClass('btn-default').addClass('btn-primary');
+            }
+        })
+    });
+    $('#modal_popup').on('hide.bs.modal', function(){
+        let btn = $('.qna-btn');
+        btn.prop('disabled', false);
+        btn.val("Ask");
+        btn.removeClass('btn-default').addClass('btn-primary');
+    });
+    $(document).ready(function () {
+        $('.product-slider-for').css({"visibility": "visible"});
+        $('.product-slider-nav').css({"visibility": "visible"});
+        $('.product-slider-for').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            fade: true,
+            lazyLoad: 'ondemand',
+            asNavFor: '.product-slider-nav'
+        });
+        $('.product-slider-nav').slick({
+            slidesToShow: 6,
+            slidesToScroll: 1,
+            asNavFor: '.product-slider-for',
+            dots: false,
+            infinite: true,
+            lazyLoad: 'ondemand',
+            focusOnSelect: true
+        });
+    });
 </script>
 </body>
 </html>

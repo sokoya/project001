@@ -40,7 +40,7 @@ $categories = $this->db->query($category_cache)->result();
                                                 if ($main_category):
                                                     foreach ($main_category as $cat) :
                                                         ?>
-                                                        <div class="col-md-4" style="margin-right: -30px;">
+                                                        <div class="col-md-4">
                                                             <h5 class="custom-menu-category-drop"><a
                                                                         href="<?= base_url('catalog/' . $cat->slug . '/'); ?>"><?= $cat->name; ?></a>
                                                             </h5>
@@ -63,7 +63,7 @@ $categories = $this->db->query($category_cache)->result();
                                                 <img class="nav-category-img"
                                                      src="https://backend.konga.com/media/customcmsmenu/item/Computers_Accessories_1.png"
                                                      alt="<?= $category->name; ?>" title="<?= $category->name; ?>"
-                                                     style="right: -15px;"/>
+                                                     style="right: -5px;"/>
                                             </div>
                                         </div>
 
@@ -88,7 +88,6 @@ $categories = $this->db->query($category_cache)->result();
                 </ul>
             </div>
             <button class="fa fa-search navbar-main-search-submit" type="submit" ></button>
-<!--            <button class="fa fa-search navbar-main-search-submit" type="submit" ></button>-->
         </form>
         <ul class="nav navbar-nav navbar-mob-item-left" style="padding:-2px; margin-left: 10px">
             <li class="dropdown">

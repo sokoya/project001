@@ -1,6 +1,79 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
 <style type="text/css">
-    .carrito-checkbox,.checkmark,.feature-attribute:hover{cursor:pointer}.product{min-height:unset!important}.carrito-checkbox{display:block;position:relative;padding-left:25px;margin-bottom:10px;font-size:14px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.carrito-checkbox input{position:absolute;opacity:0;cursor:pointer}.checkmark{position:absolute;top:0;left:0;padding:3px;margin-top:2px;height:15px;width:15px;border:1px solid;background-color:#fff}.carrito-checkbox:hover input~.checkmark{border-color:#74c68366}.carrito-checkbox input:checked~.checkmark{background-color:#74c683}; .checkmark:after{content:"";position:absolute;display:none}.carrito-checkbox input:checked~.checkmark:after{display:block;color:#fff}.carrito-checkbox .checkmark:after{left:9px;top:5px;width:5px;height:10px;border:solid #fff;border-width:0 3px 3px 0;-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg)}
+    .feature-attribute:hover {
+        cursor: pointer;
+    }
+
+    .product {
+        min-height: unset !important;
+    }
+
+    .carrito-checkbox {
+        display: block;
+        position: relative;
+        padding-left: 25px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        font-size: 14px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .carrito-checkbox input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .checkmark {
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 3px;
+        margin-top: 2px;
+        height: 15px;
+        width: 15px;
+        border: solid 1px #74c68366;;
+        background-color: #fff;
+    }
+
+    .carrito-checkbox:hover input ~ .checkmark {
+        border-color: #74c68366;
+    }
+
+    .carrito-checkbox input:checked ~ .checkmark {
+        background-color: #74c683;
+    }
+
+    ;
+
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .carrito-checkbox input:checked ~ .checkmark:after {
+        display: block;
+        color: white;
+    }
+
+    /* Style the checkmark/indicator */
+    .carrito-checkbox .checkmark:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
 </style>
 </head>
 <body>
@@ -304,7 +377,113 @@
         });
     }
 
-    $(".wishlist-btn").on("click",function(){let a=$(this).data("pid"),b=$(this);$.ajax({url:base_url+"ajax/favourite",method:"POST",data:{id:a},success:a=>{let c=JSON.parse(a);"remove"===c.action?(b.removeClass("category-favorite-active").addClass(".category-favorite"),b.find("i").attr("title","Add to your wishlist")):(b.removeClass("category-favorite").addClass(".category-favorite-active"),b.find("i").attr("title","Remove from your wishlist")),notification_message(c.msg,"fa fa-info-circle",c.status)},error:()=>{notification_message("Sorry an error occurred please try again. ","fa fa-info-circle",error)}})}),$(document).ready(function(){function a(a){history.replaceState({current_url:a},"Onitshamarket",a)}function b(b){$(".cat-notify").load(`${b} .cat-notify`),$(c).load(`${b} #category_body`,function(d,e,f){if("error"===e){alert("Sorry but there was an error: "+f.status+" "+f.statusText),window.location=current_url}$(".lazy").Lazy({scrollDirection:"vertical",effect:"fadeIn",visibleOnly:!0}),$(".product-quick-view-btn").on("click",get_view),a(b),$("#processing").hide(),$(c).show()})}let c=$("#category_body"),d="",e="";$(".filter").change(function(){if($("input[name=filterset]").is(":checked")){let a={};d="",e="",$(c).hide(),$("#processing").show();let f=$("input[name=filterset]:checked");f.each(function(){let c=$(this).data("value"),f=$(this).data("type");a[f]?-1!==jQuery.inArray(c,a[f])||a[f].push(c):a[f]=[c],d="",jQuery.each(a,function(b){e="",jQuery.each(a[b],function(a,b){e+=""===e?b:","+b}),d+=""===d?`?${b}=${e}`:`&${b}=${e}`}),b(d)})}else b(current_url)})});
+    $('.wishlist-btn').on('click', function () {
+        let product_id = $(this).data('pid');
+        let _this = $(this);
+        $.ajax({
+            url: base_url + 'ajax/favourite',
+            method: 'POST',
+            data: {
+                id: product_id
+            },
+            success: response => {
+                let parsed_response = JSON.parse(response);
+                if (parsed_response.action === 'remove') {
+                    _this.removeClass('category-favorite-active').addClass('.category-favorite');
+                    _this.find('i').attr('title', 'Add to your wishlist');
+                    // _this.find('i').removeClass('fa-heart', function () {
+                    //     $(this).addClass('fa-heart-o');
+                    // })
+                } else {
+                    _this.removeClass('category-favorite').addClass('.category-favorite-active');
+                    _this.find('i').attr('title', 'Remove from your wishlist');
+                    // _this.find('i').removeClass('fa-heart-o', function () {
+                    //     $(this).addClass('fa-heart');
+                    // })
+                }
+                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+            },
+            error: () => {
+                notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', error);
+            }
+        })
+    });
+
+    $(document).ready(function () {
+        let _category_body = $('#category_body');
+
+        function doReplaceState(url) {
+            let state = {current_url: url},
+                title = "Onitshamarket";
+            history.replaceState(state, title, url);
+        }
+
+        function load_page(url) {
+            $('.cat-notify').load(`${url} .cat-notify`);
+            $(_category_body).load(`${url} #category_body`, function (response, status, xhr) {
+                if (status === "error") {
+                    let msg = "Sorry but there was an error: ";
+                    alert(msg + xhr.status + " " + xhr.statusText);
+                    window.location = current_url;
+                }
+                $('.lazy').Lazy({
+                    scrollDirection: 'vertical',
+                    effect: 'fadeIn',
+                    visibleOnly: true
+                });
+                $('.product-quick-view-btn').on('click', get_view);
+                doReplaceState(url);
+
+                $('#processing').hide();
+                $(_category_body).show();
+            });
+        }
+
+        let url = '';
+        let filter_string = '';
+        $('.filter').change(function () {
+            if ($('input[name=filterset]').is(':checked')) {
+                let filter_list = {};
+                url = '';
+                filter_string = '';
+                $(_category_body).hide();
+                $('#processing').show();
+                let items = $('input[name=filterset]:checked');
+
+                items.each(function () {
+                    let value = $(this).data('value');
+                    let key = $(this).data('type');
+                    if (filter_list[key]) {
+                        if (jQuery.inArray(value, filter_list[key]) !== -1) {
+                        } else {
+                            filter_list[key].push(value)
+                        }
+                    } else {
+                        filter_list[key] = [value];
+                    }
+                    url = '';
+                    jQuery.each(filter_list, function (obj) {
+                        filter_string = '';
+                        jQuery.each(filter_list[obj], function (id, values) {
+                            if (filter_string === '') {
+                                filter_string += values;
+                            } else {
+                                filter_string += ',' + values;
+                            }
+                        });
+                        if (url === '') {
+                            url += `?${obj}=${filter_string}`
+                        } else {
+                            url += `&${obj}=${filter_string}`
+                        }
+                    });
+                    load_page(url);
+                });
+            } else {
+                load_page(current_url);
+            }
+        });
+    });
 </script>
 </body>
 </html>
