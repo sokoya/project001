@@ -800,9 +800,9 @@
         </div>
     </div>
     <script type="text/javascript">
-        product_id = <?= $product->id;?>;
-        data = "<?= ($this->session->userdata('logged_in')) ? $profile->email : ""; ?>";
-        user = "<?= !is_null($profile->id) ? $profile->id : ''; ?>"
+        let product_id = "<?= $product->id;?>";
+        let data = "<?= ($this->session->userdata('logged_in')) ? $profile->email : ""; ?>";
+        let user = "<?= !is_null($profile->id) ? '{$profile->id}' : ''; ?>";
     </script>
     <?php $this->load->view('landing/resources/footer'); ?>
 </div>

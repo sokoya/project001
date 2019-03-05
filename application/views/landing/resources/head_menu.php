@@ -15,7 +15,7 @@ $categories = $this->db->query($category_cache)->result();
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="<?= base_url() ?>">
-                <img src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>" style="width: 100px" id="navbar-img"
+                <img src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>" style="width: 150px" id="navbar-img"
                      alt="<?= lang('app_name'); ?>" title="<?= lang('app_name'); ?>"/>
             </a>
         </div>
@@ -40,7 +40,7 @@ $categories = $this->db->query($category_cache)->result();
                                                 if ($main_category):
                                                     foreach ($main_category as $cat) :
                                                         ?>
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-4" style="margin-right: -30px;">
                                                             <h5 class="custom-menu-category-drop"><a
                                                                         href="<?= base_url('catalog/' . $cat->slug . '/'); ?>"><?= $cat->name; ?></a>
                                                             </h5>
@@ -63,7 +63,7 @@ $categories = $this->db->query($category_cache)->result();
                                                 <img class="nav-category-img"
                                                      src="https://backend.konga.com/media/customcmsmenu/item/Computers_Accessories_1.png"
                                                      alt="<?= $category->name; ?>" title="<?= $category->name; ?>"
-                                                     style="right: -10px;"/>
+                                                     style="right: -15px;"/>
                                             </div>
                                         </div>
 
@@ -90,7 +90,7 @@ $categories = $this->db->query($category_cache)->result();
             <button class="fa fa-search navbar-main-search-submit" type="submit" ></button>
 <!--            <button class="fa fa-search navbar-main-search-submit" type="submit" ></button>-->
         </form>
-        <ul class="nav navbar-nav navbar-mob-item-left" style="padding:-2px; margin-left: 40px">
+        <ul class="nav navbar-nav navbar-mob-item-left" style="padding:-2px; margin-left: 10px">
             <li class="dropdown">
                 <a class="navbar-item-top cart-cs"
                    data-count="<?= ($this->cart->total_items() == 0) ? '' : $this->cart->total_items(); ?>"
