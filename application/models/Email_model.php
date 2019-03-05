@@ -172,7 +172,7 @@ class Email_model extends CI_Model {
        style="border-collapse: collapse;border: 1px solid #cccccc;">
     <tr>
         <td align="center" style="padding: 10px 0 10px 0; display: block">
-            <img src="https://www.onitshamarket.com/assets/img/newlogo.png" alt="Onitsha market logo" width="200"
+            <img src="https://www.onitshamarket.com/assets/img/onitshamarket-logo.png" alt="Onitsha market logo" width="200"
                  height="44"/>
         </td>
     </tr>';
@@ -341,7 +341,7 @@ class Email_model extends CI_Model {
        style="border-collapse: collapse;border: 1px solid #cccccc;">
     <tr>
         <td align="center" style="padding: 10px 0 10px 0; display: block">
-            <img src="https://www.onitshamarket.com/assets/img/newlogo.png" alt="Onitsha market logo" width="200"
+            <img src="https://www.onitshamarket.com/assets/img/onitshamarket-logo.png" alt="Onitsha market logo" width="200"
                  height="44"/>
         </td>
     </tr>';

@@ -141,10 +141,10 @@
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox"/>
-                                        I agree to <?= lang('app_name'); ?> <a href="<?= base_url('pages/terms'); ?>"
-                                                                               target="_blank" style="color:#0ac392;">Terms
+                                        I agree to <?= lang('app_name'); ?> <a style="color:#009848;" href="<?= base_url('pages/terms'); ?>"
+                                                                               target="_blank" >Terms
                                             & Conditions</a> | <a href="<?= base_url('pages/privacy'); ?>"
-                                                                  target="_blank" style="color:#0ac392;">
+                                                                  target="_blank" style="color:#009848">
                                             Policy.</a></label>
                                 </div>
                             </div>
@@ -155,6 +155,11 @@
                             <a href="<?= base_url(lang('login_link')); ?>"
                                class="panel-bordered-primary col-md-12 col-xs-12 text-center" style="margin-top:-30px;">Already
                                 Have An Account?</a>
+                            <br />
+                            <p class="text-center">
+                                <a style="text-decoration: none; color:#009848" href="<?= base_url(); ?>">Go back to onitshamarket.com</a>
+                            </p>
+
                         </div>
                     </div>
                 </div>

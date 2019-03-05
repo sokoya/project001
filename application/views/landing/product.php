@@ -182,7 +182,7 @@
                                         </p>
                                         <p class="text-sm text-uppercase">
                                             <strong>Seller : </strong><a href="#" id="pr-seller">
-                                                <?= ucwords($product->first_name . ' ' . $product->last_name); ?>
+                                                <?= ucwords($product->legal_company_name); ?>
                                             </a>
                                         </p>
                                     </div>

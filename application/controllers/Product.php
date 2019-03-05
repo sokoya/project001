@@ -20,8 +20,6 @@ class Product extends MY_Controller
 		// sanitize
 		if (!is_numeric(cleanit($index))) redirect(base_url());
 		$page_data['product'] = $this->product->get_product($index);
-
-//		var_dump($page_data['product'] ); exit;
 		$page_data['var'] = $this->product->get_variation($index);
 		$page_data['variations'] = $this->product->get_variations($index);
 		$page_data['galleries'] = $this->product->get_gallery($index);
