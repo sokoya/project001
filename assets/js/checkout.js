@@ -45,7 +45,7 @@ $('.continue-btn').on('click', function (e) {
                     }, 3000);
                     // window.location.href = base_url + "checkout/stripe";
                     window.location.href = base_url + "checkout/interswitch/webpay/";
-                }else{
+                } else {
                     window.location.href = base_url;
                 }
             }
@@ -92,6 +92,13 @@ $('.create-address-btn').on('click', function (e) {
                     $('.billing-address').on('click', get_updates);
                     $('.delivery-address').on('click', get_updates);
                 });
+                show_page = page => {
+                    $('#register_address').hide();
+                    $('#pickup_address').hide();
+                    $('#delivery_address').hide();
+                    $(`#${page}`).show();
+                };
+
             } else {
                 $('#processing').hide();
                 $('#status').html(`<p class="alert alert-danger">${response.msg}</p>`).slideDown('fast').delay(3000).slideUp('slow');
@@ -182,6 +189,7 @@ function get_pickup_updates() {
     $('.delivery-warning').text(`You selected our ${pickup_address} pickup address.`);
     setTimeout(finish_loading, 420);
 }
+
 /*
 * Get updates for billing address
 * */
