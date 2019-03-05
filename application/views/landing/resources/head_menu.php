@@ -88,6 +88,7 @@ $categories = $this->db->query($category_cache)->result();
                 </ul>
             </div>
             <button class="fa fa-search navbar-main-search-submit" type="submit" ></button>
+<!--            <button class="fa fa-search navbar-main-search-submit" type="submit" ></button>-->
         </form>
         <ul class="nav navbar-nav navbar-mob-item-left" style="padding:-2px; margin-left: 40px">
             <li class="dropdown">

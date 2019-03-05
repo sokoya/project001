@@ -59,6 +59,7 @@
 	<meta name="google-site-verification" content="xGjxCwvClqtUIevfyrQ-HWU7OcjspMEVmXMAPcpzz7Y"/>
 	<style>
 		body { font-family: 'Oxygen', sans-serif !important; }
+        .navbar-main-search-submit{border: none}
 		.mgt_drop_menu > li { height: 36px !important; line-height: 48px !important; }
 		.grey { color: grey; }
 		.banner-category { box-shadow: none !important; background: transparent !important; }
