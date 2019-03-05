@@ -23,7 +23,7 @@ class Resetpassword extends MY_Controller {
                 $this->session->set_flashdata('error_msg', '<strong>Please fix the error</strong> <br />' . validation_errors());
             }else{
                 $email = $this->input->post('email');
-                $user = $this->user->get_row('users', 'id, first_name', "email = '$email'");
+                $user = $this->user->get_row('users', 'id, first_name, last_name', "email = '$email'");
                 if( $user ){
                     $data['code'] = $code = $this->user->generate_code( 'users', 'code');
                     if( $this->user->update_data("{$user->id}", $data, 'users')) {
@@ -31,7 +31,7 @@ class Resetpassword extends MY_Controller {
                         $email_array = array(
                             'email' => $email,
                             'reset_link' => base_url('resetpassword/activate?token='.$code),
-                            'recipent' => 'Hello '
+                            'recipent' => 'Hello ' .ucwords($user->first_name .' ' . $user->last_name)
                         );
                         try {
                             $u = $this->email->reset_password( $email_array);
@@ -72,6 +72,7 @@ class Resetpassword extends MY_Controller {
         }
         redirect('resetpassword');
     }
+
 
     public function reset_password(){
         $page_data['title'] = 'Change Password';

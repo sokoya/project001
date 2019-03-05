@@ -315,9 +315,9 @@
             <!--Contact Info -->
             <div class="col-md-3">
                 <p>
-                <h5><b>Lagos Office (Seller Training Center)</b></h5><br/>
+                <h5><b>Lagos Office (Seller Training Centre)</b></h5><br/>
                 <i class="fa fa-home"></i> Address: 530A Aina Akingbala Street, Omole Phase 2, Ikeja. Lagos State, Nigeria.<br>
-                <i class="fa fa-phone"></i> Tel: +23412345678<br>
+                <i class="fa fa-phone"></i> Tel: +234816148422<br>
                 <i class="fa fa-email"></i> Tel: lagos@onitshamarket.com<br>
                 <i class="fa fa-map-marker"></i> Monday to Saturday<br>
                 <i class="fa fa-clock-o"></i> Hours: 09:00am to 05:00pm
@@ -325,7 +325,7 @@
             </div>
             <div class="col-md-3">
                 <p>
-                <h5><b>Abuja Office (Customer Experience Center)</b></h5><br/>
+                <h5><b>Abuja Office (Customer Experience Centre)</b></h5><br/>
                 <i class="fa fa-home"></i> Address: 10, Street name. FCT Abuja, Nigeria.<br>
                 <i class="fa fa-phone"></i> Tel: +23412345678<br>
                 <i class="fa fa-email"></i> Tel: abuja@onitshamarket.com<br>
@@ -335,7 +335,7 @@
             </div>
             <div class="col-md-3">
                 <p>
-                <h5><b>Asaba Office (Customer Center)</b></h5><br/>
+                <h5><b>Asaba Office (Customer Centre)</b></h5><br/>
                 <i class="fa fa-home"></i> Address: 104 Okpanam Road, Opp. Legislative Quarters Asaba, Delta State, Nigeria<br>
                 <i class="fa fa-phone"></i> Tel: +23412345678<br>
                 <i class="fa fa-email"></i> Tel: asaba@onitshamarket.com<br>
@@ -345,7 +345,7 @@
             </div>
             <div class="col-md-3">
                 <p>
-                <h5><b>Aba Office (Distributor Center)</b></h5><br/>
+                <h5><b>Aba Office (Distributor Centre)</b></h5><br/>
                 <i class="fa fa-home"></i> Address: 10, Street Name, Aba, Abia State<br>
                 <i class="fa fa-phone"></i> Tel: +23412345678<br>
                 <i class="fa fa-email"></i> Tel: aba@onitshamarket.com<br>

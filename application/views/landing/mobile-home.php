@@ -71,6 +71,7 @@
                     <a style="color: #0b0b0b;" href="<?= base_url('catalog/' . $category->slug . '/'); ?>">
                         <img class="cat_img"
                              src="<?= base_url('assets/img/cat_icons/028-smartphones.png'); ?>"
+
                              alt="Shop for <?= $category->name; ?>">
                         <span style="font-size:10px;margin-bottom:auto;"><?= $category->name; ?></span>
                     </a>
@@ -82,7 +83,7 @@
     <?php foreach ($category_listing as $listing) :
         $products = $this->product->randomproducts((int)$listing->category_id, 12);
         ?>
-        <div class="gap_small"></div>
+        <div class="gap-small"></div>
         <div class="container">
             <h5>Top Selling <span style="color:#575745"><a
                             href="<?= base_url('catalog/' . $listing->slug . '/'); ?>"><?= $listing->name ?></a></span>
@@ -112,7 +113,7 @@
                 <?php endforeach; ?>
             </div>
         </div>
-        <div class="gap_small"></div>
+        <div class="gap-small"></div>
         <div class="home_banner container">
             <img src="<?= base_url('assets/img/home/banner2.png'); ?> " class="img-responsive">
         </div>
