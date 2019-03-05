@@ -23,16 +23,12 @@
                     </div>
                     <div class="col-md-3">
                         <section class="widget widget-links widget-light-skin">
-                            <h3 class="widget-title-sm foot-link">Market</h3>
+                            <h3 class="widget-title-sm foot-link">Top 10 markets</h3>
                             <ul style="margin-left: -40px;">
                                 <li><a href="#">Onitsha Market, Anambra</a></li>
-                                <li><a href="#">Top Brands</a></li>
                                 <li><a href="#">Balogun Market, Lagos</a></li>
-                                <li><a href="#">Top Sellers</a></li>
                                 <li><a href="#">Ariaria Int'l Market, Abia</a></li>
-                                <li><a href="#">Special Offers</a></li>
                                 <li><a href="#">Alaba Int'l Market, Lagos</a></li>
-                                <li><a href="#">Outlets</a></li>
                                 <li><a href="#">Idumota Market, Lagos</a></li>
                                 <li><a href="#">Kurmi Market, Kano</a></li>
                                 <li><a href="#">Ogbete Market, Enugu</a></li>
@@ -54,6 +50,8 @@
                                 <li><a href="#">Registrations</a></li>
                                 <li><a href="#">Product Accessibility</a></li>
                                 <li><a href="#">Seller's Guide</a></li>
+                                <li><a href="#">Top Brands</a></li>
+                                <li><a href="#">Top Sellers</a></li>
                                 <li><a href="#">Environmental Information</a></li>
                             </ul>
                         </section>
