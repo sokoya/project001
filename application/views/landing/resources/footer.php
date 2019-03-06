@@ -151,9 +151,8 @@
                                 href="<?= base_url('pages/agreement'); ?>">Agreement</a> | <a
                                 title="Terms and condition"
                                 href="<?= base_url('pages/privacy'); ?>">Privacy Policy</a> |
-                        <a title="Sitemap" href="https://www.onitshamarket.com/sitemap.xml">Site
-                            Map </a> | <a title="Become a seller" target="_blank"
-                                          href="https://seller.onitshamarket.com">Become a Seller</a></p>
+                        <a title="Become a seller" target="_blank"
+                           href="https://seller.onitshamarket.com">Become a Seller</a></p>
                 </div>
             </div>
         </div>
