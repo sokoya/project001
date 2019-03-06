@@ -59,10 +59,9 @@ $categories = $this->db->query($category_cache)->result();
                                                     <?php endforeach; endif; ?>
                                             </div>
                                             <div class="">
-                                                <!-- Konga image is used here for development-->
                                                 <img class="nav-category-img"
                                                      src="<?= CATEGORY_IMAGE_PATH . $categories->image; ?>"
-                                                     alt="" title="<?= $category->name; ?>"
+                                                     alt=" " title="<?= $category->name; ?>"
                                                      style="right: -5px;"/>
                                             </div>
                                         </div>
