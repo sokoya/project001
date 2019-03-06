@@ -497,7 +497,8 @@ hr {
     position: absolute;
     display: block;
     content: '\f105';
-    font-family: 'FontAwesome';
+    font-family: 'Font Awesome\ 5 Free';
+    font-weight: 900; /* Fix version 5.0.9 */
     top: 0;
     right: 0;
     width: 40px;
@@ -1564,17 +1565,20 @@ hr {
 
 .cateogry-filters-list > li + li:before {
     content: '\f105';
-    font-family: 'FontAwesome';
+    font-family: 'Font Awesome\ 5 Free';
+    font-weight: 900; /* Fix version 5.0.9 */;
 }
 
 .tree-root:before {
     content: '\f107';
-    font-family: 'FontAwesome';
+    font-family: 'Font Awesome\ 5 Free';
+    font-weight: 900; /* Fix version 5.0.9 */;
 }
 
 .page-breadcrumb > li + li:before {
     content: '\f105';
-    font-family: 'FontAwesome';
+    font-family: 'Font Awesome\ 5 Free';
+    font-weight: 900; /* Fix version 5.0.9 */;
 }
 
 .page-breadcrumb > li.active {
@@ -2159,7 +2163,8 @@ hr {
     left: 0;
     top: 0;
     content: '\f040';
-    font-family: 'FontAwesome';
+    font-family: 'Font Awesome\ 5 Free';
+    font-weight: 900; /* Fix version 5.0.9 */;
     position: absolute;
     width: 20px;
     height: 20px;
@@ -4930,7 +4935,8 @@ product-review-rate:visited {
 .i-check:before,
 .i-radio:before {
     content: '\f00c';
-    font-family: 'FontAwesome';
+    font-family: 'Font Awesome\ 5 Free';
+    font-weight: 900; /* Fix version 5.0.9 */;
     -webkit-transition: 0.3s;
     -moz-transition: 0.3s;
     -o-transition: 0.3s;
@@ -6984,7 +6990,8 @@ undefinedundefined.owl-height {
 }
 
 .owl-nav-out .owl-nav div:before {
-    font-family: 'FontAwesome';
+    font-family: 'Font Awesome\ 5 Free';
+    font-weight: 900; /* Fix version 5.0.9 */;
 }
 
 .owl-nav-out .owl-nav div.owl-next {
