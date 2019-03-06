@@ -4,7 +4,7 @@
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="<?= base_url() ?>">
-                <img src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>" id="navbar-img"
+                <img style="width: 110px;" src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>" id="navbar-img"
                      alt="<?= lang('app_name'); ?>" title="<?= lang('app_name'); ?>"/>
             </a>
         </div>

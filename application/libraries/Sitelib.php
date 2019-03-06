@@ -16,7 +16,8 @@ class Sitelib {
             "transactionreference"  =>  $data['txn_ref'],
             "amount"    =>  $data['amount']
         );
-        $thash = INTERSWITCH_PRODUCT_ID.$data['txn_ref'].INTERSWITCH_MAC_KEY;
+        // $hash = hash('SHA512', $txn_ref.INTERSWITCH_PRODUCT_ID.INTERSWITCH_PAY_ITEM_ID.$amt.$redirect_url.INTERSWITCH_MAC_KEY) ;
+        $thash = hash('SHA512', INTERSWITCH_PRODUCT_ID.$data['txn_ref'].INTERSWITCH_MAC_KEY);
         $ponmo = http_build_query($parameters);
         $url = INTERSWITCH_RESPONSE_URL .'?'. $ponmo; // json
         $host = INTERSWITCH_HOST_URL;
@@ -30,6 +31,7 @@ class Sitelib {
             "Connection: keep-alive",
             "Hash: " . $thash
         );
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
