@@ -59,10 +59,9 @@ $categories = $this->db->query($category_cache)->result();
                                                     <?php endforeach; endif; ?>
                                             </div>
                                             <div class="">
-                                                <!-- Konga image is used here for development-->
                                                 <img class="nav-category-img"
-                                                     src="https://backend.konga.com/media/customcmsmenu/item/Computers_Accessories_1.png"
-                                                     alt="<?= $category->name; ?>" title="<?= $category->name; ?>"
+                                                     src="<?= ( $category ) ?  CATEGORY_IMAGE_PATH . $category->image : ''; ?>"
+                                                     alt="<?= ( $category ) ? $category->name : '' ; ?>" title="<?= ( $category ) ? $category->name : '' ; ?>"
                                                      style="right: -5px;"/>
                                             </div>
                                         </div>
@@ -127,17 +126,7 @@ $categories = $this->db->query($category_cache)->result();
                             <a href="<?= base_url('account/saved'); ?>"><span class="fa fa-save grey"></span>&nbsp;My
                                 Saved Items</a>
                         </li>
-                        <!--                            --><?php //if ($profile->is_seller !== 'false') : ?>
-                        <!--                                <li>-->
-                        <!--                                    <a href="--><? //= base_url('seller/overview'); ?><!--"><span-->
-                        <!--                                                class="fa fa-dashboard grey"></span>&nbsp;Seller Dashboard</a>-->
-                        <!--                                </li>-->
-                        <!--                            --><?php //else : ?>
-                        <!--                                <li>-->
-                        <!--                                    <a href="--><? //= base_url('seller/'); ?><!--"><span class="fa fa-user-plus grey"></span>&nbsp;Become-->
-                        <!--                                        A Seller</a>-->
-                        <!--                                </li>-->
-                        <!--                            --><?php //endif; ?>
+
                         <li>
                             <a href="<?= base_url('account/help'); ?>"><span
                                         class="fa fa-question-circle grey"></span>&nbsp;Help</a>
