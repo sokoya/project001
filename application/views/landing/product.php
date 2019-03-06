@@ -182,7 +182,7 @@
                                         </p>
                                         <p class="text-sm text-uppercase">
                                             <strong>Seller : </strong><a href="#" id="pr-seller">
-                                                <?= ucwords($product->first_name . ' ' . $product->last_name); ?>
+                                                <?= ucwords($product->legal_company_name); ?>
                                             </a>
                                         </p>
                                     </div>
@@ -867,9 +867,9 @@
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script type="text/javascript">
-    let product_id = <?= $product;?>;
-    let data = "<?= ($this->session->userdata('logged_in')) ? $profile->email : ""; ?>";
-    let user = "<?= !is_null($profile->id) ? $profile->id : ''; ?>"
+    let product_id = <?= $product->id;?>;
+    let data = "<?= ($this->session->userdata('logged_in')) ? $profile->email : ''; ?>";
+    let user = "<?= !is_null($profile) ? $profile->id : '' ?>";
 </script>
 <script src="<?= $this->user->auto_version('assets/js/rating.js'); ?>"></script>
 <script>

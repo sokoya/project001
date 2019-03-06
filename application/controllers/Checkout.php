@@ -302,6 +302,8 @@ class Checkout extends MY_Controller
         $token = $this->input->get('t', true);
         $txn_ref = $this->session->userdata('txn_ref');
         $is_token = simple_crypt( $token, 'd');
+
+
 	    if( $txn_ref && ( $txn_ref == $is_token ) ) {
             // Check the ResponseCode
             $amount = $this->session->userdata('amount');
@@ -416,5 +418,6 @@ class Checkout extends MY_Controller
             redirect(base_url());
         }
     }
+
 
 }

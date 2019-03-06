@@ -15,7 +15,7 @@ $categories = $this->db->query($category_cache)->result();
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="<?= base_url() ?>">
-                <img src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>" style="width: 150px" id="navbar-img"
+                <img src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>" style="width: 110px" id="navbar-img"
                      alt="<?= lang('app_name'); ?>" title="<?= lang('app_name'); ?>"/>
             </a>
         </div>

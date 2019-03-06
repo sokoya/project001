@@ -41,6 +41,8 @@ class Login extends MY_Controller{
                     'password' => $this->input->post('loginpassword')
                 );
 
+//                var_dump( $data ); exit;
+
                 $user = $this->user->login($data);
                 if( !$user ) {
                     $this->session->set_flashdata('error_msg','Sorry! Incorrect username or password.');

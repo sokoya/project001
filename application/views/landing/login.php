@@ -127,6 +127,9 @@
                                    style="margin-left:5px;"> Create an
                                     account</a>
                             </div>
+                            <p class="text-center">
+                                <a style="text-decoration: none; color: #009848" href="<?= base_url(); ?>">Go back to onitshamarket.com</a>
+                            </p>
                         </div>
                     </div>
                 </div>

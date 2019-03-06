@@ -42,3 +42,8 @@ application/views/landing/np
 node_modules
 application/config/database.php
 application/config/database.php
+
+## LIVE KEYS
+application/production/database.php
+application/production/config.php
+application/production/database.php

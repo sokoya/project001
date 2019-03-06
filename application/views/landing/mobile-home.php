@@ -118,7 +118,11 @@
             <img src="<?= base_url('assets/img/home/banner2.png'); ?> " class="img-responsive">
         </div>
     <?php endforeach; ?>
-
+    <div class="gap">
+        <div class="container">
+            <p class="text-center">Onitshamarket.com is a dynamic e-commerce platform that is designed to provide the most convenient experience for buying and selling in Nigeria. Beyond online shop; our unique focus of creating a virtual mall that interfaces with the largest market in Africa gives us an advantage over the competition. <br /> Giving customers the benefit of buying and selling quality and genuine goods from the biggest market in Africa, in the comfort of wherever they may be and having it delivered to them within a 24hrs lead time. </p>
+        </div>
+    </div>
     <div class="container" style="padding:40px;">
         <hr class="hr-text" data-content="Why Choose Us">
         <div class="owl-carousel owl-loaded owl-nav-out" data-options='{"items":5,"loop":true,"nav":true}'>
@@ -198,6 +202,8 @@
             </div>
         </div>
     </div>
+
+
     <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
     <?php $this->load->view('landing/resources/mobile/mobile-script'); ?>
     <script src="<?= base_url('assets/plugins/slick/slick.js') ?>"></script>

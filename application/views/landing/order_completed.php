@@ -199,6 +199,9 @@
                                  data-holder-rendered="true"/>
                         </a>
                     </div>
+                    <p class="text-center">
+                        <a style="text-decoration: none; color:#009848" href="<?= base_url(); ?>">Go back to onitshamarket.com</a>
+                    </p>
                     <div class="col-xs-12 col-md-4 "></div>
                 </div>
             </header>
