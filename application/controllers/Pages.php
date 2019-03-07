@@ -14,20 +14,21 @@ class Pages extends MY_Controller {
     public function terms(){
         $page_data['page'] = 'terms';
         $page_data['title'] = "Terms &amp; Conditions";
-        $page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')) );
+        $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
+        $page_data['terms'] = $this->user->get_row('page_contents', 'content, date_modified', "type = 'terms")->terms;
         $this->load->view('landing/tnc', $page_data);
     }
     public function privacy(){
         $page_data['page'] = 'privacy';
         $page_data['title'] = "Privacy &amp; Security";
-        $page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')) );
-//        $page_data['privacy'] = $this->user->get_row('page_contents', 'content', "(type='privacy')")->content;
+        $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
+        $page_data['privacy'] = $this->user->get_row('page_contents', 'content', "(type='privacy')")->content;
         $this->load->view('landing/privacy', $page_data);
     }
     public function contact(){
         $page_data['page'] = 'contact';
         $page_data['title'] = "Contact";
-        $page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')) );
+        $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
         $this->load->view('landing/contact', $page_data);
     }
 
@@ -35,7 +36,8 @@ class Pages extends MY_Controller {
     public function agreement(){
         $page_data['page'] = 'agreement';
         $page_data['title'] = "Registration Agreement";
-        $page_data['profile'] = $this->user->get_profile( base64_decode($this->session->userdata('logged_id')) );
+        $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
+        $page_data['privacy'] = $this->user->get_row('page_contents', 'content', "(type='agreement')")->content;
         $this->load->view('landing/agreement', $page_data);
     }
 
