@@ -40,7 +40,7 @@ $categories = $this->db->query($category_cache)->result();
                                                 if ($main_category):
                                                     foreach ($main_category as $cat) :
                                                         ?>
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-3">
                                                             <h5 class="custom-menu-category-drop"><a
                                                                         href="<?= base_url('catalog/' . $cat->slug . '/'); ?>"><?= $cat->name; ?></a>
                                                             </h5>
