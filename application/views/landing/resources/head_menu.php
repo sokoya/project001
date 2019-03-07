@@ -28,7 +28,7 @@ $categories = $this->db->query($category_cache)->result();
                     foreach ($categories as $category): ?>
                         <li><a href="<?= base_url('catalog/' . $category->slug . '/'); ?>"
                                title="<?= $category->name; ?>"><i
-                                        class="fas <?= $category->icon; ?> dropdown-menu-category-icon"></i><?= $category->name; ?>
+                                        class="<?= $category->icon; ?> dropdown-menu-category-icon"></i><?= $category->name; ?>
                             </a>
                             <div class="dropdown-menu-category-section">
                                 <div class="dropdown-menu-category-section-inner">
@@ -60,8 +60,9 @@ $categories = $this->db->query($category_cache)->result();
                                             </div>
                                             <div class="">
                                                 <img class="nav-category-img"
-                                                     src="<?= ( $category ) ?  CATEGORY_IMAGE_PATH . $category->image : ''; ?>"
-                                                     alt="<?= ( $category ) ? $category->name : '' ; ?>" title="<?= ( $category ) ? $category->name : '' ; ?>"
+                                                     src="<?= ($category) ? CATEGORY_IMAGE_PATH . $category->image : ''; ?>"
+                                                     alt="<?= ($category) ? $category->name : ''; ?>"
+                                                     title="<?= ($category) ? $category->name : ''; ?>"
                                                      style="right: -5px;"/>
                                             </div>
                                         </div>
@@ -86,7 +87,7 @@ $categories = $this->db->query($category_cache)->result();
                 <ul class="market-search">
                 </ul>
             </div>
-            <button class="fas fa-search navbar-main-search-submit" type="submit" ></button>
+            <button class="fas fa-search navbar-main-search-submit" type="submit"></button>
         </form>
         <ul class="nav navbar-nav navbar-mob-item-left" style="padding:-2px; margin-left: 10px">
             <li class="dropdown">
