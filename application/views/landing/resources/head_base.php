@@ -91,6 +91,10 @@
         a:hover, a:active {
             text-decoration: none !important;
         }
+
+        .dropdown-menu-category-section{
+            height: 410px;
+        }
     </style>
     <script> let base_url = "<?= base_url(); ?>"</script>
     <!--    <link rel="manifest" href="/manifest.json" />-->
