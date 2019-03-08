@@ -247,19 +247,13 @@
                                     <div class="col-md-6 col-sm-6 col-xs-6">
                                         <ul style="float: right" class="product-page-price product-page-share-item">
                                             <li>
-                                                <a class="fas fa-facebook" href="#"></a>
+                                                <a class="fab fa-facebook-f" href="#"></a>
                                             </li>
                                             <li>
-                                                <a class="fas fa-twitter" href="#"></a>
+                                                <a class="fab fa-twitter" href="#"></a>
                                             </li>
                                             <li>
-                                                <a class="fas fa-pinterest" href="#"></a>
-                                            </li>
-                                            <li>
-                                                <a class="fas fa-instagram" href="#"></a>
-                                            </li>
-                                            <li>
-                                                <a class="fas fa-google-plus" href="#"></a>
+                                                <a class="fab fa-instagram" href="#"></a>
                                             </li>
                                         </ul>
                                     </div>

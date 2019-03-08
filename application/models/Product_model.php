@@ -288,7 +288,7 @@ Class Product_model extends CI_Model{
             WHERE var.quantity > 0 ORDER BY var.id) AS v ON (p.id = v.product_id) ";
             }
             $select_query .= " JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )                
-            JOIN sellers AS s ON p.seller_id = u.id ";
+            JOIN sellers AS s ON p.seller_id = s.uid ";
 
             $array = $this->slug($queries['str']);
             $select_query .= " WHERE p.category_id IN ('".implode("','",$array)."')";
