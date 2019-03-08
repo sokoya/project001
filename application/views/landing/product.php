@@ -247,19 +247,19 @@
                                     <div class="col-md-6 col-sm-6 col-xs-6">
                                         <ul style="float: right" class="product-page-price product-page-share-item">
                                             <li>
-                                                <a class="fa fa-facebook" href="#"></a>
+                                                <a class="fas fa-facebook" href="#"></a>
                                             </li>
                                             <li>
-                                                <a class="fa fa-twitter" href="#"></a>
+                                                <a class="fas fa-twitter" href="#"></a>
                                             </li>
                                             <li>
-                                                <a class="fa fa-pinterest" href="#"></a>
+                                                <a class="fas fa-pinterest" href="#"></a>
                                             </li>
                                             <li>
-                                                <a class="fa fa-instagram" href="#"></a>
+                                                <a class="fas fa-instagram" href="#"></a>
                                             </li>
                                             <li>
-                                                <a class="fa fa-google-plus" href="#"></a>
+                                                <a class="fas fa-google-plus" href="#"></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -930,7 +930,7 @@
         $('.variation-option').removeClass('option-selected');
         selected_variation_name = $(this).data('vname');
         if ($(this).hasClass('option-disabled')) {
-            notification_message('Sorry this variation is out of stock', 'fa fa-info-circle', 'warning')
+            notification_message('Sorry this variation is out of stock', 'fas fa-info-circle', 'warning')
         } else {
             let discount_price = $(this).data('discount');
             let price = $(this).data('price');
@@ -971,17 +971,17 @@
                 } else {
                     $('.wishlist-cta').text('Remove from Wishlist');
                 }
-                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+                notification_message(parsed_response.msg, 'fas fa-info-circle', parsed_response.status);
             },
             error: () => {
-                notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', error);
+                notification_message('Sorry an error occurred please try again. ', 'fas fa-info-circle', error);
             }
         })
     });
 
     $('.add-to-cart').on('click', function () {
         if (!$(`p.variation-option`).hasClass('option-selected')) {
-            notification_message("Please select a variation.", 'fa fa-info-circle', 'error');
+            notification_message("Please select a variation.", 'fas fa-info-circle', 'error');
             return false;
         }
         let quantity_instance = $('#quan').val();
@@ -999,7 +999,7 @@
                 window.location.href = base_url + 'cart';
             },
             error: () => {
-                notification_message('Sorry an error occurred while adding to cart, please contact support if problem persist.', 'fa fa-info-circle', 'warning');
+                notification_message('Sorry an error occurred while adding to cart, please contact support if problem persist.', 'fas fa-info-circle', 'warning');
             }
         })
     });
@@ -1039,10 +1039,10 @@
             data: {qid: qid},
             success: response => {
                 let parsed_response = JSON.parse(response);
-                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+                notification_message(parsed_response.msg, 'fas fa-info-circle', parsed_response.status);
             },
             error: () => {
-                notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', "error");
+                notification_message('Sorry an error occurred please try again. ', 'fas fa-info-circle', "error");
             }
         })
 
@@ -1073,10 +1073,10 @@
                     btn.prop('disabled', false);
                     btn.val("Ask");
                     btn.removeClass('btn-default').addClass('btn-primary');
-                    notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+                    notification_message(parsed_response.msg, 'fas fa-info-circle', parsed_response.status);
                 },
                 error: () => {
-                    notification_message('An error occurred while submitting your question. Try again.', 'fa fa-info-circle', "error");
+                    notification_message('An error occurred while submitting your question. Try again.', 'fas fa-info-circle', "error");
                     btn.prop('disabled', false);
                     btn.val("Ask");
                     btn.removeClass('btn-default').addClass('btn-primary');
@@ -1101,10 +1101,10 @@
                 btn.prop('disabled', false);
                 btn.value = "Ask";
                 btn.removeClass('btn-default').addClass('btn-primary');
-                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+                notification_message(parsed_response.msg, 'fas fa-info-circle', parsed_response.status);
             },
             error: () => {
-                notification_message('An error occurred while submitting your question. Try again.', 'fa fa-info-circle', "error");
+                notification_message('An error occurred while submitting your question. Try again.', 'fas fa-info-circle', "error");
                 btn.prop('disabled', false);
                 btn.value = "Ask";
                 btn.removeClass('btn-default').addClass('btn-primary');

@@ -267,7 +267,7 @@
                                         </ul>
                                         <h5 class="product-caption-title"><?= word_limiter(ucwords($product->product_name), 14, '...'); ?></h5>
                                         <h4 class="product-caption-title">
-                                            <strong>Seller: </strong><?= ucfirst($product->first_name); ?></h4>
+                                            <strong>Seller: </strong><?= ucfirst($product->store_name); ?></h4>
                                         <div class="product-caption-price">
                                             <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
                                                 <span class="product-caption-price-new"><?= ngn($product->discount_price); ?> </span>
