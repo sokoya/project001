@@ -282,6 +282,7 @@
                 <p class="card-max-subtitle">Great items, Affordable Prices</p>
             </div>
             <div class="row">
+
                 <div class="col-md-2 col-xs-4 hot-row">
                     <img class="card-max-img" src="<?= base_url('assets/img/home/hotsale8.png'); ?>"/>
                     <div class="card-max-text">

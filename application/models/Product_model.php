@@ -273,7 +273,7 @@ Class Product_model extends CI_Model{
         // $this->db->cache_on();
         // Lets confirm the slug is valid
         if( $this->check_slug_availability( $queries['str'] ) ) {
-            $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left, g.image_name,s.store_name
+            $select_query = "SELECT p.id, p.product_name, p.brand_name, p.seller_id, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left, g.image_name,s.store_name
             FROM products p";
             if( isset($gets['price_min']) && !empty($gets['price_min']) && isset($gets['price_max']) && !empty($gets['price_max']) ){
                 $min = xss_clean($gets['price_min']); $max = xss_clean($gets['price_max']);
@@ -386,7 +386,7 @@ Class Product_model extends CI_Model{
             $select_query = "SELECT p.id,p.views, p.product_name, v.sale_price, v.discount_price, v.start_date, v.end_date, SUM(v.quantity) as item_left, g.image_name
                 FROM products p JOIN (SELECT var.product_id, var.discount_price, var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var 
                 WHERE var.quantity > 0 ORDER BY var.id) AS v ON (p.id = v.product_id) JOIN product_gallery AS g ON (p.id = g.product_id AND g.featured_image = 1) 
-                WHERE p.id != '$id' AND p.category_id = '{$product_detail_category_id}' GROUP BY p.id ORDER BY RAND() LIMIT 6";
+                WHERE p.id != '$id' AND product_status = 'approved' AND p.category_id = '{$product_detail_category_id}' GROUP BY p.id ORDER BY RAND() LIMIT 6";
             $result = $this->db->query( $select_query )->result();
             return $result;
         }else{
@@ -466,7 +466,7 @@ Class Product_model extends CI_Model{
 
     // Generic single product detail
     function get_cart_details( $id ){
-        $select = "SELECT p.product_status, p.seller_id, u.first_name name, s.legal_company_name, s.store_name, u.is_seller, i.image_name image FROM products p
+        $select = "SELECT p.product_status, p.seller_id, u.first_name firt_name, s.legal_company_name, s.store_name name, u.is_seller, i.image_name image FROM products p
                 LEFT JOIN sellers s ON (s.uid = p.seller_id)
                 LEFT JOIN users u ON (u.id = p.seller_id)
                 LEFT JOIN product_gallery i ON (i.product_id = p.id )
@@ -563,7 +563,7 @@ Class Product_model extends CI_Model{
 
     // SEARCH CATEGORY PRODUCTS PAGE
     function get_search_products( $queries = array() , $gets = array() ){
-        $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left,  g.image_name,s.store_name
+        $select_query = "SELECT p.id, p.product_name, p.brand_name, p.seller_id, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left,  g.image_name,s.store_name
             FROM products p";
         if( isset($gets['price_min']) && !empty($gets['price_min']) && isset($gets['price_max']) && !empty($gets['price_max']) ){
             $min = xss_clean($gets['price_min']); $max = xss_clean($gets['price_max']);

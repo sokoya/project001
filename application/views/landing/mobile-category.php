@@ -202,7 +202,7 @@
                 <div class="panel panel-default">
                     <div
                             class="panel-heading filter-head"><?= preg_replace("/[^A-Za-z 0-9]/", ' ', $feature); ?>
-                        <span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel"
+                        <span style="color: #4c4c4c !important; float: right"><i class="fas fa-minus close-panel"
                                                                                  aria-hidden="true"
                                                                                  data-target="<?= $feature ?>_vl"></i></span>
                     </div>
@@ -252,7 +252,7 @@
                                     <div class="product-img-wrap">
                                         <img class="product-img lazy"
                                              data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
-                                             src="<?= base_url('assets/img/load.gif'); ?>"
+                                             src="<?= base_url('assets/load.gif'); ?>"
                                              alt="<?= $product->product_name; ?>"
                                              title="<?= $product->product_name; ?>"/>
                                     </div>
@@ -265,11 +265,20 @@
                                             echo rating_star_generator($rating_counts);
                                             ?>
                                         </ul>
-                                        <h5 class="product-caption-title"><?= word_limiter(ucwords($product->product_name), 14, '...'); ?></h5>
+                                        <h5 class="product-caption-title"><b><?= word_limiter(ucwords($product->product_name), 14, '...'); ?></b>
+                                            <br/>
+                                            <?php if( $product->item_left < 5) :?>
+                                                <small class="text-sm" style="padding-top: 5px; font-max-size: small">
+                                                    (<?= $product->item_left; ?> item left)
+                                                </small>
+                                            <?php endif; ?>
+                                        </h5>
                                         <h4 class="product-caption-title">
-                                            <strong>Seller: </strong><?= ucfirst($product->store_name); ?></h4>
+                                            <?= ucfirst($product->brand_name); ?>
+                                        </h4>
                                         <div class="product-caption-price">
                                             <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
+
                                                 <span class="product-caption-price-new"><?= ngn($product->discount_price); ?> </span>
                                                 <span class="product-caption-price-old"><sup><?= ngn($product->sale_price); ?></sup></span>
                                             <?php else : ?>
@@ -337,6 +346,12 @@
                     title = "Onitshamarket";
                 history.replaceState(state, title, url);
             }
+
+            $('.lazy').Lazy({
+                scrollDirection: 'vertical',
+                effect: 'fadeIn',
+                visibleOnly: true
+            });
 
             function load_page(url) {
                 $(_category_body).load(`${url} #category_body`, function (response, status, xhr) {

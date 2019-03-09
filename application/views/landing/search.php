@@ -235,6 +235,14 @@
                                                 <li><?= get_discount($product->sale_price, $product->discount_price); ?></li>
                                             </ul>
                                         <?php endif; ?>
+
+                                        <?php if( $product->item_left < 5 ) : ?>
+                                            <ul class="product-labels" style="margin-top: 17px;">
+                                                <li style="background-color: #d7c41f; border-radius: 2px; padding-top: 3px; ">
+                                                    <b><?= $product->item_left; ?> item left</b>
+                                                </li>
+                                            </ul>
+                                        <?php endif;?>
                                         <div class="product-img-wrap">
                                             <div class="product-quick-view-cover">
                                                 <div style="position: relative; left: -50%;">
@@ -249,7 +257,7 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            <img class="product-img lazy"
+                                            <img class="product-img lazy cat-lazy"
                                                  data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
                                                  style=""
                                                  src="<?= base_url('assets/img/load.gif'); ?>"
@@ -264,12 +272,10 @@
                                                 $rating_counts = $this->product->get_rating_counts($product->id);
                                                 echo rating_star_generator($rating_counts);
                                                 ?>
-                                                <span
-                                                        class="text-sm pull-right"><strong>Seller: </strong><?= ucfirst($product->store_name); ?></span>
+                                                <span class="text-sm pull-right"><strong><?= character_limiter(ucwords($product->brand_name)); ?></strong></span>
                                             </ul>
                                             <h5 class="cs-title"><?= character_limiter(ucwords($product->product_name), 10, '...'); ?></h5>
                                             <div class="product-caption-price">
-
                                                 <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
                                                     <span class="cs-price-tl"><?= ngn($product->discount_price); ?></span>
                                                     <span class="cs-price-tl-discount"><sup><?= ngn($product->sale_price); ?> </sup></span>
@@ -305,6 +311,7 @@
 
                                             </div>
                                         </div>
+
                                     </div>
                                     <div id="arrow-<?= $product->id ?>" class="arrow-up"></div>
                                 </div>
