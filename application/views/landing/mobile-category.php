@@ -265,11 +265,20 @@
                                             echo rating_star_generator($rating_counts);
                                             ?>
                                         </ul>
-                                        <h5 class="product-caption-title"><b><?= word_limiter(ucwords($product->product_name), 14, '...'); ?></b></h5>
+                                        <h5 class="product-caption-title"><b><?= word_limiter(ucwords($product->product_name), 14, '...'); ?></b>
+                                            <br/>
+                                            <?php if( $product->item_left < 5) :?>
+                                                <small class="text-sm" style="padding-top: 5px; font-max-size: small">
+                                                    (<?= $product->item_left; ?> item left)
+                                                </small>
+                                            <?php endif; ?>
+                                        </h5>
                                         <h4 class="product-caption-title">
-                                            <strong>Seller: </strong><?= ucfirst($product->store_name); ?></h4>
+                                            <?= ucfirst($product->brand_name); ?>
+                                        </h4>
                                         <div class="product-caption-price">
                                             <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
+
                                                 <span class="product-caption-price-new"><?= ngn($product->discount_price); ?> </span>
                                                 <span class="product-caption-price-old"><sup><?= ngn($product->sale_price); ?></sup></span>
                                             <?php else : ?>
