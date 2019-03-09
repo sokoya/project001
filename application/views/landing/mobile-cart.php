@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="col-xs-12">
                                 <span
-                                        class="text">Sold By: <?= !empty($detail->legal_company_name) ? $detail->legal_company_name : $detail->name; ?></span>
+                                        class="text">Sold By: <?= !empty($detail->store_name) ? $detail->store_name : $detail->name; ?></span>
                                 </div>
                                 <div class="col-xs-12" style="margin-top:10px;">
                                     <p>Qty Price: <span

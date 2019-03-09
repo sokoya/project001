@@ -91,7 +91,7 @@
 								<?php endif; ?>
                                 <td class="text-center">
                                     <a title="Remove <?= $product['name']; ?> from the cart"
-                                       class="fa fa-close table-shopping-remove"
+                                       class="fas fa-close table-shopping-remove"
                                        href="<?= base_url('cart/remove/' . $product['rowid']); ?>"></a>
                                 </td>
 							</tr>
@@ -122,7 +122,7 @@
 			</ul>
 		<?php else: ?>
 			<div class="custom-fa-cover">
-				<!--<i class="fa fa-cart-arrow-down empty-cart-icon custom-fa text-center"></i>-->
+				<!--<i class="fas fa-cart-arrow-down empty-cart-icon custom-fa text-center"></i>-->
 				<img class="img-responsive text-center" style="padding: 10px; margin-top: 10px !important;"
 					 src="<?= base_url('assets/img/empty_cart.png') ?>"/>
 			</div>
@@ -130,7 +130,7 @@
 
 				<p class="lead custom-text">You haven't fill your shopping cart yet</p>
 				<a class="btn btn-primary btn-lg" href="<?= base_url(); ?>">Start Shopping<i
-						class="fa fa-long-arrow-right"></i></a>
+						class="fas fa-long-arrow-right"></i></a>
 			</div>
 		<?php endif; ?>
 	</div>
@@ -191,7 +191,7 @@
 				$('.cst-loader').hide();
 				if (response) {
 					let x = ($('.cart-read').text() * 1) + 1;
-					notification_message('The Product quantity has been updated.', 'fa fa-info-circle', 'success');
+					notification_message('The Product quantity has been updated.', 'fas fa-info-circle', 'success');
 					bind_market(x, 'cart-read');
 					if (quantity.val() >= 1) {
 						plus.prop("disabled", true);
@@ -228,7 +228,7 @@
 				$('.cst-loader').hide();
 				if (response) {
 					let x = ($('.cart-read').text() * 1) - 1;
-					notification_message('The Product quantity has been updated.', 'fa fa-info-circle', 'warning');
+					notification_message('The Product quantity has been updated.', 'fas fa-info-circle', 'warning');
 					bind_market(x, 'cart-read');
 					if (quantity.val() <= 1) {
 						minus.prop("disabled", true);

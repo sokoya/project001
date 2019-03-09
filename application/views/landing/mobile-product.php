@@ -270,7 +270,7 @@
     </div>
     <div class="custom-card">
         <div class="container">
-            <p class="seller-name">Seller - <?= ucwords($product->first_name . ' ' . $product->last_name); ?></p>
+            <p class="seller-name">Seller - <?= ucwords($store_name); ?></p>
             <p class="product-name"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></p>
             <div style="margin-top: 4px; margin-left: 2px">
                 <?php
@@ -438,7 +438,7 @@
         <p class="text-break" style="">
             Overview
             <span style="color: #4c4c4c !important; float: right">
-                <i class="fa fa-minus close-panel" aria-hidden="true" data-target="overview_data"></i>
+                <i class="fas fa-minus close-panel" aria-hidden="true" data-target="overview_data"></i>
             </span>
         </p>
     </div>
@@ -447,7 +447,7 @@
             <?php if (!empty($product->product_line)) : ?>
                 <p class="block-title close-panel" data-target="title_vl" style="margin-top: 5px;">Product Shop <span
                             style="color: #4c4c4c !important; float: right"><i
-                                class="fa fa-minus close-panel"
+                                class="fas fa-minus close-panel"
                                 aria-hidden="true"
                                 data-target="title_vl"></i></span></p>
                 <p class="body_text" id="title_vl"><?= $product->product_line; ?></p>
@@ -456,7 +456,7 @@
             <?php if (!empty($product->product_description)) : ?>
                 <p class="block-title close-panel" data-target="description_vl">Product Description <span
                             style="color: #4c4c4c !important; float: right"><i
-                                class="fa fa-minus close-panel"
+                                class="fas fa-minus close-panel"
                                 aria-hidden="true"
                                 data-target="description_vl"></i></span></p>
                 <p id="description_vl" class="body_text">
@@ -470,7 +470,7 @@
             <?php if (!empty($product->in_the_box)) : ?>
                 <p class="block-title close-panel" data-target="box_vl">What you will find in the box <span
                             style="color: #4c4c4c !important; float: right"><i
-                                class="fa fa-plus close-panel"
+                                class="fas fa-plus close-panel"
                                 aria-hidden="true"
                                 data-target="box_vl"></i></span></p>
                 <p class="body_text" style="display: none" id="box_vl">
@@ -483,7 +483,7 @@
         <p class="text-break">
             Full Specifications
             <span style="color: #4c4c4c !important; float: right">
-                <i class="fa fa-minus close-panel" aria-hidden="true" data-target="full_spec"></i>
+                <i class="fas fa-minus close-panel" aria-hidden="true" data-target="full_spec"></i>
             </span>
         </p></div>
     <div class="custom-card" id="full_spec" style="margin-top: 5px;">
@@ -514,7 +514,7 @@
         <p class="text-break" style="">
             Ratings and Reviews
             <span style="color: #4c4c4c !important; float: right">
-                <i class="fa fa-minus close-panel" aria-hidden="true" data-target="rating_overview"></i>
+                <i class="fas fa-minus close-panel" aria-hidden="true" data-target="rating_overview"></i>
             </span>
         </p>
     </div>
@@ -559,7 +559,7 @@
         <p class="text-break" style="">
             Customer Questions
             <span style="color: #4c4c4c !important; float: right">
-                <i class="fa fa-minus close-panel" aria-hidden="true" data-target="customer_qa"></i>
+                <i class="fas fa-minus close-panel" aria-hidden="true" data-target="customer_qa"></i>
             </span>
         </p>
     </div>
@@ -597,7 +597,7 @@
                                     <a class="product-review-rate pull-right upvote"
                                        data-qid="<?= $question->id; ?>" href="javascript:void(0)"
                                        title="Find this question helpful?"><i
-                                                class="fa fa-thumbs-up"></i><?= $question->upvotes; ?>
+                                                class="fas fa-thumbs-up"></i><?= $question->upvotes; ?>
                                     </a>
                                 </p>
                                 <p class="product-page-qa-meta">asked by <?= $question->display_name ?>
@@ -666,7 +666,7 @@
     $(document).ready(function () {
         $('.close-panel').on('click', function () {
             let target = $(this).data('target');
-            if ($(this).hasClass('fa')) {
+            if ($(this).hasClass('fas')) {
                 $(this).toggleClass("fa-minus fa-plus");
                 $(`#${target}`).toggle()
             }
@@ -704,7 +704,7 @@
         $('.variation-option').removeClass('option-selected');
         selected_variation_name = $(this).data('vname');
         if ($(this).hasClass('option-disabled')) {
-            notification_message('Sorry this variation is out of stock', 'fa fa-info-circle', 'warning')
+            notification_message('Sorry this variation is out of stock', 'fas fa-info-circle', 'warning')
         } else {
             // let id = $(this).data('vid');
             let discount_price = $(this).data('discount');
@@ -789,7 +789,7 @@
                 window.location.href = base_url + 'cart';
             },
             error: () => {
-                notification_message('Sorry an error occurred somewhere', 'fa fa-info-circle', 'warning');
+                notification_message('Sorry an error occurred somewhere', 'fas fa-info-circle', 'warning');
             }
         })
 
@@ -810,10 +810,10 @@
                 } else {
                     $('.wishlist-cta').html('Remove from Wishlist');
                 }
-                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+                notification_message(parsed_response.msg, 'fas fa-info-circle', parsed_response.status);
             },
             error: () => {
-                notification_message('Sorry an error occurred please try again ', 'fa fa-info-circle', error);
+                notification_message('Sorry an error occurred please try again ', 'fas fa-info-circle', error);
             }
         })
     })
@@ -825,10 +825,10 @@
             data: {qid: qid},
             success: response => {
                 let parsed_response = JSON.parse(response);
-                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+                notification_message(parsed_response.msg, 'fas fa-info-circle', parsed_response.status);
             },
             error: () => {
-                notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', "error");
+                notification_message('Sorry an error occurred please try again. ', 'fas fa-info-circle', "error");
             }
         })
 
@@ -858,10 +858,10 @@
                     btn.prop('disabled', false);
                     btn.val("Ask");
                     btn.removeClass('btn-default').addClass('btn-primary');
-                    notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+                    notification_message(parsed_response.msg, 'fas fa-info-circle', parsed_response.status);
                 },
                 error: () => {
-                    notification_message('An error occurred while submitting your question. Try again.', 'fa fa-info-circle', "error");
+                    notification_message('An error occurred while submitting your question. Try again.', 'fas fa-info-circle', "error");
                     btn.prop('disabled', false);
                     btn.val("Ask");
                     btn.removeClass('btn-default').addClass('btn-primary');
@@ -886,10 +886,10 @@
                 btn.prop('disabled', false);
                 btn.value = "Ask";
                 btn.removeClass('btn-default').addClass('btn-primary');
-                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+                notification_message(parsed_response.msg, 'fas fa-info-circle', parsed_response.status);
             },
             error: () => {
-                notification_message('An error occurred while submitting your question. Try again.', 'fa fa-info-circle', "error");
+                notification_message('An error occurred while submitting your question. Try again.', 'fas fa-info-circle', "error");
                 btn.prop('disabled', false);
                 btn.value = "Ask";
                 btn.removeClass('btn-default').addClass('btn-primary');

@@ -273,7 +273,7 @@ Class Product_model extends CI_Model{
         // $this->db->cache_on();
         // Lets confirm the slug is valid
         if( $this->check_slug_availability( $queries['str'] ) ) {
-            $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left, g.image_name,s.first_name
+            $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left, g.image_name,s.store_name
             FROM products p";
             if( isset($gets['price_min']) && !empty($gets['price_min']) && isset($gets['price_max']) && !empty($gets['price_max']) ){
                 $min = xss_clean($gets['price_min']); $max = xss_clean($gets['price_max']);
@@ -288,7 +288,7 @@ Class Product_model extends CI_Model{
             WHERE var.quantity > 0 ORDER BY var.id) AS v ON (p.id = v.product_id) ";
             }
             $select_query .= " JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )                
-            JOIN users AS s ON p.seller_id = s.id ";
+            JOIN sellers AS s ON p.seller_id = s.uid ";
 
             $array = $this->slug($queries['str']);
             $select_query .= " WHERE p.category_id IN ('".implode("','",$array)."')";
@@ -466,7 +466,7 @@ Class Product_model extends CI_Model{
 
     // Generic single product detail
     function get_cart_details( $id ){
-        $select = "SELECT p.product_status, p.seller_id, u.first_name name, s.legal_company_name, u.is_seller, i.image_name image FROM products p
+        $select = "SELECT p.product_status, p.seller_id, u.first_name name, s.legal_company_name, s.store_name, u.is_seller, i.image_name image FROM products p
                 LEFT JOIN sellers s ON (s.uid = p.seller_id)
                 LEFT JOIN users u ON (u.id = p.seller_id)
                 LEFT JOIN product_gallery i ON (i.product_id = p.id )
@@ -563,7 +563,7 @@ Class Product_model extends CI_Model{
 
     // SEARCH CATEGORY PRODUCTS PAGE
     function get_search_products( $queries = array() , $gets = array() ){
-        $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left,  g.image_name,s.first_name
+        $select_query = "SELECT p.id, p.product_name, p.seller_id, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left,  g.image_name,s.store_name
             FROM products p";
         if( isset($gets['price_min']) && !empty($gets['price_min']) && isset($gets['price_max']) && !empty($gets['price_max']) ){
             $min = xss_clean($gets['price_min']); $max = xss_clean($gets['price_max']);
@@ -577,7 +577,7 @@ Class Product_model extends CI_Model{
             WHERE var.quantity > 0 ORDER BY var.id) AS v ON (p.id = v.product_id) ";
         }
         $select_query .= " JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )                
-            JOIN users AS s ON p.seller_id = s.id ";
+            JOIN sellers AS s ON p.seller_id = s.uid ";
 
         if( $queries['product_name'] ) {
             $select_query .= " WHERE p.product_status = 'approved' AND p.product_name LIKE '%{$queries["product_name"]}%' ";

@@ -21,7 +21,7 @@
 
                     <div class="panel panel-default" id="delivery-method">
                         <div class="panel-heading custom-panel-head">
-                            <h3 class="panel-title"><i class="fa fa-truck"></i>&nbsp;&nbsp; Delivery / Pickup Method
+                            <h3 class="panel-title"><i class="fas fa-truck"></i>&nbsp;&nbsp; Delivery / Pickup Method
                                 <button class="btn-custom-primary btn-pickup-address">Select Pickup Location</button>
                                 <button class="btn-custom-primary btn-new-address">Add New Delivery Address</button>
                             </h3>
@@ -143,17 +143,17 @@
                                                 <div class="panel-body">
                                                     <div style="height:28px;">
                                                         <p class="panel-details"><i
-                                                                    class="fa fa-address-card"></i><strong><?= $pickup->title; ?></strong>
+                                                                    class="fas fa-address-card"></i><strong><?= $pickup->title; ?></strong>
                                                         </p>
                                                     </div>
                                                     <p class="panel-details" title="<?= $pickup->address; ?>"><i
-                                                                class="fa fa-map-marker"></i><?= $pickup->address ?>
+                                                                class="fas fa-map-marker"></i><?= $pickup->address ?>
                                                     </p>
                                                     <p class="panel-details"><i
-                                                                class="fa fa-phone"></i><?= $pickup->phones; ?>
+                                                                class="fas fa-phone"></i><?= $pickup->phones; ?>
                                                     </p>
                                                     <p class="panel-details"><i
-                                                                class="fa fa-mail-reply"></i><?= $pickup->emails; ?>
+                                                                class="fas fa-mail-reply"></i><?= $pickup->emails; ?>
                                                     </p>
                                                 </div>
                                             </div>
@@ -226,15 +226,15 @@
                                                 </div>
                                                 <div class="panel-body">
                                                     <p class="panel-details"><i
-                                                                class="fa fa-user"></i><?= ucfirst($address->first_name) . ' ' . ucfirst($address->last_name) ?>
+                                                                class="fas fa-user"></i><?= ucfirst($address->first_name) . ' ' . ucfirst($address->last_name) ?>
                                                     </p>
                                                     <div style="height:28px;">
                                                         <p class="panel-details" title="<?= $address->address ?>"><i
-                                                                    class="fa fa-map-marker"></i><?= character_limiter($address->address, 38); ?>
+                                                                    class="fas fa-map-marker"></i><?= character_limiter($address->address, 38); ?>
                                                         </p>
                                                     </div>
                                                     <p class="panel-details"><i
-                                                                class="fa fa-phone"></i><?= $address->phone; ?> <?= !empty($address->phone2) ? ',' . $address->phone2 : ''; ?>
+                                                                class="fas fa-phone"></i><?= $address->phone; ?> <?= !empty($address->phone2) ? ',' . $address->phone2 : ''; ?>
                                                     </p>
                                                 </div>
                                             </div>
@@ -247,7 +247,7 @@
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading custom-panel-head">
-                            <h3 class="panel-title"><i class="fa fa-credit-card"></i>&nbsp;&nbsp; Payment Method</h3>
+                            <h3 class="panel-title"><i class="fas fa-credit-card"></i>&nbsp;&nbsp; Payment Method</h3>
                         </div>
                         <div class="panel-body payment_method_body" style="
                         display: none;">
@@ -279,7 +279,7 @@
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading custom-panel-head">
-                            <h3 class="panel-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp; Review Order</h3>
+                            <h3 class="panel-title"><i class="fas fa-list-alt"></i>&nbsp;&nbsp; Review Order</h3>
                         </div>
                         <div class="panel-body" id="review_order">
                             <div class="panel panel-default ">
