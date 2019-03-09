@@ -245,14 +245,14 @@
                                         </p>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <ul style="float: right" class="product-page-price product-page-share-item">
-                                            <li>
+                                        <ul style="float: right; padding: 7px;" class="product-page-price product-page-share-item">
+                                            <li style="padding: 5px;">
                                                 <a class="fab fa-facebook-f" href="#"></a>
                                             </li>
-                                            <li>
+                                            <li style="padding: 5px;">
                                                 <a class="fab fa-twitter" href="#"></a>
                                             </li>
-                                            <li>
+                                            <li style="padding: 5px;">
                                                 <a class="fab fa-instagram" href="#"></a>
                                             </li>
                                         </ul>

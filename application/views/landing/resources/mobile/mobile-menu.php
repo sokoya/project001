@@ -307,7 +307,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a href="<?= base_url() ?>" style="float: left"> <img class="mobile-nav-logo"
-                                                                      src="<?= base_url('assets/img/newlogo.png'); ?>"/></a>
+                                                                      src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>"/></a>
             </div>
         </div>
         <div class="navbar-util">

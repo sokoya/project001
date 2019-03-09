@@ -242,6 +242,14 @@
                                                 <li><?= get_discount($product->sale_price, $product->discount_price); ?></li>
                                             </ul>
                                         <?php endif; ?>
+
+                                        <?php if( $product->item_left < 5 ) : ?>
+                                            <ul class="product-labels" style="margin-top: 17px;">
+                                                <li style="background-color: #d7c41f; border-radius: 2px; padding-top: 3px; ">
+                                                    <b><?= $product->item_left; ?> item left</b>
+                                                </li>
+                                            </ul>
+                                        <?php endif;?>
                                         <div class="product-img-wrap">
                                             <div class="product-quick-view-cover">
                                                 <div style="position: relative; left: -50%;">
@@ -271,8 +279,7 @@
                                                 $rating_counts = $this->product->get_rating_counts($product->id);
                                                 echo rating_star_generator($rating_counts);
                                                 ?>
-                                                <span
-                                                        class="text-sm pull-right"><strong>Seller: </strong><?= character_limiter(ucfirst($product->store_name), 18); ?></span>
+                                                <span class="text-sm pull-right"><strong><?= character_limiter(ucwords($product->brand_name)); ?></strong></span>
                                             </ul>
                                             <h5 class="cs-title"><?= character_limiter(ucwords($product->product_name), 10, '...'); ?></h5>
                                             <div class="product-caption-price">

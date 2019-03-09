@@ -70,7 +70,7 @@
                 <div class="cat_board">
                     <a style="color: #0b0b0b;" href="<?= base_url('catalog/' . $category->slug . '/'); ?>">
                         <img class="cat_img"
-                             src="<?= base_url('assets/img/cat_icons/028-smartphones.png'); ?>"
+                             src="<?= base_url('assets/img/cat_icons/') . $category->slug .'.png'; ?>"
 
                              alt="Shop for <?= $category->name; ?>">
                         <span style="font-size:10px;margin-bottom:auto;"><?= $category->name; ?></span>
