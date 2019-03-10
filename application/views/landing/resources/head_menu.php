@@ -68,15 +68,32 @@
         width: 50px;
     }
 
+    .form-bar {
+        width: 40vw;
+    }
+
     @media (min-width: 1025px) and (max-width: 1280px) {
         .nav-form {
             margin-left: 30px !important
         }
+
+        #navbar-img {
+            margin-left: 40px;
+        }
+
+        .form-bar {
+            width: 40vw;
+            margin-left: -50px;
+        }
+
     }
 
     @media (min-width: 1281px) {
         .nav-form {
             margin-left: 30px !important
+        }
+        #navbar-img {
+            margin-left: 80px;
         }
     }
 
@@ -84,6 +101,9 @@
 
         .nav-form {
             margin-left: 0 !important
+        }
+        #navbar-img {
+            margin-left: 80px;
         }
 
     }
@@ -287,6 +307,11 @@
             margin-left: 7px;
         }
 
+        .form-bar {
+            width: 30vw;
+            /*margin-left: -50px;*/
+        }
+
         .card-product-img {
             width: 100% !important;
         }
@@ -308,9 +333,9 @@ $categories = $this->db->query($category_cache)->result();
 
 ?>
 <nav class="navbar navbar-default navbar-main-white navbar-pad-top navbar-first yamm" style="padding-bottom: 20px">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-2 col-sm-4 col-xs-4">
+    <div class="container-fluid">
+        <div class="row" style="display: flex;">
+            <div style="flex: 1" class="col-md-2 col-lg-2 col-sm-3 col-xs-4">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="<?= base_url() ?>">
                         <img src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>" style="width: 200px"
@@ -319,9 +344,9 @@ $categories = $this->db->query($category_cache)->result();
                     </a>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-4 col-xs-4 nav-form">
+            <div style="flex: 1" class="col-md-6 col-lg-6 col-sm-5 col-xs-4 nav-form">
                 <form method="get" action="<?= base_url('search') ?>"
-                      class="navbar-form navbar-main-search" role="search">
+                      class="navbar-form navbar-main-search form-bar" role="search">
                     <div class="form-group">
                         <input class="form-control site-search form-search" style="padding-left: 0" required name="q"
                                autocomplete="off"
@@ -335,7 +360,7 @@ $categories = $this->db->query($category_cache)->result();
                     <button class="fas fa-search navbar-main-search-submit" type="submit"></button>
                 </form>
             </div>
-            <div class="col-md-3 col-sm-3 col-xs-3">
+            <div style="flex: 1" class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
                 <ul class="nav navbar-nav navbar-mob-item-left" style="padding:-2px; margin-left: 10px">
                     <li class="dropdown hidden-xs hidden-sm" style="position:relative;top: 10px;">
                         <a href="<?= base_url('account/saved'); ?>"><span>View Your</span><span
@@ -388,9 +413,10 @@ $categories = $this->db->query($category_cache)->result();
                             <?php endif; ?>
                         </ul>
                     </li>
-                    <span class="cart-count"
+                    <span class="cart-count cart-read"
                     <?= ($this->cart->total_items() == 0) ? 'style="display:none"' : '' ?>><?= $this->cart->total_items(); ?></span>
-                    <a href="<?= base_url(lang('cart_link')); ?>"><img
+                    <a class="cart-cs" href="<?= base_url(lang('cart_link')); ?>"
+                       data-count="<?= ($this->cart->total_items() == 0) ? '' : $this->cart->total_items(); ?>"><img
                                 src="<?= base_url('assets/svg/shopping-cart-desktop.svg'); ?>"
                                 alt="User"
                                 style="height: 30px; width: 30px; margin-right: 4px; margin-top: 18px;left: 9px"><span
