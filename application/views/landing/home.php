@@ -30,15 +30,18 @@
     }
 
     .card-max-title {
-        color: #1c1c1c;
-        font-size: 27px;
-        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-        font-weight: 600;
+        color: #0a0a0a;
+        font-size: 24px;
+        /*font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;*/
+        /*font-weight: 600;*/
+        font-family: Cabin, sans-serif;
+        text-transform: uppercase;
+
         margin-bottom: 2px;
     }
 
     .card-max-subtitle {
-        color: #1c1c1c;
+        color: #3d3d3d;
         font-size: 17px;
         font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     }
@@ -270,13 +273,13 @@
     <div class="home_slider text-center" style="visibility: hidden;">
         <?php foreach ($sliders as $slider) : ?>
             <div>
-                <img style="width: 100%; " src="<?= SLIDER_IMAGE_PATH . $slider->image; ?>"
+                <img style="width: 100%; object-fit: cover " src="<?= SLIDER_IMAGE_PATH . $slider->image; ?>"
                      alt="Onitshamrket"/>
             </div>
         <?php endforeach; ?>
     </div>
     <div class="container">
-        <div class="card-max">
+        <div class="card-max" style="margin-top: -10px">
             <div class="card-max-header">
                 <p class="card-max-title">Hot Sales<a href="#" class="card-max-view-more">View more</a></p>
                 <p class="card-max-subtitle">Great items, Affordable Prices</p>
@@ -288,7 +291,8 @@
                     <div class="card-max-text">
                         <p class="card-max-discount">₦55,000</p>
                         <p class="card-max-price">₦27,450</p>
-                        <a class="btn_view_product" href="//image_url"><i class="fa fa-search"></i>View Product</a>
+                        <a class="btn_view_product" href="javascript:void(0)"><i class="fa fa-search"></i>View
+                            Product</a>
                     </div>
                 </div>
                 <div class="col-md-2 col-xs-4 hot-row">
@@ -296,7 +300,8 @@
                     <div class="card-max-text">
                         <p class="card-max-discount">₦155,000</p>
                         <p class="card-max-price">₦66,000</p>
-                        <a class="btn_view_product" href="//image_url"><i class="fa fa-search"></i>View Product</a>
+                        <a class="btn_view_product" href="javascript:void(0)"><i class="fa fa-search"></i>View
+                            Product</a>
                     </div>
                 </div>
                 <div class="col-md-2 col-xs-4 hot-row">
@@ -304,7 +309,8 @@
                     <div class="card-max-text">
                         <p class="card-max-discount">₦90,000</p>
                         <p class="card-max-price">₦47,000</p>
-                        <a class="btn_view_product" href="//image_url"><i class="fa fa-search"></i>View Product</a>
+                        <a class="btn_view_product" href="javascript:void(0)"><i class="fa fa-search"></i>View
+                            Product</a>
                     </div>
                 </div>
                 <div class="col-md-2 col-xs-4 hot-row">
@@ -312,7 +318,8 @@
                     <div class="card-max-text">
                         <p class="card-max-discount">₦125,000</p>
                         <p class="card-max-price">₦80,000</p>
-                        <a class="btn_view_product" href="//image_url"><i class="fa fa-search"></i>View Product</a>
+                        <a class="btn_view_product" href="javascript:void(0)"><i class="fa fa-search"></i>View
+                            Product</a>
                     </div>
                 </div>
                 <div class="col-md-2 col-xs-4 hot-row">
@@ -320,7 +327,8 @@
                     <div class="card-max-text">
                         <p class="card-max-discount">₦120,000</p>
                         <p class="card-max-price">₦56,000</p>
-                        <a class="btn_view_product" href="//image_url"><i class="fa fa-search"></i>View Product</a>
+                        <a class="btn_view_product" href="javascript:void(0)"><i class="fa fa-search"></i>View
+                            Product</a>
                     </div>
                 </div>
                 <div class="col-md-2 col-xs-4 hot-row">
@@ -328,10 +336,284 @@
                     <div class="card-max-text">
                         <p class="card-max-discount">₦95,000</p>
                         <p class="card-max-price">₦75,000</p>
-                        <a class="btn_view_product" href="//image_url"><i class="fa fa-search"></i>View Product</a>
+                        <a class="btn_view_product" href="javascript:void(0)"><i class="fa fa-search"></i>View
+                            Product</a>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="card-max">
+            <div class="card-max-header">
+                <p class="card-max-title">Top Categories<a href="#" class="card-max-view-more">View more</a></p>
+                <p class="card-max-subtitle">Discover top categories, you won't want to miss</p>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-2 hidden-sm hidden-xs">
+                    <img src="<?= base_url('assets/img/home/splash.webp'); ?>" style="max-height: 100%;">
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                            <p class="card-cat-text">Women's Fashion</p>
+                            <img
+                                    src="<?= base_url('assets/img/home/ee.jpg'); ?>"></div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                            <p class="card-cat-text">Phones Accessories</p>
+                            <img
+                                    src="<?= base_url('assets/img/home/ed.jpg'); ?>"></div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                            <p class="card-cat-text">Electronics</p>
+                            <img
+                                    src="<?= base_url('assets/img/home/ef.jpg'); ?>"></div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                            <p class="card-cat-text">Computing Accessories</p><img
+                                    src="<?= base_url('assets/img/home/eg.jpg'); ?>"></div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                            <p class="card-cat-text">Phone and Tablets</p><img
+                                    src="<?= base_url('assets/img/home/em.jpg'); ?>"></div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                            <p class="card-cat-text">Home and Office</p>
+                            <img
+                                    src="<?= base_url('assets/img/home/ek.jpg'); ?>"></div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                            <p class="card-cat-text">Bluetooth Speakers</p>
+                            <img
+                                    src="<?= base_url('assets/img/home/ea.jpg'); ?>"></div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                            <p class="card-cat-text">Computing</p>
+                            <img
+                                    src="<?= base_url('assets/img/home/ex.jpg'); ?>"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img src="<?= base_url('assets/img/home/bbdre.jpg'); ?>">
+        <div class="card-max">
+            <div class="card-max-header">
+                <p class="card-max-title">Top Brands<a href="#" class="card-max-view-more">View more</a></p>
+                <p class="card-max-subtitle">Top brands top quality.</p>
+            </div>
+            <br/>
+            <div class="brand-slide">
+                <div class="row">
+                    <div class="col-md-4 hidden-sm hidden-xs">
+                        <img src="<?= base_url('assets/img/home/alfa.jpg'); ?>"
+                             style="display: block; height: 310px; width: auto; max-width: 400px; object-fit: cover">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row" style="margin-left: 10px">
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
+                                <p class="card-cat-text">Electronics</p>
+                                <img
+                                        src="<?= base_url('assets/img/home/ef.jpg'); ?>"></div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
+                                <p class="card-cat-text">Computing Accessories</p><img
+                                        src="<?= base_url('assets/img/home/eg.jpg'); ?>"></div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
+                                <p class="card-cat-text">Phone and Tablets</p><img
+                                        src="<?= base_url('assets/img/home/em.jpg'); ?>"></div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
+                                <p class="card-cat-text">Home and Office</p>
+                                <img
+                                        src="<?= base_url('assets/img/home/ek.jpg'); ?>"></div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
+                                <p class="card-cat-text">Bluetooth Speakers</p>
+                                <img
+                                        src="<?= base_url('assets/img/home/ea.jpg'); ?>"></div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
+                                <p class="card-cat-text">Computing</p>
+                                <img
+                                        src="<?= base_url('assets/img/home/ex.jpg'); ?>"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 hidden-sm hidden-xs">
+                        <img src="<?= base_url('assets/img/home/gdp.jpg'); ?>"
+                             style="display: block; height: 310px; width: auto; max-width: 400px; object-fit: cover">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row" style="margin-left: 10px">
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
+                                <p class="card-cat-text">Electronics</p>
+                                <img
+                                        src="<?= base_url('assets/img/home/ef.jpg'); ?>"></div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
+                                <p class="card-cat-text">Computing Accessories</p><img
+                                        src="<?= base_url('assets/img/home/eg.jpg'); ?>"></div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
+                                <p class="card-cat-text">Phone and Tablets</p><img
+                                        src="<?= base_url('assets/img/home/em.jpg'); ?>"></div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
+                                <p class="card-cat-text">Home and Office</p>
+                                <img
+                                        src="<?= base_url('assets/img/home/ek.jpg'); ?>"></div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
+                                <p class="card-cat-text">Bluetooth Speakers</p>
+                                <img
+                                        src="<?= base_url('assets/img/home/ea.jpg'); ?>"></div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
+                                <p class="card-cat-text">Computing</p>
+                                <img
+                                        src="<?= base_url('assets/img/home/ex.jpg'); ?>"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 hidden-sm hidden-xs">
+                        <img src="<?= base_url('assets/img/home/alfa.jpg'); ?>"
+                             style="display: block; height: 310px; width: auto; max-width: 400px; object-fit: cover">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row" style="margin-left: 10px">
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
+                                <p class="card-cat-text">Electronics</p>
+                                <img
+                                        src="<?= base_url('assets/img/home/ef.jpg'); ?>"></div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
+                                <p class="card-cat-text">Computing Accessories</p><img
+                                        src="<?= base_url('assets/img/home/eg.jpg'); ?>"></div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
+                                <p class="card-cat-text">Phone and Tablets</p><img
+                                        src="<?= base_url('assets/img/home/em.jpg'); ?>"></div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
+                                <p class="card-cat-text">Home and Office</p>
+                                <img
+                                        src="<?= base_url('assets/img/home/ek.jpg'); ?>"></div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
+                                <p class="card-cat-text">Bluetooth Speakers</p>
+                                <img
+                                        src="<?= base_url('assets/img/home/ea.jpg'); ?>"></div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
+                                <p class="card-cat-text">Computing</p>
+                                <img
+                                        src="<?= base_url('assets/img/home/ex.jpg'); ?>"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-max">
+            <div class="card-max-header">
+                <p class="card-max-title">Super Deals<a href="#" class="card-max-view-more">View more</a></p>
+                <p class="card-max-subtitle">Great Deals at amazing prices</p>
+            </div>
+            <br/>
+            <div class="brand-slide">
+                <div class="row">
+                    <div class="col-md-2 hidden-sm hidden-xs">
+                        <img src="<?= base_url('assets/img/home/splash.webp'); ?>" style="min-height: 320px">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row" style="margin-left: 10px">
+                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
+                                <p class="product-discount-overlay">6% <span>off</span></p>
+                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
+                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
+                                <p class="card-product-price-discount">&#8358; 45,000 </p>
+                                <p class="card-product-price">&#8358; 30,000 </p>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
+                                <p class="product-discount-overlay">12% <span>off</span></p>
+                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
+                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
+                                <p class="card-product-price-discount">&#8358; 65,000 </p>
+                                <p class="card-product-price">&#8358; 30,000 </p>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
+                                <p class="product-discount-overlay">2% <span>off</span></p>
+                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
+                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
+                                <p class="card-product-price-discount">&#8358; 32,000 </p>
+                                <p class="card-product-price">&#8358; 13,000 </p>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
+                                <p class="product-discount-overlay">5% <span>off</span></p>
+                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
+                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
+                                <p class="card-product-price-discount">&#8358; 45,000 </p>
+                                <p class="card-product-price">&#8358; 22,000 </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 hidden-sm hidden-xs">
+                        <img src="<?= base_url('assets/img/home/splash.webp'); ?>" style="min-height: 320px">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row" style="margin-left: 10px">
+                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
+                                <p class="product-discount-overlay">32% <span>off</span></p>
+                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
+                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
+                                <p class="card-product-price-discount">&#8358; 95,000 </p>
+                                <p class="card-product-price">&#8358; 12,000 </p>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
+                                <p class="product-discount-overlay">9% <span>off</span></p>
+                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
+                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
+                                <p class="card-product-price-discount">&#8358; 52,000 </p>
+                                <p class="card-product-price">&#8358; 31,000 </p>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
+                                <p class="product-discount-overlay">5% <span>off</span></p>
+                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
+                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
+                                <p class="card-product-price-discount">&#8358; 55,000 </p>
+                                <p class="card-product-price">&#8358; 18,000 </p>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
+                                <p class="product-discount-overlay">6% <span>off</span></p>
+                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
+                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
+                                <p class="card-product-price-discount">&#8358; 45,000 </p>
+                                <p class="card-product-price">&#8358; 30,000 </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 hidden-sm hidden-xs">
+                        <img src="<?= base_url('assets/img/home/splash.webp'); ?>" style="min-height: 320px">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row" style="margin-left: 10px">
+                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
+                                <p class="product-discount-overlay">6% <span>off</span></p>
+                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
+                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
+                                <p class="card-product-price-discount">&#8358; 45,000 </p>
+                                <p class="card-product-price">&#8358; 30,000 </p>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
+                                <p class="product-discount-overlay">6% <span>off</span></p>
+                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
+                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
+                                <p class="card-product-price-discount">&#8358; 45,000 </p>
+                                <p class="card-product-price">&#8358; 30,000 </p>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
+                                <p class="product-discount-overlay">6% <span>off</span></p>
+                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
+                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
+                                <p class="card-product-price-discount">&#8358; 45,000 </p>
+                                <p class="card-product-price">&#8358; 30,000 </p>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
+                                <p class="product-discount-overlay">6% <span>off</span></p>
+                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
+                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
+                                <p class="card-product-price-discount">&#8358; 45,000 </p>
+                                <p class="card-product-price">&#8358; 30,000 </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <?php $categories = $this->product->desktop_display(); ?>
@@ -424,7 +706,8 @@
 
     <div class="gap">
         <div class="container">
-            <p class="text-center">Onitshamarket.com is a dynamic e-commerce platform that is designed to provide the
+            <p class="text-center about-text">Onitshamarket.com is a dynamic e-commerce platform that is designed to
+                provide the
                 most convenient experience for buying and selling in Nigeria. Beyond online shop; our unique focus of
                 creating a virtual mall that interfaces with the largest market in Africa gives us an advantage over the
                 competition. <br/> Giving customers the benefit of buying and selling quality and genuine goods from the
@@ -458,34 +741,30 @@
         });
     });
     $(document).ready(function () {
-        $('.home_slider').css({"visibility": "visible"})
+        $('.home_slider').css({"visibility": "visible"});
         $('.home_slider').slick({
             slidesToShow: 1,
             slidesToScroll: 1,
             dots: true,
-            arrows: false,
             infinite: true,
             speed: 500,
             lazyLoad: 'ondemand',
             autoplay: true,
-            autoplaySpeed: 3000
+            autoplaySpeed: 3000,
+            fade: true,
+            cssEase: 'linear',
         });
     });
-    $('.card-max-img').hover(
-        function () {
-            let self = $(this);
-            self.siblings('.card-max-text').css({"display": "block"});
-        },
-        function () {
-            let self = $(this);
-            setTimeout(
-                function () {
-                    self.siblings('.card-max-text').css({"display": "none"});
-                },
-                2000
-            );
-        }
-    )
+    $(document).ready(function () {
+        $('.brand-slide').slick({
+            infinite: true,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            fade: true,
+            cssEase: 'linear',
+            draggable: true,
+        });
+    });
 </script>
 </body>
 </html>

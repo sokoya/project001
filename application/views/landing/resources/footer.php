@@ -3,9 +3,9 @@
         <div class="row row-col-gap" data-gutter="60">
             <div class="col-md-9">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-sm-3 col-xs-4">
                         <section class="widget widget-links widget-light-skin">
-                            <h3 class="widget-title-sm foot-link"><?= lang('app_name'); ?></h3>
+                            <h3 class="widget-title-sm foot-link footer-link"><?= lang('app_name'); ?></h3>
                             <ul style="margin-left: -40px;">
                                 <li><a href="#">Our Company</a></li>
                                 <li><a href="#">Investor Relation</a></li>
@@ -15,15 +15,16 @@
                             </ul>
                         </section>
                         <div style="font-size: 12px;">
-                            <p>
-                            <h4 class="text text-sm foot-link">Office Address: </h4>
-                            <?= lang('office_address'); ?><br/><?= lang('contact_no'); ?>
+
+                            <h4 class="text text-sm foot-link footer-link">Office Address: </h4>
+                            <p class="office_address">
+                                <?= lang('office_address'); ?><br/><?= lang('contact_no'); ?>
                             </p>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-sm-3 col-xs-4">
                         <section class="widget widget-links widget-light-skin">
-                            <h3 class="widget-title-sm foot-link">Top 10 markets</h3>
+                            <h3 class="widget-title-sm foot-link footer-link">Top 10 markets</h3>
                             <ul style="margin-left: -40px;">
                                 <li><a href="#">Onitsha Market, Anambra</a></li>
                                 <li><a href="#">Balogun Market, Lagos</a></li>
@@ -39,9 +40,9 @@
                             </ul>
                         </section>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-sm-3 col-xs-4">
                         <section class="widget widget-links widget-light-skin">
-                            <h3 class="widget-title-sm foot-link">Resources</h3>
+                            <h3 class="widget-title-sm foot-link footer-link">Resources</h3>
                             <ul style="margin-left: -40px;">
                                 <li><a href="#">Shopping Help</a></li>
                                 <li><a href="#">Order Status</a></li>
@@ -56,9 +57,9 @@
                             </ul>
                         </section>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-sm-3 col-xs-4">
                         <section class="widget widget-links widget-light-skin">
-                            <h3 class="widget-title-sm foot-link">Support</h3>
+                            <h3 class="widget-title-sm foot-link footer-link">Support</h3>
                             <ul style="margin-left: -40px;">
                                 <li><a href="#">App Downloads</a></li>
                                 <li><a href="<?= base_url('pages/contact'); ?>">Contact Us</a></li>
@@ -72,9 +73,10 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <h4 class="widget-title-sm foot-link">Newsletter</h4>
-                <p class="foot-link"><?= lang('app_name'); ?> respects your <a href="<?= base_url('pages/privacy') ?>"
-                                                                               style="color:#49a251;">Privacy</a></p>
+                <h4 class="widget-title-sm foot-link footer-link">Newsletter</h4>
+                <p class="foot-link footer-newsletter"><?= lang('app_name'); ?> respects your <a
+                            href="<?= base_url('pages/privacy') ?>"
+                            style="color:#49a251;">Privacy</a></p>
                 <form>
                     <div class="input-group">
                         <input type="text" class="newsletter-input form-control"
@@ -90,19 +92,19 @@
                     <p><h4 class="text text-sm foot-link">Follow us on Social Networks</h4></p>
                     <ul class="main-footer-social-list">
                         <li>
-                            <a class="fa fa-facebook" href="<?= FACEBOOK_LINK; ?>"></a>
+                            <a style="font-size: 24px" class="fab fa-facebook-square" href="<?= FACEBOOK_LINK; ?>"></a>
                         </li>
                         <li>
-                            <a class="fa fa-twitter" href="#"></a>
+                            <a style="font-size: 24px" class="fab fa-twitter" href="#"></a>
                         </li>
                         <li>
-                            <a class="fa fa-pinterest" href="#"></a>
+                            <a style="font-size: 24px" class="fab fa-pinterest" href="#"></a>
                         </li>
                         <li>
-                            <a class="fa fa-instagram" href="#"></a>
+                            <a style="font-size: 24px" class="fab fa-instagram" href="#"></a>
                         </li>
                         <li>
-                            <a class="fa fa-google-plus" href="#"></a>
+                            <a style="font-size: 24px" class="fab fa-google-plus" href="#"></a>
                         </li>
                     </ul>
                     <ul class="payment-icons-list">
@@ -111,21 +113,10 @@
                                  alt="Interswitch Payment" title="Pay with Interswitch"/>
                         </li>
                         <li>
-                            <img src="<?= base_url('assets/img/payment/visa-straight-32px.png'); ?>"
-                                 alt="Pay with Visa" title="Pay with Visa"/>
-                        </li>
-                        <li>
                             <img src="<?= base_url('assets/img/payment/mastercard-straight-32px.png'); ?>"
                                  alt="Pay with Mastercard" title="Pay with Mastercard"/>
                         </li>
-                        <li>
-                            <img src="<?= base_url('assets/img/payment/visa-electron-straight-32px.png'); ?>"
-                                 alt="Pay with Visa Electron" title="Pay with Visa-electron"/>
-                        </li>
-                        <li>
-                            <img src="<?= base_url('assets/img/payment/maestro-straight-32px.png'); ?>"
-                                 alt="Pay with Maestro" title="Pay with Maestro"/>
-                        </li>
+                        
                     </ul>
                 </div>
 

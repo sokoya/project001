@@ -433,7 +433,7 @@ hr {
 
 .navbar-main-white .navbar-main-search-submit:hover {
     background: #486d97;
-    color: whtie;
+    color: white;
 }
 
 .navbar-first {
@@ -742,7 +742,7 @@ hr {
 }
 
 .navbar-main-search {
-    width: 500px;
+    width: 100%;
     position: relative;
     -webkit-border-radius: 4px;
     border-radius: 4px;
@@ -939,8 +939,8 @@ hr {
 }
 
 .site-search::placeholder {
-    font-size: 12px;
-    font-family: Oxygen, sans-serif;
+    font-size: 14px;
+    font-family: Cabin, sans-serif;
     color: #555;
     font-weight: 500;
 }
@@ -7393,14 +7393,14 @@ input[type="color"]:focus,
     bottom: 13px;
 }
 
-@media only screen and (max-width: 768px) {
-    /* For mobile phones: */
-    #navbar-img {
-        position: relative;
-        bottom: 17px;
-        left: 127px;
-    }
-}
+/*@media only screen and (max-width: 768px) {*/
+    /*!* For mobile phones: *!*/
+    /*#navbar-img {*/
+        /*position: relative;*/
+        /*bottom: 17px;*/
+        /*left: 127px;*/
+    /*}*/
+/*}*/
 
 .navbar-before .navbar-nav > li > a:hover {
     color: #fff;
@@ -7445,7 +7445,7 @@ input[type="color"]:focus,
 
 .dropdown-menu-category-section {
     border-top: 1px solid #eeeeee;
-    width: 63.50vw;
+    width: 72vw;
     /*width: 910px;*/
 }
 

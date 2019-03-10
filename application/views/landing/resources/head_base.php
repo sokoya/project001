@@ -24,8 +24,9 @@
         <meta name="robots" content="index,follow">
     <?php endif; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="width=device-width, initial-scale=1.0 maximum-loscale=1.0, user-scalable=0" name="viewport"/>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600|Oxygen' rel='stylesheet' type='text/css'>
+    <meta content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=0" name="viewport"/>
+<!--    <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600|Oxygen|Cabin:500' rel='stylesheet' type='text/css'>
     <!--    <link rel="stylesheet" href="--><? //= base_url('assets/css/offline.css'); ?><!--">-->
     <!--    <link rel="stylesheet" href="--><? //= base_url('assets/css/offline-theme.min.css'); ?><!--">-->
     <?php if ($page == 'mobile-product' && $this->agent->is_mobile()) : ?>
@@ -95,6 +96,23 @@
         .dropdown-menu-category-section{
             height: 410px;
         }
+        #close-banner {
+            position: absolute;
+            right: 19px;
+            top: 8px;
+            cursor: pointer
+        }
+
+        .ad-banner {
+            height: 6vh;
+            width: 100%;
+            object-fit: cover
+        }
+
+        body{
+            overflow-x: hidden;
+        }
+
     </style>
     <script> let base_url = "<?= base_url(); ?>"</script>
     <!--    <link rel="manifest" href="/manifest.json" />-->

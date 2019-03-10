@@ -58,11 +58,12 @@
             <?php $this->load->view('msg_view'); ?>
         </div>
     <?php endif; ?>
+
     <div class="main-slider text-center slider_show" style="height:150px;visibility: hidden;">
         <?php foreach ($sliders as $slider) : ?>
             <a href="<?= $slider->img_link; ?>">
                 <img src="<?= SLIDER_IMAGE_PATH . $slider->image; ?>" class="img-responsive"
-                     style="margin:auto;padding:20px;"/>
+                     style="height: 15vh; width: 100%"/>
             </a>
         <?php endforeach; ?>
     </div>
@@ -221,7 +222,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('.slider_show').css({"visibility": "visible"})
+        $('.slider_show').css({"visibility": "visible"});
         $('.main-slider').slick({
             dots: true,
             infinite: true,
