@@ -63,12 +63,12 @@ Class Product_model extends CI_Model{
     function get_categories( $str = ''){
         // Get all the i
         $array = $this->slug($str);
-        $query = $this->db->query("SELECT name FROM categories WHERE id IN ('". implode("','",$array). "') LIMIT 10 ");
+        $query = $this->db->query("SELECT name, slug FROM categories WHERE id IN ('". implode("','",$array). "') LIMIT 10 ");
         if( $query->num_rows() >= 1 ) {
             return $query->result();
         }else{
             // Select all categories then
-            $query = $this->db->query("SELECT name FROM categories LIMIT 10");
+            $query = $this->db->query("SELECT name, slug FROM categories LIMIT 10");
             return $query->result();
         }
     }
@@ -266,7 +266,7 @@ Class Product_model extends CI_Model{
         return $this->db->query("SELECT name, slug, description, specifications FROM categories WHERE id IN ('".implode("','",$array)."')")->result();
     }
 
-    // "SELECT column1 FROM table WHERE column1 IN ('".implode("','",$array)."')";
+
     // Main Category prouduct listings
     // Return CI_results
     function get_products( $queries = '' , $gets = array() ){
@@ -293,7 +293,10 @@ Class Product_model extends CI_Model{
             $array = $this->slug($queries['str']);
             $select_query .= " WHERE p.category_id IN ('".implode("','",$array)."')";
 
-            if( isset($gets['q']) && !empty($gets['q']) ) {$select_query .= " AND p.product_name LIKE '%{$gets["q"]}%' "; unset($gets['q']); }
+            if( isset($gets['q']) && !empty($gets['q']) ) {
+                $q = xss_clean( $gets['q']);
+                $select_query .= " AND p.product_name LIKE '%{$q}%' "; unset($gets['q']);
+            }
             if( count($gets) ){
                 // check for brand name
                 if( isset($gets['brand_name']) && !empty($gets['brand_name'])) {

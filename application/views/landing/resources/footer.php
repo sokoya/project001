@@ -116,7 +116,7 @@
                             <img src="<?= base_url('assets/img/payment/mastercard-straight-32px.png'); ?>"
                                  alt="Pay with Mastercard" title="Pay with Mastercard"/>
                         </li>
-                        
+
                     </ul>
                 </div>
 
