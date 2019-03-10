@@ -9,7 +9,6 @@
         function gtag() {
             dataLayer.push(arguments);
         }
-
         gtag('js', new Date());
         gtag('config', 'UA-132785278-1');
     </script>
@@ -24,7 +23,7 @@
         <meta name="robots" content="index,follow">
     <?php endif; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="width=device-width, initial-scale=1.0 maximum-loscale=1.0, user-scalable=0" name="viewport"/>
+    <meta content="width=device-width, initial-scale=1.0 maximum-noscale=1.0, user-scalable=0" name="viewport"/>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600|Oxygen' rel='stylesheet' type='text/css'>
     <!--    <link rel="stylesheet" href="--><? //= base_url('assets/css/offline.css'); ?><!--">-->
     <!--    <link rel="stylesheet" href="--><? //= base_url('assets/css/offline-theme.min.css'); ?><!--">-->
