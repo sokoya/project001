@@ -280,9 +280,10 @@
             <div class="row">
                 <?php
                 $products = $this->product->randomproducts(53, 6);
-                foreach ($products as $product):
+                    foreach ($products as $product):
                     ?>
-                    <div class="col-md-2 col-xs-4 hot-row">
+<!--                    <div style="background-color: #fff;">-->
+                        <div class="col-md-2 col-xs-4 hot-row" style="background-color: #fff;">
 
                             <img class="card-max-img"
                                  src="https://res.cloudinary.com/onitshamarket/image/upload/w_260,h_280,c_pad/onitshamarket/product/<?= $product->image_name; ?>"/>
@@ -299,7 +300,9 @@
                                 <?php endif; ?>
                             </div>
 
-                    </div>
+                        </div>
+<!--                    </div>-->
+
                 <?php endforeach; ?>
             </div>
         </div>
