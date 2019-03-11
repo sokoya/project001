@@ -60,57 +60,7 @@
     <?php endif; ?>
     <meta name="google-site-verification" content="xGjxCwvClqtUIevfyrQ-HWU7OcjspMEVmXMAPcpzz7Y"/>
     <style>
-        body {
-            font-family: 'Oxygen', sans-serif !important;
-        }
-
-        .navbar-main-search-submit {
-            border: none;
-        }
-
-        .mgt_drop_menu > li {
-            height: 36px !important;
-            line-height: 48px !important;
-        }
-
-        .grey {
-            color: grey;
-        }
-
-        .banner-category {
-            box-shadow: none !important;
-            background: transparent !important;
-        }
-
-        .t_drop_menu > li {
-            height: 36px !important;
-            line-height: 48px !important;
-        }
-
-        a:hover, a:active {
-            text-decoration: none !important;
-        }
-
-        .dropdown-menu-category-section{
-            height: 410px;
-        }
-        #close-banner {
-            position: absolute;
-            right: 19px;
-            top: 8px;
-            cursor: pointer
-        }
-
-        .ad-banner {
-            height: 6vh;
-            width: 100%;
-            object-fit: cover
-        }
-
-        body{
-            overflow-x: hidden;
-        }
-
+        .mgt_drop_menu>li,.t_drop_menu>li{height:36px!important;line-height:48px!important}body{font-family:Oxygen,sans-serif!important;overflow-x:hidden}.navbar-main-search-submit{border:none}.grey{color:grey}.banner-category{box-shadow:none!important;background:0 0!important}a:active,a:hover{text-decoration:none!important}.dropdown-menu-category-section{height:410px}#close-banner{position:absolute;right:19px;top:8px;cursor:pointer}.ad-banner{height:6vh;width:100%;object-fit:cover}
     </style>
     <script> let base_url = "<?= base_url(); ?>"</script>
     <!--    <link rel="manifest" href="/manifest.json" />-->
