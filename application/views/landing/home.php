@@ -360,14 +360,14 @@
                 </div>
             </div>
         </div>
-        <img class="img-responsive" src="<?= base_url('assets/img/home/bbdre.jpg'); ?>">
+        <img class="img-responsive"  src="<?= base_url('assets/img/home/bbdre.jpg'); ?>">
         <div class="card-max">
             <div class="card-max-header">
                 <p class="card-max-title">Top Brands<a href="#" class="card-max-view-more">View more</a></p>
                 <p class="card-max-subtitle">Top brands top quality.</p>
             </div>
             <br/>
-            <div class="brand-slide" style="width: 50vw !important">
+            <div class="brand-slide">
                 <div class="row">
                     <div class="col-md-4 hidden-sm hidden-xs">
                         <img src="<?= base_url('assets/img/home/alfa.jpg'); ?>"
