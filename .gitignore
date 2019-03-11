@@ -48,3 +48,4 @@ application/production/database.php
 application/production/config.php
 application/production/database.php
 application/config/development/database.php
+application/config/development/database.php
