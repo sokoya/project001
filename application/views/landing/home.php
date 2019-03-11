@@ -2,7 +2,257 @@
 <link rel="stylesheet" href="<?= base_url('assets/plugins/slick/slick.css'); ?>">
 <link rel="stylesheet" href="<?= base_url('assets/plugins/slick/slick-theme.css'); ?>">
 <style>
-    .card-max-img:hover,.card-max-shade:hover{-webkit-box-shadow:0 5px 5px 0 rgba(176,177,193,.1);cursor:pointer}.pro_ad{min-height:auto!important}.card-max{margin-top:30px;margin-bottom:30px}.home_slider img{margin:auto;width:100%;max-height:500px;height:auto;min-height:auto}.home_slider{height:auto;max-height:450px;min-height:auto}.card-max-header{text-align:left}.card-max-title{color:#0a0a0a;font-size:24px;font-family:Cabin,sans-serif;text-transform:uppercase;margin-bottom:2px}.card-max-subtitle{color:#3d3d3d;font-size:17px;font-family:HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif}.card-max-discount,.card-max-price{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif}.card-max-img{height:auto;width:auto;max-width:180px;max-height:180px;border-radius:10px}.card-max-img:hover{-webkit-filter:brightness(96%);filter:brightness(96%);box-shadow:0 5px 5px 0 rgba(176,177,193,.1)}.card-max-side{height:auto;width:auto;max-width:330px;max-height:610px}.card-max-text{display:none;margin-top:-180px;margin-left:2px;position:absolute;border-radius:10px;height:90%;width:90%;padding:20px;text-align:center;background:rgba(0,0,0,.6)}.card-max-price{font-size:18px;color:#fff;font-weight:600;margin:auto}.card-max-discount{font-size:14px;color:#fafafa;font-weight:500;margin:20px auto auto;text-decoration:line-through}.card-max-view-more{float:right;font-size:13px;font-family:HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;color:#444;z-index:1;position:relative;top:45px}.card-max-shade-text,.max-card-product,.max-card-product-price,.max-top{font-family:"Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:600}.card-max-view-more:hover{text-decoration:none;color:#0b6427}.max-inverse{background:#fff;border:1px solid #dadada}.card-max-shade{height:100%!important;width:100%;margin-top:20px;max-width:150px;max-height:150px}.card-max-shade:hover{-webkit-filter:brightness(96%);filter:brightness(96%);box-shadow:0 5px 5px 0 rgba(176,177,193,.1)}.card-max-shade-text{font-size:14px;color:#0b0b0b;margin-bottom:0!important;text-align:center}.max-img{margin-right:-15px;margin-left:-15px;padding-top:30px;height:auto;width:auto;min-height:200px;cursor:pointer;transition:transform .2s}.max-img:hover{-webkit-box-shadow:0 5px 5px 0 rgba(176,177,193,.1);box-shadow:0 5px 5px 0 rgba(176,177,193,.1);z-index:99999;transform:scale(1.02)}.max-top{color:#222}.max-card-product{position:relative;top:6px;left:-3px;margin:0;font-size:13px}.max-card-product-img{width:40px;height:40px;position:relative;left:-12px}.max-product-category{padding-left:3px;padding-right:0;margin-bottom:0;padding-bottom:0}.max-product-row{padding-left:5px;padding-top:3px;padding-bottom:4px;border-bottom:1px solid #dadada;border-left:1px solid #dadada;position:relative;left:12px}.max-card-product-price{font-size:12px;position:relative;left:-3px;top:4px}.max-card-link>.col-md-10{color:#333}.max-card-link>.col-md-10:hover{color:#0b6427}.btn-dark,.btn-dark:focus,.btn-dark:hover{color:#fff}.btn-dark{border-radius:0;background:#07aa5e;padding:10px;left:-3px;width:223px;height:42px}.hot-row{margin-bottom:10px;padding:10px}.btn_view_product{color:#fff;border:2px solid #fff;text-decoration:none;padding:10px;position:absolute;width:fit-content;margin-left:-63px;margin-top:20px}.btn_view_product:hover{color:#000;font-weight:700;background-color:#fff;text-decoration:none;padding:10px;cursor:pointer}
+    .card-max-img:hover, .card-max-shade:hover {
+        -webkit-box-shadow: 0 5px 5px 0 rgba(176, 177, 193, .1);
+        cursor: pointer
+    }
+
+    .pro_ad {
+        min-height: auto !important
+    }
+
+    .card-max {
+        margin-top: 30px;
+        margin-bottom: 30px
+    }
+
+    .home_slider img {
+        margin: auto;
+        width: 100%;
+        max-height: 500px;
+        height: auto;
+        min-height: auto
+    }
+
+    .home_slider {
+        height: auto;
+        max-height: 450px;
+        min-height: auto
+    }
+
+    .card-max-header {
+        text-align: left
+    }
+
+    .card-max-title {
+        color: #0a0a0a;
+        font-size: 24px;
+        font-family: Cabin, sans-serif;
+        text-transform: uppercase;
+        margin-bottom: 2px
+    }
+
+    .card-max-subtitle {
+        color: #3d3d3d;
+        font-size: 17px;
+        font-family: HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif
+    }
+
+    .card-max-discount, .card-max-price {
+        font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif
+    }
+
+    .card-max-img {
+        height: auto;
+        width: auto;
+        max-width: 180px;
+        max-height: 180px;
+        border-radius: 10px
+    }
+
+    .card-max-img:hover {
+        -webkit-filter: brightness(96%);
+        filter: brightness(96%);
+        box-shadow: 0 5px 5px 0 rgba(176, 177, 193, .1)
+    }
+
+    .card-max-side {
+        height: auto;
+        width: auto;
+        max-width: 330px;
+        max-height: 610px
+    }
+
+    .card-max-text {
+        display: none;
+        margin-top: -180px;
+        margin-left: 2px;
+        position: absolute;
+        border-radius: 10px;
+        height: 90%;
+        width: 90%;
+        padding: 20px;
+        text-align: center;
+        background: rgba(0, 0, 0, .6)
+    }
+
+    .card-max-price {
+        font-size: 18px;
+        color: #fff;
+        font-weight: 600;
+        margin: auto
+    }
+
+    .card-max-discount {
+        font-size: 14px;
+        color: #fafafa;
+        font-weight: 500;
+        margin: 20px auto auto;
+        text-decoration: line-through
+    }
+
+    .card-max-view-more {
+        float: right;
+        font-size: 13px;
+        font-family: HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        color: #444;
+        z-index: 1;
+        position: relative;
+        top: 45px
+    }
+
+    .card-max-shade-text, .max-card-product, .max-card-product-price, .max-top {
+        font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 600
+    }
+
+    .card-max-view-more:hover {
+        text-decoration: none;
+        color: #0b6427
+    }
+
+    .max-inverse {
+        background: #fff;
+        border: 1px solid #dadada
+    }
+
+    .card-max-shade {
+        height: 100% !important;
+        width: 100%;
+        margin-top: 20px;
+        max-width: 150px;
+        max-height: 150px
+    }
+
+    .card-max-shade:hover {
+        -webkit-filter: brightness(96%);
+        filter: brightness(96%);
+        box-shadow: 0 5px 5px 0 rgba(176, 177, 193, .1)
+    }
+
+    .card-max-shade-text {
+        font-size: 14px;
+        color: #0b0b0b;
+        margin-bottom: 0 !important;
+        text-align: center
+    }
+
+    .max-img {
+        margin-right: -15px;
+        margin-left: -15px;
+        padding-top: 30px;
+        height: auto;
+        width: auto;
+        min-height: 200px;
+        cursor: pointer;
+        transition: transform .2s
+    }
+
+    .max-img:hover {
+        -webkit-box-shadow: 0 5px 5px 0 rgba(176, 177, 193, .1);
+        box-shadow: 0 5px 5px 0 rgba(176, 177, 193, .1);
+        z-index: 99999;
+        transform: scale(1.02)
+    }
+
+    .max-top {
+        color: #222
+    }
+
+    .max-card-product {
+        position: relative;
+        top: 6px;
+        left: -3px;
+        margin: 0;
+        font-size: 13px
+    }
+
+    .max-card-product-img {
+        width: 40px;
+        height: 40px;
+        position: relative;
+        left: -12px
+    }
+
+    .max-product-category {
+        padding-left: 3px;
+        padding-right: 0;
+        margin-bottom: 0;
+        padding-bottom: 0
+    }
+
+    .max-product-row {
+        padding-left: 5px;
+        padding-top: 3px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #dadada;
+        border-left: 1px solid #dadada;
+        position: relative;
+        left: 12px
+    }
+
+    .max-card-product-price {
+        font-size: 12px;
+        position: relative;
+        left: -3px;
+        top: 4px
+    }
+
+    .max-card-link > .col-md-10 {
+        color: #333
+    }
+
+    .max-card-link > .col-md-10:hover {
+        color: #0b6427
+    }
+
+    .btn-dark, .btn-dark:focus, .btn-dark:hover {
+        color: #fff
+    }
+
+    .btn-dark {
+        border-radius: 0;
+        background: #07aa5e;
+        padding: 10px;
+        left: -3px;
+        width: 223px;
+        height: 42px
+    }
+
+    .hot-row {
+        margin-bottom: 10px;
+        padding: 10px
+    }
+
+    .btn_view_product {
+        color: #fff;
+        border: 2px solid #fff;
+        text-decoration: none;
+        padding: 10px;
+        position: absolute;
+        width: fit-content;
+        margin-left: -63px;
+        margin-top: 20px
+    }
+
+    .btn_view_product:hover {
+        color: #000;
+        font-weight: 700;
+        background-color: #fff;
+        text-decoration: none;
+        padding: 10px;
+        cursor: pointer
+    }
 </style>
 </head>
 <body>
@@ -252,27 +502,27 @@
                     <div class="col-md-10">
                         <div class="row" style="margin-left: 10px">
                             <?php
-                                $products = $this->product->randomproducts(14, 4);
-                                foreach( $products as $product) : ?>
+                            $products = $this->product->randomproducts(53, 4);
+                            foreach ($products as $product) : ?>
                                 <div class="col-md-3 col-sm-3 col-xs-3  card-product">
                                     <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
                                         <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
                                     <?php endif; ?>
                                     <img class="card-product-img lazy"
                                          data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
-                                         style="max-width: 220px; max-height: 220px;"
+                                         style="max-width: 220px; max-height: 170px !important;"
                                          src="<?= base_url('assets/img/load.gif'); ?>"
                                          alt="<?= $product->product_name; ?>"
                                          title="<?= $product->product_name; ?>">
-                                    <p class="card-product-title"><?= character_limiter( $product->product_name, 20);?></p>
+                                    <p class="card-product-title"><?= character_limiter($product->product_name, 20); ?></p>
                                     <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
-                                        <p class="card-product-price">&#8358; <?= ngn($product->sale_price); ?> </p>
+                                        <p class="card-product-price"> <?= ngn($product->sale_price); ?> </p>
                                         <p class="card-product-price-discount"> <?= ngn($product->discount_price); ?> </p>
                                     <?php else : ?>
-                                        <p class="card-product-price"> <?= ngn($product->sale_price);?> </p>
+                                        <p class="card-product-price"> <?= ngn($product->sale_price); ?> </p>
                                     <?php endif; ?>
                                 </div>
-                                <?php endforeach; ?>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
@@ -284,28 +534,28 @@
                         <div class="row" style="margin-left: 10px">
                             <div class="col-md-3 col-sm-3 col-xs-3  card-product">
                                 <p class="product-discount-overlay">32% <span>off</span></p>
-                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
+                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>">
                                 <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
                                 <p class="card-product-price-discount">&#8358; 95,000 </p>
                                 <p class="card-product-price">&#8358; 12,000 </p>
                             </div>
                             <div class="col-md-3 col-sm-3 col-xs-3  card-product">
                                 <p class="product-discount-overlay">9% <span>off</span></p>
-                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
+                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>">
                                 <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
                                 <p class="card-product-price-discount">&#8358; 52,000 </p>
                                 <p class="card-product-price">&#8358; 31,000 </p>
                             </div>
                             <div class="col-md-3 col-sm-3 col-xs-3  card-product">
                                 <p class="product-discount-overlay">5% <span>off</span></p>
-                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
+                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>">
                                 <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
                                 <p class="card-product-price-discount">&#8358; 55,000 </p>
                                 <p class="card-product-price">&#8358; 18,000 </p>
                             </div>
                             <div class="col-md-3 col-sm-3 col-xs-3  card-product">
                                 <p class="product-discount-overlay">6% <span>off</span></p>
-                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
+                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>">
                                 <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
                                 <p class="card-product-price-discount">&#8358; 45,000 </p>
                                 <p class="card-product-price">&#8358; 30,000 </p>
@@ -321,28 +571,28 @@
                         <div class="row" style="margin-left: 10px">
                             <div class="col-md-3 col-sm-3 col-xs-3  card-product">
                                 <p class="product-discount-overlay">6% <span>off</span></p>
-                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
+                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>">
                                 <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
                                 <p class="card-product-price-discount">&#8358; 45,000 </p>
                                 <p class="card-product-price">&#8358; 30,000 </p>
                             </div>
                             <div class="col-md-3 col-sm-3 col-xs-3  card-product">
                                 <p class="product-discount-overlay">6% <span>off</span></p>
-                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
+                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>">
                                 <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
                                 <p class="card-product-price-discount">&#8358; 45,000 </p>
                                 <p class="card-product-price">&#8358; 30,000 </p>
                             </div>
                             <div class="col-md-3 col-sm-3 col-xs-3  card-product">
                                 <p class="product-discount-overlay">6% <span>off</span></p>
-                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
+                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>">
                                 <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
                                 <p class="card-product-price-discount">&#8358; 45,000 </p>
                                 <p class="card-product-price">&#8358; 30,000 </p>
                             </div>
                             <div class="col-md-3 col-sm-3 col-xs-3  card-product">
                                 <p class="product-discount-overlay">6% <span>off</span></p>
-                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
+                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>">
                                 <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
                                 <p class="card-product-price-discount">&#8358; 45,000 </p>
                                 <p class="card-product-price">&#8358; 30,000 </p>
@@ -354,7 +604,7 @@
 
         </div>
     </div>
-    
+
     <div class="gap">
         <div class="container">
             <p class="text-center about-text">Onitshamarket.com is a dynamic e-commerce platform that is designed to
@@ -409,8 +659,8 @@
     $(document).ready(function () {
         $('.brand-slide').slick({
             infinite: true,
-            autoplay: true,
-            autoplaySpeed: 3000,
+            // autoplay: true,
+            // autoplaySpeed: 3000,
             fade: true,
             cssEase: 'linear',
             draggable: true,
