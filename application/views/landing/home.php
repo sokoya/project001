@@ -231,7 +231,6 @@
     .hot-row {
         margin-bottom: 10px;
         padding: 10px;
-        background-color: #fff;
     }
 
     .btn_view_product {
@@ -280,7 +279,7 @@
             </div>
             <div class="row">
                 <?php
-                $products = $this->product->randomproducts(53, 4);
+                $products = $this->product->randomproducts(53, 6);
                 foreach ($products as $product):
                     ?>
                     <div class="col-md-2 col-xs-4 hot-row">
@@ -316,10 +315,13 @@
                 </div>
                 <div class="col-md-10">
                     <div class="row">
-                        <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
-                            <p class="card-cat-text">Women's Fashion</p>
-                            <img
-                                    src="<?= base_url('assets/img/home/ee.jpg'); ?>"></div>
+
+                        <a href="<?= base_url(); ?>">
+                            <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                                <p class="card-cat-text">Women's Fashion</p>
+                                <img src="<?= base_url('assets/img/home/ee.jpg'); ?>">
+                            </div>
+                        </a>
                         <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
                             <p class="card-cat-text">Phones Accessories</p>
                             <img
@@ -482,8 +484,8 @@
                                          title="<?= $product->product_name; ?>">
                                     <p class="card-product-title"><?= character_limiter($product->product_name, 30); ?></p>
                                     <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
-                                        <p class="card-product-price"><?= ngn($product->sale_price); ?> </p>
-                                        <p class="card-product-price-discount"> <?= ngn($product->discount_price); ?> </p>
+                                        <p class="card-product-price"><?= ngn($product->discount_price); ?> </p>
+                                        <p class="card-product-price-discount"> <?= ngn($product->sale_price); ?></p>
                                     <?php else : ?>
                                         <p class="card-product-price"> <?= ngn($product->sale_price); ?> </p>
                                     <?php endif; ?>
