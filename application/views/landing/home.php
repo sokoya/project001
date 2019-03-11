@@ -74,14 +74,16 @@
     }
 
     .card-max-text {
+        top: 0;
+        left: 0;
         display: none;
-        margin-top: -180px;
-        margin-left: 2px;
+        /*margin-top: -180px;*/
+        /*margin-left: 2px;*/
         position: absolute;
-        border-radius: 10px;
-        height: 90%;
-        width: 90%;
-        padding: 20px;
+        /*border-radius: 10px;*/
+        height: 100%;
+        width: 100%;
+        /*padding: 20px;*/
         text-align: center;
         background: rgba(0, 0, 0, .6)
     }
@@ -280,28 +282,35 @@
             <div class="row">
                 <?php
                 $products = $this->product->randomproducts(53, 6);
-                    foreach ($products as $product):
+                foreach ($products as $product):
                     ?>
-<!--                    <div style="background-color: #fff;">-->
-                        <div class="col-md-2 col-xs-4 hot-row" style="background-color: #fff;">
+                    <!--                    <div style="background-color: #fff;">-->
+                    <div class="col-md-2 col-xs-4 hot-row"
+                         style="background-color: #fff; border-right: 2px solid #f6f6f6; position: relative;">
 
-                            <img class="card-max-img"
-                                 src="https://res.cloudinary.com/onitshamarket/image/upload/w_260,h_280,c_pad/onitshamarket/product/<?= $product->image_name; ?>"/>
-                            <div class="card-max-text">
+                        <img class="card-max-img"
+                             src="https://res.cloudinary.com/onitshamarket/image/upload/w_260,h_280,c_pad/onitshamarket/product/<?= $product->image_name; ?>"/>
+                        <div class="card-max-text">
+                            <div style="margin-top: 40px">
                                 <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
                                     <p class="card-max-discount"><?= ngn($product->sale_price); ?></p>
                                     <p class="card-max-price"><?= ngn($product->sale_price); ?></p>
-                                    <a class="btn_view_product" href="<?= base_url(urlify($product->product_name, $product->id)); ?>"><i class="fa fa-search"></i>View
+                                    <a class="btn_view_product"
+                                       href="<?= base_url(urlify($product->product_name, $product->id)); ?>"><i
+                                                class="fa fa-search"></i>View
                                         Product</a>
                                 <?php else : ?>
                                     <p class="card-max-price"><?= ngn($product->discount_price); ?></p>
-                                    <a class="btn_view_product" href="<?= base_url(urlify($product->product_name, $product->id)); ?>"><i class="fa fa-search"></i>View
+                                    <a class="btn_view_product"
+                                       href="<?= base_url(urlify($product->product_name, $product->id)); ?>"><i
+                                                class="fa fa-search"></i>View
                                         Product</a>
                                 <?php endif; ?>
                             </div>
-
                         </div>
-<!--                    </div>-->
+
+                    </div>
+                    <!--                    </div>-->
 
                 <?php endforeach; ?>
             </div>
