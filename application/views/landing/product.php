@@ -102,7 +102,7 @@
                                    class="">
                                     <img
                                             style="max-width:95%"
-                                            src="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
+                                            src="https://res.cloudinary.com/onitshamarket/image/upload/w_510,h_500,c_pad/onitshamarket/product/<?= $featured_image->image_name; ?>"
                                             alt="<?= $product->product_name; ?>"
                                             title="<?= ucwords($product->product_name) ?>"/>
                                 </a>
@@ -118,7 +118,7 @@
                                                title="<?= ucwords($product->product_name) ?>">
                                                 <img
                                                         style="width:95%"
-                                                        src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
+                                                        src="https://res.cloudinary.com/onitshamarket/image/upload/w_510,h_500,c_pad/onitshamarket/product/<?= $gallery->image_name; ?>"
                                                         alt="Onitshamarket <?= $category_detail->name; ?>"
                                                         title="<?= ucwords($product->product_name) ?>"/>
                                             </a>
@@ -133,7 +133,7 @@
                             <div style="margin:auto;">
                                 <img
                                         style="max-width:40px;"
-                                        src="<?= PRODUCTS_IMAGE_PATH . $featured_image->image_name; ?>"
+                                        src="https://res.cloudinary.com/onitshamarket/image/upload/w_510,h_500,c_pad/onitshamarket/product/<?= $featured_image->image_name; ?>"
                                         alt="<?= character_limiter($product->product_name, 10); ?>"
                                         title="<?= ucwords($product->product_name) ?>"/>
                             </div>
@@ -246,14 +246,14 @@
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-6">
                                         <ul style="float: right; padding: 7px;" class="product-page-price product-page-share-item">
-                                            <li style="padding: 5px;">
-                                                <a class="fab fa-facebook-f" href="#"></a>
+                                            <li>
+                                                <a style="font-size: 24px" class="fab fa-facebook-square" href="<?= FACEBOOK_LINK; ?>"></a>
                                             </li>
-                                            <li style="padding: 5px;">
-                                                <a class="fab fa-twitter" href="#"></a>
+                                            <li>
+                                                <a style="font-size: 24px" class="fab fa-twitter" href="<?= TWITTER_LINK; ?>"></a>
                                             </li>
-                                            <li style="padding: 5px;">
-                                                <a class="fab fa-instagram" href="#"></a>
+                                            <li>
+                                                <a style="font-size: 24px" class="fab fa-instagram" href="<?= INSTAGRAM_LINK; ?>"></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -712,7 +712,7 @@
                                     <div class="product-img-wrap">
                                         <img class="product-img lazy"
                                              src="<?= base_url('assets/load.gif'); ?>"
-                                             data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $like->image_name; ?>"
+                                             data-src="https://res.cloudinary.com/demo/image/upload/x_355,y_410,w_340,h_250,c_crop/w_430,h_410,c_pad/<?= $like->image_name; ?>"
                                              alt="<?= $like->product_name; ?>"
                                              title="<?= $like->product_name; ?>">
                                     </div>
