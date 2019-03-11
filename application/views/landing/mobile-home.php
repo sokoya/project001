@@ -6,7 +6,22 @@
     .gap_small {
         height: 40px;
     }
-
+    .card-product {
+        background: #fff;
+        min-height: 270px;
+        border: 1px solid #eee;
+        padding-top: 20px;
+    }
+    .card-product>img {
+        object-fit: unset;
+        margin: auto;
+        /*width: 15vh;*/
+    }
+    .card-product-img {
+         min-width: unset !important;
+         max-width: unset !important;
+        height:auto;
+    }
     @media screen and (min-width: 555px;) {
         .gap_small {
             height: 85px !important;
@@ -168,6 +183,7 @@
                         src="<?= base_url('assets/img/home/ex.jpg'); ?>" class="img-responsive"></div>
         </div>
     </div>
+    <div class="gap_small"></div>
     <?php foreach ($category_listing as $listing) :
         $products = $this->product->randomproducts((int)$listing->category_id, 12);
         ?>
