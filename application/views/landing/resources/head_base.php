@@ -9,7 +9,6 @@
         function gtag() {
             dataLayer.push(arguments);
         }
-
         gtag('js', new Date());
         gtag('config', 'UA-132785278-1');
     </script>
@@ -24,8 +23,8 @@
         <meta name="robots" content="index,follow">
     <?php endif; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="width=device-width, initial-scale=1.0 maximum-loscale=1.0, user-scalable=0" name="viewport"/>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600|Oxygen' rel='stylesheet' type='text/css'>
+    <meta content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=0" name="viewport"/>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600|Oxygen|Cabin:500' rel='stylesheet' type='text/css'>
     <!--    <link rel="stylesheet" href="--><? //= base_url('assets/css/offline.css'); ?><!--">-->
     <!--    <link rel="stylesheet" href="--><? //= base_url('assets/css/offline-theme.min.css'); ?><!--">-->
     <?php if ($page == 'mobile-product' && $this->agent->is_mobile()) : ?>
@@ -61,40 +60,7 @@
     <?php endif; ?>
     <meta name="google-site-verification" content="xGjxCwvClqtUIevfyrQ-HWU7OcjspMEVmXMAPcpzz7Y"/>
     <style>
-        body {
-            font-family: 'Oxygen', sans-serif !important;
-        }
-
-        .navbar-main-search-submit {
-            border: none;
-        }
-
-        .mgt_drop_menu > li {
-            height: 36px !important;
-            line-height: 48px !important;
-        }
-
-        .grey {
-            color: grey;
-        }
-
-        .banner-category {
-            box-shadow: none !important;
-            background: transparent !important;
-        }
-
-        .t_drop_menu > li {
-            height: 36px !important;
-            line-height: 48px !important;
-        }
-
-        a:hover, a:active {
-            text-decoration: none !important;
-        }
-
-        .dropdown-menu-category-section{
-            height: 410px;
-        }
+        .mgt_drop_menu>li,.t_drop_menu>li{height:36px!important;line-height:48px!important}body{font-family:Oxygen,sans-serif!important;overflow-x:hidden}.navbar-main-search-submit{border:none}.grey{color:grey}.banner-category{box-shadow:none!important;background:0 0!important}a:active,a:hover{text-decoration:none!important}.dropdown-menu-category-section{height:410px}#close-banner{position:absolute;right:19px;top:8px;cursor:pointer}.ad-banner{height:6vh;width:100%;object-fit:cover}
     </style>
     <script> let base_url = "<?= base_url(); ?>"</script>
     <!--    <link rel="manifest" href="/manifest.json" />-->

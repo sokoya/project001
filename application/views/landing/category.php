@@ -117,7 +117,7 @@
                     <div class="category-selections clearfix">
                         <a class="btn btn-custom-primary" href="<?= base_url('catalog/' . urlify($category_detail->name) . '/?order_by=best_rating'); ?>">Best
                             Rating</a>
-                        <a class="btn btn-custom-primary" title="Filter by best seller" href="<?= base_url(); ?>">Best
+                        <a class="btn btn-custom-primary" title="Filter by best seller" href="<?= current_url(); ?>">Best
                             Seller</a>
                     </div>
                 </header>
@@ -135,7 +135,7 @@
                                 <li></li>
                                 <?php foreach ($sub_categories as $category) : ?>
                                     <li>
-                                        <a href="<?= base_url('catalog/' . urlify($category->name) . '/'); ?>">
+                                        <a href="<?= base_url('catalog/' . $category->slug . '/'); ?>">
                                             <?= $category->name; ?>
                                         </a>
                                     </li>
@@ -154,7 +154,7 @@
                                         <label class="tree-input">
                                             <input class="filter" type="checkbox" data-type="brand_name"
                                                    name="filterset"
-                                                   data-value="<?= trim($brand->brand_name); ?>"><?= ucfirst($brand->brand_name); ?>
+                                                   data-value="<?= trim(strtolower($brand->brand_name)); ?>"><?= ucfirst($brand->brand_name); ?>
                                             <span class="checkmark"></span>
                                             <span class="category-filters-amount">(<?= $brand->brand_count; ?>)</span>
                                         </label>
@@ -170,7 +170,7 @@
                                         <label class="tree-input">
                                             <input class="filter" type="checkbox" data-type="main_colour"
                                                    name="filterset"
-                                                   data-value="<?= trim($colour->colour_name); ?>"/><?= ucfirst($colour->colour_name); ?>
+                                                   data-value="<?= trim(strtolower($colour->colour_name)); ?>"/><?= ucfirst($colour->colour_name); ?>
                                             <span class="checkmark"></span>
                                             <span class="category-filters-amount">(<?= $colour->colour_count; ?>)</span>
                                         </label>
@@ -202,8 +202,8 @@
                                                     <div class="carrito-checkbox">
                                                         <label class="tree-input">
                                                             <input class="filter" type="checkbox" name="filterset"
-                                                                   data-type="<?= trim($feature); ?>"
-                                                                   data-value="<?= trim(preg_replace("/[^A-Za-z0-9-]/", '_', $value)) ?>"/><?= $value; ?>
+                                                                   data-type="<?= trim(strtolower($feature)); ?>"
+                                                                   data-value="<?= trim(preg_replace("/[^a-z0-9-]/", '_', strtolower($value))) ?>"/><?= $value; ?>
                                                             <span class="checkmark"></span>
                                                         </label>
                                                     </div>
@@ -230,6 +230,9 @@
                                 Wait! </strong>
                         </div>
                     </div>
+                    <?php if( count( $products) < 1 ): ?>
+                        <h2 class="text-center">Oops! No active product on this section, please filter again.</h2>
+                    <?php endif; ?>
                     <div id="category_body">
                         <div class="row filter_data" data-gutter="15">
                             <?php $p_count = 0;
@@ -324,7 +327,6 @@
                                 </div>
                             <?php endforeach; ?>
                         </div>
-
                         <div class="row">
                             <div class="col-md-6 col-md-offset-3">
                                 <?= $pagination ?>

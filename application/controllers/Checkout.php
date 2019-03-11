@@ -170,6 +170,7 @@ class Checkout extends MY_Controller
                     $res['billing_address_id'] = $address_id;
                     $res['delivery_charge'] = $billing_amount;
                     $res['commission'] = $commission;
+                    $res['payment_made'] = 'pending';
                     $res['amount'] = $product['price'];
                     $res['txnref'] = $txn_ref;
                     array_push( $data, $res );
@@ -210,7 +211,6 @@ class Checkout extends MY_Controller
                     }
 
                     // Send mail to admin
-
                     $this->session->set_userdata(array('order_code' => $order_code, 'txn_ref' => $txn_ref, 'amount' => $amt));
                     $return['status'] = 'success';
                     echo json_encode($return);
@@ -353,7 +353,7 @@ class Checkout extends MY_Controller
             $RetrievalReferenceNumber = (isset($response['RetrievalReferenceNumber'])) ? $response['RetrievalReferenceNumber'] : null;
             $row = $this->product->get_row('orders', 'status', array('order_code' => $order_code));
             $json_array = json_decode($row->status, true);
-            $array = array("cancelled" => array('msg' => "Order payment was successful: {$response['ResponseDescription']}", 'datetime' => get_now()));
+            $array = array("success" => array('msg' => "Order payment was successful: {$response['ResponseDescription']}", 'datetime' => get_now()));
             $status_array = array_merge($json_array, $array);
             $status_array = json_encode($status_array);
             $update_data = array(
