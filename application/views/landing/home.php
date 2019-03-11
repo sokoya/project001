@@ -360,7 +360,7 @@
                 </div>
             </div>
         </div>
-        <img class="img-responsive"  src="<?= base_url('assets/img/home/bbdre.jpg'); ?>">
+        <img class="img-responsive" src="<?= base_url('assets/img/home/banner_ad.png'); ?>">
         <div class="card-max">
             <div class="card-max-header">
                 <p class="card-max-title">Top Brands<a href="#" class="card-max-view-more">View more</a></p>
@@ -370,8 +370,8 @@
             <div class="brand-slide">
                 <div class="row">
                     <div class="col-md-4 hidden-sm hidden-xs">
-                        <img src="<?= base_url('assets/img/home/alfa.jpg'); ?>"
-                             style="display: block; height: 310px; width: auto; max-width: 400px; object-fit: cover">
+                        <img class="top_brand_image" src="<?= base_url('assets/img/home/top_brands.png'); ?>"
+                             style="display: block; height: 310px; width: auto; max-width: 400px; object-fit: contain">
                     </div>
                     <div class="col-md-8">
                         <div class="row" style="margin-left: 10px">
@@ -475,7 +475,7 @@
             <div class="brand-slide">
                 <div class="row">
                     <div class="col-md-2 hidden-sm hidden-xs">
-                        <img src="<?= base_url('assets/img/home/splash.webp'); ?>" style="min-height: 320px">
+                        <img src="<?= base_url('assets/img/home/left_pane_2.jpg'); ?>" style="min-height: 320px">
                     </div>
                     <div class="col-md-10">
                         <div class="row" style="margin-left: 10px">
