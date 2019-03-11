@@ -268,7 +268,7 @@
                                                 </div>
                                             </div>
                                             <img class="product-img lazy cat-lazy"
-                                                 data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
+                                                 data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?=$product->image_name; ?>"
                                                  style=""
                                                  src="<?= base_url('assets/img/load.gif'); ?>"
                                                  alt="<?= $product->product_name; ?>"
