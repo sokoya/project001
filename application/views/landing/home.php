@@ -227,8 +227,8 @@
     }
 
     .hot-row {
-        /*margin-bottom: 10px;*/
-        /*padding: 10px;*/
+        margin-bottom: 10px;
+        padding: 10px;
     }
 
     .btn_view_product {
@@ -275,14 +275,13 @@
                 <p class="card-max-title">Hot Sales<a href="#" class="card-max-view-more">View more</a></p>
                 <p class="card-max-subtitle">Great items, Affordable Prices</p>
             </div>
-            <div class="container">
-            <div class="row" style="width: 100%">
+            <div class="row">
                 <?php
                 $products = $this->product->randomproducts(53, 6);
                 foreach ($products as $product):
                     ?>
                     <!--                    <div style="background-color: #fff;">-->
-                    <div class="col-md-2 col-xs-4"
+                    <div class="col-md-2 col-xs-4 hot-row"
                          style="background-color: #fff; border-right: 2px solid #f6f6f6; position: relative;">
 
                         <img class="card-max-img"
@@ -311,8 +310,6 @@
 
                 <?php endforeach; ?>
             </div>
-            </div>
-
         </div>
         <div class="card-max">
             <div class="card-max-header">
@@ -325,7 +322,8 @@
                     <img src="<?= base_url('assets/img/home/splash.webp'); ?>" style="max-height: 100%;">
                 </div>
                 <div class="col-md-10">
-                    <div class="row" style="margin-left: 1px">
+                    <div class="row">
+
                         <a href="<?= base_url(); ?>">
                             <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
                                 <p class="card-cat-text">Women's Fashion</p>
@@ -369,7 +367,7 @@
                 <p class="card-max-subtitle">Top brands top quality.</p>
             </div>
             <br/>
-            <div class="brand-slide">
+            <div class="brand-slide" style="width: 50vw !important">
                 <div class="row">
                     <div class="col-md-4 hidden-sm hidden-xs">
                         <img src="<?= base_url('assets/img/home/alfa.jpg'); ?>"
