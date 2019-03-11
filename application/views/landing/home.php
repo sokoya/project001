@@ -132,7 +132,7 @@
                 </div>
             </div>
         </div>
-        <img src="<?= base_url('assets/img/home/bbdre.jpg'); ?>">
+        <img class="img-responsive" src="<?= base_url('assets/img/home/bbdre.jpg'); ?>">
         <div class="card-max">
             <div class="card-max-header">
                 <p class="card-max-title">Top Brands<a href="#" class="card-max-view-more">View more</a></p>
@@ -254,7 +254,7 @@
                             <?php
                             $products = $this->product->randomproducts(53, 4);
                             foreach ($products as $product) : ?>
-                                <div class="col-md-3 col-sm-3 col-xs-3  card-product">
+                                <div class="col-md-3 col-sm-3 col-xs-3  card-product card-product-alt">
                                     <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
                                         <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
                                     <?php endif; ?>
