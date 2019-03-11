@@ -6,17 +6,26 @@
     .gap_small {
         height: 40px;
     }
-    @media screen and (min-width:555px;){
+
+    @media screen and (min-width: 555px;) {
         .gap_small {
             height: 85px !important;
         }
+
         .col-img-3 {
             height: auto !important;
         }
     }
-.gap_wide{
-    height:55px;
-}
+
+    .img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+        height: 12vh;
+        width: 100%;
+    }
+
+    .gap_wide {
+        height: 55px;
+    }
+
     .col-img-3:hover, .col-img-3 > img:hover {
         cursor: pointer;
         box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
@@ -28,7 +37,7 @@
         margin-top: 5px;
         margin-left: 5px;
         color: #888888;
-        font-weight:700;
+        font-weight: 700;
     }
 
     .col-img-3 {
