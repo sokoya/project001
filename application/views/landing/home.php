@@ -566,8 +566,8 @@
     $(document).ready(function () {
         $('.brand-slide').slick({
             infinite: true,
-            // autoplay: true,
-            // autoplaySpeed: 3000,
+            autoplay: true,
+            autoplaySpeed: 3000,
             fade: true,
             cssEase: 'linear',
             draggable: true,

@@ -10,6 +10,9 @@
         placeholders.push(placeholder);
         setTimeout(cycle, 4000);
     })();
+    $('#close-banner').on('click', function () {
+        $('.ad-banner').remove();
+    });
 </script>
 <?php if (!in_array($page, array('login', 'create', 'reset_password', 'terms', 'privacy', 'contact', 'agreement', 'contact'))) : ?>
     <script src="<?= base_url('assets/js/owl.carousel.min.js'); ?>"></script>
