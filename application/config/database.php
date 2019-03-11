@@ -98,6 +98,6 @@ if( ENVIRONMENT == 'production'){
 }else{
     // development
     $db['default']['username'] = 'root';
-    $db['default']['password'] = 'root';
+    $db['default']['password'] = '';
     $db['default']['database'] = 'onitshamarket';
 }
