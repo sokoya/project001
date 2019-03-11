@@ -258,15 +258,13 @@
                                     <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
                                         <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
                                     <?php endif; ?>
-                                    <img class="card-product-img lazy"
-                                         data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
-                                         style="max-width: 220px; max-height: 220px;"
-                                         src="<?= base_url('assets/img/load.gif'); ?>"
+                                    <img class="card-product-img"
+                                         src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
                                          alt="<?= $product->product_name; ?>"
                                          title="<?= $product->product_name; ?>">
-                                    <p class="card-product-title"><?= character_limiter( $product->product_name, 20);?></p>
+                                    <p class="card-product-title"><?= character_limiter( $product->product_name, 30);?></p>
                                     <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
-                                        <p class="card-product-price">&#8358; <?= ngn($product->sale_price); ?> </p>
+                                        <p class="card-product-price"><?= ngn($product->sale_price); ?> </p>
                                         <p class="card-product-price-discount"> <?= ngn($product->discount_price); ?> </p>
                                     <?php else : ?>
                                         <p class="card-product-price"> <?= ngn($product->sale_price);?> </p>
@@ -275,81 +273,7 @@
                                 <?php endforeach; ?>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2 hidden-sm hidden-xs">
-                        <img src="<?= base_url('assets/img/home/splash.webp'); ?>" style="min-height: 320px">
-                    </div>
-                    <div class="col-md-10">
-                        <div class="row" style="margin-left: 10px">
-                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
-                                <p class="product-discount-overlay">32% <span>off</span></p>
-                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
-                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
-                                <p class="card-product-price-discount">&#8358; 95,000 </p>
-                                <p class="card-product-price">&#8358; 12,000 </p>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
-                                <p class="product-discount-overlay">9% <span>off</span></p>
-                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
-                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
-                                <p class="card-product-price-discount">&#8358; 52,000 </p>
-                                <p class="card-product-price">&#8358; 31,000 </p>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
-                                <p class="product-discount-overlay">5% <span>off</span></p>
-                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
-                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
-                                <p class="card-product-price-discount">&#8358; 55,000 </p>
-                                <p class="card-product-price">&#8358; 18,000 </p>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
-                                <p class="product-discount-overlay">6% <span>off</span></p>
-                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
-                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
-                                <p class="card-product-price-discount">&#8358; 45,000 </p>
-                                <p class="card-product-price">&#8358; 30,000 </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2 hidden-sm hidden-xs">
-                        <img src="<?= base_url('assets/img/home/splash.webp'); ?>" style="min-height: 320px">
-                    </div>
-                    <div class="col-md-10">
-                        <div class="row" style="margin-left: 10px">
-                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
-                                <p class="product-discount-overlay">6% <span>off</span></p>
-                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
-                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
-                                <p class="card-product-price-discount">&#8358; 45,000 </p>
-                                <p class="card-product-price">&#8358; 30,000 </p>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
-                                <p class="product-discount-overlay">6% <span>off</span></p>
-                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
-                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
-                                <p class="card-product-price-discount">&#8358; 45,000 </p>
-                                <p class="card-product-price">&#8358; 30,000 </p>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
-                                <p class="product-discount-overlay">6% <span>off</span></p>
-                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
-                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
-                                <p class="card-product-price-discount">&#8358; 45,000 </p>
-                                <p class="card-product-price">&#8358; 30,000 </p>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
-                                <p class="product-discount-overlay">6% <span>off</span></p>
-                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
-                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
-                                <p class="card-product-price-discount">&#8358; 45,000 </p>
-                                <p class="card-product-price">&#8358; 30,000 </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div>  
             </div>
 
         </div>
