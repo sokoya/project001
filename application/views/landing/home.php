@@ -507,34 +507,28 @@
                     </div>
                     <div class="col-md-10">
                         <div class="row" style="margin-left: 10px">
-                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
-                                <p class="product-discount-overlay">6% <span>off</span></p>
-                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
-                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
-                                <p class="card-product-price-discount">&#8358; 45,000 </p>
-                                <p class="card-product-price">&#8358; 30,000 </p>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
-                                <p class="product-discount-overlay">12% <span>off</span></p>
-                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
-                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
-                                <p class="card-product-price-discount">&#8358; 65,000 </p>
-                                <p class="card-product-price">&#8358; 30,000 </p>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
-                                <p class="product-discount-overlay">2% <span>off</span></p>
-                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
-                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
-                                <p class="card-product-price-discount">&#8358; 32,000 </p>
-                                <p class="card-product-price">&#8358; 13,000 </p>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-3  card-product">
-                                <p class="product-discount-overlay">5% <span>off</span></p>
-                                <img class="card-product-img" src="<?= base_url('assets/img/home/tab.jpg'); ?>" >
-                                <p class="card-product-title">Teclast P80 Pro Tablet 3GB + 32GB </p>
-                                <p class="card-product-price-discount">&#8358; 45,000 </p>
-                                <p class="card-product-price">&#8358; 22,000 </p>
-                            </div>
+                            <?php
+                                $products = $this->product->randomproducts(53, 4);
+                                foreach( $products as $product) : ?>
+                                <div class="col-md-3 col-sm-3 col-xs-3  card-product">
+                                    <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
+                                        <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
+                                    <?php endif; ?>
+                                    <img class="card-product-img lazy"
+                                         data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
+                                         style="max-width: 220px; max-height: 220px;"
+                                         src="<?= base_url('assets/img/load.gif'); ?>"
+                                         alt="<?= $product->product_name; ?>"
+                                         title="<?= $product->product_name; ?>">
+                                    <p class="card-product-title"><?= character_limiter( $product->product_name, 20);?></p>
+                                    <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
+                                        <p class="card-product-price">&#8358; 30,000 </p>
+                                        <p class="card-product-price-discount">&#8358; 45,000 </p>
+                                    <?php else : ?>
+                                        <p class="card-product-price">&#8358; 30,000 </p>
+                                    <?php endif; ?>
+                                </div>
+                                <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
@@ -616,94 +610,7 @@
 
         </div>
     </div>
-    <?php $categories = $this->product->desktop_display(); ?>
-    <?php foreach ($categories as $category) : ?>
-        <div class="container" style="margin-top: 50px">
-            <div class="card-max-header" style="margin-bottom: -20px;">
-                <p class="card-max-title"><?= $category->name; ?>
-                    <a href="<?= base_url('catalog/' . $category->slug . '/'); ?>" class="card-max-view-more"
-                       style="top: 20px !important">View More</a></p>
-            </div>
-            <?php $banners = json_decode($category->content); ?>
-            <div class="card-max max-inverse">
-                <div class="row">
-                    <?php foreach ($banners as $banner) : ?>
-                        <?php if (in_array($banner->position, array('left1', 'left2'))) : ?>
-                            <div class="col-md-4" style="padding-right: 0; margin-right: -43px !important">
-                                <img class="card-max-side lazy"
-                                     data-src="<?= CATEGORY_IMAGE_PATH . $banner->img; ?>"
-                                     src="<?= base_url('assets/load.gif'); ?>"/>
-                            </div>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                    <div class="col-md-6">
-                        <div class="row"
-                             style="border-bottom: 1px solid #dadada; background: url(<?= base_url('assets/img/home/dimension.png') ?>) repeat;">
-                            <?php foreach ($banners as $banner):
-                                if (in_array($banner->position, array('top1', 'top2'))) : ?>
-                                    <a href="<?= $banner->link; ?>">
-                                        <div class="col-md-6">
-                                            <div class="max-img">
-                                                <img class="img-responsive lazy"
-                                                     data-src="<?= CATEGORY_IMAGE_PATH . $banner->img; ?>"
-                                                     src="<?= base_url('assets/load.gif') ?>"/>
-                                            </div>
-                                        </div>
-                                    </a>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        </div>
-                        <div class="row" style="padding-top:35px;">
-                            <?php foreach ($banners as $banner): if (in_array($banner->position, array('bottom1', 'bottom2', 'bottom3'))) : ?>
-                                <div class="col-md-4">
-                                    <a href="<?= $banner->link; ?>">
-                                        <img class="card-max-shade lazy"
-                                             data-src="<?= CATEGORY_IMAGE_PATH . $banner->img; ?>"
-                                             src="<?= base_url('assets/load.gif') ?>"
-                                             alt="<?= lang('app_name'); ?>"/>
-                                        <p class="card-max-shade-text">Swifter Solar Energy</p>
-                                    </a>
-                                </div>
-                            <?php endif; ?>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                    <?php $randoms = $this->product->randomproducts((int)$category->category_id, 7); ?>
-                    <div class="col-md-2 max-product-category">
-                        <?php foreach ($randoms as $random) : ?>
-                            <div class="row max-product-row">
-                                <div class="col-md-2">
-                                    <img class="max-card-product-img lazy"
-                                         src="<?= base_url('assets/img/load.gif'); ?>"
-                                         data-src="<?= PRODUCTS_IMAGE_PATH . $random->image_name; ?>"/>
-                                </div>
-                                <a class="max-card-link"
-                                   href="<?= base_url(urlify($random->product_name, $random->id)); ?>">
-                                    <div class="col-md-10">
-                                        <p class="max-card-product"><?= character_limiter($random->product_name, 10) ?></p>
-                                        <?php if (discount_check($random->discount_price, $random->start_date, $random->end_date)) : ?>
-                                            <p class="max-card-product-price"><?= ngn($random->discount_price) ?>
-                                                <span class="pull-md-right pull-lg-right"><?= $random->item_left ?> item left</span>
-                                            </p>
-                                        <?php else: ?>
-                                            <p class="max-card-product-price"><?= ngn($random->sale_price) ?>
-                                                <span
-                                                        class="pull-md-right pull-lg-right text-danger"><?= $random->item_left ?>
-                                                    item left</span>
-                                            </p>
-                                        <?php endif; ?>
-                                    </div>
-                                </a>
-                            </div>
-                        <?php endforeach; ?>
-                        <button style="" class="btn btn-dark btn-block">See More</button>
-                    </div>
-                </div>
-            </div>
-            <img src="<?= base_url('assets/img/home/banner1.png'); ?>" width="100%">
-        </div>
-    <?php endforeach; ?>
-
+    
     <div class="gap">
         <div class="container">
             <p class="text-center about-text">Onitshamarket.com is a dynamic e-commerce platform that is designed to
