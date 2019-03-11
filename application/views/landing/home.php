@@ -319,43 +319,43 @@
             <br/>
             <div class="row">
                 <div class="col-md-2 hidden-sm hidden-xs">
-                    <img src="<?= base_url('assets/img/home/splash.webp'); ?>" style="max-height: 100%;">
+                    <img src="<?= base_url('assets/img/home/categories/left_pane1.jpg'); ?>" style="max-height: 100%;">
                 </div>
                 <div class="col-md-10">
-                    <div class="row">
+                    <div class="row" style="margin-left: 1px">
 
                         <a href="<?= base_url(); ?>">
                             <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
                                 <p class="card-cat-text">Women's Fashion</p>
-                                <img src="<?= base_url('assets/img/home/ee.jpg'); ?>">
+                                <img src="<?= base_url('assets/img/home/categories/prod1.jpg'); ?>">
                             </div>
                         </a>
                         <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
                             <p class="card-cat-text">Phones Accessories</p>
                             <img
-                                    src="<?= base_url('assets/img/home/ed.jpg'); ?>"></div>
+                                    src="<?= base_url('assets/img/home/categories/prod2.jpg'); ?>"></div>
                         <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
                             <p class="card-cat-text">Electronics</p>
                             <img
-                                    src="<?= base_url('assets/img/home/ef.jpg'); ?>"></div>
+                                    src="<?= base_url('assets/img/home/categories/prod3.jpg'); ?>"></div>
                         <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
                             <p class="card-cat-text">Computing Accessories</p><img
-                                    src="<?= base_url('assets/img/home/eg.jpg'); ?>"></div>
+                                    src="<?= base_url('assets/img/home/categories/prod4.jpg'); ?>"></div>
                         <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
                             <p class="card-cat-text">Phone and Tablets</p><img
-                                    src="<?= base_url('assets/img/home/em.jpg'); ?>"></div>
+                                    src="<?= base_url('assets/img/home/categories/prod5.jpg'); ?>"></div>
                         <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
                             <p class="card-cat-text">Home and Office</p>
                             <img
-                                    src="<?= base_url('assets/img/home/ek.jpg'); ?>"></div>
+                                    src="<?= base_url('assets/img/home/categories/prod6.jpg'); ?>"></div>
                         <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
                             <p class="card-cat-text">Bluetooth Speakers</p>
                             <img
-                                    src="<?= base_url('assets/img/home/ea.jpg'); ?>"></div>
+                                    src="<?= base_url('assets/img/home/categories/prod7.jpg'); ?>"></div>
                         <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
                             <p class="card-cat-text">Computing</p>
                             <img
-                                    src="<?= base_url('assets/img/home/ex.jpg'); ?>"></div>
+                                    src="<?= base_url('assets/img/home/categories/prod8.jpg'); ?>"></div>
                     </div>
                 </div>
             </div>
