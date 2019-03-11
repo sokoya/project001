@@ -77,13 +77,9 @@
         top: 0;
         left: 0;
         display: none;
-        /*margin-top: -180px;*/
-        /*margin-left: 2px;*/
         position: absolute;
-        /*border-radius: 10px;*/
         height: 100%;
         width: 100%;
-        /*padding: 20px;*/
         text-align: center;
         background: rgba(0, 0, 0, .6)
     }
@@ -231,8 +227,8 @@
     }
 
     .hot-row {
-        margin-bottom: 10px;
-        padding: 10px;
+        /*margin-bottom: 10px;*/
+        /*padding: 10px;*/
     }
 
     .btn_view_product {
@@ -279,13 +275,14 @@
                 <p class="card-max-title">Hot Sales<a href="#" class="card-max-view-more">View more</a></p>
                 <p class="card-max-subtitle">Great items, Affordable Prices</p>
             </div>
-            <div class="row">
+            <div class="container">
+            <div class="row" style="width: 100%">
                 <?php
                 $products = $this->product->randomproducts(53, 6);
                 foreach ($products as $product):
                     ?>
                     <!--                    <div style="background-color: #fff;">-->
-                    <div class="col-md-2 col-xs-4 hot-row"
+                    <div class="col-md-2 col-xs-4"
                          style="background-color: #fff; border-right: 2px solid #f6f6f6; position: relative;">
 
                         <img class="card-max-img"
@@ -314,6 +311,8 @@
 
                 <?php endforeach; ?>
             </div>
+            </div>
+
         </div>
         <div class="card-max">
             <div class="card-max-header">
@@ -326,8 +325,7 @@
                     <img src="<?= base_url('assets/img/home/splash.webp'); ?>" style="max-height: 100%;">
                 </div>
                 <div class="col-md-10">
-                    <div class="row">
-
+                    <div class="row" style="margin-left: 1px">
                         <a href="<?= base_url(); ?>">
                             <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
                                 <p class="card-cat-text">Women's Fashion</p>
