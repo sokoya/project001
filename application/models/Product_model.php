@@ -752,9 +752,9 @@ Class Product_model extends CI_Model{
             }
         }
         if( $count != '' ){
-            $select_query .= " AND product_status = 'approved' GROUP BY p.id LIMIT {$count} ";
+            $select_query .= " AND product_status = 'approved' GROUP BY p.id ORDER BY RAND() LIMIT {$count} ";
         }else{
-            $select_query .= " AND product_status = 'approved' GROUP BY p.id LIMIT 12";
+            $select_query .= " AND product_status = 'approved' GROUP BY p.id ORDER BY RAND() LIMIT 12";
         }
         return $this->db->query($select_query)->result();
     }
