@@ -258,13 +258,11 @@
                                     <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
                                         <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
                                     <?php endif; ?>
-                                    <img class="card-product-img lazy"
-                                         data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
-                                         style="max-width: 220px; max-height: 220px;"
-                                         src="<?= base_url('assets/img/load.gif'); ?>"
+                                    <img class="card-product-img"
+                                         src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
                                          alt="<?= $product->product_name; ?>"
                                          title="<?= $product->product_name; ?>">
-                                    <p class="card-product-title"><?= character_limiter( $product->product_name, 20);?></p>
+                                    <p class="card-product-title"><?= character_limiter( $product->product_name, 30);?></p>
                                     <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
                                         <p class="card-product-price">&#8358; <?= ngn($product->sale_price); ?> </p>
                                         <p class="card-product-price-discount"> <?= ngn($product->discount_price); ?> </p>
