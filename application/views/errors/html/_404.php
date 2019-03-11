@@ -55,7 +55,7 @@
                     <div class="owl-item">
                     <a class="banner-category owl-item-slide" href="<?= base_url(urlify( $product->product_name, $product->id)); ?>">
                         <img class="banner-category-img img-responsive lazy" style="height:45px;"
-                             data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
+                             data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
                              src="<?= base_url('assets/img/load.gif'); ?>" alt="<?= $product->product_name; ?>"
                              title="<?= $product->product_name ?>"/>
                         <h5 class="banner-category-title"><?= character_limiter($product->product_name, 20); ?></h5>
