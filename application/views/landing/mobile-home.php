@@ -4,13 +4,53 @@
 <link rel="stylesheet" href="<?= base_url('assets/plugins/slick/slick-theme.css'); ?>">
 <style>
     .gap_small {
-        height: 20px;
+        height: 40px;
+    }
+
+    @media screen and (min-width: 555px;) {
+        .gap_small {
+            height: 85px !important;
+        }
+
+        .col-img-3 {
+            height: auto !important;
+        }
+    }
+
+    .img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+        height: 12vh;
+        width: 100%;
+    }
+
+    .gap_wide {
+        height: 55px;
+    }
+
+    .col-img-3:hover, .col-img-3 > img:hover {
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
+    }
+
+    .col-img-3 > p {
+        position: absolute;
+        font-size: 10px;
+        margin-top: 5px;
+        margin-left: 5px;
+        color: #888888;
+        font-weight: 700;
+    }
+
+    .col-img-3 {
+        display: inline-flex;
+        width: 24%;
+        margin-bottom: 3px;
+        height: 70px;
     }
 
     .cat_board {
         background-color: #fff;
         padding: 10px;
-        height: 96px;
+        height: 66px;
     }
 
     .cat_img {
@@ -48,6 +88,10 @@
         font-size: 14px;
         color: #333;
     }
+
+    .card-cat > img {
+        margin-left: unset !important;
+    }
 </style>
 </head>
 <body>
@@ -59,25 +103,24 @@
         </div>
     <?php endif; ?>
 
-    <div class="main-slider text-center slider_show" style="height:15vh;visibility: hidden;">
+    <div class="main-slider text-center slider_show row" style="height:calc(13vh - 1em);visibility: hidden;">
         <?php foreach ($sliders as $slider) : ?>
             <a href="<?= $slider->img_link; ?>">
                 <img src="<?= SLIDER_IMAGE_PATH . $slider->image; ?>" class="img-responsive"
-                     style="height: 15vh; width: 100%"/>
+                     style="height: auto; width: 100%"/>
             </a>
         <?php endforeach; ?>
     </div>
-    <div class="gap_small"></div>
-    <!--    //top categories slider-->
-    <div class="container">
-        <h5>Top <span style="color:#575745">Categories</span></h5>
-        <div class="categories-slider text-center slider_show" style="visibility: hidden;">
+    <div class="gap_wide hidden-xs"></div>
+    <div class="row">
+        <h5 class="col-md-12" style="margin-left:10px;">Top <span style="color:#575745">Categories</span></h5>
+        <div class="categories-slider text-center slider_show" style="visibility: hidden;margin-left:10px;">
             <?php foreach ($main_categories as $category) : ?>
                 <div class="cat_board">
                     <a style="color: #0b0b0b;" href="<?= base_url('catalog/' . $category->slug . '/'); ?>">
                         <img class="cat_img"
-                             src="<?= base_url('assets/img/cat_icons/') . $category->slug .'.png'; ?>"
-
+                             src="<?= base_url('assets/img/cat_icons/') . $category->slug . '.png'; ?>"
+                             style="width:30px;"
                              alt="Shop for <?= $category->name; ?>">
                         <span style="font-size:10px;margin-bottom:auto;"><?= $category->name; ?></span>
                     </a>
@@ -85,7 +128,46 @@
             <?php endforeach; ?>
         </div>
     </div>
-    <div class="gap"></div>
+    <div class="gap_small"></div>
+    <div class="card-max container">
+        <div class="card-max-header">
+            <h5 style="margin-left:-5px;">Trending <span style="color:#575745">Selections</span></h5>
+        </div>
+        <div class="row">
+            <div class="col-img-3">
+                <p>Women's Fashion</p>
+                <img
+                        src="<?= base_url('assets/img/home/ee.jpg'); ?>" class="img-responsive"></div>
+            <div class="col-img-3">
+                <p>Phones<br/>Accessories</p>
+                <img
+                        src="<?= base_url('assets/img/home/ed.jpg'); ?>" class="img-responsive"></div>
+            <div class="col-img-3">
+                <p>Electronics</p>
+                <img
+                        src="<?= base_url('assets/img/home/ef.jpg'); ?>" class="img-responsive"></div>
+            <div class="col-img-3">
+                <p>Computer<br/>Accessories</p>
+                <img
+                        src="<?= base_url('assets/img/home/eg.jpg'); ?>" class="img-responsive"></div>
+            <div class="col-img-3">
+                <p>Phones & Tablets</p>
+                <img
+                        src="<?= base_url('assets/img/home/em.jpg'); ?>" class="img-responsive"></div>
+            <div class="col-img-3">
+                <p>Home & Office</p>
+                <img
+                        src="<?= base_url('assets/img/home/ek.jpg'); ?>" class="img-responsive"></div>
+            <div class="col-img-3">
+                <p>Bluetooth<br/>Speakers</p>
+                <img
+                        src="<?= base_url('assets/img/home/ea.jpg'); ?>" class="img-responsive"></div>
+            <div class="col-img-3">
+                <p>Computing</p>
+                <img
+                        src="<?= base_url('assets/img/home/ex.jpg'); ?>" class="img-responsive"></div>
+        </div>
+    </div>
     <?php foreach ($category_listing as $listing) :
         $products = $this->product->randomproducts((int)$listing->category_id, 12);
         ?>

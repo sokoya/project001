@@ -102,7 +102,3 @@ function notification_message(msg, icon = 'fa fa-info-circle', notification_type
     $(".notification").delay(5000).fadeOut();
 }
 
-
-$('#close-banner').on('click', function () {
-    $('.ad-banner').remove();
-});
