@@ -1,5 +1,41 @@
 <style>
-    .slick-dots{position:absolute;bottom:10px}.slick-dots li button:before,.slick-dots li.slick-active button:before{color:#FFF;opacity:1;font-size:12px}.slick-dots li.slick-active button{border-radius:100%;background:#333;width:3px;height:3px}.slick-dots li.slick-active button:before{color:transparent}
+    .slick-dots {
+        position: absolute;
+        bottom: 10px
+    }
+
+    .slick-dots li button:before, .slick-dots li.slick-active button:before {
+        color: #FFF;
+        opacity: 1;
+        font-size: 12px
+    }
+
+    .slick-dots li.slick-active button {
+        border-radius: 100%;
+        background: #333;
+        width: 3px;
+        height: 3px
+    }
+
+    .slick-dots li.slick-active button:before {
+        color: transparent
+    }
+
+    .card-product-alt {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-product-alt > .card-product-title {
+        margin-top: -10px;
+        /*flex: 1;*/
+        /*width: auto;*/
+        /*object-fit: contain;*/
+    }
+
+    .card-product-alt > img {
+        max-width: 100%;
+    }
 </style>
 
 <!-- Head Category Starts -->
