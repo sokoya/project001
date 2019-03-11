@@ -6,7 +6,22 @@
     .gap_small {
         height: 40px;
     }
-
+    .card-product {
+        background: #fff;
+        min-height: 270px;
+        border: 1px solid #eee;
+        padding-top: 20px;
+    }
+    .card-product>img {
+        object-fit: unset;
+        margin: auto;
+        width: 15vh;
+    }
+    .card-product-img {
+        min-width: unset !important;
+        max-width: unset !important;
+        height:auto;
+    }
     @media screen and (min-width: 555px;) {
         .gap_small {
             height: 85px !important;
@@ -167,6 +182,43 @@
                 <img
                         src="<?= base_url('assets/img/home/ex.jpg'); ?>" class="img-responsive"></div>
         </div>
+    </div>
+    <div class="gap_small"></div>
+    <div class="card-max container">
+        <div class="card-max-header">
+            <h5 style="margin-left:-5px;">Super <span style="color:#575745">Deals</span></h5>
+        </div>
+        <br/>
+        <div class="brand-slide">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <?php
+                        $products = $this->product->randomproducts(53, 4);
+                        foreach ($products as $product) : ?>
+                            <div class="col-xs-6 col-sm-3  card-product card-product-alt">
+                                <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
+                                    <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
+                                <?php endif; ?>
+                                <img class="card-product-img img-responsive"
+                                     src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
+                                     alt="<?= $product->product_name; ?>"
+                                     title="<?= $product->product_name; ?>">
+                                <p class="card-product-title"><?= character_limiter($product->product_name, 30); ?></p>
+                                <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
+                                    <p class="card-product-price"><?= ngn($product->discount_price); ?> </p>
+                                    <p class="card-product-price-discount"> <?= ngn($product->sale_price); ?></p>
+                                <?php else : ?>
+                                    <p class="card-product-price"> <?= ngn($product->sale_price); ?> </p>
+                                <?php endif; ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
     <?php foreach ($category_listing as $listing) :
         $products = $this->product->randomproducts((int)$listing->category_id, 12);
