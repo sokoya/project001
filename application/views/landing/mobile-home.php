@@ -4,9 +4,19 @@
 <link rel="stylesheet" href="<?= base_url('assets/plugins/slick/slick-theme.css'); ?>">
 <style>
     .gap_small {
-        height: 20px;
+        height: 40px;
     }
-
+    @media screen and (min-width:555px;){
+        .gap_small {
+            height: 85px !important;
+        }
+        .col-img-3 {
+            height: auto !important;
+        }
+    }
+.gap_wide{
+    height:55px;
+}
     .col-img-3:hover, .col-img-3 > img:hover {
         cursor: pointer;
         box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
@@ -17,6 +27,8 @@
         font-size: 10px;
         margin-top: 5px;
         margin-left: 5px;
+        color: #888888;
+        font-weight:700;
     }
 
     .col-img-3 {
@@ -82,7 +94,7 @@
         </div>
     <?php endif; ?>
 
-    <div class="main-slider text-center slider_show row" style="height:65px;visibility: hidden;">
+    <div class="main-slider text-center slider_show row" style="height:calc(13vh - 1em);visibility: hidden;">
         <?php foreach ($sliders as $slider) : ?>
             <a href="<?= $slider->img_link; ?>">
                 <img src="<?= SLIDER_IMAGE_PATH . $slider->image; ?>" class="img-responsive"
@@ -90,6 +102,7 @@
             </a>
         <?php endforeach; ?>
     </div>
+    <div class="gap_wide hidden-xs"></div>
     <div class="row">
         <h5 class="col-md-12" style="margin-left:10px;">Top <span style="color:#575745">Categories</span></h5>
         <div class="categories-slider text-center slider_show" style="visibility: hidden;margin-left:10px;">
@@ -109,7 +122,7 @@
     <div class="gap_small"></div>
     <div class="card-max container">
         <div class="card-max-header">
-            <h5>Trending <span style="color:#575745">Selections</span></h5>
+            <h5 style="margin-left:-5px;">Trending <span style="color:#575745">Selections</span></h5>
         </div>
         <div class="row">
             <div class="col-img-3">
