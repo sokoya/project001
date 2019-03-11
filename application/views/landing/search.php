@@ -246,7 +246,6 @@
                                         <div class="product-img-wrap">
                                             <div class="product-quick-view-cover">
                                                 <div style="position: relative; left: -50%;">
-                                                    <!--                                                    --><?php //$image_name = explode('/', $product->image_name); ?>
                                                     <button data-title="<?= $product->product_name ?>"
                                                             data-pr_id="<?= $product->id; ?>"
                                                             data-qv="<?php if ($p_count % 4 == 0) { ?>true<?php } ?>"
@@ -258,7 +257,7 @@
                                                 </div>
                                             </div>
                                             <img class="product-img lazy cat-lazy"
-                                                 data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
+                                                 data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
                                                  style=""
                                                  src="<?= base_url('assets/img/load.gif'); ?>"
                                                  alt="<?= $product->product_name; ?>"
