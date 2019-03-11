@@ -712,7 +712,7 @@
                                     <div class="product-img-wrap">
                                         <img class="product-img lazy"
                                              src="<?= base_url('assets/load.gif'); ?>"
-                                             data-src="https://res.cloudinary.com/demo/image/upload/x_355,y_410,w_340,h_250,c_crop/w_430,h_410,c_pad/<?= $like->image_name; ?>"
+                                             data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?=$like->image_name; ?>"
                                              alt="<?= $like->product_name; ?>"
                                              title="<?= $like->product_name; ?>">
                                     </div>

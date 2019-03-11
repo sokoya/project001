@@ -342,12 +342,12 @@
                 <?php endif; ?>
             </div>
 
-                <span class="cart-count"
+            <span class="cart-count"
                     <?= ($this->cart->total_items() == 0) ? 'style="display:none"' : '' ?>><?= $this->cart->total_items(); ?></span>
             <a href="<?= base_url(lang('cart_link')); ?>"><img
-                            src="<?= base_url('assets/svg/shopping-cart.svg'); ?>"
-                            alt="User"
-                            style="height: 24px; width: 24px; margin-right: 4px;"></a>
+                        src="<?= base_url('assets/svg/shopping-cart.svg'); ?>"
+                        alt="User"
+                        style="height: 24px; width: 24px; margin-right: 4px;"></a>
         </div>
         <form method="get" action="<?= base_url('search'); ?>" class="mobile-search-input" role="search">
             <div class="inner-addon right-addon stylish-input-group">
@@ -376,7 +376,7 @@
     $categories = $this->db->query("SELECT * FROM categories WHERE pid = 0")->result();
     foreach ($categories as $category): ?>
         <div class="container">
-            <a href="<?= base_url('catalog/' . $category->slug .'/'); ?>" style="text-decoration: none">
+            <a href="<?= base_url('catalog/' . $category->slug . '/'); ?>" style="text-decoration: none">
                 <p class="text-break" style="padding-top: 10px; padding-bottom: 15px;"><?= $category->name; ?>
                     <i class="fa fa-minus close-panel" aria-hidden="true" data-target="cat_<?= $category->id ?>"></i>
                 </p></a>
@@ -390,12 +390,13 @@
                     <div class="custom-card-child">
                         <div class="container">
                             <div class="category-child">
-                                <a href="<?= base_url('catalog/' . $cat->slug .'/'); ?>" style="text-decoration: none;">
+                                <a href="<?= base_url('catalog/' . $cat->slug . '/'); ?>"
+                                   style="text-decoration: none;">
                                     <p>
                                         <img
                                                 src="<?= base_url('assets/svg/delivery-truck.svg'); ?>"
                                                 alt="Delivery Truck"
-                                                style="height: 30px; width: 35px;"> <?= $cat->name; ?> <i
+                                                style="height: 30px; width: 35px;"><?= $cat->name; ?> <i
                                                 class="fa fa-plus close-panel"
                                                 aria-hidden="true"
                                                 data-target="cat_<?= $cat->id ?>"></i>
@@ -416,7 +417,7 @@
                                          style="margin-top: 0 !important; margin-bottom: 0 !important">
                                         <div class="category-child">
                                             <a style="color: #000; text-decoration: none"
-                                               href="<?= base_url('catalog/' . $sub->slug .'/'); ?>"><p
+                                               href="<?= base_url('catalog/' . $sub->slug . '/'); ?>"><p
                                                         style="padding-bottom: 5px; padding-left: 40px;"><?= $sub->name; ?></p>
                                             </a>
                                         </div>

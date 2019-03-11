@@ -290,7 +290,7 @@
                             <div style="margin-top: 40px">
                                 <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
                                     <p class="card-max-discount"><?= ngn($product->sale_price); ?></p>
-                                    <p class="card-max-price"><?= ngn($product->sale_price); ?></p>
+                                    <p class="card-max-price"><?= ngn($product->discount_price); ?></p>
                                     <a class="btn_view_product"
                                        href="<?= base_url(urlify($product->product_name, $product->id)); ?>"><i
                                                 class="fa fa-search"></i>View

@@ -206,8 +206,7 @@
                                      title="<?= $product->product_name; ?>">
                                 <p class="card-product-title"><?= character_limiter($product->product_name, 30); ?></p>
                                 <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
-                                    <p class="card-product-price"><?= ngn($product->discount_price); ?> </p>
-                                    <p class="card-product-price-discount"> <?= ngn($product->sale_price); ?></p>
+                                    <p class="card-product-price"><?= ngn($product->discount_price); ?></p> <small style="font-max-size: 12px;"><sub class="card-product-price"><?= ngn($product->sale_price); ?></sub></small>
                                 <?php else : ?>
                                     <p class="card-product-price"> <?= ngn($product->sale_price); ?> </p>
                                 <?php endif; ?>
