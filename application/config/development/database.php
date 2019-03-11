@@ -98,6 +98,6 @@ $db['default'] = array(
 //}else{
     // development
     $db['default']['username'] = 'root';
-    $db['default']['password'] = 'root';
+    $db['default']['password'] = '';
     $db['default']['database'] = 'onitshamarket';
 //}
