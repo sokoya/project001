@@ -1,4 +1,4 @@
-<footer class="main-footer" style="margin-top:100px;">
+<footer class="main-footer" style="margin-top:100px;font-size:12px;">
     <div class="container">
         <div class="row row-col-gap" data-gutter="60">
             <div class="col-md-9">
