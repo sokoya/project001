@@ -5,11 +5,11 @@
                 <div class="col-md-12">
                     <p style="font-size: 9px;" class="copyright-text foot-link">&copy; 2015 - <?= date('Y'); ?> <a
                                 title="Onitshamarket"
-                                href="<?= lang('domain'); ?>"><?= lang('company_name'); ?>.</a> All rights reserved</p><p class="text-sm foot-link"><a href="<?= base_url('pages'); ?>" style="font-size: 9px;">Terms of
+                                href="<?= lang('domain'); ?>"><?= lang('company_name'); ?>.</a> All rights reserved</p><p class="text-sm foot-link"><a href="<?= base_url('page'); ?>" style="font-size: 9px;">Terms of
                             Use</a> | <a title="Terms and Agreement"
-                                         href="<?= base_url('pages/agreement'); ?>"
+                                         href="<?= lang('agreement_url'); ?>"
                                          style="font-size: 9px;">Agreement</a> | <a title="Privacy Policy"
-                                                                                    href="<?= base_url('pages/privacy'); ?>"
+                                                                                    href="<?= lang('privacy_url'); ?>"
                                                                                     style="font-size: 9px;">Privacy
                             Policy</a> |
                         <?php if (!$this->session->userdata('logged_in')): ?>

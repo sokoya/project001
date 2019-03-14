@@ -7,7 +7,7 @@
                         <section class="widget widget-links widget-light-skin">
                             <h3 class="widget-title-sm foot-link footer-link"><?= lang('app_name'); ?></h3>
                             <ul style="margin-left: -40px;">
-                                <li><a href="#">Our Company</a></li>
+                                <li><a href="<?= lang('our_company_url'); ?>">Our Company</a></li>
                                 <li><a href="#">Investor Relation</a></li>
                                 <li><a href="#">Social Responsibility</a></li>
                                 <li><a href="#">Quality Complaince</a></li>
@@ -15,11 +15,10 @@
                             </ul>
                         </section>
                         <div style="font-size: 12px;">
-
-                            <h4 class="text text-sm foot-link footer-link">Office Address: </h4>
-                            <p class="office_address">
+                            <h3 class="widget-title-sm foot-link footer-link">Office Address: </h3>
+                            <span class="office_address">
                                 <?= lang('office_address'); ?><br/><?= lang('contact_no'); ?>
-                            </p>
+                            </span>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-3 col-xs-4">
@@ -37,14 +36,13 @@
                                 <li><a href="#">Bodija Market, Ibadan, Oyo</a></li>
                                 <li><a href="#">Computer Village, Lagos</a></li>
                             </ul>
-                            </ul>
                         </section>
                     </div>
                     <div class="col-md-3 col-sm-3 col-xs-4">
                         <section class="widget widget-links widget-light-skin">
                             <h3 class="widget-title-sm foot-link footer-link">Resources</h3>
                             <ul style="margin-left: -40px;">
-                                <li><a href="#">Shopping Help</a></li>
+                                <li><a href="<?= lang('shopping_help_url'); ?>">Shopping Help</a></li>
                                 <li><a href="#">Order Status</a></li>
                                 <li><a href="#">Blogs</a></li>
                                 <li><a href="#">Forums</a></li>
@@ -63,7 +61,7 @@
                             <ul style="margin-left: -40px;">
                                 <li><a href="#">App Downloads</a></li>
                                 <li><a href="<?= base_url('pages/contact'); ?>">Contact Us</a></li>
-                                <li><a href="#">FAQ</a></li>
+                                <li><a href="<?= lang('shopping_help_url'); ?>">FAQ</a></li>
                                 <li><a href="#">Live Chat</a></li>
                                 <li><a href="#">Waranty and Returns</a></li>
                                 <li><a href="#">Waranty Lookup</a></li>
@@ -75,8 +73,8 @@
             <div class="col-md-3">
                 <h4 class="widget-title-sm foot-link footer-link">Newsletter</h4>
                 <p class="foot-link footer-newsletter"><?= lang('app_name'); ?> respects your <a
-                            href="<?= base_url('pages/privacy') ?>"
-                            style="color:#49a251;">Privacy</a></p>
+                            href="<?= lang('privacy_url') ?>"
+                            style="color:#69bf83;">Privacy</a></p>
                 <form>
                     <div class="input-group">
                         <input type="text" class="newsletter-input form-control"
@@ -137,11 +135,11 @@
                     <p class="copyright-text foot-link">&copy; 2015 - <?= date('Y'); ?> <a title="Onitshamarket"
                                                                                            href="<?= lang('domain'); ?>"><?= lang('company_name'); ?>
                             .</a> All rights reserved</p>
-                    <p class="text-sm foot-link"><a href="<?= base_url('pages'); ?>">Terms of Use</a> | <a
+                    <p class="text-sm foot-link"><a href="<?= lang('terms_url'); ?>">Terms of Use</a> | <a
                                 title="Onitshamarket agreement"
-                                href="<?= base_url('pages/agreement'); ?>">Agreement</a> | <a
+                                href="<?= lang('agreement_url'); ?>">Agreement</a> | <a
                                 title="Terms and condition"
-                                href="<?= base_url('pages/privacy'); ?>">Privacy Policy</a> |
+                                href="<?= lang('privacy_url'); ?>">Privacy Policy</a> |
                         <a title="Become a seller" target="_blank"
                            href="https://seller.onitshamarket.com">Become a Seller</a></p>
                 </div>

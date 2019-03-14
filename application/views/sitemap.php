@@ -13,17 +13,27 @@
         </url>
     <?php } ?>
     <url>
-        <loc><?= base_url('pages/terms/'); ?></loc>
+        <loc><?= base_url('page/terms/'); ?></loc>
         <priority>0.5</priority>
         <changefreq>monthly</changefreq>
     </url>
     <url>
-        <loc><?= base_url('pages/privacy/'); ?></loc>
+        <loc><?= base_url('page/privacy/'); ?></loc>
         <priority>0.5</priority>
         <changefreq>monthly</changefreq>
     </url>
     <url>
-        <loc><?= base_url('pages/agreement/'); ?></loc>
+        <loc><?= base_url('page/agreement/'); ?></loc>
+        <priority>0.5</priority>
+        <changefreq>monthly</changefreq>
+    </url>
+    <url>
+        <loc><?= base_url('page/shopping_help/'); ?></loc>
+        <priority>0.5</priority>
+        <changefreq>monthly</changefreq>
+    </url>
+    <url>
+        <loc><?= base_url('page/about_onitshamarket/'); ?></loc>
         <priority>0.5</priority>
         <changefreq>monthly</changefreq>
     </url>

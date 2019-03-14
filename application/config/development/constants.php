@@ -109,7 +109,7 @@ defined('STATIC_CATEGORY_PATH') OR define('STATIC_CATEGORY_PATH',  'https://res.
 
 
 // General Settings
-defined('PAGE_CONTACT_US') or define('PAGE_CONTACT_US', "https://www.onitshamarket.com/pages/contact/");
+defined('PAGE_CONTACT_US') or define('PAGE_CONTACT_US', "https://www.onitshamarket.com/page/contact/");
 
 // Details
 // Bitly

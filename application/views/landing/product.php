@@ -174,11 +174,11 @@
                                         </p>
                                         <p class="product-page-desc">
                                             <strong
-                                                    class="custom-product-title"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></strong>
+                                                    class="custom-product-title"><?= character_limiter(ucwords($product->product_name), 60, '...'); ?></strong>
                                         </p>
                                         <p class="text-sm pr-id">
                                             <strong>Product ID :</strong> <?= $product->sku; ?>
-                                            <a href="#" id="to_sell">Have an item like this to sell? Create One.</a>
+<!--                                            <a href="#" id="to_sell">Have an item like this to sell? Create One.</a>-->
                                         </p>
                                         <p class="text-sm text-uppercase">
                                             <strong>Seller : </strong><a href="#" id="pr-seller">
@@ -212,18 +212,44 @@
                                             <?php if (!empty($product->main_material)): ?>
                                                 <tr>
                                                     <td>Main Material:</td>
-                                                    <td><?= ucwords($product->main_material); ?></td>
-                                                </tr>
-                                            <?php endif; ?>
-                                            <?php if (!empty($product->attributes)) : ?>
-                                                <tr>
-                                                    <td>Features:</td>
-                                                    <td><a href="#description-tab">See more...</a></td>
+                                                    <td><?= ucwords($product->main_material); ?>
+                                                        <?php if (!empty($product->attributes)) : ?>
+                                                            <a href="#description-tab">See more...</a>
+                                                        <?php endif;?>
+                                                    </td>
                                                 </tr>
                                             <?php endif; ?>
                                             </tbody>
                                         </table>
+                                        <?php if( $product->from_overseas == 1) :?>
+                                            <div class="well well-sm">
+                                                <span class="delivery-message">
+                                                    <i class="fas fa-plane-arrival text-success"></i><b class="text-success">Shipped from overseas</b> <br />* No cancellation after ordering. Return allowed only for wrong and defective item <br />* No warranty, * Payment on demand
+                                                </span>
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="well well-sm">
+                                                <div class="row">
+                                                    <div class="col-sm-4 delivery-message" style="padding-right: 0px;">
+                                                        <img src="<?= base_url('assets/svg/delivery-truck.svg'); ?>" alt="Delivery Truck"
+                                                             style="height: 30px; width: 35px;">
+                                                        <span class="text-sm">Fast, reliable delivery from warehouses</span>
+                                                    </div>
+                                                    <div class="col-sm-4 delivery-message" style="padding-right: 0px;">
+                                                        <img src="<?= base_url('assets/svg/return.svg'); ?>" alt="Delivery Truck"
+                                                             style="height: 30px; width: 35px;">
+                                                        <span class="text-sm">100% product quality <?php if( !empty( $product->product_warranty)) echo 'with warranty'; ?></span>
+                                                    </div>
+                                                    <div class="col-sm-4 delivery-message" style="padding-right: 0px;">
+                                                        <img src="<?= base_url('assets/svg/warranty.svg'); ?>" alt="Warranty"
+                                                             style="height: 30px; width: 35px;">
+                                                        <span class="text-sm">Quick, reliable & cost-effective</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endif;?>
                                     </div>
+
                                 </div>
                                 <hr class="product-line"/>
                                 <div class="row">

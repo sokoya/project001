@@ -273,7 +273,7 @@ Class Product_model extends CI_Model{
         // $this->db->cache_on();
         // Lets confirm the slug is valid
         if( $this->check_slug_availability( $queries['str'] ) ) {
-            $select_query = "SELECT p.id, p.product_name, p.brand_name, p.seller_id, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left, g.image_name,s.store_name
+            $select_query = "SELECT p.id, p.product_name, p.brand_name, p.seller_id, p.from_overseas, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left, g.image_name,s.store_name
             FROM products p";
             if( isset($gets['price_min']) && !empty($gets['price_min']) && isset($gets['price_max']) && !empty($gets['price_max']) ){
                 $min = xss_clean($gets['price_min']); $max = xss_clean($gets['price_max']);
@@ -566,7 +566,7 @@ Class Product_model extends CI_Model{
 
     // SEARCH CATEGORY PRODUCTS PAGE
     function get_search_products( $queries = array() , $gets = array() ){
-        $select_query = "SELECT p.id, p.product_name, p.brand_name, p.seller_id, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left,  g.image_name,s.store_name
+        $select_query = "SELECT p.id, p.product_name, p.brand_name, p.seller_id,p.from_overseas, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left,  g.image_name,s.store_name
             FROM products p";
         if( isset($gets['price_min']) && !empty($gets['price_min']) && isset($gets['price_max']) && !empty($gets['price_max']) ){
             $min = xss_clean($gets['price_min']); $max = xss_clean($gets['price_max']);

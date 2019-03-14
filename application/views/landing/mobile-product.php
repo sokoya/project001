@@ -270,7 +270,7 @@
     </div>
     <div class="custom-card">
         <div class="container">
-            <p class="seller-name">Seller - <?= ucwords($store_name); ?></p>
+            <p class="seller-name">Seller - <?= ucwords($product->store_name); ?></p>
             <p class="product-name"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></p>
             <div style="margin-top: 4px; margin-left: 2px">
                 <?php
@@ -286,8 +286,10 @@
                 </ul>
             </div>
             <?php if (discount_check($var->discount_price, $var->start_date, $var->end_date)) : ?>
-                <p class="product-price"><?= ngn($var->discount_price); ?>
+                <p class="product-price">
+                    <?= ngn($var->discount_price); ?>
                     <span><?= get_discount($var->sale_price, $var->discount_price) ?></span></p>
+                <span class="product-discount-price"><?= ngn($var->sale_price); ?></span>
             <?php else : ?>
                 <p class="product-price"><?= ngn($var->sale_price); ?></p>
                 <p class="product-discount-price"></p>
@@ -416,22 +418,21 @@
                          style="height: 30px; width: 35px;">
                 </div>
                 <div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
-                    <p class="delivery-text">Free 7 day return if available</p>
+                    <p class="delivery-text">Free 7 day return.</p>
                 </div>
             </div>
-            <div class="row" style="margin-top: 14px;">
-                <div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
-                    <img src="<?= base_url('assets/svg/warranty.svg'); ?>" alt="Warranty"
-                         style="height: 30px; width: 35px;">
+            <?php if( !empty( $product->product_warranty) ) : ?>
+                <div class="row" style="margin-top: 14px;">
+                    <div class="col-xs-1 col-md-1 col-sm-1 col-lg-1">
+                        <img src="<?= base_url('assets/svg/warranty.svg'); ?>" alt="Warranty"
+                             style="height: 30px; width: 35px;">
+                    </div>
+                    <div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
+                        <p class="delivery-text">This product has the following warranty</p>
+                        <p class="editor-text"><?= $product->product_warranty; ?></p>
+                    </div>
                 </div>
-                <div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
-                    <p class="delivery-text">This product has the following warranty
-                        : Repair by vendor
-                        <br/>
-                        <a href="javascript:void(0)">Learn more</a>
-                    </p>
-                </div>
-            </div>
+            <?php endif; ?>
         </div>
     </div>
     <div class="container close-panel" data-target="overview_data">

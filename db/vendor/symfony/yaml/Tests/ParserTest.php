@@ -1293,7 +1293,7 @@ pages:
             footer # comment3
 EOT;
         $expected = array(
-            'pages' => array(
+            'Page' => array(
                 array(
                     'title' => 'some title',
                     'content' => <<<'EOT'

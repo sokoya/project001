@@ -141,9 +141,9 @@
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox"/>
-                                        I agree to <?= lang('app_name'); ?> <a style="color:#009848;" href="<?= base_url('pages/terms'); ?>"
+                                        I agree to <?= lang('app_name'); ?> <a style="color:#009848;" href="<?= lang('terms_url'); ?>"
                                                                                target="_blank" >Terms
-                                            & Conditions</a> | <a href="<?= base_url('pages/privacy'); ?>"
+                                            & Conditions</a> | <a href="<?= lang('privacy_url'); ?>"
                                                                   target="_blank" style="color:#009848">
                                             Policy.</a></label>
                                 </div>

@@ -316,6 +316,7 @@ class Memcached_library
     */
     private function key_name($key)
     {
+//        $key = str_pad($key, 70);
         return md5(strtolower($this->config['config']['prefix'].$key));
     }
     /*

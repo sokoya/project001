@@ -46,6 +46,7 @@
                         <div class="inner">
                             <h4 class="category-header">
                                 Recommended For You
+                            </h4>
                         </div>
                     </div>
                     <div style="clear: both"></div>
