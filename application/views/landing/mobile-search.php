@@ -221,6 +221,8 @@
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
+
+    
     <div class="">
         <div class="row">
             <div id="category_body">
