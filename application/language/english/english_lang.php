@@ -7,7 +7,7 @@ $lang['notify_email'] = '';
 $lang['sale_email'] = '';
 $lang['contact_no'] = '08064028176';
 $lang['company_name'] = 'Internet Onitshamarketing Limited';
-$lang['office_address'] = "10, Street Name City, Onitsha, Anambra State. Nigeria.";
+$lang['office_address'] = "176 Akwa Road, Onitsha. Anambra State. Nigeria, West Africa ";
 $lang['domain'] = 'https://www.onitshamarket.com';
 $lang['copyright'] = "&copy; 2015 -  " . date('Y') ." Internet Onitshamarketing Limited All rights reserved";
 $lang['site_description'] = "Welcome to onitshamarket.com - Buy electronics, phones, fashions in Nigeria";
@@ -63,3 +63,10 @@ $lang['our_company_url'] = base_url('page/about_onitshamarket/');
 $lang['privacy_url'] = base_url('page/privacy/');
 $lang['terms_url'] = base_url('page/terms/');
 $lang['agreement_url'] = base_url('page/agreement/');
+
+
+// Social Media Link
+$lang['facebook_link'] = "#";
+$lang['twitter_link'] = "#";
+$lang['instagram_link'] = "#";
+$lang['youtube_link'] = "#";
