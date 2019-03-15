@@ -242,7 +242,7 @@
                     </div>
                 </div>
                 <div class="col-xs-12 ">
-}
+
                     <div class="row row-sm-gap" data-gutter="10">
                         <?php if($products) :foreach ($products as $product) : ?>
                             <div class="col-md-3">
