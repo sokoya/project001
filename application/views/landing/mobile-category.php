@@ -243,6 +243,7 @@
                         </p>
                     </div>
                 </div>
+
                 <div class="col-xs-12 ">
                     <div class="row row-sm-gap" data-gutter="10">
                         <?php if($products) :foreach ($products as $product) : ?>
@@ -251,8 +252,7 @@
                                     <ul class="product-labels"></ul>
                                     <div class="product-img-wrap">
                                         <img class="product-img lazy"
-                                             data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
-                                             src="<?= base_url('assets/load.gif'); ?>"
+                                             src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
                                              alt="<?= $product->product_name; ?>"
                                              title="<?= $product->product_name; ?>"/>
                                     </div>

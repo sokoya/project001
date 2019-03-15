@@ -54,7 +54,7 @@
                      alt="Fast Delivery"
                      title="Fast Delivery"/>
                 <h5 class="banner-category-title">Fast Delivery</h5>
-                <p class="banner-category-desc">Mationwide Same Day</p>
+                <p class="banner-category-desc">Nationwide Same Day</p>
             </a>
         </div>
         <div class="owl-item">

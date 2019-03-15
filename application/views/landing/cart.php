@@ -91,7 +91,7 @@
 								<?php endif; ?>
                                 <td class="text-center">
                                     <a title="Remove <?= $product['name']; ?> from the cart"
-                                       class="fas fa-close table-shopping-remove"
+                                       class="fas fa-times table-shopping-remove"
                                        href="<?= base_url('cart/remove/' . $product['rowid']); ?>"></a>
                                 </td>
 							</tr>

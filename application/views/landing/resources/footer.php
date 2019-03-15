@@ -90,24 +90,21 @@
                     <p><h4 class="text text-sm foot-link">Follow us on Social Networks</h4></p>
                     <ul class="main-footer-social-list">
                         <li>
-                            <a style="font-size: 24px" class="fab fa-facebook-square" href="<?= FACEBOOK_LINK; ?>"></a>
+                            <a style="font-size: 24px" class="fab fa-facebook-square" href="<?= lang('facebook_link') ?>"></a>
                         </li>
                         <li>
-                            <a style="font-size: 24px" class="fab fa-twitter" href="#"></a>
+                            <a style="font-size: 24px" class="fab fa-twitter" href="<?= lang('twitter_link'); ?>"></a>
                         </li>
                         <li>
-                            <a style="font-size: 24px" class="fab fa-pinterest" href="#"></a>
+                            <a style="font-size: 24px" class="fab fa-instagram" href="<?= lang('instagram_link'); ?>"></a>
                         </li>
                         <li>
-                            <a style="font-size: 24px" class="fab fa-instagram" href="#"></a>
-                        </li>
-                        <li>
-                            <a style="font-size: 24px" class="fab fa-google-plus" href="#"></a>
+                            <a style="font-size: 24px" class="fab fa-youtube" href="<?= lang('youtube_link'); ?>"></a>
                         </li>
                     </ul>
                     <ul class="payment-icons-list">
                         <li>
-                            <img width="100" src="<?= base_url('assets/img/payment/interswitch_logo.png') ?>"
+                            <img style="width: 100px;height: 41px;" src="<?= base_url('assets/img/payment/interswitch_logo.png') ?>"
                                  alt="Interswitch Payment" title="Pay with Interswitch"/>
                         </li>
                         <li>
