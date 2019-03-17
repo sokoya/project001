@@ -67,16 +67,25 @@ class Product extends MY_Controller
 		if ($str == '') redirect(base_url());
 		$features = $this->product->get_features($str);
 		$output_array = array();
+
+//		var_dump( $features ); exit;
 		if ($features) {
 			foreach ($features as $feature => $values) {
 				foreach ($values as $key => $value) {
 					$variables = json_decode($value);
 					foreach ($variables as $new_key => $new_value) {
+//					    echo( $new_value);
+//					    echo '<br />';
 						if (is_array($new_value)) {
 							$new_value = array_map("unserialize", array_unique(array_map("serialize", $new_value)));
-							foreach ($new_value as $inkey => $invalue) $output_array[$new_key][] = $invalue;
+
+							foreach ($new_value as $inkey => $invalue) {
+							    $invalue = strtolower( $invalue );
+							    $output_array[$new_key][] = $invalue;
+                            }
 							$output_array[$new_key] = array_unique($output_array[$new_key], SORT_REGULAR);
 						} else {
+						    $new_value = strtolower( $new_value );
 							$output_array[$new_key][] = $new_value;
 							$output_array[$new_key] = array_unique($output_array[$new_key], SORT_REGULAR);
 						}
@@ -84,6 +93,9 @@ class Product extends MY_Controller
 				}
 			}
 		}
+
+//        var_dump( $output_array );
+//        exit;
 		// pagination
 		$page = isset($_GET['page']) ? xss_clean($_GET['page']) : 0;
 		if ($page > 1) $page -= 1;
@@ -97,7 +109,7 @@ class Product extends MY_Controller
 		$config['base_url'] = current_url();
 		$config['total_rows'] = $count;
 		$config['per_page'] = 32;
-		$config["num_links"] = 5;
+		$config["num_links"] = 10;
 		$this->pagination->initialize($config);
 		$page_data['features'] = $output_array;
 		$array['limit'] = $config['per_page'];
@@ -114,6 +126,7 @@ class Product extends MY_Controller
 		$page_data['sub_categories'] = $this->product->get_categories($str, $q);
 		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 		$page_data['category_detail'] = $this->product->category_details($str);
+
 		if( $page_data['category_detail'] ) {
             $page_data['description'] = $page_data['category_detail']->description;
             $page_data['title'] = $page_data['category_detail']->title;
@@ -208,21 +221,30 @@ class Product extends MY_Controller
 		$page_data['title'] = ucwords($category . ' ' . $product_name);
 		$features = $this->product->get_features($category, $product_name);
 		$feature_array = array();
-		foreach ($features as $feature => $values) {
-			foreach ($values as $key => $value) {
-				$variables = json_decode($value);
-				foreach ($variables as $new_key => $new_value) {
-					if (is_array($new_value)) {
-						$new_value = array_map("unserialize", array_unique(array_map("serialize", $new_value)));
-						foreach ($new_value as $inkey => $invalue) $feature_array[$new_key][] = $invalue;
-						$feature_array[$new_key] = array_unique($feature_array[$new_key], SORT_REGULAR);
-					} else {
-						$feature_array[$new_key][] = $new_value;
-						$feature_array[$new_key] = array_unique($feature_array[$new_key], SORT_REGULAR);
-					}
-				}
-			}
-		}
+        if ($features) {
+            foreach ($features as $feature => $values) {
+                foreach ($values as $key => $value) {
+                    $variables = json_decode($value);
+                    foreach ($variables as $new_key => $new_value) {
+//					    echo( $new_value);
+//					    echo '<br />';
+                        if (is_array($new_value)) {
+                            $new_value = array_map("unserialize", array_unique(array_map("serialize", $new_value)));
+
+                            foreach ($new_value as $inkey => $invalue) {
+                                $invalue = strtolower( $invalue );
+                                $output_array[$new_key][] = $invalue;
+                            }
+                            $output_array[$new_key] = array_unique($output_array[$new_key], SORT_REGULAR);
+                        } else {
+                            $new_value = strtolower( $new_value );
+                            $output_array[$new_key][] = $new_value;
+                            $output_array[$new_key] = array_unique($output_array[$new_key], SORT_REGULAR);
+                        }
+                    }
+                }
+            }
+        }
 		// pagination
 		$page = isset($_GET['page']) ? xss_clean($_GET['page']) : 0;
 		if ($page > 1) $page -= 1;

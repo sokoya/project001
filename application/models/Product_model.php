@@ -181,8 +181,10 @@ Class Product_model extends CI_Model{
     function parent_slug_top( $id ){
         // Select category
         $GLOBALS['array_variable'] = array();
+//        $temp = $this->db->query("SELECT pid FROM categories WHERE id = {$id}")->row();
         $select_category = "SELECT id, slug FROM categories WHERE id = {$id}";
         $result = $this->db->query($select_category);
+
         if( $result->num_rows() >= 1 ){
             $pid = $result->row()->id;
             $this->parent_recurssive( $pid );
@@ -263,6 +265,8 @@ Class Product_model extends CI_Model{
     */
     function get_parent_details( $id ){
         $array = $this->parent_slug_top( $id );
+//        var_dump( $array );exit;
+//        die( $id );
         return $this->db->query("SELECT name, slug, description, specifications FROM categories WHERE id IN ('".implode("','",$array)."')")->result();
     }
 

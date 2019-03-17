@@ -111,7 +111,7 @@
                     <ol class="breadcrumb page-breadcrumb">
                         <li><a href="<?= base_url(); ?>">Home</a>
                         </li>
-                        <li class="active"><?= ucwords($category_detail->name); ?>
+                            <li class="active"><?= ucwords($category_detail->name); ?>
                         </li>
                     </ol>
                     <div class="category-selections clearfix">
@@ -202,7 +202,7 @@
                                                     <div class="carrito-checkbox">
                                                         <label class="tree-input">
                                                             <input class="filter" type="checkbox" name="filterset"
-                                                                   data-type="<?= trim(strtolower($feature)); ?>"
+                                                                   data-type="<?= trim($feature); ?>"
                                                                    data-value="<?= trim(preg_replace("/[^a-z0-9-]/", '_', strtolower($value))) ?>"/><?= $value; ?>
                                                             <span class="checkmark"></span>
                                                         </label>
