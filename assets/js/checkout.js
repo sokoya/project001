@@ -63,6 +63,7 @@ $('.cancel-btn').on('click', function () {
 });
 
 $('.create-address-btn').on('click', function (e) {
+
     e.preventDefault();
     $(this).prop('disabled', true);
     $('#processing').show();
@@ -85,8 +86,10 @@ $('.create-address-btn').on('click', function (e) {
         method: "POST",
         data: data,
         success: function (response) {
+
             if (response.status = 'success') {
-                $('#status').html(`<p class="alert alert-success">${response.msg}</p>`).slideDown('fast').delay(3000).slideUp('slow');
+                // alert('Heeeeeee');
+                $('#status').html(`<p class="alert alert-success">${response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
                 $('#processing').hide();
                 $('#delivery-method').load(`${base_url}checkout #delivery-method`, function () {
                     $('.billing-address').on('click', get_updates);
@@ -101,8 +104,11 @@ $('.create-address-btn').on('click', function (e) {
 
             } else {
                 $('#processing').hide();
-                $('#status').html(`<p class="alert alert-danger">${response.msg}</p>`).slideDown('fast').delay(3000).slideUp('slow');
+                $('#status').html(`<div class="alert alert-danger">${response.message}</div>`).slideDown('fast').delay(300000).slideUp('slow');
             }
+        },
+        error: function (response) {
+            console.log( response);
         }
     });
 });

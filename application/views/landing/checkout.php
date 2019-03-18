@@ -159,19 +159,14 @@
                                             </div>
                                         </div>
                                     <?php endforeach; ?>
+
                                 <?php else : ?>
                                     <div class="alert alert-warning text-center delivery-warning">We currently don't
                                         have any pickup venue available for your state/area.
                                     </div>
                                 <?php endif; ?>
                             </div>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <button type="button" class="btn btn-success btn-block cancel-btn">
-                                        Select
-                                    </button>
-                                </div>
-                                <div class="col-md-2"></div>
+                            <div class="row" style="padding-bottom: 15px;">
                                 <div class="col-md-5">
                                     <button type="button" class="btn btn-warning btn-block cancel-btn">
                                         Cancel

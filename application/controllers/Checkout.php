@@ -56,6 +56,8 @@ class Checkout extends MY_Controller
 
 	function add_address()
 	{
+        header('Content-type: text/json');
+        header('Content-type: application/json');
 		$status['status'] = 'error';
 		$this->form_validation->set_rules('first_name', 'First name', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('last_name', 'Last name', 'trim|required|xss_clean');
@@ -63,8 +65,7 @@ class Checkout extends MY_Controller
 		$this->form_validation->set_rules('state', 'State', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('area', 'Area', 'trim|required|xss_clean');
 		if ($this->form_validation->run() == FALSE) {
-			$this->session->set_flashdata('error_msg', 'Please correct the following errors ' . validation_errors());
-			$status['msg'] = 'Please correct the following errors ' . validation_errors();
+			$status['message'] = validation_errors('<span>', '</span><br/>');
 			echo json_encode($status);
 			exit;
 		} else {
@@ -79,11 +80,11 @@ class Checkout extends MY_Controller
 			);
 			if (is_int($this->user->create_account($data, 'billing_address'))) {
 				$status['status'] = 'success';
-				$status['msg'] = 'Success: The address has been added to your account.';
+				$status['message'] = 'Success: The address has been added to your account.';
 				echo json_encode($status);
 				exit;
 			} else {
-				$status['msg'] = 'Error: There was an error adding the address to your account.';
+				$status['message'] = 'Error: There was an error adding the address to your account.';
 			}
 			echo json_encode($status);
 			exit;
