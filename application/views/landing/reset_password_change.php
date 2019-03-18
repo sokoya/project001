@@ -88,7 +88,7 @@
             <div class="col-md-6 market-box">
                 <p class="text-center">
                     <a title="Go to homepage" href="<?= base_url(); ?>"><img
-                                src="<?= base_url('assets/img/onitshamarket-logo.png') ?>" width="30%"
+                                src="<?= base_url('assets/img/onitshamarket-logo.png') ?>" width="40%"
                                 alt="market logo Image"></a>
                 </p>
                 <h3 class="widget-title text-center text-bold text-sm">
