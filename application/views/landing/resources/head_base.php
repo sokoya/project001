@@ -57,6 +57,9 @@
         <meta name="twitter:card" content="summary"/>
         <meta name="twitter:site" content="<?= base_url(); ?>"/>
         <meta name="twitter:creator" content=""/>
+        <meta property="og:image:width" content="279">
+        <meta property="og:image:height" content="279">
+
     <?php endif; ?>
     <meta name="google-site-verification" content="xGjxCwvClqtUIevfyrQ-HWU7OcjspMEVmXMAPcpzz7Y"/>
     <style>

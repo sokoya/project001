@@ -54,6 +54,7 @@ class Checkout extends MY_Controller
         }
 	}
 
+	// Add billing address for customer
 	function add_address()
 	{
         header('Content-type: text/json');
@@ -108,6 +109,7 @@ class Checkout extends MY_Controller
 
     /*
      * Save user orders to the DB
+     *
      * */
 	function checkout_confirm() {
 	    if( $this->input->is_ajax_request() ){
@@ -115,12 +117,12 @@ class Checkout extends MY_Controller
             $charge = 0;
             // Check either pickup or delivery
             $pickup_id = $address_id = 0;
-            $is_delivery = false;
+
             if( $this->input->post('pickup_address') ) {
                 $pickup_id = $this->input->post('pickup_address');
                 $charge = $this->product->get_billing_amount($pickup_id, 'pickup');
             }else{
-                $is_delivery = true;
+
                 $address_id = cleanit( $this->input->post('selected_address', true) );
                 $charge = $this->product->get_billing_amount($address_id);
             }
@@ -141,8 +143,8 @@ class Checkout extends MY_Controller
                 $detail = $this->product->get_cart_details($product['id']);
                 $variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
                 if($variation_detail->quantity < 1 || $product['qty'] > $variation_detail->quantity || in_array( $detail->product_status, array('suspended', 'blocked', 'pending' ))){
-                    $return['status'] = 'error';
                     $error++;
+                    $return['status'] = 'error';
                     $return['message'] = "Sorry, one of the item(s) is out of stock.";
                     // Remove the Item
                     $cid = $product['rowid'];
@@ -188,13 +190,15 @@ class Checkout extends MY_Controller
                 $total = $subtotal + $billing_amount;
                     // Lets insert our orders into the database
                 if(  $this->product->insert_batch( 'orders', $data ) ){
-                    unset( $data);
+                    unset( $data); // Fore data leaching...
                     // check the payment method, if Interswitch (2) compile the array session
                     $token = simple_crypt( $txn_ref, 'e');
                     $amt = $total * 100 ;
                     if( (int)$payment_method == 2 ){
                         $redirect_url =  base_url('interswitch/response/?t=' . $token);
+
                         $hash = hash('SHA512', $txn_ref.INTERSWITCH_PRODUCT_ID.INTERSWITCH_PAY_ITEM_ID.$amt.$redirect_url.INTERSWITCH_MAC_KEY) ;
+
                         $profile = $this->product->get_row('users', 'first_name, last_name', array('id' => $buyer_id));
                         $name = $profile->first_name . ' '. $profile->last_name;
                         $interswitch_session = array(
@@ -227,7 +231,9 @@ class Checkout extends MY_Controller
         }
     }
 
-    // Order Completed
+    /*
+     * Checkout completed for payment on delivery
+     * */
 	public function order_completed(){
         $order = $this->session->userdata('order_code');
         $page_data['page'] = 'order_completed';
