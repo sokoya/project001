@@ -56,7 +56,7 @@
                     CONTACT US
                 </h3>
                 <p class="p_sp_con">
-                    <i class="fa fa-home"></i> Address: 10, Street Name City, Onitsha, Anambra State. Nigeria.<br>
+                    <i class="fa fa-home"></i> Address: 176 Akwa Road, Onitsha. Anambra State. Nigeria. .<br>
                     <i class="fa fa-phone"></i> Tel: +23412345678<br>
                     <i class="fa fa-map-marker"></i> Monday to Saturday<br>
                     <i class="fa fa-clock-o"></i> Hours: 09:00am to 05:00pm
