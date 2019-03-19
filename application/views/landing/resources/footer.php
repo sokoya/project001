@@ -17,7 +17,8 @@
                         <div style="font-size: 12px;">
                             <h3 class="widget-title-sm foot-link footer-link">Office Address: </h3>
                             <span class="office_address">
-                                <?= lang('office_address'); ?><br/><?= lang('contact_no'); ?>
+                                <?= lang('office_address'); ?>
+
                             </span>
                         </div>
                     </div>
@@ -60,7 +61,7 @@
                             <h3 class="widget-title-sm foot-link footer-link">Support</h3>
                             <ul style="margin-left: -40px;">
                                 <li><a href="#">App Downloads</a></li>
-                                <li><a href="<?= base_url('pages/contact'); ?>">Contact Us</a></li>
+                                <li><a href="<?= base_url('page/contact'); ?>">Contact Us</a></li>
                                 <li><a href="<?= lang('shopping_help_url'); ?>">FAQ</a></li>
                                 <li><a href="#">Live Chat</a></li>
                                 <li><a href="#">Waranty and Returns</a></li>
