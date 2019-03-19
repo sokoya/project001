@@ -277,7 +277,7 @@
             </div>
             <div class="row">
                 <?php
-                $products = $this->product->randomproducts(53, 6);
+                $products = $this->product->randomproducts(array(53,5,1), 6);
                 foreach ($products as $product):
                     ?>
                     <!--                    <div style="background-color: #fff;">-->
