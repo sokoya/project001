@@ -799,7 +799,7 @@
                                         <div class="product-img-wrap">
                                             <img class="product-img lazy"
                                                  src="<?= base_url('assets/img/load.gif'); ?>"
-                                                 data-src="<?= PRODUCTS_IMAGE_PATH . $viewed->image_name; ?>"
+                                                 data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?=$viewed->image_name; ?>"
                                                  alt="<?= $viewed->product_name; ?>"
                                                  title="<?= $viewed->product_name; ?>">
                                         </div>
