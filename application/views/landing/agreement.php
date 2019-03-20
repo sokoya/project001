@@ -43,10 +43,9 @@
         <?php $this->load->view('landing/resources/head_menu') ?>
     <?php endif; ?>
     <div class="container">
-        <div class="row text-justify" style="padding: 60px;background: #fff;margin-top:20px;">
+        <div class="row text-justify" style="padding: 30px;background: #fff;margin-top:20px;">
 
-            <?= $agreement ; ?>
-
+            <?= $agreement; ?>
         </div>
         <div style="height:15px;"></div>
 

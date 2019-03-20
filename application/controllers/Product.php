@@ -106,7 +106,7 @@ class Product extends MY_Controller
 		$config = $this->config->item('pagination');
 		$config['base_url'] = current_url();
 		$config['total_rows'] = $count;
-		$config['per_page'] = 3;
+		$config['per_page'] = 32;
 		$this->pagination->initialize($config);
 		$page_data['features'] = $output_array;
 		$array['limit'] = $config['per_page'];
@@ -255,7 +255,6 @@ class Product extends MY_Controller
 		$config['base_url'] = current_url();
 		$config['total_rows'] = $count;
 		$config['per_page'] = 32;
-		$config["num_links"] = 5;
 		$page_data['features'] = $feature_array;
 		$array['limit'] = $config['per_page'];
 		$array['offset'] = $page;
