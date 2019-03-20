@@ -150,7 +150,8 @@ class Checkout extends MY_Controller
                     // Remove the Item
                     $cid = $product['rowid'];
                     try {
-                        // remove from cart
+                        // Lets remove from cart...
+
                         $this->cart->remove($cid);
                     }catch (Exception $x ){
                         $error_array = array('error_action' => 'Cart Removal Error', 'error_message' => 'On checkout when performing checks on cart item');
