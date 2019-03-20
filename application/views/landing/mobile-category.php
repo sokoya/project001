@@ -129,6 +129,10 @@
     #filter-category{
         cursor: pointer;
     }
+    .pagination-container{
+        text-align: center;
+        font-max-size: 12px;
+    }
 </style>
 </head>
 <body>
@@ -246,7 +250,8 @@
 
                 <div class="col-xs-12 ">
                     <div class="row row-sm-gap" data-gutter="10">
-                        <?php if($products) :foreach ($products as $product) : ?>
+                        <?php if($products) :
+                            foreach ($products as $product) : ?>
                             <div class="col-md-3">
                                 <div class="mobile-product product-sm-left ">
                                     <ul class="product-labels"></ul>
@@ -288,7 +293,13 @@
                                     </div>
                                 </div>
                             </div>
-                        <?php endforeach; else: ?>
+                        <?php endforeach;?>
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <?= $pagination ?>
+                                </div>
+                            </div>
+                        <?php else: ?>
                         <div style="margin-top: 30px;"></div>
                             <h3 class="text-center text-md-center">Oops! Sorry, we couldn't find products on this section.</h3>
                             <p class="text-center text-sm">

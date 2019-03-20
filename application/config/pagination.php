@@ -5,7 +5,7 @@ $config['num_links'] = 4;
 $config['page_query_string'] = TRUE;
 $config['reuse_query_string'] = TRUE;
 $config['query_string_segment'] = 'page';
-$config['full_tag_open'] = '<div class="pagination-container margin-top-20 margin-bottom-40"><nav class=""><ul class="pagination category-pagination pull-right">';
+$config['full_tag_open'] = '<div style="margin-bottom: 10px;" class="pagination-container margin-top-20 margin-bottom-40"><nav class=""><ul class="pagination category-pagination">';
 $config['full_tag_close'] = '</ul></nav></div>';
 $config['first_link'] = '&laquo; First';
 $config['first_tag_open'] = '<li class="prev page">';
@@ -23,6 +23,7 @@ $config['cur_tag_open'] = '<li class="active"><a href="">';
 $config['cur_tag_close'] = '</a></li>';
 $config['num_tag_open'] = '<li class="page">';
 $config['num_tag_close'] = '</li>';
+$config['use_page_numbers'] = TRUE;
 // $config['display_pages'] = FALSE;
 // 
 // $config['anchor_class'] = 'follow_link';

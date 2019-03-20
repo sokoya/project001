@@ -94,21 +94,19 @@ class Product extends MY_Controller
 			}
 		}
 
-//        var_dump( $output_array );
-//        exit;
 		// pagination
 		$page = isset($_GET['page']) ? xss_clean($_GET['page']) : 0;
 		if ($page > 1) $page -= 1;
 
 		$array = array('str' => $str, 'is_limit' => false);
 		$x = (array)$this->product->get_products($array, $this->input->get());
-		$count = (count($x));
+		$count = $page_data['total_count'] =  (count($x));
 		$this->load->library('pagination');
 		$this->config->load('pagination');
 		$config = $this->config->item('pagination');
 		$config['base_url'] = current_url();
 		$config['total_rows'] = $count;
-		$config['per_page'] = 32;
+		$config['per_page'] = 3;
 		$config["num_links"] = 10;
 		$this->pagination->initialize($config);
 		$page_data['features'] = $output_array;
@@ -250,7 +248,7 @@ class Product extends MY_Controller
 		if ($page > 1) $page -= 1;
 		$array = array('category' => $category, 'product_name' => $product_name, 'is_limit' => false);
 		$x = (array)$this->product->get_search_products($array, $this->input->get());
-		$count = (count($x));
+        $count = $page_data['total_count'] =  (count($x));
 
 		$this->load->library('pagination');
 		$this->config->load('pagination');
