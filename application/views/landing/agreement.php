@@ -48,8 +48,7 @@
             <?= $agreement; ?>
         </div>
         <div style="height:15px;"></div>
-
-        <div>
+        <div class="text-center">
             <p class="lead custom-text">Are You Ready To Shop?</p>
             <a class="btn btn-primary btn-lg" style="border-radius: 0;" href="<?= base_url(); ?>">Start Shopping<i
                         class="fa fa-cart-plus"></i></a>
