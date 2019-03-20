@@ -74,6 +74,10 @@
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);
     }
+    .product-labels > li{
+        background-color: #ff0d0d;
+        font-weight: bold;
+    }
 </style>
 </head>
 <body>
@@ -248,7 +252,7 @@
 
                                         <?php if( $product->item_left < 5 ) : ?>
                                             <ul class="product-labels" style="margin-top: 17px;">
-                                                <li style="background-color: #d7c41f; border-radius: 2px; padding-top: 3px; text-transform: none; ">
+                                                <li style="background-color: #009949; border-radius: 2px; padding-top: 3px; text-transform: none; ">
                                                     <b><?= $product->item_left; ?> Item Left</b>
                                                 </li>
                                             </ul>
