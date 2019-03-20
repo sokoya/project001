@@ -74,10 +74,7 @@
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);
     }
-    .product-labels > li{
-        background-color: #ff0d0d;
-        font-weight: bold;
-    }
+
 </style>
 </head>
 <body>
@@ -246,7 +243,7 @@
                                     <div class="product">
                                         <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
                                             <ul class="product-labels">
-                                                <li><?= get_discount($product->sale_price, $product->discount_price); ?></li>
+                                                <li style="text-transform: lowercase;"><?= get_discount($product->sale_price, $product->discount_price); ?></li>
                                             </ul>
                                         <?php endif; ?>
 

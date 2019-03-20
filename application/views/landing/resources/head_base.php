@@ -66,7 +66,7 @@
     <meta name="google-site-verification" content="xGjxCwvClqtUIevfyrQ-HWU7OcjspMEVmXMAPcpzz7Y"/>
     <style>
         .product-labels > li {
-            background-color: #ff0d0d;
+            background-color: #a72323;
             font-weight: bold;
         }
 
