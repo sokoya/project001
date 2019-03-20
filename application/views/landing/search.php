@@ -276,7 +276,7 @@
                                                 ?>
                                                 <span class="text-sm pull-right"><strong><?= ($product->brand_name == 'others') ? 'Generic' : $product->brand_name; ?></strong></span>
                                             </ul>
-                                            <h5 class="cs-title"><?= character_limiter(ucwords($product->product_name), 10, '...'); ?></h5>
+                                            <h5 class="cs-title"><?= character_limiter(ucwords(str_replace('generic', '',$product->product_name)), 10, '...'); ?></h5>
                                             <div class="product-caption-price">
                                                 <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
                                                     <span class="cs-price-tl"><?= ngn($product->discount_price); ?></span>
