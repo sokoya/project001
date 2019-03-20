@@ -230,7 +230,7 @@
                         <p class="margin-0 text-center"><span
                                     class="category-text ">Products Marching "<?= ucwords($searched); ?>"</span>
                         </p>
-                        <p class="text-center result-count"><?= number_format(count($products)) . ' products found'; ?> </p>
+                        <p class="text-center result-count"><?= $total_count . ' products found'; ?> </p>
                     </div>
                 </div>
                 <div class="custom-card">
