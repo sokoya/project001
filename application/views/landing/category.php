@@ -248,8 +248,8 @@
 
                                         <?php if( $product->item_left < 5 ) : ?>
                                             <ul class="product-labels" style="margin-top: 17px;">
-                                                <li style="background-color: #d7c41f; border-radius: 2px; padding-top: 3px; ">
-                                                    <b><?= $product->item_left; ?> item left</b>
+                                                <li style="background-color: #d7c41f; border-radius: 2px; padding-top: 3px; text-transform: none; ">
+                                                    <b><?= $product->item_left; ?> Item Left</b>
                                                 </li>
                                             </ul>
                                         <?php endif;?>
