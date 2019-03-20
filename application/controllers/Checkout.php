@@ -112,6 +112,7 @@ class Checkout extends MY_Controller
      *
      * */
 	function checkout_confirm() {
+
 	    if( $this->input->is_ajax_request() ){
 	        /*  Note the seller might have checked pickup address or billing address */
             $charge = 0;
