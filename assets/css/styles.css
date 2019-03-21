@@ -3237,7 +3237,7 @@ header.main {
 
 .product-banner-alt-btn, .product-banner-alt-title, .product-labels {
     z-index: 2;
-    text-transform: uppercase
+    text-transform: capitalize;
 }
 
 .product-banner-alt-title {

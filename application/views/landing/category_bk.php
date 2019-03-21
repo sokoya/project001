@@ -247,6 +247,13 @@
                                             </ul>
                                         <?php endif; ?>
 
+<!--                                        --><?php //if( $product->item_left < 5 ) : ?>
+<!--                                            <ul class="product-labels" style="margin-top: 17px;">-->
+<!--                                                <li style="background-color: #009949; border-radius: 2px; padding-top: 3px; text-transform: none; ">-->
+<!--                                                    <b>--><?//= $product->item_left; ?><!-- Item Left</b>-->
+<!--                                                </li>-->
+<!--                                            </ul>-->
+<!--                                        --><?php //endif;?>
                                         <div class="product-img-wrap">
                                             <div class="product-quick-view-cover">
                                                 <div style="position: relative; left: -50%;">

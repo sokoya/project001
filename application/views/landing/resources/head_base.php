@@ -65,10 +65,10 @@
     <?php endif; ?>
     <meta name="google-site-verification" content="xGjxCwvClqtUIevfyrQ-HWU7OcjspMEVmXMAPcpzz7Y"/>
     <style>
-        .product-labels > li {
-            background-color: #a72323;
-            font-weight: bold;
-        }
+        /*.product-labels > li {*/
+            /*background-color: #a72323;*/
+            /*font-weight: bold;*/
+        /*}*/
 
         .mgt_drop_menu > li, .t_drop_menu > li {
             height: 36px !important;
