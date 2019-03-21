@@ -29,6 +29,7 @@ class Page extends MY_Controller {
         $this->load->view('landing/privacy', $page_data);
     }
 
+
     public function social_responsibility(){
         $page_data['page'] = 'social';
         $page_data['title'] = "Social Responsibility";
