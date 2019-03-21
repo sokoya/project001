@@ -60,6 +60,7 @@ $lang['seller_url'] = 'https://www.seller.onitshamarket.com/';
 $lang['shopping_help_url'] = base_url('page/shopping_help/');
 $lang['contact_us_url'] = base_url('page/contact/');
 $lang['our_company_url'] = base_url('page/about_onitshamarket/');
+$lang['social_responsibility_url'] = base_url('page/social_responsibility/');
 $lang['privacy_url'] = base_url('page/privacy/');
 $lang['terms_url'] = base_url('page/terms/');
 $lang['agreement_url'] = base_url('page/agreement/');

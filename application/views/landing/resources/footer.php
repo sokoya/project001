@@ -9,7 +9,7 @@
                             <ul style="margin-left: -40px;">
                                 <li><a href="<?= lang('our_company_url'); ?>">Our Company</a></li>
                                 <li><a href="#">Investor Relation</a></li>
-                                <li><a href="#">Social Responsibility</a></li>
+                                <li><a href="<?= lang('social_responsibility_url'); ?>">Social Responsibility</a></li>
                                 <li><a href="#">Quality Complaince</a></li>
                                 <li><a href="#">Jobs at <?= lang('app_name'); ?></a></li>
                             </ul>

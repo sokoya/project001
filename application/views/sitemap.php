@@ -23,6 +23,11 @@
         <changefreq>monthly</changefreq>
     </url>
     <url>
+        <loc><?= base_url('page/social_responsibility/'); ?></loc>
+        <priority>0.5</priority>
+        <changefreq>monthly</changefreq>
+    </url>
+    <url>
         <loc><?= base_url('page/agreement/'); ?></loc>
         <priority>0.5</priority>
         <changefreq>monthly</changefreq>

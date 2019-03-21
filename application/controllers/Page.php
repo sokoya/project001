@@ -18,6 +18,9 @@ class Page extends MY_Controller {
         $page_data['terms'] = $this->user->get_row('page_contents', 'content, date_modified', "(type = 'terms')")->content;
         $this->load->view('landing/tnc', $page_data);
     }
+
+
+
     public function privacy(){
         $page_data['page'] = 'privacy';
         $page_data['title'] = "Privacy &amp; Security";
@@ -25,6 +28,16 @@ class Page extends MY_Controller {
         $page_data['privacy'] = $this->user->get_row('page_contents', 'content', "(type='privacy')")->content;
         $this->load->view('landing/privacy', $page_data);
     }
+
+    public function social_responsibility(){
+        $page_data['page'] = 'social';
+        $page_data['title'] = "Social Responsibility";
+        $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
+        $page_data['social'] = $this->user->get_row('page_contents', 'content', "(type='social')")->content;
+        $this->load->view('landing/social', $page_data);
+    }
+
+
     public function contact(){
         $page_data['page'] = 'contact';
         $page_data['title'] = "Contact";
