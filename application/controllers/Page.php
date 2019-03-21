@@ -34,7 +34,7 @@ class Page extends MY_Controller {
         $page_data['title'] = "Social Responsibility";
         $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
         $page_data['social'] = $this->user->get_row('page_contents', 'content', "(type='social')")->content;
-        $this->load->view('landing/social', $page_data);
+        $this->load->view('landing/social_responsibility', $page_data);
     }
 
 
