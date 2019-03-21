@@ -39,7 +39,7 @@
     <div class="container">
         <div class="row text-justify" style="padding: 30px;background: #fff;margin-top:20px;">
 
-            <?= $privacy; ?>
+            <?= $social; ?>
         </div>
         <div style="height:15px;"></div>
         <div class="text-center">
