@@ -279,7 +279,8 @@
             </div>
             <div class="row">
                 <?php
-                $products = $this->product->randomproducts(array(106,105,14), 6 );
+                $excludes = array();
+                $products = $this->product->randomproducts(array(105,14,106,), 6 );
 
                 foreach ($products as $product):
                     ?>
@@ -309,7 +310,7 @@
                         </div>
                     </div>
                     <!--                    </div>-->
-
+                    <?php array_push($excludes, $product->id); ?>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -529,7 +530,56 @@
             </div>
 
         </div>
+
+        <?php if( $this->session->userdata('logged_id')) :
+                $recently_viewed = $this->user->get_recently_viewed($this->session->userdata('logged_id'), $excludes);
+                if ($recently_viewed && count($recently_viewed)) :
+            ?>
+                <div class="card-max">
+            <div class="card-max-header">
+                <p class="card-max-title">Recently Viewed Items </p>
+                <p class="card-max-subtitle">Items are still available.</p>
+            </div>
+            <br/>
+            <div class="brand-slide">
+                <div class="row">
+                    <div class="col-md-2 hidden-sm hidden-xs">
+                        <img src="<?= base_url('assets/img/home/left_pane_2.jpg'); ?>" style="min-height: 320px">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row" style="margin-left: 10px">
+                            <?php
+                            foreach ($recently_viewed as $viewed) : ?>
+                                <a href="<?= base_url(urlify($viewed->product_name, $viewed->id)); ?>">
+                                    <div class="col-md-3 col-sm-3 col-xs-3  card-product card-product-alt">
+                                        <?php if (discount_check($viewed->discount_price, $viewed->start_date, $viewed->end_date)): ?>
+                                            <p class="product-discount-overlay"><?= get_discount($viewed->sale_price, $viewed->discount_price); ?></p>
+                                        <?php endif; ?>
+                                        <img class="card-product-img"
+                                             src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $viewed->image_name; ?>"
+                                             alt="<?= $viewed->product_name; ?>"
+                                             title="<?= $viewed->product_name; ?>">
+                                        <p class="card-product-title"><?= character_limiter($viewed->product_name, 30); ?></p>
+                                        <?php if (discount_check($viewed->discount_price, $viewed->start_date, $viewed->end_date)) : ?>
+                                            <p class="card-product-price"><?= ngn($viewed->discount_price); ?> </p>
+                                            <p class="card-product-price-discount"> <?= ngn($viewed->sale_price); ?></p>
+                                        <?php else : ?>
+                                            <p class="card-product-price"> <?= ngn($viewed->sale_price); ?> </p>
+                                        <?php endif; ?>
+                                    </div>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <?php endif; ?>
+        <?php endif; ?>
+
     </div>
+
+
 
     <div class="gap">
         <div class="container">
