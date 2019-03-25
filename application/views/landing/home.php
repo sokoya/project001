@@ -272,12 +272,15 @@
     <div class="container">
         <div class="card-max" style="margin-top: -10px">
             <div class="card-max-header">
-                <p class="card-max-title">Hot Sales<a href="#" class="card-max-view-more">View more</a></p>
+                <p class="card-max-title">Hot Sales
+<!--                    <a href="#" class="card-max-view-more">View more</a>-->
+                </p>
                 <p class="card-max-subtitle">Great items, Affordable Prices</p>
             </div>
             <div class="row">
                 <?php
-                $products = $this->product->randomproducts(array(5,1,3,53), 6 );
+                $products = $this->product->randomproducts(array(106,105,14), 6 );
+
                 foreach ($products as $product):
                     ?>
                     <!--                    <div style="background-color: #fff;">-->
@@ -312,7 +315,9 @@
         </div>
         <div class="card-max">
             <div class="card-max-header">
-                <p class="card-max-title">Top Categories<a href="#" class="card-max-view-more">View more</a></p>
+                <p class="card-max-title">Top Categories
+<!--                    <a href="#" class="card-max-view-more">View more</a>-->
+                </p>
                 <p class="card-max-subtitle">Discover top categories, you won't want to miss</p>
             </div>
             <br/>
@@ -376,7 +381,9 @@
         <img class="img-responsive" src="<?= base_url('assets/img/home/banner_ad.png'); ?>">
         <div class="card-max">
             <div class="card-max-header">
-                <p class="card-max-title">Top Brands<a href="#" class="card-max-view-more">View more</a></p>
+                <p class="card-max-title">Top Brands
+<!--                    <a href="#" class="card-max-view-more">View more</a>-->
+                </p>
                 <p class="card-max-subtitle">Top brands top quality.</p>
             </div>
             <br/>
@@ -481,7 +488,9 @@
         </div>
         <div class="card-max">
             <div class="card-max-header">
-                <p class="card-max-title">Super Deals<a href="#" class="card-max-view-more">View more</a></p>
+                <p class="card-max-title">Super Deals
+<!--                    <a href="#" class="card-max-view-more">View more</a>-->
+                </p>
                 <p class="card-max-subtitle">Great Deals at amazing prices</p>
             </div>
             <br/>
@@ -493,7 +502,7 @@
                     <div class="col-md-10">
                         <div class="row" style="margin-left: 10px">
                             <?php
-                            $products = $this->product->randomproducts((int)3, 6);
+                            $products = $this->product->randomproducts(array(31,33,36,53,), 4);
                             foreach ($products as $product) : ?>
                                 <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>">
                                     <div class="col-md-3 col-sm-3 col-xs-3  card-product card-product-alt">

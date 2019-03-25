@@ -760,6 +760,7 @@ Class Product_model extends CI_Model{
         }else{
             $select_query .= " AND product_status = 'approved' GROUP BY p.id ORDER BY RAND() LIMIT 12";
         }
+//        die( $select_query );
         return $this->db->query($select_query)->result();
     }
     /*
