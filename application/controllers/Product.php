@@ -56,12 +56,6 @@ class Product extends MY_Controller
 		}
 	}
 
-	public function new_arrivals(){
-		$page_data['page'] = 'product';
-        $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
-		$this->load->view('landing/new_arrivals', $page_data);
-	}
-
 	// List Product Page
 	public function catalog()
 	{
