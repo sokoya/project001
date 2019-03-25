@@ -8,73 +8,41 @@
         min-height: unset !important;
     }
 
-    .carrito-checkbox {
-        display: block;
+    .col-xs-5ths,
+    .col-sm-5ths,
+    .col-md-5ths,
+    .col-lg-5ths {
         position: relative;
-        padding-left: 25px;
-        margin-bottom: 10px;
-        cursor: pointer;
-        font-size: 14px;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
     }
 
-    .carrito-checkbox input {
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
+    .col-xs-5ths {
+        width: 20%;
+        float: left;
     }
 
-    .checkmark {
-        cursor: pointer;
-        position: absolute;
-        top: 0;
-        left: 0;
-        padding: 3px;
-        margin-top: 2px;
-        height: 15px;
-        width: 15px;
-        border: solid 1px #74c68366;;
-        background-color: #fff;
+    @media (min-width: 768px) {
+        .col-sm-5ths {
+            width: 20%;
+            float: left;
+        }
     }
 
-    .carrito-checkbox:hover input ~ .checkmark {
-        border-color: #74c68366;
+    @media (min-width: 992px) {
+        .col-md-5ths {
+            width: 20%;
+            float: left;
+        }
     }
 
-    .carrito-checkbox input:checked ~ .checkmark {
-        background-color: #74c683;
+    @media (min-width: 1200px) {
+        .col-lg-5ths {
+            width: 20%;
+            float: left;
+        }
     }
-
-    ;
-
-    .checkmark:after {
-        content: "";
-        position: absolute;
-        display: none;
-    }
-
-    /* Show the checkmark when checked */
-    .carrito-checkbox input:checked ~ .checkmark:after {
-        display: block;
-        color: white;
-    }
-
-    /* Style the checkmark/indicator */
-    .carrito-checkbox .checkmark:after {
-        left: 9px;
-        top: 5px;
-        width: 5px;
-        height: 10px;
-        border: solid white;
-        border-width: 0 3px 3px 0;
-        -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-        transform: rotate(45deg);
-    }
-
 </style>
 </head>
 <body>
@@ -107,18 +75,8 @@
         </div>
     <?php else : ?>
         <div class="container">
-            <div class="row">
-                <header class="page-header">
-                    <ol class="breadcrumb page-breadcrumb">
-                        <li><a href="<?= base_url(); ?>">Home</a>
-                        </li>
-                            <li class="active"><?= ucwords($category_detail->name); ?>
-                        </li>
-                    </ol>
-                </header>
-            </div>
-            <div class="cat-notify">
-                <p class="n-head"><?= $category_detail->name; ?></p>
+            <div class="cat-notify" style="padding: 30px;">
+                <p class="n-head">New Arrivals - Best Deal</p>
 <!--                <p class="n-body"><strong>--><?//= $total_count . ' results'; ?><!--</strong></p>-->
             </div>
             <div class="row">
@@ -141,7 +99,7 @@
                             <?php $p_count = 0;
                             foreach ($products as $product) : ?>
                                 <?php $p_count++; ?>
-                                <div class="col-md-3 <?php if ($p_count % 4 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> v-items clearfix">
+                                <div class="col-md-5ths col-lg-5ths col-sm-5ths col-xs-6 <?php if ($p_count % 4 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> v-items clearfix">
                                     <div class="product">
                                         <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
                                             <ul class="product-labels">

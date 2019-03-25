@@ -55,7 +55,6 @@ $route['default_controller'] = 'frontpage';
 $route['product/(:any)-(:num)'] = 'product/index/$2/';
 $route['catalog/(:any)'] = 'product/catalog/$1/';
 $route['catalog'] = 'product/catalog/';
-// $route['new-arrivals'] = 'product/new_arrivals/';
 $route['search'] = 'product/search/';
 //$route['product/(:any)/(:any)'] = 'product/index/$2';
 $route['product/(:any)/(:any)'] = 'product/$2';
@@ -75,5 +74,5 @@ $route['order_completed'] = 'checkout/order_completed/';
 
 
 // Feeds :  This will take care of general pages with category lists.
-$route['new-arrival'] = 'feeds/new_arrival/';
+$route['new-arrivals'] = 'feeds/new_arrivals/';
 
