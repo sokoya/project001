@@ -273,13 +273,13 @@
                                     <div class="col-md-6 col-sm-6 col-xs-6">
                                         <ul style="float: right; padding: 7px;" class="product-page-price product-page-share-item">
                                             <li>
-                                                <a target="_blank" title="Share <?= $product->product_name;?> on WhatsApp" style="font-size: 30px; padding: 10px;" href="whatsapp://send?text=<?= $product->product_name; ?> Visit <?= current_url(); ?>"><i class="fab fa-whatsapp"></i></a>
+                                                <a target="_blank" title="Share <?= $product->product_name;?> on WhatsApp" style="font-size: 30px; padding: 10px;" href="whatsapp://send?text=<?= current_url(); ?>" data-action="share/whatsapp/share" target="_blank"><i class="fab fa-whatsapp"></i></a>
                                             </li>
                                             <li>
-                                                <a target="_blank" title="Share <?= $product->product_name;?> on facebook" style="font-size: 30px; padding: 10px;" href="http://www.facebook.com/sharer.php?u=<?= current_url(); ?>" ><i class="fab fa-facebook-square"></i></a>
+                                                <a target="_blank" title="Share <?= $product->product_name;?> on facebook" style="font-size: 30px; padding: 10px;" href="http://www.facebook.com/sharer.php?u=<?= current_url(); ?>" target="_blank" ><i class="fab fa-facebook-square"></i></a>
                                             </li>
                                             <li>
-                                                <a target="_blank" title="Share <?= $product->product_name;?> on Twitter" style="font-size: 30px; padding: 10px;" href="https://twitter.com/share?url=<?= current_url(); ?>&amp;text=<?= $product->product_name; ?>&amp;hashtags=onitshamarket"><i class="fab fa-twitter"></i></a>
+                                                <a target="_blank" title="Share <?= $product->product_name;?> on Twitter" style="font-size: 30px; padding: 10px;" href="https://twitter.com/home?status=<?= current_url(); ?>&amp;text=<?= $product->product_name; ?>&amp;hashtags=onitshamarket"><i class="fab fa-twitter"></i></a>
                                             </li>
                                             <li>
                                                 <a target="_blank" title="Share <?= $product->product_name;?> on Telegram" style="font-size: 30px; padding: 10px;" href="tg://msg_url?url=<?= current_url(); ?>&text=<?= $product->product_name; ?>+Visit+<?= current_url(); ?>"><i class="fab fa-telegram"></i></a>
