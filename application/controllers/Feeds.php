@@ -61,9 +61,7 @@ class Feeds extends MY_Controller
 	public function new_arrival()
 	{
         $this->session->set_userdata('referred_from', current_url());
-		$str = $this->uri->segment(2);
-		$str = preg_replace("/[^A-Za-z0-9\-]/", "", cleanit($str));
-		$str = cleanit($str);
+		$str = 'fashion';
 		if ($str == '') redirect(base_url());
 		$features = $this->product->get_features($str);
 		$output_array = array();
@@ -138,10 +136,10 @@ class Feeds extends MY_Controller
             $page_data['max'] = max(array_map(function($array) { return $array->sale_price; }, $array));
         }
 		if (!$this->agent->is_mobile()) {
-			$this->load->view('landing/category', $page_data);
+			$this->load->view('landing/new_arrival', $page_data);
 		} else {
 			$page_data['page'] = 'mobile-category';
-			$this->load->view('landing/mobile-category', $page_data);
+			$this->load->view('landing/new_arrival', $page_data);
 		}
 	}
 
