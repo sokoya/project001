@@ -277,7 +277,7 @@
             </div>
             <div class="row">
                 <?php
-                $products = $this->product->randomproducts(array(53,5,1), 6 );
+                $products = $this->product->randomproducts(array(5,1,3,53), 6 );
                 foreach ($products as $product):
                     ?>
                     <!--                    <div style="background-color: #fff;">-->
@@ -304,7 +304,6 @@
                                 <?php endif; ?>
                             </div>
                         </div>
-
                     </div>
                     <!--                    </div>-->
 
@@ -494,7 +493,7 @@
                     <div class="col-md-10">
                         <div class="row" style="margin-left: 10px">
                             <?php
-                            $products = $this->product->randomproducts(53, 4);
+                            $products = $this->product->randomproducts(3, 6);
                             foreach ($products as $product) : ?>
                                 <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>">
                                     <div class="col-md-3 col-sm-3 col-xs-3  card-product card-product-alt">
