@@ -85,7 +85,7 @@
             <div class="col-md-6 market-box">
                 <p class="text-center">
                     <a href="<?= base_url(); ?>"><img
-                                src="<?= base_url('assets/img/onitshamarket-logo.png') ?>" width="30%"
+                                src="<?= base_url('assets/img/onitshamarket-logo.png') ?>" width="50%"
                                 alt="market logo Image"></a>
                 </p>
                 <div class="row">
