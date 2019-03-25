@@ -55,6 +55,7 @@ $route['default_controller'] = 'frontpage';
 $route['product/(:any)-(:num)'] = 'product/index/$2/';
 $route['catalog/(:any)'] = 'product/catalog/$1/';
 $route['catalog'] = 'product/catalog/';
+$route['new-arrivals'] = 'product/new_arrivals/';
 $route['search'] = 'product/search/';
 //$route['product/(:any)/(:any)'] = 'product/index/$2';
 $route['product/(:any)/(:any)'] = 'product/$2';

@@ -92,5 +92,5 @@ $db['default'] = array(
 );
 
     $db['default']['username'] = 'root';
-    $db['default']['password'] = '';
+    $db['default']['password'] = 'root';
     $db['default']['database'] = 'onitshamarket';

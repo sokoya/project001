@@ -213,7 +213,7 @@ $categories = $this->db->query($category_cache)->result();
             </li>
 
             <li><a href="javascript:void(0)">Onitsha Market Deals</a></li>
-            <li><a href="javascript:void(0)">New Arrivals</a></li>
+            <li><a href="<?= base_url("new-arrivals");?>">New Arrivals</a></li>
             <li><a href="javascript:void(0)">Explore</a></li>
             <li><a href="javascript:void(0)">Top Sellers</a></li>
             <li><a href="https://www.seller.onitshamarket.com">Sell On Onitsha Market</a></li>
