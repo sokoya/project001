@@ -449,7 +449,7 @@
                                 </div>
                             <?php endif; ?>
                             <?php if (!empty($product->highlights)): ?>
-                                <h3 class="product-overview-title pr-over">Highlights?></h3>
+                                <h3 class="product-overview-title pr-over">Highlights</h3>
                                 <div class="product-overview-desc">
                                     <p style="text-wrap: normal">
                                         <?= $product->highlights; ?>
