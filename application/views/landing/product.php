@@ -273,16 +273,16 @@
                                     <div class="col-md-6 col-sm-6 col-xs-6">
                                         <ul style="float: right; padding: 7px;" class="product-page-price product-page-share-item">
                                             <li>
-                                                <a target="_blank" title="Share <?= $product->product_name;?> on WhatsApp" style="font-size: 30px; padding: 10px;" href="whatsapp://send?text=<?= current_url(); ?>" data-action="share/whatsapp/share" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                                                <a target="_blank" title="Share <?= $product->product_name;?> on WhatsApp" style="font-size: 30px; padding: 10px;color:#075e54;" href="whatsapp://send?text=<?= current_url(); ?>" data-action="share/whatsapp/share" target="_blank"><i class="fab fa-whatsapp"></i></a>
                                             </li>
                                             <li>
-                                                <a target="_blank" title="Share <?= $product->product_name;?> on facebook" style="font-size: 30px; padding: 10px;" href="http://www.facebook.com/sharer.php?u=<?= current_url(); ?>" target="_blank" ><i class="fab fa-facebook-square"></i></a>
+                                                <a target="_blank" title="Share <?= $product->product_name;?> on facebook" style="font-size: 30px; padding: 10px;color:#4267b2;" href="http://www.facebook.com/sharer.php?u=<?= current_url(); ?>" target="_blank" ><i class="fab fa-facebook-square"></i></a>
                                             </li>
                                             <li>
-                                                <a target="_blank" title="Share <?= $product->product_name;?> on Twitter" style="font-size: 30px; padding: 10px;" href="https://twitter.com/home?status=<?= current_url(); ?>&amp;text=<?= $product->product_name; ?>&amp;hashtags=onitshamarket"><i class="fab fa-twitter"></i></a>
+                                                <a target="_blank" title="Share <?= $product->product_name;?> on Twitter" style="font-size: 30px; padding: 10px;color:#38A1F3;" href="https://twitter.com/home?status=<?= current_url(); ?>&amp;text=<?= $product->product_name; ?>&amp;hashtags=onitshamarket"><i class="fab fa-twitter"></i></a>
                                             </li>
                                             <li>
-                                                <a target="_blank" title="Share <?= $product->product_name;?> on Telegram" style="font-size: 30px; padding: 10px;" href="tg://msg_url?url=<?= current_url(); ?>&text=<?= $product->product_name; ?>+Visit+<?= current_url(); ?>"><i class="fab fa-telegram"></i></a>
+                                                <a target="_blank" title="Share <?= $product->product_name;?> on Telegram" style="font-size: 30px; padding: 10px;color:#0088cc;" href="tg://msg_url?url=<?= current_url(); ?>&text=<?= $product->product_name; ?>+Visit+<?= current_url(); ?>"><i class="fab fa-telegram"></i></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -294,14 +294,16 @@
                                         <?php if (count($variations) > 0) : ?>
                                             <div class="col-md-7">
                                                 <div class="row">
-                                                    <!--                                                    <div class="col-md-3">-->
-                                                    <!--                                                        <h5 class="custom-product-page-option-title">Variation:</h5>-->
-                                                    <!--                                                    </div>-->
+                                                <?php if(strtolower($category_detail->name) == "fashion"):?>
+                                                    <div class="col-md-3">
+                                                        <h5 class="custom-product-page-option-title">Size / Color:</h5>
+                                                    </div>
+                                                <?php endif?>
                                                     <div class="col-md-9">
                                                         <div class="row variation-option-list">
                                                             <?php $qty_stock_check = 0; ?>
                                                             <?php foreach ($variations as $variation): ?>
-                                                                <div class="col-xs-3">
+                                                                <div class="col-xs-6">
                                                                     <p title="<?= $variation['variation']; ?>"
                                                                        data-price="<?= $variation['sale_price']; ?>"
                                                                         <?php if (discount_check($variation['discount_price'], $variation['start_date'], $variation['end_date'])) : ?>
@@ -352,7 +354,7 @@
                                         <?php
                                         // Make A check to confirm if the product is still in stock
                                         if ($qty_stock_check == count($variations)) : ?>
-                                            <button class="btn btn-block btn-primary c-hover" disabled
+                                            <button class="btn btn-block btn-primary c-hover" style="background:#49a251;border-color: #5ebd6f;" disabled
                                                     type="button">
                                                 <i class="fa fa-shopping-cart"></i> Out of Stock
                                             </button>

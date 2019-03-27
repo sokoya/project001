@@ -2582,10 +2582,7 @@ header.main {
         display: -moz-box;
         display: -ms-box;
         display: -webkit-flex
-    } {
-    display: box;
-    display: flex
-}
+    }
 }
 
 .product-box {
@@ -7023,8 +7020,7 @@ ul#table-pagination li {
 }
 
 .q_pr_img {
-    width: 200px;
-    height: 220px
+    width: 90%;
 }
 
 .arrow-up {
