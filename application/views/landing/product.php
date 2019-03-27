@@ -448,9 +448,17 @@
                                     </p>
                                 </div>
                             <?php endif; ?>
+                            <?php if (!empty($product->highlights)): ?>
+                                <h3 class="product-overview-title pr-over">Highlights?></h3>
+                                <div class="product-overview-desc">
+                                    <p style="text-wrap: normal">
+                                        <?= $product->highlights; ?>
+                                    </p>
+                                </div>
+                            <?php endif; ?>
                             <?php $specifications = json_decode($product->attributes);
                             if (!empty($specifications)) : ?>
-                                <table class="table">
+                                <table class="table prod_description">
                                     <thead>
                                     <tr>
                                         <th class="pr-over">Specs:</th>
