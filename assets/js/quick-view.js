@@ -61,7 +61,6 @@ $.fn.exists = function () {
 
 //onclick trigger for quickview
 $('.product-quick-view-btn').on('click', get_view);
-
 function get_view() {
     $('.arrow-up').hide();
     let _this_btn = $(this);
@@ -79,6 +78,7 @@ function get_view() {
 
     let pr_id = $(this).data('pr_id');
     let title = $(this).data('title');
+    let pr_url = $(this).data('url');
     let img_src = $(this).data('image');
     $('.overview-tab').remove();
     let qv_location = $(this).quickViewNext('.product_div');
@@ -104,13 +104,13 @@ function get_view() {
             qv_location.after(
                 `<div class="col-md-12 overview-tab q_view clearfix">
 			<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-5">
 				<img src="${img_src}" class="q_pr_img" alt="${title}" title="${title}">
 			</div>
-			<div class="col-md-8">
-			<span class="close_qv"><i class="fa fa-times-circle-o" aria-hidden="true"></i></span>
+			<div class="col-md-7">
+			<span class="close_qv"><i class="fas fa-times"></i></span>
 				<h1 class="q_pr_price" data-amount="${(quick.default_discount_price === '') ? quick.default_price : quick.default_discount_price}" id="q_pr_price${pr_id}">${(quick.default_discount_price === '') ? format_currency(quick.default_price) : format_currency(quick.default_discount_price)}</h1>
-				<h1 class="q_pr_title">${title}</h1>
+				<h1 class="q_pr_title"><a href="${pr_url}">${title}</a></h1>
 				<ul class="product-page-product-rating" style="margin-bottom: 10px;">
 					${
                     (quick.avg_rating * 1 === 0) ? '' :

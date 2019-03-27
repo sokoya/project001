@@ -89,18 +89,18 @@
                 </form>
                 <div>
                     <p><h4 class="text text-sm foot-link">Follow us on Social Networks</h4></p>
-                    <ul class="main-footer-social-list">
+                    <ul class="main-footer-social-list" >
                         <li>
-                            <a style="font-size: 24px" class="fab fa-facebook-square" target="_blank" href="<?= lang('facebook_link') ?>"></a>
+                            <a style="font-size: 24px;color:#4267b2;" class="fab fa-facebook-square" target="_blank" href="<?= lang('facebook_link') ?>"></a>
                         </li>
                         <li>
-                            <a style="font-size: 24px" class="fab fa-twitter" target="_blank" href="<?= lang('twitter_link'); ?>"></a>
+                            <a style="font-size: 24px;color:#38A1F3;" class="fab fa-twitter" target="_blank" href="<?= lang('twitter_link'); ?>"></a>
                         </li>
                         <li>
-                            <a style="font-size: 24px" class="fab fa-instagram" target="_blank" href="<?= lang('instagram_link'); ?>"></a>
+                            <a style="font-size: 24px;color:#D4C95B;" class="fab fa-instagram" target="_blank" href="<?= lang('instagram_link'); ?>"></a>
                         </li>
                         <li>
-                            <a style="font-size: 24px" class="fab fa-youtube" target="_blank" href="<?= lang('youtube_link'); ?>"></a>
+                            <a style="font-size: 24px;color:#ED3833;" class="fab fa-youtube" target="_blank" href="<?= lang('youtube_link'); ?>"></a>
                         </li>
                     </ul>
                     <ul class="payment-icons-list">

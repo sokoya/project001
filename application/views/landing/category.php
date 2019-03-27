@@ -257,6 +257,7 @@
                                                             data-qvc="<?php echo $p_count ?>"
                                                             data-image="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
                                                             data-arrow="arrow-<?= $product->id ?>"
+                                                            data-url="<?= base_url(urlify($product->product_name, $product->id)); ?>"
                                                             class="btn btn-primary product-quick-view-btn">Quick view
                                                     </button>
                                                 </div>
