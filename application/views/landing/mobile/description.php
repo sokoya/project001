@@ -167,11 +167,11 @@
 </body>
 <script src="<?= base_url('assets/js/jquery.js'); ?>"></script>
 <script src="<?= base_url('assets/js/bootstrap.js'); ?>"></script>
-<script src="<?= base_url('assets/js/mobile.js'); ?>"></script>
+<script src="<?= $this->user->auto_version('assets/js/mobile.js'); ?>"></script>
 <script>
     $(function(){
         $('.prod_description img').each(function() {
-            $(this).css({'width': '50%', 'position' : 'center'});
+            $(this).css({'width': '50%', 'text-align' : 'left'});
             $(this).addClass('img-responsive');
             $(this).attr('Onitshamarket');
         });
