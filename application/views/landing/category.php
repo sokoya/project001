@@ -240,6 +240,7 @@
                             foreach ($products as $product) : ?>
                                 <?php $p_count++; ?>
                                 <div class="col-md-3 <?php if ($p_count % 4 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> v-items clearfix">
+                                    <div id="arrow-<?= $product->id ?>" class="arrow-up"></div>
                                     <div class="product">
                                         <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
                                             <ul class="product-labels">
@@ -271,10 +272,11 @@
                                         </div>
                                         <a class="product-link" title="<?= $product->product_name ?>"
                                            href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
-                                        <?php if($product->from_overseas == 1) :  ?>
-                                            <span class=""><small><i class="fas fa-plane-arrival text-success"></i> From Overseas</small></span>
-                                        <?php endif; ?>
+
                                         <div class="product-caption">
+                                            <?php if($product->from_overseas == 1) :  ?>
+                                                <span><small><i class="fas fa-plane-arrival text-success"></i> Shipped From Overseas</small></span>
+                                            <?php endif; ?>
                                             <ul class="product-caption-rating">
                                                 <?php
                                                 $rating_counts = $this->product->get_rating_counts($product->id);
@@ -321,7 +323,6 @@
                                         </div>
 
                                     </div>
-                                    <div id="arrow-<?= $product->id ?>" class="arrow-up"></div>
                                 </div>
                             <?php endforeach; ?>
                         </div>
