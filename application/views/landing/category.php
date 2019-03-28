@@ -48,7 +48,9 @@
         background-color: #74c683;
     }
 
-    ;
+    .quick_view_link:hover{
+        color:#0b6427;
+    }
 
     .checkmark:after {
         content: "";

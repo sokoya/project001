@@ -110,7 +110,7 @@ function get_view() {
 			<div class="col-md-7">
 			<span class="close_qv"><i class="fas fa-times"></i></span>
 				<h1 class="q_pr_price" data-amount="${(quick.default_discount_price === '') ? quick.default_price : quick.default_discount_price}" id="q_pr_price${pr_id}">${(quick.default_discount_price === '') ? format_currency(quick.default_price) : format_currency(quick.default_discount_price)}</h1>
-				<h1 class="q_pr_title"><a href="${pr_url}">${title}</a></h1>
+				<h1 class="q_pr_title"><a href="${pr_url}" class="quick_view_link">${title}</a></h1>
 				<ul class="product-page-product-rating" style="margin-bottom: 10px;">
 					${
                     (quick.avg_rating * 1 === 0) ? '' :
