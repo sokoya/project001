@@ -63,10 +63,7 @@ class Feeds extends MY_Controller
         $this->session->set_userdata('referred_from', current_url());
 		$str = 'fashion';
 		if ($str == '') redirect(base_url());
-		$features = $this->product->get_features($str);
 		$output_array = array();
-//		var_dump( $features ); exit;
-		// pagination
 		$page = isset($_GET['page']) ? xss_clean($_GET['page']) : 0;
 		if ($page > 1) $page -= 1;
 
@@ -77,8 +74,8 @@ class Feeds extends MY_Controller
 		$this->config->load('pagination');
 		$config = $this->config->item('pagination');
 		$config['base_url'] = current_url();
-		$config['total_rows'] = $count;
-		$config['per_page'] = 32;
+		$config['total_rows'] = 160;
+		$config['per_page'] = 40;
 		$this->pagination->initialize($config);
 		$page_data['features'] = $output_array;
 		$array['limit'] = $config['per_page'];
