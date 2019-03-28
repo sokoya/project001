@@ -77,6 +77,7 @@ class Feeds extends MY_Controller
 		$page_data['products'] = $this->feeds->get_new_arrival($array);
 		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 		$page_data['page'] = 'new_arrival';
+		$page_data['title'] = "New trending fashion, computer, phones, gadgets, accessories";
 //		print_r($page_data['products']); exit;
         $this->load->view('landing/new_arrival', $page_data);
 	}
