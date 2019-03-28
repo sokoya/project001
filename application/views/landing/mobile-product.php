@@ -261,7 +261,7 @@
     <div class="custom-card">
         <div class="container">
             <div class="owl-carousel products-gallery">
-                <p class="product-discount-overlay" id="counter"></p>
+                <span class="product-discount-overlay" id="counter"></span>
                 <?php foreach ($galleries as $gallery) : ?>
                     <img class="product-image" src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?> "
                          alt="<?= $product->product_name; ?>"/>
