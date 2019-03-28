@@ -267,7 +267,7 @@
                              alt="<?= $product->product_name; ?>"/>
                     </div>
                 <?php endforeach; ?>
-                <span class="product-discount-overlay" style="z-index: 10000" id="counter"></span>
+<!--                <span class="product-discount-overlay" style="z-index: 10000" id="counter"></span>-->
             </div>
         </div>
     </div>
