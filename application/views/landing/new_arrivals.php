@@ -267,11 +267,19 @@
 </script>
 <script src="<?= base_url('assets/js/quick-view.js'); ?>"></script>
 <script src="<?= base_url('assets/js/search.js'); ?>"></script>
-<script src="<?= base_url('assets/js/jquery.unveil.js'); ?>"></script>
+<!-- <script src="<?//= base_url('assets/js/jquery.unveil.js'); ?>"></script> -->
 <script>
-    $(document).ready(function() {
-        $("img").unveil();
-    });
+    // $(document).ready(function() {
+    //     $("img").unveil();
+    // });
+    window.addEventListener('load', function(){
+    var allimages= document.getElementsByTagName('img');
+    for (var i=0; i<allimages.length; i++) {
+        if (allimages[i].getAttribute('data-src')) {
+            allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
+        }
+    }
+}, false)
     $("#price-range").ionRangeSlider({
         type: "double",
         min: <?= $min ?>,

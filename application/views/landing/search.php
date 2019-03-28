@@ -338,13 +338,20 @@
 </script>
 <script src="<?= base_url('assets/js/quick-view.js'); ?>"></script>
 <script src="<?= base_url('assets/js/search.js'); ?>"></script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+<!-- <script type="text/javascript" -->
+        <!-- src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script> -->
 <script>
-    $(function () {
-        $('.lazy').Lazy();
-    });
-
+    // $(function () {
+    //     $('.lazy').Lazy();
+    // });
+    window.addEventListener('load', function(){
+    var allimages= document.getElementsByTagName('img');
+    for (var i=0; i<allimages.length; i++) {
+        if (allimages[i].getAttribute('data-src')) {
+            allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
+        }
+    }
+}, false)
     $("#price-range").ionRangeSlider({
         type: "double",
         min: <?= $min; ?>,
