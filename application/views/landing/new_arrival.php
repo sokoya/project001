@@ -160,7 +160,7 @@
 
                                                 <?php if (!$this->session->userdata('logged_in')) : ?>
                                                     <a href="<?= base_url('login'); ?>">
-                                                        <span style="margin-right:3px;"
+                                                        <span style="margin-right:5px;"
                                                               class="pull-right category-favorite">
                                                                 <i class="fas fa-heart"
                                                                    title="Add <?= $product->product_name; ?> to your wishlist"></i>
