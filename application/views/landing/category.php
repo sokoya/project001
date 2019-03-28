@@ -284,7 +284,7 @@
                                                 $rating_counts = $this->product->get_rating_counts($product->id);
                                                 echo rating_star_generator($rating_counts);
                                                 ?>
-                                                <span class="text-sm pull-right"><strong><?= ($product->brand_name == 'others') ? 'Generic' : $product->brand_name; ?></strong></span>
+                                                <span class="text-sm pull-right"><strong><?= ($product->brand_name == 'others' || $product->brand_name = '') ? 'Generic' : $product->brand_name; ?></strong></span>
                                             </ul>
                                             <h5 class="cs-title"><?= character_limiter(ucwords(str_replace('generic', '',$product->product_name)), 10, '...'); ?></h5>
                                             <div class="product-caption-price">
@@ -320,7 +320,6 @@
                                                         </span>
                                                     <?php endif; ?>
                                                 <?php endif; ?>
-
                                             </div>
                                         </div>
 
