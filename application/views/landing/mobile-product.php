@@ -263,12 +263,12 @@
             <div class="owl-carousel products-gallery">
                 <?php foreach ($galleries as $gallery) : ?>
                     <div>
-                        <span class="product-discount-overlay" id="counter"></span>
                         <img class="product-image" src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?> "
                              alt="<?= $product->product_name; ?>"/>
                     </div>
                 <?php endforeach; ?>
             </div>
+            <span class="product-discount-overlay" id="counter"></span>
         </div>
     </div>
     <div class="custom-card">
@@ -662,6 +662,7 @@
     $(function () {
         $('.lazy').Lazy();
         $('.prod_description img').each(function() {
+            $(this).css({'width': '50%'});
             $(this).addClass('img-responsive');
             $(this).attr('Onitshamarket');
         });
@@ -680,6 +681,8 @@
         });
         $(".products-gallery").owlCarousel({
             items: 1,
+            loop: true,
+            autoplay: 2000,
             lazyLoad: true,
             onInitialized : counter,
             onTranslated: counter
