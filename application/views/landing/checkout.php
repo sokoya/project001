@@ -32,7 +32,7 @@
                                     <div class="gap-top col-md-10 col-md-offset-1">
                                         <div class="alert alert-warning">
                                             <p class="text-center">Select the address you will like us to deliver the
-                                                goods to.</p>
+                                                item(s) to.</p>
                                         </div>
                                     </div>
                                     <div class="row">
