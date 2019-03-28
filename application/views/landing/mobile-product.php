@@ -639,8 +639,8 @@
                     <?php foreach ($likes as $like) : ?>
                         <a style="text-decoration: none"
                            href="<?= base_url(urlify($like->product_name, $like->id)); ?>">
-                            <img class="suggested-image lazy" style="width: 80px" src="<?= base_url('assets/load.gif'); ?>"
-                                 data-src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?> "/>
+                            <img class="suggested-image" style="width: 80px"
+                                 src="<?= PRODUCTS_IMAGE_PATH . $like->image_name; ?> "/>
                             <p class="suggested-image-text"><?= character_limiter($like->product_name, 15); ?></p>
                             <span class="text-bold text-center"><?= $like->item_left; ?> left</span>
                         </a>
