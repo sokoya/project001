@@ -267,7 +267,7 @@
                              alt="<?= $product->product_name; ?>"/>
                     </div>
                 <?php endforeach; ?>
-                <span class="product-discount-overlay" style="z-index: 10" id="counter"></span>
+                <span class="product-discount-overlay" style="z-index: 99" id="counter"></span>
             </div>
         </div>
     </div>
@@ -662,7 +662,6 @@
     $(function () {
         $('.lazy').Lazy();
         $('.prod_description img').each(function() {
-            $(this).css({'width': '50%', 'position' : 'center'});
             $(this).addClass('img-responsive');
             $(this).attr('Onitshamarket');
         });

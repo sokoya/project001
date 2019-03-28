@@ -171,6 +171,7 @@
 <script>
     $(function(){
         $('.prod_description img').each(function() {
+            $(this).css({'width': '50%', 'position' : 'center'});
             $(this).addClass('img-responsive');
             $(this).attr('Onitshamarket');
         });
