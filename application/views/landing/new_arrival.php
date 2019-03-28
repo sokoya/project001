@@ -119,7 +119,7 @@
                                                             data-pr_id="<?= $product->id; ?>"
                                                             data-qv="<?php if ($p_count % 5 == 0) { ?>true<?php } ?>"
                                                             data-qvc="<?php echo $p_count ?>"
-                                                            data-image="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
+                                                            data-image="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?=$product->image_name; ?>"
                                                             data-arrow="arrow-<?= $product->id ?>"
                                                             data-url="<?= base_url(urlify($product->product_name, $product->id)); ?>"
                                                             class="btn btn-primary product-quick-view-btn">Quick view
