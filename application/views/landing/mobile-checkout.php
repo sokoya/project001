@@ -244,35 +244,69 @@
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading custom-panel-head">
-                            <h3 class="panel-title"><i class="fa fa-credit-card"></i>&nbsp;&nbsp; Payment Method</h3>
+                            <h3 class="panel-title"><i class="fas fa-credit-card"></i>&nbsp;&nbsp; Payment Method</h3>
                         </div>
                         <div class="panel-body payment_method_body" style="
                         display: none;">
                             <?php $x = 1;
                             foreach ($methods as $method) : ?>
-                                <div class="panel panel-default custom-panel pay-method">
-                                    <div class="panel-body pay-panel">
-                                        <div class="form-check">
-                                            <p class="form-check-label pay-gate">
-                                                <input class="form-check-input payment-radio" type="radio"
-                                                       name="payment_method"
-                                                       data-name="<?= trim($method->name); ?>"
-                                                       data-pid="<?= $method->id; ?>"
-                                                       id="payment_method_<?= $method->id; ?>"
-                                                       value="<?= $method->id; ?>">
-                                                <?= $method->name; ?>
-                                                <img src="<?= STATIC_CATEGORY_PATH . $method->img_name; ?>" alt="-">
-                                            </p>
-                                            <div class="gap-top"></div>
-                                            <div class="text-sm pad-all payment_note" style="display:none;">
-                                                <?= htmlspecialchars_decode($method->notes); ?>
+                                <?php if( $method->id == 1 && $total > 20000 ) : ?>
+                                    <div class="panel panel-default custom-panel">
+                                        <div class="panel-body pay-panel">
+                                            <div class="form-check">
+                                                <p class="form-check-label pay-gate">
+                                                    <input title="<?= $method->name . ' (Not Available)'; ?>"
+                                                           class="form-check-input payment-radio" type="radio"
+                                                           name="payment_method"
+                                                           data-name="<?= trim($method->name); ?>"
+                                                           data-pid="<?= $method->id; ?>"
+                                                           id="payment_method_<?= $method->id; ?>"
+                                                           value="<?= $method->id; ?>">
+                                                    <?= $method->name; ?>
+                                                    <img src="<?= STATIC_CATEGORY_PATH . $method->img_name; ?>" alt="-">
+                                                </p>
+                                                <div class="gap-top"></div>
+                                                <div class="text-sm pad-all payment_note" style="display:none;">
+                                                    <p>
+                                                        Some of the the reasons why payment on delivery may be unavailable are:
+                                                    <ul>
+                                                        <li>Your total cart value is under ₦ 1,500</li>
+                                                        <li>Your total cart value is above ₦ 20,000</li>
+                                                        <li>Selected items shipped from overseas are not eligible for Pay on Delivery</li>
+                                                    </ul>
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                <?php else : ?>
+                                    <div class="panel panel-default custom-panel pay-method">
+                                        <div class="panel-body pay-panel">
+                                            <div class="form-check">
+                                                <p class="form-check-label pay-gate">
+                                                    <input title="<?= $method->name; ?>"
+                                                           class="form-check-input payment-radio" type="radio"
+                                                           name="payment_method"
+                                                           data-name="<?= trim($method->name); ?>"
+                                                           data-pid="<?= $method->id; ?>"
+                                                           id="payment_method_<?= $method->id; ?>"
+                                                           value="<?= $method->id; ?>">
+                                                    <?= $method->name; ?>
+                                                    <img src="<?= STATIC_CATEGORY_PATH . $method->img_name; ?>" alt="-">
+                                                </p>
+                                                <div class="gap-top"></div>
+                                                <div class="text-sm pad-all payment_note" style="display:none;">
+                                                    <?= htmlspecialchars_decode($method->notes); ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
                             <?php endforeach; ?>
                         </div>
                     </div>
+
+                    <!-- / Payment method -->
                     <div class="panel panel-default">
                         <div class="panel-heading custom-panel-head">
                             <h3 class="panel-title"><i class="fa fa-list-alt"></i> Order Details</h3>

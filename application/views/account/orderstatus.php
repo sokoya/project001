@@ -26,7 +26,7 @@
                             <?php $x = 1;
                             foreach ($orders as $order): ?>
                                 <p class="market-dashboard-welcome-text"><strong>Item #<?= $x; ?>. Date Initiated
-                                        : </strong> <?= neatDate($order->order_date); ?></p>
+                                        : </strong> <?= neatDate($order->order_date) . ' '. neatTime($order->order_date); ?></p>
                                 <div class="row">
                                     <div class="col-md-5">
                                         <div class="row">

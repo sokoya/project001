@@ -42,7 +42,7 @@
 								<td class="table-shopping-cart-img text-center">
 									<?php echo form_hidden($x . '[rowid]', $product['rowid']); ?>
 									<a href="<?= base_url(urlify($product['name'], $product['id'])); ?>">
-										<img class="lazy"
+										<img style="width: 60px;" class="lazy"
 											 src="<?= PRODUCTS_IMAGE_PATH . $detail->image; ?>"
 											 alt="<?= $product['name'] ?>"
 											 title="<?= $product['name']; ?>"/>
