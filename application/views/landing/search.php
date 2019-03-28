@@ -259,6 +259,8 @@
                                            href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
                                         <?php if($product->from_overseas == 1) :  ?>
                                             <span class=""><small><i class="fas fa-plane-arrival text-success"></i> From Overseas</small></span>
+                                        <?php else : ?>
+                                            <br />
                                         <?php endif; ?>
                                         <div class="product-caption">
                                             <ul class="product-caption-rating">

@@ -278,6 +278,8 @@
                                         <div class="product-caption">
                                             <?php if($product->from_overseas == 1) :  ?>
                                                 <span><small><i class="fas fa-plane-arrival text-success"></i> Shipped From Overseas</small></span>
+                                            <?php else : ?>
+                                                <br />
                                             <?php endif; ?>
                                             <ul class="product-caption-rating">
                                                 <?php
