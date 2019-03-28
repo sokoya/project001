@@ -183,9 +183,10 @@
                                                         </span>
                                                     <?php endif; ?>
                                                 <?php endif; ?>
-                                                <br />
+
                                             </div>
                                         </div>
+                                        <br />
 
                                     </div>
                                     <div id="arrow-<?= $product->id ?>" class="arrow-up"></div>
