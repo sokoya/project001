@@ -33,19 +33,31 @@ class Checkout extends MY_Controller
 		$result = $this->user->get_default_address_price($page_data['user']->id);
 		$page_data['delivery_charge'] = (  !$result ) ? 500 : $result;
 		// Lets make a check that the product is valid to be here
-        $message = '';
+        $message = ''; $total = $error = 0;
 		foreach( $this->cart->contents() as $product ){
 			$detail = $this->product->get_cart_details($product['id']);
 			$variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
-			if($variation_detail->quantity < 1 || $product['qty'] > $variation_detail->quantity || in_array( $detail->product_status, array('suspended', 'blocked', 'pending' ))){
-				// we have an issue with this product
+            if($variation_detail->quantity < 1 || $product['qty'] > $variation_detail->quantity || in_array( $detail->product_status, array('suspended', 'blocked', 'pending' ))){
+                $error++;
                 $message .= "Sorry, the product " . $product['name']. " is presently out of stock";
-			}
+                // Remove the Item
+                $cid = $product['rowid'];
+                $this->cart->remove($cid);
+            }
+            // Total Amount
+            $total += $product['subtotal'];
 		}
+		if( $error > 0 ){
+		    $this->session->set_flashdata('error_msg', $message);
+		    redirect('cart');
+        }
         $this->session->set_flashdata('error_msg', $message);
 		$items = $this->cart->total_items();
 		$page_data['methods'] = $this->product->get_results('payment_methods', '*', "(status = 1)");
-		if( empty($items) ) redirect( base_url() );
+		if( empty($items) || $total < 0 ) {
+		    redirect( base_url() );
+        }
+		$page_data['total'] = $total;
 		if (!$this->agent->is_mobile()) {
             $this->load->view('landing/checkout', $page_data);
         } else {
@@ -151,15 +163,14 @@ class Checkout extends MY_Controller
                     $cid = $product['rowid'];
                     try {
                         // Lets remove from cart...
-
                         $this->cart->remove($cid);
                     }catch (Exception $x ){
                         $error_array = array('error_action' => 'Cart Removal Error', 'error_message' => 'On checkout when performing checks on cart item');
                         $this->product->insert_data('error_logs', $error_array);
                     }
                 }else{
-                    $price = $this->product->get_commission( $product['id'] );
-                    $commission = ( $price / 100 ) * (int)$product['subtotal'];
+                    $commission_rate = $this->product->get_commission( $product['id'] );
+                    $commission = ( $commission_rate / 100 ) * (int)$product['price'];
                     // Populate the Order table data
                     $res['buyer_id'] = $buyer_id;
                     $res['seller_id'] = $detail->seller_id;
