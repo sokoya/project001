@@ -183,7 +183,7 @@
                                                         </span>
                                                     <?php endif; ?>
                                                 <?php endif; ?>
-
+                                                <br />
                                             </div>
                                         </div>
 
