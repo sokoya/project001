@@ -295,7 +295,7 @@
                                         <?php if (count($variations) > 0) : ?>
                                             <div class="col-md-7">
                                                 <div class="row">
-                                                <?php if(strtolower($category_detail->name) == "fashion"):?>
+                                                <?php if(in_array(strtolower($category_detail->name), array('fashion', 'clothing', 'jewelry', 'shoes'))) :?>
                                                     <div class="col-md-3">
                                                         <h5 class="custom-product-page-option-title">Size / Color:</h5>
                                                     </div>
