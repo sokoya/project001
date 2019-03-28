@@ -254,15 +254,15 @@
                                     <div class="panel panel-default custom-panel">
                                     <div class="panel-body pay-panel">
                                         <div class="form-check">
-                                            <p class="form-check-label pay-gate">
-                                                <input title="<?= $method->name . ' (Not Available)'; ?>"
+                                            <p class="form-check-label">
+                                                <input disabled title="<?= $method->name . ' (Not Available)'; ?>"
                                                        class="form-check-input payment-radio" type="radio"
                                                        name="payment_method"
                                                        data-name="<?= trim($method->name); ?>"
                                                        data-pid="<?= $method->id; ?>"
                                                        id="payment_method_<?= $method->id; ?>"
                                                        value="<?= $method->id; ?>">
-                                                <?= $method->name; ?>
+                                                <?= $method->name . ' (Not Available)'; ?>
                                                 <img src="<?= STATIC_CATEGORY_PATH . $method->img_name; ?>" alt="-">
                                             </p>
                                             <div class="gap-top"></div>
@@ -283,7 +283,7 @@
                                     <div class="panel panel-default custom-panel pay-method">
                                         <div class="panel-body pay-panel">
                                             <div class="form-check">
-                                                <p class="form-check-label pay-gate">
+                                                <p class="form-check-label">
                                                     <input title="<?= $method->name; ?>"
                                                            class="form-check-input payment-radio" type="radio"
                                                            name="payment_method"

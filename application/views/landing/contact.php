@@ -56,10 +56,11 @@
                     CONTACT US
                 </h3>
                 <p class="p_sp_con">
-                    <i class="fa fa-home"></i> Address: 176 Akwa Road, Onitsha. Anambra State. Nigeria.<br>
-                    <i class="fa fa-phone"></i> Tel: +23412345678<br>
+                    <i class="fas fa-home"></i> Address: 176 Akwa Road, Onitsha. Anambra State. Nigeria.<br>
+                    <i class="fas fa-phone"></i> Tel: +23412345678<br>
+                    <i class="fas fa-envelope-square"></i> onitsha.anambra@onitshamarket.com<br>
                     <i class="fa fa-map-marker"></i> Monday to Saturday<br>
-                    <i class="fa fa-clock-o"></i> Hours: 09:00am to 05:00pm
+                    <i class="fa fa-clock-o"></i> Hours: 08:00am to 05:00pm
                 </p>
             </div>
             <div class="col-md-8 col-lg-7 col-sm-6 col-xs-12 form_sp_con">
@@ -318,9 +319,9 @@
                 <h5><b>Lagos Office (Seller Training Centre)</b></h5><br/>
                 <i class="fa fa-home"></i> Address: 530A Aina Akingbala Street, Omole Phase 2, Ikeja. Lagos State, Nigeria.<br>
                 <i class="fa fa-phone"></i> Tel: +234816148422<br>
-                <i class="fa fa-email"></i> Tel: lagos@onitshamarket.com<br>
+                <i class="fa fa-email"></i> Email: Ikeja.lagos@onitshamarket.com<br>
                 <i class="fa fa-map-marker"></i> Monday to Saturday<br>
-                <i class="fa fa-clock-o"></i> Hours: 09:00am to 05:00pm
+                <i class="fa fa-clock-o"></i> Hours: 08:00am to 05:00pm
                 </p>
             </div>
             <div class="col-md-3">
@@ -328,9 +329,9 @@
                 <h5><b>Abuja Office (Customer Experience Centre)</b></h5><br/>
                 <i class="fa fa-home"></i> Address: 10, Street name. FCT Abuja, Nigeria.<br>
                 <i class="fa fa-phone"></i> Tel: +23412345678<br>
-                <i class="fa fa-email"></i> Tel: abuja@onitshamarket.com<br>
+                <i class="fa fa-email"></i> Email: abuja.fct@onitshamarket.com<br>
                 <i class="fa fa-map-marker"></i> Monday to Saturday<br>
-                <i class="fa fa-clock-o"></i> Hours: 09:00am to 05:00pm
+                <i class="fa fa-clock-o"></i> Hours: 08:00am to 05:00pm
                 </p>
             </div>
             <div class="col-md-3">
@@ -338,19 +339,19 @@
                 <h5><b>Asaba Office (Customer Centre)</b></h5><br/>
                 <i class="fa fa-home"></i> Address: 104 Okpanam Road, Opp. Legislative Quarters Asaba, Delta State, Nigeria<br>
                 <i class="fa fa-phone"></i> Tel: +23412345678<br>
-                <i class="fa fa-email"></i> Tel: asaba@onitshamarket.com<br>
+                <i class="fa fa-email"></i> Email: asaba.delta@onitshamarket.com<br>
                 <i class="fa fa-map-marker"></i> Monday to Saturday<br>
-                <i class="fa fa-clock-o"></i> Hours: 09:00am to 05:00pm
+                <i class="fa fa-clock-o"></i> Hours: 08:00am to 05:00pm
                 </p>
             </div>
             <div class="col-md-3">
-                <p>
-                <h5><b>Aba Office (Distributor Centre)</b></h5><br/>
-                <i class="fa fa-home"></i> Address: 10, Street Name, Aba, Abia State<br>
-                <i class="fa fa-phone"></i> Tel: +23412345678<br>
-                <i class="fa fa-email"></i> Tel: aba@onitshamarket.com<br>
-                <i class="fa fa-map-marker"></i> Monday to Saturday<br>
-                <i class="fa fa-clock-o"></i> Hours: 09:00am to 05:00pm
+                <p style="text-align: justify;">
+                    <h5><b>Aba Office (Distributor Centre)</b></h5><br/>
+                    <i class="fa fa-home"></i> Address: 10, Street Name, Aba, Abia State<br>
+                    <i class="fa fa-phone"></i> Tel: +23412345678<br>
+                    <i class="fa fa-email"></i> Email: aba.abia@onitshamarket.com<br>
+                    <i class="fa fa-map-marker"></i> Monday to Saturday<br>
+                    <i class="fa fa-clock-o"></i> Hours: 08:00am to 05:00pm
                 </p>
             </div>
         </div>
