@@ -48,7 +48,9 @@
         background-color: #74c683;
     }
 
-    ;
+    .quick_view_link:hover{
+        color:#0b6427;
+    }
 
     .checkmark:after {
         content: "";
@@ -353,8 +355,8 @@
     let url = "<?= base_url('catalog/' . $category_detail->slug . '/') ?>";
 
 </script>
-<script src="<?= base_url('assets/js/quick-view.js'); ?>"></script>
-<script src="<?= base_url('assets/js/search.js'); ?>"></script>
+<script src="<?= $this->user->auto_version('assets/js/quick-view.js'); ?>"></script>
+<script src="<?= $this->user->auto_version('assets/js/search.js'); ?>"></script>
 <script src="<?= base_url('assets/js/jquery.unveil.js'); ?>"></script>
 <script>
     $(document).ready(function() {

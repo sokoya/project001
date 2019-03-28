@@ -305,7 +305,7 @@
         let current_url = "<?= current_url()?>";
         let url = "<?= base_url('catalog/' . $category_detail->slug .'/') ?>";
     </script>
-    <script src="<?= base_url('assets/js/search.js'); ?>"></script>
+    <script src="<?= $this->user->auto_version('assets/js/search.js'); ?>"></script>
     <script>
         $(function () {
             $('.lazy').Lazy();
