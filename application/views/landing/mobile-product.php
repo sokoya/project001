@@ -260,8 +260,8 @@
     </div>
     <div class="custom-card">
         <div class="container">
-            <p class="product-discount-overlay" id="counter"></p>
             <div class="owl-carousel products-gallery">
+                <p class="product-discount-overlay" id="counter"></p>
                 <?php foreach ($galleries as $gallery) : ?>
                     <img class="product-image" src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?> "
                          alt="<?= $product->product_name; ?>"/>
@@ -687,7 +687,7 @@
             let element   = event.target;         // DOM element, in this example .owl-carousel
             let items     = event.item.count;     // Number of items
             let item      = event.item.index + 1; // Position of the current item
-            $('#counter').html("item "+item+" of "+items)
+            $('#counter').html(item+" of "+items)
         }
 
         let loop = true;
