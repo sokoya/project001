@@ -153,7 +153,7 @@
                                                                 class="fas fa-phone"></i><?= $pickup->phones; ?>
                                                     </p>
                                                     <p class="panel-details"><i
-                                                                class="fas fa-mail-reply"></i><?= $pickup->emails; ?>
+                                                                class="fas fa-envelope-o"></i><?= $pickup->emails; ?>
                                                     </p>
                                                 </div>
                                             </div>
