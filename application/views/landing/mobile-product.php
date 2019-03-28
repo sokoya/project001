@@ -260,6 +260,7 @@
     </div>
     <div class="custom-card">
         <div class="container">
+            <p class="product-discount-overlay" id="counter"></p>
             <div class="owl-carousel products-gallery">
                 <?php foreach ($galleries as $gallery) : ?>
                     <img class="product-image" src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?> "
@@ -678,7 +679,17 @@
         $(".products-gallery").owlCarousel({
             items: 1,
             lazyLoad: true,
+            onInitialized : counter,
+            onTranslated: counter
         });
+
+        function counter(event) {
+            let element   = event.target;         // DOM element, in this example .owl-carousel
+            let items     = event.item.count;     // Number of items
+            let item      = event.item.index + 1; // Position of the current item
+            $('#counter').html("item "+item+" of "+items)
+        }
+
         let loop = true;
         var x =  $('.suggested-products').data('count');
         if( x <= 3 ) {loop = false;}
