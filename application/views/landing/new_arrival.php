@@ -134,6 +134,9 @@
                                             <span class=""><small><i class="fas fa-plane-arrival text-success"></i> From Overseas</small></span>
                                         <?php endif; ?>
                                         <div class="product-caption">
+                                            <?php if($product->from_overseas == 1) :  ?>
+                                                <span><small><i class="fas fa-plane-arrival text-success"></i> Shipped From Overseas</small></span>
+                                            <?php endif; ?>
                                             <ul class="product-caption-rating">
                                                 <?php
                                                 $rating_counts = $this->product->get_rating_counts($product->id);
