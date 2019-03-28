@@ -212,8 +212,8 @@
     }
     let current_url = "<?= current_url()?>";
 </script>
-<script src="<?= base_url('assets/js/quick-view.js'); ?>"></script>
-<script src="<?= base_url('assets/js/search.js'); ?>"></script>
+<script src="<?= $this->user->auto_version('assets/js/quick-view.js'); ?>"></script>
+<script src="<?= $this->user->auto_version('assets/js/search.js'); ?>"></script>
 <script src="<?= base_url('assets/js/jquery.unveil.js'); ?>"></script>
 <script>
     $(document).ready(function() {
