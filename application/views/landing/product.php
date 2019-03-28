@@ -288,6 +288,7 @@
                                     </div>
                                 </div>
                                 <hr class="product-line"/>
+                                
                                 <div class="product-variation">
                                     <?= form_open('', 'id="variation-form"'); ?>
                                     <div class="row">
