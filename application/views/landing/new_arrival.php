@@ -117,7 +117,7 @@
                                                     <!--                                                    --><?php //$image_name = explode('/', $product->image_name); ?>
                                                     <button data-title="<?= $product->product_name ?>"
                                                             data-pr_id="<?= $product->id; ?>"
-                                                            data-qv="<?php if ($p_count % 4 == 0) { ?>true<?php } ?>"
+                                                            data-qv="<?php if ($p_count % 5 == 0) { ?>true<?php } ?>"
                                                             data-qvc="<?php echo $p_count ?>"
                                                             data-image="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
                                                             data-arrow="arrow-<?= $product->id ?>"
