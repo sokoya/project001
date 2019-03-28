@@ -267,8 +267,8 @@
                              alt="<?= $product->product_name; ?>"/>
                     </div>
                 <?php endforeach; ?>
+                <span class="product-discount-overlay" style="z-index: 10" id="counter"></span>
             </div>
-            <span class="product-discount-overlay" id="counter"></span>
         </div>
     </div>
     <div class="custom-card">
@@ -655,14 +655,14 @@
 <script src="<?= base_url('assets/js/jquery.js'); ?>"></script>
 <script src="<?= base_url('assets/js/owl.carousel.min.js'); ?>"></script>
 <script src="<?= base_url('assets/js/bootstrap.js'); ?>"></script>
-<script src="<?= base_url('assets/js/search.js'); ?>"></script>
-<script src="<?= base_url('assets/js/mobile.js'); ?>"></script>
+<script src="<?= $this->user->auto_version('assets/js/search.js'); ?>"></script>
+<script src="<?= $this->user->auto_version('assets/js/mobile.js'); ?>"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
     $(function () {
         $('.lazy').Lazy();
         $('.prod_description img').each(function() {
-            $(this).css({'width': '50%'});
+            $(this).css({'width': '50%', 'position' : 'center'});
             $(this).addClass('img-responsive');
             $(this).attr('Onitshamarket');
         });
