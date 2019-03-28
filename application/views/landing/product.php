@@ -294,14 +294,14 @@
                                     <div class="row">
                                         <?php if (count($variations) > 0) : ?>
                                             <div class="col-md-7">
-                                                <div class="row">
                                                 <?php if(in_array(strtolower($category_detail->name), array('fashion', 'clothing', 'jewelry', 'shoes'))) :?>
-                                                <div class="row">
-                                                    <div class="col-md-3 ">
-                                                        <h5 class="custom-product-page-option-title">Size / Color:</h5>
+                                                    <div class="row">
+                                                        <div class="col-md-3 ">
+                                                            <h5 class="custom-product-page-option-title">Size / Color:</h5>
+                                                        </div>
                                                     </div>
-                                                </div>
                                                 <?php endif?>
+                                                <div class="row">
                                                     <div class="col-md-9">
                                                         <div class="row variation-option-list">
                                                             <?php $qty_stock_check = 0; ?>
