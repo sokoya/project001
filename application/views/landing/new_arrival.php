@@ -99,7 +99,7 @@
                             <?php $p_count = 0;
                             foreach ($products as $product) : ?>
                                 <?php $p_count++; ?>
-                                <div class="col-md-5ths col-lg-5ths col-sm-5ths col-xs-6 <?php if ($p_count % 4 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> v-items clearfix">
+                                <div class="col-md-5ths col-lg-5ths col-sm-5ths col-xs-6 <?php if ($p_count % 5 == 0) { ?> product_div <?php } ?> product-<?php echo $p_count ?> v-items clearfix">
                                     <div class="product">
                                         <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
                                             <ul class="product-labels">
@@ -139,7 +139,7 @@
                                                 $rating_counts = $this->product->get_rating_counts($product->id);
                                                 echo rating_star_generator($rating_counts);
                                                 ?>
-                                                <span class="text-sm pull-right"><strong><?= ($product->brand_name == 'others') ? 'Generic' : $product->brand_name; ?></strong></span>
+                                                <span class="text-sm pull-right"><strong><?= ($product->brand_name == 'others' || empty($product->brand_name)) ? 'Generic' : $product->brand_name; ?></strong></span>
                                             </ul>
                                             <h5 class="cs-title"><?= character_limiter(ucwords(str_replace('generic', '',$product->product_name)), 10, '...'); ?></h5>
                                             <div class="product-caption-price">
@@ -154,7 +154,7 @@
                                                     <a href="<?= base_url('login'); ?>">
                                                         <span style="margin-right:3px;"
                                                               class="pull-right category-favorite">
-                                                                <i class="fa fa-heart"
+                                                                <i class="fas fa-heart"
                                                                    title="Add <?= $product->product_name; ?> to your wishlist"></i>
                                                         </span>
                                                     </a>
@@ -163,14 +163,14 @@
                                                         <span style="margin-right:3px;"
                                                               class="pull-right category-favorite wishlist-btn"
                                                               data-pid="<?= $product->id; ?>">
-                                                            <i class="fa fa-heart"
+                                                            <i class="fas fa-heart"
                                                                title="Remove <?= $product->product_name; ?> from your wishlist"></i>
                                                         </span>
                                                     <?php else : ?>
                                                         <span style="margin-right:3px;"
                                                               class="pull-right category-favorite wishlist-btn"
                                                               data-pid="<?= $product->id; ?>">
-                                                            <i class="fa fa-heart-o"
+                                                            <i class="fas fa-heart-o"
                                                                title="Add <?= $product->product_name; ?> to your wishlist"></i>
                                                         </span>
                                                     <?php endif; ?>
@@ -208,8 +208,6 @@
         let base_url = "<?= base_url(); ?>";
     }
     let current_url = "<?= current_url()?>";
-    let url = "<?= base_url('catalog/' . $category_detail->slug . '/') ?>";
-
 </script>
 <script src="<?= base_url('assets/js/quick-view.js'); ?>"></script>
 <script src="<?= base_url('assets/js/search.js'); ?>"></script>
@@ -218,26 +216,6 @@
     $(document).ready(function() {
         $("img").unveil();
     });
-    $("#price-range").ionRangeSlider({
-        type: "double",
-        min: <?= $min ?>,
-        max: <?= $max; ?>,
-        grid: true,
-        prefix: "&#8358;",
-        onFinish: function (data) {
-            window.location = url + '?price_min=' + data.from + '&price_max=' + data.to;
-        }
-    });
-
-    let my_range = $("#price-range").data("ionRangeSlider");
-    let min = '<?= $price_min; ?>';
-    let max = '<?= $price_max; ?>';
-    if (min != '' && max != '') {
-        my_range.update({
-            from: min,
-            to: max
-        });
-    }
 
     $('.wishlist-btn').on('click', function () {
         let product_id = $(this).data('pid');
@@ -271,81 +249,6 @@
         })
     });
 
-    $(document).ready(function () {
-        let _category_body = $('#category_body');
-
-        function doReplaceState(url) {
-            let state = {current_url: url},
-                title = "Onitshamarket";
-            history.replaceState(state, title, url);
-        }
-
-        function load_page(url) {
-            $('.cat-notify').load(`${url} .cat-notify`);
-            $(_category_body).load(`${url} #category_body`, function (response, status, xhr) {
-                if (status === "error") {
-                    let msg = "Sorry but there was an error: ";
-                    alert(msg + xhr.status + " " + xhr.statusText);
-                    window.location = current_url;
-                }
-                $('.lazy').Lazy({
-                    scrollDirection: 'vertical',
-                    effect: 'fadeIn',
-                    visibleOnly: true
-                });
-                $('.product-quick-view-btn').on('click', get_view);
-                doReplaceState(url);
-
-                $('#processing').hide();
-                $(_category_body).show();
-            });
-        }
-
-        let url = '';
-        let filter_string = '';
-        $('.filter').change(function () {
-            if ($('input[name=filterset]').is(':checked')) {
-                let filter_list = {};
-                url = '';
-                filter_string = '';
-                $(_category_body).hide();
-                $('#processing').show();
-                let items = $('input[name=filterset]:checked');
-
-                items.each(function () {
-                    let value = $(this).data('value');
-                    let key = $(this).data('type');
-                    if (filter_list[key]) {
-                        if (jQuery.inArray(value, filter_list[key]) !== -1) {
-                        } else {
-                            filter_list[key].push(value)
-                        }
-                    } else {
-                        filter_list[key] = [value];
-                    }
-                    url = '';
-                    jQuery.each(filter_list, function (obj) {
-                        filter_string = '';
-                        jQuery.each(filter_list[obj], function (id, values) {
-                            if (filter_string === '') {
-                                filter_string += values;
-                            } else {
-                                filter_string += ',' + values;
-                            }
-                        });
-                        if (url === '') {
-                            url += `?${obj}=${filter_string}`
-                        } else {
-                            url += `&${obj}=${filter_string}`
-                        }
-                    });
-                    load_page(url);
-                });
-            } else {
-                load_page(current_url);
-            }
-        });
-    });
 </script>
 </body>
 </html>

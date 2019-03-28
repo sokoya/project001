@@ -67,7 +67,6 @@ class Product extends MY_Controller
 		$features = $this->product->get_features($str);
 		$output_array = array();
 
-//		var_dump( $features ); exit;
 		if ($features) {
 			foreach ($features as $feature => $values) {
 				foreach ($values as $key => $value) {

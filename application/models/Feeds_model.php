@@ -2,6 +2,29 @@
 
 Class Feeds_model extends CI_Model{
 
+
+    function get_new_arrival( $array ){
+        $select_query = "SELECT p.id, p.product_name, p.brand_name, p.seller_id, p.from_overseas, v.sale_price, v.discount_price, v.start_date,v.end_date, 
+        SUM(v.quantity) item_left, g.image_name,s.store_name
+            FROM products p";
+        // Variation
+        $select_query .= " JOIN (SELECT var.product_id, var.discount_price, var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var 
+            WHERE var.quantity > 0 ORDER BY var.id) AS v ON (p.id = v.product_id)";
+
+        // gallery
+        $select_query .= " JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )                
+            JOIN sellers AS s ON p.seller_id = s.uid ";
+
+        if( $array['is_limit'] == true ){
+            $select_query .=" AND p.product_status = 'approved' GROUP BY p.id ORDER BY p.id DESC LIMIT {$array['offset']},{$array['limit']}";
+        }else{
+            $select_query .=" AND p.product_status = 'approved' GROUP BY p.id ORDER BY p.id DESC";
+        }
+        $products_query = $this->db->query( $select_query )->result();
+        return $products_query;
+    }
+
+
     // Get single product
     function get_product( $id = ''){
         return $this->db->query('SELECT p.*, u.legal_company_name, v.quantity 
@@ -44,64 +67,6 @@ Class Feeds_model extends CI_Model{
         }
     }
 
-    // Get single variation
-    function get_variation( $id = ''){
-        return $this->db->query('SELECT * FROM product_variation WHERE product_id = ? ORDER BY id,quantity LIMIT 1', $id)->row();
-    }
-
-    // Single product, get all the product variation
-    function get_variations( $id ='' ){
-        return $this->db->query('SELECT * FROM product_variation WHERE product_id = ? ', $id)->result_array();
-    }
-
-
-    // Check if the single product has variation
-    function check_variation( $id ){
-        $this->db->select('quantity,sale_price,discount_price');
-        $this->db->where('id', $id);
-        $this->db->limit(1);
-        return $this->db->get('product_variation')->result_array();
-    }
-
-    /**
-     * @param $id
-     * @return mixed
-     */
-    function get_variation_status($id ){
-        return $this->db->query("SELECT quantity, sale_price, discount_price, start_date, end_date FROM product_variation WHERE id = $id")->row();
-    }
-
-    /*
-     *The function helps to make a secondary check on a product before adding to cart
-     * */
-    function get_product_item( $pid, $vid, $qty ){
-        // check if the variation item is still available
-        $check1 = $this->get_variation_status( $vid );
-        if( empty( $check1 ) || $qty > $check1->quantity ){
-            return array('status' => 'error', 'msg' => 'The product variation quantity you selected is not available.' . $check1->quantity . ' item remaining.' );
-        }
-        // check2 : is the seller on vacation
-        $query = "SELECT p.seller_id, p.product_name, v.discount_price, v.sale_price, v.variation FROM products p INNER JOIN product_variation v ON (v.id = {$vid} AND v.product_id = p.id) WHERE p.id = {$pid} AND p.product_status = 'approved' ";
-        $result = $this->db->query( $query )->row();
-        if( !empty($result) ){
-            return array('status' => 'success', 'msg' => $result);
-        }else{
-            return array('status' => 'error', 'msg' => 'Sorry, the product is no longer active.');
-        }
-    }
-
-
-    // Get user has favourite this property
-    function is_favourited($uid ='', $product_id =''){
-        if( $uid ){
-            $this->db->where('uid', $uid);
-            $this->db->where('product_id', $product_id);
-            if( $this->db->get('favourite')->num_rows() == 1 ){
-                return true;
-            }
-        }
-        return false;
-    }
 
     /*
     *This function is to call the recurssive function and
@@ -168,7 +133,6 @@ Class Feeds_model extends CI_Model{
         }else{
             return $GLOBALS['array_variable'];
         }
-
     }
 
     /*
