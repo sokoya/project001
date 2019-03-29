@@ -245,7 +245,11 @@
         </div>
     <?php endif; ?>
     <div class="gap"></div>
-    <?php $this->load->view('landing/resources/footer'); ?>
+    <?php if ($this->agent->is_mobile()) : ?>
+        <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
+    <?php else: ?>
+        <?php $this->load->view('landing/resources/footer'); ?>
+    <?php endif; ?>
 </div>
 <script src="<?= base_url('assets/js/jquery.js'); ?>"></script>
 <script src="<?= base_url('assets/js/bootstrap.js'); ?>"></script>
@@ -275,8 +279,15 @@
             slidesToScroll: 1,
             lazyLoad: 'ondemand',
             arrows: true,
-            mobileFirst: true,
             cssEase: 'linear',
+            responsive: [
+                { breakpoint: 640, settings: {
+                    slidesToShow: 2,
+                }},
+                { breakpoint: 913, settings: {
+                    slidesToShow: 4,
+                }}
+            ]
         });
     });
     window.addEventListener('load', function(){
