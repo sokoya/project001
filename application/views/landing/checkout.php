@@ -226,7 +226,7 @@
                                                     </p>
                                                     <div style="height:28px;">
                                                         <p class="panel-details" title="<?= $address->address ?>"><i
-                                                                    class="fas fa-map-marker"></i><?= character_limiter($address->address, 38); ?>
+                                                                    class="fas fa-map-marker"></i><?= character_limiter($address->address, 38, '...') . '. ' . $address->state . ' ('. $address->area.')'; ?>
                                                         </p>
                                                     </div>
                                                     <p class="panel-details"><i
@@ -412,6 +412,9 @@
     <?php $this->load->view('landing/resources/footer'); ?>
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
+<script>
+    console.log(`<?= $weights['weight'] ?>`);
+</script>
 <script src="<?= $this->user->auto_version('assets/js/checkout.js'); ?>"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 </body>

@@ -473,12 +473,26 @@ Class Product_model extends CI_Model{
 
     // Generic single product detail
     function get_cart_details( $id ){
-        $select = "SELECT p.product_status, p.seller_id, u.first_name firt_name, s.legal_company_name, s.store_name name, u.is_seller, i.image_name image FROM products p
+        $select = "SELECT p.product_status,p.weight, p.seller_id, u.first_name firt_name, s.legal_company_name, s.store_name name, u.is_seller, i.image_name image FROM products p
                 LEFT JOIN sellers s ON (s.uid = p.seller_id)
                 LEFT JOIN users u ON (u.id = p.seller_id)
                 LEFT JOIN product_gallery i ON (i.product_id = p.id )
                 WHERE p.id = $id";
         return $this->db->query($select)->row();
+    }
+
+    /*
+     * This fetch the product weight price , and determined by the user default area id
+     * */
+    function get_product_weight_price( $weight, $area_id ){
+        $this->db->where('aid', $area_id);
+        $this->db->where('weight', $weight);
+        return $this->db->get('delivery_amount')->row();
+        if( $amount_row ){
+            return $amount_row->amount;
+        }else{
+            return 2000;
+        }
     }
 
     /**

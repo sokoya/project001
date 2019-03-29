@@ -267,9 +267,8 @@ Class User_model extends CI_Model
 
     // Get states
 
-    function get_area($sid = '')
-    {
-        $this->db->select('id,name,price');
+    function get_area($sid = ''){
+        $this->db->select('id,name');
         $this->db->where('sid', $sid);
         return $this->db->get('area')->result_array();
     }
@@ -293,7 +292,7 @@ Class User_model extends CI_Model
 
     function get_user_billing_address($id)
     {
-        return $this->db->query("SELECT b.*, s.name, a.name FROM billing_address b LEFT JOIN states s ON (s.id = b.sid) LEFT JOIN area a ON (a.id = b.aid) WHERE b.uid = $id")->result();
+        return $this->db->query("SELECT b.*, s.name state, a.name area FROM billing_address b LEFT JOIN states s ON (s.id = b.sid) LEFT JOIN area a ON (a.id = b.aid) WHERE b.uid = $id")->result();
     }
 
     function is_address_set($id)
@@ -333,11 +332,11 @@ Class User_model extends CI_Model
      * @param $id
      * @return string
      */
-    function get_default_address_price($id)
+    function get_default_address_area($id)
     {
-        $select = "SELECT a.price price FROM billing_address b INNER JOIN area a ON(a.id = b.aid) WHERE b.primary_address = 1 AND b.uid = $id";
+        $select = "SELECT aid FROM billing_address b WHERE b.primary_address = 1 AND b.uid = {$id}";
         if ($this->db->query($select)->num_rows()) {
-            return $this->db->query($select)->row()->price;
+            return $this->db->query($select)->row()->aid;
         } else {
             return '';
         }

@@ -90,7 +90,6 @@ $('.create-address-btn').on('click', function (e) {
         success: function (response) {
 
             if (response.status = 'success') {
-                // alert('Heeeeeee');
                 $('#status').html(`<p class="alert alert-success">${response.message}</p>`).slideDown('fast').delay(3000).slideUp('slow');
                 $('#processing').hide();
                 $('#delivery-method').load(`${base_url}checkout #delivery-method`, function () {

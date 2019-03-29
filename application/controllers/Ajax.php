@@ -50,10 +50,10 @@ class Ajax extends CI_Controller
     function fetch_areas()
     {
         if ($this->input->is_ajax_request()) {
-            $sid = $this->input->get('sid');
-            $areas = $this->user->get_area($sid);
             header('Content-type: text/json');
             header('Content-type: application/json');
+            $sid = $this->input->get('sid');
+            $areas = $this->user->get_area($sid);
             echo json_encode($areas);
             exit;
         } else {

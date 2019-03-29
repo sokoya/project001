@@ -62,6 +62,7 @@
                     <i class="fa fa-map-marker"></i> Monday to Saturday<br>
                     <i class="fa fa-clock-o"></i> Hours: 08:00am to 05:00pm
                 </p>
+
             </div>
             <div class="col-md-8 col-lg-7 col-sm-6 col-xs-12 form_sp_con">
                 <form role="form" class="form-horizontal">

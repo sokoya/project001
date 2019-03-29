@@ -27,13 +27,19 @@ class Checkout extends MY_Controller
 		$page_data['title'] = 'Checkout';
 		$this->load->model('user_model', 'user');
 		$page_data['user'] = $this->user->get_profile($this->session->userdata('logged_id'));
+
 		$page_data['addresses'] = $this->user->get_user_billing_address($page_data['user']->id);
+//		var_dump( $page_data['addresses']);
+//		exit;
 		$page_data['pickups'] = $this->user->get_pickup_address();
 		$page_data['address_set'] = $this->user->is_address_set($page_data['user']->id);
-		$result = $this->user->get_default_address_price($page_data['user']->id);
-		$page_data['delivery_charge'] = (  !$result ) ? 500 : $result;
+		// Returns the default area Id
+		$user_area_id = $this->user->get_default_address_area($page_data['user']->id);
+		// Get the area id price associated with the weight
+
 		// Lets make a check that the product is valid to be here
-        $message = ''; $total = $error = 0;
+        $message = ''; $total = $error = $weight_total = 0; $weight_price = 500;
+        $weight_array = array();
 		foreach( $this->cart->contents() as $product ){
 			$detail = $this->product->get_cart_details($product['id']);
 			$variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
@@ -46,11 +52,21 @@ class Checkout extends MY_Controller
             }
             // Total Amount
             $total += $product['subtotal'];
+            // Get Weight Price
+            $weight_result = $this->product->get_product_weight_price( $detail->weight, $user_area_id );
+            if( $weight_result )  $weight_price = $weight_result->amount;
+            $weight_total += (int)$weight_price;
+
+            // Make a list of the product weight- pass it to the view
+            array_push($weight_array, $detail->weight );
 		}
 		if( $error > 0 ){
 		    $this->session->set_flashdata('error_msg', $message);
 		    redirect('cart');
         }
+        $page_data['delivery_charge'] = $weight_total;
+		$weight['weight'] = $weight_array;
+		$page_data['weights'] = json_encode($weight, true);
         $this->session->set_flashdata('error_msg', $message);
 		$items = $this->cart->total_items();
 		$page_data['methods'] = $this->product->get_results('payment_methods', '*', "(status = 1)");
