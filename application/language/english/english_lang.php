@@ -70,4 +70,4 @@ $lang['agreement_url'] = base_url('page/agreement/');
 $lang['facebook_link'] = "https://www.facebook.com/onitshamarketing";
 $lang['twitter_link'] = "https://www.twitter.com/onitshamarket";
 $lang['instagram_link'] = "#";
-$lang['youtube_link'] = "#";
+$lang['youtube_link'] = "https://www.youtube.com/channel/UCUZK-_Jh3OHMvIzkLwQdKoA";
