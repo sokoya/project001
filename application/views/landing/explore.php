@@ -19,13 +19,13 @@
     .card-max-title{
         font-weight:800;
         font-size:18px;
-        width:70%;
+        width:50%;
     }
     .card-max-subtitle{
         font-weight:500;
         font-size:14px;
         line-height:26px;
-        width:30%;
+        width:50%;
         text-align:right;
     }
     .card-max-header{
