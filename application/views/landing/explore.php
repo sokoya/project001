@@ -1,4 +1,6 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
+<link rel="stylesheet" href="<?= base_url('assets/plugins/slick/slick.css'); ?>">
+<link rel="stylesheet" href="<?= base_url('assets/plugins/slick/slick-theme.css'); ?>">
 <style type="text/css">
     .card-product-img{
         /* width:100%; */
@@ -6,6 +8,9 @@
         min-width:unset !important;
         max-width:180px !important;
         max-height:140px !important;
+    }
+    .slick-slider{
+        visibility:hidden;
     }
     .card-product {
         min-height: 285px !important;
@@ -27,7 +32,7 @@
         background:#201616;
         color:#fff;
         margin-top:20px;
-        padding:5px 10px 5px;
+        padding:10px 10px 0;
         display:inline-flex;
         width:100%;
     }
@@ -77,13 +82,13 @@
                     <br/>
                     <div class="brand-slide">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 slick-slider">
                                 
                                     <?php
-                                    $products = $this->product->randomproducts(array(31,33,36,53,), 10);
+                                    $products = $this->product->randomproducts(array(31,33,36,53,), 12);
                                     foreach ($products as $product) : ?>
-                                        <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>">
-                                            <div class="col-md-2 col-sm-3 col-xs-6  card-product card-product-alt">
+                                        <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>" class="col-md-2 col-sm-3 col-xs-6  card-product card-product-alt">
+                                            <div>
                                                 <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
                                                     <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
                                                 <?php endif; ?>
@@ -119,13 +124,13 @@
                     <br/>
                     <div class="brand-slide">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 slick-slider">
                                 
                                     <?php
-                                    $products = $this->product->randomproducts(array(31,33,36,53,), 10);
+                                    $products = $this->product->randomproducts(array(31,33,36,53,), 12);
                                     foreach ($products as $product) : ?>
-                                        <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>">
-                                            <div class="col-md-2 col-sm-3 col-xs-6  card-product card-product-alt">
+                                        <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>" class="col-md-2 col-sm-3 col-xs-6  card-product card-product-alt">
+                                            <div>
                                                 <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
                                                     <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
                                                 <?php endif; ?>
@@ -162,13 +167,13 @@
                     <br/>
                     <div class="brand-slide">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 slick-slider">
                                 
                                     <?php
-                                    $products = $this->product->randomproducts("", 10);
+                                    $products = $this->product->randomproducts("", 12);
                                     foreach ($products as $product) : ?>
-                                        <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>">
-                                            <div class="col-md-2 col-sm-3 col-xs-6  card-product card-product-alt">
+                                        <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>" class="col-md-2 col-sm-3 col-xs-6  card-product card-product-alt">
+                                            <div>
                                                 <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
                                                     <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
                                                 <?php endif; ?>
@@ -205,13 +210,13 @@
                     <br/>
                     <div class="brand-slide">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 slick-slider">
                                 
                                     <?php
-                                    $products = $this->product->randomproducts("", 10);
+                                    $products = $this->product->randomproducts("", 12);
                                     foreach ($products as $product) : ?>
-                                        <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>">
-                                            <div class="col-md-2 col-sm-3 col-xs-6  card-product card-product-alt">
+                                        <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>" class="col-md-2 col-sm-3 col-xs-6  card-product card-product-alt">
+                                            <div>
                                                 <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
                                                     <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
                                                 <?php endif; ?>
@@ -255,11 +260,25 @@
 </script>
 <script src="<?= $this->user->auto_version('assets/js/quick-view.js'); ?>"></script>
 <script src="<?= $this->user->auto_version('assets/js/search.js'); ?>"></script>
+<script src="<?= base_url('assets/plugins/slick/slick.js') ?>"></script>
 <!-- <script src="<?//= base_url('assets/js/jquery.unveil.js'); ?>"></script> -->
 <script>
     // $(document).ready(function() {
     //     $("img").unveil();
     // });
+    $(document).ready(function () {
+        $('.slick-slider').css({"visibility": "visible"});
+        $('.slick-slider').slick({
+            infinite: true,
+            speed: 500,
+            slidesToShow: 6,
+            slidesToScroll: 1,
+            lazyLoad: 'ondemand',
+            arrows: true,
+            mobileFirst: true,
+            cssEase: 'linear',
+        });
+    });
     window.addEventListener('load', function(){
     var allimages= document.getElementsByTagName('img');
     for (var i=0; i<allimages.length; i++) {
