@@ -67,7 +67,7 @@ $lang['agreement_url'] = base_url('page/agreement/');
 
 
 // Social Media Link
-$lang['facebook_link'] = "#";
+$lang['facebook_link'] = "https://www.facebook.com/onitshamarketing";
 $lang['twitter_link'] = "https://www.twitter.com/onitshamarket";
 $lang['instagram_link'] = "#";
 $lang['youtube_link'] = "#";
