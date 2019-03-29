@@ -89,15 +89,27 @@ Class User_model extends CI_Model
      * @param $bid
      * @return bool
      */
-    function update_billing_address($where = '', $bid)
+    function update_billing_address($where = '', $bid, $weights = array())
     {
         $this->db->where($where);
         $this->db->set('primary_address', 0, false);
         if ($this->db->update('billing_address')) {
             $this->db->where('id', $bid);
             $this->db->update('billing_address', array('primary_address' => 1));
-            $select = "SELECT a.price FROM area a LEFT JOIN billing_address b ON(b.aid = a.id) WHERE b.id = $bid";
-            return $this->db->query($select)->row();
+            if( !empty($weights) ){
+                $total_weight_value = 0;  $amount = 500;
+                $count = count( $weights );
+                for( $i = 0 ; $i < $count; $i++){
+                    $this->db->where('aid', $bid);
+                    $this->db->where('weight', $weights[$i]);
+                    $amount = $this->db->get('delivery_amount')->row();
+                    if( $amount ){
+                        $total_weight_value += $amount->amount;
+                    }
+                }
+                return $total_weight_value;
+            }
+            return false;
         }
         return false;
     }

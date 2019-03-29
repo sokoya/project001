@@ -212,7 +212,7 @@ function get_updates() {
     $.ajax({
         url: base_url + "checkout/set_default_address",
         method: 'POST',
-        data: {address_id: ad_id},
+        data: {address_id: ad_id, weight : weight.weight},
         success: function (response) {
             if ('.delivery-box') {
                 let quantity_instance = $('.pr-summary-count').data('quantity') * 1;

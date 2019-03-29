@@ -451,6 +451,13 @@
     <?php $this->load->view('landing/resources/script'); ?>
 <?php endif; ?>
 <script>
+    let weight = '';
+    $(document).ready(function(){
+        <!--    --><?//= var_dump( $weights ); exit;?>
+        weight = JSON.parse(`<?= $weights;?>`);
+    });
+</script>
+<script>
     $(function () {
         $('.lazy').Lazy();
     });

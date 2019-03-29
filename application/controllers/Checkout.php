@@ -126,11 +126,12 @@ class Checkout extends MY_Controller
 		if (!$this->input->post()) redirect(base_url());
 		$uid = $this->session->userdata('logged_id');
 		$address_id = cleanit($this->input->post('address_id'));
-		$price = $this->user->update_billing_address(array('uid' => $uid) , $address_id);
-		if( $price != false ) {
-			echo $price->price;
+		$weights = $this->input->post('weight');
+		$result = $this->user->update_billing_address(array('uid' => $uid) , $address_id, $weights);
+		if( $result != false ) {
+			echo $result;
 		} else {
-			echo false;
+			echo 500;
 		}
 		exit;
 	}

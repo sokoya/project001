@@ -413,7 +413,11 @@
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
 <script>
-    console.log(`<?= $weights['weight'] ?>`);
+let weight = '';
+$(document).ready(function(){
+    <!--    --><?//= var_dump( $weights ); exit;?>
+    weight = JSON.parse(`<?= $weights;?>`);
+});
 </script>
 <script src="<?= $this->user->auto_version('assets/js/checkout.js'); ?>"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
