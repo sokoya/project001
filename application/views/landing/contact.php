@@ -56,7 +56,7 @@
                     CONTACT US
                 </h3>
                 <p class="p_sp_con">
-                    <i class="fas fa-home"></i> Address: 176 Akwa Road, Onitsha. Anambra State. Nigeria.<br>
+                    <i class="fas fa-home"></i> Address: #176 Awka Road, Opposite Conoil, Inland Town, Onitsha, Anambra State.<br>
                     <i class="fas fa-phone"></i> Tel: +23412345678<br>
                     <i class="fas fa-envelope-square"></i> onitsha.anambra@onitshamarket.com<br>
                     <i class="fa fa-map-marker"></i> Monday to Saturday<br>
@@ -260,8 +260,8 @@
                                     title="Order Payment Method"
                                     style="display: none;">
                                 <option value="">--None--</option>
-                                <option value="Quick Teller">Quick Teller</option>
                                 <option value="Cash on delivery">Cash on delivery</option>
+                                <option value="Interswitch">Quick Teller</option>
                                 <option value="Pay Stack">Pay Stack</option>
                             </select>
 
@@ -287,7 +287,7 @@
                             Order No
                         </div>
                         <div class="col-xs-12">
-                            <input class="form-control" id="00N2400000IQx8L" name="00N2400000IQx8L" size="20"
+                            <input class="form-control" id="order_no" name="00N2400000IQx8L" size="20"
                                    pattern="^[3][0-9]{8}$"
                                    placeholder="Enter your 9 digits order number e.g 374929453"
                                    type="text" required onKeyPress="return isNumberKey(event)"/>
