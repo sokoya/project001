@@ -75,4 +75,5 @@ $route['order_completed'] = 'checkout/order_completed/';
 
 // Feeds :  This will take care of general pages with category lists.
 $route['new-arrivals'] = 'feeds/new_arrivals/';
+$route['explore'] = 'feeds/explore/';
 

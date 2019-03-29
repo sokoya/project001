@@ -13,50 +13,7 @@ class Feeds extends MY_Controller
 
 
 	public function index()
-	{
-		// $this->output->cache(60);
-        $this->session->set_userdata('referred_from', current_url());
-		$uri = $this->uri->segment(2);
-		$index = substr($uri, strrpos($uri, '-') + 1);
-		// sanitize
-		if (!is_numeric(cleanit($index))) redirect(base_url());
-		$page_data['product'] = $this->product->get_product($index);
-		$page_data['var'] = $this->product->get_variation($index);
-		$page_data['variations'] = $this->product->get_variations($index);
-		$page_data['galleries'] = $this->product->get_gallery($index);
-		$page_data['favourite'] = $this->product->is_favourited($this->session->userdata('logged_id'), $index);
-		$page_data['likes'] = $this->product->get_also_likes($index);
-		$page_data['category_detail'] = $this->product->single_category_detail( $page_data['product']->category_id );
-
-        $page_data['title'] = 'Buy ' . $page_data['product']->product_name;
-        $page_data['keywords'] = $page_data['title'] . ' , ' . $page_data['product']->brand_name;
-        if ($page_data['category_detail']) {
-            $page_data['description'] = $page_data['title'] . ' ' . $page_data['category_detail']->description;
-//            $page_data['breadcrumb'] = $this->product->get_parent_details( $page_data['product']->category_id );
-        } else { $page_data['description'] = DESCRIPTION; }
-        $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
-		 $this->add_count($index);
-//		 var_dump( $page_data['profile'] );exit;
-
-		$page_data['page'] = 'product';
-		$page_data['rating_counts'] = $this->product->get_rating_counts($index);
-		$page_data['featured_image'] = $this->product->get_featured_image($index);
-		// Recently viewed
-        if( $this->session->userdata('logged_in')){
-            $this->user->recently_viewed($page_data['product']->id , $this->session->userdata('logged_id'));
-        }else{ }
-        $page_data['questions'] = $this->product->get_results('qna', "*", "( status = 'approved' && pid = {$index}) ");
-        $this->add_count($page_data['product']->id);
-		$page_data['page'] = 'product';
-        $page_data['reviews'] = $this->product->get_reviews($index);
-		if (!$this->agent->is_mobile()) {
-			$this->load->view('landing/product', $page_data);
-		} else {
-			$page_data['page'] = 'mobile-product';
-			$this->load->view('landing/mobile-product', $page_data);
-		}
-	}
-
+	{}
 
 	// New Arrival Post...
 	public function new_arrivals()
@@ -80,7 +37,32 @@ class Feeds extends MY_Controller
 		$page_data['title'] = "New trending fashion, computer, phones, gadgets, accessories";
 //		print_r($page_data['products']); exit;
         $this->load->view('landing/new_arrival', $page_data);
-	}
+    }
+	// Explore Product Post...
+	public function explore()
+    {
+        $page = isset($_GET['page']) ? xss_clean($_GET['page']) : 0;
+		if ($page > 1) $page -= 1;
+		$this->load->library('pagination');
+		$this->config->load('pagination');
+		$config = $this->config->item('pagination');
+		$config['base_url'] = current_url();
+		$config['total_rows'] = 120;
+		$config['per_page'] = 40;
+		$this->pagination->initialize($config);
+		$array['limit'] = $config['per_page'];
+		$array['offset'] = $page;
+		$array['is_limit'] = true;
+		$page_data['pagination'] = $this->pagination->create_links();
+		$page_data['products'] = $this->feeds->get_new_arrival($array);
+		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
+		$page_data['page'] = 'new_arrival';
+		$page_data['title'] = "Explore trending fashion, computer, phones, gadgets, accessories";
+//		print_r($page_data['products']); exit;
+        $this->load->view('landing/explore', $page_data);
+    }
+    
+
 
 	/**
 	 * @param $id - product id
