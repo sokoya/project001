@@ -569,7 +569,7 @@
                                         <?php endif; ?>
                                     </div>
                                 </a>
-                            <?php $x++; if( $x == 3 ) exit; ?>
+                            <?php $x++; if( $x == 4 ) exit; ?>
                             <?php endforeach; ?>
                         </div>
                     </div>
