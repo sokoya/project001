@@ -167,7 +167,7 @@
                                                 <a href="#description-tab"><?= count($rating_counts); ?> customer
                                                     reviews</a> <strong></strong>
                                             <?php else : ?>
-                                                <a href="#description-tab">Be the first to rate this product</a>
+                                                <a href="#description-tab">Be the first to rate this product</a><br />
                                                 <strong><?= is_null($product->quantity) ? 0 : $product->quantity; ?>
                                                     SOLD</strong>
                                             <?php endif; ?>
