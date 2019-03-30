@@ -549,6 +549,7 @@
                     <div class="col-md-10">
                         <div class="row" style="margin-left: 10px">
                             <?php
+                            $x = 0;
                             foreach ($recently_viewed as $viewed) : ?>
                                 <a href="<?= base_url(urlify($viewed->product_name, $viewed->id)); ?>">
                                     <div class="col-md-3 col-sm-3 col-xs-3  card-product card-product-alt">
@@ -568,6 +569,7 @@
                                         <?php endif; ?>
                                     </div>
                                 </a>
+                            <?php $x++; if( $x == 3 ) exit; ?>
                             <?php endforeach; ?>
                         </div>
                     </div>
