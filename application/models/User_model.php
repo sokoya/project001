@@ -108,6 +108,7 @@ Class User_model extends CI_Model
                         $total_weight_value += $amount->amount;
                     }
                 }
+                return 40000;
                 return $total_weight_value;
             }
             return false;
