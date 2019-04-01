@@ -73,7 +73,7 @@
                                                 <div class="form-group">
                                                     <label class="checkout-form-input-label" for="state">State</label>
 
-                                                    <select class="form-control checkout-form-input" id="state"
+                                                    <select class="form-control checkout-form-input select2" id="state" style="width:100%;"
                                                             name="state"
                                                             required="">
                                                         <option value="">-- Select Sate --</option>
@@ -86,7 +86,7 @@
                                                 <div class="form-group">
                                                     <label class="checkout-form-input-label" for="city">City ( Select
                                                         the city we cover at the moment )</label>
-                                                    <select class="form-control checkout-form-input select2" id="city"
+                                                    <select class="form-control checkout-form-input select2" id="city" style="width:100%;"
                                                             name="area"
                                                             required="">
                                                     </select>
