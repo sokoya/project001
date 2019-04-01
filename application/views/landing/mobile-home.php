@@ -38,7 +38,7 @@
         min-width: unset !important;
         max-width: unset !important;
         height: 17vh;
-        margin-left:-10px;
+        margin-left:-8px;
     }
     @media screen and (min-width: 555px;) {
         .gap_small {
@@ -231,7 +231,7 @@
     <div class="gap_small"></div>
     <div class="card-max container">
         <div class="card-max-header">
-            <h5 style="margin-left:-5px;">Super <span style="color:#575745">Deals</span></h5>
+            <h5 style="margin-left:-5px;">Deals <span style="color:#575745">of the day</span></h5>
         </div>
         <br/>
         <div class="brand-slide">
@@ -254,7 +254,7 @@
                                     <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
                                         <p class="card-product-price-small" style="font-max-size: 10px;">
                                             <?= ngn($product->discount_price); ?>
-                                            <small class="card-product-price-discount pull-right" style="position:absolute;right:10px;"><?= ngn($product->sale_price); ?></small>
+                                            <small class="card-product-price-discount pull-right" style="position:absolute;right:10px;font-size:11px;color:#ee1111;"><?= ngn($product->sale_price); ?></small>
                                         </p>
                                     <?php else : ?>
                                         <p class="card-product-price-small"> <?= ngn($product->sale_price); ?> </p>
