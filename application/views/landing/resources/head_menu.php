@@ -40,7 +40,9 @@
 </style>
 <!-- Head Category Starts -->
 <?php
+$this->db->cache_on();
 $category_cache = "SELECT id,name,slug,icon,image FROM categories WHERE pid = 0 LIMIT 11";
+$this->db->cache_off();
 //if(!$this->memcached_library->get($category_cache) && $this->memcached_library->get($category_cache) == '') {
 $categories = $this->db->query($category_cache)->result();
 //    $this->memcached_library->add($category_cache, $categories);
@@ -166,7 +168,9 @@ $categories = $this->db->query($category_cache)->result();
                                         <div class="nav-category-container">
                                             <div class="nav-category-one row">
                                                 <?php
+                                                $this->db->cache_on();
                                                 $main_category = $this->db->query("SELECT id,name,slug FROM categories WHERE pid = ? ", $category->id)->result();
+                                                $this->db->cache_off();
                                                 if ($main_category):
                                                     foreach ($main_category as $cat) :
                                                         ?>
@@ -177,7 +181,9 @@ $categories = $this->db->query($category_cache)->result();
                                                             </h5>
                                                             <ul class="dropdown-menu-category-list">
                                                                 <?php
+                                                                $this->db->cache_on();
                                                                 $sub_category = $this->db->query("SELECT id,name,slug FROM categories WHERE pid = ? LIMIT 10 ", array($cat->id))->result();
+                                                                $this->db->cache_off();
                                                                 if ($sub_category):
                                                                     foreach ($sub_category as $sub) : ?>
                                                                         <li>
