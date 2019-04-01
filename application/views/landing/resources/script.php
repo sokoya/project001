@@ -27,9 +27,3 @@
 <!-- Start of HubSpot Embed Code -->
 <!--<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/5357566.js"></script>-->
 <!-- End of HubSpot Embed Code -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.select2').select2();
-    });
-</script>

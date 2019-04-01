@@ -468,5 +468,12 @@
     })
 </script>
 <script src="<?= $this->user->auto_version('assets/js/checkout.js'); ?>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.select2').select2();
+    });
+</script>
+
 </body>
 </html>
