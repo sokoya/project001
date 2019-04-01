@@ -153,7 +153,6 @@ class Checkout extends MY_Controller
                 $pickup_id = $this->input->post('pickup_address');
                 $charge = $this->product->get_billing_amount($pickup_id, 'pickup');
             }else{
-
                 $address_id = cleanit( $this->input->post('selected_address', true) );
                 $charge = $this->product->get_billing_amount($address_id,'billing', $weights);
             }

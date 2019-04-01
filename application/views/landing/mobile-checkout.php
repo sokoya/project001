@@ -140,7 +140,7 @@
                                                             <input title="Select Pickup Location" class="form-check-input delivery-box" type="radio"
                                                                    name="pickup_address"
                                                                    id="pickup_id_<?= $pickup->id; ?>"
-                                                                   value="Pickup Address">
+                                                                   value="<?= $pickup->id; ?>">
                                                             <label class="form-check-label"
                                                                    for="pickup_id_<?= $pickup->id ?>">
                                                                 Select this pickup address
