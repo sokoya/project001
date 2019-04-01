@@ -105,14 +105,14 @@
                                         </div>
                                     </div>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <button type="button" class="btn btn-primary btn-block create-address-btn">
                                                 Submit
                                             </button>
                                         </div>
 
-                                        <div class="col-md-2"></div>
-                                        <div class="col-md-4">
+                                        <br />
+                                        <div class="col-md-6">
                                             <button type="button" class="btn btn-warning btn-block cancel-btn">
                                                 Cancel
                                             </button>
