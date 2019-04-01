@@ -6,9 +6,20 @@
     .gap_small {
         height: 40px;
     }
+    .category-favorite > i {
+        font-size: 15px;
+        color: #4e4e4e;
+        padding: unset;
+        border-radius: unset;
+        position: relative;
+        left: unset;
+        bottom: unset;
+        z-index: unset;
+        cursor: pointer;
+        outline: unset;
+    }
     .card-product {
         background: #fff;
-        min-height: 270px;
         border: 1px solid #eee;
         padding-top: 20px;
     }
@@ -20,8 +31,8 @@
         background: #fff;
         border: 1px solid #eee;
         padding-top: 20px;
-        max-height: fit-content;
-        min-height: 250px;
+        padding-bottom: 20px;
+        min-height: 235px;
     }
 
     .card-product-small > img {
@@ -236,7 +247,7 @@
                                          src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
                                          alt="<?= $product->product_name; ?>"
                                          title="<?= $product->product_name; ?>">
-                                    <p class="card-product-title"><?= character_limiter($product->product_name, 30); ?></p>
+                                    <p class="card-product-title"><?= character_limiter($product->product_name, 10); ?></p>
                                     <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
                                         <p class="card-product-price-small" style="font-max-size: 10px;">
                                             <?= ngn($product->discount_price); ?>
@@ -245,6 +256,31 @@
                                     <?php else : ?>
                                         <p class="card-product-price-small"> <?= ngn($product->sale_price); ?> </p>
                                     <?php endif; ?>
+                                    <div class="row" style="margin-top:20px">
+                                    <div class="container">
+                                    <button class="btn btn-primary"><i class="fas fa-cart-plus"></i></button>
+                                                <?php if (!$this->session->userdata('logged_in')) : ?>
+                                                    <a href="<?= base_url('login'); ?>" class=" btn btn-default pull-right category-favorite">
+                                                                <i class="fa fa-heart"
+                                                                   title="Add <?= $product->product_name; ?> to your wishlist"></i>
+                                                    </a>
+                                                <?php else : ?>
+                                                    <?php if ($this->product->is_favourited($profile->id, $product->id)) : ?>
+                                                        <a href="javascript:;" class="btn btn-default pull-right category-favorite wishlist-btn"
+                                                              data-pid="<?= $product->id; ?>">
+                                                            <i class="fa fa-heart"
+                                                               title="Remove <?= $product->product_name; ?> from your wishlist"></i>
+                                                        </a>
+      btn btn-default                                               <?php else : ?>
+                                                        <a href="javascript:;" class="btn btn-default pull-right category-favorite wishlist-btn"
+                                                              data-pid="<?= $product->id; ?>">
+                                                            <i class="fa fa-heart-o"
+                                                               title="Add <?= $product->product_name; ?> to your wishlist"></i>
+                                                        </a>
+      btn btn-default                                               <?php endif; ?>
+                                                <?php endif; ?>
+                                                </div>
+                                    </div>
                                 </div>
                             </a>
                         <?php endforeach; ?>
@@ -379,6 +415,37 @@
     <script src="<?= base_url('assets/plugins/slick/slick.js') ?>"></script>
 </div>
 <script>
+$('.wishlist-btn').on('click', function () {
+        let product_id = $(this).data('pid');
+        let _this = $(this);
+        $.ajax({
+            url: base_url + 'ajax/favourite',
+            method: 'POST',
+            data: {
+                id: product_id
+            },
+            success: response => {
+                let parsed_response = JSON.parse(response);
+                if (parsed_response.action === 'remove') {
+                    _this.removeClass('category-favorite-active').addClass('.category-favorite');
+                    _this.find('i').attr('title', 'Add to your wishlist');
+                    // _this.find('i').removeClass('fa-heart', function () {
+                    //     $(this).addClass('fa-heart-o');
+                    // })
+                } else {
+                    _this.removeClass('category-favorite').addClass('.category-favorite-active');
+                    _this.find('i').attr('title', 'Remove from your wishlist');
+                    // _this.find('i').removeClass('fa-heart-o', function () {
+                    //     $(this).addClass('fa-heart');
+                    // })
+                }
+                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+            },
+            error: () => {
+                notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', error);
+            }
+        })
+    });
     $(document).ready(function () {
         $('.slider_show').css({"visibility": "visible"});
         $('.main-slider').slick({
