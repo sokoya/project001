@@ -110,8 +110,8 @@
                                                 Submit
                                             </button>
                                         </div>
-
-                                        <div class="col-md-push-4">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-4">
                                             <button type="button" class="btn btn-warning btn-block cancel-btn">
                                                 Cancel
                                             </button>
