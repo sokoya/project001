@@ -194,7 +194,7 @@
                     <div class="col-xs-12 col-md-4 "></div>
                     <div class="col-xs-12 col-md-4 text-center">
                         <a title="Go back home" href="<?= base_url(); ?>">
-                            <img style="height:100px;"
+                            <img style="height:40px;"
                                  src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>"
                                  data-holder-rendered="true"/>
                         </a>

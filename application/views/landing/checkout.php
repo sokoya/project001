@@ -146,7 +146,7 @@
                                                                     class="fas fa-address-card"></i><strong><?= $pickup->title; ?></strong>
                                                         </p>
                                                     </div>
-                                                    <p class="panel-details" title="<?= $pickup->address; ?>"><i
+                                                    <p class="panel-details" style="padding:4px;" title="<?= $pickup->address; ?>"><i
                                                                 class="fas fa-map-marker"></i><?= $pickup->address ?>
                                                     </p>
                                                     <p class="panel-details"><i
