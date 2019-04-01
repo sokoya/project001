@@ -421,70 +421,70 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4 hidden-sm hidden-xs">
-                        <img src="<?= base_url('assets/img/home/gdp.jpg'); ?>"
-                             style="display: block; height: 310px; width: auto; max-width: 400px; object-fit: cover">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="row" style="margin-left: 10px">
-                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
-                                <p class="card-cat-text">Electronics</p>
-                                <img
-                                        src="<?= base_url('assets/img/home/ef.jpg'); ?>"></div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
-                                <p class="card-cat-text">Computing Accessories</p><img
-                                        src="<?= base_url('assets/img/home/eg.jpg'); ?>"></div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
-                                <p class="card-cat-text">Phone and Tablets</p><img
-                                        src="<?= base_url('assets/img/home/em.jpg'); ?>"></div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
-                                <p class="card-cat-text">Home and Office</p>
-                                <img
-                                        src="<?= base_url('assets/img/home/ek.jpg'); ?>"></div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
-                                <p class="card-cat-text">Bluetooth Speakers</p>
-                                <img
-                                        src="<?= base_url('assets/img/home/ea.jpg'); ?>"></div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
-                                <p class="card-cat-text">Computing</p>
-                                <img
-                                        src="<?= base_url('assets/img/home/ex.jpg'); ?>"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 hidden-sm hidden-xs">
-                        <img src="<?= base_url('assets/img/home/alfa.jpg'); ?>"
-                             style="display: block; height: 310px; width: auto; max-width: 400px; object-fit: cover">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="row" style="margin-left: 10px">
-                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
-                                <p class="card-cat-text">Electronics</p>
-                                <img
-                                        src="<?= base_url('assets/img/home/ef.jpg'); ?>"></div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
-                                <p class="card-cat-text">Computing Accessories</p><img
-                                        src="<?= base_url('assets/img/home/eg.jpg'); ?>"></div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
-                                <p class="card-cat-text">Phone and Tablets</p><img
-                                        src="<?= base_url('assets/img/home/em.jpg'); ?>"></div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
-                                <p class="card-cat-text">Home and Office</p>
-                                <img
-                                        src="<?= base_url('assets/img/home/ek.jpg'); ?>"></div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
-                                <p class="card-cat-text">Bluetooth Speakers</p>
-                                <img
-                                        src="<?= base_url('assets/img/home/ea.jpg'); ?>"></div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
-                                <p class="card-cat-text">Computing</p>
-                                <img
-                                        src="<?= base_url('assets/img/home/ex.jpg'); ?>"></div>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="row">-->
+<!--                    <div class="col-md-4 hidden-sm hidden-xs">-->
+<!--                        <img src="--><?//= base_url('assets/img/home/gdp.jpg'); ?><!--"-->
+<!--                             style="display: block; height: 310px; width: auto; max-width: 400px; object-fit: cover">-->
+<!--                    </div>-->
+<!--                    <div class="col-md-8">-->
+<!--                        <div class="row" style="margin-left: 10px">-->
+<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+<!--                                <p class="card-cat-text">Electronics</p>-->
+<!--                                <img-->
+<!--                                        src="--><?//= base_url('assets/img/home/ef.jpg'); ?><!--"></div>-->
+<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+<!--                                <p class="card-cat-text">Computing Accessories</p><img-->
+<!--                                        src="--><?//= base_url('assets/img/home/eg.jpg'); ?><!--"></div>-->
+<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+<!--                                <p class="card-cat-text">Phone and Tablets</p><img-->
+<!--                                        src="--><?//= base_url('assets/img/home/em.jpg'); ?><!--"></div>-->
+<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+<!--                                <p class="card-cat-text">Home and Office</p>-->
+<!--                                <img-->
+<!--                                        src="--><?//= base_url('assets/img/home/ek.jpg'); ?><!--"></div>-->
+<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+<!--                                <p class="card-cat-text">Bluetooth Speakers</p>-->
+<!--                                <img-->
+<!--                                        src="--><?//= base_url('assets/img/home/ea.jpg'); ?><!--"></div>-->
+<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+<!--                                <p class="card-cat-text">Computing</p>-->
+<!--                                <img-->
+<!--                                        src="--><?//= base_url('assets/img/home/ex.jpg'); ?><!--"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-4 hidden-sm hidden-xs">-->
+<!--                        <img src="--><?//= base_url('assets/img/home/alfa.jpg'); ?><!--"-->
+<!--                             style="display: block; height: 310px; width: auto; max-width: 400px; object-fit: cover">-->
+<!--                    </div>-->
+<!--                    <div class="col-md-8">-->
+<!--                        <div class="row" style="margin-left: 10px">-->
+<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+<!--                                <p class="card-cat-text">Electronics</p>-->
+<!--                                <img-->
+<!--                                        src="--><?//= base_url('assets/img/home/ef.jpg'); ?><!--"></div>-->
+<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+<!--                                <p class="card-cat-text">Computing Accessories</p><img-->
+<!--                                        src="--><?//= base_url('assets/img/home/eg.jpg'); ?><!--"></div>-->
+<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+<!--                                <p class="card-cat-text">Phone and Tablets</p><img-->
+<!--                                        src="--><?//= base_url('assets/img/home/em.jpg'); ?><!--"></div>-->
+<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+<!--                                <p class="card-cat-text">Home and Office</p>-->
+<!--                                <img-->
+<!--                                        src="--><?//= base_url('assets/img/home/ek.jpg'); ?><!--"></div>-->
+<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+<!--                                <p class="card-cat-text">Bluetooth Speakers</p>-->
+<!--                                <img-->
+<!--                                        src="--><?//= base_url('assets/img/home/ea.jpg'); ?><!--"></div>-->
+<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+<!--                                <p class="card-cat-text">Computing</p>-->
+<!--                                <img-->
+<!--                                        src="--><?//= base_url('assets/img/home/ex.jpg'); ?><!--"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
         <div class="card-max">
@@ -549,6 +549,7 @@
                     <div class="col-md-10">
                         <div class="row" style="margin-left: 10px">
                             <?php
+                            $x = 0;
                             foreach ($recently_viewed as $viewed) : ?>
                                 <a href="<?= base_url(urlify($viewed->product_name, $viewed->id)); ?>">
                                     <div class="col-md-3 col-sm-3 col-xs-3  card-product card-product-alt">
@@ -568,6 +569,7 @@
                                         <?php endif; ?>
                                     </div>
                                 </a>
+                            <?php $x++; if( $x == 4 ) exit; ?>
                             <?php endforeach; ?>
                         </div>
                     </div>
