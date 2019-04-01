@@ -26,7 +26,7 @@
     <div class="container">
         <header class="page-header" style="margin: 10px 0 10px !important;">
             <h4>Checkout</h4>
-            <button class="btn-custom-primary btn-new-address">Add New Address</button>
+            <button class="btn-custom-primary btn-new-address">Add New Delivery Address</button>
             <button class="btn-custom-primary btn-pickup-address">Select Pickup Location</button>
         </header>
         <?php $this->load->view('msg_view'); ?>
