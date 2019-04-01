@@ -38,10 +38,8 @@
         max-width: 100%;
     }
 </style>
-
 <!-- Head Category Starts -->
 <?php
-//$this->db->cache_on();
 $category_cache = "SELECT id,name,slug,icon,image FROM categories WHERE pid = 0 LIMIT 11";
 //if(!$this->memcached_library->get($category_cache) && $this->memcached_library->get($category_cache) == '') {
 $categories = $this->db->query($category_cache)->result();
@@ -190,7 +188,6 @@ $categories = $this->db->query($category_cache)->result();
                                                             </ul>
                                                         </div>
                                                     <?php endforeach; endif;
-//                                                    $this->db->cache_off();
                                                     ?>
 
                                             </div>
