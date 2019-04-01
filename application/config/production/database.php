@@ -90,14 +90,6 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
-
-//if( ENVIRONMENT == 'production'){
-    $db['default']['username'] = 'onitsham_centric';
-    $db['default']['password'] = 'UE~MU[U2x4PI';
-    $db['default']['database'] = 'onitsham_market';
-//}else{
-    // development
-//    $db['default']['username'] = 'root';
-//    $db['default']['password'] = 'root';
-//    $db['default']['database'] = 'onitshamarket';
-////}
+$db['default']['username'] = 'onitsham_centric';
+$db['default']['password'] = 'UE~MU[U2x4PI';
+$db['default']['database'] = 'onitsham_market';

@@ -41,16 +41,14 @@
 
 <!-- Head Category Starts -->
 <?php
-
+$this->db->cache_on();
 $category_cache = "SELECT id,name,slug,icon,image FROM categories WHERE pid = 0 LIMIT 11";
 //if(!$this->memcached_library->get($category_cache) && $this->memcached_library->get($category_cache) == '') {
-
 $categories = $this->db->query($category_cache)->result();
 //    $this->memcached_library->add($category_cache, $categories);
 //} else {
 //    $categories = $this->memcached_library->get($category_cache);
 //}
-
 ?>
 <nav class="navbar navbar-default navbar-main-white navbar-pad-top navbar-first yamm" style="padding-bottom: 20px">
     <div class="container-fluid">
@@ -191,7 +189,10 @@ $categories = $this->db->query($category_cache)->result();
                                                                     <?php endforeach; endif; ?>
                                                             </ul>
                                                         </div>
-                                                    <?php endforeach; endif; ?>
+                                                    <?php endforeach; endif;
+                                                    $this->db->cache_off();
+                                                    ?>
+
                                             </div>
                                             <div class="">
                                                 <img class="nav-category-img"
@@ -201,10 +202,7 @@ $categories = $this->db->query($category_cache)->result();
                                                      style="right: -5px;"/>
                                             </div>
                                         </div>
-
                                     </div>
-
-
                                 </div>
                             </div>
                         </li>
