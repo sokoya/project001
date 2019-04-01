@@ -262,7 +262,7 @@
                                     <?php if (!$this->session->userdata('logged_in')) : ?>
                                         <a href="<?= base_url('login'); ?>">
                                             <span class="pull-right category-favorite">
-                                                    <i class="fa fa-heart"
+                                                    <i class="fas fa-heart"
                                                         title="Add <?= $product->product_name; ?> to your wishlist"></i>
                                             </span>
                                         </a>
@@ -270,13 +270,13 @@
                                         <?php if ($this->product->is_favourited($profile->id, $product->id)) : ?>
                                             <span class="pull-right category-favorite wishlist-btn"
                                                     data-pid="<?= $product->id; ?>">
-                                                <i class="fa fa-heart"
+                                                <i class="fas fa-heart"
                                                     title="Remove <?= $product->product_name; ?> from your wishlist"></i>
                                             </span>
                                         <?php else : ?>
                                             <span class="pull-right category-favorite wishlist-btn"
                                                     data-pid="<?= $product->id; ?>">
-                                                <i class="fa fa-heart-o"
+                                                <i class="fas fa-heart"
                                                     title="Add <?= $product->product_name; ?> to your wishlist"></i>
                                             </span>
                                         <?php endif; ?>

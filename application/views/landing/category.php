@@ -301,7 +301,7 @@
                                                     <a href="<?= base_url('login'); ?>">
                                                         <span style="margin-right:3px;"
                                                               class="pull-right category-favorite">
-                                                                <i class="fa fa-heart"
+                                                                <i class="fas fa-heart"
                                                                    title="Add <?= $product->product_name; ?> to your wishlist"></i>
                                                         </span>
                                                     </a>
@@ -310,14 +310,14 @@
                                                         <span style="margin-right:3px;"
                                                               class="pull-right category-favorite wishlist-btn"
                                                               data-pid="<?= $product->id; ?>">
-                                                            <i class="fa fa-heart"
+                                                            <i class="fas fa-heart"
                                                                title="Remove <?= $product->product_name; ?> from your wishlist"></i>
                                                         </span>
                                                     <?php else : ?>
                                                         <span style="margin-right:3px;"
                                                               class="pull-right category-favorite wishlist-btn"
                                                               data-pid="<?= $product->id; ?>">
-                                                            <i class="fa fa-heart-o"
+                                                            <i class="fas fa-heart"
                                                                title="Add <?= $product->product_name; ?> to your wishlist"></i>
                                                         </span>
                                                     <?php endif; ?>

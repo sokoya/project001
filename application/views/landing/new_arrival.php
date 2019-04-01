@@ -178,7 +178,7 @@
                                                         <span style="margin-right:3px;"
                                                               class="pull-right category-favorite wishlist-btn"
                                                               data-pid="<?= $product->id; ?>">
-                                                            <i class="fas fa-heart-o"
+                                                            <i class="fas fa-heart"
                                                                title="Add <?= $product->product_name; ?> to your wishlist"></i>
                                                         </span>
                                                     <?php endif; ?>
