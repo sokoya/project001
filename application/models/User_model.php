@@ -105,11 +105,7 @@ Class User_model extends CI_Model
                     $this->db->where('weight', $weights[][$i]);
                     $amount = $this->db->get('delivery_amount')->row();
                     if( $amount ){
-//                        $total_weight_value += $amount->amount;
-                        $total_weight_value += 1;
-
-                    }else{
-                        $total_weight_value += 3;
+                        $total_weight_value += $amount->amount;
                     }
                 }
 //                return $count;
