@@ -98,7 +98,7 @@
         }
 
         .dropdown-menu-category-section {
-            height: 410px
+            height: 450px
         }
 
         #close-banner {
