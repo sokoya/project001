@@ -222,8 +222,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="panel-body">
-                                                        <p class="panel-details"><i
-                                                                    class="fa fa-user"></i><?= ucfirst($address->first_name) . ' ' . ucfirst($address->last_name) ?>
+                                                        <p class="panel-details" title="<?= $address->address ?>"><i
+                                                                    class="fas fa-map-marker"></i><?= character_limiter($address->address, 38, '...') . '. ' . $address->state . ' ('. $address->area.')'; ?>
                                                         </p>
                                                         <div style="height:28px;">
                                                             <p class="panel-details"><i
@@ -450,6 +450,13 @@
     <?php $this->load->view('landing/resources/footer'); ?>
     <?php $this->load->view('landing/resources/script'); ?>
 <?php endif; ?>
+<script>
+    let weight = '';
+    $(document).ready(function(){
+        <!--    --><?//= var_dump( $weights ); exit;?>
+        weight = JSON.parse(`<?= $weights;?>`);
+    });
+</script>
 <script>
     $(function () {
         $('.lazy').Lazy();
