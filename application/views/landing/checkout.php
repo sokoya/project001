@@ -86,7 +86,7 @@
                                                 <div class="form-group">
                                                     <label class="checkout-form-input-label" for="city">City ( Select
                                                         the city we cover at the moment )</label>
-                                                    <select class="form-control checkout-form-input" id="city"
+                                                    <select class="form-control checkout-form-input select2" id="city"
                                                             name="area"
                                                             required="">
                                                     </select>
