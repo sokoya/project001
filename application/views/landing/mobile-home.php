@@ -9,14 +9,11 @@
     .category-favorite > i {
         font-size: 15px;
         color: #4e4e4e;
-        padding: unset;
         border-radius: unset;
-        position: relative;
         left: unset;
         bottom: unset;
-        z-index: unset;
+        z-index: 993;
         cursor: pointer;
-        outline: unset;
     }
     .card-product {
         background: #fff;
@@ -24,15 +21,14 @@
         padding-top: 20px;
     }
     .card-product {
-        min-height: 285px !important;
-        max-height: 285px !important;
+        min-height: 215px !important;
+        max-height: 215px !important;
     }
     .card-product-small {
         background: #fff;
         border: 1px solid #eee;
         padding-top: 20px;
-        padding-bottom: 20px;
-        min-height: 235px;
+        min-height: 215px;
     }
 
     .card-product-small > img {
@@ -41,7 +37,8 @@
     .card-product-img {
         min-width: unset !important;
         max-width: unset !important;
-        height:auto;
+        height: 17vh;
+        margin-left:-8px;
     }
     @media screen and (min-width: 555px;) {
         .gap_small {
@@ -53,9 +50,10 @@
         }
     }
 
-    .img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    .img-responsive{
         height: 12vh;
-        width: 100%;
+        width:100%;
+        margin:auto;
     }
 
     .gap_wide {
@@ -127,6 +125,11 @@
 
     .card-cat > img {
         margin-left: unset !important;
+    }
+    .category-favorite{
+        position:absolute;
+        top:20px;
+        background-color:#fff;
     }
 </style>
 </head>
@@ -234,7 +237,7 @@
     <div class="gap_small"></div>
     <div class="card-max container">
         <div class="card-max-header">
-            <h5 style="margin-left:-5px;">Super <span style="color:#575745">Deals</span></h5>
+            <h5 style="margin-left:-5px;">Deals <span style="color:#575745">of the day</span></h5>
         </div>
         <br/>
         <div class="brand-slide">
@@ -249,44 +252,41 @@
                                     <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
                                         <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
                                     <?php endif; ?>
-                                    <img class="card-product-img img-responsive"
-                                         src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
+                                    <img class="card-product-img"
+                                         src="https://res.cloudinary.com/onitshamarket/image/upload/w_180,h_140,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
                                          alt="<?= $product->product_name; ?>"
                                          title="<?= $product->product_name; ?>">
                                     <p class="card-product-title"><?= character_limiter($product->product_name, 10); ?></p>
                                     <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
                                         <p class="card-product-price-small" style="font-max-size: 10px;">
                                             <?= ngn($product->discount_price); ?>
-                                            <small class="card-product-price-discount pull-right"><?= ngn($product->sale_price); ?></small>
+                                            <small class="card-product-price-discount pull-right" style="position:absolute;right:10px;font-size:11px;color:#ee1111;"><?= ngn($product->sale_price); ?></small>
                                         </p>
                                     <?php else : ?>
                                         <p class="card-product-price-small"> <?= ngn($product->sale_price); ?> </p>
                                     <?php endif; ?>
-                                    <div class="row" style="margin-top:20px">
-                                    <div class="container">
-                                    <button class="btn btn-primary"><i class="fas fa-cart-plus"></i></button>
-                                                <?php if (!$this->session->userdata('logged_in')) : ?>
-                                                    <a href="<?= base_url('login'); ?>" class=" btn btn-default pull-right category-favorite">
-                                                                <i class="fa fa-heart"
-                                                                   title="Add <?= $product->product_name; ?> to your wishlist"></i>
-                                                    </a>
-                                                <?php else : ?>
-                                                    <?php if ($this->product->is_favourited($profile->id, $product->id)) : ?>
-                                                        <a href="javascript:;" class="btn btn-default pull-right category-favorite wishlist-btn"
-                                                              data-pid="<?= $product->id; ?>">
-                                                            <i class="fa fa-heart"
-                                                               title="Remove <?= $product->product_name; ?> from your wishlist"></i>
-                                                        </a>
-      btn btn-default                                               <?php else : ?>
-                                                        <a href="javascript:;" class="btn btn-default pull-right category-favorite wishlist-btn"
-                                                              data-pid="<?= $product->id; ?>">
-                                                            <i class="fa fa-heart-o"
-                                                               title="Add <?= $product->product_name; ?> to your wishlist"></i>
-                                                        </a>
-      btn btn-default                                               <?php endif; ?>
-                                                <?php endif; ?>
-                                                </div>
-                                    </div>
+                                    <?php if (!$this->session->userdata('logged_in')) : ?>
+                                        <a href="<?= base_url('login'); ?>">
+                                            <span class="pull-right category-favorite">
+                                                    <i class="fa fa-heart"
+                                                        title="Add <?= $product->product_name; ?> to your wishlist"></i>
+                                            </span>
+                                        </a>
+                                    <?php else : ?>
+                                        <?php if ($this->product->is_favourited($profile->id, $product->id)) : ?>
+                                            <span class="pull-right category-favorite wishlist-btn"
+                                                    data-pid="<?= $product->id; ?>">
+                                                <i class="fa fa-heart"
+                                                    title="Remove <?= $product->product_name; ?> from your wishlist"></i>
+                                            </span>
+                                        <?php else : ?>
+                                            <span class="pull-right category-favorite wishlist-btn"
+                                                    data-pid="<?= $product->id; ?>">
+                                                <i class="fa fa-heart-o"
+                                                    title="Add <?= $product->product_name; ?> to your wishlist"></i>
+                                            </span>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
                                 </div>
                             </a>
                         <?php endforeach; ?>
