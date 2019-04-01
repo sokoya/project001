@@ -29,8 +29,6 @@ class Checkout extends MY_Controller
 		$page_data['user'] = $this->user->get_profile($this->session->userdata('logged_id'));
 
 		$page_data['addresses'] = $this->user->get_user_billing_address($page_data['user']->id);
-//		var_dump( $page_data['addresses']);
-//		exit;
 		$page_data['pickups'] = $this->user->get_pickup_address();
 		$page_data['address_set'] = $this->user->is_address_set($page_data['user']->id);
 		// Returns the default area Id
@@ -54,8 +52,9 @@ class Checkout extends MY_Controller
             $total += $product['subtotal'];
             // Get Weight Price
             $weight_result = $this->product->get_product_weight_price( $detail->weight, $user_area_id );
+
             if( $weight_result )  $weight_price = $weight_result->amount;
-            $weight_total += (int)$weight_price;
+            $weight_total = (int)$weight_price;
 
             // Make a list of the product weight- pass it to the view
             array_push($weight_array, $detail->weight );
@@ -64,6 +63,7 @@ class Checkout extends MY_Controller
 		    $this->session->set_flashdata('error_msg', $message);
 		    redirect('cart');
         }
+
         $page_data['delivery_charge'] = $weight_total;
 		$weight['weight'] = $weight_array;
 		$page_data['weights'] = json_encode($weight, true);
@@ -126,10 +126,12 @@ class Checkout extends MY_Controller
 		if (!$this->input->post()) redirect(base_url());
 		$uid = $this->session->userdata('logged_id');
 		$address_id = cleanit($this->input->post('address_id'));
+        $billing_id = cleanit($this->input->post('billing_id'));
+
 		$weights = $this->input->post('weight');
-		$result = $this->user->update_billing_address(array('uid' => $uid) , $address_id, $weights);
+		$result = $this->user->update_billing_address(array('uid' => $uid) , $address_id, $weights,$billing_id);
 		if( $result != false ) {
-			echo $result;
+		    echo $result;
 		} else {
 			echo 500;
 		}

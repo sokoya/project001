@@ -203,20 +203,23 @@ function get_pickup_updates() {
 function get_updates() {
     start_loading();
     $('.delivery-address').removeClass('custom-panel-active');
-    let ad_id = $(this).data('id');
+    let area_id = $(this).data('aid');
+    let billing_id = $(this).data('id');
     let elem = $(this);
-    $(`#${ad_id}`).prop('checked', true);
+    $(`#${billing_id}`).prop('checked', true);
     // Un-select pickup address
     $('.pickup-location').prop('checked', false);
     $('.pickup-location').removeClass('custom-panel-active');
+
     $.ajax({
         url: base_url + "checkout/set_default_address",
         method: 'POST',
-        data: {address_id: ad_id, weight : weight.weight},
+        data: {address_id: area_id, billing_id : billing_id, weight : weight.weight},
         success: function (response) {
             if ('.delivery-box') {
                 let quantity_instance = $('.pr-summary-count').data('quantity') * 1;
                 let price_instance = response * 1;
+                // let sub_total = price_instance ;
                 let sub_total = price_instance * quantity_instance;
                 bind_market(format_currency(sub_total), 'charges');
                 bind_market(format_currency($('.total-sum').data('amount') + sub_total), 'total-sum-charges');

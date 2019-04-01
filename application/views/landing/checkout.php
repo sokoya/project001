@@ -202,7 +202,7 @@
                                         <div class="col-md-6">
                                             <div class="panel panel-default custom-panel delivery-address
                                                 "
-                                                 data-id="<?= $address->id; ?>">
+                                                 data-id="<?= $address->id; ?>" data-aid="<?= $address->area_id; ?>">
                                                 <div class="panel-heading sub-custom-panel-head">
                                                     <div class="panel-title">
                                                         <div class="form-check">
@@ -224,7 +224,7 @@
                                                     <p class="panel-details"><i
                                                                 class="fas fa-user"></i><?= ucfirst($address->first_name) . ' ' . ucfirst($address->last_name) ?>
                                                     </p>
-                                                    <div style="height:28px;">
+                                                    <div style="height:40px;">
                                                         <p class="panel-details" title="<?= $address->address ?>"><i
                                                                     class="fas fa-map-marker"></i><?= character_limiter($address->address, 38, '...') . '. ' . $address->state . ' ('. $address->area.')'; ?>
                                                         </p>
