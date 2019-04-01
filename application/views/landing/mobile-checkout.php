@@ -455,7 +455,6 @@
 <script>
     let weight = '';
     $(document).ready(function(){
-        <!--    --><?//= var_dump( $weights ); exit;?>
         weight = JSON.parse(`<?= $weights;?>`);
     });
 </script>
