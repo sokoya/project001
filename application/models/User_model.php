@@ -89,22 +89,23 @@ Class User_model extends CI_Model
      * @param $bid
      * @return bool
      */
-    function update_billing_address($where = '', $bid, $weights = array())
+    function update_billing_address($where = '', $aid, $weights = array(), $billing_id = '')
     {
         $this->db->where($where);
         $this->db->set('primary_address', 0, false);
         if ($this->db->update('billing_address')) {
-            $this->db->where('id', $bid);
+            $this->db->where('id', $billing_id);
             $this->db->update('billing_address', array('primary_address' => 1));
             if( !empty($weights) ){
-                $total_weight_value = 0;  $amount = 500;
+
+                $total_weight_value = 0;
                 $count = count( $weights );
                 for( $i = 0 ; $i < $count; $i++){
-                    $this->db->where('aid', $bid);
+                    $this->db->where('aid', $aid);
                     $this->db->where('weight', $weights[$i]);
                     $amount = $this->db->get('delivery_amount')->row();
                     if( $amount ){
-                        $total_weight_value += $amount->amount;
+                        $total_weight_value = $amount->amount;
                     }
                 }
                 return $total_weight_value;
@@ -304,7 +305,7 @@ Class User_model extends CI_Model
 
     function get_user_billing_address($id)
     {
-        return $this->db->query("SELECT b.*, s.name state, a.name area FROM billing_address b LEFT JOIN states s ON (s.id = b.sid) LEFT JOIN area a ON (a.id = b.aid) WHERE b.uid = $id")->result();
+        return $this->db->query("SELECT b.*, s.name state, a.name area, a.id area_id FROM billing_address b LEFT JOIN states s ON (s.id = b.sid) LEFT JOIN area a ON (a.id = b.aid) WHERE b.uid = $id")->result();
     }
 
     function is_address_set($id)
@@ -347,8 +348,9 @@ Class User_model extends CI_Model
     function get_default_address_area($id)
     {
         $select = "SELECT aid FROM billing_address b WHERE b.primary_address = 1 AND b.uid = {$id}";
-        if ($this->db->query($select)->num_rows()) {
-            return $this->db->query($select)->row()->aid;
+        $result = $this->db->query($select);
+        if ($result->row()) {
+            return $result->row()->aid;
         } else {
             return '';
         }

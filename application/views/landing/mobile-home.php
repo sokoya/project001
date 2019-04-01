@@ -154,11 +154,17 @@
     <div class="row">
         <h5 class="col-md-12" style="margin-left:10px;">Top <span style="color:#575745">Categories</span></h5>
         <div class="categories-slider text-center slider_show" style="visibility: hidden;margin-left:10px;">
-            <?php foreach ($main_categories as $category) : ?>
+            <?php foreach ($main_categories as $category) :
+
+                ?>
                 <div class="cat_board">
                     <a style="color: #0b0b0b;" href="<?= base_url('catalog/' . $category->slug . '/'); ?>">
                         <img class="cat_img"
-                             src="<?= base_url('assets/img/cat_icons/') . $category->slug . '.png'; ?>"
+                             <?php if( $category->slug == "other-categories") : ?>
+                                 src="<?= base_url('assets/img/cat_icons/market.png'); ?>"
+                             <?php else :?>
+                                 src="<?= base_url('assets/img/cat_icons/') . $category->slug . '.png'; ?>"
+                             <?php endif; ?>
                              style="width:30px;"
                              alt="Shop for <?= $category->name; ?>">
                         <span style="font-size:10px;margin-bottom:auto;"><?= $category->name; ?></span>

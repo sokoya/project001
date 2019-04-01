@@ -26,7 +26,7 @@
     <div class="container">
         <header class="page-header" style="margin: 10px 0 10px !important;">
             <h4>Checkout</h4>
-            <button class="btn-custom-primary btn-new-address">Add New Address</button>
+            <button class="btn-custom-primary btn-new-address">Add New Delivery Address</button>
             <button class="btn-custom-primary btn-pickup-address">Select Pickup Location</button>
         </header>
         <?php $this->load->view('msg_view'); ?>
@@ -104,18 +104,20 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
+
                                         <div class="col-md-6">
                                             <button type="button" class="btn btn-primary btn-block create-address-btn">
                                                 Submit
                                             </button>
                                         </div>
+
+                                        <br />
                                         <div class="col-md-6">
                                             <button type="button" class="btn btn-warning btn-block cancel-btn">
                                                 Cancel
                                             </button>
                                         </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -138,7 +140,7 @@
                                                             <input title="Select Pickup Location" class="form-check-input delivery-box" type="radio"
                                                                    name="pickup_address"
                                                                    id="pickup_id_<?= $pickup->id; ?>"
-                                                                   value="Pickup Address">
+                                                                   value="<?= $pickup->id; ?>">
                                                             <label class="form-check-label"
                                                                    for="pickup_id_<?= $pickup->id ?>">
                                                                 Select this pickup address
@@ -204,7 +206,7 @@
                                         foreach ($addresses as $address) : ?>
                                             <div class="col-md-6">
                                                 <div class="panel panel-default custom-panel delivery-address"
-                                                     data-id="<?= $address->id; ?>">
+                                                     data-id="<?= $address->id; ?>" data-aid="<?= $address->area_id; ?>">
                                                     <div class="panel-heading sub-custom-panel-head">
                                                         <div class="panel-title">
                                                             <div class="form-check">
@@ -225,7 +227,7 @@
                                                         <p class="panel-details" title="<?= $address->address ?>"><i
                                                                     class="fas fa-map-marker"></i><?= character_limiter($address->address, 38, '...') . '. ' . $address->state . ' ('. $address->area.')'; ?>
                                                         </p>
-                                                        <div style="height:28px;">
+                                                        <div style="height:40px;">
                                                             <p class="panel-details"><i
                                                                         class="fa fa-map-marker"></i><?= $address->address; ?>
                                                             </p>
@@ -453,7 +455,6 @@
 <script>
     let weight = '';
     $(document).ready(function(){
-        <!--    --><?//= var_dump( $weights ); exit;?>
         weight = JSON.parse(`<?= $weights;?>`);
     });
 </script>

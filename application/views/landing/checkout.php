@@ -146,7 +146,7 @@
                                                                     class="fas fa-address-card"></i><strong><?= $pickup->title; ?></strong>
                                                         </p>
                                                     </div>
-                                                    <p class="panel-details" title="<?= $pickup->address; ?>"><i
+                                                    <p class="panel-details" style="padding:4px;" title="<?= $pickup->address; ?>"><i
                                                                 class="fas fa-map-marker"></i><?= $pickup->address ?>
                                                     </p>
                                                     <p class="panel-details"><i
@@ -202,7 +202,7 @@
                                         <div class="col-md-6">
                                             <div class="panel panel-default custom-panel delivery-address
                                                 "
-                                                 data-id="<?= $address->id; ?>">
+                                                 data-id="<?= $address->id; ?>" data-aid="<?= $address->area_id; ?>">
                                                 <div class="panel-heading sub-custom-panel-head">
                                                     <div class="panel-title">
                                                         <div class="form-check">
@@ -224,7 +224,7 @@
                                                     <p class="panel-details"><i
                                                                 class="fas fa-user"></i><?= ucfirst($address->first_name) . ' ' . ucfirst($address->last_name) ?>
                                                     </p>
-                                                    <div style="height:28px;">
+                                                    <div style="height:40px;">
                                                         <p class="panel-details" title="<?= $address->address ?>"><i
                                                                     class="fas fa-map-marker"></i><?= character_limiter($address->address, 38, '...') . '. ' . $address->state . ' ('. $address->area.')'; ?>
                                                         </p>
@@ -413,9 +413,8 @@
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
 <script>
-let weight = '';
+let weight = [];
 $(document).ready(function(){
-    <!--    --><?//= var_dump( $weights ); exit;?>
     weight = JSON.parse(`<?= $weights;?>`);
 });
 </script>
