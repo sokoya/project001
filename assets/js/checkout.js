@@ -105,7 +105,7 @@ $('.create-address-btn').on('click', function (e) {
 
             } else {
                 $('#processing').hide();
-                $('#status').html(`<div class="alert alert-danger">${response.message}</div>`).slideDown('fast').delay(300000).slideUp('slow');
+                $('#status').html(`<div class="alert alert-danger">${response.message}</div>`).slideDown('fast').delay(900000).slideUp('slow');
             }
         },
         error: function (response) {
