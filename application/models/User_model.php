@@ -98,7 +98,7 @@ Class User_model extends CI_Model
             $this->db->update('billing_address', array('primary_address' => 1));
             if( !empty($weights) ){
 
-                $total_weight_value = 0;  $amount = 500;
+                $total_weight_value = 0;
                 $count = count( $weights );
                 for( $i = 0 ; $i < $count; $i++){
                     $this->db->where('aid', $bid);

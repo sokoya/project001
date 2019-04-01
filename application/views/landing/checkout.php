@@ -413,7 +413,7 @@
 </div>
 <?php $this->load->view('landing/resources/script'); ?>
 <script>
-let weight = '';
+let weight = [];
 $(document).ready(function(){
     weight = JSON.parse(`<?= $weights;?>`);
 });
