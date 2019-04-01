@@ -12,25 +12,20 @@
         border: 1px solid #eee;
         padding-top: 20px;
     }
-
+    .card-product {
+        min-height: 285px !important;
+        max-height: 285px !important;
+    }
     .card-product-small {
         background: #fff;
         border: 1px solid #eee;
         padding-top: 20px;
         max-height: fit-content;
-        min-height: 220px;
+        min-height: 250px;
     }
 
     .card-product-small > img {
-        object-fit: unset;
         margin: auto;
-        width: 10vh;
-    }
-
-    .card-product>img {
-        object-fit: unset;
-        margin: auto;
-        width: 15vh;
     }
     .card-product-img {
         min-width: unset !important;
@@ -230,7 +225,7 @@
                 <div class="col-md-12">
                     <div class="row">
                         <?php
-                        $products = $this->product->randomproducts(53, 4);
+                        $products = $this->product->randomproducts("", 12);
                         foreach ($products as $product) : ?>
                             <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>">
                                 <div class="col-xs-6 col-sm-3  card-product-small  card-product-alt">
@@ -248,7 +243,7 @@
                                             <small class="card-product-price-discount pull-right"><?= ngn($product->sale_price); ?></small>
                                         </p>
                                     <?php else : ?>
-                                        <p class="card-product-price"> <?= ngn($product->sale_price); ?> </p>
+                                        <p class="card-product-price-small"> <?= ngn($product->sale_price); ?> </p>
                                     <?php endif; ?>
                                 </div>
                             </a>
@@ -274,7 +269,7 @@
                         <div style="">
 
                             <img src="<?= PRODUCTS_IMAGE_PATH . $product->image_name ?>" class="prod_img"/>
-                            <span><?= character_limiter($product->product_name, 15) ?></span>
+                            <span><?= character_limiter($product->product_name, 30) ?></span>
                             <?php
                             if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
                                 <h5><?= ngn($product->discount_price); ?>
@@ -284,7 +279,7 @@
                                     <small class="pull-right text-danger"><?= $product->item_left; ?> Item left</small>
                                 </h5>
                             <?php else : ?>
-                                <h5><?= ngn($product->sale_price); ?>
+                                <h5><?= ngn($product->sale_price); ?></h5><h5>
                                     <small class="pull-right text-danger"><?= $product->item_left; ?> Item left</small>
                                 </h5>
                             <?php endif; ?>
@@ -399,6 +394,7 @@
             mobileFirst: true
         });
         $('.categories-slider').slick({
+            dots: false,
             infinite: true,
             speed: 300,
             slidesToShow: 3,
