@@ -29,7 +29,7 @@ $('.continue-btn').on('click', function (e) {
         url: base_url + 'checkout/checkout_confirm',
         method: 'POST',
         dataType: 'json',
-        data: $('#checkout_form').serialize() + "&delivery_charge=" + delivery_charge,
+        data: $('#checkout_form').serialize() + "&delivery_charge=" + delivery_charge +"&weight="+weight.weight,
         success: (data) => {
             if (data.status == 'success') {
                 if (payment_method == 1 || payment_name == 'Payment on Delivery') {

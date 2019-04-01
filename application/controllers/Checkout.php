@@ -147,6 +147,7 @@ class Checkout extends MY_Controller
             $charge = 0;
             // Check either pickup or delivery
             $pickup_id = $address_id = 0;
+            $weights = $this->input->post('weight');
 
             if( $this->input->post('pickup_address') ) {
                 $pickup_id = $this->input->post('pickup_address');
@@ -154,9 +155,9 @@ class Checkout extends MY_Controller
             }else{
 
                 $address_id = cleanit( $this->input->post('selected_address', true) );
-                $charge = $this->product->get_billing_amount($address_id);
+                $charge = $this->product->get_billing_amount($address_id,'billing', $weights);
             }
-            if( $charge == 0 ) $charge = 500;
+            if( $charge == false ) $charge = 500;
             $error = $subtotal = 0; $data = $return = array();
             $order_code = $this->product->generate_code('orders', 'order_code');
             $order_date = get_now();

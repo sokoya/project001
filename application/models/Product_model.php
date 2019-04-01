@@ -706,17 +706,56 @@ Class Product_model extends CI_Model{
      * @param $address_id
      * @return mixed
      */
-    function get_billing_amount($id, $type = 'billing' ){
+    function get_billing_amount($id, $type = 'billing', $weights = array() ){
         if( $type == 'pickup' ){
             // Getting result for pickup
             $select = "SELECT charge FROM pickup_address WHERE id = {$id}";
             return $this->db->query( $select )->row()->charge;
         }else{
-            $select = "SELECT b.aid, a.price FROM billing_address b LEFT JOIN area a ON (b.aid = a.id ) WHERE b.id = {$id}";
-            return $this->db->query( $select )->row()->price;
+            // Get the user primary billing address
+            $select = "SELECT aid FROM billing_address WHERE uid = {$id} AND primary_address = 1";
+            $aid = $this->db->query( $select )->row()->aid;
+            if( !empty($weights) ){
+                $total_weight_value = 0;
+                $count = count( $weights );
+                for( $i = 0 ; $i < $count; $i++){
+                    $this->db->where('aid', $aid);
+                    $this->db->where('weight', $weights[$i]);
+                    $amount = $this->db->get('delivery_amount')->row();
+                    if( $amount ){
+                        $total_weight_value += $amount->amount;
+                    }
+                }
+                return $total_weight_value;
+            }
+            return false;
         }
-
     }
+
+//    function update_billing_address($where = '', $bid, $weights = array())
+//    {
+//        $this->db->where($where);
+//        $this->db->set('primary_address', 0, false);
+//        if ($this->db->update('billing_address')) {
+//            $this->db->where('id', $bid);
+//            $this->db->update('billing_address', array('primary_address' => 1));
+//            if( !empty($weights) ){
+//                $total_weight_value = 0;  $amount = 500;
+//                $count = count( $weights );
+//                for( $i = 0 ; $i < $count; $i++){
+//                    $this->db->where('aid', $bid);
+//                    $this->db->where('weight', $weights[$i]);
+//                    $amount = $this->db->get('delivery_amount')->row();
+//                    if( $amount ){
+//                        $total_weight_value += $amount->amount;
+//                    }
+//                }
+//                return $total_weight_value;
+//            }
+//            return false;
+//        }
+//        return false;
+//    }
 
     /*
      * Function fot user to create or edit rating and review

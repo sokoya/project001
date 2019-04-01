@@ -48,26 +48,7 @@
         <?php $this->load->view('landing/resources/head_menu') ?>
     <?php endif; ?>
 
-    <?php if (empty($products)) : ?>
-        <div class="container">
-            <div class="row">
-                <div style="height:168px"></div>
-                <h2 class="text-center">Oops! Sorry, we couldn't find products on this section.</h2>
-                <p class="text-center">
-                    Please check your spelling for typographic error.<br/>
-                    <span class="text-danger">You can also:</span>
-                <ul class="text-center">
-                    <li style="list-style-type: none">Try a different keyword search.</li>
-                </ul>
-                </p>
-                <p class="text-muted text-sm text-center">You can browse for more product <a
-                            style="text-decoration: none; color: #0b6427;" href="<?= base_url(); ?>">Find
-                        product</a> or <a href="<?= PAGE_CONTACT_US ?>">contact us</a> if still not working.</p>
-                <div style="height:110px"></div>
-            </div>
-        </div>
-    <?php else : ?>
-        <div class="container">
+    <div class="container">
             <div class="cat-notify" style="padding: 30px;">
                 <p class="n-head">Explore Onitsha Market</p>
 <!--                <p class="n-body"><strong>--><?//= $total_count . ' results'; ?><!--</strong></p>-->
@@ -83,31 +64,27 @@
                     <div class="brand-slide">
                         <div class="row">
                             <div class="col-md-12 slick-slider">
-                                
-                                    <?php
-                                    $products = $this->product->randomproducts(array(31,33,36,53,), 12);
-                                    foreach ($products as $product) : ?>
-                                        <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>" class="col-md-2 col-sm-3 col-xs-6  card-product card-product-alt">
-                                            <div>
-                                                <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
-                                                    <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
-                                                <?php endif; ?>
-                                                <img class="card-product-img"
-                                                    src="<?=base_url("assets/img/load.gif")?>"
-                                                    data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
-                                                    alt="<?= $product->product_name; ?>"
-                                                    title="<?= $product->product_name; ?>">
-                                                <p class="card-product-title"><?= character_limiter($product->product_name, 30); ?></p>
-                                                <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
-                                                    <p class="card-product-price"><?= ngn($product->discount_price); ?> </p>
-                                                    <p class="card-product-price-discount"> <?= ngn($product->sale_price); ?></p>
-                                                <?php else : ?>
-                                                    <p class="card-product-price"> <?= ngn($product->sale_price); ?> </p>
-                                                <?php endif; ?>
-                                            </div>
-                                        </a>
-                                    <?php endforeach; ?>
-                                
+                                <?php foreach ($justforyou as $product) : ?>
+                                    <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>" class="col-md-2 col-sm-3 col-xs-6  card-product card-product-alt">
+                                        <div>
+                                            <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
+                                                <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
+                                            <?php endif; ?>
+                                            <img class="card-product-img"
+                                                 src="<?=base_url("assets/img/load.gif")?>"
+                                                 data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
+                                                 alt="<?= $product->product_name; ?>"
+                                                 title="<?= $product->product_name; ?>">
+                                            <p class="card-product-title"><?= character_limiter($product->product_name, 30); ?></p>
+                                            <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
+                                                <p class="card-product-price"><?= ngn($product->discount_price); ?> </p>
+                                                <p class="card-product-price-discount"> <?= ngn($product->sale_price); ?></p>
+                                            <?php else : ?>
+                                                <p class="card-product-price"> <?= ngn($product->sale_price); ?> </p>
+                                            <?php endif; ?>
+                                        </div>
+                                    </a>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
@@ -168,7 +145,6 @@
                     <div class="brand-slide">
                         <div class="row">
                             <div class="col-md-12 slick-slider">
-                                
                                     <?php
                                     $products = $this->product->randomproducts("", 12);
                                     foreach ($products as $product) : ?>
@@ -243,7 +219,7 @@
                 </div>
             
         </div>
-    <?php endif; ?>
+
     <div class="gap"></div>
     <?php if ($this->agent->is_mobile()) : ?>
         <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
@@ -329,7 +305,6 @@
             }
         })
     });
-
 </script>
 </body>
 </html>

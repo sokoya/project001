@@ -38,27 +38,14 @@ class Feeds extends MY_Controller
 //		print_r($page_data['products']); exit;
         $this->load->view('landing/new_arrival', $page_data);
     }
+
 	// Explore Product Post...
 	public function explore()
     {
-        $page = isset($_GET['page']) ? xss_clean($_GET['page']) : 0;
-		if ($page > 1) $page -= 1;
-		$this->load->library('pagination');
-		$this->config->load('pagination');
-		$config = $this->config->item('pagination');
-		$config['base_url'] = current_url();
-		$config['total_rows'] = 120;
-		$config['per_page'] = 40;
-		$this->pagination->initialize($config);
-		$array['limit'] = $config['per_page'];
-		$array['offset'] = $page;
-		$array['is_limit'] = true;
-		$page_data['pagination'] = $this->pagination->create_links();
-		$page_data['products'] = $this->feeds->get_new_arrival($array);
+        $page_data['justforyou'] = $this->product->randomproducts(array(31,33,36,53,), 12); // Just for you
 		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 		$page_data['page'] = 'new_arrival';
 		$page_data['title'] = "Explore trending fashion, computer, phones, gadgets, accessories";
-//		print_r($page_data['products']); exit;
         $this->load->view('landing/explore', $page_data);
     }
     
