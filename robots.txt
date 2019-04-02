@@ -1,6 +1,5 @@
 User-agent: *
 Disallow: /checkout/order_completed
-Disallow: /assets
 Disallow: /ajax
 
 
