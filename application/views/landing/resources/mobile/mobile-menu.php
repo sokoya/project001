@@ -400,9 +400,9 @@
                                     <p>
 
                                         <img
-                                                src="<?= base_url('assets/svg/delivery-truck.svg'); ?>"
-                                                alt="Delivery Truck"
-                                                style="height: 30px; width: 35px;"><?= $cat->name; ?> <i
+                                                src=""
+                                                alt="&nbsp;"
+                                                style="height: 30px; width: 35px;"><i class="<?=$category->icon?>"></i> <?= $cat->name; ?> <i
                                                 class="fa fa-plus close-panel"
                                                 aria-hidden="true"
                                                 data-target="cat_<?= $cat->id ?>"></i>
