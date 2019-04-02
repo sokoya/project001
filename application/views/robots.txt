@@ -1,5 +1,4 @@
 User-agent: Googlebot
 Disallow: /checkout/order_completed/
 
-
 Sitemap: https://www.onitshamarket.com/sitemap.xml
