@@ -64,8 +64,8 @@
                                 <li><a href="<?= base_url('page/contact'); ?>">Contact Us</a></li>
                                 <li><a href="<?= lang('shopping_help_url'); ?>">FAQ</a></li>
                                 <li><a href="#">Live Chat</a></li>
-                                <li><a href="#">Waranty and Returns</a></li>
-                                <li><a href="#">Waranty Lookup</a></li>
+                                <li><a href="#">Warranty and Returns</a></li>
+                                <li><a href="#">Warranty Lookup</a></li>
                             </ul>
                         </section>
                     </div>

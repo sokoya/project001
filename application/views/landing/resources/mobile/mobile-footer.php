@@ -8,13 +8,14 @@
                                 href="<?= lang('domain'); ?>"><?= lang('company_name'); ?>.</a> All rights reserved</p><p class="text-sm foot-link"><a href="<?= base_url('page'); ?>" style="font-size: 9px;">Terms of
                             Use</a> | <a title="Terms and Agreement"
                                          href="<?= lang('agreement_url'); ?>"
-                                         style="font-size: 9px;">Agreement</a> | <a title="Privacy Policy"
-                                                                                    href="<?= lang('privacy_url'); ?>"
+                                         style="font-size: 9px;">Agreement</a> |
+                        <a title="Privacy Policy" href="<?= lang('privacy_url'); ?>"
                                                                                     style="font-size: 9px;">Privacy
-                            Policy</a> |
+                            Policy</a>
                         <?php if (!$this->session->userdata('logged_in')): ?>
                             | <a href="<?= base_url('create/'); ?>" style="font-size: 9px;">Create an Account</a>
                         <?php endif; ?>
+                        | <a title="Contact Us" href="<?= lang('contact_us_url'); ?>">Contact Us</a> |
                         <a title="Become a seller" href="https://seller.onitshamarket.com" target="_blank" style="font-size: 9px;">Become a Seller</a>
                     </p>
                 </div>

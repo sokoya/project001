@@ -56,7 +56,7 @@
                     CONTACT US
                 </h3>
                 <p class="p_sp_con">
-                    <i class="fas fa-home"></i> Address: #176 Awka Road, Opposite Conoil, Inland Town, Onitsha, Anambra State.<br>
+                    <i class="fas fa-home"></i> Address: #176 Akwa Road, Opposite Conoil, Inland Town, Onitsha, Anambra State.<br>
                     <i class="fas fa-phone"></i> Tel: +23412345678<br>
                     <i class="fas fa-envelope-square"></i> onitsha.anambra@onitshamarket.com<br>
                     <i class="fa fa-map-marker"></i> Monday to Saturday<br>

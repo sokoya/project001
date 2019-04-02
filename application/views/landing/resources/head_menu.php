@@ -42,9 +42,10 @@
 <?php
 $this->db->cache_on();
 $category_cache = "SELECT id,name,slug,icon,image FROM categories WHERE pid = 0 LIMIT 11";
-$this->db->cache_off();
+
 //if(!$this->memcached_library->get($category_cache) && $this->memcached_library->get($category_cache) == '') {
 $categories = $this->db->query($category_cache)->result();
+$this->db->cache_off();
 //    $this->memcached_library->add($category_cache, $categories);
 //} else {
 //    $categories = $this->memcached_library->get($category_cache);

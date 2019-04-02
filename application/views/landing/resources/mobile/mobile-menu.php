@@ -311,14 +311,15 @@
             </div>
         </div>
         <div class="navbar-util">
-				<span class="account-dropdown" style="margin-right: 5px; cursor: pointer"><img
+				<span class="account-dropdown" style="margin-right: 5px; cursor: pointer">
+                    <img
                         <?php if ($this->session->userdata('logged_in')): ?>
                             src="<?= base_url('assets/svg/user.svg'); ?>"
                         <?php else : ?>
                             src="<?= base_url('assets/svg/logged-out-user.svg'); ?>"
                         <?php endif; ?>
                             alt="User"
-                            style="height: 24px; width: 24px;">
+                            style="height: 24px; width: 24px; padding-right: 4px;">
 				</span>
             <div class="options">
                 <div class="arrow-up"></div>
@@ -373,7 +374,9 @@
         </div>
     <?php endif; ?>
     <?php
+    $this->db->cache_on();
     $categories = $this->db->query("SELECT * FROM categories WHERE pid = 0")->result();
+    $this->db->cache_off();
     foreach ($categories as $category): ?>
         <div class="container">
             <a href="<?= base_url('catalog/' . $category->slug . '/'); ?>" style="text-decoration: none">
@@ -383,7 +386,9 @@
         </div>
         <div id="cat_<?= $category->id ?>">
             <?php
+            $this->db->cache_on();
             $main_category = $this->db->query("SELECT * FROM categories WHERE pid = ? LIMIT 6", $category->id)->result();
+            $this->db->cache_off();
             if ($main_category):
                 foreach ($main_category as $cat) :
                     ?>
@@ -393,6 +398,7 @@
                                 <a href="<?= base_url('catalog/' . $cat->slug . '/'); ?>"
                                    style="text-decoration: none;">
                                     <p>
+
                                         <img
                                                 src="<?= base_url('assets/svg/delivery-truck.svg'); ?>"
                                                 alt="Delivery Truck"
