@@ -13,6 +13,16 @@
         </url>
     <?php } ?>
     <url>
+        <loc><?= base_url('new-arrivals/'); ?></loc>
+        <priority>0.5</priority>
+        <changefreq>monthly</changefreq>
+    </url>
+    <url>
+        <loc><?= base_url('explore/'); ?></loc>
+        <priority>0.5</priority>
+        <changefreq>monthly</changefreq>
+    </url>
+    <url>
         <loc><?= base_url('page/terms/'); ?></loc>
         <priority>0.5</priority>
         <changefreq>monthly</changefreq>

@@ -217,7 +217,7 @@ class Email_model extends CI_Model {
             <p>Thank you for shopping with us. Your order <b>'. $order_code.'</b> has been placed successfully  here is the
                 summary of the order:
             </p>
-            <p>If you have any questions about this order, please contact us at <b>' . lang("contact_no"). '</b> or visit our '. anchor(base_url("pages/faq/"), "FAQ").'.
+            <p>If you have any questions about this order, please contact us at <b>' . lang("contact_no"). '</b> or visit our '. anchor(base_url("page/faq/"), "FAQ").'.
                 Remember to include your reference number - <b>' . $order_code. '</b>.</p>
             <p>Track your order with this link <b>' . anchor( $link, "Track Order"). '</b>.</p>    
         </td>
