@@ -15,7 +15,7 @@
                         <?php if (!$this->session->userdata('logged_in')): ?>
                             | <a href="<?= base_url('create/'); ?>" style="font-size: 9px;">Create an Account</a>
                         <?php endif; ?>
-                        | <a title="Contact Us" href="<?= lang('contact_us_url'); ?>">Contact Us</a> |
+                        | <a title="Contact Us" href="<?= lang('contact_us_url'); ?>" style="font-size: 9px;">Contact Us</a> |
                         <a title="Become a seller" href="https://seller.onitshamarket.com" target="_blank" style="font-size: 9px;">Become a Seller</a>
                     </p>
                 </div>
