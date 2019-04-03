@@ -1,4 +1,4 @@
-var CACHE_NAME = 'om-sw-cache-v1';
+var CACHE_NAME = 'om-sw-cache-v1.1';
 var urlsToCache = [
   './',
   './catalog/phones-tablets/',
@@ -41,22 +41,36 @@ self.addEventListener('fetch', function(event) {
           return response;
         }
         return fetch(event.request, {
-            credentials: 'include',
-            //mode: "no-cors",
-          }).then(
-          function(response) {
-            // Check if we received a valid response
-            if(!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-            var responseToCache = response.clone();
-            caches.open(CACHE_NAME)
-              .then(function(cache) {
-                cache.put(event.request, responseToCache);
-              });
+          credentials: 'include',
+          //mode: "no-cors",
+        }).then(
+        function(response) {
+          // Check if we received a valid response
+          if(!response || response.status !== 200 || response.type !== 'basic') {
             return response;
           }
-        ).catch(unableToResolve);
-      })
-    );
+          var responseToCache = response.clone();
+          caches.open(CACHE_NAME)
+            .then(function(cache) {
+              cache.put(event.request, responseToCache);
+            });
+          return response;
+        }
+      ).catch(unableToResolve);
+    })
+  );
+});
+self.addEventListener('activate', function(event) {
+  var cacheWhitelist = [CACHE_NAME];
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.map(function(cacheName) {
+          if (cacheWhitelist.indexOf(cacheName) === -1) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
 });
