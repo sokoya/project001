@@ -16,7 +16,6 @@ var urlsToCache = [
   './explore/',
   './new-arrivals/',
   './offline.html',
-  //'https://use.fontawesome.com/releases/v5.7.2/css/all.css'
 ];
 
 if(workbox){console.log('workbox loaded');}else{console.log("error workbox not loaded")}
