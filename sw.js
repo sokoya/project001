@@ -1,4 +1,5 @@
-var CACHE_NAME = 'om-sw-cache-v1.1';
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.1.1/workbox-sw.js');
+var CACHE_NAME = 'om-sw-cache-v1.2';
 var urlsToCache = [
   './',
   './catalog/phones-tablets/',
@@ -14,8 +15,40 @@ var urlsToCache = [
   './catalog/other-categories/',
   './explore/',
   './new-arrivals/',
-  './offline.html'
+  './offline.html',
 ];
+
+if(workbox){console.log('workbox loaded');}else{console.log("error workbox not loaded")}
+workbox.routing.registerRoute(
+  new RegExp('https://fonts.(?:googleapis|gstatic).com/(.*)'),
+  new workbox.strategies.CacheFirst({
+    cacheName: 'google-fonts',
+    plugins: [
+      new workbox.expiration.Plugin({
+        maxEntries: 60,
+        maxAgeSeconds: 60 * 60 * 24 * 365,
+      }),
+      new workbox.cacheableResponse.Plugin({
+        statuses: [0, 200]
+      }),        
+    ],
+  }),
+);
+workbox.routing.registerRoute(
+  new RegExp('https://use.fontawesome.com/(.*)'),
+  new workbox.strategies.CacheFirst({
+    cacheName: 'fa-fonts',
+    plugins: [
+      new workbox.expiration.Plugin({
+        maxEntries: 60,
+        maxAgeSeconds: 60 * 60 * 24 * 365,
+      }),
+      new workbox.cacheableResponse.Plugin({
+        statuses: [0, 200]
+      }),        
+    ],
+  }),
+);
 async function unableToResolve (err) {
   console.log('WORKER: fetch request failed in both cache and network; '+ err);
   const cache = await caches.open(CACHE_NAME);
@@ -29,7 +62,8 @@ self.addEventListener('install', function(event) {
       .then(function(cache) {
         console.log('Opened cache');
         return cache.addAll(urlsToCache);
-      })
+      }
+    )
   );
 });
 self.addEventListener('fetch', function(event) {
@@ -61,7 +95,7 @@ self.addEventListener('fetch', function(event) {
   );
 });
 self.addEventListener('activate', function(event) {
-  var cacheWhitelist = [CACHE_NAME];
+  var cacheWhitelist = [CACHE_NAME, 'google-fonts', 'fa-fonts'];
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
       return Promise.all(

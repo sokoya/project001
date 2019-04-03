@@ -50,3 +50,6 @@ application/production/database.php
 application/config/development/database.php
 application/config/development/database.php
 application/config/development/database.php
+
+## Ht access
+.htaccess
