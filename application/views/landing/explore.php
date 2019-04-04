@@ -51,12 +51,10 @@
     <div class="container">
             <div class="cat-notify" style="padding: 30px;">
                 <p class="n-head">Explore Onitsha Market</p>
-<!--                <p class="n-body"><strong>--><?//= $total_count . ' results'; ?><!--</strong></p>-->
             </div>
                 <div class="card-max" style="margin-top:-50px;">
                     <div class="card-max-header">
-                        <p class="card-max-title">Just For You
-        <!--                    <a href="#" class="card-max-view-more">View more</a>-->
+                        <p class="card-max-title">Suggested Products For You
                         </p>
                         <p class="card-max-subtitle">Great Deals at amazing prices</p>
                     </div>
@@ -88,7 +86,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             
                 <div class="card-max">
@@ -187,7 +184,6 @@
                     <div class="brand-slide">
                         <div class="row">
                             <div class="col-md-12 slick-slider">
-                                
                                     <?php
                                     $products = $this->product->randomproducts("", 12);
                                     foreach ($products as $product) : ?>

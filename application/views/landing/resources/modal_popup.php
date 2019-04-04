@@ -99,20 +99,17 @@
 <!--                    <form id="review_form" onsubmit="return false">-->
 <!---->
 <!--                        <div class="form-group">-->
-<!--                            <label>Title of review*</label>-->
 <!--                            <input type="text" name="title" placeholder="Title of the review"-->
 <!--                                   id="review_title"-->
 <!--                                   class="form-control" required>-->
 <!--                        </div>-->
 <!--                        <div class="form-group">-->
-<!--                            <label>Display name*</label>-->
 <!--                            <input type="text" name="display_name" placeholder="Display name"-->
 <!--                                   id="review_name"-->
 <!--                                   value=""-->
 <!--                                   class="form-control" required>-->
 <!--                        </div>-->
 <!--                        <div class="form-group">-->
-<!--                            <label>Review</label>-->
 <!--                            <textarea title="review" id="review_detail" name="review" rows="2"-->
 <!--                                      class="form-control" required-->
 <!--                                      placeholder="Write your review on this product."></textarea>-->
