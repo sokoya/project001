@@ -435,15 +435,11 @@ $('.wishlist-btn').on('click', function () {
                 if (parsed_response.action === 'remove') {
                     _this.removeClass('category-favorite-active').addClass('.category-favorite');
                     _this.find('i').attr('title', 'Add to your wishlist');
-                    // _this.find('i').removeClass('fa-heart', function () {
-                    //     $(this).addClass('fa-heart-o');
-                    // })
+                    
                 } else {
                     _this.removeClass('category-favorite').addClass('.category-favorite-active');
                     _this.find('i').attr('title', 'Remove from your wishlist');
-                    // _this.find('i').removeClass('fa-heart-o', function () {
-                    //     $(this).addClass('fa-heart');
-                    // })
+                  
                 }
                 notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
             },
@@ -491,10 +487,8 @@ if ('serviceWorker' in navigator) {
 window.addEventListener('load', function() {
     navigator.serviceWorker.register("<?= base_url('sw.js');?>")
 	.then(function(registration) {
-    // Registration was successful
     console.log('ServiceWorker registration successful with scope: ', registration.scope);
     }, function(err) {
-    // registration failed :(
     console.log('ServiceWorker registration failed: ', err);
     });
 });

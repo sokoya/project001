@@ -362,19 +362,15 @@
                     $('.filter_close_btn').on('click', function () {
                         filterBarClose();
                     });
-                    // filterBarOpen();
                     $('.filter-btn').on('click', function () {
                         filterBarOpen();
                     });
 
-                    // Side bar
                     function filterBarOpen() {
-                        // $('#ont_filter').css({'width': '100%'});
                         $('#ont_filter').show();
                     }
 
                     function filterBarClose(callback = '', value = '') {
-                        // $('#ont_filter').css({'width': 0});
                         $('#ont_filter').fadeOut(function () {
                             if (callback) {
                                 callback(value);
@@ -425,7 +421,6 @@
                                 url += `&${obj}=${filter_string}`
                             }
                         });
-                        // load_page(url);
                         console.log(url);
                     });
                 } else {
@@ -447,19 +442,15 @@
         $('.filter_close_btn').on('click', function () {
             filterBarClose();
         });
-        // filterBarOpen();
         $('.filter-btn').on('click', function () {
             filterBarOpen();
         });
 
-        // Side bar
         function filterBarOpen() {
-            // $('#ont_filter').css({'width': '100%'});
             $('#ont_filter').show();
         }
 
         function filterBarClose(callback = '', value = '') {
-            // $('#ont_filter').css({'width': 0});
             $('#ont_filter').fadeOut(function () {
                 if (callback) {
                     callback(value);

@@ -241,11 +241,7 @@
 <script src="<?= $this->user->auto_version('assets/js/quick-view.js'); ?>"></script>
 <script src="<?= $this->user->auto_version('assets/js/search.js'); ?>"></script>
 <script src="<?= base_url('assets/plugins/slick/slick.js') ?>"></script>
-<!-- <script src="<?//= base_url('assets/js/jquery.unveil.js'); ?>"></script> -->
 <script>
-    // $(document).ready(function() {
-    //     $("img").unveil();
-    // });
     $(document).ready(function () {
         $('.slick-slider').css({"visibility": "visible"});
         $('.slick-slider').slick({
@@ -288,15 +284,11 @@
                 if (parsed_response.action === 'remove') {
                     _this.removeClass('category-favorite-active').addClass('.category-favorite');
                     _this.find('i').attr('title', 'Add to your wishlist');
-                    // _this.find('i').removeClass('fa-heart', function () {
-                    //     $(this).addClass('fa-heart-o');
-                    // })
+                    
                 } else {
                     _this.removeClass('category-favorite').addClass('.category-favorite-active');
                     _this.find('i').attr('title', 'Remove from your wishlist');
-                    // _this.find('i').removeClass('fa-heart-o', function () {
-                    //     $(this).addClass('fa-heart');
-                    // })
+                
                 }
                 notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
             },

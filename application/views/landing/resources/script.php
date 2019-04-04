@@ -1,5 +1,4 @@
 <script src="<?= base_url('assets/js/jquery.js'); ?>"></script>
-<!--<script src="--><? //= base_url('assets/js/offline.min.js'); ?><!--"></script>-->
 <script src="<?= base_url('assets/js/bootstrap.js'); ?>"></script>
 <script>
     var placeholders = ['Search for products, brands and categories...', 'Samsung s10', 'Huawei', 'Redmi Note 7'];
