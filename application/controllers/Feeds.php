@@ -45,7 +45,7 @@ class Feeds extends MY_Controller
         $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
         $page_data['page'] = 'new_arrival';
         $page_data['title'] = "Explore trending fashion, computer, phones, gadgets, accessories";
-        $page_data['justforyou'] = $this->product->randomproducts(array(31,33,36,53,), 12); // Just for you
+        $page_data['justforyou'] = $this->product->randomproducts(array(31,33,36,53,1,2,3,4,5,6,7,8,9,10,11,23,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,61,62,63,64,65,66,67,68,69,70), 12); // Just for you
         $page_data['recommendeds'] = $this->user->recommendedproducts($this->session->userdata('logged_id'));
         $this->load->view('landing/explore', $page_data);
     }
