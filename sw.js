@@ -1,5 +1,5 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.1.1/workbox-sw.js');
-var CACHE_NAME = 'om-sw-cache-v1.2';
+var CACHE_NAME = 'om-sw-cache-v1.21';
 var urlsToCache = [
   './',
   './catalog/phones-tablets/',

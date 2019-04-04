@@ -19,7 +19,7 @@
                             <span class="office_address">
                                 <?= lang('office_address'); ?>
                                 <br />
-                                <b>Helpline:</b>0813 680 3006‬
+                                <b>Helpline:</b> 0813 680 3006‬
                             </span>
                         </div>
                     </div>
