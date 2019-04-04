@@ -402,46 +402,6 @@
                     </div>
                 </div>
             </form>
-<!--            <div class="custom-card" style="margin-top: 5px;">-->
-<!--                <div class="container">-->
-<!--                    <h4 class="block-title">Delivery Information</h4>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-xs-2">-->
-<!--                            <img src="--><?//= base_url('assets/svg/delivery-truck.svg'); ?><!--"-->
-<!--                                 alt="Delivery Truck" style="height: 30px; width: 35px;">-->
-<!--                        </div>-->
-<!--                        <div class="col-xs-10">-->
-<!--                            <p class="delivery-text">Onitshamarket.com delivery available, get it within 5 business-->
-<!--                                days of-->
-<!--                                order</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-xs-2">-->
-<!--                            <img src="--><?//= base_url('assets/svg/return.svg'); ?><!--"-->
-<!--                                 alt="Delivery Truck"-->
-<!--                                 style="height: 30px; width: 35px;">-->
-<!--                        </div>-->
-<!--                        <div class="col-xs-10">-->
-<!--                            <p class="delivery-text">Free 7 day return if available</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="row" style="margin-top: 14px;">-->
-<!--                        <div class="col-xs-2">-->
-<!--                            <img src="--><?//= base_url('assets/svg/warranty.svg'); ?><!--" alt="Warranty"-->
-<!--                                 style="height: 30px; width: 35px;">-->
-<!--                        </div>-->
-<!--                        <div class="col-xs-10">-->
-<!--                            <p class="delivery-text" style="position: relative; top: -5px;">This product has the-->
-<!--                                following warranty-->
-<!--                                : Repair by vendor-->
-<!--                                <br>-->
-<!--                                <a href="javascript:void(0)">Learn more</a>-->
-<!--                            </p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
         </div>
     </div>
 </div>

@@ -236,10 +236,7 @@
 						minus.prop("disabled", false);
 					}
 					$('.cart-row').load(base_url + 'cart', function (response, status, xhr) {
-						// $(function () {
-						// 	$('.lazy').Lazy();
-						// });
-
+				
 						$('.lazy').Lazy({
 							scrollDirection: 'vertical',
 							effect: 'fadeIn',

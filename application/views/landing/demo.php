@@ -293,7 +293,6 @@
         }
     });
 
-    // Send a get method to the controller function
     let get_specific_add = function (id) {
         $.ajax({
             url: base_url + 'account/fetch_single_address',

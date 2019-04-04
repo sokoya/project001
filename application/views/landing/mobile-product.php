@@ -666,7 +666,6 @@
             $(this).attr('Onitshamarket');
         });
     });
-    // owl carousel initialization
     $(document).ready(function () {
         $('.close-panel').on('click', function () {
             let target = $(this).data('target');
@@ -688,9 +687,9 @@
         });
 
         function counter(event) {
-            let element   = event.target;         // DOM element, in this example .owl-carousel
-            let items     = event.item.count;     // Number of items
-            let item      = event.item.index + 1; // Position of the current item
+            let element   = event.target;       
+            let items     = event.item.count;     
+            let item      = event.item.index + 1; 
             $('#counter').html(item+" of "+items)
         }
 
@@ -716,13 +715,12 @@
     let selected_variation_id = $('.variation_id').val();
     let selected_variation_name = $('.variation_name').val();
     $('.variation-option').on('click', function () {
-        $('#quantity-text').text(''); // Clear the notification showing the number of item left
+        $('#quantity-text').text(''); 
         $('.variation-option').removeClass('option-selected');
         selected_variation_name = $(this).data('vname');
         if ($(this).hasClass('option-disabled')) {
             notification_message('Sorry this variation is out of stock', 'fas fa-info-circle', 'warning')
         } else {
-            // let id = $(this).data('vid');
             let discount_price = $(this).data('discount');
             let price = $(this).data('price');
             let quantity_instance = $(this).data('quantity');
@@ -751,7 +749,6 @@
         }
     });
 
-    // noinspection JSJQueryEfficiency
     $(".product-page-qty-plus").on('click', function () {
         var currentVal = parseInt($(this).prev(".product-page-qty-input").val(), 10);
 
@@ -759,7 +756,6 @@
         $(this).prev(".product-page-qty-input").val(currentVal + 1);
     });
 
-    // noinspection JSJQueryEfficiency
     $(".product-page-qty-minus").on('click', function () {
         var currentVal = parseInt($(this).next(".product-page-qty-input").val(), 10);
         if (currentVal == "NaN") currentVal = 1;
@@ -775,7 +771,7 @@
         }
     });
     minus.on('click', function () {
-        $('#quantity-text').text(''); // Clear the notification showing the number of item left
+        $('#quantity-text').text('');
         plus.prop("disabled", false);
         if (quantity.val() <= 1) {
             minus.prop("disabled", true);

@@ -932,14 +932,12 @@
         let id = $(this).children(":selected").data('id');
         let quantity = $('#quan');
         $('.variation_id').val(id);
-        // let count = quantity.data('range');
         $.ajax({
             url: base_url + "ajax/check_variation",
             method: "POST",
             data: {vid: id, 'csrf_carrito': csrf_token},
             success: function (response) {
                 $.each(response, function (i, v) {
-                    // change the variation id
                     if (v.discount_price) {
                         $('.ds-price').html(format_currency(v.discount_price));
                         $('.dn-price').show();
