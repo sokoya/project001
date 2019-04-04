@@ -42,10 +42,12 @@ class Feeds extends MY_Controller
 	// Explore Product Post...
 	public function explore()
     {
+        $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
+        $page_data['page'] = 'new_arrival';
+        $page_data['title'] = "Explore trending fashion, computer, phones, gadgets, accessories";
         $page_data['justforyou'] = $this->product->randomproducts(array(31,33,36,53,), 12); // Just for you
-		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
-		$page_data['page'] = 'new_arrival';
-		$page_data['title'] = "Explore trending fashion, computer, phones, gadgets, accessories";
+        $page_data['recommendeds'] = $this->user->recommendedproducts($this->session->userdata('logged_id'));
+
         $this->load->view('landing/explore', $page_data);
     }
     

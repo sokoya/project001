@@ -87,11 +87,10 @@
                         </div>
                     </div>
                 </div>
-            
+            <?php if( $recommendeds ) : ?>
                 <div class="card-max">
                     <div class="card-max-header">
                         <p class="card-max-title">Recommended Buy
-        <!--                    <a href="#" class="card-max-view-more">View more</a>-->
                         </p>
                         <p class="card-max-subtitle">Great Deals at amazing prices</p>
                     </div>
@@ -99,39 +98,36 @@
                     <div class="brand-slide">
                         <div class="row">
                             <div class="col-md-12 slick-slider">
-                                
-                                    <?php
-                                    $products = $this->product->randomproducts(array(31,33,36,53,), 12);
-                                    foreach ($products as $product) : ?>
-                                        <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>" class="col-md-2 col-sm-3 col-xs-6  card-product card-product-alt">
-                                            <div>
-                                                <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
-                                                    <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
-                                                <?php endif; ?>
-                                                <img class="card-product-img"
-                                                    src="<?=base_url("assets/img/load.gif")?>"
-                                                    data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
-                                                    alt="<?= $product->product_name; ?>"
-                                                    title="<?= $product->product_name; ?>">
-                                                <p class="card-product-title"><?= character_limiter($product->product_name, 30); ?></p>
-                                                <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
-                                                    <p class="card-product-price"><?= ngn($product->discount_price); ?> </p>
-                                                    <p class="card-product-price-discount"> <?= ngn($product->sale_price); ?></p>
-                                                <?php else : ?>
-                                                    <p class="card-product-price"> <?= ngn($product->sale_price); ?> </p>
-                                                <?php endif; ?>
-                                            </div>
-                                        </a>
-                                    <?php endforeach; ?>
-                                
+                                <?php
+                                foreach ( $recommendeds as $product) : ?>
+                                    <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>" class="col-md-2 col-sm-3 col-xs-6  card-product card-product-alt">
+                                        <div>
+                                            <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
+                                                <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
+                                            <?php endif; ?>
+                                            <img class="card-product-img"
+                                                src="<?=base_url("assets/img/load.gif")?>"
+                                                data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
+                                                alt="<?= $product->product_name; ?>"
+                                                title="<?= $product->product_name; ?>">
+                                            <p class="card-product-title"><?= character_limiter($product->product_name, 30); ?></p>
+                                            <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
+                                                <p class="card-product-price"><?= ngn($product->discount_price); ?> </p>
+                                                <p class="card-product-price-discount"> <?= ngn($product->sale_price); ?></p>
+                                            <?php else : ?>
+                                                <p class="card-product-price"> <?= ngn($product->sale_price); ?> </p>
+                                            <?php endif; ?>
+                                        </div>
+                                    </a>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
 
                 </div>
+            <?php endif; ?>
             
-            
-                <div class="card-max">
+            <div class="card-max">
                     <div class="card-max-header">
                         <p class="card-max-title">Most Sought After
         <!--                    <a href="#" class="card-max-view-more">View more</a>-->
@@ -171,48 +167,54 @@
                     </div>
 
                 </div>
-            
-            
-                <div class="card-max">
+
+
+            <?php if($this->session->userdata('logged_in')) :
+                $products = $this->user->get_recently_viewed( $this->session->userdata('logged_id'));
+                    if( $products ):
+                ?>
+                    <div class="card-max">
                     <div class="card-max-header">
-                        <p class="card-max-title">Recently Viewed
-        <!--                    <a href="#" class="card-max-view-more">View more</a>-->
-                        </p>
+                        <p class="card-max-title">Recently Viewed</p>
                         <p class="card-max-subtitle">Great Deals at amazing prices</p>
                     </div>
                     <br/>
                     <div class="brand-slide">
                         <div class="row">
                             <div class="col-md-12 slick-slider">
-                                    <?php
-                                    $products = $this->product->randomproducts("", 12);
-                                    foreach ($products as $product) : ?>
-                                        <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>" class="col-md-2 col-sm-3 col-xs-6  card-product card-product-alt">
-                                            <div>
-                                                <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
-                                                    <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
-                                                <?php endif; ?>
-                                                <img class="card-product-img"
-                                                    src="<?=base_url("assets/img/load.gif")?>"
-                                                    data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
-                                                    alt="<?= $product->product_name; ?>"
-                                                    title="<?= $product->product_name; ?>">
-                                                <p class="card-product-title"><?= character_limiter($product->product_name, 30); ?></p>
-                                                <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
-                                                    <p class="card-product-price"><?= ngn($product->discount_price); ?> </p>
-                                                    <p class="card-product-price-discount"> <?= ngn($product->sale_price); ?></p>
-                                                <?php else : ?>
-                                                    <p class="card-product-price"> <?= ngn($product->sale_price); ?> </p>
-                                                <?php endif; ?>
-                                            </div>
-                                        </a>
-                                    <?php endforeach; ?>
+                                <?php
+
+                                foreach ($products as $product) : ?>
+                                    <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>" class="col-md-2 col-sm-3 col-xs-6  card-product card-product-alt">
+                                        <div>
+                                            <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
+                                                <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
+                                            <?php endif; ?>
+                                            <img class="card-product-img"
+                                                src="<?=base_url("assets/img/load.gif")?>"
+                                                data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
+                                                alt="<?= $product->product_name; ?>"
+                                                title="<?= $product->product_name; ?>">
+                                            <p class="card-product-title"><?= character_limiter($product->product_name, 30); ?></p>
+                                            <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
+                                                <p class="card-product-price"><?= ngn($product->discount_price); ?> </p>
+                                                <p class="card-product-price-discount"> <?= ngn($product->sale_price); ?></p>
+                                            <?php else : ?>
+                                                <p class="card-product-price"> <?= ngn($product->sale_price); ?> </p>
+                                            <?php endif; ?>
+                                        </div>
+                                    </a>
+                                <?php endforeach; ?>
                                 
                             </div>
                         </div>
                     </div>
 
                 </div>
+            <?php
+                    endif;
+                endif;
+            ?>
             
         </div>
 

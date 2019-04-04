@@ -809,7 +809,7 @@ Class Product_model extends CI_Model{
                 $select_query .= " WHERE p.category_id = {$id} ";
             }
         }
-//        $select_query .= " "
+
         if( $count != '' ){
             $select_query .= " AND product_status = 'approved' GROUP BY p.id ORDER BY RAND() LIMIT {$count} ";
         }else{

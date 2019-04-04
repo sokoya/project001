@@ -418,7 +418,7 @@ Class User_model extends CI_Model
 
     /*
      * Get recently viewed products if found else return false based on the user
-     * excludes containes the present product id and probably the get_also_likes product_id
+     * excludes contains the present product id and probably the get_also_likes product_id
      * */
     function get_recently_viewed($user_id, $excludes = array())
     {
@@ -440,6 +440,25 @@ Class User_model extends CI_Model
             return $this->db->query($select_query)->result();
         } else {
             return false;
+        }
+    }
+
+    /*
+     * Recommended product:
+     * Is user logged in? We sought base on last orders (payment made != 'success'), search ...*/
+    function recommendedproducts( $user_id = '' ){
+        if( $user_id != '' ){
+            $select = "SELECT * FROM (SELECT p.id, p.product_name, v.sale_price, v.discount_price, v.start_date, v.end_date, SUM(v.quantity) as item_left, g.image_name
+            FROM products p 
+            JOIN (SELECT var.product_id, var.discount_price,var.sale_price, var.start_date, var.end_date, var.quantity 
+            FROM product_variation var
+            WHERE var.quantity > 0 ORDER BY var.id) AS v ON (p.id = v.product_id) 
+            JOIN product_gallery AS g ON (p.id = g.product_id AND g.featured_image = 1)
+            WHERE EXISTS (select 1 from orders o where p.id = o.product_id AND buyer_id = {$user_id} AND payment_made != 'success') 
+            GROUP BY p.id ORDER BY p.id DESC LIMIT 6 ) t WHERE t.product_name IS NOT NULL";
+            return $this->db->query( $select )->result();
+        }else{
+            return '';
         }
     }
 
