@@ -5,7 +5,8 @@
     }
 
     .product {
-        min-height: unset !important;
+        min-height: 297px !important;
+        max-height: 297px !important;
     }
 
     .col-xs-5ths,

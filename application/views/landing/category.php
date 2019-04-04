@@ -6,6 +6,7 @@
 
     .product {
         min-height: 297px !important;
+        max-height: 297px !important;
     }
 
     .carrito-checkbox {
