@@ -10,8 +10,8 @@ var pid = product_id;
 			rating: void 0,
 			max: 5,
 			readOnly: false,
-			emptyClass: 'fa fa-star-o',
-			fullClass: 'fa fa-star',
+			emptyClass: 'far fa-star',
+			fullClass: 'fas fa-star',
 			change: function (e, value) {
 			}
 		};
