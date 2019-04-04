@@ -5,8 +5,8 @@
     }
 
     .product {
-        min-height: 297px !important;
-        max-height: 297px !important;
+        min-height: 300px !important;
+        max-height: 300px !important;
     }
 
     .col-xs-5ths,
@@ -233,7 +233,7 @@
             allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
         }
     }
-}, false)
+}, false);
     $('.wishlist-btn').on('click', function () {
         let product_id = $(this).data('pid');
         let _this = $(this);

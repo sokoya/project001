@@ -6,8 +6,8 @@
     }
 
     .product {
-        min-height: 297px !important;
-        max-height: 297px !important;
+        min-height: 300px !important;
+        max-height: 300px !important;
     }
     .carrito-checkbox {
         display: block;
@@ -350,7 +350,7 @@
             allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
         }
     }
-}, false)
+}, false);
     $("#price-range").ionRangeSlider({
         type: "double",
         min: <?= $min; ?>,

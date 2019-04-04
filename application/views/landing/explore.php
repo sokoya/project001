@@ -269,7 +269,7 @@
             allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
         }
     }
-}, false)
+}, false);
     $('.wishlist-btn').on('click', function () {
         let product_id = $(this).data('pid');
         let _this = $(this);
