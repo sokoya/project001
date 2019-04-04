@@ -27,8 +27,6 @@
     <meta content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=0" name="viewport"/>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600|Oxygen|Cabin:500' rel='stylesheet'
           type='text/css'>
-    <!--    <link rel="stylesheet" href="--><? //= base_url('assets/css/offline.css'); ?><!--">-->
-    <!--    <link rel="stylesheet" href="--><? //= base_url('assets/css/offline-theme.min.css'); ?><!--">-->
     <?php if ($page == 'mobile-product' && $this->agent->is_mobile()) : ?>
         <link rel="stylesheet" href="<?= $this->user->auto_version('assets/css/owl.carousel.min.css'); ?>">
     <?php endif; ?>
@@ -53,14 +51,17 @@
         <meta property="og:image"
               content="<?= ($featured_image->image_name) ? PRODUCTS_IMAGE_PATH . $featured_image->image_name : ''; ?>"/>
         <meta property="og:description"
-              content="<?php isset($description) ? $description : lang('site_description') ?>"/>
+              itemprop="description"
+              content="<?php isset($description) ? word_limiter($description, 100) : lang('site_description') ?>"/>
+
         <meta property="og:site_name" content="<?= lang('app_name'); ?>"/>
         <meta property="og:url" content="<?= current_url(); ?>"/>
-        <meta name="twitter:card" content="summary"/>
-        <meta name="twitter:site" content="<?= base_url(); ?>"/>
-        <meta name="twitter:creator" content=""/>
         <meta property="og:image:width" content="279">
         <meta property="og:image:height" content="279">
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:domain" content="<?= base_url(); ?>"/>
+        <meta name="twitter:site" content="Onitshamarket"/>
+        <meta name="twitter:creator" content=""/>
 
     <?php endif; ?>
     <meta name="google-site-verification" content="xGjxCwvClqtUIevfyrQ-HWU7OcjspMEVmXMAPcpzz7Y"/>
