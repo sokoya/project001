@@ -454,7 +454,7 @@ Class User_model extends CI_Model
             FROM product_variation var
             WHERE var.quantity > 0 ORDER BY var.id) AS v ON (p.id = v.product_id) 
             JOIN product_gallery AS g ON (p.id = g.product_id AND g.featured_image = 1)
-            WHERE EXISTS (select 1 from orders o where p.id = o.product_id AND buyer_id = {$user_id} AND payment_made != 'success') 
+            WHERE EXISTS (select 1 from orders o where p.id = o.product_id AND o.buyer_id = {$user_id} AND payment_made != 'success') 
             GROUP BY p.id ORDER BY p.id DESC LIMIT 6 ) t WHERE t.product_name IS NOT NULL";
             return $this->db->query( $select )->result();
         }else{

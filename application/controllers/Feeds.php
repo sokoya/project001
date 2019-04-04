@@ -47,7 +47,6 @@ class Feeds extends MY_Controller
         $page_data['title'] = "Explore trending fashion, computer, phones, gadgets, accessories";
         $page_data['justforyou'] = $this->product->randomproducts(array(31,33,36,53,), 12); // Just for you
         $page_data['recommendeds'] = $this->user->recommendedproducts($this->session->userdata('logged_id'));
-
         $this->load->view('landing/explore', $page_data);
     }
     
