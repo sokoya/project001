@@ -5,7 +5,7 @@
     }
 
     .product {
-        min-height: unset !important;
+        min-height: 297px !important;
     }
 
     .carrito-checkbox {
