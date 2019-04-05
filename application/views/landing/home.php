@@ -503,7 +503,7 @@
                     <div class="col-md-10">
                         <div class="row" style="margin-left: 10px">
                             <?php
-                            $products = $this->product->randomproducts(array(31,33,36,53,), 4);
+                            $products= $this->product->randomproducts(array(31,33,36,53,1,2,3,4,5,6,7,8,9,10,11,23,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,61,62,63,64,65,66,67,68,69,70), 4); // Just for you
                             foreach ($products as $product) : ?>
                                 <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>">
                                     <div class="col-md-3 col-sm-3 col-xs-3  card-product card-product-alt">
