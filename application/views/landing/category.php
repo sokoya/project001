@@ -360,19 +360,15 @@
 </script>
 <script src="<?= $this->user->auto_version('assets/js/quick-view.js'); ?>"></script>
 <script src="<?= $this->user->auto_version('assets/js/search.js'); ?>"></script>
-<!-- <script src="<?//= base_url('assets/js/jquery.unveil.js'); ?>"></script> -->
 <script>
-    // $(document).ready(function() {
-    //     $("img").unveil();
-    // });
     window.addEventListener('load', function(){
-    var allimages= document.getElementsByTagName('img');
-    for (var i=0; i<allimages.length; i++) {
-        if (allimages[i].getAttribute('data-src')) {
-            allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
+        let allimages= document.getElementsByTagName('img');
+        for (let i=0; i<allimages.length; i++) {
+            if (allimages[i].getAttribute('data-src')) {
+                allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
+            }
         }
-    }
-}, false);
+    }, false);
     $("#price-range").ionRangeSlider({
         type: "double",
         min: <?= $min ?>,
