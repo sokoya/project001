@@ -675,8 +675,13 @@ Class Product_model extends CI_Model{
             $select_query .=" GROUP BY p.id";
         }
 
-        $products_query = $this->db->query( $select_query )->result();
-        return $products_query;
+        $products_query = $this->db->query( $select_query );
+        if( $products_query ) {
+            return $products_query;
+        }else{
+            return '';
+        }
+
         // $this->db->cache_off();
     }
 
