@@ -409,17 +409,32 @@ Class Product_model extends CI_Model{
                 if( $this->check_slug_availability($category) ){
                     $array = $this->slug($category);
                     $select_query .= " WHERE category_id IN ('".implode("','",$array)."') GROUP BY `brand_name` ORDER BY `brand_name` ";
-                    return $this->db->query( $select_query )->result();
+                    $query = $this->db->query( $select_query );
+                    if( $query ){
+                        return $query->result();
+                    }else{
+                        return '';
+                    }
                 }
             }else{
                 $select_query .= " WHERE product_name LIKE '%{$search_like}%' GROUP BY `brand_name` ORDER BY `brand_name` ";
-                return $this->db->query( $select_query )->result();
+                $query = $this->db->query( $select_query );
+                if( $query ){
+                    return $query->result();
+                }else{
+                    return '';
+                }
             }
         }else{
             if( $this->check_slug_availability($category)) {
                 $array = $this->slug($category);
                 $select_query .= " WHERE category_id IN ('".implode("','",$array)."') GROUP BY `brand_name` ORDER BY `brand_name` ";
-                return $this->db->query( $select_query )->result();
+                $query = $this->db->query( $select_query );
+                if( $query ){
+                    return $query->result();
+                }else{
+                    return '';
+                }
             }
         }
         return '';
