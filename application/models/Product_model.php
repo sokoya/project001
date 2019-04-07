@@ -456,19 +456,25 @@ Class Product_model extends CI_Model{
                 if( $this->check_slug_availability( $category ) ){
                     $array = $this->slug($category);
                     $select_query .= " WHERE category_id IN ('".implode("','",$array)."') AND product_name LIKE '%{$search_like}%'";
-                    return $this->db->query( $select_query )->result_array();
+                    $query = $this->db->query( $select_query );
+                    if( $query ) return $query->result_array();
                 }
             }else{
                 $select_query .= " WHERE product_name LIKE '%{$search_like}%'";
-                return $this->db->query( $select_query )->result_array();
+                $query = $this->db->query( $select_query );
+                if( $query ) return $query->result_array();
             }
         }elseif($this->check_slug_availability( $category )) {
             $array = $this->slug($category);
             $select_query .= " WHERE category_id IN ('".implode("','",$array)."')";
-            return $this->db->query( $select_query )->result_array();
+            $query = $this->db->query( $select_query );
+            if( $query ) return $query->result_array();
         }else{
             return '';
         }
+
+        return '';
+
     }
 
     // Generic single product detail
@@ -570,6 +576,7 @@ Class Product_model extends CI_Model{
     }
 
     function search_query_categories( $search ){
+        $search = xss_clean($search);
         $select = "SELECT DISTINCT(p.category_id),count(*) total_count, c.name, c.slug FROM products p 
         INNER JOIN categories c ON(c.id = p.category_id) WHERE p.product_name LIKE '%{$search}%' AND p.product_status = 'approved' GROUP BY p.category_id LIMIT 5";
         return $this->db->query( $select )->result();
