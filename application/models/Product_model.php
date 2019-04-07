@@ -447,17 +447,34 @@ Class Product_model extends CI_Model{
                 if( $this->check_slug_availability( $category )) {
                     $array = $this->slug($category);
                     $select_query .= " WHERE category_id IN ('".implode("','",$array)."') AND product_name LIKE '%{$search_like}%' GROUP BY `colour_name` ORDER BY `colour_name` ";
-                    return $this->db->query( $select_query )->result();
+                    $query = $this->db->query( $select_query );
+                    if( $query ){
+                        return $query->result();
+                    }else{
+                        return '';
+                    }
+
                 }
             }else{
                 $select_query .= " WHERE product_name LIKE '%{$search_like}%' GROUP BY `colour_name` ORDER BY `colour_name` ";
-                return $this->db->query( $select_query )->result();
+                $query = $this->db->query( $select_query );
+                if( $query ){
+                    return $query->result();
+                }else{
+                    return '';
+                }
+
             }
         }else{
             if( $this->check_slug_availability( $category )) {
                 $array = $this->slug($category);
                 $select_query .= " WHERE category_id IN ('".implode("','",$array)."') ";
-                return $this->db->query( $select_query )->result();
+                $query = $this->db->query( $select_query );
+                if( $query ){
+                    return $query->result();
+                }else{
+                    return '';
+                }
             }
         }
         return '';
@@ -472,18 +489,30 @@ Class Product_model extends CI_Model{
                     $array = $this->slug($category);
                     $select_query .= " WHERE category_id IN ('".implode("','",$array)."') AND product_name LIKE '%{$search_like}%'";
                     $query = $this->db->query( $select_query );
-                    if( $query ) return $query->result_array();
+                    if( $query ) {
+                        return $query->result_array();
+                    }else{
+                        return '';
+                    }
                 }
             }else{
                 $select_query .= " WHERE product_name LIKE '%{$search_like}%'";
                 $query = $this->db->query( $select_query );
-                if( $query ) return $query->result_array();
+                if( $query ) {
+                    return $query->result_array();
+                }else{
+                    return '';
+                }
             }
         }elseif($this->check_slug_availability( $category )) {
             $array = $this->slug($category);
             $select_query .= " WHERE category_id IN ('".implode("','",$array)."')";
             $query = $this->db->query( $select_query );
-            if( $query ) return $query->result_array();
+            if( $query ) {
+                return $query->result_array();
+            }else{
+                return '';
+            }
         }else{
             return '';
         }
