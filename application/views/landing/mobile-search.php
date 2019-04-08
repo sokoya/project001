@@ -158,7 +158,7 @@
                 </div>
                 <div class="panel-body" id="brand_static_vl">
                     <?php foreach ($brands as $brand) : ?>
-                        <?php if(!empty( $brand )) :?>
+                        <?php if(!empty( $brand->brand_name )) :?>
                             <div class="carrito-checkbox">
                                 <label class="list-label">
                                     <input class="filter" type="checkbox" name="filterset"
