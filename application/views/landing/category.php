@@ -154,15 +154,17 @@
                             <div class="category-filters-section">
                                 <h3 class="widget-title-sm custom-widget-text">Brand</h3>
                                 <?php foreach ($brands as $brand) : ?>
-                                    <div class="carrito-checkbox">
-                                        <label class="tree-input">
-                                            <input class="filter" type="checkbox" data-type="brand_name"
-                                                   name="filterset"
-                                                   data-value="<?= trim(strtolower($brand->brand_name)); ?>"><?= ucfirst($brand->brand_name); ?>
-                                            <span class="checkmark"></span>
-                                            <span class="category-filters-amount">(<?= $brand->brand_count; ?>)</span>
-                                        </label>
-                                    </div>
+                                    <?php if( !empty($brand)) : ?>
+                                        <div class="carrito-checkbox">
+                                            <label class="tree-input">
+                                                <input class="filter" type="checkbox" data-type="brand_name"
+                                                       name="filterset"
+                                                       data-value="<?= trim(strtolower($brand->brand_name)); ?>"><?= ucfirst($brand->brand_name); ?>
+                                                <span class="checkmark"></span>
+                                                <span class="category-filters-amount">(<?= $brand->brand_count; ?>)</span>
+                                            </label>
+                                        </div>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
                             </div>
                         <?php endif; ?>
