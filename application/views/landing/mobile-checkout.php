@@ -381,7 +381,6 @@
                             <li class="list-group-item">
                                 <button type="submit" class="btn btn-block btn-custom-dark continue-btn" disabled>
                                     Proceed
-                                    to Payment
                                 </button>
                             </li>
                         </ul>

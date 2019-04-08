@@ -267,4 +267,4 @@ $('.pay-panel').on('click', function () {
     let self = $(this);
     $('div.payment_note').hide();
     self.find('div.payment_note').show();
-})
+});

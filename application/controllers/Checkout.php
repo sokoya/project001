@@ -298,7 +298,6 @@ class Checkout extends MY_Controller
                 }
                 // Send Mail
                 $this->load->model('email_model','myemail');
-
                 // send mail to the buyer
                 $recipent['name'] = ucwords($page_data['profile']->first_name . ' ' . $page_data['profile']->last_name);
                 $recipent['email'] = $page_data['profile']->email;
