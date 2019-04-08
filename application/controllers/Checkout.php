@@ -168,7 +168,10 @@ class Checkout extends MY_Controller
             $total = $this->input->post('total_charge', true);
             $payment_method = $this->input->post('payment_method', true);
             $qty = $this->input->post('qty', true);
+            // I don't know why I am using going through this stress sha
             $billing_amount = $charge * $qty;
+            // End of stress
+            $billing_amount = $this->input->post('delivery_charge', true);
             $buyer_id = $this->session->userdata('logged_id');
             $txn_ref = 'TX-'.$order_code.'-'.time();
             foreach( $this->cart->contents() as $product ){
@@ -289,10 +292,11 @@ class Checkout extends MY_Controller
                 $link = base_url('account/orderstatus/') . $order;
                 if( SMS_FOR_ORDERS ) {
                     $short_url = get_bitly_short_url( $link , BITLY_USERNAME, BITLY_API);
-                    $seller_message = "Hello {$detail->legal_company_name}, a new order has just been confirmed. Login to your portal for details.";
+                    $seller_message = "Hello {$detail->legal_company_name}, a new order has just been initiated & under review. Login to your portal for details.";
+                    $admin_message = "Hello Isiah, a new order({$order}) has just been initiated. View on admin dashboard.";
 //                    {$short_url}
                     $buyer_message = "Dear " .ucfirst($user->first_name) . ", your order {$order} has been confirmed! Visit your account and check your email for complete details. Thank you!";
-                    $sms_array = array( $detail->seller_phone => $seller_message,$user->phone => $buyer_message);
+                    $sms_array = array( $detail->seller_phone => $seller_message,$user->phone => $buyer_message, '08028427108' => $admin_message);
                     $this->load->library('AfricaSMS', $sms_array);
                     $this->africasms->sendsms();
                 }

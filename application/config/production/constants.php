@@ -119,7 +119,7 @@ defined('BITLY_API') OR define('BITLY_API', '172c6fb6841362cd510ac05bc704cf54582
 // SMS
 defined('SMS_USERNAME') OR define('SMS_USERNAME', 'ArtisansUsers');
 defined('SMS_API') OR define('SMS_API', '1a637c87827932027523e71fb340a393b5ec941e051031b86be539143ffe890f');
-defined('SMS_FOR_ORDERS') OR define('SMS_FOR_ORDERS', false);
+defined('SMS_FOR_ORDERS') OR define('SMS_FOR_ORDERS', true);
 
 //Elastic Email
 defined('ELASTIC_EMAIL_API') OR define('ELASTIC_EMAIL_API', '5fe25354-f5e7-4bee-8001-ab0080b72c4c');
