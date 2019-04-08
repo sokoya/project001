@@ -51,7 +51,8 @@ if (!function_exists('ngn')) {
 
 if (!function_exists('get_now')) {
 	function get_now(){
-		return gmdate("Y-m-d H:i:s", time());
+//		return gmdate("Y-m-d H:i:s", time());
+		return gmdate("Y-m-d H:i:s", strtotime('+1 hour', time()));
 	}
 }
 
