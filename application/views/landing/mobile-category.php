@@ -164,15 +164,17 @@
                 </div>
                 <div class="panel-body" id="brand_static_vl">
                     <?php foreach ($brands as $brand) : ?>
-                        <div class="carrito-checkbox">
-                            <label class="list-label">
-                                <input class="filter" type="checkbox" name="filterset"
-                                       data-type="brand_name"
-                                       data-value="<?= trim($brand->brand_name); ?>"/><?= ucfirst($brand->brand_name); ?>
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <hr class="panel-line"/>
+                        <?php if(!empty( $brand->brand_name )) :?>
+                            <div class="carrito-checkbox">
+                                <label class="list-label">
+                                    <input class="filter" type="checkbox" name="filterset"
+                                           data-type="brand_name"
+                                           data-value="<?= trim($brand->brand_name); ?>"/><?= ucfirst($brand->brand_name); ?>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <hr class="panel-line"/>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
             </div>
