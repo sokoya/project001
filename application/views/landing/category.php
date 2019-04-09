@@ -357,7 +357,7 @@
 
         let url = '';
         let filter_string = '';
-        filter_list = {};
+        let filter_list = {};
         $('.filter').change(function () {
             let location = main_location.split("?");
             let filtering_settings = location[1];
@@ -376,11 +376,9 @@
             if (filter_list[key]) {
                 if (jQuery.inArray(escape(value), filter_list[key]) !== -1) {
                     let index = filter_list[key].indexOf(escape(value));
-                    if (index !== -1) {
-                        filter_list[key].splice(index, 1);
-                        if (filter_list[key].length < 1){
-                            delete filter_list[key];
-                        }
+                    filter_list[key].splice(index, 1);
+                    if (filter_list[key].length < 1) {
+                        delete filter_list[key];
                     }
                 } else {
                     filter_list[key].push(value)
