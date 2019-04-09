@@ -97,7 +97,9 @@ class Product extends MY_Controller
 		if ($page > 1) $page -= 1;
 
 		$array = array('str' => $str, 'is_limit' => false);
+		$catalog_products = $this->product->get_products($array,array());
 		$x = (array)$this->product->get_products($array, $this->input->get());
+		$page_data['count_in_total'] = count($catalog_products);
 		$count = $page_data['total_count'] =  (count($x));
 		$this->load->library('pagination');
 		$this->config->load('pagination');
@@ -132,7 +134,7 @@ class Product extends MY_Controller
 		$page_data['page'] = 'category';
 		$page_data['min'] = $page_data['max'] = '';
 		if( $page_data['products'] ){
-            $array = (array) $page_data['products'];
+            $array = (array) $catalog_products;
             $page_data['min'] = min(array_map(function($array) { return $array->sale_price; }, $array));
             $page_data['max'] = max(array_map(function($array) { return $array->sale_price; }, $array));
         }
