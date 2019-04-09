@@ -154,7 +154,7 @@
                             <div class="category-filters-section">
                                 <h3 class="widget-title-sm custom-widget-text">Brand</h3>
                                 <?php foreach ($brands as $brand) : ?>
-                                    <?php if(!empty( $brand->brand_name )) :?>
+                                    <?php if(!empty( $brand->brand_name )) : ?>
                                         <div class="carrito-checkbox">
                                             <label class="tree-input">
                                                 <input class="filter" type="checkbox" data-type="brand_name"

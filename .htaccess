@@ -4,6 +4,13 @@ RewriteRule ^robots\.txt$ index.php?/$0 [L,NC]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www.onitshamarket\.com [NC]
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://www.onitshamarket.com/$1 [R=301,L]
+
+
 <IfModule mod_expires.c>
   ExpiresActive On
 
