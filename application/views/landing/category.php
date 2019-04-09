@@ -340,7 +340,7 @@
                 let kv = fs_array[w].split("=");
                 let checks = kv[1].split(",");
                 for (let z = 0; z < checks.length; z++) {
-                    $("#" + (unescape(checks[z]).toLowerCase()).replace("/[^a-z0-9-]/","_")).prop("checked", true);
+                    $("#" + (unescape(checks[z]).toLowerCase()).replace(/\s+/g, "_")).prop("checked", true);
                 }
             }
         }
