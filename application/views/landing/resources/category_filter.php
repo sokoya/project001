@@ -2,7 +2,7 @@
     <div class="category-filters-section">
         <h3 class="widget-title-sm custom-widget-text">Category</h3>
         <?php if ($count_in_total > $total_count):?>
-        <a class="btn btn-danger btn-sm" style="position:absolute;right:30px;top:15px;" href="<?= base_url("catalog/". strtolower($category_detail->name) )?>">Clear Filter</a>
+        <a class="btn btn-danger btn-sm" style="position:absolute;right:30px;top:15px;" href="<?= base_url("catalog/". strtolower($category_detail->name) .'/')?>">Clear Filter</a>
         <?php endif;?>
         <ul class="cateogry-filters-list">
             <li></li>
