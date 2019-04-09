@@ -267,7 +267,7 @@
         let base_url = "<?= base_url(); ?>";
     }
     let current_url = "<?= current_url()?>";
-    let url = "<?= base_url('catalog/' . $category_detail->slug . '/') ?>";
+    catalog_url = "<?= base_url('catalog/' . $category_detail->slug . '/') ?>";
 
 </script>
 <script src="<?= $this->user->auto_version('assets/js/quick-view.js'); ?>"></script>
@@ -288,7 +288,25 @@
         grid: true,
         prefix: "&#8358;",
         onFinish: function (data) {
-            window.location = url + '?price_min=' + data.from + '&price_max=' + data.to;
+            let main_location = window.location.href;
+            let location = main_location.split("?");
+            let fs = location[1];
+            let nu_loc = "";
+            if (fs != undefined) {
+                if (main_location.indexOf("?price_min") !== -1) {
+                    nu_loc = main_location.replace(/price_min=(.*)&price_max=(.*)&/, "");
+                } else if (main_location.indexOf("&price_min") !== -1) {
+                    let reg_match = main_location.match(/&price_min=(.*)&price_max=(.*)&/);
+                    if (reg_match !== null) {
+                        nu_loc = main_location.replace(/&price_min=(.*)&price_max=(.*)&/, "&");
+                    }else{
+                        nu_loc = main_location.replace(/&price_min=(.*)&price_max=(.*)/, "");
+                    }
+                }
+                window.location = nu_loc + '&price_min=' + data.from + '&price_max=' + data.to;
+            } else {
+                window.location = catalog_url + '?price_min=' + data.from + '&price_max=' + data.to;
+            }
         }
     });
 
@@ -357,7 +375,7 @@
 
         let url = '';
         let filter_string = '';
-        filter_list = {};
+        let filter_list = {};
         $('.filter').change(function () {
             let location = main_location.split("?");
             let filtering_settings = location[1];
@@ -376,11 +394,9 @@
             if (filter_list[key]) {
                 if (jQuery.inArray(escape(value), filter_list[key]) !== -1) {
                     let index = filter_list[key].indexOf(escape(value));
-                    if (index !== -1) {
-                        filter_list[key].splice(index, 1);
-                        if (filter_list[key].length < 1){
-                            delete filter_list[key];
-                        }
+                    filter_list[key].splice(index, 1);
+                    if (filter_list[key].length < 1) {
+                        delete filter_list[key];
                     }
                 } else {
                     filter_list[key].push(value)
@@ -407,6 +423,7 @@
                 <?php // console.log(url);
                 // console.log("fiter_list after" + JSON.stringify(filter_list));?>
             });
+            url = (url === "") ? catalog_url : url;
             load_page(url);
         });
     });
