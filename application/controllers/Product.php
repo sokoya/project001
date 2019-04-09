@@ -108,7 +108,7 @@ class Product extends MY_Controller
 		$this->pagination->initialize($config);
 		$page_data['features'] = $output_array;
 		$array['limit'] = $config['per_page'];
-		$array['offset'] = $page;
+		$array['offset'] = $page * 32;
 		$array['is_limit'] = true;
 		$page_data['pagination'] = $this->pagination->create_links();
 		$page_data['products'] = $this->product->get_products($array, $this->input->get());
@@ -255,7 +255,7 @@ class Product extends MY_Controller
 		$config['per_page'] = 32;
 		$page_data['features'] = $feature_array;
 		$array['limit'] = $config['per_page'];
-		$array['offset'] = $page;
+        $array['offset'] = $page * 32;
 		$array['is_limit'] = true;
 		$page_data['pagination'] = $this->pagination->create_links();
 		$page_data['products'] = $this->product->get_search_products($array, $this->input->get());
