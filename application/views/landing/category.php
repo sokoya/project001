@@ -340,7 +340,7 @@
                 let kv = fs_array[w].split("=");
                 let checks = kv[1].split(",");
                 for (let z = 0; z < checks.length; z++) {
-                    $("#" + (unescape(checks[z]).toLowerCase()).replace("/[^a-z0-9-]/","_")).prop("checked", true);
+                    $("#" + (unescape(checks[z]).toLowerCase()).replace(/\s+/g, '_')).prop("checked", true);
                 }
             }
         }
@@ -357,8 +357,8 @@
 
         let url = '';
         let filter_string = '';
+        filter_list = {};
         $('.filter').change(function () {
-            let filter_list = {};
             let location = main_location.split("?");
             let filtering_settings = location[1];
             if (filtering_settings != undefined) {
@@ -371,17 +371,16 @@
             }
             <?php // console.log("fiter_list" + JSON.stringify(filter_list));?>
             filter_string = '';
-            $('#processing').show();
             let value = $(this).data('value');
             let key = $(this).data('type');
             if (filter_list[key]) {
-                if (jQuery.inArray(value, filter_list[key]) !== -1) {
-                    let index = filter_list[key].indexOf(value);
+                if (jQuery.inArray(escape(value), filter_list[key]) !== -1) {
+                    let index = filter_list[key].indexOf(escape(value));
                     if (index !== -1) {
                         filter_list[key].splice(index, 1);
-                    }
-                    if (filter_list[key].length < 1){
-                        delete filter_list[key];
+                        if (filter_list[key].length < 1){
+                            delete filter_list[key];
+                        }
                     }
                 } else {
                     filter_list[key].push(value)
