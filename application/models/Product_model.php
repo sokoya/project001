@@ -271,7 +271,7 @@ Class Product_model extends CI_Model{
     }
 
 
-    // Main Category prouduct listings
+    // Main Category product listings
     // Return CI_results
     function get_products( $queries = '' , $gets = array() ){
         // $this->db->cache_on();
@@ -441,7 +441,7 @@ Class Product_model extends CI_Model{
     }
     // Get products colours
     function get_colours( $category ='', $search_like = ''){
-        $select_query = "SELECT COUNT(*) AS `colour_count`, `main_colour` AS `colour_name` FROM `products` p ";
+        $select_query = "SELECT DISTINCT(COUNT(*)) AS `colour_count`, `main_colour` AS `colour_name` FROM `products` p ";
         if( $search_like != '' ){
             if( $category != '' ){
                 if( $this->check_slug_availability( $category )) {
@@ -482,7 +482,7 @@ Class Product_model extends CI_Model{
 
     // Get products attributes. used in main category
     function get_features($category = '', $search_like = ''){
-        $select_query = "SELECT DISTINCT ( json_unquote(json_extract(`attributes`, '$'))) AS feature_value FROM products";
+        $select_query = "SELECT  json_unquote(json_extract(`attributes`, '$')) AS feature_value FROM products";
         if( $search_like != '' ){
             if( $category != '' ){
                 if( $this->check_slug_availability( $category ) ){

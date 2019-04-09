@@ -260,7 +260,7 @@ class Product extends MY_Controller
         $array['offset'] = $page * 32;
 		$array['is_limit'] = true;
 		$page_data['pagination'] = $this->pagination->create_links();
-		$page_data['products'] = $this->product->get_search_products($array, $this->input->get());
+		$page_data['products'] = $this->product->get_search_products($array, $this->input->get())->result();
 		$page_data['brands'] = $this->product->get_brands($category, $product_name);
 		$page_data['colours'] = $this->product->get_colours($category, $product_name);
         $page_data['price_min'] = $this->input->get('price_min',true);
@@ -277,7 +277,8 @@ class Product extends MY_Controller
 		$page_data['page'] = 'search';
 		$this->pagination->initialize($config);
         $page_data['min'] = $page_data['max'] = '';
-        if( $page_data['products'] ){
+//        var_dump( $page_data['products']->result());exit;
+        if( $page_data['products'] &&  $page_data['products'] != '' ){
             $array = (array) $page_data['products'];
             $page_data['min'] = min(array_map(function($array) { return $array->sale_price; }, $array));
             $page_data['max'] = max(array_map(function($array) { return $array->sale_price; }, $array));
