@@ -621,6 +621,7 @@ Class Product_model extends CI_Model{
 
     function search_query_categories( $search ){
         $search = xss_clean($search);
+        $search = cleanit( $search );
         $select = "SELECT DISTINCT(p.category_id),count(*) total_count, c.name, c.slug FROM products p 
         INNER JOIN categories c ON(c.id = p.category_id) WHERE p.product_name LIKE '%{$search}%' AND p.product_status = 'approved' GROUP BY p.category_id LIMIT 5";
         return $this->db->query( $select )->result();
@@ -635,7 +636,7 @@ Class Product_model extends CI_Model{
 
     // SEARCH CATEGORY PRODUCTS PAGE
     function get_search_products( $queries = array() , $gets = array() ){
-        $select_query = "SELECT p.id, p.product_name, p.brand_name, p.seller_id,p.from_overseas, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left,  g.image_name,s.store_name
+        $select_query = "SELECT p.id, p.product_name, p.brand_name, p.seller_id, p.from_overseas, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left,  g.image_name,s.store_name
             FROM products p";
         if( isset($gets['price_min']) && !empty($gets['price_min']) && isset($gets['price_max']) && !empty($gets['price_max']) ){
             $min = xss_clean($gets['price_min']); $max = xss_clean($gets['price_max']);
@@ -652,7 +653,8 @@ Class Product_model extends CI_Model{
             JOIN sellers AS s ON p.seller_id = s.uid ";
 
         if( $queries['product_name'] ) {
-            $select_query .= " WHERE p.product_status = 'approved' AND p.product_name LIKE '%{$queries["product_name"]}%' ";
+            $product_name = cleanit( $queries['product_name']);
+            $select_query .= " WHERE p.product_status = 'approved' AND p.product_name LIKE '%{$product_name}%' ";
         }
         if( $queries['category'] && !empty($queries['category'])){
             $id = $this->category_id( $queries['category'] );
