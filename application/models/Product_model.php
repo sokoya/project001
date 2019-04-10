@@ -299,6 +299,7 @@ Class Product_model extends CI_Model{
 
             if( isset($gets['q']) && !empty($gets['q']) ) {
                 $q = xss_clean( $gets['q']);
+                $q = preg_replace("/[^a-z]/", ' ', $q);
                 $select_query .= " AND p.product_name LIKE '%{$q}%' "; unset($gets['q']);
             }
             if( count($gets) ){
@@ -417,6 +418,7 @@ Class Product_model extends CI_Model{
                     }
                 }
             }else{
+                $search_like = preg_replace("/[^a-z]/", ' ', $search_like);
                 $select_query .= " WHERE product_name LIKE '%{$search_like}%' AND product_status = 'approved' GROUP BY `brand_name` ORDER BY `brand_name` ";
                 $query = $this->db->query( $select_query );
                 if( $query ){
@@ -456,6 +458,7 @@ Class Product_model extends CI_Model{
 
                 }
             }else{
+                $search_like = preg_replace("/[^a-z]/", ' ', $search_like);
                 $select_query .= " WHERE product_name LIKE '%{$search_like}%' AND product_status = 'approved' GROUP BY `colour_name` ORDER BY `colour_name` ";
                 $query = $this->db->query( $select_query );
                 if( $query ){
@@ -496,6 +499,7 @@ Class Product_model extends CI_Model{
                     }
                 }
             }else{
+                $search_like = preg_replace("/[^a-z]/", ' ', $search_like);
                 $select_query .= " WHERE product_name LIKE '%{$search_like}%' AND product_status = 'approved'";
                 $query = $this->db->query( $select_query );
                 if( $query ) {
@@ -621,8 +625,8 @@ Class Product_model extends CI_Model{
 
     function search_query_categories( $search ){
         $search = xss_clean($search);
-        $select = 'SELECT DISTINCT(p.category_id),count(*) total_count, c.name, c.slug FROM products p 
-        INNER JOIN categories c ON(c.id = p.category_id) WHERE p.product_name LIKE "%{$search}%" AND p.product_status = "approved" GROUP BY p.category_id LIMIT 5';
+        $select = "SELECT DISTINCT(p.category_id),count(*) total_count, c.name, c.slug FROM products p 
+        INNER JOIN categories c ON(c.id = p.category_id) WHERE p.product_name LIKE '%" . $search . "%' AND p.product_status = 'approved' GROUP BY p.category_id LIMIT 5";
         return $this->db->query( $select )->result();
     }
 
@@ -635,6 +639,7 @@ Class Product_model extends CI_Model{
 
     // SEARCH CATEGORY PRODUCTS PAGE
     function get_search_products( $queries = array() , $gets = array() ){
+
         $select_query = "SELECT p.id, p.product_name, p.brand_name, p.seller_id, p.from_overseas, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left,  g.image_name,s.store_name
             FROM products p";
         if( isset($gets['price_min']) && !empty($gets['price_min']) && isset($gets['price_max']) && !empty($gets['price_max']) ){
@@ -650,10 +655,9 @@ Class Product_model extends CI_Model{
         }
         $select_query .= " JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )                
             JOIN sellers AS s ON p.seller_id = s.uid ";
-
         if( $queries['product_name'] ) {
             $product_name = cleanit( $queries['product_name']);
-            $product_name = preg_replace("/[^a-z0-9-]/", '_', strtolower($product_name));
+            $product_name = preg_replace("/[^a-z]/", '', $product_name);
             $select_query .= " WHERE p.product_status = 'approved' AND p.product_name LIKE '%{$product_name}%' ";
         }
         if( $queries['category'] && !empty($queries['category'])){
