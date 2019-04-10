@@ -621,7 +621,6 @@ Class Product_model extends CI_Model{
 
     function search_query_categories( $search ){
         $search = xss_clean($search);
-        $search = preg_replace("/[^a-z0-9-]/", '_', $search);
         $select = 'SELECT DISTINCT(p.category_id),count(*) total_count, c.name, c.slug FROM products p 
         INNER JOIN categories c ON(c.id = p.category_id) WHERE p.product_name LIKE "%{$search}%" AND p.product_status = "approved" GROUP BY p.category_id LIMIT 5';
         return $this->db->query( $select )->result();
