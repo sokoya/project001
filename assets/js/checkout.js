@@ -32,19 +32,25 @@ $('.continue-btn').on('click', function (e) {
         data: $('#checkout_form').serialize() + "&delivery_charge=" + delivery_charge +"&weight="+weight.weight,
         success: (data) => {
             if (data.status == 'success') {
-                if (payment_method == 1 || payment_name == 'Payment on Delivery') {
+                payment_method = parseInt(payment_method);
+                if (payment_method === 1 || payment_name == 'Payment on Delivery') {
                     // Payment on delivery
                     setTimeout(function () {
                         notification_message("Processing your orders... ", 'fa fa-info-circle', 'success');
                     }, 3000);
                     window.location.href = base_url + 'checkout/order_completed';
-                } else if (payment_method == 2 || payment_name == 'Interswitch Webpay') {
+                } else if (payment_method === 2 || payment_name == 'Interswitch Webpay') {
                     // Interswitch Payment
                     setTimeout(function () {
-                        notification_message("Saving your orders... Redirecting you to payment portal in 5 seconds ", 'fas fa-info-circle', 'success');
+                        notification_message("Saving your orders... Redirecting you to payment portal in 5 seconds... ", 'fas fa-info-circle', 'success');
                     }, 3000);
                     window.location.href = base_url + "checkout/interswitch/webpay/";
-                } else {
+                } else if( payment_method === 3 || payment_name === "Payment Via Bank Transfer" ){
+                    setTimeout(function () {
+                        notification_message("Saving your orders... Redirecting you to a page 5 seconds... ", 'fas fa-info-circle', 'success');
+                    }, 3000);
+                    window.location.href = base_url + "checkout/bank_transfer/";
+                }else {
                     // no payment issued...
                     window.location.href = base_url;
                 }

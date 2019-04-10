@@ -231,9 +231,7 @@ class Checkout extends MY_Controller
                     $amt = $total * 100 ;
                     if( (int)$payment_method == 2 ){
                         $redirect_url =  base_url('interswitch/response/?t=' . $token);
-
                         $hash = hash('SHA512', $txn_ref.INTERSWITCH_PRODUCT_ID.INTERSWITCH_PAY_ITEM_ID.$amt.$redirect_url.INTERSWITCH_MAC_KEY) ;
-
                         $profile = $this->product->get_row('users', 'first_name, last_name', array('id' => $buyer_id));
                         $name = $profile->first_name . ' '. $profile->last_name;
                         $interswitch_session = array(
@@ -249,7 +247,6 @@ class Checkout extends MY_Controller
                         );
                         $this->session->set_userdata(array('inter' => $interswitch_session));
                     }
-
                     // Send mail to admin
                     $this->session->set_userdata(array('order_code' => $order_code, 'txn_ref' => $txn_ref, 'amount' => $amt));
                     $return['status'] = 'success';
@@ -461,5 +458,54 @@ class Checkout extends MY_Controller
         }
     }
 
+
+    /*
+     * Bank Transfer
+     * */
+    public function bank_transfer(){
+
+        if( !$this->session->has_userdata('order_code') || !$this->session->userdata('logged_in')){
+            $this->session->set_flashdata('error_msg', "Start shopping on Onitshamarket.com.");
+            redirect( base_url() );
+        }
+
+        $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
+        $page_data['page'] = 'checkout';
+        $page_data['title'] = 'Checkout';
+
+        $this->form_validation->set_rules('bank', 'Bank','trim|required|xss_clean');
+        $this->form_validation->set_rules('amount', 'Amount','trim|required|xss_clean');
+        $this->form_validation->set_rules('deposit_type', 'Deposit Type','trim|required|xss_clean');
+        $this->form_validation->set_rules('deposit_type', 'Deposit Type','trim|required|xss_clean');
+
+        if( $this->form_validation->run() == FALSE ){
+            $this->load->view('landing/bank_transfer', $page_data);
+            return;
+        }
+        // check that this order still exists
+        $order_code = $this->input->post('order_code');
+        $row = $this->product->get_row( 'orders',"payment_made", "( order_code = '{$order_code}' )" );
+        if( !$row || $row->payment_made == "fail"){
+            $this->session->set_flashdata('error_msg', "Sorry, this transaction no longer exist. Contact support if debited.");
+            redirect(base_url());
+        }
+        if( isset($_FILES) && $_FILES['pop']['name'] ){
+            $upload_array = array(
+                'folder' => STATIC_CATEGORY_FOLDER,
+                'filepath' => $_FILES['pop']['tmp_name'],
+                'eager' => array( 'width' => 200, 'height' => 70 , 'crop' => 'fill')
+            );
+            $this->cloudinarylib->upload_image( $upload_array );
+            $return  = $this->cloudinary->get_result('filename');
+            if( $return ){
+                $data['pop'] = $return;
+                unset( $upload_array );
+            }else{
+                $this->session->set_flashdata('error_msg','There was an error with that image, please fix and try again.');
+                $this->load->view('landing/bank_transfer', $page_data);
+                return false;
+            }
+        }
+    }
 
 }
