@@ -828,7 +828,7 @@
                 notification_message('Sorry an error occurred please try again ', 'fas fa-info-circle', error);
             }
         })
-    })
+    });
     $('.upvote').on('click', function () {
         var qid = $(this).data('qid');
         $.ajax({
