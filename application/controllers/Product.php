@@ -246,7 +246,9 @@ class Product extends MY_Controller
 		$page = isset($_GET['page']) ? xss_clean($_GET['page']) : 0;
 		if ($page > 1) $page -= 1;
 		$array = array('category' => $category, 'product_name' => $product_name, 'is_limit' => false);
-		$x = (array)$this->product->get_search_products($array, $this->input->get());
+        $catalog_products = $this->product->get_search_products($array,array())->result();
+		$x = $this->product->get_search_products($array, $this->input->get())->result();
+        $page_data['count_in_total'] = count($catalog_products);
         $count = $page_data['total_count'] =  (count($x));
 
 		$this->load->library('pagination');
@@ -279,10 +281,11 @@ class Product extends MY_Controller
         $page_data['min'] = $page_data['max'] = '';
 //        var_dump( $page_data['products']->result());exit;
         if( $page_data['products'] &&  $page_data['products'] != '' ){
-            $array = (array) $page_data['products'];
+            $array = (array) $catalog_products;
             $page_data['min'] = min(array_map(function($array) { return $array->sale_price; }, $array));
             $page_data['max'] = max(array_map(function($array) { return $array->sale_price; }, $array));
         }
+
 		$this->load->library('user_agent');
 		if (!$this->agent->is_mobile()) {
 			$this->load->view('landing/search', $page_data);

@@ -138,97 +138,8 @@
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
     <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
-    <div id="ont_filter" class="filterbar">
-        <div class="w-bg top_menu">
-            <a href="javascript:void(0)" class="update_fil filter_btn_submit" style="float: right">Update
-                Filter</a>
-            <p class="filter_close_btn" style="cursor: pointer;"><span><i class="fa fa-arrow-left" aria-hidden="true"></i></span> Go Back
-            </p>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading filter-head filter-first">Price</div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-10 col-xs-offset-1">
-                        <div id="price-range"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php if (!empty($brands)): ?>
-            <div class="panel panel-default">
-                <div
-                        class="panel-heading filter-head">Brand
-                    <span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel" aria-hidden="true"
-                                                                             data-target="brand_static_vl"></i></span>
-                </div>
-                <div class="panel-body" id="brand_static_vl">
-                    <?php foreach ($brands as $brand) : ?>
-                        <?php if(!empty( $brand->brand_name )) :?>
-                            <div class="carrito-checkbox">
-                                <label class="list-label">
-                                    <input class="filter" type="checkbox" name="filterset"
-                                           data-type="brand_name"
-                                           data-value="<?= trim($brand->brand_name); ?>"/><?= ucfirst($brand->brand_name); ?>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <hr class="panel-line"/>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        <?php endif; ?>
-        <?php if (!empty($colours)) : ?>
-            <div class="panel panel-default">
-                <div
-                        class="panel-heading filter-head" style="cursor: pointer;">Main Colour
-                    <span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel"
-                                                                             aria-hidden="true"
-                                                                             data-target="color_static_vl"></i></span>
-                </div>
-                <div class="panel-body" id="color_static_vl">
-                    <?php foreach ($colours as $colour) : ?>
-                        <div class="carrito-checkbox">
-                            <label class="list-label">
-                                <input class="filter" type="checkbox" name="filterset"
-                                       data-type="main_colour"
-                                       data-value="<?= trim($colour->colour_name); ?>"/><?= ucfirst($colour->colour_name); ?>
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <hr class="panel-line"/>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        <?php endif; ?>
-        <?php if ($features) : ?>
-            <?php $x = 1;
-            foreach ($features as $feature => $feature_value) : ?>
-                <div class="panel panel-default">
-                    <div
-                            class="panel-heading filter-head"><?= preg_replace("/[^A-Za-z 0-9]/", ' ', $feature); ?>
-                        <span style="color: #4c4c4c !important; float: right"><i class="fas fa-minus close-panel"
-                                                                                 aria-hidden="true"
-                                                                                 data-target="<?= $feature ?>_vl"></i></span>
-                    </div>
-                    <div class="panel-body" id="<?= $feature ?>_vl">
-                        <?php foreach ($feature_value as $key => $value) : ?>
-                            <div class="carrito-checkbox">
-                                <label class="list-label">
-                                    <input class="filter" type="checkbox" name="filterset"
-                                           data-type="<?= trim($feature); ?>"
-                                           data-value="<?= trim(preg_replace("/[^A-Za-z0-9-]/", '_', $value)) ?>"/><?= $value; ?>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <hr class="panel-line"/>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    </div>
+    <?php $this->load->view('landing/resources/mobile/mobile-category_filter'); ?>
+
     <div class="">
         <div class="row">
             <div id="category_body">
@@ -322,14 +233,21 @@
     </div>
     <script src="<?= base_url('assets/js/jquery.js'); ?>"></script>
     <script src="<?= base_url('assets/js/bootstrap.js'); ?>"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/js/ion.rangeSlider.min.js"></script>
     <script>
         let current_url = "<?= current_url()?>";
-        let url = "<?= base_url('catalog/' . $category_detail->slug .'/') ?>";
+        catalog_url = "<?= base_url('catalog/' . $category_detail->slug .'/') ?>";
     </script>
     <script src="<?= base_url('assets/js/search.js'); ?>"></script>
     <script>
+        window.addEventListener('load', function () {
+            let allimages = document.getElementsByTagName('img');
+            for (let i = 0; i < allimages.length; i++) {
+                if (allimages[i].getAttribute('data-src')) {
+                    allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
+                }
+            }
+        }, false);
 
         $("#price-range").ionRangeSlider({
             type: "double",
@@ -338,7 +256,35 @@
             grid: true,
             prefix: "&#8358;",
             onFinish: function (data) {
-                window.location = url + '?price_min='+data.from+'&price_max='+data.to;
+                let main_location = window.location.href;
+                let location = main_location.split("?");
+                let fs = location[1];
+                let nu_loc = "";
+                if (fs != undefined) {
+                    if (main_location.indexOf("?price_min") !== -1) {
+                        let reg_match = main_location.match(/price_min=(.*)&price_max=(.*)&/);
+                        if (reg_match !== null) {
+                            nu_loc = main_location.replace(/price_min=(.*)&price_max=(.*)&/, "");
+                        } else {
+                            nu_loc = main_location.replace(/\?price_min=(.*)&price_max=(.*)/, "");
+                        }
+                    } else if (main_location.indexOf("&price_min") !== -1) {
+                        let reg_match = main_location.match(/&price_min=(.*)&price_max=(.*)&/);
+                        if (reg_match !== null) {
+                            nu_loc = main_location.replace(/&price_min=(.*)&price_max=(.*)&/, "&");
+                        } else {
+                            nu_loc = main_location.replace(/&price_min=(.*)&price_max=(.*)/, "");
+                        }
+                    }
+                    let test_location = nu_loc.split("?");
+                    if (test_location[1] === undefined) {
+                        window.location = nu_loc + '?price_min=' + data.from + '&price_max=' + data.to;
+                    } else {
+                        window.location = nu_loc + '&price_min=' + data.from + '&price_max=' + data.to;
+                    }
+                } else {
+                    window.location = catalog_url + '?price_min=' + data.from + '&price_max=' + data.to;
+                }
             }
         });
         let my_range = $("#price-range").data("ionRangeSlider");
@@ -352,109 +298,83 @@
         }
 
         $(document).ready(function () {
-            let _category_body = $('#category_body');
-
-            function doReplaceState(url) {
-                let state = {current_url: url},
-                    title = "Onitshamarket";
-                history.replaceState(state, title, url);
+            let main_location = window.location.href;
+            let location = main_location.split("?");
+            let filtering_settings = location[1];
+            if (filtering_settings != undefined) {
+                let fs_array = filtering_settings.split("&");
+                for (let w = 0; w < fs_array.length; w++) {
+                    let kv = fs_array[w].split("=");
+                    let checks = kv[1].split(",");
+                    for (let z = 0; z < checks.length; z++) {
+                        $("#" + (unescape(checks[z]).toLowerCase()).replace(/\s+/g, '_')).prop("checked", true);
+                    }
+                }
             }
 
-            $('.lazy').Lazy({
-                scrollDirection: 'vertical',
-                effect: 'fadeIn',
-                visibleOnly: true
-            });
-
             function load_page(url) {
-                $(_category_body).load(`${url} #category_body`, function (response, status, xhr) {
-                    if (status === "error") {
-                        let msg = "Sorry but there was an error: ";
-                        alert(msg + xhr.status + " " + xhr.statusText);
-                    }
-                    $('.lazy').Lazy({
-                        scrollDirection: 'vertical',
-                        effect: 'fadeIn',
-                        visibleOnly: true
-                    });
-
-                    $('.close-panel').on('click', function (e) {
-                        e.preventDefault();
-                        let target = $(this).data('target');
-                        $(this).toggleClass("fa-minus fa-plus");
-                        $(`#${target}`).toggle()
-                    });
-
-                    $('.filter_close_btn').on('click', function () {
-                        filterBarClose();
-                    });
-                    $('.filter-btn').on('click', function () {
-                        filterBarOpen();
-                    });
-
-                    function filterBarOpen() {
-                        $('#ont_filter').show();
-                    }
-
-                    function filterBarClose(callback = '', value = '') {
-                        $('#ont_filter').fadeOut(function () {
-                            if (callback) {
-                                callback(value);
-                            }
-                        });
-                    }
-
-                    doReplaceState(url.toLowerCase());
-                    $('#processing').hide();
-                    $(_category_body).show();
-                });
+                window.location = url;
             }
 
             let url = '';
             let filter_string = '';
+            let filter_list = {};
+
+
             $('.filter').change(function () {
-                if ($('input[name=filterset]').is(':checked')) {
-                    let filter_list = {};
-                    url = '';
-                    filter_string = '';
-                    $(_category_body).hide();
-                    $('#processing').show();
-                    let items = $('input[name=filterset]:checked');
-                    items.each(function () {
-                        let value = $(this).data('value');
-                        let key = $(this).data('type');
-                        if (filter_list[key]) {
-                            if (jQuery.inArray(value, filter_list[key]) !== -1) {
-                            } else {
-                                filter_list[key].push(value)
-                            }
-                        } else {
-                            filter_list[key] = [value];
-                        }
-                        url = '';
-                        jQuery.each(filter_list, function (obj) {
-                            filter_string = '';
-                            jQuery.each(filter_list[obj], function (id, values) {
-                                if (filter_string === '') {
-                                    filter_string += values;
-                                } else {
-                                    filter_string += ',' + values;
-                                }
-                            });
-                            if (url === '') {
-                                url += `?${obj}=${filter_string}`
-                            } else {
-                                url += `&${obj}=${filter_string}`
-                            }
-                        });
-                        console.log(url);
-                    });
-                } else {
-                    load_page(current_url);
+                let location = main_location.split("?");
+                let filtering_settings = location[1];
+                if (filtering_settings != undefined) {
+                    let fs_array = filtering_settings.split("&");
+                    for (let w = 0; w < fs_array.length; w++) {
+                        let kv = fs_array[w].split("=");
+                        let key = kv[0];
+                        filter_list[key] = kv[1].split(",");
+                    }
                 }
+                <?php // console.log("fiter_list" + JSON.stringify(filter_list));?>
+                filter_string = '';
+                let value = $(this).data('value');
+                let key = $(this).data('type');
+                if (filter_list[key]) {
+                    if (jQuery.inArray(escape(value), filter_list[key]) !== -1) {
+                        let index = filter_list[key].indexOf(escape(value));
+                        filter_list[key].splice(index, 1);
+                        if (filter_list[key].length < 1) {
+                            delete filter_list[key];
+                        }
+                    } else {
+                        filter_list[key].push(value)
+                    }
+                } else {
+                    filter_list[key] = [value];
+                }
+                console.log(filter_list);
+                url = '';
+                jQuery.each(filter_list, function (obj) {
+                    filter_string = '';
+                    jQuery.each(filter_list[obj], function (id, values) {
+                        if (filter_string === '') {
+                            filter_string += values;
+                        } else {
+                            filter_string += ',' + values;
+                        }
+                    });
+                    if (url === '') {
+                        url += `?${obj}=${filter_string}`
+                    } else {
+                        url += `&${obj}=${filter_string}`
+                    }
+                    <?php // console.log(url);
+                    // console.log("fiter_list after" + JSON.stringify(filter_list));?>
+                });
+                url = (url === "") ? catalog_url : url;
+                load_page(url);
             });
+
+
             $('.filter_btn_submit').on('click', function () {
-                filterBarClose(load_page, url);
+                window.location = catalog_url;
             });
         });
 

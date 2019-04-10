@@ -294,16 +294,26 @@
             let nu_loc = "";
             if (fs != undefined) {
                 if (main_location.indexOf("?price_min") !== -1) {
-                    nu_loc = main_location.replace(/price_min=(.*)&price_max=(.*)&/, "");
+                    let reg_match = main_location.match(/price_min=(.*)&price_max=(.*)&/);
+                    if (reg_match !== null) {
+                        nu_loc = main_location.replace(/price_min=(.*)&price_max=(.*)&/, "");
+                    } else {
+                        nu_loc = main_location.replace(/\?price_min=(.*)&price_max=(.*)/, "");
+                    }
                 } else if (main_location.indexOf("&price_min") !== -1) {
                     let reg_match = main_location.match(/&price_min=(.*)&price_max=(.*)&/);
                     if (reg_match !== null) {
                         nu_loc = main_location.replace(/&price_min=(.*)&price_max=(.*)&/, "&");
-                    }else{
+                    } else {
                         nu_loc = main_location.replace(/&price_min=(.*)&price_max=(.*)/, "");
                     }
                 }
-                window.location = nu_loc + '&price_min=' + data.from + '&price_max=' + data.to;
+                let test_location = nu_loc.split("?");
+                if (test_location[1] === undefined) {
+                    window.location = nu_loc + '?price_min=' + data.from + '&price_max=' + data.to;
+                } else {
+                    window.location = nu_loc + '&price_min=' + data.from + '&price_max=' + data.to;
+                }
             } else {
                 window.location = catalog_url + '?price_min=' + data.from + '&price_max=' + data.to;
             }
@@ -363,12 +373,6 @@
             }
         }
 
-        function doReplaceState(url) {
-            let state = {current_url: url},
-                title = "Onitshamarket";
-            history.replaceState(state, title, url);
-        }
-
         function load_page(url) {
             window.location = url;
         }
@@ -425,6 +429,10 @@
             });
             url = (url === "") ? catalog_url : url;
             load_page(url);
+        });
+
+        $('#clear_filter').on('click', function () {
+            window.location = catalog_url;
         });
     });
 </script>

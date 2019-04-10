@@ -2,7 +2,7 @@
     <div class="category-filters-section">
         <h3 class="widget-title-sm custom-widget-text">Category</h3>
         <?php if ($count_in_total > $total_count):?>
-        <a class="btn btn-danger btn-sm" style="position:absolute;right:30px;top:15px;" href="<?= base_url("catalog/". strtolower($category_detail->slug) .'/')?>">Clear Filter</a>
+        <a class="btn btn-danger btn-sm" id="clear_filter" style="position:absolute;right:30px;top:15px;">Clear Filter</a>
         <?php endif;?>
         <ul class="cateogry-filters-list">
             <li></li>
@@ -27,7 +27,8 @@
                 ?>
                 <div class="carrito-checkbox">
                     <label class="tree-input">
-                        <input class="filter" type="checkbox" data-type="brand_name" id="<?= trim(preg_replace("/[^a-z0-9-]/", '_', strtolower($brand->brand_name))); ?>"
+                        <input class="filter" type="checkbox" data-type="brand_name"
+                               id="<?= trim(preg_replace("/[^a-z0-9-]/", '_', strtolower($brand->brand_name))); ?>"
                                name="filterset"
                                data-value="<?= trim(strtolower($brand->brand_name)); ?>"><?= ucfirst($brand->brand_name); ?>
                         <span class="checkmark"></span>
@@ -41,17 +42,18 @@
     <?php if (!empty($colours)) : ?>
         <div class="category-filters-section">
             <h3 class="widget-title-sm custom-widget-text">Main Colour</h3>
-            <?php foreach ($colours as $colour) : ?>
+            <?php foreach ($colours as $colour) : if (!empty($colour->colour_name)):?>
                 <div class="carrito-checkbox">
                     <label class="tree-input">
-                        <input class="filter" type="checkbox" data-type="main_colour" id="<?= trim(preg_replace("/[^a-z0-9-]/", '_', strtolower($colour->colour_name))); ?>"
+                        <input class="filter" type="checkbox" data-type="main_colour"
+                               id="<?= trim(preg_replace("/[^a-z0-9-]/", '_', strtolower($colour->colour_name))); ?>"
                                name="filterset"
                                data-value="<?= trim(strtolower($colour->colour_name)); ?>"/><?= ucfirst($colour->colour_name); ?>
                         <span class="checkmark"></span>
                         <span class="category-filters-amount">(<?= $colour->colour_count; ?>)</span>
                     </label>
                 </div>
-            <?php endforeach; ?>
+            <?php endif; endforeach; ?>
         </div>
     <?php endif; ?>
     <?php if ($features) : ?>
@@ -77,7 +79,8 @@
                             <?php foreach ($feature_value as $key => $value) : ?>
                                 <div class="carrito-checkbox">
                                     <label class="tree-input">
-                                        <input class="filter" type="checkbox" name="filterset" id="<?= trim(preg_replace("/[^a-z0-9-]/", '_', strtolower($value))) ?>"
+                                        <input class="filter" type="checkbox" name="filterset"
+                                               id="<?= trim(preg_replace("/[^a-z0-9-]/", '_', strtolower($value))) ?>"
                                                data-type="<?= trim($feature); ?>"
                                                data-value="<?= trim(preg_replace("/[^a-z0-9-]/", '_', strtolower($value))) ?>"/><?= $value; ?>
                                         <span class="checkmark"></span>

@@ -143,7 +143,7 @@
                                         <div>
                                             <img
                                                     style="max-width:40px;"
-                                                    src="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
+                                                    src="https://res.cloudinary.com/onitshamarket/image/upload/w_510,h_500,c_pad/onitshamarket/product/<?= $gallery->image_name; ?>"
                                                     alt="<?= character_limiter($product->product_name, 5); ?>"
                                                     title="<?= ucwords($product->product_name) ?>"/>
                                         </div>

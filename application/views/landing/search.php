@@ -9,6 +9,7 @@
         min-height: 300px !important;
         max-height: 300px !important;
     }
+
     .carrito-checkbox {
         display: block;
         position: relative;
@@ -49,9 +50,10 @@
         background-color: #74c683;
     }
 
-    .quick_view_link:hover{
-        color:#0b6427;
+    .quick_view_link:hover {
+        color: #0b6427;
     }
+
     .checkmark:after {
         content: "";
         position: absolute;
@@ -126,98 +128,7 @@
             </div>
             <div class="row">
                 <div class="col-md-3">
-                    <aside class="category-filters">
-                        <div class="category-filters-section">
-                            <h3 class="widget-title-sm custom-widget-text">Category</h3>
-                            <ul class="cateogry-filters-list">
-                                <li></li>
-                                <?php foreach ($sub_categories as $category) : ?>
-                                    <li>
-                                        <a href="<?= base_url('catalog/' . urlify($category->name) . '/'); ?>">
-                                            <?= $category->name; ?>
-                                        </a>
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-                        <div class="category-filters-section">
-                            <h3 class="widget-title-sm custom-widget-text">Price</h3>
-                            <div id="price-range"></div>
-                        </div>
-                        <?php if (!empty($brands)): ?>
-                            <div class="category-filters-section">
-                                <h3 class="widget-title-sm custom-widget-text">Brand</h3>
-                                <?php foreach ($brands as $brand) : ?>
-                                    <?php if(!empty( $brand->brand_name )) :?>
-                                        <div class="carrito-checkbox">
-                                            <label class="tree-input">
-                                                <input class="filter" type="checkbox" data-type="brand_name"
-                                                       name="filterset"
-                                                       data-value="<?= trim($brand->brand_name); ?>"><?= ucfirst($brand->brand_name); ?>
-                                                <span class="checkmark"></span>
-                                                <span class="category-filters-amount">(<?= $brand->brand_count; ?>)</span>
-                                            </label>
-                                        </div>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php endif; ?>
-                        <?php if (!empty($colours)) : ?>
-                            <div class="category-filters-section">
-                                <h3 class="widget-title-sm custom-widget-text">Main Colour</h3>
-                                <?php foreach ($colours as $colour) : ?>
-                                    <div class="carrito-checkbox">
-                                        <label class="tree-input">
-                                            <input class="filter" type="checkbox" data-type="main_colour"
-                                                   name="filterset"
-                                                   data-value="<?= trim($colour->colour_name); ?>"/><?= ucfirst($colour->colour_name); ?>
-                                            <span class="checkmark"></span>
-                                            <span class="category-filters-amount">(<?= $colour->colour_count; ?>)</span>
-                                        </label>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php endif; ?>
-                        <?php if ($features) : ?>
-                            <div class="category-filters-section">
-                                <?php $x = 1;
-                                foreach ($features
-
-                                as $feature => $feature_value) : ?>
-                                <div class="accordion" id="<?= trim($feature); ?>">
-                                    <div class="panel no-outline feature-attribute">
-                                        <div class="panel-header feature-attribute">
-                                            <div class="panel-title" data-toggle="collapse"
-                                                 data-target="#<?= trim($feature) . '-1'; ?>" aria-expanded="true"
-                                                 aria-controls="<?= trim($feature) . '-1'; ?>">
-                                                <h3 class="widget-title-sm custom-widget-text tree-root">
-                                                    <?= preg_replace("/[^A-Za-z 0-9]/", ' ', $feature); ?>
-                                                </h3>
-                                            </div>
-                                        </div>
-                                        <div id="<?= trim($feature) . '-1'; ?>" class="collapse"
-                                             aria-labeledby="<?= $feature; ?>" data-parent="#<?= trim($feature); ?>">
-                                            <div class="panel-body">
-                                                <?php foreach ($feature_value as $key => $value) : ?>
-                                                    <div class="carrito-checkbox">
-                                                        <label class="tree-input">
-                                                            <input class="filter" type="checkbox" name="filterset"
-                                                                   data-type="<?= trim($feature); ?>"
-                                                                   data-value="<?= trim(preg_replace("/[^A-Za-z0-9-]/", '_', $value)) ?>"/><?= $value; ?>
-                                                            <span class="checkmark"></span>
-                                                        </label>
-                                                    </div>
-
-                                                <?php endforeach; ?>
-                                            </div>
-                                        </div>
-                                        <hr class="tree-line"/>
-                                    </div>
-                                    <?php endforeach; ?>
-                                </div>
-                            </div>
-                        <?php endif; ?>
-                    </aside>
+                    <?php $this->load->view('landing/resources/category_filter'); ?>
                 </div>
                 <div class="col-md-9">
                     <div id="processing"
@@ -249,7 +160,7 @@
                                                             data-pr_id="<?= $product->id; ?>"
                                                             data-qv="<?php if ($p_count % 4 == 0) { ?>true<?php } ?>"
                                                             data-qvc="<?php echo $p_count ?>"
-                                                            data-image="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?=$product->image_name; ?>"
+                                                            data-image="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
                                                             data-arrow="arrow-<?= $product->id ?>"
                                                             data-url="<?= base_url(urlify($product->product_name, $product->id)); ?>"
                                                             class="btn btn-primary product-quick-view-btn">Quick view
@@ -265,10 +176,10 @@
                                         </div>
                                         <a class="product-link" title="<?= $product->product_name ?>"
                                            href="<?= base_url(urlify($product->product_name, $product->id)); ?>"></a>
-                                        <?php if($product->from_overseas == 1) :  ?>
-                                            <span class=""><small><i class="fas fa-plane-arrival text-success"></i> From Overseas</small></span>
+                                        <?php if ($product->from_overseas == 1) : ?>
+                                            <span style="margin-left:15px;"><small><i class="fas fa-plane-arrival text-success"></i> From Overseas</small></span>
                                         <?php else : ?>
-                                            <br />
+                                            <br/>
                                         <?php endif; ?>
                                         <div class="product-caption">
                                             <ul class="product-caption-rating">
@@ -278,7 +189,7 @@
                                                 ?>
                                                 <span class="text-sm pull-right"><strong><?= ($product->brand_name == 'others' || empty($product->brand_name)) ? 'Generic' : $product->brand_name; ?></strong></span>
                                             </ul>
-                                            <h5 class="cs-title"><?= character_limiter(ucwords(str_replace('generic', '',$product->product_name)), 10, '...'); ?></h5>
+                                            <h5 class="cs-title"><?= character_limiter(ucwords(str_replace('generic', '', $product->product_name)), 10, '...'); ?></h5>
                                             <div class="product-caption-price">
                                                 <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
                                                     <span class="cs-price-tl"><?= ngn($product->discount_price); ?></span>
@@ -345,22 +256,41 @@
 <script src="<?= base_url('assets/js/quick-view.js'); ?>"></script>
 <script src="<?= base_url('assets/js/search.js'); ?>"></script>
 <script>
-    window.addEventListener('load', function(){
-    var allimages= document.getElementsByTagName('img');
-    for (var i=0; i<allimages.length; i++) {
-        if (allimages[i].getAttribute('data-src')) {
-            allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
+    window.addEventListener('load', function () {
+        let allimages = document.getElementsByTagName('img');
+        for (let i = 0; i < allimages.length; i++) {
+            if (allimages[i].getAttribute('data-src')) {
+                allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
+            }
         }
-    }
-}, false);
+    }, false);
     $("#price-range").ionRangeSlider({
         type: "double",
-        min: <?= $min; ?>,
+        min: <?= $min ?>,
         max: <?= $max; ?>,
         grid: true,
         prefix: "&#8358;",
         onFinish: function (data) {
-            window.location = current_url + '&price_min=' + data.from + '&price_max=' + data.to;
+            let main_location = window.location.href;
+            let location = main_location.split("?");
+            let fs = location[1];
+            let nu_loc = "";
+            if (fs != undefined) {
+                if (main_location.indexOf("?price_min") !== -1) {
+                    nu_loc = main_location.replace(/price_min=(.*)&price_max=(.*)&/, "");
+                } else if (main_location.indexOf("&price_min") !== -1) {
+                    let reg_match = main_location.match(/&price_min=(.*)&price_max=(.*)&/);
+                    if (reg_match !== null) {
+                        nu_loc = main_location.replace(/&price_min=(.*)&price_max=(.*)&/, "&");
+                    }else{
+                        nu_loc = main_location.replace(/&price_min=(.*)&price_max=(.*)/, "");
+                    }
+                }
+                nu_loc = (nu_loc === "") ? main_location : nu_loc;
+                window.location = nu_loc + '&price_min=' + data.from + '&price_max=' + data.to;
+            } else {
+                window.location = catalog_url + '?price_min=' + data.from + '&price_max=' + data.to;
+            }
         }
     });
 
@@ -373,80 +303,111 @@
             to: max
         });
     }
-    $(document).ready(function () {
-        let _category_body = $('#category_body');
 
-        function doReplaceState(url) {
-            let state = {current_url: url},
-                title = "Onitshamarket";
-            history.replaceState(state, title, url);
+    $('.wishlist-btn').on('click', function () {
+        let product_id = $(this).data('pid');
+        let _this = $(this);
+        $.ajax({
+            url: base_url + 'ajax/favourite',
+            method: 'POST',
+            data: {
+                id: product_id
+            },
+            success: response => {
+                let parsed_response = JSON.parse(response);
+                if (parsed_response.action === 'remove') {
+                    _this.removeClass('category-favorite-active').addClass('.category-favorite');
+                    _this.find('i').attr('title', 'Add to your wishlist');
+
+                } else {
+                    _this.removeClass('category-favorite').addClass('.category-favorite-active');
+                    _this.find('i').attr('title', 'Remove from your wishlist');
+
+                }
+                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
+            },
+            error: () => {
+                notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', error);
+            }
+        })
+    });
+
+    $(document).ready(function () {
+        let main_location = window.location.href;
+        let location = main_location.split("?");
+        let filtering_settings = location[1];
+        if (filtering_settings != undefined) {
+            let fs_array = filtering_settings.split("&");
+            for (let w = 0; w < fs_array.length; w++) {
+                let kv = fs_array[w].split("=");
+                let checks = kv[1].split(",");
+                for (let z = 0; z < checks.length; z++) {
+                    $("#" + (unescape(checks[z]).toLowerCase()).replace(/\s+/g, '_')).prop("checked", true);
+                }
+            }
         }
 
         function load_page(url) {
-            $(_category_body).load(`${url} #category_body`, function (response, status, xhr) {
-                if (status === "error") {
-                    let msg = "Sorry but there was an error: ";
-                    alert(msg + xhr.status + " " + xhr.statusText);
-                }
-                $('.lazy').Lazy({
-                    scrollDirection: 'vertical',
-                    effect: 'fadeIn',
-                    visibleOnly: true
-                });
-
-                $('.product-quick-view-btn').on('click', get_view);
-                doReplaceState(url);
-
-                $('#processing').hide();
-                $(_category_body).show();
-            });
+            window.location = url;
         }
 
         let url = '';
         let filter_string = '';
+        let filter_list = {};
         $('.filter').change(function () {
-            if ($('input[name=filterset]').is(':checked')) {
-                let filter_list = {};
-                url = '';
-                filter_string = '';
-                $(_category_body).hide();
-                $('#processing').show();
-                let items = $('input[name=filterset]:checked');
-
-                items.each(function () {
-                    let value = $(this).data('value');
-                    let key = $(this).data('type');
-
-                    if (filter_list[key]) {
-                        if (jQuery.inArray(value, filter_list[key]) !== -1) {
-                        } else {
-                            filter_list[key].push(value)
-                        }
-                    } else {
-                        filter_list[key] = [value];
-                    }
-                    url = '';
-                    jQuery.each(filter_list, function (obj) {
-                        filter_string = '';
-                        jQuery.each(filter_list[obj], function (id, values) {
-                            if (filter_string === '') {
-                                filter_string += values;
-                            } else {
-                                filter_string += ',' + values;
-                            }
-                        });
-                        if (url === '') {
-                            url += `?${obj}=${filter_string}`
-                        } else {
-                            url += `&${obj}=${filter_string}`
-                        }
-                    });
-                    load_page(url);
-
-                });
-            } else {
-                load_page(current_url);
+            let location = main_location.split("?");
+            let filtering_settings = location[1];
+            if (filtering_settings != undefined) {
+                let fs_array = filtering_settings.split("&");
+                for (let w = 0; w < fs_array.length; w++) {
+                    let kv = fs_array[w].split("=");
+                    let key = kv[0];
+                    filter_list[key] = kv[1].split(",");
+                }
             }
+            <?php // console.log("fiter_list" + JSON.stringify(filter_list));?>
+            filter_string = '';
+            let value = $(this).data('value');
+            let key = $(this).data('type');
+            if (filter_list[key]) {
+                if (jQuery.inArray(escape(value), filter_list[key]) !== -1) {
+                    let index = filter_list[key].indexOf(escape(value));
+                    filter_list[key].splice(index, 1);
+                    if (filter_list[key].length < 1) {
+                        delete filter_list[key];
+                    }
+                } else {
+                    filter_list[key].push(value)
+                }
+            } else {
+                filter_list[key] = [value];
+            }
+            console.log(filter_list);
+            url = '';
+            jQuery.each(filter_list, function (obj) {
+                filter_string = '';
+                jQuery.each(filter_list[obj], function (id, values) {
+                    if (filter_string === '') {
+                        filter_string += values;
+                    } else {
+                        filter_string += ',' + values;
+                    }
+                });
+                if (url === '') {
+                    url += `?${obj}=${filter_string}`
+                } else {
+                    url += `&${obj}=${filter_string}`
+                }
+                <?php // console.log(url);
+                // console.log("fiter_list after" + JSON.stringify(filter_list));?>
+            });
+            url = (url === "") ? catalog_url : url;
+            load_page(url);
+        });
+
+        $('#clear_filter').on('click', function () {
+            let part = main_location.split("&");
+            window.location = part[0];
         });
     });
 </script>
