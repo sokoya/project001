@@ -504,6 +504,7 @@ class Checkout extends MY_Controller
                 $this->session->set_flashdata('error_msg','There was an error with that image, please fix and try again.');
                 $this->load->view('landing/bank_transfer', $page_data);
                 return false;
+
             }
         }
     }
