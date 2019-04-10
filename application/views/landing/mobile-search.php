@@ -285,6 +285,7 @@
 
             function load_page(url) {
                 window.location = url;
+                <?php //comment;?>
             }
 
             let url = '';
