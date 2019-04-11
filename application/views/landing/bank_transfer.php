@@ -6,19 +6,19 @@
 	<?php $this->load->view('landing/resources/head_menu') ?>
 
     <div class="container">
-        <header class="page-header">
-            <h1 style="color:#00000082;">Proof of Payment</h1>
-        </header>
         <div class="row">
-            <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-lg-8 col-lg-2">
+            <div class="col-md-6 col-md-offset-3">
                 <?php $this->load->view('landing/msg_view'); ?>
-                <div class="alert alert-info">
+                <header class="page-header">
+                    <h1 style="color:#00000082;">Please confirm your payment below.</h1>
+                </header>
+                <div class="alert alert-warning">
                     <p class="lead">
                         <b>
-                            <span>Bank Name: </span>GT Bank Plc
-                            <span>Account Name: </span>Internet Onitshamarketing Ltd
-                            <span>Account NUmber: </span>0449870887
-                            <span>Account Type: </span>Current Account
+                            <span>Bank Name: </span>GT Bank Plc<br />
+                            <span>Account Name: </span>Internet Onitshamarketing Ltd<br />
+                            <span>Account Number: </span>0449870887<br />
+                            <span>Account Type: </span>Current Account<br />
                             <span>Sort Code: </span>058244135
                         </b>
                     </p>
@@ -38,7 +38,7 @@
 
                     <div class="form-group">
                         <label for="amount">Amount</label>
-                        <input type="text" readonly name="amount" value="<?= $this->session->userdata('amount'); ?>" class="form-control">
+                        <input type="text" disabled name="amount" value="<?= $this->session->userdata('amount') / 100; ?>" class="form-control">
                         <?= form_error('amount')?>
                     </div>
 
@@ -63,12 +63,12 @@
                         <input type="file" name="pop" required >
                         <?= form_error('pop'); ?>
                     </div>
-                    <input type="hidden" name="order_code" value="<?= $this->session->userdata('order_code'); ?>" />
+                    <input type="hidden" name="order" value="<?= $this->session->userdata('order_code'); ?>" />
                     <input type="hidden" name="amount" value="<?= $this->session->userdata('amount'); ?>" />
 
                     <div class="form-group">
                         <button class="btn btn-success btn-md">Submit</button>
-                        <a href="<?= base_url('checkout/cancel/' . $this->session->userdata('order_code') .'/')?>" class="btn btn-danger">Cancel My Order</a>
+                        <a href="<?= base_url('checkout/bank_transfer/?order=' . $this->session->userdata('order_code') .'&cancel=true')?>" class="btn btn-danger">Cancel My Order</a>
                     </div>
                 <?= form_close(); ?>
                 <div class="gap gap-small"></div>
