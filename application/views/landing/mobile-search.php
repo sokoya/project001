@@ -274,15 +274,18 @@
                 let fs_array = filtering_settings.split("&");
                 for (let w = 0; w < fs_array.length; w++) {
                     let kv = fs_array[w].split("=");
-                    let checks = kv[1].split(",");
-                    for (let z = 0; z < checks.length; z++) {
-                        $("#" + (unescape(checks[z]).toLowerCase()).replace(/\s+/g, '_')).prop("checked", true);
+                    if(kv[0] !== "q"){
+                        let checks = kv[1].split(",");
+                        for (let z = 0; z < checks.length; z++) {
+                            $("#" + (unescape(checks[z]).toLowerCase()).replace(/\s+/g, '_')).prop("checked", true);
+                        }
                     }
                 }
             }
 
             function load_page(url) {
                 window.location = url;
+                <?php //comment;?>
             }
 
             let url = '';

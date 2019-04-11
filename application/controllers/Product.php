@@ -215,7 +215,7 @@ class Product extends MY_Controller
 		$product_name = $page_data['searched'] = cleanit($this->input->get('q', true));
 		$page_data['queries'] = array('category' => $category, 'q' => $page_data['searched']);
 
-		$page_data['title'] = ucwords($category . ' ' . $product_name);
+		$page_data['title'] = ucwords($category . ' ' . $product_name . ' Search Results');
 		$features = $this->product->get_features($category, $product_name);
 		$feature_array = array();
         if ($features) {
@@ -271,7 +271,6 @@ class Product extends MY_Controller
 		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 		$page_data['category_detail'] = $this->product->category_details($category);
 		if ($page_data['category_detail']) {
-            $page_data['title'] = $page_data['category_detail']->title;
             $page_data['description'] = $page_data['category_detail']->description;
 		} else {
 			$page_data['description'] = DESCRIPTION;

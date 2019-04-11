@@ -775,7 +775,7 @@ Class Product_model extends CI_Model{
             return $this->db->query( $select )->row()->charge;
         }else{
             // Get the user primary billing address
-            $select = "SELECT aid FROM billing_address WHERE uid = {$id} AND primary_address = 1";
+            $select = "SELECT aid FROM billing_address WHERE id = {$id}";
             $aid = $this->db->query( $select )->row()->aid;
             if( !empty($weights) ){
                 $total_weight_value = 0;
