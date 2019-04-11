@@ -90,7 +90,7 @@
                            class="form-control">
                     <?= form_error('amount') ?>
                 </div>
-
+                
                 <div class="form-group">
                     <label class="deposit_type">Deposit Type</label>
                     <select name="deposit_type" class="form-control" required>
