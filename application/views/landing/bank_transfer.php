@@ -147,21 +147,19 @@
                         <textarea name="remark" class="form-control" rows="3"><?= set_value('remark', ''); ?></textarea>
                         <?= form_error('remark') ?>
                     </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group">
                             <label class="pop">Proof of Payment</label>
                             <input type="file" name="pop" required>
                             <span style="font-size:8px;font-weight:700;color:#f02134;">Screenshot of Mobile Transfer / Snapshot of Deposit Slip</span>
                             <?= form_error('pop'); ?>
                         </div>
-                        <div class="col-md-6" style="margin-top:20px;">
-                            <div class="btn-group pull-right">
+                        <div class="form-group" style="margin-top:20px;">
+                            <div class="btn-group">
                                 <button class="btn btn-success btn-md">Submit</button>
                                 <a href="<?= base_url('checkout/bank_transfer/?order=' . $this->session->userdata('order_code') . '&cancel=true') ?>"
                                    class="btn btn-danger">Cancel My Order</a>
                             </div>
                         </div>
-                    </div>
 
                     <input type="hidden" name="order" value="<?= $this->session->userdata('order_code'); ?>"/>
                     <input type="hidden" name="amount" value="<?= $this->session->userdata('amount'); ?>"/>
