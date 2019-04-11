@@ -82,7 +82,7 @@
     <div class="container">
         <p class="text-center" style="margin-top:30px;">
             <a href="<?= base_url(); ?>"><img
-                        src="<?= base_url('assets/img/onitshamarket-logo.png') ?>" width="35%"
+                        src="<?= base_url('assets/img/onitshamarket-logo.png') ?>" width="45%"
                         alt="market logo Image"></a>
         </p>
         <div class="row">
@@ -155,15 +155,15 @@
                             <?= form_error('pop'); ?>
                         </div>
                         <div class="form-group" style="margin-top:20px;">
+                            <button class="btn btn-success btn-md">Submit</button>
                             <div class="btn-group">
-                                <button class="btn btn-success btn-md">Submit</button>
                                 <a href="<?= base_url('checkout/bank_transfer/?order=' . $this->session->userdata('order_code') . '&cancel=true') ?>"
                                    class="btn btn-danger">Cancel My Order</a>
                             </div>
                         </div>
 
-                    <input type="hidden" name="order" value="<?= $this->session->userdata('order_code'); ?>"/>
-                    <input type="hidden" name="amount" value="<?= $this->session->userdata('amount'); ?>"/>
+                        <input type="hidden" name="order" value="<?= $this->session->userdata('order_code'); ?>"/>
+                        <input type="hidden" name="amount" value="<?= $this->session->userdata('amount'); ?>"/>
 
 
                     <?= form_close(); ?>
