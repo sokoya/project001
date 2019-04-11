@@ -144,7 +144,6 @@ class Checkout extends MY_Controller
      *
      * */
 	function checkout_confirm() {
-
 	    if( $this->input->is_ajax_request() ){
 	        /*  Note the seller might have checked pickup address or billing address */
             $charge = 0;
@@ -216,7 +215,6 @@ class Checkout extends MY_Controller
                 }
                 $subtotal += $product['subtotal'];
             }
-
             $item_left = $this->cart->total_items();
             if(  $error > 0 ){
                 $return['message'] = $error;
@@ -226,6 +224,8 @@ class Checkout extends MY_Controller
                 $total = $subtotal + $billing_amount;
                     // Lets insert our orders into the database
                 if(  $this->product->insert_batch( 'orders', $data ) ){
+                    // Remove the product quantity Item
+                    $this->product->set_field('product_variation', 'quantity', "quantity-{$product['qty']}", array('id' => $product['options']['variation_id']));
                     unset( $data); // Fore data leaching...
                     // check the payment method, if Interswitch (2) compile the array session
                     $token = simple_crypt( $txn_ref, 'e');
@@ -275,9 +275,7 @@ class Checkout extends MY_Controller
         $page_data['profile'] = $user = $this->user->get_profile( $uid );
         $orders = $this->user->get_my_lastorders($order, $uid);
         if( $uid && $order && $orders ){
-            foreach( $orders->result() as $key ){
-                $this->product->set_field('product_variation', 'quantity', "quantity-{$key->qty}", array('id' => $key->product_variation_id));
-            }
+
             $page_data['order_code'] = $order;
             $page_data['orders'] = $orders->result();
             $page_data['ordersingledetail'] = $detail = $this->user->get_last_singleorder($order, $uid);
@@ -341,8 +339,6 @@ class Checkout extends MY_Controller
         $token = $this->input->get('t', true);
         $txn_ref = $this->session->userdata('txn_ref');
         $is_token = simple_crypt( $token, 'd');
-
-
 	    if( $txn_ref && ( $txn_ref == $is_token ) ) {
             // Check the ResponseCode
             $amount = $this->session->userdata('amount');
@@ -417,13 +413,11 @@ class Checkout extends MY_Controller
         }else{
             $PaymentReference = (isset($response['PaymentReference'])) ? $response['PaymentReference'] : null;
             $RetrievalReferenceNumber = (isset($response['RetrievalReferenceNumber'])) ? $response['RetrievalReferenceNumber'] : null;
-
             $row = $this->product->get_row('orders', 'status', array('order_code' => $order_code));
             $json_array = json_decode($row->status, true);
             $array = array("cancelled" => array('msg' => "Order was marked as cancelled : {$response['ResponseDescription']}", 'datetime' => get_now()));
             $status_array = array_merge($json_array, $array);
             $status_array = json_encode($status_array);
-
             $update_data = array(
                 'active_status' => 'cancelled',
                 'status'  => $status_array,
@@ -438,8 +432,15 @@ class Checkout extends MY_Controller
                 $this->product->update_items($order_code, $update_data);
                 $buyer['name'] = $profile->first_name . ' '. $profile->last_name;
                 $buyer['email'] = $profile->email;
-//                @TODO
+
                 $this->myemail->paymentUncompleted( $order_code, $buyer);
+
+                // Release the order quantity
+                $orders = $this->product->get_result('orders', 'qty,product_variation_id', "(order_code = '{$order_code}')");
+                foreach( $orders as $order ){
+
+                }
+
                 // Lets also send a message
                 if( SMS_FOR_ORDERS) {
                     $buyer_message = "Dear " .ucfirst($profile->first_name) . ", your order {$order_code} payment was not successful: {$response['ResponseDescription']}. check your email for complete details. Thank you!";
@@ -484,7 +485,7 @@ class Checkout extends MY_Controller
                 $status_array = array_merge($json_array, $array);
                 $update_array['status'] = json_encode($status_array);
                 $update_array['active_status'] = 'cancelled';
-                $update_array['active_status'] = 'fail';
+                $update_array['payment_made'] = 'fail';
                 try {
                     // Start shopping ...
                     $this->product->update_items( $order_code, $update_array );
