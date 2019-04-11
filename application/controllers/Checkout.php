@@ -438,9 +438,8 @@ class Checkout extends MY_Controller
                 // Release the order quantity
                 $orders = $this->product->get_result('orders', 'qty,product_variation_id', "(order_code = '{$order_code}')");
                 foreach( $orders as $order ){
-
+                    $this->product->set_field('product_variation', 'quantity', "quantity+{$order->qty}", array('id' => $order->product_variation_id));
                 }
-
                 // Lets also send a message
                 if( SMS_FOR_ORDERS) {
                     $buyer_message = "Dear " .ucfirst($profile->first_name) . ", your order {$order_code} payment was not successful: {$response['ResponseDescription']}. check your email for complete details. Thank you!";
