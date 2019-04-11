@@ -82,7 +82,7 @@
     <div class="container">
         <p class="text-center" style="margin-top:30px;">
             <a href="<?= base_url(); ?>"><img
-                        src="<?= base_url('assets/img/onitshamarket-logo.png') ?>" width="35%"
+                        src="<?= base_url('assets/img/onitshamarket-logo.png') ?>" width="45%"
                         alt="market logo Image"></a>
         </p>
         <div class="row">
@@ -149,8 +149,8 @@
                         <?= form_error('remark') ?>
                     </div>
 
-                    <input type="hidden" name="order" value="<?= $this->session->userdata('order_code'); ?>"/>
-                    <input type="hidden" name="amount" value="<?= $this->session->userdata('amount'); ?>"/>
+                        <input type="hidden" name="order" value="<?= $this->session->userdata('order_code'); ?>"/>
+                        <input type="hidden" name="amount" value="<?= $this->session->userdata('amount'); ?>"/>
 
                     <div class="col-md-6" style="margin-top:20px;">
                         <button type="submit" class="btn btn-success btn-md">Submit</button>
