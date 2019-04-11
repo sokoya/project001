@@ -231,9 +231,7 @@ class Checkout extends MY_Controller
                     $amt = $total * 100 ;
                     if( (int)$payment_method == 2 ){
                         $redirect_url =  base_url('interswitch/response/?t=' . $token);
-
                         $hash = hash('SHA512', $txn_ref.INTERSWITCH_PRODUCT_ID.INTERSWITCH_PAY_ITEM_ID.$amt.$redirect_url.INTERSWITCH_MAC_KEY) ;
-
                         $profile = $this->product->get_row('users', 'first_name, last_name', array('id' => $buyer_id));
                         $name = $profile->first_name . ' '. $profile->last_name;
                         $interswitch_session = array(
@@ -249,7 +247,6 @@ class Checkout extends MY_Controller
                         );
                         $this->session->set_userdata(array('inter' => $interswitch_session));
                     }
-
                     // Send mail to admin
                     $this->session->set_userdata(array('order_code' => $order_code, 'txn_ref' => $txn_ref, 'amount' => $amt));
                     $return['status'] = 'success';
@@ -267,7 +264,7 @@ class Checkout extends MY_Controller
     }
 
     /*
-     * Checkout completed for payment on delivery
+     * Checkout completed for payment on delivery and payment via Bak Transfer
      * */
 	public function order_completed(){
         $order = $this->session->userdata('order_code');
@@ -461,5 +458,104 @@ class Checkout extends MY_Controller
         }
     }
 
+
+    /*
+     * Bank Transfer
+     * */
+    public function bank_transfer(){
+
+        if( !$this->session->has_userdata('order_code') || !$this->session->userdata('logged_in')){
+            $this->session->set_flashdata('error_msg', "Start shopping on Onitshamarket.com.");
+            redirect( base_url() );
+        }
+        $id = $this->session->userdata('logged_id');
+        $page_data['profile'] = $this->user->get_profile( $id );
+        $page_data['page'] = 'checkout';
+        $page_data['title'] = 'Bank Transfer Payment Confirmation.';
+
+        // Over method though:(
+        $cancel = $this->input->get('cancel', true);
+        $order_code = $this->input->post_get('order');
+        $row = $this->product->get_row( 'orders',"payment_made, status", "( order_code = '{$order_code}' )" );
+        if( isset($cancel)){
+            if( $row && $cancel == true){
+                // Update the order table to be canceled
+                $json_array = json_decode($row->status, true);
+                $array = array("cancelled" => array('msg' => "Order was marked as cancelled : Transaction not completed", 'datetime' => get_now()));
+                $status_array = array_merge($json_array, $array);
+                $update_array['status'] = json_encode($status_array);
+                $update_array['active_status'] = 'cancelled';
+                $update_array['active_status'] = 'fail';
+                try {
+                    // Start shopping ...
+                    $this->product->update_items( $order_code, $update_array );
+                    $buyer['name'] = $page_data['profile']->first_name . ' '. $page_data['profile']->last_name;
+                    $buyer['email'] = $page_data['profile']->email;
+                    $this->myemail->paymentUncompleted( $order_code, $buyer);
+                    redirect(base_url());
+                } catch (Exception $x) {
+                }
+
+            }else{
+                $this->session->set_flashdata('error_msg', "Sorry, this transaction no longer exist. Contact support if debited.");
+                redirect(base_url());
+            }
+        }
+
+        $this->form_validation->set_rules('bank', 'Bank','trim|required|xss_clean');
+        $this->form_validation->set_rules('amount', 'Amount','trim|required|xss_clean');
+        $this->form_validation->set_rules('deposit_type', 'Deposit Type','trim|required|xss_clean');
+        $this->form_validation->set_rules('remark', 'Remark/Comment','trim|xss_clean|max_length[255]');
+
+        if( $this->form_validation->run() == FALSE ){
+            $this->load->view('landing/bank_transfer', $page_data);
+            return;
+        }
+        // check that this order still exists
+        if( !$row || $row->payment_made == "fail"){
+            $this->session->set_flashdata('error_msg', "Sorry, this transaction no longer exist. Contact support if debited.");
+            redirect(base_url());
+        }
+        $data = array(
+            'uid' => $id,
+            'order_code' => $order_code,
+            'bank' => $this->input->post('bank'),
+            'amount' => $this->input->post('amount'),
+            'deposit_type' => $this->input->post('deposit_type'),
+            'remark' => $this->input->post('remark')
+        );
+        if( isset($_FILES) && $_FILES['pop']['name'] ){
+            $upload_array = array(
+                'folder' => STATIC_CATEGORY_FOLDER,
+                'filepath' => $_FILES['pop']['tmp_name'],
+                'eager' => array( 'width' => 200, 'height' => 70 , 'crop' => 'fill')
+            );
+            $this->load->library('cloudinarylib');
+            $this->cloudinarylib->upload_image( $upload_array );
+            $return  = $this->cloudinarylib->get_result('filename');
+            if( $return ){
+                $data['pop'] = $return;
+                // Insert
+                try {
+                    $this->product->insert_data('bank_transfer', $data);
+                    // Checkout Confirm
+                    redirect('order_completed');
+                } catch (Exception $e) {
+                    $this->session->set_flashdata('error_msg','There was an error submitting your order ' . $e);
+                    $this->load->view('landing/bank_transfer', $page_data);
+                    return false;
+                }
+                unset( $upload_array );
+            }else{
+                $this->session->set_flashdata('error_msg','There was an error with that image, please fix and try again.');
+                $this->load->view('landing/bank_transfer', $page_data);
+                return false;
+            }
+        }else{
+            $this->session->set_flashdata('error_msg','Please upload Proof of payment to proceed.');
+            $this->load->view('landing/bank_transfer', $page_data);
+            return false;
+        }
+    }
 
 }

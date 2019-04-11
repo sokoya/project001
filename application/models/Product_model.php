@@ -779,6 +779,7 @@ Class Product_model extends CI_Model{
             $aid = $this->db->query( $select )->row()->aid;
             if( !empty($weights) ){
                 $total_weight_value = 0;
+                $weights = explode(',', $weights );
                 $count = count( $weights );
                 for( $i = 0 ; $i < $count; $i++){
                     $this->db->where('aid', $aid);
@@ -911,7 +912,7 @@ Class Product_model extends CI_Model{
             $this->db->where('order_code', $order_code);
             return $this->db->update('orders', $data);
         } catch (Exception $e) {
-            $error_array = array('error_action' => 'Failed to Update Order', 'error_message' => "A payment was successful for {$order_code} but could'nt update.");
+            $error_array = array('error_action' => 'Failed to Update Order', 'error_message' => "A payment was successful for {$order_code} but couldn't update.");
             $this->product->insert_data('error_logs', $error_array);
         }
         return false;
