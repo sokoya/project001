@@ -75,6 +75,9 @@
             font-size: 12px !important;
         }
     }
+    .market-board{
+        height: 710px;
+    }
 </style>
 </head>
 <body class="cart-row" style="background-color: #ffffff;">
@@ -96,7 +99,6 @@
                             payment below</h3>
                     </header>
                     <div class="well">
-                        <h5 style="color:#f02134;text-transform:capitalize;margin-top:10px;">Please make all transactions to the following account details</h5>
                         <p class="">
                             <b>
                                 <span>Bank Name: </span>GT Bank Plc<br/>
@@ -107,60 +109,67 @@
                             </b>
                         </p>
                     </div>
-                    <?= form_open_multipart('', 'id="bank-transfer-form"'); ?>
-                    <div class="form-group">
-                        <label for="bank">Please select the bank you paid from</label>
-                        <select class="form-control" name="bank" required>
-                            <?php $banks = explode(',', lang('banks')); ?>
-                            <option value="">-- Select Bank --</option>
-                            <?php foreach ($banks as $bank) : ?>
-                                <option value="<?= trim($bank); ?>" <?= set_select('bank', $bank); ?> ><?= $bank; ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <?= form_error('bank') ?>
-                    </div>
+                    <?= form_open_multipart(base_url('checkout/bank_transfer'), 'id="bank-transfer-form"'); ?>
+                        <div class="form-group">
+                            <label for="bank">Please select the bank you paid from</label>
+                            <select class="form-control" name="bank" required>
+                                <?php $banks = explode(',', lang('banks')); ?>
+                                <option value="">-- Select Bank --</option>
+                                <?php foreach ($banks as $bank) : ?>
+                                    <option value="<?= trim($bank); ?>" <?= set_select('bank', $bank); ?> ><?= $bank; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <?= form_error('bank') ?>
+                        </div>
 
-                <div class="form-group">
-                    <label for="amount">Amount</label>
-                    <input type="text" disabled name="amount" value="<?= $this->session->userdata('amount') / 100; ?>"
-                           class="form-control">
-                    <?= form_error('amount') ?>
-                </div>
-                
-                <div class="form-group">
-                    <label class="deposit_type">Deposit Type</label>
-                    <select name="deposit_type" class="form-control" required>
-                        <option value="Cash Deposit" <?= set_select('deposit_type', 'Cash Deposit'); ?> >Cash Deposit
-                        </option>
-                        <option value="Mobile Banking" <?= set_select('deposit_type', 'Mobile Banking'); ?> >Mobile
-                            Banking
-                        </option>
-                        <option value="Internet Banking Transfer" <?= set_select('deposit_type', 'Internet Banking Transfer'); ?> >
-                            Internet Banking Transfer
-                        </option>
-                    </select>
-                    <?= form_error('deposit_type'); ?>
-                </div>
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <input type="text" disabled name="amount" value="<?= $this->session->userdata('amount') / 100; ?>"
+                                   class="form-control">
+                            <?= form_error('amount') ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="deposit_type">Deposit Type</label>
+                            <select name="deposit_type" class="form-control" required>
+                                <option value="Cash Deposit" <?= set_select('deposit_type', 'Cash Deposit'); ?> >Cash Deposit
+                                </option>
+                                <option value="Mobile Banking" <?= set_select('deposit_type', 'Mobile Banking'); ?> >Mobile
+                                    Banking
+                                </option>
+                                <option value="Internet Banking Transfer" <?= set_select('deposit_type', 'Internet Banking Transfer'); ?> >
+                                    Internet Banking Transfer
+                                </option>
+                            </select>
+                            <?= form_error('deposit_type'); ?>
+                        </div>
 
 
-                    <div class="form-group">
-                        <label for="remark">Remark</label>
-                        <textarea name="remark" class="form-control" rows="3"><?= set_value('remark', ''); ?></textarea>
-                        <?= form_error('remark') ?>
-                    </div>
+                        <div class="form-group">
+                            <label for="remark">Remark</label>
+                            <textarea name="remark" class="form-control" rows="3"><?= set_value('remark', ''); ?></textarea>
+                            <?= form_error('remark') ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pop">Proof of payment</label>
+                            <input type="file" name="pop" required>
+                        </div>
 
                         <input type="hidden" name="order" value="<?= $this->session->userdata('order_code'); ?>"/>
                         <input type="hidden" name="amount" value="<?= $this->session->userdata('amount'); ?>"/>
 
-                    <div class="col-md-6" style="margin-top:20px;">
-                        <button type="submit" class="btn btn-success btn-md">Submit</button>
-                        <div class="btn-group pull-right">
-                            <a href="<?= base_url('checkout/bank_transfer/?order=' . $this->session->userdata('order_code') . '&cancel=true') ?>"
-                               class="btn btn-danger">Cancel My Order</a>
+                        <div class="col-md-6" style="margin-top:0px;">
+                            <button type="submit" class="btn btn-success btn-md">Submit</button>
+                            <div class="btn-group pull-right">
+                                <a href="<?= base_url('checkout/bank_transfer/?order=' . $this->session->userdata('order_code') . '&cancel=true') ?>"
+                                   class="btn btn-danger">Cancel My Order</a>
+                            </div>
                         </div>
-                    </div>
+
+                    <?= form_close(); ?>
                 </div>
-                <?= form_close(); ?>
+
             </div>
         </div>
         <div class="row">

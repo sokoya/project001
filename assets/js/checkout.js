@@ -49,7 +49,7 @@ $('.continue-btn').on('click', function (e) {
                     setTimeout(function () {
                         notification_message("Saving your orders... Redirecting you to a page 5 seconds... ", 'fas fa-info-circle', 'success');
                     }, 3000);
-                    window.location.href = base_url + "checkout/bank_transfer/";
+                    window.location.href = base_url + "checkout/bank_transfer";
                 }else {
                     // no payment issued...
                     window.location.href = base_url;
