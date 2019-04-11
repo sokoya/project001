@@ -15,6 +15,7 @@ class Checkout extends MY_Controller
 			redirect(base_url());
 		}
 		$this->load->library('sitelib');
+        $this->load->model('email_model','myemail');
 	}
 
     public function index(){
@@ -173,7 +174,7 @@ class Checkout extends MY_Controller
             // End of stress
             $billing_amount = $this->input->post('delivery_charge', true);
             $buyer_id = $this->session->userdata('logged_id');
-            $txn_ref = 'TX-'.$order_code.'-'.time();
+            $txn_ref = 'TX-'.$order_code;
             foreach( $this->cart->contents() as $product ){
                 $detail = $this->product->get_cart_details($product['id']);
                 $variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
@@ -298,7 +299,6 @@ class Checkout extends MY_Controller
                     $this->africasms->sendsms();
                 }
                 // Send Mail
-                $this->load->model('email_model','myemail');
                 // send mail to the buyer
                 $recipent['name'] = ucwords($page_data['profile']->first_name . ' ' . $page_data['profile']->last_name);
                 $recipent['email'] = $page_data['profile']->email;
@@ -491,6 +491,7 @@ class Checkout extends MY_Controller
                     $this->product->update_items( $order_code, $update_array );
                     $buyer['name'] = $page_data['profile']->first_name . ' '. $page_data['profile']->last_name;
                     $buyer['email'] = $page_data['profile']->email;
+
                     $this->myemail->paymentUncompleted( $order_code, $buyer);
                     redirect(base_url());
                 } catch (Exception $x) {
