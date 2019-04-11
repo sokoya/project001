@@ -17,6 +17,9 @@
         background-size: cover;
     }
 
+    .login-box {
+        padding: 20px 15px 30px;
+    }
 
     .market-box {
         margin-top: 50px;
@@ -25,15 +28,46 @@
         border-radius: 3px;
     }
 
+    .panel-bordered-primary {
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        border: 1px solid #1ca28b;
+        color: #1cbb86 !important;
+        padding: 10px 50px;
+        font-size: 11px;
+    }
 
     a:hover, a:active, a::selection {
         text-decoration: none;
     }
 
+    @media screen and (max-width: 885px) and (min-width: 500px) {
+        .market-board {
+            width: 80%;
+        }
+
+        .ipad_pad {
+            width: 10%;
+        }
+
+        .inline_flex {
+            display: inline-flex;
+            width: 100%;
+        }
+    }
 
     @media screen and (max-width: 360px) {
         .market-box {
             margin-top: 0 !important;
+        }
+
+        .market-board {
+            margin-bottom: 5px;
+        }
+
+        div.market-board.login-box {
+            padding: 10px;
         }
 
         input.form-control {
@@ -43,46 +77,48 @@
     }
 </style>
 </head>
-<body class="cart-row">
-<div class="global-wrapper clearfix" id="global-wrapper">
+<body class="cart-row" style="background-color: #ffffff;">
+<div class="global-wrapper clearfix" id="global-wrapper" style="background: #fff;padding-top:20px;">
     <div class="container">
         <p class="text-center" style="margin-top:30px;">
             <a href="<?= base_url(); ?>"><img
-                        src="<?= base_url('assets/img/onitshamarket-logo.png') ?>" width="30%"
+                        src="<?= base_url('assets/img/onitshamarket-logo.png') ?>" width="35%"
                         alt="market logo Image"></a>
         </p>
         <div class="row">
             <div class="col-md-3"></div>
-            <div class="col-md-6 market-board" style="background: #fff;">
-                <?php $this->load->view('landing/msg_view'); ?>
-                <header style="margin:20px 0 20px;">
-                    <h3 style="color:#00000082;text-transform: capitalize;" class="text-center">Please confirm your
-                        payment below</h3>
-                </header>
-                <div class="well">
-                    <h5 style="color:#f02134;text-transform:capitalize;margin-top:10px;">Please make all transactions to the following account details</h5>
-                    <p class="">
-                        <b>
-                            <span>Bank Name: </span>GT Bank Plc<br/>
-                            <span>Account Name: </span>Internet Onitshamarketing Ltd<br/>
-                            <span>Account Number: </span>0449870887<br/>
-                            <span>Account Type: </span>Current Account<br/>
-                            <span>Sort Code: </span>058244135
-                        </b>
-                    </p>
-                </div>
-                <?= form_open_multipart('', 'id="bank-transfer-form"'); ?>
-                <div class="form-group">
-                    <label for="bank">Please select the bank you paid from</label>
-                    <select class="form-control" name="bank" required>
-                        <?php $banks = explode(',', lang('banks')); ?>
-                        <option value="">-- Select Bank --</option>
-                        <?php foreach ($banks as $bank) : ?>
-                            <option value="<?= trim($bank); ?>" <?= set_select('bank', $bank); ?> ><?= $bank; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    <?= form_error('bank') ?>
-                </div>
+            <div class="col-md-6 inline_flex" style="background: #fff;">
+                <div class="ipad_pad"></div>
+                <div class="market-board">
+                    <?php $this->load->view('landing/msg_view'); ?>
+                    <header style="margin:20px 0 20px;">
+                        <h3 style="color:#00000082;text-transform: capitalize;" class="text-center">Please confirm your
+                            payment below</h3>
+                    </header>
+                    <div class="well">
+                        <h5 style="color:#f02134;text-transform:capitalize;margin-top:10px;">Please make all transactions to the following account details</h5>
+                        <p class="">
+                            <b>
+                                <span>Bank Name: </span>GT Bank Plc<br/>
+                                <span>Account Name: </span>Internet Onitshamarketing Ltd<br/>
+                                <span>Account Number: </span>0449870887<br/>
+                                <span>Account Type: </span>Current Account<br/>
+                                <span>Sort Code: </span>058244135
+                            </b>
+                        </p>
+                    </div>
+                    <?= form_open_multipart('', 'id="bank-transfer-form"'); ?>
+                    <div class="form-group">
+                        <label for="bank">Please select the bank you paid from</label>
+                        <select class="form-control" name="bank" required>
+                            <?php $banks = explode(',', lang('banks')); ?>
+                            <option value="">-- Select Bank --</option>
+                            <?php foreach ($banks as $bank) : ?>
+                                <option value="<?= trim($bank); ?>" <?= set_select('bank', $bank); ?> ><?= $bank; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <?= form_error('bank') ?>
+                    </div>
 
                 <div class="form-group">
                     <label for="amount">Amount</label>
@@ -106,32 +142,34 @@
                     <?= form_error('deposit_type'); ?>
                 </div>
 
-                <div class="form-group">
-                    <label for="remark">Remark</label>
-                    <textarea name="remark" class="form-control" rows="3"><?= set_value('remark', ''); ?></textarea>
-                    <?= form_error('remark') ?>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="pop">Proof of Payment</label>
-                        <input type="file" name="pop" required>
-                        <span style="font-size:10px;color:#f02134;">Screenshot of Mobile Transfer / Snapshot of Deposit Slip</span>
-                        <?= form_error('pop'); ?>
+
+                    <div class="form-group">
+                        <label for="remark">Remark</label>
+                        <textarea name="remark" class="form-control" rows="3"><?= set_value('remark', ''); ?></textarea>
+                        <?= form_error('remark') ?>
                     </div>
-                    <div class="col-md-6" style="margin-top:20px;">
-                        <div class="btn-group pull-right">
-                            <button class="btn btn-success btn-md">Submit</button>
-                            <a href="<?= base_url('checkout/bank_transfer/?order=' . $this->session->userdata('order_code') . '&cancel=true') ?>"
-                               class="btn btn-danger">Cancel My Order</a>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="pop">Proof of Payment</label>
+                            <input type="file" name="pop" required>
+                            <span style="font-size:8px;font-weight:700;color:#f02134;">Screenshot of Mobile Transfer / Snapshot of Deposit Slip</span>
+                            <?= form_error('pop'); ?>
+                        </div>
+                        <div class="col-md-6" style="margin-top:20px;">
+                            <div class="btn-group pull-right">
+                                <button class="btn btn-success btn-md">Submit</button>
+                                <a href="<?= base_url('checkout/bank_transfer/?order=' . $this->session->userdata('order_code') . '&cancel=true') ?>"
+                                   class="btn btn-danger">Cancel My Order</a>
+                            </div>
                         </div>
                     </div>
+
+                    <input type="hidden" name="order" value="<?= $this->session->userdata('order_code'); ?>"/>
+                    <input type="hidden" name="amount" value="<?= $this->session->userdata('amount'); ?>"/>
+
+
+                    <?= form_close(); ?>
                 </div>
-
-                <input type="hidden" name="order" value="<?= $this->session->userdata('order_code'); ?>"/>
-                <input type="hidden" name="amount" value="<?= $this->session->userdata('amount'); ?>"/>
-
-
-                <?= form_close(); ?>
             </div>
         </div>
         <div class="row">

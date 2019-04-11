@@ -11,10 +11,6 @@
                             href="<?= base_url('account'); ?>">Overview</a></h4>
             </li>
             <li>
-                <h4 <?php if ($page == 'information') echo 'class="market-sidebar-active"' ?> ><a
-                            href="<?= base_url('account/information'); ?>">Information</a></h4>
-            </li>
-            <li>
                 <h4 <?php if ($page == 'orders') echo 'class="market-sidebar-active"' ?> ><a
                             href="<?= base_url('account/orders'); ?>">My Orders</a></h4>
             </li>
@@ -29,6 +25,10 @@
             <li>
                 <h4 <?php if ($page == 'billing') echo 'class="market-sidebar-active"' ?> ><a
                             href="<?= base_url('account/billing'); ?>">My Billing Address</a></h4>
+            </li>
+            <li>
+                <h4 <?php if ($page == 'information') echo 'class="market-sidebar-active"' ?> ><a
+                            href="<?= base_url('account/information'); ?>">Information</a></h4>
             </li>
             <li>
                 <h4 <?php if ($page == 'settings') echo 'class="market-sidebar-active"' ?> ><a
