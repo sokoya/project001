@@ -159,7 +159,7 @@
                         <input type="hidden" name="order" value="<?= $this->session->userdata('order_code'); ?>"/>
                         <input type="hidden" name="amount" value="<?= $this->session->userdata('amount'); ?>"/>
 
-                        <div class="col-md-6" style="margin-top:0px;">
+                        <div class="" style="margin-top:0px;">
                             <button type="submit" class="btn btn-success btn-md">Submit</button>
                             <div class="btn-group pull-right">
                                 <a href="<?= base_url('checkout/bank_transfer/?order=' . $this->session->userdata('order_code') . '&cancel=true') ?>"
