@@ -657,15 +657,15 @@
 <script src="<?= base_url('assets/js/bootstrap.js'); ?>"></script>
 <script src="<?= $this->user->auto_version('assets/js/search.js'); ?>"></script>
 <script src="<?= $this->user->auto_version('assets/js/mobile.js'); ?>"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
-    $(function () {
-        $('.lazy').Lazy();
-        $('.prod_description img').each(function() {
-            $(this).addClass('img-responsive');
-            $(this).attr('Onitshamarket');
-        });
-    });
+    window.addEventListener('load', function () {
+        let allimages = document.getElementsByTagName('img');
+        for (let i = 0; i < allimages.length; i++) {
+            if (allimages[i].getAttribute('data-src')) {
+                allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
+            }
+        }
+    }, false);
     $(document).ready(function () {
         $('.close-panel').on('click', function () {
             let target = $(this).data('target');
