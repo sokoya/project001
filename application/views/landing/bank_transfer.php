@@ -196,7 +196,5 @@
     }
 </script>
 <?php $this->load->view('landing/resources/script'); ?>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 </body>
 </html>
