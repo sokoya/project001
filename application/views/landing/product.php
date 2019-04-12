@@ -902,7 +902,6 @@
 <script src="<?= base_url('assets/plugins/eazyzoom/easyzoom.js') ?>"></script>
 
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script type="text/javascript">
     let product_id = <?= $product->id;?>;
     let data = "<?= ($this->session->userdata('logged_in')) ? $profile->email : ''; ?>";
@@ -911,13 +910,15 @@
 <script src="<?= $this->user->auto_version('assets/js/rating.js'); ?>"></script>
 <script>
     var $easyzoom = $('.easyzoom').easyZoom();
-    $(function () {
-        $('.lazy').Lazy();
-        $('.prod_description img').each(function () {
-            $(this).addClass('img-responsive');
-            $(this).attr('Onitshamarket');
-        });
-    });
+
+    window.addEventListener('load', function () {
+        let allimages = document.getElementsByTagName('img');
+        for (let i = 0; i < allimages.length; i++) {
+            if (allimages[i].getAttribute('data-src')) {
+                allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
+            }
+        }
+    }, false);
     let quantity = $('#quan');
     let selected_variation_id = $('.variation_id').val();
     let count = quantity.data('range');
