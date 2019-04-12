@@ -76,7 +76,7 @@
         }
     }
     .market-board{
-        height: 720px;
+        height: 710px;
     }
 </style>
 </head>
@@ -169,7 +169,6 @@
 
                     <?= form_close(); ?>
                 </div>
-
             </div>
         </div>
         <div class="row">
