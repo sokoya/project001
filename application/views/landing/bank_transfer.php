@@ -76,7 +76,7 @@
         }
     }
     .market-board{
-        height: 730px;
+        height: 720px;
     }
 </style>
 </head>
