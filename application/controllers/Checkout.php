@@ -401,7 +401,6 @@ class Checkout extends MY_Controller
                 'apprAmt'       => $response['Amount']/100,
                 'responseCode'  => $response['ResponseCode']
             );
-
             // Insert the record to payment table
 
             // show order complete page
@@ -488,6 +487,12 @@ class Checkout extends MY_Controller
                 $update_array['active_status'] = 'cancelled';
                 $update_array['payment_made'] = 'fail';
                 try {
+
+                    // Release the order back...
+                    $orders = $this->product->get_results('orders', 'qty,product_variation_id', "(order_code = '{$order_code}' )");
+                    foreach( $orders as $order ){
+                        $this->product->set_field('product_variation', 'quantity', "quantity+{$order->qty}", array('id' => $order->product_variation_id));
+                    }
                     // Start shopping ...
                     $this->product->update_items( $order_code, $update_array );
                     $buyer['name'] = $page_data['profile']->first_name . ' '. $page_data['profile']->last_name;
@@ -522,7 +527,7 @@ class Checkout extends MY_Controller
             'uid' => $id,
             'order_code' => $order_code,
             'bank' => $this->input->post('bank'),
-            'amount' => $this->input->post('amount'),
+            'amount' => $this->input->post('amount') / 100,
             'deposit_type' => $this->input->post('deposit_type'),
             'remark' => $this->input->post('remark')
         );
@@ -541,6 +546,7 @@ class Checkout extends MY_Controller
                 try {
                     $this->product->insert_data('bank_transfer', $data);
                     // Checkout Confirm
+                    $this->session->set_flashdata('success_msg', 'Thank you for shopping with us, your order has been received.');
                     redirect('order_completed');
                 } catch (Exception $e) {
                     $this->session->set_flashdata('error_msg','There was an error submitting your order ' . $e);

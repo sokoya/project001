@@ -82,7 +82,7 @@
     <div class="container">
         <p class="text-center" style="margin-top:30px;">
             <a href="<?= base_url(); ?>"><img
-                        src="<?= base_url('assets/img/onitshamarket-logo.png') ?>" width="35%"
+                        src="<?= base_url('assets/img/onitshamarket-logo.png') ?>" width="45%"
                         alt="market logo Image"></a>
         </p>
         <div class="row">
@@ -148,26 +148,19 @@
                         <textarea name="remark" class="form-control" rows="3"><?= set_value('remark', ''); ?></textarea>
                         <?= form_error('remark') ?>
                     </div>
-                        <div class="form-group">
-                            <label class="pop">Proof of Payment</label>
-                            <input type="file" name="pop" required>
-                            <span style="font-size:8px;font-weight:700;color:#f02134;">Screenshot of Mobile Transfer / Snapshot of Deposit Slip</span>
-                            <?= form_error('pop'); ?>
+
+                        <input type="hidden" name="order" value="<?= $this->session->userdata('order_code'); ?>"/>
+                        <input type="hidden" name="amount" value="<?= $this->session->userdata('amount'); ?>"/>
+
+                    <div class="col-md-6" style="margin-top:20px;">
+                        <button type="submit" class="btn btn-success btn-md">Submit</button>
+                        <div class="btn-group pull-right">
+                            <a href="<?= base_url('checkout/bank_transfer/?order=' . $this->session->userdata('order_code') . '&cancel=true') ?>"
+                               class="btn btn-danger">Cancel My Order</a>
                         </div>
-                        <div class="form-group" style="margin-top:20px;">
-                            <div class="btn-group">
-                                <button class="btn btn-success btn-md">Submit</button>
-                                <a href="<?= base_url('checkout/bank_transfer/?order=' . $this->session->userdata('order_code') . '&cancel=true') ?>"
-                                   class="btn btn-danger">Cancel My Order</a>
-                            </div>
-                        </div>
-
-                    <input type="hidden" name="order" value="<?= $this->session->userdata('order_code'); ?>"/>
-                    <input type="hidden" name="amount" value="<?= $this->session->userdata('amount'); ?>"/>
-
-
-                    <?= form_close(); ?>
+                    </div>
                 </div>
+                <?= form_close(); ?>
             </div>
         </div>
         <div class="row">
