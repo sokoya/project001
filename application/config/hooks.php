@@ -17,3 +17,9 @@ $hook['display_override'][] = array(
     'filename' => 'compress.php',
     'filepath' => 'hooks'
     );
+
+$hook['post_controller_constructor'][] = array(
+    'function' => 'force_ssl',
+    'filename' => 'ssl.php',
+    'filepath' => 'hooks'
+);
