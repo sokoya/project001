@@ -416,6 +416,7 @@
     </div>
 
 
+    <?php $this->load->view('landing/resources/review_modal'); ?>
     <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
     <?php $this->load->view('landing/resources/mobile/mobile-script'); ?>
     <script src="<?= base_url('assets/plugins/slick/slick.js') ?>"></script>

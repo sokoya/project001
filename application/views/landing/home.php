@@ -273,14 +273,14 @@
         <div class="card-max" style="margin-top: -10px">
             <div class="card-max-header">
                 <p class="card-max-title">Hot Sales
-<!--                    <a href="#" class="card-max-view-more">View more</a>-->
+                    <!--                    <a href="#" class="card-max-view-more">View more</a>-->
                 </p>
                 <p class="card-max-subtitle">Great items, Affordable Prices</p>
             </div>
             <div class="row">
                 <?php
                 $excludes = array();
-                $products = $this->product->randomproducts(array(105,14,106,), 6 );
+                $products = $this->product->randomproducts(array(105, 14, 106,), 6);
 
                 foreach ($products as $product):
                     ?>
@@ -317,7 +317,7 @@
         <div class="card-max">
             <div class="card-max-header">
                 <p class="card-max-title">Top Categories
-<!--                    <a href="#" class="card-max-view-more">View more</a>-->
+                    <!--                    <a href="#" class="card-max-view-more">View more</a>-->
                 </p>
                 <p class="card-max-subtitle">Discover top categories, you won't want to miss</p>
             </div>
@@ -383,7 +383,7 @@
         <div class="card-max">
             <div class="card-max-header">
                 <p class="card-max-title">Top Brands
-<!--                    <a href="#" class="card-max-view-more">View more</a>-->
+                    <!--                    <a href="#" class="card-max-view-more">View more</a>-->
                 </p>
                 <p class="card-max-subtitle">Top brands top quality.</p>
             </div>
@@ -421,76 +421,88 @@
                         </div>
                     </div>
                 </div>
-<!--                <div class="row">-->
-<!--                    <div class="col-md-4 hidden-sm hidden-xs">-->
-<!--                        <img src="--><?//= base_url('assets/img/home/gdp.jpg'); ?><!--"-->
-<!--                             style="display: block; height: 310px; width: auto; max-width: 400px; object-fit: cover">-->
-<!--                    </div>-->
-<!--                    <div class="col-md-8">-->
-<!--                        <div class="row" style="margin-left: 10px">-->
-<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
-<!--                                <p class="card-cat-text">Electronics</p>-->
-<!--                                <img-->
-<!--                                        src="--><?//= base_url('assets/img/home/ef.jpg'); ?><!--"></div>-->
-<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
-<!--                                <p class="card-cat-text">Computing Accessories</p><img-->
-<!--                                        src="--><?//= base_url('assets/img/home/eg.jpg'); ?><!--"></div>-->
-<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
-<!--                                <p class="card-cat-text">Phone and Tablets</p><img-->
-<!--                                        src="--><?//= base_url('assets/img/home/em.jpg'); ?><!--"></div>-->
-<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
-<!--                                <p class="card-cat-text">Home and Office</p>-->
-<!--                                <img-->
-<!--                                        src="--><?//= base_url('assets/img/home/ek.jpg'); ?><!--"></div>-->
-<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
-<!--                                <p class="card-cat-text">Bluetooth Speakers</p>-->
-<!--                                <img-->
-<!--                                        src="--><?//= base_url('assets/img/home/ea.jpg'); ?><!--"></div>-->
-<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
-<!--                                <p class="card-cat-text">Computing</p>-->
-<!--                                <img-->
-<!--                                        src="--><?//= base_url('assets/img/home/ex.jpg'); ?><!--"></div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-4 hidden-sm hidden-xs">-->
-<!--                        <img src="--><?//= base_url('assets/img/home/alfa.jpg'); ?><!--"-->
-<!--                             style="display: block; height: 310px; width: auto; max-width: 400px; object-fit: cover">-->
-<!--                    </div>-->
-<!--                    <div class="col-md-8">-->
-<!--                        <div class="row" style="margin-left: 10px">-->
-<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
-<!--                                <p class="card-cat-text">Electronics</p>-->
-<!--                                <img-->
-<!--                                        src="--><?//= base_url('assets/img/home/ef.jpg'); ?><!--"></div>-->
-<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
-<!--                                <p class="card-cat-text">Computing Accessories</p><img-->
-<!--                                        src="--><?//= base_url('assets/img/home/eg.jpg'); ?><!--"></div>-->
-<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
-<!--                                <p class="card-cat-text">Phone and Tablets</p><img-->
-<!--                                        src="--><?//= base_url('assets/img/home/em.jpg'); ?><!--"></div>-->
-<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
-<!--                                <p class="card-cat-text">Home and Office</p>-->
-<!--                                <img-->
-<!--                                        src="--><?//= base_url('assets/img/home/ek.jpg'); ?><!--"></div>-->
-<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
-<!--                                <p class="card-cat-text">Bluetooth Speakers</p>-->
-<!--                                <img-->
-<!--                                        src="--><?//= base_url('assets/img/home/ea.jpg'); ?><!--"></div>-->
-<!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
-<!--                                <p class="card-cat-text">Computing</p>-->
-<!--                                <img-->
-<!--                                        src="--><?//= base_url('assets/img/home/ex.jpg'); ?><!--"></div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <!--                <div class="row">-->
+                <!--                    <div class="col-md-4 hidden-sm hidden-xs">-->
+                <!--                        <img src="--><? //= base_url('assets/img/home/gdp.jpg'); ?><!--"-->
+                <!--                             style="display: block; height: 310px; width: auto; max-width: 400px; object-fit: cover">-->
+                <!--                    </div>-->
+                <!--                    <div class="col-md-8">-->
+                <!--                        <div class="row" style="margin-left: 10px">-->
+                <!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+                <!--                                <p class="card-cat-text">Electronics</p>-->
+                <!--                                <img-->
+                <!--                                        src="-->
+                <? //= base_url('assets/img/home/ef.jpg'); ?><!--"></div>-->
+                <!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+                <!--                                <p class="card-cat-text">Computing Accessories</p><img-->
+                <!--                                        src="-->
+                <? //= base_url('assets/img/home/eg.jpg'); ?><!--"></div>-->
+                <!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+                <!--                                <p class="card-cat-text">Phone and Tablets</p><img-->
+                <!--                                        src="-->
+                <? //= base_url('assets/img/home/em.jpg'); ?><!--"></div>-->
+                <!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+                <!--                                <p class="card-cat-text">Home and Office</p>-->
+                <!--                                <img-->
+                <!--                                        src="-->
+                <? //= base_url('assets/img/home/ek.jpg'); ?><!--"></div>-->
+                <!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+                <!--                                <p class="card-cat-text">Bluetooth Speakers</p>-->
+                <!--                                <img-->
+                <!--                                        src="-->
+                <? //= base_url('assets/img/home/ea.jpg'); ?><!--"></div>-->
+                <!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+                <!--                                <p class="card-cat-text">Computing</p>-->
+                <!--                                <img-->
+                <!--                                        src="-->
+                <? //= base_url('assets/img/home/ex.jpg'); ?><!--"></div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--                <div class="row">-->
+                <!--                    <div class="col-md-4 hidden-sm hidden-xs">-->
+                <!--                        <img src="--><? //= base_url('assets/img/home/alfa.jpg'); ?><!--"-->
+                <!--                             style="display: block; height: 310px; width: auto; max-width: 400px; object-fit: cover">-->
+                <!--                    </div>-->
+                <!--                    <div class="col-md-8">-->
+                <!--                        <div class="row" style="margin-left: 10px">-->
+                <!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+                <!--                                <p class="card-cat-text">Electronics</p>-->
+                <!--                                <img-->
+                <!--                                        src="-->
+                <? //= base_url('assets/img/home/ef.jpg'); ?><!--"></div>-->
+                <!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+                <!--                                <p class="card-cat-text">Computing Accessories</p><img-->
+                <!--                                        src="-->
+                <? //= base_url('assets/img/home/eg.jpg'); ?><!--"></div>-->
+                <!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+                <!--                                <p class="card-cat-text">Phone and Tablets</p><img-->
+                <!--                                        src="-->
+                <? //= base_url('assets/img/home/em.jpg'); ?><!--"></div>-->
+                <!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+                <!--                                <p class="card-cat-text">Home and Office</p>-->
+                <!--                                <img-->
+                <!--                                        src="-->
+                <? //= base_url('assets/img/home/ek.jpg'); ?><!--"></div>-->
+                <!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+                <!--                                <p class="card-cat-text">Bluetooth Speakers</p>-->
+                <!--                                <img-->
+                <!--                                        src="-->
+                <? //= base_url('assets/img/home/ea.jpg'); ?><!--"></div>-->
+                <!--                            <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">-->
+                <!--                                <p class="card-cat-text">Computing</p>-->
+                <!--                                <img-->
+                <!--                                        src="-->
+                <? //= base_url('assets/img/home/ex.jpg'); ?><!--"></div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
             </div>
         </div>
         <div class="card-max">
             <div class="card-max-header">
                 <p class="card-max-title">Super Deals
-<!--                    <a href="#" class="card-max-view-more">View more</a>-->
+                    <!--                    <a href="#" class="card-max-view-more">View more</a>-->
                 </p>
                 <p class="card-max-subtitle">Great Deals at amazing prices</p>
             </div>
@@ -503,7 +515,7 @@
                     <div class="col-md-10">
                         <div class="row" style="margin-left: 10px">
                             <?php
-                            $products= $this->product->randomproducts(array(31,33,36,53,1,2,3,4,5,6,7,8,9,10,11,23,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,61,62,63,64,65,66,67,68,69,70), 4); // Just for you
+                            $products = $this->product->randomproducts(array(31, 33, 36, 53, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 23, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70), 4); // Just for you
                             foreach ($products as $product) : ?>
                                 <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>">
                                     <div class="col-md-3 col-sm-3 col-xs-3  card-product card-product-alt">
@@ -531,10 +543,10 @@
 
         </div>
 
-        <?php if( $this->session->userdata('logged_in')) :
-                $recently_viewed = $this->user->get_recently_viewed($this->session->userdata('logged_id'), $excludes);
-                if ($recently_viewed && count($recently_viewed)) :
-            ?>
+        <?php if ($this->session->userdata('logged_in')) :
+            $recently_viewed = $this->user->get_recently_viewed($this->session->userdata('logged_id'), $excludes);
+            if ($recently_viewed && count($recently_viewed)) :
+                ?>
                 <div class="card-max">
                     <div class="card-max-header">
                         <p class="card-max-title">Recently Viewed Items </p>
@@ -544,7 +556,8 @@
                     <div class="brand-slide">
                         <div class="row">
                             <div class="col-md-2 hidden-sm hidden-xs">
-                                <img src="<?= base_url('assets/img/home/left_pane_2.jpg'); ?>" style="min-height: 320px">
+                                <img src="<?= base_url('assets/img/home/left_pane_2.jpg'); ?>"
+                                     style="min-height: 320px">
                             </div>
                             <div class="col-md-10">
                                 <div class="row" style="margin-left: 10px">
@@ -569,14 +582,15 @@
                                                 <?php endif; ?>
                                             </div>
                                         </a>
-                                    <?php $x++; if( $x == 4 ) break; ?>
+                                        <?php $x++;
+                                        if ($x == 4) break; ?>
                                     <?php endforeach; ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <?php endif; ?>
+            <?php endif; ?>
         <?php endif; ?>
 
     </div>
@@ -593,6 +607,7 @@
         </div>
     </div>
 
+    <?php $this->load->view('landing/resources/review_modal'); ?>
     <?php $this->load->view('landing/resources/why-onitshamarket'); ?>
 
     <?php if ($this->agent->is_mobile()) : ?>
@@ -607,16 +622,15 @@
     <script src="<?= base_url('assets/js/mobile.js'); ?>"></script>
 <?php endif; ?>
 <script src="<?= base_url('assets/plugins/slick/slick.js') ?>"></script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
-    $(function () {
-        $('.lazy').Lazy({
-            scrollDirection: 'vertical',
-            effect: 'fadeIn',
-            visibleOnly: true
-        });
-    });
+    window.addEventListener('load', function () {
+        let allimages = document.getElementsByTagName('img');
+        for (let i = 0; i < allimages.length; i++) {
+            if (allimages[i].getAttribute('data-src')) {
+                allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
+            }
+        }
+    }, false);
     $(document).ready(function () {
         $('.home_slider').css({"visibility": "visible"});
         $('.home_slider').slick({
@@ -631,8 +645,6 @@
             fade: true,
             cssEase: 'linear',
         });
-    });
-    $(document).ready(function () {
         $('.brand-slide').slick({
             infinite: true,
             autoplay: true,
@@ -641,17 +653,20 @@
             cssEase: 'linear',
             draggable: true,
         });
+        <?php if ($this->session->userdata('logged_in')) :?>
+        $('#review_modal').modal('show');
+        <?php endif?>
     });
-if ('serviceWorker' in navigator) {
-window.addEventListener('load', function() {
-    navigator.serviceWorker.register("<?= base_url('sw.js');?>")
-	.then(function(registration) {
-    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    }, function(err) {
-    console.log('ServiceWorker registration failed: ', err);
-    });
-});
-}
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+            navigator.serviceWorker.register("<?= base_url('sw.js');?>")
+                .then(function (registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function (err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+        });
+    }
 </script>
 </body>
 </html>
