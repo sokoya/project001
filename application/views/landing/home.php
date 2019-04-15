@@ -622,6 +622,7 @@
     <script src="<?= base_url('assets/js/mobile.js'); ?>"></script>
 <?php endif; ?>
 <script src="<?= base_url('assets/plugins/slick/slick.js') ?>"></script>
+<script src="<?= $this->user->auto_version('assets/js/rating.js'); ?>"></script>
 <script>
     window.addEventListener('load', function () {
         let allimages = document.getElementsByTagName('img');
