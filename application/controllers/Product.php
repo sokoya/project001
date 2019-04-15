@@ -31,7 +31,7 @@ class Product extends MY_Controller
         $page_data['keywords'] = $page_data['title'] . ' , ' . $page_data['product']->brand_name;
         if ($page_data['category_detail']) {
             $page_data['description'] = $page_data['title'] . ' ' . $page_data['category_detail']->description;
-//            $page_data['breadcrumb'] = $this->product->get_parent_details( $page_data['product']->category_id );
+//            $page_data['breadcrumb'] = $this->product->parent_slug_top( $page_data['product']->category_id );
         } else { $page_data['description'] = DESCRIPTION; }
         $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 		 $this->add_count($index);

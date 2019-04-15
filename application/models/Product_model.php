@@ -162,7 +162,6 @@ Class Product_model extends CI_Model{
         $category_id = $id;
         $total_categories = $this->db->get('categories')->result_array();
         $count = count( $total_categories );
-
         $data =  array();
         for ($i=0; $i < $count; $i++) {
             if( $total_categories[$i]['pid'] == $category_id ){
@@ -182,18 +181,18 @@ Class Product_model extends CI_Model{
         // Select category
         $GLOBALS['array_variable'] = array();
 //        $temp = $this->db->query("SELECT pid FROM categories WHERE id = {$id}")->row();
-        $select_category = "SELECT pid, slug FROM categories WHERE id = {$id}";
+        $select_category = "SELECT id, slug FROM categories WHERE id = {$id}";
         $result = $this->db->query($select_category);
 
         if( $result->num_rows() >= 1 ){
-            $pid = $result->row()->pid;
+            $pid = $result->row()->id;
             $this->parent_recurssive( $pid );
             $array = array_filter($GLOBALS['array_variable']);
             $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($array));
             $new_array = array();
             foreach( $it as $v ){ array_push( $new_array, $v); }
             array_push( $new_array, $id ); // Lets push its own ID also
-            // return $new_array;
+//            return $new_array;
         }else{
             return $GLOBALS['array_variable'];
         }
@@ -205,9 +204,12 @@ Class Product_model extends CI_Model{
     */
     function parent_recurssive( $pid ){
         $category_pid = $pid;
+//        die( $category_pid );
         $total_categories = $this->db->get('categories')->result_array();
         $count = count( $total_categories );
+
         $data = array();
+        array_push($data, $category_pid);
         for ($i=0; $i < $count; $i++) {
             if( $total_categories[$i]['id'] == $category_pid ){
                 array_push( $data , $total_categories[$i]['pid'] );
@@ -217,6 +219,8 @@ Class Product_model extends CI_Model{
         foreach ($data as $key => $value) {
             $this->parent_recurssive($value);
         }
+
+
     }
 
     function check_slug_availability( $slug ){

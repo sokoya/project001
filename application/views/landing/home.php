@@ -622,8 +622,9 @@
     <script src="<?= base_url('assets/js/mobile.js'); ?>"></script>
 <?php endif; ?>
 <script src="<?= base_url('assets/plugins/slick/slick.js') ?>"></script>
-<script src="<?= $this->user->auto_version('assets/js/rating.js'); ?>"></script>
 <script>
+    let review = JSON.parse('<?=$review;?>');
+    product_id = review.product_id;
     window.addEventListener('load', function () {
         let allimages = document.getElementsByTagName('img');
         for (let i = 0; i < allimages.length; i++) {
@@ -655,7 +656,35 @@
             draggable: true,
         });
         <?php if ($this->session->userdata('logged_in')) :?>
-        $('#review_modal').modal('show');
+        if (JSON.stringify(review) === '[]') {
+
+        } else {
+            $("#review_modal")
+                .find('.modal-header h3 b#username')
+                .text(review.username).end()
+                .find('img#product_image').prop("src", review.img_path).end()
+                .find('b#item_name')
+                .text(review.product_name).end()
+                .modal('show');
+            $('#home_review_form').on('submit', function (e) {
+                e.preventDefault();
+                let home_detail = $('#home_review_detail').val();
+                let home_title = $('#home_review_title').val();
+                let review_dn = review.username;
+                let user_id = review.user_id;
+                $.ajax({
+                    url: base_url + "product/add_review",
+                    method: "POST",
+                    data: {title: home_title, name: review_dn, detail: home_detail, 'product_id': product_id, 'user_id': user_id},
+                    success: function (response) {
+                        $('#review_form').hide();
+                    },
+                    error: function (response) {
+                        alert("Sorry an error occurred somewhere")
+                    }
+                });
+            });
+        }
         <?php endif?>
     });
     if ('serviceWorker' in navigator) {
@@ -669,5 +698,6 @@
         });
     }
 </script>
+<script src="<?= $this->user->auto_version('assets/js/rating.js'); ?>"></script>
 </body>
 </html>
