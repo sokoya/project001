@@ -485,8 +485,7 @@ Class User_model extends CI_Model
     /*
      * Get just one single row of the last order to send SMS and mail
      * */
-    function get_last_singleorder($order, $buyer_id)
-    {
+    function get_last_singleorder($order, $buyer_id){
         $query = "SELECT o.amount,o.payRef, o.txnref, o.pickup_location_id, o.billing_address_id, p.name paymentname, o.order_date, o.payment_method,
         se.seller_phone, se.legal_company_name
         FROM orders o 
@@ -495,6 +494,19 @@ Class User_model extends CI_Model
         WHERE o.order_code = {$order} AND o.buyer_id = {$buyer_id} ORDER BY o.id DESC LIMIT 1";
         return $this->db->query($query)->row();
     }
+
+
+    function get_order_for_review($buyer_id){
+        $this_month = date('m', strtotime('this month'));
+        $query = "SELECT o.id, p.product_name, p.id product_id, g.image_name FROM orders o 
+        JOIN products p ON (o.product_id = p.id)
+        JOIN product_gallery g ON(g.product_id = o.product_id AND g.featured_image = 1 )
+        WHERE NOT EXISTS (select 1 from product_review r where p.id = r.product_id ) 
+        AND o.buyer_id = {$buyer_id} AND (o.payment_made = 'success' OR o.active_status = 'completed') AND (MONTH(o.order_date) = '{$this_month}')
+        GROUP BY o.order_code ORDER BY o.id DESC LIMIT 1";
+        return $this->db->query($query)->row();
+    }
+
 
     /*
      * Get all orders for this order_code and the seller id
