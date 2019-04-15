@@ -13,16 +13,12 @@
                     </div>
                 </div>
                 <div class="row">
-                    <?php $user = $this->product->get_rating_review('product_rating', 'rating_score', 4, 80);
-                    if (!$user):
-                        ?>
                         <div class="col-md-12">
                             <div class='starrr' id='star1'></div>
                         </div>
                         <div class="col-md-12">
                             <div class="rating-text"></div>
                         </div>
-                    <?php endif; ?>
                 </div>
                 <div id="question_div">
                     <hr class="hr-text" data-content="Write A Review">
