@@ -162,7 +162,6 @@ Class Product_model extends CI_Model{
         $category_id = $id;
         $total_categories = $this->db->get('categories')->result_array();
         $count = count( $total_categories );
-
         $data =  array();
         for ($i=0; $i < $count; $i++) {
             if( $total_categories[$i]['pid'] == $category_id ){
@@ -205,10 +204,12 @@ Class Product_model extends CI_Model{
     */
     function parent_recurssive( $pid ){
         $category_pid = $pid;
+//        die( $category_pid );
         $total_categories = $this->db->get('categories')->result_array();
         $count = count( $total_categories );
 
         $data = array();
+        array_push($data, $category_pid);
         for ($i=0; $i < $count; $i++) {
             if( $total_categories[$i]['id'] == $category_pid ){
                 array_push( $data , $total_categories[$i]['pid'] );
@@ -218,6 +219,8 @@ Class Product_model extends CI_Model{
         foreach ($data as $key => $value) {
             $this->parent_recurssive($value);
         }
+
+
     }
 
     function check_slug_availability( $slug ){

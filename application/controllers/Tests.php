@@ -149,4 +149,10 @@ class Tests extends MY_Controller
     public function time_zone(){
         echo date_default_timezone_get();
     }
+
+    public function parent_cat(){
+        $id = 62;
+        $store = $this->product->parent_slug_top( $id );
+        var_dump( $store ); exit;
+    }
 }
