@@ -24,7 +24,8 @@ class Frontpage extends MY_Controller {
                 $review['username'] = ucfirst($page_data['profile']->first_name);
             }
         }
-        $page_data['review'] = json_encode($review, JSON_PRETTY_PRINT);
+        $page_data['review'] = json_encode($review, JSON_UNESCAPED_SLASHES);
+
         if ($this->agent->is_mobile()) {
             $page_data['main_categories'] = $this->product->get_results('categories', 'id,name,slug,title', "(pid=0)");
             //  $page_data['category_listing'] = $this->product->get_results('homepage_setting', 'id', "(status = 'active')" );
