@@ -20,9 +20,9 @@ class Frontpage extends MY_Controller {
                 $review['product_name'] = $row->product_name;
                 $review['product_id'] = $row->product_id;
                 $review['user_id'] = $this->session->userdata('logged_id');
-                $review['username'] = ucfirst($page_data['profile']->first_name) . ' ' . $page_data['profile']->last_name;
+                $review['username'] = ucwords($page_data['profile']->first_name . ' ' . $page_data['profile']->last_name);
             }
-//            var_dump( $row );exit;
+            var_dump( $row );exit;
         }
 
         $page_data['review'] = json_encode($review, JSON_UNESCAPED_SLASHES);

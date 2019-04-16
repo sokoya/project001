@@ -497,7 +497,7 @@ Class User_model extends CI_Model
 
 
     function get_order_for_review($buyer_id){
-        $this_month = date('y', strtotime('this year'));
+        $this_month = date('m', strtotime('this month'));
         $query = "SELECT o.id, p.product_name, p.id product_id, g.image_name FROM orders o 
         JOIN products p ON (o.product_id = p.id)
         JOIN product_gallery g ON(g.product_id = o.product_id AND g.featured_image = 1 )
