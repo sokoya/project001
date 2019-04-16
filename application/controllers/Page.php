@@ -72,5 +72,19 @@ class Page extends MY_Controller {
 //        $page_data['privacy'] = $this->user->get_row('page_contents', 'content', "(type='about_us')")->content;
         $this->load->view('landing/about_onitshamarket', $page_data);
     }
+    // jobs on onitshamarket
+    public function jobs(){
+        $page_data['page'] = 'jobs';
+        $page_data['title'] = "Jobs Update";
+        $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
+        $this->load->view('landing/jobs', $page_data);
+    }
+    // single jobs on onitshamarket
+    public function single_job(){
+        $page_data['page'] = 'jobs';
+        $page_data['title'] = "Single Job Name";
+        $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
+        $this->load->view('landing/single_job', $page_data);
+    }
 
 }
