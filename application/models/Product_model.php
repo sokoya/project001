@@ -181,18 +181,18 @@ Class Product_model extends CI_Model{
         // Select category
         $GLOBALS['array_variable'] = array();
 //        $temp = $this->db->query("SELECT pid FROM categories WHERE id = {$id}")->row();
-        $select_category = "SELECT id, slug FROM categories WHERE id = {$id}";
+        $select_category = "SELECT pid, slug FROM categories WHERE id = {$id}";
         $result = $this->db->query($select_category);
 
         if( $result->num_rows() >= 1 ){
-            $pid = $result->row()->id;
+            $pid = $result->row()->pid;
             $this->parent_recurssive( $pid );
             $array = array_filter($GLOBALS['array_variable']);
             $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($array));
             $new_array = array();
             foreach( $it as $v ){ array_push( $new_array, $v); }
             array_push( $new_array, $id ); // Lets push its own ID also
-//            return $new_array;
+             return $new_array;
         }else{
             return $GLOBALS['array_variable'];
         }
@@ -270,7 +270,7 @@ Class Product_model extends CI_Model{
         $array = $this->parent_slug_top( $id );
 //        var_dump( $array );exit;
 //        die( $id );
-        return $this->db->query("SELECT name, slug, description, specifications FROM categories WHERE id IN ('".implode("','",$array)."')")->result();
+        return $this->db->query("SELECT name, slug, description FROM categories WHERE id IN ('".implode("','",$array)."')")->result();
     }
 
 
