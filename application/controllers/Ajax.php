@@ -124,6 +124,12 @@ class Ajax extends CI_Controller
             if( strlen($content) > 300 ) {
                 $content = substr($content, 0, strpos($content, ' ', 300)).'...';
             }
+            if( strlen($content) < 50 ){
+                $content .= $desc->highlights;
+            }
+            if( strlen($content )) {
+                $content .= ' Read more on product description.';
+            }
             $results['description'] = $content;
             $results['seller'] = $desc->seller_id;
             $variation = $this->product->get_variation($pid);
