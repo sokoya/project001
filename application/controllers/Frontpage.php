@@ -14,6 +14,7 @@ class Frontpage extends MY_Controller {
         // Last order
         $review = array();
         if( $this->session->userdata('logged_in') ){
+
             $row = $this->user->get_order_for_review( $this->session->userdata('logged_id'));
             if( $row ){
                 $review['img_path'] = "https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/" . $row->image_name;
@@ -22,7 +23,7 @@ class Frontpage extends MY_Controller {
                 $review['user_id'] = $this->session->userdata('logged_id');
                 $review['username'] = ucwords($page_data['profile']->first_name . ' ' . $page_data['profile']->last_name);
             }
-            var_dump( $row );exit;
+
         }
 
         $page_data['review'] = json_encode($review, JSON_UNESCAPED_SLASHES);

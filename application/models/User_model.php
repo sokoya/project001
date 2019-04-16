@@ -501,8 +501,8 @@ Class User_model extends CI_Model
         $query = "SELECT o.id, p.product_name, p.id product_id, g.image_name FROM orders o 
         JOIN products p ON (o.product_id = p.id)
         JOIN product_gallery g ON(g.product_id = o.product_id AND g.featured_image = 1 )
-        WHERE NOT EXISTS (select 1 from product_review r where p.id = r.product_id ) 
-        AND o.buyer_id = {$buyer_id} AND (o.payment_made = 'success' OR o.active_status = 'completed') AND (YEAR(o.order_date) = '{$this_month}')
+        WHERE NOT EXISTS (select 1 from product_review r where p.id = r.product_id and user_id = {$buyer_id}) 
+        AND o.buyer_id = {$buyer_id} AND (o.payment_made = 'success' OR o.active_status = 'completed')
         GROUP BY o.order_code ORDER BY o.id DESC LIMIT 1";
         return $this->db->query($query)->row();
     }
