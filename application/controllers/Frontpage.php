@@ -20,7 +20,7 @@ class Frontpage extends MY_Controller {
                 $review['product_name'] = $row->product_name;
                 $review['product_id'] = $row->product_id;
                 $review['user_id'] = $this->session->userdata('logged_id');
-                $review['username'] = ucfirst($page_data['profile']->first_name);
+                $review['username'] = ucfirst($page_data['profile']->first_name) . ' ' . $page_data['profile']->last_name;
             }
         }
 

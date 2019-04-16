@@ -181,9 +181,9 @@
 <!--                                            <a href="#" id="to_sell">Have an item like this to sell? Create One.</a>-->
                                         </p>
                                         <p class="text-sm text-uppercase">
-                                            <strong>Seller : </strong><a href="#" id="pr-seller">
-                                                <?= ucwords($product->legal_company_name); ?>
-                                            </a>
+<!--                                            <strong>Seller : </strong><a href="#" id="pr-seller">-->
+                                                <b><?= ( $product->brand_name == 'others' || $product == '' ) ? 'Universal' : ucwords(  $product->brand_name); ?></b>
+<!--                                            </a>-->
                                         </p>
                                     </div>
                                     <div class="col-md-7">
@@ -422,12 +422,6 @@
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="overview">
                         <div class="product-overview-section">
-                            <?php if (!empty($product->product_line)) : ?>
-                                <h3 class="product-overview-title pr-over"> Product Frontline</h3>
-                                <div class="product-overview-desc">
-                                    <p><?= $product->product_line; ?></p>
-                                </div>
-                            <?php endif; ?>
 
                             <?php if (!empty($product->dimensions)): ?>
                                 <h3 class="product-overview-title pr-over">Measurement</h3>

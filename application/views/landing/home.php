@@ -658,7 +658,6 @@
         });
         <?php if ($this->session->userdata('logged_in')) :?>
         if (JSON.stringify(review) === '[]') {
-
         } else {
             $("#review_modal")
                 .find('.modal-header h3 b#username')

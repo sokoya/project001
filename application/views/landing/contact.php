@@ -29,6 +29,7 @@
 
     .row_sp_con {
         margin-top: 100px;
+        text-align: left;
     }
 
     .p_sp_con {
@@ -53,11 +54,11 @@
                 <img src="<?= base_url('assets/img/contact.png'); ?>" style="max-width:200px;"/>
                 <hr align="center" width="80%"/>
                 <h3 style="background: #fff;margin-top:-27px;width:fit-content;font-size:14px;text-align: center;margin-left:auto;margin-right: auto;font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
-                    CONTACT US
+                    Head Office
                 </h3>
                 <p class="p_sp_con">
-                    <i class="fas fa-home"></i> Address: #176 Akwa Road, Opposite Conoil, Inland Town, Onitsha, Anambra State.<br>
-                    <i class="fas fa-phone"></i> Tel: +23412345678<br>
+                    <i class="fas fa-home"></i> Address: #176 Akwa Road, Opposite Conoil, Inland Town, Onitsha, Anambra State.
+                    <i class="fas fa-phone"></i> Tel: +234 813 680 3006<br>
                     <i class="fas fa-envelope-square"></i> onitsha.anambra@onitshamarket.com<br>
                     <i class="fa fa-map-marker"></i> Monday to Saturday<br>
                     <i class="fa fa-clock-o"></i> Hours: 08:00am to 05:00pm
@@ -317,7 +318,7 @@
             <!--Contact Info -->
             <div class="col-md-3">
                 <p>
-                <h5><b>Lagos Office (Seller Training Centre)</b></h5><br/>
+                <h5><b>Lagos Office</b></h5><br/>
                 <i class="fa fa-home"></i> Address: 530A Aina Akingbala Street, Omole Phase 2, Ikeja. Lagos State, Nigeria.<br>
                 <i class="fa fa-phone"></i> Tel: +234816148422<br>
                 <i class="fa fa-email"></i> Email: Ikeja.lagos@onitshamarket.com<br>
@@ -327,17 +328,17 @@
             </div>
             <div class="col-md-3">
                 <p>
-                <h5><b>Abuja Office (Customer Experience Centre)</b></h5><br/>
-                <i class="fa fa-home"></i> Address: 10, Street name. FCT Abuja, Nigeria.<br>
-                <i class="fa fa-phone"></i> Tel: +23412345678<br>
-                <i class="fa fa-email"></i> Email: abuja.fct@onitshamarket.com<br>
-                <i class="fa fa-map-marker"></i> Monday to Saturday<br>
-                <i class="fa fa-clock-o"></i> Hours: 08:00am to 05:00pm
+                    <h5><b>Abuja Office</b></h5><br/>
+                    <i class="fa fa-home"></i> Address: 10, Street name. FCT Abuja, Nigeria.<br>
+                    <i class="fa fa-phone"></i> Tel: +23412345678<br>
+                    <i class="fa fa-email"></i> Email: abuja.fct@onitshamarket.com<br>
+                    <i class="fa fa-map-marker"></i> Monday to Saturday<br>
+                    <i class="fa fa-clock-o"></i> Hours: 08:00am to 05:00pm
                 </p>
             </div>
             <div class="col-md-3">
                 <p>
-                <h5><b>Asaba Office (Customer Centre)</b></h5><br/>
+                <h5><b>Asaba Office</b></h5><br/>
                 <i class="fa fa-home"></i> Address: 104 Okpanam Road, Opp. Legislative Quarters Asaba, Delta State, Nigeria<br>
                 <i class="fa fa-phone"></i> Tel: +23412345678<br>
                 <i class="fa fa-email"></i> Email: asaba.delta@onitshamarket.com<br>
@@ -347,7 +348,7 @@
             </div>
             <div class="col-md-3">
                 <p style="text-align: justify;">
-                    <h5><b>Aba Office (Distributor Centre)</b></h5><br/>
+                    <h5><b>Aba Office</b></h5><br/>
                     <i class="fa fa-home"></i> Address: 10, Street Name, Aba, Abia State<br>
                     <i class="fa fa-phone"></i> Tel: +23412345678<br>
                     <i class="fa fa-email"></i> Email: aba.abia@onitshamarket.com<br>
