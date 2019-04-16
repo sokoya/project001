@@ -625,6 +625,7 @@
 <script>
     let review = JSON.parse('<?=$review;?>');
     product_id = review.product_id;
+    user = review.user_id;
     window.addEventListener('load', function () {
         let allimages = document.getElementsByTagName('img');
         for (let i = 0; i < allimages.length; i++) {
@@ -671,16 +672,16 @@
                 let home_detail = $('#home_review_detail').val();
                 let home_title = $('#home_review_title').val();
                 let review_dn = review.username;
-                let user_id = review.user_id;
                 $.ajax({
                     url: base_url + "product/add_review",
                     method: "POST",
-                    data: {title: home_title, name: review_dn, detail: home_detail, 'product_id': product_id, 'user_id': user_id},
+                    data: {title: home_title, name: review_dn, detail: home_detail, 'product_id': product_id, 'user_id': user},
                     success: function (response) {
-                        $('#review_form').hide();
+                        $('#review_modal').modal('hide');
+                        notification_message('Thanks for your feedback','fas fa-thumbs-up','success');
                     },
                     error: function (response) {
-                        alert("Sorry an error occurred somewhere")
+                        notification_message('Error submitting feedback, please contact webmaster','fas fa-remove','error');
                     }
                 });
             });
