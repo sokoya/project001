@@ -113,6 +113,11 @@
                             <img src="<?= base_url('assets/img/payment/mastercard-straight-32px.png'); ?>"
                                  alt="Pay with Mastercard" title="Pay with Mastercard"/>
                         </li>
+                        <li>
+                            <br />
+                            <img style="width: 42%;" src="<?= base_url('assets/img/home/dhl2.png'); ?>"
+                                 alt="Pay with Mastercard" title="Pay with Mastercard"/>
+                        </li>
 
                     </ul>
                 </div>
