@@ -128,7 +128,7 @@ class Ajax extends CI_Controller
                 $content .= $desc->highlights;
             }
             if( strlen($content )) {
-                $content .= ' Read more on product description.';
+                $content .= '...';
             }
             $results['description'] = $content;
             $results['seller'] = $desc->seller_id;
