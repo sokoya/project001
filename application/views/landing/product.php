@@ -87,11 +87,9 @@
                 <ol class="breadcrumb page-breadcrumb c-brc">
                     <li><a href="<?= base_url(); ?>">Home</a>
                     </li>
-<!--                    --><?php //foreach( $breadcrumb as $key ) : ?>
-<!--                        <li>-->
-<!--                            <a href="--><?//= base_url('catalog/' . $key->slug . '/'); ?><!--">--><?//= ucwords($key->name); ?><!--</a>-->
-<!--                        </li>-->
-<!--                    --><?php //endforeach;?>
+                    <li>
+                        <a href="<?= base_url('catalog/' . $category_detail->slug . '/'); ?>"><?= ucwords($category_detail->name); ?></a>
+                    </li>
                     <li class="active c-a-brc"><?= ucwords($product->product_name); ?></li>
                 </ol>
             </header>
