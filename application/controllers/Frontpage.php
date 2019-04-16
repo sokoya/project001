@@ -22,7 +22,6 @@ class Frontpage extends MY_Controller {
                 $review['user_id'] = $this->session->userdata('logged_id');
                 $review['username'] = ucfirst($page_data['profile']->first_name) . ' ' . $page_data['profile']->last_name;
             }
-//            var_dump( $row );exit;
         }
 
         $page_data['review'] = json_encode($review, JSON_UNESCAPED_SLASHES);
