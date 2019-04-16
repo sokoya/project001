@@ -127,8 +127,8 @@ class Ajax extends CI_Controller
             if( strlen($content) < 50 ){
                 $content .= $desc->highlights;
             }
-            if( strlen($content )) {
-                $content .= '...';
+            if( strlen($content ) < 50) {
+                $content .= "\n\r...";
             }
             $results['description'] = $content;
             $results['seller'] = $desc->seller_id;
