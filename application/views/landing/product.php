@@ -921,7 +921,7 @@
 
     $(document).ready(function(){
         $('.prod_description > p > img').each(function () {
-            $(this).style({'width' : '60%'});
+            $(this).css({'width' : '60%'});
         });
     });
 
