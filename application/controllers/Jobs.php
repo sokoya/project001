@@ -21,8 +21,8 @@ class Jobs extends MY_Controller {
         $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
         $job_code = $this->uri->segment(3);
         $job_code = cleanit( $job_code );
-        die( $job_code );
-        $page_data['job'] = $this->product->get_row('jobs', '*', array('job_code', $job_code));
+
+        $page_data['job'] = $this->product->get_row('jobs', '*', array('job_code' => $job_code));
         if( $page_data['job'] ){
             $page_data['title'] = $page_data['job']->job_title;
             $this->load->view('landing/jobs/job_detail', $page_data);

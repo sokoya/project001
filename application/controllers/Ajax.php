@@ -130,7 +130,8 @@ class Ajax extends CI_Controller
             if( strlen($content ) < 50) {
                 $content .= "\n\r...";
             }
-            $results['description'] = $content;
+
+            $results['description'] = html_entity_decode($content);
             $results['seller'] = $desc->seller_id;
             $variation = $this->product->get_variation($pid);
             $results['default_vid'] = $variation->id;

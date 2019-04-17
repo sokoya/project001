@@ -41,7 +41,7 @@
                             <b>Location</b> <br/> <?= $job->job_location; ?>
                         </div>
                         <div class="col-md-4 job_card_props">
-                            <b>Job Type</b> <br/> <?= ucwords(preg_replace('/[^a-z]/', ' ', $job->job_type))?>
+                            <b>Job Type</b> <br/> <?= ucwords( $job->job_type); ?>
                         </div>
                         <div class="col-md-4 job_card_props">
                             <b>Salary</b> <br/> <?= (!empty( $job->salary_range)) ? '₦ ' . $job->salary_range : 'Not disclosed'; ?>
@@ -50,7 +50,7 @@
                     <hr />
                     <div class="row">
                         <div class="col-md-8">
-                            <b>Posted on:</b> Time ago
+                            <b>Posted on:</b> <?= date('l, dS F, Y', strtotime( $job->date_posted));?>
                         </div>
                         <div class="col-md-4 text-right">
                             Share Link
@@ -59,7 +59,7 @@
                 </div>
                 <hr/>
                 <div>
-                    <?= $job->description; ?>
+                    <?= html_entity_decode($job->description); ?>
                 </div>
             </div>
         </div>
