@@ -65,12 +65,12 @@
                     <hr />
                     <div class="row">
                         <div class="col-md-8">
-                            <?= word_limiter(html_entity_decode($job->job_description), 500, '&#8230;'); ?>
+                            <?= word_limiter(html_entity_decode($job->job_description), 70, '&#8230;'); ?>
                         </div>
                         <div class="col-md-4 text-right">
                             Job posted <?php
                                 $now = time();
-                                timespan( strtotime($job->date_posted), $now);
+                                echo timespan( strtotime($job->date_posted), $now);
                                 ?> ago <br/>
                             <?php if( $job->due_date ) : ?>
                                 <span style="color:#e23312;">
