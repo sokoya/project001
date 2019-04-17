@@ -66,7 +66,7 @@
                         <hr />
                         <div class="row">
                             <div class="col-md-8">
-                                <?= word_limiter(html_entity_decode($job->job_description), 30, '&#8230;'); ?>
+                                <?= word_limiter(html_entity_decode($job->job_description), 20, '&#8230;'); ?>
                             </div>
                             <div class="col-md-4 text-right">
                                 <?php if( $job->due_date ) : ?>
