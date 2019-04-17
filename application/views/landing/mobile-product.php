@@ -464,7 +464,7 @@
                                 aria-hidden="true"
                                 data-target="description_vl"></i></span></p>
                 <p id="description_vl" class="body_text">
-                    <?= word_limiter($product->product_description, 80); ?>
+                    <?= word_limiter(html_entity_decode($product->product_description), 80); ?>
                     <?php if (str_word_count($product->product_description, 0) > 40) : ?>
                         <span><a style="text-decoration: none; color: #0b6427" href="<?= base_url( urlify($product->product_name, $product->id) . 'description/'); ?>">Read More</a> </span>
                     <?php endif; ?>
@@ -478,7 +478,7 @@
                                 aria-hidden="true"
                                 data-target="box_vl"></i></span></p>
                 <p class="body_text" style="display: none" id="box_vl">
-                    <?= $product->in_the_box; ?>
+                    <?= html_entity_decode($product->in_the_box); ?>
                 </p>
             <?php endif; ?>
         </div>
