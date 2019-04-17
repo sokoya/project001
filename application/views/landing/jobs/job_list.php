@@ -43,39 +43,41 @@
                 foreach( $jobs as $job ):
             ?>
                 <div class="job_card">
-                <div class="row job_card_header">
-                    <h4 class="text-capitalize col-md-8"><?= $job->job_title; ?></h4>
-                     <div class="col-md-4">
-                        <div class="tag"><?= date('l, dS F, Y', strtotime( $job->date_posted));?></div>
-                     </div>
-                </div>
-                <div class="job_card_body">
-                    <div class="row">
-                        <div class="col-md-4 job_card_props">
-                            <b>Location</b> <br/> <?= ucfirst($job->job_location); ?>
-                        </div>
-                        <div class="col-md-4 job_card_props">
-                            <b>Job Type</b> <br/> <?= ucwords( $job->job_type); ?>
-                        </div>
-                        <div class="col-md-4 job_card_props">
-                            <b>Salary</b> <br/> <?= (!empty( $job->salary_range)) ? '₦ ' . $job->salary_range : 'Not disclosed'; ?>
-                        </div>
+                    <div class="row job_card_header">
+                        <h4 class="text-capitalize col-md-8"><?= $job->job_title; ?></h4>
+                         <div class="col-md-4">
+                            <div class="tag"><?= date('l, dS F, Y', strtotime( $job->date_posted));?></div>
+                         </div>
                     </div>
                     <hr />
-                    <div class="row">
-                        <div class="col-md-8">
-                            <?= word_limiter(html_entity_decode($job->job_description), 30, '&#8230;'); ?>
+                    <br />
+                    <div class="job_card_body">
+                        <div class="row">
+                            <div class="col-md-4 job_card_props">
+                                <b>Location</b> <br/> <?= ucfirst($job->job_location); ?>
+                            </div>
+                            <div class="col-md-4 job_card_props">
+                                <b>Job Type</b> <br/> <?= ucwords( $job->job_type); ?>
+                            </div>
+                            <div class="col-md-4 job_card_props">
+                                <b>Salary</b> <br/> <?= (!empty( $job->salary_range)) ? '₦ ' . $job->salary_range : 'Not disclosed'; ?>
+                            </div>
                         </div>
-                        <div class="col-md-4 text-right">
-                            <?php if( $job->due_date ) : ?>
-                                <span style="color:#e23312;">
-                                    Expires: <?= date('Y/m/d', strtotime( $job->due_date)); ?>
-                                </span>
-                            <?php endif; ?>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-8">
+                                <?= word_limiter(html_entity_decode($job->job_description), 30, '&#8230;'); ?>
+                            </div>
+                            <div class="col-md-4 text-right">
+                                <?php if( $job->due_date ) : ?>
+                                    <span style="color:#e23312;">
+                                        Expires: <?= date('Y/m/d', strtotime( $job->due_date)); ?>
+                                    </span>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
             <?php endforeach; else :?>
                 <div class="container view_constraint text-center">
