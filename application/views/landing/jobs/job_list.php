@@ -70,10 +70,12 @@
                         <div class="col-md-4 text-right">
                             Job posted <?php
                                 $now = time();
-                                timespan( strtotime($job->date_posted), );
+                                timespan( strtotime($job->date_posted), $now);
                                 ?> ago <br/>
                             <?php if( $job->due_date ) : ?>
-                                <span style="color:#e23312;">Expires: <?= date('Y/m/d', strtotime( $job->due_date)); ?></span>
+                                <span style="color:#e23312;">
+                                    Expires: <?= date('Y/m/d', strtotime( $job->due_date)); ?>
+                                </span>
                             <?php endif; ?>
                         </div>
                     </div>
