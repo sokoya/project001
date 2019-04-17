@@ -57,7 +57,7 @@
                             <b>Role:</b> Accounting & Audit Assessments
                         </div>
                         <div class="col-md-4 text-right">
-                            Job posted 16m ago
+                            Job posted 16m ago  |  <span style="color:#e23312;">Expires: 29/04/2019</span>
                         </div>
                     </div>
                 </div>
