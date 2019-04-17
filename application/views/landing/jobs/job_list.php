@@ -45,18 +45,18 @@
                 <div class="job_card">
                 <div class="row job_card_header">
                     <h4 class="text-capitalize col-md-8"><?= $job->job_title; ?></h4>
-                    <div class="col-md-4">
-                        <div class="tag">new</div>
-                        <i class="fas fa-heart pull-right" style="margin-top:10px;"></i>
-                    </div>
+<!--                    <div class="col-md-4">-->
+<!--                        <div class="tag">new</div>-->
+<!--                        <i class="fas fa-heart pull-right" style="margin-top:10px;"></i>-->
+<!--                    </div>-->
                 </div>
                 <div class="job_card_body">
                     <div class="row">
                         <div class="col-md-4 job_card_props">
-                            <b>Location</b> <br/> <?= $job->job_location; ?>
+                            <b>Location</b> <br/> <?= ucfirst($job->job_location); ?>
                         </div>
                         <div class="col-md-4 job_card_props">
-                            <b>Job Type</b> <br/> <?= ucwords(preg_replace('/[^a-z]/', ' ', $job->job_type))?>
+                            <b>Job Type</b> <br/> <?= ucwords( $job->job_type); ?>
                         </div>
                         <div class="col-md-4 job_card_props">
                             <b>Salary</b> <br/> <?= (!empty( $job->salary_range)) ? '₦ ' . $job->salary_range : 'Not disclosed'; ?>
@@ -65,7 +65,7 @@
                     <hr />
                     <div class="row">
                         <div class="col-md-8">
-                            <?= word_limiter($job->description, 10, '&#8230;'); ?>
+                            <?= word_limiter($job->job_description, 10, '&#8230;'); ?>
                         </div>
                         <div class="col-md-4 text-right">
                             Job posted 16m ago <br/> <span style="color:#e23312;">Expires: 29/04/2019</span>
@@ -78,7 +78,7 @@
                 <div class="container view_constraint text-center">
                     <img src="<?= base_url('assets/img/404cart.jpg'); ?>" class="img-responsive img_cart_404" style="margin:auto;max-width:200px;"/>
 <!--                    <h2 class="hide_it_sm">Uh Oh!!</h2>-->
-                    <h5 style="padding-top: 20px;">Sorry, no job vacancy listed on the site now. KIndly check back later.</h5>
+                    <h5 style="padding-top: 20px;">Sorry, no job vacancy listed on the site now. Kindly check back later.</h5>
                     <h5 style="margin-bottom:auto;" class="hide_it_sm">Go Back <a style="color: #0b6427;" href="<?=base_url()?>">Home</a></h5>
                 </div>
             <?php endif; ?>
