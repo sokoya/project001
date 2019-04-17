@@ -65,10 +65,16 @@
                     <hr />
                     <div class="row">
                         <div class="col-md-8">
-                            <?= word_limiter(html_entity_decode($job->job_description), 10, '&#8230;'); ?>
+                            <?= word_limiter(html_entity_decode($job->job_description), 500, '&#8230;'); ?>
                         </div>
                         <div class="col-md-4 text-right">
-                            Job posted 16m ago <br/> <span style="color:#e23312;">Expires: 29/04/2019</span>
+                            Job posted <?php
+                                $now = time();
+                                timespan( strtotime($job->date_posted), );
+                                ?> ago <br/>
+                            <?php if( $job->due_date ) : ?>
+                                <span style="color:#e23312;">Expires: <?= date('Y/m/d', strtotime( $job->due_date)); ?></span>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
