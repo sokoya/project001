@@ -46,7 +46,7 @@
                     <div class="job_card">
 
                         <div class="row job_card_header">
-                            <h4 class="text-capitalize col-md-8"><?= $job->job_title; ?></h4>
+                            <h3 class="text-capitalize col-md-8"><?= $job->job_title; ?></h3>
                             <div class="col-md-4">
                                 <div class="tag"><?= date('l, dS F, Y', strtotime( $job->date_posted));?></div>
                             </div>

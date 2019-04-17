@@ -33,12 +33,12 @@
         <div>
             <div class="job_card">
                 <div class="row job_card_header">
-                    <h4 class="text-capitalize col-md-8"><?= ucwords($job->job_title); ?></h4>
+                    <h3 class="text-capitalize col-md-8"><?= ucwords($job->job_title); ?></h3>
                 </div>
                 <div class="job_card_body">
                     <div class="row">
                         <div class="col-md-4 job_card_props">
-                            <b>Location</b> <br/> <?= $job->job_location; ?>
+                            <b>Location</b> <br/> <?= ucfirst($job->job_location); ?>
                         </div>
                         <div class="col-md-4 job_card_props">
                             <b>Job Type</b> <br/> <?= ucwords( $job->job_type); ?>
