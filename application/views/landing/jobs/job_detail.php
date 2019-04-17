@@ -59,7 +59,7 @@
                 </div>
                 <hr/>
                 <div>
-                    <?= html_entity_decode($job->description); ?>
+                    <?= html_entity_decode($job->job_description); ?>
                 </div>
             </div>
         </div>
