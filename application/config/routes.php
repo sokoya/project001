@@ -77,3 +77,6 @@ $route['order_completed'] = 'checkout/order_completed/';
 $route['new-arrivals'] = 'feeds/new_arrivals/';
 $route['explore'] = 'feeds/explore/';
 
+$route['jobs-at-onitshamarket'] = 'jobs';
+$route['jobs-at-onitshamarket/(:any)/(:any)'] = 'jobs/job_detail/$2';
+

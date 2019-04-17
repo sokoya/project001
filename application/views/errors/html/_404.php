@@ -38,7 +38,6 @@
     <h5 style="margin-bottom:auto;" class="hide_it_sm">Go Back <a style="color: #0b6427;" href="<?=base_url()?>">Home</a></h5>
     <div class="col-xl-12 col-md-12 content-box" style="margin-bottom:-100px;">
         <div>
-
             <?php
                 $products = $this->product->randomproducts();
                 if( $products ) : ?>

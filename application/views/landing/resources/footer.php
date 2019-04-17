@@ -11,7 +11,7 @@
                                 <li><a href="#">Investor Relation</a></li>
                                 <li><a href="<?= lang('social_responsibility_url'); ?>">Social Responsibility</a></li>
                                 <li><a href="#">Quality Complaince</a></li>
-                                <li><a href="#">Jobs at <?= lang('app_name'); ?></a></li>
+                                <li><a href="<?= base_url('jobs-at-onitshamarket/')?>">Jobs at <?= lang('app_name'); ?></a></li>
                             </ul>
                         </section>
                         <div style="font-size: 12px;">

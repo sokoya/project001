@@ -431,14 +431,14 @@
                                     </p>
                                 </div>
                             <?php endif; ?>
-                            <?php if (!empty($product->weight)) : ?>
-                                <h3 class="product-overview-title pr-over">Weight</h3>
-                                <div class="product-overview-desc">
-                                    <p style="text-wrap: normal">
-                                        <?= $product->weight; ?>
-                                    </p>
-                                </div>
-                            <?php endif; ?>
+<!--                            --><?php //if (!empty($product->weight)) : ?>
+<!--                                <h3 class="product-overview-title pr-over">Weight</h3>-->
+<!--                                <div class="product-overview-desc">-->
+<!--                                    <p style="text-wrap: normal">-->
+<!--                                        --><?//= $product->weight; ?>
+<!--                                    </p>-->
+<!--                                </div>-->
+<!--                            --><?php //endif; ?>
 
                             <?php if (!empty($product->in_the_box)): ?>
                                 <h3 class="product-overview-title pr-over">What you will find in the box</h3>

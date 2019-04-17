@@ -72,5 +72,4 @@ class Page extends MY_Controller {
 //        $page_data['privacy'] = $this->user->get_row('page_contents', 'content', "(type='about_us')")->content;
         $this->load->view('landing/about_onitshamarket', $page_data);
     }
-
 }
