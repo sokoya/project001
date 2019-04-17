@@ -912,17 +912,18 @@
                 allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
             }
         }
-
-        for ( let x = 0 ; x < allimages.length; $x++ ){
-            allimages[x].style.width = '60%';
-            allimages[x].style.height = '60%';
-        }
     }, false);
     let quantity = $('#quan');
     let selected_variation_id = $('.variation_id').val();
     let count = quantity.data('range');
     let plus = $('.product-page-qty-plus');
     let minus = $('.product-page-qty-minus');
+
+    $(document).ready(function(){
+        $('.prod_description > p > img').each(function () {
+            $(this).style({'width' : '60%'});
+        });
+    });
 
 
     function format_currency(str) {
