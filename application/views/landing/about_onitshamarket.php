@@ -47,15 +47,14 @@
             <hr />
             <div class="text-content">
                 <p>
-                    Onitshamarket.com is a dynamic e-commerce platform that is designed to provide the most convenient experience for buying and selling in Nigeria.
-                    Beyond online shop; our unique focus of creating a virtual mall that interfaces with the largest market in Africa gives us an advantage over the competition.  <br />
+                    Internet Onitshamarketing Ltd trading as Onitshamarket.com is a dynamic e-commerce platform that is designed to provide the most convenient experience for buying and selling in Nigeria and rest of the world.  Beyond online market; our unique focus of creating a virtual mall and ultra modern experience centres that interfaces with the largest market in Africa gives us an advantage over the competition.
                     Giving customers the benefit of buying and selling quality and genuine goods from the biggest market in Africa, in the comfort of wherever they may be and having it delivered to them within a 24hrs lead time.
                 </p>
             </div>
             <h3>Our Vision</h3>
             <div class="text-content">
                 <p>
-                    Our vision is to provide an online mall for the new generation of Onitsha market customers, who need to buy genuine (delivering quality needs…, delivering quality need to you/Nigerians), cost effective wares and have it delivered to their homes.
+                    Our vision is to provide an online mall for the new generation of Onitsha market customers, who need to buy genuine, cost-effective products and have it delivered to their preferred locations.
                 </p>
                 <p>
                     <b>Onitshamarket.com</b> is always inspired to efficiently fulfill the changing current of our customers growing dynamic needs. Therefore, our products and services are genuine, superior, cost-effective, convenient and quick.
