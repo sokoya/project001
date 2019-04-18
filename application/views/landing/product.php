@@ -181,9 +181,9 @@
 <!--                                            <a href="#" id="to_sell">Have an item like this to sell? Create One.</a>-->
                                         </p>
                                         <p class="text-sm text-uppercase">
-<!--                                            <strong>Seller : </strong><a href="#" id="pr-seller">-->
-                                                <b><?= ( $product->brand_name == 'others' || $product == '' ) ? 'Universal' : ucwords(  $product->brand_name); ?></b>
-<!--                                            </a>-->
+                                            <strong>Seller : </strong><a href="#" id="pr-seller">
+                                                <b><?= ucwords($product->store_name); ?></b>
+                                            </a>
                                         </p>
                                     </div>
                                     <div class="col-md-7">
@@ -921,7 +921,7 @@
 
     $(document).ready(function(){
         $('.prod_description > p > img').each(function () {
-            $(this).css({'width' : '60%', 'align' : 'center'});
+            $(this).css({'width' : '60%'});
         });
     });
 

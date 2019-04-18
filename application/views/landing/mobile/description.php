@@ -170,7 +170,7 @@
 <script src="<?= $this->user->auto_version('assets/js/mobile.js'); ?>"></script>
 <script>
     $(function(){
-        $('.prod_description img').each(function() {
+        $('.prod_description > p > img').each(function() {
             $(this).css({'width': '50%', 'text-align' : 'left'});
             $(this).addClass('img-responsive');
             $(this).attr('Onitshamarket');
