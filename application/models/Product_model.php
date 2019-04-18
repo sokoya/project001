@@ -36,7 +36,8 @@ Class Product_model extends CI_Model{
         return $this->db->query("SELECT p.*, u.legal_company_name, u.store_name, v.quantity 
         FROM products AS p 
         LEFT JOIN sellers AS u ON (p.seller_id = u.uid) 
-        LEFT JOIN (SELECT var.product_id, SUM(var.qty) quantity FROM orders var WHERE var.product_id = {$id} AND var.payment_made = 'success') AS v ON ( p.id = v.product_id) 
+        LEFT JOIN (SELECT var.product_id, SUM(var.qty) quantity FROM orders var WHERE var.product_id = {$id} AND var.payment_made = 'success') 
+        AS v ON ( p.id = v.product_id) 
         WHERE p.id = ? ", $id )->row();
     }
 

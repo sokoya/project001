@@ -158,7 +158,7 @@
             <div class="container"><p class="text-break">What's in the box</p></div>
             <div class="custom-card">
                 <div class="container">
-                    <p class="body_text"><?= $product_description->in_the_box; ?></p>
+                    <p class="body_text"><?= html_entity_decode($product_description->in_the_box); ?></p>
                 </div>
             </div>
         <?php endif; ?>
@@ -170,7 +170,7 @@
 <script src="<?= $this->user->auto_version('assets/js/mobile.js'); ?>"></script>
 <script>
     $(function(){
-        $('.prod_description img').each(function() {
+        $('.prod_description > p > img').each(function() {
             $(this).css({'width': '50%', 'text-align' : 'left'});
             $(this).addClass('img-responsive');
             $(this).attr('Onitshamarket');

@@ -181,9 +181,9 @@
 <!--                                            <a href="#" id="to_sell">Have an item like this to sell? Create One.</a>-->
                                         </p>
                                         <p class="text-sm text-uppercase">
-<!--                                            <strong>Seller : </strong><a href="#" id="pr-seller">-->
-                                                <b><?= ( $product->brand_name == 'others' || $product == '' ) ? 'Universal' : ucwords(  $product->brand_name); ?></b>
-<!--                                            </a>-->
+                                            <strong>Seller : </strong><a href="#" id="pr-seller">
+                                                <b><?= ucwords($product->store_name); ?></b>
+                                            </a>
                                         </p>
                                     </div>
                                     <div class="col-md-7">
@@ -918,6 +918,13 @@
     let count = quantity.data('range');
     let plus = $('.product-page-qty-plus');
     let minus = $('.product-page-qty-minus');
+
+    $(document).ready(function(){
+        $('.prod_description > p > img').each(function () {
+            $(this).css({'width' : '60%'});
+        });
+    });
+
 
     function format_currency(str) {
         return '₦' + str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
