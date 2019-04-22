@@ -1,5 +1,8 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
 <style>
+    .job_link,.job_link:hover{
+        color: #111111;
+    }
     .job_card {
         -webkit-transition: box-shadow .5s linear;
         transition: box-shadow .5s linear;
@@ -21,7 +24,7 @@
         padding:5px;
         color:#21801e;
         position: absolute;
-        right:100px;
+        right:10px;
     }
     .job_card_props:not(:last-child){
         border-right: 1px solid #d9d9d9;
@@ -42,7 +45,7 @@
             <?php if( $jobs ) :
                 foreach( $jobs as $job ):
             ?>
-                <a title="<?= $job->job_title; ?>" href="<?= base_url('jobs-at-onitshamarket/' . urlify($job->job_title) .'/' . $job->job_code.'/')?>">
+                <a class="job_link" title="<?= $job->job_title; ?>" href="<?= base_url('jobs-at-onitshamarket/' . urlify($job->job_title) .'/' . $job->job_code.'/')?>">
                     <div class="job_card">
 
                         <div class="row job_card_header">
