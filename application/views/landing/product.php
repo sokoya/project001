@@ -183,7 +183,7 @@
                                         <p class="text-sm text-uppercase">
                                             <strong>Seller : </strong><a href="#" id="pr-seller">
                                                 <b>
-                                                    <a href="<?= base_url('seller/' .siteurlify( $product->store_name, $product->seller_id) .'/'); ?>">
+                                                    <a href="<?= base_url('seller/' .siteurlify( $product->store_name, $product->seller_id)); ?>">
                                                         <?= ucwords($product->store_name); ?>
                                                     </a>
                                                 </b>
