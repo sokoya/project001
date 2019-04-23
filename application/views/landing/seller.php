@@ -82,29 +82,30 @@
             </div>
         </div>
     <?php else : ?>
+
         <div class="container">
             <div class="cat-notify" style="padding:30px 30px 0px 30px;">
                 <p class="n-head"><?= $pgtitle ?></p>
             </div>
             <div class="col-sm-12" style="background: #fff;margin-bottom: 20px;padding:20px 0 0 0;">
                 <div class="col-sm-6">
-                    <h4 class="col-sm-6">
-                        Product Quality
+                    <div class="col-sm-6">
+                        <h4>Product Quality</h4>
                         <div class="progress" style="margin-top:5px;">
                             <div class="progress-bar" role="progressbar" style="width: 65%;background-color: #f12345;"
                                  aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%
                             </div>
                         </div>
-                    </h4>
+                    </div>
 
-                    <h4 class="col-sm-6 pull-right">
-                        Successful Sales
+                    <div class="col-sm-6 pull-right">
+                        <h4>Successful Sales</h4>
                         <div class="progress" style="margin-top:5px;">
                             <div class="progress-bar" role="progressbar" style="width: 100%;background-color: #5aa352;"
                                  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">5103
                             </div>
                         </div>
-                    </h4>
+                    </div>
                 </div>
                 <div class="col-sm-6">
                     <h4 class="col-sm-6" style="margin-top: 5px;">
