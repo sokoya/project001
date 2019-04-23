@@ -86,9 +86,9 @@
             <div class="cat-notify" style="padding:30px 30px 0px 30px;">
                 <p class="n-head"><?= $pgtitle ?></p>
             </div>
-            <div class="col-md-12" style="background: #fff;margin-bottom: 20px;padding:20px 0 0 0;">
-                <div class="col-md-6">
-                    <h4 class="col-md-6">
+            <div class="col-sm-12" style="background: #fff;margin-bottom: 20px;padding:20px 0 0 0;">
+                <div class="col-sm-6">
+                    <h4 class="col-sm-6">
                         Product Quality
                         <div class="progress" style="margin-top:5px;">
                             <div class="progress-bar" role="progressbar" style="width: 65%;background-color: #f12345;"
@@ -97,7 +97,7 @@
                         </div>
                     </h4>
 
-                    <h4 class="col-md-6 pull-right">
+                    <h4 class="col-sm-6 pull-right">
                         Successful Sales
                         <div class="progress" style="margin-top:5px;">
                             <div class="progress-bar" role="progressbar" style="width: 100%;background-color: #5aa352;"
@@ -106,8 +106,8 @@
                         </div>
                     </h4>
                 </div>
-                <div class="col-md-6">
-                    <h4 class="col-md-6" style="margin-top: 5px;">
+                <div class="col-sm-6">
+                    <h4 class="col-sm-6" style="margin-top: 5px;">
                         <svg height="39" viewBox="0 0 39 39" width="39" class="" name="scale-badge">
                             <g fill="none" fill-rule="nonzero">
                                 <path d="M37.2 19.5l1.72-4.46c.19-.5.04-1.05-.37-1.39l-3.71-3-.75-4.72C34 5.4 33.59 5 33.07 4.9l-4.72-.75-3-3.7c-.33-.42-.9-.57-1.38-.38L19.5 1.8 15.04.1a1.22 1.22 0 0 0-1.38.36l-3.01 3.72-4.72.75C5.4 5 5 5.4 4.9 5.92l-.75 4.73-3.7 3c-.42.34-.57.9-.38 1.39L1.8 19.5.1 23.96c-.2.5-.05 1.05.36 1.39l3.71 3 .75 4.72c.09.52.5.93 1.02 1.02l4.72.75 3 3.7c.34.42.9.57 1.39.38l4.46-1.71 4.46 1.71a1.22 1.22 0 0 0 1.39-.37l3-3.71 4.72-.75c.53-.09.94-.5 1.02-1.02l.75-4.72 3.7-3c.42-.34.57-.9.38-1.39L37.2 19.5z"
@@ -119,7 +119,7 @@
                         <span style="position: absolute;margin-left:10px;">4 years<br/>
                             Selling on OM</span>
                     </h4>
-                    <div class="col-md-6 pull-right">
+                    <div class="col-sm-6 pull-right">
                         <h4>
                             <span class="fa fa-star checked"></span>
                             <span class="fa fa-star checked"></span>
