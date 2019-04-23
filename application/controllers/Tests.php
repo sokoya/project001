@@ -155,4 +155,12 @@ class Tests extends MY_Controller
         $store = $this->product->parent_slug_top( $id );
         var_dump( $store ); exit;
     }
+
+    public function invoice(){
+        $page_data['title'] = 'Online shopping | Buy Electronics, Phones, Fashions in Nigeria';
+        $page_data['page'] = 'homepage';
+        $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
+        $this->load->view('landing/invoice', $page_data);
+
+    }
 }
