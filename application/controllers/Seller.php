@@ -37,6 +37,7 @@ class Seller extends MY_Controller {
         }else{
             $seller_detail = $this->feeds->get_row( 'sellers', 'date_applied, store_name', array('uid' => $seller_id));
             $page_data['title'] = ucwords($seller_detail->store_name) . " Sells on Onitshamarket";
+            $page_data['pgtitle'] = ucwords($seller_detail->store_name);
             $page_data['description'] = ucwords($seller_detail->store_name) . " Sells on Onitshamarket since " . date('h:ia - l, dS F, Y', strtotime($seller_detail->date_applied)) . " and as over " .count((array)$page_data['products']) . " Listed on Onitshamarket";
             $this->load->view('landing/seller', $page_data);
         }
