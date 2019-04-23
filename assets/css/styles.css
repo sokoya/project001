@@ -6952,7 +6952,7 @@ ul#table-pagination li {
     position: relative;
     left: 12px;
     bottom: 3px;
-    z-index: 30;
+    z-index: 2;
     cursor: pointer;
     outline: #ebebeb solid 1px
 }
