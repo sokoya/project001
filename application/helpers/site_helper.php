@@ -137,6 +137,15 @@ function urlify($string, $id =''){
     }
 }
 
+function siteurlify($string, $id =''){
+    $new_string = strtolower(trim(preg_replace('~[^0-9a-z]+~i', '-', html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($string, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8')), '-'));
+    if( $id != '' ){
+        return $new_string .'-'.$id.'/';
+    }else{
+        return $new_string;
+    }
+}
+
 if (!function_exists('productStatus')) {
     function productStatus($status){
         switch ($status) {
