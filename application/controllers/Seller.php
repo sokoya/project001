@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Seller extends MY_Controller {
     public function __construct(){
         parent::__construct();
+        $this->load->model('feeds_model', 'feeds');
     }
 
     public function index(){
@@ -14,7 +15,8 @@ class Seller extends MY_Controller {
         }
         $page_data['profile'] = $this->user->get_profile( $this->session->userdata('logged_id') );
         $array = array('is_limit' => false);
-        $x = (array)$this->product->get_seller_products($array);
+        $array['seller_id'] = $seller_id;
+        $x = (array)$this->feeds->get_seller_products($array);
         $page_data['count_in_total'] = count($x);
         $page = isset($_GET['page']) ? xss_clean($_GET['page']) : 0;
         if ($page > 1) $page -= 1;

@@ -80,3 +80,6 @@ $route['explore'] = 'feeds/explore/';
 $route['jobs-at-onitshamarket'] = 'jobs';
 $route['jobs-at-onitshamarket/(:any)/(:any)'] = 'jobs/job_detail/$2';
 
+// Seller
+$route['seller/(:any)'] = 'seller/index/$1';
+
