@@ -25,7 +25,7 @@ class Seller extends MY_Controller {
         $config = $this->config->item('pagination');
         $config['base_url'] = current_url();
         $config['total_rows'] = $page_data['count_in_total'];
-        $config['per_page'] = 40;
+        $config['per_page'] = 20;
         $this->pagination->initialize($config);
         $array['limit'] = $config['per_page'];
         $array['offset'] = $page;

@@ -87,50 +87,58 @@
                 <p class="n-head"><?= $pgtitle ?></p>
             </div>
             <div class="col-sm-12" style="background: #fff;margin-bottom: 20px;padding:20px 0 0 0;">
-                <div class="col-sm-6">
-                    <h4 class="col-sm-6">
-                        Product Quality
+                <div class="row">
+
+                    <div class="col-sm-6">
+                        <h4>Product Quality</h4>
                         <div class="progress" style="margin-top:5px;">
                             <div class="progress-bar" role="progressbar" style="width: 65%;background-color: #f12345;"
                                  aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%
                             </div>
                         </div>
-                    </h4>
-
-                    <h4 class="col-sm-6 pull-right">
-                        Successful Sales
-                        <div class="progress" style="margin-top:5px;">
-                            <div class="progress-bar" role="progressbar" style="width: 100%;background-color: #5aa352;"
-                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">5103
-                            </div>
-                        </div>
-                    </h4>
-                </div>
-                <div class="col-sm-6">
-                    <h4 class="col-sm-6" style="margin-top: 5px;">
-                        <svg height="39" viewBox="0 0 39 39" width="39" class="" name="scale-badge">
-                            <g fill="none" fill-rule="nonzero">
-                                <path d="M37.2 19.5l1.72-4.46c.19-.5.04-1.05-.37-1.39l-3.71-3-.75-4.72C34 5.4 33.59 5 33.07 4.9l-4.72-.75-3-3.7c-.33-.42-.9-.57-1.38-.38L19.5 1.8 15.04.1a1.22 1.22 0 0 0-1.38.36l-3.01 3.72-4.72.75C5.4 5 5 5.4 4.9 5.92l-.75 4.73-3.7 3c-.42.34-.57.9-.38 1.39L1.8 19.5.1 23.96c-.2.5-.05 1.05.36 1.39l3.71 3 .75 4.72c.09.52.5.93 1.02 1.02l4.72.75 3 3.7c.34.42.9.57 1.39.38l4.46-1.71 4.46 1.71a1.22 1.22 0 0 0 1.39-.37l3-3.71 4.72-.75c.53-.09.94-.5 1.02-1.02l.75-4.72 3.7-3c.42-.34.57-.9.38-1.39L37.2 19.5z"
-                                      fill="#1f6c54"></path>
-                                <path d="M19.54 28.34h-5.46c-.2 0-.41-.03-.59-.1-.35-.14-.5-.44-.47-.8.03-.39.33-.72.7-.72.4.01.46-.18.45-.51v-1.85c0-.64.24-1.16.66-1.63l2.35-2.64c.57-.65.57-1.19.01-1.82-.77-.9-1.56-1.77-2.35-2.64a2.36 2.36 0 0 1-.67-1.67v-1.89c0-.28-.05-.45-.4-.45-.41 0-.72-.33-.77-.74-.03-.35.23-.72.62-.83.15-.04.32-.05.48-.05h10.93c.13 0 .27 0 .4.03.4.1.7.47.68.83a.82.82 0 0 1-.8.76c-.29 0-.38.13-.37.39v1.89a2.4 2.4 0 0 1-.69 1.74c-.73.8-1.43 1.63-2.17 2.42-.73.77-.74 1.44.01 2.23.75.78 1.44 1.62 2.18 2.42.43.48.67 1.01.67 1.67v1.89c0 .28.05.45.4.45.4 0 .72.34.77.73.03.33-.22.7-.59.82a1.8 1.8 0 0 1-.51.06l-5.47.01zm0-1.63h3.38c.3 0 .44-.09.43-.4-.02-.6.02-1.19-.02-1.77a1.3 1.3 0 0 0-.28-.72c-.77-.9-1.57-1.8-2.37-2.68a2.84 2.84 0 0 1 .02-3.96c.8-.88 1.6-1.77 2.36-2.68.16-.17.26-.44.27-.68.04-.6 0-1.2.02-1.8 0-.3-.12-.4-.41-.4-2.25.01-4.5.02-6.75 0-.35 0-.44.14-.43.46.01.55-.03 1.1.02 1.64.02.29.13.61.3.83.77.91 1.58 1.79 2.37 2.68 1 1.14 1.03 2.71.04 3.83-.7.8-1.39 1.6-2.12 2.36-.45.47-.7.96-.61 1.62.04.34 0 .7 0 1.04 0 .63 0 .63.61.63h3.17z"
-                                      fill="#FFF"></path>
-                            </g>
-                        </svg>
-                        <span style="position: absolute;margin-left:10px;">4 years<br/>
-                            Selling on OM</span>
-                    </h4>
-                    <div class="col-sm-6 pull-right">
-                        <h4>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                        </h4>
-                        <h5>
-                            4.2 Rating from 1023 Reviews
-                        </h5>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="col-sm-6">
+                            <h4>Successful Sales</h4>
+                            <div class="progress" style="margin-top:5px;">
+                                <div class="progress-bar" role="progressbar" style="width: 100%;background-color: #5aa352;"
+                                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">5103
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-6">
+                        <h4 class="col-sm-6" style="margin-top: 5px;">
+                            <svg height="39" viewBox="0 0 39 39" width="39" class="" name="scale-badge">
+                                <g fill="none" fill-rule="nonzero">
+                                    <path d="M37.2 19.5l1.72-4.46c.19-.5.04-1.05-.37-1.39l-3.71-3-.75-4.72C34 5.4 33.59 5 33.07 4.9l-4.72-.75-3-3.7c-.33-.42-.9-.57-1.38-.38L19.5 1.8 15.04.1a1.22 1.22 0 0 0-1.38.36l-3.01 3.72-4.72.75C5.4 5 5 5.4 4.9 5.92l-.75 4.73-3.7 3c-.42.34-.57.9-.38 1.39L1.8 19.5.1 23.96c-.2.5-.05 1.05.36 1.39l3.71 3 .75 4.72c.09.52.5.93 1.02 1.02l4.72.75 3 3.7c.34.42.9.57 1.39.38l4.46-1.71 4.46 1.71a1.22 1.22 0 0 0 1.39-.37l3-3.71 4.72-.75c.53-.09.94-.5 1.02-1.02l.75-4.72 3.7-3c.42-.34.57-.9.38-1.39L37.2 19.5z"
+                                          fill="#1f6c54"></path>
+                                    <path d="M19.54 28.34h-5.46c-.2 0-.41-.03-.59-.1-.35-.14-.5-.44-.47-.8.03-.39.33-.72.7-.72.4.01.46-.18.45-.51v-1.85c0-.64.24-1.16.66-1.63l2.35-2.64c.57-.65.57-1.19.01-1.82-.77-.9-1.56-1.77-2.35-2.64a2.36 2.36 0 0 1-.67-1.67v-1.89c0-.28-.05-.45-.4-.45-.41 0-.72-.33-.77-.74-.03-.35.23-.72.62-.83.15-.04.32-.05.48-.05h10.93c.13 0 .27 0 .4.03.4.1.7.47.68.83a.82.82 0 0 1-.8.76c-.29 0-.38.13-.37.39v1.89a2.4 2.4 0 0 1-.69 1.74c-.73.8-1.43 1.63-2.17 2.42-.73.77-.74 1.44.01 2.23.75.78 1.44 1.62 2.18 2.42.43.48.67 1.01.67 1.67v1.89c0 .28.05.45.4.45.4 0 .72.34.77.73.03.33-.22.7-.59.82a1.8 1.8 0 0 1-.51.06l-5.47.01zm0-1.63h3.38c.3 0 .44-.09.43-.4-.02-.6.02-1.19-.02-1.77a1.3 1.3 0 0 0-.28-.72c-.77-.9-1.57-1.8-2.37-2.68a2.84 2.84 0 0 1 .02-3.96c.8-.88 1.6-1.77 2.36-2.68.16-.17.26-.44.27-.68.04-.6 0-1.2.02-1.8 0-.3-.12-.4-.41-.4-2.25.01-4.5.02-6.75 0-.35 0-.44.14-.43.46.01.55-.03 1.1.02 1.64.02.29.13.61.3.83.77.91 1.58 1.79 2.37 2.68 1 1.14 1.03 2.71.04 3.83-.7.8-1.39 1.6-2.12 2.36-.45.47-.7.96-.61 1.62.04.34 0 .7 0 1.04 0 .63 0 .63.61.63h3.17z"
+                                          fill="#FFF"></path>
+                                </g>
+                            </svg>
+                            <span style="position: absolute;margin-left:10px;">4 years<br/>
+                            Selling on OM</span>
+                        </h4>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="col-sm-6">
+                            <h4>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                            </h4>
+                            <h5>
+                                4.2 Rating from 1023 Reviews
+                            </h5>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="row">
