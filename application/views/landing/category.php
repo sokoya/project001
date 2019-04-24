@@ -281,6 +281,27 @@
             }
         }
     }, false);
+    $(window).on('scroll', function() {
+        if ((document.documentElement.scrollTop > 260) && (document.documentElement.scrollTop < 2300)) {
+            $('.category-filters').css({
+                "height": "96vh",
+                "position":"fixed",
+                "overflow-y":"scroll",
+                "overflow-x":"hidden",
+                "width":"270px",
+                "top": 10,
+            });
+        } else {
+            $('.category-filters').css({
+                "height": "unset",
+                "position":"unset",
+                "overflow-y":"unset",
+                "overflow-x":"unset",
+                "width":"270px",
+                "top": "unset",
+            });
+        }
+    });
     $("#price-range").ionRangeSlider({
         type: "double",
         min: <?= $min ?>,

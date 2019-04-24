@@ -90,7 +90,6 @@
                             <?php endforeach; ?>
                         </div>
                     </div>
-                    <hr class="tree-line"/>
                 </div>
                 <?php endforeach; ?>
             </div>
