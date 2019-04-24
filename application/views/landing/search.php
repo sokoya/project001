@@ -264,6 +264,26 @@
             }
         }
     }, false);
+    $(window).on('scroll', function() {
+        if ((document.documentElement.scrollTop > 260) && (document.documentElement.scrollTop < ($('#category_body').outerHeight() - 230))) {
+            $('.category-filters').css({
+                "height": "96vh",
+                "position":"fixed",
+                "overflow-y":"scroll",
+                "overflow-x":"hidden",
+                "width":"280px",
+                "top": 10,
+            });
+        } else {
+            $('.category-filters').css({
+                "height": "unset",
+                "position":"unset",
+                "overflow-y":"unset",
+                "overflow-x":"unset",
+                "top": "unset",
+            });
+        }
+    });
     $("#price-range").ionRangeSlider({
         type: "double",
         min: <?= $min ?>,
