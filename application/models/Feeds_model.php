@@ -100,13 +100,14 @@ Class Feeds_model extends CI_Model{
         }
         return $this->db->query( $query )->result();
     }
-//    08165013215
 
     function get_seller_statistics( $sid ){
-        $query = "SELECT s.date_applied, s.store_name, s.date_applied, ov.quantity_sold
+        $query = "SELECT s.date_applied, s.store_name, s.date_applied, ov.quantity_sold, ra.total_rate, ra.totaluser
                 FROM sellers s 
-                LEFT JOIN (SELECT SUM(o.qty) quantity_sold, o.seller_id FROM orders o WHERE (o.payment_made = 'success' OR o.active_status ='completed')) 
-                AS ov ON (ov.seller_id = s.uid)";
+                LEFT JOIN (SELECT SUM(o.qty) quantity_sold, o.seller_id,o.product_id FROM orders o WHERE (o.payment_made = 'success' OR o.active_status ='completed')) 
+                AS ov ON (ov.seller_id = s.uid)
+                LEFT JOIN (SELECT SUM(r.rating_score) total_rate, COUNT(r.product_id) totaluser, r.product_id FROM product_rating r GROUP BY r.product_id) AS ra ON(ra.product_id = ov.product_id)
+                WHERE s.uid = {$sid}";
         return $this->db->query( $query )->row();
     }
 

@@ -107,7 +107,7 @@
                         <h4>Successful Sales</h4>
                         <div class="progress" style="margin-top:5px;">
                             <div class="progress-bar" role="progressbar" style="width: 100%;background-color: #5aa352;"
-                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><?= $seller_detail->quantity_sold; ?>
+                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><?= ($seller_detail->quantity_sold == '') ? 0 : $seller_detail->quantity_sold; ?>
                             </div>
                         </div>
                     </div>
@@ -126,16 +126,38 @@
                             Selling on OM</span>
                     </h4>
                     <div class="col-sm-6 col-xs-12 pull-right">
-                        <h4>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                        </h4>
-                        <h5>
-                            4.2 Rating from 1023 Reviews
-                        </h5>
+                        <?php
+                            if( $seller_detail->total_rate ) :
+                                $count = $seller_detail->totaluser;
+                                $average_float = round($seller_detail->total_rate/$count , 1, PHP_ROUND_HALF_UP);
+                                $average_int = (int)$average_float;
+                        ?>
+                            <h4>
+                                <?php
+                                    for ($i = 1; $i <= $average_int; $i++) {
+                                        echo '<span class="fa fa-star checked"></span>';
+                                    }if ($average_int < 5) {
+                                        for ($i = 0; $i < (5 - $average_int); $i++) {
+                                            echo '<span class="fa fa-star"></span>';
+                                        }
+                                    }
+                                ?>
+                            </h4>
+                            <h5>
+                                <?= $average_float ?> Rating from <?= $count; ?> Reviews
+                            </h5>
+                        <?php else : ?>
+                                <h4>
+                                    <span class="fas fa-star"></span>
+                                    <span class="fas fa-star"></span>
+                                    <span class="fas fa-star"></span>
+                                    <span class="fas fa-star"></span>
+                                    <span class="fas fa-star"></span>
+                                </h4>
+                                <h5>
+                                    0 Rating
+                                </h5>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -195,7 +217,7 @@
                                                 ?>
                                                 <span class="text-sm pull-right"><strong><?= ($product->brand_name == 'others' || empty($product->brand_name)) ? 'Universal' : $product->brand_name; ?></strong></span>
                                             </ul>
-                                            <h5 class="cs-title"><?= character_limiter(ucwords(str_replace('generic', '', $product->product_name)), 10, '...'); ?></h5>
+                                            <h5 class="cs-title"><?= character_limiter(ucwords(str_replace('generic', '', $product->product_name)), 19, '...'); ?></h5>
                                             <div class="product-caption-price">
                                                 <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
                                                     <span class="cs-price-tl"><?= ngn($product->discount_price); ?></span>

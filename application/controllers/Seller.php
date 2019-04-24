@@ -37,6 +37,7 @@ class Seller extends MY_Controller {
             redirect('errors/_404');
         }else{
             $page_data['seller_detail'] = $this->feeds->get_seller_statistics( $seller_id );
+//            var_dump( $page_data['seller_detail'] ); exit;
             $page_data['title'] = ucwords($page_data['seller_detail']->store_name) . " Sells on Onitshamarket";
             $page_data['pgtitle'] = ucwords($page_data['seller_detail']->store_name);
             $page_data['description'] = ucwords($page_data['seller_detail']->store_name) . " Sells on Onitshamarket since " . date('h:ia - l, dS F, Y', strtotime($page_data['seller_detail']->date_applied)) . " and as over " .count((array)$page_data['products']) . " Listed on Onitshamarket";
