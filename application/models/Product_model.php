@@ -373,9 +373,9 @@ Class Product_model extends CI_Model{
                 }
             }
             if( $queries['is_limit'] == true ){
-                $select_query .=" AND p.product_status = 'approved' GROUP BY p.id LIMIT {$queries['offset']},{$queries['limit']} ";
+                $select_query .=" AND p.product_status = 'approved' GROUP BY p.id ORDER BY p.id DESC LIMIT {$queries['offset']},{$queries['limit']} ";
             }else{
-                $select_query .=" AND p.product_status = 'approved' GROUP BY p.id";
+                $select_query .=" AND p.product_status = 'approved' GROUP BY p.id ORDER BY p.id DESC";
             }
             $products_query = $this->db->query( $select_query )->result();
             return $products_query;
