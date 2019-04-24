@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Seller extends MY_Controller {
     public function __construct(){
         parent::__construct();
+        $this->load->helper('date');
         $this->load->model('feeds_model', 'feeds');
     }
 
@@ -35,10 +36,10 @@ class Seller extends MY_Controller {
         if ( !$page_data['products']) {
             redirect('errors/_404');
         }else{
-            $seller_detail = $this->feeds->get_row( 'sellers', 'date_applied, store_name', array('uid' => $seller_id));
-            $page_data['title'] = ucwords($seller_detail->store_name) . " Sells on Onitshamarket";
-            $page_data['pgtitle'] = ucwords($seller_detail->store_name);
-            $page_data['description'] = ucwords($seller_detail->store_name) . " Sells on Onitshamarket since " . date('h:ia - l, dS F, Y', strtotime($seller_detail->date_applied)) . " and as over " .count((array)$page_data['products']) . " Listed on Onitshamarket";
+            $page_data['seller_detail'] = $this->feeds->get_seller_statistics( $seller_id );
+            $page_data['title'] = ucwords($page_data['seller_detail']->store_name) . " Sells on Onitshamarket";
+            $page_data['pgtitle'] = ucwords($page_data['seller_detail']->store_name);
+            $page_data['description'] = ucwords($page_data['seller_detail']->store_name) . " Sells on Onitshamarket since " . date('h:ia - l, dS F, Y', strtotime($page_data['seller_detail']->date_applied)) . " and as over " .count((array)$page_data['products']) . " Listed on Onitshamarket";
             $this->load->view('landing/seller', $page_data);
         }
     }

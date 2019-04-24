@@ -87,11 +87,10 @@ Class Feeds_model extends CI_Model{
     function get_seller_products( $array ){
         $seller_id = $array['seller_id'];
         $query = "SELECT p.id, p.product_name,p.from_overseas,p.brand_name, v.sale_price, v.discount_price, v.start_date, v.end_date ,     
-        SUM(v.quantity) as item_left, g.image_name, ov.quantity_sold
+        SUM(v.quantity) as item_left, g.image_name
         FROM products p JOIN (SELECT var.product_id, var.discount_price,var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var
         WHERE var.quantity > 0 ORDER BY var.id) AS v on(p.id = v.product_id) 
         JOIN product_gallery AS g ON (p.id = g.product_id AND g.featured_image = 1)
-        LEFT JOIN (SELECT SUM(o.qty) quantity_sold, o.seller_id FROM orders o WHERE  (o.payment_made = 'success' OR o.active_status ='completed')) AS ov ON (ov.seller_id = p.seller_id)
         WHERE p.seller_id = {$seller_id}";
 
         if( $array['is_limit'] ){
@@ -100,6 +99,15 @@ Class Feeds_model extends CI_Model{
             $query .= " AND p.product_status = 'approved' GROUP BY p.id ORDER BY p.id DESC ";
         }
         return $this->db->query( $query )->result();
+    }
+//    08165013215
+
+    function get_seller_statistics( $sid ){
+        $query = "SELECT s.date_applied, s.store_name, s.date_applied, ov.quantity_sold
+                FROM sellers s 
+                LEFT JOIN (SELECT SUM(o.qty) quantity_sold, o.seller_id, SUM(*) total_product_count FROM orders o WHERE (o.payment_made = 'success' OR o.active_status ='completed')) 
+                AS ov ON (ov.seller_id = s.uid)";
+        return $this->db->query( $query )->row();
     }
 
 

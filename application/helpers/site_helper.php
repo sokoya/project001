@@ -95,7 +95,6 @@ function ago($time){
 	$lengths = array("60","60","24","7","4.35","12","10");
 
 	$now = time();
-
 	   $difference     = $now - $time;
 	   $tense         = "ago";
 
@@ -109,7 +108,8 @@ function ago($time){
 	   $periods[$j].= "s";
 	}
 
-	return "$difference $periods[$j] ago ";
+	return "$difference $periods[$j] ";
+//	return "$difference $periods[$j] ago ";
 }
 
 
