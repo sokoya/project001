@@ -98,7 +98,7 @@
                         <h4>Product Quality</h4>
                         <div class="progress" style="margin-top:5px;">
                             <div class="progress-bar" role="progressbar" style="width: 65%;background-color: #f12345;"
-                                 aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%
+                                 aria-valuenow="96" aria-valuemin="0" aria-valuemax="100">96%
                             </div>
                         </div>
                     </div>
