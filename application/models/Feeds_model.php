@@ -102,13 +102,19 @@ Class Feeds_model extends CI_Model{
     }
 
     function get_seller_statistics( $sid ){
-        $query = "SELECT s.date_applied, s.store_name, s.date_applied, ov.quantity_sold, ra.total_rate, ra.totaluser
+        $query = "SELECT s.date_applied, s.store_name, s.date_applied, ov.quantity_sold
                 FROM sellers s 
-                LEFT JOIN (SELECT SUM(o.qty) quantity_sold, o.seller_id,o.product_id FROM orders o WHERE (o.payment_made = 'success' OR o.active_status ='completed')) 
+                LEFT JOIN (SELECT SUM(o.qty) quantity_sold, o.seller_id,o.product_id FROM orders o WHERE (o.payment_made = 'success' OR o.active_status ='completed') GROUP BY o.product_id) 
                 AS ov ON (ov.seller_id = s.uid)
-                LEFT JOIN (SELECT SUM(r.rating_score) total_rate, COUNT(r.product_id) totaluser, r.product_id FROM product_rating r GROUP BY r.product_id) AS ra ON(ra.product_id = ov.product_id)
                 WHERE s.uid = {$sid}";
         return $this->db->query( $query )->row();
+    }
+
+    function get_seller_rate( $sid ){
+        $query = "SELECT p.id, ra.total_rate, ra.total_reviews FROM products p 
+        LEFT JOIN (SELECT SUM(r.rating_score) total_rate, COUNT(r.product_id) total_reviews, r.product_id FROM product_rating r ) AS ra ON(ra.product_id = p.id) 
+        WHERE p.seller_id = {$sid}";
+        return $this->db->query( $query )->result_array();
     }
 
 

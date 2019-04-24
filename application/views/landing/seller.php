@@ -127,9 +127,9 @@
                     </h4>
                     <div class="col-sm-6 col-xs-12 pull-right">
                         <?php
-                            if( $seller_detail->total_rate ) :
-                                $count = $seller_detail->totaluser;
-                                $average_float = round($seller_detail->total_rate/$count , 1, PHP_ROUND_HALF_UP);
+                            if( $total_rate ) :
+                                $count = $total_reviews;
+                                $average_float = round($total_rate/$count , 1, PHP_ROUND_HALF_UP);
                                 $average_int = (int)$average_float;
                         ?>
                             <h4>

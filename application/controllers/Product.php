@@ -404,11 +404,11 @@ class Product extends MY_Controller
                 'user_id' => $this->input->post('user_id'),
                 'rating_score' => $this->input->post('count')
             );
-            if (!$this->product->has_bought($data['product_id'], $data['user_id'])) {
-                $status['message'] = 'You need to be a verified buyer before rating.';
-                echo json_encode($status);
-                exit;
-            }
+//            if (!$this->product->has_bought($data['product_id'], $data['user_id'])) {
+//                $status['message'] = 'You need to be a verified buyer before rating.';
+//                echo json_encode($status);
+//                exit;
+//            }
             // check if the user bought the product
             if($this->product->create_edit($this->input->post('product_id'), $this->session->userdata('logged_id'), $data, 'product_rating')){
                 $status['status'] = 'success';

@@ -133,6 +133,7 @@ $('#star1').starrr({
 				success: function (response) {
 				},
 				error: function (response) {
+					notification_message(response.message,'fas fa-info-circle','error');
 					alert("Sorry an error occurred somewhere")
 				}
 			});
