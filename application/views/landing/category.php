@@ -281,6 +281,7 @@
             }
         }
     }, false);
+    <?php //?>
     $(window).on('scroll', function() {
         if ((document.documentElement.scrollTop > 260) && (document.documentElement.scrollTop < ($('#category_body').outerHeight() - 230))) {
             $('.category-filters').css({
