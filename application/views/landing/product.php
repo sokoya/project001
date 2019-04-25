@@ -311,7 +311,7 @@
                                                         <div class="row variation-option-list">
                                                             <?php $qty_stock_check = 0; ?>
                                                             <?php foreach ($variations as $variation): ?>
-                                                                <div class="col-xs-6">
+                                                                <div class="col-xs-4">
                                                                     <p title="<?= $variation['variation']; ?>"
                                                                        data-price="<?= $variation['sale_price']; ?>"
                                                                         <?php if (discount_check($variation['discount_price'], $variation['start_date'], $variation['end_date'])) : ?>
