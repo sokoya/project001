@@ -305,10 +305,8 @@
                                     <div class="row">
                                         <?php if (count($variations) > 0) : ?>
                                             <div class="col-md-7">
-                                                <div class="row">
 
-                                                    <div class="col-md-9">
-                                                        <div class="row variation-option-list">
+                                                <div class="row variation-option-list">
                                                             <?php $qty_stock_check = 0; ?>
                                                             <?php foreach ($variations as $variation): ?>
                                                                 <div class="col-xs-4">
@@ -329,8 +327,7 @@
                                                                 <?php if ($variation['quantity'] < 1) $qty_stock_check++; ?>
                                                             <?php endforeach; ?>
                                                         </div>
-                                                    </div>
-                                                </div>
+
                                             </div>
                                         <?php endif; ?>
                                         <div class="col-md-5 quan-u">
