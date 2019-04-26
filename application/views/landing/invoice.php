@@ -99,7 +99,7 @@
                                 <tbody>
                                     <?php $subtotal = $shipping = 0; foreach( $orders as $order ) : ?>
                                         <tr>
-                                            <td align="center"><img src="<?= PRODUCTS_IMAGE_PATH,$order->image_name; ?>" alt="Onitshamarket" width="40" height="40"></td>
+                                            <td><img style="width: 30%" src="<?= PRODUCTS_IMAGE_PATH,$order->image_name; ?>" alt="Onitshamarket"></td>
                                             <td width="80%" align="center"><?= ucwords($order->product_name);?></td>
                                             <td align="center" style="padding: 6px 6px 6px 6px; font-size: 12px"><?= $order->variation; ?></td>
                                             <td align="center" style="padding: 6px 6px 6px 6px; font-size: 12px"><?= $order->qty; ?></td>
