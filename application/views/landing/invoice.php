@@ -18,12 +18,13 @@
     th,
     td {
         border: 1px solid #49a251;
+        font-size: 12px;
         width: 100%;
         padding: 5px;
     }
 
     td > img {
-        width: 60%;
+        width: 20%;
         align-content: center;
     }
 
@@ -50,22 +51,26 @@
 
                     <tr>
                         <td align="center" style="padding: 10px 0 10px 0; display: block">
-                            <img src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>" alt="Onitsha market logo" width="150"
-                                 height="44"/>
+                            <a href="<?= base_url(); ?>"><img style="width: 50%;" src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>" alt="Onitsha market logo" width="150"
+                                 height="44"/></a>
                         </td>
                     </tr>
-
+                    <tr>
+                        <td>
+                            <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+                        </td>
+                    </tr>
                     <tr>
                         <td style="padding: 30px 10px 10px 10px; color: #153643; font-family: Arial, sans-serif; font-size: 13px;">
-                            <p>Dear Sokoya,</p>
-                            <p>Thank you for shopping with us. Your order <b>345456929</b> has been placed successfully  here is the
+                            <p>Dear <?= ucwords($profile->first_name) . ' ' . ucwords($profile->last_name); ?>,</p>
+                            <p>Thank you for shopping with us. Your order <b><?= $order_code; ?></b> has been placed successfully  here is the
                                 summary of the order:
                             </p>
-                            <p>If you have any questions about this order, please contact us at <b>++234 813 680 3006</b>
-                                Remember to include your reference number - <b>345456929</b> when contacting us.</p>
+                            <p>If you have any questions about this order, please contact us at <b>+234 813 680 3006</b>
+                                Remember to include your reference number - <b><?= $order_code; ?></b> when contacting us.</p>
+                            <p><b>Note</b><br>A copy of this invoice has also be sent to the email attached to your account.</p>
                         </td>
                     </tr>
-
                     <tr>
                         <td style="padding: 3px 10px 10px 10px; color: #153643; font-family: Arial, sans-serif; font-size: 13px;">
                             <p><b>You ordered for:</b></p>
@@ -78,36 +83,61 @@
                                         ITEM
                                     </th>
                                     <th style="color: #444444; background-color: #f6f6f6; padding-top: 3px; padding-bottom: 3px; border-left: 1px solid #cccccc;">
+                                        VARIATION
+                                    </th>
+                                    <th style="color: #444444; background-color: #f6f6f6; padding-top: 3px; padding-bottom: 3px; border-left: 1px solid #cccccc;">
                                         QUANTITY
                                     </th>
                                     <th style="color: #444444; background-color: #f6f6f6; padding-top: 3px; padding-bottom: 3px; border-left: 1px solid #cccccc;">
                                         PRICE
                                     </th>
+                                    <th style="color: #444444; background-color: #f6f6f6; padding-top: 3px; padding-bottom: 3px; border-left: 1px solid #cccccc;">
+                                        TOTAL
+                                    </th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td align="center">
-                                        <img src="https://res.cloudinary.com/onitshamarket/image/upload/q_auto/f_auto/onitshamarket/product/kr8bqhraihjfneyynmvi.jpg"
-                                             alt="image" height="80" width="80"/></td>
-                                    <td width="50%" align="center">Lontor Rechargeable Lamp With An In-Built Power Bank</td>
-                                    <td align="center">1</td>
-                                    <td align="center">₦ 2,970</td>
-                                </tr>
+                                    <?php $subtotal = $shipping = 0; foreach( $orders as $order ) : ?>
+                                        <tr>
+                                            <td align="center"><img src="<?= PRODUCTS_IMAGE_PATH,$order->image_name; ?>" alt="Onitshamarket" width="40" height="40"></td>
+                                            <td width="80%" align="center"><?= ucwords($order->product_name);?></td>
+                                            <td align="center" style="padding: 6px 6px 6px 6px; font-size: 12px"><?= $order->variation; ?></td>
+                                            <td align="center" style="padding: 6px 6px 6px 6px; font-size: 12px"><?= $order->qty; ?></td>
+                                            <td align="center" style="padding: 6px 6px 6px 6px; font-size: 12px"><?= ngn($order->amount); ?></td>
+                                            <td align="center" style="padding: 6px 6px 6px 6px; font-size: 12px"><?= ngn($order->amount  * $order->qty); ?></td>
+                                            <?php
+                                                $subtotal += $order->amount * $order->qty;
+                                                $shipping = $order->delivery_charge;
+                                            ?>
+                                        </tr>
+                                    <?php endforeach;?>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2"></td>
+                                        <td colspan="2">SUBTOTAL</td>
+                                        <td colspan="2" style="padding: 6px 6px 6px 6px; font-size: 12px"><?= ngn($subtotal); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"></td>
+                                        <td colspan="2">SHIPPING FEE</td>
+                                        <td colspan="2" style="padding: 6px 6px 6px 6px; font-size: 12px"><?= ngn($shipping);?></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"></td>
+                                        <td colspan="2">Payment Method</td>
+                                        <td colspan="2" style="padding: 6px 6px 6px 6px; font-size: 12px"><?= $ordersingledetail->paymentname;?></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"></td>
+                                        <td colspan="2" style="font-weight: 800;">GRAND TOTAL</td>
+                                        <td colspan="2" style="padding: 6px 6px 6px 6px; font-size: 12px"><?= ngn($subtotal + $shipping);?></td>
+                                    </tr>
+                                    </tfoot>
                             </table>
                             <br/>
-                            <table cellpadding="0" cellspacing="0" border="0" width="100%"
-                                   style="font-size: 13px;border-collapse: collapse; border: 1px solid #cccccc">
-                                <tr>
-                                    <td style="padding: 6px 6px 6px 6px; font-size: 12px"><b>SHIPPING COST: Courier (DHL)</b></td>
-                                    <td style="padding: 6px 6px 6px 6px" align="right">₦ 1,300</td>
-                                </tr>
-                                    <td style="padding: 6px 6px 6px 6px; font-size: 12px"><b>DATE ORDERED</b></td>
-                                    <td style="padding: 6px 6px 6px 6px" align="right">Prepaid</td>
-                                </tr>
-                            </table>
-                            <p>If you would like to know more about our services, please also refer to these FAQs from our
+                            <br />
+                            <p>If you would like to know more about our services, please also refer to these <a href="<?= lang('shopping_help_url'); ?>" target="_blank">FAQ</a> from our
                                 customers.</p>
                             <p>Happy Shopping!</p>
                             <p><b>Onitshamarket Team</b></p>
@@ -135,13 +165,10 @@
         <?php $this->load->view('landing/resources/script'); ?>
     <?php endif; ?>
 </div>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
-<script type="text/javascript">
-
-</script>
 <script>
-
+    $('#printInvoice').click(function () {
+        window.print();
+    });
 </script>
 </body>
 </html>

@@ -332,7 +332,7 @@
                                                 </a>
                                             </td>
                                             <td class="panel-product-title"><?= word_limiter(htmlentities($product['name']), 7, '...'); ?>
-                                                <br/><span>Seller : <span><?= $detail->name; ?></span> </span>
+                                                <br/><span>Seller : <span><?= $detail->store_name; ?></span> </span>
                                             </td>
                                             <td class="panel-product-quantity"><?= $product['qty']; ?>
                                                 item(s)
