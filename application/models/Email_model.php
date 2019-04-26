@@ -243,8 +243,8 @@ class Email_model extends CI_Model {
                 </tr>
                 </thead>
                 <tbody>';
-
-        $delivery_fee = $total = $payment_method = $subtotal = $order_loop = $payment_reference = $txn_ref = $payment_description = '';
+        $total = $subtotal = $delivery_fee = 0;
+        $payment_method = $order_loop = $payment_reference = $txn_ref = $payment_description = '';
         foreach( $orders as $order ){
             $name = character_limiter( $order->product_name, 10);
             $order_loop .= '
@@ -256,7 +256,7 @@ class Email_model extends CI_Model {
                         <td align="center">'.$order->qty.'</td><td align="center">₦ ' .$order->amount. '</td>
                     </tr>';
             $delivery_fee = $order->delivery_charge;
-            $total += (int)$order->amount * (int)$order->qty;
+            $total += $order->amount * $order->qty;
             $payment_method = $order->payment_method;
             $payment_reference = $order->payRef;
             $txn_ref = $order->txnref;
