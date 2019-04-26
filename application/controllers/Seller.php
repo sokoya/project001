@@ -40,7 +40,7 @@ class Seller extends MY_Controller {
             $seller_rate = $this->feeds->get_seller_rate( $seller_id );
             $page_data['total_rate'] = array_sum(array_column($seller_rate, 'total_rate'));
             $page_data['total_reviews'] = array_sum(array_column($seller_rate, 'total_reviews'));
-            $page_data['title'] = ucwords($page_data['seller_detail']->store_name) . " Sells on Onitshamarket";
+            $page_data['title'] = 'Job vacancy for the post of ' . ucwords($page_data['seller_detail']->store_name) . " Sells on Onitshamarket";
             $page_data['pgtitle'] = ucwords($page_data['seller_detail']->store_name);
             $page_data['description'] = ucwords($page_data['seller_detail']->store_name) . " Sells on Onitshamarket since " . date('h:ia - l, dS F, Y', strtotime($page_data['seller_detail']->date_applied)) . " and as over " .count((array)$page_data['products']) . " Listed on Onitshamarket";
             $this->load->view('landing/seller', $page_data);
