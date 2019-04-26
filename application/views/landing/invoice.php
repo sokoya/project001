@@ -25,7 +25,6 @@
 
     td > img {
         width: 20%;
-        align-content: center;
     }
 
 

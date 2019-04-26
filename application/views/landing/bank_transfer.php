@@ -84,8 +84,8 @@
 <div class="global-wrapper clearfix" id="global-wrapper" style="background: #fff;padding-top:20px;">
     <div class="container">
         <p class="text-center" style="margin-top:30px;">
-            <a href="<?= base_url(); ?>"><img
-                        src="<?= base_url('assets/img/onitshamarket-logo.png') ?>" width="45%"
+            <a href="<?= base_url(); ?>"><img style="width: 40%;"
+                        src="<?= base_url('assets/img/onitshamarket-logo.png') ?>"
                         alt="market logo Image"></a>
         </p>
         <div class="row">
