@@ -28,7 +28,7 @@
     }
 
     @media print {
-        body * { display:none; }
+
         #invoice {
             background-color: white;
             height: 100%;
