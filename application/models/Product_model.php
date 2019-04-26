@@ -615,7 +615,7 @@ Class Product_model extends CI_Model{
         return $this->db->query($select)->result_array();
     }
 
-    // Seacrh autocomplete query
+    // Search autocomplete query
     function search_query($search = '', $category =''){
         // $select = "SELECT product_name FROM products WHERE product_name LIKE '%{$search}%'";
         $select  = "SELECT p.id, p.product_name, g.image_name, v.sale_price, v.discount_price FROM products p 

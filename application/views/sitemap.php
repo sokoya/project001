@@ -52,5 +52,15 @@
         <priority>0.5</priority>
         <changefreq>monthly</changefreq>
     </url>
+    <url>
+        <loc><?= base_url('jobs-at-onitshamarket/'); ?></loc>
+        <priority>0.5</priority>
+        <changefreq>monthly</changefreq>
+    </url>
+    <url>
+        <loc><?= base_url('seller/'); ?></loc>
+        <priority>0.5</priority>
+        <changefreq>monthly</changefreq>
+    </url>
 
 </urlset>
