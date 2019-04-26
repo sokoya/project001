@@ -1,5 +1,19 @@
-<?php $this->load->view('landing/resources/head_base'); ?>
-<link rel="stylesheet" href="<?= $this->user->auto_version(base_url('assets/css/home.css')); ?>">
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title><?= !isset($title) ? 'Welcome ' : ucwords($title) ?> | <?= lang('app_name'); ?></title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="keywords" content="<?= !empty($keywords) ? ucwords($keywords) : ''; ?>"/>
+    <meta name="description" content="<?= !empty($description) ? $description : ''; ?>">
+    <meta name="robots" content="nofollow,noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400italic,400' rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.css'); ?>">
+    <link rel="shortcut icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
 <style>
     .heading-red{
         color: #ff3434;
@@ -27,36 +41,10 @@
         width: 20%;
     }
 
-    @media print {
-
-        #invoice {
-            background-color: white;
-            height: 100%;
-            width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            margin: 0;
-            padding: 15px;
-            font-size: 14px;
-            line-height: 18px;
-            z-index: 9999999;
-        }
-    }
-
-
 </style>
 </head>
 <body style="background: #fff;">
 <div class="global-wrapper clearfix" id="global-wrapper" style="background: #fff;">
-    <?php if ($this->agent->is_mobile()) : ?>
-        <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
-    <?php else: ?>
-        <?php $this->load->view('landing/resources/head_img') ?>
-        <?php $this->load->view('landing/resources/head_menu') ?>
-    <?php endif; ?>
-
-
     <div class="container">
         <div class="gap-big"></div>
         <div class="row">
@@ -176,13 +164,9 @@
         </div>
     </div>
 
-    <?php if ($this->agent->is_mobile()) : ?>
-        <?php $this->load->view('landing/resources/mobile/mobile-footer'); ?>
-        <?php $this->load->view('landing/resources/mobile/mobile-script'); ?>
-    <?php else: ?>
-        <?php $this->load->view('landing/resources/footer'); ?>
-        <?php $this->load->view('landing/resources/script'); ?>
-    <?php endif; ?>
+    <script src="<?= base_url('assets/js/jquery.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/bootstrap.js'); ?>"></script>
+
 </div>
 <script>
     $('#printInvoice').click(function () {
