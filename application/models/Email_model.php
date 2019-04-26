@@ -256,7 +256,7 @@ class Email_model extends CI_Model {
                         <td align="center">'.$order->qty.'</td><td align="center">₦ ' .$order->amount. '</td>
                     </tr>';
             $delivery_fee = $order->delivery_charge;
-            $total += $order->amount * (int)$order->qty;
+            $total += (int)$order->amount * (int)$order->qty;
             $payment_method = $order->payment_method;
             $payment_reference = $order->payRef;
             $txn_ref = $order->txnref;
