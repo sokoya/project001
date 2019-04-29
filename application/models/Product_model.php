@@ -885,6 +885,18 @@ Class Product_model extends CI_Model{
 
         return $this->db->query($select_query)->result();
     }
+
+    function generalrandom($count =''){
+        $select_query = " SELECT p.id, p.product_name, v.sale_price, v.discount_price, v.start_date, v.end_date, SUM(v.quantity) as item_left, g.image_name
+        FROM products p JOIN (SELECT var.product_id, var.discount_price,var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var
+        WHERE var.quantity > 0 ORDER BY var.id) AS v on(p.id = v.product_id) JOIN product_gallery AS g ON (p.id = g.product_id AND g.featured_image = 1)";
+        if( $count != '' ){
+            $select_query .= " WHERE product_status = 'approved' GROUP BY p.id ORDER BY RAND() LIMIT {$count} ";
+        }else{
+            $select_query .= " WHERE product_status = 'approved' GROUP BY p.id ORDER BY RAND() LIMIT 12";
+        }
+        return $this->db->query($select_query)->result();
+    }
     /*
      * Lets get all the queries for desktop views at the frontpage
      * */

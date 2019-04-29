@@ -66,7 +66,7 @@
         <div style="height:15px;"></div>
         <div class="text-center">
             <p class="lead custom-text">Are You Qualified?</p>
-            <a class="btn btn-primary btn-lg" style="border-radius: 0;" href="#!">Apply Now <i
+            <a class="btn btn-primary btn-lg" style="border-radius: 0;" href="mailto:jobs@onitshamarket.com?subject=Appkying for the post of <?= $job->job_title; ?>">Apply Now <i
                         class="fas fa-file-signature"></i></a>
         </div>
     </div>

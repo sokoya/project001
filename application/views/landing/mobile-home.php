@@ -245,7 +245,7 @@
                 <div class="col-md-12">
                     <div class="row">
                         <?php
-                        $products = $this->product->randomproducts("", 12);
+                        $products = $this->product->generalrandom(12);
                         foreach ($products as $product) : ?>
                             <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>">
                                 <div class="col-xs-6 col-sm-3  card-product-small  card-product-alt">

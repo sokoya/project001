@@ -11,7 +11,7 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400italic,400' rel='stylesheet'
           type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css'); ?>" media="screen">
     <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.css'); ?>">
     <link rel="shortcut icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
 <style>
@@ -39,6 +39,27 @@
 
     td > img {
         width: 20%;
+    }
+
+    @media print {
+        .invoice {
+            font-size: 11px !important;
+            overflow: hidden !important
+        }
+
+        .invoice footer {
+            position: absolute;
+            bottom: 10px;
+            page-break-after: always
+        }
+
+        .invoice > div:last-child {
+            page-break-before: always
+        }
+
+        a[href]:after {
+            visibility: hidden;
+        }
     }
 
 </style>
@@ -161,6 +182,7 @@
 
                 </div>
             </div>
+            <div></div>
         </div>
     </div>
 
