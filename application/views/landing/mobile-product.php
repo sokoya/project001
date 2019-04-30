@@ -483,14 +483,16 @@
             <?php endif; ?>
         </div>
     </div>
-    <div class="container close-panel" data-target="full_spec">
-        <p class="text-break">
-            Full Specifications
-            <span style="color: #4c4c4c !important; float: right">
-                <i class="fas fa-minus close-panel" aria-hidden="true" data-target="full_spec"></i>
-            </span>
-        </p></div>
-    <div class="custom-card" id="full_spec" style="margin-top: 5px;">
+    <?php $specs = json_decode($product->attributes); ?>
+    <?php if(!empty( $specs ) ) :  ?>
+        <div class="container close-panel" data-target="full_spec">
+            <p class="text-break">
+                Full Specifications
+                <span style="color: #4c4c4c !important; float: right">
+                    <i class="fas fa-minus close-panel" aria-hidden="true" data-target="full_spec"></i>
+                </span>
+            </p></div>
+        <div class="custom-card" id="full_spec" style="margin-top: 5px;">
         <div class="container">
             <table class="table table-striped">
                 <thead>
@@ -498,7 +500,7 @@
                     <th>Specification</th>
                     <th>Details</th>
                 </tr>
-                <?php $specs = json_decode($product->attributes); ?>
+
 
                 </thead>
                 <tbody>
@@ -514,6 +516,8 @@
             </table>
         </div>
     </div>
+    <?php endif; ?>
+
     <div class="container close-panel" data-target="rating_overview">
         <p class="text-break" style="">
             Ratings and Reviews
