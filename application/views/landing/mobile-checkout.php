@@ -345,7 +345,7 @@
                                         <div class="row">
                                             <div class="col-xs-3"></div>
                                             <div class=" col-xs-9">
-                                                <span>Sold By: <span><?= $detail->name; ?></span>
+                                                <span>Sold By: <span><?= $detail->store_name; ?></span>
                                             </div>
                                         </div>
                                     </div>
