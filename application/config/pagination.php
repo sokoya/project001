@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 // $config['base_url'] = '';
 // $config['uri_segment'] = 3;
-$config['num_links'] = 4;
+$config['num_links'] = 3;
 $config['page_query_string'] = TRUE;
 $config['reuse_query_string'] = TRUE;
 $config['query_string_segment'] = 'page';

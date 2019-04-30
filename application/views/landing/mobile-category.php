@@ -186,7 +186,7 @@
                                         <h5 class="product-caption-title"><b><?= word_limiter(ucwords($product->product_name), 14, '...'); ?></b>
                                             <br/>
                                             <?php if( $product->item_left < 5) :?>
-                                                <small class="text-sm" style="padding-top: 5px; font-max-size: small">
+                                                <small class="text-sm text-danger" style="padding-top: 5px; font-max-size: small">
                                                     (<?= $product->item_left; ?> item left)
                                                 </small>
                                             <?php endif; ?>

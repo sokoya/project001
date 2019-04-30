@@ -176,9 +176,7 @@
                                             ?>
                                         </ul>
                                         <h5 class="product-caption-title"><?= word_limiter(ucwords($product->product_name), 14, '...'); ?></h5>
-                                        <h4 class="product-caption-title">Brand:
-                                            <span class="text-sm pull-right"><strong><?= ($product->brand_name == 'others' || empty($product->brand_name)) ? 'Generic' : $product->brand_name; ?></strong></span>
-                                        </h4>
+                                        <span class="text-sm"><strong><?= ($product->brand_name == 'others' || empty($product->brand_name)) ? 'Universal' : $product->brand_name; ?></strong></span>
                                         <div class="product-caption-price">
                                             <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
                                                 <span class="product-caption-price-new"><?= ngn($product->discount_price); ?> </span>
