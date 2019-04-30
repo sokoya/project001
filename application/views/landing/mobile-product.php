@@ -635,7 +635,9 @@
             </div>
         </div>
     </div>
-    <?php if (count($likes)) : ?>
+
+    <!-- You might also like-->
+    <?php if (count($likes)) : $excludes = array();  ?>
         <div class="container" style="margin-bottom: 5px;"><p class="text-break" style="">You might also like</p></div>
         <div class="custom-card">
             <div class="">
@@ -648,11 +650,43 @@
                             <p class="suggested-image-text"><?= character_limiter($like->product_name, 15); ?></p>
                             <span class="text-bold text-center"><?= $like->item_left; ?> left</span>
                         </a>
-                    <?php endforeach; ?>
+                    <?php
+                        array_push($excludes, $like->id);
+                    endforeach; ?>
                 </div>
             </div>
         </div>
     <?php endif; ?>
+    <!-- /You might also like-->
+
+    <!-- Recently viewed-->
+    <?php
+    array_push($excludes, $product->id);
+        if ($this->session->userdata('logged_in')):
+        $recently_viewed = $this->user->get_recently_viewed($this->session->userdata('logged_id'), $excludes);
+            if( count( $excludes ) && count( $recently_viewed)) : ?>
+            <div class="gap-top"></div>
+            <div class="container" style="margin-bottom: 5px;"><p class="text-break" style="">Recently Viewed</p></div>
+            <div class="custom-card">
+                <div class="">
+                    <div class="owl-carousel suggested-products" data-count="<?= count($recently_viewed); ?>">
+                        <?php foreach ($recently_viewed as $viewed) : ?>
+                            <a style="text-decoration: none"
+                               href="<?= base_url(urlify($viewed->product_name, $viewed->id)); ?>">
+                                <img class="suggested-image" style="width: 80px"
+                                     src="<?= PRODUCTS_IMAGE_PATH . $viewed->image_name; ?> "/>
+                                <p class="suggested-image-text"><?= character_limiter($viewed->product_name, 15); ?></p>
+                                <span class="text-bold text-center"><?= $viewed->item_left; ?> left</span>
+                            </a>
+                            <?php
+                        endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+    <!--Recently viewed-->
+
 <?php endif; ?>
 <?php $this->load->view('landing/resources/modal_popup'); ?>
 <script type="text/javascript"> let csrf_token = '<?= $this->security->get_csrf_hash(); ?>';</script>
