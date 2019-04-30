@@ -191,9 +191,7 @@
                                                 </small>
                                             <?php endif; ?>
                                         </h5>
-                                        <h4 class="product-caption-title">
-                                            <?= ucfirst($product->brand_name); ?>
-                                        </h4>
+                                        <span class="text-sm"><strong><?= ($product->brand_name == 'others' || empty($product->brand_name)) ? 'Universal' : $product->brand_name; ?></strong></span>
                                         <div class="product-caption-price">
                                             <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
 
