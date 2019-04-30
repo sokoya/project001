@@ -296,7 +296,7 @@
                                                 </p>
                                                 <div class="gap-top"></div>
                                                 <div class="text-sm pad-all payment_note" style="display:none;">
-                                                    <?= htmlspecialchars_decode($method->notes); ?>
+                                                    <?= trim(htmlspecialchars_decode($method->notes)); ?>
                                                 </div>
                                             </div>
                                         </div>
