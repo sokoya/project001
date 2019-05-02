@@ -380,9 +380,19 @@
     foreach ($categories as $category): ?>
         <div class="container">
             <a href="<?= base_url('catalog/' . $category->slug . '/'); ?>" style="text-decoration: none">
-                <p class="text-break" style="padding-top: 10px; padding-bottom: 15px;"><?= $category->name; ?>
+                <p class="text-break" style="padding-top: 10px; padding-bottom: 15px;">
+                    <img
+                        <?php if( $category->slug == "other-categories") : ?>
+                            src="<?= base_url('assets/img/cat_icons/market.png'); ?>"
+                        <?php else :?>
+                            src="<?= base_url('assets/img/cat_icons/') . $category->slug . '.png'; ?>"
+                        <?php endif; ?>
+                            alt="<?= $category->name; ?>"
+                            style="height: 25px; width: 30px; padding-right: 5px;">
+                    <?= $category->name; ?>
                     <i class="fa fa-minus close-panel" aria-hidden="true" data-target="cat_<?= $category->id ?>"></i>
-                </p></a>
+                </p>
+            </a>
         </div>
         <div id="cat_<?= $category->id ?>">
             <?php
@@ -397,12 +407,9 @@
                             <div class="category-child">
                                 <a href="<?= base_url('catalog/' . $cat->slug . '/'); ?>"
                                    style="text-decoration: none;">
-                                    <p>
-
-                                        <img
-                                                src="<?= base_url('assets/svg/delivery-truck.svg'); ?>"
-                                                alt="Delivery Truck"
-                                                style="height: 30px; width: 35px;"><?= $cat->name; ?> <i
+                                    <p class="text-break" style="padding-top: 10px; padding-bottom: 15px;">
+                                        <?= $cat->name; ?>
+                                        <i
                                                 class="fa fa-plus close-panel"
                                                 aria-hidden="true"
                                                 data-target="cat_<?= $cat->id ?>"></i>

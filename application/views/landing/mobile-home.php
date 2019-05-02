@@ -335,6 +335,14 @@
             <img src="<?= base_url('assets/img/home/banner2.png'); ?> " class="img-responsive">
         </div>
     <?php endforeach; ?>
+
+    <div class="gap-small">
+        <div class="container">
+<!--            <h3 class="title">Onitshamarket.com</h3>-->
+            <p class="about-text">Internet Onitshamarketing Ltd. trading online as Onitshamarket.com is a dynamic e-commerce platform that is designed to provide the most convenient experience for buying and selling in Nigeria and rest of the world.  Beyond online market; our unique focus of creating a virtual mall and ultra modern experience centres that interfaces with the largest market in Africa gives us an advantage over the competition, thereby giving customers the benefit of buying and selling quality and genuine goods from the biggest market in Africa, in the comfort of wherever they may be and having it delivered to them within a 24hrs lead time.</p>
+        </div>
+    </div>
+
     <div class="container" style="padding:40px;">
         <hr class="hr-text" data-content="Why Choose Us">
         <div class="owl-carousel owl-loaded owl-nav-out" data-options='{"items":5,"loop":true,"nav":true}'>
