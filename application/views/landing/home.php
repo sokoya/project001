@@ -299,7 +299,7 @@
                                                 class="fa fa-search"></i>View
                                         Product</a>
                                 <?php else : ?>
-                                    <p class="card-max-price"><?= ngn($product->discount_price); ?></p>
+                                    <p class="card-max-price"><?= ngn($product->sale_price); ?></p>
                                     <a class="btn_view_product"
                                        href="<?= base_url(urlify($product->product_name, $product->id)); ?>"><i
                                                 class="fa fa-search"></i>View
