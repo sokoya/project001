@@ -81,6 +81,8 @@
     <link rel="manifest" href="/manifest.json">
     <meta name="msapplication-TileColor" content="#2a9651">
     <meta name="msapplication-TileImage" content="/assets/favicon/ms-icon-144x144.png">
+    <link rel="shortcut icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
+    <link rel="icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
     <style>
         /*.product-labels > li {*/
             /*background-color: #a72323;*/

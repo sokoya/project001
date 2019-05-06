@@ -200,10 +200,10 @@ $this->db->cache_off();
                                             </div>
                                             <div class="">
                                                 <img class="nav-category-img"
-                                                     src="<?= ($category) ? CATEGORY_IMAGE_PATH . $category->image : ''; ?>"
+                                                     src="<?= base_url('assets/elect.png'); ?>"
                                                      alt="<?= ($category) ? $category->name : ''; ?>"
                                                      title="<?= ($category) ? $category->name : ''; ?>"
-                                                     style="right: -5px;"/>
+                                                     style="right: -5px; max-width: 260px;  max-height: 470px"/>
                                             </div>
                                         </div>
                                     </div>
