@@ -204,7 +204,7 @@ $this->db->cache_off();
                                                      alt="<?= ($category) ? $category->name : ''; ?>"
                                                      title="<?= ($category) ? $category->name : ''; ?>"
                                                      style="right: -5px; max-width: 260px;  max-height: 470px"/>
-                                                <?= $category->image?>
+
                                             </div>
                                         </div>
                                     </div>
