@@ -41,7 +41,7 @@
 <!-- Head Category Starts -->
 <?php
 $this->db->cache_on();
-$category_cache = "SELECT id,name,slug,icon,image FROM categories WHERE pid = 0 LIMIT 11";
+$category_cache = "SELECT id, name, slug, icon, image FROM categories WHERE pid = 0 LIMIT 11";
 
 //if(!$this->memcached_library->get($category_cache) && $this->memcached_library->get($category_cache) == '') {
 $categories = $this->db->query($category_cache)->result();
@@ -204,6 +204,7 @@ $this->db->cache_off();
                                                      alt="<?= ($category) ? $category->name : ''; ?>"
                                                      title="<?= ($category) ? $category->name : ''; ?>"
                                                      style="right: -5px; max-width: 260px;  max-height: 470px"/>
+                                                <?= $category->image?>
                                             </div>
                                         </div>
                                     </div>
