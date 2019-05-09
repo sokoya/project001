@@ -76,6 +76,8 @@ $route['order_completed'] = 'checkout/order_completed/';
 // Feeds :  This will take care of general pages with category lists.
 $route['new-arrivals'] = 'feeds/new_arrivals/';
 $route['explore'] = 'feeds/explore/';
+$route['made-in-nigeria'] = 'feeds/made_in_nigeria/';
+$route['made-in-nigeria/(:any)'] = 'feeds/made_in_nigeria/$1/';
 
 $route['jobs-at-onitshamarket'] = 'jobs';
 $route['jobs-at-onitshamarket/(:any)/(:any)'] = 'jobs/job_detail/$2';

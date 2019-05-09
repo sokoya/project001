@@ -82,7 +82,8 @@ Class Feeds_model extends CI_Model{
     }
 
     /*
-     * Get seller product*/
+     * Get seller product
+     * */
 
     function get_seller_products( $array ){
         $seller_id = $array['seller_id'];
@@ -101,6 +102,9 @@ Class Feeds_model extends CI_Model{
         return $this->db->query( $query )->result();
     }
 
+    /*
+     * Get Seller Statictics
+     * */
     function get_seller_statistics( $sid ){
         $query = "SELECT s.date_applied, s.store_name, s.date_applied, ov.quantity_sold
                 FROM sellers s 
@@ -110,6 +114,9 @@ Class Feeds_model extends CI_Model{
         return $this->db->query( $query )->row();
     }
 
+    /*
+     * Get Seller rate
+     * */
     function get_seller_rate( $sid ){
         $query = "SELECT p.id, ra.total_rate, ra.total_reviews FROM products p 
         LEFT JOIN (SELECT SUM(r.rating_score) total_rate, COUNT(r.product_id) total_reviews, r.product_id FROM product_rating r ) AS ra ON(ra.product_id = p.id) 
@@ -117,18 +124,12 @@ Class Feeds_model extends CI_Model{
         return $this->db->query( $query )->result_array();
     }
 
-
     /*
-     * Get single row detail
+     * Fetch all the products relating to made in NIgeria
      * */
-    function get_row( $table_name, $select ='', $condition = '' ){
-        if( $select != '' ){
-            $this->db->select($select);
-        }
-        if( !empty( $condition ) ){
-            $this->db->where( $condition );
-        }
-        return $this->db->get( $table_name )->row();
+    function made_in_nigeria_products(){
+
     }
+
 }
 

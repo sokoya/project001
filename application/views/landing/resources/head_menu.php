@@ -215,7 +215,7 @@ $this->db->cache_off();
                 </ul>
             </li>
 
-            <li><a href="javascript:void(0)">Onitsha Market Deals</a></li>
+            <li><a href="<?= base_url('made-in-nigeria/all/')?>">Made In Nigeria</a></li>
             <li><a href="<?= base_url("new-arrivals/");?>">New Arrivals</a></li>
             <li><a href="<?= base_url("explore/");?>">Explore</a></li>
             <li><a href="javascript:void(0)">Top Sellers</a></li>

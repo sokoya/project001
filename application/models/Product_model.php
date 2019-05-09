@@ -256,7 +256,7 @@ Class Product_model extends CI_Model{
         }
     }
 
-    // Get a slpecific category id by its slug
+    // Get a specific category id by its slug
     // return CI_row
     function category_id( $slug ){
         $query = "SELECT id FROM categories WHERE slug = ? OR name = ?";

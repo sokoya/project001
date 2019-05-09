@@ -53,3 +53,6 @@ application/config/development/database.php
 
 ## Htaccess
 .htaccess
+
+# DB Cache
+application/cache/db
