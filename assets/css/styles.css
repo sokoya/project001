@@ -545,9 +545,9 @@ hr {
     z-index: 9999
 }
 
-.cat-lazy {
-    width: 100% !important
-}
+/*.cat-lazy {*/
+/*    width: 100% !important*/
+/*}*/
 
 .dropdown-menu-category-section-inner {
     position: relative;
