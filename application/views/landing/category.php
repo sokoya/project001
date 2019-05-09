@@ -181,7 +181,7 @@
                                             <img class="product-img lazy cat-lazy"
                                                  data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
                                                  style=""
-                                                 src="<?= base_url('assets/load.gif'); ?>"
+                                                 src="<?= base_url('assets/img/load.gif'); ?>"
                                                  alt="<?= $product->product_name; ?>"
                                                  title="<?= $product->product_name; ?>">
                                         </div>
