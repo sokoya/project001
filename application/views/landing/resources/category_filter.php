@@ -6,15 +6,26 @@
         <?php endif;?>
         <ul class="cateogry-filters-list">
             <li></li>
+            <?php if( $page == 'made_in_nigeria') : ?>
             <?php foreach ($sub_categories as $category) : ?>
                 <li>
-                    <a href="<?= base_url('catalog/' . $category->slug . '/'); ?>">
+                    <a href="<?= base_url('made-in-nigeria/' . $category->slug . '/'); ?>">
                         <?= $category->name; ?>
                     </a>
                 </li>
             <?php endforeach; ?>
+            <?php else: ?>
+                <?php foreach ($sub_categories as $category) : ?>
+                    <li>
+                        <a href="<?= base_url('catalog/' . $category->slug . '/'); ?>">
+                            <?= $category->name; ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </ul>
     </div>
+
     <div class="category-filters-section">
         <h3 class="widget-title-sm custom-widget-text">Price</h3>
         <input id="price-range" type="hidden"/>

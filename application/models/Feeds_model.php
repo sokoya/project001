@@ -127,8 +127,208 @@ Class Feeds_model extends CI_Model{
     /*
      * Fetch all the products relating to made in NIgeria
      * */
-    function made_in_nigeria_products(){
+    function made_in_nigeria_products( $queries = '' , $gets = array() ){
+        // $this->db->cache_on();
+        // Lets confirm the slug is valid
+        $this->load->model('product_model');
+        if( isset($queries['str']) && $this->product_model->check_slug_availability( $queries['str'] ) ) {
+            $select_query = "SELECT p.id, p.product_name, p.brand_name, p.seller_id, p.from_overseas, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left, g.image_name,s.store_name
+            FROM products p";
+            if( isset($gets['price_min']) && !empty($gets['price_min']) && isset($gets['price_max']) && !empty($gets['price_max']) ){
+                $min = xss_clean($gets['price_min']); $max = xss_clean($gets['price_max']);
+                $min = preg_replace("/[^0-9]/", '', $min);
+                $max = preg_replace("/[^0-9]/", '', $max);
+                if( $min == '' ) $min = 0; if( $max == '' ) $max == 0;
+                $select_query .= " JOIN (SELECT var.product_id, var.discount_price, var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var 
+            WHERE var.quantity > 0 AND var.sale_price BETWEEN {$min} AND {$max} ORDER BY var.id) AS v ON (p.id = v.product_id) ";
+                unset($gets['price_min']); unset($gets['price_max']);
+            }else{
+                $select_query .= " JOIN (SELECT var.product_id, var.discount_price, var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var 
+            WHERE var.quantity > 0 ORDER BY var.id) AS v ON (p.id = v.product_id) ";
+            }
+            $select_query .= " JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )                
+            JOIN sellers AS s ON p.seller_id = s.uid ";
 
+            $array = $this->product_model->slug($queries['str']);
+            $select_query .= " WHERE p.category_id IN ('".implode("','",$array)."')";
+
+            if( isset($gets['q']) && !empty($gets['q']) ) {
+                $q = xss_clean( $gets['q']);
+                $q = preg_replace("/[^a-z]/", ' ', $q);
+                $select_query .= " AND p.product_name LIKE '%{$q}%' "; unset($gets['q']);
+            }
+            if( count($gets) ){
+                // check for brand name
+                if( isset($gets['brand_name']) && !empty($gets['brand_name'])) {
+                    $brand_name = xss_clean($gets['brand_name']);
+                    $brands = explode(',', $brand_name);
+                    if( count($brands) > 1 ){
+                        $select_query .= " AND p.brand_name IN ('".implode("','",$brands)."') ";
+                    }else{
+                        $select_query .= " AND p.brand_name = '{$brand_name}' ";
+                    }
+                    unset($gets['brand_name']);
+                }
+                // check for main colour
+                if( isset($gets['main_colour']) && !empty($gets['main_colour']) ){
+                    $main_colour = xss_clean($gets['main_colour']);
+                    $colours = explode(',', $main_colour);
+                    if( count( $colours ) ){
+                        $select_query .= " AND p.main_colour IN ('".implode("','",$colours)."') ";
+                    }else{
+                        $select_query .= " AND p.main_colour = '{$main_colour}' ";
+                    }
+                    unset($gets['main_colour']);
+                }
+                // Best rating
+//                if( isset($gets['order_by']) && !empty($gets['order_by']) ){
+//                    $order_by = xss_clean($gets['order_by']);
+//                    switch ($order_by) {
+//                        case 'best_rating':
+//                            $select_query .= " JOIN "
+//                            break;
+//
+//                    }
+//                    unset($gets['sort']);
+//                }
+                // unset the page key
+                unset( $gets['page'] );
+                // Here comes the features
+                // check for get count again
+                if( count( $gets ) ){
+                    // $select_query .= " AND ";
+                    foreach( $gets as $key => $value ){
+                        $explode = explode(',', $value);
+                        if( count($explode) > 1 ){
+                            $select_query .= " OR ( ";
+                            $array_value = array_values($explode);
+                            $last = end($array_value);
+                            $key = xss_clean( $key );
+                            foreach( $explode as $exp ){
+                                $exp = preg_replace("/[^A-Za-z.0-9-]/", ' ', $exp);
+                                $last = preg_replace("/[^A-Za-z.0-9-]/", ' ', $last);
+                                if( $key == '' ) $key = 0; if( $last == '') $last = 0;
+                                if( $exp === $last ){
+                                    $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%')";
+                                }else{
+                                    $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' OR";
+                                }
+                            }
+                            // $select_query .= " ) ";
+                        }else{
+                            $value = xss_clean($value);
+                            $value = preg_replace("/[^A-Za-z.0-9-]/", ' ', $value);
+                            $select_query .= " AND (JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$value}%') ";
+                        }
+                    }
+                }
+            }
+            if( $queries['is_limit'] == true ){
+                $select_query .=" AND p.nigeria = 1 AND p.product_status = 'approved' GROUP BY p.id ORDER BY p.id DESC LIMIT {$queries['offset']},{$queries['limit']} ";
+            }else{
+                $select_query .=" AND p.nigeria = 1 AND p.product_status = 'approved' GROUP BY p.id ORDER BY p.id DESC";
+            }
+            $products_query = $this->db->query( $select_query )->result();
+            return $products_query;
+        }else{
+            $select_query = "SELECT p.id, p.product_name, p.brand_name, p.seller_id, p.from_overseas, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left, g.image_name,s.store_name
+        FROM products p";
+            if( isset($gets['price_min']) && !empty($gets['price_min']) && isset($gets['price_max']) && !empty($gets['price_max']) ){
+                $min = xss_clean($gets['price_min']); $max = xss_clean($gets['price_max']);
+                $min = preg_replace("/[^0-9]/", '', $min);
+                $max = preg_replace("/[^0-9]/", '', $max);
+                if( $min == '' ) $min = 0; if( $max == '' ) $max == 0;
+                $select_query .= " JOIN (SELECT var.product_id, var.discount_price, var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var 
+        WHERE var.quantity > 0 AND var.sale_price BETWEEN {$min} AND {$max} ORDER BY var.id) AS v ON (p.id = v.product_id) ";
+                unset($gets['price_min']); unset($gets['price_max']);
+            }else{
+                $select_query .= " JOIN (SELECT var.product_id, var.discount_price, var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var 
+        WHERE var.quantity > 0 ORDER BY var.id) AS v ON (p.id = v.product_id) ";
+            }
+            $select_query .= " JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )                
+        JOIN sellers AS s ON p.seller_id = s.uid ";
+
+            $select_query .= " WHERE p.nigeria = 1";
+
+            if( isset($gets['q']) && !empty($gets['q']) ) {
+                $q = xss_clean( $gets['q']);
+                $q = preg_replace("/[^a-z]/", ' ', $q);
+                $select_query .= " AND p.product_name LIKE '%{$q}%' "; unset($gets['q']);
+            }
+            if( count($gets) ){
+                // check for brand name
+                if( isset($gets['brand_name']) && !empty($gets['brand_name'])) {
+                    $brand_name = xss_clean($gets['brand_name']);
+                    $brands = explode(',', $brand_name);
+                    if( count($brands) > 1 ){
+                        $select_query .= " AND p.brand_name IN ('".implode("','",$brands)."') ";
+                    }else{
+                        $select_query .= " AND p.brand_name = '{$brand_name}' ";
+                    }
+                    unset($gets['brand_name']);
+                }
+                // check for main colour
+                if( isset($gets['main_colour']) && !empty($gets['main_colour']) ){
+                    $main_colour = xss_clean($gets['main_colour']);
+                    $colours = explode(',', $main_colour);
+                    if( count( $colours ) ){
+                        $select_query .= " AND p.main_colour IN ('".implode("','",$colours)."') ";
+                    }else{
+                        $select_query .= " AND p.main_colour = '{$main_colour}' ";
+                    }
+                    unset($gets['main_colour']);
+                }
+                // Best rating
+//                if( isset($gets['order_by']) && !empty($gets['order_by']) ){
+//                    $order_by = xss_clean($gets['order_by']);
+//                    switch ($order_by) {
+//                        case 'best_rating':
+//                            $select_query .= " JOIN "
+//                            break;
+//
+//                    }
+//                    unset($gets['sort']);
+//                }
+                // unset the page key
+                unset( $gets['page'] );
+                // Here comes the features
+                // check for get count again
+                if( count( $gets ) ){
+                    // $select_query .= " AND ";
+                    foreach( $gets as $key => $value ){
+                        $explode = explode(',', $value);
+                        if( count($explode) > 1 ){
+                            $select_query .= " OR ( ";
+                            $array_value = array_values($explode);
+                            $last = end($array_value);
+                            $key = xss_clean( $key );
+                            foreach( $explode as $exp ){
+                                $exp = preg_replace("/[^A-Za-z.0-9-]/", ' ', $exp);
+                                $last = preg_replace("/[^A-Za-z.0-9-]/", ' ', $last);
+                                if( $key == '' ) $key = 0; if( $last == '') $last = 0;
+                                if( $exp === $last ){
+                                    $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%')";
+                                }else{
+                                    $select_query .= " JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$exp}%' OR";
+                                }
+                            }
+                            // $select_query .= " ) ";
+                        }else{
+                            $value = xss_clean($value);
+                            $value = preg_replace("/[^A-Za-z.0-9-]/", ' ', $value);
+                            $select_query .= " AND (JSON_EXTRACT(`attributes`, '$.\"$key\"') LIKE '%{$value}%') ";
+                        }
+                    }
+                }
+            }
+            if( $queries['is_limit'] == true ){
+                $select_query .=" AND p.product_status = 'approved' GROUP BY p.id ORDER BY p.id DESC LIMIT {$queries['offset']},{$queries['limit']} ";
+            }else{
+                $select_query .=" AND p.product_status = 'approved' GROUP BY p.id ORDER BY p.id DESC";
+            }
+            $products_query = $this->db->query( $select_query )->result();
+            return $products_query;
+        }
     }
 
 }

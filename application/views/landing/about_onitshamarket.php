@@ -45,19 +45,44 @@
                 <b>About Our Company</b>
             </h2>
             <hr />
+            <h3>Who We Are</h3>
             <div class="text-content">
                 <p>
-                    Internet Onitshamarketing Ltd trading as Onitshamarket.com is a dynamic e-commerce platform that is designed to provide the most convenient experience for buying and selling in Nigeria and rest of the world.  Beyond online market; our unique focus of creating a virtual mall and ultra modern experience centres that interfaces with the largest market in Africa gives us an advantage over the competition, thereby giving customers the benefit of buying and selling quality and genuine goods from the biggest market in Africa, in the comfort of wherever they may be and having it delivered to them within a 24hrs lead time.
+                    We are Internet Onitshamarketing Ltd trading as Onitshamarket.com. We are a dynamic e-commerce platform that is designed to provide the most convenient experience for buying and selling in Nigeria and rest of the world. Beyond online market; our unique focus of creating a virtual mall and ultra modern experience centres that interfaces with the largest market in Africa, gives us an advantage over the competition, thereby, giving customers the benefits of buying and selling goods on our trading platform, from the comfort of wherever they may be and having it delivered to them within a lead time of 1 to 3 days depending on the location.
                 </p>
             </div>
-            <h3>Our Vision</h3>
+            <h3>What We Do</h3>
             <div class="text-content">
                 <p>
-                    Our vision is to provide an online mall for the new generation of Onitsha market customers, who need to buy genuine, cost-effective products and have it delivered to their preferred locations.
+                    We bring fulfilment through:
                 </p>
+                <ul>
+                    <li>Connecting buyers to sellers anytime and anywhere</li>
+                    <li>Providing easy access for the world to African market</li>
+                    <li>Training, as well as improving and supporting African made goods.</li>
+                    <li>Ensuring all products and services are genuine, quality, cost effective and quick.</li>
+                </ul>
+            </div>
+
+            <h3>Our Team</h3>
+            <div class="text-content">
                 <p>
-                    <b>Onitshamarket.com</b> is always inspired to efficiently fulfill the changing current of our customers growing dynamic needs. Therefore, our products and services are genuine, superior, cost-effective, convenient and quick.
+                    We are made up of a tapestry of friendly, resourceful, committed, creative, and customer-centric team. We are always inspired to fulfill the changing current of our customers growing dynamic needs.
                 </p>
+            </div>
+
+            <h3>Where To Find Us</h3>
+            <div class="text-content">
+                <p>
+                    Our Head Office is Located at #176 Akwa Road, Opposite Conoil, Inland Town, Onitsha, Anambra State. For more contacts’ information about our various experience center all around Nigeria,
+                    <a href="<?= lang('contact_us_url');?>">Contact Us</a>
+                </p>
+            </div>
+
+            <h3>Become a seller</h3>
+            <div class="text-content">
+                <p>
+                     <a href="<?= lang('seller_url');?>" title="Become a seler">Become a seller</a> to reach large audience and maximize your profit.
                 </p>
             </div>
             <?php $this->load->view('landing/resources/why-onitshamarket'); ?>
