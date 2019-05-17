@@ -241,10 +241,18 @@
         window.addEventListener('load', function () {
             let allimages = document.getElementsByTagName('img');
             for (let i = 0; i < allimages.length; i++) {
+                allimages[i].setAttribute('src', '');
                 if (allimages[i].getAttribute('data-src')) {
                     allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
                 }
             }
+            setTimeout(function(){
+                for (let i = 0; i < allimages.length; i++) {
+                    if (allimages[i].getAttribute('data-src')) {
+                        allimages[i].setAttribute('style', '');
+                    }
+                }
+            }, 300);
         }, false);
 
         $("#price-range").ionRangeSlider({

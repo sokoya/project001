@@ -305,7 +305,6 @@
                                     <div class="row">
                                         <?php if (count($variations) > 0) : ?>
                                             <div class="col-md-7">
-
                                                 <div class="row variation-option-list">
                                                             <?php $qty_stock_check = 0; ?>
                                                             <?php foreach ($variations as $variation): ?>
@@ -327,7 +326,6 @@
                                                                 <?php if ($variation['quantity'] < 1) $qty_stock_check++; ?>
                                                             <?php endforeach; ?>
                                                         </div>
-
                                             </div>
                                         <?php endif; ?>
                                         <div class="col-md-5 quan-u">
@@ -366,7 +364,12 @@
                                         <?php else : ?>
                                             <button class="btn btn-block btn-primary add-to-cart c-hover"
                                                     type="button" <?php if (!empty($product->colour_family)) echo 'data-colour="colour"'; ?> <?php if (count($variations)) echo 'data-variation="variation"'; ?> >
-                                                <i class="fa fa-shopping-cart"></i> Add to Cart
+                                                <i class="fa fa-shopping-cart"></i>
+                                                <?php if (count($variations) > 1) : ?>
+                                                        Add to Cart
+                                                    <?php else : ?>
+                                                        Buy Now
+                                                    <?php endif; ?>
                                             </button>
                                         <?php endif; ?>
                                     </div>
@@ -749,7 +752,7 @@
                                     <?php endif; ?>
                                     <div class="product-img-wrap">
                                         <img class="product-img lazy"
-                                             src="<?= base_url('assets/load.gif'); ?>"
+                                             src="<?= base_url('assets/img/imageloader.gif'); ?>"
                                              data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?=$like->image_name; ?>"
                                              alt="<?= $like->product_name; ?>"
                                              title="<?= $like->product_name; ?>">
@@ -807,7 +810,7 @@
                                         <?php endif; ?>
                                         <div class="product-img-wrap">
                                             <img class="product-img lazy"
-                                                 src="<?= base_url('assets/img/load.gif'); ?>"
+                                                 src="<?= base_url('assets/img/imageloader.gif'); ?>"
                                                  data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?=$viewed->image_name; ?>"
                                                  alt="<?= $viewed->product_name; ?>"
                                                  title="<?= $viewed->product_name; ?>">

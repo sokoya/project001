@@ -166,7 +166,6 @@
                                         <div class="product-img-wrap">
                                             <div class="product-quick-view-cover">
                                                 <div style="position: relative; left: -50%;">
-                                                    <!--                                                    --><?php //$image_name = explode('/', $product->image_name); ?>
                                                     <button data-title="<?= $product->product_name ?>"
                                                             data-pr_id="<?= $product->id; ?>"
                                                             data-qv="<?php if ($p_count % 4 == 0) { ?>true<?php } ?>"
@@ -178,10 +177,10 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            <img class="product-img lazy cat-lazy"
+                                            <img class="product-img cat-lazy"
                                                  data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
-                                                 style=""
-                                                 src="<?= base_url('assets/img/load.gif'); ?>"
+                                                 style="max-width: 50px; max-height: 50px; margin-top: 50px; margin-right: auto; margin-left: auto;margin-bottom:40px;"
+                                                 src="<?= base_url('assets/img/imageloader.gif'); ?>"
                                                  alt="<?= $product->product_name; ?>"
                                                  title="<?= $product->product_name; ?>">
                                         </div>
@@ -276,10 +275,18 @@
     window.addEventListener('load', function () {
         let allimages = document.getElementsByTagName('img');
         for (let i = 0; i < allimages.length; i++) {
+            allimages[i].setAttribute('src', '');
             if (allimages[i].getAttribute('data-src')) {
                 allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
             }
         }
+        setTimeout(function(){
+            for (let i = 0; i < allimages.length; i++) {
+                if (allimages[i].getAttribute('data-src')) {
+                    allimages[i].setAttribute('style', '');
+                }
+            }
+        }, 300);
     }, false);
     <?php //?>
     $(window).on('scroll', function() {
