@@ -153,7 +153,7 @@
 
                         <div class="form-group">
                             <label for="pop">Proof of payment</label>
-                            <input type="file" name="pop" required>
+                            <input type="file" name="pop">
                         </div>
 
                         <input type="hidden" name="order" value="<?= $this->session->userdata('order_code'); ?>"/>

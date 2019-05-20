@@ -134,7 +134,7 @@
                                             <td align="center" style="padding: 6px 6px 6px 6px; font-size: 12px"><?= ngn($order->amount  * $order->qty); ?></td>
                                             <?php
                                             $subtotal += $order->amount * $order->qty;
-                                            $shipping = $order->delivery_charge;
+                                            $shipping += $order->delivery_charge;
                                             ?>
                                         </tr>
                                     <?php endforeach;?>

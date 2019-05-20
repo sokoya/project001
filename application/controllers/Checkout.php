@@ -221,7 +221,7 @@ class Checkout extends MY_Controller
                 echo json_encode($return);
                 exit;
             }elseif( !empty($item_left) && !empty( $total) ){
-                $total = $subtotal + $billing_amount;
+//                $total = $subtotal + $billing_amount;
                     // Lets insert our orders into the database
                 if(  $this->product->insert_batch( 'orders', $data ) ){
                     // Remove the product quantity Item
@@ -541,28 +541,22 @@ class Checkout extends MY_Controller
             $return  = $this->cloudinarylib->get_result('filename');
             if( $return ){
                 $data['pop'] = $return;
-                // Insert
-                try {
-                    $this->product->insert_data('bank_transfer', $data);
-                    // Checkout Confirm
-                    $this->session->set_flashdata('success_msg', 'Thank you for shopping with us, your order has been received.');
-                    redirect('order_completed');
-                } catch (Exception $e) {
-                    $this->session->set_flashdata('error_msg','There was an error submitting your order ' . $e);
-                    $this->load->view('landing/bank_transfer', $page_data);
-                    return false;
-                }
-                unset( $upload_array );
             }else{
                 $this->session->set_flashdata('error_msg','There was an error with that image, please fix and try again.');
                 $this->load->view('landing/bank_transfer', $page_data);
                 return false;
             }
-        }else{
-            $this->session->set_flashdata('error_msg','Please upload Proof of payment to proceed.');
+        }
+            // Insert
+        try {
+            $this->product->insert_data('bank_transfer', $data);
+            // Checkout Confirm
+            $this->session->set_flashdata('success_msg', 'Thank you for shopping with us, your order has been received.');
+            redirect('order_completed');
+        } catch (Exception $e) {
+            $this->session->set_flashdata('error_msg','There was an error submitting your order ' . $e);
             $this->load->view('landing/bank_transfer', $page_data);
             return false;
         }
     }
-
 }

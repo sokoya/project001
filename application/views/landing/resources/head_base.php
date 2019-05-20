@@ -53,7 +53,6 @@
         <meta property="og:description"
               itemprop="description"
               content="<?php isset($description) ? word_limiter($description, 100) : lang('site_description') ?>"/>
-
         <meta property="og:site_name" content="<?= lang('app_name'); ?>"/>
         <meta property="og:url" content="<?= current_url(); ?>"/>
         <meta property="og:image:width" content="279">

@@ -21,17 +21,17 @@ function bind_market(src, destination) {
 $('.continue-btn').on('click', function (e) {
     $(this).prop('disabled', 'disabled');
     e.preventDefault();
-    var delivery_charge = $('.charges').data('amount');
-    var payment = $("input[name=payment_method]:checked");
-    var payment_method = payment.val();
-    var payment_name = payment.data('name');
+    let delivery_charge = $('.charges').data('amount');
+    let payment = $("input[name=payment_method]:checked");
+    let payment_method = payment.val();
+    let payment_name = payment.data('name');
     $.ajax({
         url: base_url + 'checkout/checkout_confirm',
         method: 'POST',
         dataType: 'json',
         data: $('#checkout_form').serialize() + "&delivery_charge=" + delivery_charge +"&weight="+weight.weight,
         success: (data) => {
-            if (data.status == 'success') {
+            if (data.status === 'success') {
                 payment_method = parseInt(payment_method);
                 if (payment_method === 1 || payment_name == 'Payment on Delivery') {
                     // Payment on delivery
@@ -75,13 +75,13 @@ $('.create-address-btn').on('click', function (e) {
     e.preventDefault();
     $(this).prop('disabled', true);
     $('#processing').show();
-    var first_name = $('#fname').val();
-    var last_name = $('#lname').val();
-    var phone = $('#number_').val();
-    var address = $('#street').val();
-    var state = $('#state').val();
-    var area = $('#city').val();
-    var data = {
+    let first_name = $('#fname').val();
+    let last_name = $('#lname').val();
+    let phone = $('#number_').val();
+    let address = $('#street').val();
+    let state = $('#state').val();
+    let area = $('#city').val();
+    let data = {
         'first_name': first_name,
         'last_name': last_name,
         'phone': phone,
