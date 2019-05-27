@@ -637,7 +637,7 @@
     </div>
 
     <!-- You might also like-->
-    <?php if (count($likes)) : $excludes = array();  ?>
+    <?php $excludes = array(); if (count($likes)) :   ?>
         <div class="container" style="margin-bottom: 5px;"><p class="text-break" style="">You might also like</p></div>
         <div class="custom-card">
             <div class="">
