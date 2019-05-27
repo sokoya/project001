@@ -104,8 +104,15 @@
                 </p>
                 <p class="text-muted text-sm text-center">You can browse for more product <a
                             style="text-decoration: none; color: #0b6427;" href="<?= base_url(); ?>">Find
-                        product</a> or <a href="<?= PAGE_CONTACT_US ?>">contact us</a> if still not working.</p>
-                <div style="height:110px"></div>
+                        product</a> or <a style="text-decoration: none; color: #0b6427;" href="<?= PAGE_CONTACT_US ?>">contact us</a> if still not working.
+                    <br />
+                    <?php if($_SERVER['HTTP_REFERRER']) : ?>
+                        <a style="text-decoration: none; color: #0b6427;" href="<?= $_SERVER['HTTP_REFERRER']; ?>">Go back to previous search.</a>
+                    <?php endif; ?>
+                </p>
+                <div style="height:110px">
+
+                </div>
             </div>
         </div>
     <?php else : ?>
