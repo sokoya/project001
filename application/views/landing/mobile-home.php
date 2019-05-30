@@ -132,6 +132,7 @@
         background-color:#fff;
     }
 </style>
+<meta name="google-site-verification" content="xGjxCwvClqtUIevfyrQ-HWU7OcjspMEVmXMAPcpzz7Y" />
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
