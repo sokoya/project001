@@ -174,7 +174,9 @@
                                     <ul class="product-labels"></ul>
                                     <div class="product-img-wrap">
                                         <img class="product-img lazy"
-                                             src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
+                                             style="max-width: 50px; max-height: 50px; margin-top: 50px; margin-right: auto; margin-left: auto;margin-bottom:40px;"
+                                             src="<?= base_url('assets/img/imageloader.gif'); ?>"
+                                             data-src="<?= PRODUCTS_IMAGE_PATH . $product->image_name; ?>"
                                              alt="<?= $product->product_name; ?>"
                                              title="<?= $product->product_name; ?>"/>
                                     </div>
