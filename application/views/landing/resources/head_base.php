@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta name="google-site-verification" content="xGjxCwvClqtUIevfyrQ-HWU7OcjspMEVmXMAPcpzz7Y"/>
     <!--     Global site tag (gtag.js) - Google Analytics-->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132785278-1"></script>
     <script>
