@@ -152,7 +152,8 @@
                                                 <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
                                             <?php endif; ?>
                                             <img class="card-product-img"
-                                                src="<?=base_url("assets/img/load.gif")?>"
+                                                 style="max-width: 50px; max-height: 50px; margin-top: 50px; margin-right: auto; margin-left: auto;margin-bottom:40px;"
+                                                 src="<?= base_url('assets/img/imageloader.gif'); ?>"
                                                 data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
                                                 alt="<?= $product->product_name; ?>"
                                                 title="<?= $product->product_name; ?>">
@@ -188,7 +189,6 @@
 </div>
 <script src="<?= base_url('assets/js/jquery.js'); ?>"></script>
 <script src="<?= base_url('assets/js/bootstrap.js'); ?>"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/js/ion.rangeSlider.min.js"></script>
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
 <script>
@@ -221,14 +221,24 @@
             ]
         });
     });
-    window.addEventListener('load', function(){
-    var allimages= document.getElementsByTagName('img');
-    for (var i=0; i<allimages.length; i++) {
-        if (allimages[i].getAttribute('data-src')) {
-            allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
+
+    window.addEventListener('load', function () {
+        let allimages = document.getElementsByTagName('img');
+        for (let i = 0; i < allimages.length; i++) {
+            if (allimages[i].getAttribute('data-src')) {
+                allimages[i].setAttribute('src', '');
+                allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
+            }
         }
-    }
-}, false);
+        setTimeout(function(){
+            for (let i = 0; i < allimages.length; i++) {
+                if (allimages[i].getAttribute('data-src')) {
+                    allimages[i].setAttribute('style', '');
+                }
+            }
+        }, 300);
+    }, false);
+
     $('.wishlist-btn').on('click', function () {
         let product_id = $(this).data('pid');
         let _this = $(this);
