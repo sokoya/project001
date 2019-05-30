@@ -91,9 +91,9 @@
                 <ol class="breadcrumb page-breadcrumb c-brc">
                     <li><a href="<?= base_url(); ?>">Home</a>
                     </li>
-                    <li>
-                        <a href="<?= base_url('catalog/' . $category_detail->slug . '/'); ?>"><?= ucwords($category_detail->name); ?></a>
-                    </li>
+                    <?php foreach ($categories_name as $obj) : ?>
+                        <li><a title="<?= $obj->description; ?>" href="<?= base_url('catalog/' . $obj->slug . '/'); ?>"><?= ucwords($obj->name); ?></a></li>
+                    <?php endforeach; ?>
                     <li class="active c-a-brc"><?= ucwords($product->product_name); ?></li>
                 </ol>
             </header>

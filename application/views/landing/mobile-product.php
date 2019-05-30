@@ -145,6 +145,10 @@
         font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
         position: relative;
     }
+    .body_text > img {
+        width: auto;
+        position: center;
+    }
 
     .product-image {
         height: auto;

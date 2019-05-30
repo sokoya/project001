@@ -81,7 +81,10 @@
 </style>
 </head>
 <body>
-
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TB9XP2T"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 <div class="global-wrapper clearfix" id="global-wrapper">
     <?php if ($this->agent->is_mobile()) : ?>
         <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
@@ -190,8 +193,8 @@
                                             </div>
                                             <img class="product-img lazy cat-lazy"
                                                  data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
-                                                 style=""
-                                                 src="<?= base_url('assets/img/load.gif'); ?>"
+                                                 style="max-width: 50px; max-height: 50px; margin-top: 50px; margin-right: auto; margin-left: auto;margin-bottom:40px;"
+                                                 src="<?= base_url('assets/img/imageloader.gif'); ?>"
                                                  alt="<?= $product->product_name; ?>"
                                                  title="<?= $product->product_name; ?>">
                                         </div>
@@ -287,9 +290,17 @@
         let allimages = document.getElementsByTagName('img');
         for (let i = 0; i < allimages.length; i++) {
             if (allimages[i].getAttribute('data-src')) {
+                allimages[i].setAttribute('src', '');
                 allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
             }
         }
+        setTimeout(function(){
+            for (let i = 0; i < allimages.length; i++) {
+                if (allimages[i].getAttribute('data-src')) {
+                    allimages[i].setAttribute('style', '');
+                }
+            }
+        }, 300);
     }, false);
     <?php //?>
     $(window).on('scroll', function() {

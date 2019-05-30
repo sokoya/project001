@@ -175,53 +175,51 @@ Class Product_model extends CI_Model{
         }
     }
     /*
-    *Function to get the parent category of a particular category
-    *Called the parent_recurssive
+        Return an object (name, slug, description, specifications) of all the parent of a category
     */
-    function parent_slug_top( $id ){
+
+    function parent_slug_top($id)
+    {
         // Select category
         $GLOBALS['array_variable'] = array();
-//        $temp = $this->db->query("SELECT pid FROM categories WHERE id = {$id}")->row();
-        $select_category = "SELECT pid, slug FROM categories WHERE id = {$id}";
+        $select_category = "SELECT id, slug FROM categories WHERE id = {$id}";
         $result = $this->db->query($select_category);
-
-        if( $result->num_rows() >= 1 ){
-            $pid = $result->row()->pid;
-            $this->parent_recurssive( $pid );
+        if ($result->num_rows() >= 1) {
+            $pid = $result->row()->id;
+            $this->parent_recurssive($pid);
             $array = array_filter($GLOBALS['array_variable']);
             $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($array));
             $new_array = array();
-            foreach( $it as $v ){ array_push( $new_array, $v); }
-            array_push( $new_array, $id ); // Lets push its own ID also
-             return $new_array;
-        }else{
+            foreach ($it as $v) {
+                array_push($new_array, $v);
+            }
+            array_push($new_array, $id); // Lets push its own ID also
+            return $new_array;
+        } else {
             return $GLOBALS['array_variable'];
         }
 
     }
-
     /*
     *Called by the parent_slug top, helps to generate the parent id
     */
-    function parent_recurssive( $pid ){
+
+    function parent_recurssive($pid)
+    {
         $category_pid = $pid;
-//        die( $category_pid );
         $total_categories = $this->db->get('categories')->result_array();
-        $count = count( $total_categories );
+        $count = count($total_categories);
 
         $data = array();
-        array_push($data, $category_pid);
-        for ($i=0; $i < $count; $i++) {
-            if( $total_categories[$i]['id'] == $category_pid ){
-                array_push( $data , $total_categories[$i]['pid'] );
+        for ($i = 0; $i < $count; $i++) {
+            if ($total_categories[$i]['id'] == $category_pid) {
+                array_push($data, $total_categories[$i]['pid']);
             }
         }
-        array_push( $GLOBALS['array_variable'], $data);
+        array_push($GLOBALS['array_variable'], $data);
         foreach ($data as $key => $value) {
             $this->parent_recurssive($value);
         }
-
-
     }
 
     function check_slug_availability( $slug ){
@@ -269,11 +267,15 @@ Class Product_model extends CI_Model{
     */
     function get_parent_details( $id ){
         $array = $this->parent_slug_top( $id );
-//        var_dump( $array );exit;
-//        die( $id );
         return $this->db->query("SELECT name, slug, description FROM categories WHERE id IN ('".implode("','",$array)."')")->result();
     }
 
+
+
+    /*
+   *Function to get the parent category of a particular category
+   *Called the parent_recurssive
+   */
 
     // Main Category product listings
     // Return CI_results
