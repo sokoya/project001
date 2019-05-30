@@ -1,4 +1,5 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
+<meta name="google-site-verification" content="xGjxCwvClqtUIevfyrQ-HWU7OcjspMEVmXMAPcpzz7Y"/>
 <link rel="stylesheet" href="<?= base_url('assets/plugins/slick/slick.css'); ?>">
 <link rel="stylesheet" href="<?= base_url('assets/plugins/slick/slick-theme.css'); ?>">
 <style>
@@ -251,7 +252,7 @@
         cursor: pointer
     }
 </style>
-<meta name="google-site-verification" content="xGjxCwvClqtUIevfyrQ-HWU7OcjspMEVmXMAPcpzz7Y"/>
+
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
