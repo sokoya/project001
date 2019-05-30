@@ -81,6 +81,10 @@
 </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TB9XP2T"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <div class="global-wrapper clearfix" id="global-wrapper">
     <?php if ($this->agent->is_mobile()) : ?>
@@ -105,10 +109,6 @@
                 <p class="text-muted text-sm text-center">You can browse for more product <a
                             style="text-decoration: none; color: #0b6427;" href="<?= base_url(); ?>">Find
                         product</a> or <a style="text-decoration: none; color: #0b6427;" href="<?= PAGE_CONTACT_US ?>">contact us</a> if still not working.
-                    <br />
-                    <?php if($_SERVER['HTTP_REFERRER']) : ?>
-                        <a style="text-decoration: none; color: #0b6427;" href="<?= $_SERVER['HTTP_REFERRER']; ?>">Go back to previous search.</a>
-                    <?php endif; ?>
                 </p>
                 <div style="height:110px">
 

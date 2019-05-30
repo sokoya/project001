@@ -232,6 +232,10 @@
 </style>
 </head>
 <body style="background: #e5e5e5">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TB9XP2T"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 <div class="global-wrapper clearfix" id="global-wrapper" style="margin-bottom: 3px;">
     <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
 </div>
