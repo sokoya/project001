@@ -13,6 +13,7 @@ let urlsToCache = [
     './catalog/baby-products/',
     './catalog/toys-games/',
     './catalog/other-categories/',
+    './made-in-nigeria/',
     './explore/',
     './new-arrivals/',
     './offline.html',
