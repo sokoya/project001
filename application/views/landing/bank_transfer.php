@@ -176,12 +176,12 @@
                  style="display: inline-flex;margin-top:10px;">
                 <img src="<?= base_url('assets/img/payment/ssl-logo.png'); ?>" class="img-responsive"
                      style="margin-left:auto;"
-                     alt="Image Alternative text" title="Pay with Mastercard"/>
+                     alt="Mastercard logo" title="Pay with Mastercard"/>
                 <img src="<?= base_url('assets/img/payment/interswitch.png'); ?>" class="img-responsive"
-                     alt="Pay with Interswitch" title="Pay with interswitch"/>
+                     alt="Interswitch Logo" title="Pay with interswitch"/>
                 <img src="<?= base_url('assets/img/payment/allcards.jpg'); ?>" class="img-responsive"
                      style="margin-right:auto;"
-                     alt="Image Alternative text" title="Pay with Mastercard"/>
+                     alt="Payment logo" title="Pay with Mastercard"/>
             </div>
         </div>
         <div class="row">

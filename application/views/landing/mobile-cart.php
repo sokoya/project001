@@ -41,7 +41,6 @@
 
     <div class="container">
         <?php $cart_content = $this->cart->contents();
-        $excludes = array(); # This is used to exludes product from recently viewed
         if (!empty($cart_content)) : ?>
             <header class="page-header" style="margin: 10px 0 10px 0;">
                 <h4 style="margin-bottom:0;">My Cart (<?= $this->cart->total_items(); ?>) Items</h4>
@@ -52,7 +51,6 @@
                 <?php $x = 0; $total = 0;
                 foreach ($this->cart->contents() as $product): ?>
                     <?php
-                    array_push($excludes, $product['id']);
                     $detail = $this->product->get_cart_details($product['id']);
                     $variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
                     ?>
@@ -290,7 +288,6 @@
                     $('.cart-row').load(base_url + 'cart');
                     $('.lazy').lazy();
                 }
-
             },
             error: () => {
                 if (quantity.val() <= 1) {
@@ -328,11 +325,10 @@
                 notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
             },
             error: () => {
-                notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', error);
+                notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', 'error');
             }
         })
     });
 </script>
-
 </body>
 </html>

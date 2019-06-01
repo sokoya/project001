@@ -332,47 +332,47 @@
                         <a href="https://www.onitshamarket.com/catalog/women-s-wear/">
                             <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
                                 <p class="card-cat-text">Women's Fashion</p>
-                                <img src="<?= base_url('assets/img/home/categories/prod1.jpg'); ?>">
+                                <img alt="Shop for women's fashion" src="<?= base_url('assets/img/home/categories/prod1.jpg'); ?>">
                             </div>
                         </a>
                         <a href="https://www.onitshamarket.com/catalog/accessories/">
                             <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
                                 <p class="card-cat-text">Phones Accessories</p>
-                                <img
+                                <img alt="Shop for Phones and accessories"
                                         src="<?= base_url('assets/img/home/categories/prod2.jpg'); ?>"></div>
                         </a>
                         <a href="https://www.onitshamarket.com/catalog/electronics/">
                             <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
                                 <p class="card-cat-text">Electronics</p>
-                                <img
+                                <img alt="Shop for electronics product"
                                         src="<?= base_url('assets/img/home/categories/prod3.jpg'); ?>"></div>
                         </a>
                         <a href="https://www.onitshamarket.com/catalog/computer-accessories/">
                             <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
-                                <p class="card-cat-text">Computing Accessories</p><img
+                                <p class="card-cat-text">Computing Accessories</p><img alt="Shop for computer accessories"
                                         src="<?= base_url('assets/img/home/categories/prod4.jpg'); ?>"></div>
                         </a>
                         <a href="https://www.onitshamarket.com/catalog/phones-tablets/">
                             <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
-                                <p class="card-cat-text">Phone and Tablets</p><img
+                                <p class="card-cat-text">Phone and Tablets</p><img alt="Shop for phones and tablets online"
                                         src="<?= base_url('assets/img/home/categories/prod5.jpg'); ?>"></div>
                         </a>
                         <a href="https://www.onitshamarket.com/catalog/home-office/">
                             <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
                                 <p class="card-cat-text">Home and Office</p>
-                                <img
+                                <img alt="Shop for Home and office products"
                                         src="<?= base_url('assets/img/home/categories/prod6.jpg'); ?>"></div>
                         </a>
                         <a href="https://www.onitshamarket.com/catalog/bluetooth-speakers/">
                             <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
                                 <p class="card-cat-text">Bluetooth Speakers</p>
-                                <img
+                                <img alt="Shop for bluethooth speakers"
                                         src="<?= base_url('assets/img/home/categories/prod7.jpg'); ?>"></div>
                         </a>
                         <a href="https://www.onitshamarket.com/catalog/computing/">
                             <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
                                 <p class="card-cat-text">Computing</p>
-                                <img
+                                <img alt="Shop for computing"
                                         src="<?= base_url('assets/img/home/categories/prod8.jpg'); ?>"></div>
                         </a>
                     </div>
@@ -402,38 +402,38 @@
                             <a href="https://www.onitshamarket.com/catalog/home-office/">
                                 <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
                                     <p class="card-cat-text">Electronics</p>
-                                    <img
+                                    <img alt="Shop for electonics"
                                             src="<?= base_url('assets/img/home/ef.jpg'); ?>">
                                 </div>
                             </a>
                             <a href="https://www.onitshamarket.com/catalog/gaming/" title="Gaming">
                                 <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
-                                    <p class="card-cat-text">Computing Accessories</p><img
+                                    <p class="card-cat-text">Computing Accessories</p><img alt="Shop for computing accessories"
                                             src="<?= base_url('assets/img/home/eg.jpg'); ?>"></div>
                             </a>
                             <a href="https://www.onitshamarket.com/catalog/building-materials/" title="Building Materials">
                                 <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
-                                    <p class="card-cat-text">Phone and Tablets</p><img
+                                    <p class="card-cat-text">Phone and Tablets</p><img alt="Shop for phones and tablets"
                                             src="<?= base_url('assets/img/home/em.jpg'); ?>"></div>
                             </a>
                             <a href="https://www.onitshamarket.com/catalog/home-office/" title="Home & Office">
                                 <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
                                     <p class="card-cat-text">Home and Office</p>
-                                    <img
+                                    <img alt="Shop for Home and office products"
                                             src="<?= base_url('assets/img/home/ek.jpg'); ?>"></div>
                             </a>
 
                             <a href="https://www.onitshamarket.com/catalog/home-theaters/" title="Home Theaters">
                                 <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
                                     <p class="card-cat-text">Home Theaters</p>
-                                    <img
+                                    <img alt="Shop for Home Theaters products"
                                             src="<?= base_url('assets/img/home/ea.jpg'); ?>"></div>
                             </a>
 
                             <a href="https://www.onitshamarket.com/catalog/computing/" title="Computing">
                                 <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
                                     <p class="card-cat-text">Computing</p>
-                                    <img
+                                    <img alt="Shop for Computing products"
                                             src="<?= base_url('assets/img/home/ex.jpg'); ?>"></div>
                             </a>
 
@@ -454,7 +454,7 @@
             <div class="brand-slide">
                 <div class="row">
                     <div class="col-md-2 hidden-sm hidden-xs">
-                        <img src="<?= base_url('assets/img/home/left_pane_2.jpg'); ?>" style="min-height: 320px">
+                        <img alt="Online Shopping for affordable product on onitshamarket.com" src="<?= base_url('assets/img/home/left_pane_2.jpg'); ?>" style="min-height: 320px">
                     </div>
                     <div class="col-md-10">
                         <div class="row" style="margin-left: 10px">

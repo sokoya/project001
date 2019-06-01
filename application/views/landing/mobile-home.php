@@ -184,54 +184,54 @@
             <a href="https://www.onitshamarket.com/catalog/women-s-wear/">
                 <div class="col-img-3">
                     <p>Women's Fashion</p>
-                    <img
+                    <img alt="Women's Fashion"
                             src="<?= base_url('assets/img/home/ee.jpg'); ?>" class="img-responsive"></div>
             </a>
 
             <a href="https://www.onitshamarket.com/catalog/accessories/">
                 <div class="col-img-3">
                     <p>Phones<br/>Accessories</p>
-                    <img
+                    <img alt="Phones & Accessories"
                             src="<?= base_url('assets/img/home/ed.jpg'); ?>" class="img-responsive"></div>
             </a>
 
             <a href="https://www.onitshamarket.com/catalog/electronics/">
                 <div class="col-img-3">
                     <p>Electronics</p>
-                    <img
+                    <img alt="Bul Electonics Product"
                             src="<?= base_url('assets/img/home/ef.jpg'); ?>" class="img-responsive"></div>
             </a>
             <a href="https://www.onitshamarket.com/catalog/computer-accessories/">
                 <div class="col-img-3">
                     <p>Computer<br/>Accessories</p>
-                    <img
+                    <img alt="Shop for computer accessories"
                             src="<?= base_url('assets/img/home/eg.jpg'); ?>" class="img-responsive"></div>
             </a>
 
             <a href="https://www.onitshamarket.com/catalog/phones-tablets/">
                 <div class="col-img-3">
                     <p>Phones & Tablets</p>
-                    <img
+                    <img alt="Shop for Phones & Tablets"
                             src="<?= base_url('assets/img/home/em.jpg'); ?>" class="img-responsive"></div>
             </a>
 
             <a href="https://www.onitshamarket.com/catalog/home-office/">
                 <div class="col-img-3">
                     <p>Home & Office</p>
-                    <img
+                    <img alt="Shop for Home & Office"
                             src="<?= base_url('assets/img/home/ek.jpg'); ?>" class="img-responsive"></div>
             </a>
 
             <a href="https://www.onitshamarket.com/catalog/bluetooth-speakers/">
                 <div class="col-img-3">
                     <p>Bluetooth<br/>Speakers</p>
-                    <img
+                    <img alt="Shop for Bluetooth & Speakers"
                             src="<?= base_url('assets/img/home/ea.jpg'); ?>" class="img-responsive"></div>
             </a>
             <a href="https://www.onitshamarket.com/catalog/computing/">
                 <div class="col-img-3">
                     <p>Computing</p>
-                    <img
+                    <img alt="Shop for computing devices on Onitshamarket.com"
                             src="<?= base_url('assets/img/home/ex.jpg'); ?>" class="img-responsive"></div>
             </a>
         </div>
@@ -312,7 +312,7 @@
                     <a style="color: #0b0b0b" href="<?= base_url(urlify($product->product_name, $product->id)); ?>">
                         <div style="">
 
-                            <img src="<?= PRODUCTS_IMAGE_PATH . $product->image_name ?>" class="prod_img"/>
+                            <img alt="<?= $product->product_name;?>" src="<?= PRODUCTS_IMAGE_PATH . $product->image_name ?>" class="prod_img"/>
                             <span><?= character_limiter($product->product_name, 30) ?></span>
                             <?php
                             if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
@@ -334,7 +334,7 @@
         </div>
         <div class="gap-small"></div>
         <div class="home_banner container">
-            <img src="<?= base_url('assets/img/home/banner2.png'); ?> " class="img-responsive">
+            <img alt="Affordable and quality shopping on onitshamarket" src="<?= base_url('assets/img/home/banner2.png'); ?> " class="img-responsive">
         </div>
     <?php endforeach; ?>
 
@@ -417,7 +417,7 @@
                 <a class="banner-category owl-item-slide" href="#">
                     <img class="banner-category-img"
                          src="<?= base_url('assets/img/why-onitshamarket/247.png') ?>"
-                         alt="247 Active Support" title="247 Active Support"/>
+                         alt="247 Active Customer Support" title="247 Active Support"/>
                     <h5 class="banner-category-title">24/7</h5>
                     <p class="banner-category-desc">Customer Agents Waiting To Help You.</p>
                 </a>

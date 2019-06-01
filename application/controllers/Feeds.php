@@ -13,7 +13,9 @@ class Feeds extends MY_Controller
 
 
 	public function index()
-	{}
+	{
+	    base_url();
+    }
 
 	// New Arrival Post...
 	public function new_arrivals()

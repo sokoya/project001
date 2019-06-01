@@ -168,12 +168,12 @@
                          style="display: inline-flex;margin-top:10px;">
                         <img src="<?= base_url('assets/img/payment/ssl-logo.png'); ?>" class="img-responsive"
                              style="margin-left:auto;"
-                             alt="Image Alternative text" title="Pay with Mastercard"/>
+                             alt="SSL logo" title="Pay with Mastercard"/>
                         <img src="<?= base_url('assets/img/payment/interswitch.png'); ?>" class="img-responsive"
                              alt="Pay with Interswitch" title="Pay with interswitch"/>
                         <img src="<?= base_url('assets/img/payment/allcards.jpg'); ?>" class="img-responsive"
                              style="margin-right:auto;"
-                             alt="Image Alternative text" title="Pay with Mastercard"/>
+                             alt="Pay with mastercard" title="Pay with Mastercard"/>
                     </div>
                 </div>
                 <div class="row">

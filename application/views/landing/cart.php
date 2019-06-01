@@ -7,7 +7,6 @@
 
 	<div class="container">
 		<?php $cart_contents = $this->cart->contents();
-        $excludes = array(); # This is used to exludes product from recently viewed
 		if (!empty($cart_contents)) :  ?>
 			<header class="page-header">
 				<h1 style="color:#00000082;">Cart Overview</h1>
@@ -34,7 +33,6 @@
 
 						foreach ($this->cart->contents() as $product): ?>
 							<?php
-                            array_push($excludes, $product['id']);
 							$detail = $this->product->get_cart_details($product['id']);
 							$variation_detail = $this->product->get_variation_status($product['options']['variation_id']);
 							?>
