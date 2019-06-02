@@ -276,7 +276,7 @@
                 <p class="card-max-title">Hot Sales
                     <!--                    <a href="#" class="card-max-view-more">View more</a>-->
                 </p>
-                <p class="card-max-subtitle">Great items, Affordable Prices</p>
+                <p class="card-max-subtitle">Great items</p>
             </div>
             <div class="row">
                 <?php

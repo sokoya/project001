@@ -183,7 +183,7 @@
                                                  data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
                                                  style="max-width: 50px; max-height: 50px; margin-top: 50px; margin-right: auto; margin-left: auto;margin-bottom:40px;"
                                                  src="<?= base_url('assets/img/imageloader.gif'); ?>"
-                                                 alt="<?= $product->product_name; ?>"
+                                                 alt="Shop Online at Onitshamarket - <?= $product->product_name; ?>"
                                                  title="<?= $product->product_name; ?>">
                                         </div>
                                         <a class="product-link" title="<?= $product->product_name ?>"
