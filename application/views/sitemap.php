@@ -5,6 +5,11 @@
         <priority>1.0</priority>
         <changefreq>hourly</changefreq>
     </url>
+    <url>
+        <loc>https://onitshamarket.com</loc>
+        <priority>1.0</priority>
+        <changefreq>hourly</changefreq>
+    </url>
     <?php foreach($products as $product ){  ?>
         <url>
             <loc><?= base_url(urlify($product->product_name, $product->id)); ?></loc>
