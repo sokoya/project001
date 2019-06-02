@@ -44,7 +44,7 @@
 													type="radio" title="Subscribe"> I would like to
 							unsubscribe from all the
 							offers</div>
-					<input type="hidden" name="user" value="<?= base64_encode($profile->id); ?>">
+					<input type="hidden" name="user" value="<?= $profile->id; ?>">
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-primary btn-md btn-block" style="margin: 10px;">Save
                             Preference

@@ -81,10 +81,6 @@
 <?php $this->load->view('landing/resources/head_base'); ?>
 </head>
 <body style="background-color: #ffffff;">
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TB9XP2T"
-                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 <div class="global-wrapper clearfix" id="global-wrapper" style="background: #fff;padding-top:20px;">
     <div class="container">
         <div class="row">
@@ -93,7 +89,7 @@
                 <p class="text-center">
                     <a href="<?= base_url(); ?>" title="Go to homepage"><img
                                 src="<?= base_url('assets/img/onitshamarket-logo.png') ?>" width="50%"
-                                alt="market logo Image"></a>
+                                alt="Online shopping at onitshamarket"></a>
                 </p>
                 <h3 class="widget-title text-center text-bold text-sm">
                     Forgot Password
@@ -130,11 +126,11 @@
                 <div class="row">
                     <div class="col-md-12 col-xs-12 col-sm-12 text-center" style="display: inline-flex;margin-top:10px;">
                         <img src="<?= base_url('assets/img/payment/ssl-logo.png'); ?>" class="img-responsive" style="margin-left:auto;"
-                             alt="Image Alternative text" title="Pay with Mastercard"/>
+                             alt="SSL logo" title="Pay with Mastercard"/>
                         <img src="<?= base_url('assets/img/payment/interswitch.png'); ?>" class="img-responsive"
-                             alt="Image Alternative text" title="Pay with Mastercard"/>
+                             alt="Payment with Interswitch logo" title="Pay with Interswitch"/>
                         <img src="<?= base_url('assets/img/payment/allcards.jpg'); ?>" class="img-responsive" style="margin-right:auto;"
-                             alt="Image Alternative text" title="Pay with Mastercard"/>
+                             alt="Payment with mastercard" title="Payment with mastercard"/>
                     </div>
                 </div>
                 <div class="row">

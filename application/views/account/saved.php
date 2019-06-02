@@ -53,7 +53,8 @@
                                                             class="fa fa-trash market-trash"></i></a>
                                             </div>
                                             <div class="col-md-9 col-xs-9">
-                                                <img data-src="<?= PRODUCTS_IMAGE_PATH . $item->image_name; ?>"
+                                                <img alt="Onitshamarket <?= $item->product_name; ?>"
+                                                        data-src="<?= PRODUCTS_IMAGE_PATH . $item->image_name; ?>"
                                                      src="<?= base_url('assets/landing/img/load.gif'); ?>"
                                                      class="market-left-l lazy"
                                                      title="<?= $item->product_name; ?>"
