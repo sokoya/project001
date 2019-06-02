@@ -91,5 +91,5 @@ $db['default'] = array(
 	'save_queries' => TRUE
 );
 $db['default']['username'] = 'onitsham_centric';
-$db['default']['password'] = 'UE~MU[U2x4PI';
+$db['default']['password'] = 'UE~MU[U2x4PI0SJSK';
 $db['default']['database'] = 'onitsham_market';
