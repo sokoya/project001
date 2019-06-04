@@ -79,7 +79,7 @@
                         <tr>
                             <td align="center" style="padding: 10px 0 10px 0; display: block">
                                 <a href="<?= base_url(); ?>">
-                                    <img style="width: 40%;" src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>" alt="Onitsha market logo" width="150"
+                                    <img style="width: 40%;" src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>" alt="Onitsha market logo" width="110"
                                                                   height="44"/></a>
                             </td>
                         </tr>

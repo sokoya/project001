@@ -90,7 +90,7 @@
                     <?php foreach ($categories_name as $obj) : ?>
                         <li><a title="<?= $obj->description; ?>" href="<?= base_url('catalog/' . $obj->slug . '/'); ?>"><?= ucwords($obj->name); ?></a></li>
                     <?php endforeach; ?>
-                    <li class="active c-a-brc"><?= ucwords($product->product_name); ?></li>
+                    <li class="active c-a-brc"><?= character_limiter(ucwords($product->product_name), 30); ?></li>
                 </ol>
             </header>
             <div class="row">
