@@ -78,7 +78,8 @@
 
                         <tr>
                             <td align="center" style="padding: 10px 0 10px 0; display: block">
-                                <a href="<?= base_url(); ?>"><img style="width: 50%;" src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>" alt="Onitsha market logo" width="150"
+                                <a href="<?= base_url(); ?>">
+                                    <img style="width: 40%;" src="<?= base_url('assets/img/onitshamarket-logo.png'); ?>" alt="Onitsha market logo" width="150"
                                                                   height="44"/></a>
                             </td>
                         </tr>
@@ -173,8 +174,7 @@
 
                         <tr style="color: #153643; font-family: Arial, sans-serif; font-size: 12px;">
                             <td style="padding: 10px 10px 10px 10px; border: 1px solid #cccccc;" align="center">
-                                Schoolville Limited, 530A Aina Akingbala Street, omole phase 2. Ikeja, Lagos State, Ikeja, Lagos, 282828,
-                                Nigeria, https://www.onitshamarket.com
+                                <?= lang('company_name'); ?> https://www.onitshamarket.com
                             </td>
                         </tr>
 
