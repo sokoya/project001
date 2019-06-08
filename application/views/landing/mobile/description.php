@@ -127,7 +127,7 @@
         <div class="container"><p class="text-break">Description</p></div>
         <div class="custom-card">
             <div class="container">
-                <p class="body_text"><?= $product_description->product_description; ?></p>
+                <p class="body_text"><?= html_entity_decode($product_description->product_description); ?></p>
             </div>
         </div>
         <div class="container"><p class="text-break">Specifications</p></div>
