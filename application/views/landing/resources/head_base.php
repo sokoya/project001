@@ -15,7 +15,7 @@
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
     <meta name="keywords" content="<?= !empty($keywords) ? ucwords($keywords) : lang('keywords'); ?>"/>
-    <meta name="description" content="<?= !empty($description) ? $description : lang('description'); ?>">
+
     <?php if ($page == 'order_completed') : ?>
         <meta name="robots" content="noindex,nofollow">
     <?php else : ?>
@@ -59,11 +59,16 @@
         <meta name="twitter:domain" content="<?= base_url(); ?>"/>
         <meta name="twitter:site" content="Onitshamarket"/>
         <meta name="twitter:creator" content=""/>
+
+    <?php endif; ?>
+    <?php if ($page == 'product') : ?>
         <meta name="description" content="<?= !empty($product->product_description) ?
             $product->product_description
             : isset($description) ? $description : lang('description'); ?>">
-
+    <?php else : ?>
+        <meta name="description" content="<?= !empty($description) ? $description : lang('description'); ?>">
     <?php endif; ?>
+
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/assets/favicon/apple-icon-72x72.png">
