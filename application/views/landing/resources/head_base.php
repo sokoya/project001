@@ -59,6 +59,9 @@
         <meta name="twitter:domain" content="<?= base_url(); ?>"/>
         <meta name="twitter:site" content="Onitshamarket"/>
         <meta name="twitter:creator" content=""/>
+        <meta name="description" content="<?= !empty($product->product_description) ?
+            $product->product_description
+            : isset($description) ? $description : lang('description'); ?>">
 
     <?php endif; ?>
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon/apple-icon-57x57.png">
