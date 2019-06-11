@@ -517,7 +517,7 @@
                                 <h3 class="product-overview-title pr-over">Product Warranty</h3>
                                 <div class="product-overview-desc">
                                     <p style="text-wrap: normal">
-                                        <?= $product->product_warranty; ?>
+                                        <?= html_entity_decode($product->product_warranty); ?>
                                     </p>
                                 </div>
                             <?php endif; ?>
@@ -525,7 +525,7 @@
                                 <h3 class="product-overview-title pr-over">Warranty Address</h3>
                                 <div class="product-overview-desc">
                                     <p style="text-wrap: normal">
-                                        <?= $product->warranty_address; ?>
+                                        <?= html_entity_decode($product->warranty_address); ?>
                                     </p>
                                 </div>
                             <?php endif; ?>
@@ -535,7 +535,7 @@
 
                         <?php if (!empty($product->product_description)): ?>
                             <h3 class="product-overview-title pr-over">Product Description</h3>
-                            <div class="product-overview-desc">
+                            <div class="product-overview-desc prod_description">
                                 <p style="text-wrap: normal">
                                     <?= html_entity_decode($product->product_description); ?>
                                 </p>
