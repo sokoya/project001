@@ -99,7 +99,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-6">
                                     <div class="form-group">
                                         <input class="form-control" type="text" name="signupfirstname"
-                                               value="<?= set_value('signupfirstname', '');?>>"
+                                               value="<?= set_value('signupfirstname', '');?>"
                                                placeholder="First name" autofocus required/>
                                     </div>
                                 </div>

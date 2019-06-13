@@ -33,7 +33,7 @@ class Create extends MY_Controller
         $this->form_validation->set_rules('signuppassword', 'Password', 'trim|required|xss_clean|min_length[8]|max_length[30]');
         $this->form_validation->set_rules('signuprepeatpassword', 'Password', 'trim|required|xss_clean|min_length[8]|max_length[30]|matches[signuppassword]');
         if ($this->form_validation->run() === FALSE) {
-            $this->session->set_flashdata('error_msg', '<strong>There was an error with the account creation. Please fix the following</strong> <br />' . validation_errors());
+            $this->session->set_flashdata('error_msg', validation_errors());
             $this->load->view('landing/create', $page_data);
             return;
         } else {
