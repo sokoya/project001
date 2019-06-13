@@ -51,17 +51,19 @@
     <div class="container view_constraint text-center">
         <div class="row row_sp_con ">
             <div class="col-md-4 col-lg-5 col-sm-6 col-xs-12">
-                <img src="<?= base_url('assets/img/contact.png'); ?>" style="max-width:200px;"/>
-                <hr align="center" width="80%"/>
+                <p class="text-center">
+                    <img src="<?= base_url('assets/img/contact.png'); ?>" style="max-width:200px;"/>
+                </p>
+                <hr align="center"/>
                 <h3 style="background: #fff;margin-top:-27px;width:fit-content;font-size:14px;text-align: center;margin-left:auto;margin-right: auto;font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
                     Head Office
                 </h3>
                 <p class="p_sp_con">
                     <i class="fas fa-home"></i> Address: #176 Akwa Road, Opposite Conoil, Inland Town, Onitsha, Anambra State.
-                    <i class="fas fa-phone"></i> Tel: +234 813 680 3006<br>
-                    <i class="fas fa-envelope-square"></i> onitsha.anambra@onitshamarket.com<br>
-                    <i class="fa fa-map-marker"></i> Monday to Saturday<br>
-                    <i class="fa fa-clock-o"></i> Hours: 08:00am to 05:00pm
+                    <i class="fas fa-phone"></i> Tel: +234 813 680 3006<br />
+                    <i class="fas fa-envelope-square"></i> onitsha.anambra@onitshamarket.com<br />
+                    <i class="fa fa-map-marker"></i> Monday to Saturday<br />
+                    <i class="fas fa-clock"></i> Hours: 08:00am to 05:00pm
                 </p>
 
             </div>

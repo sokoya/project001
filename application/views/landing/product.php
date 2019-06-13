@@ -501,7 +501,7 @@
                                     </p>
                                 </div>
                             <?php endif; ?>
-                            <?php if (!empty($product->warranty_type)): ?>
+                            <?php if (!empty($product->warranty_type) || (strtolower(trim($product->warranty_type)) != 'n/a' )): ?>
                                 <h3 class="product-overview-title pr-over">Warranty Type</h3>
                                 <div class="product-overview-desc">
                                     <p style="text-wrap: normal">
