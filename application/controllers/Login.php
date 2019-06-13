@@ -30,7 +30,7 @@ class Login extends MY_Controller{
         }else {
             // $this->output->enable_profiler(TRUE);
             $this->form_validation->set_rules('loginemail', 'Email Address','trim|required|xss_clean|valid_email');
-            $this->form_validation->set_rules('loginpassword', 'Password','trim|required|xss_clean|min_length[6]|max_length[15]');
+            $this->form_validation->set_rules('loginpassword', 'Password','trim|required|xss_clean|min_length[6]|max_length[30]');
             $output_array['status'] = 'error';
             if ($this->form_validation->run() == FALSE) {
                 $this->session->set_flashdata('error_msg','There was an error with the login information. Please fix the following <br />' . validation_errors() );

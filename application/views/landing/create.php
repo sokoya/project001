@@ -94,31 +94,31 @@
                         <?php $this->load->view('landing/msg_view'); ?>
                         <div class="ipad_pad"></div>
                         <div class="market-board login-box">
-                            <?= form_open('create/process', 'autocorrect="off", id="register-form"'); ?>
+                            <?= form_open('', 'autocorrect="off", id="register-form"'); ?>
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-xs-6">
                                     <div class="form-group">
                                         <input class="form-control" type="text" name="signupfirstname"
-                                               value="<?php if (isset($_POST['signupfirstname'])) echo $_POST['signupfirstname']; ?>"
+                                               value="<?= set_value('signupfirstname', '');?>>"
                                                placeholder="First name" autofocus required/>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6 col-xs-6">
                                     <div class="form-group">
                                         <input class="form-control" type="text" name="signuplastname"
-                                               value="<?php if (isset($_POST['signuplastname'])) echo $_POST['signuplastname']; ?>"
+                                               value="<?= set_value('signuplastname', ''); ?>"
                                                placeholder="Last Name" required/>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <input class="form-control" type="text" name="phone"
-                                       value="<?php if (isset($_POST['phone'])) echo $_POST['phone']; ?>"
+                                       value="<?= set_value('phone', '');?>"
                                        placeholder="08022334455" required/>
                             </div>
                             <div class="form-group">
                                 <input class="form-control" type="text" id="signup-email" name="signupemail"
-                                       value="<?php if (isset($_POST['signupemail'])) echo $_POST['signupemail']; ?>"
+                                       value="<?= set_value('signupemail', '')?>"
                                        placeholder="Email Address" required/>
                             </div>
                             <div class="row">

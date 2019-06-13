@@ -25,7 +25,65 @@ class Create extends MY_Controller
 	{
 		$page_data['title'] = "Create Account";
 		$page_data['page'] = 'create';
-		$this->load->view('landing/create', $page_data);
+        // $this->output->enable_profiler(TRUE);
+        $this->form_validation->set_rules('signupfirstname', 'First Name', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('signuplastname', 'Last Name', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('signupemail', 'Email Address', 'trim|required|xss_clean|valid_email|is_unique[users.email]', array('is_unique' => 'Sorry! This %s has already been registered!'));
+        // $this->form_validation->set_message('is_unique', 'The %s is already taken');
+        $this->form_validation->set_rules('signuppassword', 'Password', 'trim|required|xss_clean|min_length[8]|max_length[30]');
+        $this->form_validation->set_rules('signuprepeatpassword', 'Password', 'trim|required|xss_clean|min_length[8]|max_length[30]|matches[signuppassword]');
+        if ($this->form_validation->run() === FALSE) {
+            $this->session->set_flashdata('error_msg', '<strong>There was an error with the account creation. Please fix the following</strong> <br />' . validation_errors());
+            $this->load->view('landing/create', $page_data);
+            return;
+        } else {
+            $salt = salt(50);
+            $data = array(
+                'first_name' => $this->input->post('signupfirstname', true),
+                'last_name' => $this->input->post('signuplastname', true),
+                'email' => $this->input->post('signupemail', true),
+                'phone' => $this->input->post('phone', true),
+                'salt' => $salt,
+                'password' => shaPassword($this->input->post('signuppassword'), $salt),
+                'ip' => $_SERVER['REMOTE_ADDR'],
+                'date_registered' => get_now(),
+                'last_login' => get_now(),
+                'is_seller' => 'false'
+            );
+
+            $user_id = $this->user->create_account($data, 'users');
+            if (!is_numeric($user_id)) {
+                $this->session->set_flashdata('error_msg', 'Sorry! There was an error creating your account.' . $user_id);
+                redirect($_SERVER['HTTP_REFERER']);
+            } else {
+                $this->load->model('email_model', 'email');
+                $email_array = array(
+                    'email' => $data['email'],
+                    'recipent' => 'Dear ' . $data['first_name'] . ' ' . $data['last_name']
+                );
+                try {
+                    $this->email->welcome_user($email_array);
+                } catch (Exception $e) {
+                    $error_action = array(
+                        'error_action' => 'Create controller - Welcome mail',
+                        'error_message' => $e->getMessage()
+                    );
+                    $this->user->create_account($error_action, 'error_logs');
+                }
+                $data = array(
+                    'email' => $this->input->post('signupemail'),
+                    'password' => $this->input->post('signuppassword')
+                );
+                $user = $this->user->login($data);
+                $session_data = array('logged_in' => true, 'logged_id' => $user->id, 'is_seller' => 'false', 'email' => $this->input->post('email'));
+                $this->session->set_userdata($session_data);
+                unset($session_data);
+                unset($data);
+                unset($error_action);
+                $this->session->set_flashdata('success_msg', 'Account created and logged in successfully!');
+                redirect(base_url());
+            }
+        }
 	}
 
 	/*
@@ -34,69 +92,7 @@ class Create extends MY_Controller
      * */
 	function process()
 	{
-		// $this->output->enable_profiler(TRUE);
-		$this->form_validation->set_rules('signupfirstname', 'First Name', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('signuplastname', 'Last Name', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('signupemail', 'Email Address', 'trim|required|xss_clean|valid_email|is_unique[users.email]', array('is_unique' => 'Sorry! This %s has already been registered!'));
-		// $this->form_validation->set_message('is_unique', 'The %s is already taken');
-		$this->form_validation->set_rules('signuppassword', 'Password', 'trim|required|xss_clean|min_length[8]|max_length[15]');
-		$this->form_validation->set_rules('signuprepeatpassword', 'Password', 'trim|required|xss_clean|min_length[8]|max_length[15]|matches[signuppassword]');
-		if ($this->form_validation->run() === FALSE) {
-			$this->session->set_flashdata('error_msg', '<strong>There was an error with the account creation. Please fix the following</strong> <br />' . validation_errors());
-			$page_data['title'] = "Create Account";
-			$page_data['page'] = 'create';
-			$this->load->view('landing/create', $page_data);
-		} else {
-			$salt = salt(50);
-			$data = array(
-				'first_name' => $this->input->post('signupfirstname', true),
-				'last_name' => $this->input->post('signuplastname', true),
-				'email' => $this->input->post('signupemail', true),
-				'phone' => $this->input->post('phone', true),
-				'salt' => $salt,
-				'password' => shaPassword($this->input->post('signuppassword'), $salt),
-				'ip' => $_SERVER['REMOTE_ADDR'],
-				'date_registered' => get_now(),
-				'last_login' => get_now(),
-				'is_seller' => 'false'
-			);
 
-
-			$user_id = $this->user->create_account($data, 'users');
-			if (!is_numeric($user_id)) {
-				$this->session->set_flashdata('error_msg', 'Sorry! There was an error creating your account.' . $user_id);
-				redirect($_SERVER['HTTP_REFERER']);
-			} else {
-				$this->load->model('email_model', 'email');
-				$email_array = array(
-					'email' => $data['email'],
-					'recipent' => 'Dear ' . $data['first_name'] . ' ' . $data['last_name']
-				);
-
-				try {
-					$this->email->welcome_user($email_array);
-				} catch (Exception $e) {
-					$error_action = array(
-						'error_action' => 'Create controller - Welcome mail',
-						'error_message' => $e->getMessage()
-					);
-					$this->user->create_account($error_action, 'error_logs');
-				}
-				$data = array(
-					'email' => $this->input->post('signupemail'),
-					'password' => $this->input->post('signuppassword')
-				);
-				$user = $this->user->login($data);
-				$session_data = array('logged_in' => true, 'logged_id' => $user->id, 'is_seller' => 'false', 'email' => $this->input->post('email'));
-				$this->session->set_userdata($session_data);
-				unset($session_data);
-				unset($data);
-				unset($error_action);
-				$this->session->set_flashdata('success_msg', 'Account created and logged in successfully!');
-				// To ursher them to where they are coming from...
-				redirect(base_url());
-			}
-		}
 	}
 }
 

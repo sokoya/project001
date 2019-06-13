@@ -86,7 +86,7 @@
                                     Email *
                                 </div>
                                 <div class="col-xs-12">
-                                    <input type="email" id="email" class="form-control" placeholder="example@onitshamarket.com" required>
+                                    <input type="email" id="email" class="form-control" value="<?= ($this->session->userdata('logged_in')) ? $this->session->userdata('email') : '';?>" placeholder="example@onitshamarket.com" required>
                                 </div>
                             </div>
                         </div>
