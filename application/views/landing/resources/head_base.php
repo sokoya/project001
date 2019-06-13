@@ -59,13 +59,17 @@
         <meta name="twitter:domain" content="<?= base_url(); ?>"/>
         <meta name="twitter:site" content="Onitshamarket"/>
         <meta name="twitter:creator" content=""/>
+        <meta name="twitter:image" content="<?= base_url('assets/img/notice.jpg')?>" />
 
     <?php endif; ?>
     <?php if ($page == 'product') : ?>
         <meta name="description" content="<?= !empty($product->product_description) ?
             $product->product_description
             : isset($description) ? $description : lang('description'); ?>">
+        <meta property="og:image"
+              content="<?= ($featured_image->image_name) ? PRODUCTS_IMAGE_PATH . $featured_image->image_name : ''; ?>"/>
     <?php else : ?>
+        <meta property="og:image" content="<?= base_url('assets/img/notice.jpg')?>" />
         <meta name="description" content="<?= !empty($description) ? $description : lang('description'); ?>">
     <?php endif; ?>
 
@@ -78,10 +82,6 @@
     <link rel="apple-touch-icon" sizes="144x144" href="/assets/favicon/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicon/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-icon-180x180.png">
-<!--    <link rel="icon" type="image/png" sizes="192x192"  href="/assets/favicon/android-icon-192x192.png">-->
-<!--    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">-->
-<!--    <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">-->
-<!--    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">-->
     <link rel="manifest" href="/manifest.json">
     <meta name="msapplication-TileColor" content="#2a9651">
 <!--    <meta name="msapplication-TileImage" content="/assets/favicon/ms-icon-144x144.png">-->
