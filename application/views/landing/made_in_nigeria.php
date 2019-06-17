@@ -276,7 +276,8 @@
         let base_url = "<?= base_url(); ?>";
     }
     let current_url = "<?= current_url()?>";
-    catalog_url = "<?= base_url('catalog/' . $category_detail->slug . '/') ?>";
+
+    catalog_url = "<?= base_url('made-in-nigeria/' .$this->uri->segment(2)) ?>";
 
 </script>
 <script src="<?= $this->user->auto_version('assets/js/quick-view.js'); ?>"></script>
