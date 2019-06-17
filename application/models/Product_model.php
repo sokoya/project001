@@ -183,7 +183,7 @@ Class Product_model extends CI_Model{
     {
         // Select category
         $GLOBALS['array_variable'] = array();
-        $select_category = "SELECT id, slug FROM categories WHERE id = {$id}";
+        $select_category = "SELECT id, slug FROM categories WHERE id = '{$id}'";
         $result = $this->db->query($select_category);
         if ($result->num_rows() >= 1) {
             $pid = $result->row()->id;
