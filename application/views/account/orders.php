@@ -69,7 +69,7 @@
                     </div>
                     <?php elseif ($this->input->get('time')) : ?>
                         <div class="market-dashboard-card">
-                            <p class="market-dashboard-welcome-text">Oops! No result found found. <a
+                            <p class="market-dashboard-welcome-text">Oops! No result found. <a
                                         style="text-decoration: none; color: green;"
                                         href="<?= base_url('account/orders'); ?>">Go Back</a></p>
                         </div>
@@ -108,7 +108,7 @@
         } else {
             window.location = "<?= base_url('account/orders')?>";
         }
-    })
+    });
     $('.dropdown').on('click', function () {
         setTimeout(function () {
             $('.dropdown-backdrop').remove();

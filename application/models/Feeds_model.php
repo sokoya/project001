@@ -125,13 +125,13 @@ Class Feeds_model extends CI_Model{
     }
 
     /*
-     * Fetch all the products relating to made in NIgeria
+     * Fetch all the products relating to made in Nigeria
      * */
     function made_in_nigeria_products( $queries = '' , $gets = array() ){
         // $this->db->cache_on();
         // Lets confirm the slug is valid
         $this->load->model('product_model');
-        if( isset($queries['str']) && $this->product_model->check_slug_availability( $queries['str'] ) ) {
+        if( isset($queries['str']) && !empty($queries['str']) ) {
             $select_query = "SELECT p.id, p.product_name, p.brand_name, p.seller_id, p.from_overseas, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left, g.image_name,s.store_name
             FROM products p";
             if( isset($gets['price_min']) && !empty($gets['price_min']) && isset($gets['price_max']) && !empty($gets['price_max']) ){
@@ -149,9 +149,8 @@ Class Feeds_model extends CI_Model{
             $select_query .= " JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )                
             JOIN sellers AS s ON p.seller_id = s.uid ";
 
-            $array = $this->product_model->slug($queries['str']);
-            $select_query .= " WHERE p.category_id IN ('".implode("','",$array)."')";
-
+            $select_query .= " WHERE p.nigeria_state = '{$queries['str']}'";
+            
             if( isset($gets['q']) && !empty($gets['q']) ) {
                 $q = xss_clean( $gets['q']);
                 $q = preg_replace("/[^a-z]/", ' ', $q);
@@ -180,18 +179,6 @@ Class Feeds_model extends CI_Model{
                     }
                     unset($gets['main_colour']);
                 }
-                // Best rating
-//                if( isset($gets['order_by']) && !empty($gets['order_by']) ){
-//                    $order_by = xss_clean($gets['order_by']);
-//                    switch ($order_by) {
-//                        case 'best_rating':
-//                            $select_query .= " JOIN "
-//                            break;
-//
-//                    }
-//                    unset($gets['sort']);
-//                }
-                // unset the page key
                 unset( $gets['page'] );
                 // Here comes the features
                 // check for get count again
@@ -228,9 +215,14 @@ Class Feeds_model extends CI_Model{
             }else{
                 $select_query .=" AND p.nigeria = 1 AND p.product_status = 'approved' GROUP BY p.id ORDER BY p.id DESC";
             }
-            $products_query = $this->db->query( $select_query )->result();
-            return $products_query;
+            $products_query = $this->db->query( $select_query );
+            if( $products_query ){
+                return $products_query->result();
+            }else{
+                return '';
+            }
         }else{
+
             $select_query = "SELECT p.id, p.product_name, p.brand_name, p.seller_id, p.from_overseas, v.sale_price, v.discount_price, v.start_date,v.end_date, SUM(v.quantity) item_left, g.image_name,s.store_name
         FROM products p";
             if( isset($gets['price_min']) && !empty($gets['price_min']) && isset($gets['price_max']) && !empty($gets['price_max']) ){
@@ -278,17 +270,6 @@ Class Feeds_model extends CI_Model{
                     }
                     unset($gets['main_colour']);
                 }
-                // Best rating
-//                if( isset($gets['order_by']) && !empty($gets['order_by']) ){
-//                    $order_by = xss_clean($gets['order_by']);
-//                    switch ($order_by) {
-//                        case 'best_rating':
-//                            $select_query .= " JOIN "
-//                            break;
-//
-//                    }
-//                    unset($gets['sort']);
-//                }
                 // unset the page key
                 unset( $gets['page'] );
                 // Here comes the features
@@ -328,6 +309,63 @@ Class Feeds_model extends CI_Model{
             }
             $products_query = $this->db->query( $select_query )->result();
             return $products_query;
+        }
+    }
+
+
+    function get_features($str){
+        $select_query = "SELECT  json_unquote(json_extract(`attributes`, '$')) AS feature_value FROM products WHERE nigeria_state = '{$str}' AND product_status = 'approved' ";
+        $query = $this->db->query( $select_query );
+        if( $query ) {
+            return $query->result_array();
+        }else{
+            return '';
+        }
+    }
+
+
+    function get_brands( $str = '')
+    {
+        $select_query = "SELECT COUNT(*) AS `brand_count`, `brand_name` FROM `products` p  WHERE nigeria_state = '{$str}' AND product_status = 'approved' GROUP BY `brand_name` ORDER BY `brand_name`";
+        $query = $this->db->query( $select_query );
+        if ($query) {
+            return $query->result();
+        } else {
+            return '';
+        }
+    }
+
+
+    function get_colours( $str){
+        $select_query = "SELECT DISTINCT(COUNT(*)) AS `colour_count`, `main_colour` AS `colour_name` FROM `products` p WHERE nigeria_state = '{$str}' AND product_status = 'approved' GROUP BY `colour_name` ORDER BY `colour_name`  ";
+        $query = $this->db->query( $select_query );
+        if( $query ){
+            return $query->result();
+        }else{
+            return '';
+        }
+    }
+
+    function get_categories( $str = ''){
+        // Get all the i
+        $array = $this->slug($str);
+        $query = $this->db->query("SELECT name, slug FROM categories WHERE id IN ('". implode("','",$array). "') LIMIT 10 ");
+        if( $query->num_rows() >= 1 ) {
+            return $query->result();
+        }else{
+            // Select all categories then
+            $query = $this->db->query("SELECT name, slug FROM categories LIMIT 10");
+            return $query->result();
+        }
+    }
+
+    function single_state_detail( $str ){
+        $query = "SELECT c.description, c.name, c.title, c.slug, p.category_id FROM products p LEFT JOIN categories c ON(c.id = p.category_id) WHERE nigeria_state = ? ORDER BY RAND() LIMIT 1";
+        $result = $this->db->query( $query , array($str));
+        if( $result ){
+            return $result->row();
+        }else{
+            return $result->row();
         }
     }
 

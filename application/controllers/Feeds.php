@@ -106,7 +106,7 @@ class Feeds extends MY_Controller
                 $page_data['max'] = max(array_map(function($array) { return $array->sale_price; }, $array));
             }
         }else{
-            $features = $this->product->get_features($str);
+            $features = $this->feeds->get_features($str);
             $output_array = array();
             if ($features) {
                 foreach ($features as $feature => $values) {
@@ -157,9 +157,8 @@ class Feeds extends MY_Controller
             $page_data['brands'] = $this->product->get_brands($str, $q);
             $page_data['price_min'] = cleanit($this->input->get('price_min',true));
             $page_data['price_max'] = cleanit($this->input->get('price_max',true));
-            $page_data['colours'] = $this->product->get_colours($str, $q);
-            $page_data['sub_categories'] = $this->product->get_categories($str, $q);
-            $page_data['category_detail'] = $this->product->category_details($str);
+            $page_data['colours'] = $this->feeds->get_colours($str, $q);
+            $page_data['category_detail'] = $this->feeds->single_state_detail($str);
             if( $page_data['category_detail'] ) {
                 $page_data['description'] = $page_data['category_detail']->description;
                 $page_data['title'] = $page_data['category_detail']->title;
@@ -168,6 +167,7 @@ class Feeds extends MY_Controller
                 $page_data['title'] = 'Category can not be found';
             }
             $page_data['page'] = 'made_in_nigeria';
+            $page_data['state_name'] = str_replace('-', ' ', $str );
             $page_data['min'] = $page_data['max'] = '';
             if( $page_data['products'] ){
                 $array = (array) $catalog_products;

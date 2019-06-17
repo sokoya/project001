@@ -115,12 +115,12 @@
                     <ol class="breadcrumb page-breadcrumb">
                         <li><a href="<?= base_url(); ?>">Home</a>
                         </li>
-                        <li class="active"><?= ucwords($category_detail->name); ?>
+                        <li class="active"><?= ucwords($state_name); ?>
                         </li>
                     </ol>
                     <div class="category-selections clearfix">
                         <a class="btn btn-custom-primary"
-                           href="<?= base_url('catalog/' . urlify($category_detail->name) . '/?order_by=best_rating'); ?>">Best
+                           href="<?= base_url('catalog/' . urlify($state_name) . '/?order_by=best_rating'); ?>">Best
                             Rating</a>
                         <a class="btn btn-custom-primary" title="Filter by best seller" href="<?= current_url(); ?>">Best
                             Seller</a>
@@ -128,21 +128,21 @@
                 </header>
             </div>
             <div class="cat-notify">
-                <p class="n-head"><?= $category_detail->name; ?></p>
+                <p class="n-head">Products From <?= ucwords( $state_name); ?></p>
                 <p class="n-body"><strong><?= $total_count . ' results'; ?></strong></p>
             </div>
             <?php else : ?>
             <div class="row">
                 <div class="gap"></div>
                 <div class="cat-notify">
-                    <p class="n-head">Proudly Made In Nigeria</p>
+                    <p class="n-head">Proudly Made In Nigeria Products</p>
                     <p class="n-body"><strong><?= $total_count . ' results'; ?></strong></p>
                 </div>
             </div>
             <?php endif; ?>
             <div class="row">
                 <div class="col-md-3">
-                    <?php $this->load->view('landing/resources/category_filter'); ?>
+                    <?php $this->load->view('landing/resources/made_in_nigeria_filter'); ?>
                 </div>
                 <div class="col-md-9">
                     <div id="processing"

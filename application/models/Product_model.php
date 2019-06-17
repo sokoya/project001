@@ -155,6 +155,7 @@ Class Product_model extends CI_Model{
             return $GLOBALS['array_var'];
         }
     }
+
     /*
     *Called by slug
     *To get the children id
@@ -225,6 +226,18 @@ Class Product_model extends CI_Model{
     function check_slug_availability( $slug ){
         $this->db->where( 'slug', $slug);
         if( $this->db->get('categories')->num_rows() ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /*
+     * Check the nigeria state if its available
+     * */
+    function state_slug_availability( $slug ){
+        $this->db->where( 'nigeria_state', $slug);
+        if( $this->db->get('products')->num_rows() ){
             return true;
         }else{
             return false;

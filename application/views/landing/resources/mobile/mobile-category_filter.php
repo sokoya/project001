@@ -19,9 +19,7 @@
         <div class="panel panel-default">
             <div
                 class="panel-heading filter-head">Brand
-                <span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel"
-                                                                         aria-hidden="true"
-                                                                         data-target="brand_static_vl"></i></span>
+                <span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel" aria-hidden="true" data-target="brand_static_vl"></i></span>
             </div>
             <div class="panel-body" id="brand_static_vl">
                 <?php foreach ($brands as $brand) : ?>
@@ -69,11 +67,8 @@
         <?php $x = 1;
         foreach ($features as $feature => $feature_value) : ?>
             <div class="panel panel-default">
-                <div
-                    class="panel-heading filter-head"><?= preg_replace("/[^A-Za-z 0-9]/", ' ', $feature); ?>
-                    <span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel"
-                                                                             aria-hidden="true"
-                                                                             data-target="<?= $feature ?>_vl"></i></span>
+                <div class="panel-heading filter-head"><?= preg_replace("/[^A-Za-z 0-9]/", ' ', $feature); ?>
+                    <span style="color: #4c4c4c !important; float: right"><i class="fa fa-minus close-panel" aria-hidden="true" data-target="<?= $feature ?>_vl"></i></span>
                 </div>
                 <div class="panel-body" id="<?= $feature ?>_vl">
                     <?php foreach ($feature_value as $key => $value) : ?>

@@ -71,3 +71,5 @@ $lang['facebook_link'] = "https://www.facebook.com/onitshamarketing";
 $lang['twitter_link'] = "https://www.twitter.com/onitshamarket";
 $lang['instagram_link'] = "https://www.instagram.com/onitshamarket.com_/";
 $lang['youtube_link'] = "https://www.youtube.com/channel/UCUZK-_Jh3OHMvIzkLwQdKoA";
+
+$lang['states'] ='ABUJA FCT,ABIA,ADAMAWA,AKWA IBOM,ANAMBRA,BAUCHI,BAYELSA,BENUE,BORNO,CROSS RIVER,DELTA,EBONYI,EDO,EKITI,ENUGU,GOMBE,IMO,JIGAWA,KADUNA,KANO,KATSINA,KEBBI,KOGI,KWARA,LAGOS,NASSARAWA,NIGER,OGUN,ONDO,OSUN,OYO,PLATEAU,RIVERS,SOKOTO,TARABA,YOBE,ZAMFARA';
