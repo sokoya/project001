@@ -152,3 +152,5 @@
     <!--            });-->
     <!--        });-->
     <!--    </script>-->
+    <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+    <div class="elfsight-app-109847df-ce77-42ee-bac3-9c20d6cfee42"></div>
