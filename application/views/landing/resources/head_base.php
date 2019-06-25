@@ -62,13 +62,8 @@
         <meta name="twitter:image" content="<?= base_url('assets/img/notice.jpg')?>" />
 
     <?php endif; ?>
-    <?php if ($page == 'product') : ?>
-        <meta name="description" content="<?= !empty($product->product_description) ?
-            $product->product_description
-            : isset($description) ? $description : lang('description'); ?>">
-        <meta property="og:image"
-              content="<?= ($featured_image->image_name) ? PRODUCTS_IMAGE_PATH . $featured_image->image_name : ''; ?>"/>
-    <?php else : ?>
+
+    <?php if ($page != 'product') : ?>
         <meta property="og:image" content="<?= base_url('assets/img/notice.jpg')?>" />
         <meta name="description" content="<?= !empty($description) ? $description : lang('description'); ?>">
     <?php endif; ?>

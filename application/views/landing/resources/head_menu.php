@@ -66,10 +66,13 @@ $this->db->cache_off();
             <div style="flex: 1" class="col-md-6 col-lg-6 col-sm-5 col-xs-4 nav-form">
                 <form method="get" action="<?= base_url('search') ?>"
                       class="navbar-form navbar-main-search form-bar" role="search">
+                    <?php
+                        $q = $this->input->get('q', true);
+                    ?>
                     <div class="form-group">
                         <input class="form-control site-search form-search" style="padding-left: 0" required name="q"
-                               autocomplete="off"
                                type="text"
+                               value="<?= isset($q) ? cleanit($q) : ''; ?>"
                                placeholder="Search for products, brands and categories..."/>
                     </div>
                     <div class="src-cover">
