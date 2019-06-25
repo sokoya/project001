@@ -36,6 +36,7 @@ class Seller extends MY_Controller {
         if ( !$page_data['products']) {
             redirect('errors/_404');
         }else{
+
             $page_data['seller_detail'] = $this->feeds->get_seller_statistics( $seller_id );
             $seller_rate = $this->feeds->get_seller_rate( $seller_id );
             $page_data['total_rate'] = array_sum(array_column($seller_rate, 'total_rate'));
