@@ -12,6 +12,19 @@
     $('#close-banner').on('click', function () {
         $('.ad-banner').remove();
     });
+    window.onscroll = function() {myFunction()};
+    var header = document.getElementById("header-f");
+
+    var sticky = header.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    }
+
 </script>
 <?php if (!in_array($page, array('login', 'create', 'reset_password', 'terms', 'privacy', 'contact', 'agreement', 'contact'))) : ?>
     <script src="<?= base_url('assets/js/owl.carousel.min.js'); ?>"></script>

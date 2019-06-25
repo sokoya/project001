@@ -51,7 +51,8 @@ $this->db->cache_off();
 //    $categories = $this->memcached_library->get($category_cache);
 //}
 ?>
-<nav class="navbar navbar-default navbar-main-white navbar-pad-top navbar-first yamm" style="padding-bottom: 20px">
+<nav class="navbar navbar-default navbar-main-white navbar-pad-top navbar-first yamm" id="header-f" style="padding-bottom: 20px">
+<!--<nav class="navbar navbar-default navbar-main-white navbar-fixed-bottom navbar-pad-top navbar-first yamm" style="padding-bottom: 20px">-->
     <div class="container-fluid">
         <div class="row" style="display: flex;">
             <div style="flex: 1" class="col-md-2 col-lg-2 col-sm-3 col-xs-4">

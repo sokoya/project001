@@ -252,7 +252,6 @@
         cursor: pointer
     }
 </style>
-
 </head>
 <body>
 <div class="global-wrapper clearfix" id="global-wrapper">
@@ -637,9 +636,6 @@
                 });
         });
     }
-
-
-
 </script>
 <script src="<?= $this->user->auto_version('assets/js/rating.js'); ?>"></script>
 </body>
