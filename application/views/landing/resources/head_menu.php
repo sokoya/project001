@@ -73,6 +73,7 @@ $this->db->cache_off();
                     <div class="form-group">
                         <input class="form-control site-search form-search" style="padding-left: 0" required name="q"
                                type="text"
+                               autocomplete="off"
                                value="<?= isset($q) ? cleanit($q) : ''; ?>"
                                placeholder="Search for products, brands and categories..."/>
                     </div>
