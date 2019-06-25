@@ -10,9 +10,7 @@ class Account extends MY_Controller {
         if( !$this->session->userdata('logged_in') ){
             $this->session->set_flashdata('error_msg', 'You need to login to access the page.');
             // Ursher the person to where he is coming from
-            $referred_from = $this->session->userdata('referred_from');
-            if( !empty($referred_from) ) redirect($referred_from);
-            redirect(base_url('login'));
+            redirect('login/');
         } 
     }
 

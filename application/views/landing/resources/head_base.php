@@ -136,6 +136,7 @@
     </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <script> let base_url = "<?= base_url(); ?>"</script>
+    <script async data-id="8903" src="https://cdn.widgetwhats.com/script.min.js"></script>
 
     <!--    <link rel="manifest" href="/manifest.json" />-->
     <!--    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>-->
