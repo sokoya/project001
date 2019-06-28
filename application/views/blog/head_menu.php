@@ -197,7 +197,8 @@ $categories = $this->db->query($category_cache)->result();
                                                                             <a href="<?= base_url('catalog/' . $sub->slug . '/'); ?>"
                                                                                title="<?= $sub->name; ?>"><?= $sub->name; ?></a>
                                                                         </li>
-                                                                    <?php endforeach; endif; ?>
+                                                                    <?php endforeach;
+                                                                    endif; ?>
                                                             </ul>
                                                         </div>
                                                     <?php endforeach; endif;
