@@ -28,4 +28,12 @@ class Blog extends MY_Controller {
         $page_data['title'] = "Onitshamarket Blog | How To | Product Reviews | Latest News On Tech, Fashion, Gadgets";
         $this->load->view('blog/posts', $page_data);
     }
+
+    public function post(){
+        $this->session->set_userdata('referred_from', current_url());
+        $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
+        $page_data['page'] = 'new_arrival';
+        $page_data['title'] = "Onitshamarket Blog | How To | Product Reviews | Latest News On Tech, Fashion, Gadgets";
+        $this->load->view('blog/post', $page_data);
+    }
 }

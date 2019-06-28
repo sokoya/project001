@@ -3,6 +3,14 @@
     .feature-attribute:hover {
         cursor: pointer;
     }
+
+    .blog-post{
+        margin: 8px;
+        border-radius: 3px;
+    }
+    .media-heading{
+        padding-top: 5px;
+    }
     .blog-link{
         color: #000;
     }
@@ -27,7 +35,7 @@
         <?php $this->load->view('landing/resources/mobile/mobile-menu'); ?>
     <?php else: ?>
         <?php $this->load->view('landing/resources/head_img') ?>
-        <?php $this->load->view('landing/resources/head_menu') ?>
+        <?php $this->load->view('blog/head_menu') ?>
     <?php endif; ?>
 
 
@@ -42,7 +50,7 @@
                     <?php endif; ?>
 
                     <div class="col-md-9">
-                        <div class="blog-post" style="margin: 3px;">
+                        <div class="blog-post" >
                             <div class="media" style="background-color: whitesmoke; padding: 5px;">
                                 <a class="pull-left text-center" href="#">
                                     <img class="media-object" src="http://placekitten.com/150/150">
@@ -53,14 +61,14 @@
                                             Post 1
                                         </a>
                                     </h4>
-                                    <p class="">By Onitshamarket Team</p>
+                                    <h5 class="">By Onitshamarket Team</h5>
                                     <a class="blog-link" href="<?= siteurlify('ahscbsbsbs', 3); ?>">
                                         <p>
                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
                                             Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero.
                                         </p>
                                     </a>
-                                    <ul class="list-inline list-unstyled share-icon ">
+                                    <ul class="list-inline list-unstyled share-icon">
                                         <li><span><i class="glyphicon glyphicon-calendar"></i> 2 days, 8 hours </span></li>
                                         <li>|</li>
                                         <span><i class="glyphicon glyphicon-comment"></i> 2 comments</span>
@@ -74,6 +82,13 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3">
+                                <?= $pagination ?>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="col-md-3 hidden-xs hidden-sm text-center" style="background-color: white">
                         <img src="<?= base_url('assets/img/home/categories/left_pane1.jpg'); ?>" style="max-height: 100%;">
@@ -120,32 +135,6 @@
             }
         }, 300);
     }, false);
-    
-    $('.wishlist-btn').on('click', function () {
-        let product_id = $(this).data('pid');
-        let _this = $(this);
-        $.ajax({
-            url: base_url + 'ajax/favourite',
-            method: 'POST',
-            data: {
-                id: product_id
-            },
-            success: response => {
-                let parsed_response = JSON.parse(response);
-                if (parsed_response.action === 'remove') {
-                    _this.removeClass('category-favorite-active').addClass('.category-favorite');
-                    _this.find('i').attr('title', 'Add to your wishlist');
-                } else {
-                    _this.removeClass('category-favorite').addClass('.category-favorite-active');
-                    _this.find('i').attr('title', 'Remove from your wishlist');
-                }
-                notification_message(parsed_response.msg, 'fa fa-info-circle', parsed_response.status);
-            },
-            error: () => {
-                notification_message('Sorry an error occurred please try again. ', 'fa fa-info-circle', error);
-            }
-        })
-    });
 
     window.onscroll = function() {myFunction()};
     var header = document.getElementById("header-f");

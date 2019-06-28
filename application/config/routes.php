@@ -85,3 +85,7 @@ $route['jobs-at-onitshamarket/(:any)/(:any)'] = 'jobs/job_detail/$2';
 // Seller
 $route['seller/(:any)'] = 'seller/index/$1';
 
+
+// Blog
+$route['blog/(:any)/(:any)'] = 'blog/post/$2/'; // Single job post
+
