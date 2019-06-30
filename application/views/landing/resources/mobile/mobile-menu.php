@@ -374,9 +374,9 @@
         </div>
     <?php endif; ?>
     <?php
-    $this->db->cache_on();
+//    $this->db->cache_on();
     $categories = $this->db->query("SELECT * FROM categories WHERE pid = 0")->result();
-    $this->db->cache_off();
+//    $this->db->cache_off();
     foreach ($categories as $category): ?>
         <div class="container">
             <a href="<?= base_url('catalog/' . $category->slug . '/'); ?>" style="text-decoration: none">
@@ -396,9 +396,9 @@
         </div>
         <div id="cat_<?= $category->id ?>">
             <?php
-            $this->db->cache_on();
+//            $this->db->cache_on();
             $main_category = $this->db->query("SELECT * FROM categories WHERE pid = ? LIMIT 6", $category->id)->result();
-            $this->db->cache_off();
+//            $this->db->cache_off();
             if ($main_category):
                 foreach ($main_category as $cat) :
                     ?>
