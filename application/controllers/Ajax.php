@@ -131,7 +131,7 @@ class Ajax extends CI_Controller
                 $content .= "\n\r...";
             }
 
-            $content = preg_replace("/<img[^>]+>/", " (image)", $content );
+            $content = preg_replace("/\<img/", " (image)", $content );
             $results['description'] = html_entity_decode($content);
             $results['seller'] = $desc->seller_id;
             $variation = $this->product->get_variation($pid);
