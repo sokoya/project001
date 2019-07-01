@@ -132,7 +132,7 @@ class Ajax extends CI_Controller
             }
 
             $content = preg_replace("/\<img/", " (image)", $content );
-            $results['description'] = html_entity_decode($content);
+            $results['description'] = "Random description";
             $results['seller'] = $desc->seller_id;
             $variation = $this->product->get_variation($pid);
             $results['default_vid'] = $variation->id;
