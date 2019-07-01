@@ -120,12 +120,13 @@ class Ajax extends CI_Controller
             $results = array();
             $desc = $this->product->get_quick_view_details($pid);
             // check for images in the description
+//            /<img[^>]+\>/i
             $content = preg_replace("/<img[^>]+\>/i", " (image)", $desc->product_description);
             if( strlen($content) > 300 ) {
                 $content = substr($content, 0, strpos($content, ' ', 300)).'...';
             }
             if( strlen($content) < 50 ){
-                $content .= $desc->highlights;
+                $content .= preg_replace("/<img[^>]+\>/i", " (image)", $desc->highlights);
             }
             if( strlen($content ) < 50) {
                 $content .= "\n\r...";
