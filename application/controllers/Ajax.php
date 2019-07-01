@@ -115,6 +115,7 @@ class Ajax extends CI_Controller
     // Function to generate quick view on each product
     function quick_view()
     {
+
         if ($this->input->is_ajax_request() && $this->input->post('product_id')) {
             $pid = $this->input->post('product_id', true);
             $results = array();
@@ -132,7 +133,6 @@ class Ajax extends CI_Controller
             if( strlen($content ) < 50) {
                 $content .= "\n\r...";
             }
-
             $content = preg_replace("/\<img/", " (image)", $content );
             $results['description'] = html_entity_decode($content);
             $results['seller'] = $desc->seller_id;
