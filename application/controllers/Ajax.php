@@ -120,7 +120,7 @@ class Ajax extends CI_Controller
             $results = array();
             $desc = $this->product->get_quick_view_details($pid);
             // check for images in the description
-            $content = preg_replace("/<img[^>]+\>/i", " (image)", $desc->product_description);
+            $content = preg_replace("/<p><img[^>]+\>/i", " (image)", $desc->product_description);
             if( strlen($content) > 300 ) {
                 $content = substr($content, 0, strpos($content, ' ', 300)).'...';
             }
@@ -132,7 +132,7 @@ class Ajax extends CI_Controller
             }
 
             $content = preg_replace("/\<img/", " (image)", $content );
-            $results['description'] = "Random description";
+            $results['description'] = html_entity_decode($content);
             $results['seller'] = $desc->seller_id;
             $variation = $this->product->get_variation($pid);
             $results['default_vid'] = $variation->id;
