@@ -116,7 +116,7 @@ class Ajax extends CI_Controller
     function quick_view()
     {
         if ($this->input->is_ajax_request() && $this->input->post('product_id')) {
-            $pid = $this->input->post('product_id');
+            $pid = $this->input->post('product_id', true);
             $results = array();
             $desc = $this->product->get_quick_view_details($pid);
             // check for images in the description
