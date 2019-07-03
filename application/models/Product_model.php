@@ -633,8 +633,6 @@ Class Product_model extends CI_Model{
     // Search autocomplete query
     function search_query($search = '', $category =''){
         $search = xss_clean( $search );
-//        $search = preg_replace("/[^a-z0-9]/", ' ', $search);
-
         $select  = "SELECT p.id, p.product_name, g.image_name, v.sale_price, v.discount_price FROM products p 
         LEFT JOIN product_gallery g ON (g.product_id = p.id AND g.featured_image = 1)
         INNER JOIN (SELECT va.sale_price, va.discount_price,va.product_id vid FROM product_variation va  WHERE va.quantity > 0) v ON (v.vid = p.id)
@@ -696,13 +694,7 @@ Class Product_model extends CI_Model{
         if( $queries['product_name'] ) {
             $product_name = xss_clean( $queries['product_name']);
 //            $product_name = preg_replace("/[^a-z0-9 ]/", ' ', $product_name);
-
             $select_query .= " WHERE p.product_status = 'approved' AND p.product_name LIKE '%{$product_name}%'";
-//            $keys = explode(" ", $product_name );
-//            foreach ( $keys as $k ){
-//                $select_query .= " OR p.product_name LIKE '%{$k}%'";
-//            }
-//            $select_query .= ") ";
         }
         if( $queries['category'] && !empty($queries['category'])){
             $id = $this->category_id( $queries['category'] );
