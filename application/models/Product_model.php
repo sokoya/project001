@@ -648,7 +648,7 @@ Class Product_model extends CI_Model{
         }
         $select .= " AND p.product_status = 'approved'";
         if( $category != '' ) { $id = $this->category_id( $category ); $select .= "AND p.category_id = '{$id}' ";}
-        $select .= "GROUP BY p.id ORDER BY p.id LIMIT 5";
+        $select .= "GROUP BY p.id LIMIT 5";
         return $this->db->query($select)->result();
     }
 
