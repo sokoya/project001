@@ -695,8 +695,13 @@ Class Product_model extends CI_Model{
             JOIN sellers AS s ON p.seller_id = s.uid ";
         if( $queries['product_name'] ) {
             $product_name = xss_clean( $queries['product_name']);
-            $product_name = preg_replace("/[^a-z ]/", '', $product_name);
-            $select_query .= " WHERE p.product_status = 'approved' AND p.product_name LIKE '%{$product_name}%'";
+            $product_name = preg_replace("/[^a-z0-9 ]/", ' ', $product_name);
+            $select_query .= " WHERE p.product_status = 'approved' AND ( p.product_name LIKE '%{$product_name}%'";
+            $keys = explode(" ", $product_name );
+            foreach ( $keys as $k ){
+                $select_query .= " OR p.product_name LIKE '%{$k}%'";
+            }
+            $select_query .= ") ";
         }
         if( $queries['category'] && !empty($queries['category'])){
             $id = $this->category_id( $queries['category'] );
