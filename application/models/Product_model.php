@@ -633,7 +633,7 @@ Class Product_model extends CI_Model{
     // Search autocomplete query
     function search_query($search = '', $category =''){
 
-        $search = cleanit( $search );
+//        $search = cleanit( $search );
         $search = xss_clean( $search );
 //        $search = preg_replace("/[^a-z0-9]/", ' ', $search);
 
