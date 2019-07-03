@@ -695,7 +695,7 @@ Class Product_model extends CI_Model{
             JOIN sellers AS s ON p.seller_id = s.uid ";
         if( $queries['product_name'] ) {
             $product_name = xss_clean( $queries['product_name']);
-            $product_name = preg_replace("/[^a-z]/", '', $product_name);
+            $product_name = preg_replace("/[^a-z ]/", '', $product_name);
             $select_query .= " WHERE p.product_status = 'approved' AND p.product_name LIKE '%{$product_name}%'";
         }
         if( $queries['category'] && !empty($queries['category'])){
@@ -758,14 +758,7 @@ Class Product_model extends CI_Model{
         }
 
         if( $queries['is_limit'] == true ){
-            $select_query .=" GROUP BY p.id 
-            ORDER BY CASE
-                        WHEN p.product_name LIKE '{$product_name}' THEN 1
-                        WHEN p.product_name LIKE '{$product_name}%' THEN 2
-                        WHEN p.product_name LIKE '%{$product_name}' THEN 4
-                        ELSE 3
-                      END LIMIT 5
-            LIMIT {$queries['offset']},{$queries['limit']} ";
+            $select_query .=" GROUP BY p.id LIMIT {$queries['offset']},{$queries['limit']} ";
         }else{
             $select_query .=" GROUP BY p.id";
         }
