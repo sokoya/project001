@@ -696,6 +696,7 @@ Class Product_model extends CI_Model{
         if( $queries['product_name'] ) {
             $product_name = xss_clean( $queries['product_name']);
             $product_name = preg_replace("/[^a-z0-9 ]/", ' ', $product_name);
+            die( $product_name );
             $select_query .= " WHERE p.product_status = 'approved' AND p.product_name LIKE '%{$product_name}%'";
 //            $keys = explode(" ", $product_name );
 //            foreach ( $keys as $k ){
