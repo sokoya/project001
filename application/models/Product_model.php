@@ -632,8 +632,6 @@ Class Product_model extends CI_Model{
 
     // Search autocomplete query
     function search_query($search = '', $category =''){
-
-//        $search = cleanit( $search );
         $search = xss_clean( $search );
 //        $search = preg_replace("/[^a-z0-9]/", ' ', $search);
 
@@ -696,7 +694,7 @@ Class Product_model extends CI_Model{
         $select_query .= " JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )                
             JOIN sellers AS s ON p.seller_id = s.uid ";
         if( $queries['product_name'] ) {
-            $product_name = cleanit( $queries['product_name']);
+            $product_name = xss_clean( $queries['product_name']);
             $product_name = preg_replace("/[^a-z]/", '', $product_name);
             $select_query .= " WHERE p.product_status = 'approved' AND p.product_name LIKE '%{$product_name}%'";
         }
@@ -760,7 +758,14 @@ Class Product_model extends CI_Model{
         }
 
         if( $queries['is_limit'] == true ){
-            $select_query .=" GROUP BY p.id LIMIT {$queries['offset']},{$queries['limit']} ";
+            $select_query .=" GROUP BY p.id 
+            ORDER BY CASE
+                        WHEN p.product_name LIKE '{$product_name}' THEN 1
+                        WHEN p.product_name LIKE '{$product_name}%' THEN 2
+                        WHEN p.product_name LIKE '%{$product_name}' THEN 4
+                        ELSE 3
+                      END LIMIT 5
+            LIMIT {$queries['offset']},{$queries['limit']} ";
         }else{
             $select_query .=" GROUP BY p.id";
         }
