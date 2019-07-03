@@ -769,7 +769,7 @@ Class Product_model extends CI_Model{
             $select_query .=" GROUP BY p.id";
         }
 
-        die( $select_query );
+//        die( $select_query );
 
         $products_query = $this->db->query( $select_query );
         if( $products_query ) {
