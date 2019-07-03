@@ -124,7 +124,7 @@
             </div>
             <div class="cat-notify">
                 <p class="n-head">Products Matching "<?= $searched; ?>"</p>
-                <p class="n-body"><strong><?= $total_count . ' results'; ?></strong></p>
+                <p class="n-body"><strong><?= $count_in_total . ' results'; ?></strong></p>
             </div>
             <div class="row">
                 <div class="col-md-3">
