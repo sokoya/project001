@@ -649,9 +649,9 @@ Class Product_model extends CI_Model{
         $select .= " AND p.product_status = 'approved'";
         if( $category != '' ) { $id = $this->category_id( $category ); $select .= "AND p.category_id = '{$id}' ";}
         $select .= "GROUP BY p.id ORDER BY CASE
-                        WHEN word LIKE '{$search}' THEN 1
-                        WHEN word LIKE '{$search}%' THEN 2
-                        WHEN word LIKE '%{$search}' THEN 4
+                        WHEN p.product_name LIKE '{$search}' THEN 1
+                        WHEN p.product_name LIKE '{$search}%' THEN 2
+                        WHEN p.product_name LIKE '%{$search}' THEN 4
                         ELSE 3
                       END LIMIT 5";
         return $this->db->query($select)->result();
