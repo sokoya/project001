@@ -2,255 +2,45 @@
 <meta name="google-site-verification" content="xGjxCwvClqtUIevfyrQ-HWU7OcjspMEVmXMAPcpzz7Y"/>
 <link rel="stylesheet" href="<?= base_url('assets/plugins/slick/slick.css'); ?>">
 <link rel="stylesheet" href="<?= base_url('assets/plugins/slick/slick-theme.css'); ?>">
-<style>
-    .card-max-img:hover, .card-max-shade:hover {
-        -webkit-box-shadow: 0 5px 5px 0 rgba(176, 177, 193, .1);
-        cursor: pointer;
-        box-shadow: 0 5px 5px 0 rgba(176, 177, 193, .1)
+
+<style type="text/css">
+    .card-product-img{
+        /* width:100%; */
+        height:auto;
+        min-width:unset !important;
+        max-width:180px !important;
+        max-height:140px !important;
+    }
+    .slick-slider{
+        visibility:hidden;
+    }
+    .card-product {
+        min-height: 285px !important;
+        max-height: 285px !important;
+    }
+    .card-max-title{
+        font-weight:800;
+        font-size:18px;
+        width:50%;
+    }
+    .card-max-subtitle{
+        font-weight:500;
+        font-size:14px;
+        line-height:26px;
+        width:50%;
+        text-align:right;
+    }
+    .card-max-header{
+        background:#201616;
+        color:#fff;
+        margin-top:20px;
+        padding:10px 10px 0;
+        display:inline-flex;
+        width:100%;
     }
 
-    .pro_ad {
-        min-height: auto !important
-    }
 
-    .card-max {
-        margin-top: 30px;
-        margin-bottom: 30px
-    }
 
-    .home_slider img {
-        margin: auto;
-        width: 100%;
-        max-height: 500px;
-        height: auto;
-        min-height: auto
-    }
-
-    .home_slider {
-        height: auto;
-        max-height: 450px;
-        min-height: auto
-    }
-
-    .card-max-header {
-        text-align: left
-    }
-
-    .card-max-title {
-        color: #0a0a0a;
-        font-size: 24px;
-        font-family: Cabin, sans-serif;
-        text-transform: uppercase;
-        margin-bottom: 2px
-    }
-
-    .card-max-subtitle {
-        color: #3d3d3d;
-        font-size: 17px;
-        font-family: HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif
-    }
-
-    .card-max-discount, .card-max-price {
-        font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif
-    }
-
-    .card-max-img {
-        height: auto;
-        width: auto;
-        max-width: 180px;
-        max-height: 180px;
-        border-radius: 10px
-    }
-
-    .card-max-img:hover {
-        -webkit-filter: brightness(96%);
-        filter: brightness(96%)
-    }
-
-    .card-max-side {
-        height: auto;
-        width: auto;
-        max-width: 330px;
-        max-height: 610px
-    }
-
-    .card-max-text {
-        top: 0;
-        left: 0;
-        display: none;
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        text-align: center;
-        background: rgba(0, 0, 0, .6)
-    }
-
-    .card-max-price {
-        font-size: 18px;
-        color: #fff;
-        font-weight: 600;
-        margin: auto
-    }
-
-    .card-max-discount {
-        font-size: 14px;
-        color: #fafafa;
-        font-weight: 500;
-        margin: 20px auto auto;
-        text-decoration: line-through
-    }
-
-    .card-max-view-more {
-        float: right;
-        font-size: 13px;
-        font-family: HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-        color: #444;
-        z-index: 1;
-        position: relative;
-        top: 45px
-    }
-
-    .card-max-shade-text, .max-card-product, .max-card-product-price, .max-top {
-        font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-weight: 600
-    }
-
-    .card-max-view-more:hover {
-        text-decoration: none;
-        color: #0b6427
-    }
-
-    .max-inverse {
-        background: #fff;
-        border: 1px solid #dadada
-    }
-
-    .card-max-shade {
-        height: 100% !important;
-        width: 100%;
-        margin-top: 20px;
-        max-width: 150px;
-        max-height: 150px
-    }
-
-    .card-max-shade:hover {
-        -webkit-filter: brightness(96%);
-        filter: brightness(96%)
-    }
-
-    .card-max-shade-text {
-        font-size: 14px;
-        color: #0b0b0b;
-        margin-bottom: 0 !important;
-        text-align: center
-    }
-
-    .max-img {
-        margin-right: -15px;
-        margin-left: -15px;
-        padding-top: 30px;
-        height: auto;
-        width: auto;
-        min-height: 200px;
-        cursor: pointer;
-        transition: transform .2s
-    }
-
-    .max-img:hover {
-        -webkit-box-shadow: 0 5px 5px 0 rgba(176, 177, 193, .1);
-        box-shadow: 0 5px 5px 0 rgba(176, 177, 193, .1);
-        z-index: 99999;
-        transform: scale(1.02)
-    }
-
-    .max-top {
-        color: #222
-    }
-
-    .max-card-product {
-        position: relative;
-        top: 6px;
-        left: -3px;
-        margin: 0;
-        font-size: 13px
-    }
-
-    .max-card-product-img {
-        width: 40px;
-        height: 40px;
-        position: relative;
-        left: -12px
-    }
-
-    .max-product-category {
-        padding-left: 3px;
-        padding-right: 0;
-        margin-bottom: 0;
-        padding-bottom: 0
-    }
-
-    .max-product-row {
-        padding-left: 5px;
-        padding-top: 3px;
-        padding-bottom: 4px;
-        border-bottom: 1px solid #dadada;
-        border-left: 1px solid #dadada;
-        position: relative;
-        left: 12px
-    }
-
-    .max-card-product-price {
-        font-size: 12px;
-        position: relative;
-        left: -3px;
-        top: 4px
-    }
-
-    .max-card-link > .col-md-10 {
-        color: #333
-    }
-
-    .max-card-link > .col-md-10:hover {
-        color: #0b6427
-    }
-
-    .btn-dark, .btn-dark:focus, .btn-dark:hover {
-        color: #fff
-    }
-
-    .btn-dark {
-        border-radius: 0;
-        background: #07aa5e;
-        padding: 10px;
-        left: -3px;
-        width: 223px;
-        height: 42px
-    }
-
-    .hot-row {
-        margin-bottom: 10px;
-        padding: 10px;
-    }
-
-    .btn_view_product {
-        color: #fff;
-        border: 2px solid #fff;
-        text-decoration: none;
-        padding: 10px;
-        position: absolute;
-        width: fit-content;
-        margin-left: -63px;
-        margin-top: 20px
-    }
-
-    .btn_view_product:hover {
-        color: #000;
-        font-weight: 700;
-        background-color: #fff;
-        text-decoration: none;
-        padding: 10px;
-        cursor: pointer
-    }
 </style>
 </head>
 <body>
@@ -261,232 +51,270 @@
         <?php $this->load->view('landing/resources/head_img') ?>
         <?php $this->load->view('landing/resources/head_menu') ?>
     <?php endif; ?>
-    <div class="home_slider text-center" style="visibility: hidden;">
-        <?php foreach ($sliders as $slider) : ?>
-            <div>
-                <img style="width: 100%; object-fit: cover " src="<?= SLIDER_IMAGE_PATH . $slider->image; ?>"
-                     alt="Onitshamrket"/>
+
+    <!-- Slider -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card-max">
+                <div class="home_slider text-center" style="visibility: hidden;">
+                    <?php foreach ($sliders as $slider) : ?>
+                        <div><img style="width: 100%; object-fit: cover " src="<?= SLIDER_IMAGE_PATH . $slider->image; ?>" alt="Onitshamrket"/></div>
+                    <?php endforeach; ?>
+                </div>
             </div>
-        <?php endforeach; ?>
+        </div>
     </div>
+
     <div class="container">
+
+        <!-- Hot Sales -->
         <div class="card-max" style="margin-top: -10px">
-            <div class="card-max-header">
-                <p class="card-max-title">Hot Sales
-                    <!--                    <a href="#" class="card-max-view-more">View more</a>-->
-                </p>
-                <p class="card-max-subtitle">Great items</p>
-            </div>
             <div class="row">
-                <?php
-                $excludes = array();
-                $products = $this->product->generalrandom(6);
-                foreach ($products as $product):
-                    ?>
-                    <!--                    <div style="background-color: #fff;">-->
-                    <div class="col-md-2 col-xs-4 hot-row"
-                         style="background-color: #fff; border-right: 2px solid #f6f6f6; position: relative;">
-
-                        <img class="card-max-img"
-                             src="https://res.cloudinary.com/onitshamarket/image/upload/w_260,h_280,c_pad/onitshamarket/product/<?= $product->image_name; ?>"/>
-                        <div class="card-max-text">
-                            <div style="margin-top: 40px">
-                                <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
-                                    <p class="card-max-discount"><?= ngn($product->sale_price); ?></p>
-                                    <p class="card-max-price"><?= ngn($product->discount_price); ?></p>
-                                    <a class="btn_view_product"
-                                       href="<?= base_url(urlify($product->product_name, $product->id)); ?>"><i
-                                                class="fa fa-search"></i>View
-                                        Product</a>
-                                <?php else : ?>
-                                    <p class="card-max-price"><?= ngn($product->sale_price); ?></p>
-                                    <a class="btn_view_product"
-                                       href="<?= base_url(urlify($product->product_name, $product->id)); ?>"><i
-                                                class="fa fa-search"></i>View
-                                        Product</a>
-                                <?php endif; ?>
+                <div class="card-max">
+                    <div class="card-max-header">
+                        <p class="card-max-title">Hot Sales
+                        </p>
+                        <p class="card-max-subtitle">Great Items</p>
+                    </div>
+                    <br/>
+                    <div class="brand-slide">
+                        <div class="row">
+                            <div style="padding: 0px;" class="col-md-12 <?php if(count($recommendeds ) >= 6) echo 'slick-slider'; ?>">
+                                <?php
+                                foreach ( $recommendeds as $product) : ?>
+                                    <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>" class="col-md-2 col-sm-3 col-xs-6  card-product card-product-alt">
+                                        <div>
+                                            <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
+                                                <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
+                                            <?php endif; ?>
+                                            <img class="card-product-img"
+                                                 src="<?=base_url("assets/img/load.gif")?>"
+                                                 data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
+                                                 alt="<?= $product->product_name; ?>"
+                                                 title="<?= $product->product_name; ?>">
+                                            <p class="card-product-title"><?= character_limiter($product->product_name, 30); ?></p>
+                                            <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
+                                                <p class="card-product-price"><?= ngn($product->discount_price); ?> </p>
+                                                <p class="card-product-price-discount"> <?= ngn($product->sale_price); ?></p>
+                                            <?php else : ?>
+                                                <p class="card-product-price"> <?= ngn($product->sale_price); ?> </p>
+                                            <?php endif; ?>
+                                        </div>
+                                    </a>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
-                    <!--                    </div>-->
-                    <?php array_push($excludes, $product->id); ?>
-                <?php endforeach; ?>
-            </div>
-        </div>
-        <div class="card-max">
-            <div class="card-max-header">
-                <p class="card-max-title">Top Categories
-                    <!--                    <a href="#" class="card-max-view-more">View more</a>-->
-                </p>
-                <p class="card-max-subtitle">Discover top categories, you won't want to miss</p>
-            </div>
-            <br/>
-            <div class="row">
-                <div class="col-md-2 hidden-sm hidden-xs">
-                    <img src="<?= base_url('assets/img/home/categories/left_pane1.jpg'); ?>" style="max-height: 100%;">
-                </div>
-                <div class="col-md-10">
-                    <div class="row" style="margin-left: 1px">
-
-                        <a href="https://www.onitshamarket.com/catalog/women-s-wear/">
-                            <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
-                                <p class="card-cat-text">Women's Fashion</p>
-                                <img alt="Shop for women's fashion" src="<?= base_url('assets/img/home/categories/prod1.jpg'); ?>">
-                            </div>
-                        </a>
-                        <a href="https://www.onitshamarket.com/catalog/accessories/">
-                            <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
-                                <p class="card-cat-text">Phones Accessories</p>
-                                <img alt="Shop for Phones and accessories"
-                                        src="<?= base_url('assets/img/home/categories/prod2.jpg'); ?>"></div>
-                        </a>
-                        <a href="https://www.onitshamarket.com/catalog/electronics/">
-                            <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
-                                <p class="card-cat-text">Electronics</p>
-                                <img alt="Shop for electronics product"
-                                        src="<?= base_url('assets/img/home/categories/prod3.jpg'); ?>"></div>
-                        </a>
-                        <a href="https://www.onitshamarket.com/catalog/computer-accessories/">
-                            <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
-                                <p class="card-cat-text">Computing Accessories</p><img alt="Shop for computer accessories"
-                                        src="<?= base_url('assets/img/home/categories/prod4.jpg'); ?>"></div>
-                        </a>
-                        <a href="https://www.onitshamarket.com/catalog/phones-tablets/">
-                            <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
-                                <p class="card-cat-text">Phone and Tablets</p><img alt="Shop for phones and tablets online"
-                                        src="<?= base_url('assets/img/home/categories/prod5.jpg'); ?>"></div>
-                        </a>
-                        <a href="https://www.onitshamarket.com/catalog/home-office/">
-                            <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
-                                <p class="card-cat-text">Home and Office</p>
-                                <img alt="Shop for Home and office products"
-                                        src="<?= base_url('assets/img/home/categories/prod6.jpg'); ?>"></div>
-                        </a>
-                        <a href="https://www.onitshamarket.com/catalog/bluetooth-speakers/">
-                            <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
-                                <p class="card-cat-text">Bluetooth Speakers</p>
-                                <img alt="Shop for bluethooth speakers"
-                                        src="<?= base_url('assets/img/home/categories/prod7.jpg'); ?>"></div>
-                        </a>
-                        <a href="https://www.onitshamarket.com/catalog/computing/">
-                            <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
-                                <p class="card-cat-text">Computing</p>
-                                <img alt="Shop for computing"
-                                        src="<?= base_url('assets/img/home/categories/prod8.jpg'); ?>"></div>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
-        <a href="https://www.onitshamarket.com/catalog/drones/" title="Get Drones">
-            <img class="img-responsive" src="<?= base_url('assets/img/home/banner_ad.png'); ?>">
-        </a>
 
-        <div class="card-max">
-            <div class="card-max-header">
-                <p class="card-max-title">Top Brands
-                    <!--                    <a href="#" class="card-max-view-more">View more</a>-->
-                </p>
-                <p class="card-max-subtitle">Top brands top quality.</p>
-            </div>
-            <br/>
-            <div class="brand-slide">
-                <div class="row">
-                    <div class="col-md-4 hidden-sm hidden-xs">
-                        <img class="top_brand_image" src="<?= base_url('assets/img/home/top_brands.png'); ?>"
-                             style="display: block; height: 310px; width: auto; max-width: 400px; object-fit: contain">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="row" style="margin-left: 10px">
-                            <a href="https://www.onitshamarket.com/catalog/home-office/">
-                                <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
-                                    <p class="card-cat-text">Electronics</p>
-                                    <img alt="Shop for electonics"
-                                            src="<?= base_url('assets/img/home/ef.jpg'); ?>">
-                                </div>
-                            </a>
-                            <a href="https://www.onitshamarket.com/catalog/gaming/" title="Gaming">
-                                <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
-                                    <p class="card-cat-text">Computing Accessories</p><img alt="Shop for computing accessories"
-                                            src="<?= base_url('assets/img/home/eg.jpg'); ?>"></div>
-                            </a>
-                            <a href="https://www.onitshamarket.com/catalog/building-materials/" title="Building Materials">
-                                <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
-                                    <p class="card-cat-text">Phone and Tablets</p><img alt="Shop for phones and tablets"
-                                            src="<?= base_url('assets/img/home/em.jpg'); ?>"></div>
-                            </a>
-                            <a href="https://www.onitshamarket.com/catalog/home-office/" title="Home & Office">
-                                <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
-                                    <p class="card-cat-text">Home and Office</p>
-                                    <img alt="Shop for Home and office products"
-                                            src="<?= base_url('assets/img/home/ek.jpg'); ?>"></div>
-                            </a>
-
-                            <a href="https://www.onitshamarket.com/catalog/home-theaters/" title="Home Theaters">
-                                <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
-                                    <p class="card-cat-text">Home Theaters</p>
-                                    <img alt="Shop for Home Theaters products"
-                                            src="<?= base_url('assets/img/home/ea.jpg'); ?>"></div>
-                            </a>
-
-                            <a href="https://www.onitshamarket.com/catalog/computing/" title="Computing">
-                                <div class="col-md-4 col-sm-4 col-xs-4 padding-0 card-cat">
-                                    <p class="card-cat-text">Computing</p>
-                                    <img alt="Shop for Computing products"
-                                            src="<?= base_url('assets/img/home/ex.jpg'); ?>"></div>
-                            </a>
-
-                        </div>
-                    </div>
+        <!-- Top Categories -->
+        <div class="row">
+            <div class="card-max">
+                <div class="card-max-header">
+                    <p class="card-max-title">Top Categories</p>
+                    <p class="card-max-subtitle">Discover top categories, you won't want to miss</p>
                 </div>
-
-            </div>
-        </div>
-        <div class="card-max">
-            <div class="card-max-header">
-                <p class="card-max-title">Super Deals
-                    <!--                    <a href="#" class="card-max-view-more">View more</a>-->
-                </p>
-                <p class="card-max-subtitle">Great Deals at amazing prices</p>
-            </div>
-            <br/>
-            <div class="brand-slide">
                 <div class="row">
                     <div class="col-md-2 hidden-sm hidden-xs">
-                        <img alt="Online Shopping for affordable product on onitshamarket.com" src="<?= base_url('assets/img/home/left_pane_2.jpg'); ?>" style="min-height: 320px">
+                        <img src="<?= base_url('assets/img/home/categories/left_pane1.jpg'); ?>" style="max-height: 100%;">
                     </div>
                     <div class="col-md-10">
-                        <div class="row" style="margin-left: 10px">
-                            <?php
-
-                            $products = $this->product->generalrandom(4);
-                            foreach ($products as $product) : ?>
-                                <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>">
-                                    <div class="col-md-3 col-sm-3 col-xs-3  card-product card-product-alt">
-                                        <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
-                                            <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
-                                        <?php endif; ?>
-                                        <img class="card-product-img"
-                                             src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
-                                             alt="<?= $product->product_name; ?>"
-                                             title="<?= $product->product_name; ?>">
-                                        <p class="card-product-title"><?= character_limiter($product->product_name, 30); ?></p>
-                                        <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
-                                            <p class="card-product-price"><?= ngn($product->discount_price); ?> </p>
-                                            <p class="card-product-price-discount"> <?= ngn($product->sale_price); ?></p>
-                                        <?php else : ?>
-                                            <p class="card-product-price"> <?= ngn($product->sale_price); ?> </p>
-                                        <?php endif; ?>
-                                    </div>
-                                </a>
-                            <?php endforeach; ?>
+                        <div class="row">
+                            <a href="https://www.onitshamarket.com/catalog/women-s-wear/">
+                                <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                                    <p class="card-cat-text">Women's Fashion</p>
+                                    <img alt="Shop for women's fashion" src="<?= base_url('assets/img/home/categories/prod1.jpg'); ?>">
+                                </div>
+                            </a>
+                            <a href="https://www.onitshamarket.com/catalog/accessories/">
+                                <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                                    <p class="card-cat-text">Phones Accessories</p>
+                                    <img alt="Shop for Phones and accessories"
+                                         src="<?= base_url('assets/img/home/categories/prod2.jpg'); ?>"></div>
+                            </a>
+                            <a href="https://www.onitshamarket.com/catalog/electronics/">
+                                <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                                    <p class="card-cat-text">Electronics</p>
+                                    <img alt="Shop for electronics product"
+                                         src="<?= base_url('assets/img/home/categories/prod3.jpg'); ?>"></div>
+                            </a>
+                            <a href="https://www.onitshamarket.com/catalog/computer-accessories/">
+                                <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                                    <p class="card-cat-text">Computing Accessories</p><img alt="Shop for computer accessories"
+                                                                                           src="<?= base_url('assets/img/home/categories/prod4.jpg'); ?>"></div>
+                            </a>
+                            <a href="https://www.onitshamarket.com/catalog/phones-tablets/">
+                                <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                                    <p class="card-cat-text">Phone and Tablets</p><img alt="Shop for phones and tablets online"
+                                                                                       src="<?= base_url('assets/img/home/categories/prod5.jpg'); ?>"></div>
+                            </a>
+                            <a href="https://www.onitshamarket.com/catalog/home-office/">
+                                <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                                    <p class="card-cat-text">Home and Office</p>
+                                    <img alt="Shop for Home and office products"
+                                         src="<?= base_url('assets/img/home/categories/prod6.jpg'); ?>"></div>
+                            </a>
+                            <a href="https://www.onitshamarket.com/catalog/bluetooth-speakers/">
+                                <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                                    <p class="card-cat-text">Bluetooth Speakers</p>
+                                    <img alt="Shop for bluethooth speakers"
+                                         src="<?= base_url('assets/img/home/categories/prod7.jpg'); ?>"></div>
+                            </a>
+                            <a href="https://www.onitshamarket.com/catalog/computing/">
+                                <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                                    <p class="card-cat-text">Computing</p>
+                                    <img alt="Shop for computing"
+                                         src="<?= base_url('assets/img/home/categories/prod8.jpg'); ?>"></div>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
 
+        <!-- Advert Section 1 -->
+        <div class="gap-small"></div>
+        <div class="row">
+            <div class="card-max">
+                <a class="gap-top" href="https://www.onitshamarket.com/catalog/drones/" title="Get Drones">
+                    <img class="" src="<?= base_url('assets/img/home/banner_ad.png'); ?>">
+                </a>
+            </div>
+        </div>
+
+        <!-- Top Brands -->
+        <div class="row">
+            <div class="card-max">
+                <div class="card-max-header">
+                    <p class="card-max-title">Top Brands</p>
+                    <p class="card-max-subtitle">Discover top categories, you won't want to miss</p>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 hidden-sm hidden-xs">
+                        <img src="<?= base_url('assets/img/home/categories/left_pane1.jpg'); ?>" style="max-height: 100%;">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <a href="https://www.onitshamarket.com/catalog/women-s-wear/">
+                                <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                                    <p class="card-cat-text">Women's Fashion</p>
+                                    <img alt="Shop for women's fashion" src="<?= base_url('assets/img/home/categories/prod1.jpg'); ?>">
+                                </div>
+                            </a>
+                            <a href="https://www.onitshamarket.com/catalog/accessories/">
+                                <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                                    <p class="card-cat-text">Phones Accessories</p>
+                                    <img alt="Shop for Phones and accessories"
+                                         src="<?= base_url('assets/img/home/categories/prod2.jpg'); ?>"></div>
+                            </a>
+                            <a href="https://www.onitshamarket.com/catalog/electronics/">
+                                <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                                    <p class="card-cat-text">Electronics</p>
+                                    <img alt="Shop for electronics product"
+                                         src="<?= base_url('assets/img/home/categories/prod3.jpg'); ?>"></div>
+                            </a>
+                            <a href="https://www.onitshamarket.com/catalog/computer-accessories/">
+                                <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                                    <p class="card-cat-text">Computing Accessories</p><img alt="Shop for computer accessories"
+                                                                                           src="<?= base_url('assets/img/home/categories/prod4.jpg'); ?>"></div>
+                            </a>
+                            <a href="https://www.onitshamarket.com/catalog/phones-tablets/">
+                                <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                                    <p class="card-cat-text">Phone and Tablets</p><img alt="Shop for phones and tablets online"
+                                                                                       src="<?= base_url('assets/img/home/categories/prod5.jpg'); ?>"></div>
+                            </a>
+                            <a href="https://www.onitshamarket.com/catalog/home-office/">
+                                <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                                    <p class="card-cat-text">Home and Office</p>
+                                    <img alt="Shop for Home and office products"
+                                         src="<?= base_url('assets/img/home/categories/prod6.jpg'); ?>"></div>
+                            </a>
+                            <a href="https://www.onitshamarket.com/catalog/bluetooth-speakers/">
+                                <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                                    <p class="card-cat-text">Bluetooth Speakers</p>
+                                    <img alt="Shop for bluethooth speakers"
+                                         src="<?= base_url('assets/img/home/categories/prod7.jpg'); ?>"></div>
+                            </a>
+                            <a href="https://www.onitshamarket.com/catalog/computing/">
+                                <div class="col-md-3 col-sm-3 col-xs-3 padding-0 card-cat">
+                                    <p class="card-cat-text">Computing</p>
+                                    <img alt="Shop for computing"
+                                         src="<?= base_url('assets/img/home/categories/prod8.jpg'); ?>"></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Advert Section 2 -->
+        <div class="gap-small"></div>
+        <div class="row">
+            <div class="card-max">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-xs-6">
+                        <a class="gap-top" href="https://www.onitshamarket.com/catalog/drones/" title="Get Drones">
+                            <img class="img-responsive" src="<?= base_url('assets/img/home/banner_ad.png'); ?>">
+                        </a>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-xs-6">
+                        <a class="gap-top" href="https://www.onitshamarket.com/catalog/drones/" title="Get Drones">
+                            <img class="img-responsive" src="<?= base_url('assets/img/home/banner_ad.png'); ?>">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Section 1-->
+        <?php if( $recommendeds ) :  ?>
+        <div class="card-max" style="margin-top: -10px">
+            <div class="row">
+                <div class="card-max">
+                    <div class="card-max-header">
+                        <p class="card-max-title">Fast Selling Products On Fashion
+                        </p>
+                        <p class="card-max-subtitle">Up-to 48% Discount</p>
+                    </div>
+                    <br/>
+                    <div class="brand-slide">
+                        <div class="row">
+                            <div  style="padding: 0px;" class="col-md-12 <?php if(count($recommendeds ) >= 6) echo 'slick-slider'; ?>">
+                                <?php
+                                foreach ( $recommendeds as $product) : ?>
+                                    <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>" class="col-md-2 col-sm-3 col-xs-6  card-product card-product-alt">
+                                        <div>
+                                            <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
+                                                <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
+                                            <?php endif; ?>
+                                            <img class="card-product-img"
+                                                 src="<?=base_url("assets/img/load.gif")?>"
+                                                 data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
+                                                 alt="<?= $product->product_name; ?>"
+                                                 title="<?= $product->product_name; ?>">
+                                            <p class="card-product-title"><?= character_limiter($product->product_name, 30); ?></p>
+                                            <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
+                                                <p class="card-product-price"><?= ngn($product->discount_price); ?> </p>
+                                                <p class="card-product-price-discount"> <?= ngn($product->sale_price); ?></p>
+                                            <?php else : ?>
+                                                <p class="card-product-price"> <?= ngn($product->sale_price); ?> </p>
+                                            <?php endif; ?>
+                                        </div>
+                                    </a>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <!-- Recently viewed -->
         <?php if ($this->session->userdata('logged_in')) :
             $recently_viewed = $this->user->get_recently_viewed($this->session->userdata('logged_id'), $excludes);
             if ($recently_viewed && count($recently_viewed)) :
@@ -537,6 +365,67 @@
             <?php endif; ?>
         <?php endif; ?>
 
+        <!-- Advert Section 2 -->
+        <div class="gap-small"></div>
+        <div class="row">
+            <div class="card-max">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-xs-6">
+                        <a class="gap-top" href="https://www.onitshamarket.com/catalog/drones/" title="Get Drones">
+                            <img class="img-responsive" src="<?= base_url('assets/img/home/banner_ad.png'); ?>">
+                        </a>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-xs-6">
+                        <a class="gap-top" href="https://www.onitshamarket.com/catalog/drones/" title="Get Drones">
+                            <img class="img-responsive" src="<?= base_url('assets/img/home/banner_ad.png'); ?>">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="card-max" style="margin-top: -10px">
+            <div class="row">
+                <div class="card-max">
+                    <div class="card-max-header">
+                        <p class="card-max-title">Hot Sales
+                        </p>
+                        <p class="card-max-subtitle">Great Items</p>
+                    </div>
+                    <br/>
+                    <div class="brand-slide">
+                        <div class="row">
+                            <div  style="padding: 0px;" class="col-md-12 <?php if(count($recommendeds ) >= 6) echo 'slick-slider'; ?>">
+                                <?php
+                                foreach ( $recommendeds as $product) : ?>
+                                    <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>" class="col-md-2 col-sm-3 col-xs-6  card-product card-product-alt">
+                                        <div>
+                                            <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
+                                                <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>
+                                            <?php endif; ?>
+                                            <img class="card-product-img"
+                                                 src="<?=base_url("assets/img/load.gif")?>"
+                                                 data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
+                                                 alt="<?= $product->product_name; ?>"
+                                                 title="<?= $product->product_name; ?>">
+                                            <p class="card-product-title"><?= character_limiter($product->product_name, 30); ?></p>
+                                            <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)) : ?>
+                                                <p class="card-product-price"><?= ngn($product->discount_price); ?> </p>
+                                                <p class="card-product-price-discount"> <?= ngn($product->sale_price); ?></p>
+                                            <?php else : ?>
+                                                <p class="card-product-price"> <?= ngn($product->sale_price); ?> </p>
+                                            <?php endif; ?>
+                                        </div>
+                                    </a>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div class="gap">
@@ -560,6 +449,7 @@
     <script src="<?= base_url('assets/js/mobile.js'); ?>"></script>
 <?php endif; ?>
 <script src="<?= base_url('assets/plugins/slick/slick.js') ?>"></script>
+
 <script>
     let review = JSON.parse('<?=$review;?>');
     product_id = review.product_id;
@@ -572,6 +462,27 @@
             }
         }
     }, false);
+
+    $(document).ready(function () {
+        $('.slick-slider').css({"visibility": "visible"});
+        $('.slick-slider').slick({
+            infinite: true,
+            speed: 500,
+            slidesToShow: 6,
+            slidesToScroll: 1,
+            lazyLoad: 'ondemand',
+            arrows: true,
+            cssEase: 'linear',
+            responsive: [
+                { breakpoint: 690, settings: {
+                        slidesToShow: 2,
+                    }},
+                { breakpoint: 963, settings: {
+                        slidesToShow: 6,
+                    }}
+            ]
+        });
+    });
     $(document).ready(function () {
         $('.home_slider').css({"visibility": "visible"});
         $('.home_slider').slick({
@@ -594,6 +505,7 @@
             cssEase: 'linear',
             draggable: true,
         });
+
         <?php if ($this->session->userdata('logged_in')) :?>
         if (JSON.stringify(review) === '[]') {
         } else {
@@ -625,7 +537,6 @@
         }
         <?php endif?>
     });
-
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function () {
             navigator.serviceWorker.register("<?= base_url('sw.js');?>")
@@ -636,6 +547,7 @@
                 });
         });
     }
+
 </script>
 <script src="<?= $this->user->auto_version('assets/js/rating.js'); ?>"></script>
 </body>

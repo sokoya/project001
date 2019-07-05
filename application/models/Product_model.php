@@ -304,11 +304,11 @@ Class Product_model extends CI_Model{
                 $max = preg_replace("/[^0-9]/", '', $max);
                 if( $min == '' ) $min = 0; if( $max == '' ) $max == 0;
                 $select_query .= " JOIN (SELECT var.product_id, var.discount_price, var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var 
-            WHERE var.quantity > 0 AND var.sale_price BETWEEN {$min} AND {$max} ORDER BY var.id) AS v ON (p.id = v.product_id) ";
+            WHERE var.quantity >= 0 AND var.sale_price BETWEEN {$min} AND {$max} ORDER BY var.id) AS v ON (p.id = v.product_id) ";
                 unset($gets['price_min']); unset($gets['price_max']);
             }else{
                 $select_query .= " JOIN (SELECT var.product_id, var.discount_price, var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var 
-            WHERE var.quantity > 0 ORDER BY var.id) AS v ON (p.id = v.product_id) ";
+            WHERE var.quantity >= 0 ORDER BY var.id) AS v ON (p.id = v.product_id) ";
             }
             $select_query .= " JOIN product_gallery AS g ON ( p.id = g.product_id AND g.featured_image = 1 )                
             JOIN sellers AS s ON p.seller_id = s.uid ";
@@ -886,35 +886,39 @@ Class Product_model extends CI_Model{
 
     /*
      * Get a random products
-     * Used for places like error 404
+     * Used for places like error 404, Desktop Homepage
      * @params we can take category as id = 1,2,3,4, or string 'electronics' or as an array of category eg array(2,5,8,9)
      * */
     /**
      * @param string $category
      * @param string $count
+     * @param string $frontpage
      * @return mixed
      */
-    function randomproducts($category = '', $count =''){
+    function randomproducts($category = '', $count = '', $frontpage = ''){
         $select_query = " SELECT p.id, p.product_name, v.sale_price, v.discount_price, v.start_date, v.end_date, SUM(v.quantity) as item_left, g.image_name
         FROM products p JOIN (SELECT var.product_id, var.discount_price,var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var
-        WHERE var.quantity > 0 ORDER BY var.id) AS v on(p.id = v.product_id) JOIN product_gallery AS g ON (p.id = g.product_id AND g.featured_image = 1)";
+        WHERE var.quantity >= 0 ORDER BY var.id) AS v on(p.id = v.product_id) JOIN product_gallery AS g ON (p.id = g.product_id AND g.featured_image = 1)";
 
         if( $category != '' ){
             if( is_int( $category) ){
                 $select_query .= " WHERE p.category_id = {$category}";
-            }elseif( is_array( $category) ){
+            }elseif( is_array( $category ) ){
                 $select_query .= " WHERE p.category_id IN ('". implode("','",$category). "') ";
             }else{
                 // coming as a name or slug
-                $id = $this->category_id( $category );
-                $select_query .= " WHERE p.category_id = {$id} ";
+                $category_ids = $this->slug( $category );
+                $select_query .= " WHERE p.category_id IN ('". implode("','",$category_ids). "') ";
             }
+        }
+        if( $frontpage != '' ){
+            $select_query .= " AND p.product_page = 'frontpage' ";
         }
 
         if( $count != '' ){
-            $select_query .= " AND product_status = 'approved' GROUP BY p.id ORDER BY RAND() LIMIT {$count} ";
+            $select_query .= " AND product_status = 'approved' GROUP BY p.id LIMIT {$count} ";
         }else{
-            $select_query .= " AND product_status = 'approved' GROUP BY p.id ORDER BY RAND() LIMIT 12";
+            $select_query .= " AND product_status = 'approved' GROUP BY p.id LIMIT 12";
         }
 
         return $this->db->query($select_query)->result();
@@ -995,7 +999,6 @@ Class Product_model extends CI_Model{
               GROUP BY p.id ORDER BY o.order_date, o.qty LIMIT 0,6";
         return $this->db->query( $query )->result();
     }
-
 
 }
 

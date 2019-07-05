@@ -11,7 +11,7 @@ class AfricaSMS {
     public function sendsms(){
         // Set your app credentials
         // $username   = "onitshamarket";
-        // $apikey     = "d69b04b7fd1cf8b156a2fc04139b37dbef25c8acc990718aae7d3ed11db2d141";
+        // $apikey     = "4fcd186e8c17c8dfd8192fa638a7678843e4a3069001535de569f8ce699b5d0c";
         $username   = SMS_USERNAME;
         $apikey     = SMS_API;
         $AT         = new AfricasTalking($username, $apikey);
@@ -23,6 +23,7 @@ class AfricaSMS {
                     $recipent = $this->remove( $key );
                     try {
                         $sms->send(array(
+                            'from' => 'Onitshamark',
                             'to' => $recipent,
                             'message' => $message,
                             'enqueue' => true

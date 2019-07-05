@@ -94,9 +94,6 @@
                                 <p>Thank you for shopping with us. Your order <b><?= $order_code; ?></b> has been placed successfully  here is the
                                     summary of the order:
                                 </p>
-                                <p>If you have any questions about this order, please contact us at <b>+234 813 680 3006</b>
-                                    Remember to include your reference number - <b><?= $order_code; ?></b> when contacting us.</p>
-                                <p><b>Note</b><br>A copy of this invoice has also be sent to the email attached to your account.</p>
                             </td>
                         </tr>
                         <tr>
@@ -169,6 +166,14 @@
                                     customers.</p>
                                 <p>Happy Shopping!</p>
                                 <p><b>Onitshamarket Team</b></p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 30px 10px 10px 10px; color: #153643; font-family: Arial, sans-serif; font-size: 13px;">
+                                <p>If you have any questions about this order, please contact us at <b>+234 813 680 3006</b>
+                                    Remember to include your reference number - <b><?= $order_code; ?></b> when contacting us.</p>
+                                <p><b>Note</b><br>A copy of this invoice has also be sent to the email attached to your account.</p>
                             </td>
                         </tr>
 

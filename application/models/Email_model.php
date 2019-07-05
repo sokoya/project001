@@ -216,10 +216,7 @@ class Email_model extends CI_Model {
             <p>Dear ' .$buyer["name"]. ',</p>
             <p>Thank you for shopping with us. Your order <b>'. $order_code.'</b> has been placed successfully  here is the
                 summary of the order:
-            </p>
-            <p>If you have any questions about this order, please contact us at <b>' . lang("contact_no"). '</b> or visit our '. anchor(base_url("page/faq/"), "FAQ").'.
-                Remember to include your reference number - <b>' . $order_code. '</b>.</p>
-            <p>Track your order with this link <b>' . anchor( $link, "Track Order"). '</b>.</p>    
+            </p>   
         </td>
     </tr>';
         // Orders
@@ -304,6 +301,14 @@ class Email_model extends CI_Model {
                     <td style="padding: 6px 6px 6px 6px" align="right">' .$payment_description. '</td>
                 </tr>
             </table>';
+
+        $mail_template .= '<tr>
+                            <td style="padding: 30px 10px 10px 10px; color: #153643; font-family: Arial, sans-serif; font-size: 13px;">
+                                <p>If you have any questions about this order, please contact us at <b>+234 813 680 3006</b>
+                                    Remember to include your reference number - <b>' .$order_code. '</b> when contacting us.</p>
+                                <p><b>Note</b><br>A copy of this invoice has also be sent to the email attached to your account.</p>
+                            </td>
+                        </tr>';
 
         $mail_template .= '<p>If you would like to know more about our services, please also refer to these FAQs from our
                 customers.</p>

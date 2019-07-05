@@ -29,9 +29,7 @@ class Product extends MY_Controller
 
         $page_data['title'] = 'Buy ' . $page_data['product']->product_name;
         $page_data['keywords'] = $page_data['title'] . ' , ' . $page_data['product']->brand_name;
-        if ($page_data['category_detail']) {
-            $page_data['description'] = $page_data['title'] . ' ' . $page_data['category_detail']->description;
-        } else { $page_data['description'] = DESCRIPTION; }
+        $page_data['description'] = "Online shopping for " . $page_data['keywords'] . " " . $page_data['description'];
         $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
         $this->add_count($index);
 		$page_data['page'] = 'product';

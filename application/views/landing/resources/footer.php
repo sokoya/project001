@@ -44,10 +44,9 @@
                         <section class="widget widget-links widget-light-skin">
                             <h3 class="widget-title-sm foot-link footer-link">Resources</h3>
                             <ul style="margin-left: -40px;">
-                                <li><a href="<?= lang('shopping_help_url'); ?>">Shopping Help</a></li>
-                                <li><a href="#">Order Status</a></li>
-                                <li><a href="#">Blogs</a></li>
-                                <li><a href="#">Forums</a></li>
+                                <li><a title="Get online shopping help fro Onitshamarket" href="<?= lang('shopping_help_url'); ?>">Shopping Help</a></li>
+                                <li><a title="Check your order status" href="<?= base_url('account/orders/'); ?>">Order Status</a></li>
+                                <li><a title="Official Onitshamarket Blog" href="#">Blogs</a></li>
                                 <li><a href="#">Registrations</a></li>
                                 <li><a href="#">Product Accessibility</a></li>
                                 <li><a href="#">Seller's Guide</a></li>
@@ -64,7 +63,6 @@
                                 <li><a href="#">App Downloads</a></li>
                                 <li><a href="<?= base_url('page/contact'); ?>">Contact Us</a></li>
                                 <li><a href="<?= lang('shopping_help_url'); ?>">FAQ</a></li>
-                                <li><a href="#">Live Chat</a></li>
                                 <li><a href="#">Warranty and Returns</a></li>
                                 <li><a href="#">Warranty Lookup</a></li>
                             </ul>

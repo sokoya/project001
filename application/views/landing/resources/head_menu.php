@@ -181,10 +181,10 @@ $categories = $this->db->query($category_cache)->result();
                                                     foreach ($main_category as $cat) :
                                                         ?>
                                                         <div class="col-md-3">
-                                                            <h5 class="custom-menu-category-drop"><a
+                                                            <h6 class="custom-menu-category-drop"><a
                                                                         style="color: #49a251 !important;"
                                                                         href="<?= base_url('catalog/' . $cat->slug . '/'); ?>"><?= $cat->name; ?></a>
-                                                            </h5>
+                                                            </h6>
                                                             <ul class="dropdown-menu-category-list">
                                                                 <?php
 //                                                                $this->db->cache_on();
@@ -192,7 +192,11 @@ $categories = $this->db->query($category_cache)->result();
 //                                                                $this->db->cache_off();
                                                                 if ($sub_category):
                                                                     foreach ($sub_category as $sub) : ?>
-                                                                        <li>
+                                                                        <li style="font-size: 11px;
+    max-width: 170px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;">
                                                                             <a href="<?= base_url('catalog/' . $sub->slug . '/'); ?>"
                                                                                title="<?= $sub->name; ?>"><?= $sub->name; ?></a>
                                                                         </li>

@@ -25,7 +25,6 @@ class Frontpage extends MY_Controller {
             }
 
         }
-
         $page_data['review'] = json_encode($review, JSON_UNESCAPED_SLASHES);
         if ($this->agent->is_mobile()) {
             $page_data['main_categories'] = $this->product->get_results('categories', 'id,name,slug,title', "(pid=0)");
@@ -34,6 +33,10 @@ class Frontpage extends MY_Controller {
             WHERE h.status = 'active' ORDER BY h.position");
             $this->load->view('landing/mobile-home', $page_data);
         } else {
+            $page_data['fashions'] = $this->product->randomproducts( 'fashion' , 6, 'frontpage');
+            $page_data['computing'] = $this->product->randomproducts( 'computing' , 6, 'frontpage');
+            $page_data['beauties'] = $this->product->randomproducts( 'health-beauty' , 6, 'frontpage');
+            $page_data['recommendeds'] = $this->product->randomproducts(array(31,33,36,53,1,2,3,4,5,6,7,8,9,10,11,23,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,61,62,63,64,65,66,67,68,69,70), 12); // Just for you
             $page_data['top_sales'] = $this->product->get_top_sales();
             $this->load->view('landing/home', $page_data);
         }
