@@ -26,10 +26,9 @@ class Product extends MY_Controller
 		$page_data['favourite'] = $this->product->is_favourited($this->session->userdata('logged_id'), $index);
 		$page_data['likes'] = $this->product->get_also_likes($index);
 		$page_data['category_detail'] = $this->product->single_category_detail( $page_data['product']->category_id );
-
         $page_data['title'] = 'Buy ' . $page_data['product']->product_name;
         $page_data['keywords'] = $page_data['title'] . ' , ' . $page_data['product']->brand_name;
-        $page_data['description'] = "Online shopping for " . $page_data['keywords'] . " " . $page_data['description'];
+        $page_data['description'] = "Online shopping for " .$page_data['product']->product_name . " " . $page_data['product']->product_description;
         $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
         $this->add_count($index);
 		$page_data['page'] = 'product';
@@ -63,7 +62,6 @@ class Product extends MY_Controller
 		if ($str == '') redirect(base_url());
 		$features = $this->product->get_features($str);
 		$output_array = array();
-
 		if ($features) {
 			foreach ($features as $feature => $values) {
 				foreach ($values as $key => $value) {
@@ -88,7 +86,6 @@ class Product extends MY_Controller
 				}
 			}
 		}
-
 		// pagination
 		$page = isset($_GET['page']) ? xss_clean($_GET['page']) : 0;
 		if ($page > 1) $page -= 1;
@@ -120,10 +117,10 @@ class Product extends MY_Controller
 		$page_data['sub_categories'] = $this->product->get_categories($str, $q);
 		$page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
 		$page_data['category_detail'] = $this->product->category_details($str);
-
 		if( $page_data['category_detail'] ) {
             $page_data['description'] = $page_data['category_detail']->description;
             $page_data['title'] = $page_data['category_detail']->title;
+            $page_data['footer_content'] = $this->product->get_root_category( $page_data['category_detail']->id );
         }else{
             $page_data['description'] = DESCRIPTION;
             $page_data['title'] = 'Category can not be found';
@@ -135,7 +132,6 @@ class Product extends MY_Controller
             $page_data['min'] = min(array_map(function($array) { return $array->sale_price; }, $array));
             $page_data['max'] = max(array_map(function($array) { return $array->sale_price; }, $array));
         }
-
 		if (!$this->agent->is_mobile()) {
 			$this->load->view('landing/category', $page_data);
 		} else {

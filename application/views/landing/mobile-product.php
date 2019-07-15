@@ -436,7 +436,7 @@
                     </div>
                     <div class="col-xs-11 col-md-11 col-sm-11 col-lg-11">
                         <p class="delivery-text">This product has the following warranty</p>
-                        <p class="editor-text"><?= $product->product_warranty; ?></p>
+                        <p class="editor-text"><?= html_entity_decode($product->product_warranty); ?></p>
                     </div>
                 </div>
             <?php endif; ?>
@@ -467,7 +467,7 @@
                                 class="fas fa-minus close-panel"
                                 aria-hidden="true"
                                 data-target="description_vl"></i></span></p>
-                <p id="description_vl" class="body_text">
+                <p id="description_vl" class="body_text" style="font-max-size: 13px;">
                     <?= word_limiter(html_entity_decode($product->product_description), 80); ?>
                     <?php if (str_word_count($product->product_description, 0) > 40) : ?>
                         <span><a style="text-decoration: none; color: #0b6427" href="<?= base_url( urlify($product->product_name, $product->id) . 'description/'); ?>">Read More</a> </span>
@@ -481,7 +481,7 @@
                                 class="fas fa-plus close-panel"
                                 aria-hidden="true"
                                 data-target="box_vl"></i></span></p>
-                <p class="body_text" style="display: none" id="box_vl">
+                <p class="body_text" style="display: none; font-max-size: 13px;" id="box_vl">
                     <?= html_entity_decode($product->in_the_box); ?>
                 </p>
             <?php endif; ?>
@@ -504,12 +504,10 @@
                     <th>Specification</th>
                     <th>Details</th>
                 </tr>
-
-
                 </thead>
                 <tbody>
                 <?php if (!empty($specs)): foreach ($specs as $spec => $value) : ?>
-                    <tr>
+                    <tr style="font-max-size: 13px;">
                         <td><?= trim($spec); ?></td>
                         <td><?php if (is_array($value)) : foreach ($value as $val) echo ucwords($val) . ', '; else: echo ucwords($value); endif; ?></td>
                     </tr>

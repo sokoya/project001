@@ -54,8 +54,7 @@
 
         <div class="card-max" style="margin-top:-50px;">
             <div class="card-max-header">
-                <p class="card-max-title">Suggested Products For You
-                </p>
+                <p class="card-max-title">Suggested Products For You</p>
                 <p class="card-max-subtitle">Great Deals at amazing prices</p>
             </div>
             <br/>
@@ -63,7 +62,7 @@
                 <div class="row">
                     <div class="col-md-12 slick-slider">
                         <?php foreach ($justforyou as $product) : ?>
-                            <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>" class="col-md-2 col-sm-3 col-xs-6  card-product card-product-alt">
+                            <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>" class="col-md-2 col-sm-3 col-xs-6 card-product card-product-alt">
                                 <div>
                                     <?php if (discount_check($product->discount_price, $product->start_date, $product->end_date)): ?>
                                         <p class="product-discount-overlay"><?= get_discount($product->sale_price, $product->discount_price); ?></p>

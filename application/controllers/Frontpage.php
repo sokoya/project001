@@ -10,7 +10,6 @@ class Frontpage extends MY_Controller {
 		$page_data['page'] = 'homepage';
 		$page_data['sliders'] = $this->product->get_results('sliders', 'image,img_link', "( status = 'active')");
         $page_data['profile'] = $this->user->get_profile($this->session->userdata('logged_id'));
-
         // Last order
         $review = array();
         if( $this->session->userdata('logged_in') ){
@@ -33,10 +32,9 @@ class Frontpage extends MY_Controller {
             WHERE h.status = 'active' ORDER BY h.position");
             $this->load->view('landing/mobile-home', $page_data);
         } else {
-            $page_data['fashions'] = $this->product->randomproducts( 'fashion' , 6, 'frontpage');
-            $page_data['computing'] = $this->product->randomproducts( 'computing' , 6, 'frontpage');
-            $page_data['beauties'] = $this->product->randomproducts( 'health-beauty' , 6, 'frontpage');
-            $page_data['recommendeds'] = $this->product->randomproducts(array(31,33,36,53,1,2,3,4,5,6,7,8,9,10,11,23,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,61,62,63,64,65,66,67,68,69,70), 12); // Just for you
+            $page_data['fashions'] = $this->product->randomproducts( 'fashion' , 6, 'homepage');
+            $page_data['electronics'] = $this->product->randomproducts( 'electronics' , 6, 'homepage');
+            $page_data['recommendeds'] = $this->product->randomproducts(array(31,33,36,53,1,2,3,4,5,6,7,8,9,10,11,23,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,61,62,63,64,65,66,67,68,69,70), 6); // Just for you
             $page_data['top_sales'] = $this->product->get_top_sales();
             $this->load->view('landing/home', $page_data);
         }

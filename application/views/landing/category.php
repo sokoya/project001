@@ -78,6 +78,16 @@
         transform: rotate(45deg);
     }
 
+    .body_text {
+        font-size: 13px;
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        position: relative;
+    }
+
+    .body_text > ul > li > a {
+        color: black;
+    }
+
 </style>
 </head>
 <body>
@@ -200,7 +210,7 @@
                                                 $rating_counts = $this->product->get_rating_counts($product->id);
                                                 echo rating_star_generator($rating_counts);
                                                 ?>
-                                                <span class="text-sm pull-right"><strong><?= ($product->brand_name == 'others' || empty($product->brand_name)) ? 'Universal' : $product->brand_name; ?></strong></span>
+                                                <span class="text-sm pull-right"><strong><?= ($product->brand_name == 'others' || empty($product->brand_name)) ? 'Universal' : character_limiter($product->brand_name, 9, '...'); ?></strong></span>
                                             </ul>
                                             <h5 class="cs-title"><?= character_limiter(ucwords(str_replace('generic', '', $product->product_name)), 15, '...'); ?></h5>
                                             <div class="product-caption-price">
@@ -247,6 +257,13 @@
                         <div class="row">
                             <div class="col-md-6 col-md-offset-3">
                                 <?= $pagination ?>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 30px;">
+                            <div class="col-sm-12">
+                                <div class="body_text">
+                                    <?= ( $footer_content && !empty( $footer_content) ) ? html_entity_decode($footer_content->seo) : ''; ?>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -256,13 +256,13 @@ Class Product_model extends CI_Model{
         $result = '';
         if( $str != '' ){
             if( $this->check_slug_availability( $str ) ){
-                $select = "SELECT description, name, image, title,slug FROM categories WHERE slug = '{$str}' LIMIT 1";
+                $select = "SELECT id, description, name, image, title,slug FROM categories WHERE slug = '{$str}' LIMIT 1";
                 $result = $this->db->query($select)->row();
                 return $result;
             }
         }else{
             // That means its coming from search
-            $query = "SELECT c.description,c.name,c.title,c.image,c.slug, p.id FROM products p LEFT JOIN categories c ON (c.id = p.category_id) WHERE p.product_name LIKE '%{$search_like}%' LIMIT 1";
+            $query = "SELECT c.id,c.description,c.name,c.title,c.image,c.slug, p.id FROM products p LEFT JOIN categories c ON (c.id = p.category_id) WHERE p.product_name LIKE '%{$search_like}%' LIMIT 1";
             return $this->db->query( $query )->row();
         }
     }
@@ -281,6 +281,24 @@ Class Product_model extends CI_Model{
     function get_parent_details( $id ){
         $array = $this->parent_slug_top( $id );
         return $this->db->query("SELECT name, slug, description FROM categories WHERE id IN ('".implode("','",$array)."')")->result();
+    }
+
+    // Get root category SEO
+    function get_root_category( $id ){
+        $query = $this->db->query("SELECT pid,seo FROM categories WHERE slug ='{$id}' OR id = {$id}")->row();
+        if( $query && $query->pid == 0 ){
+            return $query;
+        }else if( $query ) {
+            $id = $query->pid;
+            do {
+                $query = $this->db->query("SELECT pid,seo FROM categories WHERE id = ?", array( $id ) )->row();
+                $id = $query->pid;
+            } while ($id == 0);
+            return $query;
+        }else{
+            // No result found
+            return '';
+        }
     }
 
 
@@ -895,7 +913,7 @@ Class Product_model extends CI_Model{
      * @param string $frontpage
      * @return mixed
      */
-    function randomproducts($category = '', $count = '', $frontpage = ''){
+    function randomproducts($category = '', $count = '', $page = ''){
         $select_query = " SELECT p.id, p.product_name, v.sale_price, v.discount_price, v.start_date, v.end_date, SUM(v.quantity) as item_left, g.image_name
         FROM products p JOIN (SELECT var.product_id, var.discount_price,var.sale_price, var.start_date, var.end_date, var.quantity FROM product_variation var
         WHERE var.quantity >= 0 ORDER BY var.id) AS v on(p.id = v.product_id) JOIN product_gallery AS g ON (p.id = g.product_id AND g.featured_image = 1)";
@@ -911,8 +929,8 @@ Class Product_model extends CI_Model{
                 $select_query .= " WHERE p.category_id IN ('". implode("','",$category_ids). "') ";
             }
         }
-        if( $frontpage != '' ){
-            $select_query .= " AND p.product_page = 'frontpage' ";
+        if( $page != '' ){
+            $select_query .= " AND p.feature_page = '{$page}' ";
         }
 
         if( $count != '' ){

@@ -133,6 +133,9 @@
             width: 100%;
             object-fit: cover
         }
+        .custom-menu-category-drop > a {
+            font-size: 12px;
+        }
     </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <script> let base_url = "<?= base_url(); ?>"</script>
