@@ -240,17 +240,19 @@
     </div>
     <div class="gap_small"></div>
 
-    <?php if($fashions && count( $fashions ) >= 8 ) : ?>
+    <?php if($fashions ) : ?>
     <div class="card-max container">
         <div class="card-max-header">
             <h5 style="margin-left:-5px;">Fashion Sales <span style="color:#575745">- Just For You</span></h5>
         </div>
         <div class="row">
-            <?php foreach ( $fashions as $fashion ) : ?>
+            <?php foreach ( $fashions as $product ) : ?>
                 <a href="<?= base_url(urlify($product->product_name, $product->id)); ?>">
                     <div class="col-img-3">
                         <p><?= character_limiter($product->product_name, 10); ?><br/>
-                        <?=  (discount_check($product->discount_price, $product->start_date, $product->end_date)) ? ngn($product->discount_price) : ngn($product->sale_price);?></p>
+                        <?= (discount_check($product->discount_price, $product->start_date, $product->end_date))
+                            ? ngn($product->discount_price) :
+                            ngn($product->sale_price);?></p>
                         <img alt="<?= $product->product_name?>"
                              src="https://res.cloudinary.com/onitshamarket/image/upload/w_190,h_150,c_pad/onitshamarket/product/<?= $product->image_name; ?>" class="img-responsive"></div>
                 </a>
