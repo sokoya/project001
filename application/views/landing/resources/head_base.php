@@ -134,7 +134,10 @@
             object-fit: cover
         }
         .custom-menu-category-drop > a {
-            font-size: 12px;
+            font-size: 11px;
+        }
+        h6 > .custom-menu-category-drop{
+            font-size: 11px;
         }
     </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
