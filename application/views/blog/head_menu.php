@@ -27,7 +27,6 @@
     }
 
     .card-product-alt > .card-product-title {
-
         margin-top: -10px;
         /*flex: 1;*/
         /*width: auto;*/

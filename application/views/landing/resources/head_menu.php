@@ -27,7 +27,10 @@
     }
 
     .card-product-alt > .card-product-title {
-
+        max-width: 140px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         margin-top: -10px;
         /*flex: 1;*/
         /*width: auto;*/

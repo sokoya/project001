@@ -176,62 +176,63 @@
         </div>
     </div>
     <div class="gap_small"></div>
+
     <div class="card-max container">
         <div class="card-max-header">
             <h5 style="margin-left:-5px;">Trending <span style="color:#575745">Selections</span></h5>
         </div>
         <div class="row">
-            <a href="https://www.onitshamarket.com/catalog/women-s-wear/">
+            <a href="https://www.onitshamarket.com/catalog/beauty-personal-care/">
                 <div class="col-img-3">
-                    <p>Women's Fashion</p>
+                    <p>Beauty & Personal<br/> Care</p>
                     <img alt="Women's Fashion"
                             src="<?= base_url('assets/img/home/ee.jpg'); ?>" class="img-responsive"></div>
             </a>
 
-            <a href="https://www.onitshamarket.com/catalog/accessories/">
+            <a href="https://www.onitshamarket.com/catalog/iphone-accessories/">
                 <div class="col-img-3">
-                    <p>Phones<br/>Accessories</p>
-                    <img alt="Phones & Accessories"
+                    <p>iPhone<br/>Accessories</p>
+                    <img alt="iPhones & Accessories"
                             src="<?= base_url('assets/img/home/ed.jpg'); ?>" class="img-responsive"></div>
             </a>
 
-            <a href="https://www.onitshamarket.com/catalog/electronics/">
+            <a href="https://www.onitshamarket.com/catalog/digital-cameras/">
                 <div class="col-img-3">
-                    <p>Electronics</p>
-                    <img alt="Bul Electonics Product"
+                    <p>Digital Cameras <br/>Drones</p>
+                    <img alt="Buy Digital Cameras & Drones"
                             src="<?= base_url('assets/img/home/ef.jpg'); ?>" class="img-responsive"></div>
             </a>
-            <a href="https://www.onitshamarket.com/catalog/computer-accessories/">
+            <a href="https://www.onitshamarket.com/catalog/gaming/">
                 <div class="col-img-3">
-                    <p>Computer<br/>Accessories</p>
-                    <img alt="Shop for computer accessories"
+                    <p>Gaming & <br/>Accessories</p>
+                    <img alt="Gaming & Accessories"
                             src="<?= base_url('assets/img/home/eg.jpg'); ?>" class="img-responsive"></div>
             </a>
 
-            <a href="https://www.onitshamarket.com/catalog/phones-tablets/">
+            <a href="https://www.onitshamarket.com/catalog/office-products/">
                 <div class="col-img-3">
-                    <p>Phones & Tablets</p>
-                    <img alt="Shop for Phones & Tablets"
+                    <p>Office Products</p>
+                    <img alt="Shop online for Office products"
                             src="<?= base_url('assets/img/home/em.jpg'); ?>" class="img-responsive"></div>
             </a>
 
-            <a href="https://www.onitshamarket.com/catalog/home-office/">
+            <a href="https://www.onitshamarket.com/catalog/home-and-furniture/">
                 <div class="col-img-3">
-                    <p>Home & Office</p>
-                    <img alt="Shop for Home & Office"
+                    <p>Home Tools</p>
+                    <img alt="Online Shopping for Home Tools"
                             src="<?= base_url('assets/img/home/ek.jpg'); ?>" class="img-responsive"></div>
             </a>
 
-            <a href="https://www.onitshamarket.com/catalog/bluetooth-speakers/">
+            <a href="https://www.onitshamarket.com/catalog/home-theaters/">
                 <div class="col-img-3">
-                    <p>Bluetooth<br/>Speakers</p>
+                    <p>Home Theater,<br/>Bluetooth</p>
                     <img alt="Shop for Bluetooth & Speakers"
                             src="<?= base_url('assets/img/home/ea.jpg'); ?>" class="img-responsive"></div>
             </a>
-            <a href="https://www.onitshamarket.com/catalog/computing/">
+            <a href="https://www.onitshamarket.com/catalog/toys-games/">
                 <div class="col-img-3">
-                    <p>Computing</p>
-                    <img alt="Shop for computing devices on Onitshamarket.com"
+                    <p>Toys &<br/>Games</p>
+                    <img alt="Shop for toys and games on onitshamarket.com"
                             src="<?= base_url('assets/img/home/ex.jpg'); ?>" class="img-responsive"></div>
             </a>
         </div>
