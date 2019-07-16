@@ -30,6 +30,7 @@ class Frontpage extends MY_Controller {
             //  $page_data['category_listing'] = $this->product->get_results('homepage_setting', 'id', "(status = 'active')" );
             $page_data['category_listing'] = $this->product->run_sql("SELECT h.category_id, h.content, c.name, c.slug FROM homepage_setting h JOIN categories c ON (c.id = h.category_id)
             WHERE h.status = 'active' ORDER BY h.position");
+            $page_data['fashions'] = $this->product->randomproducts( 'fashion' , 8, 'homepage');
             $this->load->view('landing/mobile-home', $page_data);
         } else {
             $page_data['fashions'] = $this->product->randomproducts( 'fashion' , 6, 'homepage');
