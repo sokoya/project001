@@ -152,6 +152,7 @@
             </a>
         <?php endforeach; ?>
     </div>
+
     <div class="gap_wide hidden-xs"></div>
     <div class="row">
         <h5 class="col-md-12" style="margin-left:10px;">Top <span style="color:#575745">Categories</span></h5>
