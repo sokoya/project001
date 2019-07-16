@@ -116,8 +116,7 @@
                                             <a href="<?= PRODUCTS_IMAGE_PATH . $gallery->image_name; ?>"
                                                class=""
                                                title="<?= ucwords($product->product_name) ?>">
-                                                <img
-                                                        style="width:95%"
+                                                <img style="width:95%"
                                                         src="https://res.cloudinary.com/onitshamarket/image/upload/w_510,h_500,c_pad/onitshamarket/product/<?= $gallery->image_name; ?>"
                                                         alt="Onitshamarket <?= $category_detail->name; ?>"
                                                         title="<?= ucwords($product->product_name) ?>"/>
