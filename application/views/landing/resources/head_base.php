@@ -43,11 +43,6 @@
     <link rel="icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
     <meta name="theme-color" content="#2a9651"/>
     <link rel="canonical" href="<?= current_url(); ?>"/>
-
-    <meta property="og:description"
-          itemprop="description"
-          content="<?= !empty($description) ? html_entity_decode($description) : lang('description') ?>" />
-    <meta name="twitter:image" content="<?= base_url('assets/img/notice.jpg')?>" />
     <?php if ($page == 'product') : ?>
         <meta property="og:title" content="<?= $product->product_name; ?>"/>
         <meta property="og:type" content="product"/>
@@ -55,18 +50,17 @@
               content="<?= ($featured_image->image_name) ? PRODUCTS_IMAGE_PATH . $featured_image->image_name : ''; ?>" />
         <meta property="og:description"
               itemprop="description"
-              content="<?= !empty($product->product_description) ? html_entity_decode( $product->product_description) : lang('description') ?>" />
-        <meta name="twitter:image" content="<?= ($featured_image->image_name) ? PRODUCTS_IMAGE_PATH . $featured_image->image_name : ''; ?>" />
-
+              content="<?= !empty($product->product_description) ? html_entity_decode( $product->product_description) : lang('site_description') ?>" />
+        <meta property="og:site_name" content="<?= lang('app_name'); ?>"/>
+        <meta property="og:url" content="<?= current_url(); ?>"/>
+        <meta property="og:image:width" content="279">
+        <meta property="og:image:height" content="279">
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:domain" content="<?= base_url(); ?>"/>
+        <meta name="twitter:site" content="Onitshamarket"/>
+        <meta name="twitter:creator" content=""/>
     <?php endif; ?>
-    <meta property="og:site_name" content="<?= lang('app_name'); ?>"/>
-    <meta property="og:url" content="<?= current_url(); ?>"/>
-    <meta property="og:image:width" content="279">
-    <meta property="og:image:height" content="279">
-    <meta name="twitter:card" content="summary"/>
-    <meta name="twitter:domain" content="<?= base_url(); ?>"/>
-    <meta name="twitter:site" content="Onitshamarket"/>
-    <meta name="twitter:creator" content=""/>
+    <meta name="twitter:image" content="<?= base_url('assets/img/notice.jpg')?>" />
 
 
     <meta name="yandex-verification" content="5e0c9cc8260f049f" />
