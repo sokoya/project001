@@ -43,19 +43,10 @@
 </style>
 <!-- Head Category Starts -->
 <?php
-//$this->db->cache_on();
 $category_cache = "SELECT id, name, slug, icon, image FROM categories WHERE pid = 0 LIMIT 11";
-
-//if(!$this->memcached_library->get($category_cache) && $this->memcached_library->get($category_cache) == '') {
 $categories = $this->db->query($category_cache)->result();
-//$this->db->cache_off();
-//    $this->memcached_library->add($category_cache, $categories);
-//} else {
-//    $categories = $this->memcached_library->get($category_cache);
-//}
 ?>
 <nav class="navbar navbar-default navbar-main-white navbar-pad-top navbar-first yamm" id="header-f" style="padding-bottom: 20px">
-<!--<nav class="navbar navbar-default navbar-main-white navbar-fixed-bottom navbar-pad-top navbar-first yamm" style="padding-bottom: 20px">-->
     <div class="container-fluid">
         <div class="row" style="display: flex;">
             <div style="flex: 1" class="col-md-2 col-lg-2 col-sm-3 col-xs-4">
@@ -195,11 +186,7 @@ $categories = $this->db->query($category_cache)->result();
 //                                                                $this->db->cache_off();
                                                                 if ($sub_category):
                                                                     foreach ($sub_category as $sub) : ?>
-                                                                        <li style="font-size: 11px;
-    max-width: 170px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;">
+                                                                        <li>
                                                                             <a href="<?= base_url('catalog/' . $sub->slug . '/'); ?>"
                                                                                title="<?= $sub->name; ?>"><?= $sub->name; ?></a>
                                                                         </li>

@@ -450,6 +450,7 @@
             </span>
         </p>
     </div>
+
     <div class="custom-card" id="overview_data" style="margin-top: 5px;">
         <div class="container">
             <?php if (!empty($product->product_line)) : ?>
@@ -461,6 +462,7 @@
                 <p class="body_text" id="title_vl"><?= $product->product_line; ?></p>
                 <hr/>
             <?php endif; ?>
+
             <?php if (!empty($product->product_description)) : ?>
                 <p class="block-title close-panel" data-target="description_vl">Product Description <span
                             style="color: #4c4c4c !important; float: right"><i
@@ -475,6 +477,7 @@
                 </p>
                 <hr/>
             <?php endif; ?>
+
             <?php if (!empty($product->in_the_box)) : ?>
                 <p class="block-title close-panel" data-target="box_vl">What you will find in the box <span
                             style="color: #4c4c4c !important; float: right"><i
