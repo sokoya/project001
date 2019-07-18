@@ -50,7 +50,7 @@
               content="<?= ($featured_image->image_name) ? PRODUCTS_IMAGE_PATH . $featured_image->image_name : ''; ?>"/>
         <meta property="og:description"
               itemprop="description"
-              content="<?php isset($product->product_description) ? html_entity_decode( $product->product_description) : lang('site_description') ?>"/>
+              content="<?= isset($product->product_description) ? html_entity_decode( $product->product_description) : lang('site_description') ?>"/>
         <meta property="og:site_name" content="<?= lang('app_name'); ?>"/>
         <meta property="og:url" content="<?= current_url(); ?>"/>
         <meta property="og:image:width" content="279">
