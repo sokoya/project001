@@ -63,10 +63,6 @@
 
     <?php endif; ?>
 
-    <?php if ($page != 'product') : ?>
-        <meta property="og:image" content="<?= base_url('assets/img/notice.jpg')?>" />
-        <meta name="description" content="<?= !empty($description) ? html_entity_decode($description) : lang('description'); ?>">
-    <?php endif; ?>
 
     <meta name="yandex-verification" content="5e0c9cc8260f049f" />
 
