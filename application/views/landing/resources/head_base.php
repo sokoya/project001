@@ -50,7 +50,7 @@
               content="<?= ($featured_image->image_name) ? PRODUCTS_IMAGE_PATH . $featured_image->image_name : ''; ?>"/>
         <meta property="og:description"
               itemprop="description"
-              content="<?php isset($description) ? word_limiter($description, 100) : lang('site_description') ?>"/>
+              content="<?php isset($product->product_description) ? html_entity_decode( $product->product_description) : lang('site_description') ?>"/>
         <meta property="og:site_name" content="<?= lang('app_name'); ?>"/>
         <meta property="og:url" content="<?= current_url(); ?>"/>
         <meta property="og:image:width" content="279">
@@ -65,7 +65,7 @@
 
     <?php if ($page != 'product') : ?>
         <meta property="og:image" content="<?= base_url('assets/img/notice.jpg')?>" />
-        <meta name="description" content="<?= !empty($description) ? $description : lang('description'); ?>">
+        <meta name="description" content="<?= !empty($description) ? html_entity_decode($description) : lang('description'); ?>">
     <?php endif; ?>
 
     <meta name="yandex-verification" content="5e0c9cc8260f049f" />
