@@ -59,14 +59,8 @@
         <meta name="twitter:domain" content="<?= base_url(); ?>"/>
         <meta name="twitter:site" content="Onitshamarket"/>
         <meta name="twitter:creator" content=""/>
-        <meta name="twitter:image" content="<?= base_url('assets/img/notice.jpg')?>" />
-
     <?php endif; ?>
-
-    <?php if ($page != 'product') : ?>
-        <meta property="og:image" content="<?= base_url('assets/img/notice.jpg')?>" />
-        <meta name="description" content="<?= !empty($description) ? html_entity_decode($description) : lang('description'); ?>" />
-    <?php endif; ?>
+    <meta name="twitter:image" content="<?= base_url('assets/img/notice.jpg')?>" />
 
     <meta name="yandex-verification" content="5e0c9cc8260f049f" />
 
