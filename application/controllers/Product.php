@@ -120,7 +120,8 @@ class Product extends MY_Controller
 		if( $page_data['category_detail'] ) {
             $page_data['description'] = $page_data['category_detail']->description;
             $page_data['title'] = $page_data['category_detail']->title;
-            $page_data['footer_content'] = $this->product->get_root_category( $page_data['category_detail']->id );
+//            $page_data['footer_content'] = $this->product->get_root_category( $page_data['category_detail']->id );
+            $page_data['footer_content'] = '';
         }else{
             $page_data['description'] = DESCRIPTION;
             $page_data['title'] = 'Category can not be found';
