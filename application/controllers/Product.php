@@ -42,8 +42,7 @@ class Product extends MY_Controller
 
         $page_data['questions'] = $this->product->get_results('qna', "*", "( status = 'approved' && pid = {$index}) ");
         $this->add_count($page_data['product']->id);
-		$page_data['page'] = 'product';
-        $page_data['reviews'] = $this->product->get_reviews($index);
+		$page_data['reviews'] = $this->product->get_reviews($index);
 		if (!$this->agent->is_mobile()) {
 			$this->load->view('landing/product', $page_data);
 		} else {
