@@ -56,3 +56,5 @@ application/config/development/database.php
 
 # DB Cache
 application/cache/db
+
+
