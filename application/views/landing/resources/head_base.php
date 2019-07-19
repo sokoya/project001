@@ -42,7 +42,7 @@
     <link rel="shortcut icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
     <link rel="icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
     <meta name="theme-color" content="#2a9651"/>
-    <link rel="canonical" href="<?= current_url(); ?>"/>
+    <link rel="canonical" href="<?= current_url(); ?>" />
     <?php if ($page == 'product') : ?>
         <meta property="og:title" content="<?= $product->product_name; ?>"/>
         <meta property="og:type" content="product"/>
@@ -61,8 +61,6 @@
         <meta name="twitter:creator" content=""/>
     <?php endif; ?>
     <meta name="twitter:image" content="<?= base_url('assets/img/notice.jpg')?>" />
-
-
     <meta name="yandex-verification" content="5e0c9cc8260f049f" />
 
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon/apple-icon-57x57.png">
