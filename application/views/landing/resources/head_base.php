@@ -54,7 +54,7 @@
               content="<?= ($featured_image->image_name) ? PRODUCTS_IMAGE_PATH . $featured_image->image_name : ''; ?>" />
         <meta property="og:description"
               itemprop="description"
-              content="<?= $product->product_name . '-'. strip_tags($product->product_description);  ?>" />
+              content="<?= $product->product_name . '-';  ?>" />
         <meta property="og:site_name" content="<?= lang('app_name'); ?>"/>
         <meta property="og:url" content="<?= current_url(); ?>"/>
         <meta property="og:image:width" content="279">
