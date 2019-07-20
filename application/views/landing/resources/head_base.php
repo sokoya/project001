@@ -48,7 +48,9 @@
         <meta property="og:type" content="product"/>
         <meta property="og:image"
               content="<?= ($featured_image->image_name) ? PRODUCTS_IMAGE_PATH . $featured_image->image_name : ''; ?>" />
-
+        <meta property="og:description"
+              itemprop="description"
+              content="<?= isset( $product) ? html_entity_decode( $product->product_description) : lang('site_description') ?>" />
         <meta property="og:site_name" content="<?= lang('app_name'); ?>"/>
         <meta property="og:url" content="<?= current_url(); ?>"/>
         <meta property="og:image:width" content="279">
@@ -59,9 +61,9 @@
         <meta name="twitter:creator" content=""/>
     <?php endif; ?>
     <meta name="twitter:image" content="<?= base_url('assets/img/notice.jpg')?>" />
+
+
     <meta name="yandex-verification" content="5e0c9cc8260f049f" />
-
-
 
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon/apple-icon-60x60.png">
