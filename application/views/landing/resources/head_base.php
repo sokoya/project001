@@ -44,6 +44,7 @@
     <meta name="theme-color" content="#2a9651"/>
     <link rel="canonical" href="<?= current_url(); ?>" />
     <?php if ($page == 'product') : ?>
+
         <meta property="og:title" content="<?= $product->product_name; ?>"/>
         <meta property="og:type" content="product"/>
         <meta property="og:image"
