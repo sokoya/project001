@@ -42,15 +42,19 @@
     <link rel="shortcut icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
     <link rel="icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
     <meta name="theme-color" content="#2a9651"/>
+    <meta name="twitter:image" content="<?= base_url('assets/img/notice.jpg')?>" />
     <link rel="canonical" href="<?= current_url(); ?>" />
+    <meta property="og:description"
+          itemprop="description"
+          content="<?= isset( $description) ? $description : lang('description'); ?>" />
     <?php if ($page == 'product') : ?>
-
-
         <meta property="og:title" content="<?= $product->product_name; ?>"/>
         <meta property="og:type" content="product"/>
         <meta property="og:image"
               content="<?= ($featured_image->image_name) ? PRODUCTS_IMAGE_PATH . $featured_image->image_name : ''; ?>" />
-
+        <meta property="og:description"
+              itemprop="description"
+              content="<?= $product->product_name . '-'. strip_tags($product->product_description);  ?>" />
         <meta property="og:site_name" content="<?= lang('app_name'); ?>"/>
         <meta property="og:url" content="<?= current_url(); ?>"/>
         <meta property="og:image:width" content="279">
@@ -59,12 +63,10 @@
         <meta name="twitter:domain" content="<?= base_url(); ?>"/>
         <meta name="twitter:site" content="Onitshamarket"/>
         <meta name="twitter:creator" content=""/>
+        <meta name="twitter:image" content="<?= ($featured_image->image_name) ? PRODUCTS_IMAGE_PATH . $featured_image->image_name : ''; ?>" />
     <?php endif; ?>
-    <meta name="twitter:image" content="<?= base_url('assets/img/notice.jpg')?>" />
-
 
     <meta name="yandex-verification" content="5e0c9cc8260f049f" />
-
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/assets/favicon/apple-icon-72x72.png">
