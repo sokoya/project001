@@ -180,13 +180,12 @@
 <!--                                            <a href="#" id="to_sell">Have an item like this to sell? Create One.</a>-->
                                         </p>
                                         <p class="text-sm text-uppercase">
-                                            <strong>Seller : </strong><a href="#" id="pr-seller">
-                                                <b>
-                                                    <a href="<?= base_url('seller/' .siteurlify( $product->store_name, $product->seller_id)); ?>">
-                                                        <?= ucwords($product->store_name); ?>
-                                                    </a>
-                                                </b>
-                                            </a>
+                                            <strong>Seller : </strong>
+                                            <b>
+                                                <a href="<?= base_url('seller/' .siteurlify( $product->store_name, $product->seller_id)); ?>">
+                                                    <?= ucwords($product->store_name); ?>
+                                                </a>
+                                            </b>
                                         </p>
                                     </div>
                                     <div class="col-md-7">

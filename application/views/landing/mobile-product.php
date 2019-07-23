@@ -277,8 +277,8 @@
     </div>
     <div class="custom-card">
         <div class="container">
-            <p class="seller-name">Seller - <?= ucwords($product->store_name); ?></p>
-            <p class="product-name"><?= character_limiter(ucwords($product->product_name), 50, '...'); ?></p>
+            <p class="seller-name">Seller - <a href="<?= base_url('seller/' .siteurlify( $product->store_name, $product->seller_id)); ?>" title="<?= $product->store_name; ?>"><?= ucwords($product->store_name); ?></a></p>
+            <p class="product-name"><?= ucwords($product->product_name); ?></p>
             <div style="margin-top: 4px; margin-left: 2px">
                 <?php
                 if ($rating_counts) {
