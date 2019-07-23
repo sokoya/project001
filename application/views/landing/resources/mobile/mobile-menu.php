@@ -343,12 +343,14 @@
                 <?php endif; ?>
             </div>
 
-            <span class="cart-count"
-                    <?= ($this->cart->total_items() == 0) ? 'style="display:none"' : '' ?>><?= $this->cart->total_items(); ?></span>
-            <a href="<?= base_url(lang('cart_link')); ?>"><img
+            <span class="cart-count" <?php if( $this->cart->total_items() == 0){ echo 'style="display:none;"' ;}?> >
+            </span>
+            <a href="<?= base_url(lang('cart_link')); ?>">
+                <img
                         src="<?= base_url('assets/svg/shopping-cart.svg'); ?>"
                         alt="User"
-                        style="height: 24px; width: 24px; margin-right: 4px;"></a>
+                        style="height: 24px; width: 24px; margin-right: 4px;">
+            </a>
         </div>
         <form method="get" action="<?= base_url('search'); ?>" class="mobile-search-input" role="search">
             <div class="inner-addon right-addon stylish-input-group">

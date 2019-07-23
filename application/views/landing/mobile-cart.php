@@ -67,8 +67,9 @@
                                 </a></div>
                             <div class="col-xs-7">
                                 <div class="col-xs-12" style="font-size: 15px;">
-                                    <a style="color: #0b6427; text-decoration: none;"
+                                    <b><a style="color: #0b6427; text-decoration: none;"
                                             href="<?= base_url(urlify($product['name'], $product['id'])); ?>"><?= word_limiter(htmlentities($product['name']), 7, '...'); ?></a>
+                                    </b>
                                 </div>
                                 <div class="col-xs-12">
                                 <span
