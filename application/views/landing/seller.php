@@ -180,6 +180,7 @@
                                         <?php endif; ?>
 
                                         <div class="product-img-wrap">
+                                            <?php if( !$this->agent->is_mobile()) :?>
                                             <div class="product-quick-view-cover">
                                                 <div style="position: relative; left: -50%;">
                                                     <!--                                                    --><?php //$image_name = explode('/', $product->image_name); ?>
@@ -194,6 +195,7 @@
                                                     </button>
                                                 </div>
                                             </div>
+                                            <?php endif;?>
                                             <img class="product-img lazy cat-lazy"
                                                  data-src="https://res.cloudinary.com/onitshamarket/image/upload/w_280,h_240,c_pad/onitshamarket/product/<?= $product->image_name; ?>"
                                                  style=""

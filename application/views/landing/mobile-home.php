@@ -176,7 +176,7 @@
             <?php endforeach; ?>
         </div>
     </div>
-    <div class="card-max container">
+    <div class="card-max container" style="margin-top: 5px;">
         <div class="card-max-header">
             <h5 style="margin-left:-5px;">Hand Picked <span style="color:#575745">Categories</span></h5>
         </div>
