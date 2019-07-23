@@ -176,8 +176,6 @@
             <?php endforeach; ?>
         </div>
     </div>
-    <div class="gap_small"></div>
-
     <div class="card-max container">
         <div class="card-max-header">
             <h5 style="margin-left:-5px;">Hand Picked <span style="color:#575745">Categories</span></h5>
@@ -223,6 +221,7 @@
                     <img alt="Online Shopping for Home Tools"
                             src="<?= base_url('assets/img/home/ek.jpg'); ?>" class="img-responsive"></div>
             </a>
+
 
             <a href="https://www.onitshamarket.com/catalog/home-theaters/">
                 <div class="col-img-3">
