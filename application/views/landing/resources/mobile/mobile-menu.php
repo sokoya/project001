@@ -343,7 +343,7 @@
                 <?php endif; ?>
             </div>
 
-            <span class="cart-count" <?php if( $this->cart->total_items() == 0){ echo 'style="display:none;"' ;}?> >
+            <span class="cart-count" <?php if( $this->cart->total_items() == 0){ echo 'style="display:none;"' ;}?> <?= $this->cart->total_items(); ?> >
             </span>
             <a href="<?= base_url(lang('cart_link')); ?>">
                 <img
