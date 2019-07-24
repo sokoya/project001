@@ -42,6 +42,7 @@ if (!function_exists('plushrs')) {
 	}
 }
 
+
 if (!function_exists('ngn')) {
 	function ngn($amt = ''){
         if ($amt == '') $amt = '0';
