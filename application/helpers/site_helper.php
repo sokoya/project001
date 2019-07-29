@@ -33,6 +33,7 @@ if (!function_exists('shaPassword')) {
 	}
 }
 
+
 if (!function_exists('plushrs')) {
 	function plushrs($dt, $hrs){
 		$pure = strtotime($dt);
