@@ -94,14 +94,14 @@
             </div>
             <div class="col-sm-12 shop_rating" style="background: #fff;margin-bottom: 20px;padding:20px 0 0 0;">
                 <div class="col-sm-6 col-xs-12">
-                    <div class="col-sm-6 col-xs-12">
-                        <h4>Product Quality</h4>
-                        <div class="progress" style="margin-top:5px;">
-                            <div class="progress-bar" role="progressbar" style="width: 65%;background-color: #f12345;"
-                                 aria-valuenow="96" aria-valuemin="0" aria-valuemax="100">96%
-                            </div>
-                        </div>
-                    </div>
+<!--                    <div class="col-sm-6 col-xs-12">-->
+<!--                        <h4>Product Quality</h4>-->
+<!--                        <div class="progress" style="margin-top:5px;">-->
+<!--                            <div class="progress-bar" role="progressbar" style="width: 65%;background-color: #f12345;"-->
+<!--                                 aria-valuenow="96" aria-valuemin="0" aria-valuemax="100">96%-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
                     <div class="col-sm-6 col-xs-12 pull-right">
                         <h4>Successful Sales</h4>
