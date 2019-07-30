@@ -13,14 +13,21 @@
     </script>
     <title><?= !isset($title) ? 'Welcome ' : ucwords($title) ?> | <?= lang('app_name'); ?></title>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="utf-8" http-equiv="encoding">
-    <meta name="keywords" content="<?= !empty($keywords) ? ucwords($keywords) : lang('keywords'); ?>"/>
-
+    <?php $keyword_brands = $this->product->get_results( 'brands', 'brand_name', array('status' => 1)); ?>
+    <meta name="keywords" content="
+    	<?php if(isset($keywords)){echo $keywords;} ?>
+    	<?php foreach( $keyword_brands as $brands ) :?>
+    		<?= $brands->brand_name.' , '; ?>
+    	<?php endforeach; ?>
+	Fashion,Top Brands, Nigeria E commerce, Fast Shipping, Secure Sales, Order Online, Groceries,Mobile phones, Electronics appliances,Shoes,
+	Household Appliances, Wines, Babies, Toys,Sports, Fitness, Books, Ecommerce, Online Sales, Sales, Wears, Trending, hp, tablets, how to,
+	sneakers, nigeria, nigeria products, nyril, poweder, how to buy, how to, sandals, how much, affordable products, best products, most searched, where to"/>
     <?php if ($page == 'order_completed') : ?>
         <meta name="robots" content="noindex,nofollow">
     <?php else : ?>
         <meta name="robots" content="index,follow">
     <?php endif; ?>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=0" name="viewport"/>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600|Oxygen|Cabin:500' rel='stylesheet'
@@ -31,6 +38,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css'); ?>">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
     <?php if ($page == 'mobile-category' || $page == 'mobile-search' || $page == 'mobile-product' || $page == 'mobile-cart' || $page == 'mobile-checkout' && $this->agent->is_mobile()) : ?>
         <link rel="stylesheet" href="<?= $this->user->auto_version('assets/css/styles.css'); ?>">
         <link rel="stylesheet" href="<?= $this->user->auto_version('assets/css/styles-mobile.css'); ?>">
@@ -42,12 +50,9 @@
     <link rel="shortcut icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
     <link rel="icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
     <meta name="theme-color" content="#2a9651"/>
-    <meta name="twitter:image" content="<?= base_url('assets/img/notice.jpg')?>" />
     <link rel="canonical" href="<?= current_url(); ?>" />
-    <meta property="og:description"
-          itemprop="description"
-          content="<?= isset( $description) ? strip_tags($description) : lang('description'); ?>" />
-    <?php if ($page == 'product') : ?>
+
+    <?php if ($page == 'product' || $page == 'mobile-product') : ?>
         <meta property="og:title" content="<?= $product->product_name; ?>"/>
         <meta property="og:type" content="product"/>
         <meta property="og:image"
@@ -59,11 +64,31 @@
         <meta property="og:url" content="<?= current_url(); ?>"/>
         <meta property="og:image:width" content="279">
         <meta property="og:image:height" content="279">
+		<meta property="twitter:image"
+			  content="<?= ($featured_image->image_name) ? PRODUCTS_IMAGE_PATH . $featured_image->image_name : ''; ?>" />
         <meta name="twitter:card" content="summary"/>
         <meta name="twitter:domain" content="<?= base_url(); ?>"/>
         <meta name="twitter:site" content="Onitshamarket"/>
         <meta name="twitter:creator" content=""/>
         <meta name="twitter:image" content="<?= ($featured_image->image_name) ? PRODUCTS_IMAGE_PATH . $featured_image->image_name : ''; ?>" />
+	<?php else : ?>
+		<meta property="og:title" content="<?= $title; ?>"/>
+		<meta property="og:type" content="page"/>
+		<meta property="og:image"
+			  content="<?= base_url('assets/img/notice.jpg')?>" />
+		<meta property="og:description"
+			  itemprop="description"
+			  content="<?= isset( $description ) ? $description : lang('description'); ?>" />
+		<meta property="og:site_name" content="<?= lang('app_name'); ?>"/>
+		<meta property="og:url" content="<?= current_url(); ?>"/>
+		<meta property="og:image:width" content="279">
+		<meta property="og:image:height" content="279">
+		<meta property="twitter:image"
+			  content="<?= base_url('assets/img/notice.jpg')?>" />
+		<meta name="twitter:card" content="summary"/>
+		<meta name="twitter:domain" content="<?= base_url(); ?>"/>
+		<meta name="twitter:site" content="Onitshamarket"/>
+		<meta name="twitter:creator" content=""/>
     <?php endif; ?>
 
     <meta name="yandex-verification" content="5e0c9cc8260f049f" />
@@ -82,11 +107,6 @@
     <link rel="shortcut icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
     <link rel="icon" href="<?= base_url('assets/img/favicon.png'); ?>" type="image/png">
     <style>
-        /*.product-labels > li {*/
-            /*background-color: #a72323;*/
-            /*font-weight: bold;*/
-        /*}*/
-
         .mgt_drop_menu > li, .t_drop_menu > li {
             height: 36px !important;
             line-height: 48px !important

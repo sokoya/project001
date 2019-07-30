@@ -103,8 +103,8 @@
                                     <img
                                             style="max-width:95%"
                                             src="https://res.cloudinary.com/onitshamarket/image/upload/w_510,h_500,c_pad/onitshamarket/product/<?= $featured_image->image_name; ?>"
-                                            alt="<?= $product->product_name; ?>"
-                                            title="<?= ucwords($product->product_name) ?>"/>
+											alt="Onitshamarket - Buy <?=  $product->product_name ; ?>"
+                                            title="Buy <?= ucwords($product->product_name) ?> online at Onitshamarket"/>
                                 </a>
                             </div>
                         </div>
@@ -118,8 +118,8 @@
                                                title="<?= ucwords($product->product_name) ?>">
                                                 <img style="width:95%"
                                                         src="https://res.cloudinary.com/onitshamarket/image/upload/w_510,h_500,c_pad/onitshamarket/product/<?= $gallery->image_name; ?>"
-                                                        alt="Onitshamarket <?= $category_detail->name; ?>"
-                                                        title="<?= ucwords($product->product_name) ?>"/>
+                                                        alt="Onitshamarket - Buy <?=  $product->product_name . ' ' . $category_detail->name; ?>"
+                                                        title="Buy <?= ucwords($product->product_name) ?> online at onitshamarket" />
                                             </a>
                                         </div>
                                     </div>

@@ -469,7 +469,7 @@
                                 class="fas fa-minus close-panel"
                                 aria-hidden="true"
                                 data-target="description_vl"></i></span></p>
-                <p id="description_vl" class="body_text" style="font-max-size: 13px;">
+                <p id="description_vl" class="body_text" style="font-size: 13px;">
                     <?= word_limiter(html_entity_decode($product->product_description), 80); ?>
                     <?php if (str_word_count($product->product_description, 0) > 40) : ?>
                         <span><a style="text-decoration: none; color: #0b6427" href="<?= base_url( urlify($product->product_name, $product->id) . 'description/'); ?>">Read More</a> </span>
@@ -708,7 +708,11 @@
                 allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
             }
         }
+        $('#description_vl img').each(function(){
+            $(this).css({'width' : '40%', 'position' : 'center'});
+        });
     }, false);
+
     $(document).ready(function () {
         $('.close-panel').on('click', function () {
             let target = $(this).data('target');
