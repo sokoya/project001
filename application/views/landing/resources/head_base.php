@@ -17,7 +17,7 @@
     <meta name="keywords" content="
     	<?php if(isset($keywords)){echo $keywords;} ?>
     	<?php foreach( $keyword_brands as $brands ) :?>
-    		<?= $brands->brand_name.' , '; ?>
+    		<?= trim($brands->brand_name).' , '; ?>
     	<?php endforeach; ?>
 	Fashion,Top Brands, Nigeria E commerce, Fast Shipping, Secure Sales, Order Online, Groceries,Mobile phones, Electronics appliances,Shoes,
 	Household Appliances, Wines, Babies, Toys,Sports, Fitness, Books, Ecommerce, Online Sales, Sales, Wears, Trending, hp, tablets, how to,

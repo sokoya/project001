@@ -708,7 +708,7 @@
                 allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
             }
         }
-        $('.product-overview-desc div img').each(function(){
+        $('.product-overview-desc').find("img").each(function(){
             $(this).css({'width' : '40%', 'position' : 'center'});
         });
     }, false);
