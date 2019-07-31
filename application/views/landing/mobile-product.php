@@ -708,8 +708,8 @@
                 allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
             }
         }
-        $('.prod_description div img').each(function(){
-            $(this).css({'width' : '40%', 'position' : 'center'});
+        $('.prod_description > div > img').each(function(){
+            $(this).css({'max-width' : '40%', 'position' : 'center'});
         });
     }, false);
 
