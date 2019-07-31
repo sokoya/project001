@@ -30,8 +30,6 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /tests/tests/
 /tests/results/
 application/config/config.php
-application/config/config.php
-application/config/config.php
 application/config/database.php
 application/views/landing/mempty
 phpstorm.php
@@ -40,15 +38,10 @@ application/views/landing/np
 
 ## Yuicompressor
 node_modules
-application/config/database.php
-application/config/database.php
 
 ## LIVE KEYS
 application/production/database.php
 application/production/config.php
-application/production/database.php
-application/config/development/database.php
-application/config/development/database.php
 application/config/development/database.php
 
 ## Htaccess
