@@ -709,7 +709,7 @@
             }
         }
         let x = 1;
-        alert('You are loaded');
+
         $('.overview_data').find('img').each(function(){
             console.log( x ); x++;
             alert('hello' + x );
