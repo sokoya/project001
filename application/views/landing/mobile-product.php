@@ -710,9 +710,9 @@
         }
         let x = 1;
 
-        $('.overview_data').find('img').each(function(){
+        $('.overview_data > div').find('img').each(function(){
             console.log( x ); x++;
-            alert('hello' + x );
+            alert('hello ' + x );
             $(this).css({'max-width' : '40%', 'position' : 'center'});
         });
     }, false);
