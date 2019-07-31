@@ -708,13 +708,7 @@
                 allimages[i].setAttribute('src', allimages[i].getAttribute('data-src'));
             }
         }
-        let x = 1;
 
-        $('.overview_data > div').find('img').each(function(){
-            console.log( x ); x++;
-            alert('hello ' + x );
-            $(this).css({'max-width' : '40%', 'position' : 'center'});
-        });
     }, false);
 
     $(document).ready(function () {
